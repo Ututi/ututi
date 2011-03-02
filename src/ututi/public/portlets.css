@@ -103,25 +103,25 @@
         color: #666666;
     }
 
-.item-box-portlet {
+.item-box {
     margin-top: 10px;
 }
 
-    .item-box-portlet .item {
+    .item-box .item {
         float: left;
         width: 30px;
         margin: 2px 8px 0 0;
     }
 
-    .item-box-portlet.with-titles .item {
+    .item-box.with-titles .item {
         width: 45px;
     }
 
-    .item-box-portlet img.item-logo {
+    .item-box img.item-logo {
         display: block;
     }
 
-    .item-box-portlet .item-title {
+    .item-box .item-title {
         font-size: 10px;
         word-wrap: break-word;
     }

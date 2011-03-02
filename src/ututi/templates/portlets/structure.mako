@@ -118,9 +118,11 @@
   members = h.location_members(location.id, count)
   %>
   %if members:
-    ${item_box(_("Members:"),
-               members,
-               'location-members-portlet',
-               with_titles=True)}
+  <%self:portlet id='location-members-portlet'>
+    <%def name="header()">
+      ${_("Members:")}
+    </%def>
+    ${item_box(members, with_titles=True)}
+  </%self:portlet>
   %endif
 </%def>

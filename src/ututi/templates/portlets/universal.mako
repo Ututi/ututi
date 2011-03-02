@@ -1,43 +1,43 @@
 <%inherit file="/portlets/base.mako"/>
 
-<%def name="item_box(title, items, id, with_titles=False)">
+<%def name="item_box(items, with_titles=False)">
   <%
   per_row = 3 if with_titles else 4
   rows = [items[i:i + per_row] for i in range(0, len(items), per_row)]
   %>
-  <%self:portlet id="${id}">
-    <%def name="header()">
-      ${title}
-    </%def>
-    <div class="item-box-portlet ${'with-titles' if with_titles else ''}">
-    %for row in rows:
-      <div class="item-row clearfix">
-        %for item in row:
-        <div class="item">
-          <a href="${item['url']}">
-            <% logo_url = item['logo_url'] if with_titles else item['logo_small_url'] %>
-            <img src="${logo_url}"
-                 class="item-logo"
-                 alt="${item['title']}"
-                 title="${item['title']}" />
-            %if with_titles:
-            <div class="item-title">
-              ${item['title']}
-            </div>
-            %endif
-          </a>
-        </div>
-        %endfor
+  <div class="item-box ${'with-titles' if with_titles else ''}">
+  %for row in rows:
+    <div class="item-row clearfix">
+      %for item in row:
+      <div class="item">
+        <a href="${item['url']}">
+          <% logo_url = item['logo_url'] if with_titles else item['logo_small_url'] %>
+          <img src="${logo_url}"
+               class="item-logo"
+               alt="${item['title']}"
+               title="${item['title']}" />
+          %if with_titles:
+          <div class="item-title">
+            ${item['title']}
+          </div>
+          %endif
+        </a>
       </div>
-    %endfor
+      %endfor
     </div>
-  </%self:portlet>
+  %endfor
+  </div>
 </%def>
 
 <%def name="users_online_portlet(count=12)">
   <% users = h.users_online(count) %>
   %if users:
-    ${item_box(_("People online:"), users, 'users-online-portlet')}
+  <%self:portlet id="users-online-portlet">
+    <%def name="header()">
+      ${_("People online:")}
+    </%def>
+    ${item_box(users)}
+  </%self:portlet>
   %endif
 </%def>
 
