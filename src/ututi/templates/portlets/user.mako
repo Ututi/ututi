@@ -133,10 +133,10 @@
     </%def>
     <ul class="icon-list">
       <li class="icon-facebook">
-        <a href="${url(controller='profile', action='invite_friends_fb')}" id="invite-fb-link">${"Via facebook"}</a>
+        <a href="${url(controller='profile', action='invite_friends_fb')}" id="invite-fb-link">${"Facebook"}</a>
       </li>
       <li class="icon-email">
-        <a href="#invite-email" id="invite-email-link">${"Via e-mail"}</a>
+        <a href="#invite-email" id="invite-email-link">${"Email"}</a>
       </li>
     </ul>
 
