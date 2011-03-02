@@ -136,10 +136,7 @@
                        help_text=_("Enter comma separated list of email addresses"))}
         ${h.input_line('subject', _("E-mail subject"), value=subject)}
         ${h.input_area('message', _("Message"), value=message)}
-        ## Prevent floating left
-        <div>
-          ${h.input_submit(_("Send"), class_='btnMedium', id='email-submit-button')}
-        </div>
+        ${h.input_submit(_("Send"), id='email-submit-button')}
       </form>
       <p id="feedback-message">${_("Your email was successfully sent.")}</p>
     </div>
