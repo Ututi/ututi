@@ -33,45 +33,6 @@
         list-style: none;
     }
 
-    .portlet ul.icon-list li {
-        padding-left: 15px;
-        margin: 3px 0;
-        background-position: left center;
-        background-repeat: no-repeat;
-    }
-
-    .portlet ul.icon-list li.icon-add {
-        background-image: url('img/icons.com/add_small_orange.png');
-        background-position: 2px center;
-    }
-    .portlet ul.icon-list li.icon-find {
-        background-image: url('img/icons.com/search_small.png');
-        background-position: 1px center;
-    }
-    .portlet ul.icon-list li.icon-user {
-        background-image: url('img/icons.com/user_small_grey.png');
-        background-position: 1px center;
-    }
-    .portlet ul.icon-list li.icon-file {
-        background-image: url('img/icons.com/file_small_grey.png');
-        background-position: 2px center;
-    }
-    .portlet ul.icon-list li.icon-feed { background-image: url('img/icons.com/feed_small_grey.png'); }
-    .portlet ul.icon-list li.icon-university { background-image: url('img/icons.com/university_small_grey.png'); }
-    .portlet ul.icon-list li.icon-message { background-image: url('img/icons.com/message_small_grey.png'); }
-    .portlet ul.icon-list li.icon-message.active { background-image: url('img/icons.com/message_small_orange.png'); }
-    .portlet ul.icon-list li.icon-group { background-image: url('img/icons.com/group2_small_grey.png'); }
-    .portlet ul.icon-list li.icon-subject { background-image: url('img/icons.com/subject_small_grey.png'); }
-    .portlet ul.icon-list li.icon-email {
-        background-image: url('img/icons.com/email.png');
-        padding-left: 22px;
-    }
-    .portlet ul.icon-list li.icon-facebook {
-        background-image: url('img/icons.com/FB.png');
-        padding-left: 22px;
-    }
-    .portlet ul.icon-list li.icon-contact { background-image: url('img/icons.com/contact_small.png'); }
-
 #user-information-portlet { }
 
     #user-information-portlet .user-logo {
