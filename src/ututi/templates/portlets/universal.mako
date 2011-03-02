@@ -1,28 +1,28 @@
 <%inherit file="/portlets/base.mako"/>
 
-<%def name="user_box(title, users, id, with_names=False)">
+<%def name="item_box(title, items, id, with_titles=False)">
   <%
-  size = 45 if with_names else 30
-  per_row = 3 if with_names else 4
-  rows = [users[i:i + per_row] for i in range(0, len(users), per_row)]
+  per_row = 3 if with_titles else 4
+  rows = [items[i:i + per_row] for i in range(0, len(items), per_row)]
   %>
   <%self:portlet id="${id}">
     <%def name="header()">
       ${title}
     </%def>
-    <div class="people-box-portlet ${'with-names' if with_names else ''}">
+    <div class="item-box-portlet ${'with-titles' if with_titles else ''}">
     %for row in rows:
-      <div class="person-row clearfix">
-        %for user in row:
-        <div class="person">
-          <a href="${user.url()}">
-            <img src="${user.url(action='logo', width=size)}"
-                 class="person-logo"
-                 alt="${user.fullname}"
-                 title="${user.fullname}" />
-            %if with_names:
-            <div class="person-name">
-              ${user.fullname}
+      <div class="item-row clearfix">
+        %for item in row:
+        <div class="item">
+          <a href="${item['url']}">
+            <% logo_url = item['logo_url'] if with_titles else item['logo_small_url'] %>
+            <img src="${logo_url}"
+                 class="item-logo"
+                 alt="${item['title']}"
+                 title="${item['title']}" />
+            %if with_titles:
+            <div class="item-title">
+              ${item['title']}
             </div>
             %endif
           </a>
@@ -34,10 +34,10 @@
   </%self:portlet>
 </%def>
 
-<%def name="users_online_portlet()">
-  <%doc>Requires context variable c.users_online</%doc>
-  %if hasattr(c, 'users_online') and c.users_online:
-    ${user_box(_("People online:"), c.users_online, 'users-online-portlet')}
+<%def name="users_online_portlet(count=12)">
+  <% users = h.users_online(count) %>
+  %if users:
+    ${item_box(_("People online:"), users, 'users-online-portlet')}
   %endif
 </%def>
 

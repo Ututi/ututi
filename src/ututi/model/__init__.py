@@ -1752,10 +1752,14 @@ class LocationTag(Tag):
                 'subject' : Subject,
                 'group' : Group,
                 'file' : File,
+                'user' : User,
                 }
             obj = obj_types[obj.lower()]
         ids = [t.id for t in self.flatten]
-        return meta.Session.query(obj).filter(obj.location_id.in_(ids)).filter(obj.deleted_on == None).count()
+        query = meta.Session.query(obj).filter(obj.location_id.in_(ids))
+        if (hasattr(obj, 'deleted_on')):
+            query = query.filter(obj.deleted_on == None)
+        return query.count()
 
     @Lazy
     def stats(self):
@@ -1791,17 +1795,6 @@ class LocationTag(Tag):
                 'n_subjects': self.count('subject'),
                 'n_groups': self.count('group'),
                 'n_files': self.count('file')}
-
-    def get_members(self, count=None):
-        ids = [t.id for t in self.flatten]
-        query = meta.Session.query(User).filter(User.location_id.in_(ids)).order_by(User.last_seen.desc())
-        if count is not None:
-            query = query.limit(count)
-        return query.all()
-
-    def member_count(self):
-        ids = [t.id for t in self.flatten]
-        return meta.Session.query(User).filter(User.location_id.in_(ids)).count()
 
     @property
     def share_info(self):

@@ -103,25 +103,25 @@
         color: #666666;
     }
 
-.people-box-portlet {
+.item-box-portlet {
     margin-top: 10px;
 }
 
-    .people-box-portlet .person {
+    .item-box-portlet .item {
         float: left;
         width: 30px;
         margin: 2px 8px 0 0;
     }
 
-    .people-box-portlet.with-names .person {
+    .item-box-portlet.with-titles .item {
         width: 45px;
     }
 
-    .people-box-portlet img.person-logo {
+    .item-box-portlet img.item-logo {
         display: block;
     }
 
-    .people-box-portlet .person-name {
+    .item-box-portlet .item-title {
         font-size: 10px;
         word-wrap: break-word;
     }

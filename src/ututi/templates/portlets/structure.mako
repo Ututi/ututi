@@ -1,5 +1,5 @@
 <%inherit file="/portlets/base.mako" />
-<%namespace file="/portlets/universal.mako" import="user_box" />
+<%namespace file="/portlets/universal.mako" import="item_box" />
 
 <%def name="location_logo_portlet(location=None)">
   <% if location is None: location = c.location %>
@@ -33,7 +33,7 @@
         ${ungettext("%(count)s Group", "%(count)s Groups", cnt) % dict(count = cnt)}
       </li>
       <li class="icon-user member-count">
-        <% cnt = location.member_count() %>
+        <% cnt = h.location_count(location.id, 'user') %>
         ${ungettext("%(count)s Member", "%(count)s Members", cnt) % dict(count = cnt)}
       </li>
       <li class="icon-file">
@@ -129,10 +129,12 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
   <%
   if location is None: location = c.location
   if count is None: count = 6
-  members = location.get_members(count)
-  total = location.member_count()
+  members = h.location_members(location.id, count)
   %>
   %if members:
-    ${user_box(_("Members:"), members, 'location-members-portlet', with_names=True)}
+    ${item_box(_("Members:"),
+               members,
+               'location-members-portlet',
+               with_titles=True)}
   %endif
 </%def>

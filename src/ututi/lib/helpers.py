@@ -5,6 +5,9 @@ available to Controllers. This module is available to templates as 'h'.
 """
 
 import os
+
+from datetime import timedelta, datetime
+
 from pylons.templating import render_mako_def
 from hashlib import md5
 import re
@@ -426,6 +429,32 @@ def url_for(*args, **kwargs):
     from pylons import url
     return url.current(*args, **kwargs)
 
+@u_cache(expire=300, query_args=True, invalidate_on_startup=True)
+def users_online(limit=12):
+    from ututi.model import User, meta
+    five_mins = timedelta(0, 300)
+    users = meta.Session.query(User)\
+            .filter(User.last_seen > datetime.utcnow() - five_mins)\
+            .limit(limit).all()
+    return [{'id': user.id,
+             'title': user.fullname,
+             'url': user.url(),
+             'logo_url': user.url(action='logo', width=45),
+             'logo_small_url': user.url(action='logo', width=30)}
+            for user in users]
+
+@u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+def location_members(location_id, limit=6):
+    from ututi.model import Tag, User, meta
+    location = Tag.get(int(location_id))
+    ids = [t.id for t in location.flatten]
+    members = meta.Session.query(User).filter(User.location_id.in_(ids)).order_by(User.last_seen.desc()).limit(limit).all()
+    return [{'id': member.id,
+             'title': member.fullname,
+             'url': member.url(),
+             'logo_url': member.url(action='logo', width=45),
+             'logo_small_url': member.url(action='logo', width=30)}
+            for member in members]
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
 def location_latest_groups(location_id, limit=5):
