@@ -96,18 +96,18 @@
   <% info = object.share_info %>
   <%self:portlet id="share-portlet">
     <%def name="header()">
-      ${_("Share with your friends:")}
+      ${_("Tell a friend:")}
     </%def>
     <ul class="icon-list">
-      <li class="icon-facebook"><a href="#share-via-facebook" id="facebook-share-link">${"Via facebook"}</a></li>
-      <li class="icon-email"><a href="#share-via-email" id="email-share-link">${"Via e-mail"}</a></li>
+      <li class="icon-facebook"><a href="#share-facebook" id="facebook-share-link">${"Facebook"}</a></li>
+      <li class="icon-email"><a href="#share-email" id="email-share-link">${"Email"}</a></li>
     </ul>
 
     <div id="email-share-dialog">
       <form action="${url(controller='profile', action='send_email_message_js')}" method="POST" class="new-style-form">
         <%
         subject = _("Here's what I've found in Ututi") + ': ' + info['title']
-        message = "\n\n---\n\n%(title)s\n\n%(description)s\n\n%(link)s" % \
+        message = "%(title)s\n\n%(description)s\n\n%(link)s" % \
           dict(title=info['title'], description=info['description'], link=info['link'])
         %>
         %if c.user is None:
@@ -148,7 +148,7 @@
         });
 
         $('#email-share-dialog').dialog({
-            title: '${_("Send via email")}',
+            title: '${_("Send email")}',
             width: 350,
             autoOpen: false
         });

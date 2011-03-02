@@ -144,18 +144,27 @@
             display: none;
         }
 
+#share-portlet { }
 
-#share-portlet-content { }
-
-    #share-portlet-content #email-share-dialog {
+    #share-portlet #email-share-dialog {
         display: none;
     }
 
-        /* dialog pops out of #share-portlet-content */
+        /* dialog pops out of #share-portlet */
         #email-share-dialog #feedback-message {
             display: none;
             font-weight: bold;
             text-align: center;
+        }
+
+        #email-share-dialog form input,
+        #email-share-dialog form textarea,
+        #email-share-dialog form .helpText {
+            width: 300px;
+        }
+
+        #email-share-dialog form button {
+            display: block;
         }
 
         #email-share-dialog.email-sent #feedback-message {
