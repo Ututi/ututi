@@ -27,9 +27,9 @@ We should be able to click on a link that leads us to the page of the faculty.
     >>> browser.printQuery('//div[@class="tip"]/text()')
     This is a list of all the recent events in the subjects and groups of this university.
 
-    >>> browser.printQuery('id("university-list")//div[@class="title"]/a/text()')
-    Ekonomikos fakultetas
-    Geografijos fakultetas
+    >>> browser.printCssQuery('.university-box .title a', strip=True)
+    <a>Ekonomikos fakultetas</a>
+    <a>Geografijos fakultetas</a>
 
 There is a search form on this page and we should be able to use it.
     >>> browser.getLink('Subjects').click()
