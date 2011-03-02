@@ -1549,10 +1549,10 @@ class Tag(object):
         except NoResultFound:
             return None
 
-    logo = logo_property()
+    logo = logo_property(inherit=True)
 
     def has_logo(self):
-        return bool(meta.Session.query(Tag).filter_by(id=self.id).filter(Tag.raw_logo != None).count())
+        return self.logo is not None
 
 
 class PrivateMessage(ContentItem):

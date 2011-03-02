@@ -77,9 +77,16 @@ def process_logo(value, crop_square=False):
                        (len(orig_result), orig_result))
     return result
 
-def logo_property(square=False, logo_attr='raw_logo'):
+def logo_property(square=False, logo_attr='raw_logo', inherit=False):
+
     def get(self):
-        return getattr(self, logo_attr)
+        logo = getattr(self, logo_attr)
+        if logo is None and inherit:
+            return self.parent.logo
+        else:
+            return logo
+
     def set(self, value):
         setattr(self, logo_attr, process_logo(value, square))
+
     return property(get, set)
