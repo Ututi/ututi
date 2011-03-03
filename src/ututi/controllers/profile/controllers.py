@@ -38,7 +38,7 @@ from ututi.lib.validators import manual_validate
 from ututi.model.events import Event, TeacherMessageEvent
 from ututi.model import File
 from ututi.model import LocationTag, TeacherGroup
-from ututi.model import meta, Email, User, UserRegistration
+from ututi.model import meta, Email, User
 from ututi.controllers.profile.validators import HideElementForm, MultiRcptEmailForm, FriendsInvitationForm, \
     FriendsInvitationJSForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm,\
@@ -95,38 +95,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         if c.user is not None:
             c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='home')}]
 
-    def _set_home_variables(self):
-        c.todo_items = []
-        invited_count = meta.Session.query(UserRegistration).filter_by(inviter=c.user).count()
-        c.todo_items.append({
-            'title': _("Invite others to join"),
-            'link': url(controller='profile', action='invite_friends_fb'),
-            'done': invited_count > 0
-        })
-        c.todo_items.append({
-            'title': _("Join / create a group"),
-            'link': url(controller='group', action='create_academic'),
-            'done': len(c.user.groups) > 0
-        })
-        c.todo_items.append({
-            'title': _("Find / create your subjects"),
-            'link': url(controller='profile', action='watch_subjects'),
-            'done': len(c.user.watched_subjects) > 0
-        })
-        c.todo_items.append({
-            'title': _("Write a wall post"),
-            'link': '#',
-            'done': True
-        })
-        profile_complete = c.user.description or \
-                           c.user.site_url or \
-                           c.user.phone_number
-        c.todo_items.append({
-            'title': _("Fill your profile"),
-            'link': url(controller='profile', action='edit'),
-            'done': profile_complete
-        })
-
     @ActionProtector("user")
     def browse(self):
         c.breadcrumbs = [{'title': _('Search'), 'link': url(controller='profile', action='browse')}]
@@ -175,7 +143,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
     @ActionProtector("user")
     def feed(self):
-        self._set_home_variables()
         return self._feed_page()
 
     def _edit_form_defaults(self):
@@ -641,7 +608,6 @@ class UserProfileController(ProfileControllerBase):
         c.breadcrumbs.append(self._actions('my_subjects'))
         c.tabs = self._tabs()
         c.current_tab = 'my_subjects'
-        self._set_home_variables()
         return render('/profile/my_subjects.mako')
 
     @ActionProtector("user")
@@ -655,7 +621,6 @@ class UserProfileController(ProfileControllerBase):
                                 _('Where are your notes?')]
             c.fb_random_post = random.choice(FB_POST_MESSAGES)
 
-        self._set_home_variables()
         return self._feed_page()
 
     @ActionProtector("user")
@@ -724,7 +689,6 @@ class TeacherProfileController(ProfileControllerBase):
     @ActionProtector("user")
     def home(self):
         c.breadcrumbs.append(self._actions('home'))
-        self._set_home_variables()
         return render('/profile/teacher_home.mako')
 
     @ActionProtector("teacher")

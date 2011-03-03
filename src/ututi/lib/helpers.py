@@ -564,3 +564,34 @@ def get_i18n_text(text_id):
     if text_obj is None:
         return ''
     return literal(text_obj.text)
+
+def user_todo_items(user):
+    from ututi.model import UserRegistration, meta
+    from pylons import url
+    todo_items = []
+    invited_count = meta.Session.query(UserRegistration).filter_by(inviter=user).count()
+    todo_items.append({
+        'title': _("Invite others to join"),
+        'link': url(controller='profile', action='invite_friends_fb'),
+        'done': invited_count > 0 })
+    todo_items.append({
+        'title': _("Join / create a group"),
+        'link': url(controller='group', action='create_academic'),
+        'done': len(user.groups) > 0 })
+    todo_items.append({
+        'title': _("Find / create your subjects"),
+        'link': url(controller='profile', action='watch_subjects'),
+        'done': len(user.watched_subjects) > 0 })
+    todo_items.append({
+        'title': _("Write a wall post"),
+        'link': '#',
+        'done': True })
+    profile_complete = user.description or \
+                       user.site_url or \
+                       user.phone_number
+    todo_items.append({
+        'title': _("Fill your profile"),
+        'link': url(controller='profile', action='edit'),
+        'done': profile_complete })
+
+    return todo_items

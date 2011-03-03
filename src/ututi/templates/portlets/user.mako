@@ -100,11 +100,12 @@
   %endif
 </%def>
 
-<%def name="todo_portlet()">
-  %if hasattr(c, 'todo_items'):
+<%def name="todo_portlet(user=None)">
+  %if c.user is not None:
     <%
+    todo_items = h.user_todo_items(c.user)
     all_done = True
-    for item in c.todo_items:
+    for item in todo_items:
       all_done = all_done and item['done']
     %>
     %if not all_done:
@@ -112,7 +113,7 @@
       <%def name="header()">
         ${_("What to do next?")}
       </%def>
-      %for n, item in enumerate(c.todo_items, 1):
+      %for n, item in enumerate(todo_items, 1):
         %if item['done']:
           <p class="done">${"%d. %s" % (n, item['title'])}</p>
         %else:
