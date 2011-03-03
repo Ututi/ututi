@@ -82,7 +82,7 @@
         <strong>${_("Monitoring wiki notes")}</strong>
         - ${_("create notes for your courses collaboratively with your students.")}
       </div>
-      <div class="feature icon-group">
+      <div class="feature icon-talk">
         <strong>${_("Easy way to reach your students")}</strong>
         - ${_("send messages to all of your students at once.")}
         ${_("When you update subject information or upload a new file, your students will be notified automatically.")}
