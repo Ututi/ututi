@@ -110,10 +110,6 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         if location.parent is None:
             self._get_departments(location)
-            if request.params.has_key('js'):
-                return render_mako_def('/anonymous_index/en.mako', 'universities',
-                                   unis=c.departments, ajax_url=location.url(), collapse=False, collapse_text=_('More departments'))
-
             return render('location/university.mako')
         else:
             return render('location/department.mako')
@@ -135,9 +131,6 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         if location.parent is None:
             self._get_departments(location)
-            if request.params.has_key('js'):
-                return render_mako_def('/anonymous_index/en.mako', 'universities',
-                                   unis=c.departments, ajax_url=location.url(), collapse=False, collapse_text=_('More departments'))
             return render('location/university_subjects.mako')
         else:
             return render('location/department_subjects.mako')
@@ -155,9 +148,6 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         if location.parent is None:
             self._get_departments(location)
-            if request.params.has_key('js'):
-                return render_mako_def('/anonymous_index/en.mako', 'universities',
-                                   unis=c.departments, ajax_url=location.url(), collapse=False, collapse_text=_('More departments'))
             return render('location/university_groups.mako')
         else:
             return render('location/department_groups.mako')
