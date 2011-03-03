@@ -1491,3 +1491,15 @@ ul.icon-list li.icon-facebook {
     padding-left: 22px;
 }
 ul.icon-list li.icon-contact { background-image: url('img/icons.com/contact_small.png'); }
+
+/* SEARCH CONTROLS.
+ */
+
+.search-controls .search-text-submit input,
+.search-controls .search-text-submit button {
+    display: inline;
+}
+
+.search-controls .search-text-submit input {
+    margin-right: 5px;
+}

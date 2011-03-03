@@ -1,7 +1,14 @@
 <%namespace file="/search/index.mako" import="search_form"/>
 <%namespace file="/search/index.mako" import="search_results"/>
 
+<%def name="css()">
+  #subject-search-panel .search-text-submit input {
+    width: 230px;
+  }
+</%def>
+
 <%def name="search_content()">
+<div id="subject-search-panel">
 ${search_form(c.text, 'subject', c.location.hierarchy,
     parts=['text'], target=c.location.url(action="subjects"), js=True,
     js_target=c.location.url(action='search_js'))}
@@ -14,4 +21,5 @@ ${search_form(c.text, 'subject', c.location.hierarchy,
       ${h.button_to(_('Create a new subject'), url(controller='subject', action='add'))}
     </div>
   %endif
+</div>
 </%def>
