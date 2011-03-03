@@ -168,6 +168,37 @@ def test_User_get():
 
     """
 
+def test_user_content_items():
+    r"""Test if content item ownership is maintained correctly when users are deleted.
+
+        >>> user = User.get('admin@uni.ututi.com', LocationTag.get('uni'))
+        >>> res = meta.Session.execute("SET ututi.active_user TO %s" % user.id)
+        >>> location = LocationTag.get([u'uni', u'dep'])
+        >>> subjects = []
+        >>> for i in range(5):
+        ...     subject = Subject('subject%d' % i, u'Subject %d' % i, location)
+        ...     subjects.append(subject)
+        ...     meta.Session.add(subject)
+        >>> meta.Session.commit()
+        >>> res = meta.Session.execute("SET ututi.active_user TO %s" % user.id)
+
+        >>> s = meta.Session.query(Subject).filter_by(subject_id='subject1').one()
+        >>> s.created.fullname
+        u'Administrator of the university'
+        >>> s.created.url()
+        '/user/1'
+
+        >>> s.created.delete_user()
+        >>> meta.Session.expire_all()
+        >>> meta.Session.expunge_all()
+        >>> meta.Session.commit()
+        >>> s = meta.Session.query(Subject).filter_by(subject_id='subject2').one()
+        >>> s.created.fullname
+        u'Administrator of the university'
+        >>> s.created.url()
+        '/user/1'
+
+    """
 
 def test_user_subject_watching():
     r"""Test for user subject watching and unwatching.

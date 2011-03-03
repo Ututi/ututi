@@ -22,8 +22,12 @@ def test_create_teacher():
        >>> meta.Session.flush()
        >>> teacher.teacher_verified
        False
-       >>> teacher.user_type
+       >>> teacher.type
        'teacher'
+
+Just checking if he has emails (which come from the user):
+       >>> len(teacher.emails)
+       0
 
        >>> user = User.get_byid(teacher.id)
        >>> user
