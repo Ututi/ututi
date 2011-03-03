@@ -15,6 +15,10 @@
         color: #6d6d6d;
     }
 
+    .portlet .content {
+        word-wrap: break-word;
+    }
+
     .portlet .footer {
         margin-top: 5px;
     }
