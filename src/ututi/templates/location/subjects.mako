@@ -2,7 +2,7 @@
 <%namespace file="/search/index.mako" import="search_results"/>
 
 <%def name="search_content()">
-${search_form(c.text, 'subject,file,page', c.location.hierarchy,
+${search_form(c.text, 'subject', c.location.hierarchy,
     parts=['text'], target=c.location.url(action="subjects"), js=True,
     js_target=c.location.url(action='search_js'))}
 
