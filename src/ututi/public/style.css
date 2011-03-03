@@ -1900,11 +1900,6 @@ li.remeju-list,
     background: url('img/icons/dalykas-very-small.png')no-repeat top left;
     }
 
-    div.item-tags,
-    span.item-tags {
-        background: url('img/icons/icon_tag.png')no-repeat top left;
-        padding-left:25px;
-}
 #SearchResults dd.s-line{
     margin: 0 ;
     padding: 0 5px 0 0;
@@ -3227,21 +3222,6 @@ div.please-register {
     background: transparent url("../img/icons/tick_10.png") left center no-repeat;
 }
 
-#subject_description {
-    background: #f6f6f6;
-    margin-top: 10px;
-}
-
-.subject_description .snippet-subject {
-    padding: 10px 0 13px 30px;
-    background-position: 12px 12px;
-    border-bottom: 1px solid #ded8d8;
-}
-
-.subject_description .snippet-subject.last {
-    border-bottom: none;
-}
-
 select {
     border: 1px solid #ccc;
     color: #333;
@@ -3678,22 +3658,6 @@ ul#event_list li {
 
 /* search results */
 
-div.search-item {
-    padding-left: 35px;
-}
-
-div.search-item dl.stats {
-    padding-top: 6px;
-}
-
-div.search-item {
-    min-height: 27px;
-}
-
-* html div.search-item {
-    height:40px;
-}
-
 div.snippet-book {
     background: white url("../images/books/book_icon_small.png") left 5px no-repeat;
 }
@@ -3712,15 +3676,6 @@ div.snippet-group {
 
 div.snippet-file {
     background: white url("../images/details/icon_type_file.png") left 5px no-repeat;
-}
-
-div.snippet-subject {
-    background: white url("../images/details/icon_type_subject.png") left 5px no-repeat;
-}
-
-#subject_settings div.snippet-subject {
-    background: white url("../img/icons/dalykas-very-small.png") left 5px no-repeat;
-    background-position: 12px 12px;
 }
 
 h3.search-results-title {
@@ -3742,21 +3697,9 @@ h3.search-results-title span.result-count {
     font-size: 14px;
 }
 
-div#search-results div.search-item {
-    margin: 0.5em 0;
-}
-
-div#search-results div.search-item a.item-title {
-    margin-bottom: 0.3em;
-}
-
 div.group-item {
     padding-left: 70px;
     background: url("../images/group_ico.png") left top no-repeat;
-}
-
-div.search-item div.description {
-    margin: 0.1em 0;
 }
 
 /* watched subjects */

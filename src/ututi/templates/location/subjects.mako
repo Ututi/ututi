@@ -16,6 +16,7 @@
 
   .search-results-header .result-count {
     float: left;
+    margin: 4px 0 -2px 0;
     max-width: 400px;
   }
   .search-results-header .create-new-subject {

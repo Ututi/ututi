@@ -1012,7 +1012,6 @@ ul.feature-list {
  */
 
 .location-tags, .location-tags a {
-    color: #668000;
     text-transform: uppercase;
 }
 
@@ -1562,4 +1561,40 @@ ul.medium-icon-list {
 
 .search-results-container .search-results-header {
     font-size: 13px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+/* SEARCH RESULT SNIPPETS.
+ */
+
+.search-results-container .search-item {
+    font-size: 11px;
+    border-bottom: 1px solid #eee;
+    padding: 8px 8px 8px 35px;
+    background-repeat: no-repeat;
+    background-position: 5px 10px;
+}
+
+.search-results-container .search-item .item-title {
+    display: block;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.search-results-container .snippet-subject {
+    background-image: url("../img/icons.com/subject_big_grey.png");
+}
+
+.search-results-container .search-item ul.statistics li {
+    display: inline-block;
+    margin-right: 5px;
+    min-width: 20px;    /* makes icons line up nicely in list */
+    color: #3d617a;
+}
+
+.item-tags {
+    background: url('img/icons.com/tag.png') no-repeat left center;
+    padding-left: 25px;
 }
