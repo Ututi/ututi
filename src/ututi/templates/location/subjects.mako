@@ -35,11 +35,11 @@
           %if search_query:
             ${h.literal(ungettext("%(result_count)s result for <strong>%(search_query)s</strong>",
                                   "%(result_count)s results for <strong>%(search_query)s</strong>",
-                                  result_count) % dict(result_count=results.item_count, search_query=search_query))}
+                                  results.item_count) % dict(result_count=results.item_count, search_query=search_query))}
           %else:
             ${h.literal(ungettext("%(result_count)s result <strong>total</strong>",
                                   "%(result_count)s results <strong>total</strong>",
-                                  result_count) % dict(result_count=results.item_count))}
+                                  results.item_count) % dict(result_count=results.item_count))}
           %endif
         </span>
         %if c.user:
