@@ -84,11 +84,13 @@ button.dark {
     padding: 0px 8px;
     border: 1px solid #666666;
     font-weight: normal;
-    background: #333333;
+    background-color: #333333;
 }
 
 button.dark.add {
+    padding: 0 8px 0 16px;
     background-image: url('img/icons.com/add_small_orange.png');
+    background-position: 8px center;
 }
 
 button.btn-text {
@@ -1581,6 +1583,10 @@ ul.medium-icon-list {
     font-weight: bold;
     font-size: 12px;
     margin-bottom: 5px;
+}
+
+.search-results-container .search-item .action-button {
+    float: right;
 }
 
 .search-results-container .snippet-subject {

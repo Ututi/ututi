@@ -113,6 +113,11 @@ Snippets for rendering various content items, e.g. in search results.
 
 <%def name="subject(object)">
   <div class="search-item snippet-subject">
+    %if c.user is not None and not c.user.watches(object):
+      <div class="action-button">
+        ${h.button_to(_('Follow'), object.url(action='watch'), class_='dark add')}
+      </div>
+    %endif
     <a href="${object.url()}" title="${object.title}" class="item-title">${object.title}</a>
     <div class="description">
       ${item_location(object)}
