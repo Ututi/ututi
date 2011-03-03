@@ -71,8 +71,13 @@ button.submit {
     margin-top: 25px;
 }
 
+button.inline {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
 button.add {
-    padding: 0 2px 0 12px;
+    padding-left: 12px;
     background-image: url('img/icons.com/add_small_grey.png');
     background-repeat: no-repeat;
     background-position: 4px center;
@@ -1603,3 +1608,37 @@ ul.medium-icon-list {
     background: url('img/icons.com/tag.png') no-repeat left center;
     padding-left: 25px;
 }
+
+/* FEATURE BOX
+ */
+
+.feature-box {
+    background-color: #eeeeee;
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    padding: 5px 20px 20px 45px;
+}
+
+    .feature-box.icon-subject {
+        background-image: url('img/icons.com/subject_big_grey.png');
+    }
+
+    .feature-box .title {
+        font-size: 13px;
+        font-weight: bold;
+        border-bottom: 1px solid #ffaf37;
+        margin-left: 10px;
+        margin-bottom: 15px;
+    }
+
+    .feature-box .feature {
+        display: inline;
+        width: 270px;
+        float: left;
+        padding: 15px 30px;
+    }
+
+    .feature-box .action-button {
+        text-align: center;
+        margin-top: 15px;
+    }
