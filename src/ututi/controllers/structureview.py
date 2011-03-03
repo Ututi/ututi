@@ -98,7 +98,11 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
             self.form_result['obj_type'] = 'subject'
         self._search()
 
-        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='structureview', action='search_js')
+        if self.form_result.has_key('text'):
+            search_query = self.form_result['text']
+        else:
+            search_query = None
+        return render_mako_def('/location/subjects.mako', 'subject_search_results', results=c.results, search_query=search_query)
 
     @location_action
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)

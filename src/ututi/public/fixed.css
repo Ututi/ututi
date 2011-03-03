@@ -71,6 +71,13 @@ button.submit {
     margin-top: 25px;
 }
 
+button.add {
+    padding: 0 2px 0 12px;
+    background-image: url('img/icons.com/add_small_grey.png');
+    background-repeat: no-repeat;
+    background-position: 4px center;
+}
+
 button.dark {
     /* dark version of the button */
     color: #ffffff;
@@ -78,6 +85,10 @@ button.dark {
     border: 1px solid #666666;
     font-weight: normal;
     background: #333333;
+}
+
+button.dark.add {
+    background-image: url('img/icons.com/add_small_orange.png');
 }
 
 button.btn-text {
@@ -1057,6 +1068,11 @@ ul.feature-list {
     word-wrap: break-word;
 }
 
+.notice {
+    font-size: 11px;
+    color: #666666;
+}
+
 /* FLASH MESSAGE
  */
 /* flash messages */
@@ -1502,4 +1518,8 @@ ul.icon-list li.icon-contact { background-image: url('img/icons.com/contact_smal
 
 .search-controls .search-text-submit input {
     margin-right: 5px;
+}
+
+.search-results-container .search-results-header {
+    font-size: 13px;
 }
