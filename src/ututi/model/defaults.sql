@@ -46,9 +46,14 @@ create table admin_users(
 /* Create first user=admin and password=asdasd */
 insert into admin_users (email, fullname, password) values ('admin@ututi.lt', 'Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7');;
 
-create table users (
+create table authors (
        id bigserial not null,
+       type varchar(20) not null default 'nouser',
        fullname varchar(100),
+       primary key (id));;
+
+create table users (
+       id int8 references authors(id) on delete cascade,
        username varchar(320) not null,
        password char(36),
        site_url varchar(200) default null,
@@ -74,7 +79,10 @@ create table users (
        location_country varchar(5) default null,
        location_city varchar(30) default null,
        ignored_events text default '',
-       user_type varchar(10) not null default 'user',
+       primary key (id));;
+
+create table teachers (
+       id int8 references users(id) on delete cascade,
        teacher_verified boolean default null,
        teacher_position varchar(200) default null,
        primary key (id));;
@@ -90,9 +98,19 @@ CREATE FUNCTION check_gadugadu() RETURNS trigger AS $$
     END
 $$ LANGUAGE plpgsql;;
 
-
 CREATE TRIGGER check_gadugadu BEFORE INSERT OR UPDATE ON users
     FOR EACH ROW EXECUTE PROCEDURE check_gadugadu();;
+
+CREATE FUNCTION delete_user() RETURNS trigger AS $$
+    BEGIN
+        UPDATE authors SET type = 'nouser' WHERE id = OLD.id;
+        RETURN OLD;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER delete_user BEFORE DELETE ON users
+    FOR EACH ROW EXECUTE PROCEDURE delete_user();;
+
 
 /* Storing the emails of the users. */
 create table emails (id int8 not null references users(id) on delete cascade,
@@ -128,11 +146,11 @@ create index user_medals_user_id on user_medals(user_id);
 /* A generic table for Ututi objects */
 create table content_items (id bigserial not null,
        content_type varchar(20) not null default '',
-       created_by int8 references users(id) on delete set null,
+       created_by int8 references authors(id) on delete set null,
        created_on timestamp not null default (now() at time zone 'UTC'),
-       modified_by int8 references users(id) on delete set null default null,
+       modified_by int8 references authors(id) on delete set null default null,
        modified_on timestamp not null default (now() at time zone 'UTC'),
-       deleted_by int8 references users(id) on delete cascade default null,
+       deleted_by int8 references authors(id) on delete cascade default null,
        deleted_on timestamp default null,
        primary key (id));;
 
@@ -1581,14 +1599,14 @@ CREATE TRIGGER update_book_search AFTER INSERT OR UPDATE ON books
 
 /* a table for linking subjects with teachers */
 create table teacher_taught_subjects (
-       user_id int8 references users(id) on delete cascade not null,
+       teacher_id int8 references teachers(id) on delete cascade not null,
        subject_id int8 not null references subjects(id) on delete cascade,
-       primary key (user_id, subject_id));;
+       primary key (teacher_id, subject_id));;
 
 /* a table for linking teachers with their groups: ututi groups and other */
 create table teacher_groups (
        id bigserial NOT NULL,
-       user_id int8 references users(id) on delete cascade not null,
+       teacher_id int8 references teachers(id) on delete cascade not null,
        title varchar(500) not null,
        email varchar(320) not null,
        group_id int8 default null references groups(id) on delete cascade,

@@ -80,15 +80,31 @@ class AdminUser(object):
         except NoResultFound:
             return None
 
+class Author(object):
+    """The Author object - for references to authorship. Persists even when the user is deleted."""
 
-class User(object):
+    def url(self, controller='user', action='index', **kwargs):
+        return url(controller=controller,
+                   action=action,
+                   id=self.id,
+                   **kwargs)
+
+
+class User(Author):
     """The User object - Ututi users."""
     is_teacher = False
 
-    def change_type(self, type, **kwargs):
+    def delete_user(self):
         from ututi.model import users_table
         conn = meta.engine.connect()
-        upd = users_table.update().where(users_table.c.id==id).values(user_type=type, **kwargs)
+        upd = users_table.delete().where(users_table.c.id==self.id)
+        conn.execute(upd)
+        meta.Session.expire(self)
+
+    def change_type(self, type, **kwargs):
+        from ututi.model import authors_table
+        conn = meta.engine.connect()
+        upd = authors_table.update().where(authors_table.c.id==self.id).values(user_type=type, **kwargs)
         conn.execute(upd)
 
     @property

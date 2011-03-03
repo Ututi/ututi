@@ -31,7 +31,7 @@ from sqlalchemy.sql.expression import and_, or_
 from sqlalchemy.orm.interfaces import MapperExtension
 
 from ututi.migration import GreatMigrator
-from ututi.model.users import Medal, Email, UserSubjectMonitoring, User
+from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Author
 from ututi.model.users import Teacher, TeacherGroup, AdminUser, UserRegistration
 from ututi.model.util import logo_property
 from ututi.model.i18n import Country
@@ -51,6 +51,7 @@ from pylons.i18n import _, lazy_ugettext as ugettext
 log = logging.getLogger(__name__)
 
 users_table = None
+authors_table = None
 admin_users_table = None
 user_monitored_subjects_table = None
 email_table = None
@@ -111,19 +112,31 @@ def setup_orm(engine):
 
     global users_table
     users_table = Table("users", meta.metadata,
-                        Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
-                        Column('fullname', Unicode(assert_unicode=True)),
                         Column('description', Unicode(assert_unicode=True)),
                         Column('location_city', Unicode(assert_unicode=True)),
-                        Column('teacher_position', Unicode(assert_unicode=True)),
                         Column('site_url', Unicode(assert_unicode=True)),
                         autoload=True,
                         useexisting=True,
                         autoload_with=engine)
 
+    global teachers_table
+    teachers_table = Table("teachers", meta.metadata,
+                        Column('teacher_position', Unicode(assert_unicode=True)),
+                        autoload=True,
+                        useexisting=True,
+                        autoload_with=engine)
+
+    global authors_table
+    authors_table = Table("authors", meta.metadata,
+                          Column('id', Integer, Sequence('authors_id_seq'), primary_key=True),
+                          Column('fullname', Unicode(assert_unicode=True)),
+                          autoload=True,
+                          useexisting=True,
+                          autoload_with=engine)
+
     global admin_users_table
     admin_users_table = Table("admin_users", meta.metadata,
-                              Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
+                              Column('id', Integer, Sequence('admin_users_id_seq'), primary_key=True),
                               Column('fullname', Unicode(assert_unicode=True)),
                               autoload=True,
                               useexisting=True,
@@ -200,13 +213,13 @@ def setup_orm(engine):
                content_items_table,
                polymorphic_on=content_items_table.c.content_type,
                polymorphic_identity='generic',
-               properties={'created': relation(User,
-                                               primaryjoin=content_items_table.c.created_by==users_table.c.id,
+               properties={'created': relation(Author,
+                                               primaryjoin=content_items_table.c.created_by==authors_table.c.id,
                                                backref="content_items"),
-                           'modified': relation(User,
-                                                primaryjoin=content_items_table.c.modified_by==users_table.c.id),
-                           'deleted': relation(User,
-                                               primaryjoin=content_items_table.c.deleted_by==users_table.c.id),
+                           'modified': relation(Author,
+                                                primaryjoin=content_items_table.c.modified_by==authors_table.c.id),
+                           'deleted': relation(Author,
+                                               primaryjoin=content_items_table.c.deleted_by==authors_table.c.id),
                            'tags': relation(SimpleTag,
                                             secondary=content_tags_table),
                            'location': relation(LocationTag)})
@@ -266,19 +279,27 @@ def setup_orm(engine):
                                                 backref='subscriptions'),
                              'user': relation(User)})
 
+    author_mapper = orm.mapper(Author,
+                               authors_table,
+                               polymorphic_on=authors_table.c.type,
+                               polymorphic_identity='nouser')
+
+
     user_mapper = orm.mapper(User,
                              users_table,
-                             polymorphic_on=users_table.c.user_type,
+                             inherits=Author,
                              polymorphic_identity='user',
-                             properties = {'emails': relation(Email, backref='user'),
+                             properties = {'emails': relation(Email,
+                                                              backref='user',
+                                                              cascade='all, delete-orphan'),
                                            'medals': relation(Medal, backref='user'),
                                            'raw_logo': deferred(users_table.c.logo),
                                            'location': relation(LocationTag, backref=backref('users', lazy=True))})
 
     orm.mapper(Teacher,
-               polymorphic_on=users_table.c.user_type,
+               teachers_table,
                polymorphic_identity='teacher',
-               inherits=user_mapper,
+               inherits=User,
                properties = {'taught_subjects' : relation(Subject,
                                                           secondary=teacher_subjects_table,
                                                           backref="teachers")})
