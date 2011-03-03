@@ -9,6 +9,7 @@ from random import randrange
 from binascii import a2b_base64, b2a_base64
 import binascii
 import hashlib
+from urlparse import urlparse
 from datetime import datetime
 
 from ututi.model.util import logo_property, read_facebook_logo
@@ -731,8 +732,11 @@ class UserRegistration(object):
     def create_university(self):
         from ututi.model import LocationTag
 
-        # TODO: parse short title from url
-        title_short = self.university_site_url
+        # parse short title from url
+        title_short = urlparse(self.university_site_url).netloc
+        if title_short.startswith('www.'):
+            title_short = title_short.replace('www.', '', 1)
+
         university = LocationTag(self.university_title, title_short, confirmed=False)
 
         # fill out the rest of information
