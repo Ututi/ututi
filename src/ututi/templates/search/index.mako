@@ -82,20 +82,11 @@ ${h.javascript_link('/javascript/search.js')|n}
   <form method="get" action="${target}" id="search_form">
     <div class="search-text-submit">
       %if 'text' in parts:
-        <div class="search-text">
-          <div>
-            <input type="text" name="text" id="text" value="${text}" size="60"/>
-          </div>
-        </div>
+        <input type="text" name="text" id="text" value="${text}" size="60"/>
       %endif
-      <div class="search-submit">
-        <button class="btnMedium" type="submit" value="${_('Search-btn')}" id="search-btn">
-          <span>
-            ${_('Search-btn')}
-          </span>
-        </button>
-      </div>
-      <br style="clear: left;"/>
+      <button type="submit" value="${_('Search-btn')}" id="search-btn">
+        ${_('Search-btn')}
+      </button>
     </div>
     %if 'obj_type' in parts:
     <%

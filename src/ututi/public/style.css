@@ -3568,22 +3568,6 @@ input.text_button:hover {
     background: url("../images/details/search-loader-small.gif") right top no-repeat;
 }
 
-.search-controls .search-text {
-    width: 75%;
-    float: left;
-    height: 25px;
-    background: url("../images/borders/search-text.png") left center no-repeat;
-    padding-left: 5px;
-}
-
-.search-controls .search-text div {
-    height: 23px;
-    padding: 1px 0;
-    background: url("../images/borders/search-text.png") right center no-repeat;
-    padding-right: 5px;
-    line-height: 23px;
-}
-
 #search-options {
     margin-top: 5px;
 }
@@ -3593,18 +3577,6 @@ input.text_button:hover {
     font-size: 0.9em;
     padding-right: 15px;
     background: url("/img/icons/arrow-small-down.png") right center no-repeat;
-}
-
-.search-controls .search-text input {
-    width: 100%;
-    font-size: 18px;
-    border: 0;
-    /*background: transparent url("../images/details/icon_eyes.png") right center no-repeat;*/
-}
-
-.search-controls .search-submit {
-    float: right;
-    margin-left: 3px;
 }
 
 .search-type {
