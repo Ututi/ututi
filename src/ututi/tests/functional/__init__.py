@@ -15,6 +15,7 @@ import doctest
 from nous.mailpost import processEmailAndPost
 
 import ututi
+from ututi.tests.data import create_user
 from ututi.lib.mailer import mail_queue
 from ututi.model.events import Event
 from ututi.model import (Group, meta, LocationTag, SimpleTag, User, Teacher,
@@ -33,12 +34,7 @@ def ftest_setUp(test):
     meta.Session.commit()
 
     # Admin user, named 'Adminas Adminovix' for backward compatibility
-
-    meta.Session.execute("insert into users (location_id, username, fullname, password)"
-                         " (select tags.id, 'admin@uni.ututi.com', 'Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7'"
-                         " from tags where title_short = 'uni');")
-    meta.Session.execute("insert into emails (id, email, confirmed)"
-                         " (select users.id, users.username, true from users where fullname = 'Adminas Adminovix')")
+    create_user('Adminas Adminovix', 'admin@uni.ututi.com', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7', 'uni')
 
     # Below are old locations, users, groups and subjects for backward compatibility
     # Note: objects that didn't have their location specified are now assigned to U-niversity
@@ -98,6 +94,7 @@ def ftest_setUp(test):
 
     moderators = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'U2ti moderatoriai.')
     meta.Session.add(moderators)
+
     moderators.add_member(admin, True)
     moderators.add_member(third)
 

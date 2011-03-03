@@ -4,6 +4,7 @@ import pylons.test
 from nous.pylons.testing.browser import NousTestApp
 
 from ututi.tests import UtutiTestBrowser
+from ututi.tests.data import create_user
 from ututi.model import LocationTag
 from ututi.model import meta
 
@@ -19,11 +20,7 @@ def setUp(test):
 
     res = meta.Session.execute("select * from users where id = 1")
     if not list(res):
-        meta.Session.execute("insert into users (location_id, username, fullname, password)"
-                             " (select tags.id, 'admin@uni.ututi.com', 'Administrator of the university', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7'"
-                             " from tags where title_short = 'uni');")
-        meta.Session.execute("insert into emails (id, email, confirmed)"
-                             " (select users.id, users.username, true from users where fullname = 'Administrator of the university')")
+        create_user()
     meta.Session.commit()
 
 
@@ -35,4 +32,5 @@ def tearDown(test):
     for name, in relnames:
         if not name.startswith('admin_users'):
             meta.Session.execute('alter sequence %s restart with 1' % name)
+    meta.Session.execute("truncate authors cascade")
     meta.Session.commit()

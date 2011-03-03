@@ -35,9 +35,9 @@ Oh, we can also lookup users by their names:
     >>> form.getControl('User name').value = 'user'
     >>> form.getControl('Find').click()
     >>> browser.printQuery("id('teacher_list')//td[@class='name']//text()")
-    Alternative user
     Second user
     Third user
+    Alternative user
 
 The teacher is immediately verified:
     >>> browser.printQuery("id('teacher_unverified')//text()")
