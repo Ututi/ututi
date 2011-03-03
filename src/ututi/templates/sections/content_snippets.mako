@@ -118,7 +118,9 @@ Snippets for rendering various content items, e.g. in search results.
         ${h.button_to(_('Follow'), object.url(action='watch'), class_='dark add')}
       </div>
     %endif
-    <a href="${object.url()}" title="${object.title}" class="item-title">${object.title}</a>
+    <div class="item-title">
+      <a href="${object.url()}" title="${object.title}">${object.title}</a>
+    </div>
     <div class="description">
       ${item_location(object)}
       % if object.teacher_repr:

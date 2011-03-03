@@ -1579,7 +1579,6 @@ ul.medium-icon-list {
 }
 
 .search-results-container .search-item .item-title {
-    display: block;
     font-weight: bold;
     font-size: 12px;
     margin-bottom: 5px;
