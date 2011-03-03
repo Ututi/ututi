@@ -153,14 +153,6 @@ ALTER TABLE ONLY public.payments DROP CONSTRAINT payments_user_id_fkey;
 ALTER TABLE ONLY public.payments
     ADD CONSTRAINT payments_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id)  ON DELETE CASCADE;
 
-ALTER TABLE ONLY public.teacher_taught_subjects DROP CONSTRAINT teacher_tought_subjects_user_id_fkey;
-ALTER TABLE ONLY public.teacher_taught_subjects
-    ADD CONSTRAINT teacher_taught_subjects_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id)  ON DELETE CASCADE;
-
-ALTER TABLE ONLY public.teacher_groups DROP CONSTRAINT teacher_groups_user_id_fkey;
-ALTER TABLE ONLY public.teacher_groups
-    ADD CONSTRAINT teacher_groups_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id)  ON DELETE CASCADE;
-
 DROP TRIGGER group_mailing_list_message_event_trigger ON group_mailing_list_messages;
 CREATE TRIGGER group_mailing_list_message_event_trigger AFTER INSERT ON group_mailing_list_messages
     FOR EACH ROW EXECUTE PROCEDURE group_mailing_list_message_event_trigger();;
