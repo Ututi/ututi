@@ -11,6 +11,7 @@
   }
   #registration-page-container h1 {
     border-bottom: 1px solid #ff9900;
+    padding-bottom: 2px;
   }
   button.next {
     margin-top: 20px;

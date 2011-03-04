@@ -40,7 +40,7 @@ Let's start a thread:
 
 Let's post a reply:
     >>> browser2 = Browser.logIn('user3@ututi.lt', 'password')
-    >>> browser2.getLink('Moderatoriai').click()
+    >>> browser2.getLink('Moderatoriai', url='/group/moderators').click()
     >>> browser2.getLink('Forum').click()
     >>> browser2.getLink("What's up?").click()
     >>> browser2.getControl('Message').value = 'Not too bad'
@@ -85,7 +85,7 @@ And all the way up to the category list:
 
     >>> browser.getLink('Back to category list').click()
 
-    >>> browser.printQuery('id("mainContent")//h2/a')
+    >>> browser.printQuery('id("main-content")//h2/a')
     <a href="/group/moderators/forum/..." class="grey">General</a>
     <a class="edit-category" href="/group/moderators/forum/.../edit">Edit category</a>
 
@@ -112,7 +112,7 @@ Excellent. Now log in as one of the users:
 Accept the group invitation
 
     >>> ubrowser.getControl('Accept').click()
-    >>> ubrowser.getLink('Moderatoriai').click()
+    >>> ubrowser.getLink('Moderatoriai', url='/group/moderators').click()
     >>> ubrowser.getLink('Forum').click()
 
 We see the thread the admin has posted:

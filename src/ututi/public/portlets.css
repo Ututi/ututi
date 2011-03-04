@@ -3,37 +3,151 @@
 
 .portlet {
     background-color: white !important;
+    padding-bottom: 7px;
+    width: 165px;
+    font-size: 11px;
 }
 
-#share-portlet-content { }
+    .portlet .header {
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 10px;
+        color: #6d6d6d;
+    }
 
-    #share-portlet-content ul#share-portlet-action-list { }
+    .portlet .content {
+        word-wrap: break-word;
+    }
 
-        #share-portlet-content ul#share-portlet-action-list li {
-            list-style: none;
-            padding: 5px 5px 5px 20px;
-            background-repeat: no-repeat;
-            background-position: left center;
-        }
+    .portlet .footer {
+        margin-top: 5px;
+    }
 
-        #share-portlet-content ul#share-portlet-action-list li#facebook-share {
-            background-image: url(img/social/facebook_16.png);
-        }
+    .portlet p {
+        font-size: 11px;
+        margin: 5px 0px;
+    }
 
-        #share-portlet-content ul#share-portlet-action-list li#email-share {
-            background-image: url(img/social/email_16.png);
-        }
+    .portlet .portlet-inner {
+        padding-bottom: 7px;
+        border-bottom: 1px solid #eeeeee;
+    }
 
-    #share-portlet-content #email-share-dialog {
+    .portlet ul {
+        list-style: none;
+    }
+
+#user-information-portlet { }
+
+    #user-information-portlet .user-logo {
+        float: left;
+        margin-top: 5px;
+    }
+
+    #user-information-portlet .user-fullname {
+        margin-left: 70px;
+        font-size: 13px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    #user-information-portlet .edit-profile-link {
+        margin-left: 70px;
+    }
+
+#user-description-portlet { }
+
+    #user-description-portlet p {
+        font-size: 10px;
+    }
+
+#todo-portlet { }
+
+    #todo-portlet p {
+        margin: 2px 0px;
+    }
+
+    #todo-portlet p.done {
+        text-decoration: line-through;
+        color: #666666;
+    }
+
+.item-box {
+    margin-top: 10px;
+}
+
+    .item-box .item {
+        float: left;
+        width: 30px;
+        margin: 2px 8px 0 0;
+    }
+
+    .item-box.with-titles .item {
+        width: 45px;
+    }
+
+    .item-box img.item-logo {
+        display: block;
+    }
+
+    .item-box .item-title {
+        font-size: 10px;
+        word-wrap: break-word;
+    }
+
+#invite-friends-portlet { }
+
+    #invite-friends-portlet #invite-email-dialog,
+    #invite-friends-portlet #invite-fb-dialog {
         display: none;
     }
 
-        /* dialog pops out of #share-portlet-content */
-        #email-share-dialog #feedback-message {
+        /* dialog pops out of #invite-friends-portlet */
+        #invite-email-dialog #invitation-feedback-message {
             display: none;
-            color: #D45500;
             font-weight: bold;
             text-align: center;
+        }
+
+        #invite-email-dialog form input,
+        #invite-email-dialog form textarea,
+        #invite-email-dialog form .helpText {
+            width: 300px;
+        }
+
+        #invite-email-dialog form button {
+            display: block;
+        }
+
+        #invite-email-dialog.email-sent #invitation-feedback-message {
+            display: block;
+        }
+
+        #invite-email-dialog.email-sent form {
+            display: none;
+        }
+
+#share-portlet { }
+
+    #share-portlet #email-share-dialog {
+        display: none;
+    }
+
+        /* dialog pops out of #share-portlet */
+        #email-share-dialog #feedback-message {
+            display: none;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #email-share-dialog form input,
+        #email-share-dialog form textarea,
+        #email-share-dialog form .helpText {
+            width: 300px;
+        }
+
+        #email-share-dialog form button {
+            display: block;
         }
 
         #email-share-dialog.email-sent #feedback-message {
@@ -114,3 +228,15 @@
         text-align: right;
     }
 
+#location-logo-portlet { }
+
+    #location-logo-portlet .logo-container {
+        margin: 10px auto 20px auto;
+        width: 140px;
+    }
+
+    #location-logo-portlet .logo-container img {
+        display: block;
+        margin-left: -5px; /* compensate sidebar left padding, so
+                            * it looks properly centered. */
+    }

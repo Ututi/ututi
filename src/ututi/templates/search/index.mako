@@ -82,20 +82,11 @@ ${h.javascript_link('/javascript/search.js')|n}
   <form method="get" action="${target}" id="search_form">
     <div class="search-text-submit">
       %if 'text' in parts:
-        <div class="search-text">
-          <div>
-            <input type="text" name="text" id="text" value="${text}" size="60"/>
-          </div>
-        </div>
+        <input type="text" name="text" id="text" value="${text}" size="60"/>
       %endif
-      <div class="search-submit">
-        <button class="btnMedium" type="submit" value="${_('Search-btn')}" id="search-btn">
-          <span>
-            ${_('Search-btn')}
-          </span>
-        </button>
-      </div>
-      <br style="clear: left;"/>
+      <button type="submit" value="${_('Search-btn')}" id="search-btn">
+        ${_('Search-btn')}
+      </button>
     </div>
     %if 'obj_type' in parts:
     <%
@@ -170,14 +161,20 @@ ${h.javascript_link('/javascript/search.js')|n}
        results = None
 %>
 %if results is not None:
-<div id="search-results-container">
+<div id="search-results-container" class="search-results-container">
   %if getattr(c, 'page', 1) == 1:
     ${location_tag_results()}
   %endif
-  <h3 class="underline search-results-title">
-    <span>${_('search results')}:</span>
-    <span class="result-count">(${ungettext("found %(count)s result", "found %(count)s results", results.item_count) % dict(count = results.item_count)})</span>
-  </h3>
+    %if hasattr(caller, 'header'):
+      <div class="search-results-header">
+        ${caller.header()}
+      </div>
+    %else:
+    <h3 class="underline search-results-title">
+      <span>${_('search results')}:</span>
+      <span class="result-count">(${ungettext("found %(count)s result", "found %(count)s results", results.item_count) % dict(count = results.item_count)})</span>
+    </h3>
+    %endif
   %if c.results.item_count > 0:
     <div id="search-results">
       %for item in results:
@@ -193,7 +190,7 @@ ${h.javascript_link('/javascript/search.js')|n}
     %if controller is not None and action is not None:
     <div id="pager">${results.pager(format='~3~', controller=controller, action=action, onclick='$("#pager").addClass("loading"); $("#search-results-container").load("%s", function () { $(document).scrollTop($("#search-results-container").scrollTop()); }); return false;') }</div>
     %else:
-    <div id="pager">${results.pager(format='~3~') }</div>
+    <div id="pager">${results.pager(format='~3~')}</div>
     %endif
   %endif
 </div>

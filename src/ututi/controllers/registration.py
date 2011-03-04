@@ -1,23 +1,23 @@
 import cgi
 import facebook
 
-from formencode import Schema, htmlfill, validators
+from formencode import Schema, htmlfill, validators, variabledecode
 from formencode.foreach import ForEach
 from formencode.compound import Pipe
 
 from pylons import tmpl_context as c, url, session, request, config
 from pylons.controllers.util import redirect, abort
-from pylons.i18n import ungettext, _
-
+from pylons.i18n import _
 from ututi.lib.base import BaseController, render
-from ututi.lib.emails import send_email_confirmation_code
 from ututi.lib.image import serve_logo
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
-        FileUploadTypeValidator, CommaSeparatedListValidator
+        FileUploadTypeValidator, SeparatedListValidator, CountryValidator
 import ututi.lib.helpers as h
+from ututi.lib.invitations import make_facebook_invitations
 
 from ututi.model import meta, LocationTag
 from ututi.model.users import User, UserRegistration
+from ututi.model.i18n import Country
 
 from openid.consumer import consumer
 from openid.consumer.consumer import Consumer, DiscoveryFailure
@@ -25,6 +25,9 @@ from openid.extensions import ax
 
 from xml.sax.saxutils import quoteattr
 
+member_policies = [('RESTRICT_EMAIL', _("Only with University emails")),
+                   ('ALLOW_INVITES', _("Allow invites for non university emails (@gmail.com, @mail.ru, @yahoo.com, etc.)")),
+                   ('PUBLIC', _("No limitations"))]
 
 class PasswordOrFederatedLogin(validators.String):
     """Allow empty password if OpenID and/or FB are provided.
@@ -70,6 +73,32 @@ class EmailApproveForm(Schema):
     hash = validators.String(min=32, max=32, strip=True)
 
 
+class UniversityCreateForm(Schema):
+
+    pre_validators = [variabledecode.NestedVariables()]
+
+    msg = {'empty': _(u"Please enter University title.")}
+    title = validators.String(not_empty=True, strip=True, messages=msg)
+
+    country = CountryValidator(not_empty=True)
+
+    msg = {'empty': _(u"Please enter University web site.")}
+    site_url = validators.URL(not_empty=True, messages=msg)
+
+    msg = { 'missing': _(u"Please select logo."),
+            'empty': _(u"Please select logo."),
+            'bad_type': _(u"Please upload JPEG, PNG or GIF image.") }
+    allowed_types = ('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif')
+    logo = FileUploadTypeValidator(allowed_types=allowed_types, not_empty=True, messages=msg)
+
+    msg = {'missing': _(u"Please specify member policy."),
+           'invalid': _(u"Invalid policy selected."),
+           'notIn': _(u"Invalid policy selected.") }
+    member_policy = validators.OneOf(dict(member_policies).keys(), messages=msg)
+
+    allowed_domains = ForEach(validators.String(strip=True))
+
+
 class PersonalInfoForm(Schema):
 
     msg = {'empty': _(u"Please enter your full name.")}
@@ -103,7 +132,7 @@ class InviteFriendsForm(Schema):
     email5 = Pipe(EmailAddSuffix(), TranslatedEmailValidator())
 
     emails = Pipe(validators.String(),
-                  CommaSeparatedListValidator(),
+                  SeparatedListValidator(separators=','),
                   ForEach(validators.Email()))
 
 
@@ -267,16 +296,8 @@ class FederationMixin(object):
 
 class RegistrationController(BaseController, FederationMixin):
 
-    def _send_confirmation(self, registration):
-        """Shorthand method."""
-        send_email_confirmation_code(registration.email,
-                                     registration.url(action='confirm_email',
-                                                      qualified=True),
-                                     registration.hash)
-
     def _go_to_start(self, location):
-        redirect(url(controller='registration',
-                     action='start',
+        redirect(url('start_registration_with_location',
                      path='/'.join(location.path)))
 
     def _start_form(self):
@@ -284,7 +305,7 @@ class RegistrationController(BaseController, FederationMixin):
 
     @location_action
     @validate(schema=RegistrationStartForm(), form='_start_form')
-    def start(self, location):
+    def start_with_location(self, location):
 
         if not hasattr(self, 'form_result'):
             return htmlfill.render(self._start_form())
@@ -298,7 +319,7 @@ class RegistrationController(BaseController, FederationMixin):
             redirect(location.url(action='login'))
 
         # Otherwise lookup/create registration entry and
-        # send confirmation code it to user.
+        # send confirmation code to user.
 
         registration = UserRegistration.get_by_email(email)
         if registration is None:
@@ -306,7 +327,7 @@ class RegistrationController(BaseController, FederationMixin):
             meta.Session.add(registration)
             meta.Session.commit()
 
-        self._send_confirmation(registration)
+        registration.send_confirmation_email()
 
         c.email = email
         return render('registration/email_approval.mako')
@@ -326,7 +347,7 @@ class RegistrationController(BaseController, FederationMixin):
             abort(404)
         else:
             c.email = email
-            self._send_confirmation(registration)
+            registration.send_confirmation_email()
             h.flash(_("Your confirmation code was resent."))
             return render('registration/email_approval.mako')
 
@@ -366,9 +387,11 @@ class RegistrationController(BaseController, FederationMixin):
 
         redirect(registration.url(action='university_info'))
 
-
     @registration_action
     def university_info(self, registration):
+        if registration.location is None:
+            redirect(registration.url(action='university_create'))
+
         from random import shuffle
         count = 14
         all_users = registration.location.users
@@ -382,6 +405,37 @@ class RegistrationController(BaseController, FederationMixin):
 
         c.active_step = 'university_info'
         return render('registration/university_info.mako')
+
+    def _university_create_form(self):
+        countries = meta.Session.query(Country).order_by(Country.name.asc()).all()
+        c.countries = [('', _("(Select country from list)"))] + \
+                [(country.id, country.name) for country in countries]
+
+        global member_policies
+        c.policies = member_policies
+        c.active_step = 'university_info'
+        c.max_allowed_domains = 50
+        c.user_domain = c.registration.email.split('@')[1]
+        return render('registration/university_create.mako')
+
+    @registration_action
+    @validate(schema=UniversityCreateForm(), form='_university_create_form')
+    def university_create(self, registration):
+        if not hasattr(self, 'form_result'):
+            # TODO: default site url, default country?
+            defaults = {
+                'allowed_domains-1': c.registration.email.split('@')[1],
+            }
+            return htmlfill.render(self._university_create_form(), defaults=defaults)
+
+        registration.university_title = self.form_result['title']
+        registration.university_site_url = self.form_result['site_url']
+        registration.university_logo = self.form_result['logo'].file.read()
+        registration.university_member_policy = self.form_result['member_policy']
+        allowed_domains = filter(bool, self.form_result['allowed_domains'])
+        registration.university_allowed_domains = ','.join(allowed_domains)
+        meta.Session.commit()
+        redirect(registration.url(action='personal_info'))
 
     def _personal_info_form(self):
         c.active_step = 'personal_info'
@@ -436,8 +490,8 @@ class RegistrationController(BaseController, FederationMixin):
                       self.form_result['email4'],
                       self.form_result['email5']] + self.form_result['emails']
 
-            self._send_email_invitations(registration, emails)
-
+            registration.invited_emails = ','.join(filter(bool, emails))
+            meta.Session.commit()
             redirect(registration.url(action='finish'))
 
         return htmlfill.render(self._invite_friends_form())
@@ -447,9 +501,9 @@ class RegistrationController(BaseController, FederationMixin):
         # handle facebook callback
         ids = request.params.get('ids[]')
         if ids:
-            ids = map(int, ids.split(','))
-            self._send_facebook_invitations(registration, ids)
-            redirect(registration.url(action='invite_friends'))
+            registration.invited_fb_ids = ids
+            meta.Session.commit()
+            redirect(registration.url(action='finish'))
 
         # render page
         fb_user = facebook.get_user_from_cookie(request.cookies,
@@ -466,65 +520,24 @@ class RegistrationController(BaseController, FederationMixin):
                 c.exclude_ids = ','.join(str(u.facebook_id) for u in friend_users)
             except facebook.GraphAPIError:
                 c.has_facebook = False
+
         c.active_step = 'invite_friends'
         return render('registration/invite_friends_fb.mako')
-
-    def _send_email_invitations(self, registration, emails):
-        already = []
-        invited = []
-        for email in filter(bool, emails):
-            if User.get(email, registration.location):
-                already.append(email)
-            else:
-                invitee = UserRegistration.get_by_email(email, registration.location)
-                if invitee is None:
-                    invitee = UserRegistration(registration.location, email)
-                    meta.Session.add(invitee)
-                invitee.inviter = registration.email
-                meta.Session.commit()
-                self._send_confirmation(invitee)
-                invited.append(email)
-
-        if already:
-            h.flash(_("%(email_list)s already using Ututi!") % \
-                    dict(email_list=', '.join(already)))
-
-        if invited:
-            h.flash(_("Invitations sent to %(email_list)s") % \
-                    dict(email_list=', '.join(invited)))
-
-    def _send_facebook_invitations(self, registration, fb_ids):
-        already = []
-        invited = []
-        for facebook_id in fb_ids:
-            if User.get_byfbid(facebook_id, registration.location):
-                already.append(facebook_id)
-            else:
-                invitee = UserRegistration.get_by_fbid(facebook_id, registration.location)
-                if invitee is None:
-                    invitee = UserRegistration(registration.location, facebook_id=facebook_id)
-                    meta.Session.add(invitee)
-                invitee.inviter = registration.email
-                invited.append(facebook_id)
-                meta.Session.commit()
-
-        if already:
-            h.flash(ungettext('%(num)d of your friends is already using Ututi!',
-                              '%(num)d of your friends area already using Ututi!',
-                              len(already)) % dict(num=len(already)))
-
-        if invited:
-            h.flash(ungettext('Invited %(num)d friend.',
-                              'Invited %(num)d friends.',
-                              len(invited)) % dict(num=len(invited)))
 
     @registration_action
     def finish(self, registration):
         from ututi.lib.security import sign_in_user
+        if not registration.location:
+            registration.location = registration.create_university()
         user = registration.create_user()
         meta.Session.add(user)
-        registration.completed = True
         meta.Session.commit()
+        # TODO: handle any integrity errors here
+
+        registration.completed = True
+        registration.process_invitations()
+        meta.Session.commit()
+
         sign_in_user(user)
         redirect(url(controller='profile', action='register_welcome'))
 

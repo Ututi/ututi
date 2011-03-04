@@ -582,12 +582,14 @@ class AdminController(BaseController, UniversityExportMixin):
             teacher_confirmed_email(teacher, True)
             h.flash('Teacher confirmed.')
         else:
-            from ututi.model import users_table
+            from ututi.model import authors_table, teachers_table
             # a hack: cannot update a polymorphic descriptor column using the orm (rejecting a teacher is basically converting him into a user)
             conn = meta.engine.connect()
-            upd = users_table.update().where(users_table.c.id==id).values(user_type='user', teacher_verified=None, teacher_position=None)
+            upd = authors_table.update().where(authors_table.c.id==id).values(type='user')
+            ins = teachers_table.delete().where(teachers_table.c.id==id)
             teacher_confirmed_email(teacher, False)
             conn.execute(upd)
+            conn.execute(ins)
             h.flash('Teacher rejected.')
 
         redirect(url(controller="admin", action="teachers"))
@@ -596,12 +598,15 @@ class AdminController(BaseController, UniversityExportMixin):
     def teacher_convert(self, id):
         teacher = meta.Session.query(User).filter(User.id == id).one()
 
-        from ututi.model import users_table
+        from ututi.model import authors_table, teachers_table
         # a hack: cannot update a polymorphic descriptor column using the orm (rejecting a teacher is basically converting him into a user)
         conn = meta.engine.connect()
-        upd = users_table.update().where(users_table.c.id==id).values(user_type='teacher', teacher_verified=True, teacher_position=None)
+        upd = authors_table.update().where(authors_table.c.id==id).values(type='teacher')
+        ins = teachers_table.insert().values(id=id, teacher_verified=True, teacher_position=None)
+
         teacher_confirmed_email(teacher, True)
         conn.execute(upd)
+        conn.execute(ins)
         h.flash('User is now a teacher.')
 
         redirect(url(controller="admin", action="teachers"))
@@ -624,6 +629,10 @@ class AdminController(BaseController, UniversityExportMixin):
     @ActionProtector("root")
     def example_widgets(self):
         return render('sections/example_widgets.mako')
+
+    @ActionProtector("root")
+    def example_layouts(self):
+        return render('sections/example_layouts.mako')
 
     @ActionProtector("root")
     def languages(self):

@@ -1,4 +1,4 @@
-<%inherit file="/ubase-width.mako" />
+<%inherit file="/ubase.mako" />
 
 <%def name="head_tags()">
 ${parent.head_tags()}
@@ -6,7 +6,7 @@ ${parent.head_tags()}
 
 <h1>${_('Permission denied!')}</h1>
 
-  <div>
+  <div id="permission-denied-message">
   %if c.reason:
     ${c.reason}
   %else:

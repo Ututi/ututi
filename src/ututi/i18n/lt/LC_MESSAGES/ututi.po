@@ -1355,7 +1355,7 @@ msgstr "El. pašto adresas"
 msgid "Login"
 msgstr "Prisijungti"
 
-msgid "Forgotten password?"
+msgid "Forgot password?"
 msgstr "Pamiršote slaptažodį?"
 
 msgid "First time here?"

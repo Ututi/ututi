@@ -55,7 +55,7 @@
         ${_('Log in directly to Ututi')}
       </div>
 
-      <form id="join_login_form" method="post" action="${url(controller='books', action='join_login')}" class="fullForm">
+      <form id="login-form" method="post" action="${url(controller='books', action='join_login')}" class="fullForm">
         %if c.came_from:
           <input type="hidden" name="came_from" value="${c.came_from}" />
         %endif
@@ -70,7 +70,7 @@
       </form>
 
       <div style="padding-bottom: 2em; padding-top: 5px; padding-right: 33px" class="floatright clear-right">
-         <a href="${url(controller='home', action='pswrecovery')}">${_('Forgotten password?')}</a>
+         <a href="${url(controller='home', action='pswrecovery')}">${_('Forgot password?')}</a>
       </div>
 
       <div style="border-top: 2px solid #eae7e7; margin: 1em;

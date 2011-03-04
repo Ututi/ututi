@@ -31,9 +31,10 @@ from sqlalchemy.sql.expression import and_, or_
 from sqlalchemy.orm.interfaces import MapperExtension
 
 from ututi.migration import GreatMigrator
-from ututi.model.users import Medal, Email, UserSubjectMonitoring, User
+from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Author
 from ututi.model.users import Teacher, TeacherGroup, AdminUser, UserRegistration
 from ututi.model.util import logo_property
+from ututi.model.i18n import Country
 from ututi.model import meta
 from ututi.lib.messaging import SMSMessage
 from ututi.lib.emails import group_invitation_email, group_space_bought_email
@@ -50,6 +51,7 @@ from pylons.i18n import _, lazy_ugettext as ugettext
 log = logging.getLogger(__name__)
 
 users_table = None
+authors_table = None
 admin_users_table = None
 user_monitored_subjects_table = None
 email_table = None
@@ -110,19 +112,31 @@ def setup_orm(engine):
 
     global users_table
     users_table = Table("users", meta.metadata,
-                        Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
-                        Column('fullname', Unicode(assert_unicode=True)),
                         Column('description', Unicode(assert_unicode=True)),
                         Column('location_city', Unicode(assert_unicode=True)),
-                        Column('teacher_position', Unicode(assert_unicode=True)),
                         Column('site_url', Unicode(assert_unicode=True)),
                         autoload=True,
                         useexisting=True,
                         autoload_with=engine)
 
+    global teachers_table
+    teachers_table = Table("teachers", meta.metadata,
+                        Column('teacher_position', Unicode(assert_unicode=True)),
+                        autoload=True,
+                        useexisting=True,
+                        autoload_with=engine)
+
+    global authors_table
+    authors_table = Table("authors", meta.metadata,
+                          Column('id', Integer, Sequence('authors_id_seq'), primary_key=True),
+                          Column('fullname', Unicode(assert_unicode=True)),
+                          autoload=True,
+                          useexisting=True,
+                          autoload_with=engine)
+
     global admin_users_table
     admin_users_table = Table("admin_users", meta.metadata,
-                              Column('id', Integer, Sequence('users_id_seq'), primary_key=True),
+                              Column('id', Integer, Sequence('admin_users_id_seq'), primary_key=True),
                               Column('fullname', Unicode(assert_unicode=True)),
                               autoload=True,
                               useexisting=True,
@@ -187,7 +201,8 @@ def setup_orm(engine):
                                                 order_by=LocationTag.title.asc(),
                                                 backref=backref('parent',
                                                                 remote_side=tags_table.c.id)),
-                           'region': relation(Region, backref='tags')})
+                           'region': relation(Region, backref='tags'),
+                           'country': relation(Country, backref='countries')})
 
     orm.mapper(SimpleTag,
                inherits=tag_mapper,
@@ -198,13 +213,13 @@ def setup_orm(engine):
                content_items_table,
                polymorphic_on=content_items_table.c.content_type,
                polymorphic_identity='generic',
-               properties={'created': relation(User,
-                                               primaryjoin=content_items_table.c.created_by==users_table.c.id,
+               properties={'created': relation(Author,
+                                               primaryjoin=content_items_table.c.created_by==authors_table.c.id,
                                                backref="content_items"),
-                           'modified': relation(User,
-                                                primaryjoin=content_items_table.c.modified_by==users_table.c.id),
-                           'deleted': relation(User,
-                                               primaryjoin=content_items_table.c.deleted_by==users_table.c.id),
+                           'modified': relation(Author,
+                                                primaryjoin=content_items_table.c.modified_by==authors_table.c.id),
+                           'deleted': relation(Author,
+                                               primaryjoin=content_items_table.c.deleted_by==authors_table.c.id),
                            'tags': relation(SimpleTag,
                                             secondary=content_tags_table),
                            'location': relation(LocationTag)})
@@ -264,19 +279,27 @@ def setup_orm(engine):
                                                 backref='subscriptions'),
                              'user': relation(User)})
 
+    author_mapper = orm.mapper(Author,
+                               authors_table,
+                               polymorphic_on=authors_table.c.type,
+                               polymorphic_identity='nouser')
+
+
     user_mapper = orm.mapper(User,
                              users_table,
-                             polymorphic_on=users_table.c.user_type,
+                             inherits=Author,
                              polymorphic_identity='user',
-                             properties = {'emails': relation(Email, backref='user'),
+                             properties = {'emails': relation(Email,
+                                                              backref='user',
+                                                              cascade='all, delete-orphan'),
                                            'medals': relation(Medal, backref='user'),
                                            'raw_logo': deferred(users_table.c.logo),
                                            'location': relation(LocationTag, backref=backref('users', lazy=True))})
 
     orm.mapper(Teacher,
-               polymorphic_on=users_table.c.user_type,
+               teachers_table,
                polymorphic_identity='teacher',
-               inherits=user_mapper,
+               inherits=User,
                properties = {'taught_subjects' : relation(Subject,
                                                           secondary=teacher_subjects_table,
                                                           backref="teachers")})
@@ -311,12 +334,20 @@ def setup_orm(engine):
     global user_registrations_table
     user_registrations_table = Table("user_registrations", meta.metadata,
                                     Column('fullname', Unicode(assert_unicode=True)),
+                                    Column('university_title', Unicode(assert_unicode=True)),
+                                    Column('university_site_url', Unicode(assert_unicode=True)),
                                     autoload=True,
                                     autoload_with=engine)
 
     orm.mapper(UserRegistration, user_registrations_table,
                properties = {'location': relation(Tag),
-                             'raw_logo': deferred(user_registrations_table.c.logo)})
+                             'raw_logo': deferred(user_registrations_table.c.logo),
+                             'inviter': relation(User,
+                                                 primaryjoin=user_registrations_table.c.inviter_id==users_table.c.id),
+                             'user': relation(User,
+                                              primaryjoin=user_registrations_table.c.user_id==users_table.c.id),
+                             'university_country': relation(Country),
+                             'raw_university_logo': deferred(user_registrations_table.c.university_logo)})
 
 
     global subject_pages_table
@@ -1570,10 +1601,10 @@ class Tag(object):
         except NoResultFound:
             return None
 
-    logo = logo_property()
+    logo = logo_property(inherit=True)
 
     def has_logo(self):
-        return bool(meta.Session.query(Tag).filter_by(id=self.id).filter(Tag.raw_logo != None).count())
+        return self.logo is not None
 
 
 class PrivateMessage(ContentItem):
@@ -1644,7 +1675,7 @@ class SimpleTag(Tag):
 class LocationTag(Tag):
     """Class representing the university and faculty tags."""
 
-    def __init__(self, title, title_short, description, parent=None, confirmed=True, region=None):
+    def __init__(self, title, title_short, description=None, parent=None, confirmed=True, region=None):
         self.parent = parent
         self.title = title
         self.title_short = title_short
@@ -1667,6 +1698,10 @@ class LocationTag(Tag):
             path.append(location.title_short)
             location = location.parent
         return list(reversed(path))
+
+    @property
+    def url_path(self):
+        return '/'.join(self.path)
 
     @property
     def root(self, full=False):
@@ -1760,7 +1795,7 @@ class LocationTag(Tag):
     def url(self, controller='structureview', action='index', **kwargs):
         return url(controller=controller,
                    action=action,
-                   path='/'.join(self.path),
+                   path=self.url_path,
                    **kwargs)
 
     def count(self, obj=Subject):
@@ -1769,10 +1804,14 @@ class LocationTag(Tag):
                 'subject' : Subject,
                 'group' : Group,
                 'file' : File,
+                'user' : User,
                 }
             obj = obj_types[obj.lower()]
         ids = [t.id for t in self.flatten]
-        return meta.Session.query(obj).filter(obj.location_id.in_(ids)).filter(obj.deleted_on == None).count()
+        query = meta.Session.query(obj).filter(obj.location_id.in_(ids))
+        if (hasattr(obj, 'deleted_on')):
+            query = query.filter(obj.deleted_on == None)
+        return query.count()
 
     @Lazy
     def stats(self):
@@ -1809,14 +1848,13 @@ class LocationTag(Tag):
                 'n_groups': self.count('group'),
                 'n_files': self.count('file')}
 
-    def get_students(self, limit=None):
-        ids = [t.id for t in self.flatten]
-        students = meta.Session.query(User).filter(User.location_id.in_(ids)).order_by(User.last_seen.desc()).limit(limit).all()
-        return students
+    @property
+    def share_info(self):
+        return dict(title=self.title,
+                    caption=self.title_short,
+                    link=self.url(qualified=True),
+                    description=self.description)
 
-    def students_number(self):
-        ids = [t.id for t in self.flatten]
-        return meta.Session.query(User).filter(User.location_id.in_(ids)).count()
 
 def cleanupFileName(filename):
     return filename.split('\\')[-1].split('/')[-1]

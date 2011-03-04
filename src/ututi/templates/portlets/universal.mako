@@ -1,5 +1,46 @@
 <%inherit file="/portlets/base.mako"/>
 
+<%def name="item_box(items, with_titles=False)">
+  <%
+  per_row = 3 if with_titles else 4
+  rows = [items[i:i + per_row] for i in range(0, len(items), per_row)]
+  %>
+  <div class="item-box ${'with-titles' if with_titles else ''}">
+  %for row in rows:
+    <div class="item-row clearfix">
+      %for item in row:
+      <div class="item">
+        <a href="${item['url']}">
+          <% logo_url = item['logo_url'] if with_titles else item['logo_small_url'] %>
+          <img src="${logo_url}"
+               class="item-logo"
+               alt="${item['title']}"
+               title="${item['title']}" />
+          %if with_titles:
+          <div class="item-title">
+            ${item['title']}
+          </div>
+          %endif
+        </a>
+      </div>
+      %endfor
+    </div>
+  %endfor
+  </div>
+</%def>
+
+<%def name="users_online_portlet(count=12)">
+  <% users = h.users_online(count) %>
+  %if users:
+  <%self:portlet id="users-online-portlet">
+    <%def name="header()">
+      ${_("People online:")}
+    </%def>
+    ${item_box(users)}
+  </%self:portlet>
+  %endif
+</%def>
+
 <%def name="quick_file_upload_portlet(targets, label=None)">
 %if len(targets) > 0:
   <%self:action_portlet id="file_upload_portlet" expanding="True" label='${label}'>
@@ -69,26 +110,21 @@
 
 <%def name="share_portlet(object)">
   %if hasattr(object, 'share_info'):
-  <%
-    info = object.share_info
-  %>
-  <%self:uportlet id="share-portlet">
+  <% info = object.share_info %>
+  <%self:portlet id="share-portlet">
     <%def name="header()">
-      ${_("Share with your friends")}
+      ${_("Tell a friend:")}
     </%def>
-    <p>
-      ${_("Found it interesting? Share with your friends!")}
-    </p>
-    <ul id="share-portlet-action-list">
-      <li id="facebook-share"><a href="#share-via-facebook" id="facebook-share-link">${"Via facebook"}</a></li>
-      <li id="email-share"><a href="#share-via-email" id="email-share-link">${"Via e-mail"}</a></li>
+    <ul class="icon-list">
+      <li class="icon-facebook"><a href="#share-facebook" id="facebook-share-link">${"Facebook"}</a></li>
+      <li class="icon-email"><a href="#share-email" id="email-share-link">${"Email"}</a></li>
     </ul>
 
     <div id="email-share-dialog">
       <form action="${url(controller='profile', action='send_email_message_js')}" method="POST" class="new-style-form">
         <%
         subject = _("Here's what I've found in Ututi") + ': ' + info['title']
-        message = "\n\n---\n\n%(title)s\n\n%(description)s\n\n%(link)s" % \
+        message = "%(title)s\n\n%(description)s\n\n%(link)s" % \
           dict(title=info['title'], description=info['description'], link=info['link'])
         %>
         %if c.user is None:
@@ -100,10 +136,7 @@
                        help_text=_("Enter comma separated list of email addresses"))}
         ${h.input_line('subject', _("E-mail subject"), value=subject)}
         ${h.input_area('message', _("Message"), value=message)}
-        ## Prevent floating left
-        <div>
-          ${h.input_submit(_("Send"), class_='btnMedium', id='email-submit-button')}
-        </div>
+        ${h.input_submit(_("Send"), id='email-submit-button')}
       </form>
       <p id="feedback-message">${_("Your email was successfully sent.")}</p>
     </div>
@@ -129,7 +162,7 @@
         });
 
         $('#email-share-dialog').dialog({
-            title: '${_("Send via email")}',
+            title: '${_("Send email")}',
             width: 350,
             autoOpen: false
         });
@@ -174,6 +207,23 @@
       });
       //]]>
     </script>
-  </%self:uportlet>
+  </%self:portlet>
   %endif
 </%def>
+
+<%def name="google_ads_portlet()">
+  %if c.user is None:
+  <%self:portlet id="google-ads-portlet">
+    <script type="text/javascript">
+      <!--
+      google_ad_client = "pub-1809251984220343";
+      google_ad_slot = "4000532165";
+      google_ad_width = 160;
+      google_ad_height = 250;
+      //-->
+    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+  </%self:portlet>
+  %endif
+</%def>
+

@@ -1,10 +1,10 @@
-<%namespace file="/portlets/user.mako" import="user_information_portlet, user_groups_portlet, user_create_group_portlet,
-                                               user_create_subject_portlet, user_recommend_portlet,
-                                               teacher_information_portlet"/>
+<%namespace file="/portlets/user.mako" import="profile_portlet, user_information_portlet, invite_friends_portlet,
+                                               user_groups_portlet, user_subjects_portlet, teacher_information_portlet,
+                                               user_menu_portlet, user_description_portlet, todo_portlet"/>
 <%namespace file="/portlets/group.mako" import="group_info_portlet, group_forum_post_portlet,
                                                 group_invite_member_portlet, group_sms_portlet,
                                                 group_members_portlet"/>
-<%namespace file="/portlets/universal.mako" import="quick_file_upload_portlet"/>
+<%namespace file="/portlets/universal.mako" import="quick_file_upload_portlet, users_online_portlet"/>
 <%namespace file="/portlets/facebook.mako" import="facebook_likebox_portlet"/>
 <%namespace file="/portlets/banners/base.mako" import="ubooks_portlet"/>
 
@@ -18,27 +18,24 @@
 %if c.user.is_teacher:
   ${teacher_sidebar(exclude)}
 %else:
-<div id="sidebar">
-  ${user_information_portlet()}
-  %if not 'files' in exclude:
-  ${quick_file_upload_portlet(c.user.groups_uploadable + c.user.watched_subjects, label='user_files')}
-  %endif
-  %if not 'create_group' in exclude:
-  ${user_create_group_portlet()}
-  %endif
-  %if not 'create_subject' in exclude:
-  ${user_create_subject_portlet()}
-  %endif
-  %if not 'recommend' in exclude:
-  ${user_recommend_portlet()}
-  %endif
+  ${profile_portlet()}
+  ${user_menu_portlet()}
   ${user_groups_portlet()}
-</div>
+  ${user_subjects_portlet()}
 %endif
+</%def>
+
+<%def name="user_right_sidebar(exclude=[])">
+  ${user_description_portlet()}
+  ${todo_portlet()}
+  ${invite_friends_portlet()}
+  ${users_online_portlet()}
 </%def>
 
 <%def name="group_sidebar(exclude=[])">
 <div id="sidebar">
+  ${profile_portlet()}
+  ${user_menu_portlet()}
   %if not 'info' in exclude:
     ${group_info_portlet()}
   %endif

@@ -29,18 +29,24 @@ SETING UP
     >>> form.getControl('Create').click()
 
 END OF SETTING UP
+
 Not logged in user can see students number of university
 
     >>> browser = Browser()
     >>> browser.open('http://localhost/team/vu')
-    >>> browser.printQuery("//li[@class='studentsNumber']")
-    <li class="studentsNumber">
-      <span class="bold">0</span> students
-          </li>
+    >>> browser.printCssQuery("#location-info-portlet .member-count", strip=True)
+    <li>0 Members</li>
 
-But he can't see button "I study here"
+He can see "I study here" button which takes him to registration:
 
-    >>> browser.printQuery("//form[@id='i_study_here']")
+    >>> browser.getControl('I study here').click()
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Registration to Vilniaus universitetas</h1>
+
+    >>> browser.open('http://localhost/school/vu/ef')
+    >>> browser.getControl('I study here').click()
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Registration to Ekonomikos fakultetas</h1>
 
 Logged user should not see "I study here" button in university and faculty portlet,
 because he already has his LocationTag set:

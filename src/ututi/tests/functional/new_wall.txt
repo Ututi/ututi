@@ -14,7 +14,7 @@ Login and visit the wall.
 
 The page title should say "News feed":
 
-    >>> user3.printQuery("//h1[@class='pageTitle']/text()")
+    >>> user3.printQuery("//h1[@class='page-title']/text()")
     News feed
 
 Right next to the title there's a link to wall settings:
@@ -193,7 +193,7 @@ User can immediately reply to this forum thread from his wall:
 
 Group's mailinglist thread is also displayed in group's wall:
 
-    >>> admin.getLink("Moderatoriai").click()
+    >>> admin.getLink("Moderatoriai", url='/group/moderators').click()
     >>> printWallEvents(admin)
     <span class="event-title">
         You have posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>

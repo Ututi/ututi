@@ -16,7 +16,7 @@ They can fill out the form and register here:
     >>> browser.getControl('Register').click()
 
     >>> browser.url
-    'http://localhost/register/welcome?fb=True'
+    'http://localhost/welcome?fb=True'
 
 We're in!
 
@@ -33,5 +33,5 @@ a single click away:
     >>> browser2.url
     'http://localhost/home/feed'
 
-    >>> browser2.printQuery('id("personal-data")//span[@class="fullname"]/text()')
-    John Smith
+    >>> browser2.printCssQuery('.user-fullname', strip=True)
+    <div>John Smith</div>

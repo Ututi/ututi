@@ -7,7 +7,7 @@ First of all let's log in;
 
 We can add a group at the url /groups/add.
 
-    >>> browser.getLink('Create group').click()
+    >>> browser.getLink('Create new group').click()
     >>> browser.getControl('Group e-mail address').value = 'test'
     >>> browser.getControl('Group title').value = 'Test group'
     >>> browser.getControl('Continue').click()
@@ -32,8 +32,8 @@ In which we see a box suggesting us to invite more members:
       <div>
         <h2>Invite group members!</h2>
     <BLANKLINE>
-    It's easy - you just have to know their email addresses! You can
-    use the group mailing list together then!
+    <p>It's easy - you just have to know their email addresses! You can
+    use the group mailing list together then!</p>
     <BLANKLINE>
         </div>
       <div>
@@ -86,11 +86,11 @@ disappear:
     >>> emails = 'user@ututi.lt'
     >>> browser.getControl(name='emails').value = emails
     >>> browser.getControl('Invite').click()
-    >>> browser.getLink('Test group').click()
 
 When we go back to what's new, we only see the watch more subjects
 box:
 
+    >>> browser.getLink('News feed').click()
     >>> browser.printCssQuery("#invite_members_block", strip=True)
 
     >>> browser.printCssQuery("#watch_subjects_block", strip=True)

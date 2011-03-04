@@ -8,27 +8,10 @@ ${_('Student information online')}
 </%def>
 
 <%def name="css()">
+
 </%def>
 
 <%def name="body_class()">
-</%def>
-
-<%def name="anonymous_menu()">
-<p class="a11y">${_('Main menu')}</p>
-<div class="head-nav">
-  <ul>
-    <li><a href="${url(controller='home', action='index', qualified=True)}">${_('Home')}</a></li>
-    <li><a href="${url(controller='search', action='browse', qualified=True)}">${_('Browse')}</a></li>
-    <li><a href="${url(controller='home', action='about', qualified=True)}">${_('About')}</a></li>
-    <li><a class="orange" href="${url(controller='home', action='register', qualified=True, came_from=url.current())}">${_('Join')}</a></li>
-  </ul>
-</div>
-<p class="a11y">${_('User menu')}</p>
-<div class="loggedin-nav" id="personal-data">
-    <ul>
-        <li><a href="#" id="feedback-link">${_('feedback')}</a></li>
-    </ul>
-</div>
 </%def>
 
 <%def name="breadcrumbs(breadcrumbs)">
@@ -95,106 +78,63 @@ ${_('Student information online')}
 </%def>
 
 <%def name="anonymous_header()">
-<form method="post" id="loginForm" action="${url('/login')}">
-
-  <div id="federatedLogin">
-    <div id="federatedLoginHint">${_('Connect using')}</div>
-    <div id="login-buttons">
-      <%
-         if c.came_from:
-           g_url = url(controller='federation', action='google_register', came_from=c.came_from)
-           fb_url = url(controller='federation', action='facebook_login', came_from=c.came_from)
-         else:
-           g_url = url(controller='federation', action='google_register')
-           fb_url = url(controller='federation', action='facebook_login')
-      %>
-      <a href="${g_url}" class="google-login"
-          onclick="show_loading_message(); return true">
-          ${h.image('/img/google.gif', alt=_('Log in using Google'))}
-      </a>
-      <fb:login-button size="icon" perms="email"
-        onlogin="show_loading_message(); window.location = '${fb_url}'"
-       >${_('Connect')}</fb:login-button>
+<%
+   nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
+%>
+<div id="header">
+  <div id="header-container">
+    <div id="logo">
+      <a href="${url('/')}"><img src="/img/Ututi_logo_big.png" alt="Ututi logo" title="Ututi logo"/></a>
+      <span id="slogan">${_("Bringing students and teachers together")}</span>
+      <ul id="nav">
+        <li class="header-links"><a href="#">What is Ututi?</a></li>
+        <li class="header-links"><a href="#">Contact us</a></li>
+        <li id="login-link" class="header-links"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Login')}</a></li>
+      </ul>
     </div>
   </div>
-
-  <fieldset>
-    <input type="hidden" name="came_from" value="${c.came_from or request.url}" />
-    <legend class="a11y">${_('Join!')}</legend>
-    <label class="textField"><span class="overlay">${_('Email')}:</span><input type="text" name="login" value="${request.params.get('login')}"/><span class="edge"></span></label>
-    <label class="textField"><span class="overlay">${_('Password')}</span><input type="password" name="password" /><span class="edge"></span></label>
-    <button class="btn" type="submit" value="${_('Login')}"><span>${_('Login')}</span></button><br />
-    <a href="${url(controller='home', action='pswrecovery')}">${_('Forgotten password?')}</a>
-    <label id="rememberMe" for="remember"><input id="remember" name="remember" value="true" type="checkbox" class="checkbox"/> ${_('Remember me')}</label>
-  </fieldset>
-  <script type="text/javascript">
-    $(document).ready(function(){$(".textField .overlay").labelOver('over');});
-  </script>
-</form>
-${self.anonymous_menu()}
+</div>
 </%def>
 
 <%def name="loggedin_header()">
-<form id="searchForm" action="${url(controller='profile', action='search')}">
-    <fieldset>
-        <legend class="a11y">${_('Search')}</legend>
-        <label class="textField">
-          <span class="a11y">${_('Search text')}</span>
-          <input type="text" name="text"/>
-          <span class="edge"></span>
-        </label>
-        ${h.input_submit(_('search_'))}
-    </fieldset>
-</form>
-<p class="a11y">${_('Main menu')}</p>
-<div class="head-nav">
-  <ul>
-    <li><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
-    <li><a href="${url(controller='profile', action='browse')}">${_('Browse')}</a></li>
-    <li class="expandable group-nav">
-      <span>${_('Groups')}</span>
-      <div>
-        <ul>
-          %for group in c.user.groups:
-            <li>
-              <a href="${url(controller='group', action='index', id=group.group_id)}"
-                 ${h.trackEvent(None, 'group_home', 'top_menu')} title="${group.title}">
-                ${h.ellipsis(group.title, 18)}
-              </a>
-            </li>
-          %endfor
-          <li class="action"><a ${h.trackEvent(None, 'all_groups', 'menu')} href="${url(controller='search', action='index', obj_type='group')}">${_('All groups')}</a></li>
-          <li class="action"><a ${h.trackEvent(None, 'create_group', 'menu')} href="${url(controller='group', action='create_academic')}">${_('Create group')}</a></li>
-        </ul>
-      </div>
-    </li>
-    <li><a href="${url(controller='community', action='index')}">${_('Community')}</a></li>
-  </ul>
-</div>
-<p class="a11y">${_('User menu')}</p>
-<div class="loggedin-nav" id="personal-data">
-    <ul>
-        <li><a id="inbox-link" href="${url(controller='messages', action='index')}">
-          <% unread_messages = c.user.unread_messages() %>
-          %if unread_messages:
-           <strong>${_("inbox")} (${unread_messages})</strong>
-          %else:
-             ${_("inbox")}
-          %endif
-        </a></li>
+<div id="header">
+  <div id="header-container">
+    <div id="logo">
+      <a href="${url('/')}"><img src="/img/Ututi_logo.png" alt="Ututi logo" title="Ututi logo" /></a>
+    </div>
+    <div id="top-panel">
+      <ul id="head-nav">
+        <li id="nav-home"><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
+        <li id="nav-university"><a href="${c.user.location.url()}">${_('My University')}</a></li>
+        <li id="nav-catalog"><a href="${url(controller='profile', action='browse')}">${_('Catalog')}</a></li>
+      </ul>
+      <form id="search-form" action="${url(controller='profile', action='search')}">
+        <fieldset>
+          <legend class="a11y">${_('Search')}</legend>
+          <label class="text-field">
+            <span class="a11y">${_('Search text')}</span>
+            <input type="text" name="text"/>
+            <span class="edge"></span>
+          </label>
+          ${h.input_submit(_('search_'))}
+        </fieldset>
+      </form>
+      <ul id="user-menu">
         <li class="expandable profile-nav">
-            <span class="fullname">${c.user.fullname}</span>
-            <div>
-                <ul>
-                    <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
-                    <li class="action"><a href="${url(controller='user', action='index', id=c.user.id)}">${_('Public profile')}</a></li>
-                </ul>
-            </div>
+          <div class="fullname">${c.user.fullname}</div>
+          <div class="expandable-items">
+            <ul>
+              <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
+              <li class="action"><a href="${url(controller='user', action='index', id=c.user.id)}">${_('Public profile')}</a></li>
+              <li class="action"><a href="${url(controller='home', action='logout')}">${_('Logout')}</a></li>
+            </ul>
+          </div>
         </li>
-        <li><a href="${url(controller='home', action='logout')}">${_('log out')}</a></li>
-    </ul>
-</div>
+      </ul>
+    </div>
 
+</div>
+</div>
 <script type="text/javascript">
     // nav ul li expandable
     $('ul li.expandable').toggle(function() {
@@ -287,16 +227,23 @@ ${self.anonymous_menu()}
     </script>
 
     ${h.stylesheet_link(h.path_with_hash('/style.css'))}
+    ${h.stylesheet_link(h.path_with_hash('/layout.css'))}
     ${h.stylesheet_link(h.path_with_hash('/fixed.css'))}
+    %if c.user is None:
+       ${h.stylesheet_link(h.path_with_hash('/anonymous.css'))}
+    %endif
     ${h.stylesheet_link(h.path_with_hash('/portlets.css'))}
     ${h.stylesheet_link(h.path_with_hash('/widgets.css'))}
+    <!--[if IE]>
+    ${h.stylesheet_link(h.path_with_hash('/ie.css'))}
+    <![endif]-->
     ${h.javascript_link('/javascript/jquery-1.4.4.min.js')}
     ${h.javascript_link('/javascript/ajaxupload.3.5.js')}
     ${h.javascript_link('/javascript/jquery.qtip.min.js')}
     ${h.javascript_link('/javascript/tooltips.js')}
     ${h.javascript_link('/javascript/jquery.blockUI.js')}
-    ${h.javascript_link('/javascript/jquery-ui-1.8.6.custom.min.js')|n}
-    ${h.stylesheet_link(h.path_with_hash('/jquery-ui-1.8.6.custom.css'))}
+    ${h.javascript_link('/javascript/jquery-ui-1.8.10.custom.min.js')|n}
+    ${h.stylesheet_link(h.path_with_hash('/jquery-ui-1.8.10.custom.css'))}
     ${h.javascript_link('/javascript/jquery.form.js')|n}
     ${h.javascript_link(h.path_with_hash('/javascript/expand.js'))}
     ${h.javascript_link(h.path_with_hash('/javascript/hide_parent.js'))}
@@ -319,52 +266,37 @@ ${self.anonymous_menu()}
     </script>
     %endif
 
-    <div id="wrap">
-      <div id="widthLimiter">
-        ${breadcrumbs(c.breadcrumbs)}
-        %if c.user is None:
-          ${self.anonymous_header()}
-        %else:
-          ${self.loggedin_header()}
-        %endif
+    %if c.user is None:
+    ${self.anonymous_header()}
+    %else:
+    ${self.loggedin_header()}
+    %endif
 
-        ${next.body()}
-      </div>
-      <div class="push"></div>
-    </div>
+    ${next.body()}
 
     <div id="footer">
       <%
          nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
       %>
-      <p>Copyright © <a href="${_('ututi_link')}">${_(u'UAB „UTUTI“')}</a></p>
-      <form id="language-switch-form" action="${url('switch_language')}">
-        <input name="came_from" type="hidden" value="${request.url}" />
-        <select name="language">
-          <option value="en">${_('English')}</option>
-          <option value="lt">${_('Lithuanian')}</option>
-          <option value="pl">${_('Polish')}</option>
-        </select>
-        <input type="submit" value="${_('Select')}" />
-      </form>
-      <ul>
-        <li><a ${nofollow} href="${url(controller='home', action='about')}">${_('About ututi')}</a></li>
-        <li><a ${nofollow} href="${_('ututi_blog_url')}">${_('U-blog')}</a></li>
-        <li><a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms of use')}</a></li>
-        <li><a href="#" id="feedback-link">${_('Feedback')}</a></li>
-      </ul>
-      <div class="folow-us-icons">
-      <a href="${config.get('folow_us_facebook', 'http://www.facebook.com/ututi')}">
-        ${h.image('/img/social/facebook_32.png', alt=_('Follow us on Facebook'))}
-      </a>
-      <a href="${config.get('folow_us_twitter', 'http://twitter.com/ututi')}">
-        ${h.image('/img/social/twitter_32.png', alt=_('Follow us on Twitter'))}
-      </a>
-      <a href="${config.get('folow_us_ublog', 'http://blog.ututi.lt')}">
-        ${h.image('/img/social/ublog_32.png', alt=_('Read about us in blog'))}
-      </a>
-
-      </div>
+      <!-- TODO: Fix language widget -->
+        <div class="left">
+          <form id="language-switch-form" action="${url('switch_language')}">
+            <input name="came_from" type="hidden" value="${request.url}" />
+            <select name="language">
+              <option value="en">${_('English')}</option>
+              <option value="lt">${_('Lithuanian')}</option>
+              <option value="pl">${_('Polish')}</option>
+            </select>
+            <input type="submit" value="${_('Select')}" />
+          </form>
+        </div>
+        <div class="middle">Copyright © <a href="${_('ututi_link')}">${_(u'UAB „UTUTI“')}</a></div>
+        <div class="right">
+          <a ${nofollow} href="${url(controller='home', action='about')}">${_('About')}</a>  |
+          <a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms')}</a>  |
+          <a href="#" >Contact Us</a>  |
+          <a href="#" id="feedback-link">${_('Feedback')}</a>
+        </div>
     </div>
     %if c.lang in ['lt', 'en', 'pl']:
     ${h.javascript_link('/javascript/uservoice.js')|n}

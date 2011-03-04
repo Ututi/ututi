@@ -81,7 +81,7 @@ page itself:
     </span>
     <span>Document at http://localhost/admin/404 was not found, but maybe you are interested in something else?</span>
 
-    >>> browser.printQuery("id('mainContent')/h1")
+    >>> browser.printQuery("id('main-content')//h1")
     <h1>Search</h1>
 
 Some views are not accessible to simple users:
@@ -94,18 +94,5 @@ Some views are not accessible to simple users:
 Our access denied page looks just like an error page, but with a
 different error message:
 
-    >>> browser.printQuery("id('mainContent')")
-    <div id="mainContent">
-      <div id="flash-messages"></div>
-      <h1>Permission denied!</h1>
-      <div>You do not have the rights to see this page, or perform this action. Go back or go to the search page please.</div>
-      <a href="/search">go find something else</a>
-    </div>
-
-If a user gets a 404 page while not being logged-in and then logs in, he should be redirected to his homepage (feed).
-
-    >>> browser = Browser()
-    >>> browser.open('http://localhost/asdfasdf')
-    Traceback (most recent call last):
-    ...
-    HTTPError: HTTP Error 404: Not Found
+    >>> browser.printCssQuery("#permission-denied-message", strip=True)
+    <div>You do not have the rights to see this page, or perform this action. Go back or go to the search page please.</div>

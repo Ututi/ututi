@@ -339,10 +339,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     @group_action
     def request_join(self, group):
         if c.user is None:
-            c.login_form_url = url(controller='home',
-                                   action='login',
-                                   came_from=group.url(action='request_join'),
-                                   context_type='group_join')
+            c.login_form_url = url(group.location.url(action='login'))
             deny(_('You have to log in or register to request group membership.'), 401)
 
         pending_request = PendingRequest.get(c.user, group)

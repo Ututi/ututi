@@ -3,7 +3,7 @@ from random import Random
 import string
 from datetime import datetime, date, timedelta
 
-from formencode import Schema, validators, Invalid, All, htmlfill
+from formencode import Schema, validators, All, htmlfill
 from webhelpers import paginate
 
 from babel.dates import format_date
@@ -12,7 +12,7 @@ from babel.dates import parse_date
 from paste.util.converters import asbool
 from pylons import request, tmpl_context as c, url, session, config, response
 from pylons.controllers.util import abort, redirect
-from pylons.i18n import _, ungettext
+from pylons.i18n import _
 from pylons.templating import render_mako_def
 
 from sqlalchemy.orm.exc import NoResultFound
@@ -21,16 +21,16 @@ from sqlalchemy.sql.expression import desc
 
 from ututi.lib.base import BaseController, render, u_cache
 import ututi.lib.helpers as h
-from ututi.lib import gg
-from ututi.lib.emails import email_confirmation_request, email_password_reset
-from ututi.lib.messaging import EmailMessage
+from ututi.lib.emails import email_password_reset
 from ututi.lib.security import sign_out_user
 from ututi.lib.security import ActionProtector, sign_in_user, bot_protect
 from ututi.lib.validators import validate, UniqueEmail, TranslatedEmailValidator
-from ututi.model import meta, User, Region, Email, PendingInvitation, LocationTag, Payment
+from ututi.model import (meta, User, Region, Email, PendingInvitation,
+                         LocationTag, Payment, UserRegistration)
 from ututi.model import Subject, Group, SearchItem
 from ututi.model.events import Event
 from ututi.controllers.federation import FederationMixin, FederatedRegistrationForm
+from ututi.controllers.registration import RegistrationStartForm
 
 log = logging.getLogger(__name__)
 
@@ -87,13 +87,6 @@ class RegistrationForm(Schema):
     chained_validators = [validators.FieldsMatch('new_password',
                                                  'repeat_password',
                                                  messages=msg)]
-
-
-class RecommendationForm(Schema):
-    """A schema for validating ututi recommendation submissions"""
-    allow_extra_fields = True
-    recommend_emails = validators.UnicodeString(not_empty=False)
-    came_from = validators.URL(require_tld=False)
 
 
 class UniversityListMixin(BaseController):
@@ -290,93 +283,6 @@ class HomeController(UniversityListMixin, FederationMixin):
         sign_out_user()
         redirect(url(controller='home', action='index'))
 
-    def _register_user(self, form, send_confirmation=True):
-        fullname = self.form_result['fullname']
-        password = self.form_result['new_password']
-        email = self.form_result['email'].lower()
-
-        # TODO: in real registration flow, university
-        # is specified explicitly
-        location = LocationTag.get('uni')
-        log.warn('Using default U-niversity for user registration')
-
-        user = User.get(email, location)
-        if user:
-            # A user with this email exists, just sign them in.
-            sign_in_user(user)
-            return (user, email)
-
-        gadugadu_uin = self.form_result['gadugadu']
-
-        user = User(fullname=fullname,
-                    username=email,
-                    location=location,
-                    password=password)
-        user.emails = [Email(email)]
-        user.accepted_terms = datetime.utcnow()
-        #all newly registered users are marked when they agree to the terms of use
-
-        meta.Session.add(user)
-        meta.Session.commit()
-        if send_confirmation:
-            email_confirmation_request(user, email)
-        else:
-            user.emails[0].confirmed = True
-            meta.Session.commit()
-
-        if gadugadu_uin:
-            user.gadugadu_uin = gadugadu_uin
-            gg.confirmation_request(user)
-            meta.Session.commit()
-
-        sign_in_user(user)
-        return (user, email)
-
-    @validate(schema=RegistrationForm(), form='register')
-    def register(self, hash=None):
-        c.hash = hash
-        c.show_registration = True
-        if hasattr(self, 'form_result'):
-            # Form validation was successful.
-            if hash is not None:
-                invitation = PendingInvitation.get(hash)
-                if invitation is not None and invitation.email.lower() == self.form_result['email'].lower():
-                    user, email = self._register_user(self.form_result, False)
-                    invitation.group.add_member(user)
-                    meta.Session.delete(invitation)
-                    meta.Session.commit()
-                    redirect(url(controller='group', action='home', id=invitation.group.group_id))
-                elif invitation is None:
-                    c.header = _('Invalid invitation!')
-                    c.message = _('The invitation link you have followed was either already used or invalid.')
-                    return render('/login.mako')
-                else:
-                    c.email = invitation.email
-                    c.header = _('Invalid email!')
-                    c.message = _('You can only use the email this invitation was sent for to register.')
-                    return render('/login.mako')
-            else:
-                user, email = self._register_user(self.form_result)
-                redirect(str(request.POST.get('came_from',
-                                                 url(controller='profile',
-                                                     action='register_welcome'))))
-        else:
-            # Form validation failed.
-            if hash is not None:
-                invitation = PendingInvitation.get(hash)
-                if invitation is not None:
-                    c.email = invitation.email
-                    c.message_class = 'please-register'
-                    c.header = _('Please register!')
-                    c.message = _('Only registered users can become members of a group, please register first.')
-                else:
-                    c.header = _('Invalid invitation!')
-                    c.message = _('The invitation link you have followed was either already used or invalid.')
-                return render('/login.mako')
-
-            self._get_unis()
-            return render('/login.mako')
-
     def _pswrecovery_form(self):
         return render('home/recoveryform.mako')
 
@@ -475,63 +381,6 @@ class HomeController(UniversityListMixin, FederationMixin):
         except NoResultFound:
             abort(404)
 
-    @validate(schema=RecommendationForm)
-    @ActionProtector("user")
-    def send_recommendations(self):
-        if hasattr(self, 'form_result'):
-            count = 0
-            failed = []
-            rcpt = []
-            using = [] #already members of ututi
-
-            #constructing the message
-            extra_vars = {'user_name': c.user.fullname}
-            text = render('/emails/recommendation_text.mako',
-                          extra_vars=extra_vars)
-            html = render('/emails/recommendation_html.mako',
-                          extra_vars=extra_vars)
-            msg = EmailMessage(_('%(fullname)s wants you to join Ututi') % dict(fullname = c.user.fullname), text, html)
-
-            emails = self.form_result.get('recommend_emails', '').split()
-            for line in emails:
-                for email in filter(bool, line.split(',')):
-                    try:
-                        TranslatedEmailValidator.to_python(email)
-                        exists = meta.Session.query(Email).filter(Email.email == email).first()
-                        if exists is None:
-                            count = count + 1
-                            rcpt.append(email)
-                        else:
-                            using.append(email)
-                    except Invalid:
-                        failed.append(email)
-            if rcpt != []:
-                msg.send(rcpt)
-
-            status = {}
-            if count > 0:
-                status['ok'] = ungettext('%(count)d invitation sent.',
-                                         '%(count)d invitations sent.', count) % {'count': count}
-
-            if len(using) > 0:
-                status['members'] = _('Already using ututi: %s.') % ', '.join(using)
-
-            if len(failed) > 0:
-                status['fail'] = _('Invalid emails: %s') % ', '.join(failed)
-
-            if request.params.has_key('js'):
-                for k in status:
-                    status[k] = '<div class="%(cls)s">%(val)s</div>' % dict(cls=k, val=status[k])
-                return ''.join([v for v in status.values()])
-            else:
-                for v in status.values():
-                    h.flash(v)
-                came_from = self.form_result.get('came_from', None)
-                if came_from is None:
-                    redirect(url(controller='profile', action='index'))
-                else:
-                    redirect(came_from.encode('utf-8'))
-
     def join(self):
         redirect(url(controller='home', action='login', came_from=c.came_from))
 
@@ -606,3 +455,27 @@ class HomeController(UniversityListMixin, FederationMixin):
         session['language'] = language
         session.save()
         redirect(c.came_from or url('/'))
+
+    @validate(schema=RegistrationStartForm(), form='index')
+    def start_registration(self):
+        if not hasattr(self, 'form_result'):
+            redirect(url('frontpage'))
+
+        email = self.form_result['email']
+
+        # TODO: try to select user location by his email here
+
+        # Otherwise lookup/create registration entry and
+        # send confirmation code to user.
+
+        registration = UserRegistration.get_by_email(email)
+        if registration is None:
+            registration = UserRegistration(email=email)
+            meta.Session.add(registration)
+            meta.Session.commit()
+
+        registration.send_confirmation_email()
+
+        c.email = email
+        return render('registration/email_approval.mako')
+

@@ -1,4 +1,4 @@
-<%inherit file="/ubase-width.mako" />
+<%inherit file="/ubase.mako" />
 
 <%def name="head_tags()">
   <title>UTUTI – student information online</title>

@@ -5,7 +5,7 @@ Group creation path
 
 This time, let's try creating an academic group:
 
-    >>> browser.getLink('Create group').click()
+    >>> browser.getLink('Create new group').click()
 
     >>> browser.getControl('Group e-mail address').value = 'test2'
     >>> browser.getControl('Group title').value = 'Another test group'
@@ -22,10 +22,9 @@ We've checked that already; let's move on.
 
 The screen will suggest watching subjects:
 
-    >>> browser.printQuery('//h2/text()')
-    Invite group members!
-    Watch subjects you are studying!
-    ...
+    >>> browser.printCssQuery('h2.portletTitle', strip=True)
+    <h2>Invite group members!</h2>
+    <h2>Watch subjects you are studying!</h2>
 
 Let's have a look at the settings:
 
@@ -44,7 +43,8 @@ Let's have a look at the settings:
 
 Let's create academic group with forum:
 
-    >>> browser.getLink('Create group').click()
+    >>> browser.getLink('Home').click()
+    >>> browser.getLink('Create new group').click()
 
     >>> browser.getControl('Group e-mail address').value = 'test2_with_forum'
     >>> browser.getControl('Group title').value = 'Another test group'

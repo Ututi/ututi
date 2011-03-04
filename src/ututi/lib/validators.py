@@ -2,7 +2,6 @@ import re
 
 from os.path import splitext
 
-from webob.multidict import UnicodeMultiDict
 from decorator import decorator
 from lxml.html.clean import Cleaner
 
@@ -17,7 +16,7 @@ from pylons.decorators import validate as old_validate
 from ututi.model import GroupCoupon
 from ututi.model import meta, Email
 from ututi.model import Subject, Group, ContentItem, LocationTag
-from ututi.model.i18n import Language
+from ututi.model.i18n import Language, Country
 
 
 def u_error_formatter(error):
@@ -60,6 +59,39 @@ def html_cleanup(input):
         )
     sane = cleaner.clean_html("<div>%s</div>"%input)
     return sane[len('<div>'):-len('</div>')]
+
+
+class CountryValidator(validators.FancyValidator):
+    """A validator that converts country id to Country.
+    Should normally be used to validate input from select box."""
+
+    messages = {
+        'bad_id': _(u"Country does not exist."),
+        'empty': _(u"Please select country."),
+        }
+
+    _notfoundmarker = object()
+
+    def _to_python(self, value, state):
+        if value is None:
+            return None
+        try:
+            id = int(value)
+            return Country.get(id) or self._notfoundmarker
+        except ValueError:
+            return self._notfoundmarker
+
+    def _from_python(self, value, state):
+        if isinstance(value, Country):
+            return value.id
+        else:
+            return None
+
+    def validate_python(self, value, state):
+        if value is None:
+            raise Invalid(self.message('empty', state), value, state)
+        elif value is self._notfoundmarker:
+            raise Invalid(self.message('bad_id', state), value, state)
 
 
 class HtmlSanitizeValidator(validators.FancyValidator):
@@ -299,21 +331,17 @@ class LanguageValidator(validators.FancyValidator):
             raise Invalid(self.message('bad_lang', state), value, state)
 
 
-def manual_validate(schema, **state_kwargs):
+def manual_validate(schema):
     """Validate a formencode schema.
     Works similar to the @validate decorator. On success return a dictionary
     of parameters from request.params. On failure throws a formencode.Invalid
     exception."""
-    # Create a state object if requested
-    if state_kwargs:
-        state = State(**state_kwargs)
-    else:
-       state = None
 
     # In case of validation errors an exception is thrown. This needs to
     # be caught elsewhere.
     from pylons import request
-    return schema.to_python(request.params, state)
+    return schema.to_python(request.params, PylonsFormEncodeState)
+
 
 class ParentIdValidator(validators.FancyValidator):
     """
@@ -354,12 +382,14 @@ class ParentIdValidator(validators.FancyValidator):
         if value is None or not isinstance(value, (Group, Subject)):
             raise Invalid(self.message('badId', state), value, state)
 
+
 class FileUploadTypeValidator(validators.FancyValidator):
-    """ A validator to check uploaded file types."""
+    """A validator to check uploaded file types."""
 
     __unpackargs__ = ('allowed_types')
 
     messages = {
+        'empty': _(u"Please select a file."),
         'bad_type': _(u"Bad file type, only files of the types '%(allowed)s' are supported.")
         }
 
@@ -367,6 +397,7 @@ class FileUploadTypeValidator(validators.FancyValidator):
         if value is not None:
             if splitext(value.filename)[1].lower() not in self.allowed_types:
                 raise Invalid(self.message('bad_type', state, allowed=', '.join(self.allowed_types)), value, state)
+
 
 class GroupCouponValidator(validators.FancyValidator):
     """ Validate Group Coupon codes. Check for both collisions (creation) and existance (usage)."""
@@ -389,20 +420,38 @@ class GroupCouponValidator(validators.FancyValidator):
         if error is not None:
             raise Invalid(self.message(error, state), value, state)
 
-class CommaSeparatedListValidator(validators.FancyValidator):
+
+class SeparatedListValidator(validators.FancyValidator):
     """A validator splits form field value for further validation,
-    used for chaining comma separated list validation (e.g. emails)."""
+    used for chaining separated list validation (e.g. emails).
+    Whitespace characters are used as separators by default, unless
+    explicitly stated whitespace=False.
+    """
 
     messages = { 'empty': _(u"Please enter at least one value.") }
 
+    def __init__(self, separators='', whitespace=True, **kwargs):
+        self.separators = separators
+        if whitespace:
+            import string
+            self.separators += string.whitespace
+
+        validators.FancyValidator.__init__(self, **kwargs)
+
     def _to_python(self, value, state):
-        print value
         if not value:
             raise Invalid(self.message('empty', state), value, state)
 
-        from string import strip
+        tokens = [value]
+        for sep in self.separators:
+            new_tokens = []
+            for token in tokens:
+                new_tokens.extend(token.split(sep))
+            tokens[:] = new_tokens
 
-        separated = filter(bool, map(strip, value.split(',')))
+        from string import strip
+        separated = filter(bool, map(strip, tokens))
+
         if len(separated) == 0:
             raise Invalid(self.message('empty', state), value, state)
 
@@ -497,7 +546,6 @@ def js_validate(schema=None, validators=None, form=None, variable_decode=False,
         else:
             params = request.params
 
-        is_unicode_params = isinstance(params, UnicodeMultiDict)
         params = params.mixed()
         if variable_decode:
             decoded = variabledecode.variable_decode(params, dict_char,

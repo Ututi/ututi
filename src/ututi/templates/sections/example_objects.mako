@@ -1,4 +1,4 @@
-<%inherit file="/ubase-width.mako" />
+<%inherit file="/ubase.mako" />
 <%namespace file="/sections/standard_objects.mako" import="subject_listitem, group_listitem" />
 
 <h3>A subject list item (e.g. in the user's home):</h3>

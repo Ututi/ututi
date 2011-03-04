@@ -18,7 +18,7 @@ from pylons.decorators import jsonify
 from pylons.templating import render_mako_def
 from pylons.controllers.util import abort, redirect
 
-from pylons.i18n import _
+from pylons.i18n import _, ungettext
 
 import ututi.lib.helpers as h
 from ututi.lib.base import render
@@ -28,6 +28,7 @@ from ututi.lib.fileview import FileViewMixin
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
+from ututi.lib.invitations import make_email_invitations, make_facebook_invitations
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.mailinglist import post_message
 from ututi.lib import gg, sms
@@ -38,7 +39,8 @@ from ututi.model.events import Event, TeacherMessageEvent
 from ututi.model import File
 from ututi.model import LocationTag, TeacherGroup
 from ututi.model import meta, Email, User
-from ututi.controllers.profile.validators import HideElementForm, MultiRcptEmailForm
+from ututi.controllers.profile.validators import HideElementForm, MultiRcptEmailForm, FriendsInvitationForm, \
+    FriendsInvitationJSForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm,\
     PhoneForm, ProfileForm, PasswordChangeForm, StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm
 from ututi.controllers.profile.wall import UserWallMixin
@@ -69,6 +71,7 @@ class WallSettingsForm(Schema):
 
 
 class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewMixin, WatchedSubjectsMixin, UserWallMixin):
+
     def _actions(self, selected):
         raise NotImplementedError("This has to be implemented by the"
                                   " specific profile controller.")
@@ -340,7 +343,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     @ActionProtector("user")
     def logo(self, width=None, height=None):
         return serve_logo('user', c.user.id, width=width, height=height,
-                          default_img_path="public/images/user_ico.png",
+                          default_img_path="public/img/user_default.png",
                           cache=False)
 
     @ActionProtector("user")
@@ -481,6 +484,65 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                 msg.send(rcpt)
             return {'success': True}
 
+    @validate(schema=FriendsInvitationForm())
+    def invite_friends_email(self):
+        if hasattr(self, 'form_result'):
+            emails = self.form_result['recipients'].split(',')
+            message = self.form_result['message']
+            invited, invalid = make_email_invitations(emails, c.user, message)
+            if invalid:
+                h.flash(_("Invalid email addresses: %(email_list)s") % \
+                        dict(email_list=', '.join(invalid)))
+            if invited:
+                h.flash(_("Invitations sent to %(email_list)s") % \
+                        dict(email_list=', '.join(invited)))
+
+        if request.referrer:
+            redirect(request.referrer)
+        else:
+            redirect(url(controller='profile', action='home'))
+
+    @js_validate(schema=FriendsInvitationJSForm())
+    @jsonify
+    def invite_friends_email_js(self):
+        if hasattr(self, 'form_result'):
+            emails = self.form_result['recipients']
+            message = self.form_result['message']
+            make_email_invitations(emails, c.user, message)
+
+        return {'success': True}
+
+    def invite_friends_fb(self):
+        # handle facebook callback
+        ids = request.params.get('ids[]')
+        if ids:
+            ids = map(int, ids.split(','))
+            invited = make_facebook_invitations(ids, c.user)
+            if invited:
+                h.flash(ungettext('Invited %(num)d friend.',
+                                  'Invited %(num)d friends.',
+                                  len(invited)) % dict(num=len(invited)))
+
+            redirect(url(controller='profile', action='home'))
+
+        # render page
+        fb_user = facebook.get_user_from_cookie(request.cookies,
+                      config['facebook.appid'], config['facebook.secret'])
+        c.has_facebook = fb_user is not None
+        if c.has_facebook:
+            try:
+                graph = facebook.GraphAPI(fb_user['access_token'])
+                friends = graph.get_object("me/friends")
+                friend_ids = [f['id'] for f in friends['data']]
+                friend_users = meta.Session.query(User)\
+                        .filter(User.facebook_id.in_(friend_ids))\
+                        .filter(User.location == c.user.location).all()
+                c.exclude_ids = ','.join(str(u.facebook_id) for u in friend_users)
+            except facebook.GraphAPIError:
+                c.has_facebook = False
+
+        return render('profile/invite_friends_fb.mako')
+
 
 class UserProfileController(ProfileControllerBase):
     """A controller for the user's personal information and actions."""
@@ -601,6 +663,7 @@ class UserProfileController(ProfileControllerBase):
 
 
 class TeacherProfileController(ProfileControllerBase):
+
     def _actions(self, selected):
         """Generate a list of all possible actions.
 
@@ -626,7 +689,6 @@ class TeacherProfileController(ProfileControllerBase):
     @ActionProtector("user")
     def home(self):
         c.breadcrumbs.append(self._actions('home'))
-
         return render('/profile/teacher_home.mako')
 
     @ActionProtector("teacher")

@@ -1,8 +1,8 @@
-<%inherit file="/base.mako" />
+<%inherit file="/ubase.mako" />
 
 <h1>Login</h1>
 
-<form id="login_form" method="post" action="${url.current()}">
+<form id="login-form" method="post" action="${url.current()}">
     %if c.came_from:
     <input type="hidden" name="came_from" value="${c.came_from}" />
     %endif
@@ -14,7 +14,7 @@
 
     <label id="rememberMe" for="remember"><input id="remember" name="remember" value="true" type="checkbox" class="checkbox"/> ${_('Keep me logged in on this computer')}</label>
     <div>
-      <a href="${url(controller='home', action='pswrecovery')}">${_('Forgotten password?')}</a>
+      <a href="${url(controller='home', action='pswrecovery')}">${_('Forgot password?')}</a>
     </div>
 
     <div>

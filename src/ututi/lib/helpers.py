@@ -5,6 +5,9 @@ available to Controllers. This module is available to templates as 'h'.
 """
 
 import os
+
+from datetime import timedelta, datetime
+
 from pylons.templating import render_mako_def
 from hashlib import md5
 import re
@@ -298,8 +301,47 @@ def input_line(name, title, value='', help_text=None, right_next=None, **kwargs)
                     HTML.span(class_='textField', c=[
                             HTML.input(type='text', value=value, name_=name, **kwargs),
                             ])]),
-                       HTML.literal('<form:error name="%s" />' % name),
                        next,
+                       HTML.literal('<form:error name="%s" />' % name),
+                       expl])
+
+def select_line(name, title, options, selected=[], help_text=None, right_next=None, **kwargs):
+    expl = None
+    if help_text is not None:
+        expl = HTML.span(class_='helpText', c=help_text)
+    next = None
+    if right_next is not None:
+        next = HTML.span(class_='rightNext', c=right_next)
+
+    kwargs.setdefault('id', name)
+    field = select(name, selected, options, **kwargs)
+    return HTML.div(class_='formField',
+                    id='%s-field' % kwargs['id'],
+                    c=[HTML.label(for_=name, c=[
+                    HTML.span(class_='labelText', c=[title]),
+                    HTML.span(class_='textField', c=[
+                            field,
+                            ])]),
+                       next,
+                       HTML.literal('<form:error name="%s" />' % name),
+                       expl])
+
+def select_radio(name, title, options, selected=[], help_text=None, **kwargs):
+    expl = None
+    if help_text is not None:
+        expl = HTML.span(class_='helpText', c=help_text)
+
+    radios = []
+    for value, label in options:
+        checked = value in selected
+        radios.append(radio(name, value, checked, label, **kwargs))
+
+    return HTML.div(class_='formField',
+                    id='%s-field' % name,
+                    c=[HTML.label(for_=name, c=[
+                    HTML.span(class_='labelText', c=[title]),
+                    HTML.span(class_='radioField', c=radios)]),
+                       HTML.literal('<form:error name="%s" />' % name),
                        expl])
 
 def input_hidden(name, value='', **kwargs):
@@ -338,7 +380,6 @@ def input_area(name, title, value='', cols='50', rows='5', help_text=None, disab
         HTML.span(class_='labelText', c=[title]),
         HTML.span(class_='textField', c=[
             HTML.textarea(name_=name, id_=name, cols=cols, rows=rows, c=[value], **kwargs),
-            HTML.span(class_='edgeTextArea'),
             ]),
         expl,
         HTML.literal('<form:error name="%s" />' % name)])
@@ -359,7 +400,10 @@ def input_submit(text=None, name=None, **kwargs):
     if name is not None:
         kwargs['name'] = name
 
-    kwargs.setdefault('class_', "submit")
+    if 'class_' in kwargs:
+        kwargs['class_'] += ' submit'
+    else:
+        kwargs['class_'] = 'submit'
     kwargs.setdefault('value', text)
     return HTML.button(c=text, **kwargs)
 
@@ -385,19 +429,45 @@ def url_for(*args, **kwargs):
     from pylons import url
     return url.current(*args, **kwargs)
 
+@u_cache(expire=300, query_args=True, invalidate_on_startup=True)
+def users_online(limit=12):
+    from ututi.model import User, meta
+    five_mins = timedelta(0, 300)
+    users = meta.Session.query(User)\
+            .filter(User.last_seen > datetime.utcnow() - five_mins)\
+            .limit(limit).all()
+    return [{'id': user.id,
+             'title': user.fullname,
+             'url': user.url(),
+             'logo_url': user.url(action='logo', width=45),
+             'logo_small_url': user.url(action='logo', width=30)}
+            for user in users]
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
-def location_latest_groups(location_id, limit=5):
+def location_members(location_id, limit=6):
+    from ututi.model import Tag, User, meta
+    location = Tag.get(int(location_id))
+    ids = [t.id for t in location.flatten]
+    members = meta.Session.query(User).filter(User.location_id.in_(ids)).order_by(User.last_seen.desc()).limit(limit).all()
+    return [{'id': member.id,
+             'title': member.fullname,
+             'url': member.url(),
+             'logo_url': member.url(action='logo', width=45),
+             'logo_small_url': member.url(action='logo', width=30)}
+            for member in members]
+
+@u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+def location_latest_groups(location_id, limit=6):
     from ututi.model import Tag, Group, meta
     location = Tag.get(int(location_id))
     ids = [t.id for t in location.flatten]
-    grps =  meta.Session.query(Group).filter(Group.location_id.in_(ids)).order_by(Group.created_on.desc()).limit(limit).all()
-    return [{'logo': group.logo,
-             'url': group.url(),
+    groups =  meta.Session.query(Group).filter(Group.location_id.in_(ids)).order_by(Group.created_on.desc()).limit(limit).all()
+    return [{'id': group.group_id,
              'title': group.title,
-             'group_id': group.group_id,
-             'member_count': len(group.members)}
-            for group in grps]
+             'url': group.url(),
+             'logo_url': group.url(action='logo', width=45),
+             'logo_small_url': group.url(action='logo', width=30)}
+            for group in groups]
 
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
@@ -494,3 +564,34 @@ def get_i18n_text(text_id):
     if text_obj is None:
         return ''
     return literal(text_obj.text)
+
+def user_todo_items(user):
+    from ututi.model import UserRegistration, meta
+    from pylons import url
+    todo_items = []
+    invited_count = meta.Session.query(UserRegistration).filter_by(inviter=user).count()
+    todo_items.append({
+        'title': _("Invite others to join"),
+        'link': url(controller='profile', action='invite_friends_fb'),
+        'done': invited_count > 0 })
+    todo_items.append({
+        'title': _("Join / create a group"),
+        'link': url(controller='group', action='create_academic'),
+        'done': len(user.groups) > 0 })
+    todo_items.append({
+        'title': _("Find / create your subjects"),
+        'link': url(controller='profile', action='watch_subjects'),
+        'done': len(user.watched_subjects) > 0 })
+    todo_items.append({
+        'title': _("Write a wall post"),
+        'link': '#',
+        'done': True })
+    profile_complete = user.description or \
+                       user.site_url or \
+                       user.phone_number
+    todo_items.append({
+        'title': _("Fill your profile"),
+        'link': url(controller='profile', action='edit'),
+        'done': profile_complete })
+
+    return todo_items

@@ -1,88 +1,206 @@
 <%inherit file="/portlets/base.mako"/>
 <%namespace file="/sections/content_snippets.mako" import="tooltip, item_location" />
 
-<%def name="user_subjects_portlet(user=None)">
-  <%
-     if user is None:
-         user = c.user
-  %>
-  <%self:portlet id="subject_portlet" portlet_class="inactive">
-    <%def name="header()">
-      ${_('Watched subjects')}
-    </%def>
-    %if not user.watched_subjects:
-      ${_('You are not watching any subjects.')}
-    %else:
-    <ul id="user-subjects" class="subjects-list">
-      % for subject in user.watched_subjects[:5]:
-      <li>
-        <a href="${subject.url()}" title="${subject.title}">${h.ellipsis(subject.title, 35)}</a>
-      </li>
-      % endfor
-    </ul>
+<%def name="user_menu_portlet()">
+  <%self:portlet id="user-menu-portlet">
+  <ul id="user-sidebar-menu" class="icon-list">
+    <li class="icon-feed"> <a href="${url(controller='profile', action='feed')}">${_("My feed")}</a> </li>
+    <li class="icon-university"> <a href="${c.user.location.url()}">${_("My university feed")}</a> </li>
+    <% unread_messages = c.user.unread_messages() %>
+    <li class="icon-message ${'active' if unread_messages else ''}">
+      <a id="inbox-link" href="${url(controller='messages', action='index')}">
+        %if unread_messages:
+         <strong>${ungettext("Messages (%(count)s new)", "Messages (%(count)s new)",
+                             unread_messages) % dict(count=unread_messages)}</strong>
+        %else:
+           ${_("Messages")}
+        %endif
+      </a>
+    </li>
+    %if c.user.memberships:
+    <li class="icon-group">
+      ${_("My groups:")}
+      <ul>
+        %for group in c.user.groups:
+        <li> ${h.object_link(group)} </li>
+        %endfor
+      </ul>
+    </li>
     %endif
-
-    ${h.link_to(_('More subjects'), url(controller='profile', action='search', obj_type='subject'), class_="more")}
-    <span>
-      ${h.button_to(_('Watch subjects'), url(controller='profile', action='watch_subjects', id=user.id))}
-      ${tooltip(_("Add watched subjects to your watched subjects' list and receive notifications "
-                  "about changes in these subjects"))}
-    </span>
-
+  </ul>
   </%self:portlet>
 </%def>
 
-<%def name="user_groups_portlet(user=None, title=None, full=True)">
-  <%
-     if user is None:
-         user = c.user
-
-     if title is None:
-       title = _('My groups')
-  %>
-  <%self:uportlet id="user-groups-portlet" portlet_class="inactive">
+<%def name="user_subjects_portlet(user=None)">
+  <% if user is None: user = c.user %>
+  <%self:portlet id="user-subjects-portlet">
     <%def name="header()">
-      ${title}
+      ${_('My subjects:')}
     </%def>
-    % if not user.memberships:
-      ${_('You are not a member of any.')}
-    %else:
-    <ul>
-      % for group in user.groups:
-      <li>
-        <dl class="group-listing-item">
-          %if group.logo is not None:
-            <img class="group-logo" src="${url(controller='group', action='logo', id=group.group_id, width=25, height=25)}" alt="logo" />
-          %else:
-            ${h.image('/images/details/icon_group_25x25.png', alt='logo', class_='group-logo')|n}
-          %endif
-            <dt class="group-title"><a href="${group.url()}" ${h.trackEvent(Null, 'groups', 'title', 'profile')}>${group.title}</a></dt>
-            <dd class="member-count">(${ungettext("%(count)s member", "%(count)s members", len(group.members)) % dict(count = len(group.members))})</dd>
-            <div class="group-location">
-              <dd>
-                <a href="${group.location.url()}">${' | '.join(group.location.title_path)}</a>
-              </dd>
-            </div>
-        </dl>
+    <ul class="icon-list">
+      %for subject in user.watched_subjects:
+      <li class="icon-subject">
+        <a href="${subject.url()}" title="${subject.title}">${h.ellipsis(subject.title, 35)}</a>
       </li>
-      % endfor
+      %endfor
+      <li class="icon-add">
+        ${h.link_to(_('Add subject'), url(controller='subject', action='add'))}
+      </li>
     </ul>
-    %endif
-    %if full:
-    <div class="footer">
-      <div class="new-group">
-        ${h.button_to(_('Create group'), url(controller='group', action='create_academic'), method='GET')}
-      </div>
-      ${tooltip(_('Create your group, invite your classmates and use the mailing list, upload private group files'))}
+  </%self:portlet>
+</%def>
 
-      <span class="more-link">
-        ${h.link_to(_('More groups'), url(controller='profile', action='search', obj_type='group'), class_="right_arrow")}
-      </span>
-      <br style="clear-both"/>
+<%def name="user_groups_portlet(user=None)">
+  <% if user is None: user = c.user %>
+  <%self:portlet id="user-groups-portlet">
+    <%def name="header()">
+      ${_('My groups:')}
+    </%def>
+    <ul class="icon-list">
+      %for group in user.groups:
+      <li class="icon-group">
+        <a href="${group.url()}" ${h.trackEvent(Null, 'groups', 'title', 'profile')}>
+          ${group.title}
+        </a>
+      </li>
+      %endfor
+      <li class="icon-find">
+        ${h.link_to(_('Find groups'), url(controller='profile', action='search', obj_type='group'))}
+      </li>
+      <li class="icon-add">
+        ${h.link_to(_('Create new group'), url(controller='group', action='create_academic'))}
+      </li>
+    </ul>
+  </%self:portlet>
+</%def>
+
+<%def name="profile_portlet(user=None)">
+  <% if user is None: user = c.user %>
+  <%self:portlet id="user-information-portlet">
+      <div class="user-logo">
+        <img src="${url(controller='user', action='logo', id=user.id, width=60)}" alt="logo" />
+      </div>
+      <div class="user-fullname break-word">
+        ${user.fullname}
+      </div>
+      %if user is c.user:
+      <div class="edit-profile-link break-word">
+        <a href="${url(controller='profile', action='edit')}">${_("(edit profile)")}</a>
+      </div>
+      %endif
+  </%self:portlet>
+</%def>
+
+<%def name="user_description_portlet(user=None)">
+  <% if user is None: user = c.user %>
+  %if user.description:
+  <%self:portlet id="user-description-portlet">
+    <p>${user.description}</p>
+  </%self:portlet>
+  %endif
+</%def>
+
+<%def name="todo_portlet(user=None)">
+  %if c.user is not None:
+    <%
+    todo_items = h.user_todo_items(c.user)
+    all_done = True
+    for item in todo_items:
+      all_done = all_done and item['done']
+    %>
+    %if not all_done:
+    <%self:portlet id="todo-portlet">
+      <%def name="header()">
+        ${_("What to do next?")}
+      </%def>
+      %for n, item in enumerate(todo_items, 1):
+        %if item['done']:
+          <p class="done">${"%d. %s" % (n, item['title'])}</p>
+        %else:
+          <p><a href="${item['link']}">${"%d. %s" % (n, item['title'])}</a></p>
+        %endif
+      %endfor
+    </%self:portlet>
+    %endif
+  %endif
+</%def>
+
+<%def name="invite_friends_portlet(user=None)">
+  <% if user is None: user = c.user %>
+  <%self:portlet id="invite-friends-portlet">
+    <%def name="header()">
+      ${_("Invite friends:")}
+    </%def>
+    <ul class="icon-list">
+      <li class="icon-facebook">
+        <a href="${url(controller='profile', action='invite_friends_fb')}" id="invite-fb-link">${"Facebook"}</a>
+      </li>
+      <li class="icon-email">
+        <a href="#invite-email" id="invite-email-link">${"Email"}</a>
+      </li>
+    </ul>
+
+    <div id="invite-email-dialog">
+      <form action="${url(controller='profile', action='invite_friends_email')}" method="POST" class="new-style-form" id="invite-email-form">
+        ${h.input_line('recipients', _("Recipients:"),
+                       help_text=_("Enter comma separated list of email addresses"))}
+        ${h.input_area('message', _("Add personal message (optional):"))}
+        ${h.input_submit(_("Send invitation"), id='invite-submit-button', class_='dark')}
+      </form>
+      <p id="invitation-feedback-message">${_("Your invitations were successfully sent.")}</p>
     </div>
 
-    %endif
-  </%self:uportlet>
+    <div id="invite-fb-dialog">
+    </div>
+
+    <script type="text/javascript">
+      //<![CDATA[
+      $(document).ready(function() {
+        $('#invite-email-dialog').dialog({
+            title: '${_("Invite friends via email")}',
+            width: 330,
+            autoOpen: false,
+            resizable: false
+        });
+
+        $("#invite-email-link").click(function() {
+          $('#invite-email-dialog').dialog('open');
+          return false;
+        });
+
+        $('#invite-submit-button').click(function(){
+            $.post("${url(controller='profile', action='invite_friends_email_js')}",
+                   $(this).closest('form').serialize(),
+                   function(data, status) {
+                       if (data.success != true) {
+                           // remove older error messages
+                           $('.error-message').remove();
+                           for (var key in data.errors) {
+                               var error = data.errors[key];
+                               $('#' + key).parent().after($('<div class="error-message">' + error + '</div>'));
+                           }
+                       }
+                       else {
+                           // show feedback to user
+                           $('#invite-email-dialog').addClass('email-sent').delay(1000).queue(function() {
+                               // close and clean up
+                               $(this).dialog('close');
+                               $(this).removeClass('email-sent');
+                               $('.error-message').remove();
+                               $(this).find('#recipients').val('');
+                               $(this).dequeue();
+                           });
+                       }
+                   },
+                   "json");
+
+            return false;
+        });
+
+      });
+      //]]>
+    </script>
+  </%self:portlet>
 </%def>
 
 <%def name="user_information_portlet(user=None, full=True, title=None)">
@@ -101,10 +219,12 @@
         <div class="floatleft avatar">
             %if user.logo is not None:
               <img src="${url(controller='user', action='logo', id=user.id, width=70, height=70)}" alt="logo" />
+              <img src="${url(controller='user', action='logo', id=user.id, width=70, height=70)}" alt="logo" />
             %else:
               ${h.image('/img/profile-avatar.png', alt='logo')|n}\
             %endif
         </div>
+        <div class="floatleft personal-data">
         <div class="floatleft personal-data">
             <div><h2>${user.fullname}</h2></div>
             % if h.check_crowds(['root']):
@@ -117,6 +237,7 @@
             </div>
             <div class="file_stats">
               ${_('Files uploaded:')}<span class="user_file_count"> ${user.files_count()}</span>
+              <br/>
               <br/>
               ${_('Files downloaded:')}<span class="user_file_count"> ${user.download_count()} (${h.file_size(user.download_size())})</span>
             </div>
@@ -145,88 +266,6 @@
     %endif
 
   </%self:uportlet>
-</%def>
-
-<%def name="user_create_subject_portlet(user=None)">
-  <%
-     if user is None:
-         user = c.user
-  %>
-  <%self:action_portlet id="subject_create_portlet">
-    <%def name="header()">
-    <a class="blark" ${h.trackEvent(None, 'click', 'user_new_subject', 'action_portlets')} href="${url(controller='subject', action='add')}">${_('create new subject')}</a>
-    ${tooltip(_("Store all the subject's files and notes in one place."),
-              style='margin-top: 4px;')}
-
-    </%def>
-  </%self:action_portlet>
-</%def>
-
-<%def name="user_create_group_portlet(user=None)">
-  <%
-     if user is None:
-         user = c.user
-  %>
-  <%self:action_portlet id="group_create_portlet">
-    <%def name="header()">
-    <a class="blark" ${h.trackEvent(None, 'click', 'user_new_group', 'action_portlets')} href="${url(controller='group', action='create_academic')}">${_('create new group')}</a>
-    ${tooltip(_("Communicate with your classmates, colleagues and friends, share files and news together!"),
-              style='margin-top: 4px;')}
-
-    </%def>
-  </%self:action_portlet>
-</%def>
-
-<%def name="user_recommend_portlet(user=None)">
-  <%
-     if user is None:
-         user = c.user
-  %>
-  <%self:action_portlet id="user_recommend_portlet" expanding="True" label="ututi_recommend">
-    <%def name="header()" >
-    ${_('recommend Ututi to your friends')}
-    </%def>
-
-    <div id="recommendation_status">
-    </div>
-    <form method="post"
-          action="${url(controller='home', action='send_recommendations')}" id="ututi_recommendation_form">
-      <div class="form-field">
-        <input type="hidden" name="came_from" value="${request.url}" />
-        <label class="textField" for="recommend_emails">${_('Enter the emails of your classmates, separated by commas or new lines.')}
-          <textarea name="recommend_emails" id="recommend_emails" rows="4"></textarea>
-        </label>
-      </div>
-
-      <div class="form-field">
-        <br />
-        <button class="btn" id="recommendation_submit" type="submit" value="${_('Send invitation')}" ${h.trackEvent(None, 'action_portlets', 'send', 'ututi_recommend')}>
-          <span>${_('Send invitation')}</span>
-        </button>
-      </div>
-    </form>
-    <br />
-  <script type="text/javascript">
-  //<![CDATA[
-    $(document).ready(function() {
-      $('#recommendation_submit').click(function() {
-        $(this).parents('.form-field').addClass('loading');
-        _gaq.push(['_trackEvent', 'action_portlets', 'send', 'ututi_recommend']);
-        $.post("${url(controller='home', action='send_recommendations', js=1)}",
-            $(this).parents('form').serialize(),
-            function(data) {
-              status = $('#recommendation_status').text('').append(data);
-              $('#recommendation_submit').parents('.form-field').removeClass('loading');
-              $('#recommend_emails').val('');
-            });
-        return false;
-      });
-    });
-  //]]>
-  </script>
-
-
-  </%self:action_portlet>
 </%def>
 
 <%def name="teacher_information_portlet(user=None, full=True, title=None)">

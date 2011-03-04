@@ -8,9 +8,9 @@ by clicking 'Register' button:
     >>> browser = Browser()
     >>> browser.open('http://localhost/team/uni')
 
-    >>> browser.getControl('Register').click()
-    >>> browser.url
-    'http://localhost/registration/uni/start'
+    >>> browser.getControl('I study here').click()
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Registration to U-niversity</h1>
 
 User has to type in a valid email address to initiate registration:
 
@@ -232,16 +232,11 @@ and invitation are sent:
     >>> form.getControl(name='email5').value = 'five'
     >>> browser.getControl('Finish').click()
 
-    >>> browser.printCssQuery('h1.pageTitle', strip=True)
+    >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>News feed</h1>
 
     >>> len(mail_queue)
     4
-
-A flash message is displayed, indicating that emails were sent.
-
-    >>> browser.printQuery("//div[@class='flash-message']//text()")
-    Invitations sent to one@example.com, two@example.com, three@example.com, five@example.com
 
     >>> [msg.recipients for msg in mail_queue]
     [['one@example.com'], ['two@example.com'], ['three@example.com'], ['five@example.com']]

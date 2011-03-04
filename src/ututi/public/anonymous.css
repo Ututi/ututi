@@ -1,0 +1,203 @@
+/* HEADER */
+
+#header {
+    background: #333;
+    background-image:url('img/header.png');
+    background-repeat:no-repeat;
+    background-position:center;
+    height: 60px;
+    width:100%;
+    min-width: 960px;
+}
+
+#header #header-container {
+    height: 60px;
+    width: 960px;
+    text-align: center;
+    margin: auto;
+    padding-top: 14px;
+}
+
+#header #header-container #logo {
+    margin-top: 0px;
+    float: left;
+    width: auto;
+}
+
+#logo {
+    padding-bottom: 3px;
+    border: 0px;
+    display: inline;
+}
+
+#slogan {
+    color: #ff9900;
+    font-size: 16px;
+    display: inline;
+    padding-left: 5px;
+    font-weight: normal;
+}
+
+
+/* NAVIGATION */
+
+#nav{
+    margin-left: 140px;
+    padding-bottom: 23px;
+    display: inline;
+}
+
+.header-links {
+    color: #fff;
+    font-size: 13px;
+    display: inline;
+    margin: 0px 10px;
+}
+
+#login-link {
+    font-weight: bold;
+}
+
+#nav a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#nav a:hover {
+    color: #ff9900;
+}
+
+/* MAIN AREA */
+
+.error span {
+    display: none;
+}
+
+#sign-in-area {
+    border-bottom: 1px solid #ff9900;
+    clear: both;
+    width: 920px;
+    margin: auto;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+    #sign-in-area .error-container {
+        margin-left: 0px;
+    }
+
+    #sign-in-area .error-message {
+        color: #990000;
+        font-size: 12px;
+        text-align: left;
+        height: 12px;
+    }
+
+    #sign-in-area h1 {
+        text-align: center;
+    }
+
+    #sign-in-area #sign-up-form {
+        margin: 5px auto;
+        border: 0px;
+        width: 620px;
+    }
+
+    #sign-in-area #register-fieldset {
+        border: 0px;
+        padding: 5px 0 12px 0;
+    }
+
+    #sign-in-area .email-input {
+        border: 1px solid #999 !important;
+        height: 40px !important;
+        width: 370px !important;
+        font-size: 16px !important;
+        padding: 0 15px;
+        font-weight: bold;
+        color: #666;
+        display: inline;
+        float: left;
+    }
+
+    #sign-in-area .submit {
+        float: left;
+        height: 42px;
+        width: auto;
+        color: #ffffff;
+        background-color: #ff9900; /* Orange */
+        border: 1px solid #666666;
+        font-size: 20px !important;
+        font-weight: bold !important;
+        padding: 0 20px !important;
+        margin: 0 0 0 20px !important;
+        letter-spacing: 1px;
+    }
+
+    #sign-in-area .notice {
+        text-align: left;
+        background-image: url("img/important.png");
+        background-position: 0% 0%;
+        background-repeat: no-repeat;
+        clear: both;
+        color: #666666;
+        padding-left: 25px;
+        margin-bottom: 20px;
+        font-size: 13px;
+    }
+
+#features {
+    width: 920px;
+    margin: auto;
+}
+
+    #features p {
+        text-align: left;
+        color: #666;
+        font-size: 13px;
+    }
+
+    #features .column {
+        float: left;
+        position: relative;
+        width: 280px;
+        height: auto;
+        margin-top: 20px;
+        padding-top: 100px;
+    }
+
+    #features .column h1 {
+        font-size:18px;
+        font-weight:bold;
+        color:#333;
+        margin-bottom:1px;
+        width: 100%;
+        text-align: left;
+    }
+
+    #features #social-discussions {
+        background: url("img/social_discussions.png") no-repeat top center;
+    }
+
+    #features #network {
+        background: url("img/network.png") no-repeat top center;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    #features #teachers-profile {
+        background: url("img/teachers_profile.png") no-repeat top center;
+    }
+
+button#learn-more {
+    text-align: center;
+    color: #ffffff;
+    background-color: #ff9900; /* Orange */
+    border: 1px solid #666666;
+    font-size: 19px;
+    font-weight: bold;
+    padding: 5px 20px;
+    display: block;
+    margin: 20px auto;
+}

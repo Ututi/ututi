@@ -6,7 +6,7 @@
 <%namespace file="/anonymous_index.mako" import="*"/>
 
 <%def name="portlets()">
-  ${user_sidebar(['search'])}
+  ${user_sidebar()}
 </%def>
 
 

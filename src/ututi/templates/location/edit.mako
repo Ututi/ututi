@@ -2,9 +2,9 @@
 <%namespace file="/portlets/structure.mako" import="*"/>
 
 <%def name="portlets()">
-<div id="sidebar">
-  ${struct_info_portlet()}
-</div>
+  ${location_logo_portlet()}
+  ${location_admin_portlet()}
+  ${location_info_portlet()}
 </%def>
 
 <%def name="title()">

@@ -21,18 +21,24 @@ Snippets for rendering various content items, e.g. in search results.
 </%def>
 
 <%def name="item_tags(object, all=True)">
+  <%
+  any_tags = False
+  for tag in object.tags:
+    if tag.title:
+      any_tags = True
+  %>
+  %if any_tags:
   <span class="item-tags">
-    <%
-       length = len(object.tags)
-    %>
+    <% length = len(object.tags) %>
     %for n, tag in enumerate(object.tags):
-      %if n != length -1:
+      %if n != length - 1:
         ${tag_link(tag)},
       %else:
         ${tag_link(tag)}
       %endif
     %endfor
   </span>
+  %endif
 </%def>
 
 <%def name="item_location(object)">
@@ -107,8 +113,14 @@ Snippets for rendering various content items, e.g. in search results.
 
 <%def name="subject(object)">
   <div class="search-item snippet-subject">
-    <a href="${object.url()}" title="${object.title}" class="item-title bold larger">${object.title}</a>
-    <span class="verysmall">(${_('Subject rating:')} </span><span>${h.image('/images/details/stars%d.png' % object.rating(), alt='', class_='subject_rating')|n})</span>
+    %if c.user is not None and not c.user.watches(object):
+      <div class="action-button">
+        ${h.button_to(_('Follow'), object.url(action='watch'), class_='dark add')}
+      </div>
+    %endif
+    <div class="item-title">
+      <a href="${object.url()}" title="${object.title}">${object.title}</a>
+    </div>
     <div class="description">
       ${item_location(object)}
       % if object.teacher_repr:
@@ -118,22 +130,12 @@ Snippets for rendering various content items, e.g. in search results.
        | ${item_tags(object)}
       %endif
     </div>
-    <dl class="stats">
-       <%
-           file_cnt = len(object.files)
-           page_cnt = len(object.pages)
-           group_cnt = object.group_count()
-           user_cnt = object.user_count()
-        %>
-
-        <dd class="files">${ungettext('%(count)s <span class="a11y">file</span>', '%(count)s <span class="a11y">files</span>', file_cnt) % dict(count = file_cnt)|n}</dd>
-        <dd class="pages">${ungettext('%(count)s <span class="a11y">wiki page</span>', '%(count)s <span class="a11y">wiki pages</span>', page_cnt) % dict(count = page_cnt)|n}</dd>
-        <dd class="watchedBy"><span class="a11y">${_('Watched by:')}</span> 
-          ${ungettext("%(count)s group", "%(count)s groups", group_cnt) % dict(count = group_cnt)|n}
-          ${_('and')}
-          ${ungettext("%(count)s member", "%(count)s members", user_cnt) % dict(count = user_cnt)|n}
-        </dd>
-    </dl>
+    <ul class="statistics medium-icon-list">
+        <li class="icon-file">${len(object.files)}</li>
+        <li class="icon-note">${len(object.pages)}</li>
+        <li class="icon-group">${object.group_count()}</li>
+        <li class="icon-user">${object.user_count()}</li>
+    </ul>
   </div>
 </%def>
 

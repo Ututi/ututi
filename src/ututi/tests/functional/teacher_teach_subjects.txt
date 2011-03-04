@@ -3,11 +3,7 @@ Test teacher's "teaching subjects" functionality
 
 Let's login as a verified teacher:
 
-    >>> browser = Browser()
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "benas@ututi.lt"
-    >>> form.getControl('Password').value = "password"
-    >>> form.getControl('Login').click()
+    >>> browser = Browser.logIn('benas@ututi.lt', 'password')
 
 XXX now there should be a way to find subjects for adding, even from
 department's page. Benas visits subject's page directly:

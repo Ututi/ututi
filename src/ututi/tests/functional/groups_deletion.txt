@@ -4,7 +4,7 @@ Group deletion tests
 When I login, I go to groups creation to create public group
 
     >>> browser = Browser.logIn()
-    >>> browser.getLink('Create group').click()
+    >>> browser.getLink('Create new group').click()
 
     >>> browser.getControl('title').value = "testing one two tree"
     >>> browser.getControl('Group address on the web').value = "testing-one-two-tree"

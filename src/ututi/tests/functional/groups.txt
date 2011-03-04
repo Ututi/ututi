@@ -46,7 +46,7 @@ We can edit the group's information.
 We can add a group:
 
    >>> browser.open('http://localhost/')
-   >>> browser.getLink('Create group').click()
+   >>> browser.getLink('Create new group').click()
    >>> browser.getControl('Group e-mail address').value = 'test'
    >>> browser.getControl('Group title').value = 'Test group'
    >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
@@ -69,7 +69,7 @@ Let's see what the group's default home page looks like:
 
 However, group ids are checked for uniqueness.
 
-   >>> browser.getLink('Create group').click()
+   >>> browser.open('http://localhost/groups/create_academic')
    >>> browser.getControl('Group e-mail address').value = 'Test'
    >>> browser.getControl('Group title').value = 'Test group'
    >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))

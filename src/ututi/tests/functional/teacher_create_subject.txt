@@ -3,11 +3,7 @@ Test teacher's create subject workflow
 
 Let's login as a verified teacher:
 
-    >>> browser = Browser()
-    >>> form = browser.getForm('loginForm')
-    >>> form.getControl('Email').value = "benas@ututi.lt"
-    >>> form.getControl('Password').value = "password"
-    >>> form.getControl('Login').click()
+    >>> browser = Browser.logIn('benas@ututi.lt', 'password')
 
 We click the big button to create the first subject:
 

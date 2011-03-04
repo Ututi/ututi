@@ -4,7 +4,7 @@ Group mailing list whitelist
 Set Up:
 
     >>> browser = Browser.logIn('admin@uni.ututi.com', 'asdasd')
-    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.getLink('Moderatoriai', url='/group/moderators').click()
 
     >>> from ututi.tests.functional import send_test_message
     >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')

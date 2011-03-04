@@ -4,7 +4,7 @@ Group Coupon testing
 When there are no available coupons, the coupon code input field should be invisible.
 
     >>> browser2 = Browser.logIn()
-    >>> browser2.getLink('Create group').click()
+    >>> browser2.getLink('Create new group').click()
 
     >>> browser2.getControl('Group e-mail address').value = 'test2'
     >>> browser2.getControl('Group title').value = 'Another test group'
@@ -51,7 +51,8 @@ It should be impossible to create another coupon with the same code.
 
 Entering an invalid coupon code should give us an error:
 
-    >>> browser2.getLink('Create group').click()
+    >>> browser2.getLink('Home').click()
+    >>> browser2.getLink('Create new group').click()
 
     >>> browser2.getControl('Group e-mail address').value = 'test2'
     >>> browser2.getControl('Group title').value = 'Another test group'
@@ -64,7 +65,8 @@ Entering an invalid coupon code should give us an error:
 
 Using the coupon code is simple:
 
-    >>> browser2.getLink('Create group').click()
+    >>> browser2.getLink('Home').click()
+    >>> browser2.getLink('Create new group').click()
 
     >>> browser2.getControl('Group e-mail address').value = 'test2'
     >>> browser2.getControl('Group title').value = 'Another test group'
@@ -77,7 +79,8 @@ Using the coupon code is simple:
 
 And once again, having used the coupon, since there are no more coupons available, the field will not be shown:
 
-    >>> browser2.getLink('Create group').click()
+    >>> browser2.getLink('Home').click()
+    >>> browser2.getLink('Create new group').click()
 
     >>> browser2.getControl('Group e-mail address').value = 'test2'
     >>> browser2.getControl('Group title').value = 'Another test group'

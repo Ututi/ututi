@@ -5,24 +5,17 @@ from sqlalchemy.orm import relation, backref
 from sqlalchemy.orm.exc import NoResultFound
 
 from ututi.model import meta
+from ututi.model.base import Model
 
 languages_table = None
 language_texts_table = None
 
-class Language(object):
+class Language(Model):
 
     def __init__(self, id, title):
         self.id = id
         self.title = title
 
-    @classmethod
-    def get(cls, id):
-        try:
-            return meta.Session.query(cls)\
-                    .filter_by(id=id)\
-                    .one()
-        except NoResultFound:
-            return None
 
 class LanguageText(object):
 
@@ -49,6 +42,24 @@ class LanguageText(object):
             return None
 
 
+countries_table = None
+class Country(Model):
+
+    @classmethod
+    def get_by_title(cls, title):
+        try:
+            return meta.Session.query(cls).filter_by(title=title).one()
+        except NoResultFound:
+            return None
+
+    @classmethod
+    def get_by_locale(cls, locale):
+        try:
+            return meta.Session.query(cls).filter_by(locale=locale).one()
+        except NoResultFound:
+            return None
+
+
 def setup_orm(engine):
     global languages_table
     languages_table = Table(
@@ -56,6 +67,7 @@ def setup_orm(engine):
         meta.metadata,
         Column('title', Unicode(assert_unicode=True)),
         autoload=True,
+        useexisting=True,
         autoload_with=engine)
 
     global language_texts_table
@@ -73,3 +85,19 @@ def setup_orm(engine):
                    'language': relation(Language,
                                         backref=backref('texts',
                                             order_by=language_texts_table.c.id.asc()))})
+
+    global countries_table
+    countries_table = Table(
+        "countries",
+        meta.metadata,
+        autoload=True,
+        useexisting=True,
+        autoload_with=engine)
+
+    orm.mapper(Country,
+               countries_table,
+               properties={
+                   'language': relation(Language,
+                                        backref=backref('countries',
+                                        order_by=countries_table.c.id.asc()))})
+

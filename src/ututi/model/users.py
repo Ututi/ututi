@@ -9,12 +9,13 @@ from random import randrange
 from binascii import a2b_base64, b2a_base64
 import binascii
 import hashlib
+from urlparse import urlparse
 from datetime import datetime
-
 
 from ututi.model.util import logo_property, read_facebook_logo
 from ututi.model import meta
 from ututi.lib.helpers import image
+from ututi.lib.emails import send_email_confirmation_code
 
 from pylons.i18n import _
 from pylons import config
@@ -79,15 +80,31 @@ class AdminUser(object):
         except NoResultFound:
             return None
 
+class Author(object):
+    """The Author object - for references to authorship. Persists even when the user is deleted."""
 
-class User(object):
+    def url(self, controller='user', action='index', **kwargs):
+        return url(controller=controller,
+                   action=action,
+                   id=self.id,
+                   **kwargs)
+
+
+class User(Author):
     """The User object - Ututi users."""
     is_teacher = False
 
-    def change_type(self, type, **kwargs):
+    def delete_user(self):
         from ututi.model import users_table
         conn = meta.engine.connect()
-        upd = users_table.update().where(users_table.c.id==id).values(user_type=type, **kwargs)
+        upd = users_table.delete().where(users_table.c.id==self.id)
+        conn.execute(upd)
+        meta.Session.expire(self)
+
+    def change_type(self, type, **kwargs):
+        from ututi.model import authors_table
+        conn = meta.engine.connect()
+        upd = authors_table.update().where(authors_table.c.id==self.id).values(user_type=type, **kwargs)
         conn.execute(upd)
 
     @property
@@ -438,7 +455,7 @@ class User(object):
     def isConfirmed(self):
         return self.emails[0].confirmed
 
-    logo = logo_property()
+    logo = logo_property(square=True)
 
     def has_logo(self):
         return bool(meta.Session.query(User).filter_by(id=self.id).filter(User.raw_logo != None).count())
@@ -631,7 +648,15 @@ class TeacherGroup(object):
 class UserRegistration(object):
     """User registration data."""
 
-    def __init__(self, location, email=None, facebook_id=None):
+    def __init__(self, location=None, email=None, facebook_id=None):
+        if location is None:
+            assert email is not None # user starts his location w/o university
+                                     # email is required
+        else:
+            assert email or facebook_id # one of these must be given
+
+        # XXX this should be an integrity check in db
+
         self.location = location
         self.email = email
         self.facebook_id = facebook_id
@@ -692,6 +717,26 @@ class UserRegistration(object):
         if self.logo is None: # Never overwrite a custom logo.
             self.logo = read_facebook_logo(self.facebook_id)
 
+    university_logo = logo_property(square=True, logo_attr='raw_university_logo')
+
+    def send_confirmation_email(self):
+        send_email_confirmation_code(self.email,
+                                     self.url(action='confirm_email',
+                                                      qualified=True))
+
+    def process_invitations(self):
+        if self.user is not None:
+            from ututi.lib.invitations import make_email_invitations, \
+                                              make_facebook_invitations
+
+            if self.invited_emails:
+                emails = self.invited_emails.split(',')
+                make_email_invitations(emails, self.user)
+
+            if self.invited_fb_ids:
+                ids = map(int, self.invited_fb_ids.split(','))
+                make_facebook_invitations(ids, self.user)
+
     def create_user(self):
         """Returns a User object filled with registration data."""
         user = User(fullname=self.fullname,
@@ -707,7 +752,27 @@ class UserRegistration(object):
         user.openid = self.openid
         user.facebook_id = self.facebook_id
         user.logo = self.logo
+        self.user = user # store reference
+
         return user
+
+    def create_university(self):
+        from ututi.model import LocationTag
+
+        # parse short title from url
+        title_short = urlparse(self.university_site_url).netloc
+        if title_short.startswith('www.'):
+            title_short = title_short.replace('www.', '', 1)
+
+        university = LocationTag(self.university_title, title_short, confirmed=False)
+
+        # fill out the rest of information
+        university.site_url = self.university_site_url
+        university.logo = self.university_logo
+        university.country = self.university_country
+        university.member_policy = self.university_member_policy
+        university.email_domains = self.university_allowed_domains
+        return university
 
     def url(self, controller='registration', action='confirm', **kwargs):
         return url(controller=controller,

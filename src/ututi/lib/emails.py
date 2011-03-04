@@ -9,11 +9,17 @@ from ututi.lib.base import render
 from ututi.model import meta
 from ututi.lib.messaging import EmailMessage
 
-def send_email_confirmation_code(email, url, hash):
+def send_registration_invitation(registration, inviter=None, message=None):
+    text = render('/emails/registration_invitation.mako',
+                  extra_vars={'registration': registration,
+                              'inviter': inviter,
+                              'message': message})
+    msg = EmailMessage(_('Invitation to Ututi'), text)
+    msg.send(registration.email)
+
+def send_email_confirmation_code(email, url):
     text = render('/emails/confirm_email.mako',
-                  extra_vars={'link': url,
-                              'html': False,
-                              'hash': hash})
+                  extra_vars={'link': url})
 
     msg = EmailMessage(_('Confirm your email for Ututi'), text, force=True)
     msg.send(email)

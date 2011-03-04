@@ -2,7 +2,7 @@ Test converting a group from a mailing list to a forum
 ======================================================
 
    >>> browser = Browser.logIn()
-   >>> browser.getLink('Moderatoriai').click()
+   >>> browser.getLink('Moderatoriai', url='/group/moderators').click()
 
    >>> browser.getLink('Edit').click()
    >>> browser.url

@@ -37,10 +37,12 @@ you are studying.
   <%self:rounded_block id="invite_members_block" class_="portletInviteMembers">
     <div class="floatleft usergrupeleft" style="width: 320px">
       <h2 class="portletTitle bold">${_("Invite group members!")}</h2>
+      <p>
 ${_("""
 It's easy - you just have to know their email addresses! You can
 use the group mailing list together then!
 """)}
+      </p>
     </div>
     <div class="floatright">
       ${h.button_to(_('Invite friends'), c.group.url(action='members'), class_='btnMedium')}

@@ -1,4 +1,4 @@
-<%inherit file="/ubase-nomenu.mako" />
+<%inherit file="/ubase.mako" />
 
 <div id="fronpage-welcome">
   Welcome to team mate. Please <a href="/login">login</a>.

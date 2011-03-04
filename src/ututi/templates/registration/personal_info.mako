@@ -21,7 +21,7 @@
 
   ${h.input_line('fullname', _("Full name:"))}
   ${h.input_psw('password', _("Password:"),
-    help_text=_("Password must contain at least 5 characters."))}
+    help_text=_("Password must contain at least 5 characters"))}
 
   <div class="formField">
       <span class="labelText">${_("Link Google or Facebook")}</span>
@@ -65,7 +65,6 @@
       <span class="helpText" style="clear:both">${_("Click the buttons to link or unlink your profile with Google and/or Facebook")}</span>
   </div>
 
-  ## TODO: FACEBOOK BUTTON
   ${h.input_submit(_("Next"))}
 </form>
 

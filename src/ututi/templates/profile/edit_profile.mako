@@ -68,7 +68,7 @@
 
     <div class="js-alternatives" id="general-information-form">
 
-      <h1 class="pageTitle">${_('General information')}:</h1>
+      <h1 class="page-title">${_('General information')}:</h1>
 
       <fieldset>
       ${h.input_line('fullname', _('Full name'))}
@@ -98,7 +98,7 @@
   </form>
 
   <form method="post" action="${url(controller='profile', action='password')}" id="change-password-form" class="new-style-form">
-    <h1 class='pageTitle'>${_('Change password')}:</h1>
+    <h1 class='page-title'>${_('Change password')}:</h1>
     <fieldset>
     ${h.input_psw('password', _('Current password'))}
     ${h.input_psw('new_password', _('New password'))}

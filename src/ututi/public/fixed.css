@@ -10,7 +10,6 @@
 html, body {
     width: 100%;
     height: 100%;
-
 }
 
 /* GENERAL STYLES
@@ -20,6 +19,7 @@ body {
     font-family: Verdana, Arial, sans-serif;
     font-size: 12px;
     color: #333333;
+    background-color: #f0f0f0;
 }
 
 h1 {
@@ -42,7 +42,8 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
+    color: #6099cc;
+    text-decoration: none;
 }
 
 a.inactive:hover {
@@ -50,13 +51,60 @@ a.inactive:hover {
     color: inherit;
 }
 
+/* BUTTONS
+ */
+
 button {
-    font-size: 12px;
-    color: #ffffff;
-    background: #333333;
-    border: 1px solid #969696;
-    padding: 0px 8px;
+    /* default button look */
     cursor: pointer;
+    font-size: 12px;
+    background: #ff9900;
+    border: 1px solid #666666;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 2px 8px;
+}
+
+button.submit {
+    /* don't inline submit buttons */
+    display: block;
+    margin-top: 25px;
+}
+
+button.inline {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+button.add {
+    padding-left: 12px;
+    background-image: url('img/icons.com/add_small_grey.png');
+    background-repeat: no-repeat;
+    background-position: 4px center;
+}
+
+button.dark {
+    /* dark version of the button */
+    color: #ffffff;
+    padding: 0px 8px;
+    border: 1px solid #666666;
+    font-weight: normal;
+    background-color: #333333;
+}
+
+button.dark.add {
+    padding: 0 8px 0 16px;
+    background-image: url('img/icons.com/add_small_orange.png');
+    background-position: 8px center;
+}
+
+button.btn-text {
+    /* pretending to look like simple link */
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #3d617a; /* link color */
+    font: 12px normal Verdana, Arial, sans-serif;
 }
 
 /* LAYOUT ELEMENTS
@@ -225,6 +273,7 @@ h1.page-title {
         background-position: 15px 5px;
         background-repeat: no-repeat;
         padding-left: 70px;
+
     }
     
     .standard-portlet button {
@@ -240,6 +289,7 @@ h1.page-title {
 
     form span.labelText,
     form span.inputField,
+    form span.radioField,
     form span.helpText {
         display: block;
     }
@@ -257,27 +307,45 @@ h1.page-title {
         margin-top: 2px;
     }
 
+    form span.radioField label {
+        display: block;
+        margin: 2px 0px;
+    }
+
+    form span.radioField label input {
+        margin-right: 2px;
+    }
+
     form div.error-container {
         display: inline;
         margin-left: 15px;
     }
 
-    form span.error-message {
+    form .error-message {
         padding-top: 5px;
         font-size: 11px;
         color: #990000;
         line-height: 20px;
     }
 
+    form .textarea span.error-message {
+        display: block;
+    }
+
     .textField input,
     form input[type='text'],
     form input[type='password'],
-    form textarea {
+    form textarea,
+    form select {
         width: 200px;
         font-size: 11px;
         height: 20px;
         border: 1px solid #666666;
         background: none;
+    }
+
+    form textarea {
+        height: 80px;
     }
 
     .new-style-form button {
@@ -290,49 +358,6 @@ h1.page-title {
 
     .new-style-form .rightNext button {
         margin-top: -1px;
-    }
-
-    form button.submit {
-        background: #ff9900;
-        border: 2px solid #969696;
-        color: #ffffff;
-        font-size: 12px;
-        font-weight: bold;
-        padding: 2px 8px;
-        cursor: pointer;
-        margin-top: 25px;
-        /*
-         * Gray version:
-        font-size: 12px;
-        color: #ffffff;
-        background: #333333;
-        border: 1px solid #969696;
-        padding: 0px 8px;
-        cursor: pointer;
-         */
-    }
-
-    form.button-to button {
-        background: #ff9900;
-        border: 1px solid #666666;
-        color: #ffffff;
-        font-size: 12px;
-        font-weight: bold;
-        padding: 2px 8px;
-        cursor: pointer;
-    }
-
-    .new-style-form button.btn-text {
-        /* pretending to look like simple link */
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: #d45500;
-        font: 13px normal Arial, Helvetica, sans-serif; 
-    }
-
-    .new-style-form button.btn-text:hover span {
-        text-decoration: underline;
     }
 
     .new-style-form span.field-status {
@@ -994,7 +1019,6 @@ ul.feature-list {
  */
 
 .location-tags, .location-tags a {
-    color: #668000;
     text-transform: uppercase;
 }
 
@@ -1034,6 +1058,26 @@ ul.feature-list {
 .clearRight { clear: right; }
 .clearBoth { clear: both; }
 
+/* Clearfix should be preferred way of closing
+ * containers, that contains floated elements.
+ */
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.break-word {
+    word-wrap: break-word;
+}
+
+.notice {
+    font-size: 11px;
+    color: #666666;
+}
 
 /* FLASH MESSAGE
  */
@@ -1193,20 +1237,20 @@ ul.feature-list {
 /*** UTUTI.COM CSS ***/
 
 /* Login form */
-#login_form label {
+#login-form label {
     margin-top: 10px;
     font-size: 13px;
     font-weight: bold;
 }
 
 
-#login_form label .labelText {
+#login-form label .labelText {
     display: block;
     font-size: 13px;
     font-weight: bold;
 }
 
-#login_form label .textField {
+#login-form label .textField {
     display: inline-block;
     padding-right: 5px;
     position: relative;
@@ -1214,3 +1258,405 @@ ul.feature-list {
 }
 
 /* End Login form */
+
+
+/* Header styling */
+
+#header {
+    background: #333;
+    height: 40px;
+    width:100%;
+    min-width: 960px;
+}
+
+#header #header-container {
+    height: 30px;
+    width: 960px;
+    margin: auto;
+    padding-top: 10px;
+}
+#header #header-container #logo {
+    display: inline;
+    float: left;
+    width: 175px;
+    text-align: left;
+    padding: 0px 0px 3px 5px;
+    border: 0px;
+}
+
+#top-panel {
+    background-color: #6d6d6d;
+    float: left;
+    width: 780px;
+    height: 20px;
+    padding: 5px 0;
+}
+
+ul#head-nav {
+    float: left;
+    list-style: none;
+    width: 300px;
+    padding-left: 15px;
+    text-align: left;
+}
+
+ul#head-nav li {
+    display: inline;
+    line-height: 20px; /* Equal to top-panel height  */
+}
+
+ul#head-nav li a {
+    color: #ffffff;
+}
+
+ul#head-nav li a:hover {
+    color: #ff9900;
+    text-decoration: none;
+}
+
+ul#head-nav li#nav-home a {
+    padding: 0 12px;
+    background: url('img/icons/home.png') left center no-repeat;
+}
+
+ul#head-nav li#nav-home a:hover {
+    background: url('img/icons/home_hover.png') left center no-repeat;
+}
+
+ul#head-nav li#nav-university a {
+    padding: 0 15px;
+    background: url('img/icons/university.png') left center no-repeat;
+}
+
+ul#head-nav li#nav-university a:hover {
+    background: url('img/icons/university_hover.png') left center no-repeat;
+}
+
+ul#head-nav li#nav-catalog a {
+    padding: 0 15px;
+    background: url('img/icons/catalog.png') left center no-repeat;
+}
+
+ul#head-nav li#nav-catalog a:hover {
+    background: url('img/icons/catalog_hover.png') left center no-repeat;
+}
+
+#search-form {
+    width: 260px;
+    float: left;
+}
+
+#search-form .text-field input {
+    background: url("img/icons/search_small.png") right center no-repeat;
+    background-color: #ffffff;
+    padding: 0 20px 0 2px;
+    width: 235px;
+    height: 18px;
+}
+
+#search-form .submit {
+    display: none;
+}
+
+ul#user-menu {
+    display: inline;
+    float: right;
+    list-style: none;
+    max-width: 190px;
+    min-width: 100px;
+    color: #ffffff;
+    padding-right: 10px;
+}
+
+ul#user-menu li.expandable {
+    position:relative;
+    margin-right:12px;
+}
+
+ul#user-menu li.expandable div.fullname {
+    padding: 0px 20px 3px 5px;
+    background-image: url('img/icons/header_arrow.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+    cursor:pointer;
+    line-height: 20px;
+    height: 20px !important; /* Don't screw up menu if username is too long */
+    overflow: hidden;
+}
+
+ul#user-menu li.expanded div.fullname {
+    background-color: #f2f2f2;
+    background-image: url('img/icons/header_arrow_active.png');
+    color: #6d6d6d;
+}
+
+li.expandable div.expandable-items {
+    background-color: #f2f2f2;
+    display: none;
+    position: absolute;
+    top:20px; right: -1px;
+    width: 100%;
+    border: 1px solid #6d6d6d;
+    border-top: none;
+}
+
+li.expanded div.expandable-items {
+    display: block;
+}
+
+li.expanded ul {
+    list-style: none;
+}
+
+li.expanded li {
+    float:none !important;
+    border:0;
+    height: 20px;
+    line-height: 20px;
+    width: 120px;
+}
+
+li.expanded li span,
+li.expanded li a {
+    padding:6px 21px 6px 6px;
+}
+
+
+/* End of header */
+
+
+/* Footer styling */
+
+#footer {
+    height: 60px;
+    width: 960px;
+    text-align: center;
+    margin: auto;
+    font-size: 12px;
+    color: #666;
+}
+
+#footer div {
+    margin-top: 14px;
+    text-align: left;
+    width: 320px;
+    float: left;
+    position: relative;
+    width: 320px;
+    height: auto;
+    margin-top: 15px;
+}
+
+.left {
+    text-align: left !important;
+}
+
+.right {
+    text-align: right !important;
+}
+
+.middle {
+    text-align: center !important;
+}
+
+#language-select{
+    display: inline;
+    float: left;
+}
+#middle{
+    display: inline;
+    float: left;
+}
+/* End of footer */
+
+/* STANDARD ICON LISTS */
+
+/* SMALL */
+
+ul.icon-list {
+    list-style: none;
+}
+
+    ul.icon-list li {
+        padding-left: 15px;
+        margin: 3px 0;
+        background-position: left center;
+        background-repeat: no-repeat;
+    }
+
+    ul.icon-list li.icon-add {
+        background-image: url('img/icons.com/add_small_orange.png');
+        background-position: 2px center;
+    }
+    ul.icon-list li.icon-find {
+        background-image: url('img/icons.com/search_small.png');
+        background-position: 1px center;
+    }
+    ul.icon-list li.icon-user {
+        background-image: url('img/icons.com/user_small_grey.png');
+        background-position: 2px center;
+    }
+    ul.icon-list li.icon-file {
+        background-image: url('img/icons.com/file_small_grey.png');
+        background-position: 2px center;
+    }
+    ul.icon-list li.icon-feed { background-image: url('img/icons.com/feed_small_grey.png'); }
+    ul.icon-list li.icon-note { background-image: url('img/icons.com/wiki_small_grey.png'); }
+    ul.icon-list li.icon-university { background-image: url('img/icons.com/university_small_grey.png'); }
+    ul.icon-list li.icon-message { background-image: url('img/icons.com/message_small_grey.png'); }
+    ul.icon-list li.icon-message.active { background-image: url('img/icons.com/message_small_orange.png'); }
+    ul.icon-list li.icon-group { background-image: url('img/icons.com/group_small_grey.png'); }
+    ul.icon-list li.icon-subject { background-image: url('img/icons.com/subject_small_grey.png'); }
+    ul.icon-list li.icon-email {
+        background-image: url('img/icons.com/email.png');
+        padding-left: 22px;
+    }
+    ul.icon-list li.icon-facebook {
+        background-image: url('img/icons.com/FB.png');
+        padding-left: 22px;
+    }
+    ul.icon-list li.icon-contact { background-image: url('img/icons.com/contact_small.png'); }
+
+/* MEDIUM */
+
+ul.medium-icon-list {
+    list-style: none;
+}
+
+    ul.medium-icon-list li {
+        padding-left: 18px;
+        margin: 3px 0;
+        background-position: 2px center;
+        background-repeat: no-repeat;
+    }
+
+    ul.medium-icon-list li.icon-add { background-image: url('img/icons.com/add_medium_orange.png'); background-position: 2px center; }
+    ul.medium-icon-list li.icon-find { background-image: url('img/icons.com/search_medium.png'); background-position: 1px center; }
+    ul.medium-icon-list li.icon-user { background-image: url('img/icons.com/user_medium_grey.png'); }
+    ul.medium-icon-list li.icon-file { background-image: url('img/icons.com/file_medium_grey.png'); }
+    ul.medium-icon-list li.icon-feed { background-image: url('img/icons.com/feed_medium_grey.png'); }
+    ul.medium-icon-list li.icon-note { background-image: url('img/icons.com/wiki_medium_grey.png'); }
+    ul.medium-icon-list li.icon-university { background-image: url('img/icons.com/university_medium_grey.png'); }
+    ul.medium-icon-list li.icon-message { background-image: url('img/icons.com/message_medium_grey.png'); }
+    ul.medium-icon-list li.icon-message.active { background-image: url('img/icons.com/message_medium_orange.png'); }
+    ul.medium-icon-list li.icon-group {
+        background-image: url('img/icons.com/group_medium_grey.png');
+        background-position: 0px center;
+    }
+    ul.medium-icon-list li.icon-subject { background-image: url('img/icons.com/subject_medium_grey.png'); }
+    ul.medium-icon-list li.icon-email {
+        background-image: url('img/icons.com/email.png');
+        padding-left: 22px;
+    }
+    ul.medium-icon-list li.icon-facebook {
+        background-image: url('img/icons.com/FB.png');
+        padding-left: 22px;
+    }
+    ul.medium-icon-list li.icon-contact { background-image: url('img/icons.com/contact_medium.png'); }
+
+/* SEARCH CONTROLS.
+ */
+
+.search-controls .search-text-submit input,
+.search-controls .search-text-submit button {
+    display: inline;
+}
+
+.search-controls .search-text-submit input {
+    margin-right: 5px;
+}
+
+.search-results-container .search-results-header {
+    font-size: 13px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+/* SEARCH RESULT SNIPPETS.
+ */
+
+.search-results-container .search-item {
+    font-size: 11px;
+    border-bottom: 1px solid #eee;
+    padding: 8px 8px 8px 35px;
+    background-repeat: no-repeat;
+    background-position: 5px 10px;
+}
+
+.search-results-container .search-item .item-title {
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.search-results-container .search-item .action-button {
+    float: right;
+}
+
+.search-results-container .snippet-subject {
+    background-image: url("../img/icons.com/subject_big_grey.png");
+}
+
+.search-results-container .search-item ul.statistics li {
+    display: inline-block;
+    margin-right: 5px;
+    min-width: 20px;    /* makes icons line up nicely in list */
+    color: #3d617a;
+}
+
+.item-tags {
+    background: url('img/icons.com/tag.png') no-repeat left center;
+    padding-left: 25px;
+}
+
+/* FEATURE BOX
+ */
+
+.feature-box {
+    background-color: #eeeeee;
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    padding: 5px 20px 20px 45px;
+}
+
+    .feature-box.icon-subject {
+        background-image: url('img/icons.com/subject_grand_grey.png');
+    }
+
+    .feature-box .title {
+        font-size: 13px;
+        font-weight: bold;
+        border-bottom: 1px solid #ffaf37;
+        margin-left: 10px;
+        margin-bottom: 15px;
+    }
+
+    .feature-box .feature {
+        display: inline;
+        width: 270px;
+        float: left;
+        margin: 15px 30px 15px 0px;
+        background-repeat: no-repeat;
+    }
+
+    .feature-box .icon-file {
+        background-image: url('img/icons.com/file_grand_orange.png');
+        padding-left: 35px;
+    }
+    .feature-box .icon-chat {
+        background-image: url('img/icons.com/discussions_grand_orange.png');
+        padding-left: 45px;
+    }
+    .feature-box .icon-note {
+        background-image: url('img/icons.com/wiki_grand_orange.png');
+        padding-left: 35px;
+    }
+    .feature-box .icon-talk {
+        background-image: url('img/icons.com/talk_grand_orange.png');
+        padding-left: 45px;
+    }
+
+    .feature-box .action-button {
+        text-align: center;
+        margin-top: 15px;
+    }

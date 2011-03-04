@@ -241,16 +241,18 @@ def make_map(config):
     map.connect('/home/subjects', controller='profile', action='my_subjects')
 
     #user registration path
-    map.connect('/welcome', controller='profile', action='welcome')
-    map.connect('/register/welcome', controller='profile', action='register_welcome')
+    map.connect('/welcome', controller='profile', action='register_welcome')
 
     #new user registration path
-    map.connect('/registration/*path/start', controller='registration', action='start')
+    map.connect('start_registration', '/registration/start', controller='home', action='start_registration')
+    map.connect('start_registration_with_location', '/registration/*path/start',
+                controller='registration', action='start_with_location')
     map.connect('/registration/*path/start_fb', controller='registration', action='start_fb')
     map.connect('/registration/resend', controller='registration', action='resend_code')
     map.connect('/registration/{hash}/confirm', controller='registration', action='confirm_email')
     map.connect('/registration/*path/confirm_fb', controller='registration', action='confirm_fb')
     map.connect('/registration/{hash}/university', controller='registration', action='university_info')
+    map.connect('/registration/{hash}/university_create', controller='registration', action='university_create')
     map.connect('/registration/{hash}/personal_info', controller='registration', action='personal_info')
     map.connect('/registration/{hash}/add_photo', controller='registration', action='add_photo')
     map.connect('/registration/{hash}/link_google', controller='registration', action='link_google')
@@ -278,6 +280,7 @@ def make_map(config):
     map.connect('/team/*path', controller='structureview', action='index')
 
     # other user views
+    map.connect('/invite_friends', controller='profile', action='invite_friends_fb')
     map.connect('/profile/confirm_emails', controller='profile', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='profile', action='confirm_user_email')
     map.connect('/profile', controller='profile', action='index')
@@ -303,7 +306,7 @@ def make_map(config):
     # CUSTOM ROUTES HERE
     map.connect('/sitemap.xml', controller='sitemap', action='index')
     map.connect('/channel.html', controller='federation', action='fbchannel')
-    map.connect('/', controller='home', action='index')
+    map.connect('frontpage', '/', controller='home', action='index')
     map.connect('/login', controller='home', action='login')
     map.connect('/logout', controller='home', action='logout')
     map.connect('/join', controller='home', action='join')

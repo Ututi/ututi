@@ -1,4 +1,4 @@
-<%inherit file="/ubase-width.mako" />
+<%inherit file="/ubase.mako" />
 
 <%def name="title()">
 ${_('Terms of use - Ututi')}

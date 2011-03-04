@@ -98,7 +98,11 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
             self.form_result['obj_type'] = 'subject'
         self._search()
 
-        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='structureview', action='search_js')
+        if self.form_result.has_key('text'):
+            search_query = self.form_result['text']
+        else:
+            search_query = None
+        return render_mako_def('/location/subjects.mako', 'subject_search_results', results=c.results, search_query=search_query)
 
     @location_action
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
@@ -110,10 +114,6 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         if location.parent is None:
             self._get_departments(location)
-            if request.params.has_key('js'):
-                return render_mako_def('/anonymous_index/en.mako', 'universities',
-                                   unis=c.departments, ajax_url=location.url(), collapse=False, collapse_text=_('More departments'))
-
             return render('location/university.mako')
         else:
             return render('location/department.mako')
@@ -130,14 +130,11 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         self.form_result['tagsitem'] = location.hierarchy()
         if self.form_result.get('obj_type', None) is None:
-            self.form_result['obj_type'] = 'subject,file,page'
+            self.form_result['obj_type'] = 'subject'
         self._search()
 
         if location.parent is None:
             self._get_departments(location)
-            if request.params.has_key('js'):
-                return render_mako_def('/anonymous_index/en.mako', 'universities',
-                                   unis=c.departments, ajax_url=location.url(), collapse=False, collapse_text=_('More departments'))
             return render('location/university_subjects.mako')
         else:
             return render('location/department_subjects.mako')
@@ -155,9 +152,6 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         if location.parent is None:
             self._get_departments(location)
-            if request.params.has_key('js'):
-                return render_mako_def('/anonymous_index/en.mako', 'universities',
-                                   unis=c.departments, ajax_url=location.url(), collapse=False, collapse_text=_('More departments'))
             return render('location/university_groups.mako')
         else:
             return render('location/department_groups.mako')

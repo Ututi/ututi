@@ -4,7 +4,7 @@ Test moderated email messages with attachments
     >>> from ututi.tests.functional import send_test_message
     >>> send_test_message('email_with_attachment2.txt', '66', to='moderators@groups.ututi.lt')
     >>> browser = Browser.logIn('admin@uni.ututi.com', 'asdasd')
-    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.getLink('Moderatoriai', url='/group/moderators').click()
     >>> browser.getLink('Mailing List').click()
     >>> browser.getControl('Moderation queue (1)').click()
     >>> browser.getLink('Also - an attachment').click()
@@ -24,7 +24,7 @@ The message is sent:
     Also, I just wanted to send you this file:
     README.txt - http://localhost/group/moderators/mailinglist/file/4/5
 
-    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.getLink('News feed').click()
     >>> browser.getLink('Mailing List').click()
 
 The attachments should be retained:

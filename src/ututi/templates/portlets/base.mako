@@ -9,15 +9,21 @@
 </%def>
 
 <%def name="portlet(id, portlet_class='')">
-<div class="sidebar-block ${portlet_class}" id="${id}">
-  <div class="rounded-header">
-    <div class="rounded-right">
-      <h3 id="${id + '_header'}">${caller.header()}</h3>
-    </div>
-  </div>
-  <div class="content" id="${id + '_content'}">
-    ${caller.body()}
-    <br style="clear: both; line-height: 0; display: block;"/>
+<div class="portlet ${portlet_class}" id="${id}">
+  <div class="portlet-inner clearfix">
+    %if hasattr(caller, 'header'):
+      <div class="header">
+        ${caller.header()}
+      </div>
+    %endif
+      <div class="content">
+        ${caller.body()}
+      </div>
+    %if hasattr(caller, 'footer'):
+      <div class="footer">
+        ${caller.footer()}
+      </div>
+    %endif
   </div>
 </div>
 </%def>

@@ -2,7 +2,7 @@ Basic forum test
 ================
 
     >>> browser = Browser.logIn()
-    >>> browser.getLink('Community').click()
+    >>> browser.open('http://localhost/community')
 
     >>> browser.getControl('New topic').click()
     >>> browser.getControl('Subject').value = 'Hello!'

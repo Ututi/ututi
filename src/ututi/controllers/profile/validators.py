@@ -7,7 +7,7 @@ from formencode.foreach import ForEach
 from formencode.api import Invalid
 from formencode.variabledecode import NestedVariables
 from ututi.lib.validators import UserPasswordValidator, TranslatedEmailValidator, UniqueEmail,\
-    LocationTagsValidator, PhoneNumberValidator, FileUploadTypeValidator, CommaSeparatedListValidator
+    LocationTagsValidator, PhoneNumberValidator, FileUploadTypeValidator, SeparatedListValidator
 
 
 class LocationForm(Schema):
@@ -165,7 +165,25 @@ class MultiRcptEmailForm(Schema):
     subject = validators.String(not_empty=True, messages=msg)
     msg = {'empty': _(u"Message can not be empty.")}
     message = validators.String(not_empty=True, messages=msg)
-    msg = {'empty': _(u"Please enter at least one value.")}
+    msg = {'empty': _(u"Please enter at least one email address.")}
     recipients = Pipe(validators.String(not_empty=True, messages=msg),
-                      CommaSeparatedListValidator(),
+                      SeparatedListValidator(separators=',', whitespace=False),
                       ForEach(validators.Email(not_empty=True)))
+
+
+class FriendsInvitationForm(Schema):
+    """A schema for validating ututi recommendation submissions"""
+    allow_extra_fields = True
+    recipients = validators.UnicodeString(not_empty=False)
+    message = validators.UnicodeString(not_empty=False)
+
+
+class FriendsInvitationJSForm(Schema):
+    """A schema for validating ututi recommendation submissions"""
+    allow_extra_fields = True
+    message = validators.UnicodeString(not_empty=False)
+    msg = {'empty': _(u"Please enter at least one email address.")}
+    recipients = Pipe(validators.String(not_empty=True, messages=msg),
+                      SeparatedListValidator(separators=',', whitespace=False),
+                      ForEach(validators.Email(not_empty=True)))
+

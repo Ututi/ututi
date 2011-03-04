@@ -7,7 +7,7 @@
 
 
   <div id="CreatePublicGroupLeft">
-    <h1 class="pageTitle">${_('Create an academic group')}</h1>
+    <h1 class="page-title">${_('Create an academic group')}</h1>
 
     ${self.path_steps(0)}
 

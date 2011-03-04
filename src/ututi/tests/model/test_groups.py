@@ -129,6 +129,17 @@ def test_invitations():
 
     """
 
+def test_memberships():
+    """Test group memberships.
+
+    >>> g = Group.get("moderators")
+    >>> u = User.get("admin@uni.ututi.com", LocationTag.get(u'uni'))
+    >>> g.add_member(u, True)
+    >>> meta.Session.commit()
+    >>> len(g.members)
+    1
+    """
+
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
