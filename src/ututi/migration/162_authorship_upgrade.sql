@@ -20,7 +20,7 @@ alter table users drop column teacher_verified;
 alter table users drop column teacher_position;
 
 ALTER TABLE ONLY users
-    ADD CONSTRAINT users_id_fkey FOREIGN KEY (id) REFERENCES authors(id)  ON DELETE SET NULL;
+    ADD CONSTRAINT users_id_fkey FOREIGN KEY (id) REFERENCES authors(id)  ON DELETE SET CASCADE;
 
 CREATE FUNCTION delete_user() RETURNS trigger AS $$
     BEGIN

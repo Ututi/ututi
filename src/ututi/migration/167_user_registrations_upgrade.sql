@@ -22,7 +22,7 @@ alter table user_registrations drop column location_id;
 alter table user_registrations add column location_id int8 default null references tags(id) on delete set null;
 
 alter table user_registrations add column university_title varchar(100) default null;
-alter table user_registrations add column university_country_id int8 default null references countries(id) on delete cascade;
+alter table user_registrations add column university_country_id int8 default null references countries(id) on delete set null;
 alter table user_registrations add column university_site_url varchar(320) default null;
 alter table user_registrations add column university_logo bytea default null;
 alter table user_registrations add column university_member_policy university_member_policy default 'RESTRICT_EMAIL';
