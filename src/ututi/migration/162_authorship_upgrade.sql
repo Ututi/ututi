@@ -49,7 +49,11 @@ alter table teacher_taught_subjects add column teacher_id int8 references teache
 update teacher_taught_subjects set teacher_id = user_id;
 alter table teacher_taught_subjects drop constraint teacher_tought_subjects_pkey;
 alter table teacher_taught_subjects drop column user_id;
+alter table teacher_taught_subjects alter column teacher_id set not null;
 alter table teacher_taught_subjects add primary key (teacher_id, subject_id);
 
 alter table teacher_groups add column teacher_id int8 references teachers(id) on delete cascade default null;
 update teacher_groups set teacher_id = user_id;
+alter table teacher_groups drop column user_id;
+alter table teacher_groups alter column teacher_id set not null;
+

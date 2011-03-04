@@ -1,14 +1,3 @@
-ALTER TABLE ONLY public.content_items DROP CONSTRAINT content_items_created_by_fkey;
-ALTER TABLE ONLY public.content_items DROP CONSTRAINT content_items_deleted_by_fkey;
-ALTER TABLE ONLY public.content_items DROP CONSTRAINT content_items_modified_by_fkey;
-
-ALTER TABLE ONLY public.content_items
-    ADD CONSTRAINT content_items_created_by_fkey FOREIGN KEY (created_by) REFERENCES users(id)  ON DELETE SET NULL;
-ALTER TABLE ONLY public.content_items
-    ADD CONSTRAINT content_items_deleted_by_fkey FOREIGN KEY (deleted_by) REFERENCES users(id)  ON DELETE SET NULL;
-ALTER TABLE ONLY public.content_items
-    ADD CONSTRAINT content_items_modified_by_fkey FOREIGN KEY (modified_by) REFERENCES users(id)  ON DELETE CASCADE;
-
 ALTER TABLE ONLY public.emails DROP CONSTRAINT emails_id_fkey;
 ALTER TABLE ONLY public.emails
     ADD CONSTRAINT emails_id_fkey FOREIGN KEY (id) REFERENCES users(id)  ON DELETE CASCADE;
