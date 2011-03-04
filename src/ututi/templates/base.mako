@@ -1,115 +1,140 @@
 <%namespace file="/sections/messages.mako" import="*"/>
 
 <%def name="title()">
-${_('Information sharing tool for small companies.')}
+${_('Student information online')}
 </%def>
 
 <%def name="head_tags()">
 </%def>
 
 <%def name="css()">
+
 </%def>
 
 <%def name="body_class()">
 </%def>
 
-<%def name="anonymous_menu()">
-<p class="a11y">${_('Main menu')}</p>
-<div class="head-nav">
-  <ul>
-    <li><a href="${url(controller='home', action='index', qualified=True)}">${_('Home')}</a></li>
-    <li><a href="${url(controller='home', action='about', qualified=True)}">${_('About')}</a></li>
-    <li><a class="orange" href="${url(controller='home', action='register', qualified=True, came_from=url.current())}">${_('Join')}</a></li>
-  </ul>
-</div>
-<p class="a11y">${_('User menu')}</p>
-<div class="loggedin-nav" id="personal-data">
-    <ul>
-        <li><a href="#" id="feedback-link">${_('feedback')}</a></li>
-    </ul>
-</div>
-</%def>
-
-<%def name="header(header)">
-<div id="header">
+<%def name="breadcrumbs(breadcrumbs)">
+<div id="breadcrumb-container">
   <%
      if c.user:
-         u_url = url(controller='profile', action='feed')
+         u_url = url(controller='profile', action='browse')
          track_event = h.trackEvent(None, 'user_search', 'logo')
      else:
          track_event = ''
          u_url = url('/')
   %>
-  <a rel="nofollow" ${track_event} href="${u_url}" title="Ututi" id="ulogo">
-    <img src="/img/site_logo.gif" title="TeamMate logo" />
-  </a>
+  %if not breadcrumbs:
+  <h1 id="siteName"><a rel="nofollow" ${track_event} href="${u_url}" title="TeamMate" id="ulogo">TeamMate</a></h1>
+  %else:
+  <h1 id="siteName2"><a rel="nofollow" ${track_event} href="${u_url}" title="TeamMate" id="ulogo">TeamMate</a></h1>
+  %endif
+
+  %if c.object_location or breadcrumbs:
+  <ul id="BreadLinks">
+
+  %if c.object_location:
+    %for (index, tag) in enumerate(c.object_location.hierarchy(True)):
+    <%
+       cls = 'first' if index == 0 else 'second'
+    %>
+    <li class="${cls}">
+      <a href="${tag.url()}" ${h.trackEvent(None, '%s_breadcrumbs' % c.security_context.__class__.__name__, 'level%s' % index)} title="${tag.title}">
+        ${tag.title_short}
+      </a>
+    </li>
+    %endfor
+  %endif
+
+  %if breadcrumbs:
+    <%
+       if len(breadcrumbs) == 3:
+         ellipsis = [15, 15, 25]
+       elif len(breadcrumbs) == 2:
+         ellipsis = [20, 40]
+       else:
+         ellipsis = [50]
+    %>
+    %for ind, breadcrumb in enumerate(breadcrumbs):
+       %if breadcrumb is not None:
+       <%
+          cls = 'first' if ind == 0 and not c.object_location else 'second'
+       %>
+       <li class="${cls}">
+         %if ind != len(breadcrumbs) - 1:
+           <a title="${breadcrumb.get('title')}" href="${breadcrumb.get('link')}">
+             ${h.ellipsis(breadcrumb.get('title'),ellipsis[ind])}
+           </a>
+         %else:
+           ${h.ellipsis(breadcrumb.get('title'),ellipsis[ind])}
+         %endif
+       </li>
+       %endif
+    %endfor
+  %endif
+  </ul>
+  %endif
 </div>
 </%def>
 
 <%def name="anonymous_header()">
-${self.anonymous_menu()}
+<%
+   nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
+%>
+<div id="header">
+  <div id="header-container">
+    <div id="logo">
+      <a href="${url('/')}"><img src="/img/site_logo.gif" alt="Team logo" title="TeamMate logo" /></a>
+      <span id="slogan">${_("Bringing students and teachers together")}</span>
+      <ul id="nav">
+        <li class="header-links"><a href="#">What is TeamMate?</a></li>
+        <li class="header-links"><a href="#">Contact us</a></li>
+        <li id="login-link" class="header-links"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Login')}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
 </%def>
 
 <%def name="loggedin_header()">
-<form id="searchForm" action="${url(controller='profile', action='search')}">
-    <fieldset>
-        <legend class="a11y">${_('Search')}</legend>
-        <label class="textField">
-          <span class="a11y">${_('Search text')}</span>
-          <input type="text" name="text"/>
-          <span class="edge"></span>
-        </label>
-        ${h.input_submit(_('search_'))}
-    </fieldset>
-</form>
-<p class="a11y">${_('Main menu')}</p>
-<div class="head-nav">
-  <ul>
-    <li><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
-    <li class="expandable group-nav">
-      <span>${_('Groups')}</span>
-      <div>
-        <ul>
-          %for group in c.user.groups:
-            <li>
-              <a href="${url(controller='group', action='index', id=group.group_id)}"
-                 ${h.trackEvent(None, 'group_home', 'top_menu')} title="${group.title}">
-                ${h.ellipsis(group.title, 18)}
-              </a>
-            </li>
-          %endfor
-          <li class="action"><a ${h.trackEvent(None, 'all_groups', 'menu')} href="${url(controller='search', action='index', obj_type='group')}">${_('All groups')}</a></li>
-          <li class="action"><a ${h.trackEvent(None, 'create_group', 'menu')} href="${url(controller='group', action='create_academic')}">${_('Create group')}</a></li>
-        </ul>
-      </div>
-    </li>
-    <li><a href="${url(controller='community', action='index')}">${_('Community')}</a></li>
-  </ul>
-</div>
-<p class="a11y">${_('User menu')}</p>
-<div class="loggedin-nav" id="personal-data">
-    <ul>
-        <li><a id="inbox-link" href="${url(controller='messages', action='index')}">
-          <% unread_messages = c.user.unread_messages() %>
-          %if unread_messages:
-           <strong>${_("inbox")} (${unread_messages})</strong>
-          %else:
-             ${_("inbox")}
-          %endif
-        </a></li>
+<div id="header">
+  <div id="header-container">
+    <div id="logo">
+      <a href="${url('/')}"><img src="/img/site_logo.gif" alt="TeamMate logo" title="TeamMate logo" /></a>
+    </div>
+    <div id="top-panel">
+      <ul id="head-nav">
+        <li id="nav-home"><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
+        <li id="nav-university"><a href="${c.user.location.url()}">${_('My University')}</a></li>
+        <li id="nav-catalog"><a href="${url(controller='profile', action='browse')}">${_('Catalog')}</a></li>
+      </ul>
+      <form id="search-form" action="${url(controller='profile', action='search')}">
+        <fieldset>
+          <legend class="a11y">${_('Search')}</legend>
+          <label class="text-field">
+            <span class="a11y">${_('Search text')}</span>
+            <input type="text" name="text"/>
+            <span class="edge"></span>
+          </label>
+          ${h.input_submit(_('search_'))}
+        </fieldset>
+      </form>
+      <ul id="user-menu">
         <li class="expandable profile-nav">
-            <span class="fullname">${c.user.fullname}</span>
-            <div>
-                <ul>
-                    <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
-                    <li class="action"><a href="${url(controller='user', action='index', id=c.user.id)}">${_('Public profile')}</a></li>
-                </ul>
-            </div>
+          <div class="fullname">${c.user.fullname}</div>
+          <div class="expandable-items">
+            <ul>
+              <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Settings')}</a></li>
+              <li class="action"><a href="${url(controller='user', action='index', id=c.user.id)}">${_('Public profile')}</a></li>
+              <li class="action"><a href="${url(controller='home', action='logout')}">${_('Logout')}</a></li>
+            </ul>
+          </div>
         </li>
-        <li><a href="${url(controller='home', action='logout')}">${_('log out')}</a></li>
-    </ul>
-</div>
+      </ul>
+    </div>
 
+</div>
+</div>
 <script type="text/javascript">
     // nav ul li expandable
     $('ul li.expandable').toggle(function() {
@@ -202,17 +227,24 @@ ${self.anonymous_menu()}
     </script>
 
     ${h.stylesheet_link(h.path_with_hash('/style.css'))}
+    ${h.stylesheet_link(h.path_with_hash('/layout.css'))}
     ${h.stylesheet_link(h.path_with_hash('/fixed.css'))}
     ${h.stylesheet_link(h.path_with_hash('/teammate.css'))}
+    %if c.user is None:
+       ${h.stylesheet_link(h.path_with_hash('/anonymous.css'))}
+    %endif
     ${h.stylesheet_link(h.path_with_hash('/portlets.css'))}
     ${h.stylesheet_link(h.path_with_hash('/widgets.css'))}
+    <!--[if IE]>
+    ${h.stylesheet_link(h.path_with_hash('/ie.css'))}
+    <![endif]-->
     ${h.javascript_link('/javascript/jquery-1.4.4.min.js')}
     ${h.javascript_link('/javascript/ajaxupload.3.5.js')}
     ${h.javascript_link('/javascript/jquery.qtip.min.js')}
     ${h.javascript_link('/javascript/tooltips.js')}
     ${h.javascript_link('/javascript/jquery.blockUI.js')}
-    ${h.javascript_link('/javascript/jquery-ui-1.8.6.custom.min.js')|n}
-    ${h.stylesheet_link(h.path_with_hash('/jquery-ui-1.8.6.custom.css'))}
+    ${h.javascript_link('/javascript/jquery-ui-1.8.10.custom.min.js')|n}
+    ${h.stylesheet_link(h.path_with_hash('/jquery-ui-1.8.10.custom.css'))}
     ${h.javascript_link('/javascript/jquery.form.js')|n}
     ${h.javascript_link(h.path_with_hash('/javascript/expand.js'))}
     ${h.javascript_link(h.path_with_hash('/javascript/hide_parent.js'))}
@@ -222,7 +254,7 @@ ${self.anonymous_menu()}
       ${self.css()}
     </style>
     <title>
-      ${self.title()} - ${_('UTUTI')}
+      ${self.title()} - ${_('TeamMate')}
     </title>
   </head>
   <body class="${self.body_class()}">
@@ -235,43 +267,37 @@ ${self.anonymous_menu()}
     </script>
     %endif
 
-    <div id="wrap">
-      ${header(c.breadcrumbs)}
-      <div id="widthLimiter">
-        %if c.user is None:
-          ${self.anonymous_header()}
-        %else:
-          ${self.loggedin_header()}
-        %endif
+    %if c.user is None:
+    ${self.anonymous_header()}
+    %else:
+    ${self.loggedin_header()}
+    %endif
 
-        ${next.body()}
-      </div>
-      <div class="push"></div>
-    </div>
+    ${next.body()}
 
     <div id="footer">
       <%
          nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
       %>
-      <p>Copyright © <a href="${_('ututi_link')}">${_(u'UAB „UTUTI“')}</a></p>
-      <ul>
-        <li><a ${nofollow} href="${url(controller='home', action='about')}">${_('About ututi')}</a></li>
-        <li><a ${nofollow} href="${_('ututi_blog_url')}">${_('U-blog')}</a></li>
-        <li><a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms of use')}</a></li>
-        <li><a href="#" id="feedback-link">${_('Feedback')}</a></li>
-      </ul>
-      <div class="folow-us-icons">
-      <a href="${config.get('folow_us_facebook', 'http://www.facebook.com/ututi')}">
-        ${h.image('/img/social/facebook_32.png', alt=_('Follow us on Facebook'))}
-      </a>
-      <a href="${config.get('folow_us_twitter', 'http://twitter.com/ututi')}">
-        ${h.image('/img/social/twitter_32.png', alt=_('Follow us on Twitter'))}
-      </a>
-      <a href="${config.get('folow_us_ublog', 'http://blog.ututi.lt')}">
-        ${h.image('/img/social/ublog_32.png', alt=_('Read about us in blog'))}
-      </a>
-
-      </div>
+      <!-- TODO: Fix language widget -->
+        <div class="left">
+          <form id="language-switch-form" action="${url('switch_language')}">
+            <input name="came_from" type="hidden" value="${request.url}" />
+            <select name="language">
+              <option value="en">${_('English')}</option>
+              <option value="lt">${_('Lithuanian')}</option>
+              <option value="pl">${_('Polish')}</option>
+            </select>
+            <input type="submit" value="${_('Select')}" />
+          </form>
+        </div>
+        <div class="middle">Copyright © <a href="${_('ututi_link')}">${_(u'UAB „Nous“')}</a></div>
+        <div class="right">
+          <a ${nofollow} href="${url(controller='home', action='about')}">${_('About')}</a>  |
+          <a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms')}</a>  |
+          <a href="#" >Contact Us</a>  |
+          <a href="#" id="feedback-link">${_('Feedback')}</a>
+        </div>
     </div>
     %if c.lang in ['lt', 'en', 'pl']:
     ${h.javascript_link('/javascript/uservoice.js')|n}

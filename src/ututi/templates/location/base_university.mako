@@ -90,8 +90,6 @@
 </%def>
 
 
-${location_title()}
-
 <%def name="university_box(unis, title)">
 %if unis:
 <div class="university-box clearfix">
