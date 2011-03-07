@@ -12,9 +12,7 @@
 </%def>
 
 <%def name="portlets()">
-  ${group_info_portlet()}
-  <br />
-  ${ubooks_portlet()}
+${user_sidebar()}
 </%def>
 
 <div class="group_description">
