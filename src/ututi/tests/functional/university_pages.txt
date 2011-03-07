@@ -38,7 +38,7 @@ There is a search form on this page and we should be able to use it.
     >>> browser.url
     'http://localhost/school/vu/subjects?text=prof.&obj_type=subject'
 
-    >>> browser.printQuery("//div[@class='search-item snippet-subject']/a/text()")
+    >>> browser.printQuery("//div[@class='search-item snippet-subject']/div/a/text()")
     Matematin&#279; analiz&#279;
 
 The information portlet shows some statistics about the university:
