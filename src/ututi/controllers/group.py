@@ -188,9 +188,7 @@ class GroupPageForm(Schema):
 class GroupInvitationActionForm(Schema):
     allow_extra_fields = True
     action = validators.OneOf(['accept', 'reject'])
-    ## FIXME on some reasons in validators.URL don't work not_empty.
-    # came_from = validators.URL(require_tld=False, not_empty=False, if_empty='')
-    came_from = validators.UnicodeString(not_empty=False)
+    came_from = validators.URL(require_tld=False, not_empty=False, if_missing='')
 
 class GroupRequestActionForm(Schema):
     allow_extra_fields = True
