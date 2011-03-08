@@ -57,6 +57,7 @@
         <div style="margin-bottom: 4px">
           ${h.input_area('emails', '', cols=37)}
         </div>
+        ${h.input_area('message', _("Add personal message (optional):"))}
         ${h.input_submit(_('Invite'))}
     </div>
 

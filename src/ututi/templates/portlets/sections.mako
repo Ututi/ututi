@@ -62,7 +62,7 @@
 </%def>
 
 <%def name="group_right_sidebar(exclude=[])">
-  ${invite_friends_portlet()}
+  ${group_invite_member_portlet()}
   ${group_members_portlet()}
   ${ubooks_portlet()}
 ##  %if not 'sms' in exclude and c.group.is_member(c.user):

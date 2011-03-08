@@ -174,13 +174,80 @@
      if group is None:
          group = c.group
   %>
-  <%self:action_portlet id="invite_member_portlet">
+  <%self:portlet id="invite-friends-portlet">
     <%def name="header()">
-    <a class="blark" ${h.trackEvent(None, 'click', 'group_invite_members', 'action_portlets')} href="${group.url(action='members')}">${_('invite classmates')}</a>
-    ${tooltip(_("Invite your classmates to use Ututi with you."),
-              style='margin-top: 4px;')}
+      ${_("Invite others to group:")}
     </%def>
-  </%self:action_portlet>
+    <ul class="icon-list">
+      <li class="icon-facebook">
+        <a href="${url(controller='profile', action='invite_friends_fb')}" id="invite-fb-link" ${h.trackEvent(None, 'click', 'group_invite_facebook', 'portlets')}>${"Facebook"}</a>
+      </li>
+      <li class="icon-email">
+        <a href="#invite-email" id="invite-email-link" ${h.trackEvent(None, 'click', 'group_invite_email', 'portlets')}>${"Email"}</a>
+      </li>
+    </ul>
+
+    <div id="invite-email-dialog">
+      <form action="${url(controller='group', action='invite_members')}" method="POST" class="new-style-form" id="invite-email-form">
+        ${h.input_line('recipients', _("Recipients:"),
+                       help_text=_("Enter comma separated list of email addresses"))}
+        ${h.input_area('message', _("Add personal message (optional):"))}
+        ${h.input_submit(_("Send invitation"), id='invite-submit-button', class_='dark')}
+      </form>
+      <p id="invitation-feedback-message">${_("Your invitations were successfully sent.")}</p>
+    </div>
+
+    <div id="invite-fb-dialog">
+    </div>
+
+    <script type="text/javascript">
+      //<![CDATA[
+      $(document).ready(function() {
+        $('#invite-email-dialog').dialog({
+            title: '${_("Invite friends via email")}',
+            width: 330,
+            autoOpen: false,
+            resizable: false
+        });
+
+        $("#invite-email-link").click(function() {
+          $('#invite-email-dialog').dialog('open');
+          return false;
+        });
+
+        $('#invite-submit-button').click(function(){
+            $.post("${url(controller='profile', action='invite_friends_email_js')}",
+                   $(this).closest('form').serialize(),
+                   function(data, status) {
+                       if (data.success != true) {
+                           // remove older error messages
+                           $('.error-message').remove();
+                           for (var key in data.errors) {
+                               var error = data.errors[key];
+                               $('#' + key).parent().after($('<div class="error-message">' + error + '</div>'));
+                           }
+                       }
+                       else {
+                           // show feedback to user
+                           $('#invite-email-dialog').addClass('email-sent').delay(1000).queue(function() {
+                               // close and clean up
+                               $(this).dialog('close');
+                               $(this).removeClass('email-sent');
+                               $('.error-message').remove();
+                               $(this).find('#recipients').val('');
+                               $(this).dequeue();
+                           });
+                       }
+                   },
+                   "json");
+
+            return false;
+        });
+
+      });
+      //]]>
+    </script>
+  </%self:portlet>
 </%def>
 
 <%def name="group_members_portlet(group=None)">

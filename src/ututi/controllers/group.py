@@ -26,6 +26,7 @@ from sqlalchemy.sql.expression import or_
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_logo
+from ututi.lib.invitations import make_email_invitations, make_facebook_invitations
 from ututi.lib.search import _exclude_subjects
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render
@@ -187,13 +188,15 @@ class GroupPageForm(Schema):
 
 class GroupInvitationActionForm(Schema):
     allow_extra_fields = True
-    action = validators.OneOf(['accept', 'reject'])
+    action = validators.OneOf(['True', 'False'])
     came_from = validators.URL(require_tld=False, not_empty=False, if_missing='')
+
 
 class GroupRequestActionForm(Schema):
     allow_extra_fields = True
     action = validators.OneOf(['confirm', 'deny'])
     hash_code = validators.String(strip=True)
+
 
 class GroupMemberUpdateForm(Schema):
     allow_extra_fields = True
@@ -204,6 +207,7 @@ class GroupInviteForm(Schema):
     """A schema for validating group member invitations"""
     allow_extra_fields = True
     emails = validators.UnicodeString(not_empty=False)
+    message = validators.UnicodeString(not_empty=False)
 
 class GroupInviteCancelForm(Schema):
     """A schema for validating group member invitations"""
@@ -836,8 +840,22 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         """Invite new members to the group."""
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
+            #message = self.form_result['message']
+            #invited, invalid = make_email_invitations(emails, c.user, message)
+
+            #if invalid:
+            #    h.flash(_("Invalid email addresses: %(email_list)s") % \
+            #            dict(email_list=', '.join(invalid)))
+            #if invited:
+            #    h.flash(_("Invitations sent to %(email_list)s") % \
+            #            dict(email_list=', '.join(invited)))
+
             self._send_invitations(group, emails)
-        redirect(url(controller='group', action='members', id=group.group_id))
+
+        if request.referrer:
+            redirect(request.referrer)
+        else:
+            redirect(url(controller='group', action='home', id=group.group_id))
 
     @group_action
     @validate(schema=GroupInviteCancelForm, form='members')
@@ -921,8 +939,9 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             invitations = meta.Session.query(PendingInvitation
                             ).filter_by(group=group, user=c.user, active=True
                             ).all()
+
             if invitations:
-                if self.form_result.get('action', '') == 'accept':
+                if self.form_result.get('accept', '') == 'True':
                     group.add_member(c.user)
                     if c.user.location is None:
                         c.user.location = group.location

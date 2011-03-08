@@ -32,7 +32,6 @@ Let's try and invite a new member to the group.
 The user should be listed in the invited users table.
 
     >>> browser.open('http://localhost/group/moderators/members')
-
     >>> browser.printQuery("//table[@class='group-invitations']/tr/td[@class='email']/text()")
     user2@ututi.lt
     loser@ututi.lt
@@ -48,6 +47,6 @@ We need another member in the group, so let's join as the invited user.
 
 The user will try accept invitation from email by clicking on some URL.
 
-    >>> browser2.open('http://localhost/group/moderators/invitation?action=accept')
+    >>> browser2.open('http://localhost/group/moderators/invitation?accept=True')
     >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
     Congratulations! You are now a member of the group 'Moderatoriai'
