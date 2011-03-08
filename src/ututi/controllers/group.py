@@ -188,7 +188,9 @@ class GroupPageForm(Schema):
 class GroupInvitationActionForm(Schema):
     allow_extra_fields = True
     action = validators.OneOf(['accept', 'reject'])
-    came_from = validators.URL(require_tld=False, )
+    ## FIXME on some reasons in validators.URL don't work not_empty.
+    # came_from = validators.URL(require_tld=False, not_empty=False, if_empty='')
+    came_from = validators.UnicodeString(not_empty=False)
 
 class GroupRequestActionForm(Schema):
     allow_extra_fields = True
@@ -913,7 +915,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             h.flash(_("Invalid email addresses detected: %s") % ', '.join(failed))
         meta.Session.commit()
 
-    @validate(schema=GroupInvitationActionForm)
+    @validate(schema=GroupInvitationActionForm, post_only=False, on_get=True)
     @group_action
     def invitation(self, group):
         """Act on the invitation of the current user to this group."""
