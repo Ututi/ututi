@@ -1,4 +1,5 @@
-<%inherit file="/group/base.mako" />
+<%inherit file="/ubase-sidebar.mako" />
+
 <%namespace file="/portlets/group.mako" import="*"/>
 <%namespace file="/portlets/sections.mako" import="*"/>
 <%namespace file="/group/members.mako" import="group_members"/>
@@ -14,6 +15,16 @@
 <%def name="portlets()">
 ${user_sidebar()}
 </%def>
+
+<h1 class="page-title">
+  ${self.title()}
+  %if not c.group.is_member(c.user):
+  <div style="float: right;">
+    ${h.button_to(_('become a member'), url(controller='group', action='request_join', id=c.group.group_id))}
+  </div>
+  %endif
+</h1>
+
 
 <div class="group_description">
   %if c.group.page_public and c.group.page != '':
