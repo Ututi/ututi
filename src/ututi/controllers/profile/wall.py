@@ -1,5 +1,6 @@
 from sqlalchemy.sql.expression import and_
 from sqlalchemy.sql.expression import or_
+from sqlalchemy.orm import eagerload
 
 from pylons import tmpl_context as c
 
@@ -27,7 +28,8 @@ class UserWallMixin(WallMixin):
                               Event.user == c.user)))\
              .filter(or_(Event.event_type != 'moderated_post_created',
                          Event.object_id.in_(user_is_admin_of_groups)))\
-             .filter(~Event.event_type.in_(c.user.ignored_events_list))
+             .filter(~Event.event_type.in_(c.user.ignored_events_list))\
+             .options(eagerload(Event.children, Event.user, Event.context, Event.comments))
 
         return query
 

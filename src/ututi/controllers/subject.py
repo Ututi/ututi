@@ -8,8 +8,9 @@ from formencode.compound import Pipe
 from formencode import Schema, validators, htmlfill
 
 from webhelpers import paginate
-
 from pylons import tmpl_context as c, request, url, session
+from sqlalchemy.orm import eagerload
+
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
 from pylons.templating import render_mako_def
@@ -172,7 +173,8 @@ class SubjectWallMixin(WallMixin):
         """WallMixin implementation."""
 
         query = meta.Session.query(Event)\
-             .filter(Event.object_id == c.subject.id)
+             .filter(Event.object_id == c.subject.id)\
+             .options(eagerload(Event.children, Event.user, Event.context, Event.comments))
 
         return query
 

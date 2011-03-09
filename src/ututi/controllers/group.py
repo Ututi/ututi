@@ -21,6 +21,7 @@ from formencode.foreach import ForEach
 from formencode.variabledecode import NestedVariables
 
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.orm import eagerload
 from sqlalchemy.sql.expression import or_
 
 import ututi.lib.helpers as h
@@ -241,7 +242,8 @@ class GroupWallMixin(WallMixin):
                 .filter(or_(Event.object_id.in_([s.id for s in c.group.watched_subjects]),
                             Event.object_id == c.group.id))\
                 .filter(or_(Event.event_type != 'moderated_post_created',
-                            Event.object_id.in_(user_is_admin_of_groups)))
+                            Event.object_id.in_(user_is_admin_of_groups)))\
+                .options(eagerload(Event.children, Event.user, Event.context, Event.comments))
 
         return query
 
