@@ -12,7 +12,6 @@ First of all let's log in;
 
     >>> browser = Browser.logIn()
 
-
 Let's find the group.
 
     >>> browser.open('http://localhost/group/moderators')
@@ -39,7 +38,6 @@ The user should be listed in the invited users table.
 
     >>> len(mail_queue)
     3
-
 
 We need another member in the group, so let's join as the invited user.
 
