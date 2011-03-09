@@ -207,7 +207,7 @@ class FederationController(BaseController, FederationMixin):
             user = User.get_byfbid(facebook_id)
 
         if user is not None and u_type == 'teacher'\
-                and user.user_type != 'teacher':
+                and user.type != 'teacher':
             teacher_request_email(user)
             h.flash(_('Thank You! Your request to become a teacher has been received. We will notify You once we grant You the rights of a teacher.'))
 

@@ -104,7 +104,7 @@ class User(Author):
     def change_type(self, type, **kwargs):
         from ututi.model import authors_table
         conn = meta.engine.connect()
-        upd = authors_table.update().where(authors_table.c.id==self.id).values(user_type=type, **kwargs)
+        upd = authors_table.update().where(authors_table.c.id==self.id).values(type=type, **kwargs)
         conn.execute(upd)
 
     @property
