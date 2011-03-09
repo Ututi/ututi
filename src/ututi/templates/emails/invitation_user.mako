@@ -1,11 +1,11 @@
 ${h.literal(_("""Hello,
 
 Your friend %(author)s wants to invite you to the group
-%(group_title)s < %(group_url)s >. After joining you will be able to
+%(group_title)s (%(group_url)s). After joining you will be able to
 watch subjects your group is studying, share files with other members
 of the group and use the group forum.
 
-You may accept or reject the invitation here: < %(invitation_url)s >
+You may accept or reject the invitation here: %(invitation_url)s
 
 We hope you will find Ututi useful!
 

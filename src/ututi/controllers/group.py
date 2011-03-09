@@ -188,7 +188,7 @@ class GroupPageForm(Schema):
 
 class GroupInvitationActionForm(Schema):
     allow_extra_fields = True
-    action = validators.OneOf(['True', 'False'])
+    accept = validators.OneOf(['True', 'False'])
     came_from = validators.URL(require_tld=False, not_empty=False, if_missing='')
 
 
@@ -203,16 +203,19 @@ class GroupMemberUpdateForm(Schema):
     role = validators.OneOf(['administrator', 'member', 'not-member'])
     user_id = validators.Int()
 
+
 class GroupInviteForm(Schema):
     """A schema for validating group member invitations"""
     allow_extra_fields = True
     emails = validators.UnicodeString(not_empty=False)
-    message = validators.UnicodeString(not_empty=False)
+    message = validators.UnicodeString(not_empty=False, if_missing='')
+
 
 class GroupInviteCancelForm(Schema):
     """A schema for validating group member invitations"""
     allow_extra_fields = True
     email = validators.UnicodeString(not_empty=False)
+
 
 def group_action(method):
     def _group_action(self, id=None):

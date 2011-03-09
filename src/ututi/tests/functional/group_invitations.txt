@@ -40,13 +40,18 @@ The user should be listed in the invited users table.
     >>> len(mail_queue)
     3
 
+
 We need another member in the group, so let's join as the invited user.
 
     >>> browser2 = Browser()
     >>> browser2 = Browser.logIn("user@ututi.lt", "password")
 
-The user will try accept invitation from email by clicking on some URL.
+The user is accepting invitation from email by clicking on URL.
 
-    >>> browser2.open('http://localhost/group/moderators/invitation?accept=True')
+    >>> from ututi.lib.helpers import get_urls
+    >>> msg1, msg2, msg3 = mail_queue
+    >>> urls = get_urls(msg1.payload())
+    >>> invitation_url = urls[1]
+    >>> browser2.open(invitation_url)
     >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
     Congratulations! You are now a member of the group 'Moderatoriai'
