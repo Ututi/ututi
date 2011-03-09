@@ -7,6 +7,8 @@ from pylons import tmpl_context as c, url
 from pylons.i18n import _
 from pylons.templating import render_mako_def
 
+from sqlalchemy.orm import eagerload
+
 from ututi.model.events import Event
 
 import ututi.lib.helpers as h
@@ -74,7 +76,8 @@ class StructureviewWallMixin(WallMixin):
             .all()
         ids = [obj.id for obj in subjects + public_groups]
 
-        return meta.Session.query(Event).filter(Event.object_id.in_(ids))
+        return meta.Session.query(Event).filter(Event.object_id.in_(ids))\
+            .options(eagerload(Event.children, Event.user, Event.context, Event.comments))
 
 
 class StructureviewController(SearchBaseController, UniversityListMixin, StructureviewWallMixin):
