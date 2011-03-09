@@ -1,0 +1,3 @@
+drop index user_location_idx;
+drop index group_mailing_list_messages_reply_to_idx;
+drop index group_mailing_list_messages_thread_idx;
