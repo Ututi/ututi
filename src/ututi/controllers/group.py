@@ -324,6 +324,8 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
 
     @group_action
     def home(self, group):
+        if not c.user:
+            abort(404);
         if check_crowds(["member", "admin"]):
             if request.params.get('do_not_watch'):
                 group.wants_to_watch_subjects = False
@@ -333,7 +335,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         else:
             c.breadcrumbs = [{'title': group.title,
                               'link': url(controller='group', action='home', id=c.group.group_id)}]
-
             return render('group/home_public.mako')
 
     @group_action
