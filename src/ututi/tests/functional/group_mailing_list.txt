@@ -268,7 +268,7 @@ messages, but only if group is set to moderated:
     >>> user2 = Browser.logIn('user2@ututi.lt', 'password')
     >>> user2.open('http://localhost/group/moderators')
     >>> 'moderators@groups.ututi.lt' not in user2.contents
-    True
+    False
 
 Now the user can see the link, and should be able to post a new
 message:

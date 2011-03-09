@@ -25,14 +25,41 @@ ${user_sidebar()}
   %endif
 </h1>
 
+  <div class="floatleft avatar">
+    <img id="group-logo" src="${url(controller='group', action='logo', id=c.group.group_id, width=70, height=70)}" alt="logo" />
+  </div>
 
-<div class="group_description">
-  %if c.group.page_public and c.group.page != '':
-    ${h.html_cleanup(c.group.page)|n,decode.utf8}
-  %else:
-    ${c.group.description}
-  %endif
-</div>
+  <div>
+    ${self.title()}
+    <div>
+    %if c.group.location:
+      <a href="${c.group.location.url()}">${' | '.join(c.group.location.title_path)}</a>
+    %endif
+    </div>
+
+    %if c.user is not None:
+    <div>
+      %if c.group.is_member(c.user):
+      <a href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${c.group.group_id}@${c.mailing_list_host}</a>
+      %elif c.group.mailinglist_moderated:
+      <a href="${url(controller='mailinglist', action='new_anonymous_post', id=c.group.group_id)}" title="${_('Mailing list address')}">${c.group.group_id}@${c.mailing_list_host}</a>
+      %endif
+    </div>
+    %endif
+
+    <div>
+      %if c.group.description:
+      ${c.group.description}
+      %endif
+    </div>
+
+    <div>
+    %if c.group.is_admin(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
+       <a class="right_arrow" href="${url(controller='group', action='edit', id=c.group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
+    %endif
+    </div>
+
+  </div>
 
 %if c.group.forum_is_public:
   %for category in c.group.forum_categories:
