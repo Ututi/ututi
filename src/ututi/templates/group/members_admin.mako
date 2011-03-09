@@ -41,7 +41,6 @@ ${group_members_invite_section()}
         </td>
         <td class="actions">
           <form style="display: inline;" method="post" action="${url(controller='group', action='invite_members', id=c.group.group_id)}">
-              <input type="hidden" name="message" value="" />
               <input type="hidden" name="emails" value="${invitation.email}" />
               <input type="submit" class="text_button" value="${_('Send again')}" />
           </form>
