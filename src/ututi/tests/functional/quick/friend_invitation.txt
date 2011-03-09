@@ -27,6 +27,7 @@ There should be a portlet with a form that let's us enter email addresses the re
    If you would like to join Ututi now, please follow this link:
    http://localhost/registration/.../confirm
    <BLANKLINE>
+   --
    The Ututi team
    <BLANKLINE>
 

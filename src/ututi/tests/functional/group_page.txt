@@ -38,6 +38,15 @@ We can specify that the group's page is public, shown on the front page.
     >>> browser.getControl('Save').click()
 
     >>> browser2 = Browser()
+    >>> browser2 = Browser.logIn("user@ututi.lt", "password")
     >>> browser2.open('http://localhost/group/moderators')
     >>> browser2.printQuery("//div[@class='group_description']/text()")
     This is our group
+
+Anonymous users must see NotFound (404) when they ented group url.
+
+    >>> browser3 = Browser()
+    >>> browser3.open('http://localhost/group/moderators')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
