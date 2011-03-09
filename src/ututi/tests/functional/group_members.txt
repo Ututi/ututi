@@ -29,6 +29,8 @@ Let's try and invite a new member to the group.
     Invalid email addresses detected: foo
 
 The user should be listed in the invited users table.
+
+    >>> browser.open('http://localhost/group/moderators/members')
     >>> browser.printQuery("//table[@class='group-invitations']/tr/td[@class='email']/text()")
     user2@ututi.lt
     loser@ututi.lt
@@ -45,6 +47,7 @@ The link to send another invitation should send another invitation email.
     4
 
 In case we change our mind, the group moderator can cancel the invitation.
+
     >>> browser.getControl('Cancel', index=2).click()
     >>> browser.printQuery("//table[@class='group-invitations']/tr/td[@class='email']/text()")
     user2@ututi.lt
@@ -170,15 +173,18 @@ If a user, who has been invited to join a group requests to join it, we consider
 
     >>> from ututi.lib.mailer import mail_queue
     >>> print mail_queue.pop().payload()
-    Hi,
+    Hello,
+    <BLANKLINE>
     Your friend Adminas Adminovix wants to invite you to the group
-    Moderatoriai < http://localhost/group/moderators >. After joining you will be able to
+    Moderatoriai (http://localhost/group/moderators). After joining you will be able to
     watch subjects your group is studying, share files with other members
     of the group and use the group forum.
     <BLANKLINE>
-    You may accept or reject the invitation here: < http://localhost/group/moderators/invitation >
+    You may accept or reject the invitation here: http://localhost/group/moderators/invitation?accept=True
     <BLANKLINE>
     We hope you will find Ututi useful!
     <BLANKLINE>
     --
     The Ututi team
+    <BLANKLINE>
+    <BLANKLINE>
