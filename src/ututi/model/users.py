@@ -381,25 +381,6 @@ class User(object):
         from ututi.model import PrivateMessage
         return meta.Session.query(PrivateMessage).filter_by(recipient=self, is_read=False).count()
 
-    def unread_feed_messages(self):
-        from ututi.model.events import Event
-        from pylons import tmpl_context as c
-
-        events = meta.Session.query(Event)\
-            .filter(or_(Event.object_id.in_([s.id for s in c.user.all_watched_subjects]),
-                        Event.object_id.in_([m.group.id for m in c.user.memberships])))\
-            .filter(Event.author_id != c.user.id)\
-            .order_by(desc(Event.created))\
-            .limit(20).all()
-
-        count = 0
-
-        for event in events:
-            if event.created > c.user.last_seen_feed:
-                count += 1
-
-        return count
-
     def purchase_sms_credits(self, credits):
         self.sms_messages_remaining += credits
         log.info("user %(id)d (%(fullname)s) purchased %(credits)s credits; current balance: %(current)d credits." % dict(id=self.id, fullname=self.fullname, credits=credits, current=self.sms_messages_remaining))
