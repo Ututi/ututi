@@ -37,11 +37,11 @@ We can edit the group's information.
    >>> browser.printQuery('id("moduleMenu")//li[@class="current"]//a/text()')
    News feed
 
-   >>> browser.printQuery("id('group_info_portlet-content')//img[@id='group-logo']")
+   >>> browser.printCssQuery("#group-logo")
    <img id="group-logo" src="/group/moderators/logo/70/70" alt="logo" />
 
-   >>> browser.printQuery("id('group_info_portlet-content')//h2/text()")
-   Ututi moderatoriai
+   >>> browser.printCssQuery(".page-title", strip=True)
+   <h1>Ututi moderatoriai</h1>
 
 We can add a group:
 

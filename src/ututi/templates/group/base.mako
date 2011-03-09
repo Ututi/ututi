@@ -20,12 +20,12 @@ ${group_right_sidebar()}
 
   <h1 class="page-title">
     ${self.title()}
-    %if not c.group.is_member(c.user):
-      <div style="float: right;">
-        ${h.button_to(_('become a member'), url(controller='group', action='request_join', id=c.group.group_id))}
-      </div>
-    %endif
   </h1>
+  %if not c.group.is_member(c.user):
+  <div style="float: right;">
+    ${h.button_to(_('become a member'), url(controller='group', action='request_join', id=c.group.group_id))}
+  </div>
+  %endif
 
   <div class="floatleft avatar">
     <img id="group-logo" src="${url(controller='group', action='logo', id=c.group.group_id, width=70, height=70)}" alt="logo" />
