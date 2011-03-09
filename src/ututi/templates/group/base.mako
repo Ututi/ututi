@@ -54,6 +54,13 @@ ${group_right_sidebar()}
       ${c.group.description}
       %endif
     </div>
+
+    <div>
+    %if c.group.is_admin(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
+       <a class="right_arrow" href="${url(controller='group', action='edit', id=c.group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
+    %endif
+    </div>
+
   </div>
 
 
