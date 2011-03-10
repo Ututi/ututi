@@ -262,18 +262,11 @@ And clean up the email queue:
     4
     >>> mail_queue[:] = []
 
-Other ututi users, who do not belong to the group can also post
-messages, but only if group is set to moderated:
+Non-group members can see the link, and should be able to post a new
+message:
 
     >>> user2 = Browser.logIn('user2@ututi.lt', 'password')
     >>> user2.open('http://localhost/group/moderators')
-    >>> 'moderators@groups.ututi.lt' not in user2.contents
-    False
-
-Now the user can see the link, and should be able to post a new
-message:
-
-    >>> user2.reload()
     >>> user2.getLink('moderators@groups.ututi.lt').click()
     >>> user2.getControl('Subject').value = "Hi group!"
     >>> user2.getControl('Message').value = u"This is my message"
@@ -286,6 +279,19 @@ This message will appear in the moderation queue:
     >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()")
     Hi group!
     This is my message
+
+If we disable the moderation non-group members can't post messages to
+our mailing list:
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl('Members only').click()
+    >>> browser.getControl('Save').click()
+
+And the link is not there anymore:
+
+    >>> user2.open('http://localhost/group/moderators')
+    >>> 'moderators@groups.ututi.lt'not in user2.contents
+    True
 
 After we accept the message, the message will get sent to all the
 members of the group (XXX not implemented):
