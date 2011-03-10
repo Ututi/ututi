@@ -53,5 +53,5 @@ First user can delete group
       <span class="close-link hide-parent">
         <img alt="Close" src="/images/details/icon_delete.png" />
       </span>
-      <span>Group 'testing one two tree' has been deleted!</span>
+      <span class="flash-message-content">Group 'testing one two tree' has been deleted!</span>
     </div>

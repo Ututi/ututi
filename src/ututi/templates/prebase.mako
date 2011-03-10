@@ -168,7 +168,7 @@ ${_('Student information online')}
       <span class="close-link hide-parent">
         ${h.image('/images/details/icon_delete.png', alt=_('Close'))}
       </span>
-      <span>${h.literal(unicode(message))}</span>
+      <span class="flash-message-content">${h.literal(unicode(message))}</span>
   </div>
   % endfor
   ${invitation_messages(c.user)}
