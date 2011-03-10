@@ -8,6 +8,7 @@ from formencode.compound import Pipe
 from pylons import tmpl_context as c, url, session, request, config
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
+from ututi.model import PendingInvitation
 from ututi.lib.base import BaseController, render
 from ututi.lib.image import serve_logo
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
@@ -529,7 +530,10 @@ class RegistrationController(BaseController, FederationMixin):
         from ututi.lib.security import sign_in_user
         if not registration.location:
             registration.location = registration.create_university()
+
         user = registration.create_user()
+        self._accept_group_invitations(user)
+
         meta.Session.add(user)
         meta.Session.commit()
         # TODO: handle any integrity errors here
@@ -538,8 +542,26 @@ class RegistrationController(BaseController, FederationMixin):
         registration.process_invitations()
         meta.Session.commit()
 
+
         sign_in_user(user)
         redirect(url(controller='profile', action='register_welcome'))
+
+    def _accept_group_invitations(self, user):
+        """Let's find all group invitations and accept them"""
+
+        ## TODO: still need check if invitation is in user's location.
+        ## I am to lazy for PendingInvitation refactoring, so I will chenge this later.
+
+        invitations = meta.Session.query(PendingInvitation
+                            ).filter_by(email=user.username, active=True
+                            ).all()
+
+        for invitation in invitations:
+            group = invitation.group
+            group.add_member(user)
+            invitation.active = None
+
+        meta.Session.commit()
 
     def logo(self, id, size):
         return serve_logo('registration', id, width=size, height=size,
