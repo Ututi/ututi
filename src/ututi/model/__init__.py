@@ -1044,7 +1044,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
             except NoResultFound:
                 invitation = PendingInvitation(email, author=author, group=self)
                 meta.Session.add(invitation)
-            #group_invitation_email(invitation, email)
+
             return invitation
         else:
             return None
