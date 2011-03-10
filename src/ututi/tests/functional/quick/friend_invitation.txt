@@ -58,9 +58,6 @@ User can add personal message to the invitation that is sent:
    Hello!
    <BLANKLINE>
    Hey, come and try Ututi. I found it rather nice.
-   ---
-   <BLANKLINE>
-   <BLANKLINE>
    <BLANKLINE>
    If you would like to join Ututi now, please follow this link:
    http://localhost/registration/.../confirm

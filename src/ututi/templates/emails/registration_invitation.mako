@@ -1,7 +1,7 @@
 %if message:
 ${_('Hello!')}
 
-${"%s\n---\n\n" % message}
+${message}
 
 ${_('If you would like to join Ututi now, please follow this link:')}
 ${registration.url(action='confirm_email', qualified=True)}
