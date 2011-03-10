@@ -39,6 +39,7 @@ And after all this we are redirected back to where we came from.
    'http://localhost/home/feed'
 
 Plus, a status message is displayed:
+
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
    Invitations sent to somenewuser@example.com
 
@@ -46,10 +47,12 @@ Plus, a status message is displayed:
 
 User can add personal message to the invitation that is sent:
 
+   >>> browser.open('http://localhost/home/feed')
    >>> form = browser.getForm(id='invite-email-form')
    >>> form.getControl('Recipients:').value = 'someotheruser@example.com'
    >>> form.getControl('Add personal message (optional):').value = 'Hey, come and try Ututi. I found it rather nice.'
    >>> form.getControl('Send invitation').click()
+
    >>> printEmails()
    ['someotheruser@example.com']
    Hey, come and try Ututi. I found it rather nice.
