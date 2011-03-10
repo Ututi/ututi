@@ -15,7 +15,8 @@ from datetime import datetime
 from ututi.model.util import logo_property, read_facebook_logo
 from ututi.model import meta
 from ututi.lib.helpers import image
-from ututi.lib.emails import send_email_confirmation_code
+from ututi.lib.emails import send_email_confirmation_code, send_registration_invitation
+
 
 from pylons.i18n import _
 from pylons import config
@@ -720,7 +721,10 @@ class UserRegistration(object):
 
             if self.invited_emails:
                 emails = self.invited_emails.split(',')
-                make_email_invitations(emails, self.user)
+                invites, invalid = make_email_invitations(emails, self.user)
+                for invitee in invites:
+                    send_registration_invitation(invitee, self.user)
+
 
             if self.invited_fb_ids:
                 ids = map(int, self.invited_fb_ids.split(','))

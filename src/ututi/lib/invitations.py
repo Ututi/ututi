@@ -5,13 +5,11 @@ from formencode.api import Invalid
 from ututi.lib.validators import TranslatedEmailValidator
 from ututi.model import meta, User, UserRegistration
 
-from ututi.lib.emails import send_registration_invitation
-
 def make_email_invitations(emails, inviter, invitation_message=None):
     location = inviter.location
     invalid = []
     already = []
-    invited = []
+    invites = []
     for email in filter(bool, map(strip, emails)):
         try:
             TranslatedEmailValidator.to_python(email)
@@ -27,10 +25,9 @@ def make_email_invitations(emails, inviter, invitation_message=None):
                     meta.Session.add(invitee)
                 invitee.inviter = inviter
                 meta.Session.commit()
-                send_registration_invitation(invitee, inviter, invitation_message)
-                invited.append(email)
+                invites.append(invitee)
 
-    return invited, invalid
+    return invites, invalid
 
 def make_facebook_invitations(fb_ids, inviter):
     already = []

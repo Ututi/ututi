@@ -22,7 +22,7 @@ from pylons.i18n import _, ungettext
 
 import ututi.lib.helpers as h
 from ututi.lib.base import render
-from ututi.lib.emails import email_confirmation_request
+from ututi.lib.emails import email_confirmation_request,  send_registration_invitation
 from ututi.lib.events import event_types_grouped
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.security import ActionProtector
@@ -34,6 +34,7 @@ from ututi.lib.mailinglist import post_message
 from ututi.lib import gg, sms
 from ututi.lib.validators import js_validate
 from ututi.lib.validators import manual_validate
+
 
 from ututi.model.events import Event, TeacherMessageEvent
 from ututi.model import File
@@ -489,13 +490,16 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         if hasattr(self, 'form_result'):
             emails = self.form_result['recipients'].split(',')
             message = self.form_result['message']
-            invited, invalid = make_email_invitations(emails, c.user, message)
+            invites, invalid = make_email_invitations(emails, c.user)
+            for invitee in invites:
+                send_registration_invitation(invitee, c.user, message)
+
             if invalid:
                 h.flash(_("Invalid email addresses: %(email_list)s") % \
                         dict(email_list=', '.join(invalid)))
-            if invited:
+            if invites:
                 h.flash(_("Invitations sent to %(email_list)s") % \
-                        dict(email_list=', '.join(invited)))
+                        dict(email_list=', '.join(invite.email for invite in invites)))
 
         if request.referrer:
             redirect(request.referrer)
@@ -508,7 +512,9 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         if hasattr(self, 'form_result'):
             emails = self.form_result['recipients']
             message = self.form_result['message']
-            make_email_invitations(emails, c.user, message)
+            invites, invalid = make_email_invitations(emails, c.user)
+            for invitee in invites:
+                send_registration_invitation(invitee, c.user, message)
 
         return {'success': True}
 
