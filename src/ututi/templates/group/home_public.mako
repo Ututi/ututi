@@ -59,6 +59,15 @@ ${user_sidebar()}
     %endif
     </div>
 
+    <%doc>
+    TODO: This needs to be formatted correctly!
+    </%doc>
+    %if c.group.page_public:
+    <div id="group_page">
+      ${c.group.page |n}
+    </div>
+    %endif
+
   </div>
 
 %if c.group.forum_is_public:
