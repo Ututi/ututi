@@ -45,6 +45,9 @@ from ututi.lib.security import bot_protect
 from ututi.lib.security import is_root, check_crowds, deny
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
+from ututi.lib.emails import send_group_invitation_for_user
+from ututi.lib.emails import send_group_invitation_for_non_user
+from ututi.lib.emails import send_registration_invitation
 from ututi.lib.emails import group_request_email, group_confirmation_email
 
 log = logging.getLogger(__name__)
@@ -844,16 +847,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         """Invite new members to the group."""
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
-            #message = self.form_result['message']
-            #invited, invalid = make_email_invitations(emails, c.user, message)
-
-            #if invalid:
-            #    h.flash(_("Invalid email addresses: %(email_list)s") % \
-            #            dict(email_list=', '.join(invalid)))
-            #if invited:
-            #    h.flash(_("Invitations sent to %(email_list)s") % \
-            #            dict(email_list=', '.join(invited)))
-
             self._send_invitations(group, emails)
 
         if request.referrer:
@@ -914,22 +907,40 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     def _send_invitations(self, group, emails):
         count = 0
         failed = []
+        valid = []
         for line in emails:
             for email in filter(bool, line.split(',')):
                 try:
                     TranslatedEmailValidator.to_python(email)
                     email.encode('ascii')
-                    user = User.get(email, group.location.root)
-                    if user is not None and self._check_handshakes(group, user) == 'request':
-                        group.add_member(user)
-                        self._clear_requests(group, c.user)
-                        h.flash(_('New member %s added.') % user.fullname)
-                    else:
-                        count = count + 1
-                        group.invite_user(email, c.user)
+                    valid.append(email)
                 except (Invalid, UnicodeEncodeError):
                     failed.append(email)
-        if count > 0:
+
+        to_invite = []
+        for email in valid:
+            user = User.get(email, group.location.root)
+            if user is not None and self._check_handshakes(group, user) == 'request':
+                group.add_member(user)
+                self._clear_requests(group, c.user)
+                h.flash(_('New member %s added.') % user.fullname)
+            else:
+                to_invite.append(email)
+
+        invites, invalid, already = make_email_invitations(to_invite, c.user)
+
+        for invitee in invites:
+            # Adding email to group_invitation table.
+            invitation = group.create_pending_invitation(invitee.email, c.user)
+            send_group_invitation_for_non_user(invitation, invitee)
+
+        for email in already:
+            # Adding email to group_invitation table.
+            invitation = group.create_pending_invitation(email, c.user)
+            send_group_invitation_for_user(invitation, email)
+
+
+        if invites:
             h.flash(_("Users invited."))
         if failed != []:
             h.flash(_("Invalid email addresses detected: %s") % ', '.join(failed))

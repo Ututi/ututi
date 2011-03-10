@@ -490,7 +490,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         if hasattr(self, 'form_result'):
             emails = self.form_result['recipients'].split(',')
             message = self.form_result['message']
-            invites, invalid = make_email_invitations(emails, c.user)
+            invites, invalid, already = make_email_invitations(emails, c.user)
             for invitee in invites:
                 send_registration_invitation(invitee, c.user, message)
 
@@ -512,7 +512,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         if hasattr(self, 'form_result'):
             emails = self.form_result['recipients']
             message = self.form_result['message']
-            invites, invalid = make_email_invitations(emails, c.user)
+            invites, invalid, already = make_email_invitations(emails, c.user)
             for invitee in invites:
                 send_registration_invitation(invitee, c.user, message)
 

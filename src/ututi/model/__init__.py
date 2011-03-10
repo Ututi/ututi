@@ -37,7 +37,7 @@ from ututi.model.util import logo_property
 from ututi.model.i18n import Country
 from ututi.model import meta
 from ututi.lib.messaging import SMSMessage
-from ututi.lib.emails import group_invitation_email, group_space_bought_email
+from ututi.lib.emails import group_space_bought_email
 from ututi.lib.security import check_crowds
 from ututi.lib.group_payment_info import GroupPaymentInfo
 from ututi.lib.helpers import literal, link_to
@@ -1033,7 +1033,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
     def url(self, controller='group', action='index', **kwargs):
         return url(controller=controller, action=action, id=self.group_id, **kwargs)
 
-    def invite_user(self, email, author):
+    def create_pending_invitation(self, email, author):
         user = User.get(email, self.location.root)
         if user is None or not self.is_member(user):
             try:
@@ -1044,7 +1044,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
             except NoResultFound:
                 invitation = PendingInvitation(email, author=author, group=self)
                 meta.Session.add(invitation)
-            group_invitation_email(invitation, email)
+            #group_invitation_email(invitation, email)
             return invitation
         else:
             return None

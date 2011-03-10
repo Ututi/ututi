@@ -27,7 +27,7 @@ def make_email_invitations(emails, inviter):
                 meta.Session.commit()
                 invites.append(invitee)
 
-    return invites, invalid
+    return invites, invalid, already
 
 def make_facebook_invitations(fb_ids, inviter):
     already = []

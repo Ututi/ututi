@@ -15,4 +15,4 @@ The Ututi team
 """) % dict(author=invitation.author.fullname,
             group_title=invitation.group.title,
             group_url=invitation.group.url(qualified=True),
-            link=url(controller="home", action="register", hash=invitation.hash, qualified=True)))}
+            link=invitee.url(action='confirm_email', qualified=True)))}

@@ -721,10 +721,9 @@ class UserRegistration(object):
 
             if self.invited_emails:
                 emails = self.invited_emails.split(',')
-                invites, invalid = make_email_invitations(emails, self.user)
+                invites, invalid, already = make_email_invitations(emails, self.user)
                 for invitee in invites:
                     send_registration_invitation(invitee, self.user)
-
 
             if self.invited_fb_ids:
                 ids = map(int, self.invited_fb_ids.split(','))
