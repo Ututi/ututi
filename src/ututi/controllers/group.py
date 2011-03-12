@@ -847,7 +847,40 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         """Invite new members to the group."""
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
-            self._send_invitations(group, emails)
+            message = self.form_result['message']
+            valid = []
+            failed = []
+            for line in emails:
+                for email in filter(bool, line.split(',')):
+                    try:
+                        TranslatedEmailValidator.to_python(email)
+                        email.encode('ascii')
+                        valid.append(email)
+                    except (Invalid, UnicodeEncodeError):
+                        failed.append(email)
+
+            invites, invalid, already = make_email_invitations(valid, c.user)
+
+            for email in already:
+                user = User.get(email, group.location.root)
+                if self._check_handshakes(group, user) == 'request':
+                    # Automatically accept requests to become group member.
+                    group.add_member(user)
+                    self._clear_requests(group, c.user)
+                    h.flash(_('New member %s added.') % user.fullname)
+                else:
+                    invitation = group.create_pending_invitation(email, c.user)
+                    send_group_invitation_for_user(invitation, email)
+
+            for invitee in invites:
+                invitation = group.create_pending_invitation(invitee.email, c.user)
+                send_group_invitation_for_non_user(invitation, invitee)
+
+            if invites:
+                h.flash(_("Users invited."))
+            if failed != []:
+                h.flash(_("Invalid email addresses detected: %s") % ', '.join(failed))
+            meta.Session.commit()
 
         if request.referrer:
             redirect(request.referrer)
@@ -903,48 +936,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                  ).filter_by(group=group, user=user, active=True
                  ).first()
         return request is not None and 'request' or invitation is not None and 'invitation'
-
-    def _send_invitations(self, group, emails):
-        count = 0
-        failed = []
-        valid = []
-        for line in emails:
-            for email in filter(bool, line.split(',')):
-                try:
-                    TranslatedEmailValidator.to_python(email)
-                    email.encode('ascii')
-                    valid.append(email)
-                except (Invalid, UnicodeEncodeError):
-                    failed.append(email)
-
-        to_invite = []
-        for email in valid:
-            user = User.get(email, group.location.root)
-            if user is not None and self._check_handshakes(group, user) == 'request':
-                group.add_member(user)
-                self._clear_requests(group, c.user)
-                h.flash(_('New member %s added.') % user.fullname)
-            else:
-                to_invite.append(email)
-
-        invites, invalid, already = make_email_invitations(to_invite, c.user)
-
-        for invitee in invites:
-            # Adding email to group_invitation table.
-            invitation = group.create_pending_invitation(invitee.email, c.user)
-            send_group_invitation_for_non_user(invitation, invitee)
-
-        for email in already:
-            # Adding email to group_invitation table.
-            invitation = group.create_pending_invitation(email, c.user)
-            send_group_invitation_for_user(invitation, email)
-
-
-        if invites:
-            h.flash(_("Users invited."))
-        if failed != []:
-            h.flash(_("Invalid email addresses detected: %s") % ', '.join(failed))
-        meta.Session.commit()
 
     @validate(schema=GroupInvitationActionForm, post_only=False, on_get=True)
     @group_action
