@@ -40,7 +40,7 @@ def email_confirmation_request(user, email):
             msg = EmailMessage(_('Confirm the email for Ututi'), text, force=True)
             msg.send(email)
 
-def send_group_invitation_for_user(invitation, email):
+def send_group_invitation_for_user(invitation, email, message=None):
     """A method for handling user invitation to group emails."""
     from ututi.model import Email
     if invitation.user is not None:
@@ -48,17 +48,19 @@ def send_group_invitation_for_user(invitation, email):
         if email_instance.confirmed:
             #the user is already using ututi, send a message inviting him to join the group
             text = render('/emails/invitation_user.mako',
-                          extra_vars={'invitation': invitation})
+                          extra_vars={'invitation': invitation,
+                                      'message': message})
             msg = EmailMessage(_('Ututi group invitation'), text)
             msg.send(email_instance.user)
         #if the email is not confirmed, nothing will be sent for now
         #XXX: if the user has several emails, send the invitation to one that is confirmed
 
-def send_group_invitation_for_non_user(group_invitation, registration_invitation):
+def send_group_invitation_for_non_user(group_invitation, registration_invitation, message=None):
     """A method for handling user invitation to group emails for non users"""
     text = render('/emails/invitation_nonuser.mako',
                   extra_vars={'invitation': group_invitation,
-                              'invitee': registration_invitation})
+                              'invitee': registration_invitation,
+                              'message': message})
     msg = EmailMessage(_('Ututi group invitation'), text)
     msg.send(registration_invitation.email)
 

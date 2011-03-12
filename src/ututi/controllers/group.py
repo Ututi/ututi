@@ -935,11 +935,11 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                 h.flash(_('New member %s added.') % user.fullname)
             else:
                 invitation = group.create_pending_invitation(email, c.user)
-                send_group_invitation_for_user(invitation, email)
+                send_group_invitation_for_user(invitation, email, message)
 
         for invitee in invites:
             invitation = group.create_pending_invitation(invitee.email, c.user)
-            send_group_invitation_for_non_user(invitation, invitee)
+            send_group_invitation_for_non_user(invitation, invitee, message)
 
         if invites:
             h.flash(_("Users invited."))

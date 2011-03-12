@@ -1,6 +1,17 @@
-${h.literal(_(u"""Hi,
+%if message:
+${_('Hi')}
 
-Your friend %(author)s is using Ututi.lt, a portal for students, and
+${message}
+
+${_('You may join group %(group_title)s by following this link:') % dict(group_title=invitation.group.title)}
+${invitee.url(action='confirm_email', qualified=True)}
+
+--
+${invitation.author.fullname}
+%else:
+${h.literal(_(u"""Hello,
+
+Your friend %(author)s is using Ututi.com, academical social networtk, and
 wants to invite you to a group %(group_title)s (%(group_url)s).
 In Ututi you can find coursework, share files with other members of 
 the group and use the group forums.
@@ -16,3 +27,4 @@ The Ututi team
             group_title=invitation.group.title,
             group_url=invitation.group.url(qualified=True),
             link=invitee.url(action='confirm_email', qualified=True)))}
+%endif
