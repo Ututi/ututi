@@ -32,7 +32,6 @@ Let's try and invite a new member to the group.
 
 The user should be listed in the invited users table.
 
-    >>> browser.open('http://localhost/group/moderators/members')
     >>> browser.printQuery("//table[@class='group-invitations']/tr/td[@class='email']/text()")
     loser@ututi.lt
     user2@ututi.lt
@@ -41,9 +40,21 @@ The user should be listed in the invited users table.
     >>> len(mail_queue)
     3
 
-We need another member in the group, so let's join as the invited user.
+Send one more invitation using invitation portlet.
 
-    >>> msg1, msg2, msg3 = mail_queue
+    >>> browser.getLink('News feed').click()
+    >>> form = browser.getForm(id='invite-email-form')
+    >>> form.getControl(name='emails').value = 'onemore@ututi.lt'
+    >>> form.getControl('Send invitation').click()
+    >>> browser.printCssQuery('#invitation-feedback-message', strip=True)
+    <p>Your invitations were successfully sent.</p>
+
+    >>> len(mail_queue)
+    4
+
+We want check invitations so let's join as the invited user.
+
+    >>> msg1, msg2, msg3, msg4 = mail_queue
     >>> user = Browser.logIn("user@ututi.lt", "password")
 
 The user is accepting invitation from email by clicking on URL.
@@ -109,3 +120,4 @@ User must be in group 'Moderatoriai' so we will check this.
     >>> new_user.getLink('Moderatoriai', url='/group/moderators').click()
     >>> print new_user.url
     http://localhost/group/moderators/home
+

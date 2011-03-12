@@ -30,6 +30,7 @@ from ututi.lib.invitations import make_email_invitations, make_facebook_invitati
 from ututi.lib.search import _exclude_subjects
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render
+from ututi.lib.validators import js_validate
 from ututi.lib.validators import HtmlSanitizeValidator, TranslatedEmailValidator, LocationTagsValidator, TagsValidator, GroupCouponValidator, FileUploadTypeValidator, validate
 from ututi.lib.wall import WallMixin
 
@@ -38,6 +39,7 @@ from ututi.model import GroupCoupon
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
 from ututi.model import meta, Group, SimpleTag, Subject, PendingInvitation, PendingRequest
 from ututi.model.events import Event
+from ututi.controllers.profile.validators import FriendsInvitationJSForm
 from ututi.controllers.subject import SubjectAddMixin
 from ututi.controllers.subject import NewSubjectForm
 from ututi.controllers.search import SearchSubmit
@@ -859,33 +861,26 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                     except (Invalid, UnicodeEncodeError):
                         failed.append(email)
 
-            invites, invalid, already = make_email_invitations(valid, c.user)
+            self._send_group_invitations(group, valid)
 
-            for email in already:
-                user = User.get(email, group.location.root)
-                if self._check_handshakes(group, user) == 'request':
-                    # Automatically accept requests to become group member.
-                    group.add_member(user)
-                    self._clear_requests(group, c.user)
-                    h.flash(_('New member %s added.') % user.fullname)
-                else:
-                    invitation = group.create_pending_invitation(email, c.user)
-                    send_group_invitation_for_user(invitation, email)
-
-            for invitee in invites:
-                invitation = group.create_pending_invitation(invitee.email, c.user)
-                send_group_invitation_for_non_user(invitation, invitee)
-
-            if invites:
-                h.flash(_("Users invited."))
             if failed != []:
                 h.flash(_("Invalid email addresses detected: %s") % ', '.join(failed))
-            meta.Session.commit()
 
         if request.referrer:
             redirect(request.referrer)
         else:
             redirect(url(controller='group', action='home', id=group.group_id))
+
+    @group_action
+    @js_validate(schema=FriendsInvitationJSForm())
+    @jsonify
+    def invite_members_js(self, group):
+        if hasattr(self, 'form_result'):
+            emails = self.form_result['emails'].split(',')
+            message = self.form_result['message']
+            self._send_group_invitations(group, emails, message)
+
+        return {'success': True}
 
     @group_action
     @validate(schema=GroupInviteCancelForm, form='members')
@@ -927,6 +922,30 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                 ).all()
         for invitation in invitations:
             invitation.active = None
+
+    def _send_group_invitations(self, group, emails, message=None):
+        invites, invalid, already = make_email_invitations(emails, c.user)
+
+        for email in already:
+            user = User.get(email, group.location.root)
+            if self._check_handshakes(group, user) == 'request':
+                # Automatically accept requests to become group member.
+                group.add_member(user)
+                self._clear_requests(group, c.user)
+                h.flash(_('New member %s added.') % user.fullname)
+            else:
+                invitation = group.create_pending_invitation(email, c.user)
+                send_group_invitation_for_user(invitation, email)
+
+        for invitee in invites:
+            invitation = group.create_pending_invitation(invitee.email, c.user)
+            send_group_invitation_for_non_user(invitation, invitee)
+
+        if invites:
+            h.flash(_("Users invited."))
+        if invalid != []:
+            h.flash(_("Invalid email addresses detected: %s") % ', '.join(invalid))
+        meta.Session.commit()
 
     def _check_handshakes(self, group, user):
         """Check if the user already has a request to join the group or an invitation."""

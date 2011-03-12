@@ -188,8 +188,8 @@
     </ul>
 
     <div id="invite-email-dialog">
-      <form action="${url(controller='group', action='invite_members')}" method="POST" class="new-style-form" id="invite-email-form">
-        ${h.input_line('recipients', _("Recipients:"),
+      <form action="${url(controller='group', action='invite_members', id=c.group.group_id)}" method="POST" class="new-style-form" id="invite-email-form">
+        ${h.input_line('emails', _("Recipients:"),
                        help_text=_("Enter comma separated list of email addresses"))}
         ${h.input_area('message', _("Add personal message (optional):"))}
         ${h.input_submit(_("Send invitation"), id='invite-submit-button', class_='dark')}
@@ -216,7 +216,7 @@
         });
 
         $('#invite-submit-button').click(function(){
-            $.post("${url(controller='profile', action='invite_friends_email_js')}",
+            $.post("${url(controller='group', action='invite_members_js', id=c.group.group_id)}",
                    $(this).closest('form').serialize(),
                    function(data, status) {
                        if (data.success != true) {
@@ -234,7 +234,7 @@
                                $(this).dialog('close');
                                $(this).removeClass('email-sent');
                                $('.error-message').remove();
-                               $(this).find('#recipients').val('');
+                               $(this).find('#emails').val('');
                                $(this).dequeue();
                            });
                        }
