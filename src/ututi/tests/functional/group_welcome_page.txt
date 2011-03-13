@@ -84,8 +84,9 @@ disappear:
 
     >>> browser.getControl('Invite friends').click()
     >>> emails = 'user@ututi.lt'
-    >>> browser.getControl(name='emails').value = emails
-    >>> browser.getControl('Invite').click()
+    >>> form = browser.getForm(id='member_invitation_form')
+    >>> form.getControl(name='emails').value = emails
+    >>> form.getControl('Invite').click()
 
 When we go back to what's new, we only see the watch more subjects
 box:

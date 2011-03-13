@@ -26,9 +26,11 @@ from sqlalchemy.sql.expression import or_
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_logo
+from ututi.lib.invitations import make_email_invitations, make_facebook_invitations
 from ututi.lib.search import _exclude_subjects
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render
+from ututi.lib.validators import js_validate
 from ututi.lib.validators import HtmlSanitizeValidator, TranslatedEmailValidator, LocationTagsValidator, TagsValidator, GroupCouponValidator, FileUploadTypeValidator, validate
 from ututi.lib.wall import WallMixin
 
@@ -37,6 +39,7 @@ from ututi.model import GroupCoupon
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
 from ututi.model import meta, Group, SimpleTag, Subject, PendingInvitation, PendingRequest
 from ututi.model.events import Event
+from ututi.controllers.profile.validators import FriendsInvitationJSForm
 from ututi.controllers.subject import SubjectAddMixin
 from ututi.controllers.subject import NewSubjectForm
 from ututi.controllers.search import SearchSubmit
@@ -44,6 +47,9 @@ from ututi.lib.security import bot_protect
 from ututi.lib.security import is_root, check_crowds, deny
 from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
+from ututi.lib.emails import send_group_invitation_for_user
+from ututi.lib.emails import send_group_invitation_for_non_user
+from ututi.lib.emails import send_registration_invitation
 from ututi.lib.emails import group_request_email, group_confirmation_email
 
 log = logging.getLogger(__name__)
@@ -183,28 +189,34 @@ class GroupPageForm(Schema):
 
 class GroupInvitationActionForm(Schema):
     allow_extra_fields = True
-    action = validators.OneOf(['accept', 'reject'])
-    came_from = validators.URL(require_tld=False, )
+    accept = validators.OneOf(['True', 'False'])
+    came_from = validators.URL(require_tld=False, not_empty=False, if_missing='')
+
 
 class GroupRequestActionForm(Schema):
     allow_extra_fields = True
     action = validators.OneOf(['confirm', 'deny'])
     hash_code = validators.String(strip=True)
 
+
 class GroupMemberUpdateForm(Schema):
     allow_extra_fields = True
     role = validators.OneOf(['administrator', 'member', 'not-member'])
     user_id = validators.Int()
 
+
 class GroupInviteForm(Schema):
     """A schema for validating group member invitations"""
     allow_extra_fields = True
     emails = validators.UnicodeString(not_empty=False)
+    message = validators.UnicodeString(not_empty=False, if_missing='')
+
 
 class GroupInviteCancelForm(Schema):
     """A schema for validating group member invitations"""
     allow_extra_fields = True
     email = validators.UnicodeString(not_empty=False)
+
 
 def group_action(method):
     def _group_action(self, id=None):
@@ -318,6 +330,8 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
 
     @group_action
     def home(self, group):
+        if not c.user:
+            abort(404);
         if check_crowds(["member", "admin"]):
             if request.params.get('do_not_watch'):
                 group.wants_to_watch_subjects = False
@@ -829,8 +843,38 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         """Invite new members to the group."""
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
-            self._send_invitations(group, emails)
-        redirect(url(controller='group', action='members', id=group.group_id))
+            message = self.form_result['message']
+            valid = []
+            failed = []
+            for line in emails:
+                for email in filter(bool, line.split(',')):
+                    try:
+                        TranslatedEmailValidator.to_python(email)
+                        email.encode('ascii')
+                        valid.append(email)
+                    except (Invalid, UnicodeEncodeError):
+                        failed.append(email)
+
+            self._send_group_invitations(group, valid)
+
+            if failed != []:
+                h.flash(_("Invalid email addresses detected: %s") % ', '.join(failed))
+
+        if request.referrer:
+            redirect(request.referrer)
+        else:
+            redirect(url(controller='group', action='home', id=group.group_id))
+
+    @group_action
+    @js_validate(schema=FriendsInvitationJSForm())
+    @jsonify
+    def invite_members_js(self, group):
+        if hasattr(self, 'form_result'):
+            emails = self.form_result['emails'].split(',')
+            message = self.form_result['message']
+            self._send_group_invitations(group, emails, message)
+
+        return {'success': True}
 
     @group_action
     @validate(schema=GroupInviteCancelForm, form='members')
@@ -854,7 +898,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     def invite_members_step(self, group):
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
-            self._send_invitations(group, emails)
+            self._send_group_invitations(group, emails)
             if self.form_result.get('final_submit', None) is not None:
                 redirect(group.url(action='welcome'))
             else:
@@ -873,6 +917,30 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         for invitation in invitations:
             invitation.active = None
 
+    def _send_group_invitations(self, group, emails, message=None):
+        invites, invalid, already = make_email_invitations(emails, c.user)
+
+        for email in already:
+            user = User.get(email, group.location.root)
+            if self._check_handshakes(group, user) == 'request':
+                # Automatically accept requests to become group member.
+                group.add_member(user)
+                self._clear_requests(group, c.user)
+                h.flash(_('New member %s added.') % user.fullname)
+            else:
+                invitation = group.create_pending_invitation(email, c.user)
+                send_group_invitation_for_user(invitation, email, message)
+
+        for invitee in invites:
+            invitation = group.create_pending_invitation(invitee.email, c.user)
+            send_group_invitation_for_non_user(invitation, invitee, message)
+
+        if invites:
+            h.flash(_("Users invited."))
+        if invalid != []:
+            h.flash(_("Invalid email addresses detected: %s") % ', '.join(invalid))
+        meta.Session.commit()
+
     def _check_handshakes(self, group, user):
         """Check if the user already has a request to join the group or an invitation."""
         request = meta.Session.query(PendingRequest
@@ -882,31 +950,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                  ).first()
         return request is not None and 'request' or invitation is not None and 'invitation'
 
-    def _send_invitations(self, group, emails):
-        count = 0
-        failed = []
-        for line in emails:
-            for email in filter(bool, line.split(',')):
-                try:
-                    TranslatedEmailValidator.to_python(email)
-                    email.encode('ascii')
-                    user = User.get(email, group.location.root)
-                    if user is not None and self._check_handshakes(group, user) == 'request':
-                        group.add_member(user)
-                        self._clear_requests(group, c.user)
-                        h.flash(_('New member %s added.') % user.fullname)
-                    else:
-                        count = count + 1
-                        group.invite_user(email, c.user)
-                except (Invalid, UnicodeEncodeError):
-                    failed.append(email)
-        if count > 0:
-            h.flash(_("Users invited."))
-        if failed != []:
-            h.flash(_("Invalid email addresses detected: %s") % ', '.join(failed))
-        meta.Session.commit()
-
-    @validate(schema=GroupInvitationActionForm)
+    @validate(schema=GroupInvitationActionForm, post_only=False, on_get=True)
     @group_action
     def invitation(self, group):
         """Act on the invitation of the current user to this group."""
@@ -914,8 +958,9 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             invitations = meta.Session.query(PendingInvitation
                             ).filter_by(group=group, user=c.user, active=True
                             ).all()
+
             if invitations:
-                if self.form_result.get('action', '') == 'accept':
+                if self.form_result.get('accept', '') == 'True':
                     group.add_member(c.user)
                     if c.user.location is None:
                         c.user.location = group.location

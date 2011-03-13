@@ -66,7 +66,7 @@
               id="${invitation.group.group_id}_invitation_reject"
               class="inline-form">
           <div style="display: inline;">
-            <input type="hidden" name="action" value="reject"/>
+            <input type="hidden" name="accept" value="False"/>
             <input type="hidden" name="came_from" value="${request.url}"/>
             ${h.input_submit(_('Reject'))}
           </div>
@@ -76,7 +76,7 @@
               id="${invitation.group.group_id}_invitation_accept"
               class="inline-form">
           <div style="display: inline;">
-            <input type="hidden" name="action" value="accept"/>
+            <input type="hidden" name="accept" value="True"/>
             <input type="hidden" name="came_from" value="${request.url}"/>
             ${h.input_submit(_('Accept'))}
           </div>

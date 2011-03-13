@@ -17,16 +17,6 @@
         %endif
       </a>
     </li>
-    %if c.user.memberships:
-    <li class="icon-group">
-      ${_("My groups:")}
-      <ul>
-        %for group in c.user.groups:
-        <li> ${h.object_link(group)} </li>
-        %endfor
-      </ul>
-    </li>
-    %endif
   </ul>
   </%self:portlet>
 </%def>

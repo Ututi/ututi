@@ -1,6 +1,14 @@
 %if message:
-${"%s\n---\n\n" % message}
-%endif
+${_('Hello!')}
+
+${message}
+
+${_('If you would like to join Ututi now, please follow this link:')}
+${registration.url(action='confirm_email', qualified=True)}
+
+--
+${inviter.fullname}
+%else:
 ${_('Hello!')}
 
 ${_('%(user_name)s has been using Ututi, a portal for students, for some time now and recommends you to try it.') % dict(user_name=inviter.fullname)}
@@ -11,4 +19,6 @@ storing lecture notes, sharing files and communicating with your classmates much
 ${_('If you would like to join Ututi now, please follow this link:')}
 ${registration.url(action='confirm_email', qualified=True)}
 
+--
 ${_('The Ututi team')}
+%endif

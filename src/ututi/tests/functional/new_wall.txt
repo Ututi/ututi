@@ -137,6 +137,7 @@ does not resubmit the form.)
 See how replying to an older thread lifts it in the wall. To test that,
 we will ask third user to reply to the private message:
 
+    >>> user3.open(user3.url)
     >>> form = user3.getForm(name='reply-form', index=1)
     >>> form.getControl(name='message').value = 'Private message reply 2'
     >>> form.getControl("Send reply").click()
@@ -177,6 +178,7 @@ To test forum post threading we will use the group will forum enabled:
 
 User can immediately reply to this forum thread from his wall:
 
+    >>> admin.open(admin.url)
     >>> form = admin.getForm(name='reply-form', index=0)
     >>> form.getControl(name='message').value = 'Forum post reply'
     >>> form.getControl("Send reply").click()

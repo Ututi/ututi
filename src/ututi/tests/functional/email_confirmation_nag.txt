@@ -25,7 +25,7 @@ Test nagging users to confirm their emails
    <span class="close-link hide-parent">
      <img alt="Close" src="/images/details/icon_delete.png" />
    </span>
-   <span>Confirmation message sent. Please check your email.</span>
+   <span class="flash-message-content">Confirmation message sent. Please check your email.</span>
    <span class="close-link hide-parent">
      <img alt="Close" src="/images/details/icon_delete.png" />
    </span>

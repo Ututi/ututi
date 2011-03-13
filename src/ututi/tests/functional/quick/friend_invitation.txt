@@ -27,6 +27,7 @@ There should be a portlet with a form that let's us enter email addresses the re
    If you would like to join Ututi now, please follow this link:
    http://localhost/registration/.../confirm
    <BLANKLINE>
+   --
    The Ututi team
    <BLANKLINE>
 
@@ -38,6 +39,7 @@ And after all this we are redirected back to where we came from.
    'http://localhost/home/feed'
 
 Plus, a status message is displayed:
+
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
    Invitations sent to somenewuser@example.com
 
@@ -45,25 +47,23 @@ Plus, a status message is displayed:
 
 User can add personal message to the invitation that is sent:
 
+   >>> browser.open('http://localhost/home/feed')
    >>> form = browser.getForm(id='invite-email-form')
    >>> form.getControl('Recipients:').value = 'someotheruser@example.com'
    >>> form.getControl('Add personal message (optional):').value = 'Hey, come and try Ututi. I found it rather nice.'
    >>> form.getControl('Send invitation').click()
+
    >>> printEmails()
    ['someotheruser@example.com']
-   Hey, come and try Ututi. I found it rather nice.
-   ---
-   <BLANKLINE>
    Hello!
    <BLANKLINE>
-   Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.
-   <BLANKLINE>
-   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
+   Hey, come and try Ututi. I found it rather nice.
    <BLANKLINE>
    If you would like to join Ututi now, please follow this link:
    http://localhost/registration/.../confirm
    <BLANKLINE>
-   The Ututi team
+   --
+   Administrator of the university
    <BLANKLINE>
 
    >>> mail_queue[:] = []
@@ -80,6 +80,7 @@ Plus, a status message is displayed:
 -----------------------------------
 What if some of the emails were mistyped?
 
+   >>> browser.open(browser.url)
    >>> form = browser.getForm(id='invite-email-form')
    >>> form.getControl('Recipients:').value = 'someneweruser@example.com, abra, bram /n, user@example.com'
    >>> form.getControl('Send invitation').click()
@@ -97,6 +98,7 @@ What if some of the emails were mistyped?
    If you would like to join Ututi now, please follow this link:
    http://localhost/registration/.../confirm
    <BLANKLINE>
+   --
    The Ututi team
    <BLANKLINE>
    ['user@example.com']
@@ -109,6 +111,7 @@ What if some of the emails were mistyped?
    If you would like to join Ututi now, please follow this link:
    http://localhost/registration/.../confirm
    <BLANKLINE>
+   --
    The Ututi team
    <BLANKLINE>
 
@@ -120,6 +123,8 @@ What if some of the emails were mistyped?
 
 -------------------------
 What if some of the emails belong to people already using ututi?
+
+   >>> browser.open(browser.url)
    >>> form = browser.getForm(id='invite-email-form')
    >>> form.getControl('Recipients:').value = 'admin@uni.ututi.com'
    >>> form.getControl('Send invitation').click()

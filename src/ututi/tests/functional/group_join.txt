@@ -1,71 +1,23 @@
-Joining a group (for anonymous users)
-=====================================
-
-Anonymous users are shown the button to join a group. After clicking on it,
-they are urged to register, which automatically fulfills their wish to
-request group membership.
-
-   >>> browser = Browser()
-   >>> browser.open('http://localhost/group/moderators')
-   >>> browser.url
-   'http://localhost/group/moderators/home'
-
-   >>> browser.getControl('become a member').click()
-   >>> browser.url
-   'http://localhost/school/vu/login'
-
-#  TODO: recover this behavior:
-#
-#   >>> form = browser.getForm('join_registration_form')
-#   >>> form.getControl('Full name').value = 'Jonas Petraitis Petrauskas'
-#   >>> form.getControl('Email').value = 'jonas@example.com'
-#   >>> form.getControl('Password').value = 'asdfgh'
-#   >>> form.getControl('Repeat password').value = 'asdfgh'
-#   >>> form.getControl(name='agree').value = True
-#   >>> form.getControl('Register').click()
-#
-#   >>> browser.url
-#   'http://localhost/group/moderators/home'
-#
-#   >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-#   Your request to join the group has been forwarded to the group's administrators. Thanks!
-#   Your email
-#   (jonas@example.com) is not confirmed! Please confirm your email by clicking on the link sent to your address or
-
 Joining a public group
 ======================
 
 If a group is public, administrators do not have to approve new members.
 
-    >>> abrowser = Browser.logIn()
+    >>> browser = Browser.logIn()
 
 Let's add a new group:
 
-    >>> abrowser.getLink('Create new group').click()
-    >>> abrowser.getControl('Group e-mail address').value = 'test'
-    >>> abrowser.getControl('Group title').value = 'Test group'
-    >>> abrowser.getControl('Continue').click()
+    >>> browser.getLink('Create new group').click()
+    >>> browser.getControl('Group e-mail address').value = 'test'
+    >>> browser.getControl('Group title').value = 'Test group'
+    >>> browser.getControl('Continue').click()
 
 We won't invite anyone for now:
 
-    >>> abrowser.getControl('Finish').click()
+    >>> browser.getControl('Finish').click()
 
 Now, let's go to group settings and make the group public:
 
-    >>> abrowser.getLink('Edit').click()
-    >>> abrowser.getControl('Anyone can join the group any time').click()
-    >>> abrowser.getControl('Save').click()
-
-# Now, the previous user comes over and tries to join:
-#
-#     >>> browser.open('http://localhost/group/test')
-#     >>> browser.getControl('become a member').click()
-#
-# We're in the group.  For example, we can see the group's files now:
-#
-#     >>> browser.getLink('Files')
-#     <Link text='Files' url='http://localhost/group/test/files'>
-#
-#
-#     >>> from ututi.lib.mailer import mail_queue
-#     >>> mail_queue[:] = []
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl('Anyone can join the group any time').click()
+    >>> browser.getControl('Save').click()

@@ -17,8 +17,9 @@ automatically:
 
     >>> browser.getLink('Mailing List').click()
     >>> browser.getControl('Moderation queue (2)').click()
-    >>> browser.getControl('Email:').value = 'varlius@example.com'
-    >>> browser.getControl('Add').click()
+    >>> form = browser.getForm(id='whitelist_email_form')
+    >>> form.getControl('Email:').value = 'varlius@example.com'
+    >>> form.getControl('Add').click()
 
 The new item should be in the list:
 
@@ -28,8 +29,9 @@ The new item should be in the list:
 If the new item is not a valid email address we should get an error,
 and the emails list should not get modified:
 
-    >>> browser.getControl('Email:').value = 'varliusexample.com'
-    >>> browser.getControl('Add').click()
+    >>> form = browser.getForm(id='whitelist_email_form')
+    >>> form.getControl('Email:').value = 'varliusexample.com'
+    >>> form.getControl('Add').click()
 
     >>> browser.printCssQuery('.group-whitelist .email a')
     <a href="mailto:varlius@example.com">varlius@example.com</a>
@@ -44,8 +46,9 @@ and the emails list should not get modified:
 If we try adding an email that is in the list already, nothing
 happens (maybe we should still highligth the item added?):
 
-    >>> browser.getControl('Email:').value = 'varlius@example.com'
-    >>> browser.getControl('Add').click()
+    >>> form = browser.getForm(id='whitelist_email_form')
+    >>> form.getControl('Email:').value = 'varlius@example.com'
+    >>> form.getControl('Add').click()
 
     >>> browser.printCssQuery('.group-whitelist .email a')
     <a href="mailto:varlius@example.com">varlius@example.com</a>

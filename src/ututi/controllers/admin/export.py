@@ -134,9 +134,9 @@ class UniversityExportMixin(object):
                                     str(user.profile_is_public),
                                     user.hidden_blocks,
                                     user.ignored_events,
-                                    user.user_type,
-                                    user.teacher_position,
-                                    str(user.teacher_verified),
+                                    user.type,
+                                    getattr(user, "teacher_position", None),
+                                    str(getattr(user, "teacher_verified", None)),
                                     ])
                 if user.logo:
                     zf.writestr('user_logos/%s.png' % user.emails[0].email, prepare_image(user.logo))

@@ -34,9 +34,10 @@ There should be a default category, 'General':
 Let's start a thread:
 
     >>> browser.getControl('New topic').click()
-    >>> browser.getControl(name='title').value = "What's up?"
-    >>> browser.getControl(name='message').value = "How's everybody doin'?"
-    >>> browser.getControl('Post').click()
+    >>> form = browser.getForm(id='group_add_form')
+    >>> form.getControl(name='title').value = "What's up?"
+    >>> form.getControl(name='message').value = "How's everybody doin'?"
+    >>> form.getControl('Post').click()
 
 Let's post a reply:
     >>> browser2 = Browser.logIn('user3@ututi.lt', 'password')
@@ -64,7 +65,8 @@ A notification to subscribed group members has been sent by email:
 
 And we'll post a reply:
 
-    >>> browser.getControl(name='message').value = 'Not too bad!'
+    >>> form = browser.getForm(id='forum_reply_form')
+    >>> form.getControl(name='message').value = 'Not too bad!'
     >>> browser.getForm(id="forum_reply_form").submit()
 
 We can see the messages we posted:
@@ -98,8 +100,9 @@ Let's invite a few more members for testing:
 
     >>> browser.open('http://localhost/group/moderators/members')
     >>> emails = 'user@ututi.lt, user2@ututi.lt'
-    >>> browser.getControl(name='emails').value = emails
-    >>> browser.getControl('Invite').click()
+    >>> form = browser.getForm(id='member_invitation_form')
+    >>> form.getControl(name='emails').value = emails
+    >>> form.getControl('Invite').click()
 
 Drop the email invitations, those are not interesting:
 
@@ -107,36 +110,37 @@ Drop the email invitations, those are not interesting:
 
 Excellent. Now log in as one of the users:
 
-    >>> ubrowser = Browser.logIn('user@ututi.lt', 'password')
+    >>> user = Browser.logIn('user@ututi.lt', 'password')
 
 Accept the group invitation
 
-    >>> ubrowser.getControl('Accept').click()
-    >>> ubrowser.getLink('Moderatoriai', url='/group/moderators').click()
-    >>> ubrowser.getLink('Forum').click()
+    >>> user.getControl('Accept').click()
+    >>> user.getLink('Moderatoriai', url='/group/moderators').click()
+    >>> user.getLink('Forum').click()
 
 We see the thread the admin has posted:
 
-    >>> ubrowser.printQuery('//a[@class="post-title"]')
+    >>> user.printQuery('//a[@class="post-title"]')
     <a href="/group/moderators/forum/.../thread/..." class="post-title">What's up?</a>
 
 Let's look into it:
 
-    >>> ubrowser.getLink("What's up?").click()
+    >>> user.getLink("What's up?").click()
 
 We could subscribe to email updates:
 
-    >>> ubrowser.getControl('Subscribe to emails')
+    >>> user.getControl('Subscribe to emails')
     <SubmitControl name=None type='submitbutton'>
 
 Let's post a reply:
 
-    >>> ubrowser.getControl(name='message').value = 'I agree!'
-    >>> ubrowser.getForm(id="forum_reply_form").submit()
+    >>> form = user.getForm(id='forum_reply_form')
+    >>> form.getControl(name='message').value = 'I agree!'
+    >>> user.getForm(id="forum_reply_form").submit()
 
 By the act of replying, we were automatically subscribed:
 
-    >>> ubrowser.getControl('Unsubscribe from emails')
+    >>> user.getControl('Unsubscribe from emails')
     <SubmitControl name=None type='submitbutton'>
 
 The resulting email notification was sent to the admin user and not to us:
@@ -149,7 +153,8 @@ Now, if, say, the admin posts a message, we will receive an email:
 
     >>> browser.getLink('Forum').click()
     >>> browser.getLink("What's up?").click()
-    >>> browser.getControl(name='message').value = 'Indeed!'
+    >>> form = browser.getForm(id='forum_reply_form')
+    >>> form.getControl(name='message').value = 'Indeed!'
     >>> browser.getForm(id="forum_reply_form").submit()
 
     >>> msg = mail_queue.pop()
@@ -158,12 +163,13 @@ Now, if, say, the admin posts a message, we will receive an email:
 
 Let's unsubscribe from emails.
 
-    >>> ubrowser.getControl('Unsubscribe from emails').click()
+    >>> user.getControl('Unsubscribe from emails').click()
 
 Now any further replies will not be sent to us.
 
-    >>> ubrowser.getControl(name='message').value = 'Right!'
-    >>> ubrowser.getForm(id="forum_reply_form").submit()
+    >>> form = user.getForm(id='forum_reply_form')
+    >>> form.getControl(name='message').value = 'Right!'
+    >>> user.getForm(id="forum_reply_form").submit()
 
     >>> mail_queue.pop()
     <EmailInfo sender='info@ututi.lt' recipients=['admin@uni.ututi.com']>
@@ -171,7 +177,7 @@ Now any further replies will not be sent to us.
 Since we unsubscribed explicitly, we will not be automatically resubscribed
 again:
 
-    >>> ubrowser.getControl('Subscribe to emails')
+    >>> user.getControl('Subscribe to emails')
     <SubmitControl name=None type='submitbutton'>
 
 Forum-wide subscriptions
@@ -180,13 +186,13 @@ Forum-wide subscriptions
 We can subscribe to the entire forum. Then we will be automatically
 subscribed to any new threads:
 
-    >>> ubrowser.getLink('Back to the topic list').click()
+    >>> user.getLink('Back to the topic list').click()
 
-    ## >>> ubrowser.getControl('Get email').click()
+    ## >>> user.getControl('Get email').click()
 
 (Because of a TestBrowser bug, we have to do this by hand.)
 
-    >>> action_url = ubrowser.getControl('Get email').mech_form.action
+    >>> action_url = user.getControl('Get email').mech_form.action
     >>> res = app.post("/login",
     ...                params={'login': 'user@ututi.lt', 'password': 'password'})
     >>> res = app.post(action_url)
@@ -196,9 +202,10 @@ Now, the admin creates another thread:
     >>> browser.getLink('Back to the topic list').click()
 
     >>> browser.getControl('New topic').click()
-    >>> browser.getControl(name='title').value = "Some news"
-    >>> browser.getControl(name='message').value = "Notice this?"
-    >>> browser.getControl('Post').click()
+    >>> form = browser.getForm(id='group_add_form')
+    >>> form.getControl(name='title').value = "Some news"
+    >>> form.getControl(name='message').value = "Notice this?"
+    >>> form.getControl('Post').click()
 
 And the user is automatically subscribed to it:
 

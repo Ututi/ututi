@@ -15,7 +15,8 @@ from datetime import datetime
 from ututi.model.util import logo_property, read_facebook_logo
 from ututi.model import meta
 from ututi.lib.helpers import image
-from ututi.lib.emails import send_email_confirmation_code
+from ututi.lib.emails import send_email_confirmation_code, send_registration_invitation
+
 
 from pylons.i18n import _
 from pylons import config
@@ -104,7 +105,7 @@ class User(Author):
     def change_type(self, type, **kwargs):
         from ututi.model import authors_table
         conn = meta.engine.connect()
-        upd = authors_table.update().where(authors_table.c.id==self.id).values(user_type=type, **kwargs)
+        upd = authors_table.update().where(authors_table.c.id==self.id).values(type=type, **kwargs)
         conn.execute(upd)
 
     @property
@@ -731,7 +732,9 @@ class UserRegistration(object):
 
             if self.invited_emails:
                 emails = self.invited_emails.split(',')
-                make_email_invitations(emails, self.user)
+                invites, invalid, already = make_email_invitations(emails, self.user)
+                for invitee in invites:
+                    send_registration_invitation(invitee, self.user)
 
             if self.invited_fb_ids:
                 ids = map(int, self.invited_fb_ids.split(','))
