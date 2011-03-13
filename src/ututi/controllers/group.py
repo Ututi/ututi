@@ -904,7 +904,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     def invite_members_step(self, group):
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
-            self._send_invitations(group, emails)
+            self._send_group_invitations(group, emails)
             if self.form_result.get('final_submit', None) is not None:
                 redirect(group.url(action='welcome'))
             else:

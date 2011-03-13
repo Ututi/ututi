@@ -100,8 +100,9 @@ Let's invite a few more members for testing:
 
     >>> browser.open('http://localhost/group/moderators/members')
     >>> emails = 'user@ututi.lt, user2@ututi.lt'
-    >>> browser.getControl(name='emails').value = emails
-    >>> browser.getControl('Invite').click()
+    >>> form = browser.getForm(id='member_invitation_form')
+    >>> form.getControl(name='emails').value = emails
+    >>> form.getControl('Invite').click()
 
 Drop the email invitations, those are not interesting:
 
