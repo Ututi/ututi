@@ -367,8 +367,6 @@ class HomeController(UniversityListMixin, FederationMixin):
                     c.header = _('Invalid invitation!')
                     c.message = _('The invitation link you have followed was either already used or invalid.')
                 return render('/login.mako')
-
-            self._get_unis()
             return render('/login.mako')
 
     def _pswrecovery_form(self):
