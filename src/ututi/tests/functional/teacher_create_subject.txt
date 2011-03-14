@@ -9,12 +9,6 @@ We click the big button to create the first subject:
 
     >>> browser.getControl('add courses').click()
 
-Observe that the page doesn't show "Lecturer's" field.
-Instead, a hidden value with teacher's name is silently submitted:
-
-    >>> browser.getControl(name="lecturer").value
-    'Benas'
-
 The teacher has been assigned to default location (U-niversity),
 so so location fields are prefilled:
 
@@ -24,12 +18,24 @@ so so location fields are prefilled:
     >>> browser.getControl('Department:').value
     ''
 
-Let's fill out the form to create the subject:
+Let's enter subject's location and title, and continue the wizard:
 
     >>> browser.getControl('University:').value = 'Vilniaus universitetas'
     >>> browser.getControl('Department:').value = 'Ekonomikos fakultetas'
     >>> browser.getControl('Subject title:').value = 'Math'
-    >>> browser.getControl('Create subject').click()
+    >>> browser.getControl('Next').click()
+    >>> browser.url
+    'http://localhost/subjects/add_description'
+
+Observe that the page doesn't show "Lecturer's" field.
+Instead, a hidden value with teacher's name is silently submitted:
+
+    >>> browser.getControl(name="lecturer").value
+    'Benas'
+
+Let's finish the wizard and create the subject:
+
+    >>> browser.getControl('Create').click()
     >>> print browser.url
     http://localhost/subject/vu/ef/math
 
@@ -70,7 +76,8 @@ This time both location fields will be prefilled by default
 Let's fill out the form to create the subject:
 
     >>> browser.getControl('Subject title:').value = 'Literature'
-    >>> browser.getControl('Create subject').click()
+    >>> browser.getControl('Next').click()
+    >>> browser.getControl('Create').click()
     >>> print browser.url
     http://localhost/subject/vu/ef/literature
 

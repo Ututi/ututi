@@ -11,7 +11,8 @@ Create one subject
 
     >>> browser.getControl(name='location-0').value = 'uni'
     >>> browser.getControl('Subject title:').value = 'Math'
-    >>> browser.getControl('Create subject').click()
+    >>> browser.getControl('Next').click()
+    >>> browser.getControl('Create').click()
 
 Test
 ----
@@ -23,8 +24,9 @@ Subjects can be tagged upon creation or when being edited.
     >>> browser.getControl(name='location-0').value = 'uni'
     >>> browser.getControl(name='location-1').value = 'dep'
     >>> browser.getControl('Subject title:').value = 'Math'
+    >>> browser.getControl('Next').click()
     >>> browser.getControl('Tags:').value = 'tag1, tag2, tag 3'
-    >>> browser.getControl('Create subject').click()
+    >>> browser.getControl('Create').click()
 
     >>> browser.url
     'http://localhost/subject/uni/dep/math'
