@@ -265,6 +265,8 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
             redirect(url(controller='subject', action='add'))
 
         defaults = dict(title=session['subject_title'])
+        if c.user.is_teacher:
+            defaults['lecturer'] = c.user.fullname
         location = LocationTag.get(session['subject_location_id'])
         tags = dict([('location-%d' % n, tag)
                     for n, tag in enumerate(location.hierarchy())])
