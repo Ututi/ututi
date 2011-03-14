@@ -90,30 +90,48 @@ The subject's portlet contains a link that can be used to start watching the sub
     The subject has been added to your watched subjects list.
 
 If we click the link again, we stop watching the subject
-We can add a subject at the url /subject/add
 
     >>> browser.getControl('Remove from my subjects').click()
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     The subject has been removed from your watched subjects list.
 
-    And the button's action turns into 'watch subject' again
+And the button's action turns into 'Add to my subjects' again:
+
     >>> browser.getControl('Add to my subjects')
     <SubmitControl name=None type='submitbutton'>
 
+We can add a subject using the wizard at the url /subject/add:
+
     >>> browser.open('http://localhost/subjects/add')
     >>> browser.getControl(name='location-0').value = 'vu'
     >>> browser.getControl('Subject title:').value = 'Test subject'
-    >>> browser.getControl('Create subject').click()
+    >>> browser.getControl('Next').click()
+    >>> print browser.url
+    http://localhost/subjects/add_description
+    >>> browser.getControl('Create').click()
     >>> print browser.url
     http://localhost/subject/vu/test_subject
 
-The id is checked for uniqueness.
+Ututi tries to prevent creation of duplicate subjects:
 
     >>> browser.open('http://localhost/subjects/add')
     >>> browser.getControl(name='location-0').value = 'vu'
     >>> browser.getControl('Subject title:').value = 'Test subject'
+    >>> browser.getControl('Next').click()
+    >>> print browser.url
+    http://localhost/subjects/lookup
+    >>> browser.printCssQuery('p.warning', strip=True)
+    <p>Please check that your subject is not in the list below.</p>
+    >>> browser.printCssQuery('.search-results-container .item-title a', strip=True)
+    <a>Test subject</a>
+
+User can create the subject anyway. Subject id is always checked for uniqueness.
+
+    >>> browser.getControl('Next').click()
+    >>> print browser.url
+    http://localhost/subjects/add_description?
     >>> browser.getControl('Lecturer:').value = 'Some guy'
-    >>> browser.getControl('Create subject').click()
+    >>> browser.getControl('Create').click()
     >>> print browser.url
     http://localhost/subject/vu/test_subject-some_guy
 
@@ -133,9 +151,16 @@ When creating a subject, the user can select to watch it:
 
     >>> browser.getControl(name='location-0').value = 'vu'
     >>> browser.getControl('Subject title:').value = 'Testing subject'
+    >>> browser.getControl('Next').click()
+    >>> print browser.url
+    http://localhost/subjects/lookup
+    >>> browser.printCssQuery('.search-results-container .item-title a', strip=True)
+    <a>Test subject</a>
+    <a>Test subject</a>
+    >>> browser.getControl('Next').click()
     >>> browser.getControl('Lecturer:').value = 'Some guy'
-    >>> browser.getControl('Start watching this subject personally').selected = True
-    >>> browser.getControl('Create subject').click()
+    >>> browser.getControl('I want to follow this subject').selected = True
+    >>> browser.getControl('Create').click()
     >>> print browser.url
     http://localhost/subject/vu/testing_subject
 
@@ -155,8 +180,7 @@ Subject names with parentheses should not cause problems:
 
     >>> browser.getControl(name='location-0').value = 'vu'
     >>> browser.getControl('Subject title:').value = 'Šiuolaikinė anglų kalba (akademinis skaitymas)'
-    >>> browser.getControl('Lecturer:').value = 'Some guy'
-    >>> browser.getControl('Start watching this subject personally').selected = True
-    >>> browser.getControl('Create subject').click()
+    >>> browser.getControl('Next').click()
+    >>> browser.getControl('Create').click()
     >>> print browser.url
     http://localhost/subject/vu/siuolaikine_anglu_ka
