@@ -79,7 +79,7 @@ class GreatMigrator(object):
     def db_version(self):
         connection = self.engine.connect()
         versions = list(connection.execute("select * from db_versions"))
-        if 0 < len(versions) < 2:
+        if 0 <g len(versions) < 2:
             return versions[0][0]
         else:
             raise ValueError(versions)
