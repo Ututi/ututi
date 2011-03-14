@@ -7,9 +7,10 @@ from formencode.foreach import ForEach
 from formencode.compound import Pipe
 from formencode import Schema, validators, htmlfill
 
-from pylons import tmpl_context as c, request, url
+from webhelpers import paginate
+
+from pylons import tmpl_context as c, request, url, session
 from pylons.controllers.util import redirect, abort
-from pylons.decorators import jsonify
 from pylons.i18n import _
 from pylons.templating import render_mako_def
 
@@ -17,10 +18,10 @@ from ututi.model import SearchItem
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
 from ututi.model.events import Event
 from ututi.lib.security import ActionProtector, deny
-from ututi.lib.search import search, search_query, _exclude_subjects
+from ututi.lib.search import search, search_query, search_query_count, _exclude_subjects
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render, u_cache
-from ututi.lib.validators import LocationTagsValidator, TagsValidator, validate, js_validate
+from ututi.lib.validators import LocationTagsValidator, TagsValidator, validate
 from ututi.lib.wall import WallMixin
 import ututi.lib.helpers as h
 
@@ -94,6 +95,17 @@ class SubjectForm(Schema):
     chained_validators = [
         TagsValidator()
         ]
+
+
+class SubjectLightForm(Schema):
+    allow_extra_fields = True
+    pre_validators = [NestedVariables()]
+
+    location = Pipe(ForEach(validators.UnicodeString(strip=True, max=250)),
+                    LocationTagsValidator())
+
+    msg = {'empty': _("Please enter subject title")}
+    title = validators.UnicodeString(not_empty=True, strip=True, messages=msg)
 
 
 class SearchSubjectForm(Schema):
@@ -202,13 +214,66 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
 
     @ActionProtector("user")
     def add(self):
-        if request.referrer:
-            c.came_from = request.referrer
-        else:
-            c.came_from = url(controller='profile', action='home')
-        return self._add_form()
+        defaults = dict([('location-%d' % n, tag)
+                         for n, tag in enumerate(c.user.location.hierarchy())])
+        c.hide_location = True
+        return htmlfill.render(self._add_form(), defaults=defaults)
 
-    @validate(schema=NewSubjectForm, form='_add_form')
+    @ActionProtector("user")
+    @validate(schema=SubjectLightForm, form='_add_form')
+    def lookup(self):
+        # save posted variables for future
+        title = self.form_result['title']
+        location = self.form_result['location']
+        session['subject_title'] = title
+        session['subject_location_id'] = location.id
+        session.save()
+
+        # lookup for subjects similar to the one
+        # that is about to be created
+        search_params = {}
+        search_params['obj_type'] = 'subject'
+        search_params['text'] = title
+        search_params['tags'] = ', '.join(location.title_path)
+
+        # exclude subjects already watched or taught by the user
+        if c.user.is_teacher:
+            sids = [s.id for s in c.user.taught_subjects]
+        else:
+            sids = [s.id for s in c.user.watched_subjects]
+
+        query = search_query(extra=_exclude_subjects(sids), **search_params)
+        c.similar_subjects = paginate.Page(
+            query,
+            items_per_page = 30,
+            item_count = search_query_count(query),
+            **search_params)
+
+        if c.similar_subjects:
+            return render('subject/add_lookup.mako')
+        else:
+            # no similar subjects found
+            return redirect(url(controller='subject', action='add_description'))
+
+    def _add_full_form(self):
+        return render('subject/add_description.mako')
+
+    @ActionProtector("user")
+    def add_description(self):
+        if 'subject_title' not in session or \
+           'subject_location_id' not in session:
+            redirect(url(controller='subject', action='add'))
+
+        defaults = dict(title=session['subject_title'])
+        location = LocationTag.get(session['subject_location_id'])
+        tags = dict([('location-%d' % n, tag)
+                    for n, tag in enumerate(location.hierarchy())])
+        defaults.update(tags)
+
+        return htmlfill.render(self._add_full_form(),
+                               defaults=defaults)
+
+    @validate(schema=NewSubjectForm, form='_add_full_form')
     @ActionProtector("user")
     def create(self):
         if not hasattr(self, 'form_result'):
@@ -230,44 +295,6 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
                     action='home',
                     id=subj.subject_id,
                     tags=subj.location_path))
-
-    @ActionProtector("user")
-    @js_validate(schema=SearchSubjectForm, form='_add_form')
-    @jsonify
-    def js_search_similar(self):
-        """Returns subjects that are similar to the one
-        that is about to be created."""
-
-        # Construct search parameters
-        search_params = {}
-        search_params['obj_type'] = 'subject'
-
-        # Title is needed at least
-        if not self.form_result.get('title', False):
-            return dict(success=False)
-
-        search_params['text'] = self.form_result['title']
-
-        # Gather location tags
-        if 'location' in self.form_result:
-            location = self.form_result['location']
-            if location is not None:
-                search_params['tags'] = ', '.join(location.title_path)
-
-        # Exclude subjects already watched or taught by the user
-        if c.user.is_teacher:
-            sids = [s.id for s in c.user.taught_subjects]
-        else:
-            sids = [s.id for s in c.user.watched_subjects]
-
-        results = search_query(extra=_exclude_subjects(sids), **search_params).all()
-        if results:
-            return dict(success=True,
-                        search_results=render_mako_def('subject/add.mako',
-                                                       'list_similar_subjects',
-                                                        results=results))
-        else:
-            return dict(succes=False)
 
     def _edit_form(self):
         return render('subject/edit.mako')

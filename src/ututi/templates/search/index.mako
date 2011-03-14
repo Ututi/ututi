@@ -175,7 +175,7 @@ ${h.javascript_link('/javascript/search.js')|n}
       <span class="result-count">(${ungettext("found %(count)s result", "found %(count)s results", results.item_count) % dict(count = results.item_count)})</span>
     </h3>
     %endif
-  %if c.results.item_count > 0:
+  %if results.item_count > 0:
     <div id="search-results">
       %for item in results:
         ${display(item)}
@@ -186,7 +186,7 @@ ${h.javascript_link('/javascript/search.js')|n}
     <br />
   %endif
 
-  %if len(results):
+  %if len(results) and results.page_count > 1:
     %if controller is not None and action is not None:
     <div id="pager">${results.pager(format='~3~', controller=controller, action=action, onclick='$("#pager").addClass("loading"); $("#search-results-container").load("%s", function () { $(document).scrollTop($("#search-results-container").scrollTop()); }); return false;') }</div>
     %else:
