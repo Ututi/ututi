@@ -322,39 +322,57 @@ create table group_mailing_list_messages (
        sender_email varchar(320),
        reply_to_message_id varchar(320) default null,
        reply_to_group_id int8 references groups(id) on delete cascade default null,
+       reply_to_message_machine_id int8 default null references group_mailing_list_messages(id) on delete cascade,
        thread_message_id varchar(320) not null,
        thread_group_id int8 references groups(id) on delete cascade not null,
+       thread_message_machine_id int8 not null references group_mailing_list_messages(id) on delete cascade,
        author_id int8 references users(id),
        subject varchar(500) not null,
        original bytea not null,
        sent timestamp not null,
        in_moderation_queue boolean default false,
-       constraint reply_to
-       foreign key (reply_to_message_id, reply_to_group_id) references group_mailing_list_messages(message_id, group_id),
-       constraint thread
-       foreign key (thread_message_id, thread_group_id) references group_mailing_list_messages(message_id, group_id),
        primary key (message_id, group_id));;
-
 
 CREATE FUNCTION set_thread_id() RETURNS trigger AS $$
     DECLARE
-        new_group_id int8 := NULL;
-        new_message_id varchar(250) := NULL;
+        lookup_id int8 := NULL;
+        n_thread_group_id int8 := NULL;
+        n_thread_message_id varchar(320) := NULL;
+        n_thread_message_machine_id int8 := NULL;
+
+        n_reply_to_message_id varchar(320) := NULL;
+        n_reply_to_group_id int8 := NULL;
+
     BEGIN
-        IF NEW.reply_to_message_id is NULL THEN
+        IF NEW.reply_to_message_machine_id is NULL THEN
           NEW.thread_message_id := NEW.message_id;
           NEW.thread_group_id := NEW.group_id;
+          NEW.thread_message_machine_id := NEW.id;
         ELSE
-          SELECT thread_message_id, thread_group_id INTO new_message_id, new_group_id
+          lookup_id := NEW.reply_to_message_machine_id;
+          SELECT thread_message_id,
+                 thread_group_id,
+                 thread_message_machine_id,
+                 message_id,
+                 group_id
+            INTO n_thread_message_id,
+                 n_thread_group_id,
+                 n_thread_message_machine_id,
+                 n_reply_to_message_id,
+                 n_reply_to_group_id
             FROM group_mailing_list_messages
-            WHERE message_id = NEW.reply_to_message_id AND group_id = NEW.reply_to_group_id;
-          NEW.thread_message_id := new_message_id;
-          NEW.thread_group_id := new_group_id;
+            WHERE id = lookup_id;
+
+          NEW.thread_message_id := n_thread_message_id;
+          NEW.thread_group_id := n_thread_group_id;
+          NEW.thread_message_machine_id := n_thread_message_machine_id;
+
+          NEW.reply_to_message_id := n_reply_to_message_id;
+          NEW.reply_to_group_id := n_reply_to_group_id;
         END IF;
         RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
-
 
 CREATE TRIGGER set_thread_id BEFORE INSERT OR UPDATE ON group_mailing_list_messages
     FOR EACH ROW EXECUTE PROCEDURE set_thread_id();;
