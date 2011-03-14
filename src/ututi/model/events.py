@@ -4,7 +4,7 @@ import logging
 from sqlalchemy import orm, Column
 from sqlalchemy.schema import Table
 from sqlalchemy.orm import backref
-from sqlalchemy.orm import relation
+from sqlalchemy.orm import relation, reconstructor
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.types import Unicode
 from pylons import url
@@ -40,7 +40,10 @@ class Event(object):
         raise NotImplementedError()
 
     def wall_entry(self):
-        raise NotImplementedError()
+        if not hasattr(self, 'wall_entry_def'):
+            raise NotImplementedError()
+
+        return render_def('/sections/wall_entries.mako', self.wall_entry_def, event=self)
 
     def post_comment(self, comment):
         # XXX: it should be checked if this user can post
@@ -119,6 +122,7 @@ class PageCreatedEvent(Event, Commentable):
     """
 
     category = 'page'
+    wall_entry_def = 'page_created'
 
     def text_news(self):
         return _('Page %(page_title)s (%(page_url)s) was created.') % {
@@ -135,9 +139,6 @@ class PageCreatedEvent(Event, Commentable):
             'link_to_subject': link_to(self.context.title, self.context.url()),
             'link_to_page': link_to(self.page.title, self.page.url())}
 
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'page_created', event=self)
-
 
 class PageModifiedEvent(Event, Commentable):
     """Event fired when a page is modified.
@@ -146,6 +147,7 @@ class PageModifiedEvent(Event, Commentable):
     """
 
     category = 'page'
+    wall_entry_def = 'page_modified'
 
     def text_news(self):
         if not self.page.isDeleted():
@@ -175,9 +177,6 @@ class PageModifiedEvent(Event, Commentable):
                 'link_to_subject': link_to(self.context.title, self.context.url()),
                 'link_to_page': link_to(self.page.title, self.page.url())}
 
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'page_modified', event=self)
-
 
 class FileUploadedEvent(Event, Commentable):
     """Event fired when a new file is uploaded.
@@ -186,6 +185,20 @@ class FileUploadedEvent(Event, Commentable):
     """
 
     category = 'file'
+    wall_entry_def = ''
+
+    @reconstructor
+    def init_on_load(self):
+        if self.file.md5 is not None:
+            if isinstance(self.file.parent, Subject):
+                self.wall_entry_def = 'file_uploaded_subject'
+            elif isinstance(self.file.parent, Group):
+                self.wall_entry_def = 'file_uploaded_group'
+        else:
+            if isinstance(self.file.parent, Subject):
+                self.wall_entry_def = 'folder_created_subject'
+            elif isinstance(self.file.parent, Group):
+                self.wall_entry_def = 'folder_created_group'
 
     def isEmptyFile(self):
         return self.file.isNullFile()
@@ -234,49 +247,36 @@ class FileUploadedEvent(Event, Commentable):
                     'link_to_group': link_to(self.context.title, self.context.url()),
                     'folder_title': self.file.folder}
 
-    def wall_entry(self):
-        if self.file.md5 is not None:
-            if isinstance(self.file.parent, Subject):
-                return render_def('/sections/wall_entries.mako', 'file_uploaded_subject', event=self)
-            elif isinstance(self.file.parent, Group):
-                return render_def('/sections/wall_entries.mako', 'file_uploaded_group', event=self)
-        else:
-            if isinstance(self.file.parent, Subject):
-                return render_def('/sections/wall_entries.mako', 'folder_created_subject', event=self)
-            elif isinstance(self.file.parent, Group):
-                return render_def('/sections/wall_entries.mako', 'folder_created_group', event=self)
-
 
 class SubjectCreatedEvent(Event):
     """Event fired when a new subject is created."""
+
+    wall_entry_def = 'subject_created'
 
     def render(self):
         return _("New subject %(link_to_subject)s was created") % {
             'link_to_subject': link_to(self.context.title, self.context.url())}
 
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'subject_created', event=self)
 
 class GroupCreatedEvent(Event):
     """Event fired when a new group is created."""
+
+    wall_entry_def = 'group_created'
 
     def render(self):
         return _("New group %(link_to_group)s was created") % {
             'link_to_group': link_to(self.context.title, self.context.url())}
 
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'group_created', event=self)
-
 
 class SubjectModifiedEvent(Event):
     """Event fired when a subject is modified."""
+
+    wall_entry_def = 'subject_modified'
 
     def render(self):
         return _("Subject %(link_to_subject)s was modified") % {
             'link_to_subject': link_to(self.context.title, self.context.url())}
 
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'subject_modified', event=self)
 
 class PostCreatedEventBase(Event):
     """Base class for mailing list post related events.""" 
@@ -296,13 +296,12 @@ class TeacherMessageEvent(Event):
     The message is stored in the 'data' attribute (text).
     """
 
+    wall_entry_def = 'teachermessage_sent'
+
     def render(self):
         return _("Teacher %(link_to_author)s sent message to the group %(link_to_group)s.") % {
             'link_to_author': link_to(self.user.fullname, self.user.url()),
             'link_to_group': link_to(self.context.title, self.context.url())}
-
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'teachermessage_sent', event=self)
 
 
 class MailinglistPostCreatedEvent(PostCreatedEventBase, MessagingEventMixin):
@@ -311,13 +310,12 @@ class MailinglistPostCreatedEvent(PostCreatedEventBase, MessagingEventMixin):
     Has an attribute `message' pointing to the message added.
     """
 
+    wall_entry_def = 'mailinglistpost_created'
+
     def render(self):
         return _("New email post %(link_to_message)s was posted on %(link_to_group)s mailing list") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_message': link_to(self.message.subject, self.message.url())}
-
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'mailinglistpost_created', event=self)
 
     def message_list(self):
         """MessagingEventMixin implementation."""
@@ -338,6 +336,7 @@ class ModeratedPostCreated(PostCreatedEventBase):
     """
 
     category = 'moderation'
+    wall_entry_def = 'moderated_post_created'
 
     def count_of_messages_in_queue(self):
         return meta.Session.query(ModeratedPostCreated).filter_by(object_id=self.context.id).count()
@@ -363,9 +362,6 @@ class ModeratedPostCreated(PostCreatedEventBase):
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_message': link_to(self.message.subject, self.message.url())}
 
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'moderated_post_created', event=self)
-
 
 class ForumPostCreatedEvent(Event, MessagingEventMixin):
     """Event fired when someone posts a message on group forums.
@@ -373,13 +369,12 @@ class ForumPostCreatedEvent(Event, MessagingEventMixin):
     Has an attribute `post' pointing to the message added.
     """
 
+    wall_entry_def = 'forumpost_created'
+
     def render(self):
         return _("New forum post %(link_to_message)s posted on %(link_to_group)s forums") % {
             'link_to_group': link_to(self.context.title, self.context.url(new=True)),
             'link_to_message': link_to(self.post.title, self.post.url(new=True))}
-
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'forumpost_created', event=self)
 
     def message_list(self):
         """MessagingEventMixin implementation."""
@@ -404,13 +399,12 @@ class ForumPostCreatedEvent(Event, MessagingEventMixin):
 class SMSMessageSentEvent(Event):
     """Event fired when someone sends an SMS message to the group."""
 
+    wall_entry_def = 'sms_sent'
+
     def render(self):
         return _("%(link_to_author)s sent an SMS: <em>%(text)s</em>") % {
             'link_to_author': link_to(self.outgoing_sms.sender.fullname, self.outgoing_sms.sender.url()),
             'text': self.sms_text()}
-
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'sms_sent', event=self)
 
     def sms_text(self):
         return cgi.escape(self.outgoing_sms.message_text)
@@ -422,13 +416,12 @@ class SMSMessageSentEvent(Event):
 class PrivateMessageSentEvent(Event, MessagingEventMixin):
     """Event fired when someone sends a private message to the user."""
 
+    wall_entry_def = 'privatemessage_sent'
+
     def render(self):
         return _("%(link_to_author)s sent an private message: <em>%(text)s</em>") % {
             'link_to_author': link_to(self.private_message.sender.fullname, self.private_message.sender.url()),
             'text': self.message_text()}
-
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'privatemessage_sent', event=self)
 
     def message_text(self):
         """Deprecated."""
@@ -454,49 +447,45 @@ class PrivateMessageSentEvent(Event, MessagingEventMixin):
 class GroupMemberJoinedEvent(Event):
     """Event fired when members join groups."""
 
+    wall_entry_def = 'groupmember_joined'
+
     def render(self):
         return _("Member %(link_to_user)s joined the group %(link_to_group)s") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_user': link_to(self.user.fullname, self.user.url())}
 
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'groupmember_joined', event=self)
-
 
 class GroupMemberLeftEvent(Event):
     """Event fired when members leave groups."""
+
+    wall_entry_def = 'groupmember_left'
 
     def render(self):
         return _("Member %(link_to_user)s left the group %(link_to_group)s") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_user': link_to(self.user.fullname, self.user.url())}
 
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'groupmember_left', event=self)
-
 
 class GroupStartedWatchingSubjects(Event):
     """Event fired when group starts watching a subject."""
+
+    wall_entry_def = 'groupsubject_start'
 
     def render(self):
         return _("Group %(link_to_group)s started watching subject %(link_to_subject)s") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_subject': link_to(self.subject.title, self.subject.url())}
 
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'groupsubject_start', event=self)
-
 
 class GroupStoppedWatchingSubjects(Event):
     """Event fired when group stops watching a subject."""
+
+    wall_entry_def = 'groupsubject_stop'
 
     def render(self):
         return _("Group %(link_to_group)s stopped watching subject %(link_to_subject)s") % {
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_subject': link_to(self.subject.title, self.subject.url())}
-
-    def wall_entry(self):
-        return render_def('/sections/wall_entries.mako', 'groupsubject_stop', event=self)
 
 
 def setup_orm(engine):
