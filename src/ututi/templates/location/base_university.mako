@@ -10,6 +10,7 @@
   ${parent.css()}
 
   .university-box {
+    margin-top: 25px;
     border: 1px solid #ffaf37;
     padding: 10px;
   }

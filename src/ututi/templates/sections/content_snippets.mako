@@ -47,11 +47,8 @@ Snippets for rendering various content items, e.g. in search results.
     hierarchy_len = len(object.location.hierarchy())
   %>
   <span class="location-tags">
-  %for index, tag in enumerate(object.location.hierarchy(True)):
-    <a href="${tag.url()}">${tag.title_short}</a>
-    %if index != hierarchy_len - 1:
-        |
-    %endif
+  %for tag in object.location.hierarchy(True):
+    <a href="${tag.url()}">${tag.title_short}</a> |
   %endfor
   </span>
   %endif
@@ -82,16 +79,33 @@ Snippets for rendering various content items, e.g. in search results.
 
 <%def name="group(object)">
   <div class="search-item snippet-group">
-    <a href="${object.url()}" title="${object.title}" class="item-title larger bold">${object.title}</a>
+    %if c.user is not None:
+      <div class="action-button">
+        %if object in c.user.groups:
+          <div class="notice">Your group</div>
+          <a href="${object.url(action='leave')}">Leave group</a>
+        %else:
+          ${h.button_to(_('Join'), object.url(action='request_join'), class_='dark add')}
+        %endif
+      </div>
+    %endif
+
+    <div class="heading">
+      <div class="item-title">
+        <a href="${object.url()}" title="${object.title}">${object.title}</a>
+      </div>
+      ${item_location(object)}
+    </div>
+
     <div class="description">
       ${object.description}
     </div>
-    <div class="description">
-      ${item_location(object)}
-      %if object.tags:
-       | ${item_tags(object)}
-      %endif
-    </div>
+    <ul class="statistics icon-list">
+        <li class="icon-time">${h.when(object.created_on)}</li>
+        <li class="icon-file">${h.item_file_count(object.id)}</li>
+        <li class="icon-subject">${h.group_subjects(object.id)}</li>
+        <li class="icon-user">${h.group_members(object.id)}</li>
+    </ul>
   </div>
 </%def>
 
@@ -118,19 +132,21 @@ Snippets for rendering various content items, e.g. in search results.
         ${h.button_to(_('Follow'), object.url(action='watch'), class_='dark add')}
       </div>
     %endif
-    <div class="item-title">
-      <a href="${object.url()}" title="${object.title}">${object.title}</a>
+    <div class="heading">
+      <div class="item-title">
+        <a href="${object.url()}" title="${object.title}">${object.title}</a>
+      </div>
     </div>
     <div class="description">
       ${item_location(object)}
-      % if object.teacher_repr:
-       | ${object.teacher_repr}
-      % endif
+      %if object.teacher_repr:
+       ${object.teacher_repr}
+      %endif
       %if object.tags:
-       | ${item_tags(object)}
+       ${item_tags(object)}
       %endif
     </div>
-    <ul class="statistics medium-icon-list">
+    <ul class="statistics icon-list">
         <li class="icon-file">${len(object.files)}</li>
         <li class="icon-note">${len(object.pages)}</li>
         <li class="icon-group">${object.group_count()}</li>

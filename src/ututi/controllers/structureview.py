@@ -95,14 +95,25 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
     def search_js(self, location):
         self.form_result['tagsitem'] = location.hierarchy()
         if self.form_result.get('obj_type', None) is None:
-            self.form_result['obj_type'] = 'subject'
+            self.form_result['obj_type'] = '*'
+
         self._search()
 
         if self.form_result.has_key('text'):
             search_query = self.form_result['text']
         else:
             search_query = None
-        return render_mako_def('/location/subjects.mako', 'subject_search_results', results=c.results, search_query=search_query)
+
+        # return specific snippet per object type
+        if self.form_result['obj_type'] == 'group':
+            return render_mako_def('/location/groups.mako',
+                                   'group_search_results',
+                                   results=c.results,
+                                   search_query=search_query)
+        return render_mako_def('/location/subjects.mako',
+                               'subject_search_results',
+                               results=c.results,
+                               search_query=search_query)
 
     @location_action
     @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)

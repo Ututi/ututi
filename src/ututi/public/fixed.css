@@ -925,6 +925,7 @@ ul.feature-list {
 
 .location-tags, .location-tags a {
     text-transform: uppercase;
+    color: #3d617a;
 }
 
 /* UTILITY CLASSES
@@ -1405,6 +1406,7 @@ ul.icon-list {
         background-image: url('img/icons.com/file_small_grey.png');
         background-position: 2px center;
     }
+    ul.icon-list li.icon-time { background-image: url('img/icons.com/clock.png'); }
     ul.icon-list li.icon-feed { background-image: url('img/icons.com/feed_small_grey.png'); }
     ul.icon-list li.icon-note { background-image: url('img/icons.com/wiki_small_grey.png'); }
     ul.icon-list li.icon-university { background-image: url('img/icons.com/university_small_grey.png'); }
@@ -1435,6 +1437,7 @@ ul.medium-icon-list {
         background-repeat: no-repeat;
     }
 
+    ul.medium-icon-list li.icon-time { background-image: url('img/icons.com/clock.png'); }
     ul.medium-icon-list li.icon-add { background-image: url('img/icons.com/add_medium_orange.png'); background-position: 2px center; }
     ul.medium-icon-list li.icon-find { background-image: url('img/icons.com/search_medium.png'); background-position: 1px center; }
     ul.medium-icon-list li.icon-user { background-image: url('img/icons.com/user_medium_grey.png'); }
@@ -1488,19 +1491,33 @@ ul.medium-icon-list {
     background-position: 5px 10px;
 }
 
+.search-results-container .search-item .heading {
+    margin-bottom: 5px;
+}
+
 .search-results-container .search-item .item-title {
     font-weight: bold;
     font-size: 12px;
-    margin-bottom: 5px;
+    margin-right: 15px;
 }
 
 .search-results-container .search-item .action-button {
     float: right;
+    text-align: right;
 }
 
 .search-results-container .snippet-subject {
     background-image: url("../img/icons.com/subject_big_grey.png");
 }
+
+.search-results-container .snippet-group {
+    background-image: url("../img/icons.com/group_big_grey.png");
+}
+
+    .search-results-container .snippet-group .item-title {
+        display: inline;
+        margin-right: 15px;
+    }
 
 .search-results-container .search-item ul.statistics li {
     display: inline-block;

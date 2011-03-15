@@ -476,12 +476,15 @@ def location_count(location_id, object_type=None):
     location = Tag.get(int(location_id))
     return location.count(object_type)
 
-
 @u_cache(expire=3600, invalidate_on_startup=True)
 def group_members(group_id):
     from ututi.model import meta, GroupMember
     return meta.Session.query(GroupMember).filter_by(group_id=group_id).count()
 
+@u_cache(expire=3600, invalidate_on_startup=True)
+def group_subjects(group_id):
+    from ututi.model import meta, GroupSubjectMonitoring
+    return meta.Session.query(GroupSubjectMonitoring).filter_by(group_id=group_id).count()
 
 @u_cache(expire=3600, invalidate_on_startup=True)
 def item_file_count(item_id):
