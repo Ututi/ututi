@@ -12,16 +12,16 @@ Let's fill out the search form.
     >>> form.getControl(name="text").value = "moderatoriai"
     >>> form.getControl('Search').click()
 
-    >>> browser.printQuery("id('search-results')//a[@class='item-title larger bold']/text()")
-    Moderatoriai
+    >>> browser.printCssQuery("#search-results .item-title a", strip=True)
+    <a>Moderatoriai</a>
 
 And does type selection work?
 
     >>> form = browser.getForm('search_form')
     >>> form.getControl(name="obj_type").value = ["group"]
     >>> form.getControl('Search').click()
-    >>> browser.printQuery("id('search-results')//a[@class='item-title larger bold']/text()")
-    Moderatoriai
+    >>> browser.printCssQuery("#search-results .item-title a", strip=True)
+    <a>Moderatoriai</a>
 
 Test location search
 
