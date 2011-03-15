@@ -111,10 +111,10 @@
 
     #sign-in-area .email-input {
         border: 1px solid #999 !important;
-        height: 40px !important;
+        height: 20px !important;
         width: 370px !important;
         font-size: 16px !important;
-        padding: 0 15px;
+        padding: 10px 15px !important;
         font-weight: bold;
         color: #666;
         display: inline;
