@@ -25,7 +25,7 @@ body {
 h1 {
     font-family: Verdana, Arial, sans-serif;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
     color: #333333;
 }
 
@@ -120,7 +120,7 @@ button.btn-text {
 
 h1.page-title {
     margin: 0;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     border-bottom: 1px solid #ff9900;
     padding-bottom: 2px; /* some spacing for border */
@@ -416,7 +416,7 @@ h1.page-title {
 
     #teacher-registration-page h1.page-title {
         font-weight: bold;
-        font-size: 18px;
+        font-size: 20px;
         margin: 0;
     }
 
