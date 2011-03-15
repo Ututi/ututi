@@ -20,6 +20,7 @@ from ututi.lib.emails import send_email_confirmation_code, send_registration_inv
 
 from pylons.i18n import _
 from pylons import config
+from pylons.templating import render_mako_def
 
 log = logging.getLogger(__name__)
 
@@ -604,6 +605,11 @@ class Teacher(User):
                     caption=caption,
                     link=self.url(qualified=True),
                     description=self.description)
+
+    def snippet(self):
+        """Render a short snippet with the basic teacher information.
+        Used in university's teacher catalog to render search results."""
+        return render_mako_def('/sections/content_snippets.mako', 'teacher', object=self)
 
 
 class GroupNotFoundException(Exception):

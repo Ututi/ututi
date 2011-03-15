@@ -1495,6 +1495,15 @@ ul.medium-icon-list {
     margin-bottom: 5px;
 }
 
+.search-results-container .search-item.with-logo {
+    padding-left: 0px;
+}
+
+.search-results-container .search-item.with-logo .logo {
+    float: left;
+    margin-right: 8px;
+}
+
 .search-results-container .search-item .item-title {
     font-weight: bold;
     font-size: 12px;
@@ -1518,6 +1527,10 @@ ul.medium-icon-list {
         display: inline;
         margin-right: 15px;
     }
+
+.search-results-container .snippet-teacher .heading {
+    margin-bottom: 0px;
+}
 
 .search-results-container .search-item ul.statistics li {
     display: inline-block;

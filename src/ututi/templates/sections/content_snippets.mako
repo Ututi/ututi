@@ -77,6 +77,26 @@ Snippets for rendering various content items, e.g. in search results.
   </div>
 </%def>
 
+<%def name="teacher(object)">
+  <div class="search-item snippet-teacher clearfix with-logo">
+    <div class="logo">
+      <img src="${object.url(action='logo', width=45)}" alt="object.fullname" />
+    </div>
+    <div class="heading">
+      <div class="item-title">
+        <a href="${object.url()}" title="${object.fullname}">${object.fullname}</a>
+      </div>
+    </div>
+    <ul class="statistics icon-list">
+        <li class="icon-file">${h.authorship_count('file', object.id)}</li>
+        <li class="icon-note">${h.authorship_count('page', object.id)}</li>
+        <li class="icon-subject">${h.teacher_subjects(object.id)}</li>
+        <li class="icon-group">${h.teacher_groups(object.id)}</li>
+    </ul>
+    ${item_location(object)}
+  </div>
+</%def>
+
 <%def name="group(object)">
   <div class="search-item snippet-group">
     %if c.user is not None:

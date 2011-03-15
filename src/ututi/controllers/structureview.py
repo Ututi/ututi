@@ -1,6 +1,7 @@
 import logging
 
 from formencode import Schema, validators, compound, htmlfill
+from webhelpers import paginate
 from pylons.controllers.util import redirect, abort
 from pylons import request
 from pylons import tmpl_context as c, url
@@ -14,7 +15,8 @@ from ututi.lib.base import render
 from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, \
         FileUploadTypeValidator, validate
 from ututi.lib.wall import WallMixin
-from ututi.model import Subject, Group
+from ututi.lib.search import search_query_count
+from ututi.model import Subject, Group, Teacher
 from ututi.model import LocationTag, meta
 from ututi.model.users import User
 from ututi.controllers.home import UniversityListMixin
@@ -23,7 +25,7 @@ from ututi.controllers.search import SearchSubmit, SearchBaseController
 log = logging.getLogger(__name__)
 
 def location_action(method):
-    def _location_action(self, path):
+    def _location_action(self, path, obj_type=None):
         location = LocationTag.get(path)
 
         if location is None:
@@ -33,7 +35,10 @@ def location_action(method):
         c.object_location = None
         c.location = location
         c.tabs = structure_menu_items()
-        return method(self, location)
+        if obj_type is None:
+            return method(self, location)
+        else:
+            return method(self, location, obj_type)
     return _location_action
 
 def structure_menu_items():
@@ -43,10 +48,13 @@ def structure_menu_items():
          'link': c.location.url(action='index')},
         {'title': _("Subjects"),
          'name': 'subjects',
-         'link': c.location.url(action='subjects')},
+         'link': c.location.url(action='catalog', obj_type='subject')},
         {'title': _("Groups"),
          'name': 'groups',
-         'link': c.location.url(action='groups')}]
+         'link': c.location.url(action='catalog', obj_type='group')},
+        {'title': _("Teachers"),
+         'name': 'teachers',
+         'link': c.location.url(action='catalog', obj_type='teacher')}]
 
 
 class LocationEditForm(Schema):
@@ -79,7 +87,32 @@ class StructureviewWallMixin(WallMixin):
         return meta.Session.query(Event).filter(Event.object_id.in_(ids))
 
 
-class StructureviewController(SearchBaseController, UniversityListMixin, StructureviewWallMixin):
+class TeacherSearchMixin():
+
+    def _search_teachers(self, location, text):
+        locations = [loc.id for loc in location.flatten]
+
+        query = meta.Session.query(Teacher)\
+                .filter(Teacher.location_id.in_(locations))
+
+        if text:
+            query = query.filter(Teacher.fullname.contains(text))
+
+        try:
+            page_no = int(request.params.get('page', 1))
+        except ValueError:
+            abort(404)
+        c.page = page_no
+
+        c.results = paginate.Page(
+            query,
+            page=c.page,
+            items_per_page = 30,
+            item_count = search_query_count(query))
+        c.searched = True
+
+
+class StructureviewController(SearchBaseController, UniversityListMixin, StructureviewWallMixin, TeacherSearchMixin):
 
     def _breadcrumbs(self, location):
         c.breadcrumbs = []
@@ -91,32 +124,6 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
             c.breadcrumbs.append(bc)
 
     @location_action
-    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
-    def search_js(self, location):
-        self.form_result['tagsitem'] = location.hierarchy()
-        if self.form_result.get('obj_type', None) is None:
-            self.form_result['obj_type'] = '*'
-
-        self._search()
-
-        if self.form_result.has_key('text'):
-            search_query = self.form_result['text']
-        else:
-            search_query = None
-
-        # return specific snippet per object type
-        if self.form_result['obj_type'] == 'group':
-            return render_mako_def('/location/groups.mako',
-                                   'group_search_results',
-                                   results=c.results,
-                                   search_query=search_query)
-        return render_mako_def('/location/subjects.mako',
-                               'subject_search_results',
-                               results=c.results,
-                               search_query=search_query)
-
-    @location_action
-    @validate(schema=SearchSubmit, form='index', post_only=False, on_get=True)
     def index(self, location):
         c.current_tab = 'index'
 
@@ -130,36 +137,65 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
     def _edit_form(self):
         return render('location/edit.mako')
 
-
     @location_action
-    @validate(schema=SearchSubmit, form='subjects', post_only=False, on_get=True)
-    def subjects(self, location):
-        c.current_tab = 'subjects'
+    @validate(schema=SearchSubmit, post_only=False, on_get=True)
+    def catalog(self, location, obj_type):
+        c.current_tab = obj_type + 's'
         self._breadcrumbs(location)
 
         self.form_result['tagsitem'] = location.hierarchy()
-        if self.form_result.get('obj_type', None) is None:
-            self.form_result['obj_type'] = 'subject'
-        self._search()
+        self.form_result['obj_type'] = obj_type
+
+        if obj_type == 'teacher':
+            self._search_teachers(location, self.form_result.get('text', ''))
+        else:
+            self._search()
 
         if location.parent is None:
             self._get_departments(location)
-        return render('location/subjects.mako')
+
+        # render template by object type
+
+        template_names = {'group': '/location/groups.mako',
+                          'subject': '/location/subjects.mako',
+                          'teacher': '/location/teachers.mako'}
+
+        if obj_type in template_names:
+            return render(template_names[obj_type])
+        else:
+            abort(404)
 
     @location_action
-    @validate(schema=SearchSubmit, form='groups', post_only=False, on_get=True)
-    def groups(self, location):
-        c.current_tab = 'groups'
-        self._breadcrumbs(location)
-
+    @validate(schema=SearchSubmit, post_only=False, on_get=True)
+    def catalog_js(self, location):
         self.form_result['tagsitem'] = location.hierarchy()
         if self.form_result.get('obj_type', None) is None:
-            self.form_result['obj_type'] = 'group'
-        self._search()
+            self.form_result['obj_type'] = '*'
 
-        if location.parent is None:
-            self._get_departments(location)
-        return render('location/groups.mako')
+        obj_type = self.form_result['obj_type']
+
+        if obj_type == 'teacher':
+            self._search_teachers(location, self.form_result.get('text', ''))
+        else:
+            self._search()
+
+
+        if self.form_result.has_key('text'):
+            search_query = self.form_result['text']
+        else:
+            search_query = None
+
+        # return specific snippet per object type
+
+        template_names = {'group': '/location/groups.mako',
+                          'subject': '/location/subjects.mako',
+                          'teacher': '/location/teachers.mako'}
+
+        if obj_type in template_names:
+            return render_mako_def(template_names[obj_type],
+                                   'search_results',
+                                   results=c.results,
+                                   search_query=search_query)
 
     @location_action
     def edit(self, location):

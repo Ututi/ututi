@@ -496,6 +496,25 @@ def subject_page_count(subject_id):
     from ututi.model import Subject
     return len(Subject.get_by_id(subject_id).pages)
 
+@u_cache(expire=3600, invalidate_on_startup=True)
+def authorship_count(obj, user_id):
+    from ututi.model import meta, File, Page
+    obj_types = {
+        'file' : File,
+        'page' : Page,
+        }
+    obj = obj_types[obj.lower()]
+    return meta.Session.query(obj).filter(obj.created_by == user_id).count()
+
+@u_cache(expire=3600, invalidate_on_startup=True)
+def teacher_subjects(teacher_id):
+    from ututi.model import Teacher
+    return len(Teacher.get_global(teacher_id).taught_subjects)
+
+@u_cache(expire=3600, invalidate_on_startup=True)
+def teacher_groups(teacher_id):
+    from ututi.model import meta, TeacherGroup
+    return meta.Session.query(TeacherGroup).filter(TeacherGroup.teacher_id == teacher_id).count()
 
 def path_with_hash(fn):
     from pylons import config

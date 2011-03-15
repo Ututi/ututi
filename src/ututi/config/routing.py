@@ -262,11 +262,10 @@ def make_map(config):
     map.connect('/school/*path/update', controller='structureview', action='update')
     map.connect('/school/*path/login', controller='structureview', action='login')
     map.connect('/school/*path/edit', controller='structureview', action='edit')
-    map.connect('/school/*path/search_js', controller='structureview', action='search_js')
-    map.connect('/school/*path/groups', controller='structureview', action='groups')
-    map.connect('/school/*path/subjects', controller='structureview', action='subjects')
-    map.connect('/school/*path/groups_js', controller='structureview', action='groups_search_js')
-    map.connect('/school/*path/subjects_js', controller='structureview', action='subjects_search_js')
+    map.connect('/school/*path/catalog_js', controller='structureview', action='catalog_js')
+    map.connect('/school/*path/groups', controller='structureview', action='catalog', obj_type='group')
+    map.connect('/school/*path/subjects', controller='structureview', action='catalog', obj_type='subject')
+    map.connect('/school/*path/teachers', controller='structureview', action='catalog', obj_type='teacher')
     map.connect('/school/*path', controller='structureview', action='index')
 
     # other user views
