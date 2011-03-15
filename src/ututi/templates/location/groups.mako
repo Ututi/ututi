@@ -1,6 +1,9 @@
+<%inherit file="/location/base.mako" />
 <%namespace file="/search/index.mako" name="search" import="search_form, search_results"/>
 
 <%def name="css()">
+  ${parent.css()}
+
   #group-search-panel .search-text-submit input {
     width: 230px;
   }
@@ -53,7 +56,6 @@
   </%search:search_results>
 </%def>
 
-<%def name="search_content()">
 %if c.results.item_count:
   <div id="group-search-panel">
     ${search.search_form(c.text, 'group', c.location.hierarchy,
@@ -92,4 +94,3 @@
     </div>
   </div>
 %endif
-</%def>

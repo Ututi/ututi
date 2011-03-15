@@ -1,4 +1,4 @@
-<%inherit file="/location/base_department.mako" />
+<%inherit file="/location/base.mako" />
 <%namespace name="wall" file="/sections/wall_entries.mako" />
 
 <%def name="head_tags()">

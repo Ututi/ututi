@@ -116,7 +116,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
                                search_query=search_query)
 
     @location_action
-    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
+    @validate(schema=SearchSubmit, form='index', post_only=False, on_get=True)
     def index(self, location):
         c.current_tab = 'index'
 
@@ -125,16 +125,14 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         if location.parent is None:
             self._get_departments(location)
-            return render('location/university.mako')
-        else:
-            return render('location/department.mako')
+        return render('location/feed.mako')
 
     def _edit_form(self):
         return render('location/edit.mako')
 
 
     @location_action
-    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
+    @validate(schema=SearchSubmit, form='subjects', post_only=False, on_get=True)
     def subjects(self, location):
         c.current_tab = 'subjects'
         self._breadcrumbs(location)
@@ -146,12 +144,10 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         if location.parent is None:
             self._get_departments(location)
-            return render('location/university_subjects.mako')
-        else:
-            return render('location/department_subjects.mako')
+        return render('location/subjects.mako')
 
     @location_action
-    @validate(schema=SearchSubmit, form='index', post_only = False, on_get = True)
+    @validate(schema=SearchSubmit, form='groups', post_only=False, on_get=True)
     def groups(self, location):
         c.current_tab = 'groups'
         self._breadcrumbs(location)
@@ -163,9 +159,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         if location.parent is None:
             self._get_departments(location)
-            return render('location/university_groups.mako')
-        else:
-            return render('location/department_groups.mako')
+        return render('location/groups.mako')
 
     @location_action
     def edit(self, location):
