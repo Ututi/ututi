@@ -1172,12 +1172,12 @@ ul.feature-list {
     background: #333;
     height: 40px;
     width:100%;
-    min-width: 960px;
+    min-width: 980px;
 }
 
 #header #header-container {
     height: 30px;
-    width: 960px;
+    width: 980px;
     margin: auto;
     padding-top: 10px;
 }
@@ -1193,7 +1193,7 @@ ul.feature-list {
 #top-panel {
     background-color: #6d6d6d;
     float: left;
-    width: 780px;
+    width: 800px;
     height: 20px;
     padding: 5px 0;
 }
@@ -1335,7 +1335,7 @@ li.expanded li a {
 
 #footer {
     height: 60px;
-    width: 960px;
+    width: 980px;
     text-align: center;
     margin: auto;
     font-size: 12px;
