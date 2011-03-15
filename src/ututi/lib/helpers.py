@@ -484,9 +484,9 @@ def group_members(group_id):
 
 
 @u_cache(expire=3600, invalidate_on_startup=True)
-def subject_file_count(subject_id):
+def item_file_count(item_id):
     from ututi.model import meta, File
-    return meta.Session.query(File).filter_by(parent_id=subject_id).count()
+    return meta.Session.query(File).filter_by(parent_id=item_id).count()
 
 @u_cache(expire=3600, invalidate_on_startup=True)
 def subject_page_count(subject_id):

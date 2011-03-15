@@ -43,7 +43,7 @@
     </div>
     <div style="margin-top: 5px">
       <dd class="files">
-        ${h.subject_file_count(subject.id)}
+        ${h.item_file_count(subject.id)}
       </dd>
       <dd class="pages">
         ${h.subject_page_count(subject.id)}

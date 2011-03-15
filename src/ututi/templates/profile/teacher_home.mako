@@ -120,7 +120,7 @@ ${h.button_to(_('add courses'), url(controller='subject', action='add'), class_=
         </span>
         <dd class="files">
           <a href="${subject.url()}">${_("Upload file")}</a>
-          (${h.subject_file_count(subject.id)})
+          (${h.item_file_count(subject.id)})
         </dd>
         <dd class="pages">
           <a href="${url(controller='subjectpage', action='add', id=subject.subject_id, tags=subject.location_path)}">${_("Create wiki page")}</a>
