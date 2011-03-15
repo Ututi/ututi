@@ -1,6 +1,5 @@
 <%inherit file="/subject/base.mako" />
 <%namespace name="files" file="/sections/files.mako" />
-<%namespace file="/location/base_university.mako" import="*"/>
 
 <%def name="head_tags()">
     ${parent.head_tags()}
