@@ -126,10 +126,19 @@ UtutiLayer = CompositeLayer(GrokLayer,
                             UtutiBaseLayer(),
                             name='UtutiLayer')
 
+UtutiFunctionalLayer = CompositeLayer(GrokLayer,
+                                      PylonsTestBrowserLayer('test.ini', conf_dir, meta),
+                                      UtutiBaseLayer(),
+                                      name='UtutiFunctionalLayer')
+
+U2tiFunctionalLayer = CompositeLayer(GrokLayer,
+                                     PylonsTestBrowserLayer('test2.ini', conf_dir, meta),
+                                     UtutiBaseLayer(),
+                                     name='U2tiFunctionalLayer')
 
 UtutiErrorsLayer = CompositeLayer(GrokLayer,
                                   PylonsTestBrowserLayer('errors.ini', conf_dir, meta),
-                                  UtutiBaseLayer(),
+                                  UtutiQuickLayerBase(),
                                   name='UtutiErrorsLayer')
 
 
@@ -138,6 +147,10 @@ UtutiQuickLayer = CompositeLayer(GrokLayer,
                                  UtutiQuickLayerBase(),
                                  name='UtutiQuickLayer')
 
+U2tiQuickLayer = CompositeLayer(GrokLayer,
+                                 PylonsTestBrowserLayer('test2.ini', conf_dir, meta),
+                                 UtutiQuickLayerBase(),
+                                 name='U2tiQuickLayer')
 
 class UtutiTestBrowser(NousTestBrowser):
 

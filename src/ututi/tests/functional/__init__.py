@@ -145,14 +145,19 @@ def collect_ftests(package=None, level=None,
     optionflags = (doctest.ELLIPSIS | doctest.REPORT_NDIFF |
                    doctest.NORMALIZE_WHITESPACE |
                    doctest.REPORT_ONLY_FIRST_FAILURE)
-    for filename in filenames:
+    for n, filename in enumerate(filenames):
         suite = doctest.DocFileSuite(filename,
                                      package=package,
                                      optionflags=optionflags,
                                      checker=checker,
                                      setUp=setUp,
                                      tearDown=tearDown)
-        suite.layer = layer
+
+        if isinstance(layer, list):
+            suite.layer = layer[n % len(layer)]
+        else:
+            suite.layer = layer
+
         if level is not None:
             suite.level = level
         suites.append(suite)

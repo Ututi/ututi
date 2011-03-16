@@ -48,6 +48,8 @@ instance/var/data/initialized:
 	${PG_PATH}/bin/createuser --no-createdb --no-createrole --no-superuser --login test -h ${PWD}/instance/var/run
 	${PG_PATH}/bin/createdb --owner test -E UTF8 test -h ${PWD}/instance/var/run
 	${PG_PATH}/bin/createlang plpgsql test -h ${PWD}/instance/var/run
+	${PG_PATH}/bin/createdb --owner test -E UTF8 test2 -h ${PWD}/instance/var/run
+	${PG_PATH}/bin/createlang plpgsql test2 -h ${PWD}/instance/var/run
 	${PG_PATH}/bin/createdb --owner admin -E UTF8 development -h ${PWD}/instance/var/run
 	${PG_PATH}/bin/createlang plpgsql development -h ${PWD}/instance/var/run
 	bin/paster setup-app development.ini
@@ -108,8 +110,15 @@ buildout:
 	$(BUILDOUT)
 
 .PHONY: test
-test: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
-	bin/test --all
+test: test1 test2
+
+.PHONY: test1
+test1:
+	bin/test --layer=Ututi
+
+.PHONY: test2
+test2:
+	bin/test --layer=U2ti
 
 .PHONY: utest
 testall: bin/test
@@ -118,6 +127,10 @@ testall: bin/test
 .PHONY: ftest
 ftest: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
 	bin/test -f --at-level 2
+
+.PHONY: atest
+atest: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
+	bin/test --all
 
 .PHONY: run
 run: bin/paster instance/done instance/var/run/.s.PGSQL.${PGPORT}

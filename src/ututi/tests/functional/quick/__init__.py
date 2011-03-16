@@ -26,6 +26,12 @@ def setUp(test):
 
 def tearDown(test):
     meta.Session.execute("truncate tags cascade")
+    meta.Session.execute("truncate regions cascade")
+    meta.Session.execute("truncate cities cascade")
+    meta.Session.execute("truncate science_types cascade")
+    meta.Session.execute("truncate book_types cascade")
+    meta.Session.execute("truncate school_grades cascade")
+    meta.Session.execute("truncate books cascade")
     meta.Session.execute("truncate content_items cascade")
     relnames = meta.Session.query('relname').from_statement(
                "select relname from pg_class where relkind = 'S'")
