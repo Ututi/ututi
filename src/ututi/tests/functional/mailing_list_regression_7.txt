@@ -6,7 +6,6 @@ Regression test for group email being in cc
     >>> from ututi.tests.functional import send_test_message
 
     >>> send_test_message('polish_encoding_test.txt')
-    >>> browser.open("http://localhost/group/moderators/mailinglist/thread/4")
 
     >>> from ututi.lib.mailer import mail_queue
     >>> print len(mail_queue)
