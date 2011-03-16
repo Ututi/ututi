@@ -1595,3 +1595,66 @@ ul.medium-icon-list {
         text-align: center;
         margin-top: 15px;
     }
+
+
+/* MENU TABS
+ */
+
+.tabs {
+    display: block;
+    background: #ffffff url('img/module_menu_bg.png') repeat-x bottom;
+    height: 22px;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 22px;
+    list-style: none;
+    margin-top: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 2px;
+    text-transform: uppercase;
+    *zoom: 1; /* IE7 */
+}
+
+    .tabs li {
+        display: inline-block;
+        vertical-align: top;
+        line-height: 20px;
+        *display: inline; /* IE7 */
+        *zoom: 1; /* IE7 */
+    }
+    .tabs li a {
+        display: block;
+        padding-left: 10px;
+        padding-right: 8px;
+        position: relative;
+        color: #666666;
+        *height: 22px; /* IE7 */
+        _display: inline; /* IE6 */
+        _zoom: 1; /* IE6 */
+    }
+    .tabs li a:hover {
+        color: #3d617a;
+    }
+    .tabs li.current {
+        line-height: 22px;
+    }
+    .tabs li.current a {
+        background: url('img/module_menu_current_item_bg.png') no-repeat left;
+        font-weight: bold;
+        color: #666666;
+        margin-right: 5px;
+        padding-right: 5px
+    }
+    .tabs li.current .edge {
+        background: url('img/module_menu_current_item_bg.png') no-repeat right;
+        display: block;
+        height: 22px;
+        position: absolute;
+        right: -5px;
+        top: 0;
+        width: 5px;
+    }
+    .tabs li a:hover {
+        text-decoration: none;
+    }
