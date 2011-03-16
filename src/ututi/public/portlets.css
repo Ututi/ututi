@@ -240,3 +240,14 @@
         margin-left: -5px; /* compensate sidebar left padding, so
                             * it looks properly centered. */
     }
+
+#subject-information-portlet { }
+
+    #subject-information-portlet .description {
+        padding-right: 10px;
+    }
+
+    #subject-information-portlet #description-edit-link {
+        float: right;
+        margin-top: -16px;
+    }

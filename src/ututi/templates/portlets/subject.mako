@@ -2,6 +2,25 @@
 <%namespace file="/sections/content_snippets.mako" import="*"/>
 
 <%def name="subject_info_portlet(subject=None)">
+  <% if subject is None: subject = c.subject %>
+  %if subject.description:
+  <%self:portlet id="subject-information-portlet">
+    <%def name="header()">
+      ${_('Info')}
+    </%def>
+    <div class="description">
+      ${h.html_cleanup(subject.description)}
+    </div>
+    %if c.user:
+      <a href="${subject.url(action='edit')}" id="description-edit-link">
+        <img src="/img/icons.com/edit.png" alt="${_('Edit')}" />
+      </a>
+    %endif
+  </%self:portlet>
+  %endif
+</%def>
+
+<%def name="old_subject_info_portlet(subject=None)">
   <%
      if subject is None:
          subject = c.subject
