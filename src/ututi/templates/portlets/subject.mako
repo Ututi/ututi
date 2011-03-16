@@ -38,7 +38,7 @@
   <% if subject is None: subject = c.subject %>
   <%self:portlet id="subject-teachers-portlet">
     <ul class="icon-list">
-      <li class="icon-university align-top">
+      <li class="icon-university align-top subject-location">
         %if subject.location.parent is None:
           ${_("University:")}
         %else:
@@ -47,13 +47,11 @@
         <br />
         ${h.link_to(subject.location.title, subject.location.url())}
       </li>
-      <li class="icon-teacher align-top">
+      <li class="icon-teacher align-top subject-teacher">
         %if subject.teachers:
-          <% teacher_list = ', '.join([h.link_to(teacher.fullname, teacher.url())
-                                       for teacher in subject.teachers]) %>
           ${ungettext('Lecturer:', 'Lecturers:', len(subject.teachers))}
           <br />
-          ${h.literal(teacher_list)}
+          ${subject.teacher_repr}
         %elif subject.lecturer:
           ${_('Lecturer:')}
           <br />
