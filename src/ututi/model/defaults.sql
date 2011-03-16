@@ -803,6 +803,7 @@ create table events (
 create index events_author_id_idx on events(author_id);
 CREATE INDEX events_parent_id_idx ON events(parent_id);
 CREATE INDEX events_created_idx ON events(created);
+create index event_parent_is_null on events(created) where parent_id is null;;
 
 CREATE FUNCTION add_event(event_id int8, evtype varchar) RETURNS void AS $$
     BEGIN
@@ -1020,6 +1021,7 @@ $$ LANGUAGE plpgsql;;
 
 CREATE FUNCTION group_mailing_list_message_event_trigger() RETURNS trigger AS $$
     DECLARE
+      evt events;
       pid int8 := NULL;
     BEGIN
       IF NEW.in_moderation_queue THEN
@@ -1027,8 +1029,10 @@ CREATE FUNCTION group_mailing_list_message_event_trigger() RETURNS trigger AS $$
                VALUES (NEW.group_id, NEW.author_id, 'moderated_post_created', NEW.id);
       ELSE
         pid := get_group_mailing_list_message_event_parent(NEW);
-        INSERT INTO events (object_id, author_id, event_type, message_id, parent_id)
-               VALUES (NEW.group_id, NEW.author_id, 'mailinglist_post_created', NEW.id, pid);
+        INSERT INTO events (object_id, author_id, event_type, message_id)
+               VALUES (NEW.group_id, NEW.author_id, 'mailinglist_post_created', NEW.id)
+               RETURNING * INTO evt;
+        UPDATE events SET parent_id = evt.id WHERE parent_id = pid OR id = pid;
       END IF;
       RETURN NEW;
     END
@@ -1054,16 +1058,19 @@ $$ LANGUAGE plpgsql;;
 
 CREATE FUNCTION group_forum_message_event_trigger() RETURNS trigger AS $$
     DECLARE
+      evt events;
       pid int8 := NULL;
     BEGIN
       IF NEW.category_id > 2 THEN   -- group forum
         pid := get_group_forum_post_event_parent(NEW);
-        INSERT INTO events (object_id, author_id, event_type, post_id, parent_id)
+        INSERT INTO events (object_id, author_id, event_type, post_id)
                VALUES (
                   (SELECT group_id FROM forum_categories
                    WHERE forum_categories.id = NEW.category_id),
                   cast(current_setting('ututi.active_user') as int8),
-                  'forum_post_created', NEW.id, pid);
+                  'forum_post_created', NEW.id)
+               RETURNING * INTO evt;
+        UPDATE events SET parent_id = evt.id WHERE parent_id = pid OR id = pid;
       END IF;
       RETURN NEW;
     END
@@ -1139,11 +1146,14 @@ $$ LANGUAGE plpgsql;;
 
 CREATE FUNCTION private_message_event_trigger() RETURNS trigger AS $$
     DECLARE
+      evt events;
       pid int8 := NULL;
     BEGIN
       pid := get_private_message_event_parent(NEW);
-      INSERT INTO events (recipient_id, author_id, event_type, private_message_id, parent_id)
-             VALUES (NEW.recipient_id, NEW.sender_id, 'private_message_sent', NEW.id, pid);
+      INSERT INTO events (recipient_id, author_id, event_type, private_message_id)
+             VALUES (NEW.recipient_id, NEW.sender_id, 'private_message_sent', NEW.id)
+             RETURNING * INTO evt;
+      UPDATE events SET parent_id = evt.id WHERE parent_id = pid OR id = pid;
       RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
