@@ -43,9 +43,6 @@ Snippets for rendering various content items, e.g. in search results.
 
 <%def name="item_location(object)">
   %if object.location:
-  <%
-    hierarchy_len = len(object.location.hierarchy())
-  %>
   <span class="location-tags">
   %for tag in object.location.hierarchy(True):
     <a href="${tag.url()}">${tag.title_short}</a> |
