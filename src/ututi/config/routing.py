@@ -156,13 +156,13 @@ def make_map(config):
 
     map.connect('/subjects/{action}', controller='subject')
 
-    map.connect('/subject/*tags/{id}/pages/{action}',
+    map.connect('/subject/*tags/{id}/notes/{action}',
                 controller='subjectpage')
 
-    map.connect('/subject/*tags/{id}/page/{page_id}',
+    map.connect('/subject/*tags/{id}/note/{page_id}',
                 controller='subjectpage', action='index')
 
-    map.connect('/subject/*tags/{id}/page/{page_id}/{action}',
+    map.connect('/subject/*tags/{id}/note/{page_id}/{action}',
                 controller='subjectpage')
 
     map.connect('/subject/*tags/{id}/file/{file_id}/{action}',
@@ -171,11 +171,14 @@ def make_map(config):
     subject_actions = ['feed', 'files', 'edit', 'watch', 'js_watch', 'update',
                        'delete', 'undelete', 'flag', 'create_folder', 'delete_folder',
                        'js_create_folder', 'js_delete_folder', 'upload_file',
-                       'upload_file_short', 'pages', 'teach', 'unteach', 'info']
+                       'upload_file_short', 'teach', 'unteach', 'info']
 
     for action in subject_actions:
         map.connect('/subject/*tags/{id}/%s' % action,
                     controller='subject', action=action)
+
+    map.connect('/subject/*tags/{id}/notes',
+                controller='subject', action='pages')
 
     map.connect('/subject/*tags/{id}',
                 controller='subject',
