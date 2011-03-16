@@ -496,8 +496,21 @@ def location_count(location_id, object_type=None):
     location = Tag.get(int(location_id))
     return location.count(object_type)
 
+@u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+def group_members(group_id, limit=6):
+    from ututi.model import Group
+    group = Group.get(int(group_id))
+    members = group.members[:limit]
+
+    return [{'id': member.user_id,
+             'title': member.user.fullname,
+             'url': member.user.url(),
+             'logo_url': member.user.url(action='logo', width=45),
+             'logo_small_url': member.user.url(action='logo', width=30)}
+            for member in members]
+
 @u_cache(expire=3600, invalidate_on_startup=True)
-def group_members(group_id):
+def group_members_count(group_id):
     from ututi.model import meta, GroupMember
     return meta.Session.query(GroupMember).filter_by(group_id=group_id).count()
 

@@ -1,6 +1,7 @@
 <%inherit file="/portlets/base.mako"/>
 <%namespace file="/widgets/sms.mako" import="sms_widget"/>
 <%namespace file="/sections/content_snippets.mako" import="tooltip" />
+<%namespace file="/portlets/universal.mako" import="item_box" />
 
 <%def name="portlet_file(file)">
   <li>
@@ -154,20 +155,6 @@
   </%self:uportlet>
 </%def>
 
-<%def name="group_forum_post_portlet(group=None)">
-  <%
-     if group is None:
-         group = c.group
-  %>
-  <%self:action_portlet id="forum_post_portlet">
-    <%def name="header()">
-    <a class="blark" ${h.trackEvent(None, 'click', 'group_forum_post', 'action_portlets')} href="${url(controller='mailinglist', action='new_thread', id=group.group_id)}">${_('email your group')}</a>
-    ${tooltip(_("Write an email to the group's forum - accessible by all your classmates."),
-              style='margin-top: 4px;')}
-
-    </%def>
-  </%self:action_portlet>
-</%def>
 
 <%def name="group_invite_member_portlet(group=None)">
   <%
@@ -250,41 +237,21 @@
   </%self:portlet>
 </%def>
 
-<%def name="group_members_portlet(group=None)">
+<%def name="group_members_portlet(group=None, count=None)">
   <%
      if group is None:
          group = c.group
+     if count is None: count = 6
+     members = h.group_members(group.id, count)
   %>
-  <%self:uportlet id="group_info_portlet" portlet_class="MyProfile first">
-
+  %if members:
+  <%self:portlet id='location-members-portlet'>
     <%def name="header()">
-      <a ${h.trackEvent(c.group, 'home', 'portlet_header')} href="${group.url(action='members')}" title="${_('''Group's members''')}">${_("Group's members")}</a>
+      ${_("Group members:")}
     </%def>
-    <div class="members_list">
-      %for member in group.members[:8]:
-        <div class="user-logo-link">
-          <div class="user-logo">
-            <a href="${url(controller="user", action="index", id=member.user.id)}" title="${member.user.fullname}">
-              %if member.user.logo is not None:
-                <img src="${url(controller='user', action='logo', id=member.user.id, width=45, height=45)}" alt="logo" />
-              %else:
-                ${h.image('/img/avatar-light-small.png', alt='logo')}
-              %endif
-            </a>
-          </div>
-          <div>
-            <a class="verysmall blark" href="${url(controller="user", action="index", id=member.user.id)}" title="${member.user.fullname}">
-              ${h.ellipsis(member.user.fullname, 10)}
-            </a>
-          </div>
-        </div>
-      %endfor
-        <br class="clear-left" />
-    </div>
-    %if not group.is_member(c.user):
-      ${h.button_to(_('become a member'), url(controller='group', action='request_join', id=group.group_id))}
-    %endif
-  </%self:uportlet>
+    ${item_box(members, with_titles=True)}
+  </%self:portlet>
+  %endif
 </%def>
 
 <%def name="group_sms_portlet(group=None)">
