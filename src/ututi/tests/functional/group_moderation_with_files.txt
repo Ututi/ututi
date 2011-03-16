@@ -5,8 +5,7 @@ Test moderated email messages with attachments
     >>> send_test_message('email_with_attachment2.txt', '66', to='moderators@groups.ututi.lt')
     >>> browser = Browser.logIn('admin@uni.ututi.com', 'asdasd')
     >>> browser.getLink('Moderatoriai', url='/group/moderators').click()
-    >>> browser.getLink('Mailing List').click()
-    >>> browser.getControl('Moderation queue (1)').click()
+    >>> browser.getLink('Moderation queue').click()
     >>> browser.getLink('Also - an attachment').click()
     >>> browser.printCssQuery('.post-attachments', strip=True)
     <ul>
@@ -25,11 +24,10 @@ The message is sent:
     README.txt - http://localhost/group/moderators/mailinglist/file/4/5
 
     >>> browser.getLink('News feed').click()
-    >>> browser.getLink('Mailing List').click()
 
 The attachments should be retained:
-    >>> browser.getLink('Also - an attachment').click()
-    >>> browser.printCssQuery('.post-attachments', strip=True)
+
+    >>> browser.printCssQuery('#wall-event-9 .file-list', strip=True)
     <ul>
       <li>
         <a>README.txt</a>
