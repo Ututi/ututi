@@ -1,4 +1,6 @@
-<%inherit file="/subject/base.mako" />
+<%inherit file="/ubase-sidebar.mako" />
+<%namespace file="/portlets/subject.mako" import="subject_info_portlet,
+    subject_follow_portlet, subject_teachers_portlet, subject_stats_portlet"/>
 <%namespace name="files" file="/sections/files.mako" />
 
 <%def name="head_tags()">
@@ -13,9 +15,12 @@
 
 <%def name="title()">${c.subject.title}</%def>
 
-<div style="float: right; margin-top: 10px;">
-  <fb:like width="90" layout="button_count" show_faces="false" url="${c.subject.url(qualified=True)}"></fb:like>
-</div>
+<%def name="portlets()">
+  ${subject_info_portlet()}
+  ${subject_follow_portlet()}
+  ${subject_teachers_portlet()}
+  ${subject_stats_portlet()}
+</%def>
 
 <h1 class="page-title">${c.subject.title}</h1>
 
@@ -31,22 +36,6 @@
   %endif
   <br style="clear: left;" />
 </div>
-%endif
-
-##google ads
-%if c.came_from_search:
-<script type="text/javascript">
-  <!--
- google_ad_client = "pub-1809251984220343";
- /* 468x60, sukurta 10.2.3 */
- google_ad_slot = "3543124516";
- google_ad_width = 468;
- google_ad_height = 60;
- //-->
-</script>
-<script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
 %endif
 
 ${next.body()}
