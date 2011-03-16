@@ -122,6 +122,9 @@ h1.page-title {
     margin: 0;
     font-size: 20px;
     font-weight: bold;
+}
+
+h1.page-title.with-bottom-line {
     border-bottom: 1px solid #ff9900;
     padding-bottom: 2px; /* some spacing for border */
 }

@@ -9,10 +9,6 @@
     width: 845px !important;
     margin: auto;
   }
-  #registration-page-container h1 {
-    border-bottom: 1px solid #ff9900;
-    padding-bottom: 2px;
-  }
   button.next {
     margin-top: 20px;
   }
@@ -22,6 +18,7 @@
     background-image: url('/img/registration_steps_bg.png');
     background-repeat: no-repeat;
     list-style: none;
+    margin-bottom: 20px;
   }
   ul.step-1 { background-position: center    0px; }
   ul.step-2 { background-position: center  -50px; }
@@ -71,7 +68,7 @@
   </ul>
   %endif
 
-  <h1 class="page-title registration">${self.pagetitle()}</h1>
+  <h1 class="page-title registration with-bottom-line">${self.pagetitle()}</h1>
 
   ${next.body()}
 
