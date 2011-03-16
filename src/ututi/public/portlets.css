@@ -267,3 +267,23 @@
             padding-left: 12px;
         }
 
+#subject-related-subjects-portlet { }
+
+    #subject-related-subjects-portlet .snippet-subject {
+        margin-top: 10px;
+    }
+
+    #subject-related-subjects-portlet .snippet-subject .heading {
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    #subject-related-subjects-portlet .snippet-subject ul.statistics li {
+        display: inline-block;
+        margin-top: 0px;
+        margin-right: 5px;
+        min-width: 15px;    /* makes icons line up nicely in list */
+        color: #3d617a;
+        padding-left: 12px;
+    }
+

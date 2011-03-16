@@ -100,6 +100,43 @@
   %endif
 </%def>
 
+<%def name="subject_related_subjects_portlet()">
+  %if c.similar_subjects:
+  <%self:portlet id="subject-related-subjects-portlet">
+    <%def name="header()">
+      ${_('Related subjects:')}
+    </%def>
+    %for item in c.similar_subjects:
+      <div class="snippet-subject">
+        <div class="heading">
+          <div class="item-title">
+            <a href="${item['url']}" title="${item['title']}">${item['title']}</a>
+          </div>
+        </div>
+        <div class="description">
+          <div class="location-tags">
+          %for tag in item['hierarchy']:
+            <a href="${tag['url']}" title="${tag['title']}">${tag['title_short']}</a> |
+          %endfor
+          </div>
+          <div class="teachers">
+          %if item['teachers']:
+            ${_("Lect.")} ${item['teachers']}
+          %endif
+          </div>
+        </div>
+        <ul class="statistics icon-list">
+            <li class="icon-file">${item['file_cnt']}</li>
+            <li class="icon-note">${item['page_cnt']}</li>
+            <li class="icon-group">${item['group_cnt']}</li>
+            <li class="icon-user">${item['user_cnt']}</li>
+        </ul>
+      </div>
+    %endfor
+  </%self:portlet>
+  %endif
+</%def>
+
 <%def name="subject_similar_subjects_portlet()">
   %if c.similar_subjects:
   <%self:uportlet id="similar_subjects_portlet">
