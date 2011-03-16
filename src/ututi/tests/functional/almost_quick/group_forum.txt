@@ -180,34 +180,3 @@ again:
     >>> user.getControl('Subscribe to emails')
     <SubmitControl name=None type='submitbutton'>
 
-Forum-wide subscriptions
-========================
-
-We can subscribe to the entire forum. Then we will be automatically
-subscribed to any new threads:
-
-    >>> user.getLink('Back to the topic list').click()
-
-    ## >>> user.getControl('Get email').click()
-
-(Because of a TestBrowser bug, we have to do this by hand.)
-
-    >>> action_url = user.getControl('Get email').mech_form.action
-    >>> res = app.post("/login",
-    ...                params={'login': 'user@ututi.lt', 'password': 'password'})
-    >>> res = app.post(action_url)
-
-Now, the admin creates another thread:
-
-    >>> browser.getLink('Back to the topic list').click()
-
-    >>> browser.getControl('New topic').click()
-    >>> form = browser.getForm(id='group_add_form')
-    >>> form.getControl(name='title').value = "Some news"
-    >>> form.getControl(name='message').value = "Notice this?"
-    >>> form.getControl('Post').click()
-
-And the user is automatically subscribed to it:
-
-    >>> mail_queue.pop()
-    <EmailInfo sender='info@ututi.lt' recipients=['user@ututi.lt']>
