@@ -1401,14 +1401,9 @@ ul.icon-list {
         background-image: url('img/icons.com/search_small.png');
         background-position: 1px center;
     }
-    ul.icon-list li.icon-user {
-        background-image: url('img/icons.com/user_small_grey.png');
-        background-position: 2px center;
-    }
-    ul.icon-list li.icon-file {
-        background-image: url('img/icons.com/file_small_grey.png');
-        background-position: 2px center;
-    }
+    ul.icon-list li.icon-user { background-image: url('img/icons.com/user_small_grey.png'); }
+    ul.icon-list li.icon-teacher { background-image: url('img/icons.com/teacher_small.png'); }
+    ul.icon-list li.icon-file { background-image: url('img/icons.com/file_small_grey.png'); }
     ul.icon-list li.icon-time { background-image: url('img/icons.com/clock.png'); }
     ul.icon-list li.icon-feed { background-image: url('img/icons.com/feed_small_grey.png'); }
     ul.icon-list li.icon-note { background-image: url('img/icons.com/wiki_small_grey.png'); }
@@ -1426,6 +1421,16 @@ ul.icon-list {
         padding-left: 22px;
     }
     ul.icon-list li.icon-contact { background-image: url('img/icons.com/contact_small.png'); }
+
+    /* Sometimes we want icons not centered vertically. */
+
+    ul.icon-list li.icon-university.align-top {
+        background-position: left 4px;
+    }
+    ul.icon-list li.icon-teacher.align-top {
+        background-position: left 2px;
+    }
+
 
 /* MEDIUM */
 

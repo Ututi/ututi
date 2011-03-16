@@ -251,3 +251,19 @@
         float: right;
         margin-top: -16px;
     }
+
+#subject-statistics-portlet { }
+
+    #subject-statistics-portlet ul.statistics {
+        margin-left: 20px;
+    }
+
+        #subject-statistics-portlet ul.statistics li {
+            display: inline-block;
+            margin-top: 0px;
+            margin-right: 5px;
+            min-width: 10px;    /* makes icons line up nicely in list */
+            color: #3d617a;
+            padding-left: 12px;
+        }
+
