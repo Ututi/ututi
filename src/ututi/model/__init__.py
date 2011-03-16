@@ -1460,6 +1460,13 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
                 'group_cnt': self.group_count(),
                 'user_cnt': self.user_count()}
 
+    @property
+    def share_info(self):
+        return dict(title=self.title,
+                    caption=self.location.title,
+                    link=self.url(qualified=True),
+                    description=html_strip(self.description))
+
 
 pages_table = None
 
