@@ -32,8 +32,8 @@ class WallMixin(object):
                       Event.event_type)\
             .limit(limit).all()
 
-    def _set_wall_variables(self, events_hidable=False):
+    def _set_wall_variables(self, events_hidable=False, limit=60):
         """This is just a shorthand method for setting common
         wall variables."""
-        c.events = self._wall_events()
+        c.events = self._wall_events(limit)
         c.events_hidable = events_hidable
