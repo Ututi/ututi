@@ -108,12 +108,16 @@
 %endif
 </%def>
 
-<%def name="share_portlet(object)">
+<%def name="share_portlet(object, title=None)">
   %if hasattr(object, 'share_info'):
   <% info = object.share_info %>
   <%self:portlet id="share-portlet">
     <%def name="header()">
-      ${_("Tell a friend:")}
+      %if title is None:
+        ${_("Tell a friend:")}
+      %else:
+        ${title}
+      %endif
     </%def>
     <ul class="icon-list">
       <li class="icon-facebook"><a href="#share-facebook" id="facebook-share-link">${"Facebook"}</a></li>
@@ -154,7 +158,7 @@
               caption: '${info['caption']}',
               %endif
               message: "${_("Here's what I've found in Ututi")}" + '!',
-              description: '${info['description']}',
+              description: '${h.single_line(info['description'])}',
               picture: '${url("/img/site_logo_collapsed.gif", qualified=True)}'
             }
           );
