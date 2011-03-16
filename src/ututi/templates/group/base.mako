@@ -53,7 +53,7 @@ ${group_right_sidebar()}
 
   <div id="group-information">
     <div class="group-logo">
-      <img src="${url(controller='group', action='logo', id=c.group.group_id, width=70, height=70)}" alt="logo" />
+      <img id="group-logo" src="${url(controller='group', action='logo', id=c.group.group_id, width=70, height=70)}" alt="logo" />
     </div>
 
     <div class="group-title" class="break-word">

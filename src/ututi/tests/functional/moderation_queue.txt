@@ -17,18 +17,6 @@ Disable moderation first:
     >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
     >>> send_test_message('email_from_non_ututi.txt', '42', to='moderators@groups.ututi.lt', subject='Hello from varlius')
 
-    >>> browser.getLink('Mailing List').click()
-    >>> browser.printQuery('//div[@class="no-messages"]/text()')
-    No messages yet.
-
-
-We can't see the moderation queue button too:
-
-    >>> browser.printCssQuery('.single-title button', strip=True)
-    <button>
-      <span>New topic</span>
-    </button>
-
 Now if we go to the group settings page and set it so it would allow
 other people to post emails to our mailing list, a moderation queue
 get's enabled and all the emails that are sent to the group from
@@ -45,29 +33,15 @@ mailing list:
 
     >>> send_test_message('email_from_user2.txt', '33', to='moderators@groups.ututi.lt')
 
-    >>> browser.getLink('Mailing List').click()
-    >>> browser.printQuery('//div[@class="no-messages"]/text()')
-    No messages yet.
-
 No email messages will be sent to group members either:
 
     >>> from ututi.lib.mailer import mail_queue
     >>> len(mail_queue)
     0
 
-But we will see it in the moderation queue. Note here, that the button
-linking to the moderation queue also shows the number of messages
-awaiting moderation:
+But we will see it in the moderation queue.
 
-    >>> browser.printCssQuery('.single-title button', strip=True)
-    <button>
-      <span>New topic</span>
-    </button>
-    <button>
-      <span>Moderation queue (1)</span>
-    </button>
-
-    >>> browser.getControl('Moderation queue (1)').click()
+    >>> browser.getLink('Moderation queue').click()
     >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()")
     Hello
     Hi, I am just writing to tell you how wonderful...
@@ -123,15 +97,9 @@ The corresponding event is removed from the wall as well:
     You have joined the group Moderatoriai 0 seconds ago
     Third user has joined the group Moderatoriai 0 seconds ago
 
-Let's get back to the mailing list. Still no messages here:
-
-    >>> browser.getLink('Mailing List').click()
-    >>> browser.printQuery('//div[@class="no-messages"]/text()')
-    No messages yet.
-
 In the administration view one message is still left. Let's approve it:
 
-    >>> browser.getControl('Moderation queue (1)').click()
+    >>> browser.getLink('Moderation queue').click()
     >>> action_url = browser.getControl('Approve').mech_form.action
     >>> res = app.post(action_url,
     ...                headers=[('referer', browser.url)])
@@ -140,11 +108,11 @@ In the administration view one message is still left. Let's approve it:
 
 Now the message should appear in the actual mailing list:
 
-    >>> browser.getLink('Mailing List').click()
-    >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()") # doctest: -ELLIPSIS
-    Hello
-    (0 replies)
-    Hi, I am just writing to tell you how wonderful...
+    >>> browser.getLink('News feed').click()
+    >>> browser.printCssQuery('#wall-event-11 .event-content', strip=True)
+    <span>Hi, I am just writing to tell you how wonderful this system is.<br />
+      <br />User2<br />
+    </span>
 
 The corresponding event is removed from wall:
 
@@ -166,8 +134,7 @@ Approved messages got sent to the members of the group:
 Let us navigate to the navigation queue one more time. We see a message
 saying that the queue is empty:
 
-    >>> browser.getLink('Mailing List').click()
-    >>> browser.getControl('Moderation queue (0)').click()
+    >>> browser.getLink('Moderation queue').click()
     >>> browser.printQuery('//div[@class="no-messages"]//text()')
     No messages to be moderated yet.
 
@@ -219,14 +186,7 @@ redirection to the moderation queue with an appropriate flash message:
 
 
 We are not able to reject the message because it was already approved.
-The later flash contains link to the message we're trying to reject, so
-let's view it.
-
-    >>> browser.getLink('one').click()
-    >>> print browser.url
-    http://localhost/group/moderators/mailinglist/thread/6
-
-If we go back and click on the second message and reject it, we are again 
+If we go back and click on the second message and reject it, we are again
 redirected to moderation queue and an appropriate message is displayed:
 
     >>> browser.goBack()

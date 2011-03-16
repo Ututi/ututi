@@ -4,12 +4,6 @@ Test for group mailing list UI
     >>> browser = Browser.logIn()
 
     >>> browser.getLink('Moderatoriai', url='/group/moderators').click()
-    >>> browser.getLink('Mailing List').click()
-
-There are no threads posted at the moment:
-
-    >>> browser.printQuery("id('single-messages')//text()")
-    No messages yet.
 
 Let's send some messages:
 
@@ -53,18 +47,16 @@ And verify that they got properly processed by our email handler:
 Data structures seem to be ok, let's see if they are displayed
 properly in the forum page:
 
-    >>> browser.open('http://localhost/group/moderators/mailinglist')
-    >>> browser.printQuery("//div[@class='single-messages']//text()")
-    Hello
-    (3 replies)
-    Hi, I am just writing to tell you how wonderful...
-    Adminas Adminovix
-    2009 Jun 15, 14:05
+    >>> browser.open('http://localhost/group/moderators')
+    >>> browser.printCssQuery('#wall-event-8 .event-title', strip=True)
+    <span>
+    <BLANKLINE>
+            You have posted a new message <a>Hello</a> to the group <a>Moderatoriai</a>
+    </span>
 
 
 Let's look at the attachment in the thread:
 
-    >>> browser.getLink('Hello').click()
     >>> browser.getLink('README.txt')
     <Link text='README.txt' url='http://localhost/group/moderators/mailinglist/file/7/8'>
 
@@ -73,194 +65,6 @@ Let's look at the attachment in the thread:
 
     >>> print browser.contents
     I am a file!
-
-    >>> browser.open(url)
-    >>> browser.getLink('Back to the topic list').click()
-
-Let's post a new topic now:
-
-    >>> browser.getControl('New topic').click()
-
-    >>> browser.url
-    'http://localhost/group/moderators/mailinglist/new_thread?'
-
-    >>> browser.getControl('Subject').value = "Hi mom"
-    >>> browser.getControl('Message').value = u"I am doing fine. Send more cash."
-    >>> browser.getControl('Post').click()
-
-The email gets sent to all the members of the group:
-
-    >>> from ututi.lib.mailer import mail_queue
-    >>> msg = mail_queue.pop()
-    >>> print msg.message
-    MIME-Version: 1.0
-    Content-Type: text/plain; charset="us-ascii"
-    Content-Transfer-Encoding: 7bit
-    From: admin@uni.ututi.com
-    To: moderators@groups.ututi.lt
-    Subject: Hi mom
-    Message-ID: <...@groups.ututi.lt>
-    Reply-To: moderators@groups.ututi.lt
-    Errors-To: errors@ututi.lt
-    List-Id: moderators@groups.ututi.lt
-    <BLANKLINE>
-    I am doing fine. Send more cash.
-
-    >>> msg.recipients
-    ['admin@uni.ututi.com']
-
-And we get redirected to our newly created thread
-
-    >>> browser.url
-    'http://localhost/group/moderators/mailinglist/thread/9'
-
-    >>> browser.printQuery("//tr[@class='thread-post']")
-    <tr class="thread-post">
-      <td class="author-logo">
-        <a href="/user/1">
-          <img alt="logo" id="group-logo" src="/images/user_logo_45x60.png" />
-        </a>
-      </td>
-      <td class="message">
-        <div class="message-content">
-          <div class="post-body">
-            I am doing fine. Send more cash.<br />
-          </div>
-        </div>
-      </td>
-    </tr>
-
-If we go back to the forum, we should see the new thread in the list
-of threads:
-
-    >>> browser.getLink('Back to the topic list').click()
-    >>> browser.printQuery("//div[@class='single-messages']//text()")
-    Hi mom
-    (0 replies)
-    ...
-    Hello
-    (3 replies)
-    ...
-
-Let's go back to it now, and post a reply:
-
-    >>> browser.getLink('Hi mom').click()
-    >>> browser.getControl('Message').value = "Oh, and don't forget to feed the fish!"
-    >>> browser.getForm(id="group_add_form").submit()
-
-The email gets sent.
-
-    >>> from ututi.lib.mailer import mail_queue
-    >>> print mail_queue.pop().message
-    MIME-Version: 1.0
-    Content-Type: text/plain; charset="us-ascii"
-    Content-Transfer-Encoding: 7bit
-    From: admin@uni.ututi.com
-    To: moderators@groups.ututi.lt
-    Subject: Re: Hi mom
-    Message-ID: <...@groups.ututi.lt>
-    In-reply-to: <...@groups.ututi.lt>
-    Reply-To: moderators@groups.ututi.lt
-    Errors-To: errors@ututi.lt
-    List-Id: moderators@groups.ututi.lt
-    <BLANKLINE>
-    Oh, and don't forget to feed the fish!
-
-We still should be looking at the thread:
-
-    >>> browser.url
-    'http://localhost/group/moderators/mailinglist/thread/9'
-
-And our new message should be in the list:
-
-    >>> browser.printQuery("//tr[@class='thread-post']")
-    <tr class="thread-post">
-      <td class="author-logo">
-        <a href="/user/1">
-          <img alt="logo" id="group-logo" src="/images/user_logo_45x60.png" />
-        </a>
-      </td>
-      <td class="message">
-        <div class="message-content">
-          <div class="post-body">
-            I am doing fine. Send more cash.<br />
-          </div>
-        </div>
-      </td>
-    </tr>
-    <tr class="thread-post">
-      <td class="author-logo">
-        <a href="/user/1">
-          <img alt="logo" id="group-logo" src="/images/user_logo_45x60.png" />
-        </a>
-      </td>
-      <td class="message">
-        <div class="message-content">
-          <div class="post-body">
-            Oh, and don't forget to feed the fish!<br />
-          </div>
-        </div>
-      </td>
-    </tr>
-
-If there is more than one member in the group, all of them get the
-email:
-
-    >>> from ututi.model import Group, User, LocationTag, meta
-    >>> group = Group.get('moderators')
-    >>> user = User.get('user@ututi.lt', LocationTag.get('uni'))
-    >>> group.add_member(user)
-    >>> meta.Session.commit()
-
-    >>> browser.getControl('Message').value = "Let's welcome our new member!"
-    >>> browser.getForm(id="group_add_form").submit()
-
-    >>> msg = mail_queue.pop()
-    >>> print msg.message
-    MIME-Version: 1.0
-    Content-Type: text/plain; charset="us-ascii"
-    Content-Transfer-Encoding: 7bit
-    From: admin@uni.ututi.com
-    To: moderators@groups.ututi.lt
-    Subject: Re: Hi mom
-    Message-ID: <...@groups.ututi.lt>
-    In-reply-to: <...@groups.ututi.lt>
-    Reply-To: moderators@groups.ututi.lt
-    Errors-To: errors@ututi.lt
-    List-Id: moderators@groups.ututi.lt
-    <BLANKLINE>
-    Let's welcome our new member!
-
-    >>> msg.recipients
-    ['admin@uni.ututi.com', 'user@ututi.lt']
-
-Now let's unsubscribe from the mailing list as an administrator:
-
-    >>> browser.open(browser.url)
-
-    ## >>> browser.getLink('Do not get email').click()
-
-(Because of a TestBrowser bug, we have to do this by hand.)
-
-    >>> action_url = browser.getControl('Do not get email').mech_form.action
-    >>> res = app.post("/login",
-    ...                params={'login': 'admin@uni.ututi.com', 'password': 'asdasd'})
-    >>> res = app.post(action_url)
-
-And post one more message:
-
-    >>> browser.getControl('Message').value = "I won't see this!"
-    >>> browser.getForm(id="group_add_form").submit()
-
-    >>> msg = mail_queue.pop()
-    >>> msg.recipients
-    ['user@ututi.lt']
-
-And clean up the email queue:
-
-    >>> len(mail_queue)
-    4
-    >>> mail_queue[:] = []
 
 Non-group members can see the link, and should be able to post a new
 message:
@@ -274,8 +78,7 @@ message:
 
 This message will appear in the moderation queue:
 
-    >>> browser.getLink('Mailing List').click()
-    >>> browser.getControl('Moderation queue (1)').click()
+    >>> browser.open('http://localhost/group/moderators/mailinglist/administration')
     >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()")
     Hi group!
     This is my message
@@ -312,18 +115,3 @@ members of the group (XXX not implemented):
 #     Errors-To: errors@ututi.lt
 #     List-Id: moderators@groups.ututi.lt
 #     This is my message
-
-Regression test for broken ajax paging
---------------------------------------
-
-Let's try loading the content of the page as if we were making an ajax request:
-
-    >>> browser.open('http://localhost/group/moderators/mailinglist?js=1&page=1')
-    >>> browser.printQuery("//div[contains(@class, 'm-on')]//text()")
-    Hi mom
-    (3 replies)
-    I am doing fine. Send more cash.
-    <BLANKLINE>
-    Hello
-    (3 replies)
-    Hi, I am just writing to tell you how wonderful...

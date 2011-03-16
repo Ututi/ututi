@@ -19,7 +19,7 @@ Now let's try writing a couple of messages to the forum:
 Two first emails get ignored, but if a member of the group sends such
 an email, it gets posted into the first category of this forum:
 
-    >>> browser.click('Forum')
+    >>> browser.open('http://localhost/group/moderators/forum')
     >>> browser.printCssQuery('.post-title , .m-on .verysmall', strip=True)
     <a>Also - an attachment</a>
     <div>Also, I just wanted to send you this file:</div>

@@ -64,7 +64,7 @@ Let's find the group:
 
 Let's enter the forum:
 
-    >>> browser.getLink('Forum').click()
+    >>> browser.open('http://localhost/group/moderators/forum')
 
 Let's test post paging:
 
@@ -89,7 +89,7 @@ And create some threads:
 
     >>> create_threads('moderators')
 
-    >>> browser.getLink('Forum').click()
+    >>> browser.open('http://localhost/group/moderators/forum')
     >>> browser.getLink('General').click()
     >>> print browser.url
     http://localhost/group/moderators/forum/3

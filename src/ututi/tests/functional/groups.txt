@@ -34,7 +34,7 @@ We can edit the group's information.
    >>> browser.getControl('Description').value = 'Ututi moderatorių grupė'
    >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
    >>> browser.getControl('Save').click()
-   >>> browser.printQuery('id("moduleMenu")//li[@class="current"]//a/text()')
+   >>> browser.printQuery('id("tabs")//li[@class="current"]//a/text()')
    News feed
 
    >>> browser.printCssQuery("#group-logo")
