@@ -25,10 +25,18 @@
   <% if subject is None: subject = c.subject %>
   %if c.user is not None:
     <%self:portlet id="subject-follow-portlet">
-      %if c.user.watches(subject):
-        ${h.button_to(_("Unfollow"), subject.url(action='watch'), class_='dark', method='GET')}
+      %if c.user.is_teacher:
+        %if c.user.teaches(subject):
+          ${h.button_to(_("Remove from my taught courses"), subject.url(action='unteach'), class_='dark', method='GET')}
+        %else:
+          ${h.button_to(_("I teach this course"), subject.url(action='teach'), class_='dark add', method='GET')}
+        %endif
       %else:
-        ${h.button_to(_("Follow"), subject.url(action='watch'), class_='dark add', method='GET')}
+        %if c.user.watches(subject):
+          ${h.button_to(_("Unfollow"), subject.url(action='watch'), class_='dark', method='GET')}
+        %else:
+          ${h.button_to(_("Follow"), subject.url(action='watch'), class_='dark add', method='GET')}
+        %endif
       %endif
     </%self:portlet>
   %endif
