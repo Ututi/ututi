@@ -34,6 +34,9 @@ table.wiki-notes td.title {
   background: url('/img/icons.com/wiki_medium_grey.png') no-repeat 10px center;
   padding-left: 25px;
 }
+table.wiki-notes td.title.deleted {
+  text-decoration: line-through;
+}
 #new-note-button {
   margin-bottom: 15px;
 }
@@ -67,7 +70,7 @@ else:
     </tr>
     %for page in pages:
     <tr>
-      <td class="title"><a href="${page.url()}" title="${page.title}">${page.title}</a></td>
+      <td class="title${' deleted' if page.isDeleted() else ''}"><a href="${page.url()}" title="${page.title}">${page.title}</a></td>
       <td class="author"><a href="${page.last_version.created.url()}">${page.last_version.created.fullname}</a></td>
       <td class="date">${h.when(page.last_version.created_on)}</td>
     </tr>
