@@ -11,11 +11,9 @@
  </%def>
 
 <%def name="portlets()">
-<div id="sidebar">
   ${subject_info_portlet(c.subject)}
-  ${subject_similar_subjects_portlet()}
+  ${subject_related_subjects_portlet()}
   ${ubooks_portlet()}
-</div>
 </%def>
 
 ${next.body()}
