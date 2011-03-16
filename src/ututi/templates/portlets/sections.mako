@@ -1,7 +1,7 @@
 <%namespace file="/portlets/user.mako" import="profile_portlet, user_information_portlet, invite_friends_portlet,
                                                user_groups_portlet, user_subjects_portlet, teacher_information_portlet,
                                                user_menu_portlet, user_description_portlet, todo_portlet"/>
-<%namespace file="/portlets/group.mako" import="group_info_portlet,
+<%namespace file="/portlets/group.mako" import="group_info_portlet, group_settings_portlet,
                                                 group_invite_member_portlet, group_sms_portlet,
                                                 group_members_portlet"/>
 <%namespace file="/portlets/universal.mako" import="quick_file_upload_portlet, users_online_portlet"/>
@@ -55,7 +55,7 @@
 <%def name="group_right_sidebar(exclude=[])">
   ${group_invite_member_portlet()}
   ${group_members_portlet()}
-  ${ubooks_portlet()}
+  ${group_settings_portlet()}
 ##  %if not 'sms' in exclude and c.group.is_member(c.user):
 ##    ${group_sms_portlet()}
 ##  %endif

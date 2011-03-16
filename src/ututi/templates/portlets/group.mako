@@ -254,6 +254,36 @@
   %endif
 </%def>
 
+<%def name="group_settings_portlet(group=None)">
+  <% if group is None: group = c.group %>
+    <%self:portlet id="group-admin-portlet">
+      <%def name="header()">
+        ${_("Settings:")}
+      </%def>
+
+      %if group.is_admin(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
+      <div style="padding-top: 4px">
+        <a href="${group.url(controller='mailinglist', action='administration')}">${_('Moderation queue')}</a>
+      </div>
+      %endif
+
+      %if group.is_subscribed(c.user):
+      <div style="padding-top: 4px">
+        <a href="${group.url(action='unsubscribe')}">${_("Do not get email")}</a>
+      </div>
+      %else:
+      <div style="padding-top: 4px">
+        <a href="${group.url(action='subscribe')}">${_("Get email")}</a>
+      </div>
+      %endif
+
+      <div style="padding-top: 4px">
+        <a href="${group.url(action='leave')}">${_("Leave group")}</a>
+      </div>
+
+    </%self:portlet>
+</%def>
+
 <%def name="group_sms_portlet(group=None)">
   <%
      if group is None:
