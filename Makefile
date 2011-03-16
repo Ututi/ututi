@@ -116,11 +116,11 @@ buildout:
 .PHONY: test
 test: test1 test2
 
-.PHONY: test1
+.PHONY: test1 bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
 test1:
 	bin/test --layer=Ututi
 
-.PHONY: test2
+.PHONY: test2 bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
 test2:
 	bin/test --layer=U2ti
 
