@@ -80,17 +80,19 @@ If group admin clicks on the subject of the message, he gets directed
 to the message moderation view in which he can see the whole content
 of the message:
 
-    >>> browser.getLink('Hello from varlius').click()
-    >>> browser.printQuery("//div[@class='post-body']//text()")
-    Confirm your varlius registration!
-    Click the link now!
-    Sincerely,
-    Varlius staff
+    >>> browser.printCssQuery('#wall-event-9 .event-content', strip=True)
+    <span>Confirm your varlius registration!<br />
+      <br />Click the link now!<br />
+      <br />Sincerely,<br />
+      <br />Varlius staff<br />
+    </span>
+
 
 Administrator can click "Approve" button to approve the message.
 From this view he gets redirected to the moderation queue:
 
-    >>> browser.getControl('Approve').click()
+    >>> browser.open('http://localhost/group/moderators/mailinglist/administration')
+    >>> browser.getControl('Approve', index=1).click()
     >>> print browser.url
     http://localhost/group/moderators/mailinglist/administration
 
@@ -99,19 +101,6 @@ approved:
 
     >>> browser.printQuery("//div[@class='flash-message']//text()")
     Message Hello from varlius has been approved.
-
-We can click on the message link to go to the mailing list, where the
-approved message has appeared:
-
-    >>> browser.getLink('Hello from varlius').click()
-    >>> print browser.url
-    http://localhost/group/moderators/mailinglist/thread/5
-
-    >>> browser.printQuery("//div[@class='post-body']//text()")
-    Confirm your varlius registration!
-    Click the link now!
-    Sincerely,
-    Varlius staff
 
 Now if user refreshes his wall, he sees the message at the top:
 

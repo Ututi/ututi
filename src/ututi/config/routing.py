@@ -123,6 +123,9 @@ def make_map(config):
     map.connect('/group/{id}/mailinglist/{action}',
                 controller='mailinglist')
 
+    map.connect('/group/{id}/mailinglist/{action}/{thread_id}',
+                controller='mailinglist')
+
     map.connect('/group/{id}/mailinglist/file/{message_id}/{file_id}',
                 controller='mailinglist',
                 action='file')
