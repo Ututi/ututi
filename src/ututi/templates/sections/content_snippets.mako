@@ -121,7 +121,7 @@ Snippets for rendering various content items, e.g. in search results.
         <li class="icon-time">${h.when(object.created_on)}</li>
         <li class="icon-file">${h.item_file_count(object.id)}</li>
         <li class="icon-subject">${h.group_subjects(object.id)}</li>
-        <li class="icon-user">${h.group_members(object.id)}</li>
+        <li class="icon-user">${h.group_members_count(object.id)}</li>
     </ul>
   </div>
 </%def>

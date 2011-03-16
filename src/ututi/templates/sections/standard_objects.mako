@@ -121,7 +121,7 @@
       <div class="group-title">
         <dt>
           <a ${h.trackEvent(Null, 'groups', 'title', 'profile')} href="${group.url()}">${group.title}</a>
-          <% n_members = h.group_members(group.id) %>
+          <% n_members = h.group_members_count(group.id) %>
           (${ungettext("%(count)s member", "%(count)s members", n_members) % dict(count=n_members)})
         </dt>
         <div><dd>
