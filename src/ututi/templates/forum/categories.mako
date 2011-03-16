@@ -8,9 +8,36 @@
 </%def>
 
 <%def name="portlets()">
-<div id="sidebar">
-  ${group_sidebar()}
-</div>
+  ${user_sidebar()}
+</%def>
+
+<%def name="portlets_right()">
+${group_right_sidebar()}
+</%def>
+
+<%def name="css()">
+   ${parent.css()}
+
+   #group-information {
+      margin-top: 15px;
+      min-height: 80px;
+   }
+
+   #group-information .group-logo {
+      float: left;
+      margin-right: 15px;
+   }
+
+   #group-information .group-title {
+      margin-bottom: 7px;
+   }
+
+   #group-information .group-title a {
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 0.5;
+   }
+
 </%def>
 
 %if not c.group.forum_categories:

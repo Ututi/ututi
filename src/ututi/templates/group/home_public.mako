@@ -12,10 +12,6 @@
   ${c.group.title}
 </%def>
 
-<%def name="portlets()">
-${user_sidebar()}
-</%def>
-
 <h1 class="page-title">
   ${self.title()}
   %if not c.group.is_member(c.user):
