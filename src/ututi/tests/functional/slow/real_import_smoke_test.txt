@@ -57,4 +57,4 @@ And upload all the files one by one:
     >>> browser.open('http://localhost/admin/admin_wall')
     >>> s3 = (browser.lastRequestPystones, browser.lastRequestSeconds)
 
-    >>> s1, s2, s3
+    # >>> s1, s2, s3
