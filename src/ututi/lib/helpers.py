@@ -268,7 +268,8 @@ def html_strip(html_text):
     return ' '.join([text.strip() for text in texts])
 
 def single_line(text):
-    return text.replace('\n', '').replace('\r', '').strip()
+    if isinstance(text, basestring):
+        return text.replace('\n', '').replace('\r', '').strip()
 
 def file_size(size):
     suffixes = [("", 2**10),
