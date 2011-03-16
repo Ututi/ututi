@@ -50,7 +50,7 @@ page creation view:
 
     >>> browser.getLink("Create wiki page").click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/pages/add'
+    'http://localhost/subject/vu/mat_analize/notes/add'
 
 As for files, there is no "add file" view available, and subjects home
 page is responsible for that functionality, so teacher is directed there:

@@ -22,7 +22,7 @@ And add a page for it.
 We should get redirected to the index view of the page we just created.
 
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/page/4'
+    'http://localhost/subject/vu/mat_analize/note/4'
 
     >>> browser.printQuery("//h2[@class='portletTitle bold']/text()")
     How to be awesome!
@@ -39,7 +39,7 @@ Let's edit the page now.
 And see how it works.
 
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/page/4'
+    'http://localhost/subject/vu/mat_analize/note/4'
 
     >>> browser.printQuery("//h2[@class='portletTitle bold']/text()")
     How to be awesome!
@@ -95,41 +95,14 @@ Let's go back:
 
     >>> browser.getLink('Go back to Matematin\xc4\x97 analiz\xc4\x97').click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/pages'
+    'http://localhost/subject/vu/mat_analize/notes'
 
 We should see the page on the list of pages, even though it has been deleted:
 
-    >>> browser.printCssQuery("#subject_pages", strip=True)
-    <div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div>
-        <h2>Subject's Wiki Pages (1)</h2>
-        <span>
-          <form>
-            <fieldset>
-              <button>
-                <span>Create a wiki document</span>
-              </button>
-            </fieldset>
-          </form>
-        </span>
-      </div>
-      <div>
-        <p>
-          <span>
-            <a>How to be awesome!</a>
-          </span>
-          <span>...</span>
-          <span>
-            <a>Adminas Adminovix</a>
-          </span>
-        </p>
-        <p>Yeah! Being Awesome is very easy! $$\sum_{n=1}^\infty a_n$$</p>
-      </div>
-    </div>
+    >>> browser.printCssQuery("table.wiki-notes td.title")
+    <td class="title deleted">
+      <a href="/subject/vu/mat_analize/note/4" title="How to be awesome!">How to be awesome!</a>
+    </td>
 
 
 Now, visit the page and undelete:
@@ -145,38 +118,10 @@ We could delete it again if we wanted to:
 Now the page shows up in the index again without the "deleted" marker:
 
     >>> browser.getLink('Go back to Matematin\xc4\x97 analiz\xc4\x97').click()
-    >>> browser.printCssQuery("#subject_pages", strip=True)
-    <div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div>
-        <h2>Subject's Wiki Pages (1)</h2>
-        <span>
-          <form>
-            <fieldset>
-              <button>
-                <span>Create a wiki document</span>
-              </button>
-            </fieldset>
-          </form>
-        </span>
-      </div>
-      <div>
-        <p>
-          <span>
-            <a>How to be awesome!</a>
-          </span>
-          <span>...</span>
-          <span>
-            <a>Adminas Adminovix</a>
-          </span>
-        </p>
-        <p>Yeah! Being Awesome is very easy! $$\sum_{n=1}^\infty a_n$$</p>
-      </div>
-    </div>
-
+    >>> browser.printCssQuery("table.wiki-notes td.title")
+    <td class="title">
+      <a href="/subject/vu/mat_analize/note/4" title="How to be awesome!">How to be awesome!</a>
+    </td>
 
 Confirming bug fix: requesting page with a non-integer as its id was resulting in a crash.
 
