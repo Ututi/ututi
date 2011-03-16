@@ -3,7 +3,6 @@ import urlparse
 import sys
 import os
 import hashlib
-import lxml
 import logging
 import warnings
 import string
@@ -40,7 +39,7 @@ from ututi.lib.messaging import SMSMessage
 from ututi.lib.emails import group_space_bought_email
 from ututi.lib.security import check_crowds
 from ututi.lib.group_payment_info import GroupPaymentInfo
-from ututi.lib.helpers import literal, link_to
+from ututi.lib.helpers import literal, link_to, html_strip
 from nous.mailpost import copy_chunked
 
 from zope.cachedescriptors.property import Lazy
@@ -1537,9 +1536,7 @@ class PageVersion(ContentItem):
 
     @property
     def plain_text(self):
-        doc = lxml.html.fragment_fromstring(self.content, create_parent=True)
-        texts = doc.xpath('//text()')
-        return ' '.join(texts)
+        return html_strip(self.content)
 
     def url(self, controller='subjectpage', action='show_version', **kwargs):
         return url(controller=controller,

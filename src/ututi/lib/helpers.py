@@ -12,6 +12,7 @@ from pylons.templating import render_mako_def
 from hashlib import md5
 import re
 import cgi
+import lxml
 
 # Import helpers as desired, or define your own, ie:
 #from webhelpers.html.tags import checkbox, password
@@ -261,6 +262,13 @@ def html_cleanup(*args, **kwargs):
     from ututi.lib.validators import html_cleanup
     return literal(html_cleanup(*args, **kwargs))
 
+def html_strip(html_text):
+    doc = lxml.html.fragment_fromstring(html_text, create_parent=True)
+    texts = doc.xpath('//text()')
+    return ' '.join([text.strip() for text in texts])
+
+def single_line(text):
+    return text.replace('\n', '').replace('\r', '').strip()
 
 def file_size(size):
     suffixes = [("", 2**10),
