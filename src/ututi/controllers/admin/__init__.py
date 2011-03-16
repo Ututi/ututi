@@ -302,7 +302,7 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
 
     @ActionProtector("root")
     def admin_wall(self):
-        self._set_wall_variables(200)
+        self._set_wall_variables(limit=200)
         return render('admin/feed.mako')
 
     def _wall_events_query(self):
