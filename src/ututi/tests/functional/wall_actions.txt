@@ -87,26 +87,6 @@ The rest of the test is undocummented, but easy to follow:
    ...
    Booyah
    ...
-   You have created the group
-   Testing group
-   ...
-   You have created the group
-   Moderatoriai
-   ...
-   You have joined the group
-   Moderatoriai
-   ...
-   You have joined the group
-   Testing group
-   ...
-   Second user
-   has joined the group
-   Testing group
-   ...
-   Third user
-   has joined the group
-   Moderatoriai
-   ...
 
    >>> from ututi.lib.mailer import mail_queue
    >>> mail_queue.pop().payload()

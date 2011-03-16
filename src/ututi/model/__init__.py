@@ -200,7 +200,7 @@ def setup_orm(engine):
                polymorphic_identity='location',
                properties={'children': relation(LocationTag,
                                                 order_by=LocationTag.title.asc(),
-                                                cascade='all',
+                                                cascade="delete",
                                                 backref=backref('parent',
                                                                 remote_side=tags_table.c.id)),
                            'region': relation(Region, backref='tags'),
