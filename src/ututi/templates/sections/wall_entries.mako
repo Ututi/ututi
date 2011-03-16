@@ -372,15 +372,21 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user == event.message.author:
+      <%
+         evt = event
+         if len(event.children) > 0:
+           evt = event.children[0]
+      %>
+
+      %if c.user is not None and c.user == evt.message.author:
         ${_("You have posted a new message %(message_link)s to the group %(group_link)s") % \
-           dict(group_link=h.object_link(event.context),
-                message_link=h.object_link(event.message)) | n}
+           dict(group_link=h.object_link(evt.context),
+                message_link=h.object_link(evt.message)) | n}
       %else:
         ${_("%(user_link)s has posted a new message %(message_link)s to the group %(group_link)s") % \
-           dict(user_link=h.object_link(event.message.author_or_anonymous),
-                group_link=h.object_link(event.context),
-                message_link=h.object_link(event.message)) | n}
+           dict(user_link=h.object_link(evt.message.author_or_anonymous),
+                group_link=h.object_link(evt.context),
+                message_link=h.object_link(evt.message)) | n}
       %endif
     </%def>
     <%self:event_conversation event="${event}"/>
@@ -471,15 +477,20 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user == event.user:
+      <%
+         evt = event
+         if event.children:
+           evt = event.children[0]
+      %>
+      %if c.user is not None and c.user == evt.user:
         ${_("You have posted a new message %(message_link)s in the forum %(group_link)s") % \
-           dict(group_link=h.object_link(event.context),
-                message_link=h.object_link(event.post)) | n}
+           dict(group_link=h.object_link(evt.context),
+                message_link=h.object_link(evt.post)) | n}
       %else:
         ${_("%(user_link)s has posted a new message %(message_link)s in the forum %(group_link)s") % \
-           dict(user_link=h.object_link(event.user),
-                group_link=h.object_link(event.context),
-                message_link=h.object_link(event.post)) | n}
+           dict(user_link=h.object_link(evt.user),
+                group_link=h.object_link(evt.context),
+                message_link=h.object_link(evt.post)) | n}
       %endif
     </%def>
     <%self:event_conversation event="${event}"/>
@@ -529,7 +540,11 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
-      <% msg = event.private_message %>
+      <%
+         msg = event.private_message
+         if event.children:
+           msg = event.children[0].private_message
+      %>
       %if c.user is not None and c.user == msg.recipient:
         ${_("%(user_link)s has sent you a private message \"%(msg_link)s\"") % \
            dict(user_link=h.object_link(msg.sender),

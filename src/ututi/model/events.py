@@ -309,7 +309,6 @@ class MailinglistPostCreatedEvent(PostCreatedEventBase, MessagingEventMixin):
 
     Has an attribute `message' pointing to the message added.
     """
-
     wall_entry_def = 'mailinglistpost_created'
 
     def render(self):

@@ -20,16 +20,11 @@ class WallMixin(object):
     def _wall_events(self, limit=60):
         """Returns threaded events, defined by _wall_events_query()"""
 
-        #query for ordering events by their last subevent
-        e = aliased(Event)
-        child_query = select([e.created], e.parent_id==Event.id, order_by=e.created.desc(), limit=1).label('last')
-
         event_query = self._wall_events_query()
 
         return event_query\
             .filter(Event.parent == None)\
-            .order_by(func.coalesce(child_query, Event.created).desc(),
-                      Event.event_type)\
+            .order_by(Event.created.desc())\
             .limit(limit).all()
 
     def _set_wall_variables(self, events_hidable=False, limit=60):
