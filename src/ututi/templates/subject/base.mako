@@ -1,6 +1,7 @@
 <%inherit file="/ubase-two-sidebars.mako" />
 <%namespace file="/portlets/subject.mako" import="subject_info_portlet,
-    subject_follow_portlet, subject_teachers_portlet, subject_stats_portlet"/>
+    subject_follow_portlet, subject_teachers_portlet, subject_stats_portlet,
+    subject_followers_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet, google_ads_portlet" />
 
 <%def name="portlets()">
@@ -12,6 +13,7 @@
 
 <%def name="portlets_right()">
   ${share_portlet(c.subject, _("Share this subject:"))}
+  ${subject_followers_portlet()}
   ${google_ads_portlet()}
 </%def>
 

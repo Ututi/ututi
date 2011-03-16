@@ -89,10 +89,9 @@
   %endif
 </%def>
 
-<%def name="location_members_portlet(location=None, count=None)">
+<%def name="location_members_portlet(location=None, count=6)">
   <%
   if location is None: location = c.location
-  if count is None: count = 6
   members = h.location_members(location.id, count)
   %>
   %if members:

@@ -1,5 +1,6 @@
 <%inherit file="/portlets/base.mako"/>
 <%namespace file="/sections/content_snippets.mako" import="*"/>
+<%namespace file="/portlets/universal.mako" import="item_box" />
 
 <%def name="subject_info_portlet(subject=None)">
   <% if subject is None: subject = c.subject %>
@@ -63,7 +64,6 @@
   </%self:portlet>
 </%def>
 
-
 <%def name="subject_stats_portlet(subject=None)">
   <% if subject is None: subject = c.subject %>
   <%self:portlet id="subject-statistics-portlet">
@@ -82,6 +82,22 @@
     ${_("Subject rating:")}
     ${h.image('/img/icons.com/rating-%d.png' % subject.rating(), alt=str(subject.rating()))}
   </%self:portlet>
+</%def>
+
+<%def name="subject_followers_portlet(subject=None, count=6)">
+  <%
+  if subject is None: subject = c.subject
+  if count is None: count = 6
+  followers = h.subject_followers(subject.id, count)
+  %>
+  %if followers:
+  <%self:portlet id='subject-followers-portlet'>
+    <%def name="header()">
+      ${_("Followers:")}
+    </%def>
+    ${item_box(followers, with_titles=True)}
+  </%self:portlet>
+  %endif
 </%def>
 
 <%def name="subject_similar_subjects_portlet()">

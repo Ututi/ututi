@@ -465,6 +465,17 @@ def location_members(location_id, limit=6):
             for member in members]
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+def subject_followers(subject_id, limit=6):
+    from ututi.model import UserSubjectMonitoring, meta
+    watches = meta.Session.query(UserSubjectMonitoring).filter_by(subject_id=subject_id, ignored=False)
+    return [{'id': watch.user.id,
+             'title': watch.user.fullname,
+             'url': watch.user.url(),
+             'logo_url': watch.user.url(action='logo', width=45),
+             'logo_small_url': watch.user.url(action='logo', width=30)}
+            for watch in watches]
+
+@u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
 def location_latest_groups(location_id, limit=6):
     from ututi.model import Tag, Group, meta
     location = Tag.get(int(location_id))
