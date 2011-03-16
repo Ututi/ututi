@@ -315,7 +315,7 @@ XXX HOW DO I START WATCHING SUBJECTS? The watch subject link in the
 welcome portlet is taking me to the notification view...
 
     >>> browser.open('http://localhost/subject/vu/mat_analize')
-    >>> browser.click('Add to my subjects')
+    >>> browser.click('Follow')
 
     >>> browser.open('http://localhost/news/daily?date=2009-10-09')
 

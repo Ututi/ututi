@@ -68,36 +68,31 @@ homepage will redirect us to the subject feed:
     >>> browser.url
     'http://localhost/subject/vu/mat_analize/feed'
 
-The changed information should be visible in the sidebar block.
+The changed information should be visible in the sidebar blocks:
 
-    >>> browser.printQuery('//div[@class="dalyko-info"]//text()')
-    Matematin&#279; analiz&#279;
-    vu
+    >>> browser.printCssQuery('#subject-information-portlet .description', strip=True)
+    >>> browser.printCssQuery('#subject-teachers-portlet .subject-teacher', strip=True)
+    <li>
     Lecturer:
+    <br />
     Some other guy
-    Subject rating:
-    The subject is watched by:
-    1
-    user,
-    0
-    groups
-    There are no subject tags.
+    </li>
 
 The subject's portlet contains a link that can be used to start watching the subject.
 
-    >>> browser.getControl('Add to my subjects').click()
+    >>> browser.getControl('Follow').click()
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     The subject has been added to your watched subjects list.
 
 If we click the link again, we stop watching the subject
 
-    >>> browser.getControl('Remove from my subjects').click()
+    >>> browser.getControl('Unfollow').click()
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     The subject has been removed from your watched subjects list.
 
-And the button's action turns into 'Add to my subjects' again:
+And the button's action turns into 'Follow' again:
 
-    >>> browser.getControl('Add to my subjects')
+    >>> browser.getControl('Follow')
     <SubmitControl name=None type='submitbutton'>
 
 We can add a subject using the wizard at the url /subject/add:

@@ -75,7 +75,7 @@ The join-create subject link points to watch subjects page:
 Once user starts watching any subject personally, the todo item is marked as done:
 
     >>> browser.getLink('Matematinė analizė').click()
-    >>> browser.getControl('Add to my subjects').click()
+    >>> browser.getControl('Follow').click()
     >>> browser.getLink('Home').click()
     >>> browser.printCssQuery('#todo-portlet p.done', strip=True)
     <p>1. Invite others to join</p>

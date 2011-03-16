@@ -41,8 +41,10 @@ Let's finish the wizard and create the subject:
 
 On the subject page Benas is listed as the lecturer:
 
-    >>> browser.printQuery(".dalyko-info .teacher-list li", selector='cssselect', strip=True)
+    >>> browser.printCssQuery("#subject-teachers-portlet .subject-teacher", strip=True)
     <li>
+        Lecturer:
+        <br />
         <a>Benas</a>
     </li>
 
