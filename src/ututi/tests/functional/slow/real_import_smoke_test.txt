@@ -47,3 +47,14 @@ And upload all the files one by one:
     >>> len(mail_queue)
     176
     >>> mail_queue[:] = []
+
+    >>> browser.open('http://localhost/admin/admin_wall')
+    >>> s1 = (browser.lastRequestPystones, browser.lastRequestSeconds)
+
+    >>> browser.open('http://localhost/admin/admin_wall')
+    >>> s2 = (browser.lastRequestPystones, browser.lastRequestSeconds)
+
+    >>> browser.open('http://localhost/admin/admin_wall')
+    >>> s3 = (browser.lastRequestPystones, browser.lastRequestSeconds)
+
+    >>> s1, s2, s3

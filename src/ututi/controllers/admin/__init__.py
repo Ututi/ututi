@@ -6,6 +6,7 @@ import datetime
 
 from pylons.controllers.util import redirect
 
+from sqlalchemy.orm import eagerload
 from sqlalchemy.sql.expression import or_
 from sqlalchemy.sql.expression import desc
 from sqlalchemy import func
@@ -26,6 +27,7 @@ from babel.dates import format_date
 
 from pylons import request, tmpl_context as c, config, url
 
+from ututi.lib.wall import WallMixin
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, validate
@@ -116,7 +118,7 @@ class BookTypeForm(Schema):
     url_name = Regex(r'^[a-z-]+$', not_empty=True)
 
 
-class AdminController(BaseController, UniversityExportMixin):
+class AdminController(BaseController, UniversityExportMixin, WallMixin):
     """Controler for system administration."""
 
     def _stripAndDecode(self, rows):
@@ -426,6 +428,16 @@ class AdminController(BaseController, UniversityExportMixin):
             .order_by(desc(Event.created))
         c.events = self._make_pages(events)
         return render('admin/events.mako')
+
+    @ActionProtector("root")
+    def admin_wall(self):
+        self._set_wall_variables(200)
+        return render('admin/feed.mako')
+
+    def _wall_events_query(self):
+        """WallMixin implementation."""
+        return meta.Session.query(Event)\
+            .options(eagerload(Event.children, Event.user, Event.context, Event.comments))
 
     def _make_pages(self, items):
         return paginate.Page(items,
