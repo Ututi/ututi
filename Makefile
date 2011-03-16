@@ -71,6 +71,10 @@ instance/var/run/.s.PGSQL.${PGPORT}:
 testpsql:
 	psql -h ${PWD}/instance/var/run/ -d test
 
+.PHONY: testpsql2
+testpsql2:
+	psql -h ${PWD}/instance/var/run/ -d test2
+
 .PHONY: devpsql
 devpsql:
 	psql -h ${PWD}/instance/var/run/ -d development
