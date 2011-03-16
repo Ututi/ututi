@@ -25,7 +25,7 @@ Let's find the group:
 
 Let's enter the forum:
 
-    >>> browser.getLink('Forum').click()
+    >>> browser.open('http://localhost/group/moderators/forum')
 
 There should be a default category, 'General':
 
@@ -42,7 +42,7 @@ Let's start a thread:
 Let's post a reply:
     >>> browser2 = Browser.logIn('user3@ututi.lt', 'password')
     >>> browser2.getLink('Moderatoriai', url='/group/moderators').click()
-    >>> browser2.getLink('Forum').click()
+    >>> browser2.open('http://localhost/group/moderators/forum')
     >>> browser2.getLink("What's up?").click()
     >>> browser2.getControl('Message').value = 'Not too bad'
     >>> browser2.getControl('Reply', index=1).click()
@@ -116,7 +116,7 @@ Accept the group invitation
 
     >>> user.getControl('Accept').click()
     >>> user.getLink('Moderatoriai', url='/group/moderators').click()
-    >>> user.getLink('Forum').click()
+    >>> user.open('http://localhost/group/moderators/forum')
 
 We see the thread the admin has posted:
 
@@ -151,7 +151,7 @@ The resulting email notification was sent to the admin user and not to us:
 
 Now, if, say, the admin posts a message, we will receive an email:
 
-    >>> browser.getLink('Forum').click()
+    >>> browser.open('http://localhost/group/moderators/forum')
     >>> browser.getLink("What's up?").click()
     >>> form = browser.getForm(id='forum_reply_form')
     >>> form.getControl(name='message').value = 'Indeed!'
