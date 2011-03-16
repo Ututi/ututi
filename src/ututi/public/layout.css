@@ -9,13 +9,13 @@
     background: #fff;
     border: solid 1px #bbb;
     border-top: none;
-    width: 960px;
+    width: 980px;
     margin: auto;
 }
 
 #layout-wrap #main-content {
     float: left;
-    width: 960px;
+    width: 980px;
     padding: 0;
 }
 
@@ -26,7 +26,7 @@
     float: left;
     width: 780px;
     margin-left: 180px;
-    margin-right: -960px;
+    margin-right: -980px;
     border-left: 1px solid #eeeeee;
 }
 
@@ -58,16 +58,20 @@
 #layout-wrap.with-right-sidebar #right-sidebar {
     display: block;
     float: left;
-    width: 180px;
+    width: 200px;
     margin-left: 780px;
-    margin-right: -960px;
+    margin-right: -980px;
     padding: 0;
+}
+
+#right-sidebar .portlet {
+    width: 175px;
 }
 
 /* Content paddings */
 
 .content-inner {
-    padding: 20px 10px;
+    padding: 20px 15px;
 }
 
 .sidebar-inner {

@@ -18,7 +18,7 @@ from ututi.model import SearchItem
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
 from ututi.model.events import Event
 from ututi.lib.security import ActionProtector, deny
-from ututi.lib.search import search, search_query, search_query_count, _exclude_subjects
+from ututi.lib.search import search, search_query, search_query_count
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render, u_cache
 from ututi.lib.validators import LocationTagsValidator, TagsValidator, validate
@@ -236,13 +236,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         search_params['text'] = title
         search_params['tags'] = ', '.join(location.title_path)
 
-        # exclude subjects already watched or taught by the user
-        if c.user.is_teacher:
-            sids = [s.id for s in c.user.taught_subjects]
-        else:
-            sids = [s.id for s in c.user.watched_subjects]
-
-        query = search_query(extra=_exclude_subjects(sids), **search_params)
+        query = search_query(**search_params)
         c.similar_subjects = paginate.Page(
             query,
             items_per_page = 30,

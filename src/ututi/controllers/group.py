@@ -259,19 +259,6 @@ class GroupWallMixin(WallMixin):
 
 def group_menu_items():
     """Generate a list of all possible actions."""
-    if c.group.mailinglist_enabled:
-        forum_entry = {
-         'name': 'mailinglist',
-         'title': _('Mailing List'),
-         'link': url(controller='group', action='mailinglist', id=c.group.group_id),
-         'event': h.trackEvent(c.group, 'mailinglist', 'breadcrumb')}
-    else:
-        forum_entry = {
-         'name': 'forum',
-         'title': _('Forum'),
-         'link': url(controller='group', action='forum', id=c.group.group_id),
-         'event': h.trackEvent(c.group, 'forum', 'breadcrumb')}
-
     files_entry = {
          'name': 'files',
          'title': _('Files'),
@@ -291,7 +278,6 @@ def group_menu_items():
          'name': 'home',
          'link': url(controller='group', action='home', id=c.group.group_id),
          'event': h.trackEvent(c.group, 'home', 'breadcrumb')},
-        forum_entry,
         {'title': _('Members'),
          'name': 'members',
          'link': url(controller='group', action='members', id=c.group.group_id),

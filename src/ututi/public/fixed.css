@@ -25,7 +25,7 @@ body {
 h1 {
     font-family: Verdana, Arial, sans-serif;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
     color: #333333;
 }
 
@@ -120,7 +120,7 @@ button.btn-text {
 
 h1.page-title {
     margin: 0;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     border-bottom: 1px solid #ff9900;
     padding-bottom: 2px; /* some spacing for border */
@@ -416,7 +416,7 @@ h1.page-title {
 
     #teacher-registration-page h1.page-title {
         font-weight: bold;
-        font-size: 18px;
+        font-size: 20px;
         margin: 0;
     }
 
@@ -1172,12 +1172,12 @@ ul.feature-list {
     background: #333;
     height: 40px;
     width:100%;
-    min-width: 960px;
+    min-width: 980px;
 }
 
 #header #header-container {
     height: 30px;
-    width: 960px;
+    width: 980px;
     margin: auto;
     padding-top: 10px;
 }
@@ -1193,7 +1193,7 @@ ul.feature-list {
 #top-panel {
     background-color: #6d6d6d;
     float: left;
-    width: 780px;
+    width: 800px;
     height: 20px;
     padding: 5px 0;
 }
@@ -1335,7 +1335,7 @@ li.expanded li a {
 
 #footer {
     height: 60px;
-    width: 960px;
+    width: 980px;
     text-align: center;
     margin: auto;
     font-size: 12px;
@@ -1594,4 +1594,67 @@ ul.medium-icon-list {
     .feature-box .action-button {
         text-align: center;
         margin-top: 15px;
+    }
+
+
+/* MENU TABS
+ */
+
+.tabs {
+    display: block;
+    background: #ffffff url('img/module_menu_bg.png') repeat-x bottom;
+    height: 22px;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 22px;
+    list-style: none;
+    margin-top: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 2px;
+    text-transform: uppercase;
+    *zoom: 1; /* IE7 */
+}
+
+    .tabs li {
+        display: inline-block;
+        vertical-align: top;
+        line-height: 20px;
+        *display: inline; /* IE7 */
+        *zoom: 1; /* IE7 */
+    }
+    .tabs li a {
+        display: block;
+        padding-left: 10px;
+        padding-right: 8px;
+        position: relative;
+        color: #666666;
+        *height: 22px; /* IE7 */
+        _display: inline; /* IE6 */
+        _zoom: 1; /* IE6 */
+    }
+    .tabs li a:hover {
+        color: #3d617a;
+    }
+    .tabs li.current {
+        line-height: 22px;
+    }
+    .tabs li.current a {
+        background: url('img/module_menu_current_item_bg.png') no-repeat left;
+        font-weight: bold;
+        color: #666666;
+        margin-right: 5px;
+        padding-right: 5px
+    }
+    .tabs li.current .edge {
+        background: url('img/module_menu_current_item_bg.png') no-repeat right;
+        display: block;
+        height: 22px;
+        position: absolute;
+        right: -5px;
+        top: 0;
+        width: 5px;
+    }
+    .tabs li a:hover {
+        text-decoration: none;
     }

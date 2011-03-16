@@ -14,6 +14,30 @@
 ${group_right_sidebar()}
 </%def>
 
+<%def name="css()">
+   ${parent.css()}
+
+   #group-information {
+      margin-top: 15px;
+      min-height: 80px;
+   }
+
+   #group-information .group-logo {
+      float: left;
+      margin-right: 15px;
+   }
+
+   #group-information .group-title {
+      margin-bottom: 7px;
+   }
+
+   #group-information .group-title a {
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 0.5;
+   }
+
+</%def>
 
 <%def name="group_menu(show_title=True)">
 %if show_title:
@@ -27,20 +51,17 @@ ${group_right_sidebar()}
   </div>
   %endif
 
-  <div class="floatleft avatar">
-    <img id="group-logo" src="${url(controller='group', action='logo', id=c.group.group_id, width=70, height=70)}" alt="logo" />
-  </div>
+  <div id="group-information">
+    <div class="group-logo">
+      <img src="${url(controller='group', action='logo', id=c.group.group_id, width=70, height=70)}" alt="logo" />
+    </div>
 
-  <div>
-    ${self.title()}
-    <div>
-    %if c.group.location:
-      <a href="${c.group.location.url()}">${' | '.join(c.group.location.title_path)}</a>
-    %endif
+    <div class="group-title" class="break-word">
+      <a href="${url(controller='group', action='home', id=c.group.group_id)}">${self.title()}</a>
     </div>
 
     %if c.user is not None:
-    <div>
+    <div class="break-word">
       %if c.group.is_member(c.user):
       <a href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${c.group.group_id}@${c.mailing_list_host}</a>
       %elif c.group.mailinglist_moderated:
@@ -49,25 +70,30 @@ ${group_right_sidebar()}
     </div>
     %endif
 
-    <div>
+    <div class="break-word">
+      %if c.group.location:
+      <a href="${c.group.location.url()}">${' | '.join(c.group.location.title_path)}</a>
+      %endif
+    </div>
+
+
+    <div class="break-word">
       %if c.group.description:
       ${c.group.description}
       %endif
     </div>
 
-    <div>
-    %if c.group.is_admin(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
-       <a class="right_arrow" href="${url(controller='group', action='edit', id=c.group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
-    %endif
+    <div class="break-word">
+      %if c.group.is_admin(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
+      <a href="${url(controller='group', action='edit', id=c.group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
+      %endif
     </div>
-
   </div>
-
 
 %endif
 
 %if c.group.is_member(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
-<ul class="moduleMenu" id="moduleMenu">
+<ul class="tabs" id="tabs">
     %for menu_item in c.group_menu_items:
       <li class="${'current' if menu_item['name'] == getattr(c, 'group_menu_current_item', None) else ''}">
         <a href="${menu_item['link']}">${menu_item['title']}
