@@ -26,7 +26,7 @@ from sqlalchemy.sql.expression import or_
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_logo
-from ututi.lib.invitations import make_email_invitations, make_facebook_invitations
+from ututi.lib.invitations import make_email_invitations
 from ututi.lib.search import _exclude_subjects
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render
@@ -49,7 +49,6 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.search import search_query, search_query_count
 from ututi.lib.emails import send_group_invitation_for_user
 from ututi.lib.emails import send_group_invitation_for_non_user
-from ututi.lib.emails import send_registration_invitation
 from ututi.lib.emails import group_request_email, group_confirmation_email
 
 log = logging.getLogger(__name__)
@@ -835,7 +834,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         """Invite new members to the group."""
         if hasattr(self, 'form_result'):
             emails = self.form_result.get('emails', '').split()
-            message = self.form_result['message']
             valid = []
             failed = []
             for line in emails:
