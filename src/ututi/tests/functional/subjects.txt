@@ -26,16 +26,16 @@ Let's check that it is actually so!
     >>> browser.url
     'http://localhost/subject/vu/mat_analize'
 
-    >>> browser.printQuery("id('subject-intro-block')//text()")
-    Edit
-    What is a subject page?
+    >>> browser.printQuery("id('no-description-block')//text()")
+    No description
+    Add description to help your friends find this subject.
     ...
 
 We can edit the subject from here, add description and some other info.
 
     >>> browser.open('http://localhost/subject/vu/mat_analize/edit')
-    >>> browser.getControl('Lecturer').value = 'Some other guy'
-    >>> browser.getControl('Brief description of the subject').value = 'This is the subject description'
+    >>> browser.getControl('Lecturer:').value = 'Some other guy'
+    >>> browser.getControl('Subject description:').value = 'This is the subject description'
     >>> browser.getControl('Save').click()
 
 Home page now displays this page description:
@@ -43,15 +43,14 @@ Home page now displays this page description:
     >>> browser.url
     'http://localhost/subject/vu/mat_analize'
 
-    >>> browser.printQuery("id('subject_description')//text()")
+    >>> browser.printQuery("id('subject-description')//text()")
     This is the subject description
-    Edit
 
 Lets remove the description, add a wiki page, and assert that
 homepage will redirect us to the subject feed:
 
     >>> browser.open('http://localhost/subject/vu/mat_analize/edit')
-    >>> browser.getControl('Brief description of the subject').value = ''
+    >>> browser.getControl('Subject description:').value = ''
     >>> browser.getControl('Save').click()
     >>> browser.url
     'http://localhost/subject/vu/mat_analize'

@@ -85,7 +85,8 @@ Let's look at the emails:
 
     >>> browser2.open(browser.url)
 
-    >>> browser2.getControl('Create a wiki document', index=0).click()
+    >>> browser2.getLink('Notes').click()
+    >>> browser2.getControl('Create new Wiki note', index=0).click()
     >>> browser2.getControl('Title').value = "How to be awesome!"
     >>> browser2.getControl('Content').value = "Being Awesome is easy!"
     >>> browser2.getControl('Save').click()

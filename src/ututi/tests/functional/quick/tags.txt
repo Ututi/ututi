@@ -34,9 +34,9 @@ Subjects can be tagged upon creation or when being edited.
 Let's open the edit view and see if the tags were saved:
 
     >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Tags').value
+    >>> browser.getControl('Tags:').value
     'tag1, tag2, tag 3'
-    >>> browser.getControl('Tags').value = 'tag2, tag 3, new tag'
+    >>> browser.getControl('Tags:').value = 'tag2, tag 3, new tag'
     >>> browser.getControl('Save').click()
 
     >>> browser.url
@@ -45,12 +45,12 @@ Let's open the edit view and see if the tags were saved:
 Once again, to check if the tags were saved:
 
     >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Tags').value
+    >>> browser.getControl('Tags:').value
     'tag2, tag 3, new tag'
 
 Let's try changing the location of the subject to get a clash with another subject:
 
-    >>> browser.getControl('Title').value = 'math'
+    >>> browser.getControl('Subject title:').value = 'math'
     >>> browser.getControl(name='location-0').value = 'uni'
     >>> browser.getControl(name='location-1').value = ''
     >>> browser.getControl('Save').click()

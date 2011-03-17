@@ -24,7 +24,7 @@
   <fieldset>
   <input type="hidden" name="id" value=""/>
   <input type="hidden" name="old_location" value=""/>
-  ${h.input_line('title', _('Subject title'))}
+  ${h.input_line('title', _('Subject title:'))}
 
   <div class="formField">
     %if hasattr(c, 'hide_location'):

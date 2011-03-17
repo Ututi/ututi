@@ -25,11 +25,13 @@ div#short-info-block {
 </div>
 
 %if c.subject.description:
-  <div class="wiki-page">
+  <div id="subject-description" class="wiki-page">
     ${h.html_cleanup(c.subject.description)}
   </div>
 %else:
+  <div id="no-description-block">
   <h2>${_("No description")}</h2>
   <p>${_("Add description to help your friends find this subject. You can also list main topics and references here.")}</p>
   ${h.button_to(_('Add description'), c.subject.url(action='edit'), class_='add')}
+  </div>
 %endif
