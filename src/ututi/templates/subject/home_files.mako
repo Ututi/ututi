@@ -1,4 +1,4 @@
-<%inherit file="/subject/home_base.mako" />
+<%inherit file="/subject/base.mako" />
 <%namespace name="files" file="/sections/files.mako" />
 
 <%def name="upload_files_nag()">

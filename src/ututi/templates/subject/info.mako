@@ -1,4 +1,4 @@
-<%inherit file="/subject/home_base.mako" />
+<%inherit file="/subject/base_two_sidebar.mako" />
 
 <%def name="css()">
 div#short-info-block {

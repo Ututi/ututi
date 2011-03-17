@@ -1,19 +1,18 @@
-<%inherit file="/subject/base.mako" />
+<%inherit file="/subject/base_two_sidebar.mako" />
 
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 <%namespace file="/sections/content_snippets.mako" import="item_location_full" />
 <%namespace file="/widgets/tags.mako" import="*"/>
 
 <%def name="title()">
-${_('Edit subject')}
+  ${_('Edit subject')}
 </%def>
 
 <%def name="head_tags()">
-<%newlocationtag:head_tags />
-${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
+  ${parent.head_tags()}
+  <%newlocationtag:head_tags />
+  ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 </%def>
-
-<h1 class="page-title with-bottom-line">${c.subject.title}</h1>
 
 <a class="back-link" href="${url(controller='subject', action='home', id=c.subject.subject_id, tags=c.subject.location_path)}">${_('Back to subject')}</a>
 

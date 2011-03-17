@@ -1,4 +1,4 @@
-<%inherit file="/subject/home_base.mako" />
+<%inherit file="/subject/base_two_sidebar.mako" />
 <%namespace name="wall" file="/sections/wall_entries.mako" />
 <%namespace name="actions" file="/subject/wall_actionblock.mako" import="action_block, head_tags"/>
 

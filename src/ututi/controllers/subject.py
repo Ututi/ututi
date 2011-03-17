@@ -293,6 +293,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
                     tags=subj.location_path))
 
     def _edit_form(self):
+        c.notabs = True
         return render('subject/edit.mako')
 
     @subject_action
