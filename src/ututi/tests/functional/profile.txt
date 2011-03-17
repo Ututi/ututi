@@ -94,7 +94,7 @@ them in the database:
     >>> browser.open('http://localhost/user/1/logo')
     >>> im = Image.open(StringIO.StringIO(browser.contents))
     >>> im.size
-    (500, 500)
+    (300, 300)
 
 Now let's try to delete the logo.
 

@@ -610,7 +610,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         redirect(url(controller='group', action='home', id=group.group_id))
 
     def logo(self, id, width=None, height=None):
-        return serve_logo('group', id, width=width, height=height,
+        return serve_logo('group', id, width=width, square=True,
                 default_img_path="public/images/details/icon_group_large.png")
 
     @group_action

@@ -113,5 +113,5 @@ class UserController(BaseController):
         redirect(url.current(action='medals'))
 
     def logo(self, id, width=None, height=None):
-        return serve_logo('user', int(id), width=width, height=height,
+        return serve_logo('user', int(id), width=width, square=True,
                 default_img_path='public/img/user_default.png', cache=False)
