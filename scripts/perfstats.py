@@ -14,7 +14,7 @@ def main(args):
 
     for row in perflog:
         try:
-            time, level, logger, cls, controller_action, walltime, cputime, uid = row.split()
+            date, time, level, logger, cls, controller_action, walltime, cputime, uid = row.split()
         except ValueError:
             continue
 
