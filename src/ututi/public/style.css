@@ -3865,7 +3865,7 @@ ul.post-attachments li {
 /* user block */
 div.user-logo-link {
   float: left;
-  margin: 10px;
+  margin: 20px 10px;
   width: 100px;
   height: 140px;
   text-align: center;

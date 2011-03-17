@@ -2,7 +2,8 @@
 
 <%namespace file="/portlets/group.mako" import="*"/>
 <%namespace file="/portlets/sections.mako" import="*"/>
-<%namespace file="/group/members.mako" import="group_members"/>
+<%namespace name="members" file="/group/members.mako" import="group_members, css"/>
+<%namespace name="membersbase" file="/group/base.mako" import="css"/>
 <%namespace file="/forum/index.mako" import="forum_thread_list"/>
 
 <%namespace file="/portlets/banners/base.mako" import="*"/>
@@ -11,6 +12,17 @@
 <%def name="title()">
   ${c.group.title}
 </%def>
+
+<%def name="portlets()">
+  ${user_sidebar()}
+</%def>
+
+<%def name="css()">
+   ${parent.css()}
+   ${membersbase.css()}
+   ${members.css()}
+</%def>
+
 
 <h1 class="page-title">
   ${self.title()}
@@ -21,20 +33,17 @@
   %endif
 </h1>
 
-  <div class="floatleft avatar">
-    <img id="group-logo" src="${url(controller='group', action='logo', id=c.group.group_id, width=70, height=70)}" alt="logo" />
-  </div>
+  <div id="group-information">
+    <div class="group-logo">
+      <img id="group-logo" src="${url(controller='group', action='logo', id=c.group.group_id, width=70, height=70)}" alt="logo" />
+    </div>
 
-  <div>
-    ${self.title()}
-    <div>
-    %if c.group.location:
-      <a href="${c.group.location.url()}">${' | '.join(c.group.location.title_path)}</a>
-    %endif
+    <div class="group-title" class="break-word">
+      <a href="${url(controller='group', action='home', id=c.group.group_id)}">${self.title()}</a>
     </div>
 
     %if c.user is not None:
-    <div>
+    <div class="break-word">
       %if c.group.is_member(c.user):
       <a href="${url(controller='mailinglist', action='new_thread', id=c.group.group_id)}" title="${_('Mailing list address')}">${c.group.group_id}@${c.mailing_list_host}</a>
       %elif c.group.mailinglist_moderated:
@@ -43,17 +52,25 @@
     </div>
     %endif
 
-    <div>
+    <div class="break-word">
+      %if c.group.location:
+      <a href="${c.group.location.url()}">${' | '.join(c.group.location.title_path)}</a>
+      %endif
+    </div>
+
+
+    <div class="break-word">
       %if c.group.description:
       ${c.group.description}
       %endif
     </div>
 
-    <div>
-    %if c.group.is_admin(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
-       <a class="right_arrow" href="${url(controller='group', action='edit', id=c.group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
-    %endif
+    <div class="break-word">
+      %if c.group.is_admin(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
+      <a href="${url(controller='group', action='edit', id=c.group.group_id)}" title="${_('Edit group settings')}">${_('Edit')}</a>
+      %endif
     </div>
+  </div>
 
     <%doc>
     TODO: This needs to be formatted correctly!
@@ -64,15 +81,12 @@
     </div>
     %endif
 
-  </div>
-
 %if c.group.forum_is_public:
   %for category in c.group.forum_categories:
     ${forum_thread_list(category, n=10000)}
   %endfor
 %endif
 
-<h2>${_('Group members')}</h2>
 ${group_members()}
 
 <br style="clear: left;"/>

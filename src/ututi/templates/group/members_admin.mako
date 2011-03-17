@@ -1,5 +1,5 @@
 <%inherit file="/group/base.mako" />
-<%namespace file="/group/members.mako" import="group_members_invite_section"/>
+<%namespace name="members" file="/group/members.mako" import="group_members_invite_section, css"/>
 <%namespace file="/portlets/base.mako" import="uportlet"/>
 
 <%def name="title()">
@@ -11,21 +11,19 @@ ${parent.head_tags()}
 ${h.javascript_link('/javascript/forms.js')|n}
 </%def>
 
+<%def name="css()">
+   ${parent.css()}
+   ${members.css()}
+</%def>
 
 ${group_members_invite_section()}
 
 %if [inv for inv in c.group.invitations if inv.active and inv.email]:
-<div class="portlet portletSmall portletGroupFiles mediumTopMargin">
-  <div class="ctl"></div>
-  <div class="ctr"></div>
-  <div class="cbl"></div>
-  <div class="cbr"></div>
+<div id="invited-members">
   <div class="single-title">
-    <div class="floatleft bigbutton2">
-      <h2 class="portletTitle bold category-title">
-        ${_('Invited users (invitations not accepted yet)')}
-      </h2>
-    </div>
+    <h2 class="portletTitle bold category-title">
+      ${_('Invited users (invitations not accepted yet)')}
+    </h2>
     <div class="clear"></div>
   </div>
 
@@ -58,11 +56,7 @@ ${group_members_invite_section()}
 %endif
 
 %if c.group.requests:
-<div class="portlet portletSmall portletGroupFiles mediumTopMargin">
-  <div class="ctl"></div>
-  <div class="ctr"></div>
-  <div class="cbl"></div>
-  <div class="cbr"></div>
+<div>
   <div class="single-title">
     <div class="floatleft bigbutton2">
       <h2 class="portletTitle bold category-title">
@@ -104,7 +98,7 @@ ${group_members_invite_section()}
 </div>
 %endif
 
-<div class="portlet portletSmall portletGroupFiles mediumTopMargin">
+<div>
   <div class="ctl"></div>
   <div class="ctr"></div>
   <div class="cbl"></div>
