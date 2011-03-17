@@ -278,12 +278,12 @@ def group_menu_items():
          'name': 'home',
          'link': url(controller='group', action='home', id=c.group.group_id),
          'event': h.trackEvent(c.group, 'home', 'breadcrumb')},
+        ] + ([files_entry] if files_entry else []) + [
+        ] + ([subjects_entry] if subjects_entry else []) + [
         {'title': _('Members'),
          'name': 'members',
          'link': url(controller='group', action='members', id=c.group.group_id),
-         'event': h.trackEvent(c.group, 'members', 'breadcrumb')}
-        ] + ([files_entry] if files_entry else []) + [
-        ] + ([subjects_entry] if subjects_entry else []) + [
+         'event': h.trackEvent(c.group, 'members', 'breadcrumb')},
         {'title': _('Page'),
          'name': 'page',
          'link': url(controller='group', action='page', id=c.group.group_id),
