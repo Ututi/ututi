@@ -129,6 +129,7 @@ h1.page-title {
     margin: 0;
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
 h1.page-title.with-bottom-line {
@@ -1643,7 +1644,7 @@ ul.medium-icon-list {
 
 ul.tabs {
     text-align: left;
-    margin: 12px 0;
+    margin-bottom: 12px;
     border-bottom: 1px solid #ff9900;
     list-style-type: none;
     padding: 1px 10px 1px 10px;
@@ -1674,4 +1675,16 @@ ul.tabs {
         margin-right: 0px;
         text-decoration: none;
         border-bottom: none;
+    }
+
+    /* Settings link container that is often placed over tabs.
+     */
+    #settings-link-container {
+        margin-bottom: -16px;
+        text-align: right;
+    }
+
+    #settings-link-container a {
+        padding-left: 14px;
+        background: url('/img/icons.com/settings.png') no-repeat left center;
     }

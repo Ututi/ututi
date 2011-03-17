@@ -34,6 +34,12 @@
   %endif
 %endif
 
+%if c.user:
+  <div id="settings-link-container">
+    <a href="${c.subject.url(action='edit')}">${_("Edit Settings")}</a>
+  </div>
+%endif
+
 ${tabs()}
 
 ${next.body()}
