@@ -34,6 +34,8 @@ class EventWrapper(dict):
     def message_list(self):
         if 'thread_posts' in self.keys():
             return self['thread_posts']
+        else:
+            return self.internal.message_list()
 
     def wall_entry(self):
         return render_def('/sections/wall_entries.mako', self.internal.wall_entry_def, event=self)
@@ -51,9 +53,10 @@ class WallMixin(object):
         event_query = self._wall_events_query()
 
         evts = event_query\
-            .join(Event.user)\
+            .outerjoin(Event.user)\
             .filter(Event.parent == None)\
-            .order_by(Event.created.desc())\
+            .order_by(Event.created.desc(),
+                      Event.event_type)\
             .limit(limit)
 
         return [EventWrapper(evt) for evt in evts.all()]
@@ -79,7 +82,7 @@ class WallMixin(object):
                 evt_collection[evt.parent_id].append(evt)
 
         message_collection = dict() #mailing list post collection
-        msg_ids = [evt.message.thread_message_machine_id for evt in c.events if isinstance(evt.internal, MailinglistPostCreatedEvent)]
+        msg_ids = [evt.internal.message.thread_message_machine_id for evt in c.events if isinstance(evt.internal, MailinglistPostCreatedEvent)]
         if msg_ids:
             messages = meta.Session.query(GroupMailingListMessage)\
                 .filter(GroupMailingListMessage.thread_message_machine_id.in_(msg_ids))\
@@ -94,7 +97,7 @@ class WallMixin(object):
                         attachments=msg.attachments))
 
         for evt in c.events:
-            if message_collection.has_key(evt.message.thread_message_machine_id):
-                evt['thread_posts'] = message_collection[evt.message.thread_message_machine_id]
+            if isinstance(evt.internal, MailinglistPostCreatedEvent) and message_collection.has_key(evt.internal.message.thread_message_machine_id):
+                evt['thread_posts'] = message_collection[evt.internal.message.thread_message_machine_id]
             if evt_collection.has_key(evt.id):
                 evt['children'] = evt_collection[evt.id]

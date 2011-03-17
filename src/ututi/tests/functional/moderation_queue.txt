@@ -94,8 +94,8 @@ The corresponding event is removed from the wall as well:
     >>> browser.printQuery("//div[contains(@class, 'event-heading')]//text()")
     Second user has posted a new message Hello to the group's Moderatoriai moderation queue 0 seconds ago
     You have created the group Moderatoriai 0 seconds ago
-    You have joined the group Moderatoriai 0 seconds ago
     Third user has joined the group Moderatoriai 0 seconds ago
+    You have joined the group Moderatoriai 0 seconds ago   
 
 In the administration view one message is still left. Let's approve it:
 
@@ -120,8 +120,8 @@ The corresponding event is removed from wall:
     >>> browser.printQuery("//div[contains(@class, 'event-heading')]//text()")
     Second user has posted a new message Hello to the group Moderatoriai 0 seconds ago
     You have created the group Moderatoriai 0 seconds ago
-    You have joined the group Moderatoriai 0 seconds ago
     Third user has joined the group Moderatoriai 0 seconds ago
+    You have joined the group Moderatoriai 0 seconds ago
 
 Approved messages got sent to the members of the group:
 

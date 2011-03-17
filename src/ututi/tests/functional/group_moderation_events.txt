@@ -65,7 +65,6 @@ The administrator can see the messages:
       <a>Third user</a> has joined the group <a>Moderatoriai</a>
     </span>
 
-
 There are links to the messages themselves and to their authors, the
 links are different depending on whether the author of the message has
 an account in Ututi or not:
