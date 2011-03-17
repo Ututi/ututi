@@ -446,7 +446,7 @@ class User(Author):
     def isConfirmed(self):
         return self.emails[0].confirmed
 
-    logo = logo_property(square=True)
+    logo = logo_property()
 
     def has_logo(self):
         return bool(meta.Session.query(User).filter_by(id=self.id).filter(User.raw_logo != None).count())
@@ -704,7 +704,7 @@ class UserRegistration(object):
     def update_password(self, password_plain):
         self.password = generate_password(password_plain)
 
-    logo = logo_property(square=True)
+    logo = logo_property()
 
     def has_logo(self):
         return self.logo is not None
@@ -713,7 +713,7 @@ class UserRegistration(object):
         if self.logo is None: # Never overwrite a custom logo.
             self.logo = read_facebook_logo(self.facebook_id)
 
-    university_logo = logo_property(square=True, logo_attr='raw_university_logo')
+    university_logo = logo_property(logo_attr='raw_university_logo')
 
     def send_confirmation_email(self):
         send_email_confirmation_code(self.email,

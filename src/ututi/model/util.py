@@ -37,28 +37,13 @@ def _adjust_size(image):
 
     return image.resize((int(width), int(height)), PIL.Image.ANTIALIAS)
 
-def _crop_square(image):
-
-    width, height = image.size
-    if width > height:
-        x = (width - height) / 2
-        box = (x, 0, x + height, height)
-    else:
-        y = (height - width) / 2
-        box = (0, y, width, y + width)
-
-    return image.crop(box)
-
-def process_logo(value, crop_square=False):
+def process_logo(value):
 
     if value is None:
         return
 
     image = Image.open(StringIO.StringIO(value))
     orig_format = image.format
-
-    if crop_square:
-        image = _crop_square(image)
 
     image = _adjust_size(image)
 
@@ -77,7 +62,7 @@ def process_logo(value, crop_square=False):
                        (len(orig_result), orig_result))
     return result
 
-def logo_property(square=False, logo_attr='raw_logo', inherit=False):
+def logo_property(logo_attr='raw_logo', inherit=False):
 
     def get(self):
         logo = getattr(self, logo_attr)
@@ -87,6 +72,6 @@ def logo_property(square=False, logo_attr='raw_logo', inherit=False):
             return logo
 
     def set(self, value):
-        setattr(self, logo_attr, process_logo(value, square))
+        setattr(self, logo_attr, process_logo(value))
 
     return property(get, set)
