@@ -1,4 +1,5 @@
 <%inherit file="/ubase-two-sidebars.mako" />
+
 <%namespace file="/portlets/subject.mako" import="subject_info_portlet,
     subject_follow_portlet, subject_teachers_portlet, subject_stats_portlet,
     subject_followers_portlet, subject_related_subjects_portlet"/>
@@ -19,3 +20,4 @@
 </%def>
 
 ${next.body()}
+
