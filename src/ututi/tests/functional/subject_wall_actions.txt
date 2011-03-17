@@ -21,9 +21,7 @@ Create a wiki page from action block:
     >>> form.getControl(name='page_content').value = 'This wiki page was created from my wall!'
     >>> form.getControl('Save').click()
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize/pages')
-    >>> browser.printQuery("id('subject_pages')//p/span/a/text()")
-    A wiki page
-    Adminas Adminovix
-
-
+    >>> browser.open('http://localhost/subject/vu/mat_analize/notes')
+    >>> browser.printCssQuery(".wiki-notes td.title, .wiki-notes td.author", strip=True)
+    <td> <a>A wiki page</a> </td>
+    <td> <a>Adminas Adminovix</a> </td>

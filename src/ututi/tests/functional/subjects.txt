@@ -56,13 +56,13 @@ homepage will redirect us to the subject feed:
     >>> browser.url
     'http://localhost/subject/vu/mat_analize'
 
-    >>> browser.getLink('Wiki notes').click()
-    >>> browser.getControl('Create a wiki document').click()
+    >>> browser.getLink('Notes').click()
+    >>> browser.getControl('Create new Wiki note').click()
     >>> browser.getControl('Title').value = 'Wiki document title'
     >>> browser.getControl('Content').value = 'Wiki document content'
     >>> browser.getControl('Save').click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/page/4'
+    'http://localhost/subject/vu/mat_analize/note/4'
 
     >>> browser.open('http://localhost/subject/vu/mat_analize')
     >>> browser.url
