@@ -5,12 +5,12 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 CKEDITOR.editorConfig = function( config )
 {
-	// Define changes to default configuration here. For example:
-	config.language = lang;
-	// config.uiColor = '#AADC6E';
+    // Define changes to default configuration here. For example:
+    config.language = lang;
+    // config.uiColor = '#AADC6E';
     config.toolbar = 'UToolBar';
 
-    config.width = '600px';
+    config.width = '560px';
     config.resize_enabled = false;
     config.resize_maxWidth = '620px';
 

@@ -9,7 +9,7 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')}
 ${parent.css()}
 
 .tag-widget {
-  width: 600px;
+  width: 560px;
 }
 .check-field {
   margin-top: 10px;
