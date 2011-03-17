@@ -535,59 +535,6 @@ ul.subject-intro-message span.heading {
     color: #333333;
     font-size: 22px;
 }
-.moduleMenu {
-    display: block;
-    background: #f8f8f8 url('img/module_menu_bg.png') repeat-x bottom;
-    height: 22px;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 22px;
-    list-style: none;
-    margin-top: 5px;
-    padding-left: 7px;
-    padding-right: 7px;
-    padding-top: 2px;
-    text-transform: uppercase;
-    *zoom: 1; /* IE7 */
-}
-
-.moduleMenu.tabs {
-    margin: 15px 0;
-}
-
-.moduleMenu li {
-    display: inline-block;
-    vertical-align: top;
-    *display: inline; /* IE7 */
-    *zoom: 1; /* IE7 */
-}
-.moduleMenu li a {
-    display: block;
-    padding-left: 10px;
-    padding-right: 8px;
-    position: relative;
-              *height: 22px; /* IE7 */
-              _display: inline; /* IE6 */
-              _zoom: 1; /* IE6 */
-}
-.moduleMenu li.current a {
-    background: url('img/module_menu_current_item_bg.png') no-repeat left;
-    color: #666666;
-    margin-right: 5px;
-    padding-right: 10px
-}
-.moduleMenu li.current .edge {
-    background: url('img/module_menu_current_item_bg.png') no-repeat right;
-    display: block;
-    height: 22px;
-    position: absolute;
-    right: -5px;
-    top: 0;
-    width: 5px;
-}
-.moduleMenu li a:hover {
-    text-decoration: none;
-}
 #mainContent div.left_arrow{
     background: url('img/icons/arrow_more_left_13.png') no-repeat center left;
     padding:0 0 0 15px;

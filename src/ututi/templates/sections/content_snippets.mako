@@ -252,12 +252,11 @@ Snippets for rendering various content items, e.g. in search results.
 
 <%def name="tabs()">
 %if hasattr(c, 'tabs') and c.tabs:
-<ul class="moduleMenu tabs" id="moduleMenu">
+<ul class="tabs">
     %for tab in c.tabs:
       <li class="${'current' if tab['name'] == c.current_tab else ''}">
-        <a href="${tab['link']}">${tab['title']}
-            <span class="edge"></span>
-        </a></li>
+        <a href="${tab['link']}">${tab['title']}</a>
+      </li>
     %endfor
 </ul>
 %endif
