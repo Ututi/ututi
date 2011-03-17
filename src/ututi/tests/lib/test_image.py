@@ -1,9 +1,6 @@
 import doctest
 from ututi.tests import UtutiLayer
 
-from ututi.lib.image import resize_image
-
-
 def test_resize_image():
     """Tests for the image resizing function.
 
@@ -11,6 +8,7 @@ def test_resize_image():
     bounding box.
 
         >>> from PIL import Image
+        >>> from ututi.lib.image import resize_image
 
     For completeness let's check if this works with portrait
     orientation images.
@@ -133,6 +131,43 @@ def test_resize_image():
 
     """
 
+def test_crop_square():
+    """Tests for the image squaring function.
+
+    crop_square squares image to a given size by removing some width or height.
+    The image may be resized first.
+
+        >>> from PIL import Image
+        >>> from ututi.lib.image import crop_square
+
+    It works with portrait images:
+
+        >>> img = Image.new("RGB", (200, 600))
+        >>> result = crop_square(img, 300)
+        >>> result.size
+        (300, 300)
+
+    Landscape images:
+
+        >>> img = Image.new("RGB", (300, 100))
+        >>> result = crop_square(img, 200)
+        >>> result.size
+        (200, 200)
+
+    And squared ones:
+
+        >>> img = Image.new("RGB", (100, 100))
+        >>> result = crop_square(img, 50)
+        >>> result.size
+        (50, 50)
+
+        >>> img = Image.new("RGB", (50, 50))
+        >>> result = crop_square(img, 100)
+        >>> result.size
+        (100, 100)
+
+    """
+
 
 def test_suite():
     suite = doctest.DocTestSuite(
@@ -140,3 +175,4 @@ def test_suite():
         doctest.NORMALIZE_WHITESPACE)
     suite.layer = UtutiLayer
     return suite
+
