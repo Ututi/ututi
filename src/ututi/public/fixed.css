@@ -1611,6 +1611,7 @@ ul.medium-icon-list {
         float: left;
         margin: 15px 30px 15px 0px;
         background-repeat: no-repeat;
+        min-height: 30px;
     }
 
     .feature-box .icon-file {
