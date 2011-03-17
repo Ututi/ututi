@@ -1,8 +1,5 @@
 <%inherit file="/subject/home_base.mako" />
 <%namespace name="files" file="/sections/files.mako" />
-<%namespace file="/sections/content_snippets.mako" import="tabs"/>
-
-${tabs()}
 
 <%def name="upload_files_nag()">
 <%self:rounded_block class_='subject-intro-block' id="subject-intro-block-files">

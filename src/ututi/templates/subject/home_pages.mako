@@ -1,6 +1,5 @@
 <%inherit file="/subject/home_base.mako" />
 <%namespace name="files" file="/sections/files.mako" />
-<%namespace file="/sections/content_snippets.mako" import="tabs, tooltip"/>
 
 <%def name="css()">
 table.wiki-notes {
@@ -41,8 +40,6 @@ table.wiki-notes td.title.deleted {
   margin-bottom: 15px;
 }
 </%def>
-
-${tabs()}
 
 <%
 if h.check_crowds(['moderator']):

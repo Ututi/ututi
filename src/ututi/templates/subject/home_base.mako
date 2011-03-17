@@ -2,6 +2,7 @@
 <%namespace file="/portlets/subject.mako" import="subject_info_portlet,
     subject_follow_portlet, subject_teachers_portlet, subject_stats_portlet"/>
 <%namespace name="files" file="/sections/files.mako" />
+<%namespace file="/sections/content_snippets.mako" import="tabs"/>
 
 <%def name="head_tags()">
     ${parent.head_tags()}
@@ -37,5 +38,7 @@
   <br style="clear: left;" />
 </div>
 %endif
+
+${tabs()}
 
 ${next.body()}
