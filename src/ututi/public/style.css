@@ -2694,11 +2694,6 @@ div.back-link {
     margin-bottom: 4px;
 }
 
-a.back-link {
-    padding-left: 15px;
-    background: white url("../images/details/link_back.png") left center no-repeat;
-}
-
 .section .container {
     border-top: 1px solid #ded8d8;
     padding-left: 20px;

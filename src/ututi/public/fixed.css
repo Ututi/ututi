@@ -121,6 +121,12 @@ button.btn-text {
     font: 12px normal Verdana, Arial, sans-serif;
 }
 
+a.back-link {
+    padding-left: 15px;
+    background: url("/img/icons.com/back.png") left center no-repeat;
+}
+
+
 /* LAYOUT ELEMENTS
  */
 
