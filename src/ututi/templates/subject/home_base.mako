@@ -5,13 +5,13 @@
 <%namespace file="/sections/content_snippets.mako" import="tabs"/>
 
 <%def name="head_tags()">
-    ${parent.head_tags()}
-   <%files:head_tags />
-
-   <meta property="og:title" content="${c.subject.title}"/>
-   <meta property="og:url" content="${c.subject.url(qualified=True)}"/>
-   ## Need an HTML stripper here for this to work properly.
-   ##<meta property="og:description" content="${c.subject.description}|h.html_cleanup"/>
+  ${parent.head_tags()}
+  <%files:head_tags />
+  <meta property="og:title" content="${c.subject.title}"/>
+  <meta property="og:url" content="${c.subject.url(qualified=True)}"/>
+  %if c.subject.description:
+  <meta property="og:description" content="${h.single_line(h.html_strip(c.subject.description))}"/>
+  %endif
 </%def>
 
 <%def name="title()">${c.subject.title}</%def>
