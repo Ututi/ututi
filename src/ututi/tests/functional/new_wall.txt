@@ -203,12 +203,7 @@ Group's mailinglist thread is also displayed in group's wall:
     <span class="event-title">
         You have created the group <a>Moderatoriai</a>
     </span>
-    <span class="event-title">
-        You have joined the group <a>Moderatoriai</a>
-    </span>
-    <span class="event-title">
-      <a>Third user</a> has joined the group <a>Moderatoriai</a>
-    </span>
+    ...
 
 User can also reply to these threads from group's wall:
 (Note, we post the form and set referer manually, because testbrowser would lose it.)
@@ -248,10 +243,10 @@ functionality:
       You have created the group <a>Testing group</a>
     </span>
     <span class="event-title">
-      You have joined the group <a>Testing group</a>
+      <a>Second user</a> has joined the group <a>Testing group</a>
     </span>
     <span class="event-title">
-      <a>Second user</a> has joined the group <a>Testing group</a>
+      You have joined the group <a>Testing group</a>
     </span>
 
     >>> form = admin.getForm(name='reply-form', index=0)

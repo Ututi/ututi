@@ -119,8 +119,7 @@ A message to the ututi forum group - members of the group receive email messages
     >>> browser2.printQuery('//div[@class="event-heading"]//text()')
     Teacher Benas has sent a message to the group Testing group 0 seconds ago
     You have created the group Testing group 0 seconds ago
-    You have joined the group Testing group 0 seconds ago
-    Second user has joined the group Testing group 0 seconds ago
+    ...
 
 Let's try sending an sms:
     >>> browser.getControl(name='sms_message', index=0).value = 'Hi, guys! (sms)'

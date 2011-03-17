@@ -93,4 +93,4 @@ $$ LANGUAGE plpgsql;;
 
 SELECT temp_update(e.*) FROM events e WHERE e.event_type = 'private_message_sent' ORDER by e.created ASC;;
 
-create index event_parent_is_null on events(created) where parent_id is null;;
+create index event_parent_is_null on events(created, event_type) where parent_id is null;;

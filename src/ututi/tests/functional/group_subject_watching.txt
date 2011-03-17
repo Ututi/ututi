@@ -50,8 +50,8 @@ These actions should have left an event trail on the group home page:
       You have created the group <a>Moderatoriai</a>
     </span>
     <span>
-      You have joined the group <a>Moderatoriai</a>
+      <a>Third user</a> has joined the group <a>Moderatoriai</a>
     </span>
     <span>
-      <a>Third user</a> has joined the group <a>Moderatoriai</a>
+      You have joined the group <a>Moderatoriai</a>
     </span>

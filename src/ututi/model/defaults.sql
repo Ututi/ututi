@@ -803,7 +803,7 @@ create table events (
 create index events_author_id_idx on events(author_id);
 CREATE INDEX events_parent_id_idx ON events(parent_id);
 CREATE INDEX events_created_idx ON events(created);
-create index event_parent_is_null on events(created) where parent_id is null;;
+create index event_parent_is_null on events(created, event_type) where parent_id is null;;
 
 CREATE FUNCTION add_event(event_id int8, evtype varchar) RETURNS void AS $$
     BEGIN
