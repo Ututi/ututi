@@ -1132,15 +1132,28 @@ ul.feature-list {
 /* WIKI PAGE STYLING
  */
 
-.wiki-page { }
+.wiki-page {
+  padding: 0 10px;
+}
 
-    .wiki-page h1, .wiki-page h2, .wiki-page h3, .wiki-page h4 {
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
+    .wiki-page h1, .wiki-page h2, .wiki-page h3,
+    .wiki-page h4, .wiki-page h5, .wiki-page h6 {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        font-weight: bold;
     }
+
+    .wiki-page h1 { font-size: 14px; }
+
+    .wiki-page h2 { font-size: 13px; }
+
+    .wiki-page h3 { font-size: 12px; }
+
+    .wiki-page h4, .wiki-page h5, .wiki-page h6 { font-size: 10px; }
 
     .wiki-page ul, .wiki-page ol {
         list-style-position: inside;
+        margin-left: 2em;
     }
 
 /*** UTUTI.COM CSS ***/
