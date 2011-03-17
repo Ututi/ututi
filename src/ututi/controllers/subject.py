@@ -306,6 +306,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
             'tags': ', '.join([tag.title for tag in subject.tags]),
             'description': subject.description,
             }
+        c.hide_location = True
 
         if subject.location is not None:
             location = dict([('location-%d' % n, tag)
