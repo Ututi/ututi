@@ -10,7 +10,7 @@
       ${_('Info')}
     </%def>
     <div class="description">
-      ${h.html_cleanup(subject.description)}
+      ${h.html_strip(subject.description)}
     </div>
     %if c.user:
       <a href="${subject.url(action='edit')}" id="description-edit-link">
