@@ -56,7 +56,7 @@ def page_action(method):
 
         c.page = page
         c.subject = subject
-        c.similar_subjects = find_similar_subjects(subject)
+        c.similar_subjects = find_similar_subjects(location.id, id)
         c.object_location = subject.location
         c.security_context = subject
         return method(self, subject, page)
