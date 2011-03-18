@@ -1,6 +1,22 @@
 <%inherit file="/ubase.mako" />
 <%namespace name="b" file="standard_blocks.mako" />
 
+<%b:title_box title="Title box" style="width: 200px">
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+  nisi ut aliquip ex ea commodo consequat.
+  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+  sunt in culpa qui officia deserunt mollit anim id est laborum.
+</%b:title_box>
+
+<br />
+
+<%b:title_box title="Wide box">
+  By default the width of the box is not fixed.
+</%b:title_box>
+
 <%b:rounded_block>
   <div class="block-content">
     This is just a simple block. <br />

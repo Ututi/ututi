@@ -1,3 +1,22 @@
+<%def name="title_box(title, class_='', id=None, style=None)">
+  <div class="title-box ${class_}"
+       %if id is not None:
+         id="${id}"
+       %endif
+
+       %if style is not None:
+         style="${style}"
+       %endif
+  >
+    <div class="title">
+      ${title}
+    </div>
+    <div class="content">
+      ${caller.body()}
+    </div>
+  </div>
+</%def>
+
 <%def name="rounded_block(class_='', id=None, style=None)">
 <div class="rounded-block ${class_}"
      %if id is not None:
