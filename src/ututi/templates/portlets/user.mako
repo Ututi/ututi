@@ -58,7 +58,7 @@
         ${h.link_to(_('Find groups'), url(controller='profile', action='search', obj_type='group'))}
       </li>
       <li class="icon-add">
-        ${h.link_to(_('Create new group'), url(controller='group', action='create_academic'))}
+        ${h.link_to(_('Create new group'), url(controller='group', action='create'))}
       </li>
     </ul>
   </%self:portlet>

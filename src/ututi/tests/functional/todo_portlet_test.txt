@@ -51,7 +51,7 @@ The join-create group link points to group's creation page:
 
     >>> browser.getLink('Join / create a group').click()
     >>> browser.url
-    'http://localhost/groups/create_academic'
+    'http://localhost/groups/create'
 
 Once user creates or becomes member of a group, the todo item is marked as done:
 

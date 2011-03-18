@@ -70,7 +70,7 @@ Let's see what the group's default home page looks like:
 
 However, group ids are checked for uniqueness.
 
-   >>> browser.open('http://localhost/groups/create_academic')
+   >>> browser.open('http://localhost/groups/create')
    >>> browser.getControl('Group e-mail address').value = 'Test'
    >>> browser.getControl('Group title').value = 'Test group'
    >>> browser.getControl('Year').value = ['2009']

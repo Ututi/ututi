@@ -19,7 +19,7 @@
         %if c.user:
         <span class="action-button">
           <span class="notice">${_("Can't find your group?")}</span>
-          ${h.button_to(_('Create a new group'), url(controller='group', action='create_academic'), class_='add inline', method='GET')}
+          ${h.button_to(_('Create a new group'), url(controller='group', action='create'), class_='add inline', method='GET')}
         </span>
         %endif
       </div>
@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="action-button">
-      ${h.button_to(_('Create a new group'), url(controller='group', action='create_academic'), class_='add', method='GET')}
+      ${h.button_to(_('Create a new group'), url(controller='group', action='create'), class_='add', method='GET')}
     </div>
   </div>
 </%def>

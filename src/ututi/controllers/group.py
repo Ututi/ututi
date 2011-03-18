@@ -174,8 +174,8 @@ class CreateGroupFormBase(Schema):
                       validators.Empty())
 
 
-class CreateAcademicGroupForm(CreateGroupFormBase):
-    """A schema for creating academic groups."""
+class CreateGroupForm(CreateGroupFormBase):
+    """A schema for creating groups."""
 
     year = validators.String()
     forum_type = validators.OneOf(['mailinglist', 'forum'])
@@ -407,18 +407,18 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
 
         return render('group/files.mako')
 
-    def _create_academic_form(self):
+    def _create_form(self):
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
         c.forum_type = 'mailinglist'
         c.forum_types = [('mailinglist', _('Mailing list')),
                          ('forum', _('Web-based forum'))]
-        return render('group/create_academic.mako')
+        return render('group/create.mako')
 
     @set_login_url
-    @validate(schema=CreateAcademicGroupForm, form='_create_academic_form')
+    @validate(schema=CreateGroupForm, form='_create_form')
     @ActionProtector("user")
-    def create_academic(self):
+    def create(self):
         if hasattr(self, 'form_result'):
             # TODO: refactor; see create_public()
             values = self.form_result
@@ -447,7 +447,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             meta.Session.commit()
             redirect(url(controller='group', action='invite_members_step', id=values['id']))
 
-        return htmlfill.render(self._create_academic_form())
+        return htmlfill.render(self._create_form())
 
     @group_action
     @ActionProtector("member", "admin")

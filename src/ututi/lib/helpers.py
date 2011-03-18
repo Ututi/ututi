@@ -631,7 +631,7 @@ def user_todo_items(user):
         'done': invited_count > 0 })
     todo_items.append({
         'title': _("Join / create a group"),
-        'link': url(controller='group', action='create_academic'),
+        'link': url(controller='group', action='create'),
         'done': len(user.groups) > 0 })
     todo_items.append({
         'title': _("Find / create your subjects"),

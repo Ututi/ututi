@@ -64,7 +64,7 @@ Entering an invalid coupon code should give us an error:
     >>> browser2.getControl('Continue').click()
 
     >>> browser2.url
-    'http://localhost/groups/create_academic'
+    'http://localhost/groups/create'
 
 
 Using the coupon code is simple:

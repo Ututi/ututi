@@ -83,7 +83,7 @@
     ${item_box(groups, with_titles=True)}
     <%def name="footer()">
       ${h.link_to(_('All groups'), location.url(obj_type='group'))}
-      ${h.link_to(_('Create group'), url(controller='group', action='create_academic'), method='GET')}
+      ${h.link_to(_('Create group'), url(controller='group', action='create'), method='GET')}
     </%def>
   </%self:portlet>
   %endif

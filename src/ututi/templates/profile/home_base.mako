@@ -230,7 +230,7 @@ ${tabs()}
   <p>${_("Use the group's mailing list!")}</p>
 </div>
 <div class="floatleft usergruperight">
-  <form action="${url(controller='group', action='create_academic')}" method="GET"
+  <form action="${url(controller='group', action='create')}" method="GET"
         style="float: none">
     <fieldset>
       <legend class="a11y">${_('Create group')}</legend>
