@@ -162,7 +162,7 @@ class UniversityListMixin(BaseController):
     def _get_departments(self, location):
         c.sort = request.params.get('sort', 'popular')
         region_id = request.params.get('region_id')
-        departments = self._departments(parent=location.id,sort_popularity=(c.sort == 'popular'),
+        departments = self._departments(parent_id=location.id,sort_popularity=(c.sort == 'popular'),
                                   region_id=region_id)
         c.departments = paginate.Page(
             departments,
