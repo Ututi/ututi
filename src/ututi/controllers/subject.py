@@ -219,7 +219,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
     def add(self):
         defaults = dict([('location-%d' % n, tag)
                          for n, tag in enumerate(c.user.location.hierarchy())])
-        c.hide_location = True
+        c.preset_location = c.user.location
         return htmlfill.render(self._add_form(), defaults=defaults)
 
     @ActionProtector("user")

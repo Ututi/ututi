@@ -1,3 +1,34 @@
+<%def name="standard_location_widget()">
+%if hasattr(c, 'preset_location'):
+<div id="location-preview" class="formField" style="display: none">
+  <label for="tags">
+    <span class="labelText">${_('University | Department:')}</span>
+  </label>
+  <% hierarchy_len = len(c.preset_location.hierarchy()) %>
+  <span class="location">
+    %for index, tag in enumerate(c.preset_location.hierarchy(True), 1):
+      ${tag.title} ${'|' if index != hierarchy_len else ''}
+    %endfor
+  </span>
+  <a id="location-edit-link" href="#">${_("Change")}</a>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#location-preview').show();
+    $('#location-edit').hide();
+    $('#location-edit-link').click(function() {
+      $('#location-preview').hide();
+      $('#location-edit').show();
+      return false;
+    });
+  })
+</script>
+%endif
+<div id="location-edit">
+  ${location_widget(2, titles=(_("University:"), _("Department:")), add_new=(c.tpl_lang=='pl'))}
+</div>
+</%def>
+
 <%def name="location_add_subform(index)">
 <div class="location-add-subform hidden" id="location-add-subform-${index}">
   <div class="error"></div>
@@ -7,7 +38,7 @@
 </div>
 </%def>
 
-<%def name="location_widget(number, values=[], titles=[], add_titles=[], add_new=False, live_search=False, label_class='')">
+<%def name="location_widget(number, values=[], titles=[], add_titles=[], add_new=False, label_class='')">
 <%
    if not hasattr(self, 'newlocationwidget_id'):
        self.newlocationwidget_id = 0
