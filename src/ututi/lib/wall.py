@@ -1,18 +1,5 @@
-from profilehooks import profile
-from collections import defaultdict
-
-from pylons.decorators import jsonify
-from pylons import request
 from pylons import tmpl_context as c
-from pylons.i18n import _
 
-from sqlalchemy.orm.query import aliased
-from sqlalchemy.orm import eagerload, contains_eager
-from sqlalchemy.sql.expression import or_
-from sqlalchemy.sql.expression import func
-from sqlalchemy.sql.expression import select
-
-from ututi.lib.security import ActionProtector
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model.events import MailinglistPostCreatedEvent
 from ututi.model import meta
