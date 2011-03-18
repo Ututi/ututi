@@ -243,10 +243,10 @@ functionality:
       You have created the group <a>Testing group</a>
     </span>
     <span class="event-title">
-      <a>Second user</a> has joined the group <a>Testing group</a>
+      You have joined the group <a>Testing group</a>
     </span>
     <span class="event-title">
-      You have joined the group <a>Testing group</a>
+      <a>Second user</a> has joined the group <a>Testing group</a>
     </span>
 
     >>> form = admin.getForm(name='reply-form', index=0)
