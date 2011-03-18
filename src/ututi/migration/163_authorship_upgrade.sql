@@ -4,7 +4,7 @@ create table authors (
        fullname varchar(100),
        primary key (id));;
 insert into authors (id, type, fullname) select id, user_type, fullname from users;
-
+select setval('authors_id_seq', (select max(id) from authors) + 1);
 
 create table teachers (
        id int8 references users(id) on delete cascade,
