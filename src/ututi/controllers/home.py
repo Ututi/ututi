@@ -114,9 +114,9 @@ class UniversityListMixin(BaseController):
         return [uni.info_dict() for uni in unis]
 
     @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
-    def _departments(self, parent, sort_popularity=True, limit=None, region_id=None):
+    def _departments(self, parent_id, sort_popularity=True, limit=None, region_id=None):
         depts = meta.Session.query(LocationTag
-                ).filter(LocationTag.parent == parent
+                ).filter(LocationTag.parent_id == parent_id
                 ).order_by(LocationTag.title.asc())
         if region_id:
             depts = depts.filter_by(region_id=region_id)
@@ -162,7 +162,7 @@ class UniversityListMixin(BaseController):
     def _get_departments(self, location):
         c.sort = request.params.get('sort', 'popular')
         region_id = request.params.get('region_id')
-        departments = self._departments(parent=location,sort_popularity=(c.sort == 'popular'),
+        departments = self._departments(parent=location.id,sort_popularity=(c.sort == 'popular'),
                                   region_id=region_id)
         c.departments = paginate.Page(
             departments,
