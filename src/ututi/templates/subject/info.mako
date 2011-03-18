@@ -12,7 +12,13 @@ div#short-info-block {
   <ul class="icon-list">
     <li class="icon-university">
       ${h.link_to(c.subject.location.title, c.subject.location.url())}
+      %if not c.subject.teacher_repr and c.user:
+        <a href="${c.subject.url(action='edit')}">
+          <img src="/img/icons.com/edit.png" alt="${_('Edit')}" />
+        </a>
+      %endif
     </li>
+    %if c.subject.teacher_repr:
     <li class="icon-teacher">
       ${c.subject.teacher_repr}
       %if c.user:
@@ -21,6 +27,7 @@ div#short-info-block {
         </a>
       %endif
     </li>
+    %endif
   </ul>
 </div>
 

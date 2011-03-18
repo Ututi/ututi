@@ -55,6 +55,7 @@
         <br />
         ${h.link_to(subject.location.title, subject.location.url())}
       </li>
+      %if subject.teacher_repr:
       <li class="icon-teacher align-top subject-teacher">
         %if subject.teachers:
           ${ungettext('Lecturer:', 'Lecturers:', len(subject.teachers))}
@@ -66,6 +67,7 @@
           ${subject.lecturer}
         %endif
       </li>
+      %endif
     </ul>
   </%self:portlet>
 </%def>
