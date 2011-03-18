@@ -190,14 +190,14 @@ class FileUploadedEvent(Event, Commentable):
     @reconstructor
     def init_on_load(self):
         if self.file.md5 is not None:
-            if isinstance(self.file.parent, Subject):
+            if isinstance(self.context, Subject):
                 self.wall_entry_def = 'file_uploaded_subject'
-            elif isinstance(self.file.parent, Group):
+            elif isinstance(self.context, Group):
                 self.wall_entry_def = 'file_uploaded_group'
         else:
-            if isinstance(self.file.parent, Subject):
+            if isinstance(self.context, Subject):
                 self.wall_entry_def = 'folder_created_subject'
-            elif isinstance(self.file.parent, Group):
+            elif isinstance(self.context, Group):
                 self.wall_entry_def = 'folder_created_group'
 
     def isEmptyFile(self):
