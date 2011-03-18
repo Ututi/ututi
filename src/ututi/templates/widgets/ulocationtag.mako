@@ -59,16 +59,11 @@
         %if i < len(titles):
           <span class="labelText">${titles[i]}</span>
         %endif
-            <%
-               cls = ''
-               if live_search:
-                   cls = 'group_live_search'
-            %>
             <span class="textField">
               %if len(values) > i:
-                <input type="text" name="location-${i}" id="location-${self.newlocationwidget_id}-${i}" class="${cls} line structure-complete location-${i}" value="${values[i]}"/>
+                <input type="text" name="location-${i}" id="location-${self.newlocationwidget_id}-${i}" class="line structure-complete location-${i}" value="${values[i]}"/>
               %else:
-                <input type="text" name="location-${i}" id="location-${self.newlocationwidget_id}-${i}" class="${cls} line structure-complete location-${i}" value=""/>
+                <input type="text" name="location-${i}" id="location-${self.newlocationwidget_id}-${i}" class="line structure-complete location-${i}" value=""/>
               %endif
               <span class="edge"></span>
             </span>

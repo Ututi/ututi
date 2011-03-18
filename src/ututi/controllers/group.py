@@ -15,7 +15,7 @@ from pylons.i18n import ungettext, _
 from webhelpers import paginate
 
 from formencode import Schema, validators, Invalid, variabledecode, htmlfill
-from formencode.compound import Pipe, Any
+from formencode.compound import Pipe
 from formencode.foreach import ForEach
 
 from formencode.variabledecode import NestedVariables
@@ -31,11 +31,10 @@ from ututi.lib.search import _exclude_subjects
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import js_validate
-from ututi.lib.validators import HtmlSanitizeValidator, TranslatedEmailValidator, LocationTagsValidator, TagsValidator, GroupCouponValidator, FileUploadTypeValidator, validate
+from ututi.lib.validators import HtmlSanitizeValidator, TranslatedEmailValidator, LocationTagsValidator, TagsValidator, FileUploadTypeValidator, validate
 from ututi.lib.wall import WallMixin
 
 from ututi.model import ForumCategory
-from ututi.model import GroupCoupon
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
 from ututi.model import meta, Group, SimpleTag, Subject, PendingInvitation, PendingRequest
 from ututi.model.events import Event
@@ -135,7 +134,6 @@ class EditGroupForm(GroupForm):
     forum_visibility = validators.OneOf(['public', 'members'])
     page_visibility = validators.OneOf(['public', 'members'])
     mailinglist_moderated = validators.OneOf(['members', 'moderated'])
-    forum_type = validators.OneOf(['mailinglist', 'forum'])
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator())
     can_add_subjects = validators.Bool()
@@ -153,8 +151,8 @@ class NewGroupForm(GroupForm):
     id = Pipe(validators.String(strip=True, min=4, max=20), GroupIdValidator())
 
 
-class CreateGroupFormBase(Schema):
-    """A base class for group creation forms."""
+class CreateGroupForm(Schema):
+    """A schema for group creation forms."""
 
     allow_extra_fields = True
 
@@ -170,15 +168,7 @@ class CreateGroupFormBase(Schema):
               GroupIdValidator())
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     description = validators.UnicodeString()
-    coupon_code = Any(GroupCouponValidator(check_collision=False),
-                      validators.Empty())
-
-
-class CreateGroupForm(CreateGroupFormBase):
-    """A schema for creating groups."""
-
     year = validators.String()
-    forum_type = validators.OneOf(['mailinglist', 'forum'])
 
 
 class GroupAddingForm(Schema):
@@ -364,15 +354,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     def _edit_page_form(self):
         return render('group/edit_page.mako')
 
-    def _apply_coupon(self, group, form_values):
-        code = form_values.get('coupon_code', None)
-        if code is not None:
-            coupon = GroupCoupon.get(code)
-            if coupon.apply(group, c.user):
-                h.flash(_("Great! You have used a coupon code and will now get %s !") % coupon.description())
-            else:
-                h.flash(_("Sorry. We were not able to apply that coupon."))
-
     @group_action
     @ActionProtector("admin", "member")
     def edit_page(self, group):
@@ -410,9 +391,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     def _create_form(self):
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
-        c.forum_type = 'mailinglist'
-        c.forum_types = [('mailinglist', _('Mailing list')),
-                         ('forum', _('Web-based forum'))]
         return render('group/create.mako')
 
     @set_login_url
@@ -420,19 +398,16 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     @ActionProtector("user")
     def create(self):
         if hasattr(self, 'form_result'):
-            # TODO: refactor; see create_public()
             values = self.form_result
 
-            year = int(values.get('year') or '2010') # XXX
+            year = int(values.get('year') or date.today().year)
             group = Group(group_id=values['id'],
                           title=values['title'],
                           description=values['description'],
                           year=date(year, 1, 1))
 
-            group.mailinglist_enabled = (self.form_result['forum_type'] == 'mailinglist')
-
-            tag = values.get('location', None)
-            group.location = tag
+            group.mailinglist_enabled = True
+            group.location = values.get('location', None)
 
             meta.Session.add(group)
 
@@ -441,13 +416,13 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                 group.logo = logo.file.read()
 
             group.add_member(c.user, admin=True)
-            if c.user.location is None:
-                c.user.location = group.location
-            self._apply_coupon(group, values)
             meta.Session.commit()
-            redirect(url(controller='group', action='invite_members_step', id=values['id']))
+            redirect(group.url(action='invite_members_step'))
 
-        return htmlfill.render(self._create_form())
+        defaults = dict([('location-%d' % n, tag)
+                         for n, tag in enumerate(c.user.location.hierarchy())])
+        c.preset_location = c.user.location
+        return htmlfill.render(self._create_form(), defaults=defaults)
 
     @group_action
     @ActionProtector("member", "admin")
@@ -503,10 +478,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                   ] + ([subjects_link] if subjects_link else []) + [
                   ('page', _('Page'))]
 
-        c.forum_types = [('mailinglist', _('Mailing list')),
-                         ('forum', _('Web-based forum'))]
-        c.forum_type = 'mailinglist' if c.group.mailinglist_enabled else 'forum'
-
         return render('group/edit.mako')
 
     @group_action
@@ -524,7 +495,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             'forum_visibility': 'public' if group.forum_is_public else 'members',
             'page_visibility': 'public' if group.page_public else 'members',
             'mailinglist_moderated': 'moderated' if group.mailinglist_moderated else 'members',
-            'forum_type': 'mailinglist' if group.mailinglist_enabled else 'forum',
         }
 
         tags = dict([('tagsitem-%d' % n, tag.title)
@@ -562,7 +532,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                 self.form_result['page_visibility'] == 'public')
         group.mailinglist_moderated = (
                 self.form_result['mailinglist_moderated'] == 'moderated')
-        group.mailinglist_enabled = (self.form_result['forum_type'] == 'mailinglist')
+        group.mailinglist_enabled = True
 
         if not group.mailinglist_enabled and not group.forum_categories:
             group.forum_categories.append(ForumCategory(_('General'), _('Discussions on anything and everything')))
@@ -1200,7 +1170,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     @bot_protect
     def js_check_id(self):
         group_id = request.params.get('id')
-        is_email = request.params.get('is_email', '') == 'true'
 
         exists = len(group_id) < 4 or len(group_id) > 20
 
@@ -1209,13 +1178,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         except Invalid:
             exists = True
 
-        return render_mako_def('group/create_base.mako', 'id_check_response', group_id=group_id, taken=exists, is_email=is_email)
-
-    def js_check_coupon(self):
-        code = request.params.get('code')
-        coupon = GroupCoupon.get(code)
-        available = coupon is not None and coupon.active()
-        return render_mako_def('group/create_base.mako', 'coupon_check_response', coupon_code=code, available=available)
+        return render_mako_def('group/create_base.mako', 'id_check_response', group_id=group_id, taken=exists)
 
     @group_action
     @ActionProtector("member", "admin")

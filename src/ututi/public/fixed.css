@@ -349,6 +349,11 @@ h1.page-title.with-bottom-line {
         margin-left: 15px;
     }
 
+    form.block-errors div.error-container {
+        display: block;
+        margin-left: 0px;
+    }
+
     form .error-message {
         padding-top: 5px;
         font-size: 11px;
@@ -699,13 +704,13 @@ ul.pros-list {
 
 ul.feature-list {
     list-style-type: none;
-    margin: 4px 8px;
+    margin: 4px 0px;
 }
 
     ul.feature-list li {
-        padding-left: 60px;
+        padding-left: 50px;
         min-height: 40px;
-        margin: 20px 0px 40px 0px;
+        margin: 10px 0 0 0;
     }
 
     ul.feature-list li.wiki {
@@ -734,6 +739,22 @@ ul.feature-list {
 
     ul.feature-list li.teacher-profile {
         background: url(img/icons/features/teacher_profile.png) no-repeat left 5px;
+    }
+
+    ul.feature-list li.discussions {
+        background: url(img/icons.com/about/discussions.png) no-repeat left top;
+    }
+
+    ul.feature-list li.email {
+        background: url(img/icons.com/about/email.png) no-repeat left top;
+    }
+
+    ul.feature-list li.private-file {
+        background: url(img/icons.com/about/private_file.png) no-repeat left top;
+    }
+
+    ul.feature-list li.subject {
+        background: url(img/icons.com/about/subject.png) no-repeat left top;
     }
 
 .subject-list {
@@ -1168,8 +1189,6 @@ ul.feature-list {
         list-style-position: inside;
         margin-left: 2em;
     }
-
-/*** UTUTI.COM CSS ***/
 
 /* Login form */
 #login-form label {

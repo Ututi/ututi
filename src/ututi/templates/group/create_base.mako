@@ -1,18 +1,46 @@
-
-<%inherit file="/ubase.mako" />
+<%inherit file="/profile/base.mako" />
 
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*" />
-<%namespace file="/sections/content_snippets.mako" import="tooltip" />
+<%namespace name="snippets" file="/sections/content_snippets.mako" import="tooltip, group" />
 
-<%def name="path_steps(step=0)">
-<div id="steps">
-  %for index, title in enumerate([_('Group settings'), _('Member invitations')]):
-<%
-   cls=''
-   if step == index:
-       cls='active'%>
-    <span class="step ${cls}">
-      <span class="number">${index + 1}</span>
+<%def name="css()">
+  ${parent.css()}
+
+  h1.page-title {
+    margin-bottom: 20px;
+  }
+  #group-registration-steps .step {
+    margin-right: 20px;
+  }
+  #group-registration-steps .step .number {
+    border: 1px solid #666;
+    background-color: #ccc;
+    color: black;
+    padding: 1px 5px;
+  }
+  #group-registration-steps .step.active {
+    font-weight: bold;
+  }
+  #group-registration-steps .step.active .number {
+    background-color: #f90;
+    border-color: #888;
+    color: white;
+  }
+  #group-id-check .taken {
+      padding-left: 15px;
+      background: transparent url("../img/icons/alert_small.png") left center no-repeat;
+  }
+  #group-id-check .free {
+      padding-left: 15px;
+      background: transparent url("../img/icons/tick_10.png") left center no-repeat;
+  }
+</%def>
+
+<%def name="path_steps(step=1)">
+<div id="group-registration-steps">
+  %for n, title in enumerate([_('Group settings'), _('Invite friends')], 1):
+    <span class="step ${'active' if n == step else ''}">
+      <span class="number">${n}</span>
       <span class="title">${title}</span>
     </span>
   %endfor
@@ -20,7 +48,7 @@
 </%def>
 
 <%def name="title()">
-  ${_('Create group')} <!-- Override this -->
+  ${_('Create group')}
 </%def>
 
 <%def name="flash_messages()"></%def>
@@ -30,159 +58,48 @@
   <%newlocationtag:head_tags />
   <script type="text/javascript">
   //<![CDATA[
-  function check_group_id(is_email) {
+  function check_group_id() {
     var id = $('input#group-id-field').val();
-    $('#group-id-check').load("${url(controller='group', action='js_check_id')}",
-           {'id': id, 'is_email': is_email});
+    if (id != '')
+      $('#group-id-check').load("${url(controller='group', action='js_check_id')}", {'id': id});
   }
-
-  function check_group_coupon() {
-    var code = $('input#group-coupon-field').val();
-    if (code != '') {
-      $('#group-coupon-check').load("${url(controller='group', action='js_check_coupon')}",
-             {'code': code});
-    } else {
-      $('#group-coupon-check').html('');
-    }
-  }
-
   function afterDelayedKeyup(selector, action, delay){
     jQuery(selector).keyup(function(){
-      if(typeof(window['inputTimeout']) != "undefined"){
+      if(typeof(window['inputTimeout']) != "undefined") {
         clearTimeout(inputTimeout);
       }
       inputTimeout = setTimeout(action, delay);
     });
   }
-
   //]]>
   </script>
-
 </%def>
 
-<%def name="path_steps(step=0)">
-<div id="steps">
-  %for index, title in enumerate([_('Group settings'), _('Member invitations')]):
-<%
-   cls=''
-   if step == index:
-       cls='active'%>
-    <span class="step ${cls}">
-      <span class="number">${index + 1}</span>
-      <span class="title">${title}</span>
-    </span>
-  %endfor
-</div>
-</%def>
-
-<%def name="id_check_response(group_id, taken, is_email)">
-<div>
-<span class="${'taken' if taken else 'free'}">
-  %if is_email:
-  <span class="bold">${group_id}</span>@${c.mailing_list_host}
-  %else:
-  http://ututi.lt/group/<span class="bold">${group_id}</span>
-  %endif
-  %if taken:
-    <span class="grey">${_(' is invalid.')}</span>
-  %else:
-    <span class="green">${_(' is free!')}</span>
-  %endif
-</span>
-</div>
-</%def>
-
-<%def name="coupon_check_response(coupon_code, available)">
-<div>
-<span class="${'valid' if available else 'invalid'}">
-  %if available:
-    <span class="green">${_('Coupon code is valid!')}</span>
-  %else:
-    <span class="grey">${_('Coupon code is invalid.')}</span>
-  %endif
-</span>
-</div>
+<%def name="id_check_response(group_id, taken)">
+%if taken:
+  <p class="taken">
+    <strong>${group_id}</strong>@${c.mailing_list_host} ${_('is invalid.')}
+  </p >
+%else:
+  <p class="free">
+    <strong>${group_id}</strong>@${c.mailing_list_host} ${_('is free!')}
+  </p>
+%endif
 </%def>
 
 <%def name="group_title_field()">
-  ${h.input_line('title', _('Group title'))}
+  ${h.input_line('title', _('Title:'))}
 </%def>
 
 <%def name="year_field()">
-  <label for="year"><span class="labelText">${_("Year")}</span></label>
+  <label for="year"><span class="labelText">${_("Year:")}</span></label>
   <form:error name="year" />
-  <select name="year" id="year" class="group_live_search">
+  <select name="year" id="year">
     <option value="">${_('Select the year')}</option>
     %for year in c.years:
       <option value="${year}">${year}</option>
     %endfor
   </select>
-</%def>
-
-<%def name="web_address_field()">
-  <label for="group-id-field">
-    <span class="labelText">${_("Group address on the web")}</span>
-  </label>
-  <label>
-    <form:error name="id" />
-    <span class="address">${url(controller='group', action='', qualified=True)}</span>
-    <span class="textField">
-      <input class="address" type="text" id="group-id-field" name="id" />
-      <span class="edge"></span>
-    </span>
-  </label>
-  <div id="group-id-check"></div>
-  <script type="text/javascript">
-  //<![CDATA[
-    afterDelayedKeyup('input#group-id-field',"check_group_id(false)",500);
-  //]]>
-  </script>
-</%def>
-
-<%def name="coupon_field()">
-  %if h.coupons_available(c.user):
-    <label for="group-coupon-field">
-      <span class="labelText">${_("Gift coupon code")}</span>
-    </label>
-    <label>
-      <span class="textField">
-        <input class="coupon" type="text" id="group-coupon-field" name="coupon_code" />
-        <span class="edge"></span>
-      </span>
-    </label>
-    <div id="group-coupon-check">
-      <form:error name="coupon_code" />
-    </div>
-    <script type="text/javascript">
-    //<![CDATA[
-      afterDelayedKeyup('input#group-coupon-field',"check_group_coupon()",500);
-    //]]>
-    </script>
-  %else:
-    <input type="hidden" name="coupon_code" value=""/>
-  %endif
-</%def>
-
-<%def name="group_email_field()">
-  <input type="hidden" name="forum_type" value="mailinglist"/>
-  <label for="group-id-field">
-    <span class="labelText">${_("Group e-mail address")}</span>
-  </label>
-  <label>
-    <form:error name="id" />
-    <span class="textField">
-      <input class="address" type="text" id="group-id-field" name="id" />
-      <span class="edge"></span>
-    </span>
-     @${c.mailing_list_host}
-  </label>
-  <div id="group-id-check"></div>
-  <script type="text/javascript">
-  //<![CDATA[
-    afterDelayedKeyup('input#group-id-field',"check_group_id(true)",500);
-  //]]>
-  </script>
-
 </%def>
 
 <%def name="can_add_subjects(enabled=True, tooltip_text=None)">
@@ -191,7 +108,7 @@
     <input name="can_add_subjects" type="checkbox"${disabled_attr} />
     ${_("Group can subscribe to subjects")}
     %if tooltip_text is not None:
-      ${tooltip(tooltip_text)}
+      ${snippets.tooltip(tooltip_text)}
     %endif
   </label>
 </%def>
@@ -202,77 +119,44 @@
     <input name="file_storage" type="checkbox"${disabled_attr} />
     ${_("Group has a file storage area")}
     %if tooltip_text is not None:
-      ${tooltip(tooltip_text)}
+      ${snippets.tooltip(tooltip_text)}
     %endif
   </label>
 </%def>
 
-<%def name="location_field(live_search=True)">
-  ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=live_search)}
+<%def name="location_field()">
+  ${standard_location_widget()}
 </%def>
 
 <%def name="logo_field()">
   <form:error name="logo_upload" />
     <label>
-      <span class="labelText">${_('Group logo')}</span>
-      <input type="file" name="logo_upload" id="logo_upload" class="line"/>
+      <span class="labelText">${_('Picture:')}</span>
+      <input type="file" name="logo_upload" id="logo_upload" />
   </label>
 </%def>
 
 <%def name="description_field()">
-  ${h.input_area('description', _('Description'))}
+  ${h.input_area('description', _('Description:'))}
   <br />
 </%def>
 
-<%def name="forum_type()">
-  <label for="forum_type"><span class="labelText">${_('Forum type')}</span></label>
-  ${h.select("forum_type", c.forum_type, c.forum_types)}
-</%def>
-
-<%def name="forum_type_and_id()">
-  <label for="forum_type"><span class="labelText">${_('Forum type')}</span></label>
-  ${h.select("forum_type", c.forum_type, c.forum_types)}
-  ${tooltip(_(
-    "<p>In an e-mail conference all messages, sent to the group's address will be forwarded to all members.</p>"
-    "<p>In a forum there is the posibility to create subforums, and subscribed members get e-mail notifications "
-    "about new messages, not the messages themselves.</p>"), style='margin-top: 4px;')}
-
-  <div style="height: 5px"></div>
-
+<%def name="group_id()">
   <label for="group-id-field">
-    <span class="labelText mailinglist-choice">${_("Group e-mail address")}</span>
-    <span class="labelText forum-choice" style="display: none">${_("Group address on the web")}</span>
+    <span class="labelText">${_("Email address:")}</span>
   </label>
   <label>
-    <form:error name="id" />
-    <span class="address forum-choice" style="display: none">${url(controller='group', action='', qualified=True)}</span>
     <span class="textField">
       <input class="address" type="text" id="group-id-field" name="id" />
-      <span class="edge"></span>
     </span>
-    <span class="mailinglist-choice">${c.mailing_list_host}</span>
+    <span>@${c.mailing_list_host}</span>
+    <form:error name="id" />
   </label>
 
   <div id="group-id-check"></div>
   <script type="text/javascript">
   //<![CDATA[
-    afterDelayedKeyup('input#group-id-field', "check_group_id(true)",500);
-  //]]>
-  </script>
-
-  <script type="text/javascript">
-  //<![CDATA[
-      $(document).ready(function() {
-          $('select#forum_type').change(function() {
-              if (this.value == 'mailinglist') {
-                  $('.mailinglist-choice').show();
-                  $('.forum-choice').hide();
-              } else {
-                  $('.forum-choice').show();
-                  $('.mailinglist-choice').hide();
-              };
-          });
-      });
+    afterDelayedKeyup('input#group-id-field', "check_group_id(true)", 500);
   //]]>
   </script>
 
@@ -288,75 +172,15 @@
 </%def>
 
 <%def name="live_search(groups)">
-<h1 class="page-title">
-  ${_('Recommended groups')}
-</h1>
-%if len(groups) > 0:
-  %for group in groups:
-    <div class="live_search_group">
-      <div class="group_logo">
-          <img height="70" width="70" class="group_logo"
-               src="${group.url(action='logo', height=70, width=70)}"
-               alt="${group.title}" />
-      </div>
-      <div class="group_information">
-        <div>
-          <a class="group_title" href="${group.url()}" title="${group.title}">${h.ellipsis(group.title, 30)}</a>
-          <a class="btn" href="${group.url()}"><span>${_('join')}</span></a>
-        </div>
-        <div class="group_members">
-          %for member in group.last_seen_members[:4]:
-          <div class="group_member">
-            <div class="member_logo">
-              <a href="${member.url()}" title="${member.fullname}">
-                  <img height="15" width="15"
-                       src="${member.url(action='logo', height="15", width="15")}"
-                       alt="${member.fullname}" />
-              </a>
-            </div>
-            ${h.ellipsis(member.fullname, 20)}
-          </div>
-          %endfor
-        </div>
-      </div>
-    </div>
-  %endfor
-  <br class="clear-left" />
-%else:
-  <span>${_('No groups found')}</span>
-%endif
-</%def>
-
-<%def name="group_live_search_js()">
-<script type="text/javascript">
-//<![CDATA[
-  $(document).ready(function() {
-    $('select.group_live_search').change(function() {
-      parameters = {'location-0': $('#location-0-0').val(),
-                    'location-1': $('#location-0-1').val(),
-                    'year': $('#year').val()}
-      $('div.group-type-info').hide();
-      $('#sidebar').load(
-          '${url(controller="group", action="js_group_search")}',
-          parameters);
-    });
-  });
-//]]>
-</script>
-</%def>
-
-<%def name="right_pane(title, sidebar=True)">
-  <div id="CreatePublicGroupRight">
-    <div class="group-type-info">
-      <h1 class="page-title">${title}</h1>
-        ${caller.body()}
-
-    </div>
-
-    <div id="sidebar">
-    </div>
-  </div>
-
+  %if groups:
+    %for group in groups:
+      ${snippets.group(group)}
+    %endfor
+  %else:
+    <p class="notice">
+      ${_('No groups found.')}
+    </p>
+  %endif
 </%def>
 
 <%def name="access_settings()">
@@ -382,7 +206,7 @@
   <label for="page_visibility" class="radio">
       <span class="labelText">
         ${_('Group page visibility')}
-        ${tooltip(_('The group page can be used for news, description of the group, calendaring, timetables, etc.'))}
+        ${snippets.tooltip(_('The group page can be used for news, description of the group, calendaring, timetables, etc.'))}
       </span>
     ${h.radio("page_visibility", "public", label=_('Public'))}
     <br />
