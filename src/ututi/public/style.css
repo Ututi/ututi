@@ -1442,16 +1442,6 @@ div.usergruperight {
     line-height: 28px;
 }
 
-div#group-id-check div,
-div#group-coupon-check div {
-    border-top: 1px solid #e9e6e6;
-    border-bottom: 1px solid #e9e6e6;
-    text-align: center;
-    width:430px;
-    padding: 15px 0;
-}
-
-
 #CreatePublicGroupLeft p span img {
     border:0;
     padding-right:15px;
@@ -2164,52 +2154,6 @@ END OF NEW LOCATION WIDGET SECTION
     padding-top: 2em;
     padding-bottom: 2px;
     margin-bottom: 5px;
-}
-
-div.live_search_group {
-    height: 70px;
-    padding: 2px;
-    border: 1px solid #ded8d8;
-    clear: left;
-    margin-top: 5px;
-}
-
-div.live_search_group div.group_logo {
-    width: 70px;
-    height: 70px;
-    float: left;
-    padding-right: 5px;
-}
-
-div.live_search_group div.group_logo img {
-    margin: 0 auto;
-}
-
-div.live_search_group a.group_title {
-    font-size: 16px;
-}
-
-div.live_search_group div.group_members {
-    clear: right;
-}
-
-div.live_search_group div.group_member {
-    height: 20px;
-    width: 160px;
-    float: left;
-    margin: 0 3px 5px 0;
-    line-height: 20px;
-}
-
-div.live_search_group div.group_member div.member_logo {
-    height: 15px;
-    width: 15px;
-    float: left;
-    margin-right: 5px;
-}
-
-div.live_search_group a.btn {
-    float: right;
 }
 
 #sidebar .message {
@@ -2951,18 +2895,6 @@ div.please-register {
 .sms-widget .group-sms-content {
     font-weight: bold;
     padding-top: 3px;
-}
-
-#group-id-check .taken,
-#group-coupon-check .invalid {
-    padding-left: 15px;
-    background: transparent url("../img/icons/alert_small.png") left center no-repeat;
-}
-
-#group-id-check .free,
-#group-coupon-check .valid {
-    padding-left: 15px;
-    background: transparent url("../img/icons/tick_10.png") left center no-repeat;
 }
 
 select {
