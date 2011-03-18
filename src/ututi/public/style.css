@@ -77,13 +77,6 @@ div#pager {
 }
 
 /* Form controls */
-#mainContent label.ieskok input {
-    width: 300px;
-}
-
-#mainContent label.dalykas {
-    padding-left: 88px;
-}
 
 .textFieldBig .edge {
     background-position: right -30px;
@@ -508,61 +501,9 @@ ul.subject-intro-message span.heading {
 }
 
 
-/* Main Content block */
-#mainContent, #CreatePublicGroupLeft {
-    display: inline-block;
-    margin: 20px 40px 0 0;
-    vertical-align: top;
-    width: 640px;
-           *display: inline; /* IE7 */
-           *zoom: 1; /* IE7 */
-}
-
-#mainContent {
-    margin-top: 0;
-}
-
-#CreatePublicGroupLeft {
-    width: 480px;
-    border-right: 1px solid #e9e6e6;
-    margin: 0 40px 30px 0;
-}
-.page-title {
-    color: #333333;
-    font-size: 22px;
-}
-#mainContent div.left_arrow{
-    background: url('img/icons/arrow_more_left_13.png') no-repeat center left;
-    padding:0 0 0 15px;
-    margin: 10px 0 20px 0;
-}
 /* Right sidebar */
-#aside, #CreatePublicGroupRight {
-    display: inline-block;
-    vertical-align: top;
-    width: 300px;
-           *display: inline; /* IE7 */
-           *zoom: 1; /* IE7 */
-}
-#aside .module-top{
-    background: url('img/module-top-bg-grey.png') no-repeat center 3px;
-    height: 28px;
-    margin: auto 0;
-}
-
-#aside .first {
-    margin-top: 0;
-}
-#aside .secondModuleLayer, .secondModuleLayer{
-    margin:10px 0 0 0;
-}
 .secondModuleLayer{
     margin:10px 0 0 0;
-}
-#aside div.right_arrow, div.my-faculty{
-    background: url('img/icons/arrow_more_right_13.png') no-repeat center right;
-    text-align: right;
-    padding:0 15px 0 0;
 }
 
 div.my-faculty{
@@ -591,45 +532,6 @@ div.right_arrow2{
     padding-top:3px;
 }
 
-#aside div.news_header{
-    background: url('img/icons/double-arrow.png') no-repeat right 2px;
-    padding:0 15px 0 0;
-}
-#aside .news_header h2{
-    text-transform: uppercase;
-    color: #666666;
-    font-weight: bold;
-    font-size:14px;
-    padding: 0 0 5px 0;
-}
-#aside div.news_header p {
-    font-size:14px;
-    padding: 8px 0 0 0;
-}
-#aside .module-top.orange{
-    background: url('img/module-top-bg-orange.png') no-repeat center 2px;
-}
-#aside div.orange form{
-    margin-top:5px;
-}
-#aside .module-top h2,
-#aside .module-top h2 a{
-    text-transform: uppercase;
-    color: #333;
-    font-weight: normal;
-    font-size:13px;
-}
-#aside .module-top h2 {
-   padding:9px 15px;
-}
-#aside .module-content{
-    padding:5px 15px;
-    background: url('img/textarea_300.png') no-repeat center bottom;
-    margin: 0 0 15px 0;
-}
-#aside .module-content p, #aside div.news_header p {
-    padding: 0 0 10px 0;
-}
 .MyProfile table{
     width:100%;
 }
@@ -776,44 +678,22 @@ div.profileOptionLinks div.drop{
     font-weight:500;
 }
 
-/* group_settings_form forms*/
-#group_settings_form {
-    margin-left: 15px;
-    width: 90%;
-}
-#group_settings_form select {
-    margin-bottom: 0.5em;
-}
-#group_settings_form span.space {
-    height: 10px;
-    display: block
-}
-.fullForm label,
-#group_settings_form label {
-    font-size: 13px;
-    margin: 7px 0 0 0;
-}
-
 .hideLabels .labelText {
     display: none !important;
 }
 
-.fullForm label .labelText,
-#group_settings_form label .labelText {
+.fullForm label .labelText {
     display: block;
 }
-.fullForm label input,
-#group_settings_form label input, #group_settings_form input {
+.fullForm label input {
     width: 270px;
     margin: 0 0 10px 0;
 }
 
-.fullForm label input.error,
-#group_settings_form label input.error {
+.fullForm label input.error {
     margin: 0;
 }
 
-#group_settings_form .error-container,
 .fullForm .error-container {
     margin-bottom: 10px;
 }
@@ -821,40 +701,9 @@ div.profileOptionLinks div.drop{
 input.checkbox,
 #loginForm input.checkbox,
 #login-screen input.checkbox,
-#group_settings_form input.checkbox,
 .fullForm input.checkbox {
     width: 1em !important;
     margin: 0 5px 0 0;
-}
-
-#group_settings_form img.tooltip{
-    vertical-align: text-bottom;
-}
-
-#group_settings_form label span.address{
-    color: #666;
-    font-size: 14px;
-    margin: 0;
-    width: 140px;
-    display: inline;
-}
-#group_settings_form label.radio span.labelText {
-    margin-top: 6px;
-    margin-bottom: 6px;
-}
-#group_settings_form input.address,
-#group_settings_form input.coupon {
-    width: 142px;
-}
-#group_settings_form label.button {
-    margin: 25px 0 0 0;
-    width: 105px;
-}
-#group_settings_form label.buttonHuge {
-    display: block;
-}
-#group_settings_form label.button button {
-    width: 105px;
 }
 
 #group-logo-button {
@@ -2175,9 +2024,6 @@ div.filtrai .portlet-verysmall {
         border-top: 1px solid #ded8d8;
         padding:15px 0 10px 0;
     }
-    #mainContent div.groupdash{
-        margin-top:10px;
-    }
     div.sorting{
         text-align:right;
     }
@@ -2310,44 +2156,6 @@ div.location-add-subform label {
 /*************************************************************************
 END OF NEW LOCATION WIDGET SECTION
  **************************************************************************/
-
-#group_settings_form {
-    display: inline-block;
-}
-
-#group_settings_form h2 {
-    color: #666;
-    font-size: 16px;
-    font-weight: bold;
-    padding-top: 12px;
-    padding-bottom: 8px;
-    margin-left: -15px;
-}
-
-#group_settings_form input[type=checkbox] {
-    width: 1em;
-}
-
-#group_settings_form input[type=radio] {
-    width: 1em;
-    margin-left: 1em;
-}
-
-#group_settings_form input#logo_delete {
-    margin-left: 0;
-}
-
-#group_settings_form label.checkbox {
-    display: block;
-}
-#group_settings_form label.checkbox span.labelText {
-    display: inline !important;
-    width: 300px !important;
-}
-
-#group_settings_form #continue-button {
-    margin-top: 5px;
-}
 
 /* group live search */
 
@@ -3473,15 +3281,6 @@ input.text_button:hover {
 /* end university list */
 
 /* search form */
-
-#mainContent .search-controls .search-text-submit {
-    width: 400px;
-    padding-right: 90px;
-}
-
-#mainContent .search-controls.loading {
-    background: url("../images/details/search-loader-small.gif") right top no-repeat;
-}
 
 #search-options {
     margin-top: 5px;
