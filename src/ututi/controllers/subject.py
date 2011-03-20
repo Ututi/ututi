@@ -53,10 +53,11 @@ def subject_menu_items():
 
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
-def find_similar_subjects(subject, n=5):
+def find_similar_subjects(subject_id, n=5):
     """Find 5 similar subjects to the one given."""
     def filter_out(query):
-        return query.filter(SearchItem.content_item_id != subject.id)
+        return query.filter(SearchItem.content_item_id != subject_id)
+    subject = Subject.get_by_id(subject_id)
     results = search(text=subject.title, obj_type='subject', disjunctive=False, limit=n, extra=filter_out)
     if not results:
         results = search(text=subject.title, obj_type='subject', tags=subject.location.hierarchy(), disjunctive=True, limit=5, extra=filter_out, rank_cutoff=0.1)
@@ -74,7 +75,7 @@ def subject_action(method):
         c.security_context = subject
         c.object_location = subject.location
         c.subject = subject
-        c.similar_subjects = find_similar_subjects(subject)
+        c.similar_subjects = find_similar_subjects(subject.id)
         c.tabs = subject_menu_items()
         c.breadcrumbs = [{'link': subject.url(), 'title': subject.title}]
         return method(self, subject)
