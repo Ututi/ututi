@@ -1,4 +1,5 @@
 <%inherit file="/portlets/base.mako"/>
+<%namespace file="/widgets/vote.mako" import="voting_bar" />
 
 <%def name="user_logo_link(user, style=None)">
 <div class="user-logo-link"
@@ -23,6 +24,30 @@
   </div>
 </div>
 </%def>
+
+<%def name="school_voting_portlet(title=None, school=None)">
+   <%
+   if school is None:
+      school = c.location
+
+   count = school.vote_count_padded
+   count_needed = 500 - count
+   %>
+
+   <%self:uportlet id="voting_portlet" portlet_class="orange">
+   <%def name="header()">
+   ${_('Vote for your university!')}
+   </%def>
+   ${voting_bar(count, large=false)}
+   <div style="clear: left; padding: 10px 0;">
+     <a href="${url(controller='home', action='voting')}"><strong>
+       ${ungettext('Your university needs <strong>%(count)d more vote</strong>.', 'Your university needs <strong>%(count)d more votes.</strong>', count_needed) % dict(count=count_needed)|n}
+     </strong></a>
+   </div>
+   <div class="right_arrow"><a href="${url(controller='home', action='voting')}">${_('find out more')}</a></div>
+   </%self:uportlet>
+</%def>
+
 
 <%def name="school_members_portlet(title=None, school=None)">
   <%
