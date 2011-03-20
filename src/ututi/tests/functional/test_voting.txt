@@ -44,6 +44,6 @@ Now we can vote:
 
     >>> browser.open('http://localhost/voting')
     >>> browser.printCssQuery('.voting-count-small', include_attributes=[''])
-    <div>22 votes</div>
+    <div>23 votes</div>
 
 (Since this is cached)
