@@ -57,9 +57,10 @@ def find_similar_subjects(location_id, id, n=5):
     """Find 5 similar subjects to the one given."""
     location = LocationTag.get(location_id)
     subject = Subject.get(location, id)
+
     def filter_out(query):
-        # XXX what about location
         return query.filter(SearchItem.content_item_id != subject.id)
+
     results = search(text=subject.title, obj_type='subject', disjunctive=False, limit=n, extra=filter_out)
     if not results:
         results = search(text=subject.title, obj_type='subject', tags=subject.location.hierarchy(), disjunctive=True, limit=5, extra=filter_out, rank_cutoff=0.1)
