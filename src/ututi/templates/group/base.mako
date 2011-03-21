@@ -1,5 +1,6 @@
 <%inherit file="/ubase-two-sidebars.mako" />
 <%namespace file="/portlets/sections.mako" import="*"/>
+<%namespace file="/sections/content_snippets.mako" import="tabs" />
 
 
 <%def name="title()">
@@ -93,14 +94,7 @@ ${group_right_sidebar()}
 %endif
 
 %if c.group.is_member(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
-<ul class="tabs" id="tabs">
-    %for menu_item in c.group_menu_items:
-      <li class="${'current' if menu_item['name'] == getattr(c, 'group_menu_current_item', None) else ''}">
-        <a href="${menu_item['link']}">${menu_item['title']}
-            <span class="edge"></span>
-        </a></li>
-    %endfor
-</ul>
+  ${tabs(c.group_menu_items, getattr(c, 'group_menu_current_item', None))}
 %endif
 </%def>
 

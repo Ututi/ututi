@@ -250,11 +250,17 @@ Snippets for rendering various content items, e.g. in search results.
   ${h.image(img, alt=text, class_='tooltip', style=style)}
 </%def>
 
-<%def name="tabs()">
-%if hasattr(c, 'tabs') and c.tabs:
+<%def name="tabs(tabs=None, current=None)">
+<%
+  if tabs == None:
+    tabs = getattr(c, 'tabs', None)
+  if current == None:
+    current = getattr(c, 'current_tab', None)
+%>
+%if tabs:
 <ul class="tabs">
-    %for tab in c.tabs:
-      <li class="${'current' if tab['name'] == c.current_tab else ''}">
+    %for tab in tabs:
+      <li class="${'current' if tab['name'] == current else ''}">
         <a href="${tab['link']}">${tab['title']}</a>
       </li>
     %endfor
