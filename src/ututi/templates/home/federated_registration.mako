@@ -73,7 +73,7 @@
     </div>
 
         <div>
-          ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=False)}
+          ${location_widget(2, add_new=(c.tpl_lang=='pl'))}
         </div>
 
     <div class="heading">${_('3. Phone number (optional)')}</div>

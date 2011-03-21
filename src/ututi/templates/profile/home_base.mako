@@ -39,7 +39,7 @@ ${tabs()}
   <h2 class="portletTitle bold">${message}</h2>
   <form method="post" action="${url(controller='profile', action='update_location')}" id="update-location-form"
         style="float: none">
-    ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=True, label_class="label")}
+    ${location_widget(2, add_new=(c.tpl_lang=='pl'), label_class="label")}
     ${h.input_submit(_('save'), id='user-location-submit')}
     <div id="location-error" class="error-container" style="display: none"><span class="error-message">${_('Please enter a university.')}</span></div>
   </form>

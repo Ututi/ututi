@@ -73,7 +73,7 @@
       <fieldset>
       ${h.input_line('fullname', _('Full name'))}
       <div>
-        ${location_widget(2, add_new=(c.tpl_lang=='pl'), live_search=False)}
+        ${location_widget(2, add_new=(c.tpl_lang=='pl'))}
       </div>
 
       ${h.input_line('site_url', _('Address of your website or blog'))}
