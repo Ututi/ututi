@@ -9,6 +9,8 @@ alter table group_mailing_list_messages add column
       thread_message_machine_id int8 default null
       references group_mailing_list_messages(id) on delete cascade;
 
+alter table group_mailing_list_messages disable trigger all;
+
 update group_mailing_list_messages gg
   set thread_message_machine_id = (select id from group_mailing_list_messages g
     where g.message_id = gg.thread_message_id and
@@ -59,3 +61,5 @@ CREATE OR REPLACE FUNCTION set_thread_id() RETURNS trigger AS $$
         RETURN NEW;
     END
 $$ LANGUAGE plpgsql;;
+
+alter table group_mailing_list_messages enable trigger all;
