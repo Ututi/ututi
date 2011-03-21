@@ -94,7 +94,9 @@ ${group_right_sidebar()}
 %endif
 
 %if c.group.is_member(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
-  ${tabs(c.group_menu_items, getattr(c, 'group_menu_current_item', None))}
+  %if getattr(c, 'group_menu_current_item', None) is not None:
+    ${tabs(c.group_menu_items, c.group_menu_current_item)}
+  %endif
 %endif
 </%def>
 
