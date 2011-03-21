@@ -7,9 +7,6 @@ I am visiting them so they would get translated properly.
     >>> browser.open('http://localhost/bugs')
     >>> browser.open('http://localhost/group/moderators/files')
     >>> browser.open('http://localhost/group/moderators/edit')
-    >>> browser.getControl('Forum type').displayValue = ['Web-based forum']
-    >>> browser.getControl('Save').click()
-    >>> browser.open('http://localhost/group/moderators/forum/new_category')
     >>> browser.open('http://localhost/tour')
     >>> browser.open('http://localhost/stats')
 
