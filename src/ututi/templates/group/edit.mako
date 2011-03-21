@@ -88,11 +88,9 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
         ${logo_field()}
         ${year_field()}
 
-        ${location_field(live_search=False)}
+        ${location_field()}
 
         <br class="clear-left"/>
-
-        ${forum_type()}
 
         <label for="default_tab">
             <span class="labelText">${_('Default group tab')}</span>
