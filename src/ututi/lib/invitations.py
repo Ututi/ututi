@@ -5,6 +5,8 @@ from formencode.api import Invalid
 from ututi.lib.validators import TranslatedEmailValidator
 from ututi.model import meta, User, UserRegistration
 
+# TODO: remove meta.Session.commit() from here
+
 def make_email_invitations(emails, inviter):
     location = inviter.location
     invalid = []
