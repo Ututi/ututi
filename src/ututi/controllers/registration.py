@@ -559,6 +559,6 @@ class RegistrationController(BaseController, FederationMixin):
         meta.Session.commit()
 
     def logo(self, id, size):
-        return serve_logo('registration', id, width=size, height=size,
+        return serve_logo('registration', id, width=size, square=True,
                           default_img_path="public/img/user_default.png",
                           cache=False)
