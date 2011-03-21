@@ -6,11 +6,10 @@ When I login, I go to groups creation to create public group
     >>> browser = Browser.logIn()
     >>> browser.getLink('Create new group').click()
 
-    >>> browser.getControl('title').value = "testing one two tree"
-    >>> browser.getControl('Group address on the web').value = "testing-one-two-tree"
-    >>> browser.getControl('University').value = "Vilniaus universitetas"
-    >>> browser.getControl('Department').value = "Ekonomikos fakultetas"
-    >>> browser.getControl('Forum type').value = ['forum']
+    >>> browser.getControl('Title:').value = "testing one two tree"
+    >>> browser.getControl('Email address:').value = "testing-one-two-tree"
+    >>> browser.getControl('University:').value = "Vilniaus universitetas"
+    >>> browser.getControl('Department:').value = "Ekonomikos fakultetas"
     >>> browser.getControl('Continue').click()
 
 Then I succesfully create a group
@@ -24,25 +23,13 @@ Then I succesfully create a group
     'http://localhost/group/testing-one-two-tree/welcome'
 
 I am the only member of that group
+
     >>> browser.getLink('Members').click()
     >>> browser.printQuery("//td[@class='member-info']")
     <td class="member-info">
       <a href="/user/1" title="Adminas Adminovix">Adminas Adminovix</a>
       <div>admin@uni.ututi.com</div>
     </td>
-
-I create a forum topic
-
-    >>> browser.open('http://localhost/group/testing-one-two-tree/forum')
-    >>> browser.getControl('New topic').click()
-    >>> browser.url
-    'http://localhost/group/testing-one-two-tree/forum/5/new_thread'
-
-    >>> browser.getControl('Subject').value = "some title"
-    >>> browser.getControl('Message').value = "Hi, there! Whats up?"
-    >>> browser.getControl('Post').click()
-    >>> browser.url
-    'http://localhost/group/testing-one-two-tree/forum/5/thread/5'
 
 First user can delete group
 
