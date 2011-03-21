@@ -17,7 +17,7 @@ We are redirected to the member invitation and just click "Finish", without
 inviting any members:
 
     >>> browser.printQuery('//h1/text()')
-    Add group members
+    Invite group members
     >>> browser.getControl('Finish').click()
 
 Let's disable file storage and subject watching.

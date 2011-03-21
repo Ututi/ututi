@@ -133,8 +133,8 @@ Now let's see if the view for the user has changed.
 
     >>> browser2.reload()
     >>> browser2.printQuery('id("main-content")//h2/text()')
-    Invite your classmates
-    Invite your classmates using Facebook
+    Invite your groupmates
+    Invite your groupmates using Facebook
     Invited users (invitations not accepted yet)
     Group members
 

@@ -16,7 +16,7 @@ This time, let's try creating an academic group:
 After creating the group, we are redirected to the member invitation step:
 
     >>> browser.printQuery('//h1/text()')
-    Add group members
+    Invite group members
 
 We've checked that already; let's move on.
 
