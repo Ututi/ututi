@@ -27,12 +27,12 @@ We can edit the group's information.
    >>> browser.url
    'http://localhost/group/moderators/edit'
 
-   >>> browser.getControl('Group title').value
+   >>> browser.getControl('Title:').value
    'Moderatoriai'
 
-   >>> browser.getControl('Group title').value = 'Ututi moderatoriai'
+   >>> browser.getControl('Title:').value = 'Ututi moderatoriai'
    >>> browser.getControl('Description').value = 'Ututi moderatorių grupė'
-   >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
+   >>> browser.getControl('Picture').add_file(*make_file('test_logo.png'))
    >>> browser.getControl('Save').click()
    >>> browser.printQuery('id("tabs")//li[@class="current"]//a/text()')
    News feed
@@ -47,10 +47,10 @@ We can add a group:
 
    >>> browser.open('http://localhost/')
    >>> browser.getLink('Create new group').click()
-   >>> browser.getControl('Group e-mail address').value = 'test'
-   >>> browser.getControl('Group title').value = 'Test group'
+   >>> browser.getControl('Email address').value = 'test'
+   >>> browser.getControl('Title:').value = 'Test group'
    >>> browser.getControl('Year').value = ['2009']
-   >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
+   >>> browser.getControl('Picture').add_file(*make_file('test_logo.png'))
    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
    >>> browser.getControl('Continue').click()
 
@@ -71,10 +71,10 @@ Let's see what the group's default home page looks like:
 However, group ids are checked for uniqueness.
 
    >>> browser.open('http://localhost/groups/create')
-   >>> browser.getControl('Group e-mail address').value = 'Test'
-   >>> browser.getControl('Group title').value = 'Test group'
+   >>> browser.getControl('Email address').value = 'Test'
+   >>> browser.getControl('Title:').value = 'Test group'
    >>> browser.getControl('Year').value = ['2009']
-   >>> browser.getControl('Group logo').add_file(*make_file('test_logo.png'))
+   >>> browser.getControl('Picture').add_file(*make_file('test_logo.png'))
    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
    >>> browser.getControl('Continue').click()
 
@@ -83,24 +83,24 @@ However, group ids are checked for uniqueness.
 
 And they must be valid local parts of email addresses.
 
-    >>> browser.getControl('Group e-mail address').value = 'test test'
+    >>> browser.getControl('Email address').value = 'test test'
     >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
 
 Slashes are also not allowed
-    >>> browser.getControl('Group e-mail address').value = 'test/test'
+    >>> browser.getControl('Email address').value = 'test/test'
     >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
 
-    >>> browser.getControl('Group e-mail address').value = 'test\test'
+    >>> browser.getControl('Email address').value = 'test\test'
     >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
 
 And plus signs for that matter
-    >>> browser.getControl('Group e-mail address').value = 'test+test'
+    >>> browser.getControl('Email address').value = 'test+test'
     >>> browser.getControl('Continue').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Id cannot be used as an email address.
