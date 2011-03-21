@@ -14,7 +14,6 @@ from ututi.lib.image import serve_logo
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
         FileUploadTypeValidator, SeparatedListValidator, CountryValidator
 import ututi.lib.helpers as h
-from ututi.lib.invitations import make_facebook_invitations
 
 from ututi.model import meta, LocationTag
 from ututi.model.users import User, UserRegistration
