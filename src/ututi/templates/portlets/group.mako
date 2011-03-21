@@ -166,7 +166,7 @@
     </%def>
     <ul class="icon-list">
       <li class="icon-facebook">
-        <a href="${url(controller='profile', action='invite_friends_fb')}" id="invite-fb-link" ${h.trackEvent(None, 'click', 'group_invite_facebook', 'portlets')}>${"Facebook"}</a>
+        <a href="${group.url(action='invite_fb')}" id="invite-fb-link" ${h.trackEvent(None, 'click', 'group_invite_facebook', 'portlets')}>${"Facebook"}</a>
       </li>
       <li class="icon-email">
         <a href="#invite-email" id="invite-email-link" ${h.trackEvent(None, 'click', 'group_invite_email', 'portlets')}>${"Email"}</a>
