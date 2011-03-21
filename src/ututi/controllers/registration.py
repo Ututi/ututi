@@ -547,11 +547,7 @@ class RegistrationController(BaseController, FederationMixin):
         redirect(url(controller='profile', action='register_welcome'))
 
     def _accept_group_invitations(self, user):
-        """Let's find all group invitations and accept them"""
-
-        ## TODO: still need check if invitation is in user's location.
-        ## I am to lazy for PendingInvitation refactoring, so I will chenge this later.
-
+        ## TODO: check invitation location
         invitations = meta.Session.query(PendingInvitation
                             ).filter_by(email=user.username, active=True
                             ).all()
