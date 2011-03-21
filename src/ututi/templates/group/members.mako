@@ -12,6 +12,12 @@
        margin-top: 20px;
    }
 
+   .members-invitations h2,
+   .facebook-invitations h2 {
+       font-size: 12px;
+       font-weight: bold;
+   }
+
    .members-invitations {
        padding-right: 20px;
        margin-right: 20px;
@@ -100,13 +106,13 @@
 
     <div class="clearfix">
       <div class="members-invitations">
-        <strong>${_('Invite your groupmates')}</strong>
+        <h2>${_('Invite your groupmates')}</h2>
         ${h.input_area('emails', '', help_text=_('Enter emails of your classmates, separated with commas.'), cols=30)}
         ${h.input_submit(_('Invite'), class_='dark add inline')}
       </div>
 
       <div class="facebook-invitations">
-        <strong>${_('Invite your groupmates using Facebook')}</strong>
+        <h2>${_('Invite your groupmates using Facebook')}</h2>
         <a id="facebook-button" href="${c.group.url(action='invite_fb')}">
           ${h.image('/img/facebook-button.png', alt=_('Facebook'))}
         </a>
