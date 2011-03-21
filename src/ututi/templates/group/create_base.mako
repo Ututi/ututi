@@ -1,7 +1,8 @@
 <%inherit file="/profile/base.mako" />
 
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*" />
-<%namespace name="snippets" file="/sections/content_snippets.mako" import="tooltip, group" />
+<%namespace name="snippets" file="/sections/content_snippets.mako" import="group" />
+<%namespace file="/elements.mako" import="tooltip" />
 
 <%def name="css()">
   ${parent.css()}
@@ -108,7 +109,7 @@
     <input name="can_add_subjects" type="checkbox"${disabled_attr} />
     ${_("Group can subscribe to subjects")}
     %if tooltip_text is not None:
-      ${snippets.tooltip(tooltip_text)}
+      ${tooltip(tooltip_text)}
     %endif
   </label>
 </%def>
@@ -119,7 +120,7 @@
     <input name="file_storage" type="checkbox"${disabled_attr} />
     ${_("Group has a file storage area")}
     %if tooltip_text is not None:
-      ${snippets.tooltip(tooltip_text)}
+      ${tooltip(tooltip_text)}
     %endif
   </label>
 </%def>
@@ -206,7 +207,7 @@
   <label for="page_visibility" class="radio">
       <span class="labelText">
         ${_('Group page visibility')}
-        ${snippets.tooltip(_('The group page can be used for news, description of the group, calendaring, timetables, etc.'))}
+        ${tooltip(_('The group page can be used for news, description of the group, calendaring, timetables, etc.'))}
       </span>
     ${h.radio("page_visibility", "public", label=_('Public'))}
     <br />

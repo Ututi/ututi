@@ -3,7 +3,7 @@
                                                     location_admin_portlet, location_register_portlet,
                                                     location_members_portlet, location_groups_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet, google_ads_portlet" />
-<%namespace file="/sections/content_snippets.mako" import="tabs"/>
+<%namespace file="/elements.mako" import="tabs"/>
 
 <%def name="css()">
   ${parent.css()}

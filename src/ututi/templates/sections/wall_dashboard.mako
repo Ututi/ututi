@@ -3,7 +3,7 @@
 </%doc>
 
 <%namespace name="base" file="/prebase.mako" import="rounded_block"/>
-<%namespace file="/sections/content_snippets.mako" import="tooltip" />
+<%namespace file="/elements.mako" import="tooltip" />
 
 <%def name="head_tags()">
   ${h.javascript_link('/javascript/dashboard.js')}

@@ -1,5 +1,5 @@
 <%inherit file="/portlets/base.mako" />
-<%namespace file="/portlets/universal.mako" import="item_box" />
+<%namespace file="/elements.mako" import="item_box" />
 
 <%def name="location_logo_portlet(location=None)">
   <% if location is None: location = c.location %>

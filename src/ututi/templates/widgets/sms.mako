@@ -1,4 +1,4 @@
-<%namespace file="/sections/content_snippets.mako" import="tooltip" />
+<%namespace file="/elements.mako" import="tooltip" />
 
 <%def name="sms_widget(user=None, group=None, text=None, parts=['tip', 'buy_credits', 'phone_send', 'phone_info'])">
 <%

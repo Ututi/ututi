@@ -1,3 +1,5 @@
+<%namespace file="/elements.mako" import="item_box" />
+
 <%doc>
 Snippets for rendering various content items, e.g. in search results.
 </%doc>
@@ -242,28 +244,4 @@ Snippets for rendering various content items, e.g. in search results.
       </span>
     </div>
   </div>
-</%def>
-
-
-<%def name="tooltip(text, style=None, img=None)">
-  <% if img is None: img = '/images/details/icon_question.png' %>
-  ${h.image(img, alt=text, class_='tooltip', style=style)}
-</%def>
-
-<%def name="tabs(tabs=None, current=None)">
-<%
-  if tabs == None:
-    tabs = getattr(c, 'tabs', None)
-  if current == None:
-    current = getattr(c, 'current_tab', None)
-%>
-%if tabs:
-<ul class="tabs">
-    %for tab in tabs:
-      <li class="${'current' if tab['name'] == current else ''}">
-        <a href="${tab['link']}">${tab['title']}</a>
-      </li>
-    %endfor
-</ul>
-%endif
 </%def>

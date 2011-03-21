@@ -1,5 +1,5 @@
 <%namespace name="prebase" file="/prebase.mako" />
-<%namespace file="/sections/content_snippets.mako" import="tooltip" />
+<%namespace file="/elements.mako" import="tooltip" />
 
 <%def name="head_tags()">
 

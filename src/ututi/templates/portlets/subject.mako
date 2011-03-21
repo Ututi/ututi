@@ -1,6 +1,6 @@
 <%inherit file="/portlets/base.mako"/>
 <%namespace file="/sections/content_snippets.mako" import="*"/>
-<%namespace file="/portlets/universal.mako" import="item_box" />
+<%namespace file="/elements.mako" import="item_box" />
 
 <%def name="subject_info_portlet(subject=None)">
   <% if subject is None: subject = c.subject %>

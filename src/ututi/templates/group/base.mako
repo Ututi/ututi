@@ -1,6 +1,6 @@
 <%inherit file="/ubase-two-sidebars.mako" />
 <%namespace file="/portlets/sections.mako" import="*"/>
-<%namespace file="/sections/content_snippets.mako" import="tabs" />
+<%namespace file="/elements.mako" import="tabs" />
 
 
 <%def name="title()">

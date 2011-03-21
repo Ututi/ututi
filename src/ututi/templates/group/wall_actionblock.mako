@@ -5,7 +5,7 @@
 <%namespace name="actions" file="/sections/wall_actionblock.mako" import="head_tags, action_block" />
 <%namespace name="base" file="/prebase.mako" import="rounded_block"/>
 <%namespace name="dropdown" file="/widgets/dropdown.mako" import="dropdown, head_tags"/>
-<%namespace file="/sections/content_snippets.mako" import="tooltip" />
+<%namespace file="/elements.mako" import="tooltip" />
 
 <%def name="head_tags()">
   ${actions.head_tags()}

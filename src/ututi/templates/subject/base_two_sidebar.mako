@@ -2,7 +2,7 @@
 
 <%namespace file="/portlets/subject.mako" import="subject_followers_portlet, subject_related_subjects_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet, google_ads_portlet" />
-<%namespace file="/sections/content_snippets.mako" import="tabs" />
+<%namespace file="/elements.mako" import="tabs" />
 <%namespace name="base" file="/subject/base.mako" />
 
 <%def name="head_tags()">

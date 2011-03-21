@@ -2,7 +2,7 @@
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 <%namespace file="/widgets/tags.mako" import="*"/>
 <%namespace file="/group/create_base.mako" import="*"/>
-<%namespace file="/sections/content_snippets.mako" import="tooltip" />
+<%namespace file="/elements.mako" import="tooltip" />
 
 <%def name="group_menu()">
   <h1 class="page-title">${self.title()}</h1>

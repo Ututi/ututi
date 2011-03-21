@@ -1,6 +1,6 @@
 <%inherit file="/profile/home_base.mako" />
 <%namespace name="b" file="/prebase.mako" import="rounded_block"/>
-<%namespace file="/sections/content_snippets.mako" import="tooltip" />
+<%namespace file="/elements.mako" import="tooltip" />
 <%namespace name="actions" file="/profile/wall_actionblock.mako" import="action_block, head_tags, css"/>
 <%namespace name="wall" file="/sections/wall_entries.mako" />
 

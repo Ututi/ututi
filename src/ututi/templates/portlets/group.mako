@@ -1,7 +1,6 @@
 <%inherit file="/portlets/base.mako"/>
 <%namespace file="/widgets/sms.mako" import="sms_widget"/>
-<%namespace file="/sections/content_snippets.mako" import="tooltip" />
-<%namespace file="/portlets/universal.mako" import="item_box" />
+<%namespace file="/elements.mako" import="item_box, tooltip" />
 
 <%def name="portlet_file(file)">
   <li>

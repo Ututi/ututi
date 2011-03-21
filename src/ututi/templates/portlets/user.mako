@@ -1,5 +1,6 @@
 <%inherit file="/portlets/base.mako"/>
-<%namespace file="/sections/content_snippets.mako" import="tooltip, item_location" />
+<%namespace file="/sections/content_snippets.mako" import="item_location" />
+<%namespace file="/elements.mako" import="tooltip" />
 
 <%def name="user_menu_portlet()">
   <%self:portlet id="user-menu-portlet">
