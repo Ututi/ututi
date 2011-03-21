@@ -11,8 +11,6 @@
   }
 </%def>
 
-<h1 class="page-title with-bottom-line">${_('Create a group')}</h1>
-
 <div class="clearfix">
 
   <%b:title_box title="${_('About groups')}" id="about-groups">

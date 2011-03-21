@@ -215,4 +215,6 @@
   </label>
 </%def>
 
+<h1 class="page-title with-bottom-line">${_('Create a group')}</h1>
+
 ${next.body()}

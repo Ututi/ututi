@@ -5,19 +5,18 @@
 </%def>
 
 <%def name="css()">
-   .members-invitations {
-       margin-top: 1em;
+   .members-invitations,
+   .facebook-invitations {
+       float: left;
        width: 280px;
-       padding-right: 1em;
-       border-right: 1px solid #ded8d8;
+       margin-top: 20px;
    }
 
-   .members-invitations h2 {
-      font-size: 16px;
-      color: #666;
-      font-weight: bold;
-      padding-bottom: 8px;
-    }
+   .members-invitations {
+       padding-right: 20px;
+       margin-right: 20px;
+       border-right: 1px solid #666;
+   }
 
    .members-invitations button.submit {
       margin-top: 10px;
@@ -28,9 +27,14 @@
    }
 
    .facebook-invitations {
-      padding-top: 1em;
-      width: 270px;
       text-align: center;
+   }
+
+   .facebook-invitations a {
+      /* facebook button */
+      display: block;
+      margin: 20px auto;
+      outline: none;
    }
 
    div.single-title {
@@ -40,7 +44,6 @@
       background: none;
       border-bottom: 1px solid #ff9900;
    }
-
 </%def>
 
 <%def name="group_members(group=None)">
@@ -95,29 +98,23 @@
       %endif
       id="member_invitation_form" class="fullForm">
 
-    <div class="floatleft members-invitations">
-      <h2>${_('Invite your classmates')}</h2>
-        <div class="explanation">
-          ${_('Enter emails of your classmates.')}
-        </div>
-        <div class="invitation-emails">
-          ${h.input_area('emails', '', cols=30)}
-        </div>
-        ${h.input_submit(_('Invite'))}
-    </div>
+    <div class="clearfix">
+      <div class="members-invitations">
+        <strong>${_('Invite your groupmates')}</strong>
+        ${h.input_area('emails', '', help_text=_('Enter emails of your classmates, separated with commas.'), cols=30)}
+        ${h.input_submit(_('Invite'), class_='dark add inline')}
+      </div>
 
-    <div class="floatleft facebook-invitations">
-      <h2 style="font-size: 16px; color: #666; font-weight: bold">${_('Invite your classmates using Facebook')}</h2>
-      <div style="margin-top: 2em">
-        <a href="${c.group.url(action='invite_fb')}">
-          ${h.image('/img/facebook_pic.jpg', alt='Facebook')}
+      <div class="facebook-invitations">
+        <strong>${_('Invite your groupmates using Facebook')}</strong>
+        <a id="facebook-button" href="${c.group.url(action='invite_fb')}">
+          ${h.image('/img/facebook-button.png', alt=_('Facebook'))}
         </a>
       </div>
     </div>
 
-    <div style="clear: both">&nbsp;</div>
     %if wizard:
-      ${h.input_submit(_('Finish'), 'final_submit', class_='btnLarge')}
+      ${h.input_submit(_('Finish'), 'final_submit')}
     %endif
   </form>
 </%def>

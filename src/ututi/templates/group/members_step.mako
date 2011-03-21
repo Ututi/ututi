@@ -1,19 +1,11 @@
-<%inherit file="/ubase-sidebar.mako" />
+<%inherit file="/group/create_base.mako" />
+<%namespace name="members" file="/group/members.mako" />
 
-<%namespace file="/group/create_base.mako" import="path_steps"/>
-<%namespace file="/group/members.mako" import="group_members_invite_section"/>
-<%namespace file="/portlets/sections.mako" import="*"/>
-
-<%def name="title()">
-${c.group.title}
+<%def name="css()">
+  ${parent.css()}
+  ${members.css()}
 </%def>
 
-<%def name="portlets()">
-  ${group_sidebar()}
-</%def>
+${self.path_steps(2)}
 
-<h1>${_('Add group members')}</h1>
-
-${path_steps(1)}
-
-${group_members_invite_section(wizard=True)}
+${members.group_members_invite_section(wizard=True)}
