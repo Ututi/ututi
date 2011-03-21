@@ -175,7 +175,7 @@
 <%def name="live_search(groups)">
   %if groups:
     %for group in groups:
-      ${snippets.group(group)}
+      ${snippets.group(group, list_members=True)}
     %endfor
   %else:
     <p class="notice">

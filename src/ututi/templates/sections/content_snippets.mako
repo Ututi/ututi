@@ -96,7 +96,7 @@ Snippets for rendering various content items, e.g. in search results.
   </div>
 </%def>
 
-<%def name="group(object)">
+<%def name="group(object, list_members=False)">
   <div class="search-item snippet-group">
     %if c.user is not None:
       <div class="action-button">
@@ -125,6 +125,10 @@ Snippets for rendering various content items, e.g. in search results.
         <li class="icon-subject">${h.group_subjects(object.id)}</li>
         <li class="icon-user">${h.group_members_count(object.id)}</li>
     </ul>
+
+    %if list_members:
+      ${item_box(h.group_members(object.id, 8), per_row=8)}
+    %endif
   </div>
 </%def>
 
