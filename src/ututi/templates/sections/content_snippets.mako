@@ -45,7 +45,7 @@ Snippets for rendering various content items, e.g. in search results.
 
 <%def name="item_location(object)">
   %if object.location:
-  <span class="location-tags">
+  <span class="location-tags short">
   %for tag in object.location.hierarchy(True):
     <a href="${tag.url()}">${tag.title_short}</a> |
   %endfor
@@ -58,9 +58,9 @@ Snippets for rendering various content items, e.g. in search results.
   <%
     hierarchy_len = len(object.location.hierarchy())
   %>
-  <span class="location">
+  <span class="location-tags">
   %for index, tag in enumerate(object.location.hierarchy(True)):
-    ${tag.title}
+    <a href="${tag.url()}">${tag.title}</a>
     %if index != hierarchy_len - 1:
         |
     %endif

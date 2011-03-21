@@ -298,6 +298,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                                    len(group.invitations) == 0)
         c.wants_to_watch_subjects = (len(group.watched_subjects) == 0 and
                                      group.wants_to_watch_subjects)
+        c.show_info = True
 
         # wall's action block variables
         self._set_wall_variables()

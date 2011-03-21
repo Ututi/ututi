@@ -1,4 +1,4 @@
-<%inherit file="/group/base.mako" />
+<%inherit file="/group/base_wide.mako" />
 <%namespace name="members" file="/group/members.mako" import="group_members_invite_section, css"/>
 <%namespace file="/portlets/base.mako" import="uportlet"/>
 

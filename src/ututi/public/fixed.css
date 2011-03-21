@@ -961,8 +961,11 @@ ul.feature-list {
  */
 
 .location-tags, .location-tags a {
-    text-transform: uppercase;
     color: #3d617a;
+}
+
+.location-tags.short, .location-tags.short a {
+    text-transform: uppercase;
 }
 
 /* UTILITY CLASSES

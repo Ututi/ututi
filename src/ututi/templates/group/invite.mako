@@ -1,4 +1,4 @@
-<%inherit file="/group/base.mako" />
+<%inherit file="/group/base_wide.mako" />
 
 <%def name="title()">
   ${_('Invite friends to %s') % c.group.title}
@@ -6,7 +6,7 @@
 
 %if c.has_facebook:
 
-  <fb:serverFbml width="500">
+  <fb:serverFbml width="630">
     <script type="text/fbml">
       <fb:fbml>
         <fb:request-form action="${c.group.url(action='invite_fb', qualified=True)}"
@@ -22,7 +22,7 @@
                                                    qualified=True)}' label='${_('Join group')}' />
           ">
           <fb:multi-friend-selector max="20" actiontext="${_('Invite your friends to Ututi!')}"
-                                    showborder="true" rows="5" cols="3" exclude_ids="${c.exclude_ids}">
+                                    showborder="true" rows="5" cols="7" exclude_ids="${c.exclude_ids}">
         </fb:request-form>
       </fb:fbml>
     </script>
