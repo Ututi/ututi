@@ -1035,30 +1035,33 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
 
     def create_pending_invitation(self, email, author):
         user = User.get(email, self.location.root)
-        if user is None or not self.is_member(user):
-            try:
-                invitation = meta.Session.query(PendingInvitation
-                        ).filter_by(email=email, group=self, active=True
-                        ).one()
-                invitation.created = datetime.utcnow()
-            except NoResultFound:
-                invitation = PendingInvitation(email, author=author, group=self)
-                meta.Session.add(invitation)
-
-            return invitation
-        else:
+        if user and self.is_member(user):
             return None
-
-    def invite_fb_user(self, facebook_id, author):
-        invitations = meta.Session.query(PendingInvitation
-                    ).filter_by(facebook_id=facebook_id, group=self, active=True
-                    ).all()
-        if not invitations:
-            invitation = PendingInvitation(facebook_id=int(facebook_id),
-                                           group=self, author=author)
-            # If the user is already in the system, bind immediately.
-            invitation.user = User.get_byfbid(facebook_id)
+        try:
+            invitation = meta.Session.query(PendingInvitation
+                    ).filter_by(email=email, group=self, active=True
+                    ).one()
+            invitation.created = datetime.utcnow()
+        except NoResultFound:
+            invitation = PendingInvitation(email, author=author, group=self)
             meta.Session.add(invitation)
+
+        return invitation
+
+    def create_pending_fb_invitation(self, facebook_id, author):
+        user = User.get_byfbid(facebook_id, self.location.root)
+        if user and self.is_member(user):
+            return None
+        try:
+            invitation = meta.Session.query(PendingInvitation
+                    ).filter_by(facebook_id=facebook_id, group=self, active=True
+                    ).one()
+            invitation.created = datetime.utcnow()
+        except NoResultFound:
+            invitation = PendingInvitation(facebook_id=facebook_id, author=author, group=self)
+            meta.Session.add(invitation)
+
+        return invitation
 
     def request_join(self, user):
         request = PendingRequest(user, group=self)

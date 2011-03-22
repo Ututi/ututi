@@ -592,7 +592,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         if invited:
             ids = invited.split(',')
             for facebook_id in ids:
-                group.invite_fb_user(int(facebook_id), c.user)
+                group.create_pending_fb_invitation(int(facebook_id), c.user)
             meta.Session.commit()
             h.flash(ungettext('Invited %(num)d friend.',
                               'Invited %(num)d friends.',
@@ -615,7 +615,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
 
         friend_ids = [f['id'] for f in friends['data']]
         friend_users = meta.Session.query(User).filter(
-                                User.facebook_id.in_(friend_ids)).all()
+                            User.facebook_id.in_(friend_ids)).all()
         c.exclude_ids = ','.join(str(u.facebook_id) for u in friend_users
                                  if c.group.is_member(u))
         return render('group/invite.mako')
