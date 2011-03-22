@@ -2,8 +2,6 @@ from string import strip
 
 from formencode.api import Invalid
 
-from sqlalchemy.sql.expression import or_
-
 from ututi.lib.validators import TranslatedEmailValidator
 from ututi.model import meta, User, UserRegistration, PendingInvitation
 
@@ -53,10 +51,16 @@ def bind_group_invitations(user):
 
     user_emails = [email.email for email in user.emails if email.confirmed]
 
-    invitations = meta.Session.query(PendingInvitation)\
-                      .filter(or_(PendingInvitation.email.in_(user_emails),
-                                  PendingInvitation.facebook_id == user.facebook_id))\
-                      .filter(PendingInvitation.active == True).all()
+    if not user_emails and not user.facebook_id:
+        return
+
+    query = meta.Session.query(PendingInvitation)
+    if user_emails:
+        query = query.filter(PendingInvitation.email.in_(user_emails))
+    if user.facebook_id:
+        query = query.filter(PendingInvitation.facebook_id == user.facebook_id)
+
+    invitations = query.filter(PendingInvitation.active == True).all()
 
     # filter out invitations with different location
     invitations = [i for i in invitations \
