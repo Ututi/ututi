@@ -488,6 +488,24 @@ class User(Author):
     def update_ignored_events(self, events):
         self.ignored_events = ','.join(list(set(events)))
 
+    def find_group_invitations(self):
+        """Return all active group invitations to this user.
+        Invitations are identified by user_id, email or facebook.
+        Also filtered by user location, because person may use
+        same email to register for several locations."""
+        from ututi.model import PendingInvitation
+
+        user_emails = [email.email for email in self.emails if email.confirmed]
+        invs = meta.Session.query(PendingInvitation)\
+                   .filter(or_(PendingInvitation.user_id == self.id,
+                               PendingInvitation.email.in_(user_emails),
+                               PendingInvitation.facebook_id == self.facebook_id))\
+                   .filter(PendingInvitation.active == True).all()
+
+        # check location!
+        invs = [i for i in invs if i.group.location.root == self.location.root]
+        return invs
+
 
 class AnonymousUser(object):
     """Helper class for dealing with anonymous users. No ORM."""
