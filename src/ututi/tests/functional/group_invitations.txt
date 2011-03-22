@@ -21,7 +21,7 @@ Let's find the group.
 
 Let's try and invite a new member to the group.
 
-    >>> emails = 'user@ututi.lt, loser@ututi.lt, user2@ututi.lt, foo'
+    >>> emails = 'user@ututi.lt, not_user@ututi.lt, user2@ututi.lt, foo'
 
     >>> form = browser.getForm(id='member_invitation_form')
     >>> form.getControl(name='emails').value = emails
@@ -33,7 +33,7 @@ Let's try and invite a new member to the group.
 The user should be listed in the invited users table.
 
     >>> browser.printQuery("//table[@class='group-invitations']/tr/td[@class='email']/text()")
-    loser@ututi.lt
+    not_user@ututi.lt
     user2@ututi.lt
     user@ututi.lt
 
@@ -55,20 +55,24 @@ Send one more invitation using invitation portlet.
 We want check invitations so let's join as the invited user.
 
     >>> msg1, msg2, msg3, msg4 = mail_queue
+    >>> msg1.recipients
+    ['user@ututi.lt']
+
     >>> user = Browser.logIn("user@ututi.lt", "password")
 
 The user is accepting invitation from email by clicking on URL.
 
     >>> from ututi.lib.helpers import get_urls
-    >>> urls = get_urls(msg2.payload())
+    >>> urls = get_urls(msg1.payload())
     >>> invitation_url = urls[1]
     >>> user.open(invitation_url)
     >>> user.printCssQuery('.flash-message-content', strip=True)
     <span>Congratulations! You are now a member of the group 'Moderatoriai'</span>
 
+Let's try accepting invitation with user which is still not Ututi member.
 
-Let's try accepting invitation with user wich is still not Ututi member.
-
+    >>> msg3.recipients
+    [u'not_user@ututi.lt']
     >>> new_user = Browser()
     >>> urls = get_urls(msg3.payload())
     >>> invitation_url = urls[1]
@@ -115,9 +119,17 @@ Finishing registration:
     >>> new_user.printCssQuery('h1.page-title', strip=True)
     <h1>News feed</h1>
 
-User must be in group 'Moderatoriai' so we will check this.
+Once registered, user should be able to accept invitation to group:
+
+    >>> new_user.printQuery("//div[contains(@class, 'flash-message')]//text()")
+    Adminas Adminovix has sent you an invitation to group Moderatoriai
+    . Do you want to become a member of this group?
+    Reject Accept
+
+    >>> new_user.getControl('Accept').click()
+    >>> new_user.printCssQuery('.flash-message-content', strip=True)
+    <span>Congratulations! You are now a member of the group 'Moderatoriai'</span>
 
     >>> new_user.getLink('Moderatoriai', url='/group/moderators').click()
     >>> print new_user.url
     http://localhost/group/moderators/home
-
