@@ -5,7 +5,6 @@
 </%def>
 
 %if c.has_facebook:
-
   <fb:serverFbml width="630">
     <script type="text/fbml">
       <fb:fbml>
@@ -27,7 +26,6 @@
       </fb:fbml>
     </script>
   </fb:serverFbml>
-
 %else:
   <p>
     ${_("You have to log in to Facebook in order to use this invitation form.")}
