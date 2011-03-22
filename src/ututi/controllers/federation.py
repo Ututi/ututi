@@ -19,8 +19,8 @@ from pylons.i18n import _
 
 from ututi.lib.emails import teacher_request_email
 from ututi.model.users import User
-from ututi.model import PendingInvitation
 from ututi.model import meta
+from ututi.lib.invitations import bind_group_invitations
 from ututi.lib.validators import PhoneNumberValidator
 from ututi.lib.validators import LocationTagsValidator
 from ututi.lib.security import sign_in_user
@@ -72,14 +72,6 @@ class FederationMixin(object):
             user.update_logo_from_facebook()
             if flash:
                 h.flash(_('Your Facebook account has been associated with your Ututi account.'))
-
-    def _bind_facebook_invitations(self, user):
-        invitations = meta.Session.query(PendingInvitation).filter_by(
-                            facebook_id=user.facebook_id, user_id=None
-                            ).all()
-        for invitation in invitations:
-            invitation.user = user
-
 
 
 class FederationController(BaseController, FederationMixin):
@@ -250,7 +242,7 @@ class FederationController(BaseController, FederationMixin):
                 elif facebook_id:
                     h.flash(_('Your Facebook account "%s" has been linked to your existing Ututi account.') % email)
                     user.facebook_id = facebook_id
-                    self._bind_facebook_invitations(user)
+                    bind_group_invitations(user)
                     if not user.logo:
                         user.update_logo_from_facebook()
 

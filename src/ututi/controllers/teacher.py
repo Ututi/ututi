@@ -17,6 +17,7 @@ from formencode.schema import Schema
 
 from ututi.lib.security import sign_in_user
 from ututi.lib.emails import email_confirmation_request, teacher_registered_email, teacher_request_email
+from ututi.lib.invitations import bind_group_invitations
 from ututi.lib.validators import validate
 from ututi.lib.validators import TranslatedEmailValidator
 from ututi.lib.base import BaseController, render
@@ -136,11 +137,10 @@ class TeacherController(BaseController, FederationMixin):
                                password=None,
                                gen_password=False)
                 self._bind_user(user, flash=False)
-                if user.facebook_id:
-                    self._bind_facebook_invitations(user)
                 user.accepted_terms = datetime.utcnow()
                 user.emails = [Email(c.email)]
                 user.emails[0].confirmed = True
+                bind_group_invitations(user)
 
                 meta.Session.add(user)
                 meta.Session.commit()

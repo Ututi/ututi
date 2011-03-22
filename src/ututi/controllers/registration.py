@@ -8,9 +8,10 @@ from formencode.compound import Pipe
 from pylons import tmpl_context as c, url, session, request, config
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
-from ututi.model import PendingInvitation
+
 from ututi.lib.base import BaseController, render
 from ututi.lib.image import serve_logo
+from ututi.lib.invitations import bind_group_invitations
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
         FileUploadTypeValidator, SeparatedListValidator, CountryValidator
 import ututi.lib.helpers as h
@@ -531,7 +532,7 @@ class RegistrationController(BaseController, FederationMixin):
             registration.location = registration.create_university()
 
         user = registration.create_user()
-        self._accept_group_invitations(user)
+        bind_group_invitations(user)
 
         meta.Session.add(user)
         meta.Session.commit()
@@ -544,19 +545,6 @@ class RegistrationController(BaseController, FederationMixin):
 
         sign_in_user(user)
         redirect(url(controller='profile', action='register_welcome'))
-
-    def _accept_group_invitations(self, user):
-        ## TODO: check invitation location
-        invitations = meta.Session.query(PendingInvitation
-                            ).filter_by(email=user.username, active=True
-                            ).all()
-
-        for invitation in invitations:
-            group = invitation.group
-            group.add_member(user)
-            invitation.active = None
-
-        meta.Session.commit()
 
     def logo(self, id, size):
         return serve_logo('registration', id, width=size, square=True,

@@ -22,6 +22,7 @@ from sqlalchemy.sql.expression import desc
 from ututi.lib.base import BaseController, render, u_cache
 import ututi.lib.helpers as h
 from ututi.lib.emails import email_password_reset
+from ututi.lib.invitations import bind_group_invitations
 from ututi.lib.security import sign_out_user
 from ututi.lib.security import ActionProtector, sign_in_user, bot_protect
 from ututi.lib.validators import validate, UniqueEmail, TranslatedEmailValidator
@@ -305,12 +306,11 @@ class HomeController(UniversityListMixin, FederationMixin):
                             password=None,
                             gen_password=False)
                 self._bind_user(user, flash=False)
-                if user.facebook_id:
-                    self._bind_facebook_invitations(user)
                 user.accepted_terms = datetime.utcnow()
                 user.emails = [Email(c.email)]
                 user.emails[0].confirmed = True
                 user.phone_number = self.form_result['phone']
+                bind_group_invitations(user)
                 meta.Session.add(user)
                 meta.Session.commit()
             sign_in_user(user)
