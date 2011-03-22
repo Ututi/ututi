@@ -46,7 +46,7 @@ The information portlet shows some statistics about the university:
 
     >>> browser.printCssQuery("#location-info-portlet li", strip=True)
     <li>1 Subject</li>
-    <li>2 Groups</li>
+    <li>1 Group</li>
     <li>0 Members</li>
     <li>0 Files</li>
 
