@@ -7,8 +7,6 @@ from sqlalchemy.sql.expression import or_
 from ututi.lib.validators import TranslatedEmailValidator
 from ututi.model import meta, User, UserRegistration, PendingInvitation
 
-# TODO: remove meta.Session.commit() from here
-
 def make_email_invitations(emails, inviter):
     location = inviter.location
     invalid = []
@@ -28,7 +26,6 @@ def make_email_invitations(emails, inviter):
                     invitee = UserRegistration(location, email)
                     meta.Session.add(invitee)
                 invitee.inviter = inviter
-                meta.Session.commit()
                 invites.append(invitee)
 
     return invites, invalid, already
@@ -47,7 +44,6 @@ def make_facebook_invitations(fb_ids, inviter):
                 meta.Session.add(invitee)
             invitee.inviter = inviter
             invited.append(facebook_id)
-            meta.Session.commit()
 
     return invited
 
