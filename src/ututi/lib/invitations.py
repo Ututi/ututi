@@ -7,8 +7,8 @@ from sqlalchemy.sql.expression import or_
 from ututi.lib.validators import TranslatedEmailValidator
 from ututi.model import meta, User, UserRegistration, PendingInvitation
 
-def make_email_invitations(emails, inviter):
-    location = inviter.location
+def make_email_invitations(emails, inviter, location=None):
+    location = location or inviter.location
     invalid = []
     already = []
     invites = []
@@ -30,10 +30,10 @@ def make_email_invitations(emails, inviter):
 
     return invites, invalid, already
 
-def make_facebook_invitations(fb_ids, inviter):
+def make_facebook_invitations(fb_ids, inviter, location=None):
+    location = location or inviter.location
     already = []
     invited = []
-    location = inviter.location
     for facebook_id in fb_ids:
         if location and User.get_byfbid(facebook_id, location):
             already.append(facebook_id)
