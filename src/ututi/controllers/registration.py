@@ -320,7 +320,7 @@ class RegistrationController(BaseController, FederationMixin):
 
         # Otherwise lookup/create registration entry and
         # send confirmation code to user.
-
+        # TODO: filter the following by location!
         registration = UserRegistration.get_by_email(email)
         if registration is None:
             registration = UserRegistration(location, email)
