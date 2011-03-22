@@ -53,34 +53,36 @@
        user = c.user
 %>
 %if user:
-  %for invitation in user.find_group_invitations():
-    <div class="flash-message">
-      <span>
-        ${h.literal(_(u"%(author)s has sent you an invitation to group %(group)s. Do you want to become a member of this group?") %\
-                    dict(author=h.object_link(invitation.author), group=h.object_link(invitation.group)))}
-      </span>
-      <br />
-      <form method="post"
-            action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
-            id="${invitation.group.group_id}_invitation_reject"
-            class="inline-form">
-        <div style="display: inline;">
-          <input type="hidden" name="accept" value="False"/>
-          <input type="hidden" name="came_from" value="${request.url}"/>
-          ${h.input_submit(_('Reject'))}
-        </div>
-      </form>
-      <form method="post"
-            action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
-            id="${invitation.group.group_id}_invitation_accept"
-            class="inline-form">
-        <div style="display: inline;">
-          <input type="hidden" name="accept" value="True"/>
-          <input type="hidden" name="came_from" value="${request.url}"/>
-          ${h.input_submit(_('Accept'))}
-        </div>
-      </form>
-    </div>
+  %for invitation in user.invitations:
+    % if invitation.active:
+      <div class="flash-message">
+        <span>
+          ${h.literal(_(u"%(author)s has sent you an invitation to group %(group)s. Do you want to become a member of this group?") %\
+                      dict(author=h.object_link(invitation.author), group=h.object_link(invitation.group)))}
+        </span>
+        <br />
+        <form method="post"
+              action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
+              id="${invitation.group.group_id}_invitation_reject"
+              class="inline-form">
+          <div style="display: inline;">
+            <input type="hidden" name="accept" value="False"/>
+            <input type="hidden" name="came_from" value="${request.url}"/>
+            ${h.input_submit(_('Reject'))}
+          </div>
+        </form>
+        <form method="post"
+              action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
+              id="${invitation.group.group_id}_invitation_accept"
+              class="inline-form">
+          <div style="display: inline;">
+            <input type="hidden" name="accept" value="True"/>
+            <input type="hidden" name="came_from" value="${request.url}"/>
+            ${h.input_submit(_('Accept'))}
+          </div>
+        </form>
+      </div>
+    %endif
   %endfor
 %endif
 
