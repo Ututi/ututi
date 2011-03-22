@@ -3,8 +3,8 @@ Group subject watching
 
     >>> browser = Browser.logIn()
 
-    >>> browser.open('http://localhost/group/moderators')
-    >>> browser.getLink('Subjects', url='moderators').click()
+    >>> browser.open('http://localhost/group/testgroup')
+    >>> browser.getLink('Subjects', url='testgroup').click()
     >>> browser.getControl('add a subject').click()
 
     >>> browser.printQuery("id('watched_subjects')")
@@ -41,17 +41,17 @@ These actions should have left an event trail on the group home page:
     >>> browser.getLink("News feed", url='group').click()
     >>> browser.printQuery(".wall .wall-entry .event-heading .event-title", selector='cssselect', strip=True)
     <span>
-        The group <a>Moderatoriai</a> has stopped watching the subject <a>Matematin&#279; analiz&#279;</a>
+        The group <a>Testing group</a> has stopped watching the subject <a>Matematin&#279; analiz&#279;</a>
     </span>
     <span>
-        The group <a>Moderatoriai</a> has started watching the subject <a>Matematin&#279; analiz&#279;</a>
+        The group <a>Testing group</a> has started watching the subject <a>Matematin&#279; analiz&#279;</a>
     </span>
     <span>
-      You have created the group <a>Moderatoriai</a>
+      You have created the group <a>Testing group</a>
     </span>
     <span>
-      You have joined the group <a>Moderatoriai</a>
+      You have joined the group <a>Testing group</a>
     </span>
     <span>
-      <a>Third user</a> has joined the group <a>Moderatoriai</a>
+      <a>Second user</a> has joined the group <a>Testing group</a>
     </span>
