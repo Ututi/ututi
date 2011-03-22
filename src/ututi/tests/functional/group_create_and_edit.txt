@@ -21,7 +21,8 @@ inviting any members:
     >>> browser.getControl('Finish').click()
 
 Let's disable file storage and subject watching.
-    >>> browser.getLink('Edit').click()
+
+    >>> browser.getLink('Edit Settings').click()
     >>> browser.getControl(name='can_add_subjects').value = False
     >>> browser.getControl(name='file_storage').value = False
     >>> browser.getControl('Save').click()
@@ -40,7 +41,7 @@ Let's assert that "Files" and "Subjects" tabs are not available:
 Suppose we changed our mind. We go to edit group's settings and
 enable file storage area:
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit Settings').click()
     >>> browser.getControl(name='file_storage').value = True
     >>> browser.getControl('Save').click()
 
@@ -62,7 +63,7 @@ Since we're watching at files, let's add one:
 If we now go to the edit form, we will notice that file storage
 checkbox has become disabled:
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit Settings').click()
     >>> browser.getControl(name='file_storage').disabled
     True
 
@@ -79,7 +80,7 @@ We can now go to "Subjects" tab and watch one:
 
 In the "Edit" page now both checkboxes should be disabled:
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit Settings').click()
     >>> browser.getControl(name='file_storage').disabled
     True
 
@@ -94,7 +95,7 @@ Let's go and delete a file, that we created earlier:
 
 Now we can again disable "Files" tab:
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit Settings').click()
     >>> browser.getControl(name='file_storage').value = False
     >>> browser.getControl('Save').click()
     >>> browser.getLink('Files')
@@ -107,7 +108,7 @@ tab as well:
 
     >>> browser.getLink('Subjects').click()
     >>> browser.getLink(url='unwatch_subject').click()
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit Settings').click()
     >>> browser.getControl(name='can_add_subjects').value = False
     >>> browser.getControl('Save').click()
     >>> browser.getLink('Subjects')
@@ -123,7 +124,7 @@ tab as well:
 If we enable file storage area, we find previously deleted
 items in the recycle bin:
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit Settings').click()
     >>> browser.getControl(name='file_storage').value = True
     >>> browser.getControl('Save').click()
     >>> browser.getLink('Files').click()
@@ -134,7 +135,7 @@ If we undelete the file, in 'Edit' page file storage area
 checkbox will again become disabled:
 
     >>> res = browser.app.get('/group/belzebubai/file/5/restore')
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit Settings').click()
     >>> browser.getControl(name='file_storage').disabled
     True
 
