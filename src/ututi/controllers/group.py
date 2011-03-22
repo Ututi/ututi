@@ -26,7 +26,7 @@ from sqlalchemy.sql.expression import or_
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_logo
-from ututi.lib.invitations import make_email_invitations
+from ututi.lib.invitations import make_email_invitations, make_facebook_invitations
 from ututi.lib.search import _exclude_subjects
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render
@@ -593,6 +593,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             ids = invited.split(',')
             for facebook_id in ids:
                 group.create_pending_fb_invitation(int(facebook_id), c.user)
+            make_facebook_invitations(ids, c.user)
             meta.Session.commit()
             h.flash(ungettext('Invited %(num)d friend.',
                               'Invited %(num)d friends.',
