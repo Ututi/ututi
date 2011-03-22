@@ -92,7 +92,7 @@ def ftest_setUp(test):
 
     meta.Session.execute("SET LOCAL ututi.active_user TO %d" % admin.id)
 
-    moderators = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'U2ti moderatoriai.')
+    moderators = Group('moderators', u'Moderatoriai', uni, date(date.today().year, 1, 1), u'U2ti moderatoriai.')
     meta.Session.add(moderators)
 
     moderators.add_member(admin, True)
