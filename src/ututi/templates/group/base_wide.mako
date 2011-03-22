@@ -14,7 +14,7 @@
    ${base.css()}
 </%def>
 
-${base.group_menu(show_info=getattr(c, 'show_info', False))}
+${base.group_menu()}
 ${base.various_dialogs()}
 
 ${next.body()}

@@ -74,10 +74,13 @@ ${group_right_sidebar()}
   </div>
 </%def>
 
-<%def name="group_menu(show_info=False)">
-  <% show_tabs = (c.group.is_member(c.user) or \
-                  c.security_context and h.check_crowds(['admin', 'moderator'])) and \
-                  getattr(c, 'group_menu_current_item', None) is not None %>
+<%def name="group_menu()">
+  <%
+  show_tabs = (c.group.is_member(c.user) or \
+               c.security_context and h.check_crowds(['admin', 'moderator'])) and \
+               getattr(c, 'group_menu_current_item', None) is not None
+  show_info = getattr(c, 'show_info', False)
+  %>
 
   <h1 class="page-title ${'with-bottom-line' if not show_tabs or show_info else ''}">
     ${self.title()}
@@ -210,7 +213,7 @@ ${group_right_sidebar()}
   %endif
 </%def>
 
-${self.group_menu(show_info=getattr(c, 'show_info', False))}
+${self.group_menu()}
 ${self.various_dialogs()}
 
 ${next.body()}
