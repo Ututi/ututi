@@ -880,6 +880,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
 
     def _send_group_invitations(self, group, emails, message=None):
         invites, invalid, already = make_email_invitations(emails, c.user)
+        # invites are registration objects!
 
         for email in already:
             user = User.get(email, group.location.root)
@@ -892,9 +893,9 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                 invitation = group.create_pending_invitation(email, c.user)
                 send_group_invitation_for_user(invitation, email, message)
 
-        for invitee in invites:
-            invitation = group.create_pending_invitation(invitee.email, c.user)
-            send_group_invitation_for_non_user(invitation, invitee, message)
+        for registration in invites:
+            invitation = group.create_pending_invitation(registration.email, c.user)
+            send_group_invitation_for_non_user(invitation, registration, message)
 
         if invites:
             h.flash(_("Users invited."))

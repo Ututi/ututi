@@ -4,7 +4,7 @@ ${_('Hi')}
 ${message}
 
 ${_('You may join group %(group_title)s by following this link:') % dict(group_title=invitation.group.title)}
-${invitee.url(action='confirm_email', qualified=True)}
+${registration.url(action='confirm_email', qualified=True)}
 
 --
 ${invitation.author.fullname}
@@ -26,5 +26,5 @@ The Ututi team
 """) % dict(author=invitation.author.fullname,
             group_title=invitation.group.title,
             group_url=invitation.group.url(qualified=True),
-            link=invitee.url(action='confirm_email', qualified=True)))}
+            link=registration.url(action='confirm_email', qualified=True)))}
 %endif

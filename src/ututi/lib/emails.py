@@ -55,14 +55,14 @@ def send_group_invitation_for_user(invitation, email, message=None):
         #if the email is not confirmed, nothing will be sent for now
         #XXX: if the user has several emails, send the invitation to one that is confirmed
 
-def send_group_invitation_for_non_user(group_invitation, registration_invitation, message=None):
+def send_group_invitation_for_non_user(invitation, registration, message=None):
     """A method for handling user invitation to group emails for non users"""
     text = render('/emails/invitation_nonuser.mako',
-                  extra_vars={'invitation': group_invitation,
-                              'invitee': registration_invitation,
+                  extra_vars={'invitation': invitation,
+                              'registration': registration,
                               'message': message})
     msg = EmailMessage(_('Ututi group invitation'), text)
-    msg.send(registration_invitation.email)
+    msg.send(registration.email)
 
 def email_password_reset(user, email):
     """Send an email to the user with a link to reset his password."""
