@@ -9,7 +9,7 @@ We'll find us a user:
 
 Let's go to his medal page:
 
-    >>> browser.getControl('Award medals').click()
+    >>> browser.click('Award medals')
 
 We will award him a medal:
 

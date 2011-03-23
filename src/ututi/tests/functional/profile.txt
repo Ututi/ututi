@@ -4,12 +4,12 @@ User profiles
     >>> from pkg_resources import resource_stream
     >>> from ututi.tests.functional import make_file
 
-Each user will have a profile that is accessible via the url /profile/{id}.
+Each user will have a profile that is accessible via the url /user/{id}.
 
     >>> browser = Browser()
     >>> browser.open('http://localhost/user/1')
     >>> browser.printQuery('//h1/text()')
-    What has Adminas Adminovix been up to?
+    Adminas Adminovix
 
 Now we'll try editing our profile information. First we need to log in.
 

@@ -28,9 +28,8 @@ Having uploaded the file, we should be presented with a list of all files presen
 The download count of files is shown in the user's public profile:
 
     >>> browser.open('http://localhost/user/1')
-    >>> browser.printQuery('//div[@class="file_stats"]/span/text()')
-    1
-    1 (25 B)
+    >>> browser.printQuery('//span[@class="user-download-count"]//text()')
+    1 file downloaded
 
 After the download of the file, the downloaded files count in the user list should indicate this:
 

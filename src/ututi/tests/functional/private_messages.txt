@@ -16,7 +16,7 @@ Sending messages
 Let's send a message:
 
     >>> browser.open('http://localhost/user/3')
-    >>> browser.getControl('Send message').click()
+    >>> browser.click('Send private message')
 
     >>> browser.getControl('Subject').value = 'First message'
     >>> browser.getControl('Message').value = 'First!'
@@ -138,7 +138,7 @@ Deletion by recipient is independent from deletion by sender:
 Messages sent to self can be deleted too:
 
     >>> browser2.open('http://localhost/user/3')
-    >>> browser2.getControl('Send message').click()
+    >>> browser2.click('Send private message')
     >>> browser2.getControl('Subject').value = 'Alter ego'
     >>> browser2.getControl('Message').value = 'Talking to myself.'
     >>> browser2.getControl('Post').click()
