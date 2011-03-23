@@ -194,6 +194,54 @@
   </%self:portlet>
 </%def>
 
+<%def name="user_statistics_portlet(user=None)">
+  <% if user is None: user = c.user %>
+  <%self:portlet id="user-statistics-portlet">
+    <%def name="header()">
+      ${_("Info:")}
+    </%def>
+    <%
+    up_count = user.files_count()
+    down_count = user.download_count()
+    note_count = h.authorship_count('page', user.id)
+    group_count = len(user.groups)
+    subject_count = len(user.watched_subjects)
+    %>
+    <ul class="icon-list">
+      <li class="icon-subject">
+        ${ungettext("%(count)s subject",\
+                    "%(count)s subjects",\
+                    subject_count) % dict(count=subject_count)}
+      </li>
+      <li class="icon-group">
+        ${ungettext("%(count)s group",\
+                    "%(count)s groups",\
+                    group_count) % dict(count=group_count)}
+      </li>
+      <li class="icon-note">
+        ${ungettext("%(count)s wiki note",\
+                    "%(count)s wiki notes",\
+                    note_count) % dict(count=note_count)}
+      </li>
+      <li class="icon-file active">
+        <span class="user-upload-count">
+          ${ungettext("%(count)s file uploaded",\
+                      "%(count)s files uploaded",\
+                      up_count) % dict(count=up_count)}
+        </span>
+      </li>
+      <li class="icon-file">
+        <span class="user-download-count">
+          ${ungettext("%(count)s file downloaded",\
+                      "%(count)s files downloaded",\
+                      down_count) % dict(count=down_count)}
+        </span>
+        (${h.file_size(user.download_size())})
+      </li>
+    </ul>
+  </%self:portlet>
+</%def>
+
 <%def name="related_users_portlet(user=None, count=None)">
   <%
      if user is None:
