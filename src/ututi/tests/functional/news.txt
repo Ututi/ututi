@@ -12,21 +12,21 @@ We log in:
 
 Let's invite a couple of users into our group:
 
-    >>> browser.getLink('Moderatoriai', url='/group/moderators').click()
+    >>> browser.getLink('Testing group', url='/group/testgroup').click()
     >>> browser.getLink('Members').click()
     >>> form = browser.getForm(id='member_invitation_form')
-    >>> form.getControl(name='emails').value = ('user@ututi.lt\nuser2@ututi.lt')
+    >>> form.getControl(name='emails').value = ('user@ututi.lt\nuser3@ututi.lt')
     >>> form.getControl('Invite').click()
 
     >>> Browser.logIn('user@ututi.lt', 'password').getControl('Accept').click()
-    >>> Browser.logIn('user2@ututi.lt', 'password').getControl('Accept').click()
+    >>> Browser.logIn('user3@ututi.lt', 'password').getControl('Accept').click()
 
     >>> from ututi.lib.mailer import mail_queue
     >>> mail_queue[:] = []
 
 Add their gadugadu numbers:
 
-    >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
+    >>> browser2 = Browser.logIn('user3@ututi.lt', 'password')
     >>> browser2.open('http://localhost/profile/edit/contacts')
     >>> browser2.getControl(name='gadugadu_uin').value = "564321"
     >>> browser2.getControl('Save').click()
@@ -69,7 +69,7 @@ Make some noise:
 
     >>> browser.getLink('Subjects').click()
     >>> browser.getControl('add a subject').click()
-    >>> browser.getLink(url="/group/moderators/watch_subject").click()
+    >>> browser.getLink(url="/group/testgroup/watch_subject").click()
 
     >>> browser.getLink(url='mat_analize').click()
     >>> browser.getLink('Edit').click()
@@ -130,12 +130,13 @@ And look at the emails:
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user2@ututi.lt']
-    Ututi news: 2 new pages
+    Ututi news: 3 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/note/4) was updated.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/note/6) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/note/4) was created.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
@@ -193,7 +194,7 @@ And we continue uploading files:
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user2@ututi.lt']
-    Ututi news: 2 new files and 2 new pages
+    Ututi news: 2 new files and 3 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -201,6 +202,7 @@ And we continue uploading files:
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/note/4) was updated.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/note/6) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/note/4) was created.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
@@ -283,7 +285,7 @@ Admin should stop getting events in his daily news:
     >>> browser.open('http://localhost/news/daily?date=2009-10-09')
 
     ##>>> printEmails()
-    ['user2@ututi.lt']
+    ['user3@ututi.lt']
     Ututi news: 2 new files and 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
@@ -332,7 +334,7 @@ welcome portlet is taking me to the notification view...
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user2@ututi.lt']
-    Ututi news: 2 new files and 2 new pages
+    Ututi news: 2 new files and 3 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -340,6 +342,7 @@ welcome portlet is taking me to the notification view...
     - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/note/4) was updated.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/note/6) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/note/4) was created.
     <BLANKLINE>
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
@@ -385,7 +388,7 @@ And reset the values of notification periods to what they were:
     >>> browser.getControl(name='each', index=2).displayValue = ['immediately']
     >>> browser.getControl('Confirm', index=2).click()
 
-Hmm, now what happens if user2 starts ignoring the subject:
+Hmm, now what happens if user3 starts ignoring the subject:
 
     >>> browser2.open('http://localhost/profile/edit/notifications')
     >>> browser2.getLink(url='ignore_subject').click()
@@ -398,6 +401,19 @@ Hmm, now what happens if user2 starts ignoring the subject:
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
+    - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/note/6) was created.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/note/4) was created.
+    <BLANKLINE>
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
+    <BLANKLINE>
+    ['user2@ututi.lt']
+    Ututi news: 2 new files and 3 new pages
+    <BLANKLINE>
+    Matematinė analizė (http://localhost/subject/vu/mat_analize)
+    <BLANKLINE>
+    - File f2.txt (http://localhost/subject/vu/mat_analize/file/11/get) was uploaded.
+    - File f1.txt (http://localhost/subject/vu/mat_analize/file/10/get) was uploaded.
+    - Page How to be awesome! (http://localhost/subject/vu/mat_analize/note/4) was updated.
     - Page How to be more awesome! (http://localhost/subject/vu/mat_analize/note/6) was created.
     - Page How to be awesome! (http://localhost/subject/vu/mat_analize/note/4) was created.
     <BLANKLINE>
@@ -474,6 +490,19 @@ Three days is right:
     <BLANKLINE>
     --
     The Ututi team
+    ['user2@ututi.lt']
+    Hello,
+    <BLANKLINE>
+    the private space subscription for the Ututi group "Testing group"
+    is about to expire.  When it expires, you will not be able to upload
+    more files to your file area.  Please extend your subscription on the
+    group page at http://localhost/group/testgroup .
+    <BLANKLINE>
+    --
+    The Ututi team
+    <BLANKLINE>
+    <BLANKLINE>
+
 
     >>> mail_queue[:] = []
 
@@ -503,6 +532,16 @@ And, here are the notifications:
     >>> msg = mail_queue.pop() # Pop one copy of the message.
     >>> printEmails()
     ['admin@uni.ututi.com']
+    Hello,
+    <BLANKLINE>
+    your group "Testing group" has just run out of private group space.
+    If you want to use private group space further, please purchase a subscription
+    on the group page at http://localhost/group/testgroup, and the group file limit
+    will be raised to 5 GB.
+    <BLANKLINE>
+    --
+    The Ututi team
+    ['user2@ututi.lt']
     Hello,
     <BLANKLINE>
     your group "Testing group" has just run out of private group space.
