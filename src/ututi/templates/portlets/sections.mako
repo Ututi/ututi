@@ -15,13 +15,15 @@
 </%def>
 
 <%def name="user_sidebar(exclude=[])">
-%if c.user.is_teacher:
-  ${teacher_sidebar(exclude)}
-%else:
-  ${profile_portlet()}
-  ${user_menu_portlet()}
-  ${user_groups_portlet()}
-  ${user_subjects_portlet()}
+%if c.user is not None:
+  %if c.user.is_teacher:
+    ${teacher_sidebar(exclude)}
+  %else:
+    ${profile_portlet()}
+    ${user_menu_portlet()}
+    ${user_groups_portlet()}
+    ${user_subjects_portlet()}
+  %endif
 %endif
 </%def>
 
