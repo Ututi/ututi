@@ -1,6 +1,6 @@
 <%inherit file="/portlets/base.mako"/>
 <%namespace file="/sections/content_snippets.mako" import="item_location" />
-<%namespace file="/elements.mako" import="tooltip" />
+<%namespace file="/elements.mako" import="tooltip, item_box" />
 
 <%def name="user_menu_portlet()">
   <%self:portlet id="user-menu-portlet">
@@ -192,6 +192,23 @@
       //]]>
     </script>
   </%self:portlet>
+</%def>
+
+<%def name="related_users_portlet(user=None, count=None)">
+  <%
+     if user is None:
+         user = c.user
+     if count is None: count = 6
+     users = h.related_users(user.id, user.location.id, count)
+  %>
+  %if users:
+  <%self:portlet id='related-users-portlet'>
+    <%def name="header()">
+      ${_("Related members:")}
+    </%def>
+    ${item_box(users, with_titles=True)}
+  </%self:portlet>
+  %endif
 </%def>
 
 <%def name="user_information_portlet(user=None, full=True, title=None)">

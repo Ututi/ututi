@@ -549,6 +549,42 @@ def teacher_groups(teacher_id):
     from ututi.model import meta, TeacherGroup
     return meta.Session.query(TeacherGroup).filter(TeacherGroup.teacher_id == teacher_id).count()
 
+@u_cache(expire=24*3600, query_args=True, invalidate_on_startup=True)
+def related_users(user_id, location_id, limit=6):
+    from ututi.model import User
+    users = {}
+    counts = {}
+    user = User.get(user_id, location_id)
+    # group mates
+    for group in user.groups:
+        for member in group.members:
+            id = member.user.id
+            counts.setdefault(id, 0)
+            counts[id] += 1
+            users[id] = member.user
+    # subject followers
+    for subject in user.watched_subjects:
+        for monitor in subject.watching_users:
+            id = monitor.user.id
+            counts.setdefault(id, 0)
+            counts[id] += 1
+            users[id] = monitor.user
+    # remove self
+    del counts[user.id]
+    del users[user.id]
+    # sort by counts
+    pairs = [(counts[id], users[id]) for id in users.keys()]
+    pairs.sort()
+    pairs.reverse()
+    pairs = pairs[:limit]
+
+    return [{'id': user.id,
+             'title': user.fullname,
+             'url': user.url(),
+             'logo_url': user.url(action='logo', width=45),
+             'logo_small_url': user.url(action='logo', width=30)}
+            for count, user in pairs]
+
 def path_with_hash(fn):
     from pylons import config
     assert fn.startswith('/'), fn
