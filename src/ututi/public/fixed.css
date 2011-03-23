@@ -65,6 +65,10 @@ a.inactive:hover {
     color: inherit;
 }
 
+.link-color {
+    color: #3d617a;
+}
+
 /* BUTTONS
  */
 
@@ -968,6 +972,10 @@ ul.feature-list {
     text-transform: uppercase;
 }
 
+.location-tags a:hover {
+    color: #6099cc;
+}
+
 /* UTILITY CLASSES
  */
 
@@ -1434,6 +1442,10 @@ ul.icon-list {
     list-style: none;
 }
 
+ul.inline-list li {
+    display: inline;
+}
+
     ul.icon-list li {
         padding-left: 15px;
         margin: 3px 0;
@@ -1441,6 +1453,7 @@ ul.icon-list {
         background-repeat: no-repeat;
     }
 
+    ul.icon-list li.icon-admin { background-image: url('img/icons.com/admin.png'); }
     ul.icon-list li.icon-add {
         background-image: url('img/icons.com/add_small_orange.png');
         background-position: 2px center;
@@ -1452,6 +1465,7 @@ ul.icon-list {
     ul.icon-list li.icon-user { background-image: url('img/icons.com/user_small_grey.png'); }
     ul.icon-list li.icon-teacher { background-image: url('img/icons.com/teacher_small.png'); }
     ul.icon-list li.icon-file { background-image: url('img/icons.com/file_small_grey.png'); }
+    ul.icon-list li.icon-file.active { background-image: url('img/icons.com/file_small_orange.png'); }
     ul.icon-list li.icon-time { background-image: url('img/icons.com/clock.png'); }
     ul.icon-list li.icon-feed { background-image: url('img/icons.com/feed_small_grey.png'); }
     ul.icon-list li.icon-note { background-image: url('img/icons.com/wiki_small_grey.png'); }
@@ -1459,7 +1473,12 @@ ul.icon-list {
     ul.icon-list li.icon-message { background-image: url('img/icons.com/message_small_grey.png'); }
     ul.icon-list li.icon-message.active { background-image: url('img/icons.com/message_small_orange.png'); }
     ul.icon-list li.icon-group { background-image: url('img/icons.com/group_small_grey.png'); }
+    ul.icon-list li.icon-network { background-image: url('img/icons.com/network_grey.png'); }
     ul.icon-list li.icon-subject { background-image: url('img/icons.com/subject_small_grey.png'); }
+    ul.icon-list li.icon-mobile {
+        background-image: url('img/icons.com/mobile.png');
+        background-position: 2px center;
+    }
     ul.icon-list li.icon-email {
         background-image: url('img/icons.com/email.png');
         padding-left: 22px;
