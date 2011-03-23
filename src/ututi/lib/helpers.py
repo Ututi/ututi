@@ -434,6 +434,9 @@ def link_to(label, url='', max_length=None, **attrs):
 
     return orig_link_to(label, url, **attrs)
 
+def mail_to(email, **attrs):
+    return link_to (email, 'mailto:' + email, **attrs)
+
 def url_for(*args, **kwargs):
     from pylons import url
     return url.current(*args, **kwargs)
