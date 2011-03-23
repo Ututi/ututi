@@ -573,8 +573,8 @@ def related_users(user_id, location_id, limit=6):
             counts[id] += 1
             users[id] = monitor.user
     # remove self
-    del counts[user.id]
-    del users[user.id]
+    if user.id in counts: del counts[user.id]
+    if user.id in users: del users[user.id]
     # sort by counts
     pairs = [(counts[id], users[id]) for id in users.keys()]
     pairs.sort()
