@@ -15,8 +15,7 @@ and do something else:
     >>> browser.printQuery("id('error-message')/text()")
     Our highly trained monkeys are fixing this problem right now.
 
-    >>> browser.printQuery("//button//text()")
-    search
+    >>> browser.printQuery("id('error-container')//button//text()")
     Shout!
     Kick a monkey!
 
