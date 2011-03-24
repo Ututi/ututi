@@ -3,23 +3,6 @@
 body.noMenu {
     background-image: url('img/body_bg_nomenu.gif');
 }
-* html #wrap {
-    height: 100%;
-}
-
-#wrap{
-    position: relative;
-    width: 980px;
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    margin: 0 auto -60px;
-}
-
-.push {
-    height: 60px;
-
-}
 
 #widthLimiter {
     background: url('img/header_bg.gif') no-repeat top;
