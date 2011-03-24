@@ -62,7 +62,7 @@ class UserController(BaseController, UserInfoWallMixin):
              'link': url_for(controller='user', action='index', id=user.id)}
             ]
 
-        self._set_wall_variables(events_hidable=True)
+        self._set_wall_variables(events_hidable=False)
 
         if user.is_teacher:
             if user.location:
