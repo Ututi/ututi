@@ -358,13 +358,17 @@ h1.page-title.with-bottom-line {
     .textField input,
     form input[type='text'],
     form input[type='password'],
-    form textarea,
-    form select {
+    form textarea {
         width: 200px;
         font-size: 11px;
         height: 20px;
         border: 1px solid #666666;
         background: none;
+    }
+
+    form select {
+        width: 200px;
+        font-size: 11px;
     }
 
     form textarea {
