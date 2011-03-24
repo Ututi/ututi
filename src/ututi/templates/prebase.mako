@@ -277,16 +277,18 @@ ${_('Student information online')}
 
     <div id="footer">
       <% nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '') %>
-      <!-- TODO: Fix language widget -->
         <div class="column left">
           <form id="language-switch-form" action="${url('switch_language')}">
             <input name="came_from" type="hidden" value="${request.url}" />
             <label for="language-box">${_("Language:")}</label>
-            <select name="language" id="language-box">
-              <option value="en">${_('English')}</option>
-              <option value="lt">${_('Lithuanian')}</option>
-              <option value="pl">${_('Polish')}</option>
-            </select>
+            ${h.select('language', c.lang, h.get_languages(), id='language-box')}
+            <script type="text/javascript">
+            $(document).ready(function() {
+                $('#language-box').change(function() {
+                    $(this).closest('form').submit();
+                });
+            });
+            </script>
           </form>
         </div>
         <div class="column middle">Copyright © <a href="${url('frontpage')}">${_(u'UAB „UTUTI“')}</a></div>

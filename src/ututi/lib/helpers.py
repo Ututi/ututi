@@ -26,7 +26,7 @@ from webhelpers.html.tags import convert_boolean_attrs
 from ututi.lib.base import u_cache
 from ututi.lib.latex import replace_latex_to_html as latex_to_html
 
-from ututi.model.i18n import LanguageText
+from ututi.model.i18n import LanguageText, Language
 
 from pylons.i18n import _
 
@@ -658,6 +658,12 @@ def get_i18n_text(text_id):
     if text_obj is None:
         return ''
     return literal(text_obj.text)
+
+@u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+def get_languages():
+    from ututi.model import meta
+    langs = meta.Session.query(Language).order_by(Language.title).all()
+    return [(lang.id, lang.title) for lang in langs]
 
 def user_todo_items(user):
     from ututi.model import UserRegistration, meta
