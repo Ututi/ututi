@@ -15,40 +15,32 @@ html, body {
     width: 980px;
     text-align: center;
     margin: auto;
-    font-size: 12px;
+    font-size: 11px;
     color: #666;
 }
 
-#footer div {
-    margin-top: 14px;
-    text-align: left;
-    width: 320px;
-    float: left;
-    position: relative;
-    width: 320px;
-    height: auto;
-    margin-top: 15px;
-}
+    #footer div.column {
+        text-align: left;
+        width: 33%;
+        float: left;
+        position: relative;
+        line-height: 30px;
+    }
 
-.left {
-    text-align: left !important;
-}
+    #footer div.column.left {
+        text-align: left !important;
+    }
 
-.right {
-    text-align: right !important;
-}
+    #footer div.column.middle {
+        text-align: center !important;
+    }
 
-.middle {
-    text-align: center !important;
-}
+    #footer div.column.right {
+        text-align: right !important;
+    }
 
-#language-select {
-    display: inline;
-    float: left;
-}
-#middle {
-    display: inline;
-    float: left;
+#language-switch-form select {
+    width: auto;
 }
 
 /* HEADER.
