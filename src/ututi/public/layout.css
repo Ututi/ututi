@@ -39,9 +39,14 @@ html, body {
         text-align: right !important;
     }
 
-#language-switch-form select {
-    width: auto;
-}
+    #language-switch-form select {
+        width: auto;
+    }
+
+    #language-switch-form button,
+    #language-switch-form input {
+        display: none; /* don't show submit button */
+    }
 
 /* HEADER.
  */

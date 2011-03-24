@@ -282,6 +282,7 @@ ${_('Student information online')}
             <input name="came_from" type="hidden" value="${request.url}" />
             <label for="language-box">${_("Language:")}</label>
             ${h.select('language', c.lang, h.get_languages(), id='language-box')}
+            ${h.input_submit(_('Select'))}
             <script type="text/javascript">
             $(document).ready(function() {
                 $('#language-box').change(function() {
