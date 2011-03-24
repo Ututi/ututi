@@ -90,15 +90,6 @@ ALTER TABLE ONLY public.event_comments DROP CONSTRAINT event_comments_id_fkey;
 ALTER TABLE ONLY public.event_comments
     ADD CONSTRAINT event_comments_id_fkey FOREIGN KEY (id) REFERENCES content_items(id)  ON DELETE CASCADE;
 
-ALTER TABLE ONLY public.group_mailing_list_messages DROP CONSTRAINT reply_to;
-ALTER TABLE ONLY public.group_mailing_list_messages DROP CONSTRAINT thread;
-ALTER TABLE ONLY public.group_mailing_list_messages
-    ADD CONSTRAINT reply_to foreign key (reply_to_message_id, reply_to_group_id)
-    references group_mailing_list_messages(message_id, group_id) on delete set null;
-ALTER TABLE ONLY public.group_mailing_list_messages
-    ADD CONSTRAINT thread foreign key (thread_message_id, thread_group_id)
-    references group_mailing_list_messages(message_id, group_id) on delete cascade;
-
 CREATE OR REPLACE FUNCTION member_group_event_trigger() RETURNS trigger AS $$
     DECLARE
       evt events;
