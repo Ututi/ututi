@@ -1,7 +1,7 @@
 import logging
 
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.sql.expression import or_
+from sqlalchemy.sql.expression import or_, and_
 from pylons.controllers.util import abort, redirect
 from pylons import tmpl_context as c, request, url
 from routes.util import url_for
@@ -14,7 +14,7 @@ from ututi.lib.image import serve_logo
 from ututi.lib.base import BaseController, render
 from ututi.lib.wall import WallMixin
 
-from ututi.model import meta, User, Medal
+from ututi.model import meta, User, Medal, ContentItem
 from ututi.model.events import Event
 from ututi.model.users import Teacher
 
@@ -39,15 +39,18 @@ class UserInfoWallMixin(WallMixin):
 
     def _wall_events_query(self):
         """WallMixin implementation."""
-        subjects = c.user_info.all_watched_subjects
-        if c.user_info.is_teacher:
-            subjects += c.user_info.taught_subjects
-        groups = [m.group for m in c.user_info.memberships]
-
-        query = meta.Session.query(Event)\
-             .filter(or_(Event.object_id.in_([s.id for s in subjects]),
-                         Event.object_id.in_([g.id for g in groups]),
-                         Event.recipient_id == c.user_info.id))
+        public_event_types = [
+            'group_created',
+            'subject_created',
+            'subject_modified',
+            'page_created',
+            'page_modified',
+        ]
+        query = meta.Session.query(Event).join(ContentItem)\
+             .filter(Event.author_id == c.user_info.id)\
+             .filter(or_(Event.event_type.in_(public_event_types),
+                         and_(Event.event_type == 'file_uploaded',
+                              ContentItem.content_type == 'subject')))
         return query
 
 class UserController(BaseController, UserInfoWallMixin):
