@@ -9,7 +9,8 @@ from ututi.tests.functional import collect_ftests
 
 def test_suite():
     return unittest.TestSuite([collect_ftests(layer=[UtutiQuickLayer, U2tiQuickLayer],
-                                              tearDown=ututi.tests.functional.quick.tearDown),
+                                              tearDown=ututi.tests.functional.quick.tearDown,
+                                              exclude=['news.txt']),
                                collect_ftests(package=ututi.tests.functional.almost_quick,
                                               layer=[UtutiFunctionalLayer, U2tiFunctionalLayer]),
                                collect_ftests(package=ututi.tests.functional.errors,
