@@ -1,7 +1,7 @@
 <%inherit file="/admin/base.mako" />
 
-<%def name="head_tags()">
-  <title>UTUTI – student information online</title>
+<%def name="back_link()">
+## Don't show back link to dashboard
 </%def>
 
 <%def name="css()">
