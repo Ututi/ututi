@@ -55,6 +55,10 @@ a.inactive:hover {
     color: #3d617a;
 }
 
+table th {
+    font-weight: bold;
+}
+
 /* BUTTONS
  */
 
