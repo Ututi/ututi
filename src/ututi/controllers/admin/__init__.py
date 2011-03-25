@@ -37,7 +37,7 @@ from ututi.model import SMS, GroupCoupon
 from ututi.model import (meta, User, Email, Group, Subject,
                          File, PrivateMessage, Teacher)
 from ututi.model import Notification, City, ScienceType, SchoolGrade, BookType
-from ututi.model import PublicEmailDomain
+from ututi.model import EmailDomain
 from ututi.model.i18n import Language, LanguageText
 from ututi.controllers.admin.export import UniversityExportMixin
 from ututi.controllers.books import BookDepartmentValidator
@@ -112,7 +112,7 @@ class LanguageTextForm(Schema):
     text = String(not_empty=True)
 
 
-class PublicDomainsForm(Schema):
+class PublicEmailDomainsForm(Schema):
     domains = Pipe(String(),
                    SeparatedListValidator(separators=','))
 
@@ -721,22 +721,22 @@ class AdminController(BaseController, UniversityExportMixin):
         redirect(url(controller='admin', action='i18n_texts'))
 
     @ActionProtector("root")
-    @validate(schema=PublicDomainsForm, form='public_domains')
-    def public_domains(self):
+    @validate(schema=PublicEmailDomainsForm, form='public_email_domains')
+    def public_email_domains(self):
         if hasattr(self, 'form_result'):
             for domain in self.form_result['domains']:
-                meta.Session.add(PublicEmailDomain(domain))
+                meta.Session.add(EmailDomain(domain))
             meta.Session.commit()
 
-        c.public_domains = PublicEmailDomain.all()
+        c.public_domains = EmailDomain.all_public()
         return render('admin/public_domains.mako')
 
     @ActionProtector("root")
-    def delete_public_domain(self, id):
-        domain = PublicEmailDomain.get(id)
+    def delete_email_domain(self, id):
+        domain = EmailDomain.get(id)
         if domain is not None:
             domain.delete()
             meta.Session.commit()
         else:
-            h.flash('Domain with id %s does not exist' % id)
-        redirect(url(controller='admin', action='public_domains'))
+            h.flash('Email domain with id %s does not exist' % id)
+        redirect(url(controller='admin', action='public_email_domains'))

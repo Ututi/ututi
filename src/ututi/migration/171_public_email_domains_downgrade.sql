@@ -1,1 +1,1 @@
-drop table public_email_domains;
+drop table email_domains;

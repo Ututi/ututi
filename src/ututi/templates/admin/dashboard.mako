@@ -49,7 +49,7 @@
 
 <h2>${_('University administration:')}</h2>
 <ul class="clearfix">
-  <li>${h.link_to('Public domains', url(controller='admin', action='public_domains'))}</li>
+  <li>${h.link_to('Public email domains', url(controller='admin', action='public_email_domains'))}</li>
 </ul>
 
 <h2>${_('Standard UI patterns/objects:')}</h2>

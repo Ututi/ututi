@@ -9,7 +9,7 @@ of them, which can be accessed and edited via admin's dashboard:
 
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/admin/')
-    >>> browser.click('Public domains')
+    >>> browser.click('Public email domains')
 
 Currently there are no domains:
 

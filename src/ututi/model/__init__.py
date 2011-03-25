@@ -56,7 +56,7 @@ admin_users_table = None
 user_monitored_subjects_table = None
 email_table = None
 teacher_groups_table = None
-public_email_domains_table = None
+email_domains_table = None
 
 def init_model(engine):
     """Call me before using any of the tables or classes in the model"""
@@ -326,11 +326,13 @@ def setup_orm(engine):
                          autoload_with=engine)
     orm.mapper(Email, emails_table)
 
-    global public_email_domains_table
-    public_email_domains_table = Table("public_email_domains", meta.metadata,
+    global email_domains_table
+    email_domains_table = Table("email_domains", meta.metadata,
                          autoload=True,
                          autoload_with=engine)
-    orm.mapper(PublicEmailDomain, public_email_domains_table)
+
+    orm.mapper(EmailDomain, email_domains_table,
+               properties = {'location': relation(Tag)})
 
     global user_medals_table
     user_medals_table = Table("user_medals", meta.metadata,
@@ -2571,20 +2573,23 @@ class BookType(object):
             return None
 
 
-class PublicEmailDomain(Model):
+class EmailDomain(Model):
 
-    def __init__(self, domain):
-        self.domain = domain.strip().lower()
+    def __init__(self, domain_name, location=None):
+        self.domain_name = domain_name.strip().lower()
+        self.location = location
 
     @classmethod
-    def is_public(cls, domain):
+    def is_public(cls, domain_name):
         """Checks whether given domain name is registered as public."""
-        return meta.Session.query(PublicEmailDomain)\
-                .filter(PublicEmailDomain.domain == domain.lower())\
+        return meta.Session.query(EmailDomain)\
+                .filter(EmailDomain.domain_name == domain_name.lower(),
+                        EmailDomain.location == None)\
                 .count() != 0
 
     @classmethod
-    def all(cls):
-        return meta.Session.query(PublicEmailDomain)\
-                .order_by(PublicEmailDomain.domain)\
+    def all_public(cls):
+        return meta.Session.query(EmailDomain)\
+                .filter(EmailDomain.location == None)\
+                .order_by(EmailDomain.domain_name)\
                 .all()

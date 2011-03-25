@@ -1,8 +1,8 @@
-/* a table for storing public email domains */
-create table public_email_domains (
+create table email_domains (
        id bigserial not null,
-       domain varchar(320) default null,
+       domain_name varchar(320) default null,
+       location_id int8 default null references tags(id) on delete cascade,
        primary key (id),
-       unique(domain));;
+       unique(domain_name));;
 
-create index public_email_domains_domain_idx on public_email_domains(domain);
+create index email_domains_domain_name_idx on email_domains(domain_name);
