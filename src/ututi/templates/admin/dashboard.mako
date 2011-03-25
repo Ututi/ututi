@@ -47,6 +47,11 @@
   <li>${h.link_to('Users', url(controller='admin', action='users'))}</li>
 </ul>
 
+<h2>${_('University administration:')}</h2>
+<ul class="clearfix">
+  <li>${h.link_to('Public domains', url(controller='admin', action='public_domains'))}</li>
+</ul>
+
 <h2>${_('Standard UI patterns/objects:')}</h2>
 <ul class="clearfix">
   <li>${h.link_to('Blocks', url(controller='admin', action='example_blocks'))}</li>

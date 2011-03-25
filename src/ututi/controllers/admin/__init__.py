@@ -9,7 +9,7 @@ from sqlalchemy.sql.expression import desc
 from sqlalchemy import func
 from webhelpers import paginate
 from formencode import htmlfill
-from formencode.compound import Any
+from formencode.compound import Any, Pipe
 from formencode.schema import Schema
 from formencode.validators import Int
 from formencode.validators import Constant
@@ -27,7 +27,7 @@ from ututi.lib.security import sign_in_admin_user
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, validate, \
-    LanguageIdValidator, LanguageValidator
+    LanguageIdValidator, LanguageValidator, SeparatedListValidator
 from ututi.lib.emails import teacher_confirmed_email
 from ututi.model.users import AdminUser
 from ututi.model.events import Event
@@ -37,6 +37,7 @@ from ututi.model import SMS, GroupCoupon
 from ututi.model import (meta, User, Email, Group, Subject,
                          File, PrivateMessage, Teacher)
 from ututi.model import Notification, City, ScienceType, SchoolGrade, BookType
+from ututi.model import PublicEmailDomain
 from ututi.model.i18n import Language, LanguageText
 from ututi.controllers.admin.export import UniversityExportMixin
 from ututi.controllers.books import BookDepartmentValidator
@@ -109,6 +110,11 @@ class LanguageTextForm(Schema):
     id = String(min=1, max=100, not_empty=True)
     language = LanguageValidator()
     text = String(not_empty=True)
+
+
+class PublicDomainsForm(Schema):
+    domains = Pipe(String(),
+                   SeparatedListValidator(separators=','))
 
 
 class AdminController(BaseController, UniversityExportMixin):
@@ -713,3 +719,24 @@ class AdminController(BaseController, UniversityExportMixin):
             text.text = self.form_result['text']
             meta.Session.commit()
         redirect(url(controller='admin', action='i18n_texts'))
+
+    @ActionProtector("root")
+    @validate(schema=PublicDomainsForm, form='public_domains')
+    def public_domains(self):
+        if hasattr(self, 'form_result'):
+            for domain in self.form_result['domains']:
+                meta.Session.add(PublicEmailDomain(domain))
+            meta.Session.commit()
+
+        c.public_domains = PublicEmailDomain.all()
+        return render('admin/public_domains.mako')
+
+    @ActionProtector("root")
+    def delete_public_domain(self, id):
+        domain = PublicEmailDomain.get(id)
+        if domain is not None:
+            domain.delete()
+            meta.Session.commit()
+        else:
+            h.flash('Domain with id %s does not exist' % id)
+        redirect(url(controller='admin', action='public_domains'))
