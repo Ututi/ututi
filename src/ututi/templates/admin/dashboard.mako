@@ -5,6 +5,7 @@
 </%def>
 
 <%def name="css()">
+  ${parent.css()}
   #admin-dashboard {
     background: url('img/admin_ukulele.png') no-repeat bottom right;
     padding-right: 50px;

@@ -10,6 +10,13 @@
 </a>
 </%def>
 
+<%def name="css()">
+  ${parent.css()}
+  h2 {
+    margin: 10px 0;
+  }
+</%def>
+
 ${self.back_link()}
 
 ${next.body()}
