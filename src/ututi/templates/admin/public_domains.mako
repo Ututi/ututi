@@ -7,8 +7,8 @@
 %if c.public_domains:
 <h2>${_('List')}</h2>
   %for domain in c.public_domains:
-  <div>
-    <strong>${domain.domain}</strong>
+  <div class="domain-entry">
+    <strong><span class="domain-name">${domain.domain}</span></strong>
     (${h.link_to(_('Delete'), url(controller="admin", action="delete_public_domain", id=domain.id)) })
   </div>
   %endfor

@@ -1,0 +1,29 @@
+Email domain logic
+==================
+
+Public domain administration
+============================
+
+There are email domains that are considered public. Ututi keeps database
+of them, which can be accessed and edited via admin's dashboard:
+
+    >>> browser = Browser.logIn()
+    >>> browser.open('http://localhost/admin/')
+    >>> browser.click('Public domains')
+
+Currently there are no domains:
+
+    >>> browser.printCssQuery('.domain-name')
+
+Let's add a few:
+
+    >>> form = browser.getForm('public_domain_form')
+    >>> form.getControl('domains').value = 'example.com, example3.com\n\nexample2.com'
+    >>> form.getControl('Add').click()
+
+We will see domains listed alphabetically:
+
+    >>> browser.printCssQuery('.domain-name', strip=True)
+    <span>example2.com</span>
+    <span>example3.com</span>
+    <span>example.com</span>
