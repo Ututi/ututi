@@ -35,7 +35,7 @@ from ututi.model import Department
 from ututi.model import FileDownload
 from ututi.model import SMS, GroupCoupon
 from ututi.model import (meta, User, Email, Group, Subject,
-                         File, PrivateMessage, Teacher)
+                         File, PrivateMessage, Teacher, LocationTag)
 from ututi.model import Notification, City, ScienceType, SchoolGrade, BookType
 from ututi.model import EmailDomain
 from ututi.model.i18n import Language, LanguageText
@@ -112,7 +112,8 @@ class LanguageTextForm(Schema):
     text = String(not_empty=True)
 
 
-class PublicEmailDomainsForm(Schema):
+class EmailDomainsForm(Schema):
+    location_id = Int()
     domains = Pipe(String(),
                    SeparatedListValidator(separators=','))
 
@@ -721,15 +722,23 @@ class AdminController(BaseController, UniversityExportMixin):
         redirect(url(controller='admin', action='i18n_texts'))
 
     @ActionProtector("root")
-    @validate(schema=PublicEmailDomainsForm, form='public_email_domains')
-    def public_email_domains(self):
+    @validate(schema=EmailDomainsForm, form='public_email_domains')
+    def email_domains(self):
         if hasattr(self, 'form_result'):
+            location_id = self.form_result.get('location_id', 0)
+            location = LocationTag.get(location_id)
+            # here location_id = 0 -> location = None -> domain is public
             for domain in self.form_result['domains']:
-                meta.Session.add(EmailDomain(domain))
+                meta.Session.add(EmailDomain(domain, location))
             meta.Session.commit()
 
-        c.public_domains = EmailDomain.all_public()
-        return render('admin/public_domains.mako')
+        unis = meta.Session.query(LocationTag)\
+            .filter(LocationTag.parent == None)\
+            .order_by(LocationTag.title.asc())
+        c.uni_options = [(0, 'Public domain')] +\
+            [(uni.id, uni.title) for uni in unis]
+        c.public_domains = EmailDomain.all()
+        return render('admin/email_domains.mako')
 
     @ActionProtector("root")
     def delete_email_domain(self, id):
@@ -739,4 +748,4 @@ class AdminController(BaseController, UniversityExportMixin):
             meta.Session.commit()
         else:
             h.flash('Email domain with id %s does not exist' % id)
-        redirect(url(controller='admin', action='public_email_domains'))
+        redirect(url(controller='admin', action='email_domains'))
