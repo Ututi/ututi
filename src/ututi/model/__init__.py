@@ -2588,6 +2588,14 @@ class EmailDomain(Model):
                 .count() != 0
 
     @classmethod
+    def all(cls):
+        return cls.all_public() + \
+            meta.Session.query(EmailDomain).join(LocationTag)\
+                .order_by(LocationTag.title)\
+                .order_by(EmailDomain.domain_name)\
+                .all()
+
+    @classmethod
     def all_public(cls):
         return meta.Session.query(EmailDomain)\
                 .filter(EmailDomain.location == None)\
