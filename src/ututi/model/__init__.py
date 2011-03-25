@@ -34,6 +34,7 @@ from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Author
 from ututi.model.users import Teacher, TeacherGroup, AdminUser, UserRegistration
 from ututi.model.util import logo_property
 from ututi.model.i18n import Country
+from ututi.model.base import Model
 from ututi.model import meta
 from ututi.lib.messaging import SMSMessage
 from ututi.lib.emails import group_space_bought_email
@@ -55,6 +56,7 @@ admin_users_table = None
 user_monitored_subjects_table = None
 email_table = None
 teacher_groups_table = None
+public_email_domains_table = None
 
 def init_model(engine):
     """Call me before using any of the tables or classes in the model"""
@@ -323,6 +325,12 @@ def setup_orm(engine):
                          autoload=True,
                          autoload_with=engine)
     orm.mapper(Email, emails_table)
+
+    global public_email_domains_table
+    public_email_domains_table = Table("public_email_domains", meta.metadata,
+                         autoload=True,
+                         autoload_with=engine)
+    orm.mapper(PublicEmailDomain, public_email_domains_table)
 
     global user_medals_table
     user_medals_table = Table("user_medals", meta.metadata,
@@ -2561,3 +2569,22 @@ class BookType(object):
             return book_type.one()
         except NoResultFound:
             return None
+
+
+class PublicEmailDomain(Model):
+
+    def __init__(self, domain):
+        self.domain = domain.strip().lower()
+
+    @classmethod
+    def is_public(cls, domain):
+        """Checks whether given domain name is registered as public."""
+        return meta.Session.query(PublicEmailDomain)\
+                .filter(PublicEmailDomain.domain == domain.lower())\
+                .count() != 0
+
+    @classmethod
+    def all(cls):
+        return meta.Session.query(PublicEmailDomain)\
+                .order_by(PublicEmailDomain.domain)\
+                .all()
