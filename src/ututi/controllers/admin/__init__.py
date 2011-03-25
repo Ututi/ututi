@@ -21,7 +21,7 @@ from formencode.validators import Regex
 from babel.dates import parse_date
 from babel.dates import format_date
 
-from pylons import request, tmpl_context as c, config, url
+from pylons import request, tmpl_context as c, url
 
 from ututi.lib.security import sign_in_admin_user
 from ututi.lib.security import ActionProtector
