@@ -1,29 +1,91 @@
 Email domain logic
 ==================
 
-Public domain administration
+Email domain administration
 ============================
 
-There are email domains that are considered public. Ututi keeps database
-of them, which can be accessed and edited via admin's dashboard:
+Ututi keeps database of email domains. Some of them are considered public,
+and other belong to universtities. Domain database can be accessed and
+edited via admin's dashboard:
 
-    >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/admin/')
-    >>> browser.click('Public email domains')
+    >>> admin = Browser.logIn()
+    >>> admin.open('http://localhost/admin/')
+    >>> admin.click('Email domains')
 
 Currently there are no domains:
 
-    >>> browser.printCssQuery('.domain-name')
+    >>> admin.printCssQuery('.domain-name')
 
-Let's add a few:
+Let's add a few public domains:
 
-    >>> form = browser.getForm('public_domain_form')
+    >>> form = admin.getForm('email_domain_form')
     >>> form.getControl('domains').value = 'example.com, example3.com\n\nexample2.com'
     >>> form.getControl('Add').click()
 
 We will see domains listed alphabetically:
 
-    >>> browser.printCssQuery('.domain-name', strip=True)
+    >>> admin.printCssQuery('.domain-name', strip=True)
     <span>example2.com</span>
     <span>example3.com</span>
     <span>example.com</span>
+
+Admin can delete domain by clicking "Delete" link next to it.
+Let's "example3.com":
+
+    >>> admin.getLink('Delete', index=1).click()
+    >>> admin.printCssQuery('.domain-name', strip=True)
+    <span>example2.com</span>
+    <span>example.com</span>
+
+
+University domain registration
+==============================
+
+When user registers new university, he selects email domain policy
+for the university and enters allowed domains.
+
+In order to test this, we'll go through the registration process:
+
+    >>> user = Browser()
+    >>> user.open('http://localhost/')
+    >>> form = user.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'user@vu.lt'
+    >>> form.getControl('Sign Up').click()
+    >>> from ututi.lib.mailer import mail_queue
+    >>> from ututi.lib.helpers import get_urls
+    >>> msg1 = mail_queue.pop()
+    >>> urls = get_urls(msg1.payload())
+    >>> registration_url = urls[0]
+    >>> user.open(registration_url)
+
+    >>> user.url
+    'http://localhost/registration/.../university_create'
+
+User enters university data in the first step:
+
+    >>> from ututi.tests.functional import make_file
+    >>> form = user.getForm('university-create-form')
+    >>> form.getControl('Full University title:').value = 'Vilnius University'
+    >>> form.getControl('Country:').displayValue = ['Lithuania']
+    >>> form.getControl('University website:').value = 'www.vu.lt'
+    >>> form.getControl('University logo:').add_file(*make_file('test_logo.png'))
+
+We will specify restrict domain policy and enter few email domains.
+Note that domain of user email (@vu.lt) is automatically posted:
+
+    >>> form.getControl(name='allowed_domains-1').value
+    'vu.lt'
+
+    >>> form.getControl(name='member_policy').value = ['RESTRICT_EMAIL']
+    >>> form.getControl(name='allowed_domains-2').value = 'mif.vu.lt'
+    >>> form.getControl(name='allowed_domains-3').value = 'stuf.mif.vu.lt'
+    >>> user.getControl("Next").click()
+
+We'll just skim through next steps:
+
+    >>> form = user.getForm('personal-info-form')
+    >>> form.getControl('Full name:').value = 'User'
+    >>> form.getControl('Password:').value = 'password'
+    >>> user.click('Next')
+    >>> user.click('Skip')
+    >>> user.click('Finish')
