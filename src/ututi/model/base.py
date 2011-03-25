@@ -15,3 +15,6 @@ class Model(object):
     @classmethod
     def all(cls):
         return meta.Session.query(cls).all()
+
+    def delete(self):
+        meta.Session.delete(self)
