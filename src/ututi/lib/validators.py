@@ -269,6 +269,7 @@ class TranslatedEmailValidator(validators.Email):
         except UnicodeEncodeError:
             raise Invalid(self.message('nonAscii', state), value, state)
 
+
 class UniqueEmail(validators.FancyValidator):
 
     messages = {
