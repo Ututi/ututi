@@ -1,4 +1,5 @@
 from sqlalchemy.sql.expression import and_
+from sqlalchemy.sql.expression import not_
 from sqlalchemy.sql.expression import or_
 from sqlalchemy.orm import eagerload
 
@@ -19,17 +20,18 @@ class UserWallMixin(WallMixin):
         subjects = c.user.all_watched_subjects
         if c.user.is_teacher:
             subjects += c.user.taught_subjects
-
-        query = meta.Session.query(Event)\
-             .filter(or_(Event.object_id.in_([s.id for s in subjects]),
-                         Event.object_id.in_([m.group.id for m in c.user.memberships]),
-                         Event.recipient_id == c.user.id,
-                         and_(Event.event_type=='private_message_sent',
-                              Event.user == c.user)))\
-             .filter(or_(Event.event_type != 'moderated_post_created',
-                         Event.object_id.in_(user_is_admin_of_groups)))\
-             .filter(~Event.event_type.in_(c.user.ignored_events_list))\
-             .options(eagerload(Event.children, Event.user, Event.context, Event.comments))
+        from ututi.lib.wall import generic_events_query
+        evts_generic = generic_events_query()
+        from ututi.model.events import events_table as t_evt
+        query = evts_generic\
+             .where(or_(t_evt.c.object_id.in_([s.id for s in subjects]),
+                        t_evt.c.object_id.in_([m.group.id for m in c.user.memberships]),
+                        t_evt.c.recipient_id == c.user.id,
+                        and_(t_evt.c.event_type=='private_message_sent',
+                              t_evt.c.author_id == c.user.id)))\
+             .where(or_(t_evt.c.event_type != 'moderated_post_created',
+                         t_evt.c.object_id.in_(user_is_admin_of_groups)))\
+             .where(not_(t_evt.c.event_type.in_(c.user.ignored_events_list)))
 
         return query
 

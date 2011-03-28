@@ -75,6 +75,10 @@ class StructureviewWallMixin(WallMixin):
 
     def _wall_events_query(self):
         """WallMixin implementation."""
+        from ututi.lib.wall import generic_events_query
+        evts_generic = generic_events_query()
+
+        from ututi.model.events import events_table as t_evt
 
         locations = [loc.id for loc in c.location.flatten]
         subjects = meta.Session.query(Subject)\
@@ -86,9 +90,8 @@ class StructureviewWallMixin(WallMixin):
             .all()
         ids = [obj.id for obj in subjects + public_groups]
 
-        return meta.Session.query(Event).filter(Event.object_id.in_(ids))\
-            .options(eagerload(Event.children, Event.user, Event.context, Event.comments))
-
+        return evts_generic\
+            .where(t_evt.c.object_id.in_(ids))
 
 class TeacherSearchMixin():
 

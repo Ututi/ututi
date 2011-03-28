@@ -362,6 +362,10 @@ class User(Author):
         return meta.Session.query(Group).join(GroupMember).order_by(Group.title.asc()).filter(GroupMember.user == self).all()
 
     @property
+    def group_ids(self):
+        return [g.id for g in self.groups]
+
+    @property
     def groups_uploadable(self):
         from ututi.model import Group
         from ututi.model import GroupMember
