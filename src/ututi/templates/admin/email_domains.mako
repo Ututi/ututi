@@ -19,11 +19,13 @@
       </strong>
     </td>
     <td>
-      %if domain.location is None:
-        (Public)
-      %else:
-        ${item_location_full(domain)}
-      %endif
+      <span class="domain-location">
+        %if domain.location is None:
+          (Public)
+        %else:
+          ${item_location_full(domain)}
+        %endif
+      </span>
     </td>
     <td style="text-align: center">
       ${h.link_to(_('Delete'), url(controller="admin", action="delete_email_domain", id=domain.id)) }
