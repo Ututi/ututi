@@ -14,7 +14,7 @@ edited via admin's dashboard:
 
 Currently there are no domains:
 
-    >>> admin.printCssQuery('.domain-name')
+    >>> admin.printCssQuery('.domain-name, .domain-location')
 
 Let's add a few public domains:
 
@@ -24,19 +24,30 @@ Let's add a few public domains:
 
 We will see domains listed alphabetically:
 
-    >>> admin.printCssQuery('.domain-name', strip=True)
-    <span>example2.com</span>
-    <span>example3.com</span>
-    <span>example.com</span>
+    >>> admin.printCssQuery('.domain-name, .domain-location', strip=True)
+    <span>example2.com</span> <span>(Public)</span>
+    <span>example3.com</span> <span>(Public)</span>
+    <span>example.com</span> <span>(Public)</span>
 
 Admin can delete domain by clicking "Delete" link next to it.
 Let's "example3.com":
 
     >>> admin.getLink('Delete', index=1).click()
-    >>> admin.printCssQuery('.domain-name', strip=True)
-    <span>example2.com</span>
-    <span>example.com</span>
+    >>> admin.printCssQuery('.domain-name, .domain-location', strip=True)
+    <span>example2.com</span> <span>(Public)</span>
+    <span>example.com</span> <span>(Public)</span>
 
+Admin can add non public domains by selecting university from dropdown list:
+
+    >>> form = admin.getForm('email_domain_form')
+    >>> form.getControl('University (or public)').displayValue = ['U-niversity']
+    >>> form.getControl('domains').value = 'uni.ututi.com'
+    >>> form.getControl('Add').click()
+
+    >>> admin.printCssQuery('.domain-name, .domain-location', strip=True)
+    <span>example2.com</span> <span>(Public)</span>
+    <span>example.com</span> <span>(Public)</span>
+    <span>uni.ututi.com</span> <span> <span> <a>U-niversity</a> </span> </span>
 
 University domain registration
 ==============================
@@ -73,12 +84,30 @@ User enters university data in the first step:
 We will specify restrict domain policy and enter few email domains.
 Note that domain of user email (@vu.lt) is automatically posted:
 
-    >>> form.getControl(name='allowed_domains-1').value
+    >>> form.getControl(name='allowed_domains-0').value
     'vu.lt'
 
+Ututi will not allow registering email domains that are already registered:
+
     >>> form.getControl(name='member_policy').value = ['RESTRICT_EMAIL']
-    >>> form.getControl(name='allowed_domains-2').value = 'mif.vu.lt'
-    >>> form.getControl(name='allowed_domains-3').value = 'stuf.mif.vu.lt'
+    >>> form.getControl(name='allowed_domains-1').value = 'example.com'
+    >>> form.getControl(name='allowed_domains-2').value = 'uni.ututi.com'
+    >>> user.getControl("Next").click()
+    >>> user.url
+    'http://localhost/registration/.../university_create'
+    >>> user.printCssQuery('.error-message', strip=True)
+    <span>Email domain example.com is not available.</span>
+    <span>Email domain uni.ututi.com is not available.</span>
+
+Let's replace them with unique domains:
+
+    >>> form = user.getForm('university-create-form')
+    >>> form.getControl(name='allowed_domains-1').value = 'mif.vu.lt'
+    >>> form.getControl(name='allowed_domains-2').value = 'stuf.mif.vu.lt'
+
+We have to upload logo as well if form does not validate:
+
+    >>> form.getControl('University logo:').add_file(*make_file('test_logo.png'))
     >>> user.getControl("Next").click()
 
 We'll just skim through next steps:
