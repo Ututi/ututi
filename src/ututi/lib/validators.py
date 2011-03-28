@@ -308,6 +308,39 @@ class AvailableEmailDomain(validators.FancyValidator):
                 raise Invalid(self.message("non_unique", state, domain_name=existing.domain_name), value, state)
 
 
+class EmailDomainValidator(validators.FancyValidator):
+    """Validate a email domain, which is basically the same as URL."""
+
+    require_tld = True
+
+    url_re = re.compile(r'''
+        ^(?P<domain>[a-z0-9][a-z0-9\-]{1,62}\.)* # (sub)domain - alpha followed by 62max chars (63 total)
+        (?P<tld>[a-z]{2,})                       # TLD
+        $
+    ''', re.I | re.VERBOSE)
+
+    scheme_re = re.compile(r'^[a-zA-Z]+:')
+
+    messages = {
+        'noScheme': _('You must start your URL with http://, https://, etc'),
+        'badDomain': _('%(domain_name)s is not a valid email domain.'),
+        'noTLD': _('You must provide a full domain name (like %(domain)s.com)'),
+        }
+
+    def _to_python(self, value, state):
+        value = value.strip().lower()
+        match = self.url_re.search(value)
+        if not match:
+            raise Invalid(
+                self.message('badDomain', state, domain_name=value),
+                value, state)
+        if self.require_tld and not match.group('domain'):
+            raise Invalid(
+                self.message('noTLD', state, domain=match.group('tld')),
+                value, state)
+        return value
+
+
 class LanguageIdValidator(validators.FancyValidator):
 
     messages = {
