@@ -558,3 +558,52 @@ def when(time):
 def get_supporters():
     from ututi.model import get_supporters
     return get_supporters()
+
+@u_cache(expire=3600, invalidate_on_startup=True)
+def content_link(content_id):
+    from ututi.model import ContentItem, Subject, Group, Page, File, PrivateMessage, ForumPost
+    from ututi.model.mailing import GroupMailingListMessage
+    from pylons import url
+    item = ContentItem.get(content_id)
+    if type(item) in [Subject, Group, Page, ForumPost]:
+        return link_to(item.title, url(controller='content', action='get_content', id=content_id))
+    elif type(item) == File:
+        return link_to(item.filename, url(controller='content', action='get_content', id=content_id))
+    elif type(item) in [PrivateMessage, GroupMailingListMessage]:
+        return link_to(item.subject, url(controller='content', action='get_content', id=content_id))
+
+@u_cache(expire=3600, invalidate_on_startup=True)
+def user_link(user_id):
+    from ututi.model.users import AnonymousUser
+    if type(user_id) in (int, long):
+        from ututi.model.users import User
+        from pylons import url
+        user = User.get_byid(user_id)
+        return link_to(user.fullname, url(controller='content', action='get_user', id=user_id))
+    elif type(user_id) == AnonymousUser:
+        return 'mailto:%s' % user_id.email
+
+def thread_reply_dict(obj):
+    """Create a universal thread reply dict from an event."""
+    if type(obj) == dict:
+        return dict(
+            author_id = obj['author_id'],
+            message= obj['message'],
+            created_on = obj['created_on'])
+
+    if obj.event_type == 'mailinglist_post_created':
+        return dict(
+            author_id = obj.author_id,
+            message = obj.ml_message,
+            created_on = obj.created
+            )
+    elif obj.event_type == 'forum_post_created':
+        return dict(
+            author_id = obj.author_id,
+            message = obj.fp_message,
+            created_on = obj.created)
+    elif obj.event_type == 'private_message_sent':
+        return dict(
+            author_id = obj.author_id,
+            message = obj.pm_message,
+            created_on = obj.created)

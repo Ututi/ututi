@@ -37,7 +37,7 @@ from ututi.model import ForumCategory
 from ututi.model import GroupCoupon
 from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
 from ututi.model import meta, Group, SimpleTag, Subject, PendingInvitation, PendingRequest
-from ututi.model.events import Event
+from ututi.model.events import events_table as t_evt
 from ututi.controllers.subject import SubjectAddMixin
 from ututi.controllers.subject import NewSubjectForm
 from ututi.controllers.search import SearchSubmit
@@ -235,13 +235,14 @@ class GroupWallMixin(WallMixin):
         user_is_admin_of_groups = [membership.group_id
                                    for membership in c.user.memberships
                                    if membership.membership_type == 'administrator']
+        from ututi.lib.wall import generic_events_query
+        evts_generic = generic_events_query()
 
-        query = meta.Session.query(Event)\
-                .filter(or_(Event.object_id.in_([s.id for s in c.group.watched_subjects]),
-                            Event.object_id == c.group.id))\
-                .filter(or_(Event.event_type != 'moderated_post_created',
-                            Event.object_id.in_(user_is_admin_of_groups)))\
-                .options(eagerload(Event.children, Event.user, Event.context, Event.comments))
+        query = evts_generic\
+                .where(or_(t_evt.c.object_id.in_([s.id for s in c.group.watched_subjects]),
+                           t_evt.c.object_id == c.group.id))\
+                .where(or_(t_evt.c.event_type != 'moderated_post_created',
+                            t_evt.c.object_id.in_(user_is_admin_of_groups)))
 
         return query
 

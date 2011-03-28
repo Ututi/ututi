@@ -273,9 +273,9 @@ class WallController(BaseController, FileViewMixin):
         if request.params.has_key('js'):
             return render_mako_def('/sections/wall_entries.mako',
                                    'thread_reply',
-                                   author=msg.author_or_anonymous,
+                                   author_id=msg.author_or_anonymous,
                                    message=msg.body,
-                                   created=msg.sent,
+                                   created_on=msg.sent,
                                    attachments=msg.attachments)
         else:
             self._redirect()
@@ -283,7 +283,11 @@ class WallController(BaseController, FileViewMixin):
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
     def forum_reply(self, group_id, category_id, thread_id):
-        group = Group.get(group_id)
+        try:
+            group_id = int(group_id)
+            group = Group.get(group_id)
+        except ValueError:
+            group = Group.get(group_id)
         try:
             thread_id = int(thread_id)
             category_id = int(category_id)
@@ -304,9 +308,9 @@ class WallController(BaseController, FileViewMixin):
         if request.params.has_key('js'):
             return render_mako_def('/sections/wall_entries.mako',
                                    'thread_reply',
-                                   author=post.created,
+                                   author_id=post.created.id,
                                    message=post.message,
-                                   created=post.created_on)
+                                   created_on=post.created_on)
         else:
             self._redirect()
 
@@ -331,9 +335,9 @@ class WallController(BaseController, FileViewMixin):
         if request.params.has_key('js'):
             return render_mako_def('/sections/wall_entries.mako',
                                    'thread_reply',
-                                   author=msg.sender,
+                                   author_id=msg.sender.id,
                                    message=msg.content,
-                                   created=msg.created_on)
+                                   created_on=msg.created_on)
         else:
             self._redirect()
 
@@ -349,9 +353,9 @@ class WallController(BaseController, FileViewMixin):
         if request.params.has_key('js'):
             return render_mako_def('/sections/wall_entries.mako',
                                    'thread_reply',
-                                   author=comment.created,
+                                   author_id=comment.created.id,
                                    message=comment.content,
-                                   created=comment.created_on)
+                                   created_on=comment.created_on)
         else:
             self._redirect()
 

@@ -158,10 +158,12 @@ class SubjectWallMixin(WallMixin):
 
     def _wall_events_query(self):
         """WallMixin implementation."""
+        from ututi.lib.wall import generic_events_query
+        evts_generic = generic_events_query()
 
-        query = meta.Session.query(Event)\
-             .filter(Event.object_id == c.subject.id)\
-             .options(eagerload(Event.children, Event.user, Event.context, Event.comments))
+        from ututi.model.events import events_table as t_evt
+        query = evts_generic\
+             .where(t_evt.c.object_id == c.subject.id)
 
         return query
 

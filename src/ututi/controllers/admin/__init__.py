@@ -436,8 +436,10 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
 
     def _wall_events_query(self):
         """WallMixin implementation."""
-        return meta.Session.query(Event)\
-            .options(eagerload(Event.children, Event.user, Event.context, Event.comments))
+        from ututi.lib.wall import generic_events_query
+        evts_generic = generic_events_query()
+
+        return evts_generic
 
     def _make_pages(self, items):
         return paginate.Page(items,
