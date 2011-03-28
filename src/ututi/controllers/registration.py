@@ -13,7 +13,8 @@ from ututi.lib.base import BaseController, render
 from ututi.lib.image import serve_logo
 from ututi.lib.invitations import bind_group_invitations
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
-        FileUploadTypeValidator, SeparatedListValidator, CountryValidator
+        FileUploadTypeValidator, SeparatedListValidator, CountryValidator, \
+        AvailableEmailDomain
 import ututi.lib.helpers as h
 
 from ututi.model import meta, LocationTag
@@ -97,7 +98,8 @@ class UniversityCreateForm(Schema):
            'notIn': _(u"Invalid policy selected.") }
     member_policy = validators.OneOf(dict(member_policies).keys(), messages=msg)
 
-    allowed_domains = ForEach(validators.String(strip=True))
+    allowed_domains = ForEach(Pipe(validators.String(strip=True),
+                                   AvailableEmailDomain()))
 
 
 class PersonalInfoForm(Schema):
@@ -420,12 +422,12 @@ class RegistrationController(BaseController, FederationMixin):
         return render('registration/university_create.mako')
 
     @registration_action
-    @validate(schema=UniversityCreateForm(), form='_university_create_form')
+    @validate(schema=UniversityCreateForm(), form='_university_create_form', variable_decode=True)
     def university_create(self, registration):
         if not hasattr(self, 'form_result'):
             # TODO: default site url, default country?
             defaults = {
-                'allowed_domains-1': c.registration.email.split('@')[1],
+                'allowed_domains-0': c.registration.email.split('@')[1],
             }
             return htmlfill.render(self._university_create_form(), defaults=defaults)
 

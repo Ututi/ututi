@@ -18,12 +18,12 @@
   form .allowed-domains-field input {
     width: 150px;
   }
-  #add-more-link { /* hack placement of add-more link */
-    display: block;
-    margin-left: 175px; /* width of input field */
-    margin-top:  -20px; /* height of input field */
-    font-size: 11px;
-    outline: none;
+  form #allowed-domains-container .textField {
+    padding-left: 20px;
+    background: url('/img/icons.com/contact_small.png') no-repeat 8px center;
+  }
+  form #add-more-link {
+    margin-left: 20px;
   }
 </%def>
 
@@ -47,14 +47,19 @@
   <div id="allowed-domains-container">
     <label for="allowed-domains">
       <span class="labelText">${_("Allowed emails:")}</span>
-      @${c.user_domain} <br />
-      <input type="hidden" name="allowed_domains-1" value="${c.user_domain}" />
-      %for i in range(2, c.max_allowed_domains + 1):
-        <div class="allowed-domains-field ${i == 2 or 'hidable'}">
-          @<input type="text" name="allowed_domains-${i}" />
+      <div class="textField">
+        ${c.user_domain}
+      </div>
+      <input type="hidden" name="allowed_domains-0" value="${c.user_domain}" />
+      %for i in range(1, c.max_allowed_domains):
+        <div class="textField allowed-domains-field ${'hidable' if i > 1 else ''}">
+          <input type="text" name="allowed_domains-${i}" />
+          <form:error name="allowed_domains-${i}" />
         </div>
       %endfor
-      <a href="#add-more" id="add-more-link">${_("Add more")}</a>
+      <div>
+        <a href="#add-more" id="add-more-link">${_("Add more")}</a>
+      </div>
     </label>
   </div>
 
