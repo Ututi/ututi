@@ -87,8 +87,21 @@ Note that domain of user email (@vu.lt) is automatically posted:
     >>> form.getControl(name='allowed_domains-0').value
     'vu.lt'
 
-Ututi will not allow registering email domains that are already registered:
+Email domains are validated:
 
+    >>> form.getControl(name='member_policy').value = ['RESTRICT_EMAIL']
+    >>> form.getControl(name='allowed_domains-1').value = 'not a domain'
+    >>> form.getControl(name='allowed_domains-2').value = '@domain.not'
+    >>> user.getControl("Next").click()
+    >>> user.url
+    'http://localhost/registration/.../university_create'
+    >>> user.printCssQuery('.error-message', strip=True)
+    <span>not a domain is not a valid email domain.</span>
+    <span>@domain.not is not a valid email domain.</span>
+
+Furthermore, Ututi will not allow registering email domains that are already registered:
+
+    >>> form = user.getForm('university-create-form')
     >>> form.getControl(name='member_policy').value = ['RESTRICT_EMAIL']
     >>> form.getControl(name='allowed_domains-1').value = 'example.com'
     >>> form.getControl(name='allowed_domains-2').value = 'uni.ututi.com'
@@ -96,17 +109,16 @@ Ututi will not allow registering email domains that are already registered:
     >>> user.url
     'http://localhost/registration/.../university_create'
     >>> user.printCssQuery('.error-message', strip=True)
+    <span>Please select logo.</span>
     <span>Email domain example.com is not available.</span>
     <span>Email domain uni.ututi.com is not available.</span>
 
-Let's replace them with unique domains:
+Let's replace them with unique domains. We have to reupload photo as well, because
+the form did not validate:
 
     >>> form = user.getForm('university-create-form')
     >>> form.getControl(name='allowed_domains-1').value = 'mif.vu.lt'
-    >>> form.getControl(name='allowed_domains-2').value = 'stuf.mif.vu.lt'
-
-We have to upload logo as well if form does not validate:
-
+    >>> form.getControl(name='allowed_domains-2').value = 'stud.mif.vu.lt'
     >>> form.getControl('University logo:').add_file(*make_file('test_logo.png'))
     >>> user.getControl("Next").click()
 
@@ -118,3 +130,14 @@ We'll just skim through next steps:
     >>> user.click('Next')
     >>> user.click('Skip')
     >>> user.click('Finish')
+
+After university is created, admin can see registered email domains:
+
+    >>> admin.open(admin.url)
+    >>> admin.printCssQuery('.domain-name, .domain-location', strip=True)
+    <span>example2.com</span> <span>(Public)</span>
+    <span>example.com</span> <span>(Public)</span>
+    <span>uni.ututi.com</span> <span> <span> <a>U-niversity</a> </span> </span>
+    <span>mif.vu.lt</span> <span> <span> <a>Vilnius University</a> </span> </span>
+    <span>stud.mif.vu.lt</span> <span> <span> <a>Vilnius University</a> </span> </span>
+    <span>vu.lt</span> <span> <span> <a>Vilnius University</a> </span> </span>
