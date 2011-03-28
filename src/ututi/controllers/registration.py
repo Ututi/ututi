@@ -14,7 +14,7 @@ from ututi.lib.image import serve_logo
 from ututi.lib.invitations import bind_group_invitations
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
         FileUploadTypeValidator, SeparatedListValidator, CountryValidator, \
-        AvailableEmailDomain
+        AvailableEmailDomain, EmailDomainValidator
 import ututi.lib.helpers as h
 
 from ututi.model import meta, LocationTag
@@ -99,6 +99,7 @@ class UniversityCreateForm(Schema):
     member_policy = validators.OneOf(dict(member_policies).keys(), messages=msg)
 
     allowed_domains = ForEach(Pipe(validators.String(strip=True),
+                                   EmailDomainValidator(),
                                    AvailableEmailDomain()))
 
 
@@ -543,7 +544,6 @@ class RegistrationController(BaseController, FederationMixin):
         registration.completed = True
         registration.process_invitations()
         meta.Session.commit()
-
 
         sign_in_user(user)
         redirect(url(controller='profile', action='register_welcome'))
