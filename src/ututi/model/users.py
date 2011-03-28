@@ -755,7 +755,7 @@ class UserRegistration(object):
         return user
 
     def create_university(self):
-        from ututi.model import LocationTag
+        from ututi.model import LocationTag, EmailDomain
 
         # parse short title from url
         title_short = urlparse(self.university_site_url).netloc
@@ -769,7 +769,12 @@ class UserRegistration(object):
         university.logo = self.university_logo
         university.country = self.university_country
         university.member_policy = self.university_member_policy
+        # TODO: remove old email_domains field and use sqlalchemy
+        # property instead
         university.email_domains = self.university_allowed_domains
+        for domain_name in self.university_allowed_domains.split(','):
+            meta.Session.add(EmailDomain(domain_name, university))
+
         return university
 
     def url(self, controller='registration', action='confirm', **kwargs):
