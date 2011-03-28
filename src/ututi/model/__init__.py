@@ -2580,6 +2580,15 @@ class EmailDomain(Model):
         self.location = location
 
     @classmethod
+    def get_by_name(cls, domain_name):
+        try:
+            return meta.Session.query(EmailDomain)\
+                    .filter(EmailDomain.domain_name == domain_name.lower())\
+                    .one()
+        except NoResultFound:
+            return None
+
+    @classmethod
     def is_public(cls, domain_name):
         """Checks whether given domain name is registered as public."""
         return meta.Session.query(EmailDomain)\
@@ -2589,7 +2598,7 @@ class EmailDomain(Model):
 
     @classmethod
     def all(cls):
-        return cls.all_public() + \
+        return EmailDomain.all_public() + \
             meta.Session.query(EmailDomain).join(LocationTag)\
                 .order_by(LocationTag.title)\
                 .order_by(EmailDomain.domain_name)\

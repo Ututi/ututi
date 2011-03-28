@@ -15,7 +15,7 @@ from pylons.decorators import validate as old_validate
 
 from ututi.model import GroupCoupon
 from ututi.model import meta, Email
-from ututi.model import Subject, Group, ContentItem, LocationTag
+from ututi.model import Subject, Group, ContentItem, LocationTag, EmailDomain
 from ututi.model.i18n import Language, Country
 
 
@@ -289,6 +289,22 @@ class UniqueEmail(validators.FancyValidator):
             if existing is not None:
                 if self.completelyUnique or existing.user.id != id:
                     raise Invalid(self.message("non_unique", state), value, state)
+
+
+class AvailableEmailDomain(validators.FancyValidator):
+
+    messages = {
+        'empty': _(u"Enter a valid email domain."),
+        'non_unique': _(u"Email domain %(domain_name)s is not available."),
+        }
+
+    def validate_python(self, value, state):
+        if value == '':
+            raise Invalid(self.message("empty", state), value, state)
+        else:
+            existing = EmailDomain.get_by_name(value.strip())
+            if existing is not None:
+                raise Invalid(self.message("non_unique", state, domain_name=existing.domain_name), value, state)
 
 
 class LanguageIdValidator(validators.FancyValidator):
