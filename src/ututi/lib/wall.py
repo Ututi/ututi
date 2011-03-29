@@ -196,8 +196,8 @@ class WallMixin(object):
         for child in children:
             if comments_collection.has_key(child.id):
                 child['conversation'] = comments_collection[child.id]
-            if attachment_collection.has_key(child.id):
-                child['attachments'] = attachment_collection[child.id]
+            if attachment_collection.has_key(child.message_id):
+                child['attachments'] = attachment_collection[child.message_id]
 
         children_collection = self._group_event_children(children)
 
@@ -211,8 +211,8 @@ class WallMixin(object):
                 evt['conversation'] = comments_collection[evt.id]
             if evt.event_type == 'sms_message_sent':
                 evt['sms_group'] = groups_collection[evt.object_id]
-            if attachment_collection.has_key(evt.id):
-                evt['attachments'] = attachment_collection[evt.id]
+            if attachment_collection.has_key(evt.message_id):
+                evt['attachments'] = attachment_collection[evt.message_id]
 
 
     def _ml_event_data(self, evt):

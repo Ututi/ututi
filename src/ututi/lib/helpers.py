@@ -595,7 +595,8 @@ def thread_reply_dict(obj):
         return dict(
             author_id = obj.author_id,
             message = obj.ml_message,
-            created_on = obj.created
+            created_on = obj.created,
+            attachments = obj.attachments if hasattr(obj, 'attachments') else []
             )
     elif obj.event_type == 'forum_post_created':
         return dict(
