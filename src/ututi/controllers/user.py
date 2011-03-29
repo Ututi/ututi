@@ -46,11 +46,17 @@ class UserInfoWallMixin(WallMixin):
             'page_created',
             'page_modified',
         ]
-        query = meta.Session.query(Event).join(ContentItem)\
-             .filter(Event.author_id == c.user_info.id)\
-             .filter(or_(Event.event_type.in_(public_event_types),
-                         and_(Event.event_type == 'file_uploaded',
-                              ContentItem.content_type == 'subject')))
+        from ututi.lib.wall import generic_events_query
+        t_evt = meta.metadata.tables['events']
+        t_ci = meta.metadata.tables['content_items']
+        evts_generic = generic_events_query()
+
+        query = evts_generic\
+            .where(and_(t_evt.c.author_id == c.user_info.id,
+                        or_(t_evt.c.event_type.in_(public_event_types),
+                            and_(t_evt.c.event_type == 'file_uploaded',
+                                 t_ci.c.content_type == 'subject'))))
+
         return query
 
 class UserController(BaseController, UserInfoWallMixin):

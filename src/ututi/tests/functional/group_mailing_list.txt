@@ -48,7 +48,7 @@ Data structures seem to be ok, let's see if they are displayed
 properly in the forum page:
 
     >>> browser.open('http://localhost/group/moderators')
-    >>> browser.printCssQuery('#wall-event-8 .event-title', strip=True)
+    >>> browser.printCssQuery('#wall-event-11 .event-title', strip=True)
     <span>
     <BLANKLINE>
             You have posted a new message <a>Hello</a> to the group <a>Moderatoriai</a>
@@ -56,7 +56,6 @@ properly in the forum page:
 
 
 Let's look at the attachment in the thread:
-
     >>> browser.getLink('README.txt')
     <Link text='README.txt' url='http://localhost/group/moderators/mailinglist/file/7/8'>
 
@@ -98,6 +97,9 @@ And the link is not there anymore:
 
 After we accept the message, the message will get sent to all the
 members of the group (XXX not implemented):
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> mail_queue[:] = []
 
 #     >>> len(mail_queue)
 #     1
