@@ -306,6 +306,18 @@ class MailinglistPostCreatedEvent(PostCreatedEventBase, MessagingEventMixin):
         return url(controller='wall', action='mailinglist_reply',
                    thread_id=self.message.thread.id, group_id=self.message.thread.group.group_id)
 
+    @property
+    def ml_message(self):
+        return self.message.body
+
+    @property
+    def ml_thread_id(self):
+        return self.message.thread.id
+
+    @property
+    def ml_group_id(self):
+        return self.message.group_id
+
 
 class ModeratedPostCreated(PostCreatedEventBase):
     """Event fired when someone posts a message on the moderation queue.
@@ -339,6 +351,11 @@ class ModeratedPostCreated(PostCreatedEventBase):
             'link_to_group': link_to(self.context.title, self.context.url()),
             'link_to_message': link_to(self.message.subject, self.message.url())}
 
+    @property
+    def ml_message(self):
+        return self.message.body
+
+
 
 class ForumPostCreatedEvent(Event, MessagingEventMixin):
     """Event fired when someone posts a message on group forums.
@@ -370,6 +387,18 @@ class ForumPostCreatedEvent(Event, MessagingEventMixin):
                    group_id=self.context.group_id,
                    category_id=self.post.category_id,
                    thread_id=self.post.thread_id)
+
+    @property
+    def fp_message(self):
+        return self.post.message
+
+    @property
+    def fp_category_id(self):
+        return self.post.category_id
+
+    @property
+    def fp_thread_id(self):
+        return self.post.thread_id
 
 
 class SMSMessageSentEvent(Event):
@@ -414,6 +443,18 @@ class PrivateMessageSentEvent(Event, MessagingEventMixin):
         """MessagingEventMixin implementation."""
         return url(controller='wall', action='privatemessage_reply',
                    msg_id=self.private_message.id)
+
+    @property
+    def pm_recipient_id(self):
+        return self.recipient_id
+
+    @property
+    def pm_sender_id(self):
+        return self.author_id
+
+    @property
+    def pm_message(self):
+        return self.private_message.content
 
 
 class GroupMemberJoinedEvent(Event):

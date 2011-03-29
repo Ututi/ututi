@@ -581,7 +581,7 @@ def user_link(user_id):
         user = User.get_byid(user_id)
         return link_to(user.fullname, url(controller='content', action='get_user', id=user_id))
     elif type(user_id) == AnonymousUser:
-        return 'mailto:%s' % user_id.email
+        return link_to(user_id.fullname, 'mailto:%s' % user_id.email)
 
 def thread_reply_dict(obj):
     """Create a universal thread reply dict from an event."""

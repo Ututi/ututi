@@ -161,7 +161,7 @@ class SubjectWallMixin(WallMixin):
         from ututi.lib.wall import generic_events_query
         evts_generic = generic_events_query()
 
-        from ututi.model.events import events_table as t_evt
+        t_evt = meta.metadata.tables['events']
         query = evts_generic\
              .where(t_evt.c.object_id == c.subject.id)
 
