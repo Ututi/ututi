@@ -22,7 +22,8 @@ class UserWallMixin(WallMixin):
             subjects += c.user.taught_subjects
         from ututi.lib.wall import generic_events_query
         evts_generic = generic_events_query()
-        from ututi.model.events import events_table as t_evt
+
+        t_evt = meta.metadata.tables['events']
         query = evts_generic\
              .where(or_(t_evt.c.object_id.in_([s.id for s in subjects]),
                         t_evt.c.object_id.in_([m.group.id for m in c.user.memberships]),

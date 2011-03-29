@@ -78,7 +78,7 @@ class StructureviewWallMixin(WallMixin):
         from ututi.lib.wall import generic_events_query
         evts_generic = generic_events_query()
 
-        from ututi.model.events import events_table as t_evt
+        t_evt = meta.metadata.tables['events']
 
         locations = [loc.id for loc in c.location.flatten]
         subjects = meta.Session.query(Subject)\

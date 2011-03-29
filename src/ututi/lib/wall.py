@@ -15,7 +15,6 @@ from ututi.model.users import AnonymousUser
 from ututi.model.mailing import decode_and_join_header
 from ututi.model.mailing import UtutiEmail
 
-from ututi.model.events import events_table as t_evt
 from ututi.model import content_items_table as t_ci, page_versions_table as t_pages
 from ututi.model import files_table as t_files, private_messages_table as t_pmsg
 from ututi.model.mailing import group_mailing_list_messages_table as t_mlmsg
@@ -39,7 +38,7 @@ def generic_events_query():
                          .order_by(t_pages.c.id.desc())\
                          .limit(1)\
                          .alias('latest_page')
-
+    t_evt = meta.metadata.tables['events']
     evts_generic = select([t_evt.c.id, t_evt.c.author_id, t_evt.c.created,
                            t_evt.c.event_type, t_evt.c.data, t_evt.c.page_id,
                            t_evt.c.object_id,
@@ -66,7 +65,7 @@ def generic_events_query():
                            t_mlmsg.c.subject.label('ml_subject'),
                            t_mlmsg.c.original.label('ml_original'),
                            t_mlmsg.c.group_id.label('ml_group_id'),
-                           t_mlmsg.c.thread_message_id.label('ml_thread_id'),
+                           t_mlmsg.c.thread_message_machine_id.label('ml_thread_id'),
                            #forum posts
                            t_fpmsg.c.message.label('fp_message'),
                            t_fpmsg.c.title.label('fp_subject'),
@@ -113,7 +112,7 @@ class WallMixin(object):
 
     def _wall_events(self, limit=250):
         """Returns threaded events, defined by _wall_events_query()"""
-
+        t_evt = meta.metadata.tables['events']
         evts = self._wall_events_query()
 
         evts = evts\
@@ -142,12 +141,11 @@ class WallMixin(object):
         return comments_collection
 
     def _get_event_children(self, event_ids):
-        global evts_generic
         from ututi.model.events import events_table as t_evt
         evts_generic = generic_events_query()
         children = meta.Session.execute(evts_generic\
                                             .where(t_evt.c.parent_id.in_(event_ids))\
-                                            .order_by(t_evt.c.parent_id.asc(), t_evt.c.created.asc())).fetchall()
+                                            .order_by(t_evt.c.created.asc())).fetchall()
 
         ids = [ch.id for ch in children]
         return (ids, [ObjectWrapper(child) for child in children])
@@ -169,6 +167,7 @@ class WallMixin(object):
         return groups_collection
 
     def _get_ml_attachments(self, event_ids):
+        t_evt = meta.metadata.tables['events']
         att = meta.Session.query(File).join((t_evt, t_evt.c.message_id==File.parent_id))\
             .filter(or_(t_evt.c.id.in_(event_ids)))\
             .order_by(File.filename.desc())\

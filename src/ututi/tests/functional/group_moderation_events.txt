@@ -70,7 +70,7 @@ links are different depending on whether the author of the message has
 an account in Ututi or not:
 
     >>> browser.getLink('Second user')
-    <Link text='Second user' url='http://localhost/user/3'>
+    <Link text='Second user' url='http://localhost/content/get_user/3'>
 
     >>> browser.getLink('Varlius <varlius@example.com>')
     <Link text='Varlius <varlius@example.com>' url='mailto:varlius@example.com'>

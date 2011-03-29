@@ -40,7 +40,7 @@ from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, Fil
 from ututi.model import meta, Group, SimpleTag, Subject, PendingInvitation, PendingRequest
 
 from ututi.controllers.profile.validators import FriendsInvitationJSForm
-from ututi.model.events import events_table as t_evt
+
 from ututi.controllers.subject import SubjectAddMixin
 from ututi.controllers.subject import NewSubjectForm
 from ututi.controllers.search import SearchSubmit
@@ -240,7 +240,7 @@ class GroupWallMixin(WallMixin):
                                    if membership.membership_type == 'administrator']
         from ututi.lib.wall import generic_events_query
         evts_generic = generic_events_query()
-
+        t_evt = meta.metadata.tables['events']
         query = evts_generic\
                 .where(or_(t_evt.c.object_id.in_([s.id for s in c.group.watched_subjects]),
                            t_evt.c.object_id == c.group.id))\

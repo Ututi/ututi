@@ -101,14 +101,19 @@
     is displayed differently, with bigger logo and etc.
   </%doc>
   <%
-    if 'conversation' in event:
+    original = event
+    if hasattr(event, 'conversation'):
       messages = event.conversation
-    elif 'children' in event and event.event_type in ['mailinglist_post_created', 'forum_post_created']:
+    elif hasattr(event, 'children') and event.event_type in ['mailinglist_post_created', 'forum_post_created', 'private_message_sent']:
       messages = event.children
+      if messages:
+        original = messages[0]
+        messages.append(event)
+        messages = messages[1:]
+    elif hasattr(event, 'comments'):
+      messages = event.comments
     else:
       messages = []
-
-    original = event
   %>
   <div class="thread">
     %if head_message:
@@ -119,6 +124,7 @@
     <div class="content">
       %if head_message:
         <%
+           message = ''
            if original.event_type == 'mailinglist_post_created':
                message = original.ml_message
            elif original.event_type == 'forum_post_created':
@@ -127,7 +133,7 @@
                message = original.pm_message
         %>
         <span class="event-content truncated">${h.nl2br(message)}</span>
-        %if 'attachments' in original:
+        %if hasattr(original, 'attachments'):
         <ul class="file-list">
           %for file in original.attachments:
           <li><a href="${file.url()}">${file.title}</a></li>
@@ -176,6 +182,8 @@
                  reply_url = url(controller='wall', action='privatemessage_reply', msg_id=event.private_message_id)
              elif original.event_type == 'forum_post_created':
                  reply_url = url(controller='wall', action='forum_reply', group_id=original.object_id, category_id=original.fp_category_id, thread_id=original.fp_thread_id)
+             elif original.event_type == 'mailinglist_post_created':
+                 reply_url = url(controller='wall', action='mailinglist_reply', thread_id=original.ml_thread_id, group_id=original.ml_group_id)
              else:
                  reply_url = url(controller='wall', action='eventcomment_reply', event_id=event.id)
           %>
@@ -199,7 +207,7 @@
     <%self:file_description event="${event}"/>
     <%self:event_conversation event="${event}" head_message="${False}" />
   </div>
-  <% children = [ch for ch in event.children if ch.md5 is not None] if 'children' in event else [] %>
+  <% children = [ch for ch in event.children if ch.md5 is not None] if hasattr(event, 'children') else [] %>
   %if children:
     <div class="click2show">
       <div class="click hide event_children_link">
@@ -409,32 +417,37 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
+      <%
+         msg = event
+         if hasattr(event, 'children') and len(event.children) > 0:
+           msg = event.children[0]
+      %>
+      %if c.user is not None and c.user.id == msg.author_id:
         ${_("You have posted a new message %(message_link)s to the group %(group_link)s") % \
-           dict(group_link=h.content_link(event.object_id),
-                message_link=h.content_link(event.message_id)) | n}
+           dict(group_link=h.content_link(msg.object_id),
+                message_link=h.content_link(msg.message_id)) | n}
       %else:
         ${_("%(user_link)s has posted a new message %(message_link)s to the group %(group_link)s") % \
-           dict(user_link=h.user_link(event.ml_author),
-                group_link=h.content_link(event.object_id),
-                message_link=h.content_link(event.message_id)) | n}
+           dict(user_link=h.user_link(msg.ml_author),
+                group_link=h.content_link(msg.object_id),
+                message_link=h.content_link(msg.message_id)) | n}
       %endif
     </%def>
     <%self:event_conversation event="${event}"/>
   </%self:wall_entry>
 </%def>
 
-<%def name="teachermessage_sent(event)">
+<%def name="teacher_message(event)">
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user == event.user:
+      %if c.user is not None and c.user.id == event.author_id:
           ${_("You have sent a message to the group %(group_link)s") % \
-             dict(group_link=h.object_link(event.context)) | n}
+             dict(group_link=h.content_link(event.object_id)) | n}
       %else:
           ${_("Teacher %(user_link)s has sent a message to the group %(group_link)s") % \
-             dict(user_link=h.object_link(event.user),
-                  group_link=h.object_link(event.context)) | n}
+             dict(user_link=h.user_link(event.author_id),
+                  group_link=h.content_link(event.object_id)) | n}
       %endif
     </%def>
     ## The following snippet is copied from event_conversation def.
@@ -442,7 +455,7 @@
     ## handled the same way as any other messages.
     <div class="thread">
       <div class="logo">
-        <img src="${event.user.url(action='logo', width=50)}" />
+        <img src="${url(controller='user', action='logo', id=event.author_id, width=50)}" />
       </div>
       <div class="content">
         <span class="event-content truncated">${h.nl2br(event.data)}</span>
@@ -475,7 +488,7 @@
       </div>
       <div class="content">
         <span class="event-content truncated">${h.nl2br(event.ml_message)}</span>
-        %if 'attachments' in event:
+        %if hasattr(event, 'attachments'):
         <ul class="file-list">
           %for file in event.attachments:
           <li><a href="${file.url()}">${file.title}</a></li>
@@ -577,12 +590,12 @@
     <%def name="heading()">
       <%
          msg = event
-         if 'children' in event:
+         if hasattr(event, 'children') and len(event.children) > 0:
            msg = event.children[0]
       %>
       %if c.user is not None and c.user.id == msg.pm_recipient_id:
         ${_("%(user_link)s has sent you a private message \"%(msg_link)s\"") % \
-           dict(user_link=h.user_link(event.pm_sender_id),
+           dict(user_link=h.user_link(msg.pm_sender_id),
                 msg_link=h.content_link(msg.private_message_id)) | n}
       %elif c.user is not None and c.user.id ==  msg.pm_sender_id:
         ${_("You have sent %(user_link)s a private message \"%(msg_link)s\"") % \
@@ -601,9 +614,9 @@
 
 <%def name="member_joined(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">group-event ${'children'in event and 'click2show' or ''}</%def>
+    <%def name="classes()">group-event ${hasattr(event, 'children') and 'click2show' or ''}</%def>
     <%def name="heading()">
-      %if 'children' in event:
+      %if hasattr(event, 'children'):
           %if c.user is not None and c.user.id == event.author_id:
             ${ungettext("You have and %(count)s more person have joined the group %(group_link)s",
                         "You have and %(count)s more people have joined the group %(group_link)s",
@@ -630,7 +643,7 @@
         %endif
       %endif
     </%def>
-    %if 'children' in event:
+    %if hasattr(event, 'children'):
       <div class="show other_members">
         %for ch in event.children:
           ${h.user_link(ch.author_id)}
@@ -642,9 +655,9 @@
 
 <%def name="member_left(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">group-event ${'children' in event and 'click2show' or ''}</%def>
+    <%def name="classes()">group-event ${hasattr(event, 'children') and 'click2show' or ''}</%def>
     <%def name="heading()">
-      %if 'children' in event:
+      %if hasattr(event, 'children'):
         %if c.user is not None and c.user.id == event.author_id:
           ${ungettext("You have and %(count)s more person have left the group %(group_link)s",
                       "You have and %(count)s more people have left the group %(group_link)s",
@@ -671,7 +684,7 @@
         %endif
       %endif
     </%def>
-    %if 'children' in event:
+    %if hasattr(event, 'children'):
       <div class="show other_members">
         %for ch in event.children:
           ${h.user_link(ch.author_id)}

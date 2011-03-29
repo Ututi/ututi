@@ -253,8 +253,8 @@ class WallController(BaseController, FileViewMixin):
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
     def mailinglist_reply(self, group_id, thread_id):
-        group = Group.get(group_id)
         try:
+            group = Group.get(int(group_id))
             thread_id = int(thread_id)
         except ValueError:
             abort(404)
