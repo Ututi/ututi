@@ -30,6 +30,7 @@
 <h2>${_('Ututi controls:')}</h2>
 <ul class="clearfix">
   <li>${h.link_to('Events', url(controller='admin', action='events'))}</li>
+  <li>${h.link_to('Universities', url(controller='structure', action='index'))}</li>
   <li>${h.link_to('Subjects', url(controller='admin', action='subjects'))}</li>
   <li>${h.link_to('Teachers', url(controller='admin', action='teachers'))}</li>
   <li>${h.link_to('Users', url(controller='admin', action='users'))}</li>
