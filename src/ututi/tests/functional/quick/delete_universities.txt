@@ -1,0 +1,19 @@
+Deleting universities
+=====================
+
+Log-in ad admin:
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/admin/login')
+    >>> form = browser.getForm('adminLoginForm')
+    >>> form.getControl('Username').value = "admin@ututi.lt"
+    >>> form.getControl('Password').value = "asdasd"
+    >>> form.getControl('Login').click()
+
+Let's try delete some university from Ututi:
+
+    >>> browser.open('http://localhost/structure')
+    >>> browser.getLink('[Edit]').click()
+    >>> form = browser.getForm('edit_structure_form')
+    >>> form.getControl('Delete').click()
+
