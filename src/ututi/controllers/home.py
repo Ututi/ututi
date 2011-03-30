@@ -27,7 +27,7 @@ from ututi.lib.security import sign_out_user
 from ututi.lib.security import ActionProtector, sign_in_user, bot_protect
 from ututi.lib.validators import validate, UniqueEmail, TranslatedEmailValidator
 from ututi.model import (meta, User, Region, Email, PendingInvitation,
-                         LocationTag, Payment, UserRegistration)
+                         LocationTag, Payment, UserRegistration, EmailDomain)
 from ututi.model import Subject, Group, SearchItem
 from ututi.model.events import Event
 from ututi.controllers.federation import FederationMixin, FederatedRegistrationForm
@@ -540,19 +540,25 @@ class HomeController(UniversityListMixin, FederationMixin):
 
         email = self.form_result['email']
 
-        # TODO: try to select user location by his email here
-
-        # Otherwise lookup/create registration entry and
-        # send confirmation code to user.
-
+        # lookup or create registration entry
         registration = UserRegistration.get_by_email(email)
         if registration is None:
             registration = UserRegistration(email=email)
             meta.Session.add(registration)
-            meta.Session.commit()
 
+        # try to select location by domain name
+        if registration.location is None:
+            _, _, domain_name = email.rpartition('@')
+            domain = EmailDomain.get_by_name(domain_name)
+            if domain is not None:
+                registration.location = domain.location
+
+        meta.Session.commit()
+
+        # send confirmation code to user
         registration.send_confirmation_email()
 
+        # show confirmation page
         c.email = email
         return render('registration/email_approval.mako')
 
