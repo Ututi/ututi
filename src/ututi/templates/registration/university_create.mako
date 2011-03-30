@@ -49,8 +49,9 @@
       <span class="labelText">${_("Allowed emails:")}</span>
       <div class="textField">
         ${c.user_domain}
+        <input type="hidden" name="allowed_domains-0" value="${c.user_domain}" />
+        <form:error name="allowed_domains-0" />
       </div>
-      <input type="hidden" name="allowed_domains-0" value="${c.user_domain}" />
       %for i in range(1, c.max_allowed_domains):
         <div class="textField allowed-domains-field ${'hidable' if i > 1 else ''}">
           <input type="text" name="allowed_domains-${i}" />
@@ -76,6 +77,10 @@
         }
         else {
             $('#allowed-domains-container').hide();
+            // empty so it does not causes validation errors
+            $('.allowed-domains-field input').val('');
+            // hide all and unhide first one
+            $('.allowed-domains-field').hide().first().show();
         }
     }
     /* Hide email fields if PUBLIC is checked. */
