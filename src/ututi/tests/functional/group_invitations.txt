@@ -133,3 +133,8 @@ Once registered, user should be able to accept invitation to group:
     >>> new_user.getLink('Moderatoriai', url='/group/moderators').click()
     >>> print new_user.url
     http://localhost/group/moderators/home
+
+    >>> len(mail_queue)
+    4
+
+    >>> mail_queue[:] = []
