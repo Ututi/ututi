@@ -104,3 +104,7 @@ The rest of the test is undocummented, but easy to follow:
    Wiki page created.
    ...
 
+We can also upload a file from the wall. Let's do just that, shall we?
+    >>> res = browser.app.post("/wall/upload_file_js",
+    ...                        params={'folder': 'a', 'target_id': '1'},
+    ...                        upload_files=[("attachment", "text;for you.txt", "Test")])
