@@ -83,6 +83,8 @@ class AdminUser(object):
 class Author(object):
     """The Author object - for references to authorship. Persists even when the user is deleted."""
 
+    is_teacher = False
+
     def url(self, controller='user', action='index', **kwargs):
         return url(controller=controller,
                    action=action,
