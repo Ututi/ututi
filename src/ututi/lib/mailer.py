@@ -157,6 +157,8 @@ def raw_send_email(sender, recipients, message):
         if recipients:
             hold_emails = False
 
+    log.debug("Recipients: %r" % recipients)
+    log.debug("Hold emails: %r" % asbool(config.get('hold_emails', False)))
     # Send the message via SMTP to localhost:25
     if not hold_emails:
         # send the email if we are not told to hold it
