@@ -1,7 +1,5 @@
 import logging
 from pylons import url
-from sqlalchemy.sql.expression import desc
-from sqlalchemy.sql.expression import or_
 from sqlalchemy.sql.expression import func
 from sqlalchemy.sql.expression import and_
 from sqlalchemy.orm.exc import NoResultFound
@@ -754,11 +752,8 @@ class UserRegistration(object):
         university.logo = self.university_logo
         university.country = self.university_country
         university.member_policy = self.university_member_policy
-        # TODO: remove old email_domains field and use sqlalchemy
-        # property instead
-        university.email_domains = self.university_allowed_domains
         for domain_name in self.university_allowed_domains.split(','):
-            meta.Session.add(EmailDomain(domain_name, university))
+            university.email_domains.append(EmailDomain(domain_name))
 
         return university
 

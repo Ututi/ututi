@@ -332,7 +332,7 @@ def setup_orm(engine):
                          autoload_with=engine)
 
     orm.mapper(EmailDomain, email_domains_table,
-               properties = {'location': relation(Tag)})
+               properties = {'location': relation(Tag, backref='email_domains')})
 
     global user_medals_table
     user_medals_table = Table("user_medals", meta.metadata,
