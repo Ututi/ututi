@@ -235,6 +235,18 @@ class FileUploadedEvent(Event, Commentable):
                     'link_to_group': link_to(self.context.title, self.context.url()),
                     'folder_title': self.file.folder}
 
+    @property
+    def context_type(self):
+        return self.file.parent.content_type
+
+    @property
+    def md5(self):
+        return self.file.md5
+
+    @property
+    def file_deleted_on(self):
+        return self.file.deleted_on
+
 
 class SubjectCreatedEvent(Event):
     """Event fired when a new subject is created."""
