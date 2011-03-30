@@ -273,7 +273,7 @@ class WallController(BaseController, FileViewMixin):
         if request.params.has_key('js'):
             return render_mako_def('/sections/wall_entries.mako',
                                    'thread_reply',
-                                   author_id=msg.author_or_anonymous,
+                                   author_id=msg.author_id if msg.author_id is not None else msg.author_or_anonymous,
                                    message=msg.body,
                                    created_on=msg.sent,
                                    attachments=msg.attachments)
