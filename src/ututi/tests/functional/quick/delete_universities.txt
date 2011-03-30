@@ -14,6 +14,7 @@ Let's try delete some university from Ututi:
 
     >>> browser.open('http://localhost/structure')
     >>> browser.getLink('[Edit]').click()
-    >>> form = browser.getForm('edit_structure_form')
-    >>> form.getControl('Delete').click()
+    >>> form = browser.getForm(name='edit_structure_form')
+    >>> form.getControl('Delete', index=1).click()
+
 
