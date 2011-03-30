@@ -34,8 +34,10 @@
 </%def>
 
 <p>
+  <span class="notification">
   ${h.literal(_("You are registering to <strong>%(university_name)s</strong> network.") % \
     dict(university_name=c.registration.location.title))}
+  </span>
 </p>
 
 <div id="people-on-this-network">

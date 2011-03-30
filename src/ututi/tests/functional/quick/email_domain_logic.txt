@@ -1,6 +1,9 @@
 Email domain logic
 ==================
 
+    >>> from ututi.lib.mailer import mail_queue
+    >>> from ututi.lib.helpers import get_urls
+
 Email domain administration
 ============================
 
@@ -62,12 +65,9 @@ In order to test this, we'll go through the registration process:
     >>> form = user.getForm('sign-up-form')
     >>> form.getControl(name='email').value = 'user@vu.lt'
     >>> form.getControl('Sign Up').click()
-    >>> from ututi.lib.mailer import mail_queue
-    >>> from ututi.lib.helpers import get_urls
-    >>> msg1 = mail_queue.pop()
-    >>> urls = get_urls(msg1.payload())
-    >>> registration_url = urls[0]
-    >>> user.open(registration_url)
+    >>> msg = mail_queue.pop()
+    >>> urls = get_urls(msg.payload())
+    >>> user.open(urls[0])
 
     >>> user.url
     'http://localhost/registration/.../university_create'
@@ -141,3 +141,36 @@ After university is created, admin can see registered email domains:
     <span>mif.vu.lt</span> <span> <span> <a>Vilnius University</a> </span> </span>
     <span>stud.mif.vu.lt</span> <span> <span> <a>Vilnius University</a> </span> </span>
     <span>vu.lt</span> <span> <span> <a>Vilnius University</a> </span> </span>
+
+User registration
+=================
+
+User can register to Ututi in several ways: signing up from the frontpage,
+signing up from university pages or invited by other users.
+
+In either case, registration location is set before email confirmation or any
+other step.
+
+It may be the case that no location is set for registration. The only possible
+registration flow in that case is to create new university.
+
+Let's start with user signing up from the frontpage. He selects university
+by entering his email. If email domain belongs to some university, this location
+is set to registration without asking user to confirm.
+
+    >>> anonymous = Browser()
+    >>> form = anonymous.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'user@mif.vu.lt'
+    >>> form.getControl('Sign Up').click()
+    >>> msg = mail_queue.pop()
+    >>> urls = get_urls(msg.payload())
+    >>> urls[0]
+    'http://localhost/registration/.../confirm'
+
+    >>> anonymous.open(urls[0])
+    >>> anonymous.url
+    'http://localhost/registration/.../university'
+    >>> anonymous.printCssQuery('h1.page-title', strip=True)
+    <h1>University information</h1>
+    >>> anonymous.printCssQuery('.notification', strip=True)
+    <span> You are registering to <strong>Vilnius University</strong> network. </span>
