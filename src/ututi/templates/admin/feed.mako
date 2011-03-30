@@ -23,4 +23,8 @@
 
 </%def>
 
+<h1>Admin wall</h1>
+
+<div class="wall">
 ${wall.wall_entries(c.events)}
+</div>
