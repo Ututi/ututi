@@ -46,9 +46,9 @@ countries_table = None
 class Country(Model):
 
     @classmethod
-    def get_by_title(cls, title):
+    def get_by_name(cls, name):
         try:
-            return meta.Session.query(cls).filter_by(title=title).one()
+            return meta.Session.query(cls).filter_by(name=name).one()
         except NoResultFound:
             return None
 
