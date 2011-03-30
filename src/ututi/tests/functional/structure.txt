@@ -107,12 +107,3 @@ If we delete one item, all its children should be gone too:
     >>> browser.printQuery("id('location_structure')//li/a[@class='tag_link']/text()")
     U-niversity
     D-epartment
-
-Note: if we try to delete location tag that has user's within it,
-integrity exception occurs:
-
-    >>> browser.getLink(text='[Edit]', index=0).click()
-    >>> browser.getControl('Delete', index=1).click()
-    Traceback (most recent call last):
-    ...
-    IntegrityError: (IntegrityError) null value in column "location_id" violates not-null constraint ...
