@@ -1,7 +1,6 @@
 import doctest
 
 from ututi.model import meta, LocationTag
-from ututi.model.users import UserRegistration
 
 from ututi.tests import UtutiLayer
 
@@ -9,6 +8,8 @@ import ututi
 
 def test_init():
     """Tests that registration object always has a hash field filled:
+
+        >>> from ututi.model.users import UserRegistration
 
     Let's create registration object:
 
@@ -30,6 +31,8 @@ def test_init():
 
 def test_create_user():
     """Tests if all registration data is moved to the user created.
+
+        >>> from ututi.model.users import UserRegistration
 
     Let's create registration object and fill it with data:
 
@@ -71,6 +74,64 @@ def test_create_user():
         >>> user = registration.create_user()
         >>> [e.email for e in user.emails]
         ['another@example.com']
+
+    """
+
+def test_create_university():
+    """Tests if all registration data is moved to the university created.
+
+        >>> from ututi.model.users import UserRegistration
+        >>> from ututi.model.i18n import Country
+
+    Let's create registration object with empty location and fill in
+    university data:
+
+        >>> registration = UserRegistration(email='user@example.com')
+        >>> registration.university_title = 'Vilnius University'
+        >>> registration.university_country = Country.get_by_name('Lithuania')
+        >>> registration.university_site_url = 'http://www.vu.lt'
+        >>> registration.university_member_policy = 'RESTRICT_EMAIL'
+        >>> registration.university_allowed_domains = 'vu.lt,mif.vu.lt,stud.mif.vu.lt'
+
+    Adding logo is just a little bit more tricky:
+
+        >>> from PIL import Image
+        >>> from StringIO import StringIO
+        >>> buffer = StringIO()
+        >>> image = Image.new("RGB", (123, 123))
+        >>> image.save(buffer, "PNG")
+        >>> registration.university_logo = buffer.getvalue()
+
+    When university is created, all data should be transfered:
+
+        >>> university = registration.create_university()
+        >>> university.parent is None
+        True
+
+        >>> university.title
+        'Vilnius University'
+
+        >>> university.title_short
+        'vu.lt'
+
+        >>> image = Image.open(StringIO(university.logo))
+        >>> image.size
+        (123, 123)
+
+        >>> image.mode
+        'RGB'
+
+        >>> university.site_url
+        'http://www.vu.lt'
+
+        >>> university.member_policy
+        'RESTRICT_EMAIL'
+
+        >>> sorted([d.domain_name for d in university.email_domains])
+        ['mif.vu.lt', 'stud.mif.vu.lt', 'vu.lt']
+
+        >>> university.country.name
+        'Lithuania'
 
     """
 
