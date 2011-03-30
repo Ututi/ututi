@@ -296,7 +296,12 @@ def setup_orm(engine):
                                                               cascade='all, delete-orphan'),
                                            'medals': relation(Medal, backref='user'),
                                            'raw_logo': deferred(users_table.c.logo),
-                                           'location': relation(LocationTag, backref=backref('users', lazy=True))})
+                                           'location': relation(LocationTag,
+                                                                backref=backref('users',
+                                                                                lazy=True,
+                                                                                cascade='all, delete',
+                                                                                passive_deletes=True)
+                                                                )})
 
     orm.mapper(Teacher,
                teachers_table,
