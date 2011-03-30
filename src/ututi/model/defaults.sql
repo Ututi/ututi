@@ -229,7 +229,6 @@ create table tags (id bigserial not null,
        site_url varchar(200) default null,
        confirmed bool default true,
        member_policy university_member_policy default 'RESTRICT_EMAIL',
-       email_domains text default null, /* comma-separated list of allowed email domains */
        region_id int8 default null references regions(id) on delete restrict,
        parent_id int8 default null references tags(id) on delete cascade,
        country_id int8 default null references countries(id) on delete cascade,
