@@ -65,6 +65,7 @@
   </div>
 
   <script type="text/javascript">
+    /* Hide all empty fields. */
     $('.allowed-domains-field.hidable input').each(function() {
         if ($(this).val().length == 0)
             $(this).closest('.allowed-domains-field').hide();
@@ -85,6 +86,8 @@
     }
     /* Hide email fields if PUBLIC is checked. */
     toggle_domain_fields();
+    /* Show email domains block if it contains error messages. */
+    $('#allowed-domains-container .error-message').first().closest('#allowed-domains-container').show();
     /* Trigger these fields if other options are set. */
     $(".radioField input").click(toggle_domain_fields);
     $('#add-more-link').click(function() {
