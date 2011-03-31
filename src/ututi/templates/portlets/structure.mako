@@ -61,8 +61,7 @@
   %if c.user is None:
     <%self:portlet id="location-register-portlet">
       ${h.button_to(_("I study here"),
-                    url('start_registration_with_location',
-                        path='/'.join(location.path)),
+                    location.url(action='register'),
                     id='i-study-here-button',
                     class_='dark',
                     method='GET')}

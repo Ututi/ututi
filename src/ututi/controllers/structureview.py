@@ -11,12 +11,12 @@ from pylons.templating import render_mako_def
 import ututi.lib.helpers as h
 from ututi.lib.base import render
 from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, \
-        FileUploadTypeValidator, validate
+        FileUploadTypeValidator, validate, TranslatedEmailValidator
 from ututi.lib.wall import WallMixin
 from ututi.lib.search import search_query_count
 from ututi.model import Subject, Group, Teacher
 from ututi.model import LocationTag, meta
-from ututi.model.users import User
+from ututi.model.users import User, UserRegistration
 from ututi.controllers.home import UniversityListMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
 
@@ -65,6 +65,11 @@ class LocationEditForm(Schema):
     chained_validators = [
         LocationIdValidator()
         ]
+
+
+class RegistrationForm(Schema):
+
+    email = TranslatedEmailValidator(not_empty=True, strip=True)
 
 
 class StructureviewWallMixin(WallMixin):
@@ -248,3 +253,36 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
                 redirect(str(destination))
 
         return render('location/login.mako')
+
+    def _register_form(self):
+        return render('location/register.mako')
+
+    @location_action
+    @validate(schema=RegistrationForm(), form='_register_form')
+    def register(self, location):
+
+        if not hasattr(self, 'form_result'):
+            return htmlfill.render(self._register_form())
+
+        email = self.form_result['email']
+
+        if User.get(email, location):
+            # User with this email exists in this location.
+            # TODO: here we should display a message, and
+            # ask user if he wants us to remember his password.
+            redirect(location.url(action='login'))
+
+        # Otherwise lookup/create registration entry and
+        # send confirmation code to user.
+        # TODO: filter the following by location!
+        registration = UserRegistration.get_by_email(email)
+        if registration is None:
+            registration = UserRegistration(location, email)
+            meta.Session.add(registration)
+            meta.Session.commit()
+
+        registration.send_confirmation_email()
+
+        c.email = email
+        return render('registration/email_approval.mako')
+

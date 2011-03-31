@@ -229,9 +229,6 @@ def make_map(config):
     map.connect('/welcome', controller='profile', action='register_welcome')
 
     #new user registration path
-    map.connect('start_registration', '/registration/start', controller='home', action='start_registration')
-    map.connect('start_registration_with_location', '/registration/*path/start',
-                controller='registration', action='start_with_location')
     map.connect('/registration/resend', controller='registration', action='resend_code')
     map.connect('/registration/start_fb', controller='registration', action='start_fb')
     map.connect('/registration/confirm_fb', controller='registration', action='confirm_fb')
@@ -261,6 +258,7 @@ def make_map(config):
     map.connect('/school/*path/groups', controller='structureview', action='catalog', obj_type='group')
     map.connect('/school/*path/subjects', controller='structureview', action='catalog', obj_type='subject')
     map.connect('/school/*path/teachers', controller='structureview', action='catalog', obj_type='teacher')
+    map.connect('/school/*path/register', controller='structureview', action='register')
     map.connect('/school/*path', controller='structureview', action='index')
 
     # other user views
@@ -297,6 +295,7 @@ def make_map(config):
     map.connect('/join/login', controller='home', action='join_login')
     map.connect('/join/login_register', controller='home', action='join_register')
     map.connect('/register', controller='home', action='register')
+    map.connect('start_registration', '/startregistration', controller='home', action='start_registration')
     map.connect('/federated_registration', controller='home', action='federated_registration')
     map.connect('/google_register', controller='federation', action='google_register')
     map.connect('/google_verify', controller='federation', action='google_verify')

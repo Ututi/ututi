@@ -17,7 +17,7 @@ from ututi.lib.validators import validate, TranslatedEmailValidator, \
         AvailableEmailDomain, EmailDomainValidator
 import ututi.lib.helpers as h
 
-from ututi.model import meta, LocationTag
+from ututi.model import meta
 from ututi.model.users import User, UserRegistration
 from ututi.model.i18n import Country
 
@@ -68,7 +68,7 @@ class RegistrationPhotoValidator(FileUploadTypeValidator):
         return super(FileUploadTypeValidator, self).to_python(value, state)
 
 
-class RegistrationStartForm(Schema):
+class CodeResendForm(Schema):
 
     email = TranslatedEmailValidator(not_empty=True, strip=True)
 
@@ -141,18 +141,6 @@ class InviteFriendsForm(Schema):
     emails = Pipe(validators.String(),
                   SeparatedListValidator(separators=','),
                   ForEach(validators.Email()))
-
-
-def location_action(method):
-    def _location_action(self, path):
-        location = LocationTag.get(path)
-
-        if location is None:
-            abort(404)
-
-        c.location = location
-        return method(self, location)
-    return _location_action
 
 
 def registration_action(method):
@@ -303,42 +291,10 @@ class FederationMixin(object):
 
 class RegistrationController(BaseController, FederationMixin):
 
-    def _start_form(self):
-        return render('registration/start.mako')
-
-    @location_action
-    @validate(schema=RegistrationStartForm(), form='_start_form')
-    def start_with_location(self, location):
-
-        if not hasattr(self, 'form_result'):
-            return htmlfill.render(self._start_form())
-
-        email = self.form_result['email']
-
-        if User.get(email, location):
-            # User with this email exists in this location.
-            # TODO: here we should display a message, and
-            # ask user if he wants us to remember his password.
-            redirect(location.url(action='login'))
-
-        # Otherwise lookup/create registration entry and
-        # send confirmation code to user.
-        # TODO: filter the following by location!
-        registration = UserRegistration.get_by_email(email)
-        if registration is None:
-            registration = UserRegistration(location, email)
-            meta.Session.add(registration)
-            meta.Session.commit()
-
-        registration.send_confirmation_email()
-
-        c.email = email
-        return render('registration/email_approval.mako')
-
     def start_fb(self):
         return render('registration/start_fb.mako')
 
-    @validate(schema=RegistrationStartForm(), form='resend_code')
+    @validate(schema=CodeResendForm(), form='resend_code')
     def resend_code(self):
         if not hasattr(self, 'form_result'):
             abort(404)
