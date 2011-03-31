@@ -4,6 +4,7 @@ import string
 from datetime import datetime, date, timedelta
 
 from formencode import Schema, validators, All, htmlfill
+from formencode.compound import Pipe
 from webhelpers import paginate
 
 from babel.dates import format_date
@@ -25,13 +26,13 @@ from ututi.lib.emails import email_password_reset
 from ututi.lib.invitations import bind_group_invitations
 from ututi.lib.security import sign_out_user
 from ututi.lib.security import ActionProtector, sign_in_user, bot_protect
-from ututi.lib.validators import validate, UniqueEmail, TranslatedEmailValidator
+from ututi.lib.validators import (validate, UniqueEmail, TranslatedEmailValidator,
+                                  ForbidPublicEmail)
 from ututi.model import (meta, User, Region, Email, PendingInvitation,
                          LocationTag, Payment, UserRegistration, EmailDomain)
 from ututi.model import Subject, Group, SearchItem
 from ututi.model.events import Event
 from ututi.controllers.federation import FederationMixin, FederatedRegistrationForm
-from ututi.controllers.registration import RegistrationStartForm
 
 log = logging.getLogger(__name__)
 
@@ -57,6 +58,15 @@ class PasswordResetForm(Schema):
     chained_validators = [validators.FieldsMatch('new_password',
                                                  'repeat_password',
                                                  messages=msg)]
+
+
+class RegistrationStartForm(Schema):
+    msg = {'public': _(u'Please use your university email or '
+                        '<a href="/browse">choose university '
+                        'from the list</a>.')}
+    # url(controller='search', action='browse') here above
+    email = Pipe(TranslatedEmailValidator(not_empty=True, strip=True),
+                 ForbidPublicEmail(messages=msg))
 
 
 class RegistrationForm(Schema):

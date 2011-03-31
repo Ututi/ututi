@@ -296,6 +296,22 @@ class UniqueEmail(validators.FancyValidator):
                     raise Invalid(self.message("non_unique", state), value, state)
 
 
+class ForbidPublicEmail(validators.FancyValidator):
+
+    messages = {
+        'empty': _(u"Enter a valid email."),
+        'public': _(u"Public email domains are not allowed."),
+        }
+
+    def validate_python(self, value, state):
+        if value == '':
+            raise Invalid(self.message("empty", state), value, state)
+        else:
+            _, _, domain_name = value.rpartition('@')
+            if EmailDomain.is_public(domain_name.strip()):
+                raise Invalid(self.message("public", state), value, state)
+
+
 class AvailableEmailDomain(validators.FancyValidator):
 
     messages = {

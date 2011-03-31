@@ -174,3 +174,13 @@ is set to registration without asking user to confirm.
     <h1>University information</h1>
     >>> anonymous.printCssQuery('.notification', strip=True)
     <span> You are registering to <strong>Vilnius University</strong> network. </span>
+
+If user enters email that is registered as public, it will not validate and a helpful
+error message will be displayed.
+
+    >>> anonymous = Browser()
+    >>> form = anonymous.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'user@example.com'
+    >>> form.getControl('Sign Up').click()
+    >>> anonymous.printCssQuery('.error-message', strip=True)
+    <span>Please use your university email or <a>choose university from the list</a>.</span>
