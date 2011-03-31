@@ -4,6 +4,7 @@ Email domain logic
     >>> from ututi.lib.mailer import mail_queue
     >>> from ututi.lib.helpers import get_urls
 
+
 Email domain administration
 ============================
 
@@ -51,6 +52,7 @@ Admin can add non public domains by selecting university from dropdown list:
     <span>example2.com</span> <span>(Public)</span>
     <span>example.com</span> <span>(Public)</span>
     <span>uni.ututi.com</span> <span> <span> <a>U-niversity</a> </span> </span>
+
 
 University domain registration
 ==============================
@@ -142,6 +144,7 @@ After university is created, admin can see registered email domains:
     <span>stud.mif.vu.lt</span> <span> <span> <a>Vilnius University</a> </span> </span>
     <span>vu.lt</span> <span> <span> <a>Vilnius University</a> </span> </span>
 
+
 User registration
 =================
 
@@ -154,9 +157,17 @@ other step.
 It may be the case that no location is set for registration. The only possible
 registration flow in that case is to create new university.
 
-Let's start with user signing up from the frontpage. He selects university
-by entering his email. If email domain belongs to some university, this location
-is set to registration without asking user to confirm.
+
+Frontpage "Sign up"
+===================
+
+There are three possibilities when user signs up from the frontpage:
+
+1. User enters email that has not been registered in Ututi before. This brings
+him to registration flow where user creates university. This is covered above.
+
+2. User enters email that belongs to some university. Then this location is set to
+registration without asking user to confirm.
 
     >>> anonymous = Browser()
     >>> form = anonymous.getForm('sign-up-form')
@@ -175,7 +186,7 @@ is set to registration without asking user to confirm.
     >>> anonymous.printCssQuery('.notification', strip=True)
     <span> You are registering to <strong>Vilnius University</strong> network. </span>
 
-If user enters email that is registered as public, it will not validate and a helpful
+3. User enters email that is registered as public. Then it will not validate and a helpful
 error message will be displayed.
 
     >>> anonymous = Browser()
@@ -184,3 +195,10 @@ error message will be displayed.
     >>> form.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('.error-message', strip=True)
     <span>Please use your university email or <a>choose university from the list</a>.</span>
+
+
+Registration from university pages
+==================================
+
+User may press "I study here" button from university page. User needs to enter
+his email and his email is validated against university email policy.
