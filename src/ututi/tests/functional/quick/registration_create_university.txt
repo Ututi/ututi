@@ -112,13 +112,20 @@ out University information he is about to create:
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>University information</h1>
 
-University title, country, web site URL, logo and member policy are required fields:
+University website URL is filled with domain name by default:
+
+    >>> browser.getControl(name='site_url').value
+    'http://example.com'
+
+    >>> browser.getControl(name='site_url').value = ''
+
+University title, country, site url, logo and member policy are required fields.
 
     >>> browser.getControl("Next").click()
     >>> browser.printCssQuery('.error-message', strip=True)
-    <span>Please enter University title.</span>
+    <span>Please enter university title.</span>
     <span>Please select country.</span>
-    <span>Please enter University web site.</span>
+    <span>Please enter university web site.</span>
     <span>Please select logo.</span>
     <span>Please specify member policy.</span>
 

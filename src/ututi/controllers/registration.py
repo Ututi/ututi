@@ -27,9 +27,12 @@ from openid.extensions import ax
 
 from xml.sax.saxutils import quoteattr
 
-member_policies = [('RESTRICT_EMAIL', _("Only with University emails")),
-                   ('ALLOW_INVITES', _("Allow invites for non university emails (@gmail.com, @mail.ru, @yahoo.com, etc.)")),
-                   ('PUBLIC', _("No limitations"))]
+member_policies = [('RESTRICT_EMAIL',
+                    _("Only people with confirmed university email can register")),
+                   ('ALLOW_INVITES',
+                    _("People with confirmed university email can register and other can be invited")),
+                   ('PUBLIC',
+                    _("Everyone can register to this university"))]
 
 class PasswordOrFederatedLogin(validators.String):
     """Allow empty password if OpenID and/or FB are provided.
@@ -79,12 +82,12 @@ class UniversityCreateForm(Schema):
 
     pre_validators = [variabledecode.NestedVariables()]
 
-    msg = {'empty': _(u"Please enter University title.")}
+    msg = {'empty': _(u"Please enter university title.")}
     title = validators.String(not_empty=True, strip=True, messages=msg)
 
     country = CountryValidator(not_empty=True)
 
-    msg = {'empty': _(u"Please enter University web site.")}
+    msg = {'empty': _(u"Please enter university web site.")}
     site_url = validators.URL(not_empty=True, messages=msg)
 
     msg = { 'missing': _(u"Please select logo."),
@@ -426,10 +429,17 @@ class RegistrationController(BaseController, FederationMixin):
     @validate(schema=UniversityCreateForm(), form='_university_create_form', variable_decode=True)
     def university_create(self, registration):
         if not hasattr(self, 'form_result'):
-            # TODO: default site url, default country?
+            _, _, domain_name = c.registration.email.rpartition('@')
             defaults = {
-                'allowed_domains-0': c.registration.email.split('@')[1],
+                'allowed_domains-0': domain_name,
+                'site_url': 'http://' + domain_name,
             }
+            # try to guess country as well
+            _, _, tld = domain_name.rpartition('.')
+            country = meta.Session.query(Country)\
+                    .filter(Country.locale.endswith(tld.upper())).first()
+            if country is not None:
+                defaults['country'] = country.id
             return htmlfill.render(self._university_create_form(), defaults=defaults)
 
         registration.university_title = self.form_result['title']

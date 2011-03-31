@@ -42,18 +42,17 @@
     <form:error name="logo" /> <!-- formencode errors container -->
   </label>
 
-  ${h.select_radio('member_policy', _("Accessibility:"), c.policies)}
-
   <div id="allowed-domains-container">
     <label for="allowed-domains">
-      <span class="labelText">${_("Allowed emails:")}</span>
+      <span class="labelText">${_("University emails:")}</span>
+      <span class="helpText">${_("Enter email domains that belong to this university.")}</span>
       <div class="textField">
         ${c.user_domain}
         <input type="hidden" name="allowed_domains-0" value="${c.user_domain}" />
         <form:error name="allowed_domains-0" />
       </div>
       %for i in range(1, c.max_allowed_domains):
-        <div class="textField allowed-domains-field ${'hidable' if i > 1 else ''}">
+        <div class="textField allowed-domains-field ${'hidable' if i > 3 else ''}">
           <input type="text" name="allowed_domains-${i}" />
           <form:error name="allowed_domains-${i}" />
         </div>
@@ -70,31 +69,13 @@
         if ($(this).val().length == 0)
             $(this).closest('.allowed-domains-field').hide();
     });
-    function toggle_domain_fields() {
-        if ($('input#member_policy_restrict_email').is(':checked') ||
-            $('input#member_policy_allow_invites').is(':checked'))
-        {
-            $('#allowed-domains-container').show();
-        }
-        else {
-            $('#allowed-domains-container').hide();
-            // empty so it does not causes validation errors
-            $('.allowed-domains-field input').val('');
-            // hide all and unhide first one
-            $('.allowed-domains-field').hide().first().show();
-        }
-    }
-    /* Hide email fields if PUBLIC is checked. */
-    toggle_domain_fields();
-    /* Show email domains block if it contains error messages. */
-    $('#allowed-domains-container .error-message').first().closest('#allowed-domains-container').show();
-    /* Trigger these fields if other options are set. */
-    $(".radioField input").click(toggle_domain_fields);
     $('#add-more-link').click(function() {
         $('.allowed-domains-field:hidden').first().show();
         return false;
     });
   </script>
+
+  ${h.select_radio('member_policy', _("Accessibility:"), c.policies)}
 
   ${h.input_submit(_("Next"))}
 </form>
