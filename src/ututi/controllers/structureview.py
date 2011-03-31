@@ -8,10 +8,6 @@ from pylons import tmpl_context as c, url
 from pylons.i18n import _
 from pylons.templating import render_mako_def
 
-from sqlalchemy.orm import eagerload
-
-from ututi.model.events import Event
-
 import ututi.lib.helpers as h
 from ututi.lib.base import render
 from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, \
