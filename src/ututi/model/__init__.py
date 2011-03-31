@@ -2597,8 +2597,8 @@ class EmailDomain(Model):
     def is_public(cls, domain_name):
         """Checks whether given domain name is registered as public."""
         return meta.Session.query(EmailDomain)\
-                .filter(EmailDomain.domain_name == domain_name.lower(),
-                        EmailDomain.location == None)\
+                .filter(EmailDomain.domain_name == domain_name.lower())\
+                .filter(EmailDomain.location == None)\
                 .count() != 0
 
     @classmethod
