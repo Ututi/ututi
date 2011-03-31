@@ -295,7 +295,8 @@ def make_map(config):
     map.connect('/join/login', controller='home', action='join_login')
     map.connect('/join/login_register', controller='home', action='join_register')
     map.connect('/register', controller='home', action='register')
-    map.connect('start_registration', '/startregistration', controller='home', action='start_registration')
+    # TODO replace this with old registration urls
+    map.connect('start_registration', '/registration/start', controller='home', action='start_registration')
     map.connect('/federated_registration', controller='home', action='federated_registration')
     map.connect('/google_register', controller='federation', action='google_register')
     map.connect('/google_verify', controller='federation', action='google_verify')

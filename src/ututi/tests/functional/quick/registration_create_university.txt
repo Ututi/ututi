@@ -63,7 +63,7 @@ A flash message is displayed:
 
 The same thing happens if the user simply restarts the registration process:
 
-    >>> browser.open('http://localhost/registration/uni/start')
+    >>> browser.open('http://localhost/school/uni/register')
     >>> browser.getControl('Enter your email here:').value = 'user@example.com'
     >>> browser.getControl('Register').click()
     >>> browser.printCssQuery('h1.page-title', strip=True)

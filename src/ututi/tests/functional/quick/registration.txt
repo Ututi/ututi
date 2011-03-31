@@ -17,7 +17,7 @@ User has to type in a valid email address to initiate registration:
     >>> browser.getControl('Enter your email here:').value = 'what ever'
     >>> browser.getControl('Register').click()
     >>> browser.url
-    'http://localhost/registration/uni/start'
+    'http://localhost/school/uni/register'
     >>> browser.printCssQuery('#registration_form .error-message', strip=True)
     <span>An email address must contain a single @</span>
     >>> browser.getControl('Enter your email here:').value = 'what ever@example.com'
@@ -34,7 +34,7 @@ If user types in an existing email address, he will be redirected to login form:
 
 Regression test: non-ascii characters in email are not valid in Ututi:
 
-    >>> browser.open('http://localhost/registration/uni/start')
+    >>> browser.open('http://localhost/school/uni/register')
     >>> browser.getControl('Enter your email here:').value = u'\u016bser@example.com'.encode('utf-8')
     >>> browser.getControl('Register').click()
     >>> browser.printCssQuery('.error-message', strip=True)
@@ -73,7 +73,7 @@ A flash message is displayed:
 
 The same thing happens if the user simply restarts the registration process:
 
-    >>> browser.open('http://localhost/registration/uni/start')
+    >>> browser.open('http://localhost/school/uni/register')
     >>> browser.getControl('Enter your email here:').value = 'user@example.com'
     >>> browser.getControl('Register').click()
     >>> browser.printCssQuery('h1.page-title', strip=True)
