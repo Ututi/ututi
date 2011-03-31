@@ -58,13 +58,6 @@
        group = c.group
 %>
 
-  <div class="single-title">
-    <h2>
-      ${_('Group members')}
-    </h2>
-    <div class="clear"></div>
-  </div>
-
 
 % for member in group.members:
   <div

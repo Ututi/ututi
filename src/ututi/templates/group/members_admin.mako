@@ -157,8 +157,7 @@ ${group_members_invite_section()}
             </span>
           </div>
         </form>
-      </td>
-    </tr>
+      </td>    </tr>
   % endfor
   </table>
 </div>

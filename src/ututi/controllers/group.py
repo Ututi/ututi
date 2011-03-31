@@ -390,6 +390,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         c.serve_file = file
 
         c.group_menu_current_item = 'files'
+        c.show_info = True
 
         return render('group/files.mako')
 
@@ -433,6 +434,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     @ActionProtector("member", "admin")
     def members(self, group):
         c.group_menu_current_item = 'members'
+        c.show_info = True
         self._set_up_member_info(group)
         if check_crowds(['admin', 'moderator'], context=group):
             return render('group/members_admin.mako')
@@ -759,6 +761,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     @group_action
     @ActionProtector("member", "admin")
     def subjects(self, group):
+        c.show_info = True
         c.group_menu_current_item = 'subjects'
         return render('group/subjects_list.mako')
 
@@ -1093,6 +1096,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     @ActionProtector("member", "admin")
     def page(self, group):
         c.group_menu_current_item = 'page'
+        c.show_info = True
         return render('group/page.mako')
 
     @group_action
