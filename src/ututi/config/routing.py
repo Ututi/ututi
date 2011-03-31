@@ -232,10 +232,10 @@ def make_map(config):
     map.connect('start_registration', '/registration/start', controller='home', action='start_registration')
     map.connect('start_registration_with_location', '/registration/*path/start',
                 controller='registration', action='start_with_location')
-    map.connect('/registration/*path/start_fb', controller='registration', action='start_fb')
     map.connect('/registration/resend', controller='registration', action='resend_code')
+    map.connect('/registration/start_fb', controller='registration', action='start_fb')
+    map.connect('/registration/confirm_fb', controller='registration', action='confirm_fb')
     map.connect('/registration/{hash}/confirm', controller='registration', action='confirm_email')
-    map.connect('/registration/*path/confirm_fb', controller='registration', action='confirm_fb')
     map.connect('/registration/{hash}/university', controller='registration', action='university_info')
     map.connect('/registration/{hash}/university_create', controller='registration', action='university_create')
     map.connect('/registration/{hash}/personal_info', controller='registration', action='personal_info')

@@ -32,7 +32,6 @@ ${user_sidebar()}
                                                                        location.url(qualified=True)))}
                            <fb:req-choice url='${url(controller='registration',
                                                      action='start_fb',
-                                                     path='/'.join(location.path),
                                                      qualified=True)}' label='${_('Join Ututi')}' />
                            ">
             <fb:multi-friend-selector actiontext="${_('Invite your classmates to Ututi!')}"

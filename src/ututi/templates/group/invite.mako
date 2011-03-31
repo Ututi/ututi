@@ -17,7 +17,6 @@
                                       (c.group.url(qualified=True), c.group.title)}
                          <fb:req-choice url='${url(controller='registration',
                                                    action='start_fb',
-                                                   path='/'.join(c.group.location.path),
                                                    qualified=True)}' label='${_('Join group')}' />
           ">
           <fb:multi-friend-selector max="20" actiontext="${_('Invite your friends to Ututi!')}"

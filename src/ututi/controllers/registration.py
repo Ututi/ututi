@@ -303,10 +303,6 @@ class FederationMixin(object):
 
 class RegistrationController(BaseController, FederationMixin):
 
-    def _go_to_start(self, location):
-        redirect(url('start_registration_with_location',
-                     path='/'.join(location.path)))
-
     def _start_form(self):
         return render('registration/start.mako')
 
@@ -339,8 +335,7 @@ class RegistrationController(BaseController, FederationMixin):
         c.email = email
         return render('registration/email_approval.mako')
 
-    @location_action
-    def start_fb(self, location):
+    def start_fb(self):
         return render('registration/start_fb.mako')
 
     @validate(schema=RegistrationStartForm(), form='resend_code')
@@ -364,27 +359,26 @@ class RegistrationController(BaseController, FederationMixin):
         meta.Session.commit()
         redirect(registration.url(action='university_info'))
 
-    @location_action
-    def confirm_fb(self, location):
+    def confirm_fb(self):
         fb_user = facebook.get_user_from_cookie(request.cookies,
                          config['facebook.appid'], config['facebook.secret'])
 
         if not fb_user or 'uid' not in fb_user or 'access_token' not in fb_user:
             h.flash(_("Failed to link Facebook account"))
-            self._go_to_start(location)
+            redirect(url('frontpage'))
 
         facebook_id = int(fb_user['uid'])
         fb_access_token = fb_user['access_token']
-        registration = UserRegistration.get_by_fbid(facebook_id, location)
+        registration = UserRegistration.get_by_fbid(facebook_id)
 
         if registration is None:
             h.flash(_("Your invitation has expired."))
-            self._go_to_start(location)
+            redirect(url('frontpage'))
 
         name, email = self._facebook_name_and_email(facebook_id, fb_access_token)
         if not email:
             h.flash(_("Facebook did not provide your email address."))
-            self._go_to_start(location)
+            redirect(url('frontpage'))
 
         registration.fullname = name
         registration.email = registration.facebook_email = email

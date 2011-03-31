@@ -9,7 +9,7 @@
           if (response.session && response.perms) {
               // user is logged in and granted some permissions.
               // perms is a comma separated list of granted permissions
-              window.location = '${url(controller='registration', action='confirm_fb', path='/'.join(c.location.path))}';
+              window.location = '${url(controller='registration', action='confirm_fb')}';
           }
       }, {perms:'email'});
   });
