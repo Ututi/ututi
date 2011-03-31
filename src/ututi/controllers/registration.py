@@ -394,21 +394,32 @@ class RegistrationController(BaseController, FederationMixin):
 
         redirect(registration.url(action='university_info'))
 
+    def _location_user_stats(self, location, display_count):
+        ids = [loc.id for loc in location.flatten]
+        user_count = meta.Session.query(User)\
+                .filter(User.location_id.in_(ids)).count()
+        users = meta.Session.query(User)\
+                .filter(User.location_id.in_(ids))\
+                .filter(User.raw_logo != None)\
+                .order_by(User.accepted_terms.desc())\
+                .limit(display_count).all()
+        if len(users) < display_count:
+            users.extend(meta.Session.query(User)\
+                .filter(User.location_id.in_(ids))\
+                .filter(User.raw_logo == None)\
+                .order_by(User.accepted_terms.desc())\
+                .limit(display_count - len(users)).all())
+
+        return user_count, users
+
     @registration_action
     def university_info(self, registration):
         if registration.location is None:
             redirect(registration.url(action='university_create'))
 
-        from random import shuffle
-        count = 14
-        all_users = registration.location.users
-        with_logo = [u for u in all_users if u.has_logo()]
-        and_other = [u for u in all_users if not u.has_logo()]
-        shuffle(with_logo)
-        if len(with_logo) >= count:
-            c.users = with_logo[:count]
-        else:
-            c.users = with_logo + and_other[:count - len(with_logo)]
+        # get some statistics about this university
+        c.user_count, c.users = \
+            self._location_user_stats(registration.location, 14)
 
         c.active_step = 'university_info'
         return render('registration/university_info.mako')

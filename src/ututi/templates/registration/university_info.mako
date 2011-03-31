@@ -9,27 +9,22 @@
     margin-top: 20px;
   }
 
-  table#people-box {
-    width: auto;
+  div#people-box {
+    width: 420px;
     border: 1px solid #666666;
-    padding: 0 10px 10px 10px;
     margin: -2px;
+    padding: 10px 0 0 10px;
   }
 
-    table#people-box td {
-      width: 50px;
-      padding-right: 15px;
+    div#people-box div.person {
+      float: left;
+      margin: 0 10px 10px 0;
     }
 
-      table#people-box td.logo {
-        padding-top: 10px;
-        vertical-align: bottom;
-      }
-
-      table#people-box td.name {
-        vertical-align: top;
+      div#people-box div.logo,
+      div#people-box div.name {
+        width: 50px;
         font-size: 9px;
-        word-wrap: break-word;
       }
 </%def>
 
@@ -42,10 +37,12 @@
 
 <div id="people-on-this-network">
   <p>
-    ${_("People on this network:")}
+    ${ungettext("%(count)s person on this network:",
+                "%(count)s people on this network:",
+                count) % dict(count=c.user_count)}
   </p>
 
-  <table id="people-box">
+  <div id="people-box">
     <%
     row1 = c.users[:7]
     row2 = c.users[7:]
@@ -53,23 +50,22 @@
     %>
     %for row in rows:
       %if row:
-      <tr class="logos">
+      <div class="row clearfix">
         %for user in row:
-        <td class="logo">
-          <img src="${user.url(action='logo', width=45)}" alt="${user.fullname}" />
-        </td>
+        <div class="person">
+          <div class="logo">
+            <img src="${user.url(action='logo', width=45)}" alt="${user.fullname}" />
+          </div>
+          <div class="name break-word">
+            ${h.object_link(user)}
+          </div>
+        </div>
         %endfor
-      </tr>
-      <tr class="names">
-        %for user in row:
-        <td class="name">
-          ${h.object_link(user)}
-        </td>
-        %endfor
-      </tr>
+      </div>
       %endif
     %endfor
-  </table>
+  </div>
+
 </div>
 
 <p>

@@ -120,7 +120,7 @@ The first registration step is "University information" step:
 It displays some people from this university:
 
     >>> browser.printCssQuery('#people-box .name', strip=True)
-    <td> <a>Administrator of the university</a> </td>
+    <div> <a>Administrator of the university</a> </div>
 
 TODO: the "Contact us" link does not take us anywhere yet:
 (Also this test exposes a bug of css selector.)
