@@ -12,6 +12,7 @@ from pylons.i18n import ungettext, _
 
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model import Group, Subject, User, File, Page, ContentItem, ForumPost, OutgoingGroupSMSMessage, PrivateMessage
+from ututi.model.users import Author
 from ututi.model import meta
 from ututi.lib.helpers import link_to, ellipsis, when
 from ututi.lib.base import render_def

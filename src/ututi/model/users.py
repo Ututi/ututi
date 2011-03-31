@@ -85,6 +85,13 @@ class Author(object):
 
     is_teacher = False
 
+    @classmethod
+    def get_byid(cls, id):
+        try:
+            return meta.Session.query(cls).filter_by(id=id).one()
+        except NoResultFound:
+            return None
+
     def url(self, controller='user', action='index', **kwargs):
         return url(controller=controller,
                    action=action,

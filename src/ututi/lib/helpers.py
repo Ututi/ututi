@@ -713,9 +713,9 @@ def content_link(content_id):
 def user_link(user_id):
     from ututi.model.users import AnonymousUser
     if type(user_id) in (int, long):
-        from ututi.model.users import User
+        from ututi.model.users import Author
         from pylons import url
-        user = User.get_byid(user_id)
+        user = Author.get_byid(user_id)
         return link_to(user.fullname, url(controller='content', action='get_user', id=user_id))
     elif type(user_id) == AnonymousUser:
         return link_to(user_id.fullname, 'mailto:%s' % user_id.email)
