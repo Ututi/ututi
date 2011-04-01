@@ -3,7 +3,7 @@ User registration flow
 
 
 A new Ututi user can start his registration on university page,
-by clicking 'Register' button:
+by clicking 'I study here' button:
 
     >>> browser = Browser()
     >>> browser.open('http://localhost/school/uni')
