@@ -1199,29 +1199,6 @@ ul.feature-list {
         margin-left: 2em;
     }
 
-/* Login form */
-#login-form label {
-    margin-top: 10px;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-
-#login-form label .labelText {
-    display: block;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-#login-form label .textField {
-    display: inline-block;
-    padding-right: 5px;
-    position: relative;
-    vertical-align: top;
-}
-
-/* End Login form */
-
 /* STANDARD ICON LISTS */
 
 /* SMALL */
