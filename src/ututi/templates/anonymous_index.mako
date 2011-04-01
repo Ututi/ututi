@@ -110,7 +110,7 @@
 
 <div id="sign-in-area">
   <h1>${_("Sign up to join your university's social network or create it yourself")}</h1>
-  <form id="sign-up-form" method="POST" action="${url('start_registration')}">
+  <form id="sign-up-form" method="POST" action="${url(controller='home', action='register')}">
     <form:error name="email" format="raw" />
     <fieldset id="register-fieldset">
       <input type="text" value="" name="email" id="email" class="email-input" />

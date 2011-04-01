@@ -14,7 +14,7 @@ by entering his email and clicking 'Sign Up':
 Email is not valid, so it is rejected:
 
     >>> browser.url
-    'http://localhost/registration/start'
+    'http://localhost/register'
 
     >>> browser.printCssQuery('#sign-up-form .error-message', strip=True)
     <span>The username portion of the email address is invalid (the portion before the @: us er)</span>
@@ -22,7 +22,7 @@ Email is not valid, so it is rejected:
 User sees the URL and some other time tries to reload it. If email
 is not posted, this action redirects to the homepage:
 
-    >>> browser.open('http://localhost/registration/start')
+    >>> browser.open('http://localhost/register')
     >>> browser.url
     'http://localhost/'
 
