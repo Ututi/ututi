@@ -313,6 +313,10 @@ h1.page-title.with-bottom-line {
 .new-style-form {
 }
 
+    form .formField {
+        margin-bottom: 10px;
+    }
+
     form span.labelText,
     form span.inputField,
     form span.radioField,
@@ -323,7 +327,7 @@ h1.page-title.with-bottom-line {
     form span.labelText {
         font-size: 12px;
         font-weight: bold;
-        margin: 10px 0px 3px 0px;
+        margin-bottom: 3px;
     }
 
     form span.helpText {

@@ -5,119 +5,106 @@
   <meta name="robots" content="noindex, nofollow" />
 </%def>
 
-<%def name="body_class()">anonymous_index</%def>
+<%def name="body_class()">plain</%def>
 
-<%def name="portlets()">
+<%def name="css()">
+  ${parent.css()}
+  #login-box {
+      margin-top: 40px;
+  }
+  #sign-up-link {
+      height: 14px;
+      padding-top: 10px;
+      margin-bottom: -24px;
+      text-align: right;
+  }
+  #login-choice-left {
+      width: 50%;
+      float: left;
+      border-right: 1px solid #888;
+  }
+  #login-choice-right {
+      width: 45%;
+      float: right;
+      text-align: center;
+  }
+  #login-choice-right .button {
+      margin: 20px 0;
+  }
+  #psw-remind-link {
+      float: right;
+      line-height: 20px;
+  }
 </%def>
 
-%if getattr(c, 'show_warning', False) is not False:
-  %if not c.show_registration or c.hash:
-  <div style="font-size: 20px; padding-top: 7px">
-    ${c.header}
-  </div>
+<div id="sign-up-link">
+  ${_("New in Ututi?")}
+  <a href="${url('frontpage')}">
+    ${_("Sign in with your university email")}
+  </a>
+</div>
 
-  <div id="login_message" class="${c.message_class or 'permission-denied'}">
-    ${c.message|n}
-    %if c.final_msg:
-    <p>
-      ${c.final_msg|n}
-    </p>
-    %endif
-  </div>
-  %endif
+<h1 class="page-title with-bottom-line">${_("Login")}</h1>
+
+%if getattr(c, 'show_warning', False) is not False:
+  <p> <strong> ${c.header} </strong> ${c.message|n} </p>
 %endif
 
-<table id="login-screen">
-  <td class="login-choice-box">
-    <div class="login-note">
-      ${_('Log in or register using your Google or Facebook account')}
-    </div>
-    <div id="federated-login-buttons">
-      <a href="${url(controller='federation', action='google_register', came_from=c.came_from, invitation_hash=c.hash)}" id="google-button">
-        ${h.image('/img/google-logo.gif', alt='Log in using Google', class_='google-login')}
+<div class="clearfix" id="login-box">
+  <div id="login-choice-left">
+    <form id="login-form" method="post" action="${url(controller='home', action='join_login')}">
+      %if c.came_from:
+        <input type="hidden" name="came_from" value="${c.came_from}" />
+      %endif
+      ${h.input_line('login_username', _('Email address:'), value=request.params.get('login'))}
+      ${h.input_psw('login_password', _('Password:'))}
+      %if c.login_error:
+      <div class="error-message">
+        ${c.login_error}
+      </div>
+      %endif
+      <div class="clearfix" style="width: 200px">
+        <div id="psw-remind-link">
+          <a href="${url(controller='home', action='pswrecovery')}"> ${_('Forgot password?')} </a>
+        </div>
+        ${h.input_submit(_('Login'))}
+      </div>
+    </form>
+  </div>
+
+  <div id="login-choice-right">
+    <strong>
+      ${_('Or log in using Facebook or Google')}
+    </strong>
+    ## We rely here on the fact that Facebook has been configured
+    ## by the login widget in the page header.
+    <div class="button">
+      <a id="facebook-login" href="#">
+        ${h.image('/img/facebook-button.png', alt=_('Log in using Facebook'))}
       </a>
-      <br />
-      ## We rely here on the fact that Facebook has been configured
-      ## by the login widget in the page header.
-      <fb:login-button perms="email"
-          onlogin="show_loading_message(); window.location = '${url(controller='federation', action='facebook_login', came_from=c.came_from, invitation_hash=c.hash)}'"
-       >${_('Connect')}</fb:login-button>
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $('#facebook-login').click(function() {
+              // attempt to login FB
+              FB.login(function(response) {
+                  if (response.session && response.perms) {
+                      // user is logged in and granted some permissions.
+                      // perms is a comma separated list of granted permissions
+                      show_loading_message();
+                      window.location = '${url(controller='federation', action='facebook_login', came_from=c.came_from)}';
+                  }
+              }, {perms:'email'});
+
+              return false;
+          });
+        });
+      </script>
     </div>
-  </td>
-
-  <td class="login-choice-separator">
-      ${_('or')}
-  </td>
-
-  <td class="login-choice-box">
-
-    <div id="login-fields" ${"style='display: none'" if getattr(c, 'show_registration', False) else ''}>
-      <div class="login-note">
-        ${_('Log in directly to Ututi')}
-      </div>
-
-      <form id="login-form" method="post" action="${url(controller='home', action='join_login')}" class="fullForm">
-        %if c.came_from:
-          <input type="hidden" name="came_from" value="${c.came_from}" />
-        %endif
-        %if c.login_error:
-          <div class="error">${c.login_error}</div>
-        %endif
-        ${h.input_line('login_username', _('Your email address'), value=request.params.get('login'))}
-        ${h.input_psw('login_password', _('Password'))}
-        <div class="floatright" style="padding-right: 2em">
-          ${h.input_submit(_('Login'))}
-        </div>
-      </form>
-
-      <div style="padding-bottom: 2em; padding-top: 5px; padding-right: 33px" class="floatright clear-right">
-         <a href="${url(controller='home', action='pswrecovery')}">${_('Forgot password?')}</a>
-      </div>
-
-      <div style="border-top: 2px solid #eae7e7; margin: 1em;
-        padding-top: 5px; padding-left: 1em; margin-right: 3em" class="clear-right">
-          ${_('First time here?')}
-          <a href="#" onclick="$('#login-fields').hide(); $('#register-fields').show()"
-            >${_('Register!')}</a>
-      </div>
+    <div class="button">
+      <a href="${url(controller='federation', action='google_register', came_from=c.came_from, invitation_hash=c.hash)}">
+        ${h.image('/img/google-button.png', alt=_('Log in using Google'))}
+      </a>
     </div>
+  </div>
 
-    <div id="register-fields" ${"style='display: none'" if not getattr(c, 'show_registration', False) else ''}>
-      <div class="login-note">
-        ${_('Register as a new Ututi user')}
-      </div>
-
-      <form id="join_registration_form" method="post" action="${url.current(action='register')}" class="fullForm">
-        <fieldset>
-
-        %if c.came_from:
-          <input type="hidden" name="came_from" value="${c.came_from}" />
-        %endif
-
-        ${h.input_line('fullname', _('Full name'))}
-        % if c.email:
-          ${h.input_line('email', _('Email'), disabled="disabled", value=c.email)}
-          <input type="hidden" name="email" value="${c.email}" />
-        % else:
-          ${h.input_line('email', _('Email'))}
-        % endif
-        %if c.gg_enabled:
-          ${h.input_line('gadugadu', _('Gadu gadu'))}
-        %else:
-         <input type="hidden" id="gadugadu" name="gadugadu"/>
-        %endif
-
-         ${h.input_psw('new_password', _('Password'))}
-         ${h.input_psw('repeat_password', _('Repeat password'))}
-        <label id="agreeWithTOC"><input class="checkbox" type="checkbox" name="agree" checked="checked" value="true"/>${_('I agree to the ')} <a href="${url(controller='home', action='terms')}" rel="nofollow">${_('terms of use')}</a></label>
-        <form:error name="agree"/>
-        <div>
-          ${h.input_submit(_('Register'))}
-        </div>
-
-        </fieldset>
-      </form>
-   </div>
-
-  </td>
-</table>
+</div>

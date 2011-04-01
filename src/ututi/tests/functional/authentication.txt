@@ -11,7 +11,7 @@ Visiting a profile-related page should not crash if the user is not logged in.
 -------------------------
 
     >>> form = browser.getForm('login-form')
-    >>> form.getControl('Your email address').value = "admin@uni.ututi.com"
+    >>> form.getControl('Email address').value = "admin@uni.ututi.com"
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
@@ -76,7 +76,7 @@ But not larger ones:
     'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%2Ffiles%3Fserve_file%3D5&context=text2.txt'
 
     >>> form = browser.getForm('login-form')
-    >>> form.getControl('Your email address').value = "user@ututi.lt"
+    >>> form.getControl('Email address').value = "user@ututi.lt"
     >>> form.getControl('Password').value = "password"
     >>> form.getControl('Login').click()
 
