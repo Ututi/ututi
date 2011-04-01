@@ -238,5 +238,21 @@ U-niversity has public member policy, therefore any valid email will validate:
     >>> anonymous.getControl('Register').click()
     >>> anonymous.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
+    >>> anonymous.open('http://localhost/school/uni/register')
+    >>> anonymous.getControl('Enter your email here:').value = 'user@mif.vu.lt'
+    >>> anonymous.getControl('Register').click()
+    >>> anonymous.printCssQuery('h1.page-title', strip=True)
+    <h1>Email approval</h1>
 
     >>> mail_queue[:] = []
+
+
+Login
+=====
+
+User can login from the login page. He gets there by clicking "Login" link
+in header:
+
+    >>> anonymous.click('Login')
+    >>> anonymous.url
+    'http://localhost/login'
