@@ -25,16 +25,15 @@ User has to type in a valid email address to initiate registration:
     >>> browser.printCssQuery('#registration_form .error-message', strip=True)
     <span>The username portion of the email address is invalid (the portion before the @: what ever)</span>
 
-If user types in an existing email address, he will be redirected to login form:
+If user types in an existing email address, an error message will be displayed:
 
     >>> browser.getControl('Enter your email here:').value = 'admin@uni.ututi.com'
     >>> browser.getControl('Register').click()
-    >>> browser.url
-    'http://localhost/school/uni/login'
+    >>> browser.printCssQuery('#registration_form .error-message', strip=True)
+    <span>admin@uni.ututi.com is already registered in U-niversity network.</span>
 
 Regression test: non-ascii characters in email are not valid in Ututi:
 
-    >>> browser.open('http://localhost/school/uni/register')
     >>> browser.getControl('Enter your email here:').value = u'\u016bser@example.com'.encode('utf-8')
     >>> browser.getControl('Register').click()
     >>> browser.printCssQuery('.error-message', strip=True)

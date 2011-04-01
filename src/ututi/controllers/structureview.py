@@ -1,6 +1,7 @@
 import logging
 
 from formencode import Schema, validators, compound, htmlfill
+
 from webhelpers import paginate
 from pylons.controllers.util import redirect, abort
 from pylons import request
@@ -11,7 +12,8 @@ from pylons.templating import render_mako_def
 import ututi.lib.helpers as h
 from ututi.lib.base import render
 from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, \
-        FileUploadTypeValidator, validate, TranslatedEmailValidator
+        FileUploadTypeValidator, validate, TranslatedEmailValidator, \
+        UniversityPolicyEmailValidator, UniqueLocationEmail
 from ututi.lib.wall import WallMixin
 from ututi.lib.search import search_query_count
 from ututi.model import Subject, Group, Teacher
@@ -69,7 +71,9 @@ class LocationEditForm(Schema):
 
 class RegistrationForm(Schema):
 
-    email = TranslatedEmailValidator(not_empty=True, strip=True)
+    email = compound.Pipe(TranslatedEmailValidator(not_empty=True, strip=True),
+                          UniqueLocationEmail(),
+                          UniversityPolicyEmailValidator())
 
 
 class StructureviewWallMixin(WallMixin):
@@ -266,13 +270,11 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         email = self.form_result['email']
 
+        # defensive programming
         if User.get(email, location):
-            # User with this email exists in this location.
-            # TODO: here we should display a message, and
-            # ask user if he wants us to remember his password.
             redirect(location.url(action='login'))
 
-        # Otherwise lookup/create registration entry and
+        # lookup/create registration entry and
         # send confirmation code to user.
         # TODO: filter the following by location!
         registration = UserRegistration.get_by_email(email)

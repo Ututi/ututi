@@ -14,7 +14,7 @@ from pylons.decorators import PylonsFormEncodeState
 from pylons.decorators import validate as old_validate
 
 from ututi.model import GroupCoupon
-from ututi.model import meta, Email
+from ututi.model import meta, Email, User
 from ututi.model import Subject, Group, ContentItem, LocationTag, EmailDomain
 from ututi.model.i18n import Language, Country
 
@@ -296,6 +296,37 @@ class UniqueEmail(validators.FancyValidator):
                     raise Invalid(self.message("non_unique", state), value, state)
 
 
+class UniqueLocationEmail(validators.FancyValidator):
+    """Similar to one above, but uses c.location to
+    limit email search to this location."""
+
+    messages = {
+        'empty': _(u"Enter a valid email."),
+        'non_unique': _(u"%(email)s is already registered in %(university)s network."),
+        }
+
+    def __init__(self, *args, **kw):
+        validators.FancyValidator.__init__(self, *args, **kw)
+        self.completelyUnique = kw.get('completelyUnique', False)
+
+    def validate_python(self, value, state):
+        if value == '':
+            raise Invalid(self.message("empty", state), value, state)
+        else:
+            ids = [loc.id for loc in c.location.flatten]
+            existing = meta.Session.query(Email).join(User)\
+                    .filter(Email.email == value.strip().lower())\
+                    .filter(User.location_id.in_(ids))\
+                    .first()
+            id = c.user.id if c.user is not None else 0
+            if existing is not None:
+                if self.completelyUnique or existing.user.id != id:
+                    raise Invalid(self.message("non_unique", state,
+                                               email=value,
+                                               university=c.location.title),
+                                  value, state)
+
+
 class ForbidPublicEmail(validators.FancyValidator):
 
     messages = {
@@ -310,6 +341,24 @@ class ForbidPublicEmail(validators.FancyValidator):
             _, _, domain_name = value.rpartition('@')
             if EmailDomain.is_public(domain_name.strip()):
                 raise Invalid(self.message("public", state), value, state)
+
+
+class UniversityPolicyEmailValidator(validators.FancyValidator):
+    """Validates email address against university's policy.
+    Uses context c.location."""
+
+    messages = {
+        'restricted': _(u"You have to use university email address to register at this university."),
+        }
+
+    def validate_python(self, value, state):
+        if value == '':
+            raise Invalid(self.message("empty", state), value, state)
+        elif c.location.member_policy != 'PUBLIC':
+            _, _, domain_name = value.rpartition('@')
+            allowed_domains = [d.domain_name for d in c.location.email_domains]
+            if domain_name not in allowed_domains:
+                raise Invalid(self.message("restricted", state), value, state)
 
 
 class AvailableEmailDomain(validators.FancyValidator):
