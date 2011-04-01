@@ -157,7 +157,6 @@ class HomeController(UniversityListMixin, FederationMixin):
         return render('/fbchannel.mako')
 
     def index(self):
-        c.show_registration = False
         if c.user is not None:
             redirect(url(controller='profile', action='home'))
         else:
@@ -224,7 +223,6 @@ class HomeController(UniversityListMixin, FederationMixin):
             return '\n'.join(robots)
 
     def login(self):
-        c.show_registration = False
         email = request.POST.get('login')
         password = request.POST.get('password')
         remember = True if request.POST.get('remember', None) else False
@@ -246,7 +244,6 @@ class HomeController(UniversityListMixin, FederationMixin):
         else:
             c.header = _('Permission denied!')
             c.message = _('Only registered users can perform this action. Please log in, or register an account on our system.')
-        c.final_msg = _('If this is your first time visiting <a href="%(url)s">Ututi</a>, please register first.') % dict(url=url('/', qualified=True))
 
         if password is not None:
             user = User.authenticate_global(email, password.encode('utf-8'))
