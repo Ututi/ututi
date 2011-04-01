@@ -284,6 +284,10 @@ li.expanded li a {
     padding: 20px 15px;
 }
 
+.plain .content-inner {
+    padding: 20px 65px;
+}
+
 .sidebar-inner {
     padding: 20px 7px;
 }
