@@ -17,10 +17,8 @@ We will award him a medal:
 
 The medal should have appeared in the user's information portlet:
 
-    >>> browser.printQuery('id("user-medals")')
-    <div class="medals" id="user-medals">
-      <img alt="Admin" src="/images/medals/admin2.png" title="Admin" />
-    </div>
+    >>> browser.printCssQuery('#user-medals-portlet img')
+    <img alt="Admin" src="/images/medals/admin2.png" title="Admin" />
 
 Now we'll take away the medal:
 
@@ -28,5 +26,4 @@ Now we'll take away the medal:
 
 The medal is no more:
 
-    >>> browser.printQuery('id("user-medals")')
-    <div class="medals" id="user-medals"></div>
+    >>> browser.printCssQuery('#user-medals-portlet img')

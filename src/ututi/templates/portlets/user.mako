@@ -91,6 +91,20 @@
   %endif
 </%def>
 
+<%def name="user_medals(user=None)">
+  <% if user is None: user = c.user %>
+  %if user.all_medals():
+  <%self:portlet id="user-medals-portlet">
+    <%def name="header()">
+      ${_("Medals")}
+    </%def>
+    %for medal in user.all_medals():
+      ${medal.img_tag()}
+    %endfor
+  </%self:portlet>
+  %endif
+</%def>
+
 <%def name="todo_portlet(user=None)">
   %if c.user is not None:
     <%

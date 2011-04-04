@@ -4,6 +4,7 @@
 <%def name="portlets()">
   ${profile_portlet(user=c.user_info)}
   ${user_statistics_portlet(user=c.user_info)}
+  ${user_medals(user=c.user_info)}
 </%def>
 
 <h1 style="font-weight: bold">${c.user_info.fullname}</h1>
