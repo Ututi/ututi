@@ -61,17 +61,14 @@ A flash message is displayed:
     >>> browser.printQuery("//div[@class='flash-message']//text()")
     Your confirmation code was resent.
 
-The same thing happens if the user simply restarts the registration process:
+However, if user tries to sign up from university page, a new registration
+will be created (with assigned university):
 
     >>> browser.open('http://localhost/school/uni/register')
     >>> browser.getControl('Enter your email here:').value = 'user@example.com'
     >>> browser.getControl('Register').click()
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
-
-But no flash message here:
-
-    >>> browser.printQuery("//div[@class='flash-message']//text()")
 
 Let's check the emails:
 
@@ -81,7 +78,9 @@ Let's check the emails:
     3
 
     >>> msg1, msg2, msg3 = mail_queue
-    >>> msg1.payload() == msg2.payload() == msg3.payload()
+    >>> msg1.payload() == msg2.payload()
+    True
+    >>> msg2.payload() != msg3.payload()
     True
 
     >>> print msg1.payload()
