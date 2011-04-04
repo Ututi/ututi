@@ -3,7 +3,7 @@
     >>> browser = Browser.logIn()
 
     >>> res = browser.app.post("/login",
-    ...                params={'login': 'admin@uni.ututi.com', 'password': 'asdasd'})
+    ...                params={'username': 'admin@uni.ututi.com', 'password': 'asdasd'})
 
     >>> res = browser.app.post("/group/moderators/upload_file",
     ...                params={'folder': ''},

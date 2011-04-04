@@ -4,7 +4,7 @@ GeoIP
 Lets try login from Lithuanian IP.
 
     >>> res = app.post("/login",
-    ...                params={'login': 'user@ututi.lt', 'password': 'password'},
+    ...                params={'username': 'user@ututi.lt', 'password': 'password'},
     ...                headers={'X-Forwarded-For': '193.219.55.5'})
 
 
@@ -20,13 +20,13 @@ User should have location city and country.
 Malformed headers don't break the application:
 
     >>> res = app.post("/login",
-    ...                params={'login': 'user@ututi.lt', 'password': 'password'},
+    ...                params={'username': 'user@ututi.lt', 'password': 'password'},
     ...                headers={'X-Forwarded-For': 'wtf'})
 
 Lets try login from Polish IP with non ASCI symbols in city name.
 
     >>> res = app.post("/login",
-    ...                params={'login': 'user@ututi.lt', 'password': 'password'},
+    ...                params={'username': 'user@ututi.lt', 'password': 'password'},
     ...                headers={'X-Forwarded-For': '194.126.165.6'})
 
     >>> from ututi.model import User, LocationTag
@@ -39,12 +39,12 @@ Lets try login from Polish IP with non ASCI symbols in city name.
 None in location_city don't braak the application:
 
     >>> res = app.post("/login",
-    ...                params={'login': 'user@ututi.lt', 'password': 'password'},
+    ...                params={'username': 'user@ututi.lt', 'password': 'password'},
     ...                headers={'X-Forwarded-For': '213.102.4.19'})
 
 Sometimes the whole record is None, that is handled too:
 
     >>> res = app.post("/login",
-    ...                params={'login': 'user@ututi.lt', 'password': 'password'},
+    ...                params={'username': 'user@ututi.lt', 'password': 'password'},
     ...                headers={'X-Forwarded-For': '46.134.5.197'})
 

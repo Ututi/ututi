@@ -46,23 +46,18 @@
 
 <h1 class="page-title with-bottom-line">${_("Login")}</h1>
 
-%if getattr(c, 'show_warning', False) is not False:
-  <p> <strong> ${c.header} </strong> ${c.message|n} </p>
+%if hasattr(c, 'header'):
+  <p> <strong> ${c.header} </strong> ${h.literal(c.message)} </p>
 %endif
 
 <div class="clearfix" id="login-box">
   <div id="login-choice-left">
-    <form id="login-form" method="post" action="${url(controller='home', action='join_login')}">
+    <form id="login-form" method="post" action="${url(controller='home', action='login')}">
       %if c.came_from:
         <input type="hidden" name="came_from" value="${c.came_from}" />
       %endif
-      ${h.input_line('login_username', _('Email address:'), value=request.params.get('login'))}
-      ${h.input_psw('login_password', _('Password:'))}
-      %if c.login_error:
-      <div class="error-message">
-        ${c.login_error}
-      </div>
-      %endif
+      ${h.input_line('username', _('Email address:'), value=request.params.get('username'))}
+      ${h.input_psw('password', _('Password:'))}
       <div class="clearfix" style="width: 200px">
         <div id="psw-remind-link">
           <a href="${url(controller='home', action='pswrecovery')}"> ${_('Forgot password?')} </a>

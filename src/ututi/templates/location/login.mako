@@ -6,7 +6,7 @@
     %if c.came_from:
     <input type="hidden" name="came_from" value="${c.came_from}" />
     %endif
-    %if c.login_error:
+    %if hasattr(c, 'login_error'):
     <div class="error">${c.login_error}</div>
     %endif
     ${h.input_line('login', _('Your email address'), value=request.params.get('login'))}

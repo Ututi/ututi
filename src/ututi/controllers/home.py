@@ -222,16 +222,9 @@ class HomeController(UniversityListMixin, FederationMixin):
                       'Allow: /']
             return '\n'.join(robots)
 
-    def login(self):
-        email = request.POST.get('login')
-        password = request.POST.get('password')
-        remember = True if request.POST.get('remember', None) else False
-        destination = c.came_from or url(controller='profile', action='home')
+    def require_login(self):
         filename = request.params.get('context', None)
-
         context_type = request.params.get('context_type', None)
-        c.show_warning = True
-
         if filename is not None:
             c.header = _('You have to be logged in to download a file!')
             c.message = _('After logging in you will be redirected to the download page of the file <strong>%(filename)s</strong> and the download will start automatically.') % dict(filename=filename)
@@ -245,8 +238,16 @@ class HomeController(UniversityListMixin, FederationMixin):
             c.header = _('Permission denied!')
             c.message = _('Only registered users can perform this action. Please log in, or register an account on our system.')
 
+        return render('/login.mako')
+
+    def login(self):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        remember = request.POST.get('remember', False)
+        destination = c.came_from or url(controller='profile', action='home')
+
         if password is not None:
-            user = User.authenticate_global(email, password.encode('utf-8'))
+            user = User.authenticate_global(username, password.encode('utf-8'))
             c.header = _('Wrong username or password!')
             c.message = _('You seem to have entered your username and password wrong, please try again!')
 
@@ -356,25 +357,6 @@ class HomeController(UniversityListMixin, FederationMixin):
             return htmlfill.render(self._pswreset_form(), defaults=defaults)
         except NoResultFound:
             abort(404)
-
-    def join(self):
-        redirect(url(controller='home', action='login', came_from=c.came_from))
-
-    def _join_login(self):
-        email = request.POST.get('login_username')
-        password = request.POST.get('login_password')
-
-        if password is not None:
-            user = User.authenticate_global(email, password.encode('utf-8'))
-            c.login_error = _('Wrong username or password!')
-
-            if user is not None:
-                sign_in_user(user)
-                redirect(c.came_from or url(controller='profile', action='home'))
-
-    def join_login(self):
-        self._join_login()
-        return render('/login.mako')
 
     @bot_protect
     def process_transaction(self):

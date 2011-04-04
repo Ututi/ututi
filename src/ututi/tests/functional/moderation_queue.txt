@@ -74,7 +74,7 @@ app.post is used because of the bug in TestBrowser redirection behaviour.
 
     >>> action_url = browser.getControl('Reject', index=1).mech_form.action
     >>> res = app.post("/login",
-    ...                params={'login': 'admin@uni.ututi.com', 'password': 'asdasd'})
+    ...                params={'username': 'admin@uni.ututi.com', 'password': 'asdasd'})
     >>> res = app.post(action_url,
     ...                headers=[('referer', browser.url)])
     >>> print res.status, res.location

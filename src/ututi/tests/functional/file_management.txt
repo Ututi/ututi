@@ -4,7 +4,7 @@ Tests for ajax file management views
 File upload:
 
     >>> res = app.post("/login",
-    ...                params={'login': 'admin@uni.ututi.com', 'password': 'asdasd'})
+    ...                params={'username': 'admin@uni.ututi.com', 'password': 'asdasd'})
 
     >>> from textwrap import dedent
     >>> res = app.post("/subject/vu/mat_analize/upload_file",

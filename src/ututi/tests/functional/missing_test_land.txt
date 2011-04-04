@@ -11,8 +11,8 @@ I am visiting them so they would get translated properly.
     >>> browser.open('http://localhost/stats')
 
 Polish frontpage:
+
     >>> from pylons import config
     >>> config['tpl_lang'] = 'pl'
     >>> browser = Browser()
     >>> browser.open('http://localhost/')
-    >>> browser.open('http://localhost/join')

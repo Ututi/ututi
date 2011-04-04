@@ -9,7 +9,6 @@ from pylons.controllers.util import redirect
 from repoze.what.predicates import NotAuthorizedError
 from repoze.what.plugins.pylonshq.protectors import ActionProtector as BaseActionProtector
 
-from ututi.lib.cache import u_cache
 from ututi.lib.geoip import set_geolocation
 
 def current_user():
@@ -202,7 +201,7 @@ def deny(reason, code=403):
 
     if response.status_int == 401:
         login_form_url =  c.login_form_url or url(controller='home',
-                                                  action='login',
+                                                  action='require_login',
                                                   came_from=request.url)
         redirect(login_form_url)
 

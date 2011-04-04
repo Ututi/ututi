@@ -66,7 +66,6 @@ class BaseController(WSGIController):
         c.message_class = None
         c.text = None
         c.tags = None
-        c.login_error = None
         c.pylons_config = config
 
         c.fb_random_post = None
