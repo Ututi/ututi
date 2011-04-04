@@ -289,7 +289,8 @@ class HomeController(UniversityListMixin, FederationMixin):
                                errors=errors,
                                error_formatters=u_error_formatters,
                                defaults={'username': username,
-                                         'location': location})
+                                         'location': location,
+                                         'came_from': c.came_from})
 
     def logout(self):
         sign_out_user()
