@@ -260,48 +260,41 @@
 </%def>
 
 
-<%def name="teacher_information_portlet(user=None, full=True, title=None)">
-  <%
-     if user is None:
-         user = c.user
-
-     if title is None:
-         title = _("Teacher's information")
-  %>
-  <%self:uportlet id="user_information_portlet" portlet_class="MyProfile">
-    <%def name="header()">
-      ${title}
-    </%def>
-    <div class="profile ${'bottomLine' if user.description or user.site_url else ''}">
-        <div class="floatleft avatar">
-            %if user.logo is not None:
-              <img src="${url(controller='user', action='logo', id=user.id, width=70, height=70)}" alt="logo" />
-            %else:
-              ${h.image('/img/teacher_70x70.png', alt='logo')}
-            %endif
-        </div>
-        <div class="floatleft personal-data">
-            <div><h2>${user.fullname}</h2></div>
-            ${item_location(user)} | ${_("teacher")}
-            %if user.emails:
-              <div><a href="mailto:${user.emails[0].email}">${user.emails[0].email}</a></div>
-            %endif
-            %if user.phone_number and user.phone_confirmed:
-              <div class="user-phone orange">${_("Phone:")} ${user.phone_number}</div>
-            %endif
-            %if user.site_url:
-            <p class="user-link">
-              <a href="${user.site_url}">${user.site_url}</a>
-            </p>
-            %endif
-        </div>
-        <div class="clear"></div>
-    </div>
-    %if user.description:
-    <div class="about-self">${h.html_cleanup(user.description)}</div>
-    %endif
-
-  </%self:uportlet>
+<%def name="teacher_information_portlet(user=None)">
+  <% if user is None: user = c.user %>
+  <%self:portlet id="user-information-portlet">
+     <div class="user-logo">
+       <img src="${url(controller='user', action='logo', id=user.id, width=70, height=70)}" alt="logo" />
+     </div>
+     <div class="user-fullname break-word">
+       ${user.fullname}
+     </div>
+      %if user is c.user:
+      <div class="edit-profile-link break-word">
+        <a href="${url(controller='profile', action='edit')}">${_("(edit profile)")}</a>
+      </div>
+      %endif
+     <div>&nbsp;</div>
+     <div>&nbsp;</div>
+     <div class="user-info">
+       ${item_location(user)} | ${_("teacher")}
+       %if user.emails:
+       <div><a href="mailto:${user.emails[0].email}">${user.emails[0].email}</a></div>
+       %endif
+       %if user.phone_number and user.phone_confirmed:
+       <div class="user-phone orange">${_("Phone:")} ${user.phone_number}</div>
+       %endif
+       %if user.site_url:
+       <p class="user-link">
+         <a href="${user.site_url}">${user.site_url}</a>
+       </p>
+       %endif
+     </div>
+     <div class="clear"></div>
+     %if user.description:
+     <div class="about-self">${h.html_cleanup(user.description)}</div>
+     %endif
+  </%self:portlet>
 </%def>
 
 <%def name="teacher_list_portlet(title, teachers)">

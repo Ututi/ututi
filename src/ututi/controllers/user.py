@@ -134,5 +134,14 @@ class UserController(BaseController, UserInfoWallMixin):
         redirect(url.current(action='medals'))
 
     def logo(self, id, width=None, height=None):
+        user = User.get_global(int(id))
+        if user is None:
+            abort(404)
+
+        if user.is_teacher:
+            img_path = 'public/img/teacher_70x70.png'
+        else:
+            img_path = 'public/img/user_default.png'
+
         return serve_logo('user', int(id), width=width, square=True,
-                default_img_path='public/img/user_default.png', cache=False)
+                          default_img_path=img_path, cache=False)
