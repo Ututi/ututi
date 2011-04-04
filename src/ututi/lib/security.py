@@ -201,7 +201,7 @@ def deny(reason, code=403):
 
     if response.status_int == 401:
         login_form_url =  c.login_form_url or url(controller='home',
-                                                  action='require_login',
+                                                  action='login',
                                                   came_from=request.url)
         redirect(login_form_url)
 

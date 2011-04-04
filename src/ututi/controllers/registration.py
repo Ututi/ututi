@@ -90,9 +90,9 @@ class UniversityCreateForm(Schema):
     msg = {'empty': _(u"Please enter university web site.")}
     site_url = validators.URL(not_empty=True, messages=msg)
 
-    msg = { 'missing': _(u"Please select logo."),
-            'empty': _(u"Please select logo."),
-            'bad_type': _(u"Please upload JPEG, PNG or GIF image.") }
+    msg = {'missing': _(u"Please select logo."),
+           'empty': _(u"Please select logo."),
+           'bad_type': _(u"Please upload JPEG, PNG or GIF image.") }
     allowed_types = ('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif')
     logo = FileUploadTypeValidator(allowed_types=allowed_types, not_empty=True, messages=msg)
 

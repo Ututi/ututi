@@ -26,12 +26,13 @@ def u_error_formatter(error):
 def u_error_formatter_raw(error):
     return '<div class="error-container"><span class="error-message">%s</span></div>\n' % error
 
+u_error_formatters = {'default' : u_error_formatter,
+                      'raw' : u_error_formatter_raw}
 
 def validate(schema=None, validators=None, form=None, variable_decode=False,
              dict_char='.', list_char='-', post_only=True, state=None,
              on_get=False, **htmlfill_kwargs):
-    htmlfill_kwargs['error_formatters'] = {'default' : u_error_formatter,
-                                           'raw' : u_error_formatter_raw}
+    htmlfill_kwargs['error_formatters'] = u_error_formatters
     return old_validate(schema=schema, validators=validators, form=form,
                         variable_decode=variable_decode, dict_char=dict_char,
                         list_char=list_char, post_only=post_only, state=state,

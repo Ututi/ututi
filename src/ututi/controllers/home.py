@@ -26,8 +26,8 @@ from ututi.lib.emails import email_password_reset
 from ututi.lib.invitations import bind_group_invitations
 from ututi.lib.security import sign_out_user
 from ututi.lib.security import ActionProtector, sign_in_user, bot_protect
-from ututi.lib.validators import (validate, TranslatedEmailValidator,
-                                  ForbidPublicEmail)
+from ututi.lib.validators import (validate, u_error_formatters,
+                                  TranslatedEmailValidator, ForbidPublicEmail)
 from ututi.model import (meta, User, Region, Email, PendingInvitation,
                          LocationTag, Payment, UserRegistration, EmailDomain)
 from ututi.model import Subject, Group, SearchItem
@@ -222,7 +222,10 @@ class HomeController(UniversityListMixin, FederationMixin):
                       'Allow: /']
             return '\n'.join(robots)
 
-    def require_login(self):
+    def _check_login_context(self):
+        """Checks context and sets up message for the login screen."""
+        # TODO: this should better be a separate action but there are
+        # many places where we redirect to login
         filename = request.params.get('context', None)
         context_type = request.params.get('context_type', None)
         if filename is not None:
@@ -238,24 +241,55 @@ class HomeController(UniversityListMixin, FederationMixin):
             c.header = _('Permission denied!')
             c.message = _('Only registered users can perform this action. Please log in, or register an account on our system.')
 
-        return render('/login.mako')
+    def _try_sign_in(self, username, password, location=None, remember=False):
+        # user may have registered in several Ututi
+        # networks using same username
+        locations = [user.location for user in User.get_all(username)]
+        if len(locations) == 0:
+            return {'username': _('Incorrect username.')}
+
+        if len(locations) > 1:
+            # if there is more than one location,
+            # we will want to show it in the form
+            c.locations = [(loc.id, loc.title) for loc in locations]
+            c.selected_location = location
+
+        if location is None and len(locations) == 1:
+            location = locations[0].id
+
+        if location is None:
+            # still none! that means that location is not
+            # unique and user did not specify it.
+            return {'location': _('Please select your network.')}
+
+        user = User.authenticate(location, username, password)
+        if user is None:
+            return {'password': _('Incorrect password.')}
+
+        sign_in_user(user, long_session=remember)
+        destination = c.came_from or url(controller='profile', action='home')
+        redirect(destination)
 
     def login(self):
         username = request.POST.get('username')
         password = request.POST.get('password')
-        remember = request.POST.get('remember', False)
-        destination = c.came_from or url(controller='profile', action='home')
+        location = request.POST.get('location')
+        location = int(location) if location else None
+        remember = bool(request.POST.get('remember'))
+        errors = None
 
-        if password is not None:
-            user = User.authenticate_global(username, password.encode('utf-8'))
-            c.header = _('Wrong username or password!')
-            c.message = _('You seem to have entered your username and password wrong, please try again!')
+        if username and password:
+            # form was posted
+            if location is not None: location = int(location)
+            errors = self._try_sign_in(username, password, location, remember)
 
-            if user is not None:
-                sign_in_user(user, long_session=remember)
-                redirect(str(destination))
-
-        return render('/login.mako')
+        # try_sign_in redirects upon successful authentication,
+        # otherwise we show the form, possibly with errors.
+        return htmlfill.render(render('login.mako'),
+                               errors=errors,
+                               error_formatters=u_error_formatters,
+                               defaults={'username': username,
+                                         'location': location})
 
     def logout(self):
         sign_out_user()

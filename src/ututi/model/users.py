@@ -173,7 +173,7 @@ class User(Author):
         user = cls.get(username, location)
         if user is None:
             return None
-        if validate_password(user.password, password):
+        if validate_password(user.password, password.encode('utf-8')):
             return user
         else:
             return None
@@ -204,6 +204,12 @@ class User(Author):
             return q.one()
         except NoResultFound:
             return None
+
+    @classmethod
+    def get_all(cls, username):
+        """Get all users by username (email)."""
+        return meta.Session.query(cls)\
+                   .filter_by(username=username.strip().lower()).all()
 
     @classmethod
     def get_global(cls, username):
@@ -673,7 +679,7 @@ class UserRegistration(object):
 
     @classmethod
     def get_by_email(cls, email, location=None):
-        q = meta.Session.query(cls)
+        q = meta.Session.query(cls).filter_by(completed=False)
         try:
             q = q.filter_by(email=email)
             if location is not None:
@@ -684,7 +690,7 @@ class UserRegistration(object):
 
     @classmethod
     def get_by_fbid(cls, facebook_id, location=None):
-        q = meta.Session.query(cls)
+        q = meta.Session.query(cls).filter_by(completed=False)
         try:
             q = q.filter_by(facebook_id=facebook_id)
             if location is not None:

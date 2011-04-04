@@ -56,8 +56,15 @@
       %if c.came_from:
         <input type="hidden" name="came_from" value="${c.came_from}" />
       %endif
-      ${h.input_line('username', _('Email address:'), value=request.params.get('username'))}
+      ${h.input_line('username', _('Email address:'))}
       ${h.input_psw('password', _('Password:'))}
+      %if hasattr(c, 'locations'):
+        ${h.select_line('location', _('Select network:'), c.locations, [c.selected_location])}
+      %endif
+      <input id="remember" type="checkbox" name="remember" />
+      <label for="remember-me" class="notice">
+        ${_('Keep me logged in on this computer')}
+      </label>
       <div class="clearfix" style="width: 200px">
         <div id="psw-remind-link">
           <a href="${url(controller='home', action='pswrecovery')}"> ${_('Forgot password?')} </a>

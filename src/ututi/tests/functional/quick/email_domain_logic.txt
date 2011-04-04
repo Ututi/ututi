@@ -256,3 +256,75 @@ in header:
     >>> anonymous.click('Login')
     >>> anonymous.url
     'http://localhost/login'
+
+User that has registered can login here:
+
+    >>> form = anonymous.getForm('login-form')
+    >>> form.getControl('Email address').value = 'user@vu.lt'
+    >>> form.getControl('Password').value = 'password'
+    >>> form.getControl('Login').click()
+    >>> anonymous.url
+    'http://localhost/home/feed'
+
+If user has registered to several universities using same username,
+the login page will ask him to select the network he wants to sign in.
+
+In order to test this, we will register user@vu.lt to U-niversity.
+
+    >>> user = Browser()
+    >>> user.open('http://localhost/school/uni')
+    >>> user.click('I study here')
+    >>> user.getControl('Enter your email here').value = 'user@vu.lt'
+    >>> user.click('Register')
+    >>> msg = mail_queue.pop()
+    >>> urls = get_urls(msg.payload())
+    >>> user.open(urls[0])
+    >>> user.click('Next')
+    >>> user.getControl('Full name:').value = 'User'
+    >>> user.getControl('Password:').value = 'anotherpassword'
+    >>> user.click('Next')
+    >>> user.click('Skip')
+    >>> user.click('Finish')
+    >>> user.click('Logout')
+
+Now, we'll demonstrate the behavior by first logging in to Vilnius University
+and then to U-niversity.
+
+    >>> user.click('Login')
+    >>> form = user.getForm('login-form')
+    >>> form.getControl('Email address').value = 'user@vu.lt'
+    >>> form.getControl('Password').value = 'password'
+    >>> form.getControl('Login').click()
+    >>> user.printCssQuery('.error-message', strip=True)
+    <span>Please select your network.</span>
+    >>> form = user.getForm('login-form')
+    >>> form.getControl('Password').value = 'password'
+    >>> form.getControl('Select network').displayValue = ['Vilnius University']
+    >>> form.getControl('Login').click()
+    >>> user.url
+    'http://localhost/home/feed'
+    >>> user.click('My university')
+    >>> user.url
+    'http://localhost/school/vu.lt'
+    >>> user.click('Logout')
+
+    >>> user.click('Login')
+    >>> form = user.getForm('login-form')
+    >>> form.getControl('Email address').value = 'user@vu.lt'
+    >>> form.getControl('Password').value = 'anotherpassword'
+    >>> form.getControl('Login').click()
+    >>> user.printCssQuery('.error-message', strip=True)
+    <span>Please select your network.</span>
+    >>> form = user.getForm('login-form')
+    >>> form.getControl('Password').value = 'anotherpassword'
+    >>> form.getControl('Select network').displayValue = ['U-niversity']
+    >>> form.getControl('Login').click()
+    >>> user.url
+    'http://localhost/home/feed'
+    >>> user.click('My university')
+    >>> user.url
+    'http://localhost/school/uni'
+    >>> user.click('Logout')
+
+Note that user was asked to specify his location even we could have identified
+him by his password. If it's a bug or a feature, we left the reader to decide!

@@ -289,7 +289,6 @@ def make_map(config):
     map.connect('/sitemap.xml', controller='sitemap', action='index')
     map.connect('/channel.html', controller='federation', action='fbchannel')
     map.connect('frontpage', '/', controller='home', action='index')
-    map.connect('/denied', controller='home', action='require_login')
     map.connect('/login', controller='home', action='login')
     map.connect('/logout', controller='home', action='logout')
     map.connect('/register', controller='home', action='register')

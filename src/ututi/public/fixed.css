@@ -310,6 +310,10 @@ h1.page-title.with-bottom-line {
  * "new-style-form" is a namespace for now.
  */
 
+input {
+    margin: 0;
+}
+
 .new-style-form {
 }
 
