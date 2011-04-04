@@ -271,7 +271,9 @@ class HomeController(UniversityListMixin, FederationMixin):
         redirect(destination)
 
     def login(self):
-        username = request.POST.get('username')
+        # here below email get parameter may be used for convenience
+        # i.e. when redirecting from sign-up form
+        username = request.POST.get('username') or request.GET.get('email')
         password = request.POST.get('password')
         location = request.POST.get('location')
         location = int(location) if location else None
@@ -449,6 +451,10 @@ class HomeController(UniversityListMixin, FederationMixin):
             redirect(url('frontpage'))
 
         email = self.form_result['email']
+
+        # redirect to login if user is already registered
+        if User.get_all(email):
+            redirect(url(controller='home', action='login', email=email))
 
         # lookup or create registration entry
         registration = UserRegistration.get_by_email(email)
