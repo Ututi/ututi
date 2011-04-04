@@ -2,7 +2,8 @@
 <%namespace file="/portlets/user.mako" import="*"/>
 
 <%def name="portlets()">
-  ${user_information_portlet(user=c.user_info, full=False, title=_('Member information'))}
+  ${profile_portlet(user=c.user_info)}
+  ${user_statistics_portlet(user=c.user_info)}
 </%def>
 
 <h1 style="font-weight: bold">${c.user_info.fullname}</h1>

@@ -1,4 +1,4 @@
-<%namespace file="/portlets/user.mako" import="profile_portlet, user_information_portlet, invite_friends_portlet,
+<%namespace file="/portlets/user.mako" import="profile_portlet, invite_friends_portlet,
                                                user_groups_portlet, user_subjects_portlet, teacher_information_portlet,
                                                user_menu_portlet, user_description_portlet, todo_portlet"/>
 <%namespace file="/portlets/group.mako" import="group_info_portlet, group_settings_portlet,
