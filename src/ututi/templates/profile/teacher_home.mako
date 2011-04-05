@@ -1,7 +1,7 @@
 <%inherit file="/profile/home_base.mako" />
 <%namespace file="/sections/standard_buttons.mako" import="close_button" />
-<%namespace file="/sections/standard_blocks.mako" name="b" import="rounded_block, item_list"/>
 <%namespace file="/sections/standard_objects.mako" import="group_listitem_teacherdashboard"/>
+<%namespace name="snippets" file="/sections/content_snippets.mako" />
 
 <%def name="css()">
 .group-description .sms-widget #sms_message {
@@ -39,6 +39,11 @@
 #groups_list .send_message_block {
     padding-left: 20px;
 }
+
+button.submit {
+    margin-top: 10px;
+}
+
 </%def>
 
 <%def name="pagetitle()">
@@ -73,18 +78,27 @@ ${parent.head_tags()}
 </%def>
 
 <%def name="teach_group_nag()">
-<%b:rounded_block class_="standard-portlet with-shade icon-group-gray">
 <div style="float:right">
   ${h.button_to(_('add groups'), url(controller='profile', action='add_student_group'), class_='btnMedium', method='GET')}
 </div>
 <h2>${_('My student groups')}</h2>
 <p>${_("Add student groups that you teach to.")}</p>
 <div style="clear:both"></div>
-</%b:rounded_block>
+</%def>
+
+<%def name="toaught_courses()">
+  <div class="section subjects">
+    <div class="title">
+      ${_("My courses:")}
+      <span class="add-button">${h.button_to(_('add courses'), url(controller='subject', action='add'))}</span>
+    </div>
+    <div>
+      ${self.subject_list(c.user.taught_subjects)}
+    </div>
+  </div>
 </%def>
 
 <%def name="teach_course_nag()">
-<%b:rounded_block class_="standard-portlet with-shade icon-subject-orange">
 <h2>${_('Add courses you teach')}</h2>
 <p><strong>${_('Create subjects you teach, or find those that are already created:')}</strong></p>
 <ul class="pros-list">
@@ -92,7 +106,6 @@ ${parent.head_tags()}
   <li>${_('All your course materials with be organized in one place.')}</li>
 </ul>
 ${h.button_to(_('add courses'), url(controller='subject', action='add'), class_='btnMedium', method='GET')}
-</%b:rounded_block>
 </%def>
 
 <%def name="subject_list(subjects)">
@@ -119,7 +132,7 @@ ${h.button_to(_('add courses'), url(controller='subject', action='add'), class_=
           ${_('Add:')}
         </span>
         <dd class="files">
-          <a href="${subject.url()}">${_("Upload file")}</a>
+          <a href="${subject.url()}/files">${_("Upload file")}</a>
           (${h.item_file_count(subject.id)})
         </dd>
         <dd class="pages">
@@ -147,42 +160,28 @@ ${h.button_to(_('add courses'), url(controller='subject', action='add'), class_=
 </div>
 </%def>
 
+<div id="teacher">
 %if c.user.teacher_verified:
-  <div id="subject_list">
     %if c.user.taught_subjects:
-    <%self:rounded_block class_='portletGroupFiles'>
-    <div class="GroupFiles GroupFilesDalykai">
-      <h2 class="portletTitle bold">
-        ${_('My courses')}
-        ##<span class="right_arrow verysmall normal normal-font">
-        ##  <a href="${url(controller='profile', action='notifications')}"> ${_('notification settings')}</a>
-        ##</span>
-      </h2>
-      <span class="group-but">
-        ${h.button_to(_('add courses'), url(controller='subject', action='add'))}
-      </span>
-    </div>
-    <div>
-      ${self.subject_list(c.user.taught_subjects)}
-    </div>
-    </%self:rounded_block>
+    ${self.toaught_courses()}
     %elif 'suggest_teach_course' not in c.user.hidden_blocks_list:
     ${self.teach_course_nag()}
     %endif
-  </div>
 
-  <div id="groups_list">
     %if c.user.student_groups:
-    <%b:item_list title="${_('Student groups')}" items="${c.user.student_groups}">
-      <%def name="header_button()">
-        ${h.button_to(_('add a group'), url(controller='profile', action='add_student_group'), method='GET')}
-      </%def>
-      <%def name="row(item)">
-        ${group_listitem_teacherdashboard(item)}
-      </%def>
-    </%b:item_list>
+    <div class="section groups">
+      <div class="title">
+        ${_("Student groups")}
+        <span class="add-button">${h.button_to(_('add a group'), url(controller='profile', action='add_student_group'), method='GET')}</span>
+      </div>
+      <div class="search-results-container">
+        %for group in c.user.student_groups:
+          ${group_listitem_teacherdashboard(group)}
+        %endfor
+      </div>
+    </div>
     %elif 'suggest_teach_group' not in c.user.hidden_blocks_list:
     ${self.teach_group_nag()}
     %endif
-  </div>
 %endif
+</div>

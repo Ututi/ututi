@@ -258,7 +258,6 @@
           <input type="file" name="file" />
         </label>
       </div>
-      <br class="clear-right" />
       <div class="formSubmit">
         ${h.input_submit(_('Send'), class_="btn message_send")}
       </div>

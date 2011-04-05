@@ -1522,3 +1522,39 @@ ul.tabs {
         padding-left: 14px;
         background: url('/img/icons.com/settings.png') no-repeat left center;
     }
+
+
+/* TEACHER'S VIEWS (HOME & PUBLIC)
+ */
+
+#teacher {}
+
+    #teacher .section {
+        margin-top: 30px;
+        padding-left: 40px;
+        background-position: top left;
+        background-repeat: no-repeat;
+    }
+
+    #teacher .section.subjects {
+        background-image: url("../img/icons.com/subject_grand_grey.png");
+    }
+
+    #teacher .section.groups {
+        background-image: url("../img/icons.com/group_grand_grey.png");
+    }
+
+    #teacher .section .title {
+        position: relative;
+        border-bottom: 1px solid #f90;
+        font-size: 13px;
+        font-weight: bold;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+    }
+
+    #teacher .add-button {
+        position: absolute;
+        bottom: 2px;
+        right: 0px;
+    }
