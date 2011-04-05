@@ -51,6 +51,7 @@ class FederatedRegistrationForm(Schema):
 
 
 class FederationMixin(object):
+
     def _bind_user(self, user, flash=True):
         """Bind user to FB/Google account (retrieve info from session)."""
         if session.get('confirmed_openid'):
@@ -75,6 +76,7 @@ class FederationMixin(object):
 
 
 class FederationController(BaseController, FederationMixin):
+
     def google_register(self):
         openid_session = session.get("openid_session", {})
         openid_store = None # stateless
