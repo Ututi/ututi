@@ -7,7 +7,7 @@ Let's login as a verified teacher:
 
 We click the big button to create the first subject:
 
-    >>> browser.getControl('add courses').click()
+    >>> browser.getControl('Add your courses').click()
 
 The teacher has been assigned to default location (U-niversity),
 so so location fields are prefilled:
@@ -51,8 +51,8 @@ On the subject page Benas is listed as the lecturer:
 This subject also appears on teacher's homepage:
 
     >>> browser.getLink('Home').click()
-    >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
-    Math
+    >>> browser.printCssQuery('.subject-description-list dt a', strip=True)
+    <a>Math</a>
 
 Let's go to the settings and change our location information:
 
@@ -86,6 +86,6 @@ Let's fill out the form to create the subject:
 This subject also appears on teacher's homepage:
 
     >>> browser.getLink('Home').click()
-    >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
-    Math
-    Literature
+    >>> browser.printCssQuery('.subject-description-list dt a', strip=True)
+    <a>Math</a>
+    <a>Literature</a>

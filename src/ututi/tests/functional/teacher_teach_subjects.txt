@@ -42,8 +42,8 @@ If we click on the link, we are redirected to Benas' page:
 The selected course is now displayed in his home page:
 
     >>> browser.getLink('Home').click()
-    >>> browser.printQuery("id('subject_list')//div[@class='subject-description-list']//dt//text()")
-    Matematin&#279; analiz&#279;
+    >>> browser.printCssQuery('.subject-description-list dt a', strip=True)
+    <a>Matematin&#279; analiz&#279;</a>
 
 Teacher can click "Create wiki page" link to be directed straight to 
 page creation view:
@@ -58,7 +58,7 @@ page is responsible for that functionality, so teacher is directed there:
     >>> browser.goBack()
     >>> browser.getLink("Upload file").click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize'
+    'http://localhost/subject/vu/mat_analize/files'
 
 He can click the link to visit some course's home page:
 

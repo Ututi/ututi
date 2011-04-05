@@ -9,7 +9,7 @@ Let's login as a verified teacher:
 
 Let's add a group (since we have none at the moment):
 
-    >>> browser.getControl('add groups').click()
+    >>> browser.getControl('Add students groups').click()
     >>> browser.getControl('Title').value = 'group A'
     >>> browser.getControl('Email address').value = 'group@groups.google.com'
     >>> browser.getControl('Save').click()
@@ -31,7 +31,7 @@ And delete it:
 
 Ok, let's add three groups: non-ututi, ututi (mailing list) and ututi (forum):
 
-    >>> browser.getControl('add groups').click()
+    >>> browser.getControl('Add students groups').click()
     >>> browser.getControl('Title').value = 'outsiders'
     >>> browser.getControl('Email address').value = 'group@groups.google.com'
     >>> browser.getControl('Save').click()
