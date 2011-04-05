@@ -74,7 +74,7 @@ class FederationController(BaseController, FederationMixin):
             kargs['u_type'] = request.params.get('u_type')
 
         redirecturl = authrequest.redirectURL(
-            url(controller='home', action='index', qualified=True),
+            url('frontpage', qualified=True),
             return_to=url(controller='federation', action='google_verify',
                           qualified=True, **kargs))
 
