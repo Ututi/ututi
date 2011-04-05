@@ -234,7 +234,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     def link_google(self):
         session['linking_to_user'] = c.user.id
         session.save()
-        redirect(url(controller='federation', action='google_register'))
+        redirect(url(controller='federation', action='google_login'))
 
     @ActionProtector("user")
     def unlink_google(self):

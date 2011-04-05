@@ -293,7 +293,7 @@ def make_map(config):
     map.connect('/logout', controller='home', action='logout')
     map.connect('/register', controller='home', action='register')
     map.connect('/federated_registration', controller='home', action='federated_registration')
-    map.connect('/google_register', controller='federation', action='google_register')
+    map.connect('/google_login', controller='federation', action='google_login')
     map.connect('/google_verify', controller='federation', action='google_verify')
     map.connect('/facebook_login', controller='federation', action='facebook_login')
     map.connect('/password', controller='home', action='pswrecovery')

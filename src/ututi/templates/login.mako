@@ -103,7 +103,7 @@
       </script>
     </div>
     <div class="button">
-      <a href="${url(controller='federation', action='google_register', came_from=c.came_from, invitation_hash=c.hash)}">
+      <a href="${url(controller='federation', action='google_login', came_from=c.came_from, invitation_hash=c.hash)}">
         ${h.image('/img/google-button.png', alt=_('Log in using Google'))}
       </a>
     </div>

@@ -46,7 +46,7 @@ class FederationMixin(object):
 
 class FederationController(BaseController, FederationMixin):
 
-    def google_register(self):
+    def google_login(self):
         openid_session = session.get("openid_session", {})
         openid_store = None # stateless
         cons = Consumer(openid_session, openid_store)
