@@ -1645,6 +1645,7 @@ CREATE TABLE user_registrations (
        id bigserial not null,
        created timestamp not null default (now() at time zone 'UTC'),
        hash varchar(32) not null unique,
+       teacher boolean not null default false,
        email varchar(320) default null,
        email_confirmed boolean default false,
        fullname varchar(100) default null,
