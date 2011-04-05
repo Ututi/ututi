@@ -277,7 +277,7 @@
   <% if user is None: user = c.user %>
   <%self:portlet id="user-information-portlet">
      <div class="user-logo">
-       <img src="${url(controller='user', action='logo', id=user.id, width=70, height=70)}" alt="logo" />
+       <img src="${user.url(action='logo', width=60)}" alt="logo" />
      </div>
      <div class="user-fullname break-word">
        ${user.fullname}
