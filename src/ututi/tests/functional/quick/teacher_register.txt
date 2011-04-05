@@ -1,80 +1,87 @@
 Test registration of teachers
 =============================
 
-    >>> browser = Browser()
+    >>> from ututi.lib.mailer import mail_queue
+    >>> from ututi.lib.helpers import get_urls
 
-There currently is no link visible to the teacher registration, so
-let's type in that url:
+There are several cases, how user may become a teacher.
 
-    >>> browser.open('http://localhost/teacher/register')
-    >>> form = browser.getForm(id='teacher_registration_form')
-    >>> form.getControl('Full name').value = 'Mr. teacher'
-    >>> form.getControl('Email').value = 'teacher@uni.ututi.com'
-    >>> form.getControl(name='new_password').value = 'mapassword'
-    >>> form.getControl(name='agree').value = True
-    >>> form.getControl('Register').click()
+1. Anonymous teacher registration
+=================================
 
-    >>> browser.url
+User may press "I teach here" button in university page and have
+the same registration flow as any other user. In the end, he
+will be registered as teacher:
+
+    >>> user = Browser()
+    >>> user.open('http://localhost/school/uni')
+    >>> user.click('I teach here')
+    >>> user.getControl('Enter your email here:').value = 'user@example.com'
+    >>> user.click('Register')
+    >>> msg = mail_queue.pop()
+    >>> urls = get_urls(msg.payload())
+    >>> user.open(urls[0])
+    >>> user.click('Next')
+    >>> user.getControl('Full name').value = 'User'
+    >>> user.getControl('Password').value = 'password'
+    >>> user.click('Next')
+    >>> user.click('Skip')
+    >>> user.click('Finish')
+
+Here. Let's look at what teacher sees:
+
+    >>> user.url
     'http://localhost/welcome'
 
-    >>> browser.printQuery("//div[@class='flash-message']//span/text()")
-    All teacher tools will be available to You once our team confirms You as a teacher. Thank You!
-    Your email (teacher@uni.ututi.com) is not confirmed! Please confirm your email by clicking on the link sent to your address or
-
-The teacher is also shown a block that informs him he is not verified yet:
-    >>> browser.printQuery("id('unverified_teacher_block')//text()")
+    >>> user.printQuery("id('unverified_teacher_block')//text()")
     Welcome to Ututi!
     At the moment You are not confirmed as a teacher. Our administrators have been notified and will verify You shortly. Please be patient. Meanwhile please tell us more about yourself.
 
 
-Teacher gets a confirmation email so he could approve his
-registration. And the team gets a notification:
-(Note: teacher has been assigned to the default university,
-this is not how things supposed to work in real registration flow)
-
-    >>> from ututi.lib.mailer import mail_queue
-    >>> mail_queue.pop()
-    <EmailInfo sender='info@ututi.lt' recipients=[u'teacher@uni.ututi.com']>
+The team gets a notification about new teacher:
 
     >>> print mail_queue.pop().payload()
     A new teacher has registered:
-    Mr. teacher (teacher@uni.ututi.com)
+    User (user@example.com)
     U-niversity
     Ututi
 
+Let's register one more teacher that later will be denied:
 
-Teachers can also register using facebook:
-    >>> browser = Browser()
-    >>> browser.open('/federation/test_facebook_teacher_login')
-    >>> browser.url
-    'http://localhost/teacher/federated_registration'
-    >>> browser.getControl(name='agree').value = True
-    >>> browser.getControl('Register').click()
-
-The team is informed of this too:
-(Note: teacher has been assigned to the default university,
-this is not how things supposed to work in real registration flow)
+    >>> notteacher = Browser()
+    >>> notteacher.open('http://localhost/school/uni')
+    >>> notteacher.click('I teach here')
+    >>> notteacher.getControl('Enter your email here:').value = 'notteacher@example.com'
+    >>> notteacher.click('Register')
+    >>> msg = mail_queue.pop()
+    >>> urls = get_urls(msg.payload())
+    >>> notteacher.open(urls[0])
+    >>> notteacher.click('Next')
+    >>> notteacher.getControl('Full name').value = 'Not a teacher'
+    >>> notteacher.getControl('Password').value = 'password'
+    >>> notteacher.click('Next')
+    >>> notteacher.click('Skip')
+    >>> notteacher.click('Finish')
     >>> print mail_queue.pop().payload()
     A new teacher has registered:
-    John Smith (john.smith@example.com)
+    Not a teacher (notteacher@example.com)
     U-niversity
     Ututi
 
-    >>> browser.url
-    'http://localhost/welcome?fb=True'
+The administrator should now see requests to confirm a teacher:
 
-The administrator should now see a request to confirm a teacher:
-    >>> browser2 = Browser.logIn()
-    >>> browser2.open('http://localhost/admin')
-    >>> browser2.getLink('Teachers').click()
-    >>> browser2.printQuery("id('teacher_list')//td[@class='name']//text()")
-    Mr. teacher
-    John Smith
+    >>> admin = Browser.logIn()
+    >>> admin.open('http://localhost/admin')
+    >>> admin.getLink('Teachers').click()
+    >>> admin.printQuery("id('teacher_list')//td[@class='name']//text()")
+    User
+    Not a teacher
 
-Let's try and accept the second teacher:
-    >>> browser2.getControl('Confirm', index=1).click()
+Let's confirm User:
+
+    >>> admin.getControl('Confirm', index=0).click()
     >>> print mail_queue.pop().payload()
-    John Smith,
+    User,
     Your request to join Ututi as a teacher has been confirmed!
     You may now visit your Ututi dashboard here: http://localhost/ .
     At Ututi you will be able to::
@@ -83,12 +90,103 @@ Let's try and accept the second teacher:
     - Easily communicate with Your students.
     The Ututi team
 
-TODO: check if the user now can act as a teacher
+    >>> admin.printQuery("id('teacher_list')//td[@class='name']//text()")
+    Not a teacher
 
-Let's also reject the first teacher:
-    >>> browser2.getControl('Deny', index=0).click()
+User now should see that he was confirmed:
+
+    >>> user.open(user.url)
+    >>> user.printQuery("//div[@class='flash-message']//span/text()")
+
+Let's deny the other one:
+
+    >>> admin.getControl('Deny', index=0).click()
     >>> print mail_queue.pop().payload()
-    Mr. teacher,
+    Not a teacher,
     Your request to join Ututi as a teacher has been rejected.
     If this was a misunderstanding, please contact us directly at: info@ututi.lt.
     The Ututi team
+
+2. Existing user wants to become a teacher
+==========================================
+
+Existing users can be manually transformed into teachers.
+When they press "I teach here", their request is registered
+and email is sent to Ututi team.
+
+Let's login as admin@uni.ututi.com (default user) to test that.
+
+    >>> user = Browser.logIn()
+    >>> user.click('My university')
+    >>> user.click('I teach here')
+    >>> user.printQuery("//div[@class='flash-message']//span/text()")
+    Thank You! Your request to become a teacher has been received.
+    We will notify You once we grant You the rights of a teacher.
+
+    >>> print mail_queue.pop().payload()
+    A user wants to become a teacher:
+    Administrator of the university (admin@uni.ututi.com)
+    U-niversity
+    http://localhost/admin/teachers?user_id=1
+    Ututi
+
+Admin can click the link from email above and confirm the teacher.
+However, let's save it for later.
+
+    >>> admin.open('http://localhost/admin/teachers?user_id=1')
+    >>> admin.printQuery("id('teacher_list')//td[@class='name']//text()")
+    Administrator of the university
+
+3. Existing user wants to become a teacher, but is not logged in
+================================================================
+
+If user enters an existing email to teacher registration form,
+he will be asked to log in, and then will be handled the same
+way as any existing Ututi user (case above).
+
+    >>> user = Browser()
+    >>> user.open('http://localhost/school/uni')
+    >>> user.click('I teach here')
+    >>> user.getControl('Enter your email here:').value = 'admin@uni.ututi.com'
+    >>> user.click('Register')
+    >>> user.url
+    'http://localhost/login?came_from=%2Fschool%2Funi%2Fregister%2Fteacher%2Fexisting&email=admin%40uni.ututi.com'
+    >>> user.getControl('Password').value = 'asdasd'
+    >>> user.getControl('Login').click()
+    >>> user.url
+    'http://localhost/school/uni'
+    >>> user.printQuery("//div[@class='flash-message']//span/text()")
+    Thank You! Your request to become a teacher has been received.
+    We will notify You once we grant You the rights of a teacher.
+    >>> print mail_queue.pop().payload()
+    A user wants to become a teacher:
+    Administrator of the university (admin@uni.ututi.com)
+    U-niversity
+    http://localhost/admin/teachers?user_id=1
+    Ututi
+
+Let's verify him this time:
+
+    >>> admin.open('http://localhost/admin/teachers?user_id=1')
+    >>> admin.printQuery("id('teacher_list')//td[@class='name']//text()")
+    Administrator of the university
+    >>> admin.click('Make a teacher')
+
+    >>> print mail_queue.pop().payload()
+    Administrator of the university,
+    Your request to join Ututi as a teacher has been confirmed!
+    You may now visit your Ututi dashboard here: http://localhost/ .
+    At Ututi you will be able to::
+    - Create your own profile with all Your courses and materials.
+    - Easily publish Your lecture notes so that Your students can find and access them.
+    - Easily communicate with Your students.
+    The Ututi team
+
+    >>> user.click('Home')
+
+User has become a teacher. Hooray!
+
+TODO for this test:
+- user is not signed in, click "I study here" but is already a teacher
+- email validation in teacher registration form
+- user is not signed in, when redirected to login, enters a different email
