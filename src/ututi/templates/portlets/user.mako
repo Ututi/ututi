@@ -283,6 +283,7 @@
        ${user.fullname}
        (${_("teacher")})
      </div>
+     %if user.phone_number or user.site_url:
      <div>&nbsp</div>
      <div class="user-info">
        %if user.phone_number and user.phone_confirmed:
@@ -294,6 +295,7 @@
        </p>
        %endif
      </div>
+     %endif
      %if user.description:
      <div class="about-self">${h.html_cleanup(user.description)}</div>
      %endif
