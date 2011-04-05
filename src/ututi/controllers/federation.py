@@ -117,7 +117,7 @@ class FederationController(BaseController, FederationMixin):
             name = '%s %s' % (request.params.get('openid.ext1.value.firstname'),
                               request.params.get('openid.ext1.value.lastname'))
             email = request.params.get('openid.ext1.value.email')
-            return self._register_or_login(name, email, google_id=identity_url)
+            return self._try_to_login(name, email, google_id=identity_url)
         elif info.status == consumer.FAILURE and display_identifier:
             # In the case of failure, if info is non-None, it is the
             # URL that we were verifying. We include it in the error
@@ -140,7 +140,7 @@ class FederationController(BaseController, FederationMixin):
         h.flash(message)
         redirect(c.came_from or url(controller='federation', action='index'))
 
-    def _register_or_login(self, name, email, google_id=None, facebook_id=None,
+    def _try_to_login(self, name, email, google_id=None, facebook_id=None,
                            fb_access_token=None):
         assert bool(google_id) != bool(facebook_id)
         if google_id:
@@ -167,14 +167,8 @@ class FederationController(BaseController, FederationMixin):
             # This user has never logged in using FB/Google before.
             user = User.get_global(email)
             if user is None:
-                # New user?
-                session['confirmed_openid'] = google_id
-                session['confirmed_facebook_id'] = facebook_id
-                session['confirmed_fullname'] = name
-                session['confirmed_email'] = email
-                session.save()
-                redirect(url(controller='home', action='federated_registration',
-                             **self._auth_args()))
+                h.flash(_('Login failed. Please login using your username and bind your account first.'))
+                redirect(url(controller='home', action='login'))
             else:
                 # Existing user logging in using FB/Google.
                 if google_id:
@@ -194,7 +188,7 @@ class FederationController(BaseController, FederationMixin):
     def test_facebook_login(self):
         assert config.get('facebook.testing')
         self._facebook_name_and_email = lambda id, token: ('John Smith', 'john.smith@example.com')
-        return self._register_or_login(None, None, facebook_id=0xfaceb006,
+        return self._try_to_login(None, None, facebook_id=0xfaceb006,
                                        fb_access_token=-42)
 
     def facebook_login(self):
@@ -202,6 +196,6 @@ class FederationController(BaseController, FederationMixin):
                          config['facebook.appid'], config['facebook.secret'])
         if fb_user:
             uid = fb_user['uid']
-            return self._register_or_login(None, None, facebook_id=uid,
+            return self._try_to_login(None, None, facebook_id=uid,
                                            fb_access_token=fb_user['access_token'])
         redirect(c.came_from or url(controller='home', action='index'))
