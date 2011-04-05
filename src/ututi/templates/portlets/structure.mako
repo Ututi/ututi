@@ -59,13 +59,34 @@
 <%def name="location_register_portlet(location=None)">
   <% if location is None: location = c.location %>
   %if c.user is None:
-    <%self:portlet id="location-register-portlet">
-      ${h.button_to(_("I study here"),
-                    location.url(action='register'),
-                    id='i-study-here-button',
+  <%self:portlet id="location-register-portlet">
+    ${h.button_to(_("I study here"),
+                  location.url(action='register'),
+                  id='i-study-here-button',
+                  class_='dark',
+                  method='GET')}
+  </%self:portlet>
+  %endif
+</%def>
+
+<%def name="location_register_teacher_portlet(location=None)">
+  <% if location is None: location = c.location %>
+  %if c.user is None or not c.user.is_teacher:
+  <%self:portlet id="location-register-teacher-portlet">
+    %if c.user is None:
+      ${h.button_to(_("I teach here"),
+                    location.url(action='register_teacher'),
+                    id='i-teach-here-button',
                     class_='dark',
                     method='GET')}
-    </%self:portlet>
+    %elif not c.user.is_teacher:
+      ${h.button_to(_("I teach here"),
+                    location.url(action='register_teacher_existing'),
+                    id='i-teach-here-button',
+                    class_='dark',
+                    method='GET')}
+    %endif
+  </%self:portlet>
   %endif
 </%def>
 

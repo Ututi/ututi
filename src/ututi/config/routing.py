@@ -259,6 +259,8 @@ def make_map(config):
     map.connect('/school/*path/subjects', controller='structureview', action='catalog', obj_type='subject')
     map.connect('/school/*path/teachers', controller='structureview', action='catalog', obj_type='teacher')
     map.connect('/school/*path/register', controller='structureview', action='register')
+    map.connect('/school/*path/register/teacher', controller='structureview', action='register_teacher')
+    map.connect('/school/*path/register/teacher/existing', controller='structureview', action='register_teacher_existing')
     map.connect('/school/*path', controller='structureview', action='index')
 
     # other user views

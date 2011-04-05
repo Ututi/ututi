@@ -735,11 +735,13 @@ class UserRegistration(object):
 
     def create_user(self):
         """Returns a User object filled with registration data."""
-        user = User(fullname=self.fullname,
+        args = dict(fullname=self.fullname,
                     username=self.email,
                     location=self.location,
                     password=self.password,
                     gen_password=False)
+
+        user = Teacher(**args) if self.teacher else User(**args)
 
         user.emails = [Email(email, confirmed=True) for email in \
                        set(filter(bool, [self.email, self.openid_email, self.facebook_email]))]
@@ -749,6 +751,7 @@ class UserRegistration(object):
         user.facebook_id = self.facebook_id
         user.logo = self.logo
         self.user = user # store reference
+        user.accepted_terms = datetime.utcnow()
 
         return user
 

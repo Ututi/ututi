@@ -1,6 +1,7 @@
 <%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/portlets/structure.mako" import="location_logo_portlet, location_info_portlet,
                                                     location_admin_portlet, location_register_portlet,
+                                                    location_register_teacher_portlet,
                                                     location_members_portlet, location_groups_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet, google_ads_portlet" />
 <%namespace file="/elements.mako" import="tabs"/>
@@ -60,6 +61,7 @@
   ${location_admin_portlet()}
   ${location_info_portlet()}
   ${location_register_portlet()}
+  ${location_register_teacher_portlet()}
   ${share_portlet(c.location)}
   ${location_members_portlet(count=6)}
   ${location_groups_portlet()}

@@ -15,6 +15,7 @@ from ututi.lib.invitations import bind_group_invitations
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
         FileUploadTypeValidator, SeparatedListValidator, CountryValidator, \
         AvailableEmailDomain, EmailDomainValidator
+from ututi.lib.emails import teacher_registered_email
 import ututi.lib.helpers as h
 
 from ututi.model import meta
@@ -515,6 +516,9 @@ class RegistrationController(BaseController, FederationMixin):
         registration.completed = True
         registration.process_invitations()
         meta.Session.commit()
+
+        if user.is_teacher:
+            teacher_registered_email(user)
 
         sign_in_user(user)
         redirect(url(controller='profile', action='register_welcome'))

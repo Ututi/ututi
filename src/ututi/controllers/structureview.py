@@ -16,6 +16,7 @@ from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, \
         UniversityPolicyEmailValidator, UniqueLocationEmail
 from ututi.lib.wall import WallMixin
 from ututi.lib.search import search_query_count
+from ututi.lib.emails import teacher_request_email
 from ututi.model import Subject, Group, Teacher
 from ututi.model import LocationTag, meta
 from ututi.model.users import User, UserRegistration
@@ -73,6 +74,12 @@ class RegistrationForm(Schema):
 
     email = compound.Pipe(TranslatedEmailValidator(not_empty=True, strip=True),
                           UniqueLocationEmail(),
+                          UniversityPolicyEmailValidator())
+
+
+class TeacherRegistrationForm(Schema):
+
+    email = compound.Pipe(TranslatedEmailValidator(not_empty=True, strip=True),
                           UniversityPolicyEmailValidator())
 
 
@@ -264,7 +271,6 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
     @location_action
     @validate(schema=RegistrationForm(), form='_register_form')
     def register(self, location):
-
         if not hasattr(self, 'form_result'):
             return htmlfill.render(self._register_form())
 
@@ -280,10 +286,54 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
         if registration is None:
             registration = UserRegistration(location, email)
             meta.Session.add(registration)
-            meta.Session.commit()
 
         registration.send_confirmation_email()
+        meta.Session.commit()
 
         c.email = email
         return render('registration/email_approval.mako')
 
+    def _register_teacher_form(self):
+        return render('location/register_teacher.mako')
+
+    @location_action
+    @validate(schema=TeacherRegistrationForm(), form='_register_teacher_form')
+    def register_teacher(self, location):
+        if not hasattr(self, 'form_result'):
+            return htmlfill.render(self._register_teacher_form())
+
+        email = self.form_result['email']
+
+        if User.get(email, location):
+            h.flash(_('The email you entered is registered in Ututi. '
+                      'Please login to proceed.'))
+            destination = location.url(action='register_teacher_existing')
+            redirect(url(controller='home', action='login',
+                         came_from=destination))
+
+        # lookup/create registration entry and
+        # send confirmation code to user.
+        registration = UserRegistration.get_by_email(email, location)
+        if registration is None:
+            registration = UserRegistration(location, email)
+            meta.Session.add(registration)
+
+        registration.teacher = True
+        registration.send_confirmation_email()
+        meta.Session.commit()
+
+        c.email = email
+        return render('registration/email_approval.mako')
+
+    @location_action
+    def register_teacher_existing(self, location):
+        if c.user is None:
+            abort(404)
+
+        if c.user.is_teacher:
+            h.flash(_('You already have a teacher account.'))
+            redirect(url(controller='profile', action='home'))
+
+        teacher_request_email(c.user)
+        h.flash(_('Thank You! Your request to become a teacher has been received. We will notify You once we grant You the rights of a teacher.'))
+        redirect(location.url())
