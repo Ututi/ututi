@@ -300,7 +300,6 @@ def make_map(config):
     map.connect('/process_transaction', controller='home', action='process_transaction')
     map.connect('/recovery/{key}', controller='home', action='recovery')
     map.connect('/recovery', controller='home', action='recovery')
-    map.connect('/register', controller='home', action='register')
     map.connect('/tour', controller='home', action='tour')
 
     map.connect('/got_mail', controller='receivemail', action='index')
