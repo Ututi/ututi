@@ -287,7 +287,7 @@ def make_map(config):
 
     # CUSTOM ROUTES HERE
     map.connect('/sitemap.xml', controller='sitemap', action='index')
-    map.connect('/channel.html', controller='federation', action='fbchannel')
+    map.connect('/channel.html', controller='home', action='fbchannel')
     map.connect('frontpage', '/', controller='home', action='index')
     map.connect('/login', controller='home', action='login')
     map.connect('/logout', controller='home', action='logout')
