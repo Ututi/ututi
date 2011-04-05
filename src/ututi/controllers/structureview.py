@@ -299,6 +299,10 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
     @location_action
     @validate(schema=TeacherRegistrationForm(), form='_register_teacher_form')
     def register_teacher(self, location):
+        # bounce existing users to different action
+        if c.user is not None:
+            redirect(location.url(action='register_teacher_existing'))
+
         if not hasattr(self, 'form_result'):
             return htmlfill.render(self._register_teacher_form())
 

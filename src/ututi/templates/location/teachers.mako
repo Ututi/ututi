@@ -23,7 +23,7 @@
         %if c.user and not c.user.is_teacher:
         <span class="action-button">
           <span class="notice">${_("Are you also a teacher in this University?")}</span>
-          ${h.button_to(_('I am a teacher'), url(controller='teacher', action='register'), class_='inline', method='GET')}
+          ${h.button_to(_('I am a teacher'), c.location.url(action='register_teacher'), class_='inline', method='GET')}
         </span>
         %endif
       </div>
@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="action-button">
-      ${h.button_to(_('Become a teacher'), url(controller='teacher', action='register'), method='GET')}
+      ${h.button_to(_('Become a teacher'), c.location.url(action='register_teacher'), method='GET')}
     </div>
   </div>
 </%def>
