@@ -1,11 +1,6 @@
 
 import cgi
 
-from formencode import validators
-from formencode.foreach import ForEach
-from formencode.compound import Pipe
-from formencode.variabledecode import NestedVariables
-from formencode.schema import Schema
 from openid.consumer import consumer
 from openid.consumer.consumer import Consumer, DiscoveryFailure
 from openid.extensions import ax
@@ -21,33 +16,9 @@ from ututi.lib.emails import teacher_request_email
 from ututi.model.users import User
 from ututi.model import meta
 from ututi.lib.invitations import bind_group_invitations
-from ututi.lib.validators import PhoneNumberValidator
-from ututi.lib.validators import LocationTagsValidator
 from ututi.lib.security import sign_in_user
 from ututi.lib.base import BaseController
 import ututi.lib.helpers as h
-
-
-class FederatedRegistrationForm(Schema):
-    """Registration form for openID/Facebook registrations."""
-
-    allow_extra_fields = True
-    pre_validators = [NestedVariables()]
-
-    invitation_hash = validators.String(not_empty=False)
-
-    msg = {'missing': _(u"You must agree to the terms of use.")}
-    agree = validators.StringBool(messages=msg)
-
-    msg = {'empty': _(u"Please enter your name to register.")}
-    fullname = validators.String(not_empty=True, strip=True, messages=msg)
-
-    gadugadu = validators.Int()
-
-    location = Pipe(ForEach(validators.String(strip=True)),
-                    LocationTagsValidator())
-
-    phone = PhoneNumberValidator(not_empty=False)
 
 
 class FederationMixin(object):
