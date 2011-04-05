@@ -19,5 +19,5 @@ class ContentController(BaseController):
             redirect(content_item.url(action=next_action))
 
     def get_user(self, id):
-        user = User.get_by_id(id)
+        user = User.get_byid(id)
         redirect(user.url())
