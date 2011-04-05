@@ -24,7 +24,7 @@ from ututi.lib.invitations import bind_group_invitations
 from ututi.lib.validators import PhoneNumberValidator
 from ututi.lib.validators import LocationTagsValidator
 from ututi.lib.security import sign_in_user
-from ututi.lib.base import BaseController, render
+from ututi.lib.base import BaseController
 import ututi.lib.helpers as h
 
 
@@ -171,24 +171,6 @@ class FederationController(BaseController, FederationMixin):
             # TODO: log info.status and info.message
         h.flash(message)
         redirect(c.came_from or url(controller='federation', action='index'))
-
-    def associate_account(self):
-        """Associate an Ututi account with a Google/FB account."""
-        email = request.POST.get('login_username')
-        password = request.POST.get('login_password')
-        destination = c.came_from or url(controller='profile', action='home')
-
-        if password is not None:
-            user = User.authenticate(email, password.encode('utf-8'))
-            if user is not None:
-                sign_in_user(user)
-                self._bind_user(User.get(email))
-                meta.Session.commit()
-                redirect(str(destination))
-            else:
-                c.login_error = _('Wrong username or password!')
-        return render('/home/associate_account.mako')
-
 
     def _register_or_login(self, name, email, google_id=None, facebook_id=None,
                            fb_access_token=None, u_type=None):

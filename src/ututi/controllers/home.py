@@ -1,7 +1,7 @@
 import logging
 from random import Random
 import string
-from datetime import datetime, date, timedelta
+from datetime import date, timedelta
 
 from formencode import Schema, validators, All, htmlfill
 from formencode.compound import Pipe
@@ -23,16 +23,14 @@ from sqlalchemy.sql.expression import desc
 from ututi.lib.base import BaseController, render, u_cache
 import ututi.lib.helpers as h
 from ututi.lib.emails import email_password_reset
-from ututi.lib.invitations import bind_group_invitations
 from ututi.lib.security import sign_out_user
 from ututi.lib.security import ActionProtector, sign_in_user, bot_protect
 from ututi.lib.validators import (validate, u_error_formatters,
                                   TranslatedEmailValidator, ForbidPublicEmail)
-from ututi.model import (meta, User, Region, Email, PendingInvitation,
-                         LocationTag, Payment, UserRegistration, EmailDomain)
+from ututi.model import (meta, User, Region, LocationTag, Payment,
+                         UserRegistration, EmailDomain)
 from ututi.model import Subject, Group, SearchItem
 from ututi.model.events import Event
-from ututi.controllers.federation import FederationMixin, FederatedRegistrationForm
 
 log = logging.getLogger(__name__)
 
@@ -151,7 +149,7 @@ class UniversityListMixin(BaseController):
 
 
 
-class HomeController(UniversityListMixin, FederationMixin):
+class HomeController(UniversityListMixin):
 
     def fbchannel(self):
         return render('/fbchannel.mako')
@@ -300,58 +298,6 @@ class HomeController(UniversityListMixin, FederationMixin):
 
     def _pswrecovery_form(self):
         return render('home/recoveryform.mako')
-
-    def _federated_registration_form(self):
-        c.email = session.get('confirmed_email', '').lower()
-        return render('home/federated_registration.mako')
-
-    @validate(FederatedRegistrationForm, form='_federated_registration_form')
-    def federated_registration(self):
-        if not (session.get('confirmed_openid') or session.get('confirmed_facebook_id')):
-            redirect(url(controller='home', action='index'))
-        c.email = session.get('confirmed_email').lower()
-        if hasattr(self, 'form_result'):
-            user = User.get(c.email, self.form_result['location'])
-            if not user:
-                # Make sure that such a user does not exist.
-                user = User(fullname=self.form_result['fullname'],
-                            username=c.email,
-                            location=self.form_result['location'],
-                            password=None,
-                            gen_password=False)
-                self._bind_user(user, flash=False)
-                user.accepted_terms = datetime.utcnow()
-                user.emails = [Email(c.email)]
-                user.emails[0].confirmed = True
-                user.phone_number = self.form_result['phone']
-                bind_group_invitations(user)
-                meta.Session.add(user)
-                meta.Session.commit()
-            sign_in_user(user)
-
-            invitation_hash = self.form_result.get('invitation_hash', '')
-            if invitation_hash:
-                invitation = PendingInvitation.get(invitation_hash)
-                if invitation is not None:
-                    invitation.group.add_member(user)
-                    meta.Session.delete(invitation)
-                    meta.Session.commit()
-                    redirect(url(controller='group', action='home',
-                                 id=invitation.group.group_id))
-
-            kwargs = dict()
-            if user.facebook_id:
-                kwargs['fb'] = True
-
-            redirect(c.came_from or url(controller='profile',
-                                        action='register_welcome', **kwargs))
-
-        # Render form: suggested name, suggested email, agree with conditions
-        defaults = dict(fullname=session.get('confirmed_fullname'),
-                    email=c.email,
-                    invitation_hash=request.params.get('invitation_hash', ''))
-        return htmlfill.render(self._federated_registration_form(),
-                               defaults=defaults)
 
     @validate(PasswordRecoveryForm, form='_pswrecovery_form')
     def pswrecovery(self):
