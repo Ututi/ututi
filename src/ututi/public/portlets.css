@@ -55,6 +55,12 @@
         margin-left: 70px;
     }
 
+    #user-information-portlet .user-info {
+        margin-top: 5px;
+        padding-top: 5px;
+        border-top: 1px solid #eeeeee;
+    }
+
 #user-description-portlet { }
 
     #user-description-portlet p {

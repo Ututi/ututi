@@ -11,6 +11,8 @@
 <%def name="teacher_sidebar(exclude=[])">
 <div id="sidebar">
   ${teacher_information_portlet()}
+  ${user_menu_portlet()}
+  ${user_groups_portlet()}
 </div>
 </%def>
 

@@ -11,10 +11,10 @@
     <li class="icon-message ${'active' if unread_messages else ''}">
       <a id="inbox-link" href="${url(controller='messages', action='index')}">
         %if unread_messages:
-         <strong>${ungettext("Messages (%(count)s new)", "Messages (%(count)s new)",
+         <strong>${ungettext("Private messages (%(count)s new)", "Private messages (%(count)s new)",
                              unread_messages) % dict(count=unread_messages)}</strong>
         %else:
-           ${_("Messages")}
+           ${_("Private messages")}
         %endif
       </a>
     </li>
@@ -273,7 +273,6 @@
   %endif
 </%def>
 
-
 <%def name="teacher_information_portlet(user=None)">
   <% if user is None: user = c.user %>
   <%self:portlet id="user-information-portlet">
@@ -282,19 +281,10 @@
      </div>
      <div class="user-fullname break-word">
        ${user.fullname}
+       (${_("teacher")})
      </div>
-      %if user is c.user:
-      <div class="edit-profile-link break-word">
-        <a href="${url(controller='profile', action='edit')}">${_("(edit profile)")}</a>
-      </div>
-      %endif
-     <div>&nbsp;</div>
-     <div>&nbsp;</div>
+     <div>&nbsp</div>
      <div class="user-info">
-       ${item_location(user)} | ${_("teacher")}
-       %if user.emails:
-       <div><a href="mailto:${user.emails[0].email}">${user.emails[0].email}</a></div>
-       %endif
        %if user.phone_number and user.phone_confirmed:
        <div class="user-phone orange">${_("Phone:")} ${user.phone_number}</div>
        %endif
@@ -304,9 +294,13 @@
        </p>
        %endif
      </div>
-     <div class="clear"></div>
      %if user.description:
      <div class="about-self">${h.html_cleanup(user.description)}</div>
+     %endif
+     %if user is c.user:
+     <div class="edit-profile-link break-word">
+       <a href="${url(controller='profile', action='edit')}">${_("(edit profile)")}</a>
+     </div>
      %endif
   </%self:portlet>
 </%def>
