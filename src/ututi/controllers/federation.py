@@ -1,4 +1,3 @@
-
 import cgi
 
 from openid.consumer import consumer
