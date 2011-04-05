@@ -1570,11 +1570,11 @@ ul.tabs {
     }
 
     #teacher .section.subjects {
-        background-image: url("../img/icons.com/subject_grand_grey.png");
+        background-image: url("../img/icons.com/about/subject.png");
     }
 
     #teacher .section.groups {
-        background-image: url("../img/icons.com/group_grand_grey.png");
+        background-image: url("../img/icons.com/about/group.png");
     }
 
     #teacher .section .title {
