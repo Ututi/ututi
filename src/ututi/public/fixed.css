@@ -1049,15 +1049,13 @@ ul.feature-list {
     -moz-border-radius: 6px;
     background: white url("../images/details/icon_usmall.png") 10px center no-repeat;
     margin: 5px 0 0.8em;
-    padding: 0.6em 3em 0.6em 35px;
-    position: relative;
+    padding: 0.6em 0.6em 0.6em 35px;
     font-size: 14px;
     color: #666;
 }
 
     .flash-message .close-link {
-        position: absolute;
-        top: 5px; right: 10px;
+        float: right;
         color: black;
         text-decoration: underline;
         cursor: pointer;
