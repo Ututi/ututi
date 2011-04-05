@@ -17,27 +17,9 @@
     margin-top: 10px;
 }
 
-#groups_list div.large-header {
-    background: #f6f6f6 url("/images/details/icon_group_25x25.png") 10px 6px no-repeat;
-    padding-left: 35px;
-}
-
-#groups_list .inelement-form .formField label {
-    float: left;
-}
-
-#groups_list .inelement-form textarea {
-    margin: 5px 0 0;
-}
-
-#groups_list .inelement-form .formSubmit {
-    clear: left;
-    margin: 5px 0;
-    float: none;
-}
-
-#groups_list .send_message_block {
-    padding-left: 20px;
+.browse-link {
+    display: block;
+    margin-top: 5px;
 }
 
 button.submit {
@@ -78,12 +60,19 @@ ${parent.head_tags()}
 </%def>
 
 <%def name="teach_group_nag()">
-<div style="float:right">
-  ${h.button_to(_('add groups'), url(controller='profile', action='add_student_group'), class_='btnMedium', method='GET')}
-</div>
-<h2>${_('My student groups')}</h2>
-<p>${_("Add student groups that you teach to.")}</p>
-<div style="clear:both"></div>
+  <div class="feature-box one-column icon-group">
+    <div class="title">
+      ${_('Students groups that you teach to')}
+    </div>
+    <div class="clearfix">
+      <div class="feature icon-email">
+        ${h.literal(_("Easy way to contact your groups by sending a <strong>group message</strong>."))}
+      </div>
+    </div>
+    <div class="action-button">
+      ${h.button_to(_('Add students groups'), url(controller='profile', action='add_student_group'), class_='add', method='GET')}
+    </div>
+  </div>
 </%def>
 
 <%def name="toaught_courses()">
@@ -99,13 +88,26 @@ ${parent.head_tags()}
 </%def>
 
 <%def name="teach_course_nag()">
-<h2>${_('Add courses you teach')}</h2>
-<p><strong>${_('Create subjects you teach, or find those that are already created:')}</strong></p>
-<ul class="pros-list">
-  <li>${_('Here you will be able to upload course material, and groups studying the subject will be notified automatically.')}</li>
-  <li>${_('All your course materials with be organized in one place.')}</li>
-</ul>
-${h.button_to(_('add courses'), url(controller='subject', action='add'), class_='btnMedium', method='GET')}
+  <div class="feature-box one-column icon-subject">
+    <div class="title">
+      ${_("Add courses you teach")}
+    </div>
+    <div class="clearfix">
+      <div class="feature icon-file-upload">
+        <strong>${_("Files upload")}</strong> &ndash; ${_("You will be able to upload course material, that will be accessable for everyone, who is following your course.")}
+      </div>
+      <div class="feature icon-discussions">
+        <strong>${_("Course discussions")}</strong> &ndash; ${_("Discuss course material and related subjects with your students.")}
+      </div>
+      <div class="feature icon-notifications">
+        <strong>${_("Automatic notifications")}</strong> &ndash; ${_("Ututi will automaticaly inform students and groups about changes in course material.")}
+      </div>
+    </div>
+    <div class="action-button">
+      ${h.button_to(_('Add your courses'), url(controller='subject', action='add'), class_='add', method='GET')}
+      ${h.link_to(_("Or browse subjects' catalog"), url(controller='profile', action='search', obj_type='subject'), class_='browse-link')}
+    </div>
+  </div>
 </%def>
 
 <%def name="subject_list(subjects)">
@@ -150,7 +152,7 @@ ${h.button_to(_('add courses'), url(controller='subject', action='add'), class_=
                       user_count) % dict(count=user_count)|n}
           ${_('and')}
           ${ungettext("<span class='orange'>%(count)s</span> group",
-                      "<span class='orange'>%(count)s</span> groups", 
+                      "<span class='orange'>%(count)s</span> groups",
                       group_count) % dict(count=group_count)|n}
         </dd>
       </div>

@@ -1413,11 +1413,18 @@ ul.medium-icon-list {
     background-color: #eeeeee;
     background-repeat: no-repeat;
     background-position: 10px 10px;
-    padding: 5px 20px 20px 45px;
+    padding: 12px 25px 20px 45px;
+    margin-bottom: 10px;
 }
 
     .feature-box.icon-subject {
-        background-image: url('img/icons.com/subject_grand_grey.png');
+        background-position: 15px 15px;
+        background-image: url('img/icons.com/about/subject.png');
+    }
+
+    .feature-box.icon-group {
+        background-position: 15px 15px;
+        background-image: url('img/icons.com/about/group.png');
     }
 
     .feature-box.icon-note {
@@ -1426,11 +1433,12 @@ ul.medium-icon-list {
     }
 
     .feature-box .title {
-        font-size: 13px;
+        font-size: 14px;
         font-weight: bold;
         border-bottom: 1px solid #ffaf37;
-        margin-left: 10px;
+        margin-left: 15px;
         margin-bottom: 15px;
+        padding-bottom: 2px;
     }
 
     .feature-box .feature {
@@ -1442,9 +1450,36 @@ ul.medium-icon-list {
         min-height: 30px;
     }
 
+    .feature-box.one-column .feature {
+        display: inline;
+        width: 460px;
+        float: left;
+        margin: 15px 30px 15px 0px;
+        background-repeat: no-repeat;
+        min-height: 30px;
+    }
+
     .feature-box .icon-file {
         background-image: url('img/icons.com/file_grand_orange.png');
         padding-left: 35px;
+    }
+    .feature-box .icon-file-upload {
+        background-image: url('img/icons.com/about/upload.png');
+        background-position: 10px;
+        padding-left: 50px;
+    }
+    .feature-box .icon-notifications {
+        background-image: url('img/icons.com/about/notifications.png');
+        background-position: 5px;
+        padding-left: 50px;
+    }
+    .feature-box .icon-email {
+        background-image: url('img/icons.com/about/email.png');
+        padding-left: 50px;
+    }
+    .feature-box .icon-discussions {
+        background-image: url('img/icons.com/about/discussions.png');
+        padding-left: 50px;
     }
     .feature-box .icon-chat {
         background-image: url('img/icons.com/discussions_grand_orange.png');
