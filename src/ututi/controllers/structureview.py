@@ -308,7 +308,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
             h.flash(_('The email you entered is registered in Ututi. '
                       'Please login to proceed.'))
             destination = location.url(action='register_teacher_existing')
-            redirect(url(controller='home', action='login',
+            redirect(url(controller='home', action='login', email=email,
                          came_from=destination))
 
         # lookup/create registration entry and
