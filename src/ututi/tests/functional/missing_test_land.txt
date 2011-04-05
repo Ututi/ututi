@@ -16,3 +16,9 @@ Polish frontpage:
     >>> config['tpl_lang'] = 'pl'
     >>> browser = Browser()
     >>> browser.open('http://localhost/')
+
+Content urls:
+
+    >>> browser.open('http://localhost/content/get_user/1')
+    >>> browser.url
+    'http://localhost/user/1'

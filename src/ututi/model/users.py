@@ -189,6 +189,13 @@ class User(Author):
             return None
 
     @classmethod
+    def get_by_id(cls, id):
+        try:
+            return meta.Session.query(User).filter_by(id=id).one()
+        except NoResultFound:
+            return None
+
+    @classmethod
     def get(cls, username, location):
         q = meta.Session.query(cls)
 
