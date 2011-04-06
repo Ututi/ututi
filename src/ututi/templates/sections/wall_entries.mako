@@ -210,7 +210,7 @@
   <% children = [ch for ch in event.children if ch.md5 is not None] if hasattr(event, 'children') else [] %>
   %if children:
     <div class="click2show">
-      <div class="click hide event_children_link">
+      <div class="click hide event-children-link">
         <% cccount = sum([len(ch.get('comments', [])) for ch in children])%>
         (
         ${ungettext("and %(count)s more file", "and %(count)s more files", len(children)) % dict(count=len(children))}
@@ -631,7 +631,7 @@
                     group_link=h.content_link(event.object_id),
                     count=len(event.children)) | n}
           %endif
-          <span class="click hide event_children_link">${_("show all")}</span>
+          <span class="click hide event-children-link">${_("show all")}</span>
       %else:
         %if c.user is not None and c.user.id == event.author_id:
           ${_("You have joined the group %(group_link)s") % \
@@ -672,7 +672,7 @@
                   group_link=h.content_link(event.object_id),
                   count=len(event.children)) | n}
         %endif
-        <span class="click hide event_children_link">${_("show all")}</span>
+        <span class="click hide event-children-link">${_("show all")}</span>
       %else:
         %if c.user is not None and c.user.id == event.author_id:
           ${_("You have left the group %(group_link)s") % \

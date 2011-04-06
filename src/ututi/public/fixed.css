@@ -655,12 +655,12 @@ input {
             display: none;
         }
 
-        .wall .wall-entry .event_children_link {
+        .wall .wall-entry .event-children-link {
             font-size: 10px;
             cursor: pointer;
         }
 
-        .wall .wall-entry.type_file_uploaded .event_children_link {
+        .wall .wall-entry.type_file_uploaded .event-children-link {
             margin-left: 60px;
             padding-bottom: 10px;
         }
