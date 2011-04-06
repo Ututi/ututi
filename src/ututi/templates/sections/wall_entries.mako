@@ -71,7 +71,7 @@
       <img src="${url(controller='user', action='logo', id=author_id, width=30)}" />
     </div>
     <div class="content">
-      <span class="reply-author">${h.user_link(author_id)}:</span>
+      <span class="reply-author link-color">${h.user_link(author_id)}:</span>
       <span class="event-content truncated">${h.nl2br(message)}</span>
       %if attachments:
       <ul class="file-list">

@@ -563,7 +563,6 @@ input {
                     }
 
                     .wall .wall-entry .thread .content .reply .reply-author {
-                        color: #d45500; /* Ututi orange */
                         margin-right: 5px;
                     }
 
@@ -883,7 +882,6 @@ ul.feature-list {
     .group-description .group-title dt {
         font-size: 13px;
         font-weight: bold;
-        color: #d45500;
     }
 
     .group-description .group-title .group-email {
