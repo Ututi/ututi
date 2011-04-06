@@ -474,7 +474,7 @@ input {
         .wall .wall-entry .event-heading {
             font-size: 11px;
             padding: 5px 5px 5px 20px;
-            background: url("/images/details/icon_event.png") no-repeat left center;
+            background: url("/img/icons.com/event.png") no-repeat left center;
         }
 
         .wall .wall-entry.minimizable .event-heading {
@@ -495,26 +495,26 @@ input {
              */
 
             .wall .wall-entry.group-event .event-heading {
-                background-image: url("/img/icons/icon-group-tiny.png");
+                background-image: url("/img/icons.com/group_medium_grey.png");
             }
 
             .wall .wall-entry.subject-event .event-heading {
-                background-image: url("/img/icons/icon-subject-tiny.png");
+                background-image: url("/img/icons.com/subject_medium_grey.png");
             }
 
             .wall .wall-entry.message-event .event-heading {
-                background-image: url("/img/icons/icon-post-tiny.png");
+                background-image: url("/img/icons.com/message_medium_grey.png");
             }
 
             .wall .wall-entry.sms-event .event-heading {
-                background-image: url("/img/icons/icon-sms-tiny.png");
+                background-image: url("/img/icons.com/mobile.png");
             }
 
         .wall .wall-entry .event-time {
             color: #888;
             font-size: 11px;
             padding-left: 15px;
-            background: url("/img/icons/icon_time.png") no-repeat left center;
+            background: url("/img/icons.com/clock.png") no-repeat left center;
         }
 
             .wall .wall-entry .event-heading .event-time {
@@ -623,11 +623,11 @@ input {
         }
 
         .wall .wall-entry .file-description {
-            background: url("/img/icons/file-off-big.png") no-repeat left center;
+            background: url("/img/icons.com/file_grand_grey.png") no-repeat left center;
         }
 
         .wall .wall-entry .page-description {
-            background: url("/img/icons/exams-off.png") no-repeat left center;
+            background: url("/img/icons.com/wiki_grand_grey.png") no-repeat left center;
         }
 
             .wall .wall-entry .file-description .title,
@@ -685,7 +685,7 @@ ul.file-list {
 }
 
     ul.file-list li {
-        background: url(img/icons/icon-file-tiny.png) no-repeat left center;
+        background: url(img/icons.com/file_medium_grey.png) no-repeat left center;
         padding-left: 15px;
         margin: 2px 0px;
     }
