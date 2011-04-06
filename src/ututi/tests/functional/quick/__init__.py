@@ -14,6 +14,7 @@ def setUp(test):
     test.globs['Browser'] = UtutiTestBrowser
     l = LocationTag(u'U-niversity', u'uni', u'')
     f = LocationTag(u'D-epartment', u'dep', u'', l)
+    l.member_policy = 'PUBLIC'
     meta.Session.add(l)
     meta.Session.add(f)
     meta.Session.commit()

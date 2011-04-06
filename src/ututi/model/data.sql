@@ -1,5 +1,5 @@
-insert into tags (title, title_short, description, tag_type)
-       values ('U-niversity', 'uni', '', 'location');
+insert into tags (title, title_short, description, tag_type, member_policy)
+       values ('U-niversity', 'uni', '', 'location', 'PUBLIC');
 insert into tags (title, title_short, description, parent_id, tag_type)
        values ('D-epartment', 'd', '', 1, 'location');
 

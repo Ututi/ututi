@@ -29,6 +29,7 @@ def ftest_setUp(test):
 
     uni = LocationTag(u'U-niversity', u'uni', u'')
     dep = LocationTag(u'D-epartment', u'dep', u'', uni)
+    uni.member_policy = 'PUBLIC'
     meta.Session.add(uni)
     meta.Session.add(dep)
     meta.Session.commit()
