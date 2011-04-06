@@ -474,7 +474,7 @@ input {
         .wall .wall-entry .event-heading {
             font-size: 11px;
             padding: 5px 5px 5px 20px;
-            background: url("/img/icons.com/event.png") no-repeat left center;
+            background: url("/img/icons.com/event.png") no-repeat left 5px;
         }
 
         .wall .wall-entry.minimizable .event-heading {
