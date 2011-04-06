@@ -576,13 +576,11 @@ input {
             }
 
                 .wall .wall-entry .actions a {
-                    color: #668000;
                     font-size: 11px;
                     margin-right: 10px;
                 }
 
                 .wall .wall-entry a.truncate_more_link {
-                    color: #668000;
                     outline: none;
                 }
 
@@ -658,7 +656,6 @@ input {
         }
 
         .wall .wall-entry .event_children_link {
-            color: #668000;
             font-size: 10px;
             cursor: pointer;
         }
@@ -916,7 +913,6 @@ ul.feature-list {
 
     .group-description .group-actions dd a {
         font-size: 10px;
-        color: #668000;
     }
 
         .group-description dd.files {
