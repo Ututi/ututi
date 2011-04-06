@@ -25,14 +25,14 @@ alter table user_registrations add column university_title varchar(100) default 
 alter table user_registrations add column university_country_id int8 default null references countries(id) on delete set null;
 alter table user_registrations add column university_site_url varchar(320) default null;
 alter table user_registrations add column university_logo bytea default null;
-alter table user_registrations add column university_member_policy university_member_policy default 'RESTRICT_EMAIL';
+alter table user_registrations add column university_member_policy university_member_policy default null;
 alter table user_registrations add column university_allowed_domains text default null;
 
 alter table countries rename column title to name;
 
 alter table tags add column country_id int8 default null references countries(id) on delete cascade;
 
-alter table tags add column member_policy university_member_policy default 'RESTRICT_EMAIL';
+alter table tags add column member_policy university_member_policy default null;
 alter table tags add column email_domains text default null;
 
 alter table user_registrations add column invited_emails text default null;
