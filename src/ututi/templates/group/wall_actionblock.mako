@@ -30,7 +30,7 @@
                                $('#'+key).parent().after($('<div class="error-message">'+error+'</div>'));
                            }
                        } else {
-                           $('#message_form').find('input, textarea').val('');
+                           $('#message_form').find('input[type="text"], textarea').val('');
                            $('#send_message').click();
                            reload_wall(data.evt);
                        }
@@ -74,7 +74,7 @@
              onComplete: function(file, response, iframe){
                  iframe['progress_indicator'].remove();
                   if (response != 'UPLOAD_FAILED') {
-                     $('#file_upload_form').find('input, textarea').val('');
+                     $('#file_upload_form').find('input[type="text"], textarea').val('');
                      $('#upload_file').click();
                      $('#upload_file_block').removeClass('upload-failed');
                      reload_wall(response);

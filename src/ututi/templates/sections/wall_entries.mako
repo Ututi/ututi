@@ -207,11 +207,11 @@
     <%self:file_description event="${event}"/>
     <%self:event_conversation event="${event}" head_message="${False}" />
   </div>
-  <% children = [ch for ch in event.children if ch.md5 is not None] if hasattr(event, 'children') else [] %>
+  <% children = [ch for ch in getattr(event, 'children', []) if ch.md5 is not None] %>
   %if children:
     <div class="click2show">
       <div class="click hide event-children-link">
-        <% cccount = sum([len(ch.get('comments', [])) for ch in children])%>
+        <% cccount = sum([len(getattr(ch, 'comments', [])) for ch in children]) %>
         (
         ${ungettext("and %(count)s more file", "and %(count)s more files", len(children)) % dict(count=len(children))}
         %if cccount:

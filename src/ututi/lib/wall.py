@@ -8,7 +8,7 @@ from collections import defaultdict
 from pylons import url
 from pylons import tmpl_context as c
 
-from sqlalchemy.sql.expression import and_, or_
+from sqlalchemy.sql.expression import or_
 from sqlalchemy.sql import select
 
 from ututi.model.users import AnonymousUser
@@ -98,7 +98,7 @@ class ObjectWrapper(dict):
         elif hasattr(self.internal, attr):
             return getattr(self.internal, attr)
         else:
-            raise NotImplementedError()
+            raise AttributeError()
 
     def wall_entry(self):
         return render_def('/sections/wall_entries.mako', self.internal.event_type, event=self)
