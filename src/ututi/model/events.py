@@ -4,7 +4,7 @@ import logging
 from sqlalchemy import orm, Column
 from sqlalchemy.schema import Table
 from sqlalchemy.orm import backref
-from sqlalchemy.orm import relation, reconstructor
+from sqlalchemy.orm import relation
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.types import Unicode
 from pylons import url
@@ -119,13 +119,24 @@ class Commentable(MessagingEventMixin):
         return url(controller='wall', action='eventcomment_reply', event_id=self.id)
 
 
-class PageCreatedEvent(Event, Commentable):
+class PageEventBase(Event):
+
+    category = 'page'
+
+    @property
+    def page_deleted_on(self):
+        return self.page.deleted_on
+
+    @property
+    def page_title(self):
+        return self.page.title
+
+
+class PageCreatedEvent(PageEventBase, Commentable):
     """Event fired when a page is created.
 
     Has an attribute `page' pointing to the page that was added.
     """
-
-    category = 'page'
 
     def text_news(self):
         return _('Page %(page_title)s (%(page_url)s) was created.') % {
@@ -143,13 +154,11 @@ class PageCreatedEvent(Event, Commentable):
             'link_to_page': link_to(self.page.title, self.page.url())}
 
 
-class PageModifiedEvent(Event, Commentable):
+class PageModifiedEvent(PageEventBase, Commentable):
     """Event fired when a page is modified.
 
     Has an attribute `page' pointing to the page that was modified.
     """
-
-    category = 'page'
 
     def text_news(self):
         if not self.page.isDeleted():

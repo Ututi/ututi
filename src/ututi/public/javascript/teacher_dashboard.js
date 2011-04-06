@@ -56,7 +56,7 @@ $(document).ready(function() {
                form.serialize(),
                function(data, status) {
                    return function() {
-                       $(form).find('input, textarea').val('');
+                       $(form).find('input[type="text"], textarea').val('');
                        container = $(form).closest('.group-description');
                        $('.send_sms', container).click();
                        $('.sms-sent', container).removeClass('hidden');

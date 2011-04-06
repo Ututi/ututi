@@ -43,7 +43,7 @@
          onComplete: function(file, response, iframe){
              iframe['progress_indicator'].remove();
               if (response != 'UPLOAD_FAILED') {
-                 $('#file_upload_form').find('input, textarea').val('');
+                 $('#file_upload_form').find('input[type="text"], textarea').val('');
                  $('#upload_file').click();
                  $('#upload_file_block').removeClass('upload-failed');
                  reload_wall(response);
@@ -81,7 +81,7 @@
                                $('#'+key).parent().after($('<div class="error-message">'+error+'</div>'));
                            }
                        } else {
-                           $('#wiki_form').find('input, textarea').val('');
+                           $('#wiki_form').find('input["type="text"], textarea').val('');
                            $('#create_wiki').click();
                            reload_wall(data.evt);
                        }
