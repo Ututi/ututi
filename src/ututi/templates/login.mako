@@ -1,4 +1,5 @@
 <%inherit file="/ubase.mako" />
+<%namespace file="/widgets/facebook.mako" import="init_facebook" />
 
 <%def name="head_tags()">
   ${parent.head_tags()}
@@ -84,6 +85,7 @@
       <a id="facebook-login" href="#">
         ${h.image('/img/facebook-button.png', alt=_('Log in using Facebook'))}
       </a>
+      ${init_facebook()}
       <script type="text/javascript">
         $(document).ready(function() {
           $('#facebook-login').click(function() {

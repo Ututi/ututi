@@ -1,7 +1,9 @@
 <%inherit file="/registration/base.mako" />
+<%namespace file="/widgets/facebook.mako" name="init_facebook" />
 
 <%def name="pagetitle()">${_("Registration to Ututi")}</%def>
 
+${init_facebook()}
 <script type="text/javascript">
   $(document).ready(function() {
       // attempt to login FB

@@ -1,4 +1,5 @@
 <%inherit file="/profile/edit.mako" />
+<%namespace file="/widgets/facebook.mako" import="init_facebook" />
 
 <form method="post" action="${url(controller='profile', action='update_contacts')}"
       id="contacts_form" class="new-style-form">
@@ -119,6 +120,7 @@
   </fieldset>
 </form>
 
+${init_facebook()}
 <script>
   $(document).ready(function() {
     $('#fb-link-button').click(function() {

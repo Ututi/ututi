@@ -2,6 +2,7 @@
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 <%namespace file="/elements.mako" import="tabs" />
 <%namespace file="/portlets/sections.mako" import="user_sidebar, user_right_sidebar"/>
+<%namespace file="/widgets/facebook.mako" import="init_facebook" />
 
 <%def name="portlets()">
 ${user_sidebar()}
@@ -271,6 +272,7 @@ ${tabs()}
   %endif
 
   %if c.fb_random_post:
+  ${init_facebook()}
   <script type="text/javascript">
       //<![CDATA[
       $(document).ready(function() {

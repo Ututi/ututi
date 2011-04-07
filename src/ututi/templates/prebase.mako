@@ -358,19 +358,6 @@ ${_('Student information online')}
             });
         }
     </script>
-
-    <div id="fb-root"></div>
-    %if c.lang == 'lt':
-      <script src="http://connect.facebook.net/lt_LT/all.js"></script>
-    %elif c.lang == 'pl':
-      <script src="http://connect.facebook.net/pl_PL/all.js"></script>
-    %else:
-      <script src="http://connect.facebook.net/en_US/all.js"></script>
-    %endif
-    <script>
-      FB.init({appId: '${c.facebook_app_id}', status: true,
-          cookie: true, xfbml: true, channelUrl: '${url(controller='home', action='fbchannel', qualified=True)}'});
-    </script>
   </body>
 </html>
 

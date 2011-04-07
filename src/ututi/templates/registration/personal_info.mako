@@ -1,4 +1,5 @@
 <%inherit file="/registration/base.mako" />
+<%namespace file="/widgets/facebook.mako" import="init_facebook" />
 
 <%def name="pagetitle()">${_("Personal information")}</%def>
 
@@ -40,6 +41,7 @@
           <a id="fb-link-button" href="#link-facebook">
             ${h.image('/img/facebook-button.png', alt=_('Link Facebook'))}
           </a>
+          ${init_facebook()}
           <script type="text/javascript">
             $(document).ready(function() {
               $('#fb-link-button').click(function() {

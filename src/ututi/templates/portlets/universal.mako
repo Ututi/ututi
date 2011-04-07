@@ -1,5 +1,6 @@
 <%inherit file="/portlets/base.mako"/>
 <%namespace file="/elements.mako" import="item_box" />
+<%namespace file="/widgets/facebook.mako" import="init_facebook" />
 
 <%def name="users_online_portlet(count=12)">
   <% users = h.users_online(count) %>
@@ -117,6 +118,7 @@
       <p id="feedback-message">${_("Your email was successfully sent.")}</p>
     </div>
 
+    ${init_facebook()}
     <script type="text/javascript">
       //<![CDATA[
       $(document).ready(function() {
