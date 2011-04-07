@@ -5,8 +5,11 @@
 <%def name="user_menu_portlet()">
   <%self:portlet id="user-menu-portlet">
   <ul id="user-sidebar-menu" class="icon-list">
-    <li class="icon-feed"> <a href="${url(controller='profile', action='feed')}">${_("My feed")}</a> </li>
-    <li class="icon-university"> <a href="${c.user.location.url()}">${_("My university feed")}</a> </li>
+    %if c.user.is_teacher:
+    <li class="icon-feed"> <a href="${url(controller='home', action='index')}">${_("Teacher's home")}</a> </li>
+    %endif
+    <li class="icon-feed"> <a href="${url(controller='profile', action='feed')}">${_("News feed")}</a> </li>
+    <li class="icon-university"> <a href="${c.user.location.url()}">${_("University feed")}</a> </li>
     <% unread_messages = c.user.unread_messages() %>
     <li class="icon-message ${'active' if unread_messages else ''}">
       <a id="inbox-link" href="${url(controller='messages', action='index')}">
@@ -280,25 +283,8 @@
        <img src="${user.url(action='logo', width=60)}" alt="logo" />
      </div>
      <div class="user-fullname break-word">
-       ${user.fullname}
-       (${_("teacher")})
+       ${_("Teacher")} ${user.fullname}
      </div>
-     %if user.phone_number or user.site_url:
-     <div>&nbsp</div>
-     <div class="user-info">
-       %if user.phone_number and user.phone_confirmed:
-       <div class="user-phone orange">${_("Phone:")} ${user.phone_number}</div>
-       %endif
-       %if user.site_url:
-       <p class="user-link">
-         <a href="${user.site_url}">${user.site_url}</a>
-       </p>
-       %endif
-     </div>
-     %endif
-     %if user.description:
-     <div class="about-self">${h.html_cleanup(user.description)}</div>
-     %endif
      %if user is c.user:
      <div class="edit-profile-link break-word">
        <a href="${url(controller='profile', action='edit')}">${_("(edit profile)")}</a>
