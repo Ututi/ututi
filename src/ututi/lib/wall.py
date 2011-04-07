@@ -15,18 +15,20 @@ from ututi.model.users import AnonymousUser
 from ututi.model.mailing import decode_and_join_header
 from ututi.model.mailing import UtutiEmail
 
-from ututi.model import content_items_table as t_ci, page_versions_table as t_pages
-from ututi.model import files_table as t_files, private_messages_table as t_pmsg
-from ututi.model.mailing import group_mailing_list_messages_table as t_mlmsg
-from ututi.model import forum_posts_table as t_fpmsg
-from ututi.model import outgoing_group_sms_messages_table as t_sms
-
 from ututi.model import Group
 from ututi.model import File
 from ututi.model import meta
 from ututi.lib.base import render_def
 
 def generic_events_query():
+    t_ci = meta.metadata.tables['content_items']
+    t_pages = meta.metadata.tables['page_versions']
+    t_files = meta.metadata.tables['files']
+    t_pmsg = meta.metadata.tables['private_messages']
+    t_mlmsg = meta.metadata.tables['group_mailing_list_messages']
+    t_fpmsg = meta.metadata.tables['forum_posts']
+    t_sms = meta.metadata.tables['outgoing_group_sms_messages']
+
     #generic query for events
     t_context = t_ci.alias('context_ci')
     file_ci = t_ci.alias('file_ci')
@@ -123,8 +125,8 @@ class WallMixin(object):
         return [ObjectWrapper(evt) for evt in  meta.Session.execute(evts)]
 
     def _get_event_comments(self, event_ids):
-        from ututi.model.events import event_comments_table as t_comm
-        from ututi.model import content_items_table as t_ci
+        t_comm = meta.metadata.tables['event_comments']
+        t_ci = meta.metadata.tables['content_items']
 
         comm = select([t_comm.c.content.label('message'),
                        t_ci.c.created_by.label('author_id'),
@@ -141,7 +143,7 @@ class WallMixin(object):
         return comments_collection
 
     def _get_event_children(self, event_ids):
-        from ututi.model.events import events_table as t_evt
+        t_evt = meta.metadata.tables['events']
         evts_generic = generic_events_query()
         children = meta.Session.execute(evts_generic\
                                             .where(t_evt.c.parent_id.in_(event_ids))\
