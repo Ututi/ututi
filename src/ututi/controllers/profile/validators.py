@@ -4,8 +4,10 @@ from pylons import tmpl_context as c
 from formencode import Schema, validators, All
 from formencode.compound import Pipe
 from formencode.foreach import ForEach
+from formencode.api import FancyValidator
 from formencode.api import Invalid
 from formencode.variabledecode import NestedVariables
+from ututi.model.users import User
 from ututi.lib.validators import UserPasswordValidator, TranslatedEmailValidator, UniqueEmail,\
     LocationTagsValidator, PhoneNumberValidator, FileUploadTypeValidator, SeparatedListValidator
 
@@ -17,8 +19,28 @@ class LocationForm(Schema):
                     LocationTagsValidator())
 
 
-class ProfileForm(LocationForm):
+class UserLocationIntegrity(FancyValidator):
+
+    messages = {
+        'duplicated': _(u"You can't choose this department."),
+        }
+
+    def validate_python(self, value, state):
+        # If there are users in selected locations and this user are not current
+        # user, we will show some Error.
+        for user in User.get_all(c.user.username):
+            if user.location == value and user.id != c.user.id:
+                raise Invalid(self.message('duplicated', state), value, state)
+
+
+class ProfileForm(Schema):
     """A schema for validating user profile forms."""
+
+    pre_validators = [NestedVariables()]
+    allow_extra_fields = True
+    location = Pipe(ForEach(validators.String(strip=True)),
+                    LocationTagsValidator(),
+                    UserLocationIntegrity())
 
     fullname = validators.String(not_empty=True)
     site_url = validators.URL()
