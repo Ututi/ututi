@@ -137,7 +137,8 @@
         <ul class="file-list">
           %for file in original.attachments:
           <li><a href="${file.url()}">${file.title}</a></li>
-          %endfor        </ul>
+          %endfor
+        </ul>
         %endif
         <div class="closing">
           <span class="event-time">${h.when(original.created)}</span>
