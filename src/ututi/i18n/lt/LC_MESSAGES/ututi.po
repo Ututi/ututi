@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-03-31 14:23+0300\n"
+"PO-Revision-Date: 2011-04-06 19:19+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -103,12 +103,6 @@ msgstr ""
 msgid "Error message"
 msgstr "Klaida"
 
-msgid "You must agree to the terms of use."
-msgstr "Su Ututi sąlygomis sutikti privaloma."
-
-msgid "Please enter your name to register."
-msgstr "Įvesk savo vardą."
-
 msgid "This Google account is already linked to another Ututi account."
 msgstr "Ši Google paskyra jau sujungta su kita Ututi paskyra"
 
@@ -145,18 +139,13 @@ msgstr "Reikia konfigūruoti"
 msgid "Authentication failed: %s"
 msgstr "Tapatybės nustatymas nesėkmingas: %s"
 
-msgid "Wrong username or password!"
-msgstr "Neteisingas el. pašto adresas arba slaptažodis!"
-
-msgid ""
-"Thank You! Your request to become a teacher has been received. We will "
-"notify You once we grant You the rights of a teacher."
-msgstr ""
-"Ačiū! Jūsų prašymas tapti dėstytoju gautas. Pranešime Jums kai tiks "
-"suteiksime dėstytojo prieigą."
-
 msgid "Facebook did not provide your email address."
 msgstr "Facebook nepateikė jūsų el. pašto adreso."
+
+msgid ""
+"Login failed. Please login using your username and bind your account "
+"first."
+msgstr ""
 
 #, python-format
 msgid "Your Google account \"%s\" has been linked to your existing Ututi account."
@@ -421,8 +410,10 @@ msgstr "Slaptažodis turi būti ne trumpesnis nei 5 simboliai."
 msgid "Passwords do not match."
 msgstr "Hm... Slaptažodžiai nesutampa."
 
-msgid "This email has already been used to register."
-msgstr "Toks el. paštas jau užregistruotas."
+msgid ""
+"Please use your university email or <a href=\"/browse\">choose university"
+" from the list</a>."
+msgstr ""
 
 msgid "You have to be logged in to download a file!"
 msgstr "Jei nori parsisiųsti failą, teks prisijungti."
@@ -466,40 +457,14 @@ msgstr ""
 "Tai galima padaryti tik prisijungus. Prašome prisijungti arba "
 "užsiregistruoti Ututi, jei lankaisi čia pirmąsyk."
 
-#, python-format
-msgid ""
-"If this is your first time visiting <a href=\"%(url)s\">Ututi</a>, please"
-" register first."
+msgid "Incorrect username."
 msgstr ""
-"Jeigu <a href=\"%(url)s\">Ututi</a> lankaisi pirmą kartą, iš pradžių "
-"užsiregistruok."
 
-msgid ""
-"You seem to have entered your username and password wrong, please try "
-"again!"
-msgstr "Įvedei neteisingą naudotojo vardą arba slaptažodį, pabandyk dar kartą!"
-
-msgid "Invalid invitation!"
-msgstr "Netinkamas pakvietimas!"
-
-msgid "The invitation link you have followed was either already used or invalid."
-msgstr "Pakvietimo nuoroda jau panaudota arba yra netinkama."
-
-msgid "Invalid email!"
-msgstr "Neteisingas el. pašto adresas!"
-
-msgid "You can only use the email this invitation was sent for to register."
+msgid "Please select your network."
 msgstr ""
-"Registruotis gali tik tuo el. pašto adresu, į kurį Tau buvo išsiųstas "
-"pakvietimas."
 
-msgid "Please register!"
-msgstr "Prašome užsiregistruoti!"
-
-msgid ""
-"Only registered users can become members of a group, please register "
-"first."
-msgstr "Tik registruoti vartotojai gali prisijungti prie grupės."
+msgid "Incorrect password."
+msgstr ""
 
 msgid "Password recovery email sent. Please check your inbox."
 msgstr "Slaptažodžio atkūrimo laiškas išsiųstas. Pasitikrink pašto dėžutę."
@@ -571,15 +536,15 @@ msgstr "Greitai baigsis grupės '%s' privačios vietos galiojimo laikas"
 msgid "The Ututi group \"%s\" has run out of private file space"
 msgstr "Grupėje \"%s\" baigėsi privačių failų vieta."
 
-msgid "Only with University emails"
+msgid "Only people with confirmed university email can register"
 msgstr ""
 
 msgid ""
-"Allow invites for non university emails (@gmail.com, @mail.ru, "
-"@yahoo.com, etc.)"
+"People with confirmed university email can register and other can be "
+"invited"
 msgstr ""
 
-msgid "No limitations"
+msgid "Everyone can register to this university"
 msgstr ""
 
 msgid "Please enter your password."
@@ -594,10 +559,10 @@ msgstr ""
 msgid "Please upload JPEG, PNG or GIF image."
 msgstr ""
 
-msgid "Please enter University title."
+msgid "Please enter university title."
 msgstr ""
 
-msgid "Please enter University web site."
+msgid "Please enter university web site."
 msgstr ""
 
 msgid "Please select logo."
@@ -672,6 +637,27 @@ msgstr ""
 msgid "Information updated."
 msgstr "Informacija atnaujinta."
 
+msgid "Wrong username or password!"
+msgstr "Neteisingas el. pašto adresas arba slaptažodis!"
+
+msgid ""
+"You seem to have entered your username and password wrong, please try "
+"again!"
+msgstr "Įvedei neteisingą naudotojo vardą arba slaptažodį, pabandyk dar kartą!"
+
+msgid "The email you entered is registered in Ututi. Please login to proceed."
+msgstr ""
+
+msgid "You already have a teacher account."
+msgstr ""
+
+msgid ""
+"Thank You! Your request to become a teacher has been received. We will "
+"notify You once we grant You the rights of a teacher."
+msgstr ""
+"Ačiū! Jūsų prašymas tapti dėstytoju gautas. Pranešime Jums kai tiks "
+"suteiksime dėstytojo prieigą."
+
 msgid "Subject information"
 msgstr "Informacija apie dalyką"
 
@@ -702,16 +688,6 @@ msgstr "Negali trinti šio katalogo."
 
 msgid "New page"
 msgstr "Naujas puslapis"
-
-msgid "This email address is already in use."
-msgstr "Šis el. pašto adresas jau naudojamas."
-
-msgid ""
-"All teacher tools will be available to You once our team confirms You as "
-"a teacher. Thank You!"
-msgstr ""
-"Visi dėstytojų įrankiai Jums bus prieinami, kai mūsų administratoriai Jus"
-" patvirtins. Ačiū!"
 
 msgid "This user profile is not public"
 msgstr "Šio naudotojo profilis nėra viešai prieinamas"
@@ -1010,6 +986,16 @@ msgstr "Toks el. paštas jau yra."
 
 msgid "Enter a valid email."
 msgstr "Ei! Įvesk teisingą el. paštą."
+
+#, python-format
+msgid "%(email)s is already registered in %(university)s network."
+msgstr ""
+
+msgid "Public email domains are not allowed."
+msgstr ""
+
+msgid "You have to use university email address to register at this university."
+msgstr ""
 
 msgid "Enter a valid email domain."
 msgstr ""
@@ -1372,56 +1358,38 @@ msgstr ""
 "Paveiksliukas iš flickr: "
 "http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
 
-msgid "Log in or register using your Google or Facebook account"
-msgstr "Prisijunk arba registruokis per savo Google ar Facebook paskyrą"
+msgid "New in Ututi?"
+msgstr ""
 
-msgid "Connect"
-msgstr "Prisijungti"
-
-msgid "Log in directly to Ututi"
-msgstr "Junkis tiesiai į Ututi"
-
-msgid "Your email address"
-msgstr "El. pašto adresas"
-
-msgid "Password"
-msgstr "Slaptažodis"
+msgid "Sign in with your university email"
+msgstr ""
 
 msgid "Login"
 msgstr "Prisijungti"
 
+msgid "Email address:"
+msgstr "El. pašto adresas:"
+
+msgid "Password:"
+msgstr ""
+
+msgid "Select network:"
+msgstr ""
+
+msgid "Keep me logged in on this computer"
+msgstr ""
+
 msgid "Forgot password?"
 msgstr "Pamiršote slaptažodį?"
 
-msgid "First time here?"
-msgstr "Pirmą kartą čia?"
+msgid "Or log in using Facebook or Google"
+msgstr ""
 
-msgid "Register!"
-msgstr "Registruokis!"
+msgid "Log in using Facebook"
+msgstr "Prisijungti per Facebook"
 
-msgid "Register as a new Ututi user"
-msgstr "Registruokis kaip naujas Ututi narys"
-
-msgid "Full name"
-msgstr "Vardas, pavardė"
-
-msgid "Email"
-msgstr "El. paštas"
-
-msgid "Gadu gadu"
-msgstr "Gadu gadu"
-
-msgid "Repeat password"
-msgstr "Pakartoti slaptažodį"
-
-msgid "I agree to the "
-msgstr "Sutinku su"
-
-msgid "terms of use"
-msgstr "naudojimosi sistema taisyklėmis"
-
-msgid "Register"
-msgstr "Registruotis"
+msgid "Log in using Google"
+msgstr "Prisijunk naudodamas Google"
 
 msgid "Student information online"
 msgstr "Informacija studentams internete"
@@ -1863,6 +1831,9 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
+msgid "Password"
+msgstr "Slaptažodis"
+
 msgid "Subject"
 msgstr "Temos antraštė"
 
@@ -1976,6 +1947,9 @@ msgstr[2] "rasta %(count)s dalykų"
 msgid "Fullname"
 msgstr "Vardas ir pavardė"
 
+msgid "Email"
+msgstr "El. paštas"
+
 msgid "University"
 msgstr "Universitetas"
 
@@ -2065,6 +2039,9 @@ msgstr "Pastabos"
 msgid "Owner information"
 msgstr "Savininko informacija"
 
+msgid "Full name"
+msgstr "Vardas, pavardė"
+
 msgid "Phone number"
 msgstr "Telefono numeris"
 
@@ -2093,6 +2070,9 @@ msgstr "Mano knygos (%(book_count)d)"
 
 msgid "Upload a Book"
 msgstr "Įkelti Knygą"
+
+msgid "Register"
+msgstr "Registruotis"
 
 msgid "log out"
 msgstr "išeiti"
@@ -2157,6 +2137,39 @@ msgstr "Tai vieta, kur tavo senas vadovėlis gali rasti naują šeimininką."
 
 msgid "Newest books"
 msgstr "Naujausios knygos"
+
+msgid "Log in or register using your Google or Facebook account"
+msgstr "Prisijunk arba registruokis per savo Google ar Facebook paskyrą"
+
+msgid "Connect"
+msgstr "Prisijungti"
+
+msgid "Log in directly to Ututi"
+msgstr "Junkis tiesiai į Ututi"
+
+msgid "Your email address"
+msgstr "El. pašto adresas"
+
+msgid "First time here?"
+msgstr "Pirmą kartą čia?"
+
+msgid "Register!"
+msgstr "Registruokis!"
+
+msgid "Register as a new Ututi user"
+msgstr "Registruokis kaip naujas Ututi narys"
+
+msgid "Gadu gadu"
+msgstr "Gadu gadu"
+
+msgid "Repeat password"
+msgstr "Pakartoti slaptažodį"
+
+msgid "I agree to the "
+msgstr "Sutinku su"
+
+msgid "terms of use"
+msgstr "naudojimosi sistema taisyklėmis"
 
 msgid "Books added"
 msgstr "Pridėtos knygos"
@@ -2657,9 +2670,6 @@ msgstr ""
 msgid "Description:"
 msgstr ""
 
-msgid "Email address:"
-msgstr "El. pašto adresas:"
-
 msgid "Moderators"
 msgstr "Grupės pilotai"
 
@@ -3061,45 +3071,6 @@ msgstr ""
 msgid "upload a file"
 msgstr "įkelk failą"
 
-msgid "Associate an existing Ututi account"
-msgstr "Susieti esamą Ututi paskyrą"
-
-msgid "Enter the user name and password for your existing Ututi account."
-msgstr "Įveskite naudotojo vardą ir slaptažodį esamai Ututi paskyrai."
-
-msgid "Log in & associate"
-msgstr "Prisijungti ir susieti"
-
-msgid "1. Personal information"
-msgstr "1. Asmeninė informacija"
-
-msgid "Please check that your personal information is correct."
-msgstr "Patikrinkite, ar jūsų asmeninė informacija teisinga."
-
-msgid "2. School (optional)"
-msgstr "2. Universitetas (nebūtina)"
-
-msgid ""
-"Ututi is an application for students, so it is important for us to know "
-"where you study. These data can be changed later in your profile settings"
-" screen."
-msgstr ""
-"Ututi yra sistema studentams, todėl mums svarbu žinoti, kur studijuojate."
-" Šie duomenys gali būti keičiami vėliau profilio nustatymų puslapyje."
-
-msgid "3. Phone number (optional)"
-msgstr "3. Telefono numeris (nebūtina)"
-
-msgid ""
-"We need your phone number so that you could send and receive SMS messages"
-" from the group. Don't worry, we will never send advertisements."
-msgstr ""
-"Mums reikia jūsų telefono numerio, kad galėtumėte siųsti ir gauti SMS "
-"žinutes iš grupės. Nesijaudinkite, niekada nesiųsime jums reklamos."
-
-msgid "I am already a registered Ututi user"
-msgstr "Aš jau esu registruotas Ututi narys"
-
 msgid "Reset your password"
 msgstr "Atkurti slaptažodį"
 
@@ -3176,7 +3147,15 @@ msgstr ""
 msgid "Group watching subjects"
 msgstr ""
 
-msgid "Keep me logged in on this computer"
+#, python-format
+msgid "Registration to %(university_title)s"
+msgstr ""
+
+msgid "Enter your email here:"
+msgstr ""
+
+#, python-format
+msgid "Teacher registration to %(university_title)s"
 msgstr ""
 
 msgid "Can't find your subject?"
@@ -3537,6 +3516,9 @@ msgstr ""
 msgid "I study here"
 msgstr "Aš studijuoju čia!"
 
+msgid "I teach here"
+msgstr ""
+
 msgid "Latest groups:"
 msgstr ""
 
@@ -3623,11 +3605,14 @@ msgid "My university feed"
 msgstr ""
 
 #, python-format
-msgid "Messages (%(count)s new)"
-msgid_plural "Messages (%(count)s new)"
+msgid "Private messages (%(count)s new)"
+msgid_plural "Private messages (%(count)s new)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+
+msgid "Private messages"
+msgstr "Privačios žinutės"
 
 msgid "My subjects:"
 msgstr ""
@@ -3645,6 +3630,9 @@ msgid "Create new group"
 msgstr ""
 
 msgid "(edit profile)"
+msgstr ""
+
+msgid "Medals"
 msgstr ""
 
 msgid "What to do next?"
@@ -3676,18 +3664,6 @@ msgstr[2] ""
 
 msgid "Related members:"
 msgstr ""
-
-msgid "My profile"
-msgstr "Mano profilis"
-
-msgid "Files uploaded:"
-msgstr "Įkelta failų:"
-
-msgid "Files downloaded:"
-msgstr "Parsiųsta failų:"
-
-msgid "Teacher's information"
-msgstr "Dėstytojo informacija"
 
 msgid "Phone:"
 msgstr "Tel.:"
@@ -3858,6 +3834,13 @@ msgstr "Eiti į mano fakultetą"
 
 msgid "What's your phone number?"
 msgstr "Koks Jūsų mob. telefono numeris?"
+
+msgid ""
+"We need your phone number so that you could send and receive SMS messages"
+" from the group. Don't worry, we will never send advertisements."
+msgstr ""
+"Mums reikia jūsų telefono numerio, kad galėtumėte siųsti ir gauti SMS "
+"žinutes iš grupės. Nesijaudinkite, niekada nesiųsime jums reklamos."
 
 msgid "Mobile phone number: "
 msgstr "Telefono numeris: "
@@ -4031,33 +4014,53 @@ msgstr "50 litų"
 msgid "Delete this group?"
 msgstr "Panaikinti šią grupę?"
 
-msgid "add groups"
-msgstr "pridėti grupes"
+msgid "Students groups that you teach to"
+msgstr ""
 
-msgid "My student groups"
-msgstr "Mano studentų grupės"
+msgid ""
+"Easy way to contact your groups by sending a <strong>group "
+"message</strong>."
+msgstr ""
 
-msgid "Add student groups that you teach to."
-msgstr "Pasirinkite grupes, kurioms dėstote."
+msgid "Add students groups"
+msgstr ""
+
+msgid "My courses:"
+msgstr ""
+
+msgid "add courses"
+msgstr "pridėti kursus"
 
 msgid "Add courses you teach"
 msgstr "Pridėkite dėstomus kursus"
 
-msgid "Create subjects you teach, or find those that are already created:"
-msgstr "Sukurkite savo dėstomą dalyką arba pridėkite jau sukurtą:"
+msgid "Files upload"
+msgstr ""
 
 msgid ""
-"Here you will be able to upload course material, and groups studying the "
-"subject will be notified automatically."
+"You will be able to upload course material, that will be accessable for "
+"everyone, who is following your course."
 msgstr ""
-"Čia galėsite įkelti dėstomų dalykų medžiagą. Jūsų studentai pranešimus "
-"apie naują medžiagą gaus automatiškai."
 
-msgid "All your course materials with be organized in one place."
-msgstr "Visa jūsų akademinė medžiaga bus sutelkta vienoje vietoje."
+msgid "Course discussions"
+msgstr ""
 
-msgid "add courses"
-msgstr "pridėti kursus"
+msgid "Discuss course material and related subjects with your students."
+msgstr ""
+
+msgid "Automatic notifications"
+msgstr ""
+
+msgid ""
+"Ututi will automaticaly inform students and groups about changes in "
+"course material."
+msgstr ""
+
+msgid "Add your courses"
+msgstr ""
+
+msgid "Or browse subjects' catalog"
+msgstr ""
 
 msgid "Add:"
 msgstr "Pridėti:"
@@ -4081,9 +4084,6 @@ msgid_plural "<span class='orange'>%(count)s</span> groups"
 msgstr[0] "<span class='orange'>%(count)s</span> grupė"
 msgstr[1] "<span class='orange'>%(count)s</span> grupės"
 msgstr[2] "<span class='orange'>%(count)s</span> grupių"
-
-msgid "My courses"
-msgstr "Mano kursai"
 
 msgid "Student groups"
 msgstr "Studentų grupės"
@@ -4139,9 +4139,6 @@ msgstr "sukurk wiki užrašus"
 
 msgid "Forum posts"
 msgstr "Forumų pranešimai"
-
-msgid "Private messages"
-msgstr "Privačios žinutės"
 
 msgid "New subjects watched by group"
 msgstr "Nauji grupės stebimi dalykai"
@@ -4246,23 +4243,13 @@ msgstr ""
 msgid "Full name:"
 msgstr ""
 
-msgid "Password:"
-msgstr ""
-
 msgid "Password must contain at least 5 characters"
 msgstr ""
 
 msgid "Link Google or Facebook"
 msgstr ""
 
-#, python-format
-msgid "Registration to %(university_title)s"
-msgstr ""
-
 msgid "Registration to Ututi"
-msgstr ""
-
-msgid "Enter your email here:"
 msgstr ""
 
 msgid "Full University title:"
@@ -4277,21 +4264,28 @@ msgstr ""
 msgid "University logo:"
 msgstr ""
 
-msgid "Accessibility:"
+msgid "University emails:"
 msgstr ""
 
-msgid "Allowed emails:"
+msgid "Enter email domains that belong to this university."
 msgstr ""
 
 msgid "Add more"
+msgstr ""
+
+msgid "Accessibility:"
 msgstr ""
 
 #, python-format
 msgid "You are registering to <strong>%(university_name)s</strong> network."
 msgstr ""
 
-msgid "People on this network:"
-msgstr ""
+#, python-format
+msgid "%(count)s person on this network:"
+msgid_plural "%(count)s people on this network:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid ""
@@ -4984,58 +4978,6 @@ msgstr ""
 msgid "Add description"
 msgstr ""
 
-msgid "Register as teacher:"
-msgstr "Registruotis dėstytoju:"
-
-msgid "Please verify that the data below is correct."
-msgstr "Patvirtinkite, kad pateikti duomenys yra teisingi."
-
-msgid "Advantages of a teacher's profile:"
-msgstr "Dėstytojo profilio privalumai:"
-
-msgid "Teacher profile"
-msgstr "Dėstytojo profilis"
-
-msgid "submit your CV, thoughts, biography and academic papers."
-msgstr "pateikite savo mintis, CV, biografiją ir akademinius straipsnius."
-
-msgid "Course material sharing"
-msgstr "Kurso medžiagos platinimas"
-
-msgid "Direct messaging"
-msgstr "Tiesioginis bendravimas"
-
-msgid "create a private dialog with one or multiple students or groups."
-msgstr ""
-"užmegzkite privatų dialogą su vienu ar keliais studentais arba studentų "
-"grupėmis."
-
-msgid "SMS"
-msgstr "SMS"
-
-msgid ""
-"send SMSs to your groups or friends. Get notifications and updates to "
-"your cell phone."
-msgstr ""
-"siųskite SMS žinutes jūsų studentų grupėms ar kolegoms. Gaukite "
-"priminimus ir naujienas tiesiai į mobilųjį telefoną."
-
-msgid ""
-"Please enter your university email. That way it will be easier to verify "
-"your identity."
-msgstr ""
-"Nurodykite savo universitetinį el. pašto adresą. Taip bus paprasčiau "
-"patvirtinti, kad esate dėstytojas."
-
-msgid "Register using your Google or Facebook account"
-msgstr "Prisijunkite arba registruokitės per savo Google ar Facebook paskyrą"
-
-msgid "Log in using Google"
-msgstr "Prisijunk naudodamas Google"
-
-msgid "Log in using Facebook"
-msgstr "Prisijungti per Facebook"
-
 #, python-format
 msgid "Log in as %(user)s"
 msgstr "Prisijungti kaip %(user)s"
@@ -5068,9 +5010,6 @@ msgstr ""
 
 msgid "No activity yet."
 msgstr ""
-
-msgid "Member information"
-msgstr "Apie naudotoją"
 
 msgid "Back to profile"
 msgstr "Grįžti į profilį"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-03-31 14:23+0300\n"
+"PO-Revision-Date: 2011-04-06 19:19+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -102,12 +102,6 @@ msgstr ""
 msgid "Error message"
 msgstr ""
 
-msgid "You must agree to the terms of use."
-msgstr ""
-
-msgid "Please enter your name to register."
-msgstr ""
-
 msgid "This Google account is already linked to another Ututi account."
 msgstr ""
 
@@ -144,15 +138,12 @@ msgstr ""
 msgid "Authentication failed: %s"
 msgstr ""
 
-msgid "Wrong username or password!"
+msgid "Facebook did not provide your email address."
 msgstr ""
 
 msgid ""
-"Thank You! Your request to become a teacher has been received. We will "
-"notify You once we grant You the rights of a teacher."
-msgstr ""
-
-msgid "Facebook did not provide your email address."
+"Login failed. Please login using your username and bind your account "
+"first."
 msgstr ""
 
 #, python-format
@@ -410,7 +401,9 @@ msgstr ""
 msgid "Passwords do not match."
 msgstr ""
 
-msgid "This email has already been used to register."
+msgid ""
+"Please use your university email or <a href=\"/browse\">choose university"
+" from the list</a>."
 msgstr ""
 
 msgid "You have to be logged in to download a file!"
@@ -446,35 +439,13 @@ msgid ""
 " an account on our system."
 msgstr ""
 
-#, python-format
-msgid ""
-"If this is your first time visiting <a href=\"%(url)s\">Ututi</a>, please"
-" register first."
+msgid "Incorrect username."
 msgstr ""
 
-msgid ""
-"You seem to have entered your username and password wrong, please try "
-"again!"
+msgid "Please select your network."
 msgstr ""
 
-msgid "Invalid invitation!"
-msgstr ""
-
-msgid "The invitation link you have followed was either already used or invalid."
-msgstr ""
-
-msgid "Invalid email!"
-msgstr ""
-
-msgid "You can only use the email this invitation was sent for to register."
-msgstr ""
-
-msgid "Please register!"
-msgstr ""
-
-msgid ""
-"Only registered users can become members of a group, please register "
-"first."
+msgid "Incorrect password."
 msgstr ""
 
 msgid "Password recovery email sent. Please check your inbox."
@@ -544,15 +515,15 @@ msgstr ""
 msgid "The Ututi group \"%s\" has run out of private file space"
 msgstr ""
 
-msgid "Only with University emails"
+msgid "Only people with confirmed university email can register"
 msgstr ""
 
 msgid ""
-"Allow invites for non university emails (@gmail.com, @mail.ru, "
-"@yahoo.com, etc.)"
+"People with confirmed university email can register and other can be "
+"invited"
 msgstr ""
 
-msgid "No limitations"
+msgid "Everyone can register to this university"
 msgstr ""
 
 msgid "Please enter your password."
@@ -567,10 +538,10 @@ msgstr ""
 msgid "Please upload JPEG, PNG or GIF image."
 msgstr ""
 
-msgid "Please enter University title."
+msgid "Please enter university title."
 msgstr ""
 
-msgid "Please enter University web site."
+msgid "Please enter university web site."
 msgstr ""
 
 msgid "Please select logo."
@@ -645,6 +616,25 @@ msgstr ""
 msgid "Information updated."
 msgstr ""
 
+msgid "Wrong username or password!"
+msgstr ""
+
+msgid ""
+"You seem to have entered your username and password wrong, please try "
+"again!"
+msgstr ""
+
+msgid "The email you entered is registered in Ututi. Please login to proceed."
+msgstr ""
+
+msgid "You already have a teacher account."
+msgstr ""
+
+msgid ""
+"Thank You! Your request to become a teacher has been received. We will "
+"notify You once we grant You the rights of a teacher."
+msgstr ""
+
 msgid "Subject information"
 msgstr ""
 
@@ -674,14 +664,6 @@ msgid "You have no right to delete this folder."
 msgstr ""
 
 msgid "New page"
-msgstr ""
-
-msgid "This email address is already in use."
-msgstr ""
-
-msgid ""
-"All teacher tools will be available to You once our team confirms You as "
-"a teacher. Thank You!"
 msgstr ""
 
 msgid "This user profile is not public"
@@ -970,6 +952,16 @@ msgid "The email already exists."
 msgstr ""
 
 msgid "Enter a valid email."
+msgstr ""
+
+#, python-format
+msgid "%(email)s is already registered in %(university)s network."
+msgstr ""
+
+msgid "Public email domains are not allowed."
+msgstr ""
+
+msgid "You have to use university email address to register at this university."
 msgstr ""
 
 msgid "Enter a valid email domain."
@@ -1309,55 +1301,37 @@ msgid ""
 "http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
 msgstr ""
 
-msgid "Log in or register using your Google or Facebook account"
+msgid "New in Ututi?"
 msgstr ""
 
-msgid "Connect"
-msgstr ""
-
-msgid "Log in directly to Ututi"
-msgstr ""
-
-msgid "Your email address"
-msgstr ""
-
-msgid "Password"
+msgid "Sign in with your university email"
 msgstr ""
 
 msgid "Login"
 msgstr ""
 
+msgid "Email address:"
+msgstr ""
+
+msgid "Password:"
+msgstr ""
+
+msgid "Select network:"
+msgstr ""
+
+msgid "Keep me logged in on this computer"
+msgstr ""
+
 msgid "Forgot password?"
 msgstr ""
 
-msgid "First time here?"
+msgid "Or log in using Facebook or Google"
 msgstr ""
 
-msgid "Register!"
+msgid "Log in using Facebook"
 msgstr ""
 
-msgid "Register as a new Ututi user"
-msgstr ""
-
-msgid "Full name"
-msgstr ""
-
-msgid "Email"
-msgstr ""
-
-msgid "Gadu gadu"
-msgstr ""
-
-msgid "Repeat password"
-msgstr ""
-
-msgid "I agree to the "
-msgstr ""
-
-msgid "terms of use"
-msgstr ""
-
-msgid "Register"
+msgid "Log in using Google"
 msgstr ""
 
 msgid "Student information online"
@@ -1741,6 +1715,9 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
+msgid "Password"
+msgstr ""
+
 msgid "Subject"
 msgstr ""
 
@@ -1852,6 +1829,9 @@ msgstr[1] ""
 msgid "Fullname"
 msgstr ""
 
+msgid "Email"
+msgstr ""
+
 msgid "University"
 msgstr ""
 
@@ -1939,6 +1919,9 @@ msgstr ""
 msgid "Owner information"
 msgstr ""
 
+msgid "Full name"
+msgstr ""
+
 msgid "Phone number"
 msgstr ""
 
@@ -1966,6 +1949,9 @@ msgid "My books (%(book_count)d)"
 msgstr ""
 
 msgid "Upload a Book"
+msgstr ""
+
+msgid "Register"
 msgstr ""
 
 msgid "log out"
@@ -2029,6 +2015,39 @@ msgid "It's place where you find new owner for you old good textbook."
 msgstr ""
 
 msgid "Newest books"
+msgstr ""
+
+msgid "Log in or register using your Google or Facebook account"
+msgstr ""
+
+msgid "Connect"
+msgstr ""
+
+msgid "Log in directly to Ututi"
+msgstr ""
+
+msgid "Your email address"
+msgstr ""
+
+msgid "First time here?"
+msgstr ""
+
+msgid "Register!"
+msgstr ""
+
+msgid "Register as a new Ututi user"
+msgstr ""
+
+msgid "Gadu gadu"
+msgstr ""
+
+msgid "Repeat password"
+msgstr ""
+
+msgid "I agree to the "
+msgstr ""
+
+msgid "terms of use"
 msgstr ""
 
 msgid "Books added"
@@ -2491,9 +2510,6 @@ msgstr ""
 msgid "Description:"
 msgstr ""
 
-msgid "Email address:"
-msgstr ""
-
 msgid "Moderators"
 msgstr ""
 
@@ -2857,41 +2873,6 @@ msgstr ""
 msgid "upload a file"
 msgstr ""
 
-msgid "Associate an existing Ututi account"
-msgstr ""
-
-msgid "Enter the user name and password for your existing Ututi account."
-msgstr ""
-
-msgid "Log in & associate"
-msgstr ""
-
-msgid "1. Personal information"
-msgstr ""
-
-msgid "Please check that your personal information is correct."
-msgstr ""
-
-msgid "2. School (optional)"
-msgstr ""
-
-msgid ""
-"Ututi is an application for students, so it is important for us to know "
-"where you study. These data can be changed later in your profile settings"
-" screen."
-msgstr ""
-
-msgid "3. Phone number (optional)"
-msgstr ""
-
-msgid ""
-"We need your phone number so that you could send and receive SMS messages"
-" from the group. Don't worry, we will never send advertisements."
-msgstr ""
-
-msgid "I am already a registered Ututi user"
-msgstr ""
-
 msgid "Reset your password"
 msgstr ""
 
@@ -2966,7 +2947,15 @@ msgstr ""
 msgid "Group watching subjects"
 msgstr ""
 
-msgid "Keep me logged in on this computer"
+#, python-format
+msgid "Registration to %(university_title)s"
+msgstr ""
+
+msgid "Enter your email here:"
+msgstr ""
+
+#, python-format
+msgid "Teacher registration to %(university_title)s"
 msgstr ""
 
 msgid "Can't find your subject?"
@@ -3299,6 +3288,9 @@ msgstr ""
 msgid "I study here"
 msgstr ""
 
+msgid "I teach here"
+msgstr ""
+
 msgid "Latest groups:"
 msgstr ""
 
@@ -3384,10 +3376,13 @@ msgid "My university feed"
 msgstr ""
 
 #, python-format
-msgid "Messages (%(count)s new)"
-msgid_plural "Messages (%(count)s new)"
+msgid "Private messages (%(count)s new)"
+msgid_plural "Private messages (%(count)s new)"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "Private messages"
+msgstr ""
 
 msgid "My subjects:"
 msgstr ""
@@ -3405,6 +3400,9 @@ msgid "Create new group"
 msgstr ""
 
 msgid "(edit profile)"
+msgstr ""
+
+msgid "Medals"
 msgstr ""
 
 msgid "What to do next?"
@@ -3432,18 +3430,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "Related members:"
-msgstr ""
-
-msgid "My profile"
-msgstr ""
-
-msgid "Files uploaded:"
-msgstr ""
-
-msgid "Files downloaded:"
-msgstr ""
-
-msgid "Teacher's information"
 msgstr ""
 
 msgid "Phone:"
@@ -3606,6 +3592,11 @@ msgstr ""
 msgid "What's your phone number?"
 msgstr ""
 
+msgid ""
+"We need your phone number so that you could send and receive SMS messages"
+" from the group. Don't worry, we will never send advertisements."
+msgstr ""
+
 msgid "Mobile phone number: "
 msgstr ""
 
@@ -3764,30 +3755,52 @@ msgstr ""
 msgid "Delete this group?"
 msgstr ""
 
-msgid "add groups"
+msgid "Students groups that you teach to"
 msgstr ""
 
-msgid "My student groups"
+msgid ""
+"Easy way to contact your groups by sending a <strong>group "
+"message</strong>."
 msgstr ""
 
-msgid "Add student groups that you teach to."
+msgid "Add students groups"
+msgstr ""
+
+msgid "My courses:"
+msgstr ""
+
+msgid "add courses"
 msgstr ""
 
 msgid "Add courses you teach"
 msgstr ""
 
-msgid "Create subjects you teach, or find those that are already created:"
+msgid "Files upload"
 msgstr ""
 
 msgid ""
-"Here you will be able to upload course material, and groups studying the "
-"subject will be notified automatically."
+"You will be able to upload course material, that will be accessable for "
+"everyone, who is following your course."
 msgstr ""
 
-msgid "All your course materials with be organized in one place."
+msgid "Course discussions"
 msgstr ""
 
-msgid "add courses"
+msgid "Discuss course material and related subjects with your students."
+msgstr ""
+
+msgid "Automatic notifications"
+msgstr ""
+
+msgid ""
+"Ututi will automaticaly inform students and groups about changes in "
+"course material."
+msgstr ""
+
+msgid "Add your courses"
+msgstr ""
+
+msgid "Or browse subjects' catalog"
 msgstr ""
 
 msgid "Add:"
@@ -3810,9 +3823,6 @@ msgid "<span class='orange'>%(count)s</span> group"
 msgid_plural "<span class='orange'>%(count)s</span> groups"
 msgstr[0] ""
 msgstr[1] ""
-
-msgid "My courses"
-msgstr ""
 
 msgid "Student groups"
 msgstr ""
@@ -3859,9 +3869,6 @@ msgid "create a wiki page"
 msgstr ""
 
 msgid "Forum posts"
-msgstr ""
-
-msgid "Private messages"
 msgstr ""
 
 msgid "New subjects watched by group"
@@ -3967,23 +3974,13 @@ msgstr ""
 msgid "Full name:"
 msgstr ""
 
-msgid "Password:"
-msgstr ""
-
 msgid "Password must contain at least 5 characters"
 msgstr ""
 
 msgid "Link Google or Facebook"
 msgstr ""
 
-#, python-format
-msgid "Registration to %(university_title)s"
-msgstr ""
-
 msgid "Registration to Ututi"
-msgstr ""
-
-msgid "Enter your email here:"
 msgstr ""
 
 msgid "Full University title:"
@@ -3998,21 +3995,27 @@ msgstr ""
 msgid "University logo:"
 msgstr ""
 
-msgid "Accessibility:"
+msgid "University emails:"
 msgstr ""
 
-msgid "Allowed emails:"
+msgid "Enter email domains that belong to this university."
 msgstr ""
 
 msgid "Add more"
+msgstr ""
+
+msgid "Accessibility:"
 msgstr ""
 
 #, python-format
 msgid "You are registering to <strong>%(university_name)s</strong> network."
 msgstr ""
 
-msgid "People on this network:"
-msgstr ""
+#, python-format
+msgid "%(count)s person on this network:"
+msgid_plural "%(count)s people on this network:"
+msgstr[0] ""
+msgstr[1] ""
 
 #, python-format
 msgid ""
@@ -4665,52 +4668,6 @@ msgstr ""
 msgid "Add description"
 msgstr ""
 
-msgid "Register as teacher:"
-msgstr ""
-
-msgid "Please verify that the data below is correct."
-msgstr ""
-
-msgid "Advantages of a teacher's profile:"
-msgstr ""
-
-msgid "Teacher profile"
-msgstr ""
-
-msgid "submit your CV, thoughts, biography and academic papers."
-msgstr ""
-
-msgid "Course material sharing"
-msgstr ""
-
-msgid "Direct messaging"
-msgstr ""
-
-msgid "create a private dialog with one or multiple students or groups."
-msgstr ""
-
-msgid "SMS"
-msgstr ""
-
-msgid ""
-"send SMSs to your groups or friends. Get notifications and updates to "
-"your cell phone."
-msgstr ""
-
-msgid ""
-"Please enter your university email. That way it will be easier to verify "
-"your identity."
-msgstr ""
-
-msgid "Register using your Google or Facebook account"
-msgstr ""
-
-msgid "Log in using Google"
-msgstr ""
-
-msgid "Log in using Facebook"
-msgstr ""
-
 #, python-format
 msgid "Log in as %(user)s"
 msgstr ""
@@ -4742,9 +4699,6 @@ msgid "Activity:"
 msgstr ""
 
 msgid "No activity yet."
-msgstr ""
-
-msgid "Member information"
 msgstr ""
 
 msgid "Back to profile"
