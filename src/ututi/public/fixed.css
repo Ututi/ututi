@@ -151,6 +151,7 @@ h1.page-title.with-bottom-line {
     margin-bottom: 15px;
     margin-top: 20px;
     position: relative;
+    max-width: 760px;
     _margin-bottom: 15px; /* IE6 */
     _margin-top: 15px; /* IE6 */
     _padding: 10px; /* IE6 */
