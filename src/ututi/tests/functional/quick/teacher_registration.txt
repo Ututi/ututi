@@ -117,7 +117,7 @@ and email is sent to Ututi team.
 Let's login as admin@uni.ututi.com (default user) to test that.
 
     >>> user = Browser.logIn()
-    >>> user.click('My university')
+    >>> user.click('University')
     >>> user.click('I teach here')
     >>> user.printQuery("//div[@class='flash-message']//span/text()")
     Thank You! Your request to become a teacher has been received.

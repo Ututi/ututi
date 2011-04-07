@@ -303,7 +303,7 @@ and then to U-niversity.
     >>> form.getControl('Login').click()
     >>> user.url
     'http://localhost/home/feed'
-    >>> user.click('My university')
+    >>> user.click('University')
     >>> user.url
     'http://localhost/school/vu.lt'
     >>> user.click('Logout')
@@ -321,7 +321,7 @@ and then to U-niversity.
     >>> form.getControl('Login').click()
     >>> user.url
     'http://localhost/home/feed'
-    >>> user.click('My university')
+    >>> user.click('University')
     >>> user.url
     'http://localhost/school/uni'
     >>> user.click('Logout')
