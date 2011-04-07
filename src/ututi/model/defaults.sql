@@ -228,12 +228,14 @@ create table tags (id bigserial not null,
        tag_type varchar(10) default null,
        site_url varchar(200) default null,
        confirmed bool default true,
-       member_policy university_member_policy not null default 'ALLOW_INVITES',
+       member_policy university_member_policy default null,
        region_id int8 default null references regions(id) on delete restrict,
        parent_id int8 default null references tags(id) on delete cascade,
        country_id int8 default null references countries(id) on delete cascade,
        primary key (id),
        unique(parent_id, title));;
+
+alter table tags add constraint location_member_policy_not_null check (member_policy is not null or tag_type != 'location');;
 
 CREATE FUNCTION tag_title_lowercase() RETURNS trigger AS $tag_parent$
     BEGIN
@@ -1336,14 +1338,16 @@ CREATE OR REPLACE FUNCTION update_tag_worker(tags) RETURNS void AS $$
         tag ALIAS FOR $1;
         vector tsvector := NULL;
     BEGIN
-      SELECT INTO vector tag_indexable_content(tags.id) || tag_indexable_content(tags.parent_id) FROM tags WHERE id = tag.id;
-      SELECT tag_id INTO search_id FROM tag_search_items WHERE tag_id = tag.id;
+      IF tag.tag_type = 'location' THEN /* index only location tags */
+          SELECT INTO vector tag_indexable_content(tags.id) || tag_indexable_content(tags.parent_id) FROM tags WHERE id = tag.id;
+          SELECT tag_id INTO search_id FROM tag_search_items WHERE tag_id = tag.id;
 
-      IF FOUND and tag.tag_type = 'location' THEN
-        UPDATE tag_search_items SET terms = vector
-          WHERE tag_id=search_id;
-      ELSE
-        INSERT INTO tag_search_items (tag_id, terms) VALUES (tag.id, vector);
+          IF FOUND THEN
+            UPDATE tag_search_items SET terms = vector
+              WHERE tag_id=search_id;
+          ELSE
+            INSERT INTO tag_search_items (tag_id, terms) VALUES (tag.id, vector);
+          END IF;
       END IF;
     END
 $$ LANGUAGE plpgsql;;
