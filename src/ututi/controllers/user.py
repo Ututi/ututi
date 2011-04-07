@@ -1,6 +1,8 @@
 import logging
 
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.sql.expression import literal_column
+from sqlalchemy.sql.expression import column
 from sqlalchemy.sql.expression import or_, and_
 from pylons.controllers.util import abort, redirect
 from pylons import tmpl_context as c, request, url
@@ -48,14 +50,16 @@ class UserInfoWallMixin(WallMixin):
         ]
         from ututi.lib.wall import generic_events_query
         t_evt = meta.metadata.tables['events']
-        t_ci = meta.metadata.tables['content_items']
         evts_generic = generic_events_query()
 
         query = evts_generic\
-            .where(and_(t_evt.c.author_id == c.user_info.id,
-                        or_(t_evt.c.event_type.in_(public_event_types),
-                            and_(t_evt.c.event_type == 'file_uploaded',
-                                 t_ci.c.content_type == 'subject'))))
+            .where(t_evt.c.author_id == c.user_info.id)
+
+        # XXX using literal_column, this is because I don't know how
+        # to refer to the column in the query directly
+        query = query.where(or_(t_evt.c.event_type.in_(public_event_types),
+                                and_(t_evt.c.event_type == 'file_uploaded',
+                                     literal_column('context_ci.content_type') == 'subject')))
 
         return query
 
