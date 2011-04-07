@@ -23,11 +23,11 @@ def test_Subject_get():
     because we will have to limit tag names and subject names so they
     would never clash with tag names. So creating a subject:
 
-         >> Subject(LocationTag('vu'), 'mif', 'Mif')
+         >> Subject(LocationTag('vu', member_policy='PUBLIC'), 'mif', 'Mif')
 
     Will raise an error. Same for tags that match subject names.
 
-         >> LocationTag('vu', 'mif', 'mat_analize')
+         >> LocationTag('vu', 'mif', 'mat_analize', member_policy='PUBLIC')
 
     Should not work.
 

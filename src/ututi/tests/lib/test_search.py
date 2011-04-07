@@ -110,8 +110,8 @@ def test_setup(test):
     from ututi.model import initialize_dictionaries
     initialize_dictionaries(meta.engine)
 
-    vu = LocationTag(u'Vilniaus universitetas', u'vu', u'')
-    ef = LocationTag(u'Ekonomikos fakultetas', u'ef', u'', vu)
+    vu = LocationTag(u'Vilniaus universitetas', u'vu', u'', member_policy='PUBLIC')
+    ef = LocationTag(u'Ekonomikos fakultetas', u'ef', u'', vu, member_policy='PUBLIC')
 
     meta.Session.add(vu)
     meta.Session.add(ef)
@@ -124,8 +124,8 @@ def test_setup(test):
     meta.Session.execute("SET default_text_search_config TO 'public.lt'")
     meta.Session.execute('SET ututi.active_user TO %d' % user.id)
 
-    l = LocationTag(u'Kauno technologijos universitetas', u'ktu', u'')
-    f = LocationTag(u'Ekologijos fakultetas', u'ef', u'', l)
+    l = LocationTag(u'Kauno technologijos universitetas', u'ktu', u'', member_policy='PUBLIC')
+    f = LocationTag(u'Ekologijos fakultetas', u'ef', u'', l, member_policy='PUBLIC')
 
     mtag = SimpleTag(u'Ekologijos fakultetas') #a mixed tag
 

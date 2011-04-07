@@ -101,7 +101,7 @@ def test_setup(test):
     ututi.tests.setUp(test)
     setUpUser()
     uni = LocationTag.get(u'uni')
-    dep = LocationTag(u'department', u'dep', u'', uni)
+    dep = LocationTag(u'department', u'dep', u'', uni, member_policy='PUBLIC')
     meta.Session.add(dep)
     meta.Session.commit()
 

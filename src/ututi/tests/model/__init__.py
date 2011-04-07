@@ -5,7 +5,7 @@ from ututi.model import meta
 
 def setUpUser():
     #a user needs a university
-    uni = LocationTag(u'U-niversity', u'uni', u'')
+    uni = LocationTag(u'U-niversity', u'uni', u'', member_policy='PUBLIC')
     meta.Session.add(uni)
     meta.Session.commit()
 

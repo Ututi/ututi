@@ -32,7 +32,7 @@ def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
 
-    uni = LocationTag(u'U-niversity', u'uni', u'')
+    uni = LocationTag(u'U-niversity', u'uni', u'', member_policy='PUBLIC')
     meta.Session.add(uni)
     user = User(u'User', 'user@uni.ututi.com', uni, 'password')
     meta.Session.add(user)

@@ -87,7 +87,8 @@ class StructureController(BaseController):
 
         structure = LocationTag(title=values['title'],
                                 title_short=values['title_short'],
-                                description=values['description'])
+                                description=values['description'],
+                                member_policy='PUBLIC')
         structure.region_id = int(values['region']) or None
 
         if values.get('logo_upload', None) is not None:

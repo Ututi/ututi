@@ -39,8 +39,8 @@ def test_setup(test):
     from ututi.model import initialize_dictionaries
     initialize_dictionaries(meta.engine)
 
-    l = LocationTag(u'Kauno technologijos universitetas', u'ktu', u'')
-    f = LocationTag(u'Ekologijos fakultetas', u'ef', u'', l)
+    l = LocationTag(u'Kauno technologijos universitetas', u'ktu', u'', member_policy='PUBLIC')
+    f = LocationTag(u'Ekologijos fakultetas', u'ef', u'', l, member_policy='PUBLIC')
     meta.Session.add(l)
     meta.Session.add(f)
 

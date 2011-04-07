@@ -147,6 +147,6 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
-    uni = LocationTag(u'U-niversity', u'uni', u'')
+    uni = LocationTag(u'U-niversity', u'uni', u'', member_policy='PUBLIC')
     meta.Session.add(uni)
     meta.Session.commit()

@@ -100,6 +100,6 @@ def test_setup(test):
     setUpUser()
 
     uni = LocationTag.get(u'uni')
-    dep = LocationTag(u'D-epartment', u'dep', u'', uni)
+    dep = LocationTag(u'D-epartment', u'dep', u'', uni, member_policy='PUBLIC')
     meta.Session.add(dep)
     meta.Session.commit()

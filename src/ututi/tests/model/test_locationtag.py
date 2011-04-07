@@ -58,7 +58,7 @@ def test_LocationTag_get():
     Even though tags themselves can have varying cases in their short
     titles:
 
-        >>> meta.Session.add(LocationTag(u'Libre University', u'Luni', u''))
+        >>> meta.Session.add(LocationTag(u'Libre University', u'Luni', u'', member_policy='PUBLIC'))
         >>> meta.Session.commit()
 
         >>> tag = LocationTag.get(u'luni')
@@ -70,9 +70,9 @@ def test_LocationTag_get():
 def test_unique_locationtag():
     """
     It should be impossible to have conflicting location tags.
-    >>> meta.Session.add(LocationTag(u'Kauno Technologijos Universitetas', u'KTU', u''))
+    >>> meta.Session.add(LocationTag(u'Kauno Technologijos Universitetas', u'KTU', u'', member_policy='PUBLIC'))
     >>> meta.Session.commit()
-    >>> meta.Session.add(LocationTag(u'Kauno Technologijos Universitetas', u'KTU', u''))
+    >>> meta.Session.add(LocationTag(u'Kauno Technologijos Universitetas', u'KTU', u'', member_policy='PUBLIC'))
     >>> meta.Session.commit()
     Traceback (most recent call last):
     ...
@@ -91,9 +91,9 @@ def test_suite():
 
 def test_setup(test):
     ututi.tests.setUp(test)
-    uni = LocationTag(u'U-niversity', u'uni', u'')
+    uni = LocationTag(u'U-niversity', u'uni', u'', member_policy='PUBLIC')
     meta.Session.add(uni)
-    dep = LocationTag(u'D-epartment', u'dep', u'', uni)
+    dep = LocationTag(u'D-epartment', u'dep', u'', uni, member_policy='PUBLIC')
     meta.Session.add(dep)
 
     meta.Session.commit()

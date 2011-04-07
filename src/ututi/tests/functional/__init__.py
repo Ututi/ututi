@@ -27,9 +27,8 @@ def ftest_setUp(test):
     # U-niversity and D-epartment
     # should be used in writing new functional tests
 
-    uni = LocationTag(u'U-niversity', u'uni', u'')
-    dep = LocationTag(u'D-epartment', u'dep', u'', uni)
-    uni.member_policy = 'PUBLIC'
+    uni = LocationTag(u'U-niversity', u'uni', u'', member_policy='PUBLIC')
+    dep = LocationTag(u'D-epartment', u'dep', u'', uni, member_policy='PUBLIC')
     meta.Session.add(uni)
     meta.Session.add(dep)
     meta.Session.commit()
@@ -40,9 +39,10 @@ def ftest_setUp(test):
     # Below are old locations, users, groups and subjects for backward compatibility
     # Note: objects that didn't have their location specified are now assigned to U-niversity
 
-    vu = LocationTag(u'Vilniaus universitetas', u'vu', u'Seniausias universitetas Lietuvoje.')
-    ef = LocationTag(u'Ekonomikos fakultetas', u'ef', u'', vu)
-    gf = LocationTag(u'Geografijos fakultetas', u'gf', u'', vu)
+    vu = LocationTag(u'Vilniaus universitetas', u'vu', u'Seniausias universitetas Lietuvoje.',
+                     member_policy='PUBLIC')
+    ef = LocationTag(u'Ekonomikos fakultetas', u'ef', u'', vu, member_policy='PUBLIC')
+    gf = LocationTag(u'Geografijos fakultetas', u'gf', u'', vu, member_policy='PUBLIC')
     meta.Session.add(vu)
     meta.Session.add(ef)
     meta.Session.add(gf)
@@ -301,7 +301,7 @@ def setup_university_export():
     uni.description = u'U-niversity description'
 
     for i in ('1', '2', '3'):
-        f = LocationTag(u'Faculty ' + i, u'f' + i, u'U-niversity faculty ' + i, uni)
+        f = LocationTag(u'Faculty ' + i, u'f' + i, u'U-niversity faculty ' + i, uni, member_policy='PUBLIC')
         meta.Session.add(f)
 
     meta.Session.commit()
