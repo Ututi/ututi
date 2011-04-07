@@ -172,26 +172,23 @@
         %endfor
       </div>
       %if c.user is not None:
-      <div class="reply-form-container action-block">
-        <div class="logo">
-          <img src="${url(controller='user', action='logo', id=c.user.id, width=30)}" />
-        </div>
-        <div class="content">
-          <%
-             if original.event_type == 'private_message_sent':
-                 reply_url = url(controller='wall', action='privatemessage_reply', msg_id=event.private_message_id)
-             elif original.event_type == 'forum_post_created':
-                 reply_url = url(controller='wall', action='forum_reply', group_id=original.object_id, category_id=original.fp_category_id, thread_id=original.fp_thread_id)
-             elif original.event_type == 'mailinglist_post_created':
-                 reply_url = url(controller='wall', action='mailinglist_reply', thread_id=original.ml_thread_id, group_id=original.ml_group_id)
-             else:
-                 reply_url = url(controller='wall', action='eventcomment_reply', event_id=event.id)
-          %>
-
+      <div class="reply">
+        <%
+           if original.event_type == 'private_message_sent':
+               reply_url = url(controller='wall', action='privatemessage_reply', msg_id=event.private_message_id)
+           elif original.event_type == 'forum_post_created':
+               reply_url = url(controller='wall', action='forum_reply', group_id=original.object_id, category_id=original.fp_category_id, thread_id=original.fp_thread_id)
+           elif original.event_type == 'mailinglist_post_created':
+               reply_url = url(controller='wall', action='mailinglist_reply', thread_id=original.ml_thread_id, group_id=original.ml_group_id)
+           else:
+               reply_url = url(controller='wall', action='eventcomment_reply', event_id=event.id)
+        %>
+        <div class="action-tease">${_("Write a reply")}</div>
+        <div class="action-block">
           <form name="reply-form" method="POST" action="${reply_url}">
             <textarea rows="3" cols="50" class="reply-text" name="message"></textarea>
             <div>
-              ${h.input_submit(_('Send reply'), class_='btn reply-button')}
+              ${h.input_submit(_('Send reply'), class_='btn dark reply-button')}
               <a class="action-block-cancel" href="#cancel-reply">${_("Cancel")}</a>
             </div>
           </form>

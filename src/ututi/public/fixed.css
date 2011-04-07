@@ -467,7 +467,6 @@ input {
 
     .wall .wall-entry {
         border-bottom: 1px solid #ddd;
-        color: #4d4d4d;
     }
 
         .wall .wall-entry .event-heading {
@@ -510,7 +509,7 @@ input {
             }
 
         .wall .wall-entry .event-time {
-            color: #888;
+            color: #666;
             font-size: 11px;
             padding-left: 15px;
             background: url("/img/icons.com/clock.png") no-repeat left center;
@@ -538,9 +537,9 @@ input {
                 margin-bottom: 5px;
             }
 
-                .wall .wall-entry .thread .reply .content,
-                .wall .wall-entry .thread .reply-form-container .content {
-                    padding-left: 40px;
+                .wall .wall-entry .thread .reply .content {
+                    padding-left: 38px;
+                    margin-top: -2px; /* Looks more aligned to logo. */
                 }
 
                 .wall .wall-entry .thread .reply .logo img {
@@ -584,32 +583,44 @@ input {
 
             .wall .wall-entry .hidden-messages .hide,
             .wall .wall-entry .reply {
-                background-color: #f6f6f6;
-                padding: 5px 10px;
+                background-color: #e6e6e6;
+                padding: 8px 14px 8px 8px; /* 14px to compensate textarea padding */
                 margin-bottom: 3px;
-            }
-
-            .wall .wall-entry .reply-form-container {
-                padding: 10px;
-                margin-bottom: 5px;
             }
 
             .wall .wall-entry .action-block {
                 display: none; /* initialy hidden */
             }
 
-                .wall .wall-entry .reply-form-container .cancel-button {
+                .wall .wall-entry .action-block .action-block-cancel {
                     font-size: 11px;
                     margin-left: 5px;
                 }
 
-                .wall .wall-entry .reply-form-container textarea {
-                    border: 1px solid #ddd;
-                    margin-bottom: 5px;
+                .wall .wall-entry .action-block .reply-button {
+                    display: inline;
+                    margin-top: 0;
+                }
+
+                .wall .wall-entry .action-block textarea,
+                .wall .wall-entry .reply .action-tease {
+                    border: 1px solid #888;
+                    background-color: #fff;
+                    width: 100%;
                     padding: 3px;
-                    border-radius: 3px;
-                    -moz-border-radius: 3px;
-                    -webkit-border-radius: 3px;
+                }
+
+                .wall .wall-entry .action-block textarea {
+                    height: 40px;
+                    margin-bottom: 5px;
+                }
+
+                .wall .wall-entry .reply .action-tease {
+                    height: 12px;
+                    line-height: 12px;
+                    font-size: 10px;
+                    color: #999;
+                    cursor: text;
                 }
 
         .wall .wall-entry .file-description,

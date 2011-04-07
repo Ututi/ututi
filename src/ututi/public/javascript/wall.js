@@ -31,8 +31,10 @@ $(document).ready(function(){
 
     /* Show/hide reply forms.
      */
-    $('.wall .wall-entry .action-block-link').live('click', function() {
+    $('.wall .wall-entry .action-block-link, ' +
+      '.wall .wall-entry .action-tease').live('click', function() {
         var entry = $(this).closest('.wall-entry, .wall-subentry');
+        entry.find('.action-tease').hide();
         entry.find('.action-block').show();
         entry.find('.action-block textarea').focus();
         return false;
@@ -41,12 +43,14 @@ $(document).ready(function(){
     $('.wall .wall-entry .action-block-cancel').live('click', function() {
         var entry = $(this).closest('.wall-entry, .wall-subentry');
         entry.find('.action-block').hide();
+        entry.find('.action-block textarea').val('');
+        entry.find('.action-tease').show();
         return false;
     });
 
     /* AJAX for reply actions.
      */
-    $('.wall .wall-entry .reply-form-container .reply-button').click(function() {
+    $('.wall .wall-entry .action-block .reply-button').click(function() {
         var form = $(this).closest('form');
         var text = form.find('.reply-text');
         if ($.trim(text.val()) != '') {
@@ -54,7 +58,8 @@ $(document).ready(function(){
                 form.attr('action') + '?js=1',
                 form.serialize(),
                 function(content) {
-                    form.closest('.reply-form-container').hide();
+                    form.closest('.action-block').hide();
+                    form.closest('.reply').find('.action-tease').show();
                     text.val('');
                     var replies = form.closest('.wall-entry, .wall-subentry').find('.replies');
                     $(content).hide().appendTo(replies).fadeIn('slow');
