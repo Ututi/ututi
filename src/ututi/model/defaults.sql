@@ -1674,6 +1674,10 @@ CREATE TABLE user_registrations (
        primary key (id),
        unique(location_id, email));;
 
+alter table user_registrations add constraint registration_data_integrity
+    check ((location_id is null and email is not null) or
+           (location_id is not null and (email is not null or facebook_id is not null)));;
+
 /* A table for storing email domains.
  * Domain is considered public if location_id is NULL.
  */

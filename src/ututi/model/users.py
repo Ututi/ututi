@@ -639,14 +639,9 @@ class UserRegistration(object):
     """User registration data."""
 
     def __init__(self, location=None, email=None, facebook_id=None):
-        if location is None:
-            assert email is not None # user starts his location w/o university
-                                     # email is required
-        else:
-            assert email or facebook_id # one of these must be given
-
-        # XXX this should be an integrity check in db
-
+        # either email or facebook_id should be given,
+        # if location is None, then email is required.
+        # (this is checked in db)
         self.location = location
         self.email = email
         self.facebook_id = facebook_id
@@ -656,8 +651,6 @@ class UserRegistration(object):
         elif facebook_id:
             self.hash = hashlib.md5(datetime.now().isoformat() + \
                                     str(facebook_id)).hexdigest()
-        else:
-            self.hash = hashlib.md5(datetime.now().isoformat()).hexdigest()
 
     @classmethod
     def get(cls, id):
