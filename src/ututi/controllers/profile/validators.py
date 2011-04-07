@@ -46,6 +46,12 @@ class ProfileForm(Schema):
     site_url = validators.URL()
 
 
+class BiographyForm(Schema):
+    """A schema for validating user biography forms."""
+    pre_validators = [NestedVariables()]
+    allow_extra_fields = True
+
+
 class PasswordChangeForm(Schema):
     allow_extra_fields = False
 

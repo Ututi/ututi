@@ -77,7 +77,9 @@
       </div>
 
       ${h.input_line('site_url', _('Address of your website or blog'))}
+      %if not c.user.is_teacher:
       ${h.input_area('description', _('About yourself'), rows='5', col='40')}
+      %endif
 
       <div style="padding-top: 5px">
         <label for="profile_is_public">

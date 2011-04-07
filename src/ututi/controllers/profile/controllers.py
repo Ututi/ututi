@@ -43,7 +43,7 @@ from ututi.model import meta, Email, User
 from ututi.controllers.profile.validators import HideElementForm, MultiRcptEmailForm, FriendsInvitationForm, \
     FriendsInvitationJSForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm,\
-    PhoneForm, ProfileForm, PasswordChangeForm, StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm
+    PhoneForm, ProfileForm, BiographyForm, PasswordChangeForm, StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm
 from ututi.controllers.profile.wall import UserWallMixin
 from ututi.controllers.profile.subjects import WatchedSubjectsMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -206,6 +206,12 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                                defaults=self._edit_form_defaults())
 
     @ActionProtector("user")
+    def edit_biography(self):
+        return htmlfill.render(self._edit_biography_form(),
+                               defaults=self._edit_form_defaults())
+
+
+    @ActionProtector("user")
     @validate(schema=WallSettingsForm, form='_wall_settings_form')
     def wall_settings(self):
         if hasattr(self, 'form_result'):
@@ -314,6 +320,18 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         meta.Session.commit()
         h.flash(_('Your profile was updated.'))
         redirect(url(controller='profile', action='edit'))
+
+    @validate(schema=BiographyForm, form='_edit_biography_form')
+    @ActionProtector("user")
+    def update_biography(self):
+        if not hasattr(self, 'form_result'):
+            redirect(url(controller='profile', action='edit_biography'))
+
+        c.user.description = self.form_result.get('description', None)
+        meta.Session.commit()
+        h.flash(_('Your biography was updated.'))
+
+        redirect(url(controller='profile', action='edit_biography'))
 
     def confirm_emails(self):
         if c.user is not None:
@@ -853,11 +871,18 @@ class UnverifiedTeacherProfileController(ProfileControllerBase):
              'link': url(controller='profile', action='edit')},
             {'title': _("Contacts"),
              'name': 'contacts',
-             'link': url(controller='profile', action='edit_contacts')}]
+             'link': url(controller='profile', action='edit_contacts')},
+            {'title': _("Biography"),
+             'name': 'biography',
+             'link': url(controller='profile', action='edit_biography')},]
 
     def _edit_contacts_form(self):
         self._set_settings_tabs(current_tab='contacts')
         return render('profile/unverified_teacher_edit_contacts.mako')
+
+    def _edit_biography_form(self):
+        self._set_settings_tabs(current_tab='biography')
+        return render('profile/unverified_teacher_edit_biography.mako')
 
     @ActionProtector("teacher")
     def register_welcome(self):
