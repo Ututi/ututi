@@ -26,10 +26,7 @@ The message is sent:
     >>> browser.getLink('News feed').click()
 
 The attachments should be retained:
-    >>> browser.printCssQuery('#wall-event-9 .file-list', strip=True)
-    <ul>
-      <li>
-        <a>README.txt</a>
-      </li>
-      ...
-    </ul>
+    >>> browser.printCssQuery('#wall-event-9 .file-list li', strip=True)
+    <li>
+      <a>README.txt</a>
+    </li>
