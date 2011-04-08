@@ -4,7 +4,10 @@ import sys
 import random
 import shutil
 import urllib
+import atexit
 
+from lxml.cssselect import ExpressionError
+from lxml.html import fromstring
 from zope.testbrowser.browser import Link
 from mechanize._mechanize import LinkNotFoundError
 from nous.pylons.testing import LayerBase, CompositeLayer
@@ -21,6 +24,7 @@ from ututi.model import meta
 from ututi.lib.sms import sms_queue
 from ututi.lib.mailer import mail_queue
 from ututi.lib import gg
+from ututi.tests.css_rules import get_all_rules
 
 import os
 here_dir = os.path.dirname(os.path.abspath(__file__))
@@ -72,6 +76,7 @@ class UtutiBaseLayer(LayerBase):
         teardown_db_defaults(meta.engine)
         meta.Session.rollback()
         meta.Session.remove()
+
 
 class UtutiQuickLayerBase(LayerBase):
 
@@ -152,6 +157,7 @@ U2tiQuickLayer = CompositeLayer(GrokLayer,
                                  UtutiQuickLayerBase(),
                                  name='U2tiQuickLayer')
 
+
 class UtutiTestBrowser(NousTestBrowser):
 
     app = None
@@ -217,6 +223,45 @@ class UtutiTestBrowser(NousTestBrowser):
                                                           'login_password': password})
         browser.open('http://localhost')
         return browser
+
+    _rules = get_all_rules()
+
+    def rules(self):
+        return self._rules
+
+    def remove_rule(self, rule):
+        self._rules.remove(rule)
+
+    def check_rules(self):
+        try:
+            doc = fromstring(self.contents)
+        except:
+            return
+        for css_file, rule in self.rules():
+            try:
+                nodes = doc.cssselect(rule)
+            except:
+                print >> sys.stderr, "XXX", css_file, rule
+                nodes = ['']
+
+            if len(nodes) > 0:
+                print >> sys.stderr, "Found %s %r in %s" % (css_file, rule, self.url)
+                self.remove_rule((css_file, rule))
+
+    def _changed(self):
+        if os.environ.get('TESTCSS'):
+            self.check_rules()
+        self._counter += 1
+        self._contents = None
+
+    @classmethod
+    def printRules(cls):
+        for css_file, rule in sorted(cls._rules):
+            print css_file, rule
+
+
+if os.environ.get('TESTCSS'):
+    atexit.register(UtutiTestBrowser.printRules)
 
 
 def setUp(test):
