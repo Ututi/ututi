@@ -1,4 +1,4 @@
-<%inherit file="/ubase-two-sidebars.mako" />
+<%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/portlets/sections.mako" import="user_sidebar"/>
 <%namespace file="/portlets/user.mako" import="user_statistics_portlet,
         related_users_portlet, teacher_list_portlet"/>
@@ -9,10 +9,6 @@
 
 
 <%def name="portlets()">
-  ${user_sidebar()}
-</%def>
-
-<%def name="portlets_right()">
   ${share_portlet(c.user_info)}
   ${user_statistics_portlet(c.user_info)}
   %if c.user_info.location:
@@ -22,7 +18,7 @@
 </%def>
 
 <%def name="title()">
-  ${c.user_info.fullname}
+  ${_("Teacher's %(user)s public profile") % dict(user=c.user_info.fullname)}
 </%def>
 
 <%def name="css()">
@@ -110,6 +106,8 @@
   %endif
 </div>
 
+<div class="section biography">
+  <div class="title">${_("Biography")}:</div>
 %if c.user_info.description:
   <div id="teacher-biography" class="wiki-page">
     ${h.html_cleanup(c.user_info.description)}
@@ -118,3 +116,4 @@
   <div id="no-description-block">
   <h2>${_("There is no biography.")}</h2>
 %endif
+</div>

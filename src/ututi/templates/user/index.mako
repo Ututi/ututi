@@ -56,6 +56,9 @@
   .section.events {
     background-image: url("../img/icons.com/clock_grand.png");
   }
+  .section.biography {
+    background-image: url("/img/icons.com/about/wiki_edit.png");
+  }
   .section .title {
     border-bottom: 1px solid #f90;
     font-size: 14px;
