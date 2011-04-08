@@ -46,17 +46,17 @@ def user_menu_items():
     return [
         {'title': _("News feed"),
          'name': 'feed',
-         'link': url(controller='user', action='index', id=c.user.id),
-         'event': h.trackEvent(c.user, 'feed', 'breadcrumb')},
+         'link': c.user_info.url(),
+         'event': h.trackEvent(c.user_info, 'feed', 'breadcrumb')},
         ] + [
         {'title': _('Courses'),
          'name': 'subjects',
-         'link': url(controller='user', action='teacher_subjects', id=c.user.id),
-         'event': h.trackEvent(c.user, 'members', 'breadcrumb')},
+         'link': c.user_info.url(action='teacher_subjects'),
+         'event': h.trackEvent(c.user_info, 'members', 'breadcrumb')},
         {'title': _('Biography'),
          'name': 'biography',
-         'link': url(controller='user', action='biography', id=c.user.id),
-         'event': h.trackEvent(c.user, 'biography', 'breadcrumb')},
+         'link': c.user_info.url(action='biography'),
+         'event': h.trackEvent(c.user_info, 'biography', 'breadcrumb')},
         ]
 
 
