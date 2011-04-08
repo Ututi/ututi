@@ -22,7 +22,6 @@ from ututi.lib.fileview import FileViewMixin
 from ututi.lib import helpers as h
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model.events import PageCreatedEvent
-from ututi.model.events import PrivateMessageSentEvent
 from ututi.model.events import MailinglistPostCreatedEvent
 from ututi.model.events import FileUploadedEvent
 from ututi.model.events import ForumPostCreatedEvent
@@ -30,7 +29,7 @@ from ututi.model.events import Event, EventComment
 from ututi.model import GroupMember
 from ututi.model import ContentItem
 from ututi.model import ForumCategory
-from ututi.model import ForumPost, PrivateMessage, Page, User, Subject, meta, Group
+from ututi.model import ForumPost, Page, User, Subject, meta, Group
 
 
 def _message_rcpt(term, current_user):
@@ -156,10 +155,7 @@ class WallController(BaseController, FileViewMixin):
         self._redirect()
 
     def _send_message(self, recipient, subject, message, category_id=None):
-        """
-        Send a message to the recipient. The recipient is either a group or a user.
-        Message type is chosen accordingly.
-        """
+        """ Send a message to the group.  """
         if isinstance(recipient, Group):
             if not recipient.mailinglist_enabled:
                 if category_id is None:
@@ -178,15 +174,9 @@ class WallController(BaseController, FileViewMixin):
                                     message)
                 evt = meta.Session.query(MailinglistPostCreatedEvent).filter_by(message_id=post.id).one().wall_entry()
                 return evt
-        elif isinstance(recipient, User):
-            msg = PrivateMessage(c.user,
-                                 recipient,
-                                 subject,
-                                 message)
-            meta.Session.add(msg)
-            meta.Session.commit()
-            evt = meta.Session.query(PrivateMessageSentEvent).filter_by(private_message_id=msg.id).one().wall_entry()
-            return evt
+        else:
+            # Here was private message code
+            raise NotImplementedError()
 
     @ActionProtector("user")
     def upload_file_js(self):
@@ -311,33 +301,6 @@ class WallController(BaseController, FileViewMixin):
                                    author_id=post.created.id,
                                    message=post.message,
                                    created_on=post.created_on)
-        else:
-            self._redirect()
-
-    @ActionProtector("user")
-    @validate(schema=WallReplyValidator())
-    def privatemessage_reply(self, msg_id):
-        original = PrivateMessage.get(msg_id)
-        if original is None or not (c.user == original.sender or c.user == original.recipient):
-            abort(404)
-
-        recipient = original.sender if original.recipient.id == c.user.id else original.recipient
-        original.is_read = True
-        thread_id = original.thread_id or original.id
-        msg = PrivateMessage(c.user, recipient, original.subject,
-                             self.form_result['message'],
-                             thread_id=thread_id)
-        meta.Session.add(msg)
-        # Make sure this thread is unhidden on both sides.
-        original.hidden_by_sender = False
-        original.hidden_by_recipient = False
-        meta.Session.commit()
-        if request.params.has_key('js'):
-            return render_mako_def('/sections/wall_entries.mako',
-                                   'thread_reply',
-                                   author_id=msg.sender.id,
-                                   message=msg.content,
-                                   created_on=msg.created_on)
         else:
             self._redirect()
 

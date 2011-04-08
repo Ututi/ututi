@@ -12,7 +12,6 @@ from pylons.i18n import ungettext, _
 
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model import Group, Subject, User, File, Page, ContentItem, ForumPost, OutgoingGroupSMSMessage, PrivateMessage
-from ututi.model.users import Author
 from ututi.model import meta
 from ututi.lib.helpers import link_to, ellipsis, when
 from ututi.lib.base import render_def
@@ -438,7 +437,7 @@ class SMSMessageSentEvent(Event):
         return self.outgoing_sms.created
 
 
-class PrivateMessageSentEvent(Event, MessagingEventMixin):
+class PrivateMessageSentEvent(Event):
     """Event fired when someone sends a private message to the user."""
 
     def render(self):
@@ -450,33 +449,6 @@ class PrivateMessageSentEvent(Event, MessagingEventMixin):
         """Deprecated."""
         log.warn('message_text of PrivateMessageSentEvent is deprecated.')
         return cgi.escape(self.private_message.content)
-
-    def message_list(self):
-        """MessagingEventMixin implementation."""
-        this = self.private_message
-        if this.thread_id is None:
-            root_message = this
-        else:
-            root_message = PrivateMessage.get(this.thread_id)
-        return [dict(author=m.sender, created=m.created_on, message=m.content)
-                for m in root_message.thread()]
-
-    def reply_action(self):
-        """MessagingEventMixin implementation."""
-        return url(controller='wall', action='privatemessage_reply',
-                   msg_id=self.private_message.id)
-
-    @property
-    def pm_recipient_id(self):
-        return self.recipient_id
-
-    @property
-    def pm_sender_id(self):
-        return self.author_id
-
-    @property
-    def pm_message(self):
-        return self.private_message.content
 
 
 class GroupMemberJoinedEvent(Event):

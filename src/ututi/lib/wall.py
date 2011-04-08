@@ -24,7 +24,6 @@ def generic_events_query():
     t_ci = meta.metadata.tables['content_items']
     t_pages = meta.metadata.tables['page_versions']
     t_files = meta.metadata.tables['files']
-    t_pmsg = meta.metadata.tables['private_messages']
     t_mlmsg = meta.metadata.tables['group_mailing_list_messages']
     t_fpmsg = meta.metadata.tables['forum_posts']
     t_sms = meta.metadata.tables['outgoing_group_sms_messages']
@@ -53,11 +52,6 @@ def generic_events_query():
                            #wiki page
                            latest_page.c.deleted_on.label('page_deleted_on'),
                            latest_page.c.title.label('page_title'),
-                           #private messages
-                           t_evt.c.private_message_id,
-                           t_pmsg.c.recipient_id.label('pm_recipient_id'),
-                           t_pmsg.c.sender_id.label('pm_sender_id'),
-                           t_pmsg.c.content.label('pm_message'),
                            #files
                            t_files.c.folder,
                            t_files.c.md5,
@@ -78,7 +72,6 @@ def generic_events_query():
                            ],
                           from_obj=[t_evt.outerjoin(latest_page, latest_page.c.page_id==t_evt.c.page_id)\
                                         .outerjoin(t_context, t_context.c.id==t_evt.c.object_id)\
-                                        .outerjoin(t_pmsg, t_pmsg.c.id==t_evt.c.private_message_id)\
                                         .outerjoin(t_files, t_files.c.id==t_evt.c.file_id)\
                                         .outerjoin(t_mlmsg, t_mlmsg.c.id==t_evt.c.message_id)\
                                         .outerjoin(t_fpmsg, t_fpmsg.c.id==t_evt.c.post_id)\

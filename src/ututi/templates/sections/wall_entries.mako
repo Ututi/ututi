@@ -129,8 +129,6 @@
                message = original.ml_message
            elif original.event_type == 'forum_post_created':
                message = original.fp_message
-           elif original.event_type == 'private_message_sent':
-               message = original.pm_message
         %>
         <span class="event-content truncated">${h.nl2br(message)}</span>
         %if hasattr(original, 'attachments'):
@@ -579,34 +577,6 @@
         %endif
       </div>
     </div>
-  </%self:wall_entry>
-</%def>
-
-<%def name="private_message_sent(event)">
-  <%self:wall_entry event="${event}">
-    <%def name="classes()">minimizable message-event</%def>
-    <%def name="heading()">
-      <%
-         msg = event
-         if hasattr(event, 'children') and len(event.children) > 0:
-           msg = event.children[0]
-      %>
-      %if c.user is not None and c.user.id == msg.pm_recipient_id:
-        ${_("%(user_link)s has sent you a private message \"%(msg_link)s\"") % \
-           dict(user_link=h.user_link(msg.pm_sender_id),
-                msg_link=h.content_link(msg.private_message_id)) | n}
-      %elif c.user is not None and c.user.id ==  msg.pm_sender_id:
-        ${_("You have sent %(user_link)s a private message \"%(msg_link)s\"") % \
-           dict(user_link=h.user_link(msg.pm_recipient_id),
-                msg_link=h.content_link(msg.private_message_id)) | n}
-      %else:
-        ${_("%(sender_link)s has sent %(recipient_link)s a private message \"%(msg_link)s\"") % \
-           dict(sender_link=h.user_link(msg.pm_sender_id),
-                recipient_link=h.user_link(msg.pm_recipient_id),
-                msg_link=h.content_link(msg.private_message_id)) | n}
-      %endif
-    </%def>
-    <%self:event_conversation event="${event}"/>
   </%self:wall_entry>
 </%def>
 

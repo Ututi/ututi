@@ -740,8 +740,3 @@ def thread_reply_dict(obj):
             author_id = obj.author_id,
             message = obj.fp_message,
             created_on = obj.created)
-    elif obj.event_type == 'private_message_sent':
-        return dict(
-            author_id = obj.author_id,
-            message = obj.pm_message,
-            created_on = obj.created)
