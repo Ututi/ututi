@@ -1,0 +1,48 @@
+Test teacher's "biography" functionality
+================================================
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> from ututi.lib.helpers import get_urls
+
+User may press "I teach here" button in university page and have
+the same registration flow as any other user. In the end, he
+will be registered as teacher:
+
+    >>> user = Browser()
+    >>> user.open('http://localhost/school/uni')
+    >>> user.click('I teach here')
+    >>> user.getControl('Enter your email here:').value = 'user@example.com'
+    >>> user.click('Register')
+    >>> msg = mail_queue.pop()
+    >>> urls = get_urls(msg.payload())
+    >>> user.open(urls[0])
+    >>> user.click('Next')
+    >>> user.getControl('Full name').value = 'User'
+    >>> user.getControl('Password').value = 'password'
+    >>> user.click('Next')
+    >>> user.click('Skip')
+    >>> user.click('Finish')
+
+Now teacher is on Ututi and waiting for approvement but still his can fill
+profile information and biography. So, let's fill some biography information.
+
+    >>> user.click('Biography')
+    >>> user.printCssQuery('h1.page-title', strip=True)
+    <h1>Your biography:</h1>
+
+    >>> user.getControl('Enter some facts from your biography').value = "Some <strong>cool</strong> biography!"
+    >>> user.getControl('Save').click()
+
+Biography should be created and we should see flash message.
+
+    >>> user.printCssQuery('.flash-message-content', strip=True)
+    <span>Your biography was updated.</span>
+
+Now let's go to Public profile and look at biography tab. Here should be our biography.
+
+    >>> user.click('Public profile')
+    >>> user.click('Biography')
+    >>> user.printCssQuery('#teacher-biography')
+    <div id="teacher-biography" class="wiki-page">
+         Some <strong>cool</strong> biography!
+    </div>
