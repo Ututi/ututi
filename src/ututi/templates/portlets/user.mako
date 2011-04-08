@@ -295,7 +295,7 @@
 
 <%def name="teacher_list_portlet(title, teachers)">
   %if teachers:
-  <%self:uportlet id="teacher_list_portlet" portlet_class="MyProfile">
+  <%self:portlet id="teacher_list_portlet">
     <%def name="header()">
       ${title}
     </%def>
@@ -306,6 +306,6 @@
     %endfor
     </ul>
 
-  </%self:uportlet>
+  </%self:portlet>
   %endif
 </%def>

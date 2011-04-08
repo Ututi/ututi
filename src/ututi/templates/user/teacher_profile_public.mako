@@ -12,7 +12,7 @@
   ${share_portlet(c.user_info)}
   ${user_statistics_portlet(c.user_info)}
   %if c.user_info.location:
-  <% title = ' '.join(c.user_info.location.title_path) + ' ' + _("teachers") %>
+  <% title =  _("Other %(university)s teachers") % dict(university=' '.join(c.user_info.location.title_path)) %>
   ${teacher_list_portlet(title, c.all_teachers)}
   %endif
 </%def>
