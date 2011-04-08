@@ -108,9 +108,9 @@ class UserController(BaseController, UserInfoWallMixin):
 
         if user.is_teacher:
             c.all_teachers = self._get_all_teachers(user)
-            c.user_menu_items = user_menu_items()
-            c.user_menu_current_tab = 'feed'
             if c.user:
+                c.user_menu_items = user_menu_items()
+                c.user_menu_current_tab = 'feed'
                 return render('user/teacher_profile.mako')
             else:
                 return render('user/teacher_profile_public.mako')
