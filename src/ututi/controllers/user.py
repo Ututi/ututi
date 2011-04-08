@@ -34,7 +34,6 @@ def profile_action(method):
 
         user = User.get_byid(id)
         c.user_info = user
-        c.user_menu_items = user_menu_items()
         if user is None:
             abort(404)
         return method(self, user)
@@ -107,6 +106,15 @@ class UserController(BaseController, UserInfoWallMixin):
     def index(self, user):
         self._check_visibility(user)
 
+        if user.is_teacher:
+            c.all_teachers = self._get_all_teachers(user)
+            c.user_menu_items = user_menu_items()
+            c.user_menu_current_tab = 'feed'
+            if c.user:
+                return render('user/teacher_profile.mako')
+            else:
+                return render('user/teacher_profile_public.mako')
+
         ## TODO: Delete
         c.breadcrumbs = [
             {'title': user.fullname,
@@ -115,29 +123,30 @@ class UserController(BaseController, UserInfoWallMixin):
 
         self._set_wall_variables(events_hidable=False)
 
-        if user.is_teacher:
-            c.all_teachers = self._get_all_teachers(user)
-            c.user_menu_current_tab = 'feed'
-            if c.user:
-                return render('user/teacher_profile.mako')
-            else:
-                return render('user/teacher_profile_public.mako')
-        else:
-            return render('user/index.mako')
+        return render('user/index.mako')
 
     @profile_action
     def teacher_subjects(self, user):
         self._check_visibility(user)
         c.all_teachers = self._get_all_teachers(user)
-        c.user_menu_current_tab = 'subjects'
-        return render('user/teacher_subjects.mako')
+        if c.user:
+            c.user_menu_items = user_menu_items()
+            c.user_menu_current_tab = 'subjects'
+            return render('user/teacher_subjects.mako')
+        else:
+            return render('user/teacher_profile_public.mako')
 
     @profile_action
+    @ActionProtector("user")
     def biography(self, user):
         self._check_visibility(user)
         c.all_teachers = self._get_all_teachers(user)
-        c.user_menu_current_tab = 'biography'
-        return render('user/teacher_biography.mako')
+        if c.user:
+            c.user_menu_items = user_menu_items()
+            c.user_menu_current_tab = 'biography'
+            return render('user/teacher_biography.mako')
+        else:
+            return render('user/teacher_profile_public.mako')
 
     @profile_action
     @ActionProtector("root")
