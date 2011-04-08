@@ -26,30 +26,6 @@
    ${index.css()}
 </%def>
 
-%if c.user is not None:
-<div id="public-profile-actions" class="clearfix">
-  <ul class="icon-list">
-    %if h.check_crowds(['root']):
-      <li class="icon-admin">
-        <a href="${c.user_info.url(action='login_as')}">
-          ${_('Log in as %(user)s') % dict(user=c.user_info.fullname)}
-        </a>
-      <li>
-      <li class="icon-admin">
-        <a href="${c.user_info.url(action='medals')}">
-          ${_('Award medals')}
-        </a>
-      </li>
-    %endif
-    <li class="icon-message">
-      <a href="${url(controller='messages', action='new_message', user_id=c.user_info.id)}">
-        ${_("Send private message")}
-      </a>
-    </li>
-  </ul>
-</div>
-%endif
-
 <h1 class="page-title with-bottom-line">
   ${_('Teacher')} ${c.user_info.fullname}
 </h1>
