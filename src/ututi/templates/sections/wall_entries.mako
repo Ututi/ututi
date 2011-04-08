@@ -42,22 +42,22 @@
 <%def name="wall_entry(event)">
 <div class="wall-entry ${caller.classes()} type_${event.event_type}" id="wall-event-${event.id}">
   <div class="event-heading">
+    %if hasattr(c, 'events_hidable') and c.events_hidable and c.user is not None:
+    <div class="hide-button-container">
+      <form method="POST" action="${url(controller='wall', action='hide_event')}">
+        <div>
+          <input class="event-type" name="event_type" type="hidden" value="${event.event_type}" />
+          <input class="hide-button" type="image" src="/img/icons.com/close.png" title="${_('Ignore events like this')}" />
+        </div>
+      </form>
+    </div>
+    %endif
     <span class="event-title">
       ${caller.heading()}
     </span>
     <span class="event-time">
       ${h.when(event.created)}
     </span>
-    %if hasattr(c, 'events_hidable') and c.events_hidable and c.user is not None:
-    <div class="hide-button-container">
-      <form method="POST" action="${url(controller='wall', action='hide_event')}">
-        <div>
-          <input class="event-type" name="event_type" type="hidden" value="${event.event_type}" />
-          <input class="hide-button" type="image" src="/images/details/icon_delete.png" title="${_('Ignore events like this')}" />
-        </div>
-      </form>
-    </div>
-    %endif
   </div>
   <div class="event-body">
     ${caller.body()}
