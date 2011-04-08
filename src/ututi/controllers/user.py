@@ -127,10 +127,10 @@ class UserController(BaseController, UserInfoWallMixin):
     @profile_action
     def teacher_subjects(self, user):
         self._check_visibility(user)
-        c.all_teachers = self._get_all_teachers(user)
         if not c.user:
             redirect(user.url())
 
+        c.all_teachers = self._get_all_teachers(user)
         c.user_menu_items = user_menu_items()
         c.user_menu_current_tab = 'subjects'
         return render('user/teacher_subjects.mako')
