@@ -1,4 +1,5 @@
 <%inherit file="/user/teacher_base.mako" />
+<%namespace name="wall" file="/sections/wall_entries.mako" />
 
 <div class="section events">
   <div class="title">${_("Teacher's activity:")}</div>
