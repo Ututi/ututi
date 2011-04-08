@@ -219,7 +219,7 @@ ${self.anonymous_menu()}
 <%def name="flash_messages()">
 <div id="flash-messages">
   %if c.user:
-    %if not c.user.has_voted:
+    %if not c.user.has_voted and c.lang != 'pl':
     ${voting_message(c.user)}
     %endif
   %endif

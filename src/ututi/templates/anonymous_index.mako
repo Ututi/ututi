@@ -9,10 +9,12 @@
 }
 </%def>
 
+%if c.lang != 'pl':
 <div id="vote_link">
   ${_('Changes are coming to %s!') % h.link_to('UTUTI', url(controller='home', action='new_ututi'))|n}
   ${_('See if <a href="/voting">Your university has gathered enough votes</a> to be transfered to the new UTUTI!')|n}
 </div>
+%endif
 
 <div id="homeSearchNotesBlock">
   <h2>
