@@ -33,11 +33,50 @@ def profile_action(method):
             abort(404)
 
         user = User.get_byid(id)
-        c.user_info = user
+
         if user is None:
             abort(404)
+
+        if not user.profile_is_public and not c.user:
+            deny(_('This user profile is not public'), 401)
+
+        c.user_info = user
+
         return method(self, user)
     return _profile_action
+
+
+def teacher_profile_action(method):
+    def _profile_action(self, id):
+        try:
+            id = int(id)
+        except ValueError:
+            abort(404)
+
+        user = User.get_byid(id)
+
+        if user is None:
+            abort(404)
+
+        if not user.profile_is_public and not c.user:
+            deny(_('This user profile is not public'), 401)
+
+        c.user_info = user
+        c.all_teachers = get_all_teachers(user)
+        c.user_menu_items = user_menu_items()
+        return method(self, user)
+    return _profile_action
+
+
+def get_all_teachers(user):
+    if user.location:
+        location_ids = [loc.id for loc in user.location.flatten]
+        return meta.Session.query(Teacher)\
+            .filter(Teacher.id != user.id)\
+            .filter(Teacher.location_id.in_(location_ids))\
+            .order_by(Teacher.fullname).all()
+    else:
+        return []
 
 
 def user_menu_items():
@@ -92,23 +131,12 @@ class UserController(BaseController, UserInfoWallMixin):
         if not user.profile_is_public and not c.user:
             deny(_('This user profile is not public'), 401)
 
-    def _get_all_teachers(self, user):
-        if user.location:
-            location_ids = [loc.id for loc in user.location.flatten]
-            return meta.Session.query(Teacher)\
-                .filter(Teacher.id != user.id)\
-                .filter(Teacher.location_id.in_(location_ids))\
-                .order_by(Teacher.fullname).all()
-        else:
-            return []
-
     @profile_action
     def index(self, user):
-        self._check_visibility(user)
         self._set_wall_variables(events_hidable=False)
 
         if user.is_teacher:
-            c.all_teachers = self._get_all_teachers(user)
+            c.all_teachers = get_all_teachers(user)
             if c.user:
                 c.user_menu_items = user_menu_items()
                 c.user_menu_current_tab = 'feed'
@@ -124,26 +152,20 @@ class UserController(BaseController, UserInfoWallMixin):
 
         return render('user/index.mako')
 
-    @profile_action
+    @teacher_profile_action
     def teacher_subjects(self, user):
-        self._check_visibility(user)
         if not c.user:
             redirect(user.url())
 
-        c.all_teachers = self._get_all_teachers(user)
-        c.user_menu_items = user_menu_items()
         c.user_menu_current_tab = 'subjects'
         return render('user/teacher_subjects.mako')
 
-    @profile_action
+    @teacher_profile_action
     @ActionProtector("user")
     def biography(self, user):
-        self._check_visibility(user)
-        c.all_teachers = self._get_all_teachers(user)
         if not c.user:
             redirect(user.url())
 
-        c.user_menu_items = user_menu_items()
         c.user_menu_current_tab = 'biography'
         return render('user/teacher_biography.mako')
 
@@ -156,7 +178,6 @@ class UserController(BaseController, UserInfoWallMixin):
     @profile_action
     @ActionProtector("root")
     def medals(self, user):
-        c.user_info = user
         c.available_medals = [Medal(None, m[0])
                               for m in Medal.available_medals()]
         return render('user/medals.mako')
