@@ -105,6 +105,7 @@ class UserController(BaseController, UserInfoWallMixin):
     @profile_action
     def index(self, user):
         self._check_visibility(user)
+        self._set_wall_variables(events_hidable=False)
 
         if user.is_teacher:
             c.all_teachers = self._get_all_teachers(user)
@@ -121,7 +122,6 @@ class UserController(BaseController, UserInfoWallMixin):
              'link': url_for(controller='user', action='index', id=user.id)}
             ]
 
-        self._set_wall_variables(events_hidable=False)
 
         return render('user/index.mako')
 

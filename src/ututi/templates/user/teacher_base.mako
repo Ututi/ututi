@@ -3,9 +3,9 @@
 <%namespace file="/portlets/user.mako" import="user_statistics_portlet,
         related_users_portlet, teacher_list_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet"/>
-<%namespace name="snippets" file="/sections/content_snippets.mako" />
 <%namespace file="/elements.mako" import="tabs" />
 <%namespace name="index" file="/user/index.mako" import="css" />
+<%namespace name="snippets" file="/sections/content_snippets.mako" />
 
 <%def name="portlets()">
   ${user_sidebar()}
