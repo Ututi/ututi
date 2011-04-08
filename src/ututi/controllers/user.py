@@ -11,6 +11,8 @@ from routes.util import url_for
 from pylons.i18n import _
 
 from ututi.controllers.home import sign_in_user
+
+import ututi.lib.helpers as h
 from ututi.lib.security import ActionProtector, deny
 from ututi.lib.image import serve_logo
 from ututi.lib.base import BaseController, render
@@ -32,10 +34,32 @@ def profile_action(method):
 
         user = User.get_byid(id)
         c.user_info = user
+        c.user_menu_items = user_menu_items()
         if user is None:
             abort(404)
         return method(self, user)
     return _profile_action
+
+
+def user_menu_items():
+    """Generate a list of all possible actions."""
+
+    return [
+        {'title': _("News feed"),
+         'name': 'feed',
+         'link': url(controller='user', action='index', id=c.user.id),
+         'event': h.trackEvent(c.user, 'feed', 'breadcrumb')},
+        ] + [
+        {'title': _('Courses'),
+         'name': 'subjects',
+         'link': url(controller='user', action='teacher_subjects', id=c.user.id),
+         'event': h.trackEvent(c.user, 'members', 'breadcrumb')},
+        {'title': _('Biography'),
+         'name': 'biography',
+         'link': url(controller='user', action='biography', id=c.user.id),
+         'event': h.trackEvent(c.user, 'biography', 'breadcrumb')},
+        ]
+
 
 class UserInfoWallMixin(WallMixin):
 
@@ -65,11 +89,25 @@ class UserInfoWallMixin(WallMixin):
 
 class UserController(BaseController, UserInfoWallMixin):
 
-    @profile_action
-    def index(self, user):
+    def _check_visibility(self, user):
         if not user.profile_is_public and not c.user:
             deny(_('This user profile is not public'), 401)
 
+    def _get_all_teachers(self, user):
+        if user.location:
+            location_ids = [loc.id for loc in user.location.flatten]
+            return meta.Session.query(Teacher)\
+                .filter(Teacher.id != user.id)\
+                .filter(Teacher.location_id.in_(location_ids))\
+                .order_by(Teacher.fullname).all()
+        else:
+            return []
+
+    @profile_action
+    def index(self, user):
+        self._check_visibility(user)
+
+        ## TODO: Delete
         c.breadcrumbs = [
             {'title': user.fullname,
              'link': url_for(controller='user', action='index', id=user.id)}
@@ -78,17 +116,21 @@ class UserController(BaseController, UserInfoWallMixin):
         self._set_wall_variables(events_hidable=False)
 
         if user.is_teacher:
-            if user.location:
-                location_ids = [loc.id for loc in user.location.flatten]
-                c.all_teachers = meta.Session.query(Teacher)\
-                    .filter(Teacher.id != user.id)\
-                    .filter(Teacher.location_id.in_(location_ids))\
-                    .order_by(Teacher.fullname).all()
+            c.all_teachers = self._get_all_teachers(user)
+            c.user_menu_current_tab = 'feed'
+            if c.user:
+                return render('user/teacher_profile.mako')
             else:
-                c.all_teachers = []
-            return render('user/teacher_profile.mako')
+                return render('user/teacher_profile_public.mako')
         else:
             return render('user/index.mako')
+
+    @profile_action
+    def teacher_subjects(self, user):
+        self._check_visibility(user)
+        c.all_teachers = self._get_all_teachers(user)
+        c.user_menu_current_tab = 'subjects'
+        return render('user/teacher_subjects.mako')
 
     @profile_action
     @ActionProtector("root")

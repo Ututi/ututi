@@ -48,7 +48,7 @@
     background-repeat: no-repeat;
   }
   .section.subjects {
-    background-image: url("../img/icons.com/subject_grand_grey.png");
+    background-image: url("/img/icons.com/about/subject.png");
   }
   .section.groups {
     background-image: url("../img/icons.com/group_grand_grey.png");
@@ -58,10 +58,11 @@
   }
   .section .title {
     border-bottom: 1px solid #f90;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bold;
     padding-bottom: 5px;
     margin-bottom: 5px;
+    color: #333;
   }
 </%def>
 
