@@ -122,31 +122,30 @@ class UserController(BaseController, UserInfoWallMixin):
              'link': url_for(controller='user', action='index', id=user.id)}
             ]
 
-
         return render('user/index.mako')
 
     @profile_action
     def teacher_subjects(self, user):
         self._check_visibility(user)
         c.all_teachers = self._get_all_teachers(user)
-        if c.user:
-            c.user_menu_items = user_menu_items()
-            c.user_menu_current_tab = 'subjects'
-            return render('user/teacher_subjects.mako')
-        else:
-            return render('user/teacher_profile_public.mako')
+        if not c.user:
+            redirect(user.url())
+
+        c.user_menu_items = user_menu_items()
+        c.user_menu_current_tab = 'subjects'
+        return render('user/teacher_subjects.mako')
 
     @profile_action
     @ActionProtector("user")
     def biography(self, user):
         self._check_visibility(user)
         c.all_teachers = self._get_all_teachers(user)
-        if c.user:
-            c.user_menu_items = user_menu_items()
-            c.user_menu_current_tab = 'biography'
-            return render('user/teacher_biography.mako')
-        else:
-            return render('user/teacher_profile_public.mako')
+        if not c.user:
+            redirect(user.url())
+
+        c.user_menu_items = user_menu_items()
+        c.user_menu_current_tab = 'biography'
+        return render('user/teacher_biography.mako')
 
     @profile_action
     @ActionProtector("root")
