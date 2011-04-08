@@ -142,7 +142,7 @@
 
 <div class="section subjects">
   <div class="title">${_("Subjects:")}</div>
-  %if c.user_info.groups:
+  %if c.user_info.watched_subjects:
   <div class="search-results-container">
     %for subject in c.user_info.watched_subjects:
       ${snippets.subject(subject)}
