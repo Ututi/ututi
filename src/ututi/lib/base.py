@@ -76,9 +76,9 @@ class BaseController(WSGIController):
         c.mailing_list_host = config.get('mailing_list_host', '')
         c.google_tracker = config['google_tracker']
         c.facebook_app_id = config.get('facebook.appid')
-        c.facebook_channel_url = url(controller='home', action='fbchannel', qualified=True)
         config.get('facebook.appid')
 
+        c.redirect_to = request.params.get('redirect_to', '')
         c.came_from = request.params.get('came_from', '')
         c.came_from_search = False #if the user came from google search
 

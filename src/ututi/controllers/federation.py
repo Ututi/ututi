@@ -199,3 +199,21 @@ class FederationController(BaseController, FederationMixin):
             return self._try_to_login(None, None, facebook_id=uid,
                                            fb_access_token=fb_user['access_token'])
         redirect(c.came_from or url(controller='home', action='index'))
+
+    def facebook_bind_proxy(self):
+        if c.user is not None:
+            fb_user = facebook.get_user_from_cookie(request.cookies,
+                             config['facebook.appid'], config['facebook.secret'])
+            if not fb_user:
+                h.flash(_("Failed to link Facebook account"))
+            else:
+                facebook_id = int(fb_user['uid'])
+                if not User.get_byfbid(facebook_id):
+                    c.user.facebook_id = facebook_id
+                    c.user.update_logo_from_facebook()
+                    meta.Session.commit()
+                    h.flash(_("Linked to Facebook account."))
+                else:
+                    h.flash(_('This Facebook account is already linked to another Ututi account.'))
+
+        redirect(c.redirect_to or url('frontpage'))
