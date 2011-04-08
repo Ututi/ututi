@@ -133,6 +133,13 @@ class UserController(BaseController, UserInfoWallMixin):
         return render('user/teacher_subjects.mako')
 
     @profile_action
+    def biography(self, user):
+        self._check_visibility(user)
+        c.all_teachers = self._get_all_teachers(user)
+        c.user_menu_current_tab = 'biography'
+        return render('user/teacher_biography.mako')
+
+    @profile_action
     @ActionProtector("root")
     def login_as(self, user):
         sign_in_user(user)
