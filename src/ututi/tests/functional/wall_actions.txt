@@ -1,73 +1,11 @@
 Test user wall actions
 ======================
 
-First user logs in and sends a private message to second user
-using wall action panel:
-
-   >>> browser = Browser.logIn('user@ututi.lt', 'password')
+   >>> browser = Browser.logIn('user3@ututi.lt', 'password')
    >>> browser.getLink("News feed").click()
-
-   >>> form = browser.getForm(id='message_form')
-   >>> form.getControl('User:').value = 'Second user'
-   >>> form.getControl(name='subject').value = 'Sending you a message from my wall!'
-   >>> form.getControl(name='message').value = 'Booyah'
-   >>> form.getControl('Send').click()
-
-Now when second user logs in he sees private message event
-among other events:
 
    >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
    >>> browser2.getLink('News feed').click()
-
-   >>> browser2.printQuery('//div[contains(@class, "event-heading")]//text()')
-   Alternative user
-   has sent you a private message "
-   Sending you a message from my wall!
-   "
-   ...
-   Adminas Adminovix
-   has created the group
-   Testing group
-   ...
-   Adminas Adminovix
-   has joined the group
-   Testing group
-   ...
-   You have joined the group
-   Testing group
-   ...
-
-He can reply the first user directly from the wall:
-
-   >>> reply_form = browser2.getForm(name="reply-form")
-   >>> reply_form.getControl(name="message").value = "It is sure nice to reply to you from my wall too!"
-   >>> reply_form.getControl("Send reply").click()
-
-   >>> browser2.url
-   'http://localhost/home/feed'
-
-The first user can see this reply on his wall, and reply again:
-
-   >>> browser.getLink("News feed").click()
-
-   >>> browser2.printQuery('//div[contains(@class, "event-heading")]//text()')
-   Alternative user
-   has sent you a private message "
-   Sending you a message from my wall!
-   "
-   ...
-
-   >>> reply_form = browser.getForm(name="reply-form", index=0)
-   >>> reply_form.getControl(name="message").value = "Yep, wall is cool."
-   >>> reply_form.getControl("Send reply").click()
-
-   >>> browser.url
-   'http://localhost/home/feed'
-
-The rest of the test is undocummented, but easy to follow:
-
-   >>> browser = Browser.logIn('user3@ututi.lt', 'password')
-   >>> browser.getLink("News feed").click()
 
    >>> form = browser.getForm(id='message_form')
    >>> form.getControl(name='rcpt_group').displayValue = ['Moderatoriai']
@@ -92,7 +30,6 @@ The rest of the test is undocummented, but easy to follow:
    >>> mail_queue.pop().payload()
    'Booyah'
 
-   >>> browser = Browser.logIn('user3@ututi.lt', 'password')
    >>> browser.getLink("News feed").click()
 
    >>> form = browser.getForm(id='wiki_form')
@@ -105,6 +42,7 @@ The rest of the test is undocummented, but easy to follow:
    ...
 
 We can also upload a file from the wall. Let's do just that, shall we?
+
     >>> res = browser.app.post("/wall/upload_file_js",
     ...                        params={'folder': 'a', 'target_id': '1'},
     ...                        upload_files=[("attachment", "text;for you.txt", "Test")])

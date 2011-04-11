@@ -33,57 +33,17 @@ The wall currently lists several simple events:
     You have joined the group Moderatoriai 0 seconds ago
     Adminas Adminovix has created the subject Matematin&#279; analiz&#279; 0 seconds ago
 
-Let's use wall's action panel to send private message to the user user:
-
-    >>> form = user3.getForm(id='message_form')
-    >>> form.getControl('User:').value = 'Alternative user'
-    >>> form.getControl(name='subject').value = 'Private message title'
-    >>> form.getControl(name='rcpt_group').value = ['select-pm']
-    >>> form.getControl(name='message').value = 'Private message'
-    >>> form.getControl('Send').click()
-    >>> user3.url
-    'http://localhost/home/feed'
-
-    >>> user3.printCssQuery('#dashboard_action_blocks .error-message')
-
-Now the user user logs in and finds the private message in his wall:
+We will start with mailing list messaging. To test it, we
+will log in few other users that belong to the same group:
 
     >>> user = Browser.logIn('user@ututi.lt', 'password')
     >>> user.url
     'http://localhost/home/feed'
-
-    >>> printWallEvents(user)
-    <span class="event-title">
-        <a>Third user</a> has sent you a private message "<a>Private message title</a>"
-    </span>
-    <span class="event-content">Private message</span>
-
-He can reply using the wall reply box. (If not using javascript, user is
-directed to the thread page after he clicks 'Send'.)
-
-    >>> form = user.getForm(name='reply-form')
-    >>> form.getControl(name='message').value = 'Private message reply'
-    >>> form.getControl("Send reply").click()
-    >>> user.url
-    'http://localhost/home/feed'
-
-The user3 user can see the reply threaded along his message, if he refreshes the page:
-(Note: here we click link instead of reload so that testbrowser does not resubmit the form.)
-
-    >>> user3.getLink('News feed').click()
-    >>> printWallEvents(user3)
-    <span class="event-title">
-        You have sent <a>Alternative user</a> a private message "<a>Private message title</a>"
-    </span>
-    <span class="event-content">Private message</span>
-    <span class="event-content">Private message reply</span>
-    ...
-
-The mailing list messaging works pretty same way in the wall. To test this,
-we will log in third user, that is in the same group as user:
-
     >>> admin = Browser.logIn('admin@uni.ututi.com', 'asdasd')
     >>> admin.getLink('News feed').click()
+
+Admin sends a message to group Moderatoriai:
+
     >>> form = admin.getForm(id='message_form')
     >>> form.getControl(name='rcpt_group').displayValue = ['Moderatoriai']
     >>> form.getControl(name='subject').value = 'Mailinglist message title'
@@ -102,7 +62,7 @@ User3 can see his message on his wall:
     </span>
     ...
 
-The message is sent via email:
+The email message also gets sent:
 
     >>> len(mail_queue)
     1
@@ -110,7 +70,7 @@ The message is sent via email:
     >>> mail_queue.pop().payload()
     'Mailinglist message'
 
-We can reply these messages the same way as private messages:
+We can reply these messages from the wall:
 
     >>> form = user3.getForm(name='reply-form', index=0)
     >>> form.getControl(name='message').value = 'Mailinglist message reply'
@@ -134,29 +94,7 @@ does not resubmit the form.)
     >>> print mail_queue.pop().payload()
     Mailinglist message reply
 
-See how replying to an older thread lifts it in the wall. To test that,
-we will ask third user to reply to the private message:
-
-    >>> user3.open(user3.url)
-    >>> form = user3.getForm(name='reply-form', index=1)
-    >>> form.getControl(name='message').value = 'Private message reply 2'
-    >>> form.getControl("Send reply").click()
-    >>> user3.url
-    'http://localhost/home/feed'
-
-    >>> printWallEvents(user3)
-    <span class="event-title">
-        You have sent <a>Alternative user</a> a private message "<a>Private message title</a>"
-    </span>
-    <span class="event-content">Private message</span>
-    <span class="event-content">Private message reply</span>
-    <span class="event-content">Private message reply 2</span>
-    <span class="event-title">
-      <a>Adminas Adminovix</a> has posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>
-    </span>
-    <span class="event-content">Mailinglist message</span>
-    <span class="event-content">Mailinglist message reply</span>
-    ...
+TODO: test if email replies a threaded in the wall properly.
 
 To test forum post threading we will use the group will forum enabled:
 
