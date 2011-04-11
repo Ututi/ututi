@@ -67,6 +67,12 @@
         font-size: 10px;
     }
 
+#about-portlet { }
+
+    #about-portlet p {
+        font-size: 10px;
+    }
+
 #todo-portlet { }
 
     #todo-portlet p {

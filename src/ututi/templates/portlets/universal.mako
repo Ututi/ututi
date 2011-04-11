@@ -205,3 +205,10 @@
   %endif
 </%def>
 
+<%def name="about_portlet(user=None)">
+  <% if user is None: user = c.user %>
+  <%self:portlet id="about-portlet">
+    <p>${h.literal(_('This is the verified network for <strong>%s</strong>.\
+      Only %s students and teachers can join this network.' % (user.location.title, user.location.title_short)))}</p>
+  </%self:portlet>
+</%def>
