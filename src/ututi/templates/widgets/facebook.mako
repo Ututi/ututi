@@ -22,6 +22,9 @@
         channelUrl: '${url(controller='home', action='fbchannel', qualified=True)}'
       });
     </script>
+    <noscript>
+    ${_("Please have javascript enabled for Facebook functionality to work.")}
+    </noscript>
   %endif
 </%def>
 
@@ -40,13 +43,36 @@
   </fb:serverFbml>
 </%def>
 
-<%def name="login_button(action_url=None)">
+<%def name="login_button(action_url=None, bind_account=True)">
   ${init_facebook()}
   <%
   action_url = action_url or url.current()
-  action_url = url(controller='federation', action='facebook_bind_proxy', redirect_to=action_url)
+  if bind_account:
+    action_url = url(controller='federation', action='facebook_bind_proxy', redirect_to=action_url)
   %>
   <fb:login-button perms="email" onlogin="show_loading_message(); window.location = '${action_url}'">
     ${_('Connect')}
   </fb:login-button>
+</%def>
+
+<%def name="login_js(action_url=None, bind_account=True)">
+  ${init_facebook()}
+  <%
+  action_url = action_url or url.current()
+  if bind_account:
+    action_url = url(controller='federation', action='facebook_bind_proxy', redirect_to=action_url)
+  %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        show_loading_message();
+        // attempt to login FB
+        FB.login(function(response) {
+            if (response.session && response.perms) {
+                // user is logged in and granted some permissions.
+                // perms is a comma separated list of granted permissions
+                window.location = '${action_url}';
+            }
+        }, {perms:'email'});
+    });
+  </script>
 </%def>

@@ -12,7 +12,7 @@
                         'a system for exchanging study materials and information.') % \
                         (c.group.url(), c.group.title),
                       _('Join group'),
-                      url(controller='registration', action='start_fb'),
+                      url(controller='registration', action='confirm_fb'),
                       c.exclude_ids)}
 %else:
   <p>${_("You have to log in to Facebook in order to use this invitation form.")}</p>

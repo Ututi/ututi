@@ -21,7 +21,7 @@
                       url(controller='profile', action='invite_friends_fb'),
                       invitation_message,
                       _('Join Ututi'),
-                      url(controller='registration', action='start_fb'),
+                      url(controller='registration', action='confirm_fb'),
                       c.exclude_ids)}
 %else:
   <p>${_("You have to log in to Facebook in order to use this invitation form.")}</p>

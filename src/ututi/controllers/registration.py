@@ -292,9 +292,6 @@ class FederationMixin(object):
 
 class RegistrationController(BaseController, FederationMixin):
 
-    def start_fb(self):
-        return render('registration/start_fb.mako')
-
     @validate(schema=CodeResendForm(), form='resend_code')
     def resend_code(self):
         if not hasattr(self, 'form_result'):
@@ -317,6 +314,9 @@ class RegistrationController(BaseController, FederationMixin):
         redirect(registration.url(action='university_info'))
 
     def confirm_fb(self):
+        return render('registration/confirm_fb.mako')
+
+    def land_fb(self):
         fb_user = facebook.get_user_from_cookie(request.cookies,
                          config['facebook.appid'], config['facebook.secret'])
 
