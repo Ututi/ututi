@@ -10,12 +10,10 @@
       ${_('Info')}
     </%def>
     <div class="description">
-      ${h.html_strip(subject.description)}
+      ${h.ellipsis(h.html_strip(subject.description), 300)}
     </div>
     %if c.user:
-      <a href="${subject.url(action='edit')}" id="description-edit-link">
-        <img src="/img/icons.com/edit.png" alt="${_('Edit')}" />
-      </a>
+      <a href="${subject.url(action='info')}" id="more-link">${_('more')}</a>
     %endif
   </%self:portlet>
   %endif
