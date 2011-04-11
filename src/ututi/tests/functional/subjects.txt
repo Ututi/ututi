@@ -156,7 +156,7 @@ When creating a subject, the user can select to watch it:
     >>> browser.getControl('I want to follow this subject').selected = True
     >>> browser.getControl('Create').click()
     >>> print browser.url
-    http://localhost/subject/vu/testing_subject
+    http://localhost/subject/vu/testing_subject/feed
 
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     You are now watching the subject Testing subject
