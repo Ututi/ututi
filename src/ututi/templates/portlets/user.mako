@@ -14,8 +14,7 @@
     <li class="icon-message ${'active' if unread_messages else ''}">
       <a id="inbox-link" href="${url(controller='messages', action='index')}">
         %if unread_messages:
-         <strong>${ungettext("Private messages (%(count)s new)", "Private messages (%(count)s new)",
-                             unread_messages) % dict(count=unread_messages)}</strong>
+         <strong>${_("Private messages (%(count)s)" % dict(count=unread_messages))}</strong>
         %else:
            ${_("Private messages")}
         %endif
