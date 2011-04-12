@@ -40,10 +40,10 @@ Book owner will get my message
     >>> browser.open('http://localhost')
     >>> browser.printQuery("id('inbox-link')")
     <a id="inbox-link" href="/messages">
-        <strong>Private messages (1 new)</strong>
+        <strong>Private messages (1)</strong>
     </a>
 
-    >>> browser.click('Private messages (1 new)')
+    >>> browser.click('Private messages (1)')
     >>> browser.printCssQuery(".post-title")
     <a href="/messages/thread/5" class="post-title">uBooks: Second user asks about book My physics book</a>
     >>> browser.click('uBooks: Second user asks about book My physics book')

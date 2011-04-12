@@ -33,10 +33,10 @@ The other user should have received the message
     >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
     >>> browser2.printQuery("id('inbox-link')")
     <a id="inbox-link" href="/messages">
-      <strong>Private messages (1 new)</strong>
+      <strong>Private messages (1)</strong>
     </a>
 
-    >>> browser2.getLink('Private messages (1 new)').click()
+    >>> browser2.getLink('Private messages (1)').click()
     >>> browser2.getLink('First message').click()
 
     >>> browser2.printQuery("//div[@class='post-body']/text()")
@@ -67,7 +67,7 @@ We can see both messages in a thread:
 The first user can see the reply:
 
     >>> browser = Browser.logIn('user@ututi.lt', 'password')
-    >>> browser.getLink('Private messages (1 new)').click()
+    >>> browser.getLink('Private messages (1)').click()
     >>> browser.getLink('First message').click()
     >>> browser.printQuery("//div[@class='post-body']/text()")
     First!
@@ -89,12 +89,12 @@ There's one unread message:
     >>> browser.reload()
     >>> browser.printQuery("id('inbox-link')")
     <a id="inbox-link" href="/messages">
-      <strong>Private messages (1 new)</strong>
+      <strong>Private messages (1)</strong>
     </a>
 
 We can mark it as read:
 
-    >>> browser.getLink('Private messages (1 new)').click()
+    >>> browser.getLink('Private messages (1)').click()
     >>> browser.getControl('Mark all as read').click()
 
 There are no unread messages now:
