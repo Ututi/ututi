@@ -341,7 +341,7 @@ class MailinglistPostCreatedEvent(PostCreatedEventBase, MessagingEventMixin):
 
     @property
     def ml_author(self):
-        return self.author
+        return self.message.author
 
 
 class ModeratedPostCreated(PostCreatedEventBase):
