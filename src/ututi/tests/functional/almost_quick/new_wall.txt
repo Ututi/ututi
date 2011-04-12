@@ -48,8 +48,6 @@ will log in few other users that belong to the same group:
     >>> user.url
     'http://localhost/home/feed'
     >>> admin = Browser.logIn('admin@uni.ututi.com', 'asdasd')
-    >>> admin.getLink('News feed').click()
-    >>> admin.url
 
 Admin sends a message to group Moderatoriai:
 
@@ -67,7 +65,10 @@ User3 can see his message on his wall:
     >>> user3.reload()
     >>> printWallEvents(user3)
     <span class="event-title">
-      <a>Adminas Adminovix</a> has posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>
+      <a>Adminas Adminovix</a>
+      <span class="">
+        <a>Moderatoriai</a>
+      </span>
     </span>
     ...
 
@@ -91,10 +92,13 @@ If admin reloads his wall he will see this reply threaded to his original
 message. (Note: here we click link instead of reload so that testbrowser
 does not resubmit the form.)
 
-    >>> admin.getLink('News feed').click()
+    >>> admin.open('http://localhost/')
     >>> printWallEvents(admin)
     <span class="event-title">
-        You have posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>
+      <a>Adminas Adminovix</a>
+      <span class="">
+        <a>Moderatoriai</a>
+      </span>
     </span>
     <span class="event-content">Mailinglist message</span>
     <span class="event-content">Mailinglist message reply</span>
@@ -118,7 +122,7 @@ To test forum post threading we will use the group will forum enabled:
 
     >>> printWallEvents(admin)
     <span class="event-title">
-        You have posted a new message <a>Forum post title</a> in the forum <a>Testing group</a>
+        <a>Adminas Adminovix</a> has posted a new message <a>Forum post title</a> in the forum <a>Testing group</a>
     </span>
     <span class="event-content">Forum post</span>
     ...
@@ -134,7 +138,7 @@ User can immediately reply to this forum thread from his wall:
 
     >>> printWallEvents(admin)
     <span class="event-title">
-        You have posted a new message <a>Forum post title</a> in the forum <a>Testing group</a>
+        <a>Adminas Adminovix</a> has posted a new message <a>Forum post title</a> in the forum <a>Testing group</a>
     </span>
     <span class="event-content">Forum post</span>
     <span class="event-content">Forum post reply</span>
@@ -145,12 +149,15 @@ Group's mailinglist thread is also displayed in group's wall:
     >>> admin.getLink("Moderatoriai", url='/group/moderators').click()
     >>> printWallEvents(admin)
     <span class="event-title">
-        You have posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>
+      <a>Adminas Adminovix</a>
+      <span class="">
+        <a>Moderatoriai</a>
+      </span>
     </span>
     <span class="event-content">Mailinglist message</span>
     <span class="event-content">Mailinglist message reply</span>
     <span class="event-title">
-        You have created the group <a>Moderatoriai</a>
+      <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>
     </span>
     ...
 
@@ -167,7 +174,10 @@ User can also reply to these threads from group's wall:
     >>> admin.open(res.location)
     >>> printWallEvents(admin)
     <span class="event-title">
-        You have posted a new message <a>Mailinglist message title</a> to the group <a>Moderatoriai</a>
+      <a>Adminas Adminovix</a>
+      <span class="">
+        <a>Moderatoriai</a>
+      </span>
     </span>
     <span class="event-content">Mailinglist message</span>
     <span class="event-content">Mailinglist message reply</span>
@@ -184,15 +194,15 @@ functionality:
     >>> admin.getLink("Testing group").click()
     >>> printWallEvents(admin)
     <span class="event-title">
-      You have posted a new message <a>Forum post title</a> in the forum <a>Testing group</a>
+      <a>Adminas Adminovix</a> has posted a new message <a>Forum post title</a> in the forum <a>Testing group</a>
     </span>
     <span class="event-content">Forum post</span>
     <span class="event-content">Forum post reply</span>
     <span class="event-title">
-      You have created the group <a>Testing group</a>
+      <a>Adminas Adminovix</a> has created the group <a>Testing group</a>
     </span>
     <span class="event-title">
-      You have joined the group <a>Testing group</a>
+      <a>Adminas Adminovix</a> has joined the group <a>Testing group</a>
     </span>
     <span class="event-title">
       <a>Second user</a> has joined the group <a>Testing group</a>
@@ -208,7 +218,7 @@ functionality:
     >>> admin.open(res.location)
     >>> printWallEvents(admin)
     <span class="event-title">
-        You have posted a new message <a>Forum post title</a> in the forum <a>Testing group</a>
+        <a>Adminas Adminovix</a> has posted a new message <a>Forum post title</a> in the forum <a>Testing group</a>
     </span>
     <span class="event-content">Forum post</span>
     <span class="event-content">Forum post reply</span>
