@@ -18,10 +18,11 @@
 <%def name="css()">
   ${actions.css()}
   .wall a#settings-link {
-      margin-top: -5px;
       display: block;
-      font-size: 11px;
-      text-align: right;
+      float: right;
+      margin-top: -30px; /* throws above page title (XXX) */
+      padding-left: 14px;
+      background: url('/img/icons.com/settings.png') no-repeat left center;
   }
 
 </%def>
@@ -30,8 +31,8 @@
   ${self.homepage_nags_and_stuff()}
 %endif
 
-${actions.action_block(c.msg_recipients, c.file_recipients, c.wiki_recipients)}
-
 <a id="settings-link" href="${url(controller='profile', action='wall_settings')}">${_('News feed settings')}</a>
+
+${actions.action_block(c.msg_recipients, c.file_recipients, c.wiki_recipients)}
 
 ${wall.wall_entries(c.events)}
