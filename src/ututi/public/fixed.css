@@ -1167,6 +1167,7 @@ ul.feature-list {
 #dashboard_action_links {
     padding-top: 5px; /* Ussually placed under heading */
     padding-bottom: 15px;
+    margin-bottom: 15px;
     border-bottom: 1px solid #ff9900;
     font-size: 11px;
 }
@@ -1630,4 +1631,16 @@ ul.tabs {
         position: absolute;
         bottom: 2px;
         right: 0px;
+    }
+
+/* PRIVATE MESSAGES */
+
+#private-messages {}
+
+    #private-messages .single-title {
+        background: none;
+        border-bottom: 1px solid #FF9900;
+        padding: 2px 0;
+        font-size: 12px;
+        font-weight: bold;
     }

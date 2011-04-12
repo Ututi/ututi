@@ -1,5 +1,6 @@
 <%inherit file="/messages/base.mako" />
 
+
 <%def name="pagetitle()">
   ${_('Messages')}
 </%def>
@@ -12,21 +13,14 @@
 ##  <a class="back-link" href="${url(controller='profile', action='home')}">${_('Back to profile')}</a>
 ##</div>
 
-<div class="portlet portletSmall portletGroupFiles">
-  <div class="ctl"></div>
-  <div class="ctr"></div>
-  <div class="cbl"></div>
-  <div class="cbr"></div>
-  <div class="single-title">
-    <div class="floatleft bigbutton2">
-      <h2 class="portletTitle bold category-title">
-        ${_('Messages')}
-      </h2>
-    </div>
 ##  <div style="float: right; padding-top: 4px">
 ##    ${h.button_to(_('New topic'), url(controller=c.controller, action='new_thread', id=c.group_id, category_id=category.id))}
 ##  </div>
-    <div class="clear"></div>
+
+
+<div id="private-messages">
+  <div class="single-title">
+        ${_('Message')}
   </div>
 
   <div class="single-messages">

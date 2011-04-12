@@ -1099,7 +1099,7 @@ div.not-active {
 */
 div.message-list-on, div.message-list-on1 {
     border-bottom: 1px solid #ded8d8;
-    background: url("img/icons/message-on.png") no-repeat 15px center;
+    background: url("img/icons.com/discussions_medium_orange.png") no-repeat 15px center;
 }
 
 div.single-messages div.message-list-on.last, div.single-messages div.message-list-on1.last {
@@ -1107,13 +1107,13 @@ div.single-messages div.message-list-on.last, div.single-messages div.message-li
 }
 
 div.message-list-off, div.message-list-off1 {
-    background: url("img/icons/message-off.png") no-repeat 15px center;
+    background: url("img/icons.com/discussions_medium_grey.png") no-repeat 15px center;
 }
 
 div.message-list-on div.m-on, div.message-list-off div.m-on,
 div.message-list-on1 div.m-on, div.message-list-off1 div.m-on {
     padding:6px 0 6px 45px;
-    width:400px;
+    width:340px;
 }
 div.message-list-on div.user, div.message-list-off div.user,
 div.message-list-on1 div.user, div.message-list-off1 div.user {
@@ -1674,10 +1674,10 @@ li.remeju-list,
     background: url('img/icons/file-off.png') no-repeat 3px 3px;
 }
 #SearchResults li.message-on {
-    background: url('img/icons/message-on.png') no-repeat 3px 3px;
+    background: url('img/icons.com/discussions_medium_orange.png') no-repeat 3px 3px;
 }
 #SearchResults li.message-off {
-    background: url('img/icons/message-off.png') no-repeat 3px 3px;
+    background: url('img/icons.com/discussions_medium_grey.png') no-repeat 3px 3px;
 }
 #SearchResults li.dalykas-on {
     background: url('img/icons/dalykas-on.png') no-repeat 3px 3px;
