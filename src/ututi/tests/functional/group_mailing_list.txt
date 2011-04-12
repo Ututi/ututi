@@ -50,10 +50,11 @@ properly in the forum page:
     >>> browser.open('http://localhost/group/moderators')
     >>> browser.printCssQuery('#wall-event-11 .event-title', strip=True)
     <span>
-    <BLANKLINE>
-            You have posted a new message <a>Hello</a> to the group <a>Moderatoriai</a>
+      <a>Adminas Adminovix</a>
+      <span>
+        <a>Moderatoriai</a>
+      </span>
     </span>
-
 
 Let's look at the attachment in the thread:
     >>> browser.getLink('README.txt')

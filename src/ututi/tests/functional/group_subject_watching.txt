@@ -42,16 +42,18 @@ These actions should have left an event trail on the group home page:
 
     >>> browser.printQuery(".wall .wall-entry .event-heading .event-title", selector='cssselect', strip=True)
     <span>
-        The group <a>Testing group</a> has stopped watching the subject <a>Matematin&#279; analiz&#279;</a>
+    <BLANKLINE>
+          The group <a>Testing group</a> has stopped watching the subject <a>Matematin&#279; analiz&#279;</a>
     </span>
     <span>
-        The group <a>Testing group</a> has started watching the subject <a>Matematin&#279; analiz&#279;</a>
+    <BLANKLINE>
+          The group <a>Testing group</a> has started watching the subject <a>Matematin&#279; analiz&#279;</a>
     </span>
     <span>
-      You have created the group <a>Testing group</a>
+      <a>Adminas Adminovix</a> has created the group <a>Testing group</a>
     </span>
     <span>
-      You have joined the group <a>Testing group</a>
+      <a>Adminas Adminovix</a> has joined the group <a>Testing group</a>
     </span>
     <span>
       <a>Second user</a> has joined the group <a>Testing group</a>
