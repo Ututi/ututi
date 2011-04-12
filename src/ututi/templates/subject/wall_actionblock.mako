@@ -1,7 +1,3 @@
-<%doc>
-  Wall actionblock for the user's wall.
-</%doc>
-
 <%namespace name="actions" file="/sections/wall_actionblock.mako" import="head_tags, action_block" />
 <%namespace name="base" file="/prebase.mako" import="rounded_block"/>
 <%namespace name="dropdown" file="/widgets/dropdown.mako" import="dropdown, head_tags"/>
@@ -121,7 +117,7 @@
 
 <%def name="create_wiki_block(subject)">
   <%base:rounded_block id="create_wiki_block" class_="dashboard_action_block">
-    <a class="${not active and 'inactive' or ''}" name="create-wiki"></a>
+    <a class="${'active' if active else 'inactive'}" name="create-wiki"></a>
     <form method="POST" action="${url(controller='wall', action='create_wiki')}" id="wiki_form" class="inelement-form">
       <input id="create-wiki-url" type="hidden" value="${url(controller='wall', action='create_wiki_js')}" />
       <input type="hidden" name="rcpt_wiki" value="${subject.id}" />
@@ -139,8 +135,8 @@
 <%def name="action_block(subject)">
   <%actions:action_block>
     <%def name="links()">
-      <a class="action" id="upload_file" href="#upload-file">${_('upload a file')}</a>
-      <a class="action" id="create_wiki" href="#create-wiki">${_('create a wiki page')}</a>
+      <a class="action active" id="upload_file" href="#upload-file">${_('File')}</a>
+      <a class="action active" id="create_wiki" href="#create-wiki">${_('Wiki note')}</a>
     </%def>
 
     ${self.upload_file_block(subject)}
