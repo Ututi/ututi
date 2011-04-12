@@ -464,16 +464,22 @@ input {
 /* THE NEW WALL STYLE
  */
 
-.wall {}
+.wall {
+}
 
     .wall .wall-entry {
         border-bottom: 1px solid #ddd;
+        font-size: 11px;
     }
 
         .wall .wall-entry .event-heading {
-            font-size: 12px;
             padding: 5px 5px 5px 20px;
             background: url("/img/icons.com/event.png") no-repeat left 5px;
+        }
+
+        .wall .wall-entry.no-icon .event-heading {
+            padding: 5px 5px 5px 0;
+            background: none;
         }
 
         .wall .wall-entry.minimizable .event-heading {
@@ -534,8 +540,12 @@ input {
                 float: left;
             }
 
+            .wall .wall-entry .thread > .logo {
+                margin-top: 5px;
+            }
+
             .wall .wall-entry .thread .content {
-                padding-left: 60px;
+                padding-left: 55px;
                 margin-bottom: 5px;
             }
 
@@ -1024,6 +1034,12 @@ ul.feature-list {
 .clearRight { clear: right; }
 .clearBoth { clear: both; }
 
+.recipient {
+    padding-left: 12px;
+    margin-left: 2px;
+    background: url('/img/icons.com/arrow_right.png') no-repeat left center;
+}
+
 /* Clearfix should be preferred way of closing
  * containers, that contains floated elements.
  */
@@ -1152,6 +1168,7 @@ ul.feature-list {
     padding-top: 5px; /* Ussually placed under heading */
     padding-bottom: 15px;
     border-bottom: 1px solid #ff9900;
+    font-size: 11px;
 }
 
   #dashboard_action_links .action {
