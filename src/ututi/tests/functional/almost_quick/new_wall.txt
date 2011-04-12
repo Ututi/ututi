@@ -14,8 +14,8 @@ Login and visit the wall.
 
 The page title should say "News feed":
 
-    >>> user3.printQuery("//h1[@class='page-title']/text()")
-    News feed
+    >>> user3.printCssQuery(".page-title", strip=True)
+    <h1>News feed</h1>
 
 Right next to the title there's a link to wall settings:
 
@@ -27,11 +27,19 @@ Right next to the title there's a link to wall settings:
 
 The wall currently lists several simple events:
 
-    >>> user3.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-    Adminas Adminovix has created the group Moderatoriai 0 seconds ago
-    Adminas Adminovix has joined the group Moderatoriai 0 seconds ago
-    You have joined the group Moderatoriai 0 seconds ago
-    Adminas Adminovix has created the subject Matematin&#279; analiz&#279; 0 seconds ago
+    >>> user3.printCssQuery(".wall-entry .event-title", strip=True)
+    <span>
+      <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>
+    </span>
+    <span>
+      <a>Adminas Adminovix</a> has joined the group <a>Moderatoriai</a>
+    </span>
+    <span>
+      <a>Third user</a> has joined the group <a>Moderatoriai</a>
+    </span>
+    <span>
+      <a>Adminas Adminovix</a> has created the subject <a>Matematin&#279; analiz&#279;</a>
+    </span>
 
 We will start with mailing list messaging. To test it, we
 will log in few other users that belong to the same group:
@@ -41,6 +49,7 @@ will log in few other users that belong to the same group:
     'http://localhost/home/feed'
     >>> admin = Browser.logIn('admin@uni.ututi.com', 'asdasd')
     >>> admin.getLink('News feed').click()
+    >>> admin.url
 
 Admin sends a message to group Moderatoriai:
 
