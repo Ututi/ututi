@@ -86,6 +86,8 @@ button.submit {
 button.inline {
     padding-top: 0;
     padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 button.add {
@@ -464,16 +466,22 @@ input {
 /* THE NEW WALL STYLE
  */
 
-.wall {}
+.wall {
+}
 
     .wall .wall-entry {
         border-bottom: 1px solid #ddd;
+        font-size: 11px;
     }
 
         .wall .wall-entry .event-heading {
-            font-size: 12px;
             padding: 5px 5px 5px 20px;
             background: url("/img/icons.com/event.png") no-repeat left 5px;
+        }
+
+        .wall .wall-entry.no-icon .event-heading {
+            padding: 5px 5px 5px 0;
+            background: none;
         }
 
         .wall .wall-entry.minimizable .event-heading {
@@ -534,8 +542,12 @@ input {
                 float: left;
             }
 
+            .wall .wall-entry .thread > .logo {
+                margin-top: 5px;
+            }
+
             .wall .wall-entry .thread .content {
-                padding-left: 60px;
+                padding-left: 55px;
                 margin-bottom: 5px;
             }
 
@@ -1024,6 +1036,12 @@ ul.feature-list {
 .clearRight { clear: right; }
 .clearBoth { clear: both; }
 
+.recipient {
+    padding-left: 12px;
+    margin-left: 2px;
+    background: url('/img/icons.com/arrow_right.png') no-repeat left center;
+}
+
 /* Clearfix should be preferred way of closing
  * containers, that contains floated elements.
  */
@@ -1136,11 +1154,11 @@ ul.feature-list {
 }
 
 /* DASHBOARD ACTION BLOCKS */
-#dashboard_action_blocks { }
-
-  #dashboard_action_blocks .rounded-block {
-    padding: 5px 10px;
-  }
+#dashboard_action_blocks {
+    border-bottom: 1px solid #ff9900;
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
 
   #dashboard_action_blocks .dashboard_action_block {
       display: none; /* Initially hidden */
@@ -1149,17 +1167,15 @@ ul.feature-list {
   #dashboard_action_blocks .formField { clear: left; }
 
 #dashboard_action_links {
-  padding: 5px 10px;
+    padding-top: 5px; /* Ussually placed under heading */
+    font-size: 11px;
 }
 
   #dashboard_action_links .action {
+    margin-left: 5px;
     margin-right: 15px;
-  }
-
-  #dashboard_action_links .tip {
-    margin-right: 5px;
+    color: #666;
     font-weight: bold;
-    font-size: 12px;
   }
 
   #dashboard_action_links img.tooltip { vertical-align: bottom; }
@@ -1168,17 +1184,35 @@ ul.feature-list {
     color: #888;
   }
 
-  #dashboard_action_links #send_message {
+  #dashboard_action_links a#send_message {
     padding-left: 20px;
-    background: transparent url("../img/icons/message-off-very-small.png") left center no-repeat;
+    background: transparent url("../img/icons.com/discussions_medium_grey.png") left center no-repeat;
   }
-  #dashboard_action_links #upload_file {
-    padding-left: 20px;
-    background: transparent url("../img/icons/files_13.png") left center no-repeat;
+  #dashboard_action_links a#upload_file {
+    padding-left: 15px;
+    background: transparent url("../img/icons.com/file_medium_grey.png") left center no-repeat;
   }
-  #dashboard_action_links #create_wiki {
-    padding-left: 20px;
-    background: transparent url("../img/icons/pages_13.png") left center no-repeat;
+  #dashboard_action_links a#create_wiki {
+    padding-left: 15px;
+    background: transparent url("../img/icons.com/wiki_medium_grey.png") left center no-repeat;
+  }
+
+  #dashboard_action_links a.action.active:hover,
+  #dashboard_action_links a.action.open {
+    color: #000;
+  }
+
+  #dashboard_action_links a.active#send_message:hover,
+  #dashboard_action_links a.open#send_message {
+    background-image: url("../img/icons.com/discussions_medium_orange.png");
+  }
+  #dashboard_action_links a.active#upload_file:hover,
+  #dashboard_action_links a.open#upload_file {
+    background-image: url("../img/icons.com/file_medium_orange.png");
+  }
+  #dashboard_action_links a.active#create_wiki:hover,
+  #dashboard_action_links a.open#create_wiki {
+    background-image: url("../img/icons.com/wiki_medium_orange.png");
   }
 
   #upload-failed-error-message { display: none; }

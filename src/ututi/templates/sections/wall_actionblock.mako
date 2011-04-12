@@ -11,11 +11,10 @@
 
 <%def name="action_block()">
 
-  <%base:rounded_block id="dashboard_action_links">
-
-  <span class="tip">${_('Share:')}</span>
-  ${caller.links()}
-  </%base:rounded_block>
+  <div id="dashboard_action_links">
+    <strong>${_('Share:')}</strong>
+    ${caller.links()}
+  </div>
 
   <div id="dashboard_action_blocks">
     ${caller.body()}

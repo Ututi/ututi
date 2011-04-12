@@ -596,15 +596,6 @@ class UserProfileController(ProfileControllerBase):
         if selected in bcs.keys():
             return bcs[selected]
 
-    def _tabs(self):
-        return [
-            {'title': _("News feed"),
-             'name': 'feed',
-             'link': url(controller='profile', action='feed')},
-            {'title': _("My subjects"),
-             'name': 'my_subjects',
-             'link': url(controller='profile', action='my_subjects')}]
-
     @ActionProtector("user")
     def index(self):
         c.events = meta.Session.query(Event)\
@@ -626,15 +617,11 @@ class UserProfileController(ProfileControllerBase):
     def _feed_page(self):
         # Overrides parent method to add tabs and breadcrumbs
         c.breadcrumbs.append(self._actions('feed'))
-        c.tabs = self._tabs()
-        c.current_tab = 'feed'
         return ProfileControllerBase._feed_page(self)
 
     @ActionProtector("user")
     def my_subjects(self):
         c.breadcrumbs.append(self._actions('my_subjects'))
-        c.tabs = self._tabs()
-        c.current_tab = 'my_subjects'
         return render('/profile/my_subjects.mako')
 
     @ActionProtector("user")

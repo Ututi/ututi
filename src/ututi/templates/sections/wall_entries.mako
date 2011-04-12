@@ -39,18 +39,23 @@
   %endif
 </%def>
 
+<%def name="hide_button(event)">
+  <div class="hide-button-container">
+    <form method="POST" action="${url(controller='wall', action='hide_event')}">
+      <div>
+        <input class="event-type" name="event_type" type="hidden" value="${event.event_type}" />
+        <input class="hide-button" type="image" src="/img/icons.com/close.png" title="${_('Ignore events like this')}" />
+      </div>
+    </form>
+  </div>
+</%def>
+
 <%def name="wall_entry(event)">
 <div class="wall-entry ${caller.classes()} type_${event.event_type}" id="wall-event-${event.id}">
+  %if hasattr(caller, 'heading'):
   <div class="event-heading">
     %if hasattr(c, 'events_hidable') and c.events_hidable and c.user is not None:
-    <div class="hide-button-container">
-      <form method="POST" action="${url(controller='wall', action='hide_event')}">
-        <div>
-          <input class="event-type" name="event_type" type="hidden" value="${event.event_type}" />
-          <input class="hide-button" type="image" src="/img/icons.com/close.png" title="${_('Ignore events like this')}" />
-        </div>
-      </form>
-    </div>
+      ${hide_button(event)}
     %endif
     <span class="event-title">
       ${caller.heading()}
@@ -59,6 +64,7 @@
       ${h.when(event.created)}
     </span>
   </div>
+  %endif
   <div class="event-body">
     ${caller.body()}
   </div>
@@ -122,6 +128,16 @@
     </div>
     %endif
     <div class="content">
+      %if hasattr(caller, 'headline'):
+      <div class="event-heading">
+        %if hasattr(c, 'events_hidable') and c.events_hidable and c.user is not None:
+          ${hide_button(event)}
+        %endif
+        <span class="event-title">
+          ${caller.headline()}
+        </span>
+      </div>
+      %endif
       %if head_message:
         <%
            message = ''
@@ -295,14 +311,9 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable subject-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
-        ${_("You have uploaded a new file in the subject %(subject_link)s") % \
-           dict(subject_link=h.content_link(event.object_id)) | n}
-      %else:
-        ${_("%(user_link)s has uploaded a new file in the subject %(subject_link)s") % \
-           dict(user_link=h.user_link(event.author_id),
-                subject_link=h.content_link(event.object_id)) | n}
-      %endif
+      ${_("%(user_link)s has uploaded a new file") % \
+         dict(user_link=h.user_link(event.author_id)) | n}
+      <span class="recipient">${h.content_link(event.object_id)}</span>
     </%def>
     <%self:grouped_files event="${event}" />
   </%self:wall_entry>
@@ -312,16 +323,10 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">subject-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
-        ${_("You have created a new folder %(folder_name)s in the subject %(subject_link)s") % \
-           dict(folder_name=event.folder,
-                subject_link=h.content_link(event.object_id)) | n}
-      %else:
-        ${_("%(user_link)s has created a new folder %(folder_name)s in the subject %(subject_link)s") % \
-           dict(user_link=h.user_link(event.author_id),
-                folder_name=event.folder,
-                subject_link=h.content_link(event.object_id)) | n}
-      %endif
+      ${_("%(user_link)s has created a new folder %(folder_name)s") % \
+         dict(user_link=h.user_link(event.author_id),
+              folder_name=event.folder) | n}
+      <span class="recipient">${h.content_link(event.object_id)}</span>
     </%def>
   </%self:wall_entry>
 </%def>
@@ -330,14 +335,9 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable group-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
-        ${_("You have uploaded a new file in the group %(group_link)s") % \
-           dict(group_link=h.content_link(event.object_id)) | n}
-      %else:
-        ${_("%(user_link)s has uploaded a new file in the group %(group_link)s") % \
-           dict(user_link=h.user_link(event.author_id),
-                group_link=h.content_link(event.object_id)) | n}
-      %endif
+      ${_("%(user_link)s has uploaded a new file") % \
+         dict(user_link=h.user_link(event.author_id)) | n}
+      <span class="recipient">${h.content_link(event.object_id)}</span>
     </%def>
     <%self:grouped_files event="${event}" />
   </%self:wall_entry>
@@ -347,16 +347,10 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">group-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
-        ${_("You have created a new folder %(folder_name)s in the group %(group_link)s") % \
-           dict(folder_name=event.folder,
-                group_link=h.content_link(event.object_id)) | n}
-      %else:
-        ${_("%(user_link)s has created a new folder %(folder_name)s in the group %(group_link)s") % \
-           dict(user_link=h.user_link(event.author_id),
-                folder_name=event.folder,
-                group_link=h.content_link(event.object_id)) | n}
-      %endif
+      ${_("%(user_link)s has created a new folder %(folder_name)s") % \
+         dict(user_link=h.user_link(event.author_id),
+              folder_name=event.folder) | n}
+      <span class="recipient">${h.content_link(event.object_id)}</span>
     </%def>
   </%self:wall_entry>
 </%def>
@@ -365,14 +359,9 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">subject-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
-        ${_("You have edited the subject %(subject_link)s") % \
-           dict(subject_link=h.content_link(event.object_id)) | n}
-      %else:
-        ${_("%(user_link)s has edited the subject %(subject_link)s") % \
-           dict(user_link=h.user_link(event.author_id),
-                subject_link=h.content_link(event.object_id)) | n}
-      %endif
+      ${_("%(user_link)s has edited the subject %(subject_link)s") % \
+         dict(user_link=h.user_link(event.author_id),
+              subject_link=h.content_link(event.object_id)) | n}
     </%def>
   </%self:wall_entry>
 </%def>
@@ -381,14 +370,9 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">subject-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
-        ${_("You have created the subject %(subject_link)s") % \
-           dict(subject_link=h.content_link(event.object_id)) | n}
-      %else:
-        ${_("%(user_link)s has created the subject %(subject_link)s") % \
-           dict(user_link=h.user_link(event.author_id),
-                subject_link=h.content_link(event.object_id)) | n}
-      %endif
+      ${_("%(user_link)s has created the subject %(subject_link)s") % \
+         dict(user_link=h.user_link(event.author_id),
+              subject_link=h.content_link(event.object_id)) | n}
     </%def>
   </%self:wall_entry>
 </%def>
@@ -397,39 +381,27 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">group-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
-        ${_("You have created the group %(group_link)s") % \
-           dict(group_link=h.content_link(event.object_id)) | n}
-      %else:
-        ${_("%(user_link)s has created the group %(group_link)s") % \
-           dict(user_link=h.user_link(event.author_id),
-                group_link=h.content_link(event.object_id)) | n}
-      %endif
+      ${_("%(user_link)s has created the group %(group_link)s") % \
+         dict(user_link=h.user_link(event.author_id),
+              group_link=h.content_link(event.object_id)) | n}
     </%def>
   </%self:wall_entry>
 </%def>
 
 <%def name="mailinglist_post_created(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">minimizable message-event</%def>
-    <%def name="heading()">
-      <%
-         msg = event
-         if hasattr(event, 'children') and len(event.children) > 0:
-           msg = event.children[0]
-      %>
-      %if c.user is not None and c.user.id == msg.author_id:
-        ${_("You have posted a new message %(message_link)s to the group %(group_link)s") % \
-           dict(group_link=h.content_link(msg.object_id),
-                message_link=h.content_link(msg.message_id)) | n}
-      %else:
-        ${_("%(user_link)s has posted a new message %(message_link)s to the group %(group_link)s") % \
-           dict(user_link=h.user_link(msg.ml_author),
-                group_link=h.content_link(msg.object_id),
-                message_link=h.content_link(msg.message_id)) | n}
-      %endif
-    </%def>
-    <%self:event_conversation event="${event}"/>
+    <%def name="classes()">minimizable no-icon</%def>
+    <%self:event_conversation event="${event}">
+      <%def name="headline()">
+        <%
+           msg = event
+           if hasattr(event, 'children') and len(event.children) > 0:
+             msg = event.children[0]
+        %>
+        ${h.user_link(msg.ml_author)}
+        <span class="recipient">${h.content_link(msg.object_id)}</span>
+      </%def>
+    </%self:event_conversation>
   </%self:wall_entry>
 </%def>
 
@@ -437,14 +409,9 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
-          ${_("You have sent a message to the group %(group_link)s") % \
-             dict(group_link=h.content_link(event.object_id)) | n}
-      %else:
-          ${_("Teacher %(user_link)s has sent a message to the group %(group_link)s") % \
-             dict(user_link=h.user_link(event.author_id),
-                  group_link=h.content_link(event.object_id)) | n}
-      %endif
+      ${_("%(user_link)s has sent a message to the group %(group_link)s") % \
+         dict(user_link=h.user_link(event.author_id),
+              group_link=h.content_link(event.object_id)) | n}
     </%def>
     ## The following snippet is copied from event_conversation def.
     ## This is a temporary solution as teacher messages should be
@@ -464,16 +431,10 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
-        ${_("You have posted a new message %(message_link)s to the group's %(group_link)s moderation queue") % \
-             dict(group_link=h.content_link(event.object_id),
-                  message_link=h.content_link(event.message_id)) | n}
-      %else:
-        ${_("%(user_link)s has posted a new message %(message_link)s to the group's %(group_link)s moderation queue") % \
-             dict(user_link=h.user_link(event.ml_author),
-                  group_link=h.content_link(event.object_id),
-                  message_link=h.content_link(event.message_id)) | n}
-      %endif
+      ${_("%(user_link)s has posted a new message %(message_link)s to the group's %(group_link)s moderation queue") % \
+           dict(user_link=h.user_link(event.ml_author),
+                group_link=h.content_link(event.object_id),
+                message_link=h.content_link(event.message_id)) | n}
     </%def>
     ## The following snippet is copied from event_conversation def.
     ## This markup should probably be shared but I don't know the
@@ -526,16 +487,10 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
-        ${_("You have posted a new message %(message_link)s in the forum %(group_link)s") % \
-           dict(group_link=h.content_link(event.object_id),
-                message_link=h.content_link(event.post_id)) | n}
-      %else:
-        ${_("%(user_link)s has posted a new message %(message_link)s in the forum %(group_link)s") % \
-           dict(user_link=h.user_link(event.author_id),
-                group_link=h.content_link(event.object_id),
-                message_link=h.content_link(event.post_id)) | n}
-      %endif
+      ${_("%(user_link)s has posted a new message %(message_link)s in the forum %(group_link)s") % \
+         dict(user_link=h.user_link(event.author_id),
+              group_link=h.content_link(event.object_id),
+              message_link=h.content_link(event.post_id)) | n}
     </%def>
     <%self:event_conversation event="${event}"/>
   </%self:wall_entry>
@@ -585,30 +540,17 @@
     <%def name="classes()">group-event ${hasattr(event, 'children') and 'click2show' or ''}</%def>
     <%def name="heading()">
       %if hasattr(event, 'children'):
-          %if c.user is not None and c.user.id == event.author_id:
-            ${ungettext("You have and %(count)s more person have joined the group %(group_link)s",
-                        "You have and %(count)s more people have joined the group %(group_link)s",
-                        len(event.children)) % \
-               dict(group_link=h.content_link(event.object_id),
-                    count=len(event.children)) | n}
-          %else:
-            ${ungettext("%(user_link)s and %(count)s more person have joined the group %(group_link)s",
-                        "%(user_link)s and %(count)s more people have joined the group %(group_link)s",
-                        len(event.children)) % \
-               dict(user_link=h.user_link(event.author_id),
-                    group_link=h.content_link(event.object_id),
-                    count=len(event.children)) | n}
-          %endif
-          <span class="click hide event-children-link">${_("show all")}</span>
+        ${ungettext("%(user_link)s and %(count)s more person have joined the group %(group_link)s",
+                    "%(user_link)s and %(count)s more people have joined the group %(group_link)s",
+                    len(event.children)) % \
+           dict(user_link=h.user_link(event.author_id),
+                group_link=h.content_link(event.object_id),
+                count=len(event.children)) | n}
+        <span class="click hide event-children-link">${_("show all")}</span>
       %else:
-        %if c.user is not None and c.user.id == event.author_id:
-          ${_("You have joined the group %(group_link)s") % \
-             dict(group_link=h.content_link(event.object_id)) | n}
-        %else:
-          ${_("%(user_link)s has joined the group %(group_link)s") % \
-             dict(user_link=h.user_link(event.author_id),
-                  group_link=h.content_link(event.object_id)) | n}
-        %endif
+        ${_("%(user_link)s has joined the group %(group_link)s") % \
+           dict(user_link=h.user_link(event.author_id),
+                group_link=h.content_link(event.object_id)) | n}
       %endif
     </%def>
     %if hasattr(event, 'children'):
@@ -626,30 +568,17 @@
     <%def name="classes()">group-event ${hasattr(event, 'children') and 'click2show' or ''}</%def>
     <%def name="heading()">
       %if hasattr(event, 'children'):
-        %if c.user is not None and c.user.id == event.author_id:
-          ${ungettext("You have and %(count)s more person have left the group %(group_link)s",
-                      "You have and %(count)s more people have left the group %(group_link)s",
-                      len(event.children)) % \
-             dict(group_link=h.content_link(event.object_id),
-                  count=len(event.children)) | n}
-        %else:
-          ${ungettext("%(user_link)s and %(count)s more person have left the group %(group_link)s",
-                      "%(user_link)s and %(count)s more people have left the group %(group_link)s",
-                      len(event.children)) % \
-             dict(user_link=h.user_link(event.author_id),
-                  group_link=h.content_link(event.object_id),
-                  count=len(event.children)) | n}
-        %endif
+        ${ungettext("%(user_link)s and %(count)s more person have left the group %(group_link)s",
+                    "%(user_link)s and %(count)s more people have left the group %(group_link)s",
+                    len(event.children)) % \
+           dict(user_link=h.user_link(event.author_id),
+                group_link=h.content_link(event.object_id),
+                count=len(event.children)) | n}
         <span class="click hide event-children-link">${_("show all")}</span>
       %else:
-        %if c.user is not None and c.user.id == event.author_id:
-          ${_("You have left the group %(group_link)s") % \
-             dict(group_link=h.content_link(event.object_id)) | n}
-        %else:
-          ${_("%(user_link)s has left the group %(group_link)s") % \
-             dict(user_link=h.user_link(event.author_id),
-                  group_link=h.content_link(event.object_id)) | n}
-        %endif
+        ${_("%(user_link)s has left the group %(group_link)s") % \
+           dict(user_link=h.user_link(event.author_id),
+                group_link=h.content_link(event.object_id)) | n}
       %endif
     </%def>
     %if hasattr(event, 'children'):
@@ -696,16 +625,10 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable subject-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
-        ${_("You have created a page %(page_link)s in the subject %(subject_link)s") % \
-           dict(subject_link=h.content_link(event.object_id),
-                page_link=h.content_link(event.page_id)) | n}
-      %else:
-        ${_("%(user_link)s has created a page %(page_link)s in the subject %(subject_link)s") % \
-           dict(subject_link=h.content_link(event.object_id),
-                page_link=h.content_link(event.page_id),
-                user_link=h.user_link(event.author_id)) | n}
-      %endif
+      ${_("%(user_link)s has created a page %(page_link)s") % \
+         dict(page_link=h.content_link(event.page_id),
+              user_link=h.user_link(event.author_id)) | n}
+      <span class="recipient">${h.content_link(event.object_id)}</span>
     </%def>
     <%self:page_description evt="${event}"/>
     <%self:event_conversation event="${event}" head_message="${False}" />
@@ -716,16 +639,10 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable subject-event</%def>
     <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
-        ${_("You have modified a page %(page_link)s in the subject %(subject_link)s") % \
-           dict(subject_link=h.content_link(event.object_id),
-                page_link=h.content_link(event.page_id)) | n}
-      %else:
-        ${_("%(user_link)s has modified a page %(page_link)s in the subject %(subject_link)s") % \
-           dict(subject_link=h.content_link(event.object_id),
-                page_link=h.content_link(event.page_id),
-                user_link=h.user_link(event.author_id)) | n}
-      %endif
+      ${_("%(user_link)s has modified a page %(page_link)s") % \
+         dict(page_link=h.content_link(event.page_id),
+              user_link=h.user_link(event.author_id)) | n}
+      <span class="recipient">${h.content_link(event.object_id)}</span>
     </%def>
     <%self:page_description evt="${event}"/>
     <%self:event_conversation event="${event}" head_message="${False}" />

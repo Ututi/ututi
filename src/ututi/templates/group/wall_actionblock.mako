@@ -1,7 +1,3 @@
-<%doc>
-  Wall actionblock for the user's wall.
-</%doc>
-
 <%namespace name="actions" file="/sections/wall_actionblock.mako" import="head_tags, action_block" />
 <%namespace name="base" file="/prebase.mako" import="rounded_block"/>
 <%namespace name="dropdown" file="/widgets/dropdown.mako" import="dropdown, head_tags"/>
@@ -150,11 +146,11 @@
   %>
   <%actions:action_block>
     <%def name="links()">
-      <a class="action ${not show_messages and 'inactive' or ''}" id="send_message" href="#send-message">${_('send a message')}</a>
+      <a class="action ${'active' if show_messages else 'inactive'}" id="send_message" href="#send-message">${_('Group message')}</a>
       %if not show_files:
       ${tooltip(_('You need to be a member of a group or have subjects that you are studying to be able to quickly upload files.'))}
       %endif
-      <a class="action ${not show_files and 'inactive' or ''}" id="upload_file" href="#upload-file">${_('upload a file')}</a>
+      <a class="action ${'active' if show_files else 'inactive'}" id="upload_file" href="#upload-file">${_('File')}</a>
     </%def>
 
     ${self.send_message_block(group)}

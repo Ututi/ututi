@@ -98,18 +98,18 @@
   show_wiki = bool(len(wiki_recipients))
   %>
 
-  <%base:rounded_block id="dashboard_actions">
+  <div id="dashboard_actions">
   <div class="tip">${_('Share with others')}</div>
-  <a class="action ${not show_messages and 'inactive' or ''}" id="send_message" href="#send-message">${_('send a message')}</a>
+  <a class="action ${'active' if show_messages else 'inactive'}" id="send_message" href="#send-message">${_('send a message')}</a>
   %if not show_files:
   ${tooltip(_('You need to be a member of a group or have subjects that you are studying to be able to quickly upload files.'))}
   %endif
-  <a class="action ${not show_files and 'inactive' or ''}" id="upload_file" href="#upload-file">${_('upload a file')}</a>
+  <a class="action ${'active' if show_files else 'inactive'}" id="upload_file" href="#upload-file">${_('upload a file')}</a>
   %if not show_wiki:
   ${tooltip(_('You or your group need to have subjects that you are studying to be able to quickly create wiki notes in them.'))}
   %endif
-  <a class="action ${not show_wiki and 'inactive' or ''}" id="create_wiki" href="#create-wiki">${_('create a wiki page')}</a>
-  </%base:rounded_block>
+  <a class="action ${'active' if show_wiki else 'inactive'}" id="create_wiki" href="#create-wiki">${_('create a wiki page')}</a>
+  </div>
 
   ${self.wall_reload_url()}
 
