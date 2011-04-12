@@ -339,6 +339,10 @@ class MailinglistPostCreatedEvent(PostCreatedEventBase, MessagingEventMixin):
     def ml_group_id(self):
         return self.message.group_id
 
+    @property
+    def ml_author(self):
+        return self.author
+
 
 class ModeratedPostCreated(PostCreatedEventBase):
     """Event fired when someone posts a message on the moderation queue.
