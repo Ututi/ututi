@@ -156,13 +156,13 @@
 </%def>
 
 <%def name="send_message_block(msg_recipients)">
-  <div id="send_message_block" class="dashboard_action_block">
+  <%base:rounded_block id="send_message_block" class_="dashboard_action_block">
     <a class="${not active and 'inactive' or ''}" name="send-message"></a>
-    <form method="POST" action="${url(controller='wall', action='send_message')}" id="message_form">
+    <form method="POST" action="${url(controller='wall', action='send_message')}" id="message_form" class="inelement-form">
       <input id="message-rcpt-url" type="hidden" value="${url(controller='wall', action='message_rcpt_js')}" />
       <input id="message-send-url" type="hidden" value="${url(controller='wall', action='send_message_js')}" />
 
-      ${h.select_line('rcpt_group', _('Write a message to:'), msg_recipients)}
+      ${dropdown.dropdown('rcpt_group', _('Write a message to:'), msg_recipients)}
       <input type="hidden" name="rcpt_user_id" id="rcpt_user_id" value=""/>
       ${h.input_line('rcpt_user', _('User:'), id='rcpt_user', class_='wide-input')}
       ${h.input_line('subject', _('Message subject:'), id="message_subject", class_='wide-input')}
@@ -173,31 +173,31 @@
         </label>
       </div>
       <div class="formSubmit">
-        ${h.input_submit(_('Send'), id="message_send", class_='dark inline')}
+        ${h.input_submit(_('Send'), id="message_send")}
       </div>
     </form>
-  </div>
+  </%base:rounded_block>
 </%def>
 
 <%def name="upload_file_block(file_recipients)">
-  <div id="upload_file_block" class="dashboard_action_block">
+  <%base:rounded_block id="upload_file_block" class_="dashboard_action_block">
     <a class="${not active and 'inactive' or ''}" name="upload-file"></a>
-    <form id="file_form">
+    <form id="file_form" class="inelement-form">
       <input id="file-upload-url" type="hidden" value="${url(controller='wall', action='upload_file_js', qualified=True)}" />
       ${dropdown.dropdown('file_rcpt', _('Upload a file to:'), file_recipients)}
       <br class="clearBoth" />
       <div class="formSubmit">
-        ${h.input_submit(_('Upload file'), id="file_upload_submit", class_='dark inline')}
+        ${h.input_submit(_('Upload file'), id="file_upload_submit")}
       </div>
     </form>
-  </div>
+  </%base:rounded_block>
   <div id="upload-failed-error-message" class="action-reply">${_('File upload failed.')}</div>
 </%def>
 
 <%def name="create_wiki_block(wiki_recipients)">
-  <div id="create_wiki_block" class="dashboard_action_block">
+  <%base:rounded_block id="create_wiki_block" class_="dashboard_action_block">
     <a class="${not active and 'inactive' or ''}" name="create-wiki"></a>
-    <form method="POST" action="${url(controller='wall', action='create_wiki')}" id="wiki_form">
+    <form method="POST" action="${url(controller='wall', action='create_wiki')}" id="wiki_form" class="inelement-form">
       <input id="create-wiki-url" type="hidden" value="${url(controller='wall', action='create_wiki_js')}" />
       ${dropdown.dropdown('rcpt_wiki', _('Create a note on:'), wiki_recipients)}
       ${h.input_line('page_title', _('Title'), id='page_title', class_='wide-input')}
@@ -205,10 +205,10 @@
         ${h.input_wysiwyg('page_content', '')}
       </div>
       <div class="formSubmit">
-        ${h.input_submit(_('Save'), id="wiki_create_send", class_='dark inline')}
+        ${h.input_submit(_('Save'), id="wiki_create_send")}
       </div>
     </form>
-  </div>
+  </%base:rounded_block>
 </%def>
 
 

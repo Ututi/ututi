@@ -86,8 +86,6 @@ button.submit {
 button.inline {
     padding-top: 0;
     padding-bottom: 0;
-    margin-top: 0;
-    margin-bottom: 0;
 }
 
 button.add {
@@ -1154,11 +1152,11 @@ ul.feature-list {
 }
 
 /* DASHBOARD ACTION BLOCKS */
-#dashboard_action_blocks {
-    border-bottom: 1px solid #ff9900;
-    margin-bottom: 10px;
-    padding: 5px 0;
-}
+#dashboard_action_blocks { }
+
+  #dashboard_action_blocks .rounded-block {
+    padding: 5px 10px;
+  }
 
   #dashboard_action_blocks .dashboard_action_block {
       display: none; /* Initially hidden */
@@ -1168,6 +1166,8 @@ ul.feature-list {
 
 #dashboard_action_links {
     padding-top: 5px; /* Ussually placed under heading */
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ff9900;
     font-size: 11px;
 }
 
