@@ -734,15 +734,15 @@ input {
 
   #dashboard_action_links a#send_message {
     padding-left: 15px;
-    background: transparent url("../img/icons.com/group2_small_grey.png") left center no-repeat;
+    background: transparent url("/img/icons.com/group2_small_grey.png") left center no-repeat;
   }
   #dashboard_action_links a#upload_file {
     padding-left: 10px;
-    background: transparent url("../img/icons.com/file_small_grey.png") left center no-repeat;
+    background: transparent url("/img/icons.com/file_small_grey.png") left center no-repeat;
   }
   #dashboard_action_links a#create_wiki {
     padding-left: 10px;
-    background: transparent url("../img/icons.com/wiki_small_grey.png") left center no-repeat;
+    background: transparent url("/img/icons.com/wiki_small_grey.png") left center no-repeat;
   }
 
   #dashboard_action_links a.action.active:hover,
@@ -752,15 +752,15 @@ input {
 
   #dashboard_action_links a.active#send_message:hover,
   #dashboard_action_links a.open#send_message {
-    background-image: url("../img/icons.com/group2_small_orange.png");
+    background-image: url("/img/icons.com/group2_small_orange.png");
   }
   #dashboard_action_links a.active#upload_file:hover,
   #dashboard_action_links a.open#upload_file {
-    background-image: url("../img/icons.com/file_small_orange.png");
+    background-image: url("/img/icons.com/file_small_orange.png");
   }
   #dashboard_action_links a.active#create_wiki:hover,
   #dashboard_action_links a.open#create_wiki {
-    background-image: url("../img/icons.com/wiki_small_orange.png");
+    background-image: url("/img/icons.com/wiki_small_orange.png");
   }
 
   #upload-failed-error-message { display: none; }
@@ -1142,7 +1142,7 @@ ul.feature-list {
     border: 1px solid #FF7800;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
-    background: white url("../images/details/icon_usmall.png") 10px center no-repeat;
+    background: white url("/images/details/icon_usmall.png") 10px center no-repeat;
     margin: 5px 0 0.8em;
     padding: 0.6em 0.6em 0.6em 35px;
     font-size: 14px;
@@ -1366,11 +1366,11 @@ ul.medium-icon-list {
 }
 
 .search-results-container .snippet-subject {
-    background-image: url("../img/icons.com/subject_big_grey.png");
+    background-image: url("/img/icons.com/subject_big_grey.png");
 }
 
 .search-results-container .snippet-group {
-    background-image: url("../img/icons.com/group_big_grey.png");
+    background-image: url("/img/icons.com/group_big_grey.png");
 }
 
     .search-results-container .snippet-group .item-title {
@@ -1574,11 +1574,11 @@ ul.tabs {
     }
 
     #teacher .section.subjects {
-        background-image: url("../img/icons.com/about/subject.png");
+        background-image: url("/img/icons.com/about/subject.png");
     }
 
     #teacher .section.groups {
-        background-image: url("../img/icons.com/about/group.png");
+        background-image: url("/img/icons.com/about/group.png");
     }
 
     #teacher .section .title {
