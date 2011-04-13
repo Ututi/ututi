@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-04-07 09:47+0300\n"
+"PO-Revision-Date: 2011-04-13 23:48+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -131,7 +131,7 @@ msgid "Facebook did not provide your email address."
 msgstr "Facebook nie daje Ci adresu e-mail."
 
 msgid "Login failed. Please login using your username and bind your account first."
-msgstr ""
+msgstr "Logowanie nie powiodło się. Zaloguj się za pomocą nazwy użytkownika i połącz konto z Facebook/Google."
 
 #, python-format
 msgid "Your Google account \"%s\" has been linked to your existing Ututi account."
@@ -381,7 +381,7 @@ msgid "Passwords do not match."
 msgstr "Wprowadzone przez Ciebie hasła są różne."
 
 msgid "Please use your university email or <a href=\"/browse\">choose university from the list</a>."
-msgstr ""
+msgstr "Użyj uniwerysteckiego adresu e-mail lub <a href=\"/browse\">wybierz uniwersytet z listy</a>."
 
 msgid "You have to be logged in to download a file!"
 msgstr "Zaloguj się by pobrać plik!"
@@ -409,13 +409,13 @@ msgid "Only registered users can perform this action. Please log in, or register
 msgstr "Informacja udostępniana wyłącznie użytkownikom. Zaloguj się lub załóż nowe konto użytkownika."
 
 msgid "Incorrect username."
-msgstr ""
+msgstr "Niepoprawna nazwa użytkownika."
 
 msgid "Please select your network."
-msgstr ""
+msgstr "Wybierz swoją sieć."
 
 msgid "Incorrect password."
-msgstr ""
+msgstr "Nieprawidłowe hasło."
 
 msgid "Password recovery email sent. Please check your inbox."
 msgstr "E-mail z linkiem, odtwarzającym Twoje hasło został wysłany. Sprawdź swoją skrzynkę pocztową."
@@ -486,13 +486,13 @@ msgid "The Ututi group \"%s\" has run out of private file space"
 msgstr "Grupa \"%s\" nie posiada już prywatnej przestrzeni na pliki."
 
 msgid "Only people with confirmed university email can register"
-msgstr ""
+msgstr "Tylko osoby z potwierdzonym uniwersyteckim adresem e-mail mogą się zarejestrować"
 
 msgid "People with confirmed university email can register and other can be invited"
-msgstr ""
+msgstr "Osoby z potwierdzonym uniwersyteckim adresem e-mail mogą się zarejstrować i zapraszać innych"
 
 msgid "Everyone can register to this university"
-msgstr ""
+msgstr "Każdy może się zapisać do tego uniwersytetu"
 
 msgid "Please enter your password."
 msgstr "Wpisz swoje hasło."
@@ -507,10 +507,10 @@ msgid "Please upload JPEG, PNG or GIF image."
 msgstr "Dodaj zdjęcie w formacie JPEG, PNG lub GIF."
 
 msgid "Please enter university title."
-msgstr ""
+msgstr "Wpisz stopień uniwersytecki."
 
 msgid "Please enter university web site."
-msgstr ""
+msgstr "Wpisz adres strony uniwersytetu."
 
 msgid "Please select logo."
 msgstr "Wybierz logo."
@@ -591,10 +591,10 @@ msgid "You seem to have entered your username and password wrong, please try aga
 msgstr "Login nie pasuje do hasła. Próbuj jeszcze raz!"
 
 msgid "The email you entered is registered in Ututi. Please login to proceed."
-msgstr ""
+msgstr "Ten adres e-mail jest już zarejestrowany w Ututi. Proszę się zalogować aby kontynuować."
 
 msgid "You already have a teacher account."
-msgstr ""
+msgstr "Masz już konto wykładowcy."
 
 msgid "Thank You! Your request to become a teacher has been received. We will notify You once we grant You the rights of a teacher."
 msgstr "Dziękujemy! Otrzymaliśmy Twoje podanie. Powiadomimy Cię gdy zostaną Ci przyznane prawa wykładowcy."
@@ -918,13 +918,13 @@ msgstr "Wprowadź aktualny e-mail."
 
 #, python-format
 msgid "%(email)s is already registered in %(university)s network."
-msgstr ""
+msgstr "%(email)s jest już zarejetrowany w sieci %(university)s."
 
 msgid "Public email domains are not allowed."
-msgstr ""
+msgstr "Publiczne domeny e-mail nie są dozowolone."
 
 msgid "You have to use university email address to register at this university."
-msgstr ""
+msgstr "Musisz użyć uniwersyteckiego adresu e-mail aby zarejestrować się na tym uniwersytecie."
 
 msgid "Enter a valid email domain."
 msgstr "Dodaj poprawną domenę e-mail."
@@ -1243,10 +1243,10 @@ msgid "Image from flickr: http://www.flickr.com/photos/orinrobertjohn/13069655/s
 msgstr "Obraz z flickr:  http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
 
 msgid "New in Ututi?"
-msgstr ""
+msgstr "Jesteś nowy na Ututi?"
 
 msgid "Sign in with your university email"
-msgstr ""
+msgstr "Zarejestruj się za pomocą uczelnianego adresu e-mail."
 
 msgid "Login"
 msgstr "Login"
@@ -1258,7 +1258,7 @@ msgid "Password:"
 msgstr "Hasło:"
 
 msgid "Select network:"
-msgstr ""
+msgstr "Wybierz sieć:"
 
 msgid "Keep me logged in on this computer"
 msgstr "Nie wylogowuj mnie na tym komputerze"
@@ -1267,7 +1267,7 @@ msgid "Forgot password?"
 msgstr "Zapomniałeś hasła?"
 
 msgid "Or log in using Facebook or Google"
-msgstr ""
+msgstr "Lub zaloguj się za pomocą Facebooka lub Google"
 
 msgid "Log in using Facebook"
 msgstr "Zaloguj się używając Facebooka"
@@ -2858,7 +2858,7 @@ msgstr "Tutaj wpisz swój adres email:"
 
 #, python-format
 msgid "Teacher registration to %(university_title)s"
-msgstr ""
+msgstr "Rejestracja wykładowcy jako %(university_title)s"
 
 msgid "Can't find your subject?"
 msgstr "Nie możesz znaleźć swojego przedmiotu?"
@@ -3177,7 +3177,7 @@ msgid "I study here"
 msgstr "Studiuję tutaj"
 
 msgid "I teach here"
-msgstr ""
+msgstr "Wykładam tutaj"
 
 msgid "Latest groups:"
 msgstr "Ostatnio założone grupy:"
@@ -3266,9 +3266,9 @@ msgstr "Tablica uniwersytetu"
 #, python-format
 msgid "Private messages (%(count)s new)"
 msgid_plural "Private messages (%(count)s new)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Wiadomości prywatne (%(count)s)"
+msgstr[1] "Wiadomości prywatne (%(count)s)"
+msgstr[2] "Wiadomości prywatne (%(count)s)"
 
 msgid "Private messages"
 msgstr "Wiadomość prywatna"
@@ -3292,7 +3292,7 @@ msgid "(edit profile)"
 msgstr "(edytuj profil)"
 
 msgid "Medals"
-msgstr ""
+msgstr "Medale"
 
 msgid "What to do next?"
 msgstr "Co teraz zrobić?"
@@ -3624,16 +3624,16 @@ msgid "Delete this group?"
 msgstr "Chcesz usunąć tę grupę?"
 
 msgid "Students groups that you teach to"
-msgstr ""
+msgstr "Grupy studenckie, które uczysz"
 
 msgid "Easy way to contact your groups by sending a <strong>group message</strong>."
-msgstr ""
+msgstr "Prosty sposób, aby skontaktować się z Twoimi grupami wysyłając <strong>wiadomość grupową</strong>."
 
 msgid "Add students groups"
-msgstr ""
+msgstr "Dodaj grupy studenckie"
 
 msgid "My courses:"
-msgstr ""
+msgstr "Moje przedmioty:"
 
 msgid "add courses"
 msgstr "dodaj przedmioty"
@@ -3642,28 +3642,28 @@ msgid "Add courses you teach"
 msgstr "Dodaj przedmioty, których uczysz"
 
 msgid "Files upload"
-msgstr ""
+msgstr "Przesyłanie plików"
 
 msgid "You will be able to upload course material, that will be accessable for everyone, who is following your course."
-msgstr ""
+msgstr "Możesz przesyłać materiały do nauki, a będą one dostępne dla wszystkich, którzy obserwują Twój przedmiot."
 
 msgid "Course discussions"
-msgstr ""
+msgstr "Dyskusje o przedmiocie"
 
 msgid "Discuss course material and related subjects with your students."
-msgstr ""
+msgstr "Rozmawiaj o przedmiocie i innych sprawach ze swoimi studentami."
 
 msgid "Automatic notifications"
-msgstr ""
+msgstr "Automatyczne powiadomienia"
 
 msgid "Ututi will automaticaly inform students and groups about changes in course material."
-msgstr ""
+msgstr "Ututi będzie automatycznie powiadamiać studentów i grupy o zmianach w przedmiocie."
 
 msgid "Add your courses"
-msgstr ""
+msgstr "Dodaj swoje przedmioty"
 
 msgid "Or browse subjects' catalog"
-msgstr ""
+msgstr "Lub przejrzyj katalog przedmiotów"
 
 msgid "Add:"
 msgstr "Dodaj:"
@@ -3850,10 +3850,10 @@ msgid "University logo:"
 msgstr "Logo uczelni:"
 
 msgid "University emails:"
-msgstr ""
+msgstr "Maile uczelniane:"
 
 msgid "Enter email domains that belong to this university."
-msgstr ""
+msgstr "Podaj domeny email, które należą do tego uniwersytetu."
 
 msgid "Add more"
 msgstr "Dodaj więcej"
@@ -3868,9 +3868,9 @@ msgstr "Rejestrujesz się do sieci <strong>%(university_name)s</strong>."
 #, python-format
 msgid "%(count)s person on this network:"
 msgid_plural "%(count)s people on this network:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%(count)s osoba w tej sieci:"
+msgstr[1] "%(count)s osoby w tej sieci:"
+msgstr[2] "%(count)s osób w tej sieci:"
 
 #, python-format
 msgid "It is not your university? Use another email address or %(contact_us_link)s."
