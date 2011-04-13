@@ -435,47 +435,6 @@ input {
         font-style: italic;
     }
 
-/* TEACHER REGISTRATION PAGE
- */
-
-#teacher-registration-page {
-    padding: 50px 0px;
-}
-
-    #teacher-registration-page .two-panel-layout {
-        text-align: center;
-    }
-
-        #teacher-registration-page .two-panel-layout .left-panel,
-        #teacher-registration-page .two-panel-layout .right-panel {
-            background: url(img/faded-box-400px.png) no-repeat left bottom;
-            width: 320px;
-            min-height: 350px;
-            padding: 10px 40px;
-            text-align: left; /* Reset centering */
-        }
-
-        #teacher-registration-page .two-panel-layout.with-right-panel .left-panel {
-            border: none;
-            margin-right: 50px;
-        }
-
-    #teacher-registration-page h1.page-title {
-        font-weight: bold;
-        font-size: 20px;
-        margin: 0;
-    }
-
-    #teacher-registration-page p {
-        margin: 10px 0px;
-    }
-
-    #teacher-registration-page ul.feature-list li {
-        /* Diferrent than standard spacing. */
-        margin-bottom: 20px; 
-        padding-left: 80px;
-    }
-
 /* THE NEW WALL STYLE
  */
 
