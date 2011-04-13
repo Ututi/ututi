@@ -601,7 +601,8 @@ input {
 
                 .wall .action-block textarea,
                 .wall .action-block input,
-                .wall .action-block select {
+                .wall .action-block select,
+                .wall .action-block .form-field {
                     margin-bottom: 5px;
                 }
 

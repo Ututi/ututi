@@ -16,15 +16,27 @@
   ${dropdown.head_tags()}
   <script type="text/javascript">
   $(function(){
-    /* Send message actions.
-     */
-    $('#dashboard_action_blocks .cancel-button').click(function() {
-        $('#send_message').click();
-        var block = $(this).closest('.action-block');
+    function clearBlock(block) {
         block.find('input[type="text"], textarea').val('');
         block.find('.tease-element').hide();
         block.find('.action-tease').show();
+        block.find('.error-message').hide();
+    }
+
+    /* Send message actions.
+     */
+    $('#send_message_block .cancel-button').click(function() {
+        $('#send_message').click();
+        clearBlock($(this).closest('.action-block'));
         return false;
+    });
+    $('#upload_file_block .cancel-button').click(function() {
+        $('#upload_file').click();
+        clearBlock($(this).closest('.action-block'));
+    });
+    $('#create_wiki_block .cancel-button').click(function() {
+        $('#create_wiki').click();
+        clearBlock($(this).closest('.action-block'));
     });
 
     message_send_url = $("#message-send-url").val();
@@ -63,7 +75,7 @@
         var file_upload = new AjaxUpload($('#file_upload_submit'),
             {action: file_upload_url,
              name: 'attachment',
-             data: {folder: '', target_id: $('#file_rcpt-select').val()},
+             data: {folder: '', target_id: $('#file_rcpt').val()},
              onSubmit: function(file, ext, iframe){
                  _gaq.push(['_trackEvent', 'profile wall', 'action block submit', 'file upload']);
                  iframe['progress_indicator'] = $(document.createElement('div'));
@@ -88,9 +100,7 @@
              onComplete: function(file, response, iframe){
                  iframe['progress_indicator'].remove();
                  if (response != 'UPLOAD_FAILED') {
-                     $('#file_upload_form').find('input[type="text"], textarea').val('');
-                     $('#upload_file').click();
-                     $('#upload_file_block').removeClass('upload-failed');
+                     $('#file_upload_submit .cancel-button').click();
                      reload_wall(response);
                  } else {
                      $('#upload-failed-error-message').fadeIn(500);
@@ -98,7 +108,7 @@
                  window.clearInterval(iframe['interval']);
              }
             });
-        $('#file_rcpt-select').change(function(){
+        $('#file_rcpt').change(function(){
             file_upload.setData({folder: '', target_id: $(this).val()});
         });
 
@@ -111,9 +121,8 @@
         create_wiki_url = $("#create-wiki-url").val();
         form = $(this).closest('form');
 
-        for ( instance in CKEDITOR.instances )
+        for (instance in CKEDITOR.instances)
             CKEDITOR.instances[instance].updateElement();
-
 
         title = $('#page_title', form).val();
         content = $('#page_content', form).val();
@@ -125,13 +134,10 @@
                        if (data.success != true) {
                            for (var key in data.errors) {
                                var error = data.errors[key];
-                               $('#'+key).parent().after($('<div class="error-message">'+error+'</div>'));
+                               $('#' + key).parent().after($('<div class="error-message">'+error+'</div>'));
                            }
                        } else {
-                           $('#wiki_form').find('input[type="text"], textarea').val('');
-                           for (instance in CKEDITOR.instances)
-                               CKEDITOR.instances[instance].setData('');
-                           $('#create_wiki').click();
+                           $('#create_wiki_block .cancel-button').click();
                            reload_wall(data.evt);
                        }
                    },
@@ -148,7 +154,7 @@
     <a class="${not active and 'inactive' or ''}" name="send-message"></a>
     <form method="POST" action="${url(controller='wall', action='send_message')}" id="message_form">
       <input id="message-send-url" type="hidden" value="${url(controller='wall', action='send_message_js')}" />
-      ${h.select('group_id', _('Write a message to:'), msg_recipients)}
+      ${h.select('group_id', [], msg_recipients)}
       <div class="action-tease">${_("Write your topic")}</div>
       <input id="message_subject" type="text" name="subject" class="tease-element" />
       <textarea name="message">
@@ -164,14 +170,12 @@
     <a class="${not active and 'inactive' or ''}" name="upload-file"></a>
     <form id="file_form">
       <input id="file-upload-url" type="hidden" value="${url(controller='wall', action='upload_file_js', qualified=True)}" />
-      ${dropdown.dropdown('file_rcpt', _('Upload a file to:'), file_recipients)}
-      <br class="clearBoth" />
-      <div class="formSubmit">
-        ${h.input_submit(_('Upload file'), id="file_upload_submit")}
-      </div>
+      ${h.select('file_rcpt', [], file_recipients)}
+      ${h.input_submit(_('Upload file'), id="file_upload_submit", class_='dark inline action-button')}
+      <a class="cancel-button" href="#cancel">${_("Cancel")}</a>
     </form>
   </div>
-  <div id="upload-failed-error-message" class="action-reply">${_('File upload failed.')}</div>
+  <div id="upload-failed-error-message" class="error-message action-reply">${_('File upload failed.')}</div>
 </%def>
 
 <%def name="create_wiki_block(wiki_recipients)">
@@ -179,14 +183,12 @@
     <a class="${not active and 'inactive' or ''}" name="create-wiki"></a>
     <form method="POST" action="${url(controller='wall', action='create_wiki')}" id="wiki_form">
       <input id="create-wiki-url" type="hidden" value="${url(controller='wall', action='create_wiki_js')}" />
-      ${dropdown.dropdown('rcpt_wiki', _('Create a note on:'), wiki_recipients)}
-      ${h.input_line('page_title', _('Title'), id='page_title', class_='wide-input')}
-      <div style="clear: right;">
-        ${h.input_wysiwyg('page_content', '')}
-      </div>
-      <div class="formSubmit">
-        ${h.input_submit(_('Save'), id="wiki_create_send")}
-      </div>
+      ${h.select('rcpt_wiki', [], wiki_recipients)}
+      <div class="action-tease">${_("Write note title here")}</div>
+      <input id="page_title" type="text" name="page_title" class="tease-element" />
+      ${h.input_wysiwyg('page_content', '')}
+      ${h.input_submit(_('Save'), id="wiki_create_send", class_='dark inline action-button')}
+      <a class="cancel-button" href="#cancel">${_("Cancel")}</a>
     </form>
   </div>
 </%def>
