@@ -19,8 +19,10 @@ Send a message from the action block:
     >>> browser.getLink('Moderatoriai', url='/group/moderators').click()
     >>> browser.printCssQuery('#wall-event-8 .event-title', strip=True)
     <span>
-    <BLANKLINE>
-            You have posted a new message <a>Sending a message from the group wall!</a> to the group <a>Moderatoriai</a>
+      <a>Adminas Adminovix</a>
+      <span>
+        <a>Moderatoriai</a>
+      </span>
     </span>
 
     >>> from ututi.lib.mailer import mail_queue

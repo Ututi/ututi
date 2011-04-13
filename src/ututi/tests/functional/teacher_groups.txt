@@ -72,11 +72,39 @@ A message to the ututi mailing list group:
 
     >>> browser2 = Browser.logIn()
     >>> browser2.getLink('Moderatoriai', url='/group/moderators').click()
-    >>> browser2.printQuery('//div[contains(@class, "wall-entry")]//text()')
-    Benas has posted a new message a message to the group to the group Moderatoriai 0 seconds ago
-    The teacher Benas (http://localhost/user/5) sent a message to Your group:
-    Hi, guys!
-    If You reply to this message, the teacher will not get Your replies. 0 seconds ago
+    >>> browser2.printCssQuery('.wall-entry .content', strip=True)
+    <div>
+      <div>
+        <span>
+          <a>Benas</a>
+          <span>
+            <a>Moderatoriai</a>
+          </span>
+        </span>
+      </div>
+      <span>The teacher Benas (http://localhost/user/5) sent a message to Your group:<br />
+        <br />Hi, guys!<br />
+        <br />If You reply to this message, the teacher will not get Your replies.<br />
+      </span>
+      <div>
+        <span>0 seconds ago</span>
+        <span>
+          <a>Reply</a>
+        </span>
+      </div>
+      <div></div>
+      <div>
+        <div>Write a reply</div>
+        <div>
+          <form>
+            <textarea></textarea>
+            <div>
+              <button>Send reply</button>
+              <a>Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
     ...
 
 
@@ -117,9 +145,13 @@ A message to the ututi forum group - members of the group receive email messages
 
     >>> browser2.getLink('Home').click()
     >>> browser2.getLink('Testing group', url='/group/test').click()
-    >>> browser2.printQuery('//div[@class="event-heading"]//text()')
-    Teacher Benas has sent a message to the group Testing group 0 seconds ago
-    You have created the group Testing group 0 seconds ago
+    >>> browser2.printCssQuery('.event-heading .event-title', strip=True)
+    <span>
+      <a>Benas</a> has sent a message to the group <a>Testing group</a>
+    </span>
+    <span>
+      <a>Adminas Adminovix</a> has created the group <a>Testing group</a>
+    </span>
     ...
 
 Let's try sending an sms:
