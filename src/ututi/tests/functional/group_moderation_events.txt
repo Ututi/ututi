@@ -30,7 +30,7 @@ actually so:
       <a>Adminas Adminovix</a> has joined the group <a>Moderatoriai</a>
     </span>
     <span class="event-title">
-            You have joined the group <a>Moderatoriai</a>
+      <a>Third user</a> has joined the group <a>Moderatoriai</a>
     </span>
     <span class="event-title">
       <a>Adminas Adminovix</a> has created the subject <a>Matematin&#279; analiz&#279;</a>
@@ -43,7 +43,8 @@ The administrator can see the messages:
     >>> printWallEvents(browser)
     <span class="event-title">
       <a>Varlius &lt;varlius@example.com&gt;</a> has posted a new message <a>Hello from varlius</a> to the group's <a>Moderatoriai</a> moderation queue
-    </span>
+    <BLANKLINE>
+        </span>
     <span class="event-content">Confirm your varlius registration!<br />
       <br />Click the link now!<br />
       <br />Sincerely,<br />
@@ -51,15 +52,16 @@ The administrator can see the messages:
     </span>
     <span class="event-title">
       <a>Second user</a> has posted a new message <a>Hello</a> to the group's <a>Moderatoriai</a> moderation queue
+    <BLANKLINE>
         </span>
     <span class="event-content">Hi, I am just writing to tell you how wonderful this system is.<br />
       <br />User2<br />
     </span>
     <span class="event-title">
-            You have created the group <a>Moderatoriai</a>
+      <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>
     </span>
     <span class="event-title">
-            You have joined the group <a>Moderatoriai</a>
+      <a>Adminas Adminovix</a> has joined the group <a>Moderatoriai</a>
     </span>
     <span class="event-title">
       <a>Third user</a> has joined the group <a>Moderatoriai</a>
@@ -103,10 +105,13 @@ approved:
 
 Now if user refreshes his wall, he sees the message at the top:
 
-    >>> user3.getLink("News feed").click()
+    >>> user3.open('http://localhost/home/feed')
     >>> printWallEvents(user3)
     <span class="event-title">
-      <a>Varlius &lt;varlius@example.com&gt;</a> has posted a new message <a>Hello from varlius</a> to the group <a>Moderatoriai</a>
+      <a>Varlius &lt;varlius@example.com&gt;</a>
+      <span class="">
+        <a>Moderatoriai</a>
+      </span>
     </span>
     <span class="event-content">Confirm your varlius registration!<br />
       <br />Click the link now!<br />
