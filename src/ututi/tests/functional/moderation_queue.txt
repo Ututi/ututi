@@ -91,11 +91,19 @@ only the first message is left:
 The corresponding event is removed from the wall as well:
 
     >>> browser.getLink("News feed").click()
-    >>> browser.printQuery("//div[contains(@class, 'event-heading')]//text()")
-    Second user has posted a new message Hello to the group's Moderatoriai moderation queue 0 seconds ago
-    You have created the group Moderatoriai 0 seconds ago
-    You have joined the group Moderatoriai 0 seconds ago
-    Third user has joined the group Moderatoriai 0 seconds ago
+    >>> browser.printCssQuery(".event-heading .event-title", strip=True)
+    <span>
+      <a>Second user</a> has posted a new message <a>Hello</a> to the group's <a>Moderatoriai</a> moderation queue
+    </span>
+    <span>
+      <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>
+    </span>
+    <span>
+      <a>Adminas Adminovix</a> has joined the group <a>Moderatoriai</a>
+    </span>
+    <span>
+      <a>Third user</a> has joined the group <a>Moderatoriai</a>
+    </span>
 
 In the administration view one message is still left. Let's approve it:
 
@@ -117,11 +125,22 @@ Now the message should appear in the actual mailing list:
 The corresponding event is removed from wall:
 
     >>> browser.getLink('News feed').click()
-    >>> browser.printQuery("//div[contains(@class, 'event-heading')]//text()")
-    Second user has posted a new message Hello to the group Moderatoriai 0 seconds ago
-    You have created the group Moderatoriai 0 seconds ago
-    You have joined the group Moderatoriai 0 seconds ago
-    Third user has joined the group Moderatoriai 0 seconds ago
+    >>> browser.printCssQuery(".event-heading .event-title", strip=True)
+    <span>
+      <a>Second user</a>
+      <span>
+        <a>Moderatoriai</a>
+      </span>
+    </span>
+    <span>
+      <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>
+    </span>
+    <span>
+      <a>Adminas Adminovix</a> has joined the group <a>Moderatoriai</a>
+    </span>
+    <span>
+      <a>Third user</a> has joined the group <a>Moderatoriai</a>
+    </span>
 
 Approved messages got sent to the members of the group:
 
