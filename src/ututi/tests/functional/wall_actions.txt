@@ -8,7 +8,7 @@ Test user wall actions
    >>> browser.getLink("News feed", index=1).click()
 
    >>> form = browser.getForm(id='message_form')
-   >>> form.getControl(name='rcpt_group').displayValue = ['Moderatoriai']
+   >>> form.getControl(name='group_id').displayValue = ['Moderatoriai']
    >>> form.getControl(name='subject').value = 'Sending my group a message from my wall!'
    >>> form.getControl(name='message').value = 'Booyah'
    >>> form.getControl('Send').click()

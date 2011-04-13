@@ -52,7 +52,7 @@ will log in few other users that belong to the same group:
 Admin sends a message to group Moderatoriai:
 
     >>> form = admin.getForm(id='message_form')
-    >>> form.getControl(name='rcpt_group').displayValue = ['Moderatoriai']
+    >>> form.getControl(name='group_id').displayValue = ['Moderatoriai']
     >>> form.getControl(name='subject').value = 'Mailinglist message title'
     >>> form.getControl(name='message').value = 'Mailinglist message'
     >>> form.getControl('Send').click()
@@ -112,7 +112,7 @@ TODO: test if email replies a threaded in the wall properly.
 To test forum post threading we will use the group will forum enabled:
 
     >>> form = admin.getForm(id='message_form')
-    >>> form.getControl(name='rcpt_group').displayValue = ['Testing group']
+    >>> form.getControl(name='group_id').displayValue = ['Testing group']
     >>> form.getControl(name='subject').value = 'Forum post title'
     >>> form.getControl(name='message').value = 'Forum post'
     >>> form.getControl('Send').click()
