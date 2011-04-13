@@ -686,11 +686,11 @@ $(document).ready(function(){
         %endif
 
         %if 'folder' in controls:
-        <div style="float: left; margin-left: 20px;">
+        <div style="float: left; margin-left: 25px;">
           <form action="${obj.url(action='create_folder')}">
             <div class="folder_controls">
               ${h.input_line('folder', _('New folder:'), class_="new-folder-name", id="new_folder_input-%s"%section_id)}
-              ${h.input_submit(_('create'), id="new_folder_button-%s" % section_id, class_="new_folder_button btn")}
+              ${h.input_submit(_('create'), id="new_folder_button-%s" % section_id, class_="new_folder_button dark add")}
             </div>
           </form>
         </div>

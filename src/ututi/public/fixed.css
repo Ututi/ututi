@@ -105,7 +105,7 @@ button.dark {
 }
 
 button.dark.add {
-    padding: 0 8px 0 16px;
+    padding: 0 8px 0 20px;
     background-image: url('img/icons.com/add_small_orange.png');
     background-position: 8px center;
 }

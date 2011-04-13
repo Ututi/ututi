@@ -2207,14 +2207,23 @@ div.section div.controls label {
     vertical-align: middle;
 }
 
+div.folder_controls {
+    padding: 1px;
+}
+
 div.folder_controls div {
     float: left;
     margin-top: 3px;
 }
 
+div.folder_controls .labelText {
+    display: inline;
+}
+
 div.folder_controls button {
-    margin-top: 2px;
-    margin-left: 3px;
+    margin-top: 5px;
+    margin-left: 10px;
+    float: left;
 }
 
 div.section div.controls .new-folder-name {
