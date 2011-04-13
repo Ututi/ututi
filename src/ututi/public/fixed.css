@@ -70,11 +70,15 @@ button {
     /* default button look */
     cursor: pointer;
     font-size: 12px;
-    background: #ff9900;
     border: 1px solid #666666;
     color: #ffffff;
     font-weight: bold;
     padding: 2px 8px;
+    background: #ff9900 url('img/buttons/bg_small_orange.png') repeat-x left bottom;
+}
+
+button:hover {
+    background-image: url('img/buttons/hover_small_orange.png');
 }
 
 button.submit {
@@ -88,27 +92,38 @@ button.inline {
     padding-bottom: 0;
 }
 
-button.add {
-    padding-left: 12px;
-    background-image: url('img/icons.com/add_small_grey.png');
-    background-repeat: no-repeat;
-    background-position: 4px center;
-}
-
 button.dark {
     /* dark version of the button */
     color: #ffffff;
     padding: 0px 8px;
     border: 1px solid #666666;
     font-weight: normal;
-    background-color: #333333;
+    background-image: url('img/buttons/bg_small_grey.png');
 }
 
-button.dark.add {
-    padding: 0 8px 0 20px;
-    background-image: url('img/icons.com/add_small_orange.png');
-    background-position: 8px center;
+button.dark:hover {
+    background-image: url('img/buttons/hover_small_grey.png');
 }
+
+button.add {
+    padding-left: 12px;
+    background-image: url('img/buttons/bg_add_orange.png');
+}
+
+button.add:hover {
+    background-image: url('img/buttons/hover_add_orange.png');
+}
+
+
+button.dark.add {
+    padding: 0 8px 0 16px;
+    background-image: url('img/buttons/bg_add_grey.png');
+}
+
+button.dark.add:hover {
+    background-image: url('img/buttons/hover_add_grey.png');
+}
+
 
 button.btn-text {
     /* pretending to look like simple link */
