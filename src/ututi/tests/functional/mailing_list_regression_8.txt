@@ -9,8 +9,10 @@ Regression test for utf-8 characters in email subject
     >>> browser.reload()
     >>> browser.printCssQuery('#wall-event-8 .event-title', strip=True)
     <span>
-    <BLANKLINE>
-            You have posted a new message <a>Jacek Gurzi&#324;ski invited you to Dropbox</a> to the group <a>Moderatoriai</a>
+      <a>Adminas Adminovix</a>
+      <span>
+        <a>Moderatoriai</a>
+      </span>
     </span>
 
     >>> from ututi.lib.mailer import mail_queue
