@@ -90,6 +90,8 @@ button.submit {
 button.inline {
     padding-top: 0;
     padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 button.dark {
@@ -588,20 +590,31 @@ input {
                     margin-top: 0;
                 }
 
-                .wall .wall-entry .action-block textarea,
-                .wall .wall-entry .reply .action-tease {
+                .wall .action-block textarea,
+                .wall .action-block input,
+                .wall .action-tease {
                     border: 1px solid #888;
                     background-color: #fff;
                     width: 100%;
                     padding: 3px;
                 }
 
-                .wall .wall-entry .action-block textarea {
-                    height: 40px;
+                .wall .action-block textarea,
+                .wall .action-block input,
+                .wall .action-block select {
                     margin-bottom: 5px;
                 }
 
-                .wall .wall-entry .reply .action-tease {
+                .wall .action-block textarea {
+                    height: 40px;
+                }
+
+                .wall .action-block input {
+                    padding-top: 0;
+                    padding-bottom: 0;
+                }
+
+                .wall .action-tease {
                     height: 12px;
                     line-height: 12px;
                     font-size: 10px;
@@ -666,6 +679,92 @@ input {
             outline: none;
             text-align: center;
         }
+
+/* DASHBOARD ACTION BLOCKS
+ */
+
+#dashboard_action_blocks {
+    font-size: 11px;
+    border-bottom: 1px solid #ff9900;
+    padding-bottom: 10px;
+}
+
+  #dashboard_action_blocks .action-block {
+      background-color: #e6e6e6;
+      padding: 8px 14px 8px 8px; /* 14px to compensate textarea padding */
+      margin-top: 5px;
+      margin-bottom: 3px;
+      display: none; /* Initially hidden */
+  }
+
+  #dashboard_action_blocks .action-block .action-tease {
+      margin-bottom: 5px; /* Same as other form elements. */
+  }
+
+  #dashboard_action_blocks .action-block .tease-element {
+      display: none; /* Initially hidden */
+  }
+
+  #dashboard_action_blocks .action-block .action-button {
+      display: inline;
+  }
+
+  #dashboard_action_blocks .action-block .cancel-button {
+      margin-left: 5px;
+  }
+
+#dashboard_action_links {
+    padding-top: 5px; /* Ussually placed under heading */
+    padding-bottom: 5px;
+    font-size: 11px;
+}
+
+  #dashboard_action_links .action {
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #666;
+    font-weight: bold;
+  }
+
+  #dashboard_action_links img.tooltip { vertical-align: bottom; }
+
+  #dashboard_action_links .action.inactive {
+    color: #888;
+  }
+
+  #dashboard_action_links a#send_message {
+    padding-left: 15px;
+    background: transparent url("../img/icons.com/group2_small_grey.png") left center no-repeat;
+  }
+  #dashboard_action_links a#upload_file {
+    padding-left: 10px;
+    background: transparent url("../img/icons.com/file_small_grey.png") left center no-repeat;
+  }
+  #dashboard_action_links a#create_wiki {
+    padding-left: 10px;
+    background: transparent url("../img/icons.com/wiki_small_grey.png") left center no-repeat;
+  }
+
+  #dashboard_action_links a.action.active:hover,
+  #dashboard_action_links a.action.open {
+    color: #000;
+  }
+
+  #dashboard_action_links a.active#send_message:hover,
+  #dashboard_action_links a.open#send_message {
+    background-image: url("../img/icons.com/group2_small_orange.png");
+  }
+  #dashboard_action_links a.active#upload_file:hover,
+  #dashboard_action_links a.open#upload_file {
+    background-image: url("../img/icons.com/file_small_orange.png");
+  }
+  #dashboard_action_links a.active#create_wiki:hover,
+  #dashboard_action_links a.open#create_wiki {
+    background-image: url("../img/icons.com/wiki_small_orange.png");
+  }
+
+  #upload-failed-error-message { display: none; }
+
 
 /* SIMPLE LISTS
  * Simple list styles that provide bullet images and spacing.
@@ -1061,48 +1160,6 @@ ul.feature-list {
         color: #333333;
     }
 
-
-/* IN-ELEMENT FORM
-   (a small form shown e.g. in dashboard actions)
- */
-    .inelement-form .send-message {  }
-
-        .inelement-form input.wide-input {
-            width: 350px;
-        }
-
-        .inelement-form .labelText {
-            margin: 0.1em 0;
-            font-weight: bold;
-            color: #666;
-        }
-
-        .inelement-form .textField {
-            display: block;
-            width: 355px;
-        }
-
-        .inelement-form .formField {
-            width: 500px;
-            padding: 5px 0;
-            clear: left;
-        }
-
-        .inelement-form .formField label {
-            margin: 5px 0;
-        }
-
-        .inelement-form textarea {
-          border: 1px solid #888;
-          background: white;
-          width: 100%;
-          margin: 0;
-        }
-
-        .inelement-form .formSubmit {
-            margin: 5px 0;
-        }
-
 /* CLICK ACTION BLOCKS
  a pattern-in-progress: click-action opens an associated click-action-block,
   maintaining that one block of a group is shown at a time
@@ -1124,74 +1181,6 @@ ul.feature-list {
 .click2fade .click {
     cursor: pointer;
 }
-
-/* DASHBOARD ACTION BLOCKS */
-#dashboard_action_blocks { }
-
-  #dashboard_action_blocks .rounded-block {
-    padding: 5px 10px;
-  }
-
-  #dashboard_action_blocks .dashboard_action_block {
-      display: none; /* Initially hidden */
-  }
-
-  #dashboard_action_blocks .formField { clear: left; }
-
-#dashboard_action_links {
-    padding-top: 5px; /* Ussually placed under heading */
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #ff9900;
-    font-size: 11px;
-}
-
-  #dashboard_action_links .action {
-    margin-left: 5px;
-    margin-right: 15px;
-    color: #666;
-    font-weight: bold;
-  }
-
-  #dashboard_action_links img.tooltip { vertical-align: bottom; }
-
-  #dashboard_action_links .action.inactive {
-    color: #888;
-  }
-
-  #dashboard_action_links a#send_message {
-    padding-left: 20px;
-    background: transparent url("../img/icons.com/discussions_medium_grey.png") left center no-repeat;
-  }
-  #dashboard_action_links a#upload_file {
-    padding-left: 15px;
-    background: transparent url("../img/icons.com/file_medium_grey.png") left center no-repeat;
-  }
-  #dashboard_action_links a#create_wiki {
-    padding-left: 15px;
-    background: transparent url("../img/icons.com/wiki_medium_grey.png") left center no-repeat;
-  }
-
-  #dashboard_action_links a.action.active:hover,
-  #dashboard_action_links a.action.open {
-    color: #000;
-  }
-
-  #dashboard_action_links a.active#send_message:hover,
-  #dashboard_action_links a.open#send_message {
-    background-image: url("../img/icons.com/discussions_medium_orange.png");
-  }
-  #dashboard_action_links a.active#upload_file:hover,
-  #dashboard_action_links a.open#upload_file {
-    background-image: url("../img/icons.com/file_medium_orange.png");
-  }
-  #dashboard_action_links a.active#create_wiki:hover,
-  #dashboard_action_links a.open#create_wiki {
-    background-image: url("../img/icons.com/wiki_medium_orange.png");
-  }
-
-  #upload-failed-error-message { display: none; }
-
 
 /* WIKI PAGE STYLING
  */

@@ -18,7 +18,7 @@ $(document).ready(function() {
 
     /* Attach dashboard actions.
      */
-    $('#dashboard_action_links a.action').filter(':not(.inactive)').click(function(){
+    $('#dashboard_action_links a.action').filter(':not(.inactive)').click(function() {
         var id = $(this).attr('id');
         if ($(this).hasClass('open')) {
             $(this).removeClass('open');
@@ -35,6 +35,13 @@ $(document).ready(function() {
         return false;
     });
 
+    /* Action tease.
+     */
+    $('#dashboard_action_blocks .action-tease').click(function() {
+        $(this).hide().next('.tease-element').show().focus();
+        return false;
+    });
+
 });
 
 /* Helper reload function.
@@ -42,5 +49,4 @@ $(document).ready(function() {
 function reload_wall(event_snippet) {
     $('.wall-entry:first').before(event_snippet);
 };
-
 

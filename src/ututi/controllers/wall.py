@@ -26,67 +26,25 @@ from ututi.model.events import MailinglistPostCreatedEvent
 from ututi.model.events import FileUploadedEvent
 from ututi.model.events import ForumPostCreatedEvent
 from ututi.model.events import Event, EventComment
-from ututi.model import GroupMember
 from ututi.model import ContentItem
 from ututi.model import ForumCategory
-from ututi.model import ForumPost, Page, User, Subject, meta, Group
-
-
-def _message_rcpt(term, current_user):
-    """Return list of possible recipients limited by the query term."""
-
-    classmates = meta.Session.query(User)\
-        .filter(User.fullname.ilike('%%%s%%' % term))\
-        .join(User.memberships)\
-        .join(GroupMember.group)\
-        .filter(Group.id.in_([g.group.id for g in current_user.memberships]))\
-        .all()
-
-    users = []
-    if len(classmates) == 0:
-        users = meta.Session.query(User)\
-            .filter(User.fullname.ilike('%%%s%%' % term))\
-            .limit(10)\
-            .all()
-
-    return (classmates, users)
+from ututi.model import ForumPost, Page, Subject, meta, Group
 
 
 class MessageRcpt(validators.FormValidator):
-    """
-    Validate the universal message post form.
-    Check if the recipient's id has been specified in the js field, if not,
-    check if enough text has been input to identify the recipient.
-    """
     messages = {
-        'invalid': _(u"The recipient is not specified."),
+        'invalid': _(u"The group is not specified."),
     }
 
     def validate_python(self, form_dict, state):
-        rcpt_group = form_dict.get('rcpt_group')
-        rcpt_user = form_dict.get('rcpt_user_id')
-        rcpt_name = form_dict.get('rcpt_user')
-
-        rcpt_obj = None
-
-        if rcpt_user:
-            rcpt_obj = User.get(int(rcpt_user))
-        elif rcpt_group and rcpt_group != 'select-pm':
-            rcpt_obj = Group.get(int(rcpt_group))
-            if not rcpt_obj.is_member(c.user):
-                rcpt_obj = None
-        elif rcpt_name:
-            alternatives = _message_rcpt(rcpt_name, c.user)
-            alternatives = alternatives[0] + alternatives[1]
-            if alternatives:
-                rcpt_obj = alternatives[0]
-
-        if rcpt_obj is None:
+        group_id = form_dict.get('group_id')
+        group = Group.get(int(group_id))
+        if group is not None and group.is_member(c.user):
+            form_dict['group'] = group
+        else:
             raise Invalid(self.message('invalid', state),
                           form_dict, state,
-                          error_dict={'rcpt': Invalid(self.message('invalid', state), form_dict, state)})
-        else:
-            form_dict['recipient'] = rcpt_obj
+                          error_dict={'group_id': Invalid(self.message('invalid', state), form_dict, state)})
 
 
 class MessageForm(Schema):
@@ -136,7 +94,7 @@ class WallController(BaseController, FileViewMixin):
     @jsonify
     def send_message_js(self):
         evt = self._send_message(
-                self.form_result['recipient'],
+                self.form_result['group'],
                 self.form_result['subject'],
                 self.form_result['message'],
                 self.form_result.get('category_id', None))
@@ -147,36 +105,28 @@ class WallController(BaseController, FileViewMixin):
     @validate(schema=MessageForm())
     def send_message(self):
         self._send_message(
-            self.form_result['recipient'],
+            self.form_result['group'],
             self.form_result['subject'],
             self.form_result['message'],
             self.form_result.get('category_id', None))
         h.flash(_('Message sent.'))
         self._redirect()
 
-    def _send_message(self, recipient, subject, message, category_id=None):
-        """ Send a message to the group.  """
-        if isinstance(recipient, Group):
-            if not recipient.mailinglist_enabled:
-                if category_id is None:
-                    category_id = recipient.forum_categories[0].id
-                post = ForumPost(subject, message, category_id=category_id,
-                                 thread_id=None)
-                meta.Session.add(post)
-                meta.Session.commit()
+    def _send_message(self, group, subject, message, category_id=None):
+        if not group.mailinglist_enabled:
+            if category_id is None:
+                category_id = group.forum_categories[0].id
+            post = ForumPost(subject, message, category_id=category_id,
+                             thread_id=None)
+            meta.Session.add(post)
+            meta.Session.commit()
 
-                evt = meta.Session.query(ForumPostCreatedEvent).filter_by(post_id=post.id).one().wall_entry()
-                return evt
-            else:
-                post = post_message(recipient,
-                                    c.user,
-                                    subject,
-                                    message)
-                evt = meta.Session.query(MailinglistPostCreatedEvent).filter_by(message_id=post.id).one().wall_entry()
-                return evt
+            evt = meta.Session.query(ForumPostCreatedEvent).filter_by(post_id=post.id).one().wall_entry()
+            return evt
         else:
-            # Here was private message code
-            raise NotImplementedError()
+            post = post_message(group, c.user, subject, message)
+            evt = meta.Session.query(MailinglistPostCreatedEvent).filter_by(message_id=post.id).one().wall_entry()
+            return evt
 
     @ActionProtector("user")
     def upload_file_js(self):
@@ -321,18 +271,3 @@ class WallController(BaseController, FileViewMixin):
                                    created_on=comment.created_on)
         else:
             self._redirect()
-
-    @ActionProtector("user")
-    @jsonify
-    def message_rcpt_js(self):
-        term = request.params.get('term', None)
-        if term is None or len(term) < 1:
-            return {'data' : []}
-
-        (classmates, others) = _message_rcpt(term, c.user)
-
-        classmates = [dict(label='%s (%s)' % (u.fullname, u.emails[0].email),
-                           id=u.id) for u in classmates]
-        users = [dict(label=u.fullname,
-                      id=u.id) for u in others]
-        return dict(data=classmates+users)
