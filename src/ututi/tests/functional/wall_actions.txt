@@ -1,11 +1,11 @@
 Test user wall actions
 ======================
 
-   >>> browser = Browser.logIn('user3@ututi.lt', 'password')
-   >>> browser.getLink("News feed").click()
+   >>> def printWallEvents(browser):
+   ...     browser.printCssQuery(".wall-entry .event-title, .wall-entry .event-content", include_attributes=['class'], include_classes=['event-content', 'event-title'])
 
-   >>> browser2 = Browser.logIn('user2@ututi.lt', 'password')
-   >>> browser2.getLink('News feed').click()
+   >>> browser = Browser.logIn('user3@ututi.lt', 'password')
+   >>> browser.getLink("News feed", index=1).click()
 
    >>> form = browser.getForm(id='message_form')
    >>> form.getControl(name='rcpt_group').displayValue = ['Moderatoriai']
@@ -14,23 +14,40 @@ Test user wall actions
    >>> form.getControl('Send').click()
 
    >>> browser2 = Browser.logIn()
-   >>> browser2.getLink('News feed').click()
+   >>> browser2.getLink('News feed', index=1).click()
 
-   >>> browser2.printQuery("//div[contains(@class, 'wall-entry')]//text()")
-   Third user
-   has posted a new message
-   Sending my group a message from my wall!
-   to the group
-   Moderatoriai
-   ...
-   Booyah
-   ...
+   >>> printWallEvents(browser2)
+   <span class="event-title">
+     <a>Third user</a>
+     <span class="">
+       <a>Moderatoriai</a>
+     </span>
+   </span>
+   <span class="event-content">Booyah</span>
+   <span class="event-title">
+     <a>Adminas Adminovix</a> has joined the group <a>Moderatoriai</a>
+   </span>
+   <span class="event-title">
+     <a>Third user</a> has joined the group <a>Moderatoriai</a>
+   </span>
+   <span class="event-title">
+     <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>
+   </span>
+   <span class="event-title">
+     <a>Adminas Adminovix</a> has joined the group <a>Testing group</a>
+   </span>
+   <span class="event-title">
+     <a>Second user</a> has joined the group <a>Testing group</a>
+   </span>
+   <span class="event-title">
+     <a>Adminas Adminovix</a> has created the group <a>Testing group</a>
+   </span>
 
    >>> from ututi.lib.mailer import mail_queue
    >>> mail_queue.pop().payload()
    'Booyah'
 
-   >>> browser.getLink("News feed").click()
+   >>> browser.getLink("News feed", index=1).click()
 
    >>> form = browser.getForm(id='wiki_form')
    >>> form.getControl(name='page_title').value = 'A wiki page'
