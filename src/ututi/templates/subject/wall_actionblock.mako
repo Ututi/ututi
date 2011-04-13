@@ -1,10 +1,8 @@
 <%namespace name="actions" file="/sections/wall_actionblock.mako" import="head_tags, action_block" />
 <%namespace name="base" file="/prebase.mako" import="rounded_block"/>
-<%namespace name="dropdown" file="/widgets/dropdown.mako" import="dropdown, head_tags"/>
 
 <%def name="head_tags()">
   ${actions.head_tags()}
-  ${dropdown.head_tags()}
   <script type="text/javascript">
   $(function(){
     function clearBlock(block) {
