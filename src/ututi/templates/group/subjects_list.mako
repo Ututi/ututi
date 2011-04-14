@@ -44,18 +44,36 @@ ${parent.head_tags()}
 
 </%def>
 
+<%def name="css()">
+
+.single-title {
+   height: 22px;
+   margin-top: 20px;
+}
+
+.single-title h2 {
+   font-weight: bold;
+   float: left;
+}
+
+.single-title .action-button {
+   float: right;
+}
+
+${parent.css()}
+</%def>
 
 <%def name="subjects_block(title, subjects)">
-<%self:rounded_block class_='portletGroupFiles subject_description'>
-  <div class="GroupFiles GroupFilesDalykai">
-    <h2 class="portletTitle bold">
+<div class="search-results-container">
+  <div class="single-title">
+    <h2>
       ${title|n}
     </h2>
-    <div class="group-but" style="top: 10px;">
-      ${h.button_to(_('add a subject'), c.group.url(action='subjects_watch'))}
-    </div>
+    <span class="action-button">
+      ${h.button_to(_('add new subject'), c.group.url(action='subjects_watch'), class_='add inline')}
+    </span>
   </div>
-  <div id="SearchResults">
+  <div id="search-results">
     %if subjects:
       ${subject_list(subjects)}
     %endif
@@ -64,40 +82,13 @@ ${parent.head_tags()}
          style="border-bottom: 1px solid #ded8d8">
       ${_('No watched subjects were found.')}
     </div>
-    %if c.group.is_member(c.user):
-      <div class="search-item" style="padding-top: 10px">
-        <form class="select_interval_form" action="${c.group.url(action='set_receive_email_each')}">
-          ${h.input_submit(_('Confirm'))}
-          <script type="text/javascript">
-            //<![CDATA[
-              $('.select_interval_form .btn').hide();
-            //]]>
-          </script>
-          <label for="each" class="blark">${_('Receive email notifications')}
-            <% selected = c.group.is_member(c.user).receive_email_each %>
-            <select name="each" class="each" style="font-size: 1em;">
-              %for v, t in [('hour', _('immediately')), ('day', _('at the end of the day')), ('never', _('never'))]:
-                %if v == selected:
-                  <option selected="selected" value="${v}">${t}</option>
-                %else:
-                  <option value="${v}">${t}</option>
-                %endif
-              %endfor
-            </select>
-          </label>
-          <img class="done_icon" src="${url('/images/details/icon_done.png')}" style="margin-right: 15px;"/>
-          <img class="in_progress_icon" src="${url('/images/details/icon_progress.gif')}" style="margin-right: 15px;"/>
-        </form>
-      </div>
-    %endif
-
   </div>
-</%self:rounded_block>
+</div>
 </%def>
 
 <%def name="subject_item(object)">
   <div class="search-item snippet-subject">
-    <div style="float: right; margin-right: 15px;">
+    <div class="action-button">
       <input type="hidden" class="remove_url"
              value="${c.group.url(action='js_unwatch_subject', subject_id=object.subject_id, subject_location_id=object.location.id)}" />
       <a href="${c.group.url(action='unwatch_subject', subject_id=object.subject_id, subject_location_id=object.location.id)}" class="remove_subject_button">

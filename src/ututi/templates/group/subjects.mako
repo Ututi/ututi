@@ -48,6 +48,27 @@ ${parent.head_tags()}
 
 </%def>
 
+<%def name="css()">
+
+.single-title {
+   height: 22px;
+   margin-top: 20px;
+   margin-bottom: 20px;
+}
+
+.single-title h2 {
+   font-weight: bold;
+   float: left;
+}
+
+.single-title .action-button {
+   float: right;
+}
+
+${parent.css()}
+</%def>
+
+
 <%def name="subject_flash_message(subject)">
   ${search_subject(subject, watched=True)}
 </%def>
@@ -92,6 +113,7 @@ ${parent.head_tags()}
      object = subject
   %>
   %endif
+<div class="search-results-container">
   <div class="search-item snippet-subject">
     <a href="${object.url()}" title="${object.title}" class="item-title bold larger">${h.ellipsis(object.title, 60)}</a>
     <div style="float: right;" class="js-alternatives">
@@ -133,6 +155,7 @@ ${parent.head_tags()}
         </dd>
     </dl>
   </div>
+</div>
 </%def>
 
 ##overriding the search results definition
@@ -176,9 +199,9 @@ ${_('Your group is not watching any subjects. Add them by searching.')}
 </li>
 </ul>
 
-<div style="margin: 10px 0; overflow: auto;">
-  <h2 class="subjects-suggestions" style="float: left;">
-    ${_('Recommended subjects')}
+<div class="single-title">
+  <h2 class="subjects-suggestions">
+    ${_('Choose subjects from list')}
   </h2>
 
   %if c.results:

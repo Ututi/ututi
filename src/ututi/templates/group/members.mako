@@ -50,6 +50,8 @@
       background: none;
       border-bottom: 1px solid #ff9900;
    }
+
+   ${parent.css()}
 </%def>
 
 <%def name="group_members(group=None)">

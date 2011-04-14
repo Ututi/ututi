@@ -232,6 +232,14 @@ h1.page-title.with-bottom-line {
 /* STANDARD ITEM LIST
  */
 
+.single-title {
+    background: none;
+    border-bottom: 1px solid #FF9900;
+    padding: 2px 0;
+    font-size: 12px;
+    font-weight: bold;
+}
+
 .light-table {}
     .light-table.rounded-block .cbl,
     .light-table.rounded-block .cbr {
@@ -287,6 +295,7 @@ h1.page-title.with-bottom-line {
         .item-list.with-footer .row.last {
             border-bottom: 1px solid #ded8d8;
         }
+
 
 /* STANDARD PORTLETS.
  */
@@ -1620,16 +1629,6 @@ ul.tabs {
     }
 
 /* PRIVATE MESSAGES */
-
-#private-messages {}
-
-    #private-messages .single-title {
-        background: none;
-        border-bottom: 1px solid #FF9900;
-        padding: 2px 0;
-        font-size: 12px;
-        font-weight: bold;
-    }
 
 #private-message-thread {}
 

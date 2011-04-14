@@ -1161,12 +1161,6 @@ div.GroupFilesContent p.verysmall{
     padding: 0 0 0 40px;
 }
 
-div.single-title{
-    border-bottom: 1px solid #ded8d8;
-    background: #f6f6f6;
-    padding: 5px 0 5px 15px;
-}
-
 .files_more{
     cursor: pointer;
     list-style-type: none;
