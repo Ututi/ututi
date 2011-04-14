@@ -154,6 +154,9 @@ class HomeController(UniversityListMixin):
     def fbchannel(self):
         return render('/fbchannel.mako')
 
+    def _sign_up_form(self):
+        return render('/frontpage.mako')
+
     def index(self):
         if c.user is not None:
             redirect(url(controller='profile', action='home'))
@@ -164,7 +167,7 @@ class HomeController(UniversityListMixin):
             if request.params.has_key('js'):
                 return render_mako_def('/anonymous_index/lt.mako','universities', unis=c.unis, ajax_url=url(controller='home', action='index'))
             c.slideshow = request.params.has_key('slide')
-            return render('/anonymous_index.mako')
+            return htmlfill.render(self._sign_up_form())
 
     def about(self):
         return render('/about.mako')
@@ -391,7 +394,7 @@ class HomeController(UniversityListMixin):
         session.save()
         redirect(c.came_from or url('/'))
 
-    @validate(schema=RegistrationForm(), form='index')
+    @validate(schema=RegistrationForm(), form='_sign_up_form')
     def register(self):
         if not hasattr(self, 'form_result'):
             redirect(url('frontpage'))

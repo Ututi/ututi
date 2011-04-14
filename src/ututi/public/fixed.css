@@ -100,7 +100,7 @@ button.dark {
     padding: 0px 8px;
     border: 1px solid #666666;
     font-weight: normal;
-    background-image: url('img/buttons/bg_small_grey.png');
+    background: #333 url('img/buttons/bg_small_grey.png') repeat-x left bottom;
 }
 
 button.dark:hover {

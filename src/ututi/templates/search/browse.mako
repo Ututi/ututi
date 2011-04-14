@@ -1,6 +1,5 @@
 <%inherit file="/ubase-sidebar.mako" />
 <%namespace file="/portlets/facebook.mako" import="*"/>
-<%namespace file="/anonymous_index.mako" import="universities_section"/>
 <%namespace file="/search/index.mako" import="search_form"/>
 
 <%def name="location_tag(uni)">
@@ -159,4 +158,3 @@ ${search_form(c.text, c.obj_type, c.tags, parts=['text'], target=url(controller=
 
 ${universities_section(c.unis, url(controller='profile', action='browse'))}
 <br class="clear-left" />
-

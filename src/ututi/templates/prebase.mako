@@ -81,17 +81,15 @@ ${_('Student information online')}
 <%
    nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
 %>
-<div id="header">
+<div id="anonymous-header">
   <div id="header-container">
-    <div id="logo">
-      <a href="${url('/')}"><img src="/img/Ututi_logo_big.png" alt="Ututi logo" title="Ututi logo"/></a>
-      <span id="slogan">${_("Bringing students and teachers together")}</span>
-      <ul id="nav">
-        <li class="header-links"><a href="#">What is Ututi?</a></li>
-        <li class="header-links"><a href="#">Contact us</a></li>
-        <li id="login-link" class="header-links"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Login')}</a></li>
-      </ul>
-    </div>
+    <a id="logo" href="${url('/')}"><img src="/img/Ututi_logo_big.png" alt="Ututi" title="Ututi"/></a>
+    <span id="slogan">${_("Bringing students and teachers together")}</span>
+    <ul id="nav">
+      <li class="header-links"><a href="#">What is Ututi?</a></li>
+      <li class="header-links"><a href="#">Contact us</a></li>
+      <li id="login-link" class="header-links"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Login')}</a></li>
+    </ul>
   </div>
 </div>
 </%def>
@@ -100,7 +98,7 @@ ${_('Student information online')}
 <div id="header">
   <div id="header-container">
     <div id="logo">
-      <a href="${url('/')}"><img src="/img/Ututi_logo.png" alt="Ututi logo" title="Ututi logo" /></a>
+      <a href="${url('/')}"><img src="/img/Ututi_logo.png" alt="Ututi" title="Ututi" /></a>
     </div>
     <div id="top-panel">
       <ul id="head-nav">
