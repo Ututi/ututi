@@ -8,7 +8,7 @@
 <div id="private-message-thread">
   <div class="single-title ">
     <h2>${c.message.subject}</h2>
-    <div class=""></div>
+    <div class="delete-message"><a href="${url(controller='messages', action='delete', id=c.thread[0].id)}">${_('Delete')}</a></div>
   </div>
 
   <table id="forum-thread">

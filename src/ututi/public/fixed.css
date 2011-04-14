@@ -1646,6 +1646,14 @@ ul.tabs {
         width: 400px;
         padding: 0;
         font-weight: bold;
+        float: left;
+    }
+
+    #private-message-thread .delete-message {
+        background: url('img/icons.com/close.png') no-repeat right;
+        text-align: right;
+        padding-right: 15px;
+        font-size: 12px;
     }
 
     #private-message-thread .reply {
@@ -1704,3 +1712,4 @@ ul.tabs {
         #private-message-thread .action-block .action-button {
             display: inline;
         }
+
