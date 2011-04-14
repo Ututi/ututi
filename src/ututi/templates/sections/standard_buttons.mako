@@ -8,7 +8,7 @@
   class="${class_}"
   %endif
 >
-  <img src="${url('/img/icons/bigX_15x15.png')}" />
+  <img src="${url('/img/icons.com/close.png')}" />
 </a>
 </%def>
 
