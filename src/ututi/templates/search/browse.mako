@@ -3,6 +3,113 @@
 <%namespace file="/anonymous_index.mako" import="universities_section"/>
 <%namespace file="/search/index.mako" import="search_form"/>
 
+<%def name="location_tag(uni)">
+<div class="university_block">
+  %if uni['has_logo']:
+    <div class="logo">
+      <img src="${url(controller='structure', action='logo', id=uni['id'], width=26, height=26)}" alt="logo" />
+    </div>
+  %elif uni['parent_has_logo']:
+    <div class="logo">
+      <img src="${url(controller='structure', action='logo', id=uni['parent_id'], width=26, height=26)}" alt="logo" />
+    </div>
+  %endif
+
+  <div class="title">
+    <a href="${uni['url']}" title="${uni['title']}">${h.ellipsis(uni['title'], 36)}</a>
+  </div>
+  <div class="stats">
+    <span>
+      ${ungettext("%(count)s subject", "%(count)s subjects", uni['n_subjects']) % dict(count=uni['n_subjects'])|n}
+    </span>
+    <span>
+      ${ungettext("%(count)s group", "%(count)s groups", uni['n_groups']) % dict(count=uni['n_groups'])|n}
+    </span>
+    <span>
+      ${ungettext("%(count)s file", "%(count)s files", uni['n_files']) % dict(count=uni['n_files'])|n}
+    </span>
+  </div>
+</div>
+</%def>
+
+<%def name="universities(unis, ajax_url)">
+  %for uni in unis:
+    ${location_tag(uni)}
+  %endfor
+  <div id="pager">
+    ${unis.pager(format='~3~',
+                 partial_param='js',
+                 onclick="$('#pager').addClass('loading'); $('#university-list').load('%s'); return false;") }
+  </div>
+  <div id="sorting">
+    ${_('Sort by:')}
+    <%
+       url_args_alpha = dict(sort='alpha')
+       url_args_pop = dict(sort='popular')
+       if request.params.get('region_id'):
+               url_args_alpha['region_id'] = request.params.get('region_id')
+               url_args_pop['region_id'] = request.params.get('region_id')
+    %>
+    <a id="sort-alpha" class="${c.sort == 'alpha' and 'active' or ''}" href="${url(ajax_url, **url_args_alpha)}">${_('name')}</a>
+    <input type="hidden" id="sort-alpha-url" name="sort-alpha-url" value="${url(ajax_url, js=True, **url_args_alpha)}" />
+    <a id="sort-popular" class="${c.sort == 'popular' and 'active' or ''}" href="${url(ajax_url, **url_args_pop)}">${_('popularity')}</a>
+    <input type="hidden" id="sort-popular-url" name="sort-popular-url" value="${url(ajax_url, js=True, **url_args_pop)}" />
+  </div>
+</%def>
+
+<%def name="universities_section(unis, ajax_url, collapse=True, collapse_text=None)">
+  <%
+     if collapse_text is None:
+       collapse_text = _('More universities')
+  %>
+  %if unis:
+  <div id="university-list" class="${c.teaser and 'collapsed_list' or ''}">
+    ${universities(unis, ajax_url)}
+  </div>
+  %if collapse and len(unis) > 6:
+    %if c.teaser:
+      <div id="teaser_switch" style="display: none;">
+            <span class="files_more">
+              <a class="green verysmall">
+                    ${collapse_text}
+              </a>
+            </span>
+      </div>
+    %endif
+    <script type="text/javascript">
+    //<![CDATA[
+      $(document).ready(function() {
+            $('#university-list.collapsed_list').data("preheight", $('#university-list.collapsed_list').height()).css('height', '115px');
+            $('#teaser_switch').show();
+            $('#teaser_switch a').click(function() {
+              $('#teaser_switch').hide();
+              $('#university-list').animate({
+                    height: $('#university-list').data("preheight")},
+                    200, "linear",
+                    function() {
+                      $('#university-list').css('height', 'auto');
+                    });
+              return false;
+            });
+      });
+    //]]>
+    </script>
+  %endif
+  <script type="text/javascript">
+  //<![CDATA[
+      $(document).ready(function() {
+        $('#sort-alpha,#sort-popular').live("click", function() {
+            var url = $('#'+$(this).attr('id')+'-url').val();
+            $('#sorting').addClass('loading');
+            $('#university-list').load(url);
+            return false;
+        });
+      });
+  //]]>
+  </script>
+  %endif
+</%def>
+
 <%def name="head_tags()">
   ${h.javascript_link('/javascript/jquery.maphilight.js')}
 
