@@ -45,17 +45,27 @@ The administrator can see the messages:
       <a>Varlius &lt;varlius@example.com&gt;</a> has posted a new message <a>Hello from varlius</a> to the group's <a>Moderatoriai</a> moderation queue
     <BLANKLINE>
         </span>
-    <span class="event-content">Confirm your varlius registration!<br />
-      <br />Click the link now!<br />
-      <br />Sincerely,<br />
-      <br />Varlius staff<br />
+    <span class="event-content">Confirm your varlius registration!
+    <br />
+      <br />
+    Click the link now!
+    <br />
+      <br />
+    Sincerely,
+    <br />
+      <br />
+    Varlius staff
+    <br />
     </span>
     <span class="event-title">
       <a>Second user</a> has posted a new message <a>Hello</a> to the group's <a>Moderatoriai</a> moderation queue
     <BLANKLINE>
         </span>
-    <span class="event-content">Hi, I am just writing to tell you how wonderful this system is.<br />
-      <br />User2<br />
+    <span class="event-content">Hi, I am just writing to tell you how wonderful this system is.
+    <br />
+      <br />
+    User2
+    <br />
     </span>
     <span class="event-title">
       <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>
@@ -82,10 +92,10 @@ to the message moderation view in which he can see the whole content
 of the message:
 
     >>> browser.printCssQuery('#wall-event-9 .event-content', strip=True)
-    <span>Confirm your varlius registration!<br />
-      <br />Click the link now!<br />
-      <br />Sincerely,<br />
-      <br />Varlius staff<br />
+    <span>Confirm your varlius registration! <br />
+      <br /> Click the link now! <br />
+      <br /> Sincerely, <br />
+      <br /> Varlius staff <br />
     </span>
 
 
@@ -113,10 +123,10 @@ Now if user refreshes his wall, he sees the message at the top:
         <a>Moderatoriai</a>
       </span>
     </span>
-    <span class="event-content">Confirm your varlius registration!<br />
-      <br />Click the link now!<br />
-      <br />Sincerely,<br />
-      <br />Varlius staff<br />
+    <span class="event-content">Confirm your varlius registration! <br />
+      <br /> Click the link now! <br />
+      <br /> Sincerely, <br />
+      <br /> Varlius staff <br />
     </span>
     ...
 

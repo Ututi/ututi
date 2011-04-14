@@ -118,8 +118,8 @@ Now the message should appear in the actual mailing list:
 
     >>> browser.getLink('News feed').click()
     >>> browser.printCssQuery('#wall-event-11 .event-content', strip=True)
-    <span>Hi, I am just writing to tell you how wonderful this system is.<br />
-      <br />User2<br />
+    <span>Hi, I am just writing to tell you how wonderful this system is. <br />
+      <br /> User2 <br />
     </span>
 
 The corresponding event is removed from wall:
