@@ -8,20 +8,20 @@ First of all let's log in;
 Let's find the group.
 
     >>> browser.open('http://localhost/group/moderators')
-    >>> browser.getLink('Page').click()
+    >>> browser.getLink('Notes').click()
     >>> print browser.url
     http://localhost/group/moderators/page
 
 At first the page is just a placeholder:
 
     >>> browser.printQuery('id("page-placeholder")/h2/text()')
-    What is a group page and who sees it?
-    What are the uses of a group page?
-    Edit your group page now!
+    What is a group notes and who sees it?
+    What are the uses of a group notes?
+    Edit your group note now!
 
 We can edit it of course:
 
-    >>> browser.getControl('Edit page').click()
+    >>> browser.getControl('Edit note').click()
     >>> browser.url
     'http://localhost/group/moderators/edit_page'
 
@@ -33,7 +33,7 @@ We can edit it of course:
 
 We can specify that the group's page is public, shown on the front page.
 
-    >>> browser.getControl('Edit page').click()
+    >>> browser.getControl('Edit note').click()
     >>> browser.getControl('Group page is visible to everybody').selected = True
     >>> browser.getControl('Save').click()
 

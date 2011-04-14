@@ -109,7 +109,7 @@ By the way - we are looking at the group home page now:
 Let's watch some subjects:
 
     >>> browser.getLink('Subjects').click()
-    >>> browser.getControl('add a subject').click()
+    >>> browser.getControl('add new subject').click()
     >>> subjects_url = browser.url
     >>> browser.getLink('Watch').click()
     >>> browser.getLink("News feed", url='group').click()

@@ -277,7 +277,7 @@ def group_menu_items():
          'name': 'members',
          'link': url(controller='group', action='members', id=c.group.group_id),
          'event': h.trackEvent(c.group, 'members', 'breadcrumb')},
-        {'title': _('Page'),
+        {'title': _('Notes'),
          'name': 'page',
          'link': url(controller='group', action='page', id=c.group.group_id),
          'event': h.trackEvent(c.group, 'page', 'breadcrumb')},
