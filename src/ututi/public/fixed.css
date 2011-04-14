@@ -1461,9 +1461,14 @@ ul.medium-icon-list {
         min-height: 30px;
     }
 
-    .feature-box .icon-file {
+    .feature-box .icon-file-orange {
         background-image: url('img/icons.com/file_grand_orange.png');
         padding-left: 35px;
+    }
+    .feature-box .icon-file {
+        background-image: url('img/icons.com/about/file.png');
+        background-position: 10px 5px;
+        padding-left: 50px;
     }
     .feature-box .icon-file-upload {
         background-image: url('img/icons.com/about/upload.png');
@@ -1472,7 +1477,7 @@ ul.medium-icon-list {
     }
     .feature-box .icon-notifications {
         background-image: url('img/icons.com/about/notifications.png');
-        background-position: 5px;
+        background-position: 5px 0;
         padding-left: 50px;
     }
     .feature-box .icon-email {
@@ -1481,6 +1486,10 @@ ul.medium-icon-list {
     }
     .feature-box .icon-discussions {
         background-image: url('img/icons.com/about/discussions.png');
+        padding-left: 50px;
+    }
+    .feature-box .icon-message {
+        background-image: url('img/icons.com/about/message.png');
         padding-left: 50px;
     }
     .feature-box .icon-chat {

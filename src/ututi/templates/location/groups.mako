@@ -39,23 +39,23 @@
       ${_("About groups:")}
     </div>
     <div class="clearfix">
-      <div class="feature icon-file">
+      <div class="feature icon-discussions">
         <strong>${_("Discussions")}</strong>
-        - ${_("lorem ipsum dolor sit amet...")}
+        - ${_("a place to discuss study matters and your student life.")}
       </div>
-      <div class="feature icon-chat">
+      <div class="feature icon-email">
         <strong>${_("E-mail")}</strong>
-        - ${_("lorem ipsum dolor sit amet...")}
+        - ${_("each group has an email address. If someone writes to this address, all groupmates will receive the email.")}
       </div>
     </div>
     <div class="clearfix">
-      <div class="feature icon-note">
+      <div class="feature icon-file">
         <strong>${_("Private group files")}</strong>
-        - ${_("lorem ipsum dolor sit amet...")}
+        - ${_("private file storage area for files that you don't want to share with outsiders. ")}
       </div>
-      <div class="feature icon-talk">
-        <strong>${_("Group watching subjects")}</strong>
-        - ${_("lorem ipsum dolor sit amet...")}
+      <div class="feature icon-notifications">
+        <strong>${_("Subject notifications")}</strong>
+        - ${_("receive notifications from subjects that your group is following.")}
       </div>
     </div>
     <div class="action-button">
