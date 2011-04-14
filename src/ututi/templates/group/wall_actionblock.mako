@@ -110,8 +110,7 @@
       <input type="hidden" name="group_id" id="group_id" value="${group.id}"/>
       <div class="action-tease">${_("Write your topic")}</div>
       <input id="message_subject" type="text" name="subject" class="tease-element" />
-      <textarea name="message">
-      </textarea>
+      <textarea name="message"></textarea>
       ${h.input_submit(_('Send'), id="message_send", class_='dark inline action-button')}
       <a class="cancel-button" href="#cancel">${_("Cancel")}</a>
     </form>
