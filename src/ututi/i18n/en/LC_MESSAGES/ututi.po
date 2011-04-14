@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-04-06 19:19+0300\n"
+"PO-Revision-Date: 2011-04-14 22:09+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -154,6 +154,12 @@ msgstr ""
 msgid ""
 "Your Facebook account \"%s\" has been linked to your existing Ututi "
 "account."
+msgstr ""
+
+msgid "Failed to link Facebook account"
+msgstr ""
+
+msgid "Linked to Facebook account."
 msgstr ""
 
 msgid "Files"
@@ -571,12 +577,6 @@ msgstr ""
 msgid "Unlinked from Google account."
 msgstr ""
 
-msgid "Failed to link Facebook account"
-msgstr ""
-
-msgid "Linked to Facebook account."
-msgstr ""
-
 msgid "This Facebook account is already linked to another user."
 msgstr ""
 
@@ -669,16 +669,19 @@ msgstr ""
 msgid "This user profile is not public"
 msgstr ""
 
-msgid "The recipient is not specified."
+msgid "Courses"
+msgstr ""
+
+msgid "Biography"
+msgstr ""
+
+msgid "The group is not specified."
 msgstr ""
 
 msgid "Wiki page created."
 msgstr ""
 
 msgid "Search"
-msgstr ""
-
-msgid "Private message"
 msgstr ""
 
 msgid "General information"
@@ -706,6 +709,9 @@ msgid "Your password has been changed!"
 msgstr ""
 
 msgid "Your profile was updated."
+msgstr ""
+
+msgid "Your biography was updated."
 msgstr ""
 
 msgid "Confirmation message sent. Please check your email."
@@ -770,6 +776,9 @@ msgstr ""
 
 #, python-format
 msgid "Message from Your teacher: %s"
+msgstr ""
+
+msgid "You can't choose this department."
 msgstr ""
 
 msgid "This is not the confirmation code we sent you."
@@ -1209,72 +1218,6 @@ msgstr ""
 msgid "go find something else"
 msgstr ""
 
-#, python-format
-msgid "%(count)s subject"
-msgid_plural "%(count)s subjects"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "%(count)s group"
-msgid_plural "%(count)s groups"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "%(count)s file"
-msgid_plural "%(count)s files"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Sort by:"
-msgstr ""
-
-msgid "name"
-msgstr ""
-
-msgid "popularity"
-msgstr ""
-
-msgid "More universities"
-msgstr ""
-
-msgid "Sign up to join your university's social network or create it yourself"
-msgstr ""
-
-msgid "Sign Up"
-msgstr ""
-
-msgid ""
-"Only people with a verified university / college email address can join "
-"your network."
-msgstr ""
-
-msgid "Social discussions between students and teachers"
-msgstr ""
-
-msgid ""
-"On Ututi students and teachers can discuss course material, academical "
-"matters and university life in a modern way."
-msgstr ""
-
-msgid "Private social network for your university or college"
-msgstr ""
-
-msgid ""
-"Ututi lets You create a social network for Your university. Here You will"
-" find online groups, teachers profiles and course pages - a tool to share"
-" information and build your online community."
-msgstr ""
-
-msgid "Easy to use teachers accounts"
-msgstr ""
-
-msgid ""
-"Teachers can create their website, share course materials and communicate"
-" with their students at Ututi. And they can do it easily."
-msgstr ""
-
 msgid "Error!"
 msgstr ""
 
@@ -1299,6 +1242,43 @@ msgstr ""
 msgid ""
 "Image from flickr: "
 "http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
+msgstr ""
+
+msgid "Sign up to join your university's social network or create it yourself"
+msgstr ""
+
+msgid "Enter your academic email"
+msgstr ""
+
+msgid "Sign Up"
+msgstr ""
+
+msgid ""
+"Only people with a verified university / college email address can join "
+"your network."
+msgstr ""
+
+msgid "Learn more"
+msgstr ""
+
+msgid "What is Ututi?"
+msgstr ""
+
+msgid "Social discussions about course material between students and teachers."
+msgstr ""
+
+msgid ""
+"Students and teachers can discuss course material, academical matters and"
+" university life in modern way."
+msgstr ""
+
+msgid "Strong sentence."
+msgstr ""
+
+msgid "Explaining note."
+msgstr ""
+
+msgid "Using Ututi:"
 msgstr ""
 
 msgid "New in Ututi?"
@@ -2283,7 +2263,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"The teacher %(teacher_name)s (%(teacher_url)s) sent a message to Your "
+"The teacher %(teacher_name)s ( %(teacher_url)s ) sent a message to Your "
 "group:"
 msgstr ""
 
@@ -2649,6 +2629,9 @@ msgstr ""
 msgid "Invite friends to %s"
 msgstr ""
 
+msgid "Invite your friends to Ututi!"
+msgstr ""
+
 #, python-format
 msgid ""
 "Join our group <a href=\"%s\">%s</a> in Ututi, a system for exchanging "
@@ -2656,9 +2639,6 @@ msgid ""
 msgstr ""
 
 msgid "Join group"
-msgstr ""
-
-msgid "Invite your friends to Ututi!"
 msgstr ""
 
 msgid "You have to log in to Facebook in order to use this invitation form."
@@ -2802,6 +2782,12 @@ msgstr[1] ""
 msgid "Watched by:"
 msgstr ""
 
+#, python-format
+msgid "%(count)s group"
+msgid_plural "%(count)s groups"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "and"
 msgstr ""
 
@@ -2844,16 +2830,10 @@ msgstr ""
 msgid "Subject rating:"
 msgstr ""
 
-msgid "Message subject:"
-msgstr ""
-
-msgid "Message text:"
+msgid "Write your topic"
 msgstr ""
 
 msgid "Root"
-msgstr ""
-
-msgid "Folder:"
 msgstr ""
 
 msgid "Upload file"
@@ -2862,15 +2842,13 @@ msgstr ""
 msgid "File upload failed."
 msgstr ""
 
-msgid "send a message"
+msgid "Group message"
 msgstr ""
 
-msgid ""
-"You need to be a member of a group or have subjects that you are studying"
-" to be able to quickly upload files."
+msgid "This group does not have a file area of has reached its limits."
 msgstr ""
 
-msgid "upload a file"
+msgid "File"
 msgstr ""
 
 msgid "Reset your password"
@@ -2938,13 +2916,12 @@ msgstr ""
 msgid "About groups:"
 msgstr ""
 
-msgid "lorem ipsum dolor sit amet..."
-msgstr ""
-
 msgid "E-mail"
 msgstr ""
 
-msgid "Group watching subjects"
+msgid ""
+"private file storage area for files that you don't want to share with "
+"outsiders. "
 msgstr ""
 
 #, python-format
@@ -3006,10 +2983,22 @@ msgstr ""
 msgid "About teachers:"
 msgstr ""
 
-msgid "Foo"
+msgid "Teacher profile"
 msgstr ""
 
-msgid "Bar"
+msgid "submit your CV, thoughts, biography and academic papers."
+msgstr ""
+
+msgid "Course material sharing"
+msgstr ""
+
+msgid "Direct messaging"
+msgstr ""
+
+msgid "create a private dialog with one or multiple students or groups."
+msgstr ""
+
+msgid "discuss tought courses with your students."
 msgstr ""
 
 msgid "Become a teacher"
@@ -3059,6 +3048,9 @@ msgstr ""
 msgid "Message to the group"
 msgstr ""
 
+msgid "Private messages"
+msgstr ""
+
 msgid "You can send a new message to a user from his or her public profile page."
 msgstr ""
 
@@ -3075,6 +3067,9 @@ msgid "New message"
 msgstr ""
 
 msgid "Back to message list"
+msgstr ""
+
+msgid "Write a reply"
 msgstr ""
 
 #, python-format
@@ -3303,6 +3298,9 @@ msgstr ""
 msgid "Info"
 msgstr ""
 
+msgid "more"
+msgstr ""
+
 msgid "Remove from my taught courses"
 msgstr ""
 
@@ -3369,19 +3367,20 @@ msgstr ""
 msgid "Send email"
 msgstr ""
 
-msgid "My feed"
+#, python-format
+msgid ""
+"This is the verified network for <strong>%s</strong>.      Only %s "
+"students and teachers can join this network."
 msgstr ""
 
-msgid "My university feed"
+msgid "Teacher's home"
+msgstr ""
+
+msgid "University feed"
 msgstr ""
 
 #, python-format
-msgid "Private messages (%(count)s new)"
-msgid_plural "Private messages (%(count)s new)"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Private messages"
+msgid "Private messages (%(count)s)"
 msgstr ""
 
 msgid "My subjects:"
@@ -3412,6 +3411,12 @@ msgid "Invite friends:"
 msgstr ""
 
 #, python-format
+msgid "%(count)s subject"
+msgid_plural "%(count)s subjects"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
 msgid "%(count)s wiki note"
 msgid_plural "%(count)s wiki notes"
 msgstr[0] ""
@@ -3430,9 +3435,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "Related members:"
-msgstr ""
-
-msgid "Phone:"
 msgstr ""
 
 msgid "Friends of ututi"
@@ -3465,6 +3467,12 @@ msgid "Add a student group"
 msgstr ""
 
 msgid "back to home page"
+msgstr ""
+
+msgid "Your biography"
+msgstr ""
+
+msgid "Enter some facts from your biography"
 msgstr ""
 
 msgid "Your GG number"
@@ -3667,16 +3675,10 @@ msgid ""
 " study material and information."
 msgstr ""
 
-#, python-format
-msgid ""
-"Join our %(university_link)s social network in Ututi, a system for "
-"exchanging study material and information."
+msgid "Invite your classmates to Ututi!"
 msgstr ""
 
 msgid "Join Ututi"
-msgstr ""
-
-msgid "Invite your classmates to Ututi!"
 msgstr ""
 
 msgid "notification settings"
@@ -3848,16 +3850,12 @@ msgid ""
 "please tell us more about yourself."
 msgstr ""
 
-msgid "Write a message to:"
+msgid "Write note title here"
 msgstr ""
 
-msgid "User:"
-msgstr ""
-
-msgid "Upload a file to:"
-msgstr ""
-
-msgid "Create a note on:"
+msgid ""
+"You need to be a member of a group or have subjects that you are studying"
+" to be able to quickly upload files."
 msgstr ""
 
 msgid ""
@@ -3865,7 +3863,7 @@ msgid ""
 "to quickly create wiki notes in them."
 msgstr ""
 
-msgid "create a wiki page"
+msgid "Wiki note"
 msgstr ""
 
 msgid "Forum posts"
@@ -3950,6 +3948,9 @@ msgstr ""
 msgid "Step %(step_num)s"
 msgstr ""
 
+msgid "Registration to Ututi"
+msgstr ""
+
 msgid "Email approval"
 msgstr ""
 
@@ -3978,9 +3979,6 @@ msgid "Password must contain at least 5 characters"
 msgstr ""
 
 msgid "Link Google or Facebook"
-msgstr ""
-
-msgid "Registration to Ututi"
 msgstr ""
 
 msgid "Full University title:"
@@ -4024,6 +4022,24 @@ msgid ""
 msgstr ""
 
 msgid "Contact us"
+msgstr ""
+
+#, python-format
+msgid "%(count)s file"
+msgid_plural "%(count)s files"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Sort by:"
+msgstr ""
+
+msgid "name"
+msgstr ""
+
+msgid "popularity"
+msgstr ""
+
+msgid "More universities"
 msgstr ""
 
 msgid "Pick your region"
@@ -4233,6 +4249,9 @@ msgstr ""
 msgid "Send SMS"
 msgstr ""
 
+msgid "Message subject:"
+msgstr ""
+
 msgid "Attachment:"
 msgstr ""
 
@@ -4243,24 +4262,6 @@ msgid "Your SMS was successfully sent."
 msgstr ""
 
 msgid "Share:"
-msgstr ""
-
-msgid "Group or user:"
-msgstr ""
-
-msgid "Category"
-msgstr ""
-
-msgid "Group or subject:"
-msgstr ""
-
-msgid "Subject:"
-msgstr ""
-
-msgid "Share with others"
-msgstr ""
-
-msgid "more"
 msgstr ""
 
 msgid "less"
@@ -4300,45 +4301,11 @@ msgid "edit_on_wall"
 msgstr "Edit"
 
 #, python-format
-msgid "You have uploaded a new file in the subject %(subject_link)s"
+msgid "%(user_link)s has uploaded a new file"
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has uploaded a new file in the subject %(subject_link)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"You have created a new folder %(folder_name)s in the subject "
-"%(subject_link)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user_link)s has created a new folder %(folder_name)s in the subject "
-"%(subject_link)s"
-msgstr ""
-
-#, python-format
-msgid "You have uploaded a new file in the group %(group_link)s"
-msgstr ""
-
-#, python-format
-msgid "%(user_link)s has uploaded a new file in the group %(group_link)s"
-msgstr ""
-
-#, python-format
-msgid "You have created a new folder %(folder_name)s in the group %(group_link)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user_link)s has created a new folder %(folder_name)s in the group "
-"%(group_link)s"
-msgstr ""
-
-#, python-format
-msgid "You have edited the subject %(subject_link)s"
+msgid "%(user_link)s has created a new folder %(folder_name)s"
 msgstr ""
 
 #, python-format
@@ -4346,15 +4313,7 @@ msgid "%(user_link)s has edited the subject %(subject_link)s"
 msgstr ""
 
 #, python-format
-msgid "You have created the subject %(subject_link)s"
-msgstr ""
-
-#, python-format
 msgid "%(user_link)s has created the subject %(subject_link)s"
-msgstr ""
-
-#, python-format
-msgid "You have created the group %(group_link)s"
 msgstr ""
 
 #, python-format
@@ -4362,37 +4321,13 @@ msgid "%(user_link)s has created the group %(group_link)s"
 msgstr ""
 
 #, python-format
-msgid "You have posted a new message %(message_link)s to the group %(group_link)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user_link)s has posted a new message %(message_link)s to the group "
-"%(group_link)s"
-msgstr ""
-
-#, python-format
-msgid "You have sent a message to the group %(group_link)s"
-msgstr ""
-
-#, python-format
-msgid "Teacher %(user_link)s has sent a message to the group %(group_link)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"You have posted a new message %(message_link)s to the group's "
-"%(group_link)s moderation queue"
+msgid "%(user_link)s has sent a message to the group %(group_link)s"
 msgstr ""
 
 #, python-format
 msgid ""
 "%(user_link)s has posted a new message %(message_link)s to the group's "
 "%(group_link)s moderation queue"
-msgstr ""
-
-#, python-format
-msgid "You have posted a new message %(message_link)s in the forum %(group_link)s"
 msgstr ""
 
 #, python-format
@@ -4410,26 +4345,6 @@ msgid "%(user_link)s has sent an sms to the group %(group_link)s"
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has sent you a private message \"%(msg_link)s\""
-msgstr ""
-
-#, python-format
-msgid "You have sent %(user_link)s a private message \"%(msg_link)s\""
-msgstr ""
-
-#, python-format
-msgid ""
-"%(sender_link)s has sent %(recipient_link)s a private message "
-"\"%(msg_link)s\""
-msgstr ""
-
-#, python-format
-msgid "You have and %(count)s more person have joined the group %(group_link)s"
-msgid_plural "You have and %(count)s more people have joined the group %(group_link)s"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
 msgid ""
 "%(user_link)s and %(count)s more person have joined the group "
 "%(group_link)s"
@@ -4439,32 +4354,18 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "show all"
-msgstr ""
-
-#, python-format
-msgid "You have joined the group %(group_link)s"
-msgstr ""
-
 #, python-format
 msgid "%(user_link)s has joined the group %(group_link)s"
 msgstr ""
 
-#, python-format
-msgid "You have and %(count)s more person have left the group %(group_link)s"
-msgid_plural "You have and %(count)s more people have left the group %(group_link)s"
-msgstr[0] ""
-msgstr[1] ""
+msgid "show all"
+msgstr ""
 
 #, python-format
 msgid "%(user_link)s and %(count)s more person have left the group %(group_link)s"
 msgid_plural "%(user_link)s and %(count)s more people have left the group %(group_link)s"
 msgstr[0] ""
 msgstr[1] ""
-
-#, python-format
-msgid "You have left the group %(group_link)s"
-msgstr ""
 
 #, python-format
 msgid "%(user_link)s has left the group %(group_link)s"
@@ -4479,23 +4380,11 @@ msgid "The group %(group_link)s has stopped watching the subject %(subject_link)
 msgstr ""
 
 #, python-format
-msgid "You have created a page %(page_link)s in the subject %(subject_link)s"
+msgid "%(user_link)s has created a page %(page_link)s"
 msgstr ""
 
 #, python-format
-msgid ""
-"%(user_link)s has created a page %(page_link)s in the subject "
-"%(subject_link)s"
-msgstr ""
-
-#, python-format
-msgid "You have modified a page %(page_link)s in the subject %(subject_link)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user_link)s has modified a page %(page_link)s in the subject "
-"%(subject_link)s"
+msgid "%(user_link)s has modified a page %(page_link)s"
 msgstr ""
 
 msgid "Region"
@@ -4629,9 +4518,6 @@ msgstr ""
 msgid "Create new Wiki note"
 msgstr ""
 
-msgid "Wiki note"
-msgstr ""
-
 msgid "Created (edited) by"
 msgstr ""
 
@@ -4719,7 +4605,37 @@ msgstr ""
 msgid "teachers"
 msgstr ""
 
+msgid "Network"
+msgstr ""
+
+msgid "Phone:"
+msgstr ""
+
+msgid "Personal webpage"
+msgstr ""
+
+msgid "There is no biography."
+msgstr ""
+
+msgid "Teacher's activity:"
+msgstr ""
+
+#, python-format
+msgid "Other %(university)s teachers"
+msgstr ""
+
+#, python-format
+msgid "Teacher's %(user)s public profile"
+msgstr ""
+
 msgid "Taught courses"
+msgstr ""
+
+#, python-format
+msgid "%(user_name)s doesn't teach any course."
+msgstr ""
+
+msgid "Please have javascript enabled for Facebook functionality to work."
 msgstr ""
 
 msgid ""
@@ -4732,6 +4648,9 @@ msgid "Credits left:"
 msgstr ""
 
 msgid "Purchase credits"
+msgstr ""
+
+msgid "Message text:"
 msgstr ""
 
 msgid "You do not have enough SMS credits to send a message to this group."
