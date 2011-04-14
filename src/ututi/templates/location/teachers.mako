@@ -44,12 +44,20 @@
     </div>
     <div class="clearfix">
       <div class="feature icon-file">
-        <strong>${_("Foo")}</strong>
-        - ${_("lorem ipsum dolor sit amet...")}
+        <strong>${_("Teacher profile")}</strong>
+        - ${_("submit your CV, thoughts, biography and academic papers.")}
       </div>
-      <div class="feature icon-chat">
-        <strong>${_("Bar")}</strong>
-        - ${_("lorem ipsum dolor sit amet...")}
+      <div class="feature icon-subjects-file">
+        <strong>${_("Course material sharing")}</strong>
+        - ${_("upload and share course material with students of your class, university or the entire world.")}
+      </div>
+      <div class="feature icon-email">
+        <strong>${_("Direct messaging")}</strong>
+        - ${_("create a private dialog with one or multiple students or groups.")}
+      </div>
+      <div class="feature icon-discussions">
+        <strong>${_("Discussions")}</strong>
+        - ${_("discuss tought courses with your students.")}
       </div>
     </div>
     <div class="action-button">

@@ -1475,6 +1475,10 @@ ul.medium-icon-list {
         background-position: 10px;
         padding-left: 50px;
     }
+    .feature-box .icon-subjects-file {
+        background-image: url('img/icons.com/about/subjects_file.png');
+        padding-left: 50px;
+    }
     .feature-box .icon-notifications {
         background-image: url('img/icons.com/about/notifications.png');
         background-position: 5px 0;
@@ -1495,6 +1499,10 @@ ul.medium-icon-list {
     .feature-box .icon-chat {
         background-image: url('img/icons.com/discussions_grand_orange.png');
         padding-left: 45px;
+    }
+    .feature-box .icon-publications {
+        background-image: url('img/icons.com/about/publications.png');
+        padding-left: 35px;
     }
     .feature-box .icon-note {
         background-image: url('img/icons.com/wiki_grand_orange.png');
