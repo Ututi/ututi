@@ -133,9 +133,17 @@ def button_to(title, url='', **html_options):
 
 
 def get_urls(text):
-    urls = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+",text)
+    urls = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+~]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", text)
     return urls
 
+url_re = re.compile(r"(https?://\S+)") # simple!
+url_re_plain = re.compile(r"(www\.\S+)")
+
+def wall_fmt(text):
+    text = '\n<br/>\n'.join(cgi.escape(text).split("\n"))
+    text =  url_re.sub(r'<a href="\1">\1</a>', text)
+    text =  url_re_plain.sub(r'<a href="http://\1">\1</a>', text)
+    return literal(text)
 
 def ellipsis(text, max=20):
     if len(text) > max:
@@ -200,7 +208,6 @@ def wraped_text(text, max_length = 10, break_symbol = "<br />"):
     words = text.split()
 
     #TODO: add short words join if they are not exceeding max_length
-    word_pairs = []
     for i, word in enumerate(words):
         if i != 0 and len(words[i-1]) + len(word) < max_length:
             words[i] = words[i-1] + " " + word
@@ -266,6 +273,12 @@ def html_strip(html_text):
     doc = lxml.html.fragment_fromstring(html_text, create_parent=True)
     texts = doc.xpath('//text()')
     return ' '.join([text.strip() for text in texts])
+
+myString = "This is my tweet check it out http://tinyurl.com/blah"
+
+r = re.compile(r"(http://[^ ]+)")
+print r.sub(r'<a href="\1">\1</a>', myString)
+
 
 def single_line(text):
     if isinstance(text, basestring):

@@ -78,7 +78,7 @@
     </div>
     <div class="content">
       <span class="reply-author link-color">${h.user_link(author_id)}:</span>
-      <span class="event-content truncated">${h.nl2br(message)}</span>
+      <span class="event-content truncated">${h.wall_fmt(message)}</span>
       %if attachments:
       <ul class="file-list">
         %for file in attachments:
@@ -146,7 +146,7 @@
            elif original.event_type == 'forum_post_created':
                message = original.fp_message
         %>
-        <span class="event-content truncated">${h.nl2br(message)}</span>
+        <span class="event-content truncated">${h.wall_fmt(message)}</span>
         %if hasattr(original, 'attachments'):
         <ul class="file-list">
           %for file in original.attachments:
@@ -421,7 +421,7 @@
         <img src="${url(controller='user', action='logo', id=event.author_id, width=50)}" />
       </div>
       <div class="content">
-        <span class="event-content truncated">${h.nl2br(event.data)}</span>
+        <span class="event-content truncated">${h.wall_fmt(event.data)}</span>
       </div>
     </div>
   </%self:wall_entry>
@@ -444,7 +444,7 @@
         <img src="${event.ml_author_logo_link}" />
       </div>
       <div class="content">
-        <span class="event-content truncated">${h.nl2br(event.ml_message)}</span>
+        <span class="event-content truncated">${h.wall_fmt(event.ml_message)}</span>
         %if hasattr(event, 'attachments'):
         <ul class="file-list">
           %for file in event.attachments:
@@ -514,7 +514,7 @@
         <img src="${url(controller='users', action='logo', id=event.author_id, width=50)}" />
       </div>
       <div class="content">
-        <span class="event-content truncated">${h.nl2br(event.sms_message)}</span>
+        <span class="event-content truncated">${h.wall_fmt(event.sms_message)}</span>
         <div class="closing">
           <span class="event-time">${h.when(event.created)}</span>
           %if c.user is not None:
