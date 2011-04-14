@@ -2,7 +2,7 @@
 
 
 <%def name="pagetitle()">
-  ${_('Messages')}
+  ${_('Private messages')}
 </%def>
 
 <div class="tip">

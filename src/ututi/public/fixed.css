@@ -136,6 +136,12 @@ button.btn-text {
     font: 12px normal Verdana, Arial, sans-serif;
 }
 
+div.back-link {
+    margin-left: 2px;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
 a.back-link {
     padding-left: 15px;
     background: url("/img/icons.com/back.png") left center no-repeat;
@@ -1624,3 +1630,77 @@ ul.tabs {
         font-size: 12px;
         font-weight: bold;
     }
+
+#private-message-thread {}
+
+    #private-message-thread .single-title {
+        background: url('img/icons.com/discussions_medium_grey.png') no-repeat;
+        background-position: 0px 8px;
+        border-bottom: 1px solid #FF9900;
+        padding-left: 23px;
+    }
+
+    #private-message-thread .single-title h2 {
+        color: #333;
+        font-size: 13px;
+        width: 400px;
+        padding: 0;
+        font-weight: bold;
+    }
+
+    #private-message-thread .reply {
+        background-color: #e6e6e6;
+        padding: 8px 14px 8px 8px; /* 14px to compensate textarea padding */
+        margin-bottom: 3px;
+    }
+
+    #private-message-thread .action-block textarea,
+    #private-message-thread .action-block input,
+    #private-message-thread .action-tease {
+        border: 1px solid #888;
+        background-color: #fff;
+        width: 100%;
+        padding: 3px;
+    }
+
+    #private-message-thread .action-tease {
+        height: 12px;
+        line-height: 12px;
+        font-size: 10px;
+        color: #999;
+        cursor: text;
+    }
+
+    #private-message-thread .action-block {
+        /*display: none; /* initialy hidden */
+    }
+
+        #private-message-thread .action-block .action-block-cancel {
+            font-size: 11px;
+            margin-left: 5px;
+        }
+
+        #private-message-thread .action-block .reply-button {
+            display: inline;
+            margin-top: 0;
+        }
+
+        #private-message-thread .action-block textarea,
+        #private-message-thread .action-block input,
+        #private-message-thread .action-block select,
+        #private-message-thread .action-block .form-field {
+            margin-bottom: 5px;
+        }
+
+        #private-message-thread .action-block textarea {
+            height: 100px;
+        }
+
+        #private-message-thread .action-block input {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        #private-message-thread .action-block .action-button {
+            display: inline;
+        }

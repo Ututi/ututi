@@ -5,58 +5,54 @@
     >${_('Back to message list')}</a>
 </div>
 
-  <%self:rounded_block class_="portletGroupFiles portletGroupMailingList smallTopMargin">
+<div id="private-message-thread">
+  <div class="single-title ">
+    <h2>${c.message.subject}</h2>
+    <div class=""></div>
+  </div>
 
-<div class="single-title">
-  <h2 class="portletTitle bold category-title" style="padding-bottom: 7px">${c.message.subject}</h2>
-</div>
-
-<table id="forum-thread">
-<% first_seen = True %>
-% for message in c.thread:
-  % if not message.is_read and first_seen:
+  <table id="forum-thread">
+    <% first_seen = True %>
+    % for message in c.thread:
+    % if not message.is_read and first_seen:
     <% first_seen = False %>
+    % endif
     <tr>
-      <td colspan="2"><a name="unseen"></a><hr /><td>
+      <td colspan="2" class="author">
+        <a href="${message.sender.url()}">${message.sender.fullname}</a>
+        <span class="created-on">${h.fmt_dt(message.created_on)}</span>
+      </td>
     </tr>
-  % endif
-  <tr>
-    <td colspan="2" class="author">
-      <a href="${message.sender.url()}">${message.sender.fullname}</a>
-      <span class="created-on">${h.fmt_dt(message.created_on)}</span>
-    </td>
-  </tr>
-  <tr class="thread-post">
-    <td class="author-logo">
-      <a href="${message.sender.url()}">
-        %if message.sender.logo is not None:
+    <tr class="thread-post">
+      <td class="author-logo">
+        <a href="${message.sender.url()}">
+          %if message.sender.logo is not None:
           <img alt="user-logo" src="${url(controller='user', action='logo', id=message.sender.id, width='45', height='60')}"/>
-        %else:
+          %else:
           ${h.image('/images/user_logo_45x60.png', alt='logo', id='group-logo')|n}
-        %endif
-      </a>
-    </td>
-    <td class="forum_post">
-      <div class="forum_post-content">
-        <div class="post-body">
-          ${h.nl2br(message.content)}
+          %endif
+        </a>
+      </td>
+      <td class="forum_post">
+        <div class="forum_post-content">
+          <div class="post-body">
+            ${h.nl2br(message.content)}
+          </div>
         </div>
-      </div>
-    </td>
-  </tr>
-% endfor
-</table>
+      </td>
+    </tr>
+    % endfor
+  </table>
 
-<div id="reply-section">
-  <a name="reply"></a>
-  <h2>${_('Reply')}</h2>
-  <br />
-  <form method="post" action="${url(controller='messages', action='reply', id=c.message.id)}"
-        id="message_reply_form" class="fullForm" enctype="multipart/form-data">
-    ${h.input_area('message', _('Message'))}
-    <br />
-    ${h.input_submit(_('Reply'))}
-  </form>
+  <div class="reply click2show">
+    <div class="action-tease click hide">${_('Write a reply')}</div>
+    <div class="action-block show" id="send-message-block">
+      <form method="POST" action="${url(controller='messages', action='reply', id=c.message.id)}" id="message_form" enctype="multipart/form-data">
+        <input id="message-send-url" type="hidden" value="${url(controller='wall', action='send_message_js')}" />
+        <textarea name="message"></textarea>
+        ${h.input_submit(_('Reply'), id="message_send", class_='dark inline action-button')}
+        <a class="cancel-button click" href="#cancel">${_("Cancel")}</a>
+      </form>
+    </div>
+  </div>
 </div>
-
-</%self:rounded_block>

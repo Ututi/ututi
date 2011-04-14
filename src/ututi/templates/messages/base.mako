@@ -10,7 +10,7 @@ ${user_right_sidebar()}
 </%def>
 
 <%def name="pagetitle()">
-${_('Home')}
+${_('Private messages')}
 </%def>
 
 <h1 class="page-title">${self.pagetitle()}</h1>
