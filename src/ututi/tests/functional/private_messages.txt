@@ -55,8 +55,9 @@ Let's go to first message and reply:
 
     >>> browser2.getLink('Private messages').click()
     >>> browser2.getLink('First message').click()
-    >>> browser2.getControl('Message').value = 'Second!'
-    >>> browser2.getControl('Reply').click()
+    >>> form = browser2.getForm(id='message_form')
+    >>> form.getControl(name='message').value = 'Second!'
+    >>> form.getControl('Reply').click()
 
 We can see both messages in a thread:
 
@@ -81,8 +82,9 @@ Mark all messages as read
 If you have several unread messages, you can mark them as read in one fell
 swoop.  Let's add a message:
 
-    >>> browser2.getControl('Message').value = 'Third!'
-    >>> browser2.getControl('Reply').click()
+    >>> form = browser2.getForm(id='message_form')
+    >>> form.getControl(name='message').value = 'Third!'
+    >>> form.getControl('Reply').click()
 
 There's one unread message:
 
@@ -118,8 +120,9 @@ However, if the peer sends another message, the thread reappears:
 
     >>> browser2.getLink('Private messages').click()
     >>> browser2.getLink('First message').click()
-    >>> browser2.getControl('Message').value = 'Frankenstein!'
-    >>> browser2.getControl('Reply').click()
+    >>> form = browser2.getForm(id='message_form')
+    >>> form.getControl(name='message').value = 'Frankenstein!'
+    >>> form.getControl('Reply').click()
 
     >>> browser.getLink('Private messages').click()
     >>> browser.printQuery("//a[@class='post-title']/text()")
