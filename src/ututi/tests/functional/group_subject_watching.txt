@@ -5,7 +5,7 @@ Group subject watching
 
     >>> browser.open('http://localhost/group/testgroup')
     >>> browser.getLink('Subjects', url='testgroup').click()
-    >>> browser.getControl('add a subject').click()
+    >>> browser.getControl('add new subject').click()
 
     >>> browser.printQuery("id('watched_subjects')")
     <ul id="watched_subjects" class="personal_watched_subjects">

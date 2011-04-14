@@ -75,7 +75,7 @@ Let's enable subject subscriptions though:
 We can now go to "Subjects" tab and watch one:
 
     >>> browser.getLink('Subjects').click()
-    >>> browser.getControl('add a subject').click()
+    >>> browser.getControl('add new subject').click()
     >>> browser.getLink('Watch', url='mat_analize').click()
 
 In the "Edit" page now both checkboxes should be disabled:
