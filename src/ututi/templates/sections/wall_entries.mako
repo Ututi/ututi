@@ -546,7 +546,6 @@
            dict(user_link=h.user_link(event.author_id),
                 group_link=h.content_link(event.object_id),
                 count=len(event.children)) | n}
-        <span class="click hide event-children-link">${_("show all")}</span>
       %else:
         ${_("%(user_link)s has joined the group %(group_link)s") % \
            dict(user_link=h.user_link(event.author_id),
@@ -554,6 +553,7 @@
       %endif
     </%def>
     %if hasattr(event, 'children'):
+      <span class="click hide event-children-link">${_("show all")}</span>
       <div class="show other_members">
         %for ch in event.children:
           ${h.user_link(ch.author_id)}
@@ -574,7 +574,6 @@
            dict(user_link=h.user_link(event.author_id),
                 group_link=h.content_link(event.object_id),
                 count=len(event.children)) | n}
-        <span class="click hide event-children-link">${_("show all")}</span>
       %else:
         ${_("%(user_link)s has left the group %(group_link)s") % \
            dict(user_link=h.user_link(event.author_id),
@@ -582,6 +581,7 @@
       %endif
     </%def>
     %if hasattr(event, 'children'):
+      <span class="click hide event-children-link">${_("show all")}</span>
       <div class="show other_members">
         %for ch in event.children:
           ${h.user_link(ch.author_id)}

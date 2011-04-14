@@ -464,7 +464,7 @@ input {
 
             .wall .wall-entry .event-heading .hide-button-container {
                 float: right;
-                margin-top: 5px;
+                margin-top: 2px;
                 visibility: hidden;
             }
 

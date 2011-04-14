@@ -31,10 +31,12 @@
     $('#upload_file_block .cancel-button').click(function() {
         $('#upload_file').click();
         clearBlock($(this).closest('.action-block'));
+        return false;
     });
     $('#create_wiki_block .cancel-button').click(function() {
         $('#create_wiki').click();
         clearBlock($(this).closest('.action-block'));
+        return false;
     });
 
     message_send_url = $("#message-send-url").val();
