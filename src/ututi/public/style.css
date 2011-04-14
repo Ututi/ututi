@@ -2845,7 +2845,7 @@ h2.overline {
 #page_content {
     background: white;
     padding-left: 1em;
-    padding-top: 1em;
+    padding-top: 0;
     padding-bottom: 8px;
 }
 
