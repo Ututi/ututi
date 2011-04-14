@@ -37,6 +37,14 @@
         list-style: none;
     }
 
+    .portlet .icon-find {
+        padding-left: 15px;
+        background-position: left center;
+        background-repeat: no-repeat;
+        background-image: url('img/icons.com/search_small.png');
+        background-position: 1px center;
+    }
+
 #user-information-portlet { }
 
     #user-information-portlet .user-logo {
