@@ -21,5 +21,5 @@ We won't invite anyone for now:
 Now, let's go to group settings and make the group public:
 
     >>> browser.getLink('Edit').click()
-    >>> browser.getControl('Anyone can join the group any time').click()
+    >>> browser.getControl('Anyone can join the group;').click()
     >>> browser.getControl('Save').click()
