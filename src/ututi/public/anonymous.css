@@ -192,11 +192,21 @@ button#learn-more:hover {
     #about p {
         color: #666;
         font-size: 12px;
+        margin-top: 5px;
     }
 
-    #about p strong {
-        color: #333;
-        font-size: 13px;
+
+    #about h2 {
+        font-size: 18px;
+        font-weight: bold;
+        color: #666;
+        width: 100%;
+    }
+
+    #about h3 {
+        color: #666;
+        font-size: 14px;
+        font-weight: bold;
     }
 
     #about #features {
@@ -205,10 +215,14 @@ button#learn-more:hover {
         padding-right: 50px;
     }
 
+        #about #features h2 {
+            margin-bottom: 20px;
+        }
+
     #about .feature {
         min-height: 60px;
         padding-left: 100px;
-        margin-bottom: 10px;
+        margin-bottom: 25px;
         background-position: left top;
         background-repeat: no-repeat;
     }
@@ -228,13 +242,6 @@ button#learn-more:hover {
     #about #using-ututi {
         float: left;
         width: 320px;
-    }
-
-    #about h2 {
-        font-size: 18px;
-        font-weight: bold;
-        color: #666;
-        width: 100%;
     }
 
     #about #using-ututi {}
