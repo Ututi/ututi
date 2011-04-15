@@ -271,3 +271,9 @@ button#learn-more:hover {
             padding-top: 10px;
             display: inline-block;
         }
+
+.static-content {}
+
+    .static-content h2 {
+        font-weight: bold;
+    }

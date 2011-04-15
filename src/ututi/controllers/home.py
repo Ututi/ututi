@@ -172,6 +172,9 @@ class HomeController(UniversityListMixin):
     def about(self):
         return render('/about.mako')
 
+    def features (self):
+        return render('/features.mako')
+
     def advertising(self):
         return render('/advertising.mako')
 

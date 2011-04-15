@@ -46,6 +46,7 @@ def make_map(config):
     map.connect('/bunners', controller='home', action='banners')
     map.connect('/terms', controller='home', action='terms')
     map.connect('/about', controller='home', action='about')
+    map.connect('/features', controller='home', action='features')
     map.connect('/advertising', controller='home', action='advertising')
     map.connect('/stats', controller='home', action='statistics')
     map.connect('/robots.txt', controller='home', action='robots')

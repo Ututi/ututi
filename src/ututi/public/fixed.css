@@ -1444,6 +1444,11 @@ ul.medium-icon-list {
         background-image: url('img/icons.com/about/group.png');
     }
 
+    .feature-box.icon-logo {
+        background-position: 15px 15px;
+        background-image: url('img/icons.com/logo.png');
+    }
+
     .feature-box.icon-note {
         background-position: 20px 10px;
         background-image: url('img/icons.com/about/wiki.png');
@@ -1490,6 +1495,10 @@ ul.medium-icon-list {
         background-position: 10px;
         padding-left: 50px;
     }
+    .feature-box .icon-private-file {
+        background-image: url('img/icons.com/about/private_file.png');
+        padding-left: 50px;
+    }
     .feature-box .icon-subjects-file {
         background-image: url('img/icons.com/about/subjects_file.png');
         padding-left: 50px;
@@ -1497,6 +1506,10 @@ ul.medium-icon-list {
     .feature-box .icon-notifications {
         background-image: url('img/icons.com/about/notifications.png');
         background-position: 5px 0;
+        padding-left: 50px;
+    }
+    .feature-box .icon-group {
+        background-image: url('img/icons.com/about/group.png');
         padding-left: 50px;
     }
     .feature-box .icon-email {
@@ -1533,6 +1546,18 @@ ul.medium-icon-list {
     }
     .feature-box .icon-talk {
         background-image: url('img/icons.com/talk_grand_orange.png');
+        padding-left: 45px;
+    }
+    .feature-box .icon-wiki {
+        background-image: url('img/icons.com/about/wiki.png');
+        padding-left: 45px;
+    }
+    .feature-box .icon-administration {
+        background-image: url('img/icons.com/about/administration.png');
+        padding-left: 45px;
+    }
+    .feature-box .icon-branding {
+        background-image: url('img/icons.com/about/branding.png');
         padding-left: 45px;
     }
 
