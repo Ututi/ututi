@@ -10,23 +10,35 @@
   h1.page-title {
     margin-bottom: 20px;
   }
-  #group-registration-steps .step {
-    margin-right: 20px;
+
+  .labelText {
+    margin-top: 10px;
   }
-  #group-registration-steps .step .number {
-    border: 1px solid #666;
-    background-color: #ccc;
-    color: black;
-    padding: 1px 5px;
+
+  button.submit {
+    margin-top: 15px;
   }
-  #group-registration-steps .step.active {
-    font-weight: bold;
+
+  #group-registration-steps {
+    margin-bottom: 15px;
   }
-  #group-registration-steps .step.active .number {
-    background-color: #f90;
-    border-color: #888;
-    color: white;
-  }
+     #group-registration-steps .step {
+       margin-right: 20px;
+     }
+     #group-registration-steps .step .number {
+       border: 1px solid #666;
+       background-color: #ccc;
+       color: black;
+       padding: 1px 5px;
+     }
+     #group-registration-steps .step.active {
+       font-weight: bold;
+     }
+     #group-registration-steps .step.active .number {
+       background-color: #f90;
+       border-color: #888;
+       color: white;
+     }
   #group-id-check .taken {
       padding-left: 15px;
       background: transparent url("../img/icons/alert_small.png") left center no-repeat;
