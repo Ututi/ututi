@@ -18,5 +18,5 @@
 <br/>
 %if c.group.is_admin(c.user):
 
-${h.button_to(_('Add more subjects'), c.group.url(action='subjects', list='open'), method='get')}
+${h.button_to(_('Add more subjects'), c.group.url(action='subjects_watch'), method='get')}
 %endif
