@@ -13,26 +13,13 @@ from ututi.lib.cache import u_cache
 from ututi.lib.geoip import set_geolocation
 
 def current_user():
-    from ututi.model import User
-    login = session.get('login', '')
-    session_secret = session.get('cookie_secret', None)
-    cookie_secret = request.cookies.get('ututi_session_lifetime', None)
+    session.delete()
+    return None
 
-    if session_secret != cookie_secret:
-        session.delete()
-        response.delete_cookie('ututi_session_lifetime')
-        return None
-
-    return User.get(login)
 
 def sign_in_user(user, long_session=False):
-    set_geolocation(user)
+    pass
 
-    session['login'] = user.emails[0].email
-    session['cookie_secret'] = ''.join(Random().sample(string.ascii_lowercase, 20))
-    expiration_time = 3600*24*30 if long_session else None
-    response.set_cookie('ututi_session_lifetime', session['cookie_secret'], max_age = expiration_time)
-    session.save()
 
 def is_root(user, context=None):
     return user is not None and user.id == 1
