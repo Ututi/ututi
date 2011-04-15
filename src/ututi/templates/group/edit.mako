@@ -88,7 +88,8 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
      border-bottom: 1px solid #FF9900;
   }
 
-  .privacy-settings {
+  .privacy-settings,
+  .delete-group {
      margin-left: 180px;
   }
 
@@ -191,4 +192,8 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
 
 <h2 class="subtitle">${_('Delete group:')}</h2>
 <div class="delete-group">
+  <p>${_('You can delete group only if you are last member of the group.')}</p>
+  %if len(c.group.members) == 1:
+     ${h.button_to(_('Delete group'), c.group.url(action='delete'))}
+  %endif
 </div>
