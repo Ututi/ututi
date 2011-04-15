@@ -134,7 +134,6 @@ class EditGroupForm(GroupForm):
     default_tab = validators.OneOf(['home', 'forum', 'mailinglist', 'members', 'files', 'subjects', 'page'])
     approve_new_members = validators.OneOf(['none', 'admin'])
     forum_visibility = validators.OneOf(['public', 'members'])
-    page_visibility = validators.OneOf(['public', 'members'])
     mailinglist_moderated = validators.OneOf(['members', 'moderated'])
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator())
@@ -538,8 +537,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                 self.form_result['approve_new_members'] == 'admin')
         group.forum_is_public = (
                 self.form_result['forum_visibility'] == 'public')
-        group.page_public = (
-                self.form_result['page_visibility'] == 'public')
         group.mailinglist_moderated = (
                 self.form_result['mailinglist_moderated'] == 'moderated')
         group.mailinglist_enabled = True

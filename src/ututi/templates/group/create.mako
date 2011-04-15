@@ -6,7 +6,7 @@
   ${parent.css()}
   #about-groups,
   #found-groups {
-    width: 350px;
+    width: 300px;
     float: right;
   }
 </%def>

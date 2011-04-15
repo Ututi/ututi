@@ -334,7 +334,7 @@ h1.page-title.with-bottom-line {
         padding-left: 70px;
 
     }
-    
+
     .standard-portlet button {
         margin-top: 10px;
     }
@@ -408,7 +408,7 @@ input {
     form input[type='text'],
     form input[type='password'],
     form textarea {
-        width: 200px;
+        width: 300px;
         font-size: 11px;
         height: 20px;
         border: 1px solid #666666;

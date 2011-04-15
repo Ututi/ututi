@@ -93,7 +93,7 @@
 </%def>
 
 <%def name="year_field()">
-  <label for="year"><span class="labelText">${_("Year:")}</span></label>
+  <label for="year"><span class="labelText">${_("Entrance year:")}</span></label>
   <form:error name="year" />
   <select name="year" id="year">
     <option value="">${_('Select the year')}</option>
@@ -182,37 +182,6 @@
       ${_('No groups found.')}
     </p>
   %endif
-</%def>
-
-<%def name="access_settings()">
-  <h2>${_('Access settings')}</h2>
-
-  <label for="approve_new_members" class="radio">
-    <span class="labelText">${_('New members')}</span>
-    ${h.radio("approve_new_members", "none",
-      label=_('Anyone can join the group any time'))}
-    <br />
-    ${h.radio("approve_new_members", "admin",
-      label=_('Administrators have to approve new members'))}
-  </label>
-
-  <label for="forum_visibility" class="radio">
-    <span class="labelText">${_('Group forum and mailing list visibility')}</span>
-    ${h.radio("forum_visibility", "public", label=_('Public'))}
-    <br />
-    ${h.radio("forum_visibility", "members", label=_('Visible only to members'))}
-
-  </label>
-
-  <label for="page_visibility" class="radio">
-      <span class="labelText">
-        ${_('Group page visibility')}
-        ${tooltip(_('The group page can be used for news, description of the group, calendaring, timetables, etc.'))}
-      </span>
-    ${h.radio("page_visibility", "public", label=_('Public'))}
-    <br />
-    ${h.radio("page_visibility", "members", label=_('Visible only to members'))}
-  </label>
 </%def>
 
 <h1 class="page-title with-bottom-line">${self.title()}</h1>

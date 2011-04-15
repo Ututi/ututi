@@ -63,11 +63,39 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
   </script>
 </%def>
 
+<%def name="css()">
+  ${parent.css()}
+
+  h2.subtitle {
+     font-size: 14px;
+     font-weight: bold;
+     margin-top: 15px;
+     margin-bottom: 10px;
+     padding-bottom: 2px;
+     border-bottom: 1px solid #FF9900;
+  }
+
+  .privacy-settings {
+     margin-left: 180px;
+  }
+
+     .privacy-settings .labelText {
+        font-size: 13px;
+        margin-top: 15px;
+     }
+
+     .privacy-settings input {
+        margin-top: 5px;
+     }
+
+</%def>
+
+
 <form method="post" action="${url(controller='group', action='update', id=c.group.group_id)}" name="edit_profile_form" enctype="multipart/form-data"
       id="group_settings_form">
   <table>
     <tr>
-      <td style="width: 180px; padding-top: 30px; vertical-align: top;">
+      <td style="width: 180px; padding-top: 10px; vertical-align: top;">
         <div class="js-alternatives" id="group-logo">
           <img src="${url(controller='group', id=c.group.group_id, action='logo', width='120', height='200')}" alt="Group logo" id="group-logo-editable"/>
           <button id="group-logo-button" class="btn">
@@ -85,66 +113,69 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
         ${group_title_field()}
         ${description_field()}
 
-        ${logo_field()}
+        %if h.check_crowds(['root']):
+        <div class="form-field">
+          <label for="moderators">
+            % if c.group.moderators:
+            <input name="moderators" id="moderators" type="checkbox" value="true" checked="checked" />
+            % else:
+            <input name="moderators" id="moderators" type="checkbox" value="true" />
+            % endif
+            ${_("Moderators")}
+          </label>
+        </div>
+        %endif
+
         ${year_field()}
 
-        ${location_field()}
-
-        <br class="clear-left"/>
+        <div style="display:none;">
+          ${logo_field()}
+          ${location_field()}
+        </div>
 
         <label for="default_tab">
-            <span class="labelText">${_('Default group tab')}</span>
+          <span class="labelText">${_('Default group tab')}</span>
         </label>
         ${h.select("default_tab", c.group.default_tab, c.tabs)}
 
-        %if c.group.is_watching_subjects() and c.group.wants_to_watch_subjects:
-          ${can_add_subjects(enabled=False,
-                             tooltip_text=_("This setting cannot be disabled, because "
-                                            "the group is currently watching some subjects."))}
-        %else:
-          ${can_add_subjects()}
-        %endif
-
-        %if c.group.is_storing_files() and c.group.has_file_area:
-          ${has_file_storage(enabled=False,
-                             tooltip_text=_("This setting cannot be disabled, because "
-                                            "the group is currently storing some private files."))}
-        %else:
-          ${has_file_storage()}
-        %endif
-
-        <label for="tags"><span class="labelText">${_('Tags')}</span></label>
-        ${tags_widget([])}
-
-        %if h.check_crowds(['root']):
-          <div class="form-field">
-            <label for="moderators">
-            % if c.group.moderators:
-               <input name="moderators" id="moderators" type="checkbox" value="true" checked="checked" />
-            % else:
-               <input name="moderators" id="moderators" type="checkbox" value="true" />
-            % endif
-               ${_("Moderators")}
-            </label>
-          </div>
-        %endif
-
-                ${access_settings()}
-
-          <label for="mailing_list_moderation" class="radio">
-              <span class="labelText">
-                ${_('Who can send messages to the mailing list')}
-              </span>
-            ${h.radio("mailinglist_moderated", "members", label=_('Members only'))}
-            <br />
-            ${h.radio("mailinglist_moderated", "moderated", label=_('Everybody (moderated)'))}
-            ${tooltip(_("If you select 'moderated', you can pick the people "
-                        "who you want to allow to post to the mailing list."))}
-          </label>
-
-          <br />
-
-        ${h.input_submit()}
       </td>
   </tr></table>
+
+  <h2 class="subtitle">${_('Access settings:')}</h2>
+  <div class="privacy-settings">
+
+    <label for="approve_new_members" class="radio">
+      <span class="labelText">${_('Joining the group:')}</span>
+      ${h.radio("approve_new_members", "none",
+      label=_('Anyone can join the group;'))}
+      <br />
+      ${h.radio("approve_new_members", "admin",
+      label=_('Administrators have to approve new members.'))}
+    </label>
+
+    <label for="forum_visibility" class="radio">
+      <span class="labelText">${_('Group discussions are visibile for:')}</span>
+      ${h.radio("forum_visibility", "public", label=_('Everybody;'))}
+      <br />
+      ${h.radio("forum_visibility", "members", label=_('Group members only.'))}
+    </label>
+
+    <label for="mailing_list_moderation" class="radio">
+      <span class="labelText">
+        ${_('Who can send messages to the mailing list:')}
+      </span>
+      ${h.radio("mailinglist_moderated", "members", label=_('Members only;'))}
+      <br />
+      ${h.radio("mailinglist_moderated", "moderated", label=_('Everybody (moderated).'))}
+      ${tooltip(_("If you select 'moderated', you can pick the people "
+      "who you want to allow to post to the mailing list."))}
+    </label>
+
+    ${h.input_submit()}
+</div>
+
 </form>
+
+<h2 class="subtitle">${_('Delete group:')}</h2>
+<div class="delete-group">
+</div>
