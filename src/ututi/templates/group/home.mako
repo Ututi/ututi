@@ -32,44 +32,5 @@ you are studying.
   </%self:rounded_block>
 %endif
 
-
-%if c.has_to_invite_members:
-  <%self:rounded_block id="invite_members_block" class_="portletInviteMembers">
-    <div class="floatleft usergrupeleft" style="width: 320px">
-      <h2 class="portletTitle bold">${_("Invite group members!")}</h2>
-      <p>
-${_("""
-It's easy - you just have to know their email addresses! You can
-use the group mailing list together then!
-""")}
-      </p>
-    </div>
-    <div class="floatright">
-      ${h.button_to(_('Invite friends'), c.group.url(action='members'), class_='btnMedium')}
-    </div>
-    <br class="clear-left" />
-  </%self:rounded_block>
-
-%endif
-
-%if c.wants_to_watch_subjects:
-  <%self:rounded_block id="watch_subjects_block" class_="portletNewDalykas">
-    <div class="floatleft usergrupeleft">
-      <h2 class="portletTitle bold">${_('Watch subjects you are studying!')}</h2>
-      <ul id="prosList">
-        <li>${_('Find materials shared by others')}</li>
-        <li>${_('Get notifications about changes')}</li>
-      </ul>
-    </div>
-    <div class="floatright">
-       ${h.button_to(_('Watch subjects'), c.group.url(action='subjects'), class_='btnMedium')}
-       <br class="clear-left" />
-       <span style="float: left; padding-left: 3.5em;">
-         <a href="${c.group.url(action='home', do_not_watch=True)}" class="cancel_link">${_('no, thank you')}</a>
-       </span>
-    </div>
-    <br class="clear-left" />
-  </%self:rounded_block>
-%endif
 ${actions.action_block(c.group)}
 ${wall.wall_entries(c.events)}
