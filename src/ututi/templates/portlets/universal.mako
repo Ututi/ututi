@@ -189,22 +189,6 @@
   %endif
 </%def>
 
-<%def name="google_ads_portlet()">
-  %if c.user is None:
-  <%self:portlet id="google-ads-portlet">
-    <script type="text/javascript">
-      <!--
-      google_ad_client = "pub-1809251984220343";
-      google_ad_slot = "4000532165";
-      google_ad_width = 160;
-      google_ad_height = 250;
-      //-->
-    </script>
-    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-  </%self:portlet>
-  %endif
-</%def>
-
 <%def name="about_portlet(user=None)">
   <% if user is None: user = c.user %>
   <%self:portlet id="about-portlet">

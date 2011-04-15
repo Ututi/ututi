@@ -1,0 +1,11 @@
+Test features view
+==================
+
+We just want to be sure, that /features view is still here and is
+accesible from frontpage.
+
+    >>> user = Browser()
+    >>> user.open('http://localhost/')
+    >>> user.click('What is Ututi?')
+    >>> user.printCssQuery('.page-title', strip=True)
+    <h1>What is Ututi?</h1>
