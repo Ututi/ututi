@@ -5,10 +5,14 @@
 <%namespace file="/elements.mako" import="tooltip" />
 
 <%def name="group_menu()">
-  <h1 class="page-title">${self.title()}</h1>
-  <div class="back-link">
-    <a class="back-link" href="${c.group.url()}">${_('Back to group page')}</a>
+
+  <div class="with-bottom-line clearfix">
+    <h1 class="page-title " style="float: left;">${self.title()}</h1>
+    <div class="back-link" style="float: right;">
+      <a class="back-link" href="${c.group.url()}">${_('Back')}</a>
+    </div>
   </div>
+
 </%def>
 
 <%def name="head_tags()">
@@ -65,6 +69,15 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
 
 <%def name="css()">
   ${parent.css()}
+
+  .with-bottom-line {
+     border-bottom: 1px solid #FF9900;
+     margin-bottom: 10px;
+  }
+
+  h1.page-title {
+     margin-bottom: 0;
+  }
 
   h2.subtitle {
      font-size: 14px;
