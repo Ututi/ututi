@@ -290,7 +290,7 @@ ${_('Student information online')}
             </script>
           </form>
         </div>
-        <div class="column middle">Copyright © <a href="${url('frontpage')}">${_(u'UAB „UTUTI“')}</a></div>
+        <div class="column middle">Copyright © <a href="${url('frontpage')}">${_(u'„UTUTI Ltd.“')}</a></div>
         <div class="column right link-color">
           <a ${nofollow} href="${url(controller='home', action='about')}">${_('About')}</a>
           |

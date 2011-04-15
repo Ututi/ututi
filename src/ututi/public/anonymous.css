@@ -135,6 +135,10 @@
         -webkit-box-shadow: 3px 3px 10px #333;
     }
 
+    #sign-in-area .submit:hover {
+        background: url("img/buttons/hover_big_orange.png") repeat-x scroll left bottom #FF9900;
+    }
+
     #sign-in-area .error-container {
         margin-left: 0;
     }
@@ -151,6 +155,7 @@
         margin-top: 10px;
         margin-bottom: 20px;
         font-size: 12px;
+        width: 500px;
     }
 
 button#learn-more {
@@ -231,3 +236,31 @@ button#learn-more:hover {
         color: #666;
         width: 100%;
     }
+
+    #about #using-ututi {}
+
+        #about #using-ututi .university {
+            float: left;
+            width: 360px;
+            padding-right: 5px;
+            margin-top: 15px;
+        }
+
+        #about #using-ututi .uni-logo {
+            float: left;
+            text-align: center;
+            width: 55px;
+        }
+
+        #about #using-ututi .strong {
+            font-weight: bold;
+            float: right;
+            width: 300px;
+            margin: auto;
+        }
+
+        #about #using-ututi .more {
+            padding-left: 60px;
+            padding-top: 10px;
+            display: inline-block;
+        }
