@@ -68,7 +68,7 @@ However, group ids are checked for uniqueness.
    >>> browser.open('http://localhost/groups/create')
    >>> browser.getControl('Email address').value = 'Test'
    >>> browser.getControl('Title:').value = 'Test group'
-   >>> browser.getControl('Year').value = ['2009']
+   >>> browser.getControl('Entrance year').value = ['2009']
    >>> browser.getControl('Picture').add_file(*make_file('test_logo.png'))
    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
    >>> browser.getControl('Continue').click()
