@@ -131,7 +131,7 @@ class GroupLiveSearchForm(Schema):
 class EditGroupForm(GroupForm):
     """A schema for validating group edits."""
 
-    default_tab = validators.OneOf(['home', 'forum', 'mailinglist', 'members', 'files', 'subjects', 'page'])
+    default_tab = validators.OneOf(['home', 'members', 'files', 'subjects'])
     approve_new_members = validators.OneOf(['none', 'admin'])
     forum_visibility = validators.OneOf(['public', 'members'])
     mailinglist_moderated = validators.OneOf(['members', 'moderated'])
@@ -475,17 +475,13 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     def _edit_form(self):
         c.current_year = date.today().year
         c.years = range(c.current_year - 10, c.current_year + 5)
-        forum_link = (('mailinglist', _('Mailing List'))
-                      if c.group.mailinglist_enabled
-                      else ('forum', _('Forum')))
         files_link = ('files', _('Files')) if c.group.has_file_area else None
         subjects_link = ('subjects', _('Subjects')) if c.group.has_file_area else None
-        c.tabs = [('home', _("What's New?")),
-                  forum_link,
+        c.tabs = [('home', _("News feed")),
                   ('members', _('Members'))
                   ] + ([files_link] if files_link else []) + [
                   ] + ([subjects_link] if subjects_link else []) + [
-                  ('page', _('Page'))]
+                  ('page', _('Notes'))]
 
         return render('group/edit.mako')
 
@@ -553,10 +549,8 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             group.has_file_area = bool(self.form_result['file_storage'])
 
         # Fix default tab setting if needed.
-        if group.default_tab == 'forum' and group.mailinglist_enabled:
-            group.default_tab = 'mailinglist'
-        if group.default_tab == 'mailinglist' and not group.mailinglist_enabled:
-            group.default_tab = 'forum'
+        if group.default_tab == 'forum' or group.default_tab == 'mailinglist':
+            group.default_tab = 'home'
 
         if values['logo_delete']:
             group.logo = None
