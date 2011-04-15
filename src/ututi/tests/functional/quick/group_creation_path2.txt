@@ -22,12 +22,6 @@ We've checked that already; let's move on.
 
     >>> browser.getControl("Finish").click()
 
-The screen will suggest watching subjects:
-
-    >>> browser.printCssQuery('h2.portletTitle', strip=True)
-    <h2>Invite group members!</h2>
-    <h2>Watch subjects you are studying!</h2>
-
 Let's have a look at the settings:
 
     >>> browser.getLink('Edit').click()
