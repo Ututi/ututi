@@ -31,17 +31,17 @@
   <div id="about-inner" class="clearfix">
     <div id="features">
       <h2>${_("What is Ututi?")}</h2>
-      <div class="feature" id="discussions">
-        <p><strong>${_("Social discussions about course material between students and teachers.")}</strong></p>
-        <p>${_("Students and teachers can discuss course material, academical matters and university life in modern way.")}</p>
-      </div>
       <div class="feature" id="social-network">
-        <p><strong>${_("Strong sentence.")}</strong></p>
-        <p>${_("Explaining note.")}</p>
+        <h3>${_("Private social networks for universities.")}</h3>
+        <p>${_("Ututi is a platform for creating academical social networks. It helps engage your students and teachers and improve the quality of your studies.")}</p>
+      </div>
+      <div class="feature" id="discussions">
+        <h3>${_("Social discussions about course material between students and teachers.")}</h3>
+        <p>${_("Students and teachers can discuss course material, academical matters and university life in a modern way.")}</p>
       </div>
       <div class="feature" id="personal-websites">
-        <p><strong>${_("Strong sentence.")}</strong></p>
-        <p>${_("Explaining note.")}</p>
+        <h3>${_("Course material publishing.")}</h3>
+        <p>${_("Teachers can create areas for course information where students will be able to access, share and comment study materials.")}</p>
       </div>
     </div>
     <div id="using-ututi">
