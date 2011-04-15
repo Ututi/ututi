@@ -20,57 +20,11 @@ inviting any members:
     Invite group members
     >>> browser.getControl('Finish').click()
 
-Let's disable file storage and subject watching.
-
-    >>> browser.getLink('Edit Settings').click()
-    >>> browser.getControl(name='can_add_subjects').value = False
-    >>> browser.getControl(name='file_storage').value = False
-    >>> browser.getControl('Save').click()
-
-Let's assert that "Files" and "Subjects" tabs are not available:
-
-    >>> browser.getLink('Files')
-    Traceback (most recent call last):
-    ...
-    LinkNotFoundError
-    >>> browser.getLink('Subjects')
-    Traceback (most recent call last):
-    ...
-    LinkNotFoundError
-
-Suppose we changed our mind. We go to edit group's settings and
-enable file storage area:
-
-    >>> browser.getLink('Edit Settings').click()
-    >>> browser.getControl(name='file_storage').value = True
-    >>> browser.getControl('Save').click()
-
-Now "Subjects" tab is still unavailable, but "Files" tab became
-available and we can browse there:
-
-    >>> browser.getLink('Subjects')
-    Traceback (most recent call last):
-    ...
-    LinkNotFoundError
-    >>> browser.getLink('Files').click()
-
 Since we're watching at files, let's add one:
 
     >>> res = browser.app.post("/group/belzebubai/upload_file",
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "blzbb.txt", "Belzebubijos teritorijos")])
-
-If we now go to the edit form, we will notice that file storage
-checkbox has become disabled:
-
-    >>> browser.getLink('Edit Settings').click()
-    >>> browser.getControl(name='file_storage').disabled
-    True
-
-Let's enable subject subscriptions though:
-
-    >>> browser.getControl(name='can_add_subjects').value = True
-    >>> browser.getControl('Save').click()
 
 We can now go to "Subjects" tab and watch one:
 
@@ -78,65 +32,17 @@ We can now go to "Subjects" tab and watch one:
     >>> browser.getControl('add new subject').click()
     >>> browser.getLink('Watch', url='mat_analize').click()
 
-In the "Edit" page now both checkboxes should be disabled:
-
-    >>> browser.getLink('Edit Settings').click()
-    >>> browser.getControl(name='file_storage').disabled
-    True
-
-    >>> browser.getControl(name='can_add_subjects').disabled
-    True
-
 Let's go and delete a file, that we created earlier:
 
-    >>> browser.getLink('Back to group page').click()
+    >>> browser.getLink('Back').click()
     >>> browser.getLink('Files').click()
     >>> res = browser.app.get('/files/delete/5')
 
-Now we can again disable "Files" tab:
-
-    >>> browser.getLink('Edit Settings').click()
-    >>> browser.getControl(name='file_storage').value = False
-    >>> browser.getControl('Save').click()
-    >>> browser.getLink('Files')
-    Traceback (most recent call last):
-    ...
-    LinkNotFoundError
-
-Let's remove the subject we've added before and disable "Subjects"
-tab as well:
-
-    >>> browser.getLink('Subjects').click()
-    >>> browser.getLink(url='unwatch_subject').click()
-    >>> browser.getLink('Edit Settings').click()
-    >>> browser.getControl(name='can_add_subjects').value = False
-    >>> browser.getControl('Save').click()
-    >>> browser.getLink('Subjects')
-    Traceback (most recent call last):
-    ...
-    LinkNotFoundError
-
-    >>> browser.getLink('Files')
-    Traceback (most recent call last):
-    ...
-    LinkNotFoundError
-
-If we enable file storage area, we find previously deleted
+Let's go to files area and find previously deleted
 items in the recycle bin:
 
-    >>> browser.getLink('Edit Settings').click()
-    >>> browser.getControl(name='file_storage').value = True
-    >>> browser.getControl('Save').click()
     >>> browser.getLink('Files').click()
     >>> browser.printCssQuery('ul.trash_folder .file_name')
     <span class="file_name">blzbb.txt</span>
-
-If we undelete the file, in 'Edit' page file storage area
-checkbox will again become disabled:
-
-    >>> res = browser.app.get('/group/belzebubai/file/5/restore')
-    >>> browser.getLink('Edit Settings').click()
-    >>> browser.getControl(name='file_storage').disabled
-    True
 
 That completes the exercise. Have a good day!

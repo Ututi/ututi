@@ -9,7 +9,7 @@ This time, let's try creating an academic group:
 
     >>> browser.getControl('Email address').value = 'test2'
     >>> browser.getControl('Title').value = 'Another test group'
-    >>> browser.getControl('Year').value = ['2010']
+    >>> browser.getControl('Entrance year').value = ['2010']
     >>> browser.getControl(name='location-0').value = 'U-niversity'
     >>> browser.getControl('Continue').click()
 
@@ -31,6 +31,4 @@ Let's have a look at the settings:
     >>> browser.getControl(name='approve_new_members').value
     ['admin']
     >>> browser.getControl(name='forum_visibility').value
-    ['members']
-    >>> browser.getControl(name='page_visibility').value
     ['members']
