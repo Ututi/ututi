@@ -147,7 +147,7 @@ def is_smallfile(user, context=None):
     from ututi.model import Subject, File
 
     if isinstance(context, File) and isinstance(context.parent, Subject):
-        return context.size < int(config.get('small_file_size', 1024**2))
+        return context.size < int(config.get('small_file_size', 1024**3))
     return False
 
 
