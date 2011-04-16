@@ -1201,9 +1201,7 @@ ul.feature-list {
 .flash-message,
 .action-reply {
     border: 1px solid #FF7800;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    background: white url("/images/details/icon_usmall.png") 10px center no-repeat;
+    background: white url("/img/icons.com/icon_logo_small.png") 5px 5px no-repeat;
     margin: 5px 0 0.8em;
     padding: 0.6em 0.6em 0.6em 35px;
     font-size: 14px;
