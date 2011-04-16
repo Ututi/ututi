@@ -4,14 +4,14 @@
 
 <div class="static-content">
   <h2>${_('Private social networks for Universities and Colleges')}</h2>
-  <p>${_('Ututi is a platform for creating academic social networks.
-    It helps engage your students and teachers and improve the quality
+  <p>${_('Ututi is a platform for creating academic social networks.\
+    It helps engage your students and teachers and improve the quality\
     of your studies.')}</p>
 
-  <p>${_('Here students and teachers can create groups online, use the mailing
+  <p>${_('Here students and teachers can create groups online, use the mailing\
     list for communication and the file storage for sharing information.')}</p>
 
-  <p>${_(What is more, here Teachers will create for courses information where
+  <p>${_('What is more, here Teachers will create for courses information where\
     students will be able to access, share and comment study materials.')}</p>
 </div>
 
