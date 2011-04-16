@@ -1,0 +1,46 @@
+Contact us form
+===============
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> def printEmails():
+    ...     for email in mail_queue:
+    ...         print email.recipients
+    ...         print email.payload()
+
+Anonymous Ututi user can write some message to Ututi team using contact us form.
+So, let's try go to contact us form:
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/')
+    >>> browser.getLink('Contact us', index=0).click()
+    >>> browser.printCssQuery('.page-title', strip=True)
+    <h1>Contact Us</h1>
+
+Ok. We are here, so now is time for a message.
+
+    >>> form = browser.getForm(id='contact-form')
+    >>> form.getControl(name='name').value = 'Important User'
+    >>> form.getControl(name='email').value = 'anonymous@ututi.lt'
+    >>> form.getControl(name='message').value = 'Hello, i just want to ask somethink'
+    >>> form.getControl('Send').click()
+    >>> browser.printCssQuery('.contact-text', strip=True)
+    <div>Message sent succesfully.</div>
+
+    >>> len(mail_queue)
+    1
+
+Ok, now we will check if validators works fine.
+
+    >>> browser.open('http://localhost/contacts')
+    >>> form = browser.getForm(id='contact-form')
+    >>> form.getControl(name='name').value = 'Important User'
+    >>> form.getControl(name='email').value = 'anonymous'
+    >>> form.getControl('Send').click()
+    >>> browser.printCssQuery('.error-message', strip=True)
+    <span>An email address must contain a single @</span>
+    <span>Field can't be empty.</span>
+
+In mail queue stil must be only one message.
+
+    >>> len(mail_queue)
+    1

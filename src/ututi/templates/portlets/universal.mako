@@ -196,3 +196,17 @@
       Only %s students and teachers can join this network.' % (user.location.title, user.location.title_short)))}</p>
   </%self:portlet>
 </%def>
+
+<%def name="contacts_portlet()">
+  <%self:portlet id="about-portlet">
+    <%def name="header()">
+         ${_("Contact information:")}
+    </%def>
+    <p><strong>UAB "Ututi"</strong></p>
+    <p>Upės str. 5, Vilnius<br />Lithuania</p>
+    <p>Email: <a href="mailto:info@ututi.com">info@ututi.com</a><br />
+       Mobile phone: +370 683 79238</p>
+    <p>Company number: 302495065<br />
+       VAT number: LT10000510316</p>
+  </%self:portlet>
+</%def>

@@ -86,8 +86,8 @@ ${_('Student information online')}
     <a id="logo" href="${url('/')}"><img src="/img/Ututi_logo_big.png" alt="Ututi" title="Ututi"/></a>
     <span id="slogan">${_("Bringing students and teachers together")}</span>
     <ul id="nav">
-      <li class="header-links"><a href="${url('/features')}">What is Ututi?</a></li>
-      <li class="header-links"><a href="#">Contact us</a></li>
+      <li class="header-links"><a href="${url('/features')}">${_('What is Ututi?')}</a></li>
+      <li class="header-links"><a href="${url('/contacts')}">${_('Contact us')}</a></li>
       <li id="login-link" class="header-links"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Login')}</a></li>
     </ul>
   </div>
@@ -296,7 +296,7 @@ ${_('Student information online')}
           |
           <a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms')}</a>
           |
-          <a href="#" >Contact Us</a>
+          <a href="${url(controller='home', action='contacts')}">${_('Contact Us')}</a>
           |
           <a href="#" id="feedback-link">${_('Feedback')}</a>
         </div>

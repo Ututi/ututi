@@ -20,6 +20,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql import func
 from sqlalchemy.sql.expression import desc
 
+from ututi.lib.messaging import EmailMessage
 from ututi.lib.base import BaseController, render, u_cache
 import ututi.lib.helpers as h
 from ututi.lib.emails import email_password_reset
@@ -65,6 +66,14 @@ class RegistrationForm(Schema):
     # url(controller='search', action='browse') here above
     email = Pipe(TranslatedEmailValidator(not_empty=True, strip=True),
                  ForbidPublicEmail(messages=msg))
+
+
+class ContactsForm(Schema):
+    msg = {'invalid': _(u"Wrong email address."),
+           'empty': _(u"Field can't be empty.")}
+    name = validators.UnicodeString(not_empty=True, messages=msg)
+    email = Pipe(TranslatedEmailValidator(not_empty=True, strip=True, messages=msg))
+    message = validators.UnicodeString(not_empty=True, messages=msg)
 
 
 class UniversityListMixin(BaseController):
@@ -157,6 +166,9 @@ class HomeController(UniversityListMixin):
     def _sign_up_form(self):
         return render('/frontpage.mako')
 
+    def _contacts_form(self):
+        return render('/about/contacts.mako')
+
     def index(self):
         if c.user is not None:
             redirect(url(controller='profile', action='home'))
@@ -170,10 +182,30 @@ class HomeController(UniversityListMixin):
             return htmlfill.render(self._sign_up_form())
 
     def about(self):
-        return render('/about.mako')
+        return render('/about/features.mako')
+
+    @validate(schema=ContactsForm(), form='_contacts_form')
+    def contacts(self):
+        """Contact us form with send message functionality."""
+        if not hasattr(self, 'form_result'):
+            return self._contacts_form()
+
+        name = self.form_result['name']
+        email = self.form_result['email']
+        message = self.form_result['message']
+
+        text = render('/emails/contact_us.mako',
+                      extra_vars={'name': name,
+                                  'email': email,
+                                  'message': message})
+        msg = EmailMessage(_('Message to Ututi.com team'), text, force=True)
+        msg.send('info@ututi.com')
+
+        return render('/about/contacts.mako',
+                      extra_vars={'message': _('Message sent succesfully.')})
 
     def features (self):
-        return render('/features.mako')
+        return render('/about/features.mako')
 
     def advertising(self):
         return render('/advertising.mako')
