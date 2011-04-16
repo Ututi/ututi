@@ -187,9 +187,10 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
 
     @subject_action
     def home(self, subject):
-        blank_subject = not subject.pages and not subject.n_files(include_deleted=False)
-        if not (subject.description or blank_subject) or subject in c.user.watched_subjects:
-            redirect(subject.url(action='feed'))
+        if c.user:
+            blank_subject = not subject.pages and not subject.n_files(include_deleted=False)
+            if not (subject.description or blank_subject) or subject in c.user.watched_subjects:
+                redirect(subject.url(action='feed'))
         c.current_tab = 'info'
         return render('subject/info.mako')
 
