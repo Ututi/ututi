@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-04-15 13:48+0300\n"
-"Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
+"PO-Revision-Date: 2011-04-16 23:22+0300\n"
+"Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 "MIME-Version: 1.0\n"
@@ -3923,7 +3923,7 @@ msgid "It is not your university? Use another email address or %(contact_us_link
 msgstr "Tai ne Jūsų universitetas? Naudokite kitą el. pašto adresą arba susisiekite su mumis %(contact_us_link)s."
 
 msgid "Contact us"
-msgstr "Susisiekite su mumis"
+msgstr "Kontaktai"
 
 #, python-format
 msgid "%(count)s file"
