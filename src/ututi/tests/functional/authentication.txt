@@ -64,13 +64,14 @@ Note that user is being redirected to news feed after.
 
 Anonymous users should be able to download small files (for testing: up to 10 bytes):
 
+    >>> browser.getLink('News feed').click()
     >>> browser.getLink('text.txt').click()
     >>> browser.url
     'http://localhost/subject/vu/mat_analize/file/4/get'
 
 But not larger ones:
 
-    >>> browser.open('http://localhost/subject/vu/mat_analize')
+    >>> browser.open('http://localhost/subject/vu/mat_analize/feed')
     >>> browser.getLink('text2.txt').click()
     >>> browser.url
     'http://localhost/login?came_from=%2Fsubject%2Fvu%2Fmat_analize%2Ffiles%3Fserve_file%3D5&context=text2.txt'
