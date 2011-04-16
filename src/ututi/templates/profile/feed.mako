@@ -1,5 +1,4 @@
 <%inherit file="/profile/home_base.mako" />
-<%namespace name="b" file="/prebase.mako" import="rounded_block"/>
 <%namespace file="/elements.mako" import="tooltip" />
 <%namespace name="actions" file="/profile/wall_actionblock.mako" import="action_block, head_tags, css"/>
 <%namespace name="wall" file="/sections/wall_entries.mako" />
@@ -26,10 +25,6 @@
   }
 
 </%def>
-
-%if not c.user.is_teacher:
-  ${self.homepage_nags_and_stuff()}
-%endif
 
 <a id="settings-link" href="${url(controller='profile', action='wall_settings')}">${_('News feed settings')}</a>
 

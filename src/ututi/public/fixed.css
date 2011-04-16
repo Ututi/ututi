@@ -1529,11 +1529,11 @@ ul.medium-icon-list {
 
     .feature-box.one-column .feature {
         display: inline;
-        width: 460px;
+        width: 445px;
         float: left;
-        margin: 15px 30px 15px 0px;
+        margin: 15px 30px 5px 0px;
         background-repeat: no-repeat;
-        min-height: 30px;
+        min-height: 35px;
     }
 
     .feature-box .icon-file-orange {
@@ -1605,7 +1605,8 @@ ul.medium-icon-list {
     }
     .feature-box .icon-wiki {
         background-image: url('img/icons.com/about/wiki.png');
-        padding-left: 45px;
+        background-position: 10px 5px;
+        padding-left: 50px;
     }
     .feature-box .icon-administration {
         background-image: url('img/icons.com/about/administration.png');

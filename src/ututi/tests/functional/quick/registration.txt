@@ -232,7 +232,7 @@ and invitation are sent:
     >>> browser.getControl('Finish').click()
 
     >>> browser.printCssQuery('h1.page-title', strip=True)
-    <h1>News feed</h1>
+    <h1>Welcome to Ututi</h1>
 
     >>> len(mail_queue)
     4

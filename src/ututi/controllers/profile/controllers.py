@@ -634,7 +634,7 @@ class UserProfileController(ProfileControllerBase):
                                 _('Where are your notes?')]
             c.fb_random_post = random.choice(FB_POST_MESSAGES)
 
-        return self._feed_page()
+        return render('/profile/welcome.mako')
 
     @ActionProtector("user")
     @validate(schema=PhoneForm, form='home')
