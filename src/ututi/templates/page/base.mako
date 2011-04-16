@@ -1,6 +1,8 @@
 <%inherit file="/ubase-sidebar.mako" />
-<%namespace file="/portlets/subject.mako" import="*"/>
-<%namespace file="/portlets/banners/base.mako" import="*"/>
+<%namespace file="/portlets/subject.mako" import="subject_info_portlet,
+     subject_follow_portlet, subject_teachers_portlet, subject_stats_portlet"/>
+<%namespace file="/subject/base.mako" import="pre_content" />
+
 
 <%def name="head_tags()">
   ${parent.head_tags()}
@@ -11,9 +13,12 @@
  </%def>
 
 <%def name="portlets()">
-  ${subject_info_portlet(c.subject)}
-  ${subject_related_subjects_portlet()}
-  ${ubooks_portlet()}
+  ${subject_info_portlet()}
+  ${subject_follow_portlet()}
+  ${subject_teachers_portlet()}
+  ${subject_stats_portlet()}
 </%def>
+
+${pre_content()}
 
 ${next.body()}

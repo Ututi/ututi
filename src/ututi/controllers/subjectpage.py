@@ -8,13 +8,14 @@ from lxml.html.diff import htmldiff
 from pylons import tmpl_context as c, request, url
 from pylons.controllers.util import abort, redirect
 
-from ututi.controllers.subject import subject_action, find_similar_subjects
+from ututi.controllers.subject import subject_action, find_similar_subjects, subject_menu_items
 from ututi.model import Subject, LocationTag, Page, PageVersion
 from ututi.model import meta
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
 from ututi.lib.helpers import html_cleanup, literal, check_crowds
 from ututi.lib.validators import validate
+
 from pylons.i18n import _
 
 log = logging.getLogger(__name__)
@@ -60,6 +61,8 @@ def page_action(method):
         c.similar_subjects = find_similar_subjects(location.id, id)
         c.object_location = subject.location
         c.security_context = subject
+        c.tabs = subject_menu_items()
+
         return method(self, subject, page)
     return _page_action
 
@@ -69,15 +72,11 @@ class SubjectpageController(BaseController):
 
     @page_action
     def index(self, subject, page):
-        c.breadcrumbs = [{'link': subject.url(),
-                          'title': subject.title},
-                         {'link': page.url(),
-                          'title': page.title}]
-
         if page not in subject.pages:
             abort(404)
         if page.isDeleted() and not check_crowds(['moderator']):
             abort(404)
+        c.current_tab = 'pages'
         return render('page/view.mako')
 
     @page_action

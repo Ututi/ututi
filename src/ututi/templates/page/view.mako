@@ -3,47 +3,42 @@
 <%def name="title()">${h.ellipsis(c.page.title,30)} - ${h.ellipsis(c.subject.title, 30)}</%def>
 
 <div class="back-link">
-  <a class="back-link" href="${c.subject.url(action="pages")}">${_('Go back to %(subject_title)s') % dict(subject_title=c.subject.title)}</a>
+  <a class="back-link" href="${c.subject.url(action="pages")}">${_('Go back to %(subject_title)s notes') % dict(subject_title=c.subject.title)}</a>
 </div>
 
-<%self:rounded_block class_='portletGroupFiles smallTopMargin'>
-  <div class="GroupFiles GroupWiki" style="height: auto; position: auto; padding-bottom: 10px">
-        <div class="floatright wiki3">
-          ${h.button_to(_('edit'), c.page.url(action='edit'), method='GET')}
-        </div>
-        %if h.check_crowds(['user']):
-          <div class="floatright wiki3">
-            ${h.button_to(_('history'), c.page.url(action='history'), method='GET')}
-          </div>
+<div class="notes-header">
+  %if h.check_crowds(['user']):
+  <div class="floatright controls edit">
+    <a href="${c.page.url(action='edit')}">${_('edit')}</a>
+  </div>
+  <div class="floatright controls history">
+    <a href="${c.page.url(action='history')}">${_('history')}</a>
+  </div>
+  %endif
+  %if h.check_crowds(['moderator']):
+     %if not c.page.isDeleted():
+     <div class="floatright wiki3 controls delete">
+       <a href="${c.page.url(action='delete')}">${_('delete')}</a>
+     </div>
+     %else:
+     <div class="floatright wiki3">
+       ${h.button_to(_('undelete'), c.page.url(action='undelete'))}
+     </div>
+     %endif
+  %endif
+  <div class="note">
+    <h2 class="page-title">${c.page.title}</h2>
+    <% last_version = c.page.last_version %>
+    %if last_version:
+    <p><span class="grey verysmall">${_('Last edit: ')}
+        <a class="verysmall" href="${last_version.created.url()}">${last_version.created.fullname}</a>
+        <span class="grey verysmall">${h.fmt_dt(last_version.created_on)}</span>
         %endif
-        %if h.check_crowds(['moderator']):
-          %if not c.page.isDeleted():
-          <div class="floatright wiki3">
-            ${h.button_to(_('delete'), c.page.url(action='delete'))}
-          </div>
-          %else:
-          <div class="floatright wiki3">
-            ${h.button_to(_('undelete'), c.page.url(action='undelete'))}
-          </div>
-          %endif
-        %endif
-        <div style="float: right; margin-top: 11px">
-          <fb:like width="90" layout="button_count" show_faces="false" url="${c.page.url(qualified=True)}"></fb:like>
-        </div>
-        <div class="wiki2">
-          <h2 class="portletTitle bold" style="padding-top: 3px; padding-left: 50px">${c.page.title}</h2>
-          <% last_version = c.page.last_version %>
-          %if last_version:
-            <p><span class="grey verysmall">${_('Last edit: ')}
-            <a class="orange verysmall" href="${last_version.created.url()}">${last_version.created.fullname}</a>
-            <span class="grey verysmall">${h.fmt_dt(last_version.created_on)}</span>
-          %endif
-        </div>
-    </div>
-    <div id="page_content" class="wiki-page">
-      ${h.latex_to_html(h.html_cleanup(c.page.content))}
-    </div>
-</%self:rounded_block>
+  </div>
+</div>
+<div id="note-content" class="wiki-page">
+  ${h.latex_to_html(h.html_cleanup(c.page.content))}
+</div>
 
 ##%if c.came_from_search:
 ##  <script type="text/javascript">

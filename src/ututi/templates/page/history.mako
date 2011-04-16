@@ -12,9 +12,8 @@
 
 <div class="clear-left"></div>
 
-<%self:rounded_block class_='portletGroupFiles' id="subject_history">
-<div class="GroupFilesWiki GroupFiles">
-  <h2 class="portletTitle bold">${c.page.title}</h2>
+<div class="notes-header">
+  <h2 class="page-title">${c.page.title}</h2>
 </div>
   <table id="wiki_history">
   % for version in c.page.versions:
@@ -39,4 +38,3 @@
         </tr>
   % endfor
   </table>
-</%self:rounded_block>

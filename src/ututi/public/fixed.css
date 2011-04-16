@@ -972,6 +972,52 @@ ul.feature-list {
         display: block;
     }
 
+.notes-header {}
+
+    .notes-header .note {
+        background-image: url('img/icons.com/about/wiki.png');
+        background-repeat: no-repeat;
+        padding-left: 40px;
+        border-bottom: 1px solid #FF9900;
+        margin-top: 15px;
+    }
+
+        .notes-header .note h2 {
+            font-weight: bold;
+        }
+
+        .notes-header .note p {
+            margin: 0;
+        }
+
+        .notes-header .controls {
+            background-repeat: no-repeat;
+            background-position: 0 18px;
+            padding-left: 15px;
+            padding-top: 15px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .notes-header .edit {
+            background-image: url('img/icons.com/edit.png');
+        }
+
+        .notes-header .history {
+            background-image: url('img/icons.com/clock_orange.png');
+            background-position: 0 17px;
+        }
+
+        .notes-header .delete {
+            background-image: url('img/icons.com/close.png');
+            background-position: 0 20px;
+        }
+
+#note-content {
+    padding: 0 10px 10px 5px;
+}
+
+
 /* GROUP DESCRIPTION
  */
 .group-description {
@@ -1211,18 +1257,27 @@ ul.feature-list {
         font-weight: bold;
     }
 
-    .wiki-page h1 { font-size: 14px; }
+    .wiki-page h1 { font-size: 16px; }
 
-    .wiki-page h2 { font-size: 13px; }
+    .wiki-page h2 { font-size: 14px; }
 
     .wiki-page h3 { font-size: 12px; }
 
     .wiki-page h4, .wiki-page h5, .wiki-page h6 { font-size: 10px; }
 
     .wiki-page ul, .wiki-page ol {
-        list-style-position: inside;
         margin-left: 2em;
+        list-style: disc inside none;
     }
+
+    .wiki-page ol {
+        list-style: decimal inside none;
+    }
+
+    .wiki-page em {
+        font-style: italic;
+    }
+
 
 /* STANDARD ICON LISTS */
 

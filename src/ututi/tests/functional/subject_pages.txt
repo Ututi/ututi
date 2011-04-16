@@ -26,15 +26,15 @@ We should get redirected to the index view of the page we just created.
     >>> browser.url
     'http://localhost/subject/vu/mat_analize/note/4'
 
-    >>> browser.printQuery("//h2[@class='portletTitle bold']/text()")
-    How to be awesome!
+    >>> browser.printCssQuery("h2.page-title", strip=True)
+    <h2>How to be awesome!</h2>
 
-    >>> browser.printCssQuery("#page_content", strip=True)
+    >>> browser.printCssQuery("#note-content", strip=True)
     <div>Being Awesome is easy!</div>
 
 Let's edit the page now.
 
-    >>> browser.getControl('edit').click()
+    >>> browser.getLink('edit').click()
     >>> browser.getControl('Content').value = "<script>Yeah!</script>Being Awesome is very easy!"
     >>> browser.getControl('Save').click()
 
@@ -43,28 +43,28 @@ And see how it works.
     >>> browser.url
     'http://localhost/subject/vu/mat_analize/note/4'
 
-    >>> browser.printQuery("//h2[@class='portletTitle bold']/text()")
-    How to be awesome!
+    >>> browser.printCssQuery("h2.page-title", strip=True)
+    <h2>How to be awesome!</h2>
 
-    >>> browser.printCssQuery("#page_content", strip=True)
+    >>> browser.printCssQuery("#note-content", strip=True)
     <div>Being Awesome is very easy!</div>
 
 
 What about our brand new embedded latex syntax:
 
-    >>> browser.getControl('edit').click()
+    >>> browser.getLink('edit').click()
     >>> browser.getControl('Content').value = r"<script>Yeah!</script>Being Awesome is very easy! $$\sum_{n=1}^\infty a_n$$"
     >>> browser.getControl('Save').click()
 
-    >>> browser.printQuery("id('page_content')")
-    <div id="page_content" class="wiki-page">
+    >>> browser.printQuery("id('note-content')")
+    <div id="note-content" class="wiki-page">
       Being Awesome is very easy!
       <img class="latex" alt="\sum_{n=1}^\infty a_n" src="http://l.wordpress.com/latex.php?bg=ffffff&amp;fg=000000&amp;s=0&amp;latex=%5Cdisplaystyle+%5Csum_%7Bn%3D1%7D%5E%5Cinfty+a_n" />
     </div>
 
 We can also view version history for the page:
 
-    >>> browser.getControl('history').click()
+    >>> browser.getLink('history').click()
 
 Let's look at the changes
 
@@ -91,7 +91,7 @@ We can also look at the previous version:
 
 As an admin, we can delete the page:
 
-    >>> browser.getControl('delete').click()
+    >>> browser.getLink('delete').click()
 
 Let's go back:
 
@@ -114,8 +114,8 @@ Now, visit the page and undelete:
 
 We could delete it again if we wanted to:
 
-    >>> browser.getControl('delete')
-    <SubmitControl name=None type='submitbutton'>
+    >>> browser.getLink('delete')
+    <Link text='delete' url='http://localhost/subject/vu/mat_analize/note/4/delete'>
 
 Now the page shows up in the index again without the "deleted" marker:
 
