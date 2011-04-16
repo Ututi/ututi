@@ -112,7 +112,7 @@ If we switch language, text should be displayed in the new language:
 
     >>> form = browser.getForm('language-switch-form')
     >>> form.getControl(name='language').value = ['pl']
-    >>> form.getControl('Select').click()
+    >>> form.getControl('Rinktis').click()
     >>> browser.open('http://localhost/terms')
     >>> browser.printCssQuery('#terms-of-use-text', strip=True)
     <div> Terms of use <b>PL</b> content </div>
