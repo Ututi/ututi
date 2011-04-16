@@ -117,7 +117,7 @@ Finishing registration:
 
     >>> new_user.getControl('Finish').click()
     >>> new_user.printCssQuery('h1.page-title', strip=True)
-    <h1>News feed</h1>
+    <h1>Welcome to Ututi</h1>
 
 Once registered, user should be able to accept invitation to group:
 

@@ -5,7 +5,7 @@
 </%def>
 
 <%def name="welcome()">
-<div id="welcome-message" class="flash-message">
+<div id="welcome-message">
   ${h.literal(_('Welcome to <strong>%(university)s</strong> private social network'
   'created on <a href="%(url)s">Ututi platform</a>. '
   'Here students and teachers can create groups online, use the mailinglist for '

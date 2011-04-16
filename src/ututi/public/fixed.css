@@ -1198,6 +1198,7 @@ ul.feature-list {
 /* FLASH MESSAGE
  */
 /* flash messages */
+#welcome-message,
 .flash-message,
 .action-reply {
     border: 1px solid #FF7800;

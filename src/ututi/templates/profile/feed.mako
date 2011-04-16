@@ -26,8 +26,11 @@
 
 </%def>
 
-<a id="settings-link" href="${url(controller='profile', action='wall_settings')}">${_('News feed settings')}</a>
-
-${actions.action_block(c.msg_recipients, c.file_recipients, c.wiki_recipients)}
-
-${wall.wall_entries(c.events)}
+%if not c.user.groups and not c.user.watched_subjects:
+    ${self.group_feature_box()}
+    ${self.subject_feature_box()}
+%else:
+    <a id="settings-link" href="${url(controller='profile', action='wall_settings')}">${_('News feed settings')}</a>
+    ${actions.action_block(c.msg_recipients, c.file_recipients, c.wiki_recipients)}
+    ${wall.wall_entries(c.events)}
+%endif
