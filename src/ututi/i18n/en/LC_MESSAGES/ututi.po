@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-04-14 22:09+0300\n"
+"PO-Revision-Date: 2011-04-16 23:30+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -273,7 +273,7 @@ msgstr ""
 msgid "Members"
 msgstr ""
 
-msgid "Page"
+msgid "Notes"
 msgstr ""
 
 msgid "You have to log in or register to request group membership."
@@ -304,15 +304,6 @@ msgid "Member"
 msgstr ""
 
 msgid "Delete member"
-msgstr ""
-
-msgid "Mailing List"
-msgstr ""
-
-msgid "Forum"
-msgstr ""
-
-msgid "What's New?"
 msgstr ""
 
 msgid "General"
@@ -410,6 +401,18 @@ msgstr ""
 msgid ""
 "Please use your university email or <a href=\"/browse\">choose university"
 " from the list</a>."
+msgstr ""
+
+msgid "Wrong email address."
+msgstr ""
+
+msgid "Field can't be empty."
+msgstr ""
+
+msgid "Message to Ututi.com team"
+msgstr ""
+
+msgid "Message sent succesfully."
 msgstr ""
 
 msgid "You have to be logged in to download a file!"
@@ -638,9 +641,6 @@ msgstr ""
 msgid "Subject information"
 msgstr ""
 
-msgid "Notes"
-msgstr ""
-
 msgid "Please enter subject title"
 msgstr ""
 
@@ -736,6 +736,9 @@ msgid "Invitations sent to %(email_list)s"
 msgstr ""
 
 msgid "Home"
+msgstr ""
+
+msgid "What's New?"
 msgstr ""
 
 msgid "My subjects"
@@ -1264,21 +1267,35 @@ msgstr ""
 msgid "What is Ututi?"
 msgstr ""
 
+msgid "Private social networks for universities."
+msgstr ""
+
+msgid ""
+"Ututi is a platform for creating academical social networks. It helps "
+"engage your students and teachers and improve the quality of your "
+"studies."
+msgstr ""
+
 msgid "Social discussions about course material between students and teachers."
 msgstr ""
 
 msgid ""
 "Students and teachers can discuss course material, academical matters and"
-" university life in modern way."
+" university life in a modern way."
 msgstr ""
 
-msgid "Strong sentence."
+msgid "Course material publishing."
 msgstr ""
 
-msgid "Explaining note."
+msgid ""
+"Teachers can create areas for course information where students will be "
+"able to access, share and comment study materials."
 msgstr ""
 
 msgid "Using Ututi:"
+msgstr ""
+
+msgid "More"
 msgstr ""
 
 msgid "New in Ututi?"
@@ -1318,6 +1335,9 @@ msgid "Student information online"
 msgstr ""
 
 msgid "Bringing students and teachers together"
+msgstr ""
+
+msgid "Contact us"
 msgstr ""
 
 msgid "My University"
@@ -1361,13 +1381,16 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-msgid "UAB „UTUTI“"
+msgid "„UTUTI Ltd.“"
 msgstr ""
 
 msgid "About"
 msgstr ""
 
 msgid "Terms"
+msgstr ""
+
+msgid "Contact Us"
 msgstr ""
 
 msgid "Feedback"
@@ -1528,6 +1551,39 @@ msgstr ""
 msgid ""
 "From here You can also easily create a subject, upload a file, invite "
 "people to use Ututi."
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "Email adress:"
+msgstr ""
+
+msgid "Message:"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Private social networks for Universities and Colleges"
+msgstr ""
+
+msgid ""
+"Ututi is a platform for creating academic social networks.It helps engage"
+" your students and teachers and improve the qualityof your studies."
+msgstr ""
+
+msgid ""
+"Here students and teachers can create groups online, use the mailinglist "
+"for communication and the file storage for sharing information."
+msgstr ""
+
+msgid ""
+"What is more, here Teachers will create for courses information "
+"wherestudents will be able to access, share and comment study materials."
+msgstr ""
+
+msgid "Key features"
 msgstr ""
 
 msgid "Book_Type"
@@ -1794,9 +1850,6 @@ msgstr ""
 msgid "IP not allowed"
 msgstr ""
 
-msgid "Send"
-msgstr ""
-
 msgid "Number"
 msgstr ""
 
@@ -1938,6 +1991,9 @@ msgid "log out"
 msgstr ""
 
 msgid "ututi_link"
+msgstr ""
+
+msgid "UAB „UTUTI“"
 msgstr ""
 
 msgid "About ututi"
@@ -2085,6 +2141,9 @@ msgid ""
 msgstr ""
 
 msgid "Ututi team"
+msgstr ""
+
+msgid "Hello, this is a message sent from ututi.com contact us form."
 msgstr ""
 
 #, python-format
@@ -2472,7 +2531,7 @@ msgstr ""
 msgid "Title:"
 msgstr ""
 
-msgid "Year:"
+msgid "Entrance year:"
 msgstr ""
 
 msgid "Select the year"
@@ -2496,36 +2555,7 @@ msgstr ""
 msgid "No groups found."
 msgstr ""
 
-msgid "Access settings"
-msgstr ""
-
-msgid "New members"
-msgstr ""
-
-msgid "Anyone can join the group any time"
-msgstr ""
-
-msgid "Administrators have to approve new members"
-msgstr ""
-
-msgid "Group forum and mailing list visibility"
-msgstr ""
-
-msgid "Public"
-msgstr ""
-
-msgid "Visible only to members"
-msgstr ""
-
-msgid "Group page visibility"
-msgstr ""
-
-msgid ""
-"The group page can be used for news, description of the group, "
-"calendaring, timetables, etc."
-msgstr ""
-
-msgid "Back to group page"
+msgid "Back"
 msgstr ""
 
 msgid "The file type is not supported."
@@ -2540,31 +2570,48 @@ msgstr ""
 msgid "Default group tab"
 msgstr ""
 
-msgid ""
-"This setting cannot be disabled, because the group is currently watching "
-"some subjects."
+msgid "Access settings:"
 msgstr ""
 
-msgid ""
-"This setting cannot be disabled, because the group is currently storing "
-"some private files."
+msgid "Joining the group:"
 msgstr ""
 
-msgid "Tags"
+msgid "Anyone can join the group;"
 msgstr ""
 
-msgid "Who can send messages to the mailing list"
+msgid "Administrators have to approve new members."
 msgstr ""
 
-msgid "Members only"
+msgid "Group discussions are visibile for:"
 msgstr ""
 
-msgid "Everybody (moderated)"
+msgid "Everybody;"
+msgstr ""
+
+msgid "Group members only."
+msgstr ""
+
+msgid "Who can send messages to the mailing list:"
+msgstr ""
+
+msgid "Members only;"
+msgstr ""
+
+msgid "Everybody (moderated)."
 msgstr ""
 
 msgid ""
 "If you select 'moderated', you can pick the people who you want to allow "
 "to post to the mailing list."
+msgstr ""
+
+msgid "Delete group:"
+msgstr ""
+
+msgid "You can delete group only if you are last member of the group."
+msgstr ""
+
+msgid "Delete group"
 msgstr ""
 
 msgid "Edit group front page"
@@ -2599,30 +2646,6 @@ msgid ""
 "your group can use the <a href=\"%(link_to_forums)s\">forums</a>, keep\n"
 "private files and <a href=\"%(link_to_subjects)s\">watch subjects</a>\n"
 "you are studying.\n"
-msgstr ""
-
-msgid "Invite group members!"
-msgstr ""
-
-msgid ""
-"\n"
-"It's easy - you just have to know their email addresses! You can\n"
-"use the group mailing list together then!\n"
-msgstr ""
-
-msgid "Watch subjects you are studying!"
-msgstr ""
-
-msgid "Find materials shared by others"
-msgstr ""
-
-msgid "Get notifications about changes"
-msgstr ""
-
-msgid "Watch subjects"
-msgstr ""
-
-msgid "no, thank you"
 msgstr ""
 
 #, python-format
@@ -2689,15 +2712,12 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-msgid "Delete group"
-msgstr ""
-
-msgid "What is a group page and who sees it?"
+msgid "What is a group notes and who sees it?"
 msgstr ""
 
 msgid ""
-"The group page is the face of the group. It may be public or visible only"
-" to group members, depending on configuration."
+"The group notes is the face of the group. It may be public or visible "
+"only to group members, depending on configuration."
 msgstr ""
 
 #, python-format
@@ -2706,7 +2726,7 @@ msgid ""
 "settings</a> screen."
 msgstr ""
 
-msgid "What are the uses of a group page?"
+msgid "What are the uses of a group notes?"
 msgstr ""
 
 msgid ""
@@ -2720,10 +2740,10 @@ msgstr ""
 msgid "Description of the group for users who are not members of the group yet."
 msgstr ""
 
-msgid "Edit your group page now!"
+msgid "Edit your group note now!"
 msgstr ""
 
-msgid "Edit page"
+msgid "Edit note"
 msgstr ""
 
 msgid "Go to the group's files"
@@ -2803,28 +2823,16 @@ msgstr ""
 msgid "Your group is not watching any subjects. Add them by searching."
 msgstr ""
 
-msgid "Recommended subjects"
+msgid "Choose subjects from list"
 msgstr ""
 
 msgid "Create a new subject"
 msgstr ""
 
-msgid "add a subject"
+msgid "add new subject"
 msgstr ""
 
 msgid "No watched subjects were found."
-msgstr ""
-
-msgid "Receive email notifications"
-msgstr ""
-
-msgid "immediately"
-msgstr ""
-
-msgid "at the end of the day"
-msgstr ""
-
-msgid "never"
 msgstr ""
 
 msgid "Subject rating:"
@@ -3082,6 +3090,9 @@ msgstr ""
 msgid "Restore previous"
 msgstr ""
 
+msgid "Edit page"
+msgstr ""
+
 #, python-format
 msgid "Back to %(page_title)s"
 msgstr ""
@@ -3102,7 +3113,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "Go back to %(subject_title)s"
+msgid "Go back to %(subject_title)s notes"
 msgstr ""
 
 msgid "edit"
@@ -3247,6 +3258,9 @@ msgstr ""
 msgid "in-Subjects"
 msgstr "Subjects"
 
+msgid "Tags"
+msgstr ""
+
 msgid "Info:"
 msgstr ""
 
@@ -3371,6 +3385,9 @@ msgstr ""
 msgid ""
 "This is the verified network for <strong>%s</strong>.      Only %s "
 "students and teachers can join this network."
+msgstr ""
+
+msgid "Contact information:"
 msgstr ""
 
 msgid "Teacher's home"
@@ -3585,79 +3602,20 @@ msgstr ""
 msgid "News feed settings"
 msgstr ""
 
-msgid "Your phone has been confirmed. Thank you."
+msgid ""
+"private file storage area for files that you don't want to share with "
+"outsiders."
 msgstr ""
 
-msgid "save"
+msgid "a place to discuss subject related questions with students and teachers."
 msgstr ""
 
-msgid "Please enter a university."
-msgstr ""
-
-msgid "Go to my department"
-msgstr ""
-
-msgid "What's your phone number?"
+msgid "Shared notes"
 msgstr ""
 
 msgid ""
-"We need your phone number so that you could send and receive SMS messages"
-" from the group. Don't worry, we will never send advertisements."
-msgstr ""
-
-msgid "Mobile phone number: "
-msgstr ""
-
-msgid "Please enter a phone number."
-msgstr ""
-
-msgid "The entered phone number is invalid."
-msgstr ""
-
-msgid "(use the format +37067812345)"
-msgstr ""
-
-msgid "no, thanks"
-msgstr ""
-
-msgid "Please confirm your phone number"
-msgstr ""
-
-msgid ""
-"Enter the confirmation code that you received by SMS to prove that this "
-"number belongs to you."
-msgstr ""
-
-msgid "Confirmation code: "
-msgstr ""
-
-msgid "Please enter a confirmation key."
-msgstr ""
-
-msgid "Invalid confirmation key."
-msgstr ""
-
-msgid "Watch subject"
-msgstr ""
-
-msgid "watch subjects"
-msgstr ""
-
-msgid "Create a group"
-msgstr ""
-
-msgid ""
-"It's simple - you only need to know the email addresses of your "
-"classmates!"
-msgstr ""
-
-msgid "Use the group's mailing list!"
-msgstr ""
-
-msgid "create group"
-msgstr ""
-
-msgid "Tell us where you are studying"
+"create wiki notes collaboratively with your class-mates or take notes "
+"during the lecture and upload it directly to Ututi."
 msgstr ""
 
 msgid ""
@@ -3702,6 +3660,15 @@ msgid "back to the profile"
 msgstr ""
 
 msgid "email notifications"
+msgstr ""
+
+msgid "immediately"
+msgstr ""
+
+msgid "at the end of the day"
+msgstr ""
+
+msgid "never"
 msgstr ""
 
 msgid "Group's mailing list"
@@ -3926,6 +3893,17 @@ msgstr ""
 msgid "Notification settings"
 msgstr ""
 
+msgid "Welcome to Ututi"
+msgstr ""
+
+#, python-format
+msgid ""
+"Welcome to <strong>%(university)s</strong> private social networkcreated "
+"on <a href=\"%(url)s\">Ututi platform</a>. Here students and teachers can"
+" create groups online, use the mailinglist for communication and the file"
+" storage for sharing information."
+msgstr ""
+
 msgid "Select an image file on your computer:"
 msgstr ""
 
@@ -4019,9 +3997,6 @@ msgstr[1] ""
 msgid ""
 "It is not your university? Use another email address or "
 "%(contact_us_link)s."
-msgstr ""
-
-msgid "Contact us"
 msgstr ""
 
 #, python-format
@@ -4515,6 +4490,17 @@ msgstr ""
 msgid "Subject files"
 msgstr ""
 
+msgid "No description"
+msgstr ""
+
+msgid ""
+"Add description to help your friends find this subject. You can also list"
+" main topics and references here."
+msgstr ""
+
+msgid "Add description"
+msgstr ""
+
 msgid "Create new Wiki note"
 msgstr ""
 
@@ -4530,9 +4516,6 @@ msgstr ""
 msgid "About Wiki notes:"
 msgstr ""
 
-msgid "Shared notes"
-msgstr ""
-
 msgid ""
 "Create wiki notes collaborating with your groupmates. Everyone who "
 "follows the subject can edit it's wiki notes."
@@ -4541,17 +4524,6 @@ msgstr ""
 msgid ""
 "<strong>Take notes during lecture</strong> on your laptop and upload it "
 "directly to Ututi."
-msgstr ""
-
-msgid "No description"
-msgstr ""
-
-msgid ""
-"Add description to help your friends find this subject. You can also list"
-" main topics and references here."
-msgstr ""
-
-msgid "Add description"
 msgstr ""
 
 #, python-format
