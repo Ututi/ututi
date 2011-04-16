@@ -4,16 +4,15 @@
 
 <div class="static-content">
   <h2>${_('Private social networks for Universities and Colleges')}</h2>
-  <p>Ututi is a platform for creating academical social networks.
+  <p>${_('Ututi is a platform for creating academic social networks.
     It helps engage your students and teachers and improve the quality
-    of your studies.</p>
+    of your studies.')}</p>
 
-  <p>Here students and teachers can create groups online, use the mailing
-    list for communication and the file storage for sharing information.</p>
+  <p>${_('Here students and teachers can create groups online, use the mailing
+    list for communication and the file storage for sharing information.')}</p>
 
-  <p>What is more, here Teachers will find (or create) areas for courses
-    information where students will be able to access, share and comment
-    study materials.</p>
+  <p>${_(What is more, here Teachers will create for courses information where
+    students will be able to access, share and comment study materials.')}</p>
 </div>
 
 <div class="feature-box icon-logo">
@@ -43,7 +42,5 @@
     <div class="feature icon-branding">
       <strong>Custom branding</strong> &ndash; Customize the look and feel of Ututi with Your university's style: logo, color scheme and basic information in the header and footer.
     </div>
-
-
   </div>
 </div>
