@@ -209,7 +209,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
     @subject_action
     def pages(self, subject):
         c.current_tab = 'pages'
-        return render('subject/home_pages.mako')
+        return render('subject/notes.mako')
 
     @subject_action
     def feed(self, subject):
