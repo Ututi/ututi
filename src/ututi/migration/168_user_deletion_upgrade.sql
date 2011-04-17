@@ -1,3 +1,11 @@
+UPDATE users
+       SET location_id = location_ids.location_id
+ FROM (SELECT u.id AS user_id, min(ci.location_id) AS location_id
+        FROM users u INNER JOIN group_members gm ON u.id = gm.user_id
+        LEFT JOIN content_items ci ON ci.id = gm.group_id
+        WHERE u.location_id IS NULL GROUP BY u.id) AS location_ids
+ WHERE users.id = location_ids.user_id;
+
 ALTER TABLE ONLY public.emails DROP CONSTRAINT emails_id_fkey;
 ALTER TABLE ONLY public.emails
     ADD CONSTRAINT emails_id_fkey FOREIGN KEY (id) REFERENCES users(id)  ON DELETE CASCADE;
