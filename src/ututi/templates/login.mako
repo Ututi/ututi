@@ -66,7 +66,7 @@
       <label for="remember-me" class="notice">
         ${_('Keep me logged in on this computer')}
       </label>
-      <div class="clearfix" style="width: 200px">
+      <div class="clearfix" style="width: 210px">
         <div id="psw-remind-link">
           <a href="${url(controller='home', action='pswrecovery')}"> ${_('Forgot password?')} </a>
         </div>
