@@ -13,7 +13,7 @@ setup(
         "z3c.testsetup",
         "repoze.what-pylons",
         "psycopg2",
-        "formencode",
+        "FormEncode",
         "wsgi_intercept",
         "zope.testbrowser",
         "zope.cachedescriptors",
