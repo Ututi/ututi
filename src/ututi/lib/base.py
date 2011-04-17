@@ -86,6 +86,8 @@ class BaseController(WSGIController):
         lang = session.get('language', None)
         if not lang:
             lang = get_country_code() or 'en'
+            if lang not in ['lt', 'pl', 'en']:
+                lang = 'en'
         session['language'] = lang
         session.save()
         set_lang(lang)

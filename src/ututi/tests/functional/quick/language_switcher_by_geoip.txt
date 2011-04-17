@@ -27,3 +27,12 @@ again:
     >>> browser.open('http://localhost/contacts')
     >>> browser.getControl(name='language').displayValue
     ['Polish']
+
+If we come from a country that does not have translations set, we
+should default to english:
+
+    >>> browser = Browser(url=None)
+    >>> browser.addHeader('X-Forwarded-For', '4.4.8.8')
+    >>> browser.open('http://localhost/contacts')
+    >>> browser.getControl(name='language').displayValue
+    ['English']
