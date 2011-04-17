@@ -70,7 +70,8 @@ class UtutiEmail(email.message.Message):
     def getGroup(self):
         mailing_list_host = config.get('mailing_list_host')
         mailing_list_hosts = [mailing_list_host,
-                              'lists.ututi.lt']
+                              'lists.ututi.lt',
+                              'groups.ututi.lt']
 
         group_ids = []
         for name, address in self.getToAddresses():
