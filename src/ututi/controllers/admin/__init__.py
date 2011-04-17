@@ -750,8 +750,14 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
         unis = meta.Session.query(LocationTag)\
             .filter(LocationTag.parent == None)\
             .order_by(LocationTag.title.asc())
-        c.uni_options = [(0, 'Public domain')] +\
-            [(uni.id, uni.title) for uni in unis]
+        c.uni_options = [(0, 'Public domain')]
+        for uni in unis:
+            for u in uni.flatten:
+                title = u.title
+                if u.parent:
+                    title = "%s: %s" % (u.parent.title, u.title)
+                c.uni_options.append((u.id, title))
+
         c.public_domains = EmailDomain.all()
         return render('admin/email_domains.mako')
 

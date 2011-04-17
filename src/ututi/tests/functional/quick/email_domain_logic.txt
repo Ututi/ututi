@@ -44,7 +44,10 @@ Let's "example3.com":
 Admin can add non public domains by selecting university from dropdown list:
 
     >>> form = admin.getForm('email_domain_form')
-    >>> form.getControl('University (or public)').displayValue = ['U-niversity']
+
+# XXX display values matches both university and its faculties, so I am using value
+
+    >>> form.getControl('University (or public)').value = ['1']
     >>> form.getControl('domains').value = 'uni.ututi.com'
     >>> form.getControl('Add').click()
 
