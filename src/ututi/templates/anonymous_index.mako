@@ -53,7 +53,7 @@
         <span class="a11y">${_('Enter the search string')}: </span>
         <input name="text" type="text">
       </label>
-      <button type="submit" class="btnLarge"><span>Ieškoti konspkeitų</span></button>
+      <button type="submit" class="btnLarge"><span>Ieškoti konspektų</span></button>
     </fieldset>
   </form>
   <div class="browse">Arba naršyk <a href="/browse">konspektų archyve</a></div>
