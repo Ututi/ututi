@@ -39,7 +39,7 @@
   <p>
     ${ungettext("%(count)s person on this network:",
                 "%(count)s people on this network:",
-                count) % dict(count=c.user_count)}
+                c.user_count) % dict(count=c.user_count)}
   </p>
 
   <div id="people-box">
