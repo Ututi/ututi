@@ -23,7 +23,7 @@ Malformed headers don't break the application:
     ...                params={'username': 'user@ututi.lt', 'password': 'password'},
     ...                headers={'X-Forwarded-For': 'wtf'})
 
-Lets try login from Polish IP with non ASCI symbols in city name.
+Lets try login from Polish IP with non ASCII symbols in city name.
 
     >>> res = app.post("/login",
     ...                params={'username': 'user@ututi.lt', 'password': 'password'},
