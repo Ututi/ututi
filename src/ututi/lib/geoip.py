@@ -3,6 +3,12 @@ from ututi.model import meta
 
 from nous.pylons.geoip import get_city_and_country
 
+def get_geolocation():
+    user_ip = request.headers.get('X-Forwarded-For')
+    if user_ip:
+        country_code, city = get_city_and_country(user_ip)
+        return country_code
+    return None
 
 def set_geolocation(user):
     user_ip = request.headers.get('X-Forwarded-For')

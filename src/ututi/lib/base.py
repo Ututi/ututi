@@ -22,6 +22,7 @@ from pylons.i18n.translation import set_lang
 
 from ututi.lib.cache import u_cache # reexport
 from ututi.lib.security import current_user, sign_in_user
+from ututi.lib.geoip import get_geolocation
 from ututi.model import meta
 
 perflog = logging.getLogger('performance')
@@ -82,7 +83,9 @@ class BaseController(WSGIController):
         c.came_from = request.params.get('came_from', '')
         c.came_from_search = False #if the user came from google search
 
-        lang = session.get('language', 'en')
+        lang = session.get('language', None)
+        if not lang:
+            lang = get_geolocation() or 'en'
         set_lang(lang)
         c.lang = lang
         # XXX get these from db
