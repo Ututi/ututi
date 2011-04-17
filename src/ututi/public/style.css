@@ -314,7 +314,7 @@ button.btnMedium.btnTeacher {
 
 /* Header */
 #siteName a, #siteName2 a{
-    background: url('img/site_logo.gif') no-repeat left;
+    background: url('img/site_logo.png') no-repeat left;
     display: block;
     height: 68px;
     left: 0;
