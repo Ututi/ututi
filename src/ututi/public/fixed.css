@@ -400,6 +400,10 @@ input {
         line-height: 20px;
     }
 
+    #sign-up-form .error-message a {
+        color: #FFAA00;
+    }
+
     form .textarea span.error-message {
         display: block;
     }
