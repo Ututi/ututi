@@ -1,11 +1,3 @@
 # (pofilter) xmltags: checks that XML/HTML tags have not been translated
-msgid ""
-"Calendaring. Read this <a href=\"http://blog.ututi.lt/2009/05/28"
-"/naudotoju-isradingumas/\">blog post</a> for more information."
-msgstr ""
-"Kalendoriams; pasiskaitykite <a href=\"http://blog.ututi.lt/2010/10/04"
-"/kalendorius-ututi-grupei/\">blogo straipsnį</a> apie tai."
-
-# (pofilter) xmltags: checks that XML/HTML tags have not been translated
 msgid "Messages in Bugs forum"
 msgstr "<strong>Klaidų</strong> forumo pranešimai"
