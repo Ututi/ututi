@@ -286,6 +286,7 @@ ${_('Private social networks for universities')}
                 $('#language-box').change(function() {
                     $(this).closest('form').submit();
                 });
+                $('#language-box').val(lang);
             });
             </script>
           </form>
