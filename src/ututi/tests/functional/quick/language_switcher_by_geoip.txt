@@ -1,0 +1,29 @@
+Language switching based on geoip
+=================================
+
+    >>> browser = Browser(url=None)
+    >>> browser.addHeader('X-Forwarded-For', '193.219.55.5')
+
+# XXX we use contacts form for testing, because formfill resets the
+# language selector in the front page
+
+    >>> browser.open('http://localhost/contacts')
+    >>> browser.getControl(name='language').displayValue
+    ['Lithuanian']
+
+Now if we get to the site from a different place, we will still get it
+it Lithuanian:
+
+    >>> browser.addHeader('X-Forwarded-For', '194.126.165.6')
+    >>> browser.open('http://localhost/contacts')
+    >>> browser.getControl(name='language').displayValue
+    ['Lithuanian']
+
+But if we start a new session, we should get the language detected
+again:
+
+    >>> browser = Browser(url=None)
+    >>> browser.addHeader('X-Forwarded-For', '194.126.165.6')
+    >>> browser.open('http://localhost/contacts')
+    >>> browser.getControl(name='language').displayValue
+    ['Polish']

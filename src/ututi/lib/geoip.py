@@ -3,10 +3,12 @@ from ututi.model import meta
 
 from nous.pylons.geoip import get_city_and_country
 
-def get_geolocation():
+def get_country_code():
     user_ip = request.headers.get('X-Forwarded-For')
     if user_ip:
         country_code, city = get_city_and_country(user_ip)
+        if isinstance(country_code, basestring):
+            country_code = country_code.lower()
         return country_code
     return None
 

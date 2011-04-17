@@ -22,7 +22,7 @@ from pylons.i18n.translation import set_lang
 
 from ututi.lib.cache import u_cache # reexport
 from ututi.lib.security import current_user, sign_in_user
-from ututi.lib.geoip import get_geolocation
+from ututi.lib.geoip import get_country_code
 from ututi.model import meta
 
 perflog = logging.getLogger('performance')
@@ -85,7 +85,9 @@ class BaseController(WSGIController):
 
         lang = session.get('language', None)
         if not lang:
-            lang = get_geolocation() or 'en'
+            lang = get_country_code() or 'en'
+        session['language'] = lang
+        session.save()
         set_lang(lang)
         c.lang = lang
         # XXX get these from db

@@ -6,6 +6,7 @@ import shutil
 import urllib
 import atexit
 
+from wsgi_intercept.zope_testbrowser.wsgi_testbrowser import WSGI_Browser
 from lxml.cssselect import ExpressionError
 from lxml.html import fromstring
 from zope.testbrowser.browser import Link
@@ -161,6 +162,14 @@ U2tiQuickLayer = CompositeLayer(GrokLayer,
 class UtutiTestBrowser(NousTestBrowser):
 
     app = None
+
+    def __init__(self, url='http://localhost/'):
+        # XXX this is a workaround for a but in NousTestBrowser, it
+        # can't handle url not being passed to the constructor
+        WSGI_Browser.__init__(self)
+        self.handleErrors = False
+        if url is not None:
+            self.open(url)
 
     def click(self, text, name=None, url=None, id=None, index=0):
         controls = []
