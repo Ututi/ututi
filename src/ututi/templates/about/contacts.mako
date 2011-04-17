@@ -21,7 +21,7 @@
 </%def>
 
 %if not message:
-<div class="contact-text">Contact us using this form:</div>
+<div class="contact-text">${_('Contact us using this form')}:</div>
 
 <form id="contact-form" method="POST" action="${url(controller='home', action='contacts')}">
   ${h.input_line('name', _('Name:'))}
