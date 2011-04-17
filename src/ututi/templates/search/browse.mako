@@ -40,20 +40,6 @@
                  partial_param='js',
                  onclick="$('#pager').addClass('loading'); $('#university-list').load('%s'); return false;") }
   </div>
-  <div id="sorting">
-    ${_('Sort by:')}
-    <%
-       url_args_alpha = dict(sort='alpha')
-       url_args_pop = dict(sort='popular')
-       if request.params.get('region_id'):
-               url_args_alpha['region_id'] = request.params.get('region_id')
-               url_args_pop['region_id'] = request.params.get('region_id')
-    %>
-    <a id="sort-alpha" class="${c.sort == 'alpha' and 'active' or ''}" href="${url(ajax_url, **url_args_alpha)}">${_('name')}</a>
-    <input type="hidden" id="sort-alpha-url" name="sort-alpha-url" value="${url(ajax_url, js=True, **url_args_alpha)}" />
-    <a id="sort-popular" class="${c.sort == 'popular' and 'active' or ''}" href="${url(ajax_url, **url_args_pop)}">${_('popularity')}</a>
-    <input type="hidden" id="sort-popular-url" name="sort-popular-url" value="${url(ajax_url, js=True, **url_args_pop)}" />
-  </div>
 </%def>
 
 <%def name="universities_section(unis, ajax_url, collapse=True, collapse_text=None)">
