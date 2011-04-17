@@ -86,7 +86,7 @@ Let's try to enter a title that is way too long:
     >>> form.getControl('Title').value = u'40 characters are not that much text rly'*10
     >>> form.getControl('Save').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
-    Enter a value less than 250 characters long
+    Enter a value not more than 250 characters long
 
 Let's look at the list:
 
