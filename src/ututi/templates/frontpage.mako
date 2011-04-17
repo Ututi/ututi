@@ -48,7 +48,7 @@
       <h2>${_("Using Ututi:")}</h2>
       <div class="university">
         <div class="uni-logo"><img src="${url('/img/icons.com/universities/MIF_logo.png')}" alt="VU MIF logo" title="Department of Mathematics and Informatics" /></div>
-        <div class="strong"><a href="${url('/school/vu/mif')}">Vilnius University - Department of Mathemetics and Informatics</a></div>
+        <div class="strong"><a href="${url('/school/vu/mif')}">Vilnius University - Department of Mathematics and Informatics</a></div>
       </div>
       <div class="university">
         <div class="uni-logo"><img src="${url('/img/icons.com/universities/VU_logo.png')}" alt="VU logo" title="Vilnius university" /></div>
@@ -56,7 +56,7 @@
       </div>
       <div class="university">
         <div class="uni-logo"><img src="${url('/img/icons.com/universities/LSMU_logo.png')}" alt="LSMU logo" title="Department of Mathematics and Informatics" /></div>
-        <div class="strong" style="padding-top: 5px;"><a href="${url('/school/lsmu')}">Lithuanian university of health sciences</a></div>
+        <div class="strong" style="padding-top: 5px;"><a href="${url('/school/lsmu')}">Lithuanian University of Health Sciences</a></div>
       </div>
       <div class="university">
         <div class="uni-logo"><img src="${url('/img/icons.com/universities/VPU_logo.png')}" alt="VPU logo" title="Vilnius Pedagogical University" /></div>
