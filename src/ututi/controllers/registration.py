@@ -9,6 +9,7 @@ from pylons import tmpl_context as c, url, session, request, config
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
 
+from ututi.model import LocationTag
 from ututi.lib.base import BaseController, render
 from ututi.lib.image import serve_logo
 from ututi.lib.invitations import bind_group_invitations
@@ -504,7 +505,11 @@ class RegistrationController(BaseController, FederationMixin):
     def finish(self, registration):
         from ututi.lib.security import sign_in_user
         if not registration.location:
-            registration.location = registration.create_university()
+            # If there is a university with same title we will use it.
+            location = LocationTag.get_by_title(registration.university_title)
+            if not location:
+                location =  registration._create_university()
+            registration.location = location
 
         user = registration.create_user()
         bind_group_invitations(user)

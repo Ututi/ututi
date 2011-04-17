@@ -744,7 +744,7 @@ class UserRegistration(object):
 
         return user
 
-    def create_university(self):
+    def _create_university(self):
         from ututi.model import LocationTag, EmailDomain
 
         # parse short title from url

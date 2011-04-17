@@ -257,3 +257,105 @@ User can not go back to registration, it is invalidated:
     Traceback (most recent call last):
     ...
     HTTPError: HTTP Error 404: Not Found
+
+
+A new Ututi user will can start new registration from frontpage,
+ant type existing University title or website URL:
+
+    >>> mail_queue[:] = []
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/')
+    >>> form = browser.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'user@u2ti.com'
+    >>> form.getControl('Sign Up').click()
+
+Let's check the emails:
+
+    >>> from ututi.lib.mailer import mail_queue
+
+    >>> len(mail_queue)
+    1
+
+    >>> msg1 = mail_queue.pop()
+
+    >>> print msg1.payload()
+    We have received a request to confirm the ownership of this email on the Ututi system.
+    If this email belongs to you, confirm it by clicking on this link:
+    http://localhost/registration/.../confirm
+    Ututi team
+
+    >>> msg1.recipients
+    ['user@u2ti.com']
+
+    >>> mail_queue[:] = []
+
+When user clicks on confirmation link, he starts his registration process:
+
+    >>> from ututi.lib.helpers import get_urls
+    >>> urls = get_urls(msg1.payload())
+    >>> registration_url = urls[0]
+
+    >>> browser.open(registration_url)
+
+The first registration step is "University information" step, where user fills
+out University information he is about to create:
+
+    >>> browser.url
+    'http://localhost/registration/.../university_create'
+
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>University information</h1>
+
+Fill University information with existing university title:
+
+    >>> browser.getControl(name='site_url').value
+    'http://u2ti.com'
+
+    >>> from ututi.tests.functional import make_file
+    >>> form = browser.getForm('university-create-form')
+    >>> form.getControl('Full University title:').value = 'Example University'
+    >>> form.getControl('Country:').displayValue = ['Lithuania']
+    >>> form.getControl('University website:').value = 'www.u2ti.com'
+    >>> form.getControl('University logo:').add_file(*make_file('test_logo.png'))
+    >>> form.getControl(name='member_policy').value = ['RESTRICT_EMAIL']
+
+The "Next" takes user to "Personal information" step:
+
+    >>> browser.getControl("Next").click()
+    >>> browser.printCssQuery('.error-message', strip=True)
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Personal information</h1>
+
+Before going next, user has to fill in his full name and password:
+
+    >>> form = browser.getForm('personal-info-form')
+    >>> form.getControl('Full name:').value = 'User'
+    >>> form.getControl('Password:').value = 'password'
+    >>> form.getControl('Next').click()
+
+This takes user to the third step: "Add your photo". Adding photo is
+not mandatory:
+
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Add your photo</h1>
+
+    >>> browser.getLink('Skip').click()
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Invite friends</h1>
+
+User can enter 0 to 5 emails. We don't want invite any user:
+
+    >>> browser.getControl('Finish').click()
+    >>> browser.printCssQuery('h1.page-title', strip=True)
+    <h1>Welcome to Ututi</h1>
+
+Let's look to universities list. We must see only one 'Example University':
+
+    >>> browser.open('http://localhost/profile/browse')
+    >>> browser.printCssQuery('#university-list .title', strip=True)
+    <div>
+      <a>Example University</a>
+    </div>
+    <div>
+      <a>U-niversity</a>
+    </div>
