@@ -201,7 +201,7 @@ package_release:
 .PHONY: download_backup
 download_backup:
 	mkdir -p backup
-	scp ututi.lt:/srv/u2ti.com/backup/dbdump ./backup/dbdump
+	scp ututi.lt:/srv/ututi.com/backup/dbdump ./backup/dbdump
 
 .PHONY: download_pl_backup
 download_pl_backup:
