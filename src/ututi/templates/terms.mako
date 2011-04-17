@@ -1,7 +1,7 @@
 <%inherit file="/ubase.mako" />
 
 <%def name="title()">
-${_('Terms of use - Ututi')}
+${_('Terms of use')}
 </%def>
 
 <div id="terms-of-use-text">
