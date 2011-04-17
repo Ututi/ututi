@@ -1,5 +1,6 @@
 import logging
 
+from pylons.controllers.util import abort
 from pylons import request
 
 from ututi.lib.forums import make_forum_post
@@ -26,6 +27,7 @@ class ReceivemailController(BaseController):
             message.send(message.group.recipients_mailinglist())
 
     def index(self):
+        abort(500)
         md5_list = request.POST.getall("md5[]")
         mime_type_list = request.POST.getall("mime-type[]")
         file_name_list = request.POST.getall("filename[]")
