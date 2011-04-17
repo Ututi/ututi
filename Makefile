@@ -108,7 +108,7 @@ buildout:
 
 .PHONY: test
 test: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
-	bin/test --all
+	bin/test --list-tests
 
 .PHONY: utest
 testall: bin/test
