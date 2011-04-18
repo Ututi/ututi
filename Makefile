@@ -36,7 +36,7 @@ bin/tags: buildout.cfg bin/buildout setup.py versions.cfg
 
 export PGPORT ?= 4455
 
-PG_PATH = $(shell if test -d /usr/lib/postgresql/8.3; then echo /usr/lib/postgresql/8.3; else echo /usr/lib/postgresql/8.4; fi)
+PG_PATH = $(shell if test -d /usr/lib/postgresql/9.0; then echo /usr/lib/postgresql/9.0; else echo /usr/lib/postgresql/8.4; fi)
 
 instance/var/data/postgresql.conf:
 	mkdir -p ${PWD}/instance/var/data
@@ -47,11 +47,8 @@ instance/var/data/initialized:
 	${PG_PATH}/bin/createuser --createdb    --no-createrole --no-superuser --login admin -h ${PWD}/instance/var/run
 	${PG_PATH}/bin/createuser --no-createdb --no-createrole --no-superuser --login test -h ${PWD}/instance/var/run
 	${PG_PATH}/bin/createdb --owner test -E UTF8 test -h ${PWD}/instance/var/run
-	${PG_PATH}/bin/createlang plpgsql test -h ${PWD}/instance/var/run
 	${PG_PATH}/bin/createdb --owner test -E UTF8 test2 -h ${PWD}/instance/var/run
-	${PG_PATH}/bin/createlang plpgsql test2 -h ${PWD}/instance/var/run
 	${PG_PATH}/bin/createdb --owner admin -E UTF8 development -h ${PWD}/instance/var/run
-	${PG_PATH}/bin/createlang plpgsql development -h ${PWD}/instance/var/run
 	bin/paster setup-app development.ini
 	echo 1 > ${PWD}/instance/var/data/initialized
 
