@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-04-17 18:39+0300\n"
+"POT-Creation-Date: 2011-04-20 13:30+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1409,7 +1409,7 @@ msgstr ""
 msgid "Here you see most altruistic users."
 msgstr ""
 
-msgid "Terms of use - Ututi"
+msgid "Terms of use"
 msgstr ""
 
 msgid "Found out enough?"
@@ -1534,6 +1534,9 @@ msgstr ""
 msgid ""
 "From here You can also easily create a subject, upload a file, invite people "
 "to use Ututi."
+msgstr ""
+
+msgid "Contact us using this form"
 msgstr ""
 
 msgid "Name:"
@@ -1986,9 +1989,6 @@ msgid "ututi_blog_url"
 msgstr ""
 
 msgid "U-blog"
-msgstr ""
-
-msgid "Terms of use"
 msgstr ""
 
 #, python-format
@@ -3650,7 +3650,10 @@ msgstr ""
 msgid "Group's forum"
 msgstr ""
 
-msgid "Watched subjects notification settings"
+msgid "Email me whe"
+msgstr ""
+
+msgid "Choose when Ututi will send you email notifications"
 msgstr ""
 
 msgid "Personally watched subjects' notifications"
@@ -3973,15 +3976,6 @@ msgid "%(count)s file"
 msgid_plural "%(count)s files"
 msgstr[0] ""
 msgstr[1] ""
-
-msgid "Sort by:"
-msgstr ""
-
-msgid "name"
-msgstr ""
-
-msgid "popularity"
-msgstr ""
 
 msgid "More universities"
 msgstr ""

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-04-17 18:39+0300\n"
+"PO-Revision-Date: 2011-04-20 13:31+0300\n"
 "Last-Translator: r <ringaile.jurgeleviciute@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1496,8 +1496,8 @@ msgstr "Aktyviausi naudotojai"
 msgid "Here you see most altruistic users."
 msgstr "Naudotojai kurie pridėjo daugiausia failų."
 
-msgid "Terms of use - Ututi"
-msgstr "Naudojimosi sąlygos - Ututi"
+msgid "Terms of use"
+msgstr "Naudojimosi sistema taisyklės"
 
 msgid "Found out enough?"
 msgstr "Sužinojai pakankamai?"
@@ -1677,6 +1677,9 @@ msgstr ""
 "Iš čia tu gali sukurti dalyką, įkelti failą į pasirinktą\n"
 "dalyką ar grupę, pakviesti pažįstamus ir draugus\n"
 "naudotis Ututi (šoninių blokelių meniu)."
+
+msgid "Contact us using this form"
+msgstr ""
 
 msgid "Name:"
 msgstr "Vardas:"
@@ -2147,9 +2150,6 @@ msgstr "http://blog.ututi.lt/category/news/"
 
 msgid "U-blog"
 msgstr "Ututi blogas"
-
-msgid "Terms of use"
-msgstr "Naudojimosi sistema taisyklės"
 
 #, python-format
 msgid "%d book"
@@ -3985,8 +3985,11 @@ msgstr "Grupės el. pašto konferencija"
 msgid "Group's forum"
 msgstr "Grupės forumas"
 
-msgid "Watched subjects notification settings"
-msgstr "Priminimų apie dalykus nustatymai"
+msgid "Email me whe"
+msgstr ""
+
+msgid "Choose when Ututi will send you email notifications"
+msgstr ""
 
 msgid "Personally watched subjects' notifications"
 msgstr "Asmeniškai stebimų dalykų pranešimai"
@@ -4347,15 +4350,6 @@ msgid_plural "%(count)s files"
 msgstr[0] "%(count)s failas"
 msgstr[1] "%(count)s failai"
 msgstr[2] "%(count)s failų"
-
-msgid "Sort by:"
-msgstr "Rikiuoti pagal:"
-
-msgid "name"
-msgstr "pavadinimą"
-
-msgid "popularity"
-msgstr "populiarumą"
 
 msgid "More universities"
 msgstr "Daugiau universitetų"
