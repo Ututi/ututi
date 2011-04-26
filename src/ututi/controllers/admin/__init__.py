@@ -4,7 +4,6 @@ import datetime
 
 from pylons.controllers.util import redirect
 
-from sqlalchemy.orm import eagerload
 from sqlalchemy.sql.expression import or_
 from sqlalchemy.sql.expression import desc
 from sqlalchemy import func
