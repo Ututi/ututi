@@ -120,6 +120,7 @@ class EmailDomainsForm(Schema):
     domains = Pipe(String(),
                    SeparatedListValidator(separators=','))
 
+
 class AdminController(BaseController, UniversityExportMixin, WallMixin):
     """Controler for system administration."""
 
