@@ -2385,11 +2385,6 @@ div.file_upload_progress div.failed {
 
 /* misc */
 
-form.inline-form,
-form.inline-form div {
-    display: inline;
-}
-
 .thank_you {
     padding-top: 7px;
     padding-bottom: 200px;

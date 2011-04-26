@@ -164,7 +164,7 @@ ${_('Private social networks for universities')}
   % for message in messages:
   <div class="flash-message">
       <span class="close-link hide-parent">
-        ${h.image('/images/details/icon_delete.png', alt=_('Close'))}
+        ${h.image('/img/icons.com/close.png', alt=_('Close'))}
       </span>
       <span class="flash-message-content">${h.literal(unicode(message))}</span>
   </div>
@@ -186,7 +186,7 @@ ${_('Private social networks for universities')}
            $('.user-notification').fadeOut();
          }
        })">
-      ${h.image('/images/details/icon_delete.png', alt=_('No, thanks'))}
+      ${h.image('/img/icons.com/close.png', alt=_('No, thanks'))}
     </a>
   </div>
 </div>

@@ -456,6 +456,16 @@ input {
         font-style: italic;
     }
 
+/* INLINE FORMS
+ */
+
+form.inline-form,
+form.inline-form div,
+form.inline-form button {
+    display: inline;
+}
+
+
 /* THE NEW WALL STYLE
  */
 
@@ -1199,18 +1209,17 @@ ul.feature-list {
     color: #666666;
 }
 
-/* FLASH MESSAGE
+/* FLASH MESSAGES
  */
-/* flash messages */
+
 #welcome-message,
 .flash-message,
 .action-reply {
-    border: 1px solid #FF7800;
+    border: 1px solid #f90;
     background: white url("/img/icons.com/icon_logo_small.png") 5px 5px no-repeat;
-    margin: 5px 0 0.8em;
-    padding: 0.6em 0.6em 0.6em 35px;
-    font-size: 14px;
-    color: #666;
+    margin: 5px 0 10px;
+    padding: 5px 5px 5px 35px;
+    color: black;
 }
 
     .flash-message .close-link {

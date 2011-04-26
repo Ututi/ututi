@@ -6,7 +6,7 @@
 %if c.user and not c.user.isConfirmed:
 <div class="flash-message">
   <span class="close-link hide-parent">
-    ${h.image('/images/details/icon_delete.png', alt=_('Close'))}
+    ${h.image('/img/icons.com/close.png', alt=_('Close'))}
   </span>
   <span>
     ${_('Your email (%(email)s) is not confirmed! '
@@ -26,10 +26,10 @@
 %if c.user and c.gg_enabled and c.user.gadugadu_uin is not None and not c.user.gadugadu_confirmed:
 <div class="flash-message">
   <span class="close-link hide-parent">
-    ${h.image('/images/details/icon_delete.png', alt=_('Close'))}
+    ${h.image('/img/icons.com/close.png', alt=_('Close'))}
   </span>
   <span>
-    ${_('Your <strong>gadu gadu number</strong> is not confirmed! Please <a href="%s">confirm</a> it by entering the code sent to you.') % url(controller='profile', action='edit')|n}
+    ${_('Your <strong>gadu gadu number</strong> is not confirmed! Please <a href="%s">confirm</a> it by entering the code sent to you.') % url(controller='profile', action='edit_contacts')|n}
   </span>
 </div>
 %endif
@@ -37,10 +37,10 @@
 %if c.user and c.gg_enabled and c.user.phone_number is not None and not c.user.phone_confirmed:
 <div class="flash-message" id="confirm-phone-flash-message">
   <span class="close-link hide-parent">
-    ${h.image('/images/details/icon_delete.png', alt=_('Close'))}
+    ${h.image('/img/icons.com/close.png', alt=_('Close'))}
   </span>
   <span>
-    ${_('Your phone is not confirmed! Please <a href="%s">confirm</a> it by entering the code sent to you.') % url(controller='profile', action='edit')|n}
+    ${_('Your phone is not confirmed! Please <a href="%s">confirm</a> it by entering the code sent to you.') % url(controller='profile', action='edit_contacts')|n}
   </span>
 </div>
 %endif
@@ -63,22 +63,22 @@
         <br />
         <form method="post"
               action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
-              id="${invitation.group.group_id}_invitation_reject"
-              class="inline-form">
-          <div style="display: inline;">
-            <input type="hidden" name="accept" value="False"/>
-            <input type="hidden" name="came_from" value="${request.url}"/>
-            ${h.input_submit(_('Reject'))}
-          </div>
-        </form>
-        <form method="post"
-              action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
               id="${invitation.group.group_id}_invitation_accept"
               class="inline-form">
           <div style="display: inline;">
             <input type="hidden" name="accept" value="True"/>
             <input type="hidden" name="came_from" value="${request.url}"/>
-            ${h.input_submit(_('Accept'))}
+            ${h.input_submit(_('Accept'), class_='dark inline add')}
+          </div>
+        </form>
+        <form method="post"
+              action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
+              id="${invitation.group.group_id}_invitation_reject"
+              class="inline-form">
+          <div style="display: inline;">
+            <input type="hidden" name="accept" value="False"/>
+            <input type="hidden" name="came_from" value="${request.url}"/>
+            ${h.input_submit(_('Reject'), class_='dark inline')}
           </div>
         </form>
       </div>
@@ -106,7 +106,7 @@
         <input type="hidden" name="hash_code" value="${rq.hash}"/>
         <input type="hidden" name="action" value="confirm"/>
         <input type="hidden" name="came_from" value="${request.url}"/>
-        ${h.input_submit(_('Confirm'))}
+        ${h.input_submit(_('Confirm'), class_='dark inline add')}
       </div>
     </form>
     <form style="display: inline;" method="post" action="${url(controller='group', action='request', id=rq.group.group_id)}">
@@ -114,11 +114,9 @@
         <input type="hidden" name="hash_code" value="${rq.hash}"/>
         <input type="hidden" name="action" value="deny"/>
                 <input type="hidden" name="came_from" value="${request.url}"/>
-        ${h.input_submit(_('Deny'))}
+        ${h.input_submit(_('Deny'), class_='dark inline')}
       </div>
     </form>
-
-
   </div>
   %endfor
 %endif
