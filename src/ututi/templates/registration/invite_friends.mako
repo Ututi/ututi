@@ -34,7 +34,7 @@
 
 <%def name="pagetitle()">${_("Invite friends")}</%def>
 
-<p>${_("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et")}</p>
+<p>${_("Ututi is most valuable when used together with your classmates and friends. Take a minute to invite them now.")}</p>
 
 <div class="clearfix" id="invitation-choice">
 
