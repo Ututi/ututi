@@ -25,6 +25,11 @@
   #invite-friends-form span.helpText {
     width: 350px;
   }
+  #invite-friends-form div.error-container {
+    width: 350px;
+    display: block;
+    margin: 0;
+  }
 </%def>
 
 <%def name="pagetitle()">${_("Invite friends")}</%def>
@@ -38,11 +43,11 @@
         method="POST">
 
     <p class="invite-choice">${_('Invite friends via email')}</p>
-    ${h.input_line('email1', None, right_next=c.email_suffix)}
-    ${h.input_line('email2', None, right_next=c.email_suffix)}
-    ${h.input_line('email3', None, right_next=c.email_suffix)}
-    ${h.input_line('email4', None, right_next=c.email_suffix)}
-    ${h.input_line('email5', None, right_next=c.email_suffix)}
+    ${h.input_area('emails', '', help_text=_('Enter emails of your classmates, separated with commas and/or whitespace.'), cols=30)}
+    ## generate error fields for variable_decode
+    %for i in range(100):
+    <form:error name="emails-${i}" />
+    %endfor
 
     ${h.input_submit(_("Finish"))}
   </form>

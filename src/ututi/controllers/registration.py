@@ -120,25 +120,8 @@ class AddPhotoForm(Schema):
     photo = RegistrationPhotoValidator()
 
 
-class EmailAddSuffix(validators.FancyValidator):
-
-    def _to_python(self, value, state):
-        if isinstance(value, basestring):
-            value = value.strip()
-        if value:
-            _, _, suffix = c.registration.email.partition('@')
-            value = '%s@%s' % (value, suffix)
-        return value
-
-
 class InviteFriendsForm(Schema):
     """There are two variants of the form, this schema handles both."""
-
-    email1 = Pipe(EmailAddSuffix(), TranslatedEmailValidator())
-    email2 = Pipe(EmailAddSuffix(), TranslatedEmailValidator())
-    email3 = Pipe(EmailAddSuffix(), TranslatedEmailValidator())
-    email4 = Pipe(EmailAddSuffix(), TranslatedEmailValidator())
-    email5 = Pipe(EmailAddSuffix(), TranslatedEmailValidator())
 
     emails = Pipe(validators.String(),
                   SeparatedListValidator(separators=','),
@@ -452,21 +435,14 @@ class RegistrationController(BaseController, FederationMixin):
         return htmlfill.render(self._add_photo_form())
 
     def _invite_friends_form(self):
-        _, _, suffix = c.registration.email.partition('@')
-        c.email_suffix = '@' + suffix
         c.active_step = 'invite_friends'
         return render('registration/invite_friends.mako')
 
     @registration_action
-    @validate(schema=InviteFriendsForm(), form='_invite_friends_form')
+    @validate(schema=InviteFriendsForm(), form='_invite_friends_form', variable_decode=True)
     def invite_friends(self, registration):
         if hasattr(self, 'form_result'):
-            emails = [self.form_result['email1'],
-                      self.form_result['email2'],
-                      self.form_result['email3'],
-                      self.form_result['email4'],
-                      self.form_result['email5']] + self.form_result['emails']
-
+            emails = self.form_result['emails']
             registration.invited_emails = ','.join(filter(bool, emails))
             meta.Session.commit()
             redirect(registration.url(action='finish'))
