@@ -78,52 +78,23 @@ Let's try accepting invitation with user which is still not Ututi member.
     >>> invitation_url = urls[1]
     >>> new_user.open(invitation_url)
 
-The first registration step is "University information" step:
+Invitee has to go through registration first:
 
-    >>> new_user.printCssQuery('h1.page-title', strip=True)
-    <h1>University information</h1>
-
-The "Next" takes user to "Personal information" step:
-
-    >>> new_user.getControl("Next").click()
-    >>> new_user.printCssQuery('h1.page-title', strip=True)
-    <h1>Personal information</h1>
-
-Before going next, user has to fill in his full name and password:
-
+    >>> new_user.click('Next')
     >>> form = new_user.getForm('personal-info-form')
     >>> form.getControl('Full name:').value = 'User'
     >>> form.getControl('Password:').value = 'password'
-    >>> form.getControl('Next').click()
-
-This takes user to the third step: "Add your photo":
-
-    >>> new_user.printCssQuery('h1.page-title', strip=True)
-    <h1>Add your photo</h1>
-
-Let's upload the photo:
-
-    >>> from ututi.tests.functional import make_file
-    >>> form = new_user.getForm('add-photo-form')
-    >>> form.getControl(name='photo').add_file(*make_file('test_logo.png'))
-    >>> new_user.getControl('Next').click()
-
-This automatically takes user to the next step:
-
-    >>> new_user.printCssQuery('h1.page-title', strip=True)
-    <h1>Invite friends</h1>
-
-Finishing registration:
-
-    >>> new_user.getControl('Finish').click()
+    >>> new_user.click('Next')
+    >>> new_user.click('Skip')
+    >>> new_user.click('Finish')
     >>> new_user.printCssQuery('h1.page-title', strip=True)
     <h1>Welcome to Ututi</h1>
 
 Once registered, user should be able to accept invitation to group:
 
     >>> new_user.printQuery("//div[contains(@class, 'flash-message')]//text()")
-    Adminas Adminovix has sent you an invitation to group Moderatoriai
-    . Do you want to become a member of this group?
+    Adminas Adminovix has sent you an invitation to group Moderatoriai .
+    Do you want to become a member of this group?
     Accept Reject
 
     >>> new_user.getControl('Accept').click()
@@ -138,3 +109,95 @@ Once registered, user should be able to accept invitation to group:
     4
 
     >>> mail_queue[:] = []
+
+
+Member invitation using group create wizard
+===========================================
+
+Group members can also be invited just after creating new group.
+Here we will test this functionality.
+
+    >>> browser = Browser.logIn()
+    >>> browser.getLink('Create new group').click()
+    >>> browser.getControl('Title').value = 'New Group'
+    >>> browser.getControl('Email address').value = 'newgroup'
+    >>> browser.getControl('University').value = 'U-niversity'
+    >>> browser.getControl('Department').value = 'D-epartment'
+    >>> browser.click('Continue')
+    >>> emails = 'user@ututi.lt\nnot@an@email, user@example.com notanemail'
+    >>> browser.getControl(name='emails').value = emails
+    >>> browser.click('Invite')
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    Users invited.
+    Invalid email addresses detected: not@an@email, notanemail
+    >>> browser.click('Finish')
+
+We have successfully created the group:
+
+    >>> browser.url
+    'http://localhost/group/newgroup/welcome'
+    >>> browser.printCssQuery('.page-title', strip=True)
+    <h1>New Group</h1>
+
+Now let's check the invitations:
+
+    >>> len(mail_queue)
+    2
+
+    >>> msg1, msg2 = mail_queue
+    >>> msg1.recipients
+    ['user@ututi.lt']
+
+user@ututi.lt is Ututi user. He can accept the invitation by clicking
+link in the email or on-site. Let's do it on-site:
+
+    >>> user = Browser.logIn("user@ututi.lt", "password")
+    >>> user.printQuery("//div[@class='flash-message']//text()")
+    Adminas Adminovix has sent you an invitation to group New Group .
+    Do you want to become a member of this group?
+    Accept Reject
+
+    >>> user.click('Accept')
+    >>> user.printCssQuery('.flash-message-content', strip=True)
+    <span>Congratulations! You are now a member of the group 'New Group'</span>
+    >>> user.getLink('New Group', url='/group/newgroup').click()
+    >>> user.url
+    'http://localhost/group/newgroup/home'
+
+user@example.com is not an Ututi user yet. He may register by following
+link in the invitation email:
+
+    >>> msg2.recipients
+    [u'user@example.com']
+
+    >>> new_user = Browser()
+    >>> urls = get_urls(msg2.payload())
+    >>> invitation_url = urls[1]
+    >>> new_user.open(invitation_url)
+
+Invitee has to go through registration first:
+
+    >>> new_user.click('Next')
+    >>> form = new_user.getForm('personal-info-form')
+    >>> form.getControl('Full name:').value = 'User'
+    >>> form.getControl('Password:').value = 'password'
+    >>> new_user.click('Next')
+    >>> new_user.click('Skip')
+    >>> new_user.click('Finish')
+    >>> new_user.printCssQuery('h1.page-title', strip=True)
+    <h1>Welcome to Ututi</h1>
+
+Once registered, user should be able to accept invitation to group:
+
+    >>> new_user.printQuery("//div[contains(@class, 'flash-message')]//text()")
+    Adminas Adminovix has sent you an invitation to group New Group .
+    Do you want to become a member of this group?
+    Accept Reject
+
+    >>> new_user.click('Accept')
+    >>> new_user.printCssQuery('.flash-message-content', strip=True)
+    <span>Congratulations! You are now a member of the group 'New Group'</span>
+
+    >>> new_user.getLink('New Group', url='/group/newgroup').click()
+    >>> new_user.url
+    'http://localhost/group/newgroup/home'
