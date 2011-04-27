@@ -5,6 +5,20 @@ from formencode.api import Invalid
 from ututi.lib.validators import TranslatedEmailValidator
 from ututi.model import meta, User, UserRegistration, PendingInvitation
 
+def extract_emails(emailbunch):
+    """Extracts and validated emails from comma separated email list.
+    Returns valid and invalid emails as separate lists."""
+    valid, invalid = [], []
+    for token in emailbunch.split():
+        for email in filter(bool, token.split(',')):
+            try:
+                TranslatedEmailValidator.to_python(email)
+                email.encode('ascii')
+                valid.append(email)
+            except (Invalid, UnicodeEncodeError):
+                invalid.append(email)
+    return valid, invalid
+
 def make_email_invitations(emails, inviter, location=None):
     location = location or inviter.location
     invalid = []

@@ -27,12 +27,13 @@ from sqlalchemy.sql.expression import or_
 import ututi.lib.helpers as h
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.image import serve_logo
-from ututi.lib.invitations import make_email_invitations, make_facebook_invitations
+from ututi.lib.invitations import make_email_invitations, make_facebook_invitations,\
+        extract_emails
 from ututi.lib.search import _exclude_subjects
 from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import js_validate
-from ututi.lib.validators import HtmlSanitizeValidator, TranslatedEmailValidator, LocationTagsValidator, TagsValidator, FileUploadTypeValidator, validate
+from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator, FileUploadTypeValidator, validate
 from ututi.lib.wall import WallMixin
 
 from ututi.model import ForumCategory
@@ -804,22 +805,11 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     def invite_members(self, group):
         """Invite new members to the group."""
         if hasattr(self, 'form_result'):
-            emails = self.form_result.get('emails', '').split()
-            valid = []
-            failed = []
-            for line in emails:
-                for email in filter(bool, line.split(',')):
-                    try:
-                        TranslatedEmailValidator.to_python(email)
-                        email.encode('ascii')
-                        valid.append(email)
-                    except (Invalid, UnicodeEncodeError):
-                        failed.append(email)
-
+            emails = self.form_result.get('emails', '')
+            valid, invalid = extract_emails(emails)
             self._send_group_invitations(group, valid)
-
-            if failed != []:
-                h.flash(_("Invalid email addresses detected: %s") % ', '.join(failed))
+            if invalid != []:
+                h.flash(_("Invalid email addresses detected: %s") % ', '.join(invalid))
 
         if request.referrer:
             redirect(request.referrer)
@@ -831,9 +821,10 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
     @jsonify
     def invite_members_js(self, group):
         if hasattr(self, 'form_result'):
-            emails = self.form_result['emails'].split(',')
+            emails = self.form_result.get('emails', '')
+            valid, invalid = extract_emails(emails)
             message = self.form_result['message']
-            self._send_group_invitations(group, emails, message)
+            self._send_group_invitations(group, valid, message)
 
         return {'success': True}
 
@@ -851,20 +842,24 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                 invitation.active = False
                 meta.Session.commit()
                 h.flash(_('Invitation cancelled'))
-        redirect(url(controller='group', action='members', id=group.group_id))
+        redirect(group.url(action='members'))
 
     @validate(schema=GroupInviteForm, form='invite_members_step')
     @group_action
     @ActionProtector("member", "admin")
     def invite_members_step(self, group):
         if hasattr(self, 'form_result'):
-            emails = self.form_result.get('emails', '').split()
-            self._send_group_invitations(group, emails)
-            if self.form_result.get('final_submit', None) is not None:
+            emails = self.form_result.get('emails', '')
+            valid, invalid = extract_emails(emails)
+            self._send_group_invitations(group, valid)
+            if invalid != []:
+                h.flash(_("Invalid email addresses detected: %s") % ', '.join(invalid))
+
+            if self.form_result.get('final_submit') is not None:
                 redirect(group.url(action='welcome'))
             else:
-                redirect(url(controller='group', action='invite_members_step',
-                             id=group.group_id))
+                redirect(group.url(action='invite_members_step'))
+
         return render('group/members_step.mako')
 
     def _clear_requests(self, group, user):

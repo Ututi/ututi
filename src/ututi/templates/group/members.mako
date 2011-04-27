@@ -93,11 +93,11 @@
 <%def name="group_members_invite_section(wizard=False)">
   <form method="post"
       %if not wizard:
-      action="${url(controller='group', action='invite_members', id=c.group.group_id)}"
+      action="${c.group.url(action='invite_members')}"
       %else:
-      action="${url(controller='group', action='invite_members_step', id=c.group.group_id)}"
+      action="${c.group.url(action='invite_members_step')}"
       %endif
-      id="member_invitation_form" class="fullForm">
+      id="member_invitation_form">
 
     <div class="clearfix">
       <div class="members-invitations">

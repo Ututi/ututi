@@ -64,8 +64,6 @@
   ${_('Create group')}
 </%def>
 
-<%def name="flash_messages()"></%def>
-
 <%def name="head_tags()">
   ${parent.head_tags()}
   <%newlocationtag:head_tags />
