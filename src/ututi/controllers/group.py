@@ -957,7 +957,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                 meta.Session.commit()
             except NoResultFound:
                 h.flash(_("Error confirming membership request."))
-                pass
 
             came_from = self.form_result.get('came_from', None)
 
