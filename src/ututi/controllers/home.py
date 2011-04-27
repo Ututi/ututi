@@ -429,16 +429,25 @@ class HomeController(UniversityListMixin):
         session.save()
         redirect(c.came_from or url('/'))
 
-    @validate(schema=RegistrationForm(), form='_sign_up_form')
     def register(self):
-        if not hasattr(self, 'form_result'):
+        email = request.POST.get('email')
+        if not email:
             redirect(url('frontpage'))
-
-        email = self.form_result['email']
 
         # redirect to login if user is already registered
         if User.get_all(email):
             redirect(url(controller='home', action='login', email=email))
+
+        # otherwise we validate the form properly
+        try:
+            self.form_result = RegistrationForm().to_python(request.POST)
+        except validators.Invalid, e:
+            return htmlfill.render(self._sign_up_form(),
+                                   defaults=request.POST,
+                                   errors=e.error_dict,
+                                   error_formatters=u_error_formatters)
+
+        email = self.form_result['email']
 
         # lookup or create registration entry
         registration = UserRegistration.get_by_email(email)
