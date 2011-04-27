@@ -293,7 +293,7 @@ def make_map(config):
     map.connect('/sitemap.xml', controller='sitemap', action='index')
     map.connect('/channel.html', controller='home', action='fbchannel')
     map.connect('frontpage', '/', controller='home', action='index')
-    map.connect('/login', controller='home', action='login')
+    map.connect('login', '/login', controller='home', action='login')
     map.connect('/logout', controller='home', action='logout')
     map.connect('/register', controller='home', action='register')
     map.connect('/google_login', controller='federation', action='google_login')

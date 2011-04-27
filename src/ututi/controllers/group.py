@@ -57,9 +57,7 @@ log = logging.getLogger(__name__)
 
 def set_login_url(method):
     def _set_login_url(self):
-        c.login_form_url = url(controller='home',
-                               action='join',
-                               came_from=url.current())
+        c.login_form_url = url('login', came_from=url.current())
         return method(self)
     return _set_login_url
 
