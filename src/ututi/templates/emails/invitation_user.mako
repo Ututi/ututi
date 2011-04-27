@@ -14,5 +14,5 @@ The Ututi team
 """) % dict(author=invitation.author.fullname,
             group_title=invitation.group.title,
             group_url=invitation.group.url(qualified=True),
-            invitation_url=url(controller="group", action="invitation", id=invitation.group.group_id, accept="True", qualified=True)
+            invitation_url=invitation.group.url(action='invitation', accept='True', qualified=True)
 ))}

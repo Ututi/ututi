@@ -62,7 +62,7 @@
         </span>
         <br />
         <form method="post"
-              action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
+              action="${invitation.group.url(action='invitation')}"
               id="${invitation.group.group_id}_invitation_accept"
               class="inline-form">
           <div style="display: inline;">
@@ -72,7 +72,7 @@
           </div>
         </form>
         <form method="post"
-              action="${url(controller='group', action='invitation', id=invitation.group.group_id)}"
+              action="${invitation.group.url(action='invitation')}"
               id="${invitation.group.group_id}_invitation_reject"
               class="inline-form">
           <div style="display: inline;">
