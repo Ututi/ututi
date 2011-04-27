@@ -171,8 +171,6 @@ However, the 'Next' button raises an error:
     >>> browser.printCssQuery('.error-message', strip=True)
     <span>Please select your photo.</span>
 
-Personally, I think this is a bug and there should be only one button.
-
 Let's upload the photo:
 
     >>> from ututi.tests.functional import make_file
@@ -197,38 +195,23 @@ In add photo form: if user has already set his logo,
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>Invite friends</h1>
 
-User can enter 0 to 5 emails. The suffix is automatically added and
-is the same as this user's. Emails are validated properly:
+User can invite users entering emails freeform. All emails are validated first:
 
     >>> form = browser.getForm('invite-friends-form')
-    >>> form.getControl(name='email1').value = 'one'
-    >>> form.getControl(name='email2').value = 't w o'
-    >>> form.getControl(name='email3').value = 'three'
-    >>> form.getControl(name='email4').value = '     '
-    >>> form.getControl(name='email5').value = 'fi@ve'
+    >>> form.getControl(name='emails').value = 'one, tw@o three\nf@o@ur'
     >>> browser.getControl('Finish').click()
 
     >>> browser.printCssQuery('.error-message', strip=True)
-    <span>The username portion of the email address is invalid (the portion before the @: t w o)</span>
-    <span>The domain portion of the email address is invalid (the portion after the @: ve@example.com)</span>
-
-    >>> form = browser.getForm('invite-friends-form')
-    >>> form.getControl(name='email1').value
-    'one'
-    >>> form.getControl(name='email2').value
-    't w o'
-    >>> form.getControl(name='email3').value
-    'three'
-    >>> form.getControl(name='email4').value
-    '     '
-    >>> form.getControl(name='email5').value
-    'fi@ve'
+    <span>An email address must contain a single @</span>
+    <span>The domain portion of the email address is invalid (the portion after the @: o)</span>
+    <span>An email address must contain a single @</span>
+    <span>The domain portion of the email address is invalid (the portion after the @: o@ur)</span>
 
 If correct email addresses are submitted, user is taken to the "Welcome" page,
 and invitation are sent:
 
-    >>> form.getControl(name='email2').value = 'two'
-    >>> form.getControl(name='email5').value = 'five'
+    >>> form = browser.getForm('invite-friends-form')
+    >>> form.getControl(name='emails').value = 'one@example.com, two@example.com three@example.com\nfour@example.com'
     >>> browser.getControl('Finish').click()
 
     >>> browser.printCssQuery('h1.page-title', strip=True)
@@ -238,7 +221,7 @@ and invitation are sent:
     4
 
     >>> [msg.recipients for msg in mail_queue]
-    [['one@example.com'], ['two@example.com'], ['three@example.com'], ['five@example.com']]
+    [['one@example.com'], ['two@example.com'], ['three@example.com'], ['four@example.com']]
 
     >>> mail_queue[:] = []
 

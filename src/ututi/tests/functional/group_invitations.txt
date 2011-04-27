@@ -124,7 +124,7 @@ Once registered, user should be able to accept invitation to group:
     >>> new_user.printQuery("//div[contains(@class, 'flash-message')]//text()")
     Adminas Adminovix has sent you an invitation to group Moderatoriai
     . Do you want to become a member of this group?
-    Reject Accept
+    Accept Reject
 
     >>> new_user.getControl('Accept').click()
     >>> new_user.printCssQuery('.flash-message-content', strip=True)

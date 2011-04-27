@@ -38,7 +38,7 @@ First user can delete group
     >>> browser.printQuery("//div[@class='flash-message']")
     <div class="flash-message">
       <span class="close-link hide-parent">
-        <img alt="Close" src="/images/details/icon_delete.png" />
+        <img alt="Close" src="/img/icons.com/close.png" />
       </span>
       <span class="flash-message-content">Group 'testing one two tree' has been deleted!</span>
     </div>

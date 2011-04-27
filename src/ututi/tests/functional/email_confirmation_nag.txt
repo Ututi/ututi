@@ -6,7 +6,7 @@ Test nagging users to confirm their emails
    >>> browser = Browser.logIn('user3@ututi.lt', 'password')
    >>> browser.printQuery("//div[@class='flash-message']/span")
    <span class="close-link hide-parent">
-     <img alt="Close" src="/images/details/icon_delete.png" />
+     <img alt="Close" src="/img/icons.com/close.png" />
    </span>
    <span>
        Your email (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
@@ -23,11 +23,11 @@ Test nagging users to confirm their emails
    >>> browser.getControl('get another confirmation email').click()
    >>> browser.printQuery("//div[@class='flash-message']/span")
    <span class="close-link hide-parent">
-     <img alt="Close" src="/images/details/icon_delete.png" />
+     <img alt="Close" src="/img/icons.com/close.png" />
    </span>
    <span class="flash-message-content">Confirmation message sent. Please check your email.</span>
    <span class="close-link hide-parent">
-     <img alt="Close" src="/images/details/icon_delete.png" />
+     <img alt="Close" src="/img/icons.com/close.png" />
    </span>
    <span>
        Your email (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or

@@ -76,8 +76,8 @@ The user should be presented with a flash message inviting him to join the group
     </span>
 
     >>> browser2.printCssQuery(".flash-message button", strip=True)
-    <button>Reject</button>
     <button>Accept</button>
+    <button>Reject</button>
 
 Let's accept this invitation.
 
