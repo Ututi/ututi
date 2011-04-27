@@ -371,7 +371,7 @@ class HomeController(UniversityListMixin):
                 meta.Session.commit()
                 h.flash(_('Your password has been updated. Welcome back!'))
                 sign_in_user(user)
-                redirect(url(controller='profile', action='index'))
+                redirect(url(controller='profile', action='home'))
             else:
                 defaults={'recovery_key': key}
             c.key = key
