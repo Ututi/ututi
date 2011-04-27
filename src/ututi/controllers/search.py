@@ -83,9 +83,9 @@ class SearchController(SearchBaseController, UniversityListMixin):
 
         return render('/search/browse.mako')
 
-    @validate(schema=SearchSubmit, post_only = False, on_get = True)
+    @validate(schema=SearchSubmit, post_only=False, on_get=True)
     def search_js(self):
         self._search()
         self._search_locations(c.text)
-        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='search', action='search_js')
+        return render_mako_def('/search/index.mako', 'search_results', results=c.results, controller='search', action='search_js')
 
