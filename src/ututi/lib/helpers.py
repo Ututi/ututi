@@ -274,12 +274,6 @@ def html_strip(html_text):
     texts = doc.xpath('//text()')
     return ' '.join([text.strip() for text in texts])
 
-myString = "This is my tweet check it out http://tinyurl.com/blah"
-
-r = re.compile(r"(http://[^ ]+)")
-print r.sub(r'<a href="\1">\1</a>', myString)
-
-
 def single_line(text):
     if isinstance(text, basestring):
         return text.replace('\n', '').replace('\r', '').strip()
