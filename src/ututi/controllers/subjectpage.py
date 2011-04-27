@@ -1,6 +1,5 @@
 import logging
 
-from routes.util import url_for
 from formencode import Schema, validators, htmlfill
 
 from lxml.html.diff import htmldiff
