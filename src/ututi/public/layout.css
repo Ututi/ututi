@@ -172,12 +172,14 @@ ul#user-menu li.expandable div.fullname {
     line-height: 20px;
     height: 20px !important; /* Don't screw up menu if username is too long */
     overflow: hidden;
+    text-align: right;
 }
 
 ul#user-menu li.expanded div.fullname {
     background-color: #f2f2f2;
     background-image: url('img/icons/header_arrow_active.png');
     color: #6d6d6d;
+    text-align: left;
 }
 
 li.expandable div.expandable-items {
