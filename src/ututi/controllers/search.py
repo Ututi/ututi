@@ -9,7 +9,6 @@ from pylons.controllers.util import abort
 from pylons.templating import render_mako_def
 
 from ututi.controllers.home import UniversityListMixin
-from ututi.model import meta
 from ututi.lib.base import BaseController, render
 from ututi.lib.search import search_query, search_query_count, tag_search
 from ututi.lib.validators import validate
