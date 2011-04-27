@@ -297,6 +297,9 @@ ${self.anonymous_menu()}
         %else:
           ${self.loggedin_header()}
         %endif
+        %if c.lang == 'lt':
+        <a id="go-ututi-com-lt" href="http://ututi.com">${_('Go to ututi.com')}</a>
+        %endif
 
         ${next.body()}
       </div>

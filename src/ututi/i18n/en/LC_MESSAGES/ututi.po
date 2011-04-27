@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-01-28 12:37+0200\n"
+"PO-Revision-Date: 2011-04-27 20:01+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1112,138 +1112,7 @@ msgstr ""
 msgid "go find something else"
 msgstr ""
 
-msgid "Search for notes"
-msgstr ""
-
-msgid "Your study materials"
-msgstr ""
-
-msgid "Subjects and files"
-msgstr ""
-
-msgid "Shared lecture notes"
-msgstr ""
-
-msgid "Universities and departments"
-msgstr ""
-
 msgid "Enter the search string"
-msgstr ""
-
-msgid "search_fp"
-msgstr "search"
-
-msgid "Join"
-msgstr ""
-
-msgid "Full name"
-msgstr ""
-
-msgid "Email"
-msgstr ""
-
-msgid "Gadu gadu"
-msgstr ""
-
-msgid "Password"
-msgstr ""
-
-msgid "Repeat password"
-msgstr ""
-
-msgid "I agree to the "
-msgstr ""
-
-msgid "terms of use"
-msgstr ""
-
-msgid "Register"
-msgstr ""
-
-msgid "... or connect using your Google or Facebook account."
-msgstr ""
-
-msgid "Connect"
-msgstr ""
-
-msgid ""
-"Here you and your classmates can use the file storage for sharing "
-"information and create group for communication."
-msgstr ""
-
-msgid "register"
-msgstr ""
-
-msgid "Create a group"
-msgstr ""
-
-msgid "Groups have"
-msgstr ""
-
-msgid "A mailing list or forum"
-msgstr ""
-
-msgid "Private file storage"
-msgstr ""
-
-msgid "A list of studied subjects"
-msgstr ""
-
-msgid "Create group"
-msgstr ""
-
-msgid "Popular subjects"
-msgstr ""
-
-#, python-format
-msgid "%(count)s <span class=\"a11y\">file</span>"
-msgid_plural "%(count)s <span class=\"a11y\">files</span>"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "%(count)s <span class=\"a11y\">wiki page</span>"
-msgid_plural "%(count)s <span class=\"a11y\">wiki pages</span>"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Watched by:"
-msgstr ""
-
-#, python-format
-msgid "%(count)s group"
-msgid_plural "%(count)s groups"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "and"
-msgstr ""
-
-#, python-format
-msgid "%(count)s member"
-msgid_plural "%(count)s members"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Active universities"
-msgstr ""
-
-#, python-format
-msgid "%(count)s subject"
-msgid_plural "%(count)s subjects"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "%(count)s file"
-msgid_plural "%(count)s files"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "All universities"
-msgstr ""
-
-msgid "Latest groups"
 msgstr ""
 
 msgid "Error!"
@@ -1275,10 +1144,16 @@ msgstr ""
 msgid "Log in or register using your Google or Facebook account"
 msgstr ""
 
+msgid "Connect"
+msgstr ""
+
 msgid "Log in directly to Ututi"
 msgstr ""
 
 msgid "Your email address"
+msgstr ""
+
+msgid "Password"
 msgstr ""
 
 msgid "Login"
@@ -1294,6 +1169,27 @@ msgid "Register!"
 msgstr ""
 
 msgid "Register as a new Ututi user"
+msgstr ""
+
+msgid "Full name"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Gadu gadu"
+msgstr ""
+
+msgid "Repeat password"
+msgstr ""
+
+msgid "I agree to the "
+msgstr ""
+
+msgid "terms of use"
+msgstr ""
+
+msgid "Register"
 msgstr ""
 
 msgid "Student information online"
@@ -1314,18 +1210,6 @@ msgstr ""
 msgid "feedback"
 msgstr ""
 
-msgid "Connect using"
-msgstr ""
-
-msgid "Log in using Google"
-msgstr ""
-
-msgid "Join!"
-msgstr ""
-
-msgid "Remember me"
-msgstr ""
-
 msgid "Search text"
 msgstr ""
 
@@ -1333,6 +1217,9 @@ msgid "search_"
 msgstr "search"
 
 msgid "All groups"
+msgstr ""
+
+msgid "Create group"
 msgstr ""
 
 msgid "inbox"
@@ -1359,6 +1246,9 @@ msgstr ""
 msgid ""
 "This is a testing version - this is just a copy of the information! "
 "Changes you make will not be persisted!"
+msgstr ""
+
+msgid "Go to ututi.com"
 msgstr ""
 
 msgid "ututi_link"
@@ -1857,6 +1747,24 @@ msgstr ""
 #, python-format
 msgid "found %(count)s user"
 msgid_plural "found %(count)s users"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s subject"
+msgid_plural "%(count)s subjects"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s group"
+msgid_plural "%(count)s groups"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s file"
+msgid_plural "%(count)s files"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -2759,6 +2667,30 @@ msgstr ""
 msgid "Watch"
 msgstr ""
 
+#, python-format
+msgid "%(count)s <span class=\"a11y\">file</span>"
+msgid_plural "%(count)s <span class=\"a11y\">files</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s <span class=\"a11y\">wiki page</span>"
+msgid_plural "%(count)s <span class=\"a11y\">wiki pages</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Watched by:"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
+#, python-format
+msgid "%(count)s member"
+msgid_plural "%(count)s members"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Back to subject list"
 msgstr ""
 
@@ -2901,6 +2833,33 @@ msgstr ""
 msgid "I am already a registered Ututi user"
 msgstr ""
 
+msgid "Social network for Your university"
+msgstr ""
+
+msgid ""
+"Communicate in the virtual space of your university - with your "
+"classmates and your teachers.Join groups and participate in discussions, "
+"share information and knowledge."
+msgstr ""
+
+msgid "Teacher profiles"
+msgstr ""
+
+msgid ""
+"Teacher profiles on Ututi - a clean and simple way to have personal "
+"homepages for teachers.Easy to use tools for communication with students "
+"and for publishing lecture notes."
+msgstr ""
+
+msgid "Discussions"
+msgstr ""
+
+msgid ""
+"Discuss any topic not only with Your classmates, but with all students "
+"and teachers at your university.In Ututi everything is a starting point "
+"for a discussion - from an uploaded file to a new wiki note."
+msgstr ""
+
 msgid "Reset your password"
 msgstr ""
 
@@ -2920,6 +2879,69 @@ msgid "Enter your email:"
 msgstr ""
 
 msgid "Recover password"
+msgstr ""
+
+msgid "Recommend to a friend"
+msgstr ""
+
+#, python-format
+msgid "Your university needs <strong>%(count)d more vote</strong>."
+msgid_plural "Your university needs <strong>%(count)d more votes.</strong>"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "About the new Ututi"
+msgstr ""
+
+msgid ""
+"Communicate in the virtual space of Your university, join groups, "
+"exchange information."
+msgstr ""
+
+msgid ""
+"Teacher profiles on Ututi, will be able to upload course materials and "
+"easily communicate with their students."
+msgstr ""
+
+msgid ""
+"Discuss not only within groups, but also comment on subjects and uploaded"
+" files."
+msgstr ""
+
+msgid "find out more"
+msgstr ""
+
+msgid "Vote for your university!"
+msgstr ""
+
+msgid "Ututi is growing!"
+msgstr ""
+
+msgid ""
+"After two years of development and service here in Lithuania , Ututi is "
+"growing and changing. This March we are planning to release a new "
+"version, that will be not only a study material exchange platform. Ututi "
+"will become Your university's social network and will connect not only "
+"students but also teachers."
+msgstr ""
+
+msgid ""
+"Going in this new direction, we have decided to transition only the "
+"universities that have an active community. If You want Your university "
+"to be a part of the new Ututi this March, vote here. Only univerisites "
+"with 500 votes or more will be transfered."
+msgstr ""
+
+msgid "Choose Your university:"
+msgstr ""
+
+msgid "Thank You for voting!"
+msgstr ""
+
+msgid "Vote!"
+msgstr ""
+
+msgid "Voting results"
 msgstr ""
 
 msgid "Faculty's members"
@@ -3210,6 +3232,12 @@ msgstr ""
 msgid "in-Subjects"
 msgstr "Subjects"
 
+msgid "Ututi voting is in progress!"
+msgstr ""
+
+msgid "Vote for Your university!"
+msgstr ""
+
 msgid "University information"
 msgstr ""
 
@@ -3233,6 +3261,9 @@ msgid "<span class='bold'>%(count)s</span> file"
 msgid_plural "<span class='bold'>%(count)s</span> files"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "Latest groups"
+msgstr ""
 
 msgid "There are no groups yet."
 msgstr ""
@@ -3590,6 +3621,9 @@ msgid "Watch subject"
 msgstr ""
 
 msgid "watch subjects"
+msgstr ""
+
+msgid "Create a group"
 msgstr ""
 
 msgid ""
@@ -4001,6 +4035,9 @@ msgid ""
 "membership?"
 msgstr ""
 
+msgid "Check out how Your university is doing!"
+msgstr ""
+
 msgid "I teach this"
 msgstr ""
 
@@ -4079,6 +4116,18 @@ msgstr ""
 
 msgid "Send reply"
 msgstr ""
+
+#, python-format
+msgid "and %(count)s more file"
+msgid_plural "and %(count)s more files"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "with %(count)s comment"
+msgid_plural "with %(count)s comments"
+msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: translate this as a verb 'Comment'
 msgid "comment_on_wall"
@@ -4213,12 +4262,43 @@ msgid ""
 msgstr ""
 
 #, python-format
+msgid "You have and %(count)s more person have joined the group %(group_link)s"
+msgid_plural "You have and %(count)s more people have joined the group %(group_link)s"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"%(user_link)s and %(count)s more person have joined the group "
+"%(group_link)s"
+msgid_plural ""
+"%(user_link)s and %(count)s more people have joined the group "
+"%(group_link)s"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "show all"
+msgstr ""
+
+#, python-format
 msgid "You have joined the group %(group_link)s"
 msgstr ""
 
 #, python-format
 msgid "%(user_link)s has joined the group %(group_link)s"
 msgstr ""
+
+#, python-format
+msgid "You have and %(count)s more person have left the group %(group_link)s"
+msgid_plural "You have and %(count)s more people have left the group %(group_link)s"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(user_link)s and %(count)s more person have left the group %(group_link)s"
+msgid_plural "%(user_link)s and %(count)s more people have left the group %(group_link)s"
+msgstr[0] ""
+msgstr[1] ""
 
 #, python-format
 msgid "You have left the group %(group_link)s"
@@ -4425,52 +4505,6 @@ msgid ""
 "subjects list."
 msgstr ""
 
-msgid "What is a subject page?"
-msgstr ""
-
-msgid ""
-"A subject page is a place for all information related to a particular "
-"course."
-msgstr ""
-
-msgid "Where do I start?"
-msgstr ""
-
-msgid "Create wiki pages for a subject"
-msgstr ""
-
-msgid ""
-"You can store Your lecture notes here, and share them with Your students."
-" Encourage them to contribute and coauthor the materials with You!"
-msgstr ""
-
-msgid ""
-"Collecting course notes in Word? Writing things down on a computer during"
-" lectures? You can store your notes here, where they can be read and "
-"edited by your classmates."
-msgstr ""
-
-msgid "Create a wiki document"
-msgstr ""
-
-msgid "Upload course files"
-msgstr ""
-
-msgid ""
-"Upload Your slides, course notes, sample tasks and solutions here. Large "
-"files are supported - all for Your convenience!"
-msgstr ""
-
-msgid ""
-"You may upload course notes, sample tasks and solutions, coursework "
-"examples. You can also upload <strong>very</strong> large files (do not "
-"abuse this feature though, the moderators will promptly delete any "
-"inappropriate material)."
-msgstr ""
-
-msgid "Upload files"
-msgstr ""
-
 msgid "Upload study material"
 msgstr ""
 
@@ -4497,16 +4531,19 @@ msgid ""
 "worry about available space or delete old files to upload new ones."
 msgstr ""
 
+msgid "Upload files"
+msgstr ""
+
 msgid "Subject files"
 msgstr ""
 
-msgid "Subject's Wiki Pages"
-msgstr ""
-
-msgid "The subject has no pages yet - create one!"
-msgstr ""
-
 msgid "Create wiki documents"
+msgstr ""
+
+msgid ""
+"Collecting course notes in Word? Writing things down on a computer during"
+" lectures? You can store your notes here, where they can be read and "
+"edited by your classmates."
 msgstr ""
 
 msgid "What can be a wiki document?"
@@ -4521,6 +4558,26 @@ msgstr ""
 msgid "Any text that you want to collaborate on with your classmates"
 msgstr ""
 
+msgid "Create a wiki document"
+msgstr ""
+
+msgid "Subject's Wiki Pages"
+msgstr ""
+
+msgid "The subject has no pages yet - create one!"
+msgstr ""
+
+msgid "What is a subject page?"
+msgstr ""
+
+msgid ""
+"A subject page is a place for all information related to a particular "
+"course."
+msgstr ""
+
+msgid "Where do I start?"
+msgstr ""
+
 msgid "Enter a subject description,"
 msgstr ""
 
@@ -4528,6 +4585,29 @@ msgid "so that others would find their way around more easily."
 msgstr ""
 
 msgid "Create a subject description"
+msgstr ""
+
+msgid "Create wiki pages for a subject"
+msgstr ""
+
+msgid ""
+"You can store Your lecture notes here, and share them with Your students."
+" Encourage them to contribute and coauthor the materials with You!"
+msgstr ""
+
+msgid "Upload course files"
+msgstr ""
+
+msgid ""
+"Upload Your slides, course notes, sample tasks and solutions here. Large "
+"files are supported - all for Your convenience!"
+msgstr ""
+
+msgid ""
+"You may upload course notes, sample tasks and solutions, coursework "
+"examples. You can also upload <strong>very</strong> large files (do not "
+"abuse this feature though, the moderators will promptly delete any "
+"inappropriate material)."
 msgstr ""
 
 msgid "Register as teacher:"
@@ -4568,6 +4648,9 @@ msgid ""
 msgstr ""
 
 msgid "Register using your Google or Facebook account"
+msgstr ""
+
+msgid "Log in using Google"
 msgstr ""
 
 msgid "Log in using Facebook"
@@ -4699,4 +4782,10 @@ msgstr ""
 
 msgid "Add section"
 msgstr ""
+
+#, python-format
+msgid "%(count)d vote"
+msgid_plural "%(count)d votes"
+msgstr[0] ""
+msgstr[1] ""
 

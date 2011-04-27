@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-02-24 12:19+0200\n"
+"PO-Revision-Date: 2011-04-27 20:01+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1173,158 +1173,8 @@ msgstr "atgal"
 msgid "go find something else"
 msgstr "Ieškok ko nors kito"
 
-#, python-format
-msgid "Changes are coming to %s!"
-msgstr "%s keičiasi!"
-
-msgid ""
-"See if <a href=\"/voting\">Your university has gathered enough votes</a> "
-"to be transfered to the new UTUTI!"
-msgstr ""
-"Žvilgtelėk, ar Tavo universitetas <a href=\"/voting\">surinko pakankamai "
-"balsų</a>, kad būtų perkeltas į naująjį UTUTI!"
-
-msgid "Search for notes"
-msgstr "Ieškok konspektų"
-
-msgid "Your study materials"
-msgstr "Tavo studijų medžiaga"
-
-msgid "Subjects and files"
-msgstr "Studijų dalykai ir failai"
-
-msgid "Shared lecture notes"
-msgstr "Bendri konspektai"
-
-msgid "Universities and departments"
-msgstr "Universitetai ir fakultetai"
-
 msgid "Enter the search string"
 msgstr "Įvesk ieškomą žodį"
-
-msgid "search_fp"
-msgstr "ieškoti"
-
-msgid "Join"
-msgstr "Prisijunk"
-
-msgid "Full name"
-msgstr "Vardas, pavardė"
-
-msgid "Email"
-msgstr "El. paštas"
-
-msgid "Gadu gadu"
-msgstr "Gadu gadu"
-
-msgid "Password"
-msgstr "Slaptažodis"
-
-msgid "Repeat password"
-msgstr "Pakartoti slaptažodį"
-
-msgid "I agree to the "
-msgstr "Sutinku su"
-
-msgid "terms of use"
-msgstr "naudojimosi sistema taisyklėmis"
-
-msgid "Register"
-msgstr "Registruotis"
-
-msgid "... or connect using your Google or Facebook account."
-msgstr "... arba prisijunkite naudodamiesi Google arba Facebook."
-
-msgid "Connect"
-msgstr "Prisijungti"
-
-msgid ""
-"Here you and your classmates can use the file storage for sharing "
-"information and create group for communication."
-msgstr ""
-"Čia gali rasti studijų medžiagos, turėti failų saugyklą bei sukurti grupę"
-" bendravimui su grupiokais. "
-
-msgid "register"
-msgstr "registruotis"
-
-msgid "Create a group"
-msgstr "Sukurk grupę"
-
-msgid "Groups have"
-msgstr "Ką turi grupės?"
-
-msgid "A mailing list or forum"
-msgstr "El. pašto konferenciją arba forumą"
-
-msgid "Private file storage"
-msgstr "Privačių failų saugyklą"
-
-msgid "A list of studied subjects"
-msgstr "Studijuojamus dalykus"
-
-msgid "Create group"
-msgstr "kurti grupę"
-
-msgid "Popular subjects"
-msgstr "Populiariausi dalykai"
-
-#, python-format
-msgid "%(count)s <span class=\"a11y\">file</span>"
-msgid_plural "%(count)s <span class=\"a11y\">files</span>"
-msgstr[0] "%(count)s <span class=\"a11y\">failas</span>"
-msgstr[1] "%(count)s <span class=\"a11y\">failai</span>"
-msgstr[2] "%(count)s <span class=\"a11y\">failų</span>"
-
-#, python-format
-msgid "%(count)s <span class=\"a11y\">wiki page</span>"
-msgid_plural "%(count)s <span class=\"a11y\">wiki pages</span>"
-msgstr[0] "%(count)s <span class=\"a11y\">wiki užrašas</span>"
-msgstr[1] "%(count)s <span class=\"a11y\">wiki užrašai</span>"
-msgstr[2] "%(count)s <span class=\"a11y\">wiki užrašų</span>"
-
-msgid "Watched by:"
-msgstr "Stebi:"
-
-#, python-format
-msgid "%(count)s group"
-msgid_plural "%(count)s groups"
-msgstr[0] "%(count)s grupė"
-msgstr[1] "%(count)s grupės"
-msgstr[2] "%(count)s grupių"
-
-msgid "and"
-msgstr "ir"
-
-#, python-format
-msgid "%(count)s member"
-msgid_plural "%(count)s members"
-msgstr[0] "%(count)s narys"
-msgstr[1] "%(count)s nariai"
-msgstr[2] "%(count)s narių"
-
-msgid "Active universities"
-msgstr "Aktyviausi universitetai"
-
-#, python-format
-msgid "%(count)s subject"
-msgid_plural "%(count)s subjects"
-msgstr[0] "%(count)s dalykas"
-msgstr[1] "%(count)s dalykai"
-msgstr[2] "%(count)s dalykų"
-
-#, python-format
-msgid "%(count)s file"
-msgid_plural "%(count)s files"
-msgstr[0] "%(count)s failas"
-msgstr[1] "%(count)s failai"
-msgstr[2] "%(count)s failų"
-
-msgid "All universities"
-msgstr "Visi universitetai"
-
-msgid "Latest groups"
-msgstr "Naujausios grupės"
 
 msgid "Error!"
 msgstr "Klaidelė..."
@@ -1357,11 +1207,17 @@ msgstr ""
 msgid "Log in or register using your Google or Facebook account"
 msgstr "Prisijunk arba registruokis per savo Google ar Facebook paskyrą"
 
+msgid "Connect"
+msgstr "Prisijungti"
+
 msgid "Log in directly to Ututi"
 msgstr "Junkis tiesiai į Ututi"
 
 msgid "Your email address"
 msgstr "El. pašto adresas"
+
+msgid "Password"
+msgstr "Slaptažodis"
 
 msgid "Login"
 msgstr "Prisijungti"
@@ -1377,6 +1233,27 @@ msgstr "Registruokis!"
 
 msgid "Register as a new Ututi user"
 msgstr "Registruokis kaip naujas Ututi narys"
+
+msgid "Full name"
+msgstr "Vardas, pavardė"
+
+msgid "Email"
+msgstr "El. paštas"
+
+msgid "Gadu gadu"
+msgstr "Gadu gadu"
+
+msgid "Repeat password"
+msgstr "Pakartoti slaptažodį"
+
+msgid "I agree to the "
+msgstr "Sutinku su"
+
+msgid "terms of use"
+msgstr "naudojimosi sistema taisyklėmis"
+
+msgid "Register"
+msgstr "Registruotis"
 
 msgid "Student information online"
 msgstr "Informacija studentams internete"
@@ -1396,18 +1273,6 @@ msgstr "Naudotojo meniu"
 msgid "feedback"
 msgstr "atsiliepimai"
 
-msgid "Connect using"
-msgstr "Jungtis su"
-
-msgid "Log in using Google"
-msgstr "Prisijunk naudodamas Google"
-
-msgid "Join!"
-msgstr "Prisijunk"
-
-msgid "Remember me"
-msgstr "Prisiminti mane"
-
 msgid "Search text"
 msgstr "Paieškos tekstas"
 
@@ -1416,6 +1281,9 @@ msgstr "Ieškoti"
 
 msgid "All groups"
 msgstr "Visos grupės"
+
+msgid "Create group"
+msgstr "kurti grupę"
 
 msgid "inbox"
 msgstr "žinutės"
@@ -1444,6 +1312,9 @@ msgid ""
 msgstr ""
 "Tai yra bandomoji versija, naudojanti duomenų kopiją! Pakeitimai nebus "
 "išsaugomi!"
+
+msgid "Go to ututi.com"
+msgstr "Eikite į Ututi.com"
 
 msgid "ututi_link"
 msgstr "http://ututi.lt"
@@ -2004,6 +1875,27 @@ msgid_plural "found %(count)s users"
 msgstr[0] "rastas %(count)s naudotojas"
 msgstr[1] "rasti %(count)s naudotojai"
 msgstr[2] "rasta %(count)s naudotojų"
+
+#, python-format
+msgid "%(count)s subject"
+msgid_plural "%(count)s subjects"
+msgstr[0] "%(count)s dalykas"
+msgstr[1] "%(count)s dalykai"
+msgstr[2] "%(count)s dalykų"
+
+#, python-format
+msgid "%(count)s group"
+msgid_plural "%(count)s groups"
+msgstr[0] "%(count)s grupė"
+msgstr[1] "%(count)s grupės"
+msgstr[2] "%(count)s grupių"
+
+#, python-format
+msgid "%(count)s file"
+msgid_plural "%(count)s files"
+msgstr[0] "%(count)s failas"
+msgstr[1] "%(count)s failai"
+msgstr[2] "%(count)s failų"
 
 msgid "Sort by:"
 msgstr "Rikiuoti pagal:"
@@ -3024,6 +2916,33 @@ msgstr "Grįžti į grupės failus"
 msgid "Watch"
 msgstr "Stebėti"
 
+#, python-format
+msgid "%(count)s <span class=\"a11y\">file</span>"
+msgid_plural "%(count)s <span class=\"a11y\">files</span>"
+msgstr[0] "%(count)s <span class=\"a11y\">failas</span>"
+msgstr[1] "%(count)s <span class=\"a11y\">failai</span>"
+msgstr[2] "%(count)s <span class=\"a11y\">failų</span>"
+
+#, python-format
+msgid "%(count)s <span class=\"a11y\">wiki page</span>"
+msgid_plural "%(count)s <span class=\"a11y\">wiki pages</span>"
+msgstr[0] "%(count)s <span class=\"a11y\">wiki užrašas</span>"
+msgstr[1] "%(count)s <span class=\"a11y\">wiki užrašai</span>"
+msgstr[2] "%(count)s <span class=\"a11y\">wiki užrašų</span>"
+
+msgid "Watched by:"
+msgstr "Stebi:"
+
+msgid "and"
+msgstr "ir"
+
+#, python-format
+msgid "%(count)s member"
+msgid_plural "%(count)s members"
+msgstr[0] "%(count)s narys"
+msgstr[1] "%(count)s nariai"
+msgstr[2] "%(count)s narių"
+
 msgid "Back to subject list"
 msgstr "Grįžti į dalykų sąrašą"
 
@@ -3660,6 +3579,9 @@ msgstr[0] "<span class='bold'>%(count)s</span> failas"
 msgstr[1] "<span class='bold'>%(count)s</span> failai"
 msgstr[2] "<span class='bold'>%(count)s</span> failų"
 
+msgid "Latest groups"
+msgstr "Naujausios grupės"
+
 msgid "There are no groups yet."
 msgstr "Grupių dar nėra."
 
@@ -4037,6 +3959,9 @@ msgstr "stebėti dalyką"
 
 msgid "watch subjects"
 msgstr "stebėti dalykus"
+
+msgid "Create a group"
+msgstr "Sukurk grupę"
 
 msgid ""
 "It's simple - you only need to know the email addresses of your "
@@ -5151,6 +5076,9 @@ msgstr ""
 
 msgid "Register using your Google or Facebook account"
 msgstr "Prisijunkite arba registruokitės per savo Google ar Facebook paskyrą"
+
+msgid "Log in using Google"
+msgstr "Prisijunk naudodamas Google"
 
 msgid "Log in using Facebook"
 msgstr "Prisijungti per Facebook"

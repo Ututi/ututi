@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-02-24 12:19+0200\n"
+"POT-Creation-Date: 2011-04-27 20:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1102,147 +1102,7 @@ msgstr ""
 msgid "go find something else"
 msgstr ""
 
-#, python-format
-msgid "Changes are coming to %s!"
-msgstr ""
-
-msgid ""
-"See if <a href=\"/voting\">Your university has gathered enough votes</a> to "
-"be transfered to the new UTUTI!"
-msgstr ""
-
-msgid "Search for notes"
-msgstr ""
-
-msgid "Your study materials"
-msgstr ""
-
-msgid "Subjects and files"
-msgstr ""
-
-msgid "Shared lecture notes"
-msgstr ""
-
-msgid "Universities and departments"
-msgstr ""
-
 msgid "Enter the search string"
-msgstr ""
-
-msgid "search_fp"
-msgstr ""
-
-msgid "Join"
-msgstr ""
-
-msgid "Full name"
-msgstr ""
-
-msgid "Email"
-msgstr ""
-
-msgid "Gadu gadu"
-msgstr ""
-
-msgid "Password"
-msgstr ""
-
-msgid "Repeat password"
-msgstr ""
-
-msgid "I agree to the "
-msgstr ""
-
-msgid "terms of use"
-msgstr ""
-
-msgid "Register"
-msgstr ""
-
-msgid "... or connect using your Google or Facebook account."
-msgstr ""
-
-msgid "Connect"
-msgstr ""
-
-msgid ""
-"Here you and your classmates can use the file storage for sharing information"
-" and create group for communication."
-msgstr ""
-
-msgid "register"
-msgstr ""
-
-msgid "Create a group"
-msgstr ""
-
-msgid "Groups have"
-msgstr ""
-
-msgid "A mailing list or forum"
-msgstr ""
-
-msgid "Private file storage"
-msgstr ""
-
-msgid "A list of studied subjects"
-msgstr ""
-
-msgid "Create group"
-msgstr ""
-
-msgid "Popular subjects"
-msgstr ""
-
-#, python-format
-msgid "%(count)s <span class=\"a11y\">file</span>"
-msgid_plural "%(count)s <span class=\"a11y\">files</span>"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "%(count)s <span class=\"a11y\">wiki page</span>"
-msgid_plural "%(count)s <span class=\"a11y\">wiki pages</span>"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Watched by:"
-msgstr ""
-
-#, python-format
-msgid "%(count)s group"
-msgid_plural "%(count)s groups"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "and"
-msgstr ""
-
-#, python-format
-msgid "%(count)s member"
-msgid_plural "%(count)s members"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Active universities"
-msgstr ""
-
-#, python-format
-msgid "%(count)s subject"
-msgid_plural "%(count)s subjects"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "%(count)s file"
-msgid_plural "%(count)s files"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "All universities"
-msgstr ""
-
-msgid "Latest groups"
 msgstr ""
 
 msgid "Error!"
@@ -1274,10 +1134,16 @@ msgstr ""
 msgid "Log in or register using your Google or Facebook account"
 msgstr ""
 
+msgid "Connect"
+msgstr ""
+
 msgid "Log in directly to Ututi"
 msgstr ""
 
 msgid "Your email address"
+msgstr ""
+
+msgid "Password"
 msgstr ""
 
 msgid "Login"
@@ -1293,6 +1159,27 @@ msgid "Register!"
 msgstr ""
 
 msgid "Register as a new Ututi user"
+msgstr ""
+
+msgid "Full name"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Gadu gadu"
+msgstr ""
+
+msgid "Repeat password"
+msgstr ""
+
+msgid "I agree to the "
+msgstr ""
+
+msgid "terms of use"
+msgstr ""
+
+msgid "Register"
 msgstr ""
 
 msgid "Student information online"
@@ -1313,18 +1200,6 @@ msgstr ""
 msgid "feedback"
 msgstr ""
 
-msgid "Connect using"
-msgstr ""
-
-msgid "Log in using Google"
-msgstr ""
-
-msgid "Join!"
-msgstr ""
-
-msgid "Remember me"
-msgstr ""
-
 msgid "Search text"
 msgstr ""
 
@@ -1332,6 +1207,9 @@ msgid "search_"
 msgstr ""
 
 msgid "All groups"
+msgstr ""
+
+msgid "Create group"
 msgstr ""
 
 msgid "inbox"
@@ -1358,6 +1236,9 @@ msgstr ""
 msgid ""
 "This is a testing version - this is just a copy of the information! Changes "
 "you make will not be persisted!"
+msgstr ""
+
+msgid "Go to ututi.com"
 msgstr ""
 
 msgid "ututi_link"
@@ -1852,6 +1733,24 @@ msgstr ""
 #, python-format
 msgid "found %(count)s user"
 msgid_plural "found %(count)s users"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s subject"
+msgid_plural "%(count)s subjects"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s group"
+msgid_plural "%(count)s groups"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s file"
+msgid_plural "%(count)s files"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -2748,6 +2647,30 @@ msgstr ""
 msgid "Watch"
 msgstr ""
 
+#, python-format
+msgid "%(count)s <span class=\"a11y\">file</span>"
+msgid_plural "%(count)s <span class=\"a11y\">files</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s <span class=\"a11y\">wiki page</span>"
+msgid_plural "%(count)s <span class=\"a11y\">wiki pages</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Watched by:"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
+#, python-format
+msgid "%(count)s member"
+msgid_plural "%(count)s members"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Back to subject list"
 msgstr ""
 
@@ -3318,6 +3241,9 @@ msgid_plural "<span class='bold'>%(count)s</span> files"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "Latest groups"
+msgstr ""
+
 msgid "There are no groups yet."
 msgstr ""
 
@@ -3670,6 +3596,9 @@ msgid "Watch subject"
 msgstr ""
 
 msgid "watch subjects"
+msgstr ""
+
+msgid "Create a group"
 msgstr ""
 
 msgid "It's simple - you only need to know the email addresses of your classmates!"
@@ -4676,6 +4605,9 @@ msgid ""
 msgstr ""
 
 msgid "Register using your Google or Facebook account"
+msgstr ""
+
+msgid "Log in using Google"
 msgstr ""
 
 msgid "Log in using Facebook"

@@ -340,6 +340,19 @@ button.btnMedium.btnTeacher {
     top: 43px;
 }
 
+#go-ututi-com-lt {
+    background: url('img/go_ututi_com_lt.png') no-repeat left;
+    display: block;
+    height: 68px;
+    right: 0;
+    overflow: hidden;
+    padding-left: 166px;
+    position: absolute;
+    top: 8px;
+    width: 0;
+    outline: none;
+}
+
 
 #socialLinks li, #BreadLinks li {
 
