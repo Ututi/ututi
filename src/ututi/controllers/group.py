@@ -907,6 +907,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
                  ).first()
         return request is not None and 'request' or invitation is not None and 'invitation'
 
+    @ActionProtector("user")
     @validate(schema=GroupInvitationActionForm, post_only=False, on_get=True)
     @group_action
     def invitation(self, group):
