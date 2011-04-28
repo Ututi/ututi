@@ -3210,12 +3210,6 @@ ul#event_list li {
     background: transparent url("../images/details/icon_event.png") left top no-repeat;
 }
 
-.tip {
-    font-size: 0.85em;
-    color: #808080;
-    padding-bottom: 5px;
-}
-
 /* search results */
 
 div.snippet-book {

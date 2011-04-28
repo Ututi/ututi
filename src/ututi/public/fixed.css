@@ -63,6 +63,12 @@ strong {
     font-weight: bold;
 }
 
+.tip {
+    font-size: 11px;
+    color: #999;
+    padding-bottom: 5px;
+}
+
 /* BUTTONS
  */
 
