@@ -39,7 +39,7 @@ class ReceivemailController(BaseController):
 
         if not group.mailinglist_enabled:
             if author is not None and group.is_member(author):
-                meta.Session.execute("SET ututi.active_user TO %d" % author.id)
+                meta.set_active_user(author.id)
                 request.environ['repoze.who.identity'] = author.id
                 if not group.forum_categories:
                     return 'Ok!'
@@ -64,10 +64,10 @@ class ReceivemailController(BaseController):
             return "Silent bounce!"
 
         if message.author is not None:
-            meta.Session.execute("SET ututi.active_user TO %d" % message.author.id)
+            meta.set_active_user(message.author.id)
             request.environ['repoze.who.identity'] = message.author.id
         else:
-            meta.Session.execute("SET ututi.active_user TO ''")
+            meta.set_active_user('')
 
         meta.Session.add(message)
 
@@ -77,10 +77,10 @@ class ReceivemailController(BaseController):
                                            mime_type_list,
                                            file_name_list):
             if message.author is not None:
-                meta.Session.execute("SET ututi.active_user TO %d" % message.author.id)
+                meta.set_active_user(message.author.id)
                 request.environ['repoze.who.identity'] = message.author.id
             else:
-                meta.Session.execute("SET ututi.active_user TO ''")
+                meta.set_active_user('')
 
             # XXX we are not filtering nonsense files like small
             # images, pgp signatures, vcards and html bodies yet.

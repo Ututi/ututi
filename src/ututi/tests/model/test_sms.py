@@ -15,7 +15,7 @@ def test_messages():
         >>> sms = SMS(sender=admin, recipient=admin, recipient_number='+37060000000', message_text=u'Test message.')
         >>> meta.Session.add(sms)
         >>> meta.Session.commit()
-        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % admin.id)
+        >>> res = meta.set_active_user(admin.id)
 
     The id should be assigned automatically:
         >>> sms.id

@@ -71,7 +71,6 @@ class UtutiBaseLayer(LayerBase):
         shutil.rmtree(config['files_path'])
 
         # XXX Tear down database here
-        meta.Session.execute("SET ututi.active_user TO 0")
         meta.Session.close()
 
         teardown_db_defaults(meta.engine)
@@ -120,7 +119,6 @@ class UtutiQuickLayerBase(LayerBase):
         shutil.rmtree(config['files_path'])
 
         # XXX Tear down database here
-        meta.Session.execute("SET ututi.active_user TO 0")
         meta.Session.close()
 
         meta.Session.rollback()

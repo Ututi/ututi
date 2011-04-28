@@ -71,7 +71,7 @@ def test_subject_files():
 
     Check if location is synchronized for files:
 
-        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+        >>> res = meta.set_active_user(1)
         >>> [f.location_id for f in subject.files]
         [1L, 1L]
 
@@ -106,7 +106,7 @@ def test_setup(test):
     meta.Session.commit()
 
     u = User.get('admin@uni.ututi.com', uni)
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.set_active_user(u.id)
 
     g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
 
@@ -121,4 +121,4 @@ def test_setup(test):
     meta.Session.add(Subject(u'subject', u'A Generic subject', uni, u''))
     meta.Session.commit()
 
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.set_active_user(u.id)

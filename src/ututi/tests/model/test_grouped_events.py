@@ -23,12 +23,12 @@ def test_grouping_subject_events():
     r"""Test grouping of subject events
         Let's create and update a subject. The creation and update events should be grouped.
 
-        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+        >>> res = meta.set_active_user(1)
         >>> s = Subject('some_id', u'Subject title', LocationTag.get([u'vu']))
         >>> meta.Session.add(s)
         >>> meta.Session.commit()
 
-        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+        >>> res = meta.set_active_user(1)
         >>> s.title = u'A new subject title'
         >>> meta.Session.commit()
 
@@ -40,7 +40,7 @@ def test_grouping_subject_events():
 
     Let's update the subject again and see if the newest event is really the parent:
 
-        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+        >>> res = meta.set_active_user(1)
         >>> s.title = u'A newer subject title'
         >>> meta.Session.commit()
 
@@ -53,7 +53,7 @@ def test_grouping_subject_events():
         >>> meta.Session.add(petras)
         >>> meta.Session.commit()
 
-        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % petras.id)
+        >>> res = meta.set_active_user(petras.id)
         >>> s.title = u'The old subject title'
         >>> meta.Session.commit()
         >>> events = meta.Session.query(SubjectModifiedEvent).all()
@@ -64,7 +64,7 @@ def test_grouping_subject_events():
 def test_grouping_page_events():
     r"""Test grouping of page events
 
-        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+        >>> res = meta.set_active_user(1)
         >>> s = Subject('some_id', u'Subject title', LocationTag.get([u'vu']))
         >>> meta.Session.add(s)
         >>> page = Page(u'Some coursework', u'Some information about it.')
@@ -72,7 +72,7 @@ def test_grouping_page_events():
         >>> meta.Session.commit()
 
     Let's update the page:
-        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+        >>> res = meta.set_active_user(1)
         >>> version = PageVersion(u'Some coursework (updated)',
         ...                       u'Some more information about it.')
         >>> page.versions.append(version)
@@ -94,7 +94,7 @@ def test_grouping_file_events():
         >>> group.files.append(f)
         >>> meta.Session.commit()
 
-        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+        >>> res = meta.set_active_user(1)
         >>> f = File(u"some.txt", u'A Text file', mimetype='text/plain', data="Wassup?")
         >>> f.folder = u"some folder"
         >>> group.files.append(f)
@@ -119,7 +119,7 @@ def test_setup(test):
     """Create some models for the test."""
     setUpUser()
     u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.set_active_user(u.id)
 
     g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
 
@@ -131,5 +131,5 @@ def test_setup(test):
     meta.Session.add(g)
     meta.Session.add(gm)
     meta.Session.commit()
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.set_active_user(u.id)
 

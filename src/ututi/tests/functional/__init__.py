@@ -117,7 +117,6 @@ def ftest_setUp(test):
     meta.Session.add(tag)
 
     meta.Session.commit()
-    meta.Session.execute("SET ututi.active_user TO 0")
 
 
 def collect_ftests(package=None, level=None,
@@ -305,4 +304,3 @@ def setup_university_export():
         meta.Session.add(f)
 
     meta.Session.commit()
-    meta.Session.execute("SET ututi.active_user TO 0")

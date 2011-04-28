@@ -29,7 +29,7 @@ def test_group_create():
         >>> g = Group('testgroup', u'Testing group', LocationTag.get(u'vu'), date(date.today().year, 1, 1), u'Testing group')
         >>> meta.Session.add(g)
         >>> meta.Session.commit()
-        >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+        >>> res = meta.set_active_user(1)
         >>> evt = meta.Session.query(Event).filter(Event.context == g).all()
         >>> [e.render() for e in evt]
         [u'New group ... was created']
@@ -97,9 +97,8 @@ def test_empty_folders():
         >>> for file in list(group.files):
         ...     if file.folder == 'some folder':
         ...         group.files.remove(file)
-        ...         meta.Session.execute("SET ututi.active_user TO %d" % 1)
+        ...         meta.set_active_user(1)
         ...         meta.Session.delete(file)
-        <sqlalchemy.engine.base.ResultProxy object at ...>
         >>> meta.Session.commit()
         >>> meta.Session.expire_all()
 
@@ -155,11 +154,11 @@ def test_setup(test):
     setUpUser()
 
     u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.set_active_user(u.id)
 
     g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
     g.add_member(u, True)
     meta.Session.add(g)
     meta.Session.commit()
 
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.set_active_user(u.id)

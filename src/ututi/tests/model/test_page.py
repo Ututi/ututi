@@ -19,7 +19,7 @@ def test_pages():
         >>> page = Page(u'Some coursework', u'Some information about it.')
         >>> meta.Session.add(page)
         >>> meta.Session.commit()
-        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % admin.id)
+        >>> res = meta.set_active_user(admin.id)
 
     When added to the database they get ids assigned automatically:
 
@@ -61,7 +61,7 @@ def test_pages():
         ...                       u'Some more information about it.')
         >>> page.versions.append(version)
         >>> meta.Session.commit()
-        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % admin.id)
+        >>> res = meta.set_active_user(admin.id)
         >>> page.content
         u'Some more information about it.'
 
@@ -71,7 +71,7 @@ def test_pages():
         >>> page.add_version(u'Some coursework (new)',
         ...                  u'Some exclusive information about it.')
         >>> meta.Session.commit()
-        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % admin.id)
+        >>> res = meta.set_active_user(admin.id)
 
         >>> page.title
         u'Some coursework (new)'
@@ -144,10 +144,10 @@ def test_setup(test):
     setUpUser()
 
     u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.set_active_user(u.id)
 
     meta.Session.add(Subject(u'subject', u'Subject',
                              LocationTag.get(u'uni'),
                              u''))
     meta.Session.commit()
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.set_active_user(u.id)

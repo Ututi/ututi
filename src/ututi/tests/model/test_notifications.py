@@ -16,7 +16,7 @@ def test_notifications():
         >>> notification = Notification(u'hey!', datetime.date(2020, 10, 01))
         >>> meta.Session.add(notification)
         >>> meta.Session.commit()
-        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % admin.id)
+        >>> res = meta.set_active_user(admin.id)
         >>> print notification.id
         1
 

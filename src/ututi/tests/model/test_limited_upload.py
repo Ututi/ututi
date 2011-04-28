@@ -49,10 +49,10 @@ def test_setup(test):
     ututi.tests.setUp(test)
     setUpUser()
     u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.set_active_user(u.id)
 
     g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
     meta.Session.add(g)
     meta.Session.commit()
 
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.set_active_user(u.id)

@@ -134,12 +134,6 @@ class BaseController(WSGIController):
         try:
             return WSGIController.__call__(self, environ, start_response)
         finally:
-            try:
-                meta.Session.execute("SET ututi.active_user TO 0")
-            except (InvalidRequestError, InternalError):
-                # Ignore the error, if we got an error in the
-                # controller this call raises an error
-                pass
             meta.Session.remove()
 
             # Performance logging.

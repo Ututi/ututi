@@ -122,7 +122,7 @@ def test_setup(test):
     meta.Session.commit()
 
     meta.Session.execute("SET default_text_search_config TO 'public.lt'")
-    meta.Session.execute('SET ututi.active_user TO %d' % user.id)
+    meta.set_active_user(user.id)
 
     l = LocationTag(u'Kauno technologijos universitetas', u'ktu', u'', member_policy='PUBLIC')
     f = LocationTag(u'Ekologijos fakultetas', u'ef', u'', l, member_policy='PUBLIC')

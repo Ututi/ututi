@@ -16,7 +16,7 @@ def test_page_tags():
     Create a subject, add a page to it.
 
         >>> u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
-        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+        >>> res = meta.set_active_user(u.id)
 
         >>> s = Subject(u'subj_id', u'Test subject', LocationTag.get(u'VU'))
         >>> t = SimpleTag(u'old tag')
@@ -60,7 +60,7 @@ def test_page_location():
     the pages belong to.
 
         >>> u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
-        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+        >>> res = meta.set_active_user(u.id)
 
         >>> s = Subject(u'subj_id', u'Test subject', LocationTag.get(u'uni'))
         >>> meta.Session.add(s)
@@ -71,7 +71,7 @@ def test_page_location():
 
     Does the new page already have tags its subject had?
 
-        >>> res = meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+        >>> res = meta.set_active_user(u.id)
         >>> p = Page.get(p.id)
         >>> p.location.title
         u'U-niversity'

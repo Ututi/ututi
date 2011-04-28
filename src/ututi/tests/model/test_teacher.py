@@ -51,7 +51,7 @@ def test_teacher_subjects():
        >>> teacher.taught_subjects
        []
 
-       >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+       >>> res = meta.set_active_user(1)
        >>> s = Subject('subject_id', u'Subject title', LocationTag.get([u'vu']))
        >>> meta.Session.add(s)
        >>> teacher.taught_subjects.append(s)
@@ -77,21 +77,21 @@ def test_teacher_groups():
        []
 
 Let's add a yahoo group:
-       >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+       >>> res = meta.set_active_user(1)
        >>> tg = TeacherGroup(u'Some yahooers', u'group@groups.yahoo.com')
        >>> teacher.student_groups.append(tg)
        >>> meta.Session.commit()
-       >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+       >>> res = meta.set_active_user(1)
        >>> teacher.student_groups
        [<ututi.model.users.TeacherGroup object at ...>]
 
 
 Let's add a ututi group:
-       >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+       >>> res = meta.set_active_user(1)
        >>> tg = TeacherGroup(u'Some Ututi users', 'moderators@groups.ututi.lt')
        >>> teacher.student_groups.append(tg)
        >>> meta.Session.commit()
-       >>> res = meta.Session.execute("SET ututi.active_user TO 1")
+       >>> res = meta.set_active_user(1)
        >>> teacher.student_groups
        [<ututi.model.users.TeacherGroup object at ...>,
         <ututi.model.users.TeacherGroup object at ...>]
@@ -111,8 +111,8 @@ def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
     setUpUser()
-    meta.Session.execute("SET ututi.active_user TO 1")
+    meta.set_active_user(1)
     g = Group('moderators', u'Moderators', LocationTag.get(u'uni'), date.today(), u'Moderators')
     meta.Session.add(g)
     meta.Session.commit()
-    meta.Session.execute("SET ututi.active_user TO 1")
+    meta.set_active_user(1)

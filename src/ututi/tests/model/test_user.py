@@ -172,7 +172,7 @@ def test_user_content_items():
     r"""Test if content item ownership is maintained correctly when users are deleted.
 
         >>> user = User.get('admin@uni.ututi.com', LocationTag.get('uni'))
-        >>> res = meta.Session.execute("SET ututi.active_user TO %s" % user.id)
+        >>> res = meta.set_active_user(user.id)
         >>> location = LocationTag.get([u'uni', u'dep'])
         >>> subjects = []
         >>> for i in range(5):
@@ -180,7 +180,7 @@ def test_user_content_items():
         ...     subjects.append(subject)
         ...     meta.Session.add(subject)
         >>> meta.Session.commit()
-        >>> res = meta.Session.execute("SET ututi.active_user TO %s" % user.id)
+        >>> res = meta.set_active_user(user.id)
 
         >>> s = meta.Session.query(Subject).filter_by(subject_id='subject1').one()
         >>> s.created.fullname
@@ -204,7 +204,7 @@ def test_user_subject_watching():
     r"""Test for user subject watching and unwatching.
 
         >>> user = User.get('admin@uni.ututi.com', LocationTag.get('uni'))
-        >>> res = meta.Session.execute("SET ututi.active_user TO %s" % user.id)
+        >>> res = meta.set_active_user(user.id)
         >>> location = LocationTag.get([u'uni', u'dep'])
         >>> subjects = []
         >>> for i in range(5):
@@ -212,7 +212,7 @@ def test_user_subject_watching():
         ...     subjects.append(subject)
         ...     meta.Session.add(subject)
         >>> meta.Session.commit()
-        >>> res = meta.Session.execute("SET ututi.active_user TO %s" % user.id)
+        >>> res = meta.set_active_user(user.id)
 
     All the subjects added to it, are visible in the list:
 
@@ -306,7 +306,7 @@ def test_setup(test):
     setUpUser()
 
     u = User.get('admin@uni.ututi.com', LocationTag.get('uni'))
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.set_active_user(u.id)
 
     g = Group('moderators', u'Moderatoriai', LocationTag.get(u'uni'), date.today(), u'U2ti moderatoriai.')
     role = GroupMembershipType.get('administrator')

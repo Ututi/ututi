@@ -262,7 +262,7 @@ def test_setup(test):
     meta.Session.add(g)
     meta.Session.add(gm)
     meta.Session.commit()
-    meta.Session.execute("SET ututi.active_user TO %d" % u.id)
+    meta.set_active_user(u.id)
 
 
 def test_suite():
