@@ -33,7 +33,7 @@ p.warning {
 }
 
 p.light {
-    color: #888;
+    color: #999;
 }
 
 a {
@@ -330,7 +330,7 @@ h1.page-title.with-bottom-line {
         background-repeat: no-repeat;
         padding-left: 70px;
     }
-    
+
     .standard-portlet.icon-group-gray {
         background-image: url('images/details/icon_group_42x35.png');
         background-position: 15px 5px;
@@ -626,7 +626,7 @@ form.inline-form button {
                 .wall .action-block textarea,
                 .wall .action-block input,
                 .wall .action-tease {
-                    border: 1px solid #888;
+                    border: 1px solid #999;
                     background-color: #fff;
                     width: 100%;
                     padding: 3px;
@@ -762,7 +762,7 @@ form.inline-form button {
   #dashboard_action_links img.tooltip { vertical-align: bottom; }
 
   #dashboard_action_links .action.inactive {
-    color: #888;
+    color: #999;
   }
 
   #dashboard_action_links a#send_message {
@@ -1059,7 +1059,7 @@ ul.feature-list {
     }
 
     .group-description .group-title .group-email {
-        color: #888;
+        color: #999;
     }
 
     .group-description .group-actions {
@@ -1756,7 +1756,7 @@ ul.tabs {
     #private-message-thread .action-block textarea,
     #private-message-thread .action-block input,
     #private-message-thread .action-tease {
-        border: 1px solid #888;
+        border: 1px solid #999;
         background-color: #fff;
         width: 100%;
         padding: 3px;
