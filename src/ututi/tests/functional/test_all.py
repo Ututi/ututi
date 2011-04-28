@@ -14,6 +14,7 @@ def test_suite():
                                collect_ftests(package=ututi.tests.functional.almost_quick,
                                               layer=[UtutiFunctionalLayer, U2tiFunctionalLayer]),
                                collect_ftests(package=ututi.tests.functional.errors,
+                                              tearDown=ututi.tests.functional.quick.tearDown,
                                               layer=UtutiErrorsLayer),
                                collect_ftests(package=ututi.tests.functional.quick,
                                               layer=[UtutiQuickLayer, U2tiQuickLayer],
