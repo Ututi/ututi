@@ -143,10 +143,14 @@ div.back-link {
 }
 
 a.back-link {
-    padding-left: 15px;
+    padding-left: 18px;
     background: url("/img/icons.com/back.png") left center no-repeat;
 }
 
+a.settings-link {
+    padding-left: 14px;
+    background: url('/img/icons.com/settings.png') no-repeat left center;
+}
 
 /* LAYOUT ELEMENTS
  */
@@ -1673,16 +1677,11 @@ ul.tabs {
         border-bottom: none;
     }
 
-    /* Settings link container that is often placed over tabs.
+    /* Container that may be placed above the tabs.
      */
-    #settings-link-container {
+    .above-tabs {
         margin-bottom: -16px;
         text-align: right;
-    }
-
-    #settings-link-container a {
-        padding-left: 14px;
-        background: url('/img/icons.com/settings.png') no-repeat left center;
     }
 
 

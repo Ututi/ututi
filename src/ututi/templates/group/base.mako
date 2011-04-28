@@ -100,8 +100,8 @@ ${group_right_sidebar()}
 
   %if show_tabs:
     %if c.user:
-      <div id="settings-link-container">
-        <a href="${c.group.url(action='edit')}">${_("Edit Settings")}</a>
+      <div class="above-tabs">
+        <a class="settings-link" href="${c.group.url(action='edit')}">${_("Edit Settings")}</a>
       </div>
     %endif
     ${tabs(c.group_menu_items, c.group_menu_current_item)}

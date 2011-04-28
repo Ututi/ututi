@@ -41,8 +41,8 @@
 
 %if not hasattr(c, 'notabs'):
   %if c.user:
-    <div id="settings-link-container">
-      <a href="${c.subject.url(action='edit')}">${_("Edit Settings")}</a>
+    <div class="above-tabs">
+      <a class="settings-link" href="${c.subject.url(action='edit')}">${_("Edit Settings")}</a>
     </div>
   %endif
 
