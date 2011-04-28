@@ -346,9 +346,9 @@ button.btnMedium.btnTeacher {
     height: 68px;
     right: 0;
     overflow: hidden;
-    padding-left: 166px;
+    padding-left: 274px;
     position: absolute;
-    top: 8px;
+    top: 12px;
     width: 0;
     outline: none;
 }
