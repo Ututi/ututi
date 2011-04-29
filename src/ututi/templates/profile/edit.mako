@@ -21,8 +21,14 @@ ${parent.css()}
 ## subheader is actually a placeholder to put in
 ## a notification block for unverified teachers.
 <%def name="subheader()">
-  <a class="back-link" id="back-to-home-page" href="${url(controller='profile', action='home')}">${_('back to home page')}</a>
+  <div class="above-tabs">
+    <a class="back-link" href="${url(controller='profile', action='home')}">${_('back')}</a>
+  </div>
 </%def>
+
+%if hasattr(self, 'pagetitle'):
+<h1 class="page-title">${self.pagetitle()}</h1>
+%endif
 
 ${self.subheader()}
 

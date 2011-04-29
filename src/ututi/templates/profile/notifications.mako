@@ -1,209 +1,185 @@
 <%inherit file="/profile/edit.mako" />
 
+<%def name="css()">
+${parent.css()}
+.select-interval-form {
+    float: right;
+    color: #999;
+    font-size: 11px;
+    padding-right: 20px;
+}
+.select-interval-form.done {
+    background: url('/img/icons.com/ok.png') no-repeat right center;
+}
+.select-interval-form.progress {
+    background: url('/images/details/icon_progress.gif') no-repeat right center;
+}
+.select-interval-form select {
+    width: auto;
+}
+.notification-block {
+    margin-top: 15px;
+}
+.notification-block .header {
+    border-bottom: 1px solid #f90;
+    padding: 5px 0px 5px 20px;
+}
+.notification-block.subject .header {
+    background: url('/img/icons.com/subject_medium_grey.png') no-repeat left center;
+}
+.notification-block.group .header {
+    background: url('/img/icons.com/group_medium_grey.png') no-repeat left center;
+}
+.notification-block.email .header {
+    background: url('/img/icons.com/email_medium_grey.png') no-repeat left center;
+}
+.notification-block .warning {
+    font-size: 11px;
+    color: #990000;
+    display: none;
+}
+.notification-block .show-warning .warning {
+    display: inline;
+}
+.checkbox-list {
+    padding: 5px 5px 5px 20px;
+}
+.checkbox-list form {
+    padding: 2px 0;
+}
+.checkbox-list form input {
+    margin-right: 2px;
+}
+.post-header {
+    margin-top: 30px;
+}
+</%def>
+
+
 <%def name="head_tags()">
 ${parent.head_tags()}
 
 <script type="text/javascript">
-//<![CDATA[
+    $(document).ready(function(){
+        // action checkboxes
+        $('.action-checkbox').change(function() {
+            var url;
+            if ($(this).is(':checked'))
+                url = $(this).closest('form').find('.check-url').val();
+            else
+                url = $(this).closest('form').find('.uncheck-url').val();
+            // call AJAX action (TODO: handle ajax failures and quickclicks)
+            $.get(url);
+        });
 
-$(document).ready(function(){
-  $('.ignore_subject_button').click(function (event) {
-    var url = $('input.ignore_url', $(event.target).closest("li")).val();
-    $.ajax({type: "GET",
-            url: url,
-            success: function(msg){
-                $(event.target).closest("li").removeClass("enabled").addClass("disabled");
-    }});
-    return false;
-  });
+        // some more control for watch/unwatch checkboxes
+        $('.watch.action-checkbox').change(function() {
+            if ($(this).is(':checked'))
+                $(this).closest('form').removeClass('show-warning');
+            else
+                $(this).closest('form').addClass('show-warning');
+        });
 
-  $('.unignore_subject_button').click(function (event) {
-    var url = $('input.unignore_url', $(event.target).closest("li")).val();
-    $.ajax({type: "GET",
-            url: url,
-            success: function(msg){
-                $(event.target).closest('li').removeClass("disabled").addClass("enabled");
-    }});
-    return false;
-  });
-
-  $('.subscribe_group_button').click(function (event) {
-    var url = $('input.subscribe_url', $(event.target).closest("li")).val() + '?js=1';
-    $.ajax({type: "GET",
-            url: url,
-            success: function(msg){
-                $(event.target).closest("li").removeClass("disabled").addClass("enabled");
-    }});
-    return false;
-  });
-
-  $('.unsubscribe_group_button').click(function (event) {
-    var url = $('input.unsubscribe_url', $(event.target).closest("li")).val() + '?js=1';
-    $.ajax({type: "GET",
-            url: url,
-            success: function(msg){
-                $(event.target).closest('li').removeClass("enabled").addClass("disabled");
-    }});
-    return false;
-  });
-
-  $('.select_interval_form .each').change(function (event) {
-    var url = event.target.form.action;
-    $(event.target.form).removeClass('select_interval_form')
-                        .removeClass('select_interval_form_done')
-                        .addClass('select_interval_form_in_progress');
-    $.ajax({type: "GET",
-            url: url,
-            data: {'each': event.target.value, 'ajax': 'yes'},
-            success: function(msg){
-            $(event.target.form).removeClass('select_interval_form_in_progress')
-                                .addClass('select_interval_form_done');
-    }});
-  });
-});
-//]]>
+        // select interval forms
+        $('.select-interval-form button').hide();
+        $('.select-interval-form select').change(function (event) {
+            var url = event.target.form.action;
+            $(event.target.form).removeClass('done').addClass('progress');
+            $.get(
+                url,
+                {'each': event.target.value, 'ajax': 'yes'},
+                function() { $(event.target.form).removeClass('progress').addClass('done'); }
+            );
+        });
+    });
 </script>
 </%def>
 
-<%def name="subjects_block(title, update_url, selected, subjects, group=None)">
-<%self:rounded_block class_='portletGroupFiles subject_description'>
-  <div class="GroupFiles GroupFilesGroups ${not group and 'GroupFilesDalykai' or ''}">
-    <h2 class="portletTitle bold">
-      ${title|n}
-    </h2>
-    <div class="group-but" style="top: 10px;">
-      <form class="select_interval_form" action="${update_url}">
-        ${h.input_submit(_('Confirm'))}
-        <script type="text/javascript">
-          //<![CDATA[
-            $('.select_interval_form .btn').hide();
-          //]]>
-        </script>
-        <label for="each" class="grey verysmall">${_('email notifications')}
-          <select name="each" class="each" style="font-size: 1em;">
-            %for v, t in [('hour', _('immediately')), ('day', _('at the end of the day')), ('never', _('never'))]:
-              %if v == selected:
-                <option selected="selected" value="${v}">${t}</option>
-              %else:
-                <option value="${v}">${t}</option>
-              %endif
-            %endfor
-          </select>
-        </label>
-        <img class="done_icon" src="${url('/images/details/icon_done.png')}" />
-        <img class="in_progress_icon" src="${url('/images/details/icon_progress.gif')}" />
+<%def name="pagetitle()">${_('Email notification settings')}</%def>
+
+<div class="post-header">
+  <p style="font-size: 14px; margin-bottom: 0">
+    ${_('Email me when')}
+  </p>
+  <div class="tip">
+    ${_('What notifications would you like to receive by email:')}
+  </div>
+</div>
+
+<%def name="notification_interval_form(action_url, selected)">
+    <% notification_options = [('hour', _('immediately')),
+                               ('day', _('at the end of the day')),
+                               ('never', _('never'))] %>
+    <form class="select-interval-form" action="${action_url}">
+      <label>
+        ${_('Send me email:')}
+        ${h.select('each', [selected], notification_options)}
+      </label>
+      ${h.input_submit(_('Confirm'), class_='dark inline')}
+    </form>
+</%def>
+
+<div class="subject notification-block">
+  <div class="header">
+    <strong>${_("Personally watched subjects' notifications")}</strong>
+    ${notification_interval_form(url(controller='profile', action='set_receive_email_each'), c.user.receive_email_each)}
+  </div>
+
+  %if c.subjects:
+    <div class="checkbox-list">
+    %for subject in c.subjects:
+      <form>
+        <input type="hidden" class="check-url" value="${url(controller='profile', action='watch_subject', subject_id=subject.id, js=True)}" />
+        <input type="hidden" class="uncheck-url" value="${url(controller='profile', action='unwatch_subject', subject_id=subject.id, js=True)}" />
+        <label><input type="checkbox" class="watch action-checkbox" checked="checked" />${subject.title}</label>
+        <span class="warning">${_("This subject will be removed from followed subject list.")}</span>
       </form>
+    %endfor
     </div>
-  </div>
-
-  %if group is not None:
-    ${subscription_option(group)}
+  %else:
+    <p class="empty-note">${_('You do not follow any subjects.')}</p>
   %endif
-
-  <div>
-    %if subjects:
-      ${subject_list(subjects, group)}
-    %elif group is None:
-      <span class="empty_note">
-        ${_('No watched subjects were found.')}
-      </span>
-    %endif
-  </div>
-</%self:rounded_block>
-</%def>
-
-<%def name="subscription_option(group)">
-<div class="GroupFilesContent-line-dal mailing-option">
-  <ul class="grupes-links-list-dalykai">
-    %if group.is_subscribed(c.user):
-      <% cls = 'enabled' %>
-    %else:
-      <% cls = 'disabled' %>
-    %endif
-    <li class="${cls}">
-      <dl>
-        <dt>
-          <span> 
-            %if group.mailinglist_enabled:
-            <a class="blark" href="${group.url(action='mailinglist')}">
-              ${_("Group's mailing list")}
-            </a>
-            %else:
-            <a class="blark" href="${group.url(action='forum')}">
-              ${_("Group's forum")}
-            </a>
-            %endif
-          </span>
-          <input type="hidden" class="subscribe_url"
-                 value="${group.url(action='subscribe')}" />
-          <input type="hidden" class="unsubscribe_url"
-                 value="${group.url(action='unsubscribe')}" />
-          <a class="unsubscribe_group_button"
-             href="${group.url(action='unsubscribe')}">
-            ${h.image('/images/details/eye_open.png', alt='unsubscribe')|n}
-          </a>
-          <a class="subscribe_group_button"
-             href="${group.url(action='subscribe')}">
-            ${h.image('/images/details/eye_closed.png', alt='subscribe')|n}
-          </a>
-        </dt>
-      </dl>
-    </li>
-  </ul>
-  <br class="clear-left" />
 </div>
-</%def>
-
-<%def name="subject_list(subjects, group=None)">
-  <%
-     count = len(subjects)
-  %>
-%for n, subject in enumerate(subjects, 1):
-<div class="GroupFilesContent-line-dal${n == count and '-last' or ''}">
-  <ul class="grupes-links-list-dalykai">
-    %if group is not None and subject in c.user.ignored_subjects:
-      <% cls = 'disabled' %>
-    %elif group is not None:
-      <% cls = 'enabled' %>
-    %else:
-      <% cls = '' %>
-    %endif
-    <li class="${cls}">
-      <dl>
-        <dt>
-          <span>
-            <a class="subject_title blark" href="${subject.url()}">${subject.title}</a>
-          </span>
-          %if group is not None:
-          <input type="hidden" class="ignore_url"
-                 value="${url(controller='profile', action='js_ignore_subject', subject_id=subject.id)}" />
-          <input type="hidden" class="unignore_url"
-                 value="${url(controller='profile', action='js_unignore_subject', subject_id=subject.id)}" />
-          <a class="ignore_subject_button"
-             href="${url(controller='profile', action='ignore_subject', subject_id=subject.id)}">
-            ${h.image('/images/details/eye_open.png', alt='ignore')|n}
-          </a>
-          <a class="unignore_subject_button"
-             href="${url(controller='profile', action='unignore_subject', subject_id=subject.id)}">
-            ${h.image('/images/details/eye_closed.png', alt='unignore')|n}
-          </a>
-          %endif
-        </dt>
-      </dl>
-    </li>
-  </ul>
-  <br class="clear-left" />
-</div>
-%endfor
-</%def>
-
-<div id="subject_settings">
-<h1 class="page-title">${_('Watched subjects notification settings')}:</h1>
-
-${subjects_block(_("Personally watched subjects' notifications"), url(controller='profile', action='set_receive_email_each'), c.user.receive_email_each, c.subjects)}
 
 %for group in c.groups:
-  ${subjects_block(_("Group's %(group_title)s notifications") % dict(group_title=h.link_to(group.title, group.url())),
-                   group.url(action='set_receive_email_each'), group.is_member(c.user).receive_email_each, group.watched_subjects, group)}
-%endfor
+<div class="group notification-block">
+  <div class="header">
+    <strong>${h.literal(_("Group's %(group_title)s notifications") % dict(group_title=h.link_to(group.title, group.url())))}</strong>
+    ${notification_interval_form(group.url(action='set_receive_email_each'), group.is_member(c.user).receive_email_each)}
+  </div>
+
+  %if group.watched_subjects:
+    <div class="checkbox-list">
+    %for subject in group.watched_subjects:
+      <form>
+        <input type="hidden" class="check-url" value="${url(controller='profile', action='js_unignore_subject', subject_id=subject.id)}" />
+        <input type="hidden" class="uncheck-url" value="${url(controller='profile', action='js_ignore_subject', subject_id=subject.id)}" />
+        <% checked = 'checked="checked"' if subject not in c.user.ignored_subjects else '' %>
+        <label><input type="checkbox" class="action-checkbox" ${checked} />${subject.title}</label>
+      </form>
+    %endfor
+    </div>
+  %else:
+    <p class="empty-note">${_('This group does not follow any subjects.')}</p>
+  %endif
 </div>
+%endfor
+
+%if c.groups:
+<div class="email notification-block">
+  <div class="header">
+    <strong>${_("Group emails")}</strong>
+  </div>
+
+  <div class="checkbox-list">
+  %for group in c.groups:
+    <form>
+      <input type="hidden" class="check-url" value="${group.url(action='subscribe', js=True)}" />
+      <input type="hidden" class="uncheck-url" value="${group.url(action='unsubscribe', js=True)}" />
+      <% checked = 'checked="checked"' if group.is_subscribed(c.user) else '' %>
+      <label><input type="checkbox" class="action-checkbox" ${checked} />${group.title}</label>
+    </form>
+  %endfor
+  </div>
+</div>
+%endif
