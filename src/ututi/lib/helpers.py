@@ -32,9 +32,10 @@ from pylons.i18n import _
 
 import pytz
 
-
 from webhelpers.pylonslib import Flash as _Flash
 flash = _Flash()
+
+from addhrefs import addhrefs
 
 
 def button_to(title, url='', **html_options):
@@ -136,13 +137,9 @@ def get_urls(text):
     urls = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+~]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", text)
     return urls
 
-url_re = re.compile(r"(https?://\S+)") # simple!
-url_re_plain = re.compile(r"(www\.\S+)")
-
 def wall_fmt(text):
     text = '\n<br/>\n'.join(cgi.escape(text).split("\n"))
-    text =  url_re.sub(r'<a href="\1">\1</a>', text)
-    text =  url_re_plain.sub(r'<a href="http://\1">\1</a>', text)
+    text = addhrefs(text)
     return literal(text)
 
 def ellipsis(text, max=20):

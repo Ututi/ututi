@@ -198,6 +198,44 @@ def test_file_size():
     """
 
 
+def test_wall_fmt():
+    """Tests for wall text formatter.
+
+        >>> from ututi.lib.helpers import wall_fmt
+
+    The helper returns a literal string, because it may contain tags:
+
+        >>> wall_fmt('Hello')
+        literal(u'Hello')
+
+    Wall text formatter is responsible for several things:
+    1. escaping HTML entities
+
+        >>> print wall_fmt('<b>Hello again</b>')
+        &lt;b&gt;Hello again&lt;/b&gt;
+
+    2. replacing newlines with <br /> tags
+
+        >>> wall_fmt('Hello\\nagain')
+        literal(u'Hello\\n<br/>\\nagain')
+
+    3. activating links (and also emails)
+
+        >>> print wall_fmt('Go to http://www.ututi.com.')
+        Go to <a href="http://www.ututi.com">http://www.ututi.com</a>.
+
+        >>> print wall_fmt('Go to www.ututi.com.')
+        Go to <a href="http://www.ututi.com">www.ututi.com</a>.
+
+        >>> print wall_fmt('Go to http://ututi.com.')
+        Go to <a href="http://ututi.com">http://ututi.com</a>.
+
+        >>> print wall_fmt('Contact us info@ututi.com.')
+        Contact us <a href="mailto:info@ututi.com">info@ututi.com</a>.
+
+    """
+
+
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |

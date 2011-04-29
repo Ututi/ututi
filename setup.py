@@ -27,7 +27,8 @@ setup(
         "python-openid",
         "nous.pylons.grok",
         "nous.pylons.testing",
-        "nous.pylons.geoip"
+        "nous.pylons.geoip",
+        "addhrefs",
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
