@@ -68,7 +68,7 @@
   </ul>
   %endif
 
-  <h1 class="page-title registration with-bottom-line">${self.pagetitle()}</h1>
+  <h1 class="page-title registration underline">${self.pagetitle()}</h1>
 
   ${next.body()}
 

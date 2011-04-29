@@ -82,7 +82,7 @@ ${group_right_sidebar()}
   show_info = getattr(c, 'show_info', False)
   %>
 
-  <h1 class="page-title ${'with-bottom-line' if not show_tabs or show_info else ''}">
+  <h1 class="page-title ${'underline' if not show_tabs or show_info else ''}">
     ${self.title()}
   </h1>
 

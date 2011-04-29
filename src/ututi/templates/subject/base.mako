@@ -25,7 +25,7 @@
 
 <%def name="pre_content()">
 %if hasattr(c, 'notabs'):
-<h1 class="page-title with-bottom-line">${c.subject.title}</h1>
+<h1 class="page-title underline">${c.subject.title}</h1>
 %else:
 <h1 class="page-title">${c.subject.title}</h1>
 %endif

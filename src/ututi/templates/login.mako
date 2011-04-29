@@ -45,7 +45,7 @@
   </a>
 </div>
 
-<h1 class="page-title with-bottom-line">${_("Login")}</h1>
+<h1 class="page-title underline">${_("Login")}</h1>
 
 %if hasattr(c, 'header'):
   <p> <strong> ${c.header} </strong> ${h.literal(c.message)} </p>

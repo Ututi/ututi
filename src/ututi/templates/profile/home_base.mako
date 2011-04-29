@@ -18,7 +18,7 @@ ${parent.head_tags()}
 </%def>
 
 %if hasattr(self, 'pagetitle'):
-  <h1 class="page-title with-bottom-line">${self.pagetitle()}</h1>
+  <h1 class="page-title underline">${self.pagetitle()}</h1>
 %endif
 
 <%def name="group_feature_box()">

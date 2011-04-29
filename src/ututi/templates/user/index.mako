@@ -94,7 +94,7 @@
 </div>
 %endif
 
-<h1 class="page-title with-bottom-line">
+<h1 class="page-title underline">
   ${c.user_info.fullname}
 </h1>
 

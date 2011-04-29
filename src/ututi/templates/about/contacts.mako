@@ -1,7 +1,7 @@
 <%inherit file="/ubase-two-sidebars.mako" />
 <%namespace file="/portlets/universal.mako" import="contacts_portlet" />
 
-<h1 class="page-title with-bottom-line">${_('Contact Us')}</h1>
+<h1 class="page-title underline">${_('Contact Us')}</h1>
 
 <%def name="portlets_right()">
   ${contacts_portlet()}

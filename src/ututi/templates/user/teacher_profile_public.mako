@@ -26,7 +26,7 @@
    ${index.css()}
 </%def>
 
-<h1 class="page-title with-bottom-line">
+<h1 class="page-title underline">
   ${_('Teacher')} ${c.user_info.fullname}
 </h1>
 

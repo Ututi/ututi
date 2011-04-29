@@ -78,7 +78,7 @@
 <%def name="item_list(title, items, class_='')">
 <% if hasattr(caller, 'footer'): class_ += ' with-footer' %>
 <%self:rounded_block class_="item-list ${class_}">
-  <div class="large-header with-shade with-bottom-line">
+  <div class="large-header with-shade underline">
     <h2 class="portletTitle bold category-title">
       ${title}
       %if hasattr(caller, 'header_link'):

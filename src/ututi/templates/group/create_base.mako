@@ -194,6 +194,6 @@
   %endif
 </%def>
 
-<h1 class="page-title with-bottom-line">${self.title()}</h1>
+<h1 class="page-title underline">${self.title()}</h1>
 
 ${next.body()}

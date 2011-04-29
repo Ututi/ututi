@@ -6,7 +6,7 @@
 
 <%def name="group_menu()">
 
-  <div class="with-bottom-line clearfix">
+  <div class="underline clearfix">
     <h1 class="page-title " style="float: left;">${self.title()}</h1>
     <div class="back-link" style="float: right;">
       <a class="back-link" href="${c.group.url()}">${_('Back')}</a>
@@ -70,7 +70,7 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
 <%def name="css()">
   ${parent.css()}
 
-  .with-bottom-line {
+  .underline {
      border-bottom: 1px solid #FF9900;
      margin-bottom: 10px;
   }
