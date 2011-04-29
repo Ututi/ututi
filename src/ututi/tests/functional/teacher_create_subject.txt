@@ -63,7 +63,7 @@ Let's go to the settings and change our location information:
 
 Now back to home page and click to add another subject:
 
-    >>> browser.getLink('back to home page').click()
+    >>> browser.click('back')
     >>> browser.getControl('add courses').click()
 
 This time both location fields will be prefilled by default 

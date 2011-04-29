@@ -28,7 +28,7 @@ profile information and biography. So, let's fill some biography information.
 
     >>> user.click('Biography')
     >>> user.printCssQuery('h1.page-title', strip=True)
-    <h1>Your biography:</h1>
+    <h1>Your biography</h1>
 
     >>> user.getControl('Enter some facts from your biography').value = "Some <strong>cool</strong> biography!"
     >>> user.getControl('Save').click()
