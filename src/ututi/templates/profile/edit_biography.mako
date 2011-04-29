@@ -5,10 +5,10 @@
   ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 </%def>
 
+<%def name="pagetitle()">${_("Your biography")}</%def>
+
 <div id="general-information-settings">
   <form method="post" action="${url(controller='profile', action='update_biography')}" name="edit_biography_form" enctype="multipart/form-data" class="new-style-form"> 
-    <h1 class="page-title">${_('Your biography')}:</h1>
-
     <fieldset>
       <div class="formField">
         <label for="description">

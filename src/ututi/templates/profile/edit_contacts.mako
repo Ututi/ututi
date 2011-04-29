@@ -1,10 +1,10 @@
 <%inherit file="/profile/edit.mako" />
 <%namespace file="/widgets/facebook.mako" import="init_facebook" />
 
+<%def name="pagetitle()">${_("Contacts")}</%def>
+
 <form method="post" action="${url(controller='profile', action='update_contacts')}"
       id="contacts_form" class="new-style-form">
-
-  <h1 class='page-title'>${_("Contacts")}:</h1>
 
   <fieldset>
 

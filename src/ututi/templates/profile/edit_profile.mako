@@ -50,6 +50,8 @@
   </script>
 </%def>
 
+<%def name="pagetitle()">${_("General information")}</%def>
+
 <div id="general-information-settings">
   <form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" enctype="multipart/form-data" class="new-style-form"> 
     <div class="js-alternatives" id="user-logo">
@@ -67,8 +69,6 @@
     </div>
 
     <div class="js-alternatives" id="general-information-form">
-
-      <h1 class="page-title">${_('General information')}:</h1>
 
       <fieldset>
       ${h.input_line('fullname', _('Full name'))}
