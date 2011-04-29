@@ -58,7 +58,7 @@
       </li>
       %endfor
       <li class="icon-find">
-        ${h.link_to(_('Find groups'), url(controller='profile', action='search', obj_type='group'))}
+        ${h.link_to(_('Find groups'), user.location.url(action='catalog', obj_type='group'))}
       </li>
       <li class="icon-add">
         ${h.link_to(_('Create new group'), url(controller='group', action='create'))}

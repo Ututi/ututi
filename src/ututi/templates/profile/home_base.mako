@@ -45,7 +45,7 @@ ${parent.head_tags()}
       </div>
     </div>
     <div class="action-button">
-      ${h.button_to(_('Create a new group'), url(controller='group', action='create'), class_='add', method='GET')}
+      ${h.button_to(_('Find your group'), c.user.location.url(action='catalog', obj_type='group'), class_='add', method='GET')}
     </div>
   </div>
 </%def>
