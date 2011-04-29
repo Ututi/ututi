@@ -706,7 +706,10 @@ def content_link(content_id):
     from ututi.model.mailing import GroupMailingListMessage
     from pylons import url
     item = ContentItem.get(content_id)
-    if type(item) in [Subject, Group, Page, ForumPost]:
+    if type(item) == ForumPost:
+        # we don't want to link to forum posts anymore
+        return item.title
+    if type(item) in [Subject, Group, Page]:
         return link_to(item.title, url(controller='content', action='get_content', id=content_id))
     elif type(item) == File:
         return link_to(item.filename, url(controller='content', action='get_content', id=content_id))
