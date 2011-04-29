@@ -72,7 +72,7 @@ ${parent.head_tags()}
       </div>
     </div>
     <div class="action-button">
-      ${h.button_to(_('Create a new subject'), url(controller='subject', action='add'), class_='add')}
+      ${h.button_to(_('Find your subjects'), c.user.location.url(action='catalog', obj_type='subject'), class_='add')}
     </div>
   </div>
 </%def>

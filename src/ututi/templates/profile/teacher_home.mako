@@ -105,7 +105,7 @@ ${parent.head_tags()}
     </div>
     <div class="action-button">
       ${h.button_to(_('Add your courses'), url(controller='subject', action='add'), class_='add', method='GET')}
-      ${h.link_to(_("Or browse subjects' catalog"), url(controller='profile', action='search', obj_type='subject'), class_='browse-link')}
+      ${h.link_to(_("Or browse subjects' catalog"), c.user.location.url(action='catalog', obj_type='subject'), class_='browse-link')}
     </div>
   </div>
 </%def>
