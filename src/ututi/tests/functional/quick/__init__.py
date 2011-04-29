@@ -25,6 +25,7 @@ def setUp(test):
 
 
 def tearDown(test):
+    meta.Session.execute("truncate notifications cascade")
     meta.Session.execute("truncate tags cascade")
     meta.Session.execute("truncate regions cascade")
     meta.Session.execute("truncate cities cascade")
