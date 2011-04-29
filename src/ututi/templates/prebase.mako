@@ -107,15 +107,11 @@ ${_('Private social networks for universities')}
         <li id="nav-catalog"><a href="${url(controller='profile', action='browse')}">${_('Catalog')}</a></li>
       </ul>
       <form id="search-form" action="${url(controller='profile', action='search')}">
-        <fieldset>
-          <legend class="a11y">${_('Search')}</legend>
-          <label class="text-field">
-            <span class="a11y">${_('Search text')}</span>
-            <input type="text" name="text"/>
-            <span class="edge"></span>
-          </label>
-          ${h.input_submit(_('search_'))}
-        </fieldset>
+        <label>
+          <span class="a11y">${_('Search text')}</span>
+          <input type="text" name="text"/>
+        </label>
+        ${h.input_submit(_('search_'))}
       </form>
       <ul id="user-menu">
         <li class="expandable profile-nav">
@@ -130,8 +126,7 @@ ${_('Private social networks for universities')}
         </li>
       </ul>
     </div>
-
-</div>
+  </div>
 </div>
 <script type="text/javascript">
     // nav ul li expandable

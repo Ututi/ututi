@@ -1199,6 +1199,10 @@ ul.feature-list {
     background: url('/img/icons.com/arrow_right.png') no-repeat left center;
 }
 
+.a11y {
+    display: none;
+}
+
 /* Clearfix should be preferred way of closing
  * containers, that contains floated elements.
  */

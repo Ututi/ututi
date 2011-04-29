@@ -85,7 +85,7 @@ html, body {
 ul#head-nav {
     float: left;
     list-style: none;
-    width: 310px;
+    width: 345px;
     padding-left: 15px;
     text-align: left;
 }
@@ -132,19 +132,19 @@ ul#head-nav li#nav-catalog a:hover {
 }
 
 #search-form {
-    width: 260px;
+    width: 225px;
     float: left;
 }
 
-#search-form .text-field input {
+#search-form input {
     background: url("img/icons/search_small.png") right center no-repeat;
     background-color: #ffffff;
     padding: 0 20px 0 2px;
-    width: 235px;
+    width: 203px;
     height: 18px;
 }
 
-#search-form .submit {
+#search-form button {
     display: none;
 }
 
