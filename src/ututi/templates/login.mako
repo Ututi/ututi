@@ -29,19 +29,16 @@
 
 <table id="login-screen">
   <td class="login-choice-box">
-    <div class="login-note">
-      ${_('Log in or register using your Google or Facebook account')}
-    </div>
-    <div id="federated-login-buttons">
-      <a href="${url(controller='federation', action='google_register', came_from=c.came_from, invitation_hash=c.hash)}" id="google-button">
-        ${h.image('/img/google-logo.gif', alt='Log in using Google', class_='google-login')}
-      </a>
-      <br />
-      ## We rely here on the fact that Facebook has been configured
-      ## by the login widget in the page header.
-      <fb:login-button perms="email"
-          onlogin="show_loading_message(); window.location = '${url(controller='federation', action='facebook_login', came_from=c.came_from, invitation_hash=c.hash)}'"
-       >${_('Connect')}</fb:login-button>
+    <strong>
+      ${h.literal(_("Ututi.xx has moved to %(ututi_com_link)s!") % \
+          dict(ututi_com_link=h.link_to('Ututi.com', 'http://ututi.com')))}
+    </strong>
+    <div style="margin-top: 30px">
+      <img src="/img/U-com.png" alt="Ututi.com" style="float: left; margin-right: 20px" />
+      <p style="font-size: smaller; margin-bottom: 15px">- ${_("Join your university's social network;")}</p>
+      <p style="font-size: smaller; margin-bottom: 15px">- ${_("Follow subjects that you study;")}</p>
+      <p style="font-size: smaller; margin-bottom: 15px">- ${_("Communicate with academic community of your university.")}</p>
+      <p style="text-align: right"><a class="forward-link" href="http://ututi.com">${_("Go to Ututi.com")}</a></p>
     </div>
   </td>
 

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-04-27 20:01+0300\n"
+"PO-Revision-Date: 2011-04-29 20:02+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1141,10 +1141,20 @@ msgid ""
 "http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
 msgstr ""
 
-msgid "Log in or register using your Google or Facebook account"
+#, python-format
+msgid "Ututi.xx has moved to %(ututi_com_link)s!"
 msgstr ""
 
-msgid "Connect"
+msgid "Join your university's social network;"
+msgstr ""
+
+msgid "Follow subjects that you study;"
+msgstr ""
+
+msgid "Communicate with academic community of your university."
+msgstr ""
+
+msgid "Go to Ututi.com"
 msgstr ""
 
 msgid "Log in directly to Ututi"
@@ -1953,6 +1963,12 @@ msgid "It's place where you find new owner for you old good textbook."
 msgstr ""
 
 msgid "Newest books"
+msgstr ""
+
+msgid "Log in or register using your Google or Facebook account"
+msgstr ""
+
+msgid "Connect"
 msgstr ""
 
 msgid "Books added"
