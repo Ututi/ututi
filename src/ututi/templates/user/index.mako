@@ -110,16 +110,19 @@
         ${snippets.item_location_full(c.user_info)}
       </li>
 
-      %if c.user_info.phone_number and c.user_info.phone_confirmed:
-      <li class="icon-mobile link-color">
-        ${c.user_info.phone_number}
-      </li>
-      %endif
+      %if c.user is not None:
+        ## don't show private details to anonymous
+        %if c.user_info.phone_number and c.user_info.phone_confirmed:
+        <li class="icon-mobile link-color">
+          ${c.user_info.phone_number}
+        </li>
+        %endif
 
-      %if c.user_info.emails:
-      <li class="icon-contact link-color">
-        ${h.literal(', '.join([h.mail_to(email.email) for email in c.user_info.emails if email.confirmed]))}
-      </li>
+        %if c.user_info.emails:
+        <li class="icon-contact link-color">
+          ${h.literal(', '.join([h.mail_to(email.email) for email in c.user_info.emails if email.confirmed]))}
+        </li>
+        %endif
       %endif
 
       %if c.user_info.site_url:
