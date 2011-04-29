@@ -11,7 +11,7 @@
 
 
 <%def name="pagetitle()">
-${_('Search')}
+${_('Universities')}
 </%def>
 ${search_form(c.text, c.obj_type, c.tags, parts=['text'], target=url(controller='profile', action='search'))}
 

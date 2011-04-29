@@ -2,6 +2,8 @@
 <%namespace file="/portlets/facebook.mako" import="*"/>
 <%namespace file="/search/index.mako" import="search_form"/>
 
+<h1 class="page-title">${_('Universities')}</h1>
+
 <%def name="location_tag(uni)">
 <div class="university_block">
   %if uni['has_logo']:
