@@ -24,7 +24,8 @@ def current_user():
         return None
 
     user = User.get(login)
-    if user is not None or not user.location:
+
+    if not user or not user.location:
         return None
     if 'mru' not in user.location.path:
         session.delete()
