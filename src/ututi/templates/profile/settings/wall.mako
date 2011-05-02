@@ -1,4 +1,4 @@
-<%inherit file="/profile/edit.mako" />
+<%inherit file="/profile/settings/base.mako" />
 
 <%def name="pagetitle()">${_('News feed settings')}</%def>
 

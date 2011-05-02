@@ -23,7 +23,7 @@ will be registered as teacher:
     >>> user.click('Skip')
     >>> user.click('Finish')
 
-Now teacher is on Ututi and waiting for approvement but still his can fill
+Now teacher is on Ututi and waiting for approvement but still he can fill
 profile information and biography. So, let's fill some biography information.
 
     >>> user.click('Biography')
@@ -46,3 +46,30 @@ Now let's go to Public profile and look at biography tab. Here should be our bio
     <div id="teacher-biography" class="wiki-page">
          Some <strong>cool</strong> biography!
     </div>
+
+After user is verified as a teacher, he still can edit his biography
+in settings page:
+
+    >>> admin = Browser.logIn()
+    >>> admin.open('http://localhost/admin')
+    >>> admin.click('Teachers')
+    >>> admin.click('Confirm')
+
+    >>> user.click('Settings')
+    >>> user.click('Biography')
+    >>> user.getControl('Enter some facts from your biography').value
+    'Some <strong>cool</strong> biography!'
+    >>> user.getControl('Enter some facts from your biography').value = 'Some <strong>very cool</strong> biography!'
+    >>> user.getControl('Save').click()
+    >>> user.printCssQuery('.flash-message-content', strip=True)
+    <span>Your biography was updated.</span>
+    >>> user.click('Public profile')
+    >>> user.click('Biography')
+    >>> user.printCssQuery('#teacher-biography')
+    <div id="teacher-biography" class="wiki-page">
+         Some <strong>very cool</strong> biography!
+    </div>
+
+Mail queue is irrelevant for this test:
+
+    >>> mail_queue[:] = []

@@ -167,16 +167,16 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
     def _edit_profile_form(self):
         self._set_settings_tabs(current_tab='general')
-        return render('profile/edit_profile.mako')
+        return render('profile/settings/profile.mako')
 
     def _edit_contacts_form(self):
         self._set_settings_tabs(current_tab='contacts')
-        return render('profile/edit_contacts.mako')
+        return render('profile/settings/contacts.mako')
 
     def _wall_settings_form(self):
         c.event_types = event_types_grouped(Event.event_types())
         self._set_settings_tabs(current_tab='wall')
-        return render('profile/wall_settings.mako')
+        return render('profile/settings/wall.mako')
 
     def _set_settings_tabs(self, current_tab):
         c.current_tab = current_tab
@@ -205,12 +205,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                                defaults=self._edit_form_defaults())
 
     @ActionProtector("user")
-    def edit_biography(self):
-        return htmlfill.render(self._edit_biography_form(),
-                               defaults=self._edit_form_defaults())
-
-
-    @ActionProtector("user")
     @validate(schema=WallSettingsForm, form='_wall_settings_form')
     def wall_settings(self):
         if hasattr(self, 'form_result'):
@@ -233,7 +227,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         self._set_settings_tabs(current_tab='notifications')
         c.subjects = c.user.watched_subjects
         c.groups = c.user.groups
-        return render('profile/notifications.mako')
+        return render('profile/settings/notifications.mako')
 
     @ActionProtector("user")
     def link_google(self):
@@ -319,18 +313,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         meta.Session.commit()
         h.flash(_('Your profile was updated.'))
         redirect(url(controller='profile', action='edit'))
-
-    @validate(schema=BiographyForm, form='_edit_biography_form')
-    @ActionProtector("user")
-    def update_biography(self):
-        if not hasattr(self, 'form_result'):
-            redirect(url(controller='profile', action='edit_biography'))
-
-        c.user.description = self.form_result.get('description', None)
-        meta.Session.commit()
-        h.flash(_('Your biography was updated.'))
-
-        redirect(url(controller='profile', action='edit_biography'))
 
     def confirm_emails(self):
         if c.user is not None:
@@ -675,7 +657,62 @@ class UserProfileController(ProfileControllerBase):
         return render_mako_def('/profile/home_base.mako', 'phone_confirmed')
 
 
-class TeacherProfileController(ProfileControllerBase):
+class UnverifiedTeacherProfileController(ProfileControllerBase):
+
+    @ActionProtector("teacher")
+    def home(self):
+        return htmlfill.render(self._edit_profile_form(),
+                               defaults=self._edit_form_defaults())
+
+    def _edit_profile_form(self):
+        self._set_settings_tabs(current_tab='general')
+        return render('profile/settings/teacher_profile.mako')
+
+    def _set_settings_tabs(self, current_tab):
+        # we want to show less to unverified teachers
+        c.current_tab = current_tab
+        c.tabs = [
+            {'title': _("General information"),
+             'name': 'general',
+             'link': url(controller='profile', action='edit')},
+            {'title': _("Contacts"),
+             'name': 'contacts',
+             'link': url(controller='profile', action='edit_contacts')},
+            {'title': _("Biography"),
+             'name': 'biography',
+             'link': url(controller='profile', action='edit_biography')},]
+
+    def _edit_contacts_form(self):
+        self._set_settings_tabs(current_tab='contacts')
+        return render('profile/settings/teacher_contacts.mako')
+
+    def _edit_biography_form(self):
+        self._set_settings_tabs(current_tab='biography')
+        return render('profile/settings/teacher_biography.mako')
+
+    @ActionProtector("user")
+    def edit_biography(self):
+        return htmlfill.render(self._edit_biography_form(),
+                               defaults=self._edit_form_defaults())
+
+    @validate(schema=BiographyForm, form='_edit_biography_form')
+    @ActionProtector("user")
+    def update_biography(self):
+        if not hasattr(self, 'form_result'):
+            redirect(url(controller='profile', action='edit_biography'))
+
+        c.user.description = self.form_result.get('description', None)
+        meta.Session.commit()
+        h.flash(_('Your biography was updated.'))
+
+        redirect(url(controller='profile', action='edit_biography'))
+
+    @ActionProtector("teacher")
+    def register_welcome(self):
+        return self.home()
+
+
+class TeacherProfileController(UnverifiedTeacherProfileController):
 
     def _actions(self, selected):
         """Generate a list of all possible actions.
@@ -693,6 +730,25 @@ class TeacherProfileController(ProfileControllerBase):
             }
         if selected in bcs.keys():
             return bcs[selected]
+
+    def _set_settings_tabs(self, current_tab):
+        c.current_tab = current_tab
+        c.tabs = [
+            {'title': _("General information"),
+             'name': 'general',
+             'link': url(controller='profile', action='edit')},
+            {'title': _("Contacts"),
+             'name': 'contacts',
+             'link': url(controller='profile', action='edit_contacts')},
+            {'title': _("Biography"),
+             'name': 'biography',
+             'link': url(controller='profile', action='edit_biography')},
+            {'title': _("Wall"),
+             'name': 'wall',
+             'link': url(controller='profile', action='wall_settings')},
+            {'title': _("Notifications"),
+             'name': 'notifications',
+             'link': url(controller='profile', action='notifications')}]
 
     @ActionProtector("user")
     def register_welcome(self):
@@ -836,41 +892,3 @@ class TeacherProfileController(ProfileControllerBase):
             else:
                 h.flash(_('Message sent.'))
                 redirect(url(controller='profile', action='home'))
-
-
-class UnverifiedTeacherProfileController(ProfileControllerBase):
-
-    @ActionProtector("teacher")
-    def home(self):
-        return htmlfill.render(self._edit_profile_form(),
-                               defaults=self._edit_form_defaults())
-
-    def _edit_profile_form(self):
-        self._set_settings_tabs(current_tab='general')
-        return render('profile/unverified_teacher_edit.mako')
-
-    def _set_settings_tabs(self, current_tab):
-        c.current_tab = current_tab
-        c.tabs = [
-            {'title': _("General information"),
-             'name': 'general',
-             'link': url(controller='profile', action='edit')},
-            {'title': _("Contacts"),
-             'name': 'contacts',
-             'link': url(controller='profile', action='edit_contacts')},
-            {'title': _("Biography"),
-             'name': 'biography',
-             'link': url(controller='profile', action='edit_biography')},]
-
-    def _edit_contacts_form(self):
-        self._set_settings_tabs(current_tab='contacts')
-        return render('profile/unverified_teacher_edit_contacts.mako')
-
-    def _edit_biography_form(self):
-        self._set_settings_tabs(current_tab='biography')
-        return render('profile/unverified_teacher_edit_biography.mako')
-
-    @ActionProtector("teacher")
-    def register_welcome(self):
-        return self.home()
-

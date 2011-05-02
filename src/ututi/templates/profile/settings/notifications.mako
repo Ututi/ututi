@@ -1,4 +1,4 @@
-<%inherit file="/profile/edit.mako" />
+<%inherit file="/profile/settings/base.mako" />
 
 <%def name="css()">
 ${parent.css()}
