@@ -24,12 +24,16 @@ def current_user():
         return None
 
     user = User.get(login)
-    if user is not None and 'mru' not in user.location.path:
+    if user is not None or not user.location:
+        return None
+    if 'mru' not in user.location.path:
         session.delete()
         return None
     return user
 
 def sign_in_user(user, long_session=False):
+    if not user or not user.location:
+        return
     if 'mru' not in user.location.path:
         return
     set_geolocation(user)
