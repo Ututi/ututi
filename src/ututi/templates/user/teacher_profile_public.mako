@@ -83,13 +83,16 @@
 </div>
 
 <div class="section biography">
-  <div class="title">${_("Biography")}:</div>
+  <div class="title">
+    ${_("Biography")}:
+  </div>
 %if c.user_info.description:
   <div id="teacher-biography" class="wiki-page">
     ${h.html_cleanup(c.user_info.description)}
   </div>
 %else:
   <div id="no-description-block">
-  <h2>${_("There is no biography.")}</h2>
+    <h2>${_("There is no biography.")}</h2>
+  </div>
 %endif
 </div>
