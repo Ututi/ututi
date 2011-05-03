@@ -7,7 +7,7 @@
 <form id="sign-up-form" method="POST" action="${c.location.url(action='register_teacher')}">
   <form:error name="email" format="raw" />
   <fieldset id="register-fieldset">
-    <label>${_("Enter your academic email")}</label>
+    <label for="email">${_("Enter your academic email")}</label>
     <input type="text" value="" name="email" id="email" class="email-input" />
     ${h.input_submit(_('Sign Up'))}
     <div class="notice">
