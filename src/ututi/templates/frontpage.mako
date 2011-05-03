@@ -6,7 +6,7 @@
   <div id="sign-up-inner">
     <div id="sign-in-area">
       <h1>${_("Sign up to join your university's social network or create it yourself")}</h1>
-      <form id="sign-up-form" method="POST" action="${url(controller='home', action='register')}">
+      <form id="sign-up-form" class="light" method="POST" action="${url(controller='home', action='register')}">
         <div class="message-container">
           <form:error name="email" format="raw" />
         </div>

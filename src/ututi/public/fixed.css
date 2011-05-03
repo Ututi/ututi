@@ -476,6 +476,89 @@ form.inline-form button {
     display: inline;
 }
 
+/* SIGN UP FORM
+ */
+
+#sign-up-form {
+    width: 620px;
+}
+
+    #sign-up-form .message-container {
+        height: 20px;
+    }
+
+    #sign-up-form fieldset {
+        border: 0px;
+        padding: 5px 0 12px 0;
+        position: relative;
+    }
+
+    #sign-up-form label,
+    #sign-up-form label.over {
+        font-size: 18px !important;
+        color: #999;
+        position: absolute;
+        top: 10px;
+        left: 15px;
+    }
+
+    #sign-up-form input {
+        border: 1px solid #999 !important;
+        background-color: white !important;
+        height: 20px !important;
+        width: 360px !important;
+        font-size: 18px !important;
+        padding: 10px 15px !important;
+        color: #666;
+        display: inline;
+    }
+
+    #sign-up-form .submit {
+        display: inline;
+        height: 42px;
+        width: auto;
+        color: #ffffff;
+        background-color: #ff9900; /* Orange */
+        font-size: 20px !important;
+        font-weight: bold !important;
+        padding: 0 15px !important;
+        margin: 0 0 0 15px !important;
+        border: none;
+    }
+
+        #sign-up-form.light .submit {
+            border: 1px solid #666666;
+            box-shadow: 3px 3px 10px #333;
+            -moz-box-shadow: 3px 3px 10px #333;
+            -webkit-box-shadow: 3px 3px 10px #333;
+        }
+
+    #sign-up-form .submit:hover {
+        background: url("img/buttons/hover_big_orange.png") repeat-x scroll left bottom #FF9900;
+    }
+
+    #sign-up-form .error-container {
+        margin-left: 0;
+    }
+
+    #sign-up-form .error-message {
+        font-size: 12px;
+    }
+
+    #sign-up-form .notice {
+        background: url("img/important.png") no-repeat left top;
+        color: #999;
+        padding-left: 25px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        font-size: 12px;
+        width: 500px;
+    }
+
+        #sign-up-form.light .error-message,
+        #sign-up-form.light .notice {
+            color: #fff;
+        }
 
 /* THE NEW WALL STYLE
  */
