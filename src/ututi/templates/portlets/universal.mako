@@ -2,6 +2,20 @@
 <%namespace file="/elements.mako" import="item_box" />
 <%namespace file="/widgets/facebook.mako" import="init_facebook" />
 
+<%def name="about_ututi_portlet()">
+  <%self:portlet id="about-ututi-portlet">
+    <%def name="header()">
+      ${_("About Ututi:")}
+    </%def>
+    <p>
+    ${_("Ututi lets you create a social network for your university. "
+        "Here you will find online groups, teacher profiles and course pages. "
+        "Ututi is a tool to share information and build your online academic community.")}
+    </p>
+    <a href="${url(controller='home', action='features')}">${_("Learn more...")}</a>
+  </%self:portlet>
+</%def>
+
 <%def name="users_online_portlet(count=12)">
   <% users = h.users_online(count) %>
   %if users:

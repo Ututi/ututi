@@ -45,6 +45,12 @@
         background-position: 1px center;
     }
 
+#about-ututi-portlet { }
+
+    #about-ututi-portlet p {
+        padding-right: 10px;
+    }
+
 #user-information-portlet { }
 
     #user-information-portlet .user-logo {
