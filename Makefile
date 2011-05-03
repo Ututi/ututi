@@ -94,7 +94,7 @@ start_database: instance/var/data/postgresql.conf instance/var/run/.s.PGSQL.${PG
 
 .PHONY: stop_database
 stop_database:
-	test -f ${PWD}/instance/var/data/postmaster.pid && ${PG_PATH}/bin/pg_ctl -D ${PWD}/instance/var/data stop -o "-c unix_socket_directory=${PWD}/instance/var/run/" || true
+	test -f ${PWD}/instance/var/data/postmaster.pid && ${PG_PATH}/bin/pg_ctl -D ${PWD}/instance/var/data stop -m i -o "-c unix_socket_directory=${PWD}/instance/var/run/" || true
 
 tags: buildout.cfg bin/buildout setup.py bin/tags
 	bin/tags
