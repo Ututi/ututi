@@ -75,20 +75,16 @@
     'icon-group', 'icon-email', 'icon-discussions', 'icon-message',
     'icon-chat', 'icon-publications', 'icon-note', 'icon-edit-note',
     'icon-class-note', 'icon-talk', 'icon-wiki', 'icon-administration',
-    'icon-branding', 'icon-cv',] %>
-  %for n, icon in enumerate(icons):
-  %if n % 2 == 0:
+    'icon-branding', 'icon-cv', 'icon-subject', ] %>
   <div class="clearfix">
-  %endif
+  %for n, icon in enumerate(icons):
     <div class="feature ${icon}">
       <strong>${icon}</strong>
       Luctus nunc massa a velit. Fusce ac nisi. Integer volutpat elementum metus.
       Vivamus luctus ultricies diam. Curabitur euismod. Vivamus quam. Nunc.
     </div>
-  %if n % 2 == 1:
-  </div>
-  %endif
   %endfor
+  </div>
 </div>
 
 <%b:rounded_block>

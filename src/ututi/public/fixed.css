@@ -481,6 +481,7 @@ form.inline-form button {
 
 #sign-up-form {
     width: 620px;
+    margin-bottom: 20px;
 }
 
     #sign-up-form .message-container {
@@ -550,7 +551,6 @@ form.inline-form button {
         color: #999;
         padding-left: 25px;
         margin-top: 10px;
-        margin-bottom: 20px;
         font-size: 12px;
         width: 500px;
     }
@@ -1682,6 +1682,10 @@ ul.medium-icon-list {
     }
     .feature-box .icon-group {
         background-image: url('img/icons.com/about/group.png');
+        background-position: 5px 5px;
+    }
+    .feature-box .icon-subject {
+        background-image: url('img/icons.com/about/subject.png');
         background-position: 5px 5px;
     }
     .feature-box .icon-email {

@@ -1849,6 +1849,10 @@ class LocationTag(Tag):
                     link=self.url(qualified=True),
                     description=self.description)
 
+    @property
+    def public(self):
+        return self.member_policy == 'PUBLIC'
+
 
 def cleanupFileName(filename):
     return filename.split('\\')[-1].split('/')[-1]
