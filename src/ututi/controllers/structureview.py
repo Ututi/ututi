@@ -35,7 +35,8 @@ def location_action(method):
         c.security_context = location
         c.object_location = None
         c.location = location
-        c.tabs = structure_menu_items()
+        c.menu_items = structure_menu_items()
+        c.current_menu_item = None
         if obj_type is None:
             return method(self, location)
         else:
@@ -143,7 +144,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
     @location_action
     def index(self, location):
-        c.current_tab = 'index'
+        c.current_menu_item = 'index'
 
         self._breadcrumbs(location)
         self._set_wall_variables()
@@ -158,7 +159,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
     @location_action
     @validate(schema=SearchSubmit, post_only=False, on_get=True)
     def catalog(self, location, obj_type):
-        c.current_tab = obj_type + 's'
+        c.current_menu_item = obj_type + 's'
         self._breadcrumbs(location)
 
         self.form_result['tagsitem'] = location.hierarchy()

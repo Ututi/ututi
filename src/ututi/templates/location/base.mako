@@ -110,7 +110,7 @@
 %endif
 </%def>
 
-<% show_tabs = hasattr(c, 'current_tab') %>
+<% show_tabs = hasattr(c, 'current_menu_item') %>
 
 <h1 class="page-title ${'underline' if not show_tabs else ''}">
   ${self.pagetitle()}
@@ -121,7 +121,7 @@ ${university_box(c.departments, _("Departments:"))}
 %endif
 
 %if show_tabs:
-${tabs()}
+${tabs(c.menu_items, c.current_menu_item)}
 %endif
 
 ${next.body()}
