@@ -11,8 +11,8 @@ will be registered as teacher:
     >>> user = Browser()
     >>> user.open('http://localhost/school/uni')
     >>> user.click('I teach here')
-    >>> user.getControl('Enter your email here:').value = 'user@example.com'
-    >>> user.click('Register')
+    >>> user.getControl('Enter your academic email').value = 'user@example.com'
+    >>> user.click('Sign Up')
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())
     >>> user.open(urls[0])

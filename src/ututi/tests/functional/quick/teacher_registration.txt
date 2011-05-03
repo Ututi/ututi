@@ -16,8 +16,8 @@ will be registered as teacher:
     >>> user = Browser()
     >>> user.open('http://localhost/school/uni')
     >>> user.click('I teach here')
-    >>> user.getControl('Enter your email here:').value = 'user@example.com'
-    >>> user.click('Register')
+    >>> user.getControl('Enter your academic email').value = 'user@example.com'
+    >>> user.click('Sign Up')
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())
     >>> user.open(urls[0])
@@ -51,8 +51,8 @@ Let's register one more teacher that later will be denied:
     >>> notteacher = Browser()
     >>> notteacher.open('http://localhost/school/uni')
     >>> notteacher.click('I teach here')
-    >>> notteacher.getControl('Enter your email here:').value = 'notteacher@example.com'
-    >>> notteacher.click('Register')
+    >>> notteacher.getControl('Enter your academic email').value = 'notteacher@example.com'
+    >>> notteacher.click('Sign Up')
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())
     >>> notteacher.open(urls[0])
@@ -147,8 +147,8 @@ way as any existing Ututi user (case above).
     >>> user = Browser()
     >>> user.open('http://localhost/school/uni')
     >>> user.click('I teach here')
-    >>> user.getControl('Enter your email here:').value = 'admin@uni.ututi.com'
-    >>> user.click('Register')
+    >>> user.getControl('Enter your academic email').value = 'admin@uni.ututi.com'
+    >>> user.click('Sign Up')
     >>> user.url
     'http://localhost/login?came_from=%2Fschool%2Funi%2Fregister%2Fteacher%2Fexisting&email=admin%40uni.ututi.com'
     >>> user.getControl('Password').value = 'asdasd'
