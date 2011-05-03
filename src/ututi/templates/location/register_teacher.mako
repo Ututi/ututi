@@ -21,7 +21,7 @@
 
 <div class="feature-box simple">
   <div class="title">
-    ${_("About teacher profiles:")}
+    ${_("Ututi teacher accounts:")}
   </div>
   <div class="clearfix">
     <div class="feature icon-cv">
