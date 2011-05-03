@@ -40,13 +40,13 @@ Not logged in user can see students number of university
 He can see "I study here" button which takes him to registration:
 
     >>> browser.getControl('I study here').click()
-    >>> browser.printCssQuery('h1.page-title', strip=True)
-    <h1>Registration to Vilniaus universitetas</h1>
+    >>> browser.url
+    'http://localhost/school/vu/register?'
 
     >>> browser.open('http://localhost/school/vu/ef')
     >>> browser.getControl('I study here').click()
-    >>> browser.printCssQuery('h1.page-title', strip=True)
-    <h1>Registration to Ekonomikos fakultetas</h1>
+    >>> browser.url
+    'http://localhost/school/vu/ef/register?'
 
 Logged user should not see "I study here" button in university and faculty portlet,
 because he already has his LocationTag set:

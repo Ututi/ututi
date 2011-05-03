@@ -209,8 +209,8 @@ his email and his email is validated against university email policy.
     >>> anonymous.click('choose university from the list')
     >>> anonymous.click('Vilnius University')
     >>> anonymous.click('I study here')
-    >>> anonymous.getControl('Enter your email here:').value = 'user@example.com'
-    >>> anonymous.getControl('Register').click()
+    >>> anonymous.getControl('Enter your academic email').value = 'user@example.com'
+    >>> anonymous.getControl('Sign Up').click()
     >>> anonymous.url
     'http://localhost/school/vu.lt/register'
     >>> anonymous.printCssQuery('.error-message', strip=True)
@@ -218,32 +218,32 @@ his email and his email is validated against university email policy.
 
 Existing emails are also not allowed:
 
-    >>> anonymous.getControl('Enter your email here:').value = 'user@vu.lt'
-    >>> anonymous.getControl('Register').click()
+    >>> anonymous.getControl('Enter your academic email').value = 'user@vu.lt'
+    >>> anonymous.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('.error-message', strip=True)
     <span>user@vu.lt is already registered in Vilnius University network.</span>
 
 user@mif.vu.lt works, because it conforms to university policy and is not taken:
 
-    >>> anonymous.getControl('Enter your email here:').value = 'user@mif.vu.lt'
-    >>> anonymous.getControl('Register').click()
+    >>> anonymous.getControl('Enter your academic email').value = 'user@mif.vu.lt'
+    >>> anonymous.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
 
 U-niversity has public member policy, therefore any valid email will validate:
 
     >>> anonymous.open('http://localhost/school/uni/register')
-    >>> anonymous.getControl('Enter your email here:').value = 'admin@uni.ututi.com'
-    >>> anonymous.getControl('Register').click()
+    >>> anonymous.getControl('Enter your email').value = 'admin@uni.ututi.com'
+    >>> anonymous.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('.error-message', strip=True)
     <span>admin@uni.ututi.com is already registered in U-niversity network.</span>
-    >>> anonymous.getControl('Enter your email here:').value = 'user@example.com'
-    >>> anonymous.getControl('Register').click()
+    >>> anonymous.getControl('Enter your email').value = 'user@example.com'
+    >>> anonymous.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
     >>> anonymous.open('http://localhost/school/uni/register')
-    >>> anonymous.getControl('Enter your email here:').value = 'user@mif.vu.lt'
-    >>> anonymous.getControl('Register').click()
+    >>> anonymous.getControl('Enter your email').value = 'user@mif.vu.lt'
+    >>> anonymous.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
 
@@ -277,8 +277,8 @@ In order to test this, we will register user@vu.lt to U-niversity.
     >>> user = Browser()
     >>> user.open('http://localhost/school/uni')
     >>> user.click('I study here')
-    >>> user.getControl('Enter your email here').value = 'user@vu.lt'
-    >>> user.click('Register')
+    >>> user.getControl('Enter your email').value = 'user@vu.lt'
+    >>> user.click('Sign Up')
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())
     >>> user.open(urls[0])

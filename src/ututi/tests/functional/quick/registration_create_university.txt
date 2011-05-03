@@ -65,8 +65,8 @@ However, if user tries to sign up from university page, a new registration
 will be created (with assigned university):
 
     >>> browser.open('http://localhost/school/uni/register')
-    >>> browser.getControl('Enter your email here:').value = 'user@example.com'
-    >>> browser.getControl('Register').click()
+    >>> browser.getControl('Enter your email').value = 'user@example.com'
+    >>> browser.getControl('Sign Up').click()
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
 

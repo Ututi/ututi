@@ -9,40 +9,38 @@ by clicking 'I study here' button:
     >>> browser.open('http://localhost/school/uni')
 
     >>> browser.getControl('I study here').click()
-    >>> browser.printCssQuery('h1.page-title', strip=True)
-    <h1>Registration to U-niversity</h1>
 
 User has to type in a valid email address to initiate registration:
 
-    >>> browser.getControl('Enter your email here:').value = 'what ever'
-    >>> browser.getControl('Register').click()
+    >>> browser.getControl('Enter your email').value = 'what ever'
+    >>> browser.getControl('Sign Up').click()
     >>> browser.url
     'http://localhost/school/uni/register'
-    >>> browser.printCssQuery('#registration_form .error-message', strip=True)
+    >>> browser.printCssQuery('.error-message', strip=True)
     <span>An email address must contain a single @</span>
-    >>> browser.getControl('Enter your email here:').value = 'what ever@example.com'
-    >>> browser.getControl('Register').click()
-    >>> browser.printCssQuery('#registration_form .error-message', strip=True)
+    >>> browser.getControl('Enter your email').value = 'what ever@example.com'
+    >>> browser.getControl('Sign Up').click()
+    >>> browser.printCssQuery('.error-message', strip=True)
     <span>The username portion of the email address is invalid (the portion before the @: what ever)</span>
 
 If user types in an existing email address, an error message will be displayed:
 
-    >>> browser.getControl('Enter your email here:').value = 'admin@uni.ututi.com'
-    >>> browser.getControl('Register').click()
-    >>> browser.printCssQuery('#registration_form .error-message', strip=True)
+    >>> browser.getControl('Enter your email').value = 'admin@uni.ututi.com'
+    >>> browser.getControl('Sign Up').click()
+    >>> browser.printCssQuery('.error-message', strip=True)
     <span>admin@uni.ututi.com is already registered in U-niversity network.</span>
 
 Regression test: non-ascii characters in email are not valid in Ututi:
 
-    >>> browser.getControl('Enter your email here:').value = u'\u016bser@example.com'.encode('utf-8')
-    >>> browser.getControl('Register').click()
+    >>> browser.getControl('Enter your email').value = u'\u016bser@example.com'.encode('utf-8')
+    >>> browser.getControl('Sign Up').click()
     >>> browser.printCssQuery('.error-message', strip=True)
     <span>Email address cannot contain unicode characters</span>
 
 User come back to registration view ant types new email:
 
-    >>> browser.getControl('Enter your email here:').value = 'user@example.com'
-    >>> browser.getControl('Register').click()
+    >>> browser.getControl('Enter your email').value = 'user@example.com'
+    >>> browser.getControl('Sign Up').click()
 
 A confirmation code is sent to user's email, and the page states so:
 
@@ -73,8 +71,8 @@ A flash message is displayed:
 The same thing happens if the user simply restarts the registration process:
 
     >>> browser.open('http://localhost/school/uni/register')
-    >>> browser.getControl('Enter your email here:').value = 'user@example.com'
-    >>> browser.getControl('Register').click()
+    >>> browser.getControl('Enter your email').value = 'user@example.com'
+    >>> browser.getControl('Sign Up').click()
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
 
