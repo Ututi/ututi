@@ -45,6 +45,30 @@
         background-position: 1px center;
     }
 
+#navigation-portlet { }
+
+    #navigation-portlet ul {
+    }
+
+    #navigation-portlet ul li {
+        margin: 0;
+    }
+
+    #navigation-portlet ul li a {
+        display: block;
+        margin: 0;
+        padding: 3px 5px 3px 15px;
+    }
+
+    #navigation-portlet ul li.current a {
+        background-color: #ddd;
+        font-weight: bold;
+    }
+
+    #navigation-portlet ul li a:hover {
+        background-color: #ddd;
+    }
+
 #about-ututi-portlet { }
 
     #about-ututi-portlet p {

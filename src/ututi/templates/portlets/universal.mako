@@ -2,6 +2,28 @@
 <%namespace file="/elements.mako" import="item_box" />
 <%namespace file="/widgets/facebook.mako" import="init_facebook" />
 
+<%def name="navigation_portlet(menu_items, current)">
+%if menu_items:
+  <%self:portlet id="navigation-portlet">
+    <%def name="header()">
+      ${_("Navigation:")}
+    </%def>
+    <ul>
+      %for item in menu_items:
+      <%
+      classes = item.get('class', '')
+      if item['name'] == current:
+        classes += ' current'
+      %>
+      <li class="${classes}">
+        <a href="${item['link']}">${item['title']}</a>
+      </li>
+      %endfor
+    </ul>
+  </%self:portlet>
+%endif
+</%def>
+
 <%def name="about_ututi_portlet()">
   <%self:portlet id="about-ututi-portlet">
     <%def name="header()">
