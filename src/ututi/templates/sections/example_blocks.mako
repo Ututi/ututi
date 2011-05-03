@@ -17,6 +17,80 @@
   By default the width of the box is not fixed.
 </%b:title_box>
 
+<div class="feature-box icon-group">
+  <div class="title">Feature box:</div>
+  <div class="clearfix">
+    <div class="feature icon-discussions">
+      <strong>Feature one</strong>
+      Luctus nunc massa a velit. Fusce ac nisi. Integer volutpat elementum metus.
+      Vivamus luctus ultricies diam. Curabitur euismod. Vivamus quam. Nunc.
+    </div>
+    <div class="feature icon-email">
+      <strong>Feature two</strong>
+      Luctus nunc massa a velit. Fusce ac nisi. Integer volutpat elementum metus.
+      Vivamus luctus ultricies diam. Curabitur euismod. Vivamus quam. Nunc.
+    </div>
+  </div>
+  <div class="clearfix">
+    <div class="feature icon-file">
+      <strong>Feature three</strong>
+      Luctus nunc massa a velit. Fusce ac nisi. Integer volutpat elementum metus.
+      Vivamus luctus ultricies diam. Curabitur euismod. Vivamus quam. Nunc.
+    </div>
+    <div class="feature icon-notifications">
+      <strong>Feature four</strong>
+      Luctus nunc massa a velit. Fusce ac nisi. Integer volutpat elementum metus.
+      Vivamus luctus ultricies diam. Curabitur euismod. Vivamus quam. Nunc.
+    </div>
+  </div>
+  <div class="action-button">
+    ${h.button_to('Action button!', url('/'))}
+  </div>
+</div>
+
+<div class="feature-box icon-subject">
+  <div class="title">Feature box can have different icons!</div>
+</div>
+
+<div class="feature-box icon-group one-column">
+  <div class="title">One column variation:</div>
+  <div class="clearfix">
+    <div class="feature icon-discussions">
+      <strong>Feature one</strong>
+      Luctus nunc massa a velit. Fusce ac nisi. Integer volutpat elementum metus.
+      Vivamus luctus ultricies diam. Curabitur euismod. Vivamus quam. Nunc.
+    </div>
+    <div class="feature icon-email">
+      <strong>Feature two</strong>
+      Luctus nunc massa a velit. Fusce ac nisi. Integer volutpat elementum metus.
+      Vivamus luctus ultricies diam. Curabitur euismod. Vivamus quam. Nunc.
+    </div>
+  </div>
+</div>
+
+<div class="feature-box simple">
+  <div class="title">Simple feature box showcasing icons:</div>
+  <% icons = ['icon-file-orange', 'icon-file', 'icon-file-upload',
+    'icon-private-file', 'icon-subjects-file', 'icon-notifications',
+    'icon-group', 'icon-email', 'icon-discussions', 'icon-message',
+    'icon-chat', 'icon-publications', 'icon-note', 'icon-edit-note',
+    'icon-class-note', 'icon-talk', 'icon-wiki', 'icon-administration',
+    'icon-branding', 'icon-cv',] %>
+  %for n, icon in enumerate(icons):
+  %if n % 2 == 0:
+  <div class="clearfix">
+  %endif
+    <div class="feature ${icon}">
+      <strong>${icon}</strong>
+      Luctus nunc massa a velit. Fusce ac nisi. Integer volutpat elementum metus.
+      Vivamus luctus ultricies diam. Curabitur euismod. Vivamus quam. Nunc.
+    </div>
+  %if n % 2 == 1:
+  </div>
+  %endif
+  %endfor
+</div>
+
 <%b:rounded_block>
   <div class="block-content">
     This is just a simple block. <br />

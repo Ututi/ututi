@@ -1619,6 +1619,11 @@ ul.medium-icon-list {
         background-image: url('img/icons.com/about/wiki.png');
     }
 
+    .feature-box.simple {
+        background: none;
+        padding: 0;
+    }
+
     .feature-box .title {
         font-size: 14px;
         font-weight: bold;
@@ -1628,110 +1633,113 @@ ul.medium-icon-list {
         padding-bottom: 2px;
     }
 
+        .feature-box.simple .title {
+            font-size: 13px;
+            margin-left: 0px;
+            margin-bottom: 10px;
+        }
+
     .feature-box .feature {
         display: inline;
         width: 250px;
         float: left;
         margin: 15px 30px 15px 0px;
         background-repeat: no-repeat;
-        min-height: 30px;
+        min-height: 35px;
+        padding-left: 50px;
     }
 
-    .feature-box.one-column .feature {
-        display: inline;
-        width: 445px;
-        float: left;
-        margin: 15px 30px 5px 0px;
-        background-repeat: no-repeat;
-        min-height: 35px;
-    }
+        .feature-box.simple .feature {
+            width: 300px;
+        }
+
+        .feature-box.one-column .feature {
+            width: 445px;
+        }
 
     .feature-box .icon-file-orange {
         background-image: url('img/icons.com/file_grand_orange.png');
-        padding-left: 35px;
+        background-position: 10px 5px;
     }
     .feature-box .icon-file {
         background-image: url('img/icons.com/about/file.png');
         background-position: 10px 5px;
-        padding-left: 50px;
     }
     .feature-box .icon-file-upload {
         background-image: url('img/icons.com/about/upload.png');
-        background-position: 10px;
-        padding-left: 50px;
+        background-position: 10px 5px;
     }
     .feature-box .icon-private-file {
         background-image: url('img/icons.com/about/private_file.png');
-        padding-left: 50px;
+        background-position: 2px 5px;
     }
     .feature-box .icon-subjects-file {
         background-image: url('img/icons.com/about/subjects_file.png');
-        padding-left: 50px;
     }
     .feature-box .icon-notifications {
         background-image: url('img/icons.com/about/notifications.png');
         background-position: 5px 0;
-        padding-left: 50px;
     }
     .feature-box .icon-group {
         background-image: url('img/icons.com/about/group.png');
-        padding-left: 50px;
+        background-position: 5px 5px;
     }
     .feature-box .icon-email {
         background-image: url('img/icons.com/about/email.png');
-        padding-left: 50px;
+        background-position: 2px 5px;
     }
     .feature-box .icon-discussions {
         background-image: url('img/icons.com/about/discussions.png');
-        padding-left: 50px;
+        background-position: 2px 5px;
     }
     .feature-box .icon-message {
         background-image: url('img/icons.com/about/message.png');
-        padding-left: 50px;
+        background-position: 2px 5px;
     }
     .feature-box .icon-chat {
         background-image: url('img/icons.com/discussions_grand_orange.png');
-        padding-left: 45px;
+        background-position: 2px 5px;
     }
     .feature-box .icon-publications {
         background-image: url('img/icons.com/about/publications.png');
-        padding-left: 35px;
+        background-position: 5px 5px;
     }
     .feature-box .icon-note {
         background-image: url('img/icons.com/wiki_grand_orange.png');
-        padding-left: 35px;
+        background-position: 10px 5px;
     }
     .feature-box .icon-edit-note {
         background-image: url('img/icons.com/about/wiki_edit.png');
-        padding-left: 40px;
+        background-position: 10px 5px;
     }
     .feature-box .icon-class-note {
         background-image: url('img/icons.com/about/wiki_class.png');
-        padding-left: 65px;
+        background-position: -5px 5px;
     }
     .feature-box .icon-talk {
         background-image: url('img/icons.com/talk_grand_orange.png');
-        padding-left: 45px;
+        background-position: 5px 5px;
     }
     .feature-box .icon-wiki {
         background-image: url('img/icons.com/about/wiki.png');
         background-position: 10px 5px;
-        padding-left: 50px;
     }
     .feature-box .icon-administration {
         background-image: url('img/icons.com/about/administration.png');
-        padding-left: 45px;
     }
     .feature-box .icon-branding {
         background-image: url('img/icons.com/about/branding.png');
-        padding-left: 45px;
+        background-position: 2px 5px;
+    }
+    .feature-box .icon-cv {
+        background-image: url('img/icons.com/about/cv.png');
+        background-position: 10px 5px;
     }
 
     .feature-box .action-button {
         text-align: center;
         margin-top: 15px;
     }
-
 
 /* MENU TABS
  */
