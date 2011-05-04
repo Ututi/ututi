@@ -2,6 +2,14 @@
 <%namespace file="/elements.mako" import="item_box" />
 <%namespace file="/widgets/facebook.mako" import="init_facebook" />
 
+<%def name="create_network_portlet()">
+  <%self:portlet id="navigation-portlet">
+    <strong>
+      <a href="${url('frontpage')}">${_("Create your own social network")}</a>
+    </strong>
+  </%self:portlet>
+</%def>
+
 <%def name="navigation_portlet(menu_items, current)">
 %if menu_items:
   <%self:portlet id="navigation-portlet">
