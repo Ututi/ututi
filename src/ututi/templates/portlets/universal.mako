@@ -5,13 +5,10 @@
 <%def name="navigation_portlet(menu_items, current)">
 %if menu_items:
   <%self:portlet id="navigation-portlet">
-    <%def name="header()">
-      ${_("Navigation:")}
-    </%def>
     <ul>
       %for item in menu_items:
       <%
-      classes = item.get('class', '')
+      classes = item['name']
       if item['name'] == current:
         classes += ' current'
       %>

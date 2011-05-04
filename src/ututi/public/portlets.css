@@ -48,6 +48,9 @@
 #navigation-portlet { }
 
     #navigation-portlet ul {
+        position: relative;
+        width: 180px; /* sidebar full width */
+        left: -12px;  /* sidebar left padding */
     }
 
     #navigation-portlet ul li {
@@ -57,7 +60,10 @@
     #navigation-portlet ul li a {
         display: block;
         margin: 0;
-        padding: 3px 5px 3px 15px;
+        padding: 3px 5px 3px 30px;
+        background-position: 12px center;
+        background-repeat: no-repeat;
+        outline: none;
     }
 
     #navigation-portlet ul li.current a {
@@ -65,8 +71,26 @@
         font-weight: bold;
     }
 
+    #navigation-portlet ul li a:focus,
     #navigation-portlet ul li a:hover {
-        background-color: #ddd;
+        background-color: #eee;
+    }
+
+    /* menu icons
+     */
+    #navigation-portlet ul li.news a {
+        background-image: url('/img/icons.com/news_small_orange.png');
+    }
+    #navigation-portlet ul li.subjects a {
+        background-image: url('/img/icons.com/subject_small_orange.png');
+        background-position: 13px center;
+    }
+    #navigation-portlet ul li.groups a {
+        background-image: url('/img/icons.com/group_small_orange.png');
+        background-position: 13px center;
+    }
+    #navigation-portlet ul li.teachers a {
+        background-image: url('/img/icons.com/teacher_small_orange.png');
     }
 
 #about-ututi-portlet { }
