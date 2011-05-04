@@ -46,7 +46,7 @@ def location_action(method):
 def structure_menu_items():
     return [
         {'title': _("News feed"),
-         'name': 'index',
+         'name': 'news',
          'link': c.location.url(action='index')},
         {'title': _("Subjects"),
          'name': 'subjects',
@@ -144,7 +144,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
     @location_action
     def index(self, location):
-        c.current_menu_item = 'index'
+        c.current_menu_item = 'news'
 
         self._breadcrumbs(location)
         self._set_wall_variables()

@@ -3,7 +3,8 @@
                                                     location_admin_portlet, location_register_portlet,
                                                     location_register_teacher_portlet,
                                                     location_members_portlet, location_groups_portlet"/>
-<%namespace file="/portlets/universal.mako" import="share_portlet" />
+<%namespace file="/portlets/universal.mako" import="share_portlet, about_ututi_portlet,
+                                                    navigation_portlet, create_network_portlet" />
 <%namespace file="/elements.mako" import="tabs"/>
 
 <%def name="css()">
@@ -57,14 +58,24 @@
 </%def>
 
 <%def name="portlets()">
+%if c.user is not None:
   ${location_logo_portlet()}
+  ${navigation_portlet(c.menu_items, c.current_menu_item)}
   ${location_admin_portlet()}
   ${location_info_portlet()}
-  ${location_register_portlet()}
   ${location_register_teacher_portlet()}
   ${share_portlet(c.location)}
   ${location_members_portlet(count=6)}
   ${location_groups_portlet()}
+%else:
+  ${location_logo_portlet()}
+  ${navigation_portlet(c.menu_items, c.current_menu_item)}
+  ${location_info_portlet()}
+  ${location_register_portlet()}
+  ${location_register_teacher_portlet()}
+  ${about_ututi_portlet()}
+  ${create_network_portlet()}
+%endif
 </%def>
 
 <%def name="title()">
@@ -110,18 +121,12 @@
 %endif
 </%def>
 
-<% show_tabs = hasattr(c, 'current_menu_item') %>
-
-<h1 class="page-title ${'underline' if not show_tabs else ''}">
+<h1 class="page-title ${'underline' if not hasattr(c, 'departments') else ''}">
   ${self.pagetitle()}
 </h1>
 
 %if hasattr(c, 'departments'):
 ${university_box(c.departments, _("Departments:"))}
-%endif
-
-%if show_tabs:
-${tabs(c.menu_items, c.current_menu_item)}
 %endif
 
 ${next.body()}
