@@ -6,5 +6,6 @@
   </div>
 %else:
   <div id="no-description-block">
-  <h2>${_("There is no biography.")}</h2>
+    <h2>${_("There is no biography.")}</h2>
+  </div>
 %endif
