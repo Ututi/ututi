@@ -23,15 +23,14 @@ Ok. We are here, so now is time for a message.
     >>> form.getControl(name='email').value = 'anonymous@ututi.lt'
     >>> form.getControl(name='message').value = 'Hello, i just want to ask somethink'
     >>> form.getControl('Send').click()
-    >>> browser.printCssQuery('.contact-text', strip=True)
-    <div>Message sent succesfully.</div>
+    >>> browser.printCssQuery('.flash-message-content', strip=True)
+    <span>Your message was succesfully sent.</span>
 
     >>> len(mail_queue)
     1
 
 Ok, now we will check if validators works fine.
 
-    >>> browser.open('http://localhost/contacts')
     >>> form = browser.getForm(id='contact-form')
     >>> form.getControl(name='name').value = 'Important User'
     >>> form.getControl(name='email').value = 'anonymous'
@@ -40,7 +39,7 @@ Ok, now we will check if validators works fine.
     <span>An email address must contain a single @</span>
     <span>Field can't be empty.</span>
 
-In mail queue stil must be only one message.
+In mail queue still must be only one message.
 
     >>> len(mail_queue)
     1
