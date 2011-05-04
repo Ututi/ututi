@@ -1,6 +1,6 @@
-<%inherit file="/ubase-sidebar.mako" />
+<%inherit file="/about/base.mako" />
 
-<h1 class="page-title underline">${_('What is Ututi?')}</h1>
+<%def name="pagetitle()">${_('What is Ututi?')}</%def>
 
 <div class="static-content">
   <h2>${_('Private social networks for Universities and Colleges')}</h2>

@@ -10,9 +10,12 @@
   </%self:portlet>
 </%def>
 
-<%def name="navigation_portlet(menu_items, current)">
+<%def name="navigation_portlet(menu_items, current, title=None)">
 %if menu_items:
   <%self:portlet id="navigation-portlet">
+    %if title is not None:
+    <%def name="header()">${title}</%def>
+    %endif
     <ul>
       %for item in menu_items:
       <%
@@ -235,19 +238,5 @@
   <%self:portlet id="about-portlet">
     <p>${h.literal(_('This is the verified network for <strong>%s</strong>.\
       Only %s students and teachers can join this network.') % (user.location.title, user.location.title_short))}</p>
-  </%self:portlet>
-</%def>
-
-<%def name="contacts_portlet()">
-  <%self:portlet id="about-portlet">
-    <%def name="header()">
-         ${_("Contact information:")}
-    </%def>
-    <p><strong>UAB "Ututi"</strong></p>
-    <p>Upės str. 5, Vilnius<br />Lithuania</p>
-    <p>Email: <a href="mailto:info@ututi.com">info@ututi.com</a><br />
-       Mobile phone: +370 683 79238</p>
-    <p>Company number: 302495065<br />
-       VAT number: LT10000510316</p>
   </%self:portlet>
 </%def>

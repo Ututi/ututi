@@ -35,6 +35,23 @@ from ututi.model.events import Event
 
 log = logging.getLogger(__name__)
 
+def info_menu_items():
+    return [
+        {'title': _("What is Ututi?"),
+         'name': 'about',
+         'link': url(controller='home', action='features')},
+        {'title': _("Contact us"),
+         'name': 'contact',
+         'link': url(controller='home', action='contacts')}]
+
+def info_action(method):
+    def _info_action(self):
+        c.menu_items = info_menu_items()
+        c.current_menu_item = None
+        return method(self)
+    return _info_action
+
+
 class PasswordRecoveryForm(Schema):
     allow_extra_fields = False
     email = All(
@@ -167,6 +184,7 @@ class HomeController(UniversityListMixin):
         return render('/frontpage.mako')
 
     def _contacts_form(self):
+        c.current_menu_item = 'contact'
         return render('/about/contacts.mako')
 
     def index(self):
@@ -184,27 +202,27 @@ class HomeController(UniversityListMixin):
     def about(self):
         return render('/about/features.mako')
 
+    @info_action
     @validate(schema=ContactsForm(), form='_contacts_form')
     def contacts(self):
         """Contact us form with send message functionality."""
-        if not hasattr(self, 'form_result'):
-            return self._contacts_form()
+        if hasattr(self, 'form_result'):
+            name = self.form_result['name']
+            email = self.form_result['email']
+            message = self.form_result['message']
+            text = render('/emails/contact_us.mako',
+                          extra_vars={'name': name,
+                                      'email': email,
+                                      'message': message})
+            msg = EmailMessage(_('Message to Ututi.com team'), text, force=True)
+            msg.send('info@ututi.com')
+            h.flash(_('Your message was succesfully sent.'))
 
-        name = self.form_result['name']
-        email = self.form_result['email']
-        message = self.form_result['message']
+        return self._contacts_form()
 
-        text = render('/emails/contact_us.mako',
-                      extra_vars={'name': name,
-                                  'email': email,
-                                  'message': message})
-        msg = EmailMessage(_('Message to Ututi.com team'), text, force=True)
-        msg.send('info@ututi.com')
-
-        return render('/about/contacts.mako',
-                      extra_vars={'message': _('Message sent succesfully.')})
-
-    def features (self):
+    @info_action
+    def features(self):
+        c.current_menu_item = 'about'
         return render('/about/features.mako')
 
     def advertising(self):

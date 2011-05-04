@@ -1197,32 +1197,20 @@ ul.feature-list {
 /* GENERAL TWO PANEL LAYOUT
  */
 
-.two-panel-layout { }
+.left-right {
+    display: table;
+    width: 100%;
+}
 
-    .two-panel-layout .left-panel,
-    .two-panel-layout .right-panel {
-        vertical-align: top;
-       *display: inline; /* IE7 */
-       *zoom: 1;         /* IE7 */
+    .left-right .left,
+    .left-right .right {
+        display: table-cell;
+        width: 50%;
     }
 
-    .two-panel-layout .left-panel {
-        display: inline-block;
-        width: 100%;
-    }
-
-    .two-panel-layout .right-panel {
-        display: hidden;
-    }
-
-    .two-panel-layout.with-right-panel .left-panel {
-        width: 480px;
-        border-right: 1px solid #e9e6e6;
-    }
-
-    .two-panel-layout.with-right-panel .right-panel {
-        display: inline-block;
-        width: 400px;
+    .left-right .right {
+        border-left: 1px solid #333;
+        padding-left: 50px;
     }
 
 /* COMMON LOOKS

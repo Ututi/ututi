@@ -47,6 +47,10 @@
 
 #navigation-portlet { }
 
+    #navigation-portlet .header {
+        margin-bottom: 2px;
+    }
+
     #navigation-portlet ul {
         position: relative;
         width: 180px; /* sidebar full width */
