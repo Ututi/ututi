@@ -17,10 +17,6 @@
   .left-right {
     margin-top: 20px;
   }
-
-  .right {
-    padding-left: 50px;
-  }
 </%def>
 
 <div class="left-right">
