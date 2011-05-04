@@ -251,7 +251,7 @@ li.expanded li a {
     display: block;
     float: left;
     width: 180px;
-    margin-left: 0px;
+    margin-left: -1px;
     margin-right: -180px;
     border-right: 1px solid #eeeeee;
     padding: 0;
@@ -293,6 +293,7 @@ li.expanded li a {
 
 .sidebar-inner {
     padding: 20px 7px;
+    overflow: hidden;
 }
 
 #left-sidebar .sidebar-inner {
