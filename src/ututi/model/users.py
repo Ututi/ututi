@@ -712,6 +712,7 @@ class UserRegistration(object):
                                                       qualified=True))
 
     def process_invitations(self):
+        # TODO: this should live in lib
         if self.user is not None:
             from ututi.lib.invitations import make_email_invitations, \
                                               make_facebook_invitations
