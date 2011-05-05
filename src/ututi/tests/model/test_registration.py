@@ -98,6 +98,23 @@ def test_create_update():
         >>> a.id == a2.id, c.id == c2.id, d == d2.id
         (False, False, False)
 
+    This create/update method can be called specifying facebook id instread of
+    email:
+
+        >>> a = R.create_or_update(LocationTag.get('uni/dep'), facebook_id=31337)
+        >>> meta.Session.flush()
+        >>> b = R.create_or_update(LocationTag.get('uni'), facebook_id=31337)
+        >>> meta.Session.flush()
+        >>> a.id == b.id
+        True
+
+    Either email or facebook id must be specified:
+
+        >>> R.create_or_update(None, None, None)
+        Traceback (most recent call last):
+        ...
+        ValueError: Either email or facebook id must be given
+
     """
 
 def test_create_user():
