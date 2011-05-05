@@ -239,7 +239,8 @@ class User(Author):
         try:
             q = q.filter_by(openid=openid)
             if location is not None:
-                q = q.filter_by(location_id=location.id)
+                loc_ids = [loc.id for loc in location.root.flatten]
+                q = q.filter(cls.location.in_(loc_ids))
             return q.one()
         except NoResultFound:
             return None
@@ -250,7 +251,8 @@ class User(Author):
         try:
             q = q.filter_by(facebook_id=facebook_id)
             if location is not None:
-                q = q.filter_by(location_id=location.id)
+                loc_ids = [loc.id for loc in location.root.flatten]
+                q = q.filter(cls.location.in_(loc_ids))
             return q.one()
         except NoResultFound:
             return None
