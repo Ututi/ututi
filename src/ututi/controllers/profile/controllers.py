@@ -489,7 +489,8 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         if hasattr(self, 'form_result'):
             emails = self.form_result['recipients'].split(',')
             message = self.form_result['message']
-            invites, invalid, already = make_email_invitations(emails, c.user)
+            invites, invalid, already = \
+                make_email_invitations(emails, c.user, c.user.location)
             meta.Session.commit()
             for invitee in invites:
                 send_registration_invitation(invitee, c.user, message)
@@ -512,7 +513,8 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         if hasattr(self, 'form_result'):
             emails = self.form_result['recipients']
             message = self.form_result['message']
-            invites, invalid, already = make_email_invitations(emails, c.user)
+            invites, invalid, already = \
+                make_email_invitations(emails, c.user, c.user.location)
             meta.Session.commit()
             for invitee in invites:
                 send_registration_invitation(invitee, c.user, message)
@@ -524,7 +526,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         ids = request.params.get('ids[]')
         if ids:
             ids = map(int, ids.split(','))
-            invited = make_facebook_invitations(ids, c.user)
+            invited = make_facebook_invitations(ids, c.user, c.user.location)
             meta.Session.commit()
             if invited:
                 h.flash(ungettext('Invited %(num)d friend.',
