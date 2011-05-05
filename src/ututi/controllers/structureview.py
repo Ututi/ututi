@@ -277,20 +277,18 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         email = self.form_result['email']
 
-        # defensive programming
-        if User.get(email, location):
-            redirect(location.url(action='login'))
+        # redirect to login if user is registered in this university
+        if User.get(email, location.root):
+            h.flash(_('The email you entered is registered in Ututi. '
+                      'Please login to proceed.'))
+            redirect(url(controller='home', action='login', email=email))
 
-        # lookup/create registration entry and
-        # send confirmation code to user.
-        registration = UserRegistration.get_by_email(email, location)
-        if registration is None:
-            registration = UserRegistration(location, email)
-            meta.Session.add(registration)
-
-        registration.send_confirmation_email()
+        # lookup/create registration entry and send confirmation code to user
+        registration = UserRegistration.create_or_update(location, email)
         meta.Session.commit()
+        registration.send_confirmation_email()
 
+        # show confirmation page
         c.email = email
         return render('registration/email_approval.mako')
 
@@ -316,17 +314,13 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
             redirect(url(controller='home', action='login', email=email,
                          came_from=destination))
 
-        # lookup/create registration entry and
-        # send confirmation code to user.
-        registration = UserRegistration.get_by_email(email, location)
-        if registration is None:
-            registration = UserRegistration(location, email)
-            meta.Session.add(registration)
-
+        # lookup/create registration entry and send confirmation code to user
+        registration = UserRegistration.create_or_update(location, email)
         registration.teacher = True
-        registration.send_confirmation_email()
         meta.Session.commit()
+        registration.send_confirmation_email()
 
+        # show confirmation page
         c.email = email
         return render('registration/email_approval.mako')
 
