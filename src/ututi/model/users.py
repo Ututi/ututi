@@ -657,6 +657,28 @@ class UserRegistration(object):
                                     str(facebook_id)).hexdigest()
 
     @classmethod
+    def create_or_update(cls, location, email):
+        """If another pending registration is found in the same university,
+        then it is updated and returned. Otherwise new registration is created.
+        """
+        q = meta.Session.query(cls).filter_by(completed=False, email=email)
+        if location is None:
+            q = q.filter_by(location=None)
+        else:
+            loc_ids = [loc.id for loc in location.root.flatten]
+            q = q.filter(cls.location_id.in_(loc_ids))
+
+        registration = q.first()
+
+        if registration is None:
+            registration = cls(location, email)
+            meta.Session.add(registration)
+        else:
+            registration.location = location # update
+
+        return registration
+
+    @classmethod
     def get(cls, id):
         try:
             return meta.Session.query(cls).filter(cls.id == id).one()

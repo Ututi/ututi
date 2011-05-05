@@ -29,6 +29,77 @@ def test_init():
 
     """
 
+def test_create_update():
+    """Tests that registration objects are not created for same
+    (user, university) twice:
+
+        >>> from ututi.model.users import UserRegistration as R
+
+    We have no pending registrations, so create_or_update call will create
+    new registration:
+
+        >>> a = R.create_or_update(LocationTag.get('uni'), 'user@example.com')
+        >>> meta.Session.flush()
+        >>> print a.location.title_short
+        uni
+
+    Calling "create_or_update" with same parameters will retrieve the same
+    registration object:
+
+        >>> b = R.create_or_update(LocationTag.get('uni'), 'user@example.com')
+        >>> meta.Session.flush()
+        >>> a.id == b.id
+        True
+
+    Calling "create_or_update" with location uni/dep will update registration,
+    but not create new one:
+
+        >>> b = R.create_or_update(LocationTag.get('uni/dep'), 'user@example.com')
+        >>> meta.Session.flush()
+        >>> a.id == b.id
+        True
+        >>> print b.location.title_short
+        dep
+
+    This works the other way around as well:
+
+        >>> b = R.create_or_update(LocationTag.get('uni'), 'user@example.com')
+        >>> meta.Session.flush()
+        >>> a.id == b.id
+        True
+        >>> print b.location.title_short
+        uni
+
+    However new registration would be created for different university:
+
+        >>> c = R.create_or_update(LocationTag.get('frd'), 'user@example.com')
+        >>> meta.Session.flush()
+        >>> a.id == c.id
+        False
+
+    Also, if registration is created with no location:
+
+        >>> d = R.create_or_update(None, 'user@example.com')
+        >>> meta.Session.flush()
+        >>> a.id == d.id, c.id == d.id
+        (False, False)
+
+        >>> e = R.create_or_update(None, 'user@example.com')
+        >>> meta.Session.flush()
+        >>> d.id == e.id
+        True
+
+    For another user, different registration objects are created:
+
+        >>> a2 = R.create_or_update(LocationTag.get('uni/dep'), 'user2@example.com')
+        >>> c2 = R.create_or_update(LocationTag.get('frd'), 'user2@example.com')
+        >>> d2 = R.create_or_update(None, 'user2@example.com')
+        >>> meta.Session.flush()
+        >>> a.id == a2.id, c.id == c2.id, d == d2.id
+        (False, False, False)
+
+    """
+
 def test_create_user():
     """Tests if all registration data is moved to the user created.
 
@@ -147,6 +218,10 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
-    uni = LocationTag(u'U-niversity', u'uni', u'', member_policy='PUBLIC')
+    uni = LocationTag(u'U-niversity', u'uni', member_policy='PUBLIC')
+    dep = LocationTag(u'D-epartment', u'dep', member_policy='PUBLIC', parent=uni)
+    frd = LocationTag(u'University of Freedom', u'frd', member_policy='PUBLIC')
     meta.Session.add(uni)
+    meta.Session.add(dep)
+    meta.Session.add(frd)
     meta.Session.commit()
