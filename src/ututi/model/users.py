@@ -191,13 +191,14 @@ class User(Author):
     @classmethod
     def get(cls, username, location):
         if isinstance(location, (long, int)):
+            from ututi.model import LocationTag
             location = LocationTag.get(location)
 
         if location is None:
             return None
 
         loc_ids = [loc.id for loc in location.flatten]
-        q = meta.Session.query(cls).filter(location_id.in_(loc_ids))
+        q = meta.Session.query(cls).filter(cls.location_id.in_(loc_ids))
 
         if isinstance(username, (long, int)):
             q = q.filter_by(id=username)
