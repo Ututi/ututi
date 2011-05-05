@@ -98,7 +98,7 @@ Let's check the emails:
     Ututi team
 
     >>> msg1.recipients
-    [u'user@example.com']
+    ['user@example.com']
 
     >>> mail_queue[:] = []
 
