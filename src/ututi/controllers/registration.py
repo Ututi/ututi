@@ -12,7 +12,8 @@ from pylons.i18n import _
 from ututi.model import LocationTag
 from ututi.lib.base import BaseController, render
 from ututi.lib.image import serve_logo
-from ututi.lib.invitations import bind_group_invitations
+from ututi.lib.invitations import bind_group_invitations, \
+    process_registration_invitations
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
         FileUploadTypeValidator, SeparatedListValidator, CountryValidator, \
         AvailableEmailDomain, EmailDomainValidator
@@ -495,7 +496,7 @@ class RegistrationController(BaseController, FederationMixin):
         # TODO: handle any integrity errors here
 
         registration.completed = True
-        registration.process_invitations()
+        process_registration_invitations(registration)
         meta.Session.commit()
 
         if user.is_teacher:

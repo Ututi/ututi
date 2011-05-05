@@ -4,6 +4,7 @@ from formencode.api import Invalid
 
 from ututi.lib.validators import TranslatedEmailValidator
 from ututi.model import meta, User, UserRegistration, PendingInvitation
+from ututi.lib.emails import send_registration_invitation
 
 def extract_emails(emailbunch):
     """Extracts and validated emails from comma separated email list.
@@ -58,6 +59,20 @@ def make_facebook_invitations(fb_ids, inviter, location=None):
             invited.append(facebook_id)
 
     return invited
+
+def process_registration_invitations(registration):
+    inviter = registration.user
+    location = registration.location
+    if registration.invited_emails:
+        emails = registration.invited_emails.split(',')
+        invites, invalid, already = \
+            make_email_invitations(emails, inviter, location)
+        for invitee in invites:
+            send_registration_invitation(invitee, inviter)
+
+    if registration.invited_fb_ids:
+        ids = map(int, registration.invited_fb_ids.split(','))
+        make_facebook_invitations(ids, inviter, location)
 
 def bind_group_invitations(user):
     """Finds and binds all group invitations to user.
