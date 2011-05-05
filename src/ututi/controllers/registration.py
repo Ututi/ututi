@@ -15,8 +15,8 @@ from ututi.lib.image import serve_logo
 from ututi.lib.invitations import bind_group_invitations, \
     process_registration_invitations
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
-        FileUploadTypeValidator, SeparatedListValidator, CountryValidator, \
-        AvailableEmailDomain, EmailDomainValidator
+    FileUploadTypeValidator, SeparatedListValidator, CountryValidator, \
+    AvailableEmailDomain, EmailDomainValidator
 from ututi.lib.emails import teacher_registered_email
 import ututi.lib.helpers as h
 
