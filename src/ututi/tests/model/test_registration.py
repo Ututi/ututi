@@ -165,7 +165,7 @@ def test_create_user():
 
     """
 
-def _test_create_university():
+def test_create_university():
     """Tests if all registration data is moved to the university created.
 
         >>> from ututi.model.users import UserRegistration
@@ -192,7 +192,7 @@ def _test_create_university():
 
     When university is created, all data should be transfered:
 
-        >>> university = registration._create_university()
+        >>> university = registration.create_university()
         >>> university.parent is None
         True
 

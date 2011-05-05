@@ -482,11 +482,12 @@ class RegistrationController(BaseController, FederationMixin):
     def finish(self, registration):
         from ututi.lib.security import sign_in_user
         if not registration.location:
-            # If there is a university with same title we will use it.
-            location = LocationTag.get_by_title(registration.university_title)
-            if not location:
-                location =  registration._create_university()
-            registration.location = location
+            # if there is a university with same title we will use it.
+            existing = LocationTag.get_by_title(registration.university_title)
+            if existing is not None:
+                registration.location = existing
+            else:
+                registration.location = registration.create_university()
 
         user = registration.create_user()
         bind_group_invitations(user)
