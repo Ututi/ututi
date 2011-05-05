@@ -466,20 +466,16 @@ class HomeController(UniversityListMixin):
                                    error_formatters=u_error_formatters)
 
         email = self.form_result['email']
-
-        # lookup or create registration entry
-        registration = UserRegistration.get_by_email(email)
-        if registration is None:
-            registration = UserRegistration(email=email)
-            meta.Session.add(registration)
+        location = None
 
         # try to select location by domain name
-        if registration.location is None:
-            _, _, domain_name = email.rpartition('@')
-            domain = EmailDomain.get_by_name(domain_name)
-            if domain is not None:
-                registration.location = domain.location
+        _, _, domain_name = email.rpartition('@')
+        domain = EmailDomain.get_by_name(domain_name)
+        if domain is not None:
+            location = domain.location
 
+        # lookup or create registration entry
+        registration = UserRegistration.create_or_update(location, email)
         meta.Session.commit()
 
         # send confirmation code to user
