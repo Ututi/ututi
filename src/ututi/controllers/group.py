@@ -592,7 +592,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             ids = invited.split(',')
             for facebook_id in ids:
                 group.create_pending_fb_invitation(int(facebook_id), c.user)
-            make_facebook_invitations(ids, c.user, group.location.root)
+            make_facebook_invitations(ids, c.user, group.location)
             meta.Session.commit()
             h.flash(ungettext('Invited %(num)d friend.',
                               'Invited %(num)d friends.',
@@ -874,7 +874,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             invitation.active = None
 
     def _send_group_invitations(self, group, emails, message=None):
-        invites, invalid, already = make_email_invitations(emails, c.user, group.location.root)
+        invites, invalid, already = make_email_invitations(emails, c.user, group.location)
         # invites are registration objects!
 
         for email in already:
