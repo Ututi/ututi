@@ -54,7 +54,7 @@
          onComplete: function(file, response, iframe){
              iframe['progress_indicator'].remove();
               if (response != 'UPLOAD_FAILED') {
-                 $('#file_upload_submit .cancel-button').click();
+                 $('#file_form .cancel-button').click();
                  reload_wall(response);
              } else {
                  $('#upload-failed-error-message').fadeIn(500);
