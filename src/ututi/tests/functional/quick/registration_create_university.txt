@@ -204,8 +204,17 @@ In add photo form: if user has already set his logo,
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>Invite friends</h1>
 
-User can invite users entering emails freeform. All emails are validated first:
+User can invite users entering emails freeform or using Facebook.
+Let's visit facebook invitation page first:
 
+    >>> browser.getLink(id='facebook-button').click()
+    >>> browser.printCssQuery('.page-title', strip=True)
+    <h1>Invite friends</h1>
+
+Now let's go back and use email form to invite friends. All emails
+are validated first:
+
+    >>> browser.goBack()
     >>> form = browser.getForm('invite-friends-form')
     >>> form.getControl(name='emails').value = 'one, tw@o three\nf@o@ur'
     >>> browser.getControl('Finish').click()
