@@ -643,9 +643,9 @@ class UserRegistration(object):
     """User registration data."""
 
     def __init__(self, location=None, email=None, facebook_id=None):
-        # either email or facebook_id should be given,
-        # if location is None, then email is required.
-        # (this is checked in db)
+        """Either email or facebook_id should be given, if location is None,
+        then email is required  (this is checked in db).
+        """
         self.location = location
         self.email = email
         self.facebook_id = facebook_id
