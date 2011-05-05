@@ -20,41 +20,34 @@ def extract_emails(emailbunch):
                 invalid.append(email)
     return valid, invalid
 
-def make_email_invitations(emails, inviter, location=None):
-    location = location or inviter.location
+def make_email_invitations(emails, inviter, location):
     invalid = []
     already = []
-    invites = []
+    invited = []
     for email in filter(bool, map(strip, emails)):
         try:
             TranslatedEmailValidator.to_python(email)
         except Invalid:
             invalid.append(email)
         else:
-            if User.get(email, location):
+            if User.get(email, location.root):
                 already.append(email)
             else:
-                invitee = UserRegistration.get_by_email(email, location)
-                if invitee is None:
-                    invitee = UserRegistration(location, email)
-                    meta.Session.add(invitee)
+                invitee = UserRegistration.create_or_update(location, email)
                 invitee.inviter = inviter
-                invites.append(invitee)
+                invited.append(invitee)
 
-    return invites, invalid, already
+    return invited, invalid, already
 
-def make_facebook_invitations(fb_ids, inviter, location=None):
-    location = location or inviter.location
+def make_facebook_invitations(fb_ids, inviter, location):
     already = []
     invited = []
     for facebook_id in fb_ids:
-        if location and User.get_byfbid(facebook_id, location):
+        if User.get_byfbid(facebook_id, location):
             already.append(facebook_id)
         else:
-            invitee = UserRegistration.get_by_fbid(facebook_id, location)
-            if invitee is None:
-                invitee = UserRegistration(location, facebook_id=facebook_id)
-                meta.Session.add(invitee)
+            invitee = UserRegistration.create_or_update(
+                location, facebook_id=facebook_id)
             invitee.inviter = inviter
             invited.append(facebook_id)
 
