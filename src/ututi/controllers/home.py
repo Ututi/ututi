@@ -474,11 +474,9 @@ class HomeController(UniversityListMixin):
         if domain is not None:
             location = domain.location
 
-        # lookup or create registration entry
+        # lookup/create registration entry and send confirmation code to user
         registration = UserRegistration.create_or_update(location, email)
         meta.Session.commit()
-
-        # send confirmation code to user
         registration.send_confirmation_email()
 
         # show confirmation page
