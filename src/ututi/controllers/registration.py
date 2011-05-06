@@ -500,11 +500,13 @@ class RegistrationController(BaseController, FederationMixin):
         user = registration.create_user()
         bind_group_invitations(user)
 
-        meta.Session.add(user)
-        meta.Session.commit()
-        # TODO: handle any integrity errors here
+        # TODO: integrity checks here
 
+        meta.Session.add(user)
         registration.completed = True
+        # flush before sending any emails
+        meta.Session.flush()
+
         process_registration_invitations(registration)
         meta.Session.commit()
 
