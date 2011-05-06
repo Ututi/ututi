@@ -457,7 +457,7 @@ class RegistrationController(BaseController, FederationMixin):
         if ids:
             registration.invited_fb_ids = ids
             meta.Session.commit()
-            redirect(registration.url(action='finish'))
+            redirect(registration.url(action='invite_friends'))
 
         # render page
         fb_user = facebook.get_user_from_cookie(request.cookies,
