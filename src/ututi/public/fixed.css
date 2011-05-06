@@ -108,6 +108,8 @@ button.dark {
     border: 1px solid #666666;
     font-weight: normal;
     background: #333 url('img/buttons/bg_small_grey.png') repeat-x left bottom;
+    height: 21px !important;
+    overflow: hidden;
 }
 
 button.dark:hover {
