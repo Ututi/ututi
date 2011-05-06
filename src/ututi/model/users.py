@@ -730,10 +730,10 @@ class UserRegistration(object):
                     gen_password=False)
 
         user = Teacher(**args) if self.teacher else User(**args)
-
-        user.emails = [Email(email, confirmed=True) for email in \
-                       set(filter(bool, [self.email, self.openid_email, self.facebook_email]))]
-
+        from string import lower
+        emails = [self.email, self.openid_email, self.facebook_email]
+        emails = set(map(lower, filter(bool, emails)))
+        user.emails = [Email(email, confirmed=True) for email in emails]
         user.accepted_terms = datetime.utcnow()
         user.openid = self.openid
         user.facebook_id = self.facebook_id

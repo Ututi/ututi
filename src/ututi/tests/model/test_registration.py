@@ -163,6 +163,15 @@ def test_create_user():
         >>> [e.email for e in user.emails]
         ['another@example.com']
 
+    Regression test: differently capitalized emails are identified
+    as the same:
+
+        >>> registration = UserRegistration(LocationTag.get('uni'), 'user@example.com')
+        >>> registration.openid_email = 'USER@example.com'
+        >>> user = registration.create_user()
+        >>> [e.email for e in user.emails]
+        ['user@example.com']
+
     """
 
 def test_create_university():
