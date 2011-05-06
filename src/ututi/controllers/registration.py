@@ -452,6 +452,10 @@ class RegistrationController(BaseController, FederationMixin):
 
     @registration_action
     def invite_friends_fb(self, registration):
+        # we don't do fb invitations if university is not created
+        if registration.location is None:
+            redirect(registration.url(action='invite_friends'))
+
         # handle facebook callback
         ids = request.params.get('ids[]')
         if ids:
