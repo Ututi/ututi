@@ -204,7 +204,7 @@ Now let's go back and use email form to invite friends. All emails
 are validated first:
 
     >>> browser.goBack()
-    >>> form = browser.getForm('invite-friends-form')
+    >>> form = browser.getForm('email-invitation-form')
     >>> form.getControl(name='emails').value = 'one, tw@o three\nf@o@ur'
     >>> browser.getControl('Finish').click()
 
@@ -217,7 +217,7 @@ are validated first:
 If correct email addresses are submitted, user is taken to the "Welcome" page,
 and invitation are sent:
 
-    >>> form = browser.getForm('invite-friends-form')
+    >>> form = browser.getForm('email-invitation-form')
     >>> form.getControl(name='emails').value = 'one@example.com, two@example.com three@example.com\nfour@example.com'
     >>> browser.getControl('Finish').click()
 

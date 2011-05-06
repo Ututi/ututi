@@ -204,18 +204,18 @@ In add photo form: if user has already set his logo,
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>Invite friends</h1>
 
-User can invite users entering emails freeform or using Facebook.
-Let's visit facebook invitation page first:
+Note that there is no facebook invitation option. This is by design,
+because the university is not yet created and may not be created,
+and facebook invitations cannot be postponed:
 
     >>> browser.getLink(id='facebook-button').click()
-    >>> browser.printCssQuery('.page-title', strip=True)
-    <h1>Invite friends</h1>
+    Traceback (most recent call last):
+    ...
+    LinkNotFoundError
 
-Now let's go back and use email form to invite friends. All emails
-are validated first:
+Let's use email invitation form. All emails are validated first:
 
-    >>> browser.goBack()
-    >>> form = browser.getForm('invite-friends-form')
+    >>> form = browser.getForm('email-invitation-form')
     >>> form.getControl(name='emails').value = 'one, tw@o three\nf@o@ur'
     >>> browser.getControl('Finish').click()
 
@@ -228,7 +228,7 @@ are validated first:
 If correct email addresses are submitted, user is taken to the "Welcome" page,
 and invitation are sent:
 
-    >>> form = browser.getForm('invite-friends-form')
+    >>> form = browser.getForm('email-invitation-form')
     >>> form.getControl(name='emails').value = 'one@example.com, two@example.com three@example.com\nfour@example.com'
     >>> browser.getControl('Finish').click()
 
