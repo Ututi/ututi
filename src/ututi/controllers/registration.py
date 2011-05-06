@@ -283,12 +283,15 @@ class RegistrationController(BaseController, FederationMixin):
             abort(404)
 
         email = self.form_result['email']
-        registration = UserRegistration.get_by_email(email)
-        if registration is None:
+        registrations = meta.Session.query(UserRegistration).\
+                filter_by(completed=False, email=email).all()
+
+        if len(registrations) == 0:
             abort(404)
         else:
+            for r in registrations:
+                r.send_confirmation_email()
             c.email = email
-            registration.send_confirmation_email()
             h.flash(_("Your confirmation code was resent."))
             return render('registration/email_approval.mako')
 
@@ -311,7 +314,8 @@ class RegistrationController(BaseController, FederationMixin):
 
         facebook_id = int(fb_user['uid'])
         fb_access_token = fb_user['access_token']
-        registration = UserRegistration.get_by_fbid(facebook_id)
+        registration = meta.Session.query(UserRegistration).\
+                filter_by(completed=False, facebook_id=facebook_id).first()
 
         if registration is None:
             h.flash(_("Your invitation has expired."))

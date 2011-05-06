@@ -702,28 +702,6 @@ class UserRegistration(object):
         except NoResultFound:
             return None
 
-    @classmethod
-    def get_by_email(cls, email, location=None):
-        q = meta.Session.query(cls).filter_by(completed=False)
-        try:
-            q = q.filter_by(email=email)
-            if location is not None:
-                q = q.filter_by(location_id=location.id)
-            return q.one()
-        except NoResultFound:
-            return None
-
-    @classmethod
-    def get_by_fbid(cls, facebook_id, location=None):
-        q = meta.Session.query(cls).filter_by(completed=False)
-        try:
-            q = q.filter_by(facebook_id=facebook_id)
-            if location is not None:
-                q = q.filter_by(location_id=location.id)
-            return q.one()
-        except NoResultFound:
-            return None
-
     def update_password(self, password_plain):
         self.password = generate_password(password_plain)
 
