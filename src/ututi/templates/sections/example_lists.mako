@@ -3,6 +3,41 @@
 
 <h2>Standart Ututi lists</h2>
 
+<h3>Numbered steps</h3>
+
+<div class="steps">
+  <span class="step">
+    <span class="number">1</span>
+    <span class="title">One</span>
+  </span>
+  <span class="step active">
+    <span class="number">2</span>
+    <span class="title">Two (active)</span>
+  </span>
+  <span class="step">
+    <span class="number">3</span>
+    <span class="title">Three</span>
+  </span>
+</div>
+
+<br />
+They can also be displayed as blocks:
+
+<div class="steps">
+  <div class="step complete">
+    <span class="number">1</span>
+    <span class="title">Completed item</span>
+  </div>
+  <div class="step complete">
+    <span class="number">2</span>
+    <span class="title">Completed item</span>
+  </div >
+  <div class="step">
+    <span class="number">3</span>
+    <span class="title">Item that is not completed</span>
+  </div>
+</div>
+
 <br />
 <h3>File list</h3>
 

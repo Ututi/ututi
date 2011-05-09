@@ -24,20 +24,10 @@
   }
      #group-registration-steps .step {
        margin-right: 20px;
-     }
-     #group-registration-steps .step .number {
-       border: 1px solid #666;
-       background-color: #ccc;
-       color: black;
-       padding: 1px 5px;
+       font-weight: noraml;
      }
      #group-registration-steps .step.active {
        font-weight: bold;
-     }
-     #group-registration-steps .step.active .number {
-       background-color: #f90;
-       border-color: #888;
-       color: white;
      }
   #group-id-check .taken {
       padding-left: 15px;
@@ -50,7 +40,7 @@
 </%def>
 
 <%def name="path_steps(step=1)">
-<div id="group-registration-steps">
+<div id="group-registration-steps" class="steps">
   %for n, title in enumerate([_('Group settings'), _('Invite friends')], 1):
     <span class="step ${'active' if n == step else ''}">
       <span class="number">${n}</span>

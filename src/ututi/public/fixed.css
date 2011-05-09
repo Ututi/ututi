@@ -1276,6 +1276,23 @@ ul.feature-list {
     display: none;
 }
 
+.steps { }
+
+    .steps .step .number {
+        border: 1px solid #666;
+        background-color: #ccc;
+        font-weight: bold;
+        color: black;
+        padding: 1px 5px;
+    }
+    .steps .step.active .number,
+    .steps .step.complete .number {
+        background-color: #f90;
+        border-color: #888;
+        color: white;
+    }
+
+
 /* Clearfix should be preferred way of closing
  * containers, that contains floated elements.
  */
