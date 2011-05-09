@@ -14,7 +14,7 @@ class ContentController(BaseController):
     def get_content(self, id=None, next_action=None):
         try:
             id = int(id)
-        except ValueError, TypeError:
+        except (ValueError, TypeError):
             abort(404)
 
         content_item = ContentItem.get(id)
@@ -30,7 +30,7 @@ class ContentController(BaseController):
     def get_user(self, id=None):
         try:
             id = int(id)
-        except ValueError, TypeError:
+        except (ValueError, TypeError):
             abort(404)
 
         user = User.get_byid(id)
