@@ -1310,33 +1310,6 @@ div.usergruperight {
     padding-top:5px;
 }
 
-/* Group creation steps */
-
-#steps span {
-  color: #303030;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-#steps .step .number {
-  margin-right: 3px;
-}
-
-#steps .step .title {
-  margin-right: 10px;
-}
-
-#steps .step.active span {
-  color: #d65e0d;
-}
-
-#steps {
-  margin-bottom: 20px;
-  margin-top: 10px;
-}
-
-/* End group creation steps */
-
 /* Home Page Specials – could be moved into a separate file */
 #homeSearchNotesBlock,
 #homeRegisterBlock,
