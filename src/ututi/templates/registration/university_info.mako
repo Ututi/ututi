@@ -70,7 +70,7 @@
 
 <p>
   ${h.literal(_("It is not your university? Use another email address or %(contact_us_link)s.") % \
-    dict(contact_us_link='<a href="#" id="contact-link">' + _("Contact us") + '</a>'))}
+    dict(contact_us_link=h.link_to(_("Contact us"), url(controller='home', action='contacts'), id="contact-link")))}
 </p>
 
 ${h.button_to(_("Next"),

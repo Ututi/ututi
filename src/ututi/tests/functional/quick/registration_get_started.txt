@@ -119,11 +119,12 @@ It displays some people from this university:
     >>> browser.printCssQuery('#people-box .name', strip=True)
     <div> <a>Administrator of the university</a> </div>
 
-TODO: the "Contact us" link does not take us anywhere yet:
-(Also this test exposes a bug of css selector.)
+"Contact us" link brings user to Ututi contact page:
 
-    >>> browser.printCssQuery('a#contact-link')
-    <a href="#" id="contact-link">Contact us</a>.
+    >>> browser.getLink(id='contact-link').click()
+    >>> browser.url
+    'http://localhost/contacts'
+    >>> browser.goBack()
 
 The "Next" takes user to "Personal information" step:
 
