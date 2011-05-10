@@ -4,7 +4,6 @@ import facebook
 import simplejson
 
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.sql.expression import desc
 
 from formencode import validators
 from formencode import htmlfill
@@ -584,20 +583,6 @@ class UserProfileController(ProfileControllerBase):
             return bcs[selected]
 
     @ActionProtector("user")
-    def index(self):
-        c.events = meta.Session.query(Event)\
-            .filter(Event.author_id == c.user.id)\
-            .order_by(desc(Event.created))\
-            .limit(20).all()
-
-        c.fullname = c.user.fullname
-        c.emails = [email.email for email in
-                    meta.Session.query(Email).filter_by(id=c.user.id).filter_by(confirmed=False).all()]
-        c.emails_confirmed = [email.email for email in
-                              meta.Session.query(Email).filter_by(id=c.user.id).filter_by(confirmed=True).all()]
-        return render('profile/profile.mako')
-
-    @ActionProtector("user")
     def home(self):
         redirect(url(controller='profile', action='feed'))
 
@@ -613,7 +598,8 @@ class UserProfileController(ProfileControllerBase):
 
     @ActionProtector("user")
     def register_welcome(self):
-        return render('/profile/welcome.mako')
+        c.welcome = True
+        return render('/profile/get_started.mako')
 
     @ActionProtector("user")
     def get_started(self):

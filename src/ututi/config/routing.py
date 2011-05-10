@@ -270,7 +270,6 @@ def make_map(config):
     map.connect('/invite_friends', controller='profile', action='invite_friends_fb')
     map.connect('/profile/confirm_emails', controller='profile', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='profile', action='confirm_user_email')
-    map.connect('/profile', controller='profile', action='index')
     map.connect('/profile/edit/contacts', controller='profile', action='edit_contacts')
     map.connect('/profile/edit/password', controller='profile', action='edit_password')
     map.connect('/profile/edit/wall', controller='profile', action='wall_settings')
