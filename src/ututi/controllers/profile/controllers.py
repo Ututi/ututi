@@ -92,6 +92,11 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         raise NotImplementedError("This has to be implemented by the"
                                   " specific profile controller.")
 
+    @ActionProtector("user")
+    def get_started(self):
+        raise NotImplementedError("This has to be implemented by the"
+                                  " specific profile controller.")
+
     def __before__(self):
         if c.user is not None:
             c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='home')}]
@@ -619,6 +624,10 @@ class UserProfileController(ProfileControllerBase):
             c.fb_random_post = random.choice(FB_POST_MESSAGES)
 
         return render('/profile/welcome.mako')
+
+    @ActionProtector("user")
+    def get_started(self):
+        return render('/profile/get_started.mako')
 
     @ActionProtector("user")
     @validate(schema=PhoneForm, form='home')

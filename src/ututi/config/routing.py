@@ -266,6 +266,7 @@ def make_map(config):
     map.connect('/school/*path', controller='structureview', action='index')
 
     # other user views
+    map.connect('/getstarted', controller='profile', action='get_started')
     map.connect('/invite_friends', controller='profile', action='invite_friends_fb')
     map.connect('/profile/confirm_emails', controller='profile', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='profile', action='confirm_user_email')

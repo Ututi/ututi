@@ -94,8 +94,6 @@ button.submit {
 }
 
 button.inline {
-    padding-top: 0;
-    padding-bottom: 0;
     margin-top: 0;
     margin-bottom: 0;
     display: inline;
@@ -135,6 +133,14 @@ button.dark.add:hover {
     background-image: url('img/buttons/hover_add_grey.png');
 }
 
+button.dark.edit {
+    padding: 0 8px 0 16px;
+    background-image: url('img/buttons/bg_edit_grey.png');
+}
+
+button.dark.edit:hover {
+    background-image: url('img/buttons/hover_edit_grey.png');
+}
 
 button.btn-text {
     /* pretending to look like simple link */
@@ -381,7 +387,7 @@ input {
     }
 
     form span.helpText {
-        width: 200px; /* equals input width */
+        width: 300px; /* equals input width */
         color: #666;
         font-size: 11px;
         margin-top: 2px;
@@ -983,6 +989,29 @@ ul.feature-list {
         background: url(img/icons.com/about/subject.png) no-repeat left top;
     }
 
+    ul.feature-list.small li {
+        padding-left: 35px;
+        min-height: 25px;
+        line-height: 25px;
+        margin: 10px 0 0 0;
+    }
+
+    ul.feature-list.small li.discussions {
+        background: url(img/icons.com/about/discussions_smaller.png) no-repeat left center;
+    }
+
+    ul.feature-list.small li.email {
+        background: url(img/icons.com/about/email_smaller.png) no-repeat 2px center;
+    }
+
+    ul.feature-list.small li.file {
+        background: url(img/icons.com/about/file_smaller.png) no-repeat 8px center;
+    }
+
+    ul.feature-list.small li.notifications {
+        background: url(img/icons.com/about/notifications_smaller.png) no-repeat 2px center;
+    }
+
 .subject-list {
     background: url(img/icons/dalykas-off-big.png) no-repeat left top;
     padding: 0px 0px 0px 35px;
@@ -1208,10 +1237,11 @@ ul.feature-list {
     .left-right .right {
         display: table-cell;
         width: 50%;
+        vertical-align: top;
     }
 
     .left-right .right {
-        border-left: 1px solid #333;
+        border-left: 1px solid #999;
         padding-left: 50px;
     }
 
