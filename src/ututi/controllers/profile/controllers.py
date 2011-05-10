@@ -1,7 +1,6 @@
 from datetime import datetime
 import logging
 import facebook
-import random
 import simplejson
 
 from sqlalchemy.orm.exc import NoResultFound
@@ -614,15 +613,6 @@ class UserProfileController(ProfileControllerBase):
 
     @ActionProtector("user")
     def register_welcome(self):
-        if request.params.get('fb'):
-            FB_POST_MESSAGES = [_('I like it'),
-                                _('I joined too ;)'),
-                                _('Nice tool for students.'),
-                                _('Maybe You will also find it useful'),
-                                _('I found my University on Ututi ;)'),
-                                _('Where are your notes?')]
-            c.fb_random_post = random.choice(FB_POST_MESSAGES)
-
         return render('/profile/welcome.mako')
 
     @ActionProtector("user")

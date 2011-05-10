@@ -13,10 +13,6 @@
 </div>
 </%def>
 
-%if not c.user.is_teacher:
-  ${self.homepage_nags_and_stuff()}
-%endif
-
 ${welcome()}
 ${self.group_feature_box()}
 ${self.subject_feature_box()}

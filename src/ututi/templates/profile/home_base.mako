@@ -77,34 +77,4 @@ ${parent.head_tags()}
   </div>
 </%def>
 
-<%def name="homepage_nags_and_stuff()">
-  %if c.fb_random_post:
-  ${init_facebook()}
-  <script type="text/javascript">
-      //<![CDATA[
-      $(document).ready(function() {
-          FB.ui({
-              method: 'stream.publish',
-              message: '${c.fb_random_post}',
-              attachment: {
-                  name: 'Ututi - your university online',
-                  description: (
-                      '${_("Ututi is Your university online. "
-                           "Here You and Your class mates can create your group online, "
-                           "use the mailing list for communication and the file storage for sharing information.")}'
-                  ),
-                  href: '${url('/', qualified=True)}'
-               },
-               action_links: [ { text: 'Labas rytas', href: 'ututi.lt' } ],
-               user_message_prompt: '${_('Share your thoughts about Ututi')}'
-             },
-             function(response) { }
-         );
-      });
-      //]]>
-  </script>
-  %endif
-</%def>
-
-
 ${next.body()}
