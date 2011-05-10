@@ -125,8 +125,8 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         self._search()
         return render_mako_def('/search/index.mako','search_results', results=c.results, controller='profile', action='search_js')
 
-    def _feed_page(self):
-        """This method is reused in controllers implementing feed action."""
+    @ActionProtector("user")
+    def feed(self):
         self._set_wall_variables(events_hidable=True)
 
         c.msg_recipients = [(m.group.id, m.group.title) for m in c.user.memberships]
@@ -143,10 +143,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         meta.Session.commit()
 
         return result
-
-    @ActionProtector("user")
-    def feed(self):
-        return self._feed_page()
 
     def _edit_form_defaults(self):
         defaults = {
@@ -586,10 +582,6 @@ class UserProfileController(ProfileControllerBase):
     def home(self):
         redirect(url(controller='profile', action='feed'))
 
-    def _feed_page(self):
-        # Overrides parent method to add tabs and breadcrumbs
-        c.breadcrumbs.append(self._actions('feed'))
-        return ProfileControllerBase._feed_page(self)
 
     @ActionProtector("user")
     def my_subjects(self):
