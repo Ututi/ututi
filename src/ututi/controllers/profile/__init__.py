@@ -1,9 +1,10 @@
 import logging
 
 from ututi.model.users import Teacher
-from ututi.lib.base import BaseController
 from ututi.lib.security import current_user
-from ututi.controllers.profile.controllers import UserProfileController, TeacherProfileController, UnverifiedTeacherProfileController
+from ututi.controllers.profile.user import UserProfileController
+from ututi.controllers.profile.teacher import TeacherProfileController, \
+        UnverifiedTeacherProfileController
 
 log = logging.getLogger(__name__)
 
