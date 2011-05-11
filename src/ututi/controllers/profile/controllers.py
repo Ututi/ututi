@@ -4,6 +4,7 @@ import facebook
 import simplejson
 
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.sql.expression import desc
 
 from formencode import validators
 from formencode import htmlfill
@@ -98,6 +99,14 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     def __before__(self):
         if c.user is not None:
             c.breadcrumbs = [{'title': c.user.fullname, 'link': url(controller='profile', action='home')}]
+
+    @ActionProtector("user")
+    def events(self):
+        c.events = meta.Session.query(Event)\
+            .filter(Event.author_id == c.user.id)\
+            .order_by(desc(Event.created))\
+            .limit(20).all()
+        return render('profile/events.mako')
 
     @ActionProtector("user")
     def browse(self):
