@@ -1480,6 +1480,7 @@ ul.inline-list li {
         padding-left: 22px;
     }
     ul.icon-list li.icon-contact { background-image: url('img/icons.com/contact_small.png'); }
+    ul.icon-list li.icon-ututi { background-image: url('img/icons.com/ututi_small_orange.png'); }
 
     /* Sometimes we want icons not centered vertically. */
 
