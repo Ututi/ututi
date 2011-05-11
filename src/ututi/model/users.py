@@ -12,7 +12,7 @@ from datetime import datetime
 
 from ututi.model.util import logo_property, read_facebook_logo
 from ututi.model import meta
-from ututi.lib.helpers import image
+from ututi.lib.helpers import image, user_done_items
 from ututi.lib.emails import send_email_confirmation_code
 
 
@@ -488,6 +488,9 @@ class User(Author):
 
     def update_ignored_events(self, events):
         self.ignored_events = ','.join(list(set(events)))
+
+    def is_freshman(self):
+        return len(user_done_items(self)) < 3
 
 
 class AnonymousUser(object):

@@ -589,8 +589,10 @@ class UserProfileController(ProfileControllerBase):
 
     @ActionProtector("user")
     def home(self):
-        redirect(url(controller='profile', action='feed'))
-
+        if c.user.is_freshman():
+            redirect(url(controller='profile', action='get_started'))
+        else:
+            redirect(url(controller='profile', action='feed'))
 
     @ActionProtector("user")
     def my_subjects(self):

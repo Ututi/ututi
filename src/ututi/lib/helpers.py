@@ -669,34 +669,45 @@ def get_languages():
     langs = meta.Session.query(Language).order_by(Language.title).all()
     return [(lang.id, lang.title) for lang in langs]
 
-def user_todo_items(user):
+def user_done_items(user):
+    """Returns which actions user has done."""
     from ututi.model import UserRegistration, meta
+    items = []
+    if meta.Session.query(UserRegistration)\
+       .filter_by(inviter=user).count() > 0:
+        items.append('invitation')
+    if len(user.groups) > 0:
+        items.append('group')
+    if len(user.watched_subjects) > 0:
+        items.append('subject')
+    if user.description or user.site_url or user.phone_number:
+        items.append('profile')
+    return items
+
+def user_todo_items(user):
     from pylons import url
     todo_items = []
-    invited_count = meta.Session.query(UserRegistration).filter_by(inviter=user).count()
+    done = user_done_items(user)
     todo_items.append({
         'title': _("Invite others to join"),
         'link': url(controller='profile', action='invite_friends_fb'),
-        'done': invited_count > 0 })
+        'done': 'invitation' in done })
     todo_items.append({
         'title': _("Join / create a group"),
         'link': url(controller='group', action='create'),
-        'done': len(user.groups) > 0 })
+        'done': 'group' in done })
     todo_items.append({
         'title': _("Find / create your subjects"),
         'link': url(controller='profile', action='watch_subjects'),
-        'done': len(user.watched_subjects) > 0 })
+        'done': 'subject' in done })
     todo_items.append({
         'title': _("Write a wall post"),
         'link': '#',
         'done': True })
-    profile_complete = user.description or \
-                       user.site_url or \
-                       user.phone_number
     todo_items.append({
         'title': _("Fill your profile"),
         'link': url(controller='profile', action='edit'),
-        'done': profile_complete })
+        'done': 'profile' in done })
 
     return todo_items
 

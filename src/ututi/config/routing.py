@@ -225,6 +225,7 @@ def make_map(config):
     map.connect('/home', controller='profile', action='home')
     map.connect('/browse', controller='search', action='browse')
     map.connect('/home/feed', controller='profile', action='feed')
+    map.connect('/home/start', controller='profile', action='get_started')
     map.connect('/home/subjects', controller='profile', action='my_subjects')
 
     #user registration path
@@ -266,7 +267,6 @@ def make_map(config):
     map.connect('/school/*path', controller='structureview', action='index')
 
     # other user views
-    map.connect('/getstarted', controller='profile', action='get_started')
     map.connect('/invite_friends', controller='profile', action='invite_friends_fb')
     map.connect('/profile/confirm_emails', controller='profile', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='profile', action='confirm_user_email')

@@ -7,6 +7,9 @@ ${parent.css()}
   padding: 20px 0 10px 0;
   border-bottom: 1px solid #eeeeee;
 }
+.steps .step.complete {
+  opacity: 0.5;
+}
 .steps .heading {
   position: relative;
 }
@@ -82,8 +85,10 @@ button#create-new-group {
 </div>
 %endif
 
+<% done = h.user_done_items(c.user) %>
+
 <div class="steps">
-  <div class="step">
+  <div class="step ${'complete' if 'invitation' in done else ''}">
     <div class="heading">
       <span class="number">1</span>
       <span class="title">${_("Invite your friends")}</span>
@@ -106,7 +111,7 @@ button#create-new-group {
       </div>
     </div>
   </div>
-  <div class="step clearfix">
+  <div class="step clearfix ${'complete' if 'group' in done else ''}">
     <div class="heading">
       <span class="number">2</span>
       <span class="title">${_("Join the group")}</span>
@@ -130,7 +135,7 @@ button#create-new-group {
       </div>
     </div>
   </div>
-  <div class="step">
+  <div class="step ${'complete' if 'subject' in done else ''}">
     <div class="heading">
       <span class="number">3</span>
       <span class="title">${_("Choose your subjects")}</span>
@@ -149,7 +154,7 @@ button#create-new-group {
       <p>${_("Share course material, create wiki notes and discuss with other subject followers.")}</p>
     </div>
   </div>
-  <div class="step">
+  <div class="step ${'complete' if 'profile' in done else ''}">
     <div class="heading">
       <span class="number">4</span>
       <span class="title">${_("Fill your profile")}</span>
