@@ -8,18 +8,18 @@
   <span class="close-link hide-parent">
     ${h.image('/img/icons.com/close.png', alt=_('Close'))}
   </span>
-  <span>
-    ${_('Your email (%(email)s) is not confirmed! '
-    'Please confirm your email by clicking on the link sent '
-    'to your address or ') % dict(email=c.user.emails[0].email) |n}
-    <form method="post" action="${url(controller='profile', action='confirm_emails')}" id="email_confirmation_request" class="inline-form">
-      <div>
-        <input type="hidden" name="came_from" value="${request.url}" />
-        <input type="hidden" name="email" value="${c.user.emails[0].email}" />
-        <input type="submit" class="text_button" value="${_('get another confirmation email')}" style="font-size: 13px;"/>
-      </div>
-    </form>
+  <span class="flash-message-content">
+      ${_('Your email (%(email)s) is not confirmed! '
+      'Please confirm your email by clicking on the link sent '
+      'to your address or ') % dict(email=c.user.emails[0].email) |n}
   </span>
+  <form method="post" action="${url(controller='profile', action='confirm_emails')}" id="email_confirmation_request" class="inline-form">
+    <div>
+      <input type="hidden" name="came_from" value="${request.url}" />
+      <input type="hidden" name="email" value="${c.user.emails[0].email}" />
+      <input type="submit" class="text_button" value="${_('get another confirmation email')}" style="font-size: 13px;"/>
+    </div>
+  </form>
 </div>
 %endif
 
@@ -28,7 +28,7 @@
   <span class="close-link hide-parent">
     ${h.image('/img/icons.com/close.png', alt=_('Close'))}
   </span>
-  <span>
+  <span class="flash-message-content">
     ${_('Your <strong>gadu gadu number</strong> is not confirmed! Please <a href="%s">confirm</a> it by entering the code sent to you.') % url(controller='profile', action='edit_contacts')|n}
   </span>
 </div>
@@ -39,7 +39,7 @@
   <span class="close-link hide-parent">
     ${h.image('/img/icons.com/close.png', alt=_('Close'))}
   </span>
-  <span>
+  <span class="flash-message-content">
     ${_('Your phone is not confirmed! Please <a href="%s">confirm</a> it by entering the code sent to you.') % url(controller='profile', action='edit_contacts')|n}
   </span>
 </div>
@@ -56,7 +56,7 @@
   %for invitation in user.invitations:
     % if invitation.active:
       <div class="flash-message">
-        <span>
+        <span class="flash-message-content">
           ${h.literal(_(u"%(author)s has sent you an invitation to group %(group)s. Do you want to become a member of this group?") %\
                       dict(author=h.object_link(invitation.author), group=h.object_link(invitation.group)))}
         </span>
@@ -96,7 +96,7 @@
 %if user:
   %for rq in user.group_requests():
   <div class="flash-message">
-    <span>
+    <span class="flash-message-content">
       ${_(u"%(user)s wants to join the group %(group)s. Do you want to confirm this membership?") % \
         dict(user=h.object_link(rq.user), group=h.object_link(rq.group))|n}
     </span>
