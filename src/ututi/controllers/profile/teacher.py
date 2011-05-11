@@ -39,8 +39,14 @@ class UnverifiedTeacherProfileController(ProfileControllerBase):
 
     @ActionProtector("teacher")
     def home(self):
-        return htmlfill.render(self._edit_profile_form(),
-                               defaults=self._edit_form_defaults())
+        if c.user.is_freshman():
+            redirect(url(controller='profile', action='get_started'))
+        else:
+            redirect(url(controller='profile', action='dashboard'))
+
+    @ActionProtector("user")
+    def dashboard(self):
+        return render('/profile/teacher/dashboard.mako')
 
     def _edit_profile_form(self):
         self._set_settings_tabs(current_tab='general')
@@ -132,11 +138,6 @@ class TeacherProfileController(UnverifiedTeacherProfileController):
     def register_welcome(self):
         #redirecting: the teacher has already been verified, hence passed registration
         redirect(url(controller='profile', action='home'))
-
-    @ActionProtector("user")
-    def home(self):
-        c.breadcrumbs.append(self._actions('home'))
-        return render('/profile/teacher_home.mako')
 
     @ActionProtector("teacher")
     @validate(schema=StudentGroupForm, form='add_student_group', on_get=False)
