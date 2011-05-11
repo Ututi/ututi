@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-04-20 13:30+0300\n"
+"POT-Creation-Date: 2011-05-11 19:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -385,6 +385,12 @@ msgstr ""
 msgid "SMS sent! (%d credits used up, %d remaining)"
 msgstr ""
 
+msgid "What is Ututi?"
+msgstr ""
+
+msgid "Contact us"
+msgstr ""
+
 msgid "Please enter your password to register."
 msgstr ""
 
@@ -408,7 +414,7 @@ msgstr ""
 msgid "Message to Ututi.com team"
 msgstr ""
 
-msgid "Message sent succesfully."
+msgid "Your message was succesfully sent."
 msgstr ""
 
 msgid "You have to be logged in to download a file!"
@@ -701,9 +707,6 @@ msgstr ""
 msgid "Your profile was updated."
 msgstr ""
 
-msgid "Your biography was updated."
-msgstr ""
-
 msgid "Confirmation message sent. Please check your email."
 msgstr ""
 
@@ -722,6 +725,10 @@ msgid "Invalid email addresses: %(email_list)s"
 msgstr ""
 
 #, python-format
+msgid "These addresses are already registered in Ututi: %(email_list)s"
+msgstr ""
+
+#, python-format
 msgid "Invitations sent to %(email_list)s"
 msgstr ""
 
@@ -734,28 +741,13 @@ msgstr ""
 msgid "My subjects"
 msgstr ""
 
-msgid "I like it"
-msgstr ""
-
-msgid "I joined too ;)"
-msgstr ""
-
-msgid "Nice tool for students."
-msgstr ""
-
-msgid "Maybe You will also find it useful"
-msgstr ""
-
-msgid "I found my University on Ututi ;)"
-msgstr ""
-
-msgid "Where are your notes?"
-msgstr ""
-
 msgid "Your phone number has been updated."
 msgstr ""
 
 msgid "Your phone number has been confirmed."
+msgstr ""
+
+msgid "Your biography was updated."
 msgstr ""
 
 msgid "Group added!"
@@ -1252,9 +1244,6 @@ msgstr ""
 msgid "Learn more"
 msgstr ""
 
-msgid "What is Ututi?"
-msgstr ""
-
 msgid "Private social networks for universities."
 msgstr ""
 
@@ -1322,9 +1311,6 @@ msgid "Private social networks for universities"
 msgstr ""
 
 msgid "Bringing students and teachers together"
-msgstr ""
-
-msgid "Contact us"
 msgstr ""
 
 msgid "My University"
@@ -1536,6 +1522,12 @@ msgid ""
 "to use Ututi."
 msgstr ""
 
+msgid "Overview:"
+msgstr ""
+
+msgid "About Ututi"
+msgstr ""
+
 msgid "Contact us using this form"
 msgstr ""
 
@@ -1549,6 +1541,9 @@ msgid "Message:"
 msgstr ""
 
 msgid "Send"
+msgstr ""
+
+msgid "Contact information:"
 msgstr ""
 
 msgid "Private social networks for Universities and Colleges"
@@ -2908,15 +2903,60 @@ msgid ""
 "outsiders. "
 msgstr ""
 
-#, python-format
-msgid "Registration to %(university_title)s"
+msgid "Join as student"
 msgstr ""
 
-msgid "Enter your email here:"
+msgid "Enter your email"
 msgstr ""
 
-#, python-format
-msgid "Teacher registration to %(university_title)s"
+msgid "Ututi student accounts:"
+msgstr ""
+
+msgid ""
+"<strong>Join or create your group</strong> for easy communication and "
+"collaboration with your classmates."
+msgstr ""
+
+msgid ""
+"<strong>Start following courses</strong> that interest you. Find course "
+"material and receive notifications about course related updates."
+msgstr ""
+
+msgid ""
+"<strong>Upload files</strong> to share them with your classmates. Files "
+"uploaded to course catalog will be available to everyone who is interested in"
+" the subject."
+msgstr ""
+
+msgid ""
+"<strong>Create wiki notes</strong> and edit them together with other people "
+"on the network. You can even take notes to Ututi during your lectures."
+msgstr ""
+
+msgid "Join as teacher"
+msgstr ""
+
+msgid "Ututi teacher accounts:"
+msgstr ""
+
+msgid ""
+"<strong>Fill in your biography</strong> to represent yourself to other "
+"members of your academic community."
+msgstr ""
+
+msgid ""
+"<strong>Upload course material.</strong> It will become immediately available"
+" to everyone who is following your course."
+msgstr ""
+
+msgid ""
+"<strong>Select and organize your publications</strong> that will be displayed"
+" on your Ututi profile page."
+msgstr ""
+
+msgid ""
+"<strong>Contact your followers</strong> by sending group or private messages,"
+" or firing discussions on the course wall."
 msgstr ""
 
 msgid "Can't find your subject?"
@@ -3326,6 +3366,21 @@ msgstr ""
 msgid "Lect."
 msgstr ""
 
+msgid "Create your own social network"
+msgstr ""
+
+msgid "About Ututi:"
+msgstr ""
+
+msgid ""
+"Ututi lets you create a social network for your university. Here you will "
+"find online groups, teacher profiles and course pages. Ututi is a tool to "
+"share information and build your online academic community."
+msgstr ""
+
+msgid "Learn more..."
+msgstr ""
+
 msgid "People online:"
 msgstr ""
 
@@ -3362,7 +3417,7 @@ msgid ""
 "and teachers can join this network."
 msgstr ""
 
-msgid "Contact information:"
+msgid "Get started"
 msgstr ""
 
 msgid "Teacher's home"
@@ -3458,126 +3513,85 @@ msgstr ""
 msgid "Add a student group"
 msgstr ""
 
-msgid "back to home page"
-msgstr ""
-
-msgid "Your biography"
-msgstr ""
-
-msgid "Enter some facts from your biography"
-msgstr ""
-
-msgid "Your GG number"
-msgstr ""
-
-msgid "GG number is not confirmed"
-msgstr ""
-
-msgid "Enter the code that you have received in your GG"
-msgstr ""
-
-msgid ""
-"\n"
-"\n"
-"                      Should you not have received the code, please press "
-"\"Send code again\".\n"
-"                      Also don't forget to add Ututi (<a "
-"href=\"gg:5437377\">5437377</a>) to your friends!"
-msgstr ""
-
-msgid "Submit code"
-msgstr ""
-
-msgid "Send code again"
-msgstr ""
-
-msgid "GG number is confirmed"
-msgstr ""
-
-msgid "Receive news into gg"
-msgstr ""
-
-msgid "Use international format, +XXXXXXXXXXX"
-msgstr ""
-
-msgid "Mobile phone number"
-msgstr ""
-
-msgid "Number is not confirmed"
-msgstr ""
-
-msgid "Enter the code that you have received by SMS"
-msgstr ""
-
-msgid "Should you not have received the code, please press \"Send code again\""
-msgstr ""
-
-msgid "Number is confirmed"
-msgstr ""
-
-msgid "Email is confirmed"
-msgstr ""
-
-msgid "Get confirmation email"
-msgstr ""
-
-msgid "Email is not confirmed"
-msgstr ""
-
-msgid "Link with Google and Facebook"
-msgstr ""
-
-msgid "Link Google"
-msgstr ""
-
-msgid "Unlink Google"
-msgstr ""
-
-msgid "Link Facebook"
-msgstr ""
-
-msgid "Unlink Facebook"
-msgstr ""
-
-msgid "Click the buttons to link or unlink your profile with Google and/or Facebook"
-msgstr ""
-
-msgid "Change picture"
-msgstr ""
-
-msgid "Delete current picture"
-msgstr ""
-
-msgid "Address of your website or blog"
-msgstr ""
-
-msgid "About yourself"
-msgstr ""
-
-msgid "Show my profile to unregistered users and search engines"
-msgstr ""
-
-msgid "Picture"
-msgstr ""
-
-msgid "Current password"
-msgstr ""
-
-msgid "New password"
-msgstr ""
-
-msgid "Repeat the new password"
+msgid "Universities"
 msgstr ""
 
 msgid "Edit a student group"
 msgstr ""
 
+msgid "What have I been doing?"
+msgstr ""
+
+msgid "You haven't contributed much, have you?"
+msgstr ""
+
 msgid "News feed settings"
+msgstr ""
+
+msgid "Welcome to Ututi"
+msgstr ""
+
+#, python-format
+msgid ""
+"Welcome to <strong>%(university)s</strong> private social networkcreated on "
+"<a href=\"%(url)s\">Ututi platform</a>. Here students and teachers can create"
+" groups online, use the mailinglist for communication and the file storage "
+"for sharing information."
+msgstr ""
+
+msgid "Invite your friends"
+msgstr ""
+
+msgid "Enter comma separated list of email addresses."
+msgstr ""
+
+msgid "Or use Facebook to invite your friends."
+msgstr ""
+
+msgid "Join the group"
+msgstr ""
+
+msgid "Features:"
+msgstr ""
+
+msgid "Group's email"
+msgstr ""
+
+msgid "Private discussions"
+msgstr ""
+
+msgid "Find and join your group or create a new one."
+msgstr ""
+
+msgid "Or browse group catalog"
+msgstr ""
+
+msgid "Choose your subjects"
+msgstr ""
+
+msgid "Find subjects in your university and start following them."
+msgstr ""
+
+msgid "Or create new subject"
+msgstr ""
+
+msgid ""
+"Share course material, create wiki notes and discuss with other subject "
+"followers."
+msgstr ""
+
+msgid "Tell some basic information about yourself by editing your profile."
+msgstr ""
+
+msgid "Edit profile"
 msgstr ""
 
 msgid ""
 "private file storage area for files that you don't want to share with "
 "outsiders."
+msgstr ""
+
+msgid "Find your group"
 msgstr ""
 
 msgid "a place to discuss subject related questions with students and teachers."
@@ -3591,13 +3605,7 @@ msgid ""
 "the lecture and upload it directly to Ututi."
 msgstr ""
 
-msgid ""
-"Ututi is Your university online. Here You and Your class mates can create "
-"your group online, use the mailing list for communication and the file "
-"storage for sharing information."
-msgstr ""
-
-msgid "Share your thoughts about Ututi"
+msgid "Find your subjects"
 msgstr ""
 
 #, python-format
@@ -3630,43 +3638,6 @@ msgid ""
 msgstr ""
 
 msgid "back to the profile"
-msgstr ""
-
-msgid "email notifications"
-msgstr ""
-
-msgid "immediately"
-msgstr ""
-
-msgid "at the end of the day"
-msgstr ""
-
-msgid "never"
-msgstr ""
-
-msgid "Group's mailing list"
-msgstr ""
-
-msgid "Group's forum"
-msgstr ""
-
-msgid "Email me whe"
-msgstr ""
-
-msgid "Choose when Ututi will send you email notifications"
-msgstr ""
-
-msgid "Personally watched subjects' notifications"
-msgstr ""
-
-#, python-format
-msgid "Group's %(group_title)s notifications"
-msgstr ""
-
-msgid "What have I been doing?"
-msgstr ""
-
-msgid "You haven't contributed much, have you?"
 msgstr ""
 
 msgid "Why we need support?"
@@ -3782,15 +3753,6 @@ msgid ""
 "continuing to use Ututi!"
 msgstr ""
 
-msgid "Welcome to Ututi!"
-msgstr ""
-
-msgid ""
-"At the moment You are not confirmed as a teacher. Our administrators have "
-"been notified and will verify You shortly. Please be patient. Meanwhile "
-"please tell us more about yourself."
-msgstr ""
-
 msgid "Write note title here"
 msgstr ""
 
@@ -3805,6 +3767,175 @@ msgid ""
 msgstr ""
 
 msgid "Wiki note"
+msgstr ""
+
+msgid "Add a subject"
+msgstr ""
+
+msgid "You are not watching any subjects."
+msgstr ""
+
+msgid "Notification settings"
+msgstr ""
+
+msgid "back"
+msgstr ""
+
+msgid "Your GG number"
+msgstr ""
+
+msgid "GG number is not confirmed"
+msgstr ""
+
+msgid "Enter the code that you have received in your GG"
+msgstr ""
+
+msgid ""
+"\n"
+"\n"
+"                        Should you not have received the code, please press "
+"\"Send code again\".\n"
+"                        Also don't forget to add Ututi (<a "
+"href=\"gg:5437377\">5437377</a>) to your friends!"
+msgstr ""
+
+msgid "Submit code"
+msgstr ""
+
+msgid "Send code again"
+msgstr ""
+
+msgid "GG number is confirmed"
+msgstr ""
+
+msgid "Receive news into gg"
+msgstr ""
+
+msgid "Use international format, +XXXXXXXXXXX"
+msgstr ""
+
+msgid "Mobile phone number"
+msgstr ""
+
+msgid "Number is not confirmed"
+msgstr ""
+
+msgid "Enter the code that you have received by SMS"
+msgstr ""
+
+msgid "Should you not have received the code, please press \"Send code again\""
+msgstr ""
+
+msgid "Number is confirmed"
+msgstr ""
+
+msgid "Email is confirmed"
+msgstr ""
+
+msgid "Get confirmation email"
+msgstr ""
+
+msgid "Email is not confirmed"
+msgstr ""
+
+msgid "Link with Google and Facebook"
+msgstr ""
+
+msgid "Link Google"
+msgstr ""
+
+msgid "Unlink Google"
+msgstr ""
+
+msgid "Link Facebook"
+msgstr ""
+
+msgid "Unlink Facebook"
+msgstr ""
+
+msgid "Click the buttons to link or unlink your profile with Google and/or Facebook"
+msgstr ""
+
+msgid "Email notification settings"
+msgstr ""
+
+msgid "Email me when"
+msgstr ""
+
+msgid "What notifications would you like to receive by email:"
+msgstr ""
+
+msgid "immediately"
+msgstr ""
+
+msgid "at the end of the day"
+msgstr ""
+
+msgid "never"
+msgstr ""
+
+msgid "Send me email:"
+msgstr ""
+
+msgid "Personally watched subjects' notifications"
+msgstr ""
+
+msgid "This subject will be removed from followed subject list."
+msgstr ""
+
+msgid "You do not follow any subjects."
+msgstr ""
+
+#, python-format
+msgid "Group's %(group_title)s notifications"
+msgstr ""
+
+msgid "This group does not follow any subjects."
+msgstr ""
+
+msgid "Group emails"
+msgstr ""
+
+msgid "Change picture"
+msgstr ""
+
+msgid "Delete current picture"
+msgstr ""
+
+msgid "Address of your website or blog"
+msgstr ""
+
+msgid "About yourself"
+msgstr ""
+
+msgid "Show my profile to unregistered users and search engines"
+msgstr ""
+
+msgid "Picture"
+msgstr ""
+
+msgid "Current password"
+msgstr ""
+
+msgid "New password"
+msgstr ""
+
+msgid "Repeat the new password"
+msgstr ""
+
+msgid "Welcome to Ututi!"
+msgstr ""
+
+msgid ""
+"At the moment You are not confirmed as a teacher. Our administrators have "
+"been notified and will verify You shortly. Please be patient. Meanwhile "
+"please tell us more about yourself."
+msgstr ""
+
+msgid "Your biography"
+msgstr ""
+
+msgid "Enter some facts from your biography"
 msgstr ""
 
 msgid "Forum posts"
@@ -3858,26 +3989,6 @@ msgstr ""
 msgid "Which events do You want to see in Your news feed?"
 msgstr ""
 
-msgid "Add a subject"
-msgstr ""
-
-msgid "You are not watching any subjects."
-msgstr ""
-
-msgid "Notification settings"
-msgstr ""
-
-msgid "Welcome to Ututi"
-msgstr ""
-
-#, python-format
-msgid ""
-"Welcome to <strong>%(university)s</strong> private social networkcreated on "
-"<a href=\"%(url)s\">Ututi platform</a>. Here students and teachers can create"
-" groups online, use the mailinglist for communication and the file storage "
-"for sharing information."
-msgstr ""
-
 msgid "Select an image file on your computer:"
 msgstr ""
 
@@ -3917,8 +4028,11 @@ msgid "Did not get the confirmation code? Press \"Send again\" button."
 msgstr ""
 
 msgid ""
-"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod "
-"tempor incididunt ut labore et"
+"Ututi is most valuable when used together with your classmates and friends. "
+"Take a minute to invite them now."
+msgstr ""
+
+msgid "Enter emails of your classmates, separated with commas and/or whitespace."
 msgstr ""
 
 msgid "Invite friends via facebook"
@@ -4493,9 +4607,6 @@ msgid "Award medals"
 msgstr ""
 
 msgid "Send private message"
-msgstr ""
-
-msgid "Edit profile"
 msgstr ""
 
 msgid "Subjects:"
