@@ -267,7 +267,7 @@ User that has registered can login here:
     >>> form.getControl('Password').value = 'password'
     >>> form.getControl('Login').click()
     >>> anonymous.url
-    'http://localhost/home/feed'
+    'http://localhost/home/start'
 
 If user has registered to several universities using same username,
 the login page will ask him to select the network he wants to sign in.
@@ -305,7 +305,7 @@ and then to U-niversity.
     >>> form.getControl('Select network').displayValue = ['Vilnius University']
     >>> form.getControl('Login').click()
     >>> user.url
-    'http://localhost/home/feed'
+    'http://localhost/home/start'
     >>> user.click('University')
     >>> user.url
     'http://localhost/school/vu.lt'
@@ -323,7 +323,7 @@ and then to U-niversity.
     >>> form.getControl('Select network').displayValue = ['U-niversity']
     >>> form.getControl('Login').click()
     >>> user.url
-    'http://localhost/home/feed'
+    'http://localhost/home/start'
     >>> user.click('University')
     >>> user.url
     'http://localhost/school/uni'

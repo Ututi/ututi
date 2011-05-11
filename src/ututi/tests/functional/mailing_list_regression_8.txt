@@ -6,7 +6,7 @@ Regression test for utf-8 characters in email subject
     >>> from ututi.tests.functional import send_test_message
 
     >>> send_test_message('dropbox.txt')
-    >>> browser.reload()
+    >>> browser.click('News feed')
     >>> browser.printCssQuery('#wall-event-8 .event-title', strip=True)
     <span>
       <a>Adminas Adminovix</a>

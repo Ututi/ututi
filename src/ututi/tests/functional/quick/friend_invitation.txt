@@ -9,7 +9,7 @@ Testing ututi recommendation letters sent to friends
 
    >>> browser = Browser.logIn()
    >>> browser.url
-   'http://localhost/home/feed'
+   'http://localhost/home/start'
 
 There should be a portlet with a form that let's us enter email addresses the recommendations will be sent to:
 
@@ -36,7 +36,7 @@ There should be a portlet with a form that let's us enter email addresses the re
 And after all this we are redirected back to where we came from.
 
    >>> browser.url
-   'http://localhost/home/feed'
+   'http://localhost/home/start'
 
 Plus, a status message is displayed:
 
@@ -47,7 +47,7 @@ Plus, a status message is displayed:
 
 User can add personal message to the invitation that is sent:
 
-   >>> browser.open('http://localhost/home/feed')
+   >>> browser.open('http://localhost/home/start')
    >>> form = browser.getForm(id='invite-email-form')
    >>> form.getControl('Recipients:').value = 'someotheruser@example.com'
    >>> form.getControl('Add personal message (optional):').value = 'Hey, come and try Ututi. I found it rather nice.'
@@ -71,7 +71,7 @@ User can add personal message to the invitation that is sent:
 And after all this we are redirected back to where we came from.
 
    >>> browser.url
-   'http://localhost/home/feed'
+   'http://localhost/home/start'
 
 Plus, a status message is displayed:
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")

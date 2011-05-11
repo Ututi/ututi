@@ -4,41 +4,14 @@ Test nagging users to confirm their emails
    >>> from ututi.lib.mailer import mail_queue
 
    >>> browser = Browser.logIn('user3@ututi.lt', 'password')
-   >>> browser.printQuery("//div[@class='flash-message']/span")
-   <span class="close-link hide-parent">
-     <img alt="Close" src="/img/icons.com/close.png" />
-   </span>
-   <span>
-       Your email (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
-       <form method="post" action="/profile/confirm_emails" id="email_confirmation_request" class="inline-form">
-       <div>
-         <input type="hidden" name="came_from" value="http://localhost/home/feed" />
-         <input type="hidden" name="email" value="user3@ututi.lt" />
-         <input type="submit" class="text_button" value="get another confirmation email" />
-       </div>
-     </form>
-   </span>
+   >>> browser.printCssQuery('.flash-message-content', strip=True)
+   <span>Your email (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or</span>
 
 
    >>> browser.getControl('get another confirmation email').click()
-   >>> browser.printQuery("//div[@class='flash-message']/span")
-   <span class="close-link hide-parent">
-     <img alt="Close" src="/img/icons.com/close.png" />
-   </span>
-   <span class="flash-message-content">Confirmation message sent. Please check your email.</span>
-   <span class="close-link hide-parent">
-     <img alt="Close" src="/img/icons.com/close.png" />
-   </span>
-   <span>
-       Your email (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or
-       <form method="post" action="/profile/confirm_emails" id="email_confirmation_request" class="inline-form">
-       <div>
-         <input type="hidden" name="came_from" value="http://localhost/home/feed" />
-         <input type="hidden" name="email" value="user3@ututi.lt" />
-         <input type="submit" class="text_button" value="get another confirmation email" />
-       </div>
-     </form>
-   </span>
+   >>> browser.printCssQuery('.flash-message-content', strip=True)
+   <span>Confirmation message sent. Please check your email.</span>
+   <span>Your email (user3@ututi.lt) is not confirmed! Please confirm your email by clicking on the link sent to your address or</span>
 
    >>> msg = mail_queue.pop()
    >>> print msg.payload()

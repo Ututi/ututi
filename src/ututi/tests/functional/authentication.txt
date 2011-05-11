@@ -15,10 +15,10 @@ Visiting a profile-related page should not crash if the user is not logged in.
     >>> form.getControl('Password').value = "asdasd"
     >>> form.getControl('Login').click()
 
-Note that user is being redirected to news feed after.
+Note that new user is being redirected to his "Get started" page after.
 
     >>> browser.url
-    'http://localhost/home/feed'
+    'http://localhost/home/start'
 
     >>> browser.getLink('Logout').click()
     >>> browser.url

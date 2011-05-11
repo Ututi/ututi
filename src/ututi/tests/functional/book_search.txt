@@ -144,7 +144,7 @@ in Vilnius after all) but has Kaunas selected:
 Lets see if the book shows up in ututi search:
 
     >>> browser.open('http://localhost/')
-    >>> browser.getControl(name='text').value = 'physics'
+    >>> browser.getControl(name='text', index=0).value = 'physics'
     >>> browser.getControl('search').click()
 
     >>> browser.printCssQuery('#search-results .snippet-book', strip=True)

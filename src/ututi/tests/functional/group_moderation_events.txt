@@ -7,9 +7,6 @@ Set Up:
     ...     browser.printCssQuery(".wall-entry .event-title, .wall-entry .event-content", include_attributes=['class'], include_classes=['event-content', 'event-title'])
 
     >>> browser = Browser.logIn()
-    >>> print browser.url
-    http://localhost/home/feed
-
     >>> browser.getLink('Moderatoriai', url='/group/moderators').click()
 
     >>> from ututi.tests.functional import send_test_message
@@ -22,6 +19,7 @@ should not be visible to the other users. Let's check that it is
 actually so:
 
     >>> user3 = Browser.logIn('user3@ututi.lt', 'password')
+    >>> user3.click('News feed')
     >>> printWallEvents(user3)
     <span class="event-title">
       <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>
@@ -39,7 +37,7 @@ actually so:
 
 The administrator can see the messages:
 
-    >>> browser.getLink("News feed").click()
+    >>> browser.click('News feed')
     >>> printWallEvents(browser)
     <span class="event-title">
       <a>Varlius &lt;varlius@example.com&gt;</a> has posted a new message <a>Hello from varlius</a> to the group's <a>Moderatoriai</a> moderation queue

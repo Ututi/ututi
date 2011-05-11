@@ -9,6 +9,7 @@ Functional test for the new wall
 Login and visit the wall.
 
     >>> user3 = Browser.logIn('user3@ututi.lt', 'password')
+    >>> user3.click('News feed')
     >>> user3.url
     'http://localhost/home/feed'
 
@@ -45,9 +46,11 @@ We will start with mailing list messaging. To test it, we
 will log in few other users that belong to the same group:
 
     >>> user = Browser.logIn('user@ututi.lt', 'password')
+    >>> user.click('News feed')
     >>> user.url
     'http://localhost/home/feed'
     >>> admin = Browser.logIn('admin@uni.ututi.com', 'asdasd')
+    >>> admin.click('News feed')
 
 Admin sends a message to group Moderatoriai:
 
@@ -92,7 +95,7 @@ If admin reloads his wall he will see this reply threaded to his original
 message. (Note: here we click link instead of reload so that testbrowser
 does not resubmit the form.)
 
-    >>> admin.open('http://localhost/')
+    >>> admin.open('http://localhost/home/feed')
     >>> printWallEvents(admin)
     <span class="event-title">
       <a>Adminas Adminovix</a>
