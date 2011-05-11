@@ -250,6 +250,11 @@ To newly registered user Ututi shows a "Get started" home page.
     >>> user.printCssQuery('.page-title', strip=True)
     <h1>Get started</h1>
 
+On the right hand menu there is also a "Get started" menu item:
+
+    >>> user.getLink('Get started')
+    <Link text='Get started' url='http://localhost/home/start'>
+
 User sees these options:
 
     >>> user.printCssQuery('.step span.title', strip=True)
@@ -278,3 +283,111 @@ Nevertheless he can still use the form to invite more friends:
     >>> len(mail_queue)
     2
     >>> mail_queue[:] = []
+
+Facebook button brings user to facebook invitation view:
+
+    >>> user.getLink(id='facebook-button').click()
+    >>> user.url
+    'http://localhost/invite_friends'
+    >>> user.goBack()
+
+Group's section offers to create a group of browse groups catalog:
+
+    >>> user.click('Or browse group catalog')
+    >>> user.url
+    'http://localhost/school/uni/groups'
+    >>> user.goBack()
+
+    >>> user.click('Create new group')
+    >>> user.url
+    'http://localhost/groups/create'
+
+Let's create a group now:
+
+    >>> user.getControl('Entrance year').displayValue = ['2011']
+    >>> user.getControl('Title').value = 'My new group'
+    >>> user.getControl('Email address').value = 'mygroup'
+    >>> user.click('Continue')
+    >>> user.click('Finish')
+
+Now let's go home and see that this action is marked as complete:
+
+    >>> user.click('Home')
+    >>> user.printCssQuery('.step.complete span.title', strip=True)
+    <span>Invite your friends</span>
+    <span>Join the group</span>
+
+Subject section allows to search subjects of the university, or create it:
+
+    >>> form = user.getForm('subject-search-form')
+    >>> form.getControl(name='text').value = 'something'
+    >>> form.getControl('Search').click()
+    >>> user.url
+    'http://localhost/school/uni/subjects'
+
+TODO: we should check if it ever finds something. But this setup has no
+subjects.
+
+    >>> user.click('Home')
+    >>> user.click('Or create new subject')
+    >>> user.url
+    'http://localhost/subjects/add'
+    >>> user.goBack()
+
+The profile section asks user to fill in his profile information.
+There is a button that brings user to his profile settings:
+
+    >>> user.click('Edit profile')
+    >>> user.url
+    'http://localhost/profile/edit?'
+
+We can fill in something:
+
+    >>> user.getControl('About yourself').value = "I'm cool"
+    >>> user.click('Save')
+
+Now enough actions have been completed and user's home page has been
+switched to news feed:
+
+    >>> user.click('Home')
+    >>> user.url
+    'http://localhost/home/feed'
+
+The "Get started" menu item is removed as well:
+
+    >>> user.getLink('Get started')
+    Traceback (most recent call last):
+    ...
+    LinkNotFoundError
+
+He can, however, visit get started page if he really wants to:
+
+    >>> user.open('http://localhost/home/start')
+
+He will see, that three actions are now marked as complete:
+
+    >>> user.printCssQuery('.step.complete span.title', strip=True)
+    <span>Invite your friends</span>
+    <span>Join the group</span>
+    <span>Fill your profile</span>
+
+And if user downgrades to not having enough actions done (i.e. leaves all groups),
+his homepage is again switched to the "Get started" page. (This is how current
+implementation works, and maybe it would be better not to switch again.)
+We will test this behavior by removing profile information:
+
+    >>> user.click('Settings')
+    >>> user.getControl('About yourself').value = ''
+    >>> user.click('Save')
+    >>> user.click('Home')
+    >>> user.url
+    'http://localhost/home/start'
+
+    >>> user.printCssQuery('.step.complete span.title', strip=True)
+    <span>Invite your friends</span>
+    <span>Join the group</span>
+
+"Get started" menu item is also available again:
+
+    >>> user.getLink('Get started')
+    <Link text='Get started' url='http://localhost/home/start'>
