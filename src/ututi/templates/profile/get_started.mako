@@ -8,7 +8,7 @@ ${parent.css()}
   border-bottom: 1px solid #eeeeee;
 }
 .steps .step.complete {
-  opacity: 0.5;
+  opacity: 0.75;
 }
 .steps .heading {
   position: relative;
@@ -104,7 +104,7 @@ button#create-new-group {
         </form>
         <div id="invite-friends-facebook" class="right">
           <p>${_("Or use Facebook to invite your friends.")}</p>
-          <a href="${url(controller='profile', action='invite_friends_fb')}">
+          <a id="facebook-button" href="${url(controller='profile', action='invite_friends_fb')}">
             ${h.image('/img/facebook-button.png', alt=_('Facebook'))}
           </a>
         </div>
@@ -130,7 +130,7 @@ button#create-new-group {
         class_='add inline', method='GET', id='create-new-group')}
       <div class="alternative-link">
         <a href="${c.user.location.url(action='catalog', obj_type='group')}">
-          ${_("Or create new subject")}
+          ${_("Or browse group catalog")}
         </a>
       </div>
     </div>
