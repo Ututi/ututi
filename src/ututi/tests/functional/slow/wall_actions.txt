@@ -1,62 +1,61 @@
 Test user wall actions
 ======================
 
-   >>> def printWallEvents(browser):
-   ...     browser.printCssQuery(".wall-entry .event-title, .wall-entry .event-content", include_attributes=['class'], include_classes=['event-content', 'event-title'])
+    >>> def printWallEvents(browser):
+    ...     browser.printCssQuery(".wall-entry .event-title, .wall-entry .event-content", include_attributes=['class'], include_classes=['event-content', 'event-title'])
 
-   >>> browser = Browser.logIn('user3@ututi.lt', 'password')
-   >>> browser.getLink("News feed", index=1).click()
+    >>> browser = Browser.logIn('user3@ututi.lt', 'password')
+    >>> browser.open('http://localhost/home/feed')
 
-   >>> form = browser.getForm(id='message_form')
-   >>> form.getControl(name='group_id').displayValue = ['Moderatoriai']
-   >>> form.getControl(name='subject').value = 'Sending my group a message from my wall!'
-   >>> form.getControl(name='message').value = 'Booyah'
-   >>> form.getControl('Send').click()
+    >>> form = browser.getForm(id='message_form')
+    >>> form.getControl(name='group_id').displayValue = ['Moderatoriai']
+    >>> form.getControl(name='subject').value = 'Sending my group a message from my wall!'
+    >>> form.getControl(name='message').value = 'Booyah'
+    >>> form.getControl('Send').click()
 
-   >>> browser2 = Browser.logIn()
-   >>> browser2.getLink('News feed', index=1).click()
+    >>> browser2 = Browser.logIn()
+    >>> browser2.open('http://localhost/home/feed')
 
-   >>> printWallEvents(browser2)
-   <span class="event-title">
-     <a>Third user</a>
-     <span class="">
-       <a>Moderatoriai</a>
-     </span>
-   </span>
-   <span class="event-content">Booyah</span>
-   <span class="event-title">
-     <a>Adminas Adminovix</a> has joined the group <a>Moderatoriai</a>
-   </span>
-   <span class="event-title">
-     <a>Third user</a> has joined the group <a>Moderatoriai</a>
-   </span>
-   <span class="event-title">
-     <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>
-   </span>
-   <span class="event-title">
-     <a>Adminas Adminovix</a> has joined the group <a>Testing group</a>
-   </span>
-   <span class="event-title">
-     <a>Second user</a> has joined the group <a>Testing group</a>
-   </span>
-   <span class="event-title">
-     <a>Adminas Adminovix</a> has created the group <a>Testing group</a>
-   </span>
+    >>> printWallEvents(browser2)
+    <span class="event-title">
+      <a>Third user</a>
+      <span class="">
+        <a>Moderatoriai</a>
+      </span>
+    </span>
+    <span class="event-content">Booyah</span>
+    <span class="event-title">
+      <a>Adminas Adminovix</a> has joined the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-title">
+      <a>Third user</a> has joined the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-title">
+      <a>Adminas Adminovix</a> has created the group <a>Moderatoriai</a>
+    </span>
+    <span class="event-title">
+      <a>Adminas Adminovix</a> has joined the group <a>Testing group</a>
+    </span>
+    <span class="event-title">
+      <a>Second user</a> has joined the group <a>Testing group</a>
+    </span>
+    <span class="event-title">
+      <a>Adminas Adminovix</a> has created the group <a>Testing group</a>
+    </span>
 
-   >>> from ututi.lib.mailer import mail_queue
-   >>> mail_queue.pop().payload()
-   'Booyah'
+    >>> from ututi.lib.mailer import mail_queue
+    >>> mail_queue.pop().payload()
+    'Booyah'
 
-   >>> browser.getLink("News feed", index=1).click()
+    >>> browser.open('http://localhost/home/feed')
+    >>> form = browser.getForm(id='wiki_form')
+    >>> form.getControl(name='page_title').value = 'A wiki page'
+    >>> form.getControl(name='page_content').value = 'This wiki page was created from my wall!'
+    >>> form.getControl('Save').click()
 
-   >>> form = browser.getForm(id='wiki_form')
-   >>> form.getControl(name='page_title').value = 'A wiki page'
-   >>> form.getControl(name='page_content').value = 'This wiki page was created from my wall!'
-   >>> form.getControl('Save').click()
-
-   >>> browser.printQuery("//div[@class='flash-message']/span/text()")
-   Wiki page created.
-   ...
+    >>> browser.printQuery("//div[@class='flash-message']/span/text()")
+    Wiki page created.
+    ...
 
 We can also upload a file from the wall. Let's do just that, shall we?
 
