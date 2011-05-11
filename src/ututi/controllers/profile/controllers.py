@@ -39,7 +39,7 @@ from ututi.model.events import Event, TeacherMessageEvent
 from ututi.model import File
 from ututi.model import LocationTag, TeacherGroup
 from ututi.model import meta, Email, User
-from ututi.controllers.profile.validators import HideElementForm, MultiRcptEmailForm, FriendsInvitationForm, \
+from ututi.controllers.profile.validators import HideElementForm, MultiRcptEmailForm, \
     FriendsInvitationJSForm
 from ututi.controllers.profile.validators import ContactForm, LocationForm, LogoUpload, PhoneConfirmationForm,\
     PhoneForm, ProfileForm, BiographyForm, PasswordChangeForm, StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm
@@ -492,11 +492,11 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                 msg.send(rcpt)
             return {'success': True}
 
-    @validate(schema=FriendsInvitationForm())
     def invite_friends_email(self):
-        if hasattr(self, 'form_result'):
-            emails = self.form_result['recipients'].split(',')
-            message = self.form_result['message']
+        emails = request.POST.get('recipients')
+        message = request.POST.get('message') # optional
+        if emails:
+            emails = emails.split(',')
             invites, invalid, already = \
                 make_email_invitations(emails, c.user, c.user.location)
             meta.Session.commit()
@@ -506,6 +506,9 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             if invalid:
                 h.flash(_("Invalid email addresses: %(email_list)s") % \
                         dict(email_list=', '.join(invalid)))
+            if already:
+                h.flash(_("These addresses are already registered in Ututi: %(email_list)s") % \
+                        dict(email_list=', '.join(already)))
             if invites:
                 h.flash(_("Invitations sent to %(email_list)s") % \
                         dict(email_list=', '.join(invite.email for invite in invites)))
