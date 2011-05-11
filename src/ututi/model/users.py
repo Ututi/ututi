@@ -490,7 +490,9 @@ class User(Author):
         self.ignored_events = ','.join(list(set(events)))
 
     def is_freshman(self):
-        return len(user_done_items(self)) < 3
+        if not hasattr(self, '_is_freshman'):
+            self._is_freshman = len(user_done_items(self)) < 3
+        return self._is_freshman
 
 
 class AnonymousUser(object):
