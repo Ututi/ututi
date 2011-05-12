@@ -152,7 +152,7 @@ class TeacherProfileController(UnverifiedTeacherProfileController):
             c.user.student_groups.append(grp)
             meta.Session.commit()
             h.flash(_('Group added!'))
-            redirect(url(controller='profile', action='home'))
+            redirect(url(controller='profile', action='dashboard'))
         return render('profile/add_student_group.mako')
 
     @ActionProtector("teacher")
@@ -179,7 +179,7 @@ class TeacherProfileController(UnverifiedTeacherProfileController):
             group.update_binding()
             meta.Session.commit()
             h.flash(_('Group updated!'))
-            redirect(url(controller='profile', action='home'))
+            redirect(url(controller='profile', action='dashboard'))
         return htmlfill.render(self._edit_student_group(), defaults=defaults)
 
     def _edit_student_group(self):
@@ -196,7 +196,7 @@ class TeacherProfileController(UnverifiedTeacherProfileController):
                 h.flash(_('Group deleted.'))
             else:
                 abort(404)
-        redirect(url(controller='profile', action='home'))
+        redirect(url(controller='profile', action='dashboard'))
 
     @group_teacher_action
     @ActionProtector("group_teacher")
@@ -274,4 +274,4 @@ class TeacherProfileController(UnverifiedTeacherProfileController):
                 return {'success': True}
             else:
                 h.flash(_('Message sent.'))
-                redirect(url(controller='profile', action='home'))
+                redirect(url(controller='profile', action='dashboard'))
