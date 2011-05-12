@@ -1,4 +1,5 @@
 <%inherit file="/forum/base.mako" />
+<%namespace file="/profile/base.mako" name="profile" />
 <%namespace file="/portlets/forum.mako" import="*"/>
 <%namespace file="/portlets/sections.mako" import="*"/>
 <%namespace file="/forum/index.mako" import="*"/>
@@ -8,11 +9,11 @@
 </%def>
 
 <%def name="portlets()">
-  ${user_sidebar()}
+  ${profile.portlets()}
 </%def>
 
 <%def name="portlets_right()">
-${group_right_sidebar()}
+  ${group_right_sidebar()}
 </%def>
 
 <%def name="css()">

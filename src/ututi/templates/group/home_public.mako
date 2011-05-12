@@ -1,5 +1,6 @@
 <%inherit file="/ubase-sidebar.mako" />
 
+<%namespace file="/profile/base.mako" name="profile" />
 <%namespace file="/portlets/group.mako" import="*"/>
 <%namespace file="/portlets/sections.mako" import="*"/>
 <%namespace name="members" file="/group/members.mako" import="group_members, css"/>
@@ -14,7 +15,7 @@
 </%def>
 
 <%def name="portlets()">
-  ${user_sidebar()}
+  ${profile.portlets()}
 </%def>
 
 <%def name="css()">

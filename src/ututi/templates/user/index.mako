@@ -1,12 +1,12 @@
 <%inherit file="/ubase-two-sidebars.mako" />
-<%namespace file="/portlets/sections.mako" import="user_sidebar"/>
+<%namespace file="/profile/base.mako" import="profile"/>
 <%namespace file="/portlets/user.mako" import="user_statistics_portlet,
         related_users_portlet, user_medals"/>
 <%namespace name="snippets" file="/sections/content_snippets.mako" />
 <%namespace name="wall" file="/sections/wall_entries.mako" />
 
 <%def name="portlets()">
-  ${user_sidebar()}
+  ${profile.portlets()}
 </%def>
 
 <%def name="portlets_right()">

@@ -1,14 +1,7 @@
-<%inherit file="/ubase-sidebar.mako" />
-<%namespace file="/portlets/sections.mako" import="user_sidebar"/>
+<%inherit file="/profile/base.mako" />
 <%namespace name="fb" file="/widgets/facebook.mako" />
 
-<%def name="portlets()">
-  ${user_sidebar()}
-</%def>
-
 <%def name="pagetitle()">${_("Invite friends")}</%def>
-
-<h1 class="page-title">${self.pagetitle()}</h1>
 
 %if c.has_facebook:
   <%

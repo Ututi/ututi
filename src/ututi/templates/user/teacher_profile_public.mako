@@ -1,5 +1,4 @@
 <%inherit file="/ubase-sidebar.mako" />
-<%namespace file="/portlets/sections.mako" import="user_sidebar"/>
 <%namespace file="/portlets/user.mako" import="user_statistics_portlet,
         related_users_portlet, teacher_list_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet"/>

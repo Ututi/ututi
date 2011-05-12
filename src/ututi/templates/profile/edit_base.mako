@@ -1,10 +1,5 @@
-<%inherit file="/ubase-sidebar.mako" />
-<%namespace file="/portlets/sections.mako" import="*"/>
+<%inherit file="/profile/base.mako" />
 <%namespace file="/elements.mako" import="tabs" />
-
-<%def name="portlets()">
-${user_sidebar()}
-</%def>
 
 <%def name="title()">
 ${c.user.fullname}
@@ -25,10 +20,6 @@ ${parent.css()}
     <a class="back-link" href="${url(controller='profile', action='home')}">${_('back')}</a>
   </div>
 </%def>
-
-%if hasattr(self, 'pagetitle'):
-<h1 class="page-title">${self.pagetitle()}</h1>
-%endif
 
 ${self.subheader()}
 

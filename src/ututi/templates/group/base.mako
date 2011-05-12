@@ -1,4 +1,5 @@
 <%inherit file="/ubase-two-sidebars.mako" />
+<%namespace file="/profile/base.mako" name="profile" />
 <%namespace file="/portlets/sections.mako" import="*"/>
 <%namespace file="/sections/content_snippets.mako" import="item_location_full" />
 <%namespace file="/elements.mako" import="tabs" />
@@ -9,7 +10,7 @@
 </%def>
 
 <%def name="portlets()">
-  ${user_sidebar()}
+  ${profile.portlets()}
 </%def>
 
 <%def name="portlets_right()">

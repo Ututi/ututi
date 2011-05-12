@@ -1,12 +1,13 @@
 <%inherit file="/ubase-two-sidebars.mako" />
+<%namespace file="/profile/home_base.mako" name="profile" />
 <%namespace file="/portlets/sections.mako" import="*"/>
 
 <%def name="portlets()">
-${user_sidebar()}
+  ${profile.portlets()}
 </%def>
 
 <%def name="portlets_right()">
-${user_right_sidebar()}
+  ${profile.portlets_right()}
 </%def>
 
 <%def name="pagetitle()">
