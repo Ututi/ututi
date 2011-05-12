@@ -5,14 +5,13 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import desc
 
 from formencode import htmlfill, validators
-from formencode.api import Invalid
 from formencode.foreach import ForEach
 from formencode.schema import Schema
 
 from pylons import request, tmpl_context as c, url, config, session
 from pylons.decorators import jsonify
 from pylons.templating import render_mako_def
-from pylons.controllers.util import abort, redirect
+from pylons.controllers.util import redirect
 
 from pylons.i18n import _, ungettext
 
@@ -28,7 +27,6 @@ from ututi.lib.invitations import make_email_invitations, make_facebook_invitati
 from ututi.lib.messaging import EmailMessage
 from ututi.lib import gg, sms
 from ututi.lib.validators import js_validate
-from ututi.lib.validators import manual_validate
 
 from ututi.model.events import Event
 from ututi.model import LocationTag
@@ -408,16 +406,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         meta.Session.commit()
         h.flash(_('Your university information has been updated.'))
         redirect(url(controller='profile', action='home'))
-
-    @ActionProtector("user")
-    def js_update_location(self):
-        try:
-            fields = manual_validate(LocationForm)
-            c.user.location = fields.get('location', None)
-            meta.Session.commit()
-            return render_mako_def('/profile/home_base.mako', 'location_updated')
-        except Invalid:
-            abort(400)
 
     @ActionProtector("user")
     def thank_you(self):

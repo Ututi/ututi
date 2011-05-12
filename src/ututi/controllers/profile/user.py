@@ -1,7 +1,4 @@
-from formencode.api import Invalid
-
-from pylons import request, tmpl_context as c, url
-from pylons.templating import render_mako_def
+from pylons import tmpl_context as c, url
 from pylons.controllers.util import redirect
 
 from pylons.i18n import _
@@ -10,8 +7,6 @@ import ututi.lib.helpers as h
 from ututi.lib.base import render
 from ututi.lib.security import ActionProtector
 from ututi.lib.forms import validate
-from ututi.lib import sms
-from ututi.lib.validators import manual_validate
 
 from ututi.model import meta
 from ututi.controllers.profile.base import ProfileControllerBase
@@ -72,32 +67,9 @@ class UserProfileController(ProfileControllerBase):
         redirect(url(controller='profile', action='home'))
 
     @ActionProtector("user")
-    def js_update_phone(self):
-        try:
-            fields = manual_validate(PhoneForm)
-            c.user.phone_number = fields.get('phone_number', None)
-            c.user.phone_confirmed = False
-            if c.user.phone_number:
-                sms.confirmation_request(c.user)
-            meta.Session.commit()
-            return render_mako_def('/profile/home_base.mako', 'phone_confirmation_nag')
-        except Invalid:
-            return ''
-
-    @ActionProtector("user")
     @validate(schema=PhoneConfirmationForm, form='home')
     def confirm_phone(self):
         c.user.location = self.form_result.get('phone_confirmation_key', None)
         meta.Session.commit()
         h.flash(_('Your phone number has been confirmed.'))
         redirect(url(controller='profile', action='home'))
-
-    @ActionProtector("user")
-    def js_confirm_phone(self):
-        key = request.params.get('phone_confirmation_key')
-        if key.strip() != c.user.phone_confirmation_key.strip():
-            return ''
-        c.user.confirm_phone_number()
-        meta.Session.commit()
-        return render_mako_def('/profile/home_base.mako', 'phone_confirmed')
-
