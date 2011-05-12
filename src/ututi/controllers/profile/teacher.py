@@ -62,6 +62,11 @@ class TeacherProfileController(ProfileControllerBase):
             redirect(url(controller='profile', action='dashboard'))
 
     @ActionProtector("teacher")
+    def register_welcome(self):
+        c.welcome = True
+        return render('/profile/teacher/get_started.mako')
+
+    @ActionProtector("teacher")
     def get_started(self):
         return render('/profile/teacher/get_started.mako')
 
