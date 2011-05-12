@@ -44,7 +44,11 @@ class UnverifiedTeacherProfileController(ProfileControllerBase):
         else:
             redirect(url(controller='profile', action='dashboard'))
 
-    @ActionProtector("user")
+    @ActionProtector("teacher")
+    def get_started(self):
+        return render('/profile/teacher/get_started.mako')
+
+    @ActionProtector("teacher")
     def dashboard(self):
         return render('/profile/teacher/dashboard.mako')
 

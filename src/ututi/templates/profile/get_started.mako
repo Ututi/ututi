@@ -1,48 +1,14 @@
-<%inherit file="/profile/home_base.mako" />
+<%inherit file="/profile/get_started_base.mako" />
 <%namespace name="b" file="/sections/standard_blocks.mako" import="title_box"/>
 
 <%def name="css()">
 ${parent.css()}
-.steps .step {
-  padding: 20px 0 10px 0;
-  border-bottom: 1px solid #eeeeee;
-}
-.steps .step.complete {
-  opacity: 0.75;
-}
-.steps .heading {
-  position: relative;
-}
-.steps .step .heading .number {
-  position: absolute;
-  left: 0px;
-}
-.steps .step .heading .title {
-  position: absolute;
-  left: 30px;
-  top: 2px;
-  font-weight: bold;
-}
-.steps .step .content {
-  margin: 30px 0 0 30px;
-}
-.alternative-link {
-  font-size: 11px;
-  margin-top: 5px;
-}
+
 button#create-new-group {
   font-weight: normal;
 }
 #group-features {
   width: 200px;
-  float: right;
-  border-color: #eee;
-}
-#group-features .title {
-  border-bottom: none;
-}
-#group-features .content {
-  margin: 0; /* reset content margin */
 }
 #invite-friends-form {
   width: auto;
@@ -50,7 +16,7 @@ button#create-new-group {
 #subject-search-form input {
   margin-right: 5px;
 }
-#subject-search-form input,
+subject-search-form input,
 #invite-friends-form textarea,
 #invite-friends-form .helpText {
   width: 280px;
@@ -67,23 +33,6 @@ button#create-new-group {
   margin-top: 0px;
 }
 </%def>
-
-<%def name="pagetitle()">
-%if hasattr(c, 'welcome'):
-  ${_("Welcome to Ututi")}
-%else:
-  ${_("Get started")}
-%endif
-</%def>
-
-%if hasattr(c, 'welcome'):
-<div id="welcome-message">
-  ${h.literal(_('Welcome to <strong>%(university)s</strong> private social network'
-  'created on <a href="%(url)s">Ututi platform</a>. '
-  'Here students and teachers can create groups online, use the mailinglist for '
-  'communication and the file storage for sharing information.' % dict(university=c.user.location.title, url=url('/features'))))}
-</div>
-%endif
 
 <% done = h.user_done_items(c.user) %>
 
@@ -116,7 +65,7 @@ button#create-new-group {
       <span class="number">2</span>
       <span class="title">${_("Join the group")}</span>
     </div>
-    <%b:title_box title="${_('Features:')}" id="group-features">
+    <%b:title_box title="${_('Features:')}" id="group-features" class_="side-box">
       <ul class="feature-list small">
         <li class="email">${_("Group's email")}</li>
         <li class="file">${_("Private group files")}</li>
@@ -157,7 +106,7 @@ button#create-new-group {
   <div class="step ${'complete' if 'profile' in done else ''}">
     <div class="heading">
       <span class="number">4</span>
-      <span class="title">${_("Fill your profile")}</span>
+      <span class="title">${_("Fill your profile information")}</span>
     </div>
     <div class="content">
       <p>${_("Tell some basic information about yourself by editing your profile.")}</p>

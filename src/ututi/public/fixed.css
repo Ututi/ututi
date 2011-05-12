@@ -1016,6 +1016,10 @@ ul.feature-list {
         background: url(img/icons.com/about/file_smaller.png) no-repeat 8px center;
     }
 
+    ul.feature-list.small li.wiki {
+        background: url(img/icons.com/about/wiki_smaller.png) no-repeat 5px center;
+    }
+
     ul.feature-list.small li.notifications {
         background: url(img/icons.com/about/notifications_smaller.png) no-repeat 2px center;
     }
