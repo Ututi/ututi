@@ -684,6 +684,19 @@ def user_done_items(user):
         items.append('profile')
     return items
 
+def teacher_done_items(user):
+    """Returns which actions teacher has done."""
+    items = []
+    if user.side_url or user.phone_number:
+        items.append('profile')
+    if user.description:
+        items.append('biography')
+    if len(user.student_groups) > 0:
+        items.append('group')
+    if len(user.taught_subjects) > 0:
+        items.append('subject')
+    return items
+
 def user_todo_items(user):
     from pylons import url
     todo_items = []
@@ -707,10 +720,26 @@ def user_todo_items(user):
 
     return todo_items
 
+def teacher_todo_items(user):
+    from pylons import url
+    todo_items = []
+    done = teacher_done_items(user)
     todo_items.append({
-        'title': _("Fill your profile"),
+        'title': _("Fill profile information"),
         'link': url(controller='profile', action='edit'),
         'done': 'profile' in done })
+    todo_items.append({
+        'title': _("Find / create your subjects"),
+        'link': url(controller='subject', action='add'),
+        'done': 'subject' in done })
+    todo_items.append({
+        'title': _("Add you biography"),
+        'link': url(controller='profile', action='edit_biography'),
+        'done': 'biography' in done })
+    todo_items.append({
+        'title': _("Add your student groups"),
+        'link': url(controller='profile', action='add_student_group'),
+        'done': 'group' in done })
 
     return todo_items
 
