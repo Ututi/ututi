@@ -30,13 +30,11 @@ will be registered as teacher:
 
 Here. Let's look at what teacher sees:
 
-    >>> user.url
-    'http://localhost/home/start'
+    >>> user.printCssQuery('h1.page-title', strip=True)
+    <h1>Welcome to Ututi</h1>
 
-    >>> user.printQuery("id('unverified_teacher_block')//text()")
-    Welcome to Ututi!
-    At the moment You are not confirmed as a teacher. Our administrators have been notified and will verify You shortly. Please be patient. Meanwhile please tell us more about yourself.
-
+    >>> user.printCssQuery(".flash-message-content", strip=True)
+    <span>At the moment you are not confirmed as teacher. Our administrators have been notified and will verify you shortly.</span>
 
 The team gets a notification about new teacher:
 
