@@ -50,7 +50,7 @@ class UnverifiedTeacherProfileController(ProfileControllerBase):
 
     def _edit_profile_form(self):
         self._set_settings_tabs(current_tab='general')
-        return render('profile/settings/teacher_profile.mako')
+        return render('profile/teacher/edit_profile.mako')
 
     def _set_settings_tabs(self, current_tab):
         # we want to show less to unverified teachers
@@ -68,11 +68,11 @@ class UnverifiedTeacherProfileController(ProfileControllerBase):
 
     def _edit_contacts_form(self):
         self._set_settings_tabs(current_tab='contacts')
-        return render('profile/settings/teacher_contacts.mako')
+        return render('profile/teacher/edit_contacts.mako')
 
     def _edit_biography_form(self):
         self._set_settings_tabs(current_tab='biography')
-        return render('profile/settings/teacher_biography.mako')
+        return render('profile/teacher/edit_biography.mako')
 
     @ActionProtector("user")
     def edit_biography(self):

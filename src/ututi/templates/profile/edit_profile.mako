@@ -1,4 +1,4 @@
-<%inherit file="/profile/settings/base.mako" />
+<%inherit file="/profile/edit_base.mako" />
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 
 <%def name="head_tags()">

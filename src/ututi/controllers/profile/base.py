@@ -153,16 +153,16 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
     def _edit_profile_form(self):
         self._set_settings_tabs(current_tab='general')
-        return render('profile/settings/profile.mako')
+        return render('profile/edit_profile.mako')
 
     def _edit_contacts_form(self):
         self._set_settings_tabs(current_tab='contacts')
-        return render('profile/settings/contacts.mako')
+        return render('profile/edit_contacts.mako')
 
     def _wall_settings_form(self):
         c.event_types = event_types_grouped(Event.event_types())
         self._set_settings_tabs(current_tab='wall')
-        return render('profile/settings/wall.mako')
+        return render('profile/edit_wall.mako')
 
     def _set_settings_tabs(self, current_tab):
         c.current_tab = current_tab
@@ -213,7 +213,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         self._set_settings_tabs(current_tab='notifications')
         c.subjects = c.user.watched_subjects
         c.groups = c.user.groups
-        return render('profile/settings/notifications.mako')
+        return render('profile/edit_notifications.mako')
 
     @ActionProtector("user")
     def link_google(self):
