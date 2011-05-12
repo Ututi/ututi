@@ -12,8 +12,7 @@
 
   .university-box {
     margin: 25px 0;
-    border: 1px solid #ffaf37;
-    padding: 10px;
+    padding: 10px 0;
   }
 
   .university-box .box-title {
@@ -86,24 +85,8 @@
   ${c.location.title}
 </%def>
 
-<%def name="university_entry(uni)">
-<div class="university-entry clearfix">
-  <div class="logo">
-    <img src="${url(controller='structure', action='logo', id=uni['id'], width=30, height=30)}"
-         alt="logo" />
-  </div>
-  <div class="title">
-    <a href="${uni['url']}" title="${uni['title']}">${h.ellipsis(uni['title'], 36)}</a>
-  </div>
-  <ul class="icon-list statistics">
-    <li class="icon-subject"> ${uni['n_subjects']} </li>
-    <li class="icon-group"> ${uni['n_groups']} </li>
-    <li class="icon-file"> ${uni['n_files']} </li>
-  </ul>
-</div>
-</%def>
 
-<h1 class="page-title ${'underline' if not hasattr(c, 'departments') else ''}">
+<h1 class="page-title underline">
   ${self.pagetitle()}
 </h1>
 

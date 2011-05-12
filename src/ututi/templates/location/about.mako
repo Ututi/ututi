@@ -25,7 +25,7 @@
 %if unis:
 <div class="university-box clearfix">
   <div class="clearfix">
-    <div class="box-title">${title}</div>
+    <h2 class="single-title underline">${title}</h2>
     %if h.check_crowds(['moderator']):
       <a class="create-link" href="${url(controller='structure', action='index')}">
         ${_("+ Add department")}

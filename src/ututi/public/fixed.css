@@ -182,6 +182,14 @@ h1.page-title.underline {
     padding-bottom: 2px; /* some spacing for border */
 }
 
+h2.single-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+
 /* ROUNDED BLOCKS
  */
 
