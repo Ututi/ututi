@@ -31,7 +31,7 @@ will be registered as teacher:
 Here. Let's look at what teacher sees:
 
     >>> user.url
-    'http://localhost/welcome'
+    'http://localhost/home/start'
 
     >>> user.printQuery("id('unverified_teacher_block')//text()")
     Welcome to Ututi!

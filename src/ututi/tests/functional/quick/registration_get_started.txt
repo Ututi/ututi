@@ -261,7 +261,7 @@ User sees these options:
     <span>Invite your friends</span>
     <span>Join the group</span>
     <span>Choose your subjects</span>
-    <span>Fill your profile</span>
+    <span>Fill your profile information</span>
 
 He has already invited friends during registration, so "Invite friends"
 step is marked as complete:
@@ -369,7 +369,7 @@ He will see, that three actions are now marked as complete:
     >>> user.printCssQuery('.step.complete span.title', strip=True)
     <span>Invite your friends</span>
     <span>Join the group</span>
-    <span>Fill your profile</span>
+    <span>Fill your profile information</span>
 
 And if user downgrades to not having enough actions done (i.e. leaves all groups),
 his homepage is again switched to the "Get started" page. (This is how current

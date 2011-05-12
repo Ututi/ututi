@@ -13,14 +13,7 @@ Todo portlet lists what user should be able to do:
     1. Invite others to join
     2. Join / create a group
     3. Find / create your subjects
-    4. Write a wall post
-    5. Fill your profile
-
-The "write wall post" is not implemented yet (TODO), so it is by default
-marked as done:
-
-    >>> browser.printCssQuery('#todo-portlet p.done', strip=True)
-    <p>4. Write a wall post</p>
+    4. Fill profile information
 
 "Invite others to join" takes user to FB invitation view:
 
@@ -45,7 +38,6 @@ marked as done. We will use friend invitation portlet for that matter:
 
     >>> browser.printCssQuery('#todo-portlet p.done', strip=True)
     <p>1. Invite others to join</p>
-    <p>4. Write a wall post</p>
 
 The join-create group link points to group's creation page:
 
@@ -64,7 +56,6 @@ Once user creates or becomes member of a group, the todo item is marked as done:
     >>> browser.printCssQuery('#todo-portlet p.done', strip=True)
     <p>1. Invite others to join</p>
     <p>2. Join / create a group</p>
-    <p>4. Write a wall post</p>
 
 The join-create subject link points to watch subjects page:
 
@@ -81,13 +72,12 @@ Once user starts watching any subject personally, the todo item is marked as don
     <p>1. Invite others to join</p>
     <p>2. Join / create a group</p>
     <p>3. Find / create your subjects</p>
-    <p>4. Write a wall post</p>
 
-"Fill your profile" links to user's settings page. If user enters his description,
+"Fill profile information" links to user's settings page. If user enters his description,
 or website url, or phone number, his profile is considered complete and todo item
 marked as done. When all items are marked as done, the todo list is not shown:
 
-    >>> browser.getLink('Fill your profile').click()
+    >>> browser.getLink('Fill profile information').click()
     >>> browser.url
     'http://localhost/profile/edit'
 

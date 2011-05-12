@@ -23,10 +23,10 @@ will be registered as teacher:
     >>> user.click('Skip')
     >>> user.click('Finish')
 
-Now teacher is on Ututi and waiting for approvement but still he can fill
-profile information and biography. So, let's fill some biography information.
+Even though teacher is not verified, he can fill his profile information.
+From the "Get started" page he can click "Add my biography".
 
-    >>> user.click('Biography')
+    >>> user.click('Add my biography')
     >>> user.printCssQuery('h1.page-title', strip=True)
     <h1>Your biography</h1>
 

@@ -9,6 +9,7 @@ Let's login as a verified teacher:
 
 Let's add a group (since we have none at the moment):
 
+    >>> browser.click('Teacher dashboard')
     >>> browser.getControl('Add students groups').click()
     >>> browser.getControl('Title').value = 'group A'
     >>> browser.getControl('Email address').value = 'group@groups.google.com'

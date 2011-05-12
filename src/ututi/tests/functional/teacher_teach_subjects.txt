@@ -41,7 +41,7 @@ If we click on the link, we are redirected to Benas' page:
 
 The selected course is now displayed in his home page:
 
-    >>> browser.getLink('Home').click()
+    >>> browser.getLink('Teacher dashboard').click()
     >>> browser.printCssQuery('.subject-description-list dt a', strip=True)
     <a>Matematin&#279; analiz&#279;</a>
 
@@ -93,6 +93,7 @@ appears. So let's again add and remove the course from taught courses list:
     Matematin&#279; analiz&#279; has been added to your taught courses list.
 
     >>> browser.getLink('Home').click()
+    >>> browser.getLink('Teacher dashboard').click()
     >>> browser.getLink(url='/profile/unteach_subject?subject_id=3').click()
     >>> browser.printQuery("//div[@class='flash-message']/span//text()")
     Matematin&#279; analiz&#279; has been removed from your taught courses list.
