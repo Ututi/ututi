@@ -82,7 +82,10 @@
 
     /* menu icons
      */
-    #navigation-portlet ul li.news a {
+    #navigation-portlet ul li.about a {
+        background-image: url('/img/icons.com/university_small_orange.png');
+    }
+    #navigation-portlet ul li.feed a {
         background-image: url('/img/icons.com/news_small_orange.png');
     }
     #navigation-portlet ul li.subjects a {

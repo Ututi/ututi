@@ -103,30 +103,8 @@
 </div>
 </%def>
 
-<%def name="university_box(unis, title)">
-%if unis:
-<div class="university-box clearfix">
-  <div class="clearfix">
-    <div class="box-title">${title}</div>
-    %if h.check_crowds(['moderator']):
-      <a class="create-link" href="${url(controller='structure', action='index')}">
-        ${_("+ Add department")}
-      </a>
-    %endif
-  </div>
-  %for uni in unis:
-    ${university_entry(uni)}
-  %endfor
-</div>
-%endif
-</%def>
-
 <h1 class="page-title ${'underline' if not hasattr(c, 'departments') else ''}">
   ${self.pagetitle()}
 </h1>
-
-%if hasattr(c, 'departments'):
-${university_box(c.departments, _("Departments:"))}
-%endif
 
 ${next.body()}

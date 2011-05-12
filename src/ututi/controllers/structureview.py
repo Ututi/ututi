@@ -45,9 +45,12 @@ def location_action(method):
 
 def structure_menu_items():
     return [
-        {'title': _("News feed"),
-         'name': 'news',
+        {'title': _("About"),
+         'name': 'about',
          'link': c.location.url(action='index')},
+        {'title': _("News feed"),
+         'name': 'feed',
+         'link': c.location.url(action='catalog', obj_type='feed')},
         {'title': _("Subjects"),
          'name': 'subjects',
          'link': c.location.url(action='catalog', obj_type='subject')},
@@ -144,14 +147,13 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
     @location_action
     def index(self, location):
-        c.current_menu_item = 'news'
+        c.current_menu_item = 'about'
 
         self._breadcrumbs(location)
-        self._set_wall_variables()
 
         if location.parent is None:
             self._get_departments(location)
-        return render('location/feed.mako')
+        return render('location/about.mako')
 
     def _edit_form(self):
         return render('location/edit.mako')
@@ -159,7 +161,11 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
     @location_action
     @validate(schema=SearchSubmit, post_only=False, on_get=True)
     def catalog(self, location, obj_type):
-        c.current_menu_item = obj_type + 's'
+        if obj_type == 'feed':
+            c.current_menu_item = obj_type
+            self._set_wall_variables()
+        else:
+            c.current_menu_item = obj_type + 's'
         self._breadcrumbs(location)
 
         self.form_result['tagsitem'] = location.hierarchy()
@@ -175,7 +181,8 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
         # render template by object type
 
-        template_names = {'group': '/location/groups.mako',
+        template_names = {'feed': '/location/feed.mako',
+                          'group': '/location/groups.mako',
                           'subject': '/location/subjects.mako',
                           'teacher': '/location/teachers.mako'}
 

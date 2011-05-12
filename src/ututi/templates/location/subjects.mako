@@ -1,6 +1,10 @@
 <%inherit file="/location/catalog.mako" />
 <%namespace file="/search/index.mako" name="search" import="search_form"/>
 
+<%def name="title()">
+  ${c.location.title} &ndash; ${_('Subjects')}
+</%def>
+
 <%def name="search_results(results, search_query=None)">
   <%search:search_results results="${results}" controller='structureview' action='catalog_js'>
     <%def name="header()">
