@@ -167,6 +167,7 @@ ${_('Private social networks for universities')}
   ${invitation_messages(c.user)}
   ${request_messages(c.user)}
   ${confirmation_messages(c.user)}
+  ${unverified_teacher_message(c.user)}
 
 %if c.user_notification:
 <div class="user-notification flash-message">

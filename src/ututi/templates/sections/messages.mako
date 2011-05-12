@@ -1,3 +1,17 @@
+<%def name="unverified_teacher_message(user=None)">
+<% if user is None: user = c.user %>
+%if user is not None and user.is_teacher and not user.teacher_verified:
+<div class="flash-message">
+  <span class="close-link hide-parent">
+    ${h.image('/img/icons.com/close.png', alt=_('Close'))}
+  </span>
+  <span class="flash-message-content">
+      ${_('At the moment you are not confirmed as teacher. Our administrators have been notified and will verify you shortly.')}
+  </span>
+</div>
+%endif
+</%def>
+
 <%def name="confirmation_messages(user=None)">
 <%
    if user is None and c.user is not None:
