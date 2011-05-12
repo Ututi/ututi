@@ -701,9 +701,12 @@ def user_todo_items(user):
         'link': url(controller='profile', action='watch_subjects'),
         'done': 'subject' in done })
     todo_items.append({
-        'title': _("Write a wall post"),
-        'link': '#',
-        'done': True })
+        'title': _("Fill profile information"),
+        'link': url(controller='profile', action='edit'),
+        'done': 'profile' in done })
+
+    return todo_items
+
     todo_items.append({
         'title': _("Fill your profile"),
         'link': url(controller='profile', action='edit'),
