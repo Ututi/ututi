@@ -1,5 +1,5 @@
 <%inherit file="/ubase-two-sidebars.mako" />
-<%namespace file="/profile/base.mako" import="profile"/>
+<%namespace file="/profile/base.mako" name="profile"/>
 <%namespace file="/portlets/user.mako" import="user_statistics_portlet,
         related_users_portlet, user_medals"/>
 <%namespace name="snippets" file="/sections/content_snippets.mako" />
