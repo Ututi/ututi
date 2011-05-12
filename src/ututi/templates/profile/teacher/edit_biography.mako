@@ -1,4 +1,4 @@
-<%inherit file="/profile/teacher/edit_base.mako" />
+<%inherit file="/profile/edit_base.mako" />
 
 <%def name="head_tags()">
   ${parent.head_tags()}

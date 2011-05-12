@@ -13,15 +13,9 @@ ${parent.css()}
 }
 </%def>
 
-## subheader is actually a placeholder to put in
-## a notification block for unverified teachers.
-<%def name="subheader()">
-  <div class="above-tabs">
-    <a class="back-link" href="${url(controller='profile', action='home')}">${_('back')}</a>
-  </div>
-</%def>
-
-${self.subheader()}
+<div class="above-tabs">
+  <a class="back-link" href="${url(controller='profile', action='home')}">${_('back')}</a>
+</div>
 
 ${tabs()}
 
