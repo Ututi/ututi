@@ -111,9 +111,13 @@
 </%def>
 
 <%def name="todo_portlet(user=None)">
-  %if c.user is not None:
+  <% if user is None: user = c.user %>
+  %if user is not None:
     <%
-    todo_items = h.user_todo_items(c.user)
+    if user.is_teacher:
+      todo_items = h.teacher_todo_items(user)
+    else:
+      todo_items = h.user_todo_items(user)
     all_done = True
     for item in todo_items:
       all_done = all_done and item['done']
