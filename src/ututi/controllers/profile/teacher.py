@@ -52,12 +52,7 @@ class UnverifiedTeacherProfileController(ProfileControllerBase):
     def dashboard(self):
         return render('/profile/teacher/dashboard.mako')
 
-    def _edit_profile_form(self):
-        self._set_settings_tabs(current_tab='general')
-        return render('profile/teacher/edit_profile.mako')
-
     def _set_settings_tabs(self, current_tab):
-        # we want to show less to unverified teachers
         c.current_tab = current_tab
         c.tabs = [
             {'title': _("General information"),
@@ -68,11 +63,13 @@ class UnverifiedTeacherProfileController(ProfileControllerBase):
              'link': url(controller='profile', action='edit_contacts')},
             {'title': _("Biography"),
              'name': 'biography',
-             'link': url(controller='profile', action='edit_biography')},]
-
-    def _edit_contacts_form(self):
-        self._set_settings_tabs(current_tab='contacts')
-        return render('profile/teacher/edit_contacts.mako')
+             'link': url(controller='profile', action='edit_biography')},
+            {'title': _("Wall"),
+             'name': 'wall',
+             'link': url(controller='profile', action='wall_settings')},
+            {'title': _("Notifications"),
+             'name': 'notifications',
+             'link': url(controller='profile', action='notifications')}]
 
     def _edit_biography_form(self):
         self._set_settings_tabs(current_tab='biography')
@@ -95,10 +92,6 @@ class UnverifiedTeacherProfileController(ProfileControllerBase):
 
         redirect(url(controller='profile', action='edit_biography'))
 
-    @ActionProtector("teacher")
-    def register_welcome(self):
-        return self.home()
-
 
 class TeacherProfileController(UnverifiedTeacherProfileController):
 
@@ -118,30 +111,6 @@ class TeacherProfileController(UnverifiedTeacherProfileController):
             }
         if selected in bcs.keys():
             return bcs[selected]
-
-    def _set_settings_tabs(self, current_tab):
-        c.current_tab = current_tab
-        c.tabs = [
-            {'title': _("General information"),
-             'name': 'general',
-             'link': url(controller='profile', action='edit')},
-            {'title': _("Contacts"),
-             'name': 'contacts',
-             'link': url(controller='profile', action='edit_contacts')},
-            {'title': _("Biography"),
-             'name': 'biography',
-             'link': url(controller='profile', action='edit_biography')},
-            {'title': _("Wall"),
-             'name': 'wall',
-             'link': url(controller='profile', action='wall_settings')},
-            {'title': _("Notifications"),
-             'name': 'notifications',
-             'link': url(controller='profile', action='notifications')}]
-
-    @ActionProtector("user")
-    def register_welcome(self):
-        #redirecting: the teacher has already been verified, hence passed registration
-        redirect(url(controller='profile', action='home'))
 
     @ActionProtector("teacher")
     @validate(schema=StudentGroupForm, form='add_student_group', on_get=False)
