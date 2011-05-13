@@ -9,7 +9,6 @@ from formencode import Schema, validators, htmlfill
 
 from webhelpers import paginate
 from pylons import tmpl_context as c, request, url, session
-from sqlalchemy.orm import eagerload
 
 from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
@@ -17,7 +16,6 @@ from pylons.templating import render_mako_def
 
 from ututi.model import SearchItem
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
-from ututi.model.events import Event
 from ututi.lib.security import ActionProtector, deny
 from ututi.lib.search import search, search_query, search_query_count
 from ututi.lib.fileview import FileViewMixin
