@@ -201,7 +201,7 @@ class PhoneNumberValidator(validators.FancyValidator):
 class InURLValidator(validators.FancyValidator):
     """ A validator for strings that appear in urls"""
     messages = {
-        'badId': _(u"The field may only contain letters, numbers and the characters + - _"),
+        'badId': _(u"The field may only contain letters, numbers and the characters + - _ and . (dot)"),
         'empty': _("The field may not be left empty.")
         }
 
@@ -209,7 +209,7 @@ class InURLValidator(validators.FancyValidator):
         if value == '':
             raise Invalid(self.message('empty', state), value, state)
 
-        valueRE = re.compile("^[\w+-]+$", re.I)
+        valueRE = re.compile("^[\w\.+-_]+$", re.I)
         if not valueRE.search(value):
             raise Invalid(self.message('badId', state), value, state)
 
