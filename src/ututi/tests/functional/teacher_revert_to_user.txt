@@ -1,0 +1,118 @@
+Test how teacher account reverts to user account when teacher is denied
+=======================================================================
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> from ututi.lib.helpers import get_urls
+
+Let's register a new teacher:
+
+    >>> teacher = Browser()
+    >>> teacher.open('http://localhost/school/vu')
+    >>> teacher.click('I teach here')
+    >>> teacher.getControl('Enter your academic email').value = 'mrjones@vu.lt'
+    >>> teacher.click('Sign Up')
+    >>> msg = mail_queue.pop()
+    >>> urls = get_urls(msg.payload())
+    >>> teacher.open(urls[0])
+    >>> teacher.click('Next')
+    >>> teacher.getControl('Full name').value = 'Mr. Jones'
+    >>> teacher.getControl('Password').value = 'password'
+    >>> teacher.click('Next')
+    >>> teacher.click('Skip')
+    >>> teacher.click('Finish')
+    >>> print mail_queue.pop().payload()
+    A new teacher has registered:
+    Mr. Jones (mrjones@vu.lt)
+    Vilniaus universitetas
+    Ututi
+
+Teacher can see that his account is not confirmed yet:
+
+    >>> teacher.printCssQuery('.flash-message-content', strip=True)
+    <span>At the moment you are not confirmed as teacher. Our administrators have been notified and will verify you shortly.</span>
+
+However, teacher can start using Ututi. He can say, he teaches
+a subject:
+
+    >>> teacher.open('http://localhost/subject/vu/mat_analize')
+    >>> teacher.printCssQuery('.subject-teacher', strip=True)
+    <li> Lecturer: <br /> prof. E. Misevi&#269;ius </li>
+    >>> teacher.click('I teach this course')
+    >>> teacher.printCssQuery('.subject-teacher', strip=True)
+    <li> Lecturer: <br /> <a>Mr. Jones</a> </li>
+
+He can as well create new subjects:
+
+    >>> teacher.open('http://localhost/subjects/add')
+    >>> teacher.getControl('Subject title').value = 'Algorithms'
+    >>> teacher.click('Next')
+    >>> teacher.getControl('Create').click()
+    >>> teacher.printCssQuery('.subject-teacher', strip=True)
+    <li> Lecturer: <br /> <a>Mr. Jones</a> </li>
+
+He may as well add his student groups. We will add one existing
+Ututi group and one "external" group:
+
+    >>> teacher.open('http://localhost/profile/add_student_group')
+    >>> teacher.getControl('Title').value = 'Ututi group'
+    >>> teacher.getControl('Email address').value = 'testgroup@groups.ututi.lt'
+    >>> teacher.click('Save')
+    >>> teacher.open('http://localhost/profile/add_student_group')
+    >>> teacher.getControl('Title').value = 'Google group'
+    >>> teacher.getControl('Email address').value = 'group@groups.google.com'
+    >>> teacher.click('Save')
+
+Let's see what we have now:
+
+    >>> teacher.printCssQuery('.section.subjects dt', strip=True)
+    <dt> <a>Matematin&#279; analiz&#279;</a> </dt>
+    <dt> <a>Algorithms</a> </dt>
+    >>> teacher.printCssQuery('.section.groups dt', strip=True)
+    <dt>Ututi group</dt>
+    <dt>Google group</dt>
+
+Now let's have admin deny this teacher:
+
+    >>> admin = Browser.logIn()
+    >>> admin.open('http://localhost/admin')
+    >>> admin.click('Teachers')
+    >>> admin.getControl('Deny', index=0).click()
+    >>> print mail_queue.pop().payload()
+    Mr. Jones,
+    Your request to join Ututi as a teacher has been rejected.
+    If this was a misunderstanding, please contact us directly at: info@ututi.lt.
+    The Ututi team
+
+Let's assert teacher account has been reverted to user account:
+
+    >>> teacher.click('Home')
+    >>> teacher.url
+    'http://localhost/home/start'
+
+    >>> teacher.printCssQuery('#user-information-portlet .user-fullname', strip=True)
+    <div>Mr. Jones</div>
+
+Teacher's subjects have been added to his watched subjects list:
+
+    >>> teacher.printCssQuery('#user-subjects-portlet li', strip=True)
+    <li> <a>Matematin&#279; analiz&#279;</a> </li>
+    <li> <a>Algorithms</a> </li>
+    <li> <a>Add subject</a> </li>
+
+Let's see what teachers they have:
+
+    >>> teacher.open('http://localhost/subject/vu/mat_analize')
+    >>> teacher.printCssQuery('.subject-teacher', strip=True)
+    <li> Lecturer: <br /> prof. E. Misevi&#269;ius </li>
+    >>> teacher.open('http://localhost/subject/vu/algorithms')
+    >>> teacher.printCssQuery('.subject-teacher', strip=True)
+    <li> Lecturer: <br /> Mr. Jones </li>
+
+Note that in the latter case, the teacher name has been left,
+but this is not a link to teacher's profile anymore.
+
+Let's also verify that "Test group" is OK:
+
+    >>> teacher.open('http://localhost/group/testgroup')
+    >>> teacher.url
+    'http://localhost/group/testgroup/home'

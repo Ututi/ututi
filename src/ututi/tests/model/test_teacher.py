@@ -98,6 +98,43 @@ Let's add a ututi group:
 
     """
 
+def test_teacher_revert():
+    """Test that teacher taught subject relations and student groups
+    are deleted when teacher account is reverted to user account.
+
+       >>> from ututi.model.users import Teacher, TeacherGroup
+       >>> from ututi.model import Subject
+       >>> teacher = Teacher(fullname=u'Petras', username='petras', location=LocationTag.get('uni'), password='qwerty', gen_password=True)
+       >>> meta.Session.add(teacher)
+       >>> res = meta.set_active_user(1)
+       >>> s = Subject('subject_id', u'Subject title', LocationTag.get([u'vu']))
+       >>> meta.Session.add(s)
+       >>> teacher.taught_subjects.append(s)
+       >>> tg = TeacherGroup(u'Some yahooers', u'group@groups.yahoo.com')
+       >>> teacher.student_groups.append(tg)
+       >>> tg2 = TeacherGroup(u'Some Ututi users', 'moderators@groups.ututi.lt')
+       >>> teacher.student_groups.append(tg2)
+       >>> meta.Session.commit()
+
+    Let's check related objects:
+
+       >>> meta.Session.query(TeacherGroup).count()
+       2L
+       >>> conn = meta.engine.connect()
+       >>> list(conn.execute("select count(*) from teacher_taught_subjects"))
+       [(1L,)]
+
+    Now let's assert that these objects are deleted after teacher revert:
+
+       >>> teacher.revert_to_user()
+       >>> meta.Session.query(TeacherGroup).count()
+       0L
+       >>> conn = meta.engine.connect()
+       >>> list(conn.execute("select count(*) from teacher_taught_subjects"))
+       [(0L,)]
+
+    """
+
 def test_suite():
     suite = doctest.DocTestSuite(
         optionflags=doctest.ELLIPSIS | doctest.REPORT_UDIFF |
