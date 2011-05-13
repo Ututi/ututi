@@ -7,6 +7,66 @@
 <%def name="css()">
   ${parent.css()}
 
+  .university-box {
+    margin: 25px 0;
+    padding: 10px 0;
+  }
+
+  .university-box .box-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    float: left;
+  }
+
+  .university-box .create-link {
+    float: right;
+  }
+
+  .university-box .university-entry {
+    color: #666666;
+    width: 50%;
+    float: left;
+    margin-top: 5px;
+  }
+
+  .university-entry .logo {
+    float: left;
+    margin-right: 7px;
+    margin-top: 2px;
+  }
+
+  .university-entry .logo img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .university-entry .title {
+    font-weight: bold;
+    color: #333333;
+  }
+
+  .university-entry ul.statistics li {
+    display: inline-block;
+    margin-right: 5px;
+    min-width: 20px;    /* makes icons line up nicely in list */
+  }
+
+  h1.page-title {
+    font-size: 22px;
+    margin-bottom: 0px;
+  }
+
+  .sub-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  #social-network {
+    float: left;
+    margin-left: 20px;
+  }
+
   .about-box {
     border: solid 1px #ccc;
     margin: 5px 0;
@@ -19,17 +79,6 @@
   .about-box .feature {
     width: 215px;
     margin-top: 10px;
-  }
-
-  h1.page-title {
-    font-size: 22px;
-    margin-bottom: 0px;
-  }
-
-  .sub-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 20px;
   }
 
 </%def>
@@ -55,7 +104,7 @@
 %if unis:
 <div class="university-box clearfix">
   <div class="clearfix">
-    <h2 class="single-title underline">${title}</h2>
+    <h2 class="single-title">${title}</h2>
     %if h.check_crowds(['moderator']):
       <a class="create-link" href="${url(controller='structure', action='index')}">
         ${_("+ Add department")}
@@ -69,17 +118,17 @@
 %endif
 </%def>
 
-<div class="sub-title">${_('Private social network!')}</div>
+<div class="sub-title">${_('Private social network')}</div>
 
 <div class="clearfix">
-  <img src="/img/social_network.png" alt="Social network" style="float:left;" />
+  <img id="social-network" src="/img/social_network.png" alt="Social network" />
   <ul class="about-box feature-box">
     <li class="feature icon-subjects-file"><strong>${_('Academic resources')}</strong> &ndash;
     ${_('Add your study material (notes and files).')}</li>
-    <li class="feature icon-group"><strong>${_('Students groups')}</strong> &ndash;
+    <li class="feature icon-group"><strong>${_('Student groups')}</strong> &ndash;
       ${_('Create and join private or public groups to communicate and collaborate.')}</li>
     <li class="feature icon-discussions"><strong>${_('Discussions')}</strong> &ndash;
-      ${_('Share knowledge and discuss tought courses with students and teachers.')}</li>
+      ${_('Share knowledge and discuss academic subjects with students and teachers.')}</li>
   </ul>
 </div>
 
