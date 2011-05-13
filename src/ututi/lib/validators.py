@@ -253,6 +253,22 @@ class TagsValidator(validators.FormValidator):
                                   form_dict, state,
                                   error_dict={'tags' : Invalid(self.message('too_long', state), form_dict, state)})
 
+
+class URLNameValidator(InURLValidator):
+    messages = {
+        'non_unique': _(u"This username is used by another user."),
+        'badId': _(u"The field may only contain lowercase letters, numbers and the characters + - _ and . (dot)"),
+    }
+
+    def _to_python(self, value, state):
+        value = value.strip().lower()
+        InURLValidator.validate_python(self, value, state)
+        existing = meta.Session.query(User).filter_by(url_name=value).first()
+        if existing and c.user and existing.id != c.user.id:
+            raise Invalid(self.message("non_unique", state), value, state)
+        return value
+
+
 class TranslatedEmailValidator(validators.Email):
     messages = {
         'empty': _('Please enter an email address'),
