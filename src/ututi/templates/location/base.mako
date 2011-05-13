@@ -1,4 +1,4 @@
-<%inherit file="/ubase-sidebar.mako" />
+<%inherit file="/base.mako" />
 <%namespace file="/portlets/structure.mako" import="location_logo_portlet, location_info_portlet,
                                                     location_admin_portlet, location_register_portlet,
                                                     location_register_teacher_portlet,

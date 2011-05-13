@@ -1,4 +1,4 @@
-<%inherit file="/ubase.mako" />
+<%inherit file="/base.mako" />
 <%namespace file="/widgets/facebook.mako" import="init_facebook" />
 
 <%def name="head_tags()">

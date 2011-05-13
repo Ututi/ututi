@@ -1,4 +1,4 @@
-<%inherit file="/ubase.mako" />
+<%inherit file="/base.mako" />
 
 <div id="statsContent">
 

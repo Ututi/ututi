@@ -1,4 +1,4 @@
-<%inherit file="/ubase.mako" />
+<%inherit file="/base.mako" />
 
 %if c.texts:
   <table id="texts_list" style="width: 100%;">

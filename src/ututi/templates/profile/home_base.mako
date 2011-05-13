@@ -1,4 +1,4 @@
-<%inherit file="/ubase-two-sidebars.mako" />
+<%inherit file="/base.mako" />
 <%namespace file="/profile/base.mako" name="profile" />
 <%namespace file="/portlets/user.mako" import="invite_friends_portlet,
                                                profile_page_portlet,

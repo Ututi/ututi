@@ -1,4 +1,4 @@
-<%inherit file="/ubase-sidebar.mako" />
+<%inherit file="/base.mako" />
 
 <%namespace file="/profile/base.mako" name="profile" />
 <%namespace file="/portlets/group.mako" import="*"/>

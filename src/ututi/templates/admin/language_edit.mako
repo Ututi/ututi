@@ -1,4 +1,4 @@
-<%inherit file="/ubase.mako" />
+<%inherit file="/base.mako" />
 
 <h1>${_('Language')}</h1>
 <h2>${_('Editing')}</h2>

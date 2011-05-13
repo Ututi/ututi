@@ -1,4 +1,4 @@
-<%inherit file="/ubase-sidebar.mako" />
+<%inherit file="/base.mako" />
 <%namespace file="/portlets/structure.mako" import="*"/>
 
 <%def name="portlets()">

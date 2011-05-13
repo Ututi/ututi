@@ -1,4 +1,4 @@
-<%inherit file="/ubase-sidebar.mako" />
+<%inherit file="/base.mako" />
 
 <%def name="portlets()">
   Here will be important portlets.

@@ -1,4 +1,4 @@
-<%inherit file="/ubase.mako" />
+<%inherit file="/base.mako" />
 
 <h1>${_('School grade')}: ${c.school_grade.name}</h1>
 

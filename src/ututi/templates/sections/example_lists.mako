@@ -1,4 +1,4 @@
-<%inherit file="/ubase.mako" />
+<%inherit file="/base.mako" />
 <%namespace name="o" file="/sections/standard_objects.mako" />
 
 <h2>Standart Ututi lists</h2>

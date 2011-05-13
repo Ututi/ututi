@@ -1,4 +1,4 @@
-<%inherit file="/ubase.mako" />
+<%inherit file="/base.mako" />
 <%namespace name="b" file="standard_blocks.mako" />
 
 <%b:title_box title="Title box" style="width: 200px">

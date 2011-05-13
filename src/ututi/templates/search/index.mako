@@ -1,4 +1,4 @@
-<%inherit file="/ubase-sidebar.mako" />
+<%inherit file="/base.mako" />
 <%namespace file="/widgets/tags.mako" import="*"/>
 <%namespace file="/portlets/facebook.mako" import="*"/>
 

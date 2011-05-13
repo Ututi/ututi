@@ -1,4 +1,4 @@
-<%inherit file="/ubase-two-sidebars.mako" />
+<%inherit file="/base.mako" />
 
 <%namespace file="/portlets/subject.mako" import="subject_followers_portlet, subject_related_subjects_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet" />

@@ -1,4 +1,4 @@
-<%inherit file="/ubase-sidebar.mako" />
+<%inherit file="/base.mako" />
 <%namespace file="/portlets/facebook.mako" import="*"/>
 <%namespace file="/search/index.mako" import="search_form"/>
 
