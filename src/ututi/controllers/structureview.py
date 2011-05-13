@@ -50,7 +50,7 @@ def structure_menu_items():
          'link': c.location.url(action='index')},
         {'title': _("News feed"),
          'name': 'feed',
-         'link': c.location.url(action='catalog', obj_type='feed')},
+         'link': c.location.url(action='feed')},
         {'title': _("Subjects"),
          'name': 'subjects',
          'link': c.location.url(action='catalog', obj_type='subject')},
