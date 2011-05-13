@@ -623,6 +623,28 @@ class Teacher(User):
             self._is_freshman = len(teacher_done_items(self)) < 3
         return self._is_freshman
 
+    def confirm(self):
+        self.teacher_verified = True
+
+    def revert_to_user(self):
+        """Revert teacher account to user account. This is called when teacher
+        registration is not verified by administrators."""
+
+        # move taught subjects to watched subject list
+        for subject in self.taught_subjects:
+            if subject not in self.watched_subjects:
+                self.watchSubject(subject)
+        meta.Session.commit()
+
+        # a hack: cannot update a polymorphic descriptor column using the orm 
+        from ututi.model import authors_table, teachers_table
+        conn = meta.engine.connect()
+        upd = authors_table.update().where(authors_table.c.id==self.id).values(type='user')
+        ins = teachers_table.delete().where(teachers_table.c.id==self.id)
+        conn.execute(upd)
+        conn.execute(ins)
+
+
 class GroupNotFoundException(Exception):
     pass
 

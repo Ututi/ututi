@@ -599,19 +599,13 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
     def teacher_status(self, command, id):
         teacher = meta.Session.query(Teacher).filter(Teacher.id == id).filter(Teacher.teacher_verified==False).one()
         if command == 'confirm':
-            teacher.teacher_verified = True
+            teacher.confirm()
             meta.Session.commit()
             teacher_confirmed_email(teacher, True)
             h.flash('Teacher confirmed.')
         else:
-            from ututi.model import authors_table, teachers_table
-            # a hack: cannot update a polymorphic descriptor column using the orm (rejecting a teacher is basically converting him into a user)
-            conn = meta.engine.connect()
-            upd = authors_table.update().where(authors_table.c.id==id).values(type='user')
-            ins = teachers_table.delete().where(teachers_table.c.id==id)
+            teacher.revert_to_user()
             teacher_confirmed_email(teacher, False)
-            conn.execute(upd)
-            conn.execute(ins)
             h.flash('Teacher rejected.')
 
         redirect(url(controller="admin", action="teachers"))
