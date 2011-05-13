@@ -733,7 +733,7 @@ def teacher_todo_items(user):
         'link': url(controller='subject', action='add'),
         'done': 'subject' in done })
     todo_items.append({
-        'title': _("Add you biography"),
+        'title': _("Add your biography"),
         'link': url(controller='profile', action='edit_biography'),
         'done': 'biography' in done })
     todo_items.append({
