@@ -211,6 +211,11 @@ def make_map(config):
                 controller='anonymous',
                 action='logo')
 
+    # teacher profile pages
+    map.connect('/teacher/{id}', controller='user', action='teacher_index')
+    map.connect('/teacher/{id}/subjects', controller='user', action='teacher_subjects')
+    map.connect('/teacher/{id}/biography', controller='user', action='teacher_biography')
+
     # user profiles
     map.connect('/user/{id}', controller='user', action='index')
     map.connect('/user/{id}/{action}', controller='user')

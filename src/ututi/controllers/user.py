@@ -51,7 +51,7 @@ def teacher_profile_action(method):
     def _profile_action(self, id):
         user = find_user(id)
 
-        if user is None:
+        if user is None or not user.is_teacher:
             abort(404)
 
         if not user.profile_is_public and not c.user:
@@ -132,15 +132,6 @@ class UserController(BaseController, UserInfoWallMixin):
     def index(self, user):
         self._set_wall_variables(events_hidable=False)
 
-        if user.is_teacher:
-            c.all_teachers = get_all_teachers(user)
-            if c.user:
-                c.user_menu_items = user_menu_items()
-                c.user_menu_current_tab = 'feed'
-                return render('user/teacher_profile.mako')
-            else:
-                return render('user/teacher_profile_public.mako')
-
         ## TODO: Delete
         c.breadcrumbs = [
             {'title': user.fullname,
@@ -148,6 +139,16 @@ class UserController(BaseController, UserInfoWallMixin):
             ]
 
         return render('user/index.mako')
+
+    @teacher_profile_action
+    def teacher_index(self, user):
+        self._set_wall_variables(events_hidable=False)
+        c.user_menu_current_tab = 'feed'
+
+        if c.user:
+            return render('user/teacher_profile.mako')
+        else:
+            return render('user/teacher_profile_public.mako')
 
     @teacher_profile_action
     def teacher_subjects(self, user):
@@ -159,7 +160,7 @@ class UserController(BaseController, UserInfoWallMixin):
 
     @teacher_profile_action
     @ActionProtector("user")
-    def biography(self, user):
+    def teacher_biography(self, user):
         if not c.user:
             redirect(user.url())
 
