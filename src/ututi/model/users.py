@@ -80,6 +80,7 @@ class AdminUser(object):
         except NoResultFound:
             return None
 
+
 class Author(object):
     """The Author object - for references to authorship. Persists even when the user is deleted."""
 
@@ -363,10 +364,8 @@ class User(Author):
         self._unsetWatchedSubject(subject, ignored=True)
 
     def url(self, controller='user', action='index', **kwargs):
-        return url(controller=controller,
-                   action=action,
-                   id=self.id,
-                   **kwargs)
+        kwargs['id'] = self.url_name or self.id
+        return url(controller=controller, action=action, **kwargs)
 
     def watches(self, subject):
         return subject in self.watched_subjects

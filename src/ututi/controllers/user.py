@@ -22,15 +22,18 @@ from ututi.model.users import Teacher
 
 log = logging.getLogger(__name__)
 
+def find_user(id):
+    """Get's user object by specified id or url_name."""
+    try:
+        id = int(id)
+        return User.get_byid(id)
+    except ValueError:
+        # it may be url_name then
+        return meta.Session.query(User).filter_by(url_name=id).first()
 
 def profile_action(method):
     def _profile_action(self, id):
-        try:
-            id = int(id)
-        except ValueError:
-            abort(404)
-
-        user = User.get_byid(id)
+        user = find_user(id)
 
         if user is None:
             abort(404)
@@ -46,12 +49,7 @@ def profile_action(method):
 
 def teacher_profile_action(method):
     def _profile_action(self, id):
-        try:
-            id = int(id)
-        except ValueError:
-            abort(404)
-
-        user = User.get_byid(id)
+        user = find_user(id)
 
         if user is None:
             abort(404)
@@ -215,7 +213,7 @@ class UserController(BaseController, UserInfoWallMixin):
         redirect(url.current(action='medals'))
 
     def logo(self, id, width=None, height=None):
-        user = User.get_global(int(id))
+        user = find_user(id)
         if user is None:
             abort(404)
 
