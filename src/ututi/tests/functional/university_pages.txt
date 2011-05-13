@@ -25,7 +25,7 @@ We should be able to click on a link that leads us to the page of the faculty.
     <h1>Vilniaus universitetas</h1>
 
     >>> browser.printCssQuery('.sub-title', strip=True)
-    <div>Private social network!</div>
+    <div>Private social network</div>
 
     >>> browser.printCssQuery('.university-box .title a', strip=True)
     <a>Ekonomikos fakultetas</a>
