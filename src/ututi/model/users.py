@@ -12,7 +12,7 @@ from datetime import datetime
 
 from ututi.model.util import logo_property, read_facebook_logo
 from ututi.model import meta
-from ututi.lib.helpers import image, user_done_items
+from ututi.lib.helpers import image, user_done_items, teacher_done_items
 from ututi.lib.emails import send_email_confirmation_code
 
 
@@ -617,6 +617,11 @@ class Teacher(User):
         Used in university's teacher catalog to render search results."""
         return render_mako_def('/sections/content_snippets.mako', 'teacher', object=self)
 
+
+    def is_freshman(self):
+        if not hasattr(self, '_is_freshman'):
+            self._is_freshman = len(teacher_done_items(self)) < 3
+        return self._is_freshman
 
 class GroupNotFoundException(Exception):
     pass

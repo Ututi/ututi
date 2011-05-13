@@ -17,7 +17,7 @@ button#add-student-group {
 }
 </%def>
 
-<% done = h.user_done_items(c.user) %>
+<% done = h.teacher_done_items(c.user) %>
 
 <div class="steps">
   <div class="step ${'complete' if 'profile' in done else ''}">
