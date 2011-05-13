@@ -364,7 +364,7 @@ class User(Author):
         self._unsetWatchedSubject(subject, ignored=True)
 
     def url(self, controller='user', action='index', **kwargs):
-        kwargs['id'] = self.url_name or self.id
+        kwargs.setdefault('id', self.url_name or self.id)
         return url(controller=controller, action=action, **kwargs)
 
     def watches(self, subject):
@@ -617,7 +617,7 @@ class Teacher(User):
         return render_mako_def('/sections/content_snippets.mako', 'teacher', object=self)
 
     def url(self, controller='user', action='teacher_index', **kwargs):
-        kwargs['id'] = self.url_name or self.id
+        kwargs.setdefault('id', self.url_name or self.id)
         return url(controller=controller, action=action, **kwargs)
 
     def is_freshman(self):

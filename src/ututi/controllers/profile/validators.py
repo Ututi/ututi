@@ -8,8 +8,9 @@ from formencode.api import FancyValidator
 from formencode.api import Invalid
 from formencode.variabledecode import NestedVariables
 from ututi.model.users import User
-from ututi.lib.validators import UserPasswordValidator, TranslatedEmailValidator, UniqueEmail,\
-    LocationTagsValidator, PhoneNumberValidator, FileUploadTypeValidator, SeparatedListValidator
+from ututi.lib.validators import UserPasswordValidator, TranslatedEmailValidator, \
+    UniqueEmail, LocationTagsValidator, PhoneNumberValidator, \
+    FileUploadTypeValidator, SeparatedListValidator, URLNameValidator
 
 
 class LocationForm(Schema):
@@ -44,6 +45,7 @@ class ProfileForm(Schema):
 
     fullname = validators.String(not_empty=True)
     site_url = validators.URL()
+    url_name = URLNameValidator()
 
 
 class BiographyForm(Schema):

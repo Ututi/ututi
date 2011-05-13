@@ -90,6 +90,30 @@
         </label>
       </div>
 
+      <div style="padding-top: 5px">
+        <h2>${_("Ututi username")}</h2>
+          <p>
+            <% user_url = c.user.url(qualified=True) %>
+            ${_("Setting Ututi username allows you to have a more personal URL of your Ututi profile page.")}
+            ${h.literal(_("Your current public profile page URL is %(user_url)s.") % dict(user_url=h.link_to(user_url, user_url)))}
+          </p>
+          <% help_text = _("Your new url will be: ") + \
+                 h.literal('<br /><span class="link-color">') + \
+                 c.user.url(id='', qualified=True) + \
+                 h.literal('<span id="user-url-preview"></span></span>') %>
+          ${h.input_line('url_name', _('Your Ututi username'), help_text=help_text)}
+          <script type="text/javascript">
+            function update_url_preview() {
+              $('#user-url-preview').html($(this).val());
+            }
+            $(document).ready(function() {
+              $('#url_name').keyup(update_url_preview);
+              $('#url_name').change(update_url_preview);
+              update_url_preview();
+            });
+          </script>
+      </div>
+
       <div class="non-js">
         <label for="logo_upload">${_('Picture')}</label>
         <input type="file" name="logo_upload" id="logo_upload" class="line" />

@@ -141,6 +141,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             'site_url': c.user.site_url,
             'description': c.user.description,
             'profile_is_public': c.user.profile_is_public,
+            'url_name': c.user.url_name,
             }
         if c.user.location is not None:
             location = dict([('location-%d' % n, tag)
@@ -277,7 +278,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     @ActionProtector("user")
     def update(self):
         fields = ('fullname', 'logo_upload', 'logo_delete', 'site_url',
-                  'description', 'profile_is_public', 'location')
+                  'description', 'profile_is_public', 'location', 'url_name')
         values = {}
         for field in fields:
             values[field] = self.form_result.get(field)
@@ -292,6 +293,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         tag = values.get('location', None)
         c.user.profile_is_public = bool(values['profile_is_public'])
         c.user.location = tag
+        c.user.url_name = values['url_name']
 
         if values['logo_delete'] == 'delete' and c.user.logo is not None:
             c.user.logo = None
