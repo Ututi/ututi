@@ -287,7 +287,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         subj = self._create_subject()
         meta.Session.commit()
 
-        if c.user.is_teacher and c.user.teacher_verified:
+        if c.user.is_teacher:
             c.user.teach_subject(subj)
             meta.Session.commit()
 
@@ -345,7 +345,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
                     tags=subject.location_path))
 
     @subject_action
-    @ActionProtector("verified_teacher")
+    @ActionProtector("teacher")
     def teach(self, subject):
         if not c.user.teaches(subject):
             c.user.teach_subject(subject)

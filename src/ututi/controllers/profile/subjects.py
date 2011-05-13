@@ -18,6 +18,7 @@ from ututi.controllers.search import SearchSubmit
 import ututi.lib.helpers as h
 
 class WatchedSubjectsMixin(object):
+
     @ActionProtector("user")
     def js_all_subjects(self):
         subjects = c.user.all_watched_subjects
@@ -135,7 +136,7 @@ class WatchedSubjectsMixin(object):
         self._unwatch_subject()
         return "OK"
 
-    @ActionProtector("verified_teacher")
+    @ActionProtector("teacher")
     def teach_subject(self):
         self._teach_subject()
         if request.params.has_key('js'):
