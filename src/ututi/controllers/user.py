@@ -90,7 +90,7 @@ def user_menu_items():
          'event': h.trackEvent(c.user_info, 'members', 'breadcrumb')},
         {'title': _('Biography'),
          'name': 'biography',
-         'link': c.user_info.url(action='biography'),
+         'link': c.user_info.url(action='teacher_biography'),
          'event': h.trackEvent(c.user_info, 'biography', 'breadcrumb')},
         ]
 
