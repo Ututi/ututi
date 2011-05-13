@@ -368,3 +368,8 @@
         padding-left: 12px;
     }
 
+#profile-page-portlet { }
+
+    #profile-page-portlet button {
+        margin: 10px 0;
+    }

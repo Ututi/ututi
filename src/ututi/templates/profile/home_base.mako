@@ -1,6 +1,7 @@
 <%inherit file="/ubase-two-sidebars.mako" />
 <%namespace file="/profile/base.mako" name="profile" />
 <%namespace file="/portlets/user.mako" import="invite_friends_portlet,
+                                               profile_page_portlet,
                                                todo_portlet"/>
 <%namespace file="/portlets/universal.mako" import="users_online_portlet,
                                                     about_portlet"/>
@@ -10,6 +11,9 @@
 </%def>
 
 <%def name="portlets_right()">
+  %if c.user.is_teacher:
+  ${profile_page_portlet()}
+  %endif
   ${about_portlet()}
   ${todo_portlet()}
   ${invite_friends_portlet()}

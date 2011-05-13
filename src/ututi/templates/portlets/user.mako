@@ -305,13 +305,26 @@
     <%def name="header()">
       ${title}
     </%def>
-
     <ul class="teacher-list">
     %for teacher in teachers:
       <li>${h.link_to(teacher.fullname, teacher.url())}</li>
     %endfor
     </ul>
+  </%self:portlet>
+  %endif
+</%def>
 
+<%def name="profile_page_portlet()">
+  %if c.user is not None:
+  <%self:portlet id="profile-page-portlet">
+    <%def name="header()">
+      ${_("My profile page")}
+    </%def>
+    ${h.button_to(_("Edit my profile"), url(controller='profile', action='edit'),
+                  method='GET', class_='dark edit')}
+    <a class="forward-link" id="view-page-link" href="${c.user.url()}">
+      ${_("View my profile page")}
+    </a>
   </%self:portlet>
   %endif
 </%def>
