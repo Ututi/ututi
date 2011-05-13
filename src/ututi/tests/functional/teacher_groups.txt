@@ -60,7 +60,7 @@ A message to the outsiders:
 
     >>> from ututi.lib.mailer import mail_queue
     >>> print mail_queue.pop().payload()
-    The teacher Benas ( http://localhost/user/5 ) sent a message to Your group:
+    The teacher Benas ( http://localhost/teacher/5 ) sent a message to Your group:
     Hi, guys!
     If You reply to this message, the teacher will not get Your replies.
 
@@ -83,7 +83,7 @@ A message to the ututi mailing list group:
           </span>
         </span>
       </div>
-      <span>The teacher Benas ( <a>http://localhost/user/5</a> ) sent a message to Your group:
+      <span>The teacher Benas ( <a>http://localhost/teacher/5</a> ) sent a message to Your group:
     <br />
         <br />
     Hi, guys!
@@ -119,7 +119,7 @@ A message to the ututi mailing list group:
 
     >>> msg = mail_queue.pop()
     >>> print msg.payload()
-    The teacher Benas ( http://localhost/user/5 ) sent a message to Your group:
+    The teacher Benas ( http://localhost/teacher/5 ) sent a message to Your group:
     <BLANKLINE>
     Hi, guys!
     <BLANKLINE>
@@ -142,7 +142,7 @@ A message to the ututi forum group - members of the group receive email messages
 
     >>> msg = mail_queue.pop()
     >>> print msg.payload()
-    The teacher Benas ( http://localhost/user/5 ) sent a message to Your group:
+    The teacher Benas ( http://localhost/teacher/5 ) sent a message to Your group:
     Hi, guys!
     If You reply to this message, the teacher will not get Your replies.
 
@@ -192,7 +192,7 @@ And let's try sending messages with attachments:
     >>> len(mail_queue)
     1
     >>> print mail_queue.pop().payload()
-    The teacher Benas ( http://localhost/user/5 ) sent a message to Your group:
+    The teacher Benas ( http://localhost/teacher/5 ) sent a message to Your group:
     Hi, guys!
     If You reply to this message, the teacher will not get Your replies.
     file.txt - http://localhost/group/moderators/mailinglist/file/6/5
@@ -205,6 +205,6 @@ And let's try sending messages with attachments:
     >>> len(mail_queue)
     1
     >>> print mail_queue.pop().payload()
-    The teacher Benas ( http://localhost/user/5 ) sent a message to Your group:
+    The teacher Benas ( http://localhost/teacher/5 ) sent a message to Your group:
     Hi, guys!
     If You reply to this message, the teacher will not get Your replies.

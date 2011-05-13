@@ -266,7 +266,7 @@ public teacher's profile page:
 
     >>> user.click('View my public page')
     >>> user.url
-    'http://localhost/user/2'
+    'http://localhost/teacher/2'
     >>> user.printCssQuery('.page-title', strip=True)
     <h1>Teacher User</h1>
     >>> user.goBack()
