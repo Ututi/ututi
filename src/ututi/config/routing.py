@@ -258,7 +258,7 @@ def make_map(config):
     map.connect('/school/*path/login', controller='structureview', action='login')
     map.connect('/school/*path/edit', controller='structureview', action='edit')
     map.connect('/school/*path/catalog_js', controller='structureview', action='catalog_js')
-    map.connect('/school/*path/feed', controller='structureview', action='catalog', obj_type='feed')
+    map.connect('/school/*path/feed', controller='structureview', action='feed')
     map.connect('/school/*path/groups', controller='structureview', action='catalog', obj_type='group')
     map.connect('/school/*path/subjects', controller='structureview', action='catalog', obj_type='subject')
     map.connect('/school/*path/teachers', controller='structureview', action='catalog', obj_type='teacher')

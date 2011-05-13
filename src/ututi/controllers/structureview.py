@@ -150,22 +150,24 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
         c.current_menu_item = 'about'
 
         self._breadcrumbs(location)
+        self._get_departments(location)
 
-        if location.parent is None:
-            self._get_departments(location)
         return render('location/about.mako')
 
     def _edit_form(self):
         return render('location/edit.mako')
 
     @location_action
+    def feed(self, location):
+        c.current_menu_item = 'feed'
+        self._breadcrumbs(location)
+        self._set_wall_variables()
+        return render('location/feed.mako')
+
+    @location_action
     @validate(schema=SearchSubmit, post_only=False, on_get=True)
     def catalog(self, location, obj_type):
-        if obj_type == 'feed':
-            c.current_menu_item = obj_type
-            self._set_wall_variables()
-        else:
-            c.current_menu_item = obj_type + 's'
+        c.current_menu_item = obj_type + 's'
         self._breadcrumbs(location)
 
         self.form_result['tagsitem'] = location.hierarchy()
@@ -176,13 +178,8 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
         else:
             self._search()
 
-        if location.parent is None:
-            self._get_departments(location)
-
         # render template by object type
-
-        template_names = {'feed': '/location/feed.mako',
-                          'group': '/location/groups.mako',
+        template_names = {'group': '/location/groups.mako',
                           'subject': '/location/subjects.mako',
                           'teacher': '/location/teachers.mako'}
 
