@@ -54,6 +54,11 @@
     min-width: 20px;    /* makes icons line up nicely in list */
   }
 
+  img {
+    float: left;
+    margin-left: 20px;
+  }
+
 </%def>
 
 <%def name="portlets()">
@@ -68,10 +73,10 @@
   ${location_groups_portlet()}
 %else:
   ${location_logo_portlet()}
-  ${navigation_portlet(c.menu_items, c.current_menu_item)}
-  ${location_info_portlet()}
   ${location_register_portlet()}
   ${location_register_teacher_portlet()}
+  ${navigation_portlet(c.menu_items, c.current_menu_item)}
+  ${location_info_portlet()}
   ${about_ututi_portlet()}
   ${create_network_portlet()}
 %endif
@@ -86,7 +91,7 @@
 </%def>
 
 
-<h1 class="page-title underline">
+<h1 class="page-title ${'underline' if c.current_menu_item!='about' else ''}">
   ${self.pagetitle()}
 </h1>
 
