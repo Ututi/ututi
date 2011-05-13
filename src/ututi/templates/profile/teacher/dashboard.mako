@@ -163,27 +163,25 @@ ${parent.head_tags()}
 </%def>
 
 <div id="teacher">
-%if c.user.teacher_verified:
-    %if c.user.taught_subjects:
-    ${self.toaught_courses()}
-    %elif 'suggest_teach_course' not in c.user.hidden_blocks_list:
-    ${self.teach_course_nag()}
-    %endif
+  %if c.user.taught_subjects:
+  ${self.toaught_courses()}
+  %elif 'suggest_teach_course' not in c.user.hidden_blocks_list:
+  ${self.teach_course_nag()}
+  %endif
 
-    %if c.user.student_groups:
-    <div class="section groups">
-      <div class="title">
-        ${_("Student groups")}
-        <span class="add-button">${h.button_to(_('add a group'), url(controller='profile', action='add_student_group'), method='GET')}</span>
-      </div>
-      <div class="search-results-container">
-        %for group in c.user.student_groups:
-          ${group_listitem_teacherdashboard(group)}
-        %endfor
-      </div>
+  %if c.user.student_groups:
+  <div class="section groups">
+    <div class="title">
+      ${_("Student groups")}
+      <span class="add-button">${h.button_to(_('add a group'), url(controller='profile', action='add_student_group'), method='GET')}</span>
     </div>
-    %elif 'suggest_teach_group' not in c.user.hidden_blocks_list:
-    ${self.teach_group_nag()}
-    %endif
-%endif
+    <div class="search-results-container">
+      %for group in c.user.student_groups:
+        ${group_listitem_teacherdashboard(group)}
+      %endfor
+    </div>
+  </div>
+  %elif 'suggest_teach_group' not in c.user.hidden_blocks_list:
+  ${self.teach_group_nag()}
+  %endif
 </div>
