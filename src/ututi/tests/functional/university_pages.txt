@@ -21,11 +21,11 @@ We should be able to click on a link that leads us to the page of the faculty.
     >>> browser.url
     'http://localhost/school/vu'
 
-    >>> browser.printQuery('//h1/text()')
-    Vilniaus universitetas
+    >>> browser.printCssQuery('h1', strip=True)
+    <h1>Vilniaus universitetas</h1>
 
-    >>> browser.printQuery('//div[@class="tip"]/text()')
-    This is a list of all the recent events in the subjects and groups of this university.
+    >>> browser.printCssQuery('.sub-title', strip=True)
+    <div>Private social network!</div>
 
     >>> browser.printCssQuery('.university-box .title a', strip=True)
     <a>Ekonomikos fakultetas</a>
