@@ -280,11 +280,15 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                   'description', 'profile_is_public', 'location')
         values = {}
         for field in fields:
-            values[field] = self.form_result.get(field, None)
+            values[field] = self.form_result.get(field)
 
         c.user.fullname = values['fullname']
         c.user.site_url = values['site_url']
-        c.user.description = values['description']
+        if values['description'] is not None:
+            # this check is needed because description field
+            # is currently reused as teacher's biography and
+            # is not displayed for teacher in this form.
+            c.user.description = values['description']
         tag = values.get('location', None)
         c.user.profile_is_public = bool(values['profile_is_public'])
         c.user.location = tag
