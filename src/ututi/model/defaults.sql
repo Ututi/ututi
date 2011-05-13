@@ -54,7 +54,7 @@ create table authors (
 
 create table users (
        id int8 references authors(id) on delete cascade,
-       username varchar(320) not null,
+       username varchar(320) not null, /* email actually */
        password char(36),
        site_url varchar(200) default null,
        description text default null,
@@ -79,6 +79,7 @@ create table users (
        location_country varchar(5) default null,
        location_city varchar(30) default null,
        ignored_events text default '',
+       url_name varchar(200) default null unique, /* ututi username, used in urls */
        primary key (id));;
 
 create table teachers (
