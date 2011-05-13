@@ -188,3 +188,135 @@ TODO for this test:
 - user is not signed in, click "I study here" but is already a teacher
 - email validation in teacher registration form
 - user is not signed in, when redirected to login, enters a different email
+
+
+
+Teacher's get started functionality
+===================================
+
+We will use one of the registered teachers to show teacher's "Get started"
+page functionality. To newly registered teacher Ututi shows "Get started"
+page as a home page.
+
+    >>> user = Browser.logIn('user@example.com', 'password')
+    >>> user.printCssQuery('.page-title', strip=True)
+    <h1>Get started</h1>
+
+On the right hand menu there is also a "Get started" menu item:
+
+    >>> user.getLink('Get started')
+    <Link text='Get started' url='http://localhost/home/start'>
+
+User sees these options:
+
+    >>> user.printCssQuery('.step span.title', strip=True)
+    <span>Fill your profile information</span>
+    <span>Create your subjects</span>
+    <span>Complete your profile page</span>
+    <span>Add your student groups</span>
+
+Edit profile page brings user to his profile edit page (duh!):
+
+    >>> user.click('Edit profile')
+    >>> user.url
+    'http://localhost/profile/edit?'
+
+If user add some info, this action will be marked as complete:
+
+    >>> user.getControl('Address of your website').value = 'http://myblog.com'
+    >>> user.click('Save')
+    >>> user.click('Home')
+    >>> user.printCssQuery('.step.complete span.title', strip=True)
+    <span>Fill your profile information</span>
+
+Subject's section allows to add actions or visit subject catalog:
+
+    >>> form = user.getForm('subject-search-form')
+    >>> form.getControl(name='text').value = 'something'
+    >>> form.getControl('Search').click()
+    >>> user.url
+    'http://localhost/school/uni/subjects'
+    >>> user.click('Home')
+    >>> user.click('Or create new subject')
+    >>> user.url
+    'http://localhost/subjects/add'
+
+Let's create a subject now:
+
+    >>> user.getControl('Subject title').value = 'Algorithms'
+    >>> user.click('Next')
+    >>> user.getControl('Create').click()
+
+Now this action is also marked as complete:
+
+    >>> user.click('Home')
+    >>> user.printCssQuery('.step.complete span.title', strip=True)
+    <span>Fill your profile information</span>
+    <span>Create your subjects</span>
+
+Group's section offers to add student groups:
+
+    >>> user.click('Add student group')
+    >>> user.url
+    'http://localhost/profile/add_student_group?'
+    >>> user.goBack()
+
+Profile page section asks to add biography, and gives a link to
+public teacher's profile page:
+
+    >>> user.click('View my public page')
+    >>> user.url
+    'http://localhost/user/2'
+    >>> user.printCssQuery('.page-title', strip=True)
+    <h1>Teacher User</h1>
+    >>> user.goBack()
+
+    >>> user.click('Add my biography')
+    >>> user.getControl('Enter some facts').value = "Some <strong>cool</strong> biography!"
+    >>> user.getControl('Save').click()
+
+Now user has completed enough actions, so his homepage has been
+switched to teacher's dashboard:
+
+    >>> user.click('Home')
+    >>> user.url
+    'http://localhost/profile/dashboard'
+
+The "Get started" menu item is removed as well:
+
+    >>> user.getLink('Get started')
+    Traceback (most recent call last):
+    ...
+    LinkNotFoundError
+
+He can, however, visit get started page if he really wants to:
+
+    >>> user.open('http://localhost/home/start')
+
+He will see, that three actions are now marked as complete:
+
+    >>> user.printCssQuery('.step.complete span.title', strip=True)
+    <span>Fill your profile information</span>
+    <span>Create your subjects</span>
+    <span>Complete your profile page</span>
+
+And if teacher downgrades to not having enough actions done (i.e. removes all
+subjects), his homepage is again switched to the "Get started" page. (This is
+how current implementation works, and maybe it would be better not to switch
+again.) We will test this behavior by removing profile information:
+
+    >>> user.click('Settings')
+    >>> user.getControl('Address of your website').value = ''
+    >>> user.click('Save')
+    >>> user.click('Home')
+    >>> user.url
+    'http://localhost/home/start'
+
+    >>> user.printCssQuery('.step.complete span.title', strip=True)
+    <span>Create your subjects</span>
+    <span>Complete your profile page</span>
+
+"Get started" menu item is also available again:
+
+    >>> user.getLink('Get started')
+    <Link text='Get started' url='http://localhost/home/start'>
