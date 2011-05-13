@@ -2,7 +2,6 @@ import logging
 
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import literal_column
-from sqlalchemy.sql.expression import column
 from sqlalchemy.sql.expression import or_, and_
 from pylons.controllers.util import abort, redirect
 from pylons import tmpl_context as c, request, url
@@ -18,8 +17,7 @@ from ututi.lib.image import serve_logo
 from ututi.lib.base import BaseController, render
 from ututi.lib.wall import WallMixin
 
-from ututi.model import meta, User, Medal, ContentItem
-from ututi.model.events import Event
+from ututi.model import meta, User, Medal
 from ututi.model.users import Teacher
 
 log = logging.getLogger(__name__)
@@ -124,6 +122,7 @@ class UserInfoWallMixin(WallMixin):
                                      literal_column('context_ci.content_type') == 'subject')))
 
         return query
+
 
 class UserController(BaseController, UserInfoWallMixin):
 
