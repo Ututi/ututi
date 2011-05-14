@@ -37,7 +37,7 @@ If we click on the link, we are redirected to Benas' page:
 
     >>> browser.getLink('Benas').click()
     >>> browser.url
-    'http://localhost/user/5'
+    'http://localhost/teacher/5'
 
 The selected course is now displayed in his home page:
 
