@@ -14,69 +14,6 @@ ${_('Private social networks for universities')}
 <%def name="body_class()">
 </%def>
 
-<%def name="breadcrumbs(breadcrumbs)">
-<div id="breadcrumb-container">
-  <%
-     if c.user:
-         u_url = url(controller='profile', action='browse')
-         track_event = h.trackEvent(None, 'user_search', 'logo')
-     else:
-         track_event = ''
-         u_url = url('/')
-  %>
-  %if not breadcrumbs:
-  <h1 id="siteName"><a rel="nofollow" ${track_event} href="${u_url}" title="Ututi" id="ulogo">Ututi</a></h1>
-  %else:
-  <h1 id="siteName2"><a rel="nofollow" ${track_event} href="${u_url}" title="Ututi" id="ulogo">Ututi</a></h1>
-  %endif
-
-  %if c.object_location or breadcrumbs:
-  <ul id="BreadLinks">
-
-  %if c.object_location:
-    %for (index, tag) in enumerate(c.object_location.hierarchy(True)):
-    <%
-       cls = 'first' if index == 0 else 'second'
-    %>
-    <li class="${cls}">
-      <a href="${tag.url()}" ${h.trackEvent(None, '%s_breadcrumbs' % c.security_context.__class__.__name__, 'level%s' % index)} title="${tag.title}">
-        ${tag.title_short}
-      </a>
-    </li>
-    %endfor
-  %endif
-
-  %if breadcrumbs:
-    <%
-       if len(breadcrumbs) == 3:
-         ellipsis = [15, 15, 25]
-       elif len(breadcrumbs) == 2:
-         ellipsis = [20, 40]
-       else:
-         ellipsis = [50]
-    %>
-    %for ind, breadcrumb in enumerate(breadcrumbs):
-       %if breadcrumb is not None:
-       <%
-          cls = 'first' if ind == 0 and not c.object_location else 'second'
-       %>
-       <li class="${cls}">
-         %if ind != len(breadcrumbs) - 1:
-           <a title="${breadcrumb.get('title')}" href="${breadcrumb.get('link')}">
-             ${h.ellipsis(breadcrumb.get('title'),ellipsis[ind])}
-           </a>
-         %else:
-           ${h.ellipsis(breadcrumb.get('title'),ellipsis[ind])}
-         %endif
-       </li>
-       %endif
-    %endfor
-  %endif
-  </ul>
-  %endif
-</div>
-</%def>
-
 <%def name="anonymous_header()">
 <%
    nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
