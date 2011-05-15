@@ -67,7 +67,7 @@
 <h1 class="page-title ${'underline' if len(c.location.hierarchy()) == 1 else ''}" >
   ${self.pageheader()}
 </h1>
-%if len(c.location.hierarchy()) !=1 and c.breadcrumbs:
+%if len(c.location.hierarchy()) !=1 and c.breadcrumbs and c.current_menu_item != 'about':
   ${self.breadcrumbs()}
 %endif
 
