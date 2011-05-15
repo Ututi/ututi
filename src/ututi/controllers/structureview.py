@@ -35,7 +35,11 @@ def location_action(method):
         c.security_context = location
         c.object_location = None
         c.location = location
-        c.menu_items = structure_menu_items()
+        if c.user:
+            c.menu_items = structure_menu_items()
+        else:
+            c.menu_items = structure_menu_public_items()
+
         c.current_menu_item = None
         if obj_type is None:
             return method(self, location)
@@ -45,9 +49,6 @@ def location_action(method):
 
 def structure_menu_items():
     return [
-        {'title': _("About"),
-         'name': 'about',
-         'link': c.location.url(action='index')},
         {'title': _("News feed"),
          'name': 'feed',
          'link': c.location.url(action='feed')},
@@ -57,6 +58,18 @@ def structure_menu_items():
         {'title': _("Groups"),
          'name': 'groups',
          'link': c.location.url(action='catalog', obj_type='group')},
+        {'title': _("Teachers"),
+         'name': 'teachers',
+         'link': c.location.url(action='catalog', obj_type='teacher')}]
+
+def structure_menu_public_items():
+    return [
+        {'title': _("About"),
+         'name': 'about',
+         'link': c.location.url(action='index')},
+        {'title': _("Subjects"),
+         'name': 'subjects',
+         'link': c.location.url(action='catalog', obj_type='subject')},
         {'title': _("Teachers"),
          'name': 'teachers',
          'link': c.location.url(action='catalog', obj_type='teacher')}]
@@ -140,6 +153,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
         c.breadcrumbs = []
         for tag in location.hierarchy(True):
             bc = {'link': tag.url(),
+                  'full_title': tag.title,
                   'title': tag.title_short}
             if tag.logo is not None:
                 bc['logo'] = url(controller='structure', action='logo', width=30, height=30, id=tag.id)
@@ -147,18 +161,22 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
     @location_action
     def index(self, location):
-        c.current_menu_item = 'about'
-
-        self._breadcrumbs(location)
-        self._get_departments(location)
-
-        return render('location/about.mako')
+        if not c.user:
+            self._breadcrumbs(location)
+            self._get_departments(location)
+            c.current_menu_item = 'about'
+            return render('location/about.mako')
+        else:
+            redirect(url(controller='structureview', action='feed', path='/'.join(location.path)))
 
     def _edit_form(self):
         return render('location/edit.mako')
 
     @location_action
     def feed(self, location):
+        if not c.user:
+            abort(404)
+
         c.current_menu_item = 'feed'
         self._breadcrumbs(location)
         self._set_wall_variables()
