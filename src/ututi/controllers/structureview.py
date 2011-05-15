@@ -161,13 +161,16 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
     @location_action
     def index(self, location):
+        self._breadcrumbs(location)
+
         if not c.user:
-            self._breadcrumbs(location)
             self._get_departments(location)
             c.current_menu_item = 'about'
             return render('location/about.mako')
         else:
-            redirect(url(controller='structureview', action='feed', path='/'.join(location.path)))
+            c.current_menu_item = 'feed'
+            self._set_wall_variables()
+            return render('location/feed.mako')
 
     def _edit_form(self):
         return render('location/edit.mako')
