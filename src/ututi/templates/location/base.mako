@@ -36,9 +36,39 @@
   ${c.location.title}
 </%def>
 
+<%def name="pageheader()">
+    ${self.pagetitle()}
+</%def>
 
-<h1 class="page-title ${'underline' if c.current_menu_item!='about' else ''}">
-  ${self.pagetitle()}
+<%def name="css()">
+  ${parent.css()}
+
+  ul#breadcrumbs {
+    margin-top: -15px;
+    margin-bottom: 20px;
+  }
+
+  ul#breadcrumbs li {
+    display: inline;
+    font-size: 14px;
+  }
+</%def>
+
+<%def name="breadcrumbs()">
+<ul id="breadcrumbs">
+  <li>
+    <a href="${c.breadcrumbs[0]['link']}">
+      ${c.breadcrumbs[0]['full_title']}
+    </a>
+  </li>
+</ul>
+</%def>
+
+<h1 class="page-title ${'underline' if len(c.location.hierarchy()) == 1 else ''}" >
+  ${self.pageheader()}
 </h1>
+%if len(c.location.hierarchy()) !=1 and c.breadcrumbs:
+  ${self.breadcrumbs()}
+%endif
 
 ${next.body()}
