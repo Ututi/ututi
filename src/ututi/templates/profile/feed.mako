@@ -19,7 +19,7 @@
   .wall a#settings-link {
       display: block;
       float: right;
-      margin-top: -30px; /* throws above page title (XXX) */
+      margin-top: -33px; /* throws above page title (XXX) */
       padding-left: 14px;
       background: url('/img/icons.com/settings.png') no-repeat left center;
   }
