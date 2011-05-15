@@ -200,6 +200,7 @@ class HomeController(UniversityListMixin):
             return htmlfill.render(self._sign_up_form())
 
     def about(self):
+        c.current_menu_item = 'about'
         return render('/about/features.mako')
 
     @info_action
