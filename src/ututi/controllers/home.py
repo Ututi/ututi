@@ -199,6 +199,7 @@ class HomeController(UniversityListMixin):
             c.slideshow = request.params.has_key('slide')
             return htmlfill.render(self._sign_up_form())
 
+    @info_action
     def about(self):
         c.current_menu_item = 'about'
         return render('/about/features.mako')

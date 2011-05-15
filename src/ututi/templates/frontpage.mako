@@ -22,7 +22,7 @@
           $(document).ready(function(){$("#sign-up-form label").labelOver('over');});
         </script>
       </form>
-      ${h.button_to(_("Learn more"), '/features', id="learn-more", method='GET')}
+      ${h.button_to(_("Learn more"), '/about', id="learn-more", method='GET')}
     </div>
   </div>
 </div>
