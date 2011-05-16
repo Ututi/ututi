@@ -1438,6 +1438,14 @@ ul.feature-list {
         font-style: italic;
     }
 
+    .wiki-page b {
+        font-weight: bold;
+    }
+
+    .wiki-page i {
+        font-style: italic;
+    }
+
 
 /* STANDARD ICON LISTS */
 
