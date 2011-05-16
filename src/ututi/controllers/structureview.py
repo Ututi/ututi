@@ -26,28 +26,6 @@ from ututi.controllers.search import SearchSubmit, SearchBaseController
 
 log = logging.getLogger(__name__)
 
-def location_action(method):
-    def _location_action(self, path, obj_type=None):
-        location = LocationTag.get(path)
-
-        if location is None:
-            abort(404)
-
-        c.security_context = location
-        c.object_location = None
-        c.location = location
-        if c.user:
-            c.menu_items = structure_menu_items()
-        else:
-            c.menu_items = structure_menu_public_items()
-
-        c.current_menu_item = None
-        if obj_type is None:
-            return method(self, location)
-        else:
-            return method(self, location, obj_type)
-    return _location_action
-
 def structure_menu_items():
     return [
         {'title': _("News feed"),
@@ -74,6 +52,40 @@ def structure_menu_public_items():
         {'title': _("Teachers"),
          'name': 'teachers',
          'link': c.location.url(action='catalog', obj_type='teacher')}]
+
+def location_breadcrumbs(location):
+    breadcrumbs = []
+    for tag in location.hierarchy(True):
+        bc = {'link': tag.url(),
+              'full_title': tag.title,
+              'title': tag.title_short}
+        if tag.logo is not None:
+            bc['logo'] = url(controller='structure', action='logo', width=30, height=30, id=tag.id)
+        breadcrumbs.append(bc)
+    return breadcrumbs
+
+def location_action(method):
+    def _location_action(self, path, obj_type=None):
+        location = LocationTag.get(path)
+
+        if location is None:
+            abort(404)
+
+        c.security_context = location
+        c.object_location = None
+        c.location = location
+        c.breadcrumbs = location_breadcrumbs(location)
+        if c.user:
+            c.menu_items = structure_menu_items()
+        else:
+            c.menu_items = structure_menu_public_items()
+
+        c.current_menu_item = None
+        if obj_type is None:
+            return method(self, location)
+        else:
+            return method(self, location, obj_type)
+    return _location_action
 
 
 class LocationEditForm(Schema):
@@ -150,42 +162,26 @@ class TeacherSearchMixin():
 
 class StructureviewController(SearchBaseController, UniversityListMixin, StructureviewWallMixin, TeacherSearchMixin):
 
-    def _breadcrumbs(self, location):
-        c.breadcrumbs = []
-        for tag in location.hierarchy(True):
-            bc = {'link': tag.url(),
-                  'full_title': tag.title,
-                  'title': tag.title_short}
-            if tag.logo is not None:
-                bc['logo'] = url(controller='structure', action='logo', width=30, height=30, id=tag.id)
-            c.breadcrumbs.append(bc)
-
     @location_action
     def index(self, location):
-        self._breadcrumbs(location)
-
-        if not c.user:
-            self._get_departments(location)
-            c.current_menu_item = 'about'
-            return render('location/about.mako')
+        if c.user:
+            redirect(location.url(action='feed'))
         else:
-            c.current_menu_item = 'feed'
-            self._set_wall_variables()
-            return render('location/feed.mako')
+            redirect(location.url(action='about'))
 
     def _edit_form(self):
         return render('location/edit.mako')
 
     @location_action
-    def feed(self, location):
-        if not c.user:
-            abort(404)
+    def about(self, location):
+        c.current_menu_item = 'about'
+        self._get_departments(location)
+        return render('location/about.mako')
 
     @location_action
     @ActionProtector("user")
     def feed(self, location):
         c.current_menu_item = 'feed'
-        self._breadcrumbs(location)
         self._set_wall_variables()
         return render('location/feed.mako')
 
@@ -193,7 +189,6 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
     @validate(schema=SearchSubmit, post_only=False, on_get=True)
     def catalog(self, location, obj_type):
         c.current_menu_item = obj_type + 's'
-        self._breadcrumbs(location)
 
         self.form_result['tagsitem'] = location.hierarchy()
         self.form_result['obj_type'] = obj_type
@@ -253,13 +248,11 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
             'title_short': location.title_short,
             'site_url': location.site_url
             }
-        self._breadcrumbs(location)
         return htmlfill.render(self._edit_form(), defaults=defaults, force_defaults=False)
 
     @location_action
     @validate(schema=LocationEditForm, form='_edit_form')
     def update(self, location):
-        self._breadcrumbs(location)
 
         if hasattr(self, 'form_result'):
             location.title = self.form_result['title']
