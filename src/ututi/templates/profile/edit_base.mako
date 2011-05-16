@@ -11,6 +11,9 @@ ${parent.css()}
   display: block;
   margin-bottom: 10px;
 }
+.explanation-post-header {
+    margin: 30px 0 15px;
+}
 </%def>
 
 <div class="above-tabs">

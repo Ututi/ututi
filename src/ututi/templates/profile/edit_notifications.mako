@@ -18,7 +18,7 @@ ${parent.css()}
     width: auto;
 }
 .notification-block {
-    margin-top: 15px;
+    margin-bottom: 15px;
 }
 .notification-block .header {
     border-bottom: 1px solid #f90;
@@ -49,9 +49,6 @@ ${parent.css()}
 }
 .checkbox-list form input {
     margin-right: 2px;
-}
-.post-header {
-    margin-top: 30px;
 }
 </%def>
 
@@ -97,10 +94,8 @@ ${parent.head_tags()}
 
 <%def name="pagetitle()">${_('Email notification settings')}</%def>
 
-<div class="post-header">
-  <p style="font-size: 14px; margin-bottom: 0">
-    ${_('Email me when')}
-  </p>
+<div class="explanation-post-header">
+  <h2>${_('Email me when')}</h2>
   <div class="tip">
     ${_('What notifications would you like to receive by email:')}
   </div>

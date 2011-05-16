@@ -99,8 +99,14 @@ class TeacherProfileController(ProfileControllerBase):
 
     @ActionProtector("user")
     def edit_biography(self):
-        return htmlfill.render(self._edit_biography_form(),
-                               defaults=self._edit_form_defaults())
+        if c.user.description.strip():
+            # description not empty
+            defaults = {'description': c.user.description}
+        else:
+            template = render('profile/teacher/biography_template.mako')
+            defaults = {'description': template}
+            c.edit_template = True
+        return htmlfill.render(self._edit_biography_form(), defaults=defaults)
 
     @validate(schema=BiographyForm, form='_edit_biography_form')
     @ActionProtector("user")
@@ -108,7 +114,7 @@ class TeacherProfileController(ProfileControllerBase):
         if not hasattr(self, 'form_result'):
             redirect(url(controller='profile', action='edit_biography'))
 
-        c.user.description = self.form_result.get('description', None)
+        c.user.description = self.form_result['description']
         meta.Session.commit()
         h.flash(_('Your biography was updated.'))
 

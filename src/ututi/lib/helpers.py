@@ -385,7 +385,6 @@ def input_area(name, title, value='', cols='50', rows='5', help_text=None, disab
     expl = None
     if help_text is not None:
         expl = HTML.span(class_='helpText', c=help_text)
-    kwargs = {}
     if disabled:
         kwargs['disabled'] = 'disabled'
 
