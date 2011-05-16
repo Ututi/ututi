@@ -17,6 +17,7 @@ from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, \
 from ututi.lib.wall import WallMixin
 from ututi.lib.search import search_query_count
 from ututi.lib.emails import teacher_request_email
+from ututi.lib.security import ActionProtector
 from ututi.model import Subject, Group, Teacher
 from ututi.model import LocationTag, meta
 from ututi.model.users import User, UserRegistration
@@ -180,6 +181,9 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
         if not c.user:
             abort(404)
 
+    @location_action
+    @ActionProtector("user")
+    def feed(self, location):
         c.current_menu_item = 'feed'
         self._breadcrumbs(location)
         self._set_wall_variables()
@@ -350,10 +354,8 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
         return render('registration/email_approval.mako')
 
     @location_action
+    @ActionProtector("user")
     def register_teacher_existing(self, location):
-        if c.user is None:
-            abort(404)
-
         if c.user.is_teacher:
             h.flash(_('You already have a teacher account.'))
             redirect(url(controller='profile', action='home'))
