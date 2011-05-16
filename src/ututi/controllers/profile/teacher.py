@@ -99,8 +99,8 @@ class TeacherProfileController(ProfileControllerBase):
 
     @ActionProtector("user")
     def edit_biography(self):
-        if c.user.description.strip():
-            # description not empty
+        if c.user.description and c.user.description.strip():
+            # description is not empty
             defaults = {'description': c.user.description}
         else:
             template = render('profile/teacher/biography_template.mako')
