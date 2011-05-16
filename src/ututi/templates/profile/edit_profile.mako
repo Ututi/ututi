@@ -109,7 +109,7 @@
             $(document).ready(function() {
               $('#url_name').keyup(update_url_preview);
               $('#url_name').change(update_url_preview);
-              update_url_preview();
+              $('#url_name').change();
             });
           </script>
       </div>
