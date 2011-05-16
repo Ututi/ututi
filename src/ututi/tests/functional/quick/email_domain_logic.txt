@@ -308,7 +308,7 @@ and then to U-niversity.
     'http://localhost/home/start'
     >>> user.click('University')
     >>> user.url
-    'http://localhost/school/vu.lt'
+    'http://localhost/school/vu.lt/feed'
     >>> user.click('Logout')
 
     >>> user.click('Login')
@@ -326,7 +326,7 @@ and then to U-niversity.
     'http://localhost/home/start'
     >>> user.click('University')
     >>> user.url
-    'http://localhost/school/uni'
+    'http://localhost/school/uni/feed'
     >>> user.click('Logout')
 
 Note that user was asked to specify his location even we could have identified

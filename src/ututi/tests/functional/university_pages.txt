@@ -12,7 +12,7 @@ Let's look at public universities page.
 We should be able to click on a link that leads us to the page of the faculty.
     >>> public_browser.getLink('Vilniaus universitetas').click()
     >>> public_browser.url
-    'http://localhost/school/vu'
+    'http://localhost/school/vu/about'
 
     >>> public_browser.printCssQuery('h1', strip=True)
     <h1>Vilniaus universitetas</h1>
@@ -66,7 +66,7 @@ We should be able to edit the information of the location tag.
     >>> browser.getControl('Save').click()
 
     >>> browser.url
-    'http://localhost/school/ku'
+    'http://localhost/school/ku/feed'
 
 And the updated information should be visible in the university page:
 
@@ -119,7 +119,7 @@ Oh, and we can upload logos too:
     >>> browser.printQuery("//span[@class='error-message']/text()")
 
     >>> browser.url
-    'http://localhost/school/ku/ggf'
+    'http://localhost/school/ku/ggf/feed'
 
     >>> browser.printCssQuery("#location-logo-portlet img")
     <img src="/structure/5/logo/140" alt="Geografijos fakultetas" />

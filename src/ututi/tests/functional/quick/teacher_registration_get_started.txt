@@ -152,7 +152,7 @@ way as any existing Ututi user (case above).
     >>> user.getControl('Password').value = 'asdasd'
     >>> user.getControl('Login').click()
     >>> user.url
-    'http://localhost/school/uni'
+    'http://localhost/school/uni/feed'
     >>> user.printQuery("//div[@class='flash-message']//span/text()")
     Thank You! Your request to become a teacher has been received.
     We will notify You once we grant You the rights of a teacher.
