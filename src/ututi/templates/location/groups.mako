@@ -5,20 +5,6 @@
     ${_('Groups')}
 </%def>
 
-<%def name="breadcrumbs()">
-<ul id="breadcrumbs">
-  <li>
-    <a href="${c.breadcrumbs[0]['link']}">
-      ${c.breadcrumbs[0]['full_title']}
-    </a> |
-    <a href="${c.breadcrumbs[1]['link']}">
-      ${c.breadcrumbs[1]['full_title']}
-    </a>
-  </li>
-</ul>
-</%def>
-
-
 <%def name="search_results(results, search_query=None)">
   <%search:search_results results="${results}" controller='structureview' action='catalog_js'>
     <%def name="header()">

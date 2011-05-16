@@ -118,6 +118,9 @@
 %endif
 </%def>
 
+<%doc>Don't show breadcrumbs in this view.</%doc>
+<%def name="breadcrumbs()"></%def>
+
 <div class="sub-title">${_('Private social network')}</div>
 
 <div class="clearfix">

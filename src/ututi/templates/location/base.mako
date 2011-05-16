@@ -37,38 +37,46 @@
 </%def>
 
 <%def name="pageheader()">
-    ${self.pagetitle()}
+  ${self.pagetitle()}
 </%def>
 
 <%def name="css()">
   ${parent.css()}
 
+  h1.underline {
+    margin-bottom: 2px; /* means we show breadcrumbs below */
+  }
+
   ul#breadcrumbs {
-    margin-top: -15px;
     margin-bottom: 20px;
+    font-size: 14px;
   }
 
   ul#breadcrumbs li {
     display: inline;
-    font-size: 14px;
+    margin-right: 20px;
   }
 </%def>
 
 <%def name="breadcrumbs()">
+<%doc>Only show breadcrumbs if we're not at root.</%doc>
+%if c.location.parent:
 <ul id="breadcrumbs">
+  %for crumb in c.breadcrumbs:
   <li>
-    <a href="${c.breadcrumbs[0]['link']}">
-      ${c.breadcrumbs[0]['full_title']}
-    </a>
+    <a href="${crumb['link']}">${crumb['full_title']}</a>
   </li>
+  %endfor
 </ul>
+%endif
 </%def>
 
-<h1 class="page-title ${'underline' if len(c.location.hierarchy()) == 1 else ''}" >
+<% breadcrumbs_block = capture(self.breadcrumbs).strip() %>
+
+<h1 class="page-title ${'underline' if breadcrumbs_block else ''}" >
   ${self.pageheader()}
 </h1>
-%if len(c.location.hierarchy()) !=1 and c.breadcrumbs and c.current_menu_item != 'about':
-  ${self.breadcrumbs()}
-%endif
+
+${h.literal(breadcrumbs_block)}
 
 ${next.body()}
