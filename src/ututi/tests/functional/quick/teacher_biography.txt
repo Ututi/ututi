@@ -30,7 +30,25 @@ From the "Get started" page he can click "Add my biography".
     >>> user.printCssQuery('h1.page-title', strip=True)
     <h1>Your biography</h1>
 
-    >>> user.getControl('Enter some facts from your biography').value = "Some <strong>cool</strong> biography!"
+For the first time text area contains a template that teacher can edit.
+It also displays a related warning message:
+
+    >>> print user.getControl('Edit your biography').value
+    Provide any personal information that you would like to begin with.
+    Research interests
+    Include a brief summary of your interests. Cover past, current and future research plans.
+    Use bulleted list if needed.
+    Education
+    ...
+
+    >>> user.printCssQuery('.warning', strip=True)
+    <p>Below you see a template that you can freely edit.
+    Note that once your press "Save", it will become publicly
+    available in your profile page.</p>
+
+
+
+    >>> user.getControl('Edit your biography').value = "Some <strong>cool</strong> biography!"
     >>> user.getControl('Save').click()
 
 Biography should be created and we should see flash message.
@@ -71,9 +89,9 @@ in settings page:
 
     >>> user.click('Settings')
     >>> user.click('Biography')
-    >>> user.getControl('Enter some facts from your biography').value
+    >>> user.getControl('Edit your biography').value
     'Some <strong>cool</strong> biography!'
-    >>> user.getControl('Enter some facts from your biography').value = 'Some <strong>very cool</strong> biography!'
+    >>> user.getControl('Edit your biography').value = 'Some <strong>very cool</strong> biography!'
     >>> user.getControl('Save').click()
     >>> user.printCssQuery('.flash-message-content', strip=True)
     <span>Your biography was updated.</span>

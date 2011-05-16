@@ -272,7 +272,7 @@ public teacher's profile page:
     >>> user.goBack()
 
     >>> user.click('Add my biography')
-    >>> user.getControl('Enter some facts').value = "Some <strong>cool</strong> biography!"
+    >>> user.getControl('Edit your biography').value = "Some <strong>cool</strong> biography!"
     >>> user.getControl('Save').click()
 
 Now user has completed enough actions, so his homepage has been
