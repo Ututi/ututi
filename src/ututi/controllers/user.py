@@ -223,5 +223,5 @@ class UserController(BaseController, UserInfoWallMixin):
         else:
             img_path = 'public/img/user_default.png'
 
-        return serve_logo('user', int(id), width=width, square=True,
+        return serve_logo('user', user.id, width=width, square=True,
                           default_img_path=img_path, cache=False)
