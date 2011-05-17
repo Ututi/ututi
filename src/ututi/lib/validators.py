@@ -111,7 +111,7 @@ class HtmlSanitizeValidator(validators.FancyValidator):
 class UserPasswordValidator(validators.FancyValidator):
     """ User's password checker for password change form. """
     messages = {
-        'invalid': _(u"Invalid password"),
+        'invalid': _(u"Incorrect password."),
         }
 
     def validate_python(self, value, state):

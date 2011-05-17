@@ -64,7 +64,7 @@ def send_group_invitation_for_non_user(invitation, registration, message=None):
     msg = EmailMessage(_('Ututi group invitation'), text)
     msg.send(registration.email)
 
-def email_password_reset(user, email):
+def email_password_reset(user):
     """Send an email to the user with a link to reset his password."""
     text = render('/emails/password_recovery.mako',
                   extra_vars={'user' : user})

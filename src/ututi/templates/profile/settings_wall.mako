@@ -1,6 +1,11 @@
-<%inherit file="/profile/edit_base.mako" />
+<%inherit file="/profile/settings_base.mako" />
 
-<%def name="pagetitle()">${_('News feed settings')}</%def>
+<div class="explanation-post-header">
+  <h2>${_('News feed settings')}</h2>
+  <p class="tip">
+    ${_('Select which events you want to show up on your wall.')}
+  </p>
+</div>
 
 <%
 labels = {
@@ -53,9 +58,7 @@ labels = {
   %endif
 </%def>
 
-<form method="POST" action="${url(controller='profile', action='wall_settings')}" class="new-style-form" id="wall_settings_form">
-<div class="tip">${_('Which events do You want to see in Your news feed?')}</div>
-<br />
+<form method="POST" action="${url(controller='profile', action='update_wall_settings')}" class="new-style-form" id="wall_settings_form">
 %for key, item in c.event_types.items():
   ${form_item(item)}
 %endfor

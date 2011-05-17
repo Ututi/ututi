@@ -463,11 +463,11 @@ input {
         margin-top: 20px;
     }
 
-    .new-style-form .rightNext {
+    form .rightNext {
         margin-left: 15px;
     }
 
-    .new-style-form .rightNext button {
+    form .rightNext button {
         margin-top: -1px;
     }
 
@@ -1254,6 +1254,10 @@ ul.feature-list {
         display: table-cell;
         width: 50%;
         vertical-align: top;
+    }
+
+    .left-right .left {
+        padding-right: 20px;
     }
 
     .left-right .right {

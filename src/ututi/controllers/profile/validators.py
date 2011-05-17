@@ -59,7 +59,7 @@ class PasswordChangeForm(Schema):
 
     password = UserPasswordValidator(not_empty=True)
 
-    msg = {'empty': _(u"Please enter your password to register."),
+    msg = {'empty': _(u"Please enter your password."),
            'tooShort': _(u"The password must be at least 5 symbols long.")}
 
     new_password = validators.String(
@@ -70,7 +70,7 @@ class PasswordChangeForm(Schema):
 
     msg = {'invalid': _(u"Passwords do not match."),
            'invalidNoMatch': _(u"Passwords do not match."),
-           'empty': _(u"Please enter your password to register.")}
+           'empty': _(u"Please enter your password.")}
     chained_validators = [validators.FieldsMatch('new_password',
                                                  'repeat_password',
                                                  messages=msg)]

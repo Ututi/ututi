@@ -17,7 +17,8 @@ from pylons.i18n import _, ungettext
 
 import ututi.lib.helpers as h
 from ututi.lib.base import render
-from ututi.lib.emails import email_confirmation_request,  send_registration_invitation
+from ututi.lib.emails import email_confirmation_request, \
+        send_registration_invitation, email_password_reset
 from ututi.lib.events import event_types_grouped
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.security import ActionProtector
@@ -40,6 +41,20 @@ from ututi.controllers.profile.subjects import WatchedSubjectsMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
 from ututi.controllers.home import sign_in_user
 from ututi.controllers.home import UniversityListMixin
+
+
+def account_settings_tabs():
+    return [
+        {'title': _("Login"),
+         'name': 'login',
+         'link': url(controller='profile', action='login_settings')},
+        {'title': _("News feed"),
+         'name': 'wall',
+         'link': url(controller='profile', action='wall_settings')},
+        {'title': _("Notifications"),
+         'name': 'notifications',
+         'link': url(controller='profile', action='notification_settings')},
+    ]
 
 
 class WallSettingsForm(Schema):
@@ -131,6 +146,14 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
         return result
 
+    ## settings pages
+
+    @ActionProtector("user")
+    def login_settings(self):
+        c.tabs = account_settings_tabs()
+        c.current_tab = 'login'
+        return render('/profile/settings_login.mako')
+
     def _edit_form_defaults(self):
         defaults = {
             'email': c.user.emails[0].email,
@@ -160,12 +183,8 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         self._set_settings_tabs(current_tab='contacts')
         return render('profile/edit_contacts.mako')
 
-    def _wall_settings_form(self):
-        c.event_types = event_types_grouped(Event.event_types())
-        self._set_settings_tabs(current_tab='wall')
-        return render('profile/edit_wall.mako')
-
     def _set_settings_tabs(self, current_tab):
+        # TODO: refactor this out of the class
         c.current_tab = current_tab
         c.tabs = [
             {'title': _("General information"),
@@ -191,30 +210,40 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         return htmlfill.render(self._edit_contacts_form(),
                                defaults=self._edit_form_defaults())
 
+    def _wall_settings_form(self):
+        c.event_types = event_types_grouped(Event.event_types())
+        c.tabs = account_settings_tabs()
+        c.current_tab = 'wall'
+        return render('profile/settings_wall.mako')
+
     @ActionProtector("user")
     @validate(schema=WallSettingsForm, form='_wall_settings_form')
     def wall_settings(self):
+        defaults = {
+            'events': list(set(Event.event_types()) - \
+                           set(c.user.ignored_events_list))
+        }
+        return htmlfill.render(self._wall_settings_form(),
+                               defaults=defaults)
+
+    @ActionProtector("user")
+    @validate(schema=WallSettingsForm, form='_wall_settings_form')
+    def update_wall_settings(self):
         if hasattr(self, 'form_result'):
             events = set(self.form_result.get('events', []))
             events = list(set(Event.event_types()) - events)
             c.user.update_ignored_events(events)
             meta.Session.commit()
             h.flash(_('Your wall settings have been updated.'))
-            redirect(url(controller='profile', action='wall_settings'))
-
-        defaults = {
-            'events': list(set(Event.event_types()) - set(c.user.ignored_events_list))
-            }
-
-        return htmlfill.render(self._wall_settings_form(),
-                               defaults=defaults)
+        redirect(url(controller='profile', action='wall_settings'))
 
     @ActionProtector("user")
-    def notifications(self):
-        self._set_settings_tabs(current_tab='notifications')
+    def notification_settings(self):
+        c.tabs = account_settings_tabs()
+        c.current_tab = 'notifications'
         c.subjects = c.user.watched_subjects
         c.groups = c.user.groups
-        return render('profile/edit_notifications.mako')
+        return render('profile/settings_notifications.mako')
 
     @ActionProtector("user")
     def link_google(self):
@@ -227,7 +256,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         c.user.openid = None
         meta.Session.commit()
         h.flash(_('Your Google account has been unlinked.'))
-        redirect(url(controller='profile', action='edit_contacts'))
+        redirect(url(controller='profile', action='login_settings'))
 
     @ActionProtector("user")
     def link_facebook(self):
@@ -244,26 +273,35 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                 h.flash(_("Linked to Facebook account."))
             else:
                 h.flash(_('This Facebook account is already linked to another Ututi account.'))
-        redirect(url(controller='profile', action='edit_contacts'))
+        redirect(url(controller='profile', action='login_settings'))
 
     @ActionProtector("user")
     def unlink_facebook(self):
         c.user.facebook_id = None
         meta.Session.commit()
         h.flash(_('Your Facebook account has been unlinked.'))
-        redirect(url(controller='profile', action='edit_contacts'))
+        redirect(url(controller='profile', action='login_settings'))
 
-    @validate(PasswordChangeForm, form='_edit_profile_form',
-              ignore_request=True, defaults=_edit_form_defaults)
     @ActionProtector("user")
-    def password(self):
+    @validate(PasswordChangeForm, form='login_settings', ignore_request=True)
+    def change_password(self):
         if hasattr(self, 'form_result'):
             c.user.update_password(self.form_result['new_password'].encode('utf-8'))
             meta.Session.commit()
             h.flash(_('Your password has been changed!'))
-            redirect(url(controller='profile', action='edit'))
-        else:
-            redirect(url(controller='profile', action='edit'))
+        redirect(url(controller='profile', action='login_settings'))
+
+    @ActionProtector("user")
+    def recover_password(self):
+        if not c.user.recovery_key:
+            c.user.gen_recovery_key()
+        email_password_reset(c.user)
+        meta.Session.commit()
+        h.flash(_('Password recovery email sent to %(user_email)s. '
+                  'Please check your inbox.') % {
+                  'user_email': c.user.email.email
+                  })
+        redirect(url(controller='profile', action='login_settings'))
 
     @validate(LogoUpload)
     @ActionProtector("user")

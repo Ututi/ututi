@@ -1,4 +1,4 @@
-<%inherit file="/profile/edit_base.mako" />
+<%inherit file="/profile/settings_base.mako" />
 
 <%def name="css()">
 ${parent.css()}
@@ -92,13 +92,11 @@ ${parent.head_tags()}
 </script>
 </%def>
 
-<%def name="pagetitle()">${_('Email notification settings')}</%def>
-
 <div class="explanation-post-header">
   <h2>${_('Email me when')}</h2>
-  <div class="tip">
+  <p class="tip">
     ${_('What notifications would you like to receive by email:')}
-  </div>
+  </p>
 </div>
 
 <%def name="notification_interval_form(action_url, selected)">

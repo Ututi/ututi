@@ -3,6 +3,9 @@
 
 <%def name="css()">
   ${parent.css()}
+  .left-right {
+    margin-top: 20px;
+  }
   .no-top-margin {
     margin-top: 0;
   }
