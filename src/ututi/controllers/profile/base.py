@@ -30,11 +30,10 @@ from ututi.lib import gg, sms
 from ututi.lib.validators import js_validate
 
 from ututi.model.events import Event
-from ututi.model import LocationTag
 from ututi.model import meta, Email, User
 
 from ututi.controllers.profile.validators import HideElementForm, \
-    MultiRcptEmailForm, FriendsInvitationJSForm, ContactForm, LocationForm, \
+    MultiRcptEmailForm, FriendsInvitationJSForm, ContactForm, \
     LogoUpload, ProfileForm, PasswordChangeForm
 from ututi.controllers.profile.wall import UserWallMixin
 from ututi.controllers.profile.subjects import WatchedSubjectsMixin
@@ -442,14 +441,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         redirect(url(controller='profile', action='edit_contacts'))
 
     @ActionProtector("user")
-    @validate(schema=LocationForm, form='home')
-    def update_location(self):
-        c.user.location = self.form_result.get('location', None)
-        meta.Session.commit()
-        h.flash(_('Your university information has been updated.'))
-        redirect(url(controller='profile', action='home'))
-
-    @ActionProtector("user")
     def thank_you(self):
         return render('/profile/thank_you.mako')
 
@@ -481,14 +472,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         for key, value in items:
             ret += "%s => %s\n" % (key, value)
         return ret
-
-    @ActionProtector("user")
-    def set_location(self):
-        location_id = request.params.get('location_id')
-        c.user.location_id = location_id
-        meta.Session.commit()
-        location = meta.Session.query(LocationTag).filter_by(id=location_id).one()
-        redirect(url(controller='structureview', action='index', path='/'.join(location.path)))
 
     @js_validate(schema=MultiRcptEmailForm())
     @jsonify
