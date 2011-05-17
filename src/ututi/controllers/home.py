@@ -1,6 +1,4 @@
 import logging
-from random import Random
-import string
 from datetime import date, timedelta
 
 from formencode import Schema, validators, All, htmlfill
@@ -365,8 +363,8 @@ class HomeController(UniversityListMixin):
             user = User.get_global(email)
             if user is not None:
                 if not user.recovery_key:
-                    user.recovery_key = ''.join(Random().sample(string.ascii_lowercase, 8))
-                email_password_reset(user, email)
+                    user.gen_recovery_key()
+                email_password_reset(user)
                 meta.Session.commit()
                 h.flash(_('Password recovery email sent. Please check your inbox.'))
             else:

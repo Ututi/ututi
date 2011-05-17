@@ -1,4 +1,6 @@
 import logging
+import string
+from random import Random
 from pylons import url
 from sqlalchemy.sql.expression import func
 from sqlalchemy.sql.expression import and_
@@ -432,6 +434,9 @@ class User(Author):
             self.password = generate_password(password)
         else:
             self.password = password
+
+    def gen_recovery_key(self):
+        self.recovery_key = ''.join(Random().sample(string.ascii_lowercase, 8))
 
     def update_logo_from_facebook(self):
         if self.logo is None: # Never overwrite a custom logo.
