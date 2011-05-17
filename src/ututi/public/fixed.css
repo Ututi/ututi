@@ -416,7 +416,10 @@ input {
         margin-left: 15px;
     }
 
-    form.block-errors div.error-container {
+    form.narrow div.error-container {
+        /* For narrow forms we don't want to inline error messages
+         * with input fields.
+         */
         display: block;
         margin-left: 0px;
     }

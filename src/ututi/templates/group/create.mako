@@ -56,7 +56,7 @@
 
   ${self.path_steps(1)}
 
-  <form method="post" action="${url(controller='group', action='create')}" enctype="multipart/form-data" class="block-errors">
+  <form method="post" action="${url(controller='group', action='create')}" enctype="multipart/form-data" class="narrow">
     <fieldset>
       ${self.location_field()}
       ${self.year_field()}
