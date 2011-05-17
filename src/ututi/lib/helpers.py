@@ -307,12 +307,13 @@ def input_line(name, title, value='', help_text=None, right_next=None, **kwargs)
         next = HTML.span(class_='rightNext', c=right_next)
 
     kwargs.setdefault('id', name)
+    kwargs.setdefault('type', 'text')
     return HTML.div(class_='formField',
                     id='%s-field' % kwargs['id'],
                     c=[HTML.label(for_=name, c=[
                     HTML.span(class_='labelText', c=[title]),
                     HTML.span(class_='textField', c=[
-                            HTML.input(type='text', value=value, name_=name, **kwargs),
+                            HTML.input(value=value, name_=name, **kwargs),
                             ])]),
                        next,
                        HTML.literal('<form:error name="%s" />' % name),
@@ -364,22 +365,9 @@ def input_hidden(name, value='', **kwargs):
                     c=[HTML.input(type='hidden', value=value, name_=name, **kwargs),
                        HTML.literal('<form:error name="%s" />' % name)])
 
-def input_psw(name, title, value='', help_text=None, **kwargs):
-    expl = None
-    if help_text is not None:
-        expl = HTML.span(class_='helpText', c=help_text)
-
-    kwargs.setdefault('id', name)
-    return HTML.div(class_='formField',
-                    id='%s-field' % kwargs['id'],
-                    c=[HTML.label(for_=name, c=[
-                    HTML.span(class_='labelText', c=[title]),
-                    HTML.span(class_='textField', c=[
-                            HTML.input(type='password', name_=name, value='', **kwargs),
-                            ])]),
-                       HTML.literal('<form:error name="%s" />' % name),
-                       expl])
-
+def input_psw(name, title, value='', help_text=None, right_next=None, **kwargs):
+    kwargs['type'] = 'password'
+    return input_line(name, title, value, help_text, right_next, **kwargs)
 
 def input_area(name, title, value='', cols='50', rows='5', help_text=None, disabled=False, **kwargs):
     expl = None
