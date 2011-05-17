@@ -54,7 +54,7 @@
 <div class="location-tag-widget ${'horizontalLocationForm' if c.tpl_lang != 'pl' else ''}"
      id="newlocationwidget-${self.newlocationwidget_id}">
   %for i in range(number):
-    <div class="location-tag-field form-field" id="location-tag-field-${i}">
+    <div class="location-tag-field form-field formField" id="location-tag-field-${i}">
       <label class="${label_class}">
         %if i < len(titles):
           <span class="labelText">${titles[i]}</span>

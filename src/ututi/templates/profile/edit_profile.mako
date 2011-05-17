@@ -50,8 +50,6 @@
   </script>
 </%def>
 
-<%def name="pagetitle()">${_("General information")}</%def>
-
 <div id="general-information-settings">
   <form method="post" action="${url(controller='profile', action='update')}" name="edit_profile_form" enctype="multipart/form-data" class="new-style-form"> 
     <div class="js-alternatives" id="user-logo">
@@ -123,13 +121,4 @@
     </div>
   </form>
 
-  <form method="post" action="${url(controller='profile', action='password')}" id="change-password-form" class="new-style-form">
-    <h1 class='page-title'>${_('Change password')}:</h1>
-    <fieldset>
-    ${h.input_psw('password', _('Current password'))}
-    ${h.input_psw('new_password', _('New password'))}
-    ${h.input_psw('repeat_password', _('Repeat the new password'))}
-    ${h.input_submit(_('Change password'), class_='btnMedium')}
-    </fieldset>
-  </form>
 </div>

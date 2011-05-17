@@ -11,8 +11,6 @@
   }
 </%def>
 
-<%def name="pagetitle()">${_("Login settings")}</%def>
-
 <div class="left-right">
   <div class="left">
     <div class="explanation-post-header no-top-margin">

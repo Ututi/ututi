@@ -5,6 +5,8 @@
 ${c.user.fullname}
 </%def>
 
+<%def name="pagetitle()">${_("Edit your profile")}</%def>
+
 <%def name="css()">
 ${parent.css()}
 #back-to-home-page {

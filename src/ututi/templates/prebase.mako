@@ -180,6 +180,7 @@ ${_('Private social networks for universities')}
     ${h.javascript_link(h.path_with_hash('/javascript/expand.js'))}
     ${h.javascript_link(h.path_with_hash('/javascript/hide_parent.js'))}
     ${h.javascript_link(h.path_with_hash('/javascript/forms.js'))}
+    ${h.javascript_link('/javascript/js-alternatives.js')|n}
     ${self.head_tags()}
     <style type="text/css">
       ${self.css()}

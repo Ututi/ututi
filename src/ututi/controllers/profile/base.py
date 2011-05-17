@@ -34,7 +34,7 @@ from ututi.model import meta, Email, User
 
 from ututi.controllers.profile.validators import HideElementForm, \
     MultiRcptEmailForm, FriendsInvitationJSForm, ContactForm, \
-    LogoUpload, ProfileForm, PasswordChangeForm
+    ProfileForm, PasswordChangeForm, LogoUpload
 from ututi.controllers.profile.wall import UserWallMixin
 from ututi.controllers.profile.subjects import WatchedSubjectsMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -64,6 +64,19 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             {'title': _("Notifications"),
              'name': 'notifications',
              'link': url(controller='profile', action='notification_settings')},
+        ]
+
+    def _edit_profile_tabs(self):
+        return [
+            {'title': _("General information"),
+             'name': 'general',
+             'link': url(controller='profile', action='edit')},
+            {'title': _("Photo"),
+             'name': 'photo',
+             'link': url(controller='profile', action='edit_photo')},
+            {'title': _("Contacts"),
+             'name': 'contacts',
+             'link': url(controller='profile', action='edit_contacts')},
         ]
 
     @ActionProtector("user")
@@ -151,62 +164,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         c.current_tab = 'login'
         return render('/profile/settings_login.mako')
 
-    def _edit_form_defaults(self):
-        defaults = {
-            'email': c.user.emails[0].email,
-            'gadugadu_uin': c.user.gadugadu_uin,
-            'gadugadu_get_news': c.user.gadugadu_get_news,
-            'phone_number': c.user.phone_number,
-            'fullname': c.user.fullname,
-            'site_url': c.user.site_url,
-            'description': c.user.description,
-            'profile_is_public': c.user.profile_is_public,
-            'url_name': c.user.url_name,
-            }
-        if c.user.location is not None:
-            location = dict([('location-%d' % n, tag)
-                             for n, tag in enumerate(c.user.location.hierarchy())])
-        else:
-            location = []
-        defaults.update(location)
-
-        return defaults
-
-    def _edit_profile_form(self):
-        self._set_settings_tabs(current_tab='general')
-        return render('profile/edit_profile.mako')
-
-    def _edit_contacts_form(self):
-        self._set_settings_tabs(current_tab='contacts')
-        return render('profile/edit_contacts.mako')
-
-    def _set_settings_tabs(self, current_tab):
-        # TODO: refactor this out of the class
-        c.current_tab = current_tab
-        c.tabs = [
-            {'title': _("General information"),
-             'name': 'general',
-             'link': url(controller='profile', action='edit')},
-            {'title': _("Contacts"),
-             'name': 'contacts',
-             'link': url(controller='profile', action='edit_contacts')},
-            {'title': _("Wall"),
-             'name': 'wall',
-             'link': url(controller='profile', action='wall_settings')},
-            {'title': _("Notifications"),
-             'name': 'notifications',
-             'link': url(controller='profile', action='notifications')}]
-
-    @ActionProtector("user")
-    def edit(self):
-        return htmlfill.render(self._edit_profile_form(),
-                               defaults=self._edit_form_defaults())
-
-    @ActionProtector("user")
-    def edit_contacts(self):
-        return htmlfill.render(self._edit_contacts_form(),
-                               defaults=self._edit_form_defaults())
-
     def _wall_settings_form(self):
         c.event_types = event_types_grouped(Event.event_types())
         c.tabs = self._account_settings_tabs()
@@ -241,6 +198,75 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         c.subjects = c.user.watched_subjects
         c.groups = c.user.groups
         return render('profile/settings_notifications.mako')
+
+    def _edit_form_defaults(self):
+        defaults = {
+            'email': c.user.emails[0].email,
+            'gadugadu_uin': c.user.gadugadu_uin,
+            'gadugadu_get_news': c.user.gadugadu_get_news,
+            'phone_number': c.user.phone_number,
+            'fullname': c.user.fullname,
+            'site_url': c.user.site_url,
+            'description': c.user.description,
+            'profile_is_public': c.user.profile_is_public,
+            'url_name': c.user.url_name,
+            }
+        if c.user.location is not None:
+            location = dict([('location-%d' % n, tag)
+                             for n, tag in enumerate(c.user.location.hierarchy())])
+        else:
+            location = []
+        defaults.update(location)
+
+        return defaults
+
+    def _edit_profile_form(self):
+        c.tabs = self._edit_profile_tabs()
+        c.current_tab = 'general'
+        return render('profile/edit_profile.mako')
+
+    @ActionProtector("user")
+    def edit(self):
+        return htmlfill.render(self._edit_profile_form(),
+                               defaults=self._edit_form_defaults())
+
+    def _edit_contacts_form(self):
+        c.tabs = self._edit_profile_tabs()
+        c.current_tab ='contacts'
+        return render('profile/edit_contacts.mako')
+
+    @ActionProtector("user")
+    def edit_contacts(self):
+        return htmlfill.render(self._edit_contacts_form(),
+                               defaults=self._edit_form_defaults())
+
+    @ActionProtector("user")
+    def edit_photo(self):
+        c.tabs = self._edit_profile_tabs()
+        c.current_tab ='photo'
+        return render('profile/edit_photo.mako')
+
+
+    @ActionProtector("user")
+    @validate(LogoUpload, form='edit_photo')
+    def update_photo(self):
+        if hasattr(self, 'form_result'):
+            logo = self.form_result['logo']
+            if logo is not None:
+                c.user.logo = logo.file.read()
+                meta.Session.commit()
+                if 'js' not in request.params:
+                    h.flash(_("Your photo successfully updated."))
+            if 'js' in request.params:
+                return 'OK'
+        redirect(url(controller='profile', action='edit_photo'))
+
+    @ActionProtector("user")
+    def remove_photo(self):
+        c.user.logo = None
+        meta.Session.commit()
+        h.flash(_("Your photo was removed."))
+        redirect(url(controller='profile', action='edit_photo'))
 
     @ActionProtector("user")
     def link_google(self):
@@ -341,19 +367,17 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         h.flash(_('Your profile was updated.'))
         redirect(url(controller='profile', action='edit'))
 
+    @ActionProtector("user")
     def confirm_emails(self):
-        if c.user is not None:
-            emails = request.POST.getall('email')
-            for email in emails:
-                email_confirmation_request(c.user, email)
-            h.flash(_('Confirmation message sent. Please check your email.'))
-            dest = request.POST.get('came_from', None)
-            if dest is not None:
-                redirect(dest.encode('utf-8'))
-            else:
-                redirect(url(controller='profile', action='edit_contacts'))
+        emails = request.POST.getall('email')
+        for email in emails:
+            email_confirmation_request(c.user, email)
+        h.flash(_('Confirmation message sent. Please check your email.'))
+        dest = request.POST.get('came_from', None)
+        if dest is not None:
+            redirect(dest.encode('utf-8'))
         else:
-            redirect(url(controller='home', action='home'))
+            redirect(url(controller='profile', action='edit_contacts'))
 
     def confirm_user_email(self, key):
         try:
