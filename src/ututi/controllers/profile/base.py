@@ -43,31 +43,29 @@ from ututi.controllers.home import sign_in_user
 from ututi.controllers.home import UniversityListMixin
 
 
-def account_settings_tabs():
-    return [
-        {'title': _("Login"),
-         'name': 'login',
-         'link': url(controller='profile', action='login_settings')},
-        {'title': _("News feed"),
-         'name': 'wall',
-         'link': url(controller='profile', action='wall_settings')},
-        {'title': _("Notifications"),
-         'name': 'notifications',
-         'link': url(controller='profile', action='notification_settings')},
-    ]
-
-
 class WallSettingsForm(Schema):
     allow_extra_fields = True
     filter_extra_fields = True
     events = ForEach(validators.String())
-
 
 class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewMixin, WatchedSubjectsMixin, UserWallMixin):
 
     def _actions(self, selected):
         raise NotImplementedError("This has to be implemented by the"
                                   " specific profile controller.")
+
+    def _account_settings_tabs(self):
+        return [
+            {'title': _("Login"),
+             'name': 'login',
+             'link': url(controller='profile', action='login_settings')},
+            {'title': _("News feed"),
+             'name': 'wall',
+             'link': url(controller='profile', action='wall_settings')},
+            {'title': _("Notifications"),
+             'name': 'notifications',
+             'link': url(controller='profile', action='notification_settings')},
+        ]
 
     @ActionProtector("user")
     def index(self):
@@ -150,7 +148,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
     @ActionProtector("user")
     def login_settings(self):
-        c.tabs = account_settings_tabs()
+        c.tabs = self._account_settings_tabs()
         c.current_tab = 'login'
         return render('/profile/settings_login.mako')
 
@@ -212,7 +210,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
     def _wall_settings_form(self):
         c.event_types = event_types_grouped(Event.event_types())
-        c.tabs = account_settings_tabs()
+        c.tabs = self._account_settings_tabs()
         c.current_tab = 'wall'
         return render('profile/settings_wall.mako')
 
@@ -239,7 +237,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
     @ActionProtector("user")
     def notification_settings(self):
-        c.tabs = account_settings_tabs()
+        c.tabs = self._account_settings_tabs()
         c.current_tab = 'notifications'
         c.subjects = c.user.watched_subjects
         c.groups = c.user.groups
