@@ -23,6 +23,7 @@ def send_sms(number, text, sender, recipient=None, parent=None):
     if parent:
         msg.outgoing_group_message = parent
     meta.Session.add(msg)
+    log.debug("%s -> %r" % (number, text))
 
     hold_emails = asbool(config.get('hold_emails', False))
     if hold_emails:
