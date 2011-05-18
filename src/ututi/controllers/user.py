@@ -219,7 +219,7 @@ class UserController(BaseController, UserInfoWallMixin):
             abort(404)
 
         if user.is_teacher:
-            img_path = 'public/img/teacher_60x60.png'
+            img_path = 'public/img/teacher_default.png'
         else:
             img_path = 'public/img/user_default.png'
 
