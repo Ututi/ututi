@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-05-11 19:29+0300\n"
+"PO-Revision-Date: 2011-05-18 18:58+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=((n * 1) != 1)\n"
@@ -622,6 +622,9 @@ msgstr ""
 msgid "Teachers"
 msgstr ""
 
+msgid "About"
+msgstr ""
+
 msgid "Information updated."
 msgstr ""
 
@@ -748,15 +751,6 @@ msgstr ""
 msgid "What's New?"
 msgstr ""
 
-msgid "My subjects"
-msgstr ""
-
-msgid "Your phone number has been updated."
-msgstr ""
-
-msgid "Your phone number has been confirmed."
-msgstr ""
-
 msgid "Your biography was updated."
 msgstr ""
 
@@ -771,6 +765,15 @@ msgstr ""
 
 #, python-format
 msgid "Message from Your teacher: %s"
+msgstr ""
+
+msgid "My subjects"
+msgstr ""
+
+msgid "Your phone number has been updated."
+msgstr ""
+
+msgid "Your phone number has been confirmed."
 msgstr ""
 
 msgid "You can't choose this department."
@@ -875,10 +878,13 @@ msgstr ""
 msgid "Find / create your subjects"
 msgstr ""
 
-msgid "Write a wall post"
+msgid "Fill profile information"
 msgstr ""
 
-msgid "Fill your profile"
+msgid "Add your biography"
+msgstr ""
+
+msgid "Add your student groups"
 msgstr ""
 
 #, python-format
@@ -915,10 +921,23 @@ msgstr ""
 msgid "The field may not be left empty."
 msgstr ""
 
+msgid ""
+"The field may only contain letters, numbers and the characters + - _ and "
+". (dot)"
+msgstr ""
+
 msgid "The field may only contain letters, numbers and the characters + - _"
 msgstr ""
 
 msgid "The tag is too long."
+msgstr ""
+
+msgid "This username is used by another user."
+msgstr ""
+
+msgid ""
+"The field may only contain lowercase letters, numbers and the characters "
+"+ - _ and . (dot)"
 msgstr ""
 
 msgid "Please enter an email address"
@@ -1368,9 +1387,6 @@ msgid "Select"
 msgstr ""
 
 msgid "„UTUTI Ltd.“"
-msgstr ""
-
-msgid "About"
 msgstr ""
 
 msgid "Terms"
@@ -2878,6 +2894,24 @@ msgstr ""
 msgid "+ Add department"
 msgstr ""
 
+msgid "Private social network"
+msgstr ""
+
+msgid "Academic resources"
+msgstr ""
+
+msgid "Add your study material (notes and files)."
+msgstr ""
+
+msgid "Student groups"
+msgstr ""
+
+msgid "Create and join private or public groups to communicate and collaborate."
+msgstr ""
+
+msgid "Share knowledge and discuss academic subjects with students and teachers."
+msgstr ""
+
 msgid "Departments:"
 msgstr ""
 
@@ -3446,7 +3480,7 @@ msgstr ""
 msgid "Get started"
 msgstr ""
 
-msgid "Teacher's home"
+msgid "Teacher dashboard"
 msgstr ""
 
 msgid "University feed"
@@ -3510,6 +3544,15 @@ msgstr[1] ""
 msgid "Related members:"
 msgstr ""
 
+msgid "My profile page"
+msgstr ""
+
+msgid "Edit my profile"
+msgstr ""
+
+msgid "View my profile page"
+msgstr ""
+
 msgid "Friends of ututi"
 msgstr ""
 
@@ -3542,270 +3585,6 @@ msgstr ""
 msgid "Universities"
 msgstr ""
 
-msgid "Edit a student group"
-msgstr ""
-
-msgid "What have I been doing?"
-msgstr ""
-
-msgid "You haven't contributed much, have you?"
-msgstr ""
-
-msgid "News feed settings"
-msgstr ""
-
-msgid "Welcome to Ututi"
-msgstr ""
-
-#, python-format
-msgid ""
-"Welcome to <strong>%(university)s</strong> private social networkcreated "
-"on <a href=\"%(url)s\">Ututi platform</a>. Here students and teachers can"
-" create groups online, use the mailinglist for communication and the file"
-" storage for sharing information."
-msgstr ""
-
-msgid "Invite your friends"
-msgstr ""
-
-msgid "Enter comma separated list of email addresses."
-msgstr ""
-
-msgid "Or use Facebook to invite your friends."
-msgstr ""
-
-msgid "Join the group"
-msgstr ""
-
-msgid "Features:"
-msgstr ""
-
-msgid "Group's email"
-msgstr ""
-
-msgid "Private discussions"
-msgstr ""
-
-msgid "Find and join your group or create a new one."
-msgstr ""
-
-msgid "Or browse group catalog"
-msgstr ""
-
-msgid "Choose your subjects"
-msgstr ""
-
-msgid "Find subjects in your university and start following them."
-msgstr ""
-
-msgid "Or create new subject"
-msgstr ""
-
-msgid ""
-"Share course material, create wiki notes and discuss with other subject "
-"followers."
-msgstr ""
-
-msgid "Tell some basic information about yourself by editing your profile."
-msgstr ""
-
-msgid "Edit profile"
-msgstr ""
-
-msgid ""
-"private file storage area for files that you don't want to share with "
-"outsiders."
-msgstr ""
-
-msgid "Find your group"
-msgstr ""
-
-msgid "a place to discuss subject related questions with students and teachers."
-msgstr ""
-
-msgid "Shared notes"
-msgstr ""
-
-msgid ""
-"create wiki notes collaboratively with your class-mates or take notes "
-"during the lecture and upload it directly to Ututi."
-msgstr ""
-
-msgid "Find your subjects"
-msgstr ""
-
-#, python-format
-msgid ""
-"Join %(university_link)s social network in Ututi, a system for exchanging"
-" study material and information."
-msgstr ""
-
-msgid "Invite your classmates to Ututi!"
-msgstr ""
-
-msgid "Join Ututi"
-msgstr ""
-
-msgid "notification settings"
-msgstr ""
-
-msgid "add subject"
-msgstr ""
-
-msgid "Show subjects from my groups"
-msgstr ""
-
-msgid "Very sad..."
-msgstr ""
-
-msgid ""
-"We are very disappointed that you have decided not to support Ututi. We "
-"hope you will support us next time. Good luck!"
-msgstr ""
-
-msgid "back to the profile"
-msgstr ""
-
-msgid "Why we need support?"
-msgstr ""
-
-msgid ""
-"Ututi is just like wikipedia: every user can change, create, see and "
-"download the content for free.  But maintainance of servers, development "
-"and supervision requires recources.  So if Ututi has helped you pass an "
-"exam, write your thesis or you just like Ututi, we are asking you to "
-"contribute by making a small donation :)"
-msgstr ""
-
-msgid ""
-"If you donate at least 50 Lt, you will receive a gift &mdash; an Ututi "
-"T-shirt. You can donate this amount in parts."
-msgstr ""
-
-msgid "I want to donate:"
-msgstr ""
-
-msgid "5 litas"
-msgstr ""
-
-msgid "10 litas"
-msgstr ""
-
-msgid "50 litas"
-msgstr ""
-
-msgid "Delete this group?"
-msgstr ""
-
-msgid "Students groups that you teach to"
-msgstr ""
-
-msgid ""
-"Easy way to contact your groups by sending a <strong>group "
-"message</strong>."
-msgstr ""
-
-msgid "Add students groups"
-msgstr ""
-
-msgid "My courses:"
-msgstr ""
-
-msgid "add courses"
-msgstr ""
-
-msgid "Add courses you teach"
-msgstr ""
-
-msgid "Files upload"
-msgstr ""
-
-msgid ""
-"You will be able to upload course material, that will be accessable for "
-"everyone, who is following your course."
-msgstr ""
-
-msgid "Course discussions"
-msgstr ""
-
-msgid "Discuss course material and related subjects with your students."
-msgstr ""
-
-msgid "Automatic notifications"
-msgstr ""
-
-msgid ""
-"Ututi will automaticaly inform students and groups about changes in "
-"course material."
-msgstr ""
-
-msgid "Add your courses"
-msgstr ""
-
-msgid "Or browse subjects' catalog"
-msgstr ""
-
-msgid "Add:"
-msgstr ""
-
-msgid "Create wiki page"
-msgstr ""
-
-msgid "The subject is watched by:"
-msgstr ""
-
-#, python-format
-msgid "<span class='orange'>%(count)s</span> user"
-msgid_plural "<span class='orange'>%(count)s</span> users"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "<span class='orange'>%(count)s</span> group"
-msgid_plural "<span class='orange'>%(count)s</span> groups"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Student groups"
-msgstr ""
-
-msgid "add a group"
-msgstr ""
-
-msgid "Thank you for supporting Ututi!"
-msgstr ""
-
-msgid ""
-"You have just contributed to the development of Ututi! A medal, "
-"signifying your Ututi supporter status, should soon appear in your "
-"profile. Good luck continuing to use Ututi!"
-msgstr ""
-
-msgid "Write note title here"
-msgstr ""
-
-msgid ""
-"You need to be a member of a group or have subjects that you are studying"
-" to be able to quickly upload files."
-msgstr ""
-
-msgid ""
-"You or your group need to have subjects that you are studying to be able "
-"to quickly create wiki notes in them."
-msgstr ""
-
-msgid "Wiki note"
-msgstr ""
-
-msgid "Add a subject"
-msgstr ""
-
-msgid "You are not watching any subjects."
-msgstr ""
-
-msgid "Notification settings"
-msgstr ""
-
 msgid "back"
 msgstr ""
 
@@ -3821,9 +3600,9 @@ msgstr ""
 msgid ""
 "\n"
 "\n"
-"                        Should you not have received the code, please "
-"press \"Send code again\".\n"
-"                        Also don't forget to add Ututi (<a "
+"                      Should you not have received the code, please press"
+" \"Send code again\".\n"
+"                      Also don't forget to add Ututi (<a "
 "href=\"gg:5437377\">5437377</a>) to your friends!"
 msgstr ""
 
@@ -3941,6 +3720,24 @@ msgstr ""
 msgid "Show my profile to unregistered users and search engines"
 msgstr ""
 
+msgid "Ututi username"
+msgstr ""
+
+msgid ""
+"Setting Ututi username allows you to have a more personal URL of your "
+"Ututi profile page."
+msgstr ""
+
+#, python-format
+msgid "Your current public profile page URL is %(user_url)s."
+msgstr ""
+
+msgid "Your new url will be: "
+msgstr ""
+
+msgid "Your Ututi username"
+msgstr ""
+
 msgid "Picture"
 msgstr ""
 
@@ -3953,19 +3750,10 @@ msgstr ""
 msgid "Repeat the new password"
 msgstr ""
 
-msgid "Welcome to Ututi!"
+msgid "Edit a student group"
 msgstr ""
 
-msgid ""
-"At the moment You are not confirmed as a teacher. Our administrators have"
-" been notified and will verify You shortly. Please be patient. Meanwhile "
-"please tell us more about yourself."
-msgstr ""
-
-msgid "Your biography"
-msgstr ""
-
-msgid "Enter some facts from your biography"
+msgid "News feed settings"
 msgstr ""
 
 msgid "Forum posts"
@@ -4017,6 +3805,402 @@ msgid "New groups"
 msgstr ""
 
 msgid "Which events do You want to see in Your news feed?"
+msgstr ""
+
+msgid "What have I been doing?"
+msgstr ""
+
+msgid "You haven't contributed much, have you?"
+msgstr ""
+
+msgid ""
+"private file storage area for files that you don't want to share with "
+"outsiders."
+msgstr ""
+
+msgid "Find your group"
+msgstr ""
+
+msgid "a place to discuss subject related questions with students and teachers."
+msgstr ""
+
+msgid "Shared notes"
+msgstr ""
+
+msgid ""
+"create wiki notes collaboratively with your class-mates or take notes "
+"during the lecture and upload it directly to Ututi."
+msgstr ""
+
+msgid "Find your subjects"
+msgstr ""
+
+msgid "Invite your friends"
+msgstr ""
+
+msgid "Enter comma separated list of email addresses."
+msgstr ""
+
+msgid "Or use Facebook to invite your friends."
+msgstr ""
+
+msgid "Join the group"
+msgstr ""
+
+msgid "Features:"
+msgstr ""
+
+msgid "Group's email"
+msgstr ""
+
+msgid "Private discussions"
+msgstr ""
+
+msgid "Find and join your group or create a new one."
+msgstr ""
+
+msgid "Or browse group catalog"
+msgstr ""
+
+msgid "Choose your subjects"
+msgstr ""
+
+msgid "Find subjects in your university and start following them."
+msgstr ""
+
+msgid "Or create new subject"
+msgstr ""
+
+msgid ""
+"Share course material, create wiki notes and discuss with other subject "
+"followers."
+msgstr ""
+
+msgid "Fill your profile information"
+msgstr ""
+
+msgid "Tell some basic information about yourself by editing your profile."
+msgstr ""
+
+msgid "Edit profile"
+msgstr ""
+
+msgid "Welcome to Ututi"
+msgstr ""
+
+#, python-format
+msgid ""
+"Welcome to <strong>%(university)s</strong> private social networkcreated "
+"on <a href=\"%(url)s\">Ututi platform</a>. Here students and teachers can"
+" create groups online, use the mailinglist for communication and the file"
+" storage for sharing information."
+msgstr ""
+
+#, python-format
+msgid ""
+"Join %(university_link)s social network in Ututi, a system for exchanging"
+" study material and information."
+msgstr ""
+
+msgid "Invite your classmates to Ututi!"
+msgstr ""
+
+msgid "Join Ututi"
+msgstr ""
+
+msgid "notification settings"
+msgstr ""
+
+msgid "add subject"
+msgstr ""
+
+msgid "Show subjects from my groups"
+msgstr ""
+
+msgid "Very sad..."
+msgstr ""
+
+msgid ""
+"We are very disappointed that you have decided not to support Ututi. We "
+"hope you will support us next time. Good luck!"
+msgstr ""
+
+msgid "back to the profile"
+msgstr ""
+
+msgid "Why we need support?"
+msgstr ""
+
+msgid ""
+"Ututi is just like wikipedia: every user can change, create, see and "
+"download the content for free.  But maintainance of servers, development "
+"and supervision requires recources.  So if Ututi has helped you pass an "
+"exam, write your thesis or you just like Ututi, we are asking you to "
+"contribute by making a small donation :)"
+msgstr ""
+
+msgid ""
+"If you donate at least 50 Lt, you will receive a gift &mdash; an Ututi "
+"T-shirt. You can donate this amount in parts."
+msgstr ""
+
+msgid "I want to donate:"
+msgstr ""
+
+msgid "5 litas"
+msgstr ""
+
+msgid "10 litas"
+msgstr ""
+
+msgid "50 litas"
+msgstr ""
+
+msgid "Thank you for supporting Ututi!"
+msgstr ""
+
+msgid ""
+"You have just contributed to the development of Ututi! A medal, "
+"signifying your Ututi supporter status, should soon appear in your "
+"profile. Good luck continuing to use Ututi!"
+msgstr ""
+
+msgid "Write note title here"
+msgstr ""
+
+msgid ""
+"You need to be a member of a group or have subjects that you are studying"
+" to be able to quickly upload files."
+msgstr ""
+
+msgid ""
+"You or your group need to have subjects that you are studying to be able "
+"to quickly create wiki notes in them."
+msgstr ""
+
+msgid "Wiki note"
+msgstr ""
+
+msgid "Add a subject"
+msgstr ""
+
+msgid "You are not watching any subjects."
+msgstr ""
+
+msgid "Notification settings"
+msgstr ""
+
+msgid "Provide any personal information that you would like to begin with."
+msgstr ""
+
+msgid "Research interests"
+msgstr ""
+
+msgid ""
+"Include a brief summary of your interests. Cover past, current and future"
+" research plans."
+msgstr ""
+
+msgid "Use bulleted list if needed."
+msgstr ""
+
+msgid "Education"
+msgstr ""
+
+msgid ""
+"List dates and institutions where you have studied starting with most "
+"recent."
+msgstr ""
+
+msgid "Name of institution and degree title received"
+msgstr ""
+
+msgid "Work experience"
+msgstr ""
+
+msgid ""
+"List dates, job titles and names of organizations where you have worked "
+"starting with most recent."
+msgstr ""
+
+msgid "Job title and name of organization"
+msgstr ""
+
+msgid "Taught courses"
+msgstr ""
+
+msgid "List courses that you teach."
+msgstr ""
+
+msgid "Course title"
+msgstr ""
+
+msgid "Publications"
+msgstr ""
+
+msgid ""
+"List your publications that you consider most important, starting with "
+"most recent."
+msgstr ""
+
+msgid "Authors"
+msgstr ""
+
+msgid "Title of the Publication"
+msgstr ""
+
+msgid "Title of Journal"
+msgstr ""
+
+msgid ""
+"List languages that you speak, starting with ones that you are most "
+"fluent with."
+msgstr ""
+
+msgid "english"
+msgstr ""
+
+msgid "russian"
+msgstr ""
+
+msgid "german"
+msgstr ""
+
+msgid "Delete this group?"
+msgstr ""
+
+msgid "Students groups that you teach to"
+msgstr ""
+
+msgid ""
+"Easy way to contact your groups by sending a <strong>group "
+"message</strong>."
+msgstr ""
+
+msgid "Add students groups"
+msgstr ""
+
+msgid "My courses:"
+msgstr ""
+
+msgid "add courses"
+msgstr ""
+
+msgid "Add courses you teach"
+msgstr ""
+
+msgid "Files upload"
+msgstr ""
+
+msgid ""
+"You will be able to upload course material, that will be accessable for "
+"everyone, who is following your course."
+msgstr ""
+
+msgid "Course discussions"
+msgstr ""
+
+msgid "Discuss course material and related subjects with your students."
+msgstr ""
+
+msgid "Automatic notifications"
+msgstr ""
+
+msgid ""
+"Ututi will automaticaly inform students and groups about changes in "
+"course material."
+msgstr ""
+
+msgid "Add your courses"
+msgstr ""
+
+msgid "Or browse subjects' catalog"
+msgstr ""
+
+msgid "Add:"
+msgstr ""
+
+msgid "Create wiki page"
+msgstr ""
+
+msgid "The subject is watched by:"
+msgstr ""
+
+#, python-format
+msgid "<span class='orange'>%(count)s</span> user"
+msgid_plural "<span class='orange'>%(count)s</span> users"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "<span class='orange'>%(count)s</span> group"
+msgid_plural "<span class='orange'>%(count)s</span> groups"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "add a group"
+msgstr ""
+
+msgid "Your biography"
+msgstr ""
+
+msgid "Write down your biography and research interests"
+msgstr ""
+
+#, python-format
+msgid "This information will be displayed on your %(profile_page_url)s."
+msgstr ""
+
+msgid "profile page"
+msgstr ""
+
+msgid ""
+"Below you see a template that you can freely edit. Note that once your "
+"press \"Save\", it will become publicly available in your profile page."
+msgstr ""
+
+msgid "Edit your biography"
+msgstr ""
+
+msgid "Create your subjects"
+msgstr ""
+
+msgid "Upload course material"
+msgstr ""
+
+msgid "Edit subject notes"
+msgstr ""
+
+msgid "Notify your students"
+msgstr ""
+
+msgid "Discuss the subject"
+msgstr ""
+
+msgid "Find subjects that your teach or create them."
+msgstr ""
+
+msgid "Complete your profile page"
+msgstr ""
+
+msgid ""
+"Ututi provides you a profile page that other people can access online. To"
+" have a complete page, please tell us some bits about your biography and "
+"your research interests."
+msgstr ""
+
+msgid "View my public page"
+msgstr ""
+
+msgid "Add my biography"
+msgstr ""
+
+msgid ""
+"Ututi will keep track of your student groups and make it easy to reach "
+"them."
+msgstr ""
+
+msgid "Add student group"
 msgstr ""
 
 msgid "Select an image file on your computer:"
@@ -4262,6 +4446,11 @@ msgid "Trash"
 msgstr ""
 
 msgid "There are no deleted files."
+msgstr ""
+
+msgid ""
+"At the moment you are not confirmed as teacher. Our administrators have "
+"been notified and will verify you shortly."
 msgstr ""
 
 #, python-format
@@ -4704,9 +4893,6 @@ msgstr ""
 
 #, python-format
 msgid "Teacher's %(user)s public profile"
-msgstr ""
-
-msgid "Taught courses"
 msgstr ""
 
 #, python-format
