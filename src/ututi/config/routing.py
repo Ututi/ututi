@@ -280,6 +280,7 @@ def make_map(config):
     map.connect('/profile/edit', controller='profile', action='edit')
     map.connect('/profile/edit/photo', controller='profile', action='edit_photo')
     map.connect('/profile/edit/contacts', controller='profile', action='edit_contacts')
+    map.connect('/profile/edit/biography', controller='profile', action='edit_biography')
     map.connect('/profile/settings', controller='profile', action='login_settings')
     map.connect('/profile/settings/login', controller='profile', action='login_settings')
     map.connect('/profile/settings/wall', controller='profile', action='wall_settings')

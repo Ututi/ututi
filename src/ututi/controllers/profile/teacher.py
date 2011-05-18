@@ -74,27 +74,17 @@ class TeacherProfileController(ProfileControllerBase):
     def dashboard(self):
         return render('/profile/teacher/dashboard.mako')
 
-    def _set_settings_tabs(self, current_tab):
-        c.current_tab = current_tab
-        c.tabs = [
-            {'title': _("General information"),
-             'name': 'general',
-             'link': url(controller='profile', action='edit')},
-            {'title': _("Contacts"),
-             'name': 'contacts',
-             'link': url(controller='profile', action='edit_contacts')},
+    def _edit_profile_tabs(self):
+        tabs = ProfileControllerBase._edit_profile_tabs(self)
+        tabs.append(
             {'title': _("Biography"),
              'name': 'biography',
-             'link': url(controller='profile', action='edit_biography')},
-            {'title': _("Wall"),
-             'name': 'wall',
-             'link': url(controller='profile', action='wall_settings')},
-            {'title': _("Notifications"),
-             'name': 'notifications',
-             'link': url(controller='profile', action='notifications')}]
+             'link': url(controller='profile', action='edit_biography')})
+        return tabs
 
     def _edit_biography_form(self):
-        self._set_settings_tabs(current_tab='biography')
+        c.tabs = self._edit_profile_tabs()
+        c.current_tab = 'biography'
         return render('profile/teacher/edit_biography.mako')
 
     @ActionProtector("user")
@@ -135,7 +125,6 @@ class TeacherProfileController(ProfileControllerBase):
     @ActionProtector("teacher")
     @validate(schema=StudentGroupForm, form='add_student_group', on_get=False)
     def edit_student_group(self, id):
-
         try:
             group = TeacherGroup.get(int(id))
         except ValueError:

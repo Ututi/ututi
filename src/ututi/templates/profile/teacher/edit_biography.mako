@@ -22,8 +22,6 @@
   }
 </%def>
 
-<%def name="pagetitle()">${_("Your biography")}</%def>
-
 <div class="explanation-post-header">
   <h2>${_('Write down your biography and research interests')}</h2>
   <div class="tip">
