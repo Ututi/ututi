@@ -44,7 +44,6 @@ class ProfileForm(Schema):
                     UserLocationIntegrity())
 
     fullname = validators.String(not_empty=True)
-    site_url = validators.URL()
     url_name = URLNameValidator()
 
 
@@ -136,6 +135,7 @@ class ContactForm(Schema):
     email = All(TranslatedEmailValidator(not_empty=True, strip=True),
                 UniqueEmail(messages=msg, strip=True))
 
+    site_url = validators.URL()
     gadugadu_uin = validators.Int()
     phone_number = PhoneNumberValidator()
 

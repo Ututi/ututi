@@ -68,13 +68,13 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
     def _edit_profile_tabs(self):
         return [
-            {'title': _("General information"),
+            {'title': _("General"),
              'name': 'general',
              'link': url(controller='profile', action='edit')},
             {'title': _("Photo"),
              'name': 'photo',
              'link': url(controller='profile', action='edit_photo')},
-            {'title': _("Contacts"),
+            {'title': _("Contact"),
              'name': 'contacts',
              'link': url(controller='profile', action='edit_contacts')},
         ]
@@ -210,13 +210,10 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             'description': c.user.description,
             'profile_is_public': c.user.profile_is_public,
             'url_name': c.user.url_name,
-            }
+        }
         if c.user.location is not None:
-            location = dict([('location-%d' % n, tag)
-                             for n, tag in enumerate(c.user.location.hierarchy())])
-        else:
-            location = []
-        defaults.update(location)
+            for n, tag in enumerate(c.user.location.hierarchy()):
+                defaults['location-%d' % n] = tag
 
         return defaults
 
@@ -229,6 +226,31 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     def edit(self):
         return htmlfill.render(self._edit_profile_form(),
                                defaults=self._edit_form_defaults())
+
+    @validate(ProfileForm, form='_edit_profile_form', defaults=_edit_form_defaults)
+    @ActionProtector("user")
+    def update(self):
+        values = {
+            'fullname': None,
+            'description': None,
+            'profile_is_public': None,
+            'location': None,
+            'url_name': None,
+        }
+        values.update(self.form_result)
+
+        c.user.fullname = values['fullname']
+        if values['description'] is not None:
+            # this check is needed because description field
+            # is currently reused as teacher's biography and
+            # is not displayed for teacher in this form.
+            c.user.description = values['description']
+        c.user.profile_is_public = bool(values['profile_is_public'])
+        c.user.location = values['location']
+        c.user.url_name = values['url_name']
+        meta.Session.commit()
+        h.flash(_('Your profile was updated.'))
+        redirect(url(controller='profile', action='edit'))
 
     def _edit_contacts_form(self):
         c.tabs = self._edit_profile_tabs()
@@ -245,7 +267,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         c.tabs = self._edit_profile_tabs()
         c.current_tab ='photo'
         return render('profile/edit_photo.mako')
-
 
     @ActionProtector("user")
     @validate(LogoUpload, form='edit_photo')
@@ -335,38 +356,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             meta.Session.commit()
             return ''
 
-    @validate(ProfileForm, form='_edit_profile_form', defaults=_edit_form_defaults)
-    @ActionProtector("user")
-    def update(self):
-        fields = ('fullname', 'logo_upload', 'logo_delete', 'site_url',
-                  'description', 'profile_is_public', 'location', 'url_name')
-        values = {}
-        for field in fields:
-            values[field] = self.form_result.get(field)
-
-        c.user.fullname = values['fullname']
-        c.user.site_url = values['site_url']
-        if values['description'] is not None:
-            # this check is needed because description field
-            # is currently reused as teacher's biography and
-            # is not displayed for teacher in this form.
-            c.user.description = values['description']
-        tag = values.get('location', None)
-        c.user.profile_is_public = bool(values['profile_is_public'])
-        c.user.location = tag
-        c.user.url_name = values['url_name']
-
-        if values['logo_delete'] == 'delete' and c.user.logo is not None:
-            c.user.logo = None
-
-        if values['logo_upload'] is not None and values['logo_upload'] != '':
-            logo = values['logo_upload']
-            c.user.logo = logo.file.read()
-
-        meta.Session.commit()
-        h.flash(_('Your profile was updated.'))
-        redirect(url(controller='profile', action='edit'))
-
     @ActionProtector("user")
     def confirm_emails(self):
         emails = request.POST.getall('email')
@@ -409,7 +398,11 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     @validate(ContactForm, form='_edit_contacts_form', defaults=_edit_form_defaults)
     @ActionProtector("user")
     def update_contacts(self):
+        # TODO: this should be refactored into separate actions
         if hasattr(self, 'form_result'):
+            # site url
+            c.user.site_url = self.form_result['site_url']
+
             if self.form_result['confirm_email']:
                 h.flash(_('Confirmation message sent. Please check your email.'))
                 email_confirmation_request(c.user, c.user.emails[0].email)

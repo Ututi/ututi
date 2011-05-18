@@ -471,22 +471,6 @@ input {
         margin-top: -1px;
     }
 
-    .new-style-form span.field-status {
-        display: block;
-        margin-top: 2px;
-        /* should attract attention */
-        color: #d45500;
-        font-size: 10px;
-    }
-
-    .new-style-form span.field-status.confirmed {
-        /* should bring peace  */
-        color: #666;
-        background: url(img/icons/tick_10.png) no-repeat left center;
-        padding-left: 12px;
-        font-style: italic;
-    }
-
 /* INLINE FORMS
  */
 

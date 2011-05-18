@@ -6,14 +6,11 @@
   .left-right {
     margin-top: 20px;
   }
-  .no-top-margin {
-    margin-top: 0;
-  }
 </%def>
 
 <div class="left-right">
   <div class="left">
-    <div class="explanation-post-header no-top-margin">
+    <div class="explanation-post-header" style="margin-top:0">
       <h2>${_('Change password')}</h2>
       <p class="tip">
         ${_("To change your password, type your current password and repeat new password twice in the form below.")}
@@ -27,7 +24,7 @@
     </form>
   </div>
   <div class="right">
-    <div class="explanation-post-header no-top-margin">
+    <div class="explanation-post-header" style="margin-top:0">
       <h2>${_('Recover password')}</h2>
       <p class="tip">
         ${_('In case you forgot your password, use the button below to recover it.')}
