@@ -10,7 +10,7 @@ from binascii import a2b_base64, b2a_base64
 import binascii
 import hashlib
 from urlparse import urlparse
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from ututi.model.util import logo_property, read_facebook_logo
 from ututi.model import meta
@@ -495,7 +495,15 @@ class User(Author):
 
     def is_freshman(self):
         if not hasattr(self, '_is_freshman'):
-            self._is_freshman = len(user_done_items(self)) < 3
+            done = user_done_items(self)
+            self._is_freshman = True
+            # more than tree actions complete
+            if len(done) >= 3:
+                self._is_freshman = False
+            # more than two actions + more than two weeks
+            if len(done) >= 2 and \
+                self.accepted_terms < datetime.now() - timedelta(weeks=2):
+                self._is_freshman = False
         return self._is_freshman
 
 

@@ -391,3 +391,26 @@ We will test this behavior by removing profile information:
 
     >>> user.getLink('Get started')
     <Link text='Get started' url='http://localhost/home/start'>
+
+If user has been using Ututi for more than two weeks, and has completed
+at least two actions, then "Get started" page should also not be shown.
+This is a bit hacky, but we will want to change user's registration time
+to test that:
+
+    >>> from datetime import timedelta
+    >>> from ututi.model import meta
+    >>> from ututi.model.users import User
+    >>> u = User.get_global('user@example.com')
+    >>> u.accepted_terms -= timedelta(weeks=2, seconds=1)
+    >>> meta.Session.commit()
+
+    >>> user.click('Home')
+    >>> user.url
+    'http://localhost/home/feed'
+
+The "Get started" menu item is removed as well:
+
+    >>> user.getLink('Get started')
+    Traceback (most recent call last):
+    ...
+    LinkNotFoundError
