@@ -59,7 +59,7 @@ button#add-student-group {
   </div>
   <div class="step ${'complete' if 'biography' in done else ''}">
     <div class="heading">
-      <span class="number">2</span>
+      <span class="number">3</span>
       <span class="title">${_("Complete your profile page")}</span>
     </div>
     <div class="content">
@@ -68,9 +68,9 @@ button#add-student-group {
             "To have a complete page, please tell us some bits about your biography and your research interests.")}
       </p>
       <a class="forward-link" id="view-page-link" href="${c.user.url()}">
-        ${_("View my public page")}
+        ${_("View profile page")}
       </a>
-      ${h.button_to(_("Add my biography"), url(controller='profile', action='edit_biography'),
+      ${h.button_to(_("Add biography"), url(controller='profile', action='edit_biography'),
                     method='GET', class_='dark add inline')}
     </div>
   </div>

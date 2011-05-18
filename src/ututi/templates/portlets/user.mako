@@ -320,7 +320,7 @@
     <%def name="header()">
       ${_("My profile page")}
     </%def>
-    ${h.button_to(_("Edit my profile"), url(controller='profile', action='edit'),
+    ${h.button_to(_("Edit profile"), url(controller='profile', action='edit'),
                   method='GET', class_='dark edit')}
     <a class="forward-link" id="view-page-link" href="${c.user.url()}">
       ${_("View my profile page")}
