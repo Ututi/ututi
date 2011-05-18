@@ -93,7 +93,7 @@ subject-search-form input,
       <p>${_("Find subjects in your university and start following them.")}</p>
       <form id="subject-search-form" action="${c.user.location.url(action='catalog', obj_type='subject')}" method="POST">
         <input type="text" name="text" />
-        ${h.input_submit('Search', '', class_='inline')}
+        ${h.input_submit(_('Search'), '', class_='inline')}
       </form>
       <div class="alternative-link">
         <a href="${url(controller='subject', action='add')}">
