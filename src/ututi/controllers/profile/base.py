@@ -74,7 +74,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             {'title': _("Photo"),
              'name': 'photo',
              'link': url(controller='profile', action='edit_photo')},
-            {'title': _("Contact"),
+            {'title': _("Contacts"),
              'name': 'contacts',
              'link': url(controller='profile', action='edit_contacts')},
         ]
