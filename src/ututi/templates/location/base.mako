@@ -19,10 +19,9 @@
   ${location_groups_portlet()}
 %else:
   ${location_logo_portlet()}
+  ${navigation_portlet(c.menu_items, c.current_menu_item)}
   ${location_register_portlet()}
   ${location_register_teacher_portlet()}
-  ${navigation_portlet(c.menu_items, c.current_menu_item)}
-  ${location_info_portlet()}
   ${about_ututi_portlet()}
   ${create_network_portlet()}
 %endif
@@ -36,15 +35,15 @@
   ${c.location.title}
 </%def>
 
-<%def name="pageheader()">
-  ${self.pagetitle()}
-</%def>
-
 <%def name="css()">
   ${parent.css()}
 
-  h1.underline {
+  h1.page-title {
     margin-bottom: 2px; /* means we show breadcrumbs below */
+  }
+
+  h1.page-title.underline {
+    margin-bottom: 15px; /* reset bottom margin */
   }
 
   ul#breadcrumbs {
@@ -54,7 +53,13 @@
 
   ul#breadcrumbs li {
     display: inline;
-    margin-right: 20px;
+    margin-right: 2px;
+    padding-left: 12px;
+    background: url("/img/icons.com/arrow_right.png") no-repeat left center;
+  }
+  ul#breadcrumbs li.first {
+    padding-left: 0;
+    background: none;
   }
 </%def>
 
@@ -62,21 +67,23 @@
 <%doc>Only show breadcrumbs if we're not at root.</%doc>
 %if c.location.parent:
 <ul id="breadcrumbs">
-  %for crumb in c.breadcrumbs:
-  <li>
-    <a href="${crumb['link']}">${crumb['full_title']}</a>
-  </li>
+  %for n, crumb in enumerate(c.breadcrumbs, 1):
+    <li class="${'first' if n == 1 else ''}">
+      <a href="${crumb['link']}">${crumb['full_title']}</a>
+    </li>
   %endfor
 </ul>
 %endif
 </%def>
 
-<% breadcrumbs_block = capture(self.breadcrumbs).strip() %>
+<%def name="pageheader()">
+  <% breadcrumbs_block = capture(self.breadcrumbs).strip() %>
+  <h1 class="page-title ${'underline' if not breadcrumbs_block else ''}" >
+    ${self.pagetitle()}
+  </h1>
+  ${h.literal(breadcrumbs_block)}
+</%def>
 
-<h1 class="page-title ${'underline' if breadcrumbs_block else ''}" >
-  ${self.pageheader()}
-</h1>
-
-${h.literal(breadcrumbs_block)}
+${self.pageheader()}
 
 ${next.body()}

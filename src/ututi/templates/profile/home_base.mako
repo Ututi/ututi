@@ -11,10 +11,10 @@
 </%def>
 
 <%def name="portlets_right()">
+  ${about_portlet()}
   %if c.user.is_teacher:
   ${profile_page_portlet()}
   %endif
-  ${about_portlet()}
   ${todo_portlet()}
   ${invite_friends_portlet()}
   ${users_online_portlet()}

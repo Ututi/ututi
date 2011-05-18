@@ -118,10 +118,12 @@
 %endif
 </%def>
 
-<%doc>Don't show breadcrumbs in this view.</%doc>
-<%def name="breadcrumbs()"></%def>
-
-<div class="sub-title">${_('Private social network')}</div>
+<%def name="pageheader()">
+  <h1 class="page-title">
+    ${self.pagetitle()}
+  </h1>
+  <div class="sub-title">${_('Private social network')}</div>
+</%def>
 
 <div class="clearfix">
   <img id="social-network" src="/img/social_network.png" alt="Social network" />

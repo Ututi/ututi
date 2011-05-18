@@ -9,9 +9,7 @@
   ${c.location.title} &ndash; ${_('Teachers')}
 </%def>
 
-<%def name="pageheader()">
-    ${_('Teachers')}
-</%def>
+<%def name="pagetitle()">${_('Teachers')}</%def>
 
 <%def name="search_results(results, search_query=None)">
   <%search:search_results results="${results}" controller='structureview' action='catalog_js' display="${self.teacher_snippet}">
