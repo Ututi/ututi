@@ -37,7 +37,7 @@
   #user-information .user-info {
     float: left;
     margin-right: 20px;
-    max-width: 400px;
+    max-width: 390px;
   }
   #user-information .about-self {
     margin-top: 10px;
