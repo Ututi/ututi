@@ -501,7 +501,7 @@ class User(Author):
             if len(done) >= 3:
                 self._is_freshman = False
             # more than two actions + more than two weeks
-            if len(done) >= 2 and \
+            if self.accepted_terms and len(done) >= 2 and \
                 self.accepted_terms < datetime.now() - timedelta(weeks=2):
                 self._is_freshman = False
         return self._is_freshman
