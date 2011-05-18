@@ -1,5 +1,6 @@
 <%inherit file="/profile/get_started_base.mako" />
 <%namespace name="b" file="/sections/standard_blocks.mako" import="title_box"/>
+<%namespace name="location" file="/widgets/ulocationtag.mako" />
 
 <%def name="css()">
 ${parent.css()}
@@ -46,15 +47,11 @@ button#add-student-group {
     </%b:title_box>
     <div class="content">
       <p>${_("Find subjects that your teach or create them.")}</p>
-      <form id="subject-search-form" action="${c.user.location.url(action='catalog', obj_type='subject')}" method="POST">
-        <input type="text" name="text" />
-        ${h.input_submit('Search', '', class_='inline')}
+      <form id="subject-search-form" action="${url(controller='subject', action='lookup')}" method="POST">
+        <input type="text" name="title" />
+        ${location.hidden_fields(c.user.location)}
+        ${h.input_submit(_('Create'), '', class_='inline')}
       </form>
-      <div class="alternative-link">
-        <a href="${url(controller='subject', action='add')}">
-          ${_("Or create new subject")}
-        </a>
-      </div>
     </div>
   </div>
   <div class="step ${'complete' if 'biography' in done else ''}">

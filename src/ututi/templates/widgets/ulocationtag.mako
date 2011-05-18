@@ -38,6 +38,12 @@
 </div>
 </%def>
 
+<%def name="hidden_fields(location)">
+%for n, tag in enumerate(location.hierarchy()):
+  <input type="hidden" name="location-${n}" value="${tag}" />
+%endfor
+</%def>
+
 <%def name="location_widget(number, values=[], titles=[], add_titles=[], add_new=False, label_class='')">
 <%
    if not hasattr(self, 'newlocationwidget_id'):
