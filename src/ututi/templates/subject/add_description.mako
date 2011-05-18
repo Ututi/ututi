@@ -28,7 +28,7 @@ ${_('Enter subject details')}
   <input type="hidden" name="location-1" value="" />
 
   %if c.user.is_teacher:
-    <input type="hidden" name="lecturer" value="${c.user.fullname}" />
+    <input type="hidden" name="lecturer" value="" />
   %else:
     ${h.input_line('lecturer', _('Lecturer:'))}
   %endif
