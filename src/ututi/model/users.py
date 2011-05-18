@@ -773,12 +773,11 @@ class UserRegistration(object):
         emails = [self.email, self.openid_email, self.facebook_email]
         emails = set(map(lower, filter(bool, emails)))
         user.emails = [Email(email, confirmed=True) for email in emails]
-        user.accepted_terms = datetime.utcnow()
         user.openid = self.openid
         user.facebook_id = self.facebook_id
         user.logo = self.logo
-        self.user = user # store reference
         user.accepted_terms = datetime.utcnow()
+        self.user = user # store reference
 
         return user
 
