@@ -140,4 +140,3 @@
 %if c.departments:
 ${university_box(c.departments, _("Departments:"))}
 %endif
-
