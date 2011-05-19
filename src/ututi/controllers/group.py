@@ -1098,7 +1098,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
             meta.Session.commit()
         if request.params.get('ajax'):
             return 'OK'
-        redirect(url(controller='profile', action='notifications'))
+        redirect(url(controller='profile', action='notification_settings'))
 
     @validate(schema=GroupLiveSearchForm)
     def js_group_search(self):

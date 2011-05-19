@@ -9,4 +9,4 @@ ${section['title']} (${section['url']})
 %endfor
 
 ${_('If you want to stop getting these emails - you can change your subscription settings in your notification settings page (%(url)s).') % dict(
-    url=url(controller='profile', action='notifications', qualified=True)) }
+    url=url(controller='profile', action='notification_settings', qualified=True)) }

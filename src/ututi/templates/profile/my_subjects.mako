@@ -53,7 +53,7 @@ ${parent.head_tags()}
     <h2 class="portletTitle bold">
       ${_('Subjects')}
       <span class="right_arrow verysmall normal normal-font">
-        <a href="${url(controller='profile', action='notifications')}"> ${_('notification settings')}</a>
+        <a href="${url(controller='profile', action='notification_settings')}"> ${_('notification settings')}</a>
       </span>
     </h2>
     <span class="group-but">

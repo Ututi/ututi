@@ -74,7 +74,7 @@ ${parent.head_tags()}
 </ul>
 %if c.watched_subjects:
   <div style="padding: 5px;">
-    <a class="forward-link-to" href="${url(controller='profile', action='notifications')}"> ${_('Notification settings')}</a>
+    <a class="forward-link-to" href="${url(controller='profile', action='notification_settings')}"> ${_('Notification settings')}</a>
   </div>
 %endif
 

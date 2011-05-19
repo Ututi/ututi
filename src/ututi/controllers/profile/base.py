@@ -393,7 +393,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             meta.Session.commit()
         if request.params.get('ajax'):
             return 'OK'
-        redirect(url(controller='profile', action='notifications'))
+        redirect(url(controller='profile', action='notification_settings'))
 
     @validate(ContactForm, form='_edit_contacts_form', defaults=_edit_form_defaults)
     @ActionProtector("user")
