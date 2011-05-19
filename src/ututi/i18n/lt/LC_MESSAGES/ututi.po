@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-05-18 18:58+0300\n"
-"Last-Translator: Jaro <jaro@akl.lt>\n"
+"PO-Revision-Date: 2011-05-19 18:30+0300\n"
+"Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -432,7 +432,7 @@ msgid "Message to Ututi.com team"
 msgstr "Žinutė Ututi.com komandai"
 
 msgid "Your message was succesfully sent."
-msgstr ""
+msgstr "Jūsų žinutė sėkmingai išsiųsta."
 
 msgid "You have to be logged in to download a file!"
 msgstr "Jei nori parsisiųsti failą, teks prisijungti."
@@ -719,23 +719,32 @@ msgstr "Grupė nenurodyta"
 msgid "Wiki page created."
 msgstr "Wiki užrašai sukurti"
 
-msgid "Search"
-msgstr "Paieška"
-
-msgid "General information"
-msgstr "Bendra informacija"
-
-msgid "Contacts"
-msgstr "Kontaktai"
-
-msgid "Wall"
-msgstr "Siena"
+msgid "Login"
+msgstr "Prisijungti"
 
 msgid "Notifications"
 msgstr "Priminimai"
 
+msgid "Photo"
+msgstr "Nuotrauka"
+
+msgid "Contacts"
+msgstr "Kontaktai"
+
+msgid "Search"
+msgstr "Paieška"
+
 msgid "Your wall settings have been updated."
 msgstr "Tavo sienos nustatymai pakeisti"
+
+msgid "Your profile was updated."
+msgstr "Tavo profilis sėkmingai atnaujintas!"
+
+msgid "Your photo successfully updated."
+msgstr "Jūsų nuotrauka sėkmingai atnaujinta."
+
+msgid "Your photo was removed."
+msgstr "Jūsų nuotrauka pašalinta."
 
 msgid "Your Google account has been unlinked."
 msgstr "Google paskyra atsieta."
@@ -746,8 +755,11 @@ msgstr "Facebook paskyra atsieta."
 msgid "Your password has been changed!"
 msgstr "Tavo slaptažodis sėkmingai pakeistas!"
 
-msgid "Your profile was updated."
-msgstr "Tavo profilis sėkmingai atnaujintas!"
+#, python-format
+msgid "Password recovery email sent to %(user_email)s. Please check your inbox."
+msgstr ""
+"Slaptažodžio atkūrimo informacija nusiųsta į %(user_email)s. "
+"Pasitikrinkite savo pašto dėžutę."
 
 msgid "Confirmation message sent. Please check your email."
 msgstr "Patvirtinimo žinutė išsiųsta. Pasitikrinkite savo el. paštą."
@@ -759,16 +771,13 @@ msgstr "Tavo el. pašto adresas %s patvirtintas, ačiū."
 msgid "Could not confirm email: invalid confirmation key."
 msgstr "Nepavyko patvirtinti adreso: neteisingas patvirtinimo raktas."
 
-msgid "Your university information has been updated."
-msgstr "Tavo universiteto informacija atnaujinta."
-
 #, python-format
 msgid "Invalid email addresses: %(email_list)s"
 msgstr "Neteisingi el. pašto adresai: %(email_list)s"
 
 #, python-format
 msgid "These addresses are already registered in Ututi: %(email_list)s"
-msgstr ""
+msgstr "Šie el. pašto adresai jau užregistruoti Ututi: %(email_list)s"
 
 #, python-format
 msgid "Invitations sent to %(email_list)s"
@@ -914,13 +923,13 @@ msgid "Find / create your subjects"
 msgstr "Rasti / sukurti akademinius dalykus"
 
 msgid "Fill profile information"
-msgstr ""
+msgstr "Užpildykite profilio informaciją"
 
 msgid "Add your biography"
-msgstr ""
+msgstr "Pridėkite savo biografiją"
 
 msgid "Add your student groups"
-msgstr ""
+msgstr "Pridėkite savo studentų grupes"
 
 #, python-format
 msgid "Ututi registration code: %s"
@@ -931,9 +940,6 @@ msgstr "Tokia šalis neegzistuoja."
 
 msgid "Please select country."
 msgstr "Pasirinkti šalį."
-
-msgid "Invalid password"
-msgstr "Netinkamas slaptažodis"
 
 msgid "Location does not exist."
 msgstr "Tokios vietos nėra."
@@ -960,6 +966,8 @@ msgid ""
 "The field may only contain letters, numbers and the characters + - _ and "
 ". (dot)"
 msgstr ""
+"Šiame lauke gali  būti tik raidės, skaitmenys ir simboliai +, -, _ bei . "
+"(taškas)"
 
 msgid "The field may only contain letters, numbers and the characters + - _"
 msgstr ""
@@ -970,12 +978,14 @@ msgid "The tag is too long."
 msgstr "Žyma per ilga."
 
 msgid "This username is used by another user."
-msgstr ""
+msgstr "Šis vartotojo vardas jau užimtas."
 
 msgid ""
 "The field may only contain lowercase letters, numbers and the characters "
 "+ - _ and . (dot)"
 msgstr ""
+"Šiame lauke gali  būti tik mažosios raidės, skaitmenys ir simboliai +, -,"
+" _ bei . (taškas)"
 
 msgid "Please enter an email address"
 msgstr "Reikalingas el. pašto adresas"
@@ -1384,9 +1394,6 @@ msgstr "Pirmąkart Ututi?"
 msgid "Sign in with your university email"
 msgstr "Prisijungti naudojant akademinį el. pašto adresą"
 
-msgid "Login"
-msgstr "Prisijungti"
-
 msgid "Email address:"
 msgstr "El. pašto adresas:"
 
@@ -1429,8 +1436,11 @@ msgstr "Paieškos tekstas"
 msgid "search_"
 msgstr "Ieškoti"
 
-msgid "Settings"
-msgstr "Nustatymai"
+msgid "Account settings"
+msgstr "Paskyros nuostatos"
+
+msgid "Edit profile"
+msgstr "Redaguoti profilį"
 
 msgid "Public profile"
 msgstr "Viešas profilis"
@@ -1681,13 +1691,13 @@ msgstr ""
 "naudotis Ututi (šoninių blokelių meniu)."
 
 msgid "Overview:"
-msgstr ""
+msgstr "Apžvalga:"
 
 msgid "About Ututi"
 msgstr "Apie Ututi"
 
 msgid "Contact us using this form"
-msgstr ""
+msgstr "Susisiekite su mumis naudodamiesi šia forma"
 
 msgid "Name:"
 msgstr "Vardas:"
@@ -1773,13 +1783,13 @@ msgid "Ututi controls:"
 msgstr "Ututi valdymas:"
 
 msgid "uBooks controls:"
-msgstr ""
+msgstr "uBooks įrankiai:"
 
 msgid "University administration:"
 msgstr "Universiteto administracija:"
 
 msgid "Standard UI patterns/objects:"
-msgstr ""
+msgstr "Standartiniai UI principai ir objektai:"
 
 #, python-format
 msgid "found %(count)s file"
@@ -1875,7 +1885,7 @@ msgstr[1] "rastos %(count)s grupės"
 msgstr[2] "rasta %(count)s grupių"
 
 msgid "I18n texts"
-msgstr ""
+msgstr "I18n tekstai"
 
 msgid "Text"
 msgstr "Tekstas"
@@ -3147,19 +3157,23 @@ msgid "Private social network"
 msgstr "Privatus socialinis tinklas"
 
 msgid "Academic resources"
-msgstr ""
+msgstr "Akademiniai resursai"
 
 msgid "Add your study material (notes and files)."
-msgstr ""
+msgstr "Pridėkite studijų medžiagą (užrašus bei failus)"
 
 msgid "Student groups"
 msgstr "Studentų grupės"
 
 msgid "Create and join private or public groups to communicate and collaborate."
 msgstr ""
+"Sukurkite arba prisijunkite prie privačių bei viešųjų grupių. Bendraukite"
+" ir mokykitės kartu."
 
 msgid "Share knowledge and discuss academic subjects with students and teachers."
 msgstr ""
+"Dalinkitės akademinėmis žiniomis ir diskutuokite su studentais bei "
+"dėstytojais."
 
 msgid "Departments:"
 msgstr "Fakultetai:"
@@ -3213,38 +3227,47 @@ msgid ""
 msgstr "Privatūs failais, kurių nenorite viešinti pašaliniams."
 
 msgid "Join as student"
-msgstr ""
+msgstr "Studento registracija"
 
 msgid "Enter your email"
-msgstr ""
+msgstr "Jūsų el. pašto adresas"
 
 msgid "Ututi student accounts:"
-msgstr ""
+msgstr "Ututi studentų paskyros:"
 
 msgid ""
 "<strong>Join or create your group</strong> for easy communication and "
 "collaboration with your classmates."
 msgstr ""
+"<strong>Prisijunk arba sukur savo grupę</strong> &ndash; bendrauk ir "
+"dalinkis su savo grupiokais."
 
 msgid ""
 "<strong>Start following courses</strong> that interest you. Find course "
 "material and receive notifications about course related updates."
 msgstr ""
+"<strong>Pradėk stebėti dalykus</strong>, kurie tave domina. Ten rasi "
+"mokymosi medžiagą bei galėsi gauti kurso naujienas."
 
 msgid ""
 "<strong>Upload files</strong> to share them with your classmates. Files "
 "uploaded to course catalog will be available to everyone who is "
 "interested in the subject."
 msgstr ""
+"<strong>Kelk failus</strong>, pradėk dalintis su savo grupiokais. Failai "
+"įkelti į dalyko katalogą bus prieinami visiems, besidomintiems šiuo "
+"dalyku."
 
 msgid ""
 "<strong>Create wiki notes</strong> and edit them together with other "
 "people on the network. You can even take notes to Ututi during your "
 "lectures."
 msgstr ""
+"<strong>Kurk wiki užrašus</strong> ir redaguok juos kartu su kitais "
+"bendruomenės nariais. Tu gali konspektuoti paskaitų metu tiesiai į Ututi!"
 
 msgid "Join as teacher"
-msgstr ""
+msgstr "Dėstytojo registracija"
 
 msgid "Ututi teacher accounts:"
 msgstr "Ututi dėstytojo paskyra:"
@@ -3253,21 +3276,29 @@ msgid ""
 "<strong>Fill in your biography</strong> to represent yourself to other "
 "members of your academic community."
 msgstr ""
+"<strong>Užpildykite savo biografiją</strong> &ndash; pristatykite save "
+"kitiems akademinės bendruomenės nariams."
 
 msgid ""
 "<strong>Upload course material.</strong> It will become immediately "
 "available to everyone who is following your course."
 msgstr ""
+"<strong>Įkelkite kurso medžiagą.</strong> Apie ją iš karto sužinos visi "
+"Ututi nariai, stebintys jūsų dėstomą dalyką."
 
 msgid ""
 "<strong>Select and organize your publications</strong> that will be "
 "displayed on your Ututi profile page."
 msgstr ""
+"<strong>Pateikite savo publikacijų sąrašą</strong>, kuris bus "
+"vaizduojamas jūsų svetainėje."
 
 msgid ""
 "<strong>Contact your followers</strong> by sending group or private "
 "messages, or firing discussions on the course wall."
 msgstr ""
+"<strong>Bendraukite su savo studentais</strong> siųsdami grupės arba "
+"privačias žinutes, arba pradėdami diskusiją dalyko puslapyje."
 
 msgid "Can't find your subject?"
 msgstr "Nerandate savo dalyko?"
@@ -3708,7 +3739,7 @@ msgid "Lect."
 msgstr "Dėst."
 
 msgid "Create your own social network"
-msgstr ""
+msgstr "Sukurkite savo socialinį tinklą"
 
 msgid "About Ututi:"
 msgstr "Apie Ututi:"
@@ -3718,9 +3749,13 @@ msgid ""
 " find online groups, teacher profiles and course pages. Ututi is a tool "
 "to share information and build your online academic community."
 msgstr ""
+"Ututi yra įrankis jūsų universiteto socialiniam tinklui. Čia jūs rasite "
+"studentų grupes, dėstytojų bei kursų puslapius. Ututi palengvina "
+"dalinimąsi informacija ir padeda suburti universiteto akademinę "
+"bendruomenę."
 
 msgid "Learn more..."
-msgstr ""
+msgstr "Sužinoti daugiau..."
 
 msgid "People online:"
 msgstr "Prisijungę nariai:"
@@ -3764,7 +3799,7 @@ msgid "Get started"
 msgstr "Pradžia"
 
 msgid "Teacher dashboard"
-msgstr ""
+msgstr "Dėstytojo įrankinė"
 
 msgid "University feed"
 msgstr "Universiteto naujienos"
@@ -3832,13 +3867,10 @@ msgid "Related members:"
 msgstr "Susiję nariai:"
 
 msgid "My profile page"
-msgstr ""
-
-msgid "Edit my profile"
-msgstr ""
+msgstr "Mano svetainė"
 
 msgid "View my profile page"
-msgstr ""
+msgstr "Peržiūrėti mano svetainę"
 
 msgid "Friends of ututi"
 msgstr "Ututi draugai"
@@ -3872,10 +3904,19 @@ msgid "Add a student group"
 msgstr "Pridėti studentų grupę"
 
 msgid "Universities"
-msgstr ""
+msgstr "Universitetai"
+
+msgid "Edit your profile"
+msgstr "Profilio informacija"
 
 msgid "back"
-msgstr ""
+msgstr "grįžti"
+
+msgid "Contact information"
+msgstr "Kontaktinė informacija"
+
+msgid "Be findable."
+msgstr "Būkite randamas."
 
 msgid "Your GG number"
 msgstr "Tavo GG numeris"
@@ -3889,11 +3930,16 @@ msgstr "Įveskite kodą, kurį gavote savo GG"
 msgid ""
 "\n"
 "\n"
-"                      Should you not have received the code, please press"
-" \"Send code again\".\n"
-"                      Also don't forget to add Ututi (<a "
+"                    Should you not have received the code, please press "
+"\"Send code again\".\n"
+"                    Also don't forget to add Ututi (<a "
 "href=\"gg:5437377\">5437377</a>) to your friends!"
 msgstr ""
+"\n"
+"\n"
+"Jei negavote kodo, paspauskite \"Siųsti kodą dar kartą\". Taip pat "
+"nepamirškite įtraukti Ututi (<a href=\"gg:5437377\">5437377</a>) į savo "
+"draugų sąrašą!"
 
 msgid "Submit code"
 msgstr "Patvirtinti"
@@ -3934,8 +3980,210 @@ msgstr "Gauti patvirtinimo laišką"
 msgid "Email is not confirmed"
 msgstr "El. pašto adresas nepatvirtintas"
 
-msgid "Link with Google and Facebook"
-msgstr "Susieti paskyrą su Google ir Facebook"
+msgid "Address of your website or blog"
+msgstr "Nuosavo puslapio arba blog'o adresas"
+
+msgid "Your profile photo"
+msgstr "Jūsų profilio nuotrauka"
+
+msgid "Change or remove your profile photo."
+msgstr "Pakeiskite arba pašalinkite savo profilio nuotrauką."
+
+msgid "Change photo"
+msgstr "Keisti nuotrauką"
+
+msgid "General information"
+msgstr "Bendra informacija"
+
+msgid "Edit your general information below."
+msgstr "Įveskite savo bendrinę informaciją žemiau."
+
+msgid "About yourself"
+msgstr "Šiek tiek informacijos apie save"
+
+msgid "Profile page"
+msgstr "Profilio puslapis"
+
+msgid ""
+"You can set a Ututi username to have a more personal URL of your profile "
+"page."
+msgstr ""
+"Jūs galite nustatyti savo Ututi vartotojo vardą ir turėti labiau "
+"asmenišką profilio svetainės adresą."
+
+#, python-format
+msgid "Your current public profile page is %(user_url)s."
+msgstr ""
+
+msgid "Your new url will be: "
+msgstr ""
+
+msgid "Ututi username"
+msgstr "Ututi vartotojo vardas"
+
+msgid "Show my profile to unregistered users and search engines"
+msgstr "Rodyti profilį neregistruotiems naudotojams ir paieškos varikliams"
+
+msgid "Edit a student group"
+msgstr "Redaguoti grupę"
+
+msgid "What have I been doing?"
+msgstr "Ir ką gi aš nuveikiau?"
+
+msgid "You haven't contributed much, have you?"
+msgstr "Ne itin daug nuveikta?.."
+
+msgid ""
+"private file storage area for files that you don't want to share with "
+"outsiders."
+msgstr "privati saugykla failams, kuriais nenorite dalintis su pašaliniais."
+
+msgid "Find your group"
+msgstr ""
+
+msgid "a place to discuss subject related questions with students and teachers."
+msgstr ""
+"vieta diskutuoti su dalyku susijusiomis temomis su studentais ir "
+"dėstytojais."
+
+msgid "Shared notes"
+msgstr "Užrašai, kuriais pasidalinta"
+
+msgid ""
+"create wiki notes collaboratively with your class-mates or take notes "
+"during the lecture and upload it directly to Ututi."
+msgstr ""
+"kurkite Wiki užrašus bendrai su kitais grupės nariais arba konspektuokite"
+" paskaitos medžiagą tiesiai į Ututi."
+
+msgid "Find your subjects"
+msgstr ""
+
+msgid "News feed settings"
+msgstr "Naujienų nustatymai"
+
+msgid "Invite your friends"
+msgstr ""
+
+msgid "Enter comma separated list of email addresses."
+msgstr ""
+
+msgid "Or use Facebook to invite your friends."
+msgstr ""
+
+msgid "Join the group"
+msgstr "Prisijungti prie grupės"
+
+msgid "Features:"
+msgstr "Galimybės"
+
+msgid "Group's email"
+msgstr "Grupės el. paštas"
+
+msgid "Private discussions"
+msgstr "Privačios diskusijos"
+
+msgid "Find and join your group or create a new one."
+msgstr "Surask ir prisijunk prie savo grupės arba sukurk naują."
+
+msgid "Or browse group catalog"
+msgstr "Arba peržiūrėk grupių katalogą."
+
+msgid "Choose your subjects"
+msgstr "Pasirink savo dalykus"
+
+msgid "Find subjects in your university and start following them."
+msgstr ""
+"Surask tau įdomius dalykus savo universiteto tinkle ir pradėk juos "
+"stebėti."
+
+msgid "Or create new subject"
+msgstr "Arba sukurk naują dalyką"
+
+msgid ""
+"Share course material, create wiki notes and discuss with other subject "
+"followers."
+msgstr ""
+"Dalinkis kursų medžiaga, kurk wiki užrašus bei diskutuok su kitais dalyko"
+" sekėjais."
+
+msgid "Fill your profile information"
+msgstr "Užpildykite savo profilį"
+
+msgid "Tell some basic information about yourself by editing your profile."
+msgstr ""
+
+msgid "Welcome to Ututi"
+msgstr "Sveiki atvykę į Ututi"
+
+#, python-format
+msgid ""
+"Welcome to <strong>%(university)s</strong> private social network created"
+" on <a href=\"%(url)s\">Ututi platform</a>. Here students and teachers "
+"can create groups online, use the mailinglist for communication and the "
+"file storage for sharing information."
+msgstr ""
+
+#, python-format
+msgid ""
+"Join %(university_link)s social network in Ututi, a system for exchanging"
+" study material and information."
+msgstr ""
+"Prisijunkite prie %(university_link)s  socialinio tinklo Ututi sistemoje,"
+" skirtoje dalintis studijų medžiaga ir informacija."
+
+msgid "Invite your classmates to Ututi!"
+msgstr "Pakvieskite į Ututi savo grupės draugus!"
+
+msgid "Join Ututi"
+msgstr "Prisijungti prie Ututi"
+
+msgid "notification settings"
+msgstr "priminimų apie dalykus nustatymai"
+
+msgid "add subject"
+msgstr "pridėti dalyką"
+
+msgid "Show subjects from my groups"
+msgstr "Rodyti grupės dalykus"
+
+msgid "Very sad..."
+msgstr "Labai gaila..."
+
+msgid ""
+"We are very disappointed that you have decided not to support Ututi. We "
+"hope you will support us next time. Good luck!"
+msgstr ""
+"Mums labai gaila, kad nusprendėte neparemti Ututi. Tikimės, kad dar "
+"grįšite ir paremsite mus kitą kartą. Sėkmės!"
+
+msgid "back to the profile"
+msgstr "grįžti į profilį"
+
+msgid ""
+"To change your password, type your current password and repeat new "
+"password twice in the form below."
+msgstr ""
+
+msgid "Current password"
+msgstr "Dabartinis slaptažodis"
+
+msgid "New password"
+msgstr "Naujas slaptažodis"
+
+msgid "Repeat the new password"
+msgstr "Pakartok naują slaptažodį"
+
+msgid "In case you forgot your password, use the button below to recover it."
+msgstr ""
+
+msgid "Link with Google and/or Facebook"
+msgstr ""
+
+msgid ""
+"You can log in to Ututi using your Google or Facebook account. Use "
+"buttons below to link or unlink these external accounts."
+msgstr ""
 
 msgid "Link Google"
 msgstr "Susieti su Google"
@@ -3949,21 +4197,11 @@ msgstr "Susieti su Facebook"
 msgid "Unlink Facebook"
 msgstr "Atsieti nuo Facebook"
 
-msgid ""
-"Click the buttons to link or unlink your profile with Google and/or "
-"Facebook"
-msgstr ""
-"Paspauskite mygtukus norėdami susieti arba atsieti savo paskyrą su Google"
-" ir/ar Facebook"
-
-msgid "Email notification settings"
-msgstr ""
-
 msgid "Email me when"
-msgstr ""
+msgstr "Praneškite man, kai"
 
 msgid "What notifications would you like to receive by email:"
-msgstr ""
+msgstr "Kokius priminimus norite gauti į savo elektroninį paštą?"
 
 msgid "immediately"
 msgstr "iškart"
@@ -3975,7 +4213,7 @@ msgid "never"
 msgstr "niekada"
 
 msgid "Send me email:"
-msgstr ""
+msgstr "Siųskite man el. laišką:"
 
 msgid "Personally watched subjects' notifications"
 msgstr "Asmeniškai stebimų dalykų pranešimai"
@@ -3996,56 +4234,8 @@ msgstr ""
 msgid "Group emails"
 msgstr ""
 
-msgid "Change picture"
-msgstr "Pakeisti paveiksliuką"
-
-msgid "Delete current picture"
-msgstr "Ištrinti esamą paveiksliuką"
-
-msgid "Address of your website or blog"
-msgstr "Nuosavo puslapio arba blog'o adresas"
-
-msgid "About yourself"
-msgstr "Šiek tiek informacijos apie save"
-
-msgid "Show my profile to unregistered users and search engines"
-msgstr "Rodyti profilį neregistruotiems naudotojams ir paieškos varikliams"
-
-msgid "Ututi username"
+msgid "Select which events you want to show up on your wall."
 msgstr ""
-
-msgid ""
-"Setting Ututi username allows you to have a more personal URL of your "
-"Ututi profile page."
-msgstr ""
-
-#, python-format
-msgid "Your current public profile page URL is %(user_url)s."
-msgstr ""
-
-msgid "Your new url will be: "
-msgstr ""
-
-msgid "Your Ututi username"
-msgstr ""
-
-msgid "Picture"
-msgstr "Paveiksliukas"
-
-msgid "Current password"
-msgstr "Dabartinis slaptažodis"
-
-msgid "New password"
-msgstr "Naujas slaptažodis"
-
-msgid "Repeat the new password"
-msgstr "Pakartok naują slaptažodį"
-
-msgid "Edit a student group"
-msgstr "Redaguoti grupę"
-
-msgid "News feed settings"
-msgstr "Naujienų nustatymai"
 
 msgid "Forum posts"
 msgstr "Forumų pranešimai"
@@ -4094,142 +4284,6 @@ msgstr "Moderuojami laiškai"
 
 msgid "New groups"
 msgstr "Naujos grupės"
-
-msgid "Which events do You want to see in Your news feed?"
-msgstr "Kokius įvykius norite matyti savo naujienų sraute?"
-
-msgid "What have I been doing?"
-msgstr "Ir ką gi aš nuveikiau?"
-
-msgid "You haven't contributed much, have you?"
-msgstr "Ne itin daug nuveikta?.."
-
-msgid ""
-"private file storage area for files that you don't want to share with "
-"outsiders."
-msgstr "privati saugykla failams, kuriais nenorite dalintis su pašaliniais."
-
-msgid "Find your group"
-msgstr ""
-
-msgid "a place to discuss subject related questions with students and teachers."
-msgstr ""
-"vieta diskutuoti su dalyku susijusiomis temomis su studentais ir "
-"dėstytojais."
-
-msgid "Shared notes"
-msgstr "Užrašai, kuriais pasidalinta"
-
-msgid ""
-"create wiki notes collaboratively with your class-mates or take notes "
-"during the lecture and upload it directly to Ututi."
-msgstr ""
-"kurkite Wiki užrašus bendrai su kitais grupės nariais arba konspektuokite"
-" paskaitos medžiagą tiesiai į Ututi."
-
-msgid "Find your subjects"
-msgstr ""
-
-msgid "Invite your friends"
-msgstr ""
-
-msgid "Enter comma separated list of email addresses."
-msgstr ""
-
-msgid "Or use Facebook to invite your friends."
-msgstr ""
-
-msgid "Join the group"
-msgstr ""
-
-msgid "Features:"
-msgstr "Galimybės"
-
-msgid "Group's email"
-msgstr ""
-
-msgid "Private discussions"
-msgstr ""
-
-msgid "Find and join your group or create a new one."
-msgstr ""
-
-msgid "Or browse group catalog"
-msgstr ""
-
-msgid "Choose your subjects"
-msgstr ""
-
-msgid "Find subjects in your university and start following them."
-msgstr ""
-
-msgid "Or create new subject"
-msgstr ""
-
-msgid ""
-"Share course material, create wiki notes and discuss with other subject "
-"followers."
-msgstr ""
-
-msgid "Fill your profile information"
-msgstr ""
-
-msgid "Tell some basic information about yourself by editing your profile."
-msgstr ""
-
-msgid "Edit profile"
-msgstr "Redaguoti profilį"
-
-msgid "Welcome to Ututi"
-msgstr "Sveiki atvykę į Ututi"
-
-#, python-format
-msgid ""
-"Welcome to <strong>%(university)s</strong> private social networkcreated "
-"on <a href=\"%(url)s\">Ututi platform</a>. Here students and teachers can"
-" create groups online, use the mailinglist for communication and the file"
-" storage for sharing information."
-msgstr ""
-"Sveiki atvykę į <strong>%(university)s</strong> privatų socialinį tinklą "
-"<a href=\"%(url)s\">Ututi sistemoje</a>. Čia studentai ir dėstytojai gali"
-" sukurti virtualias grupes, naudotis el. pašto konferecija bei failų "
-"saugykla informacijos sklaidai."
-
-#, python-format
-msgid ""
-"Join %(university_link)s social network in Ututi, a system for exchanging"
-" study material and information."
-msgstr ""
-"Prisijunkite prie %(university_link)s  socialinio tinklo Ututi sistemoje,"
-" skirtoje dalintis studijų medžiaga ir informacija."
-
-msgid "Invite your classmates to Ututi!"
-msgstr "Pakvieskite į Ututi savo grupės draugus!"
-
-msgid "Join Ututi"
-msgstr "Prisijungti prie Ututi"
-
-msgid "notification settings"
-msgstr "priminimų apie dalykus nustatymai"
-
-msgid "add subject"
-msgstr "pridėti dalyką"
-
-msgid "Show subjects from my groups"
-msgstr "Rodyti grupės dalykus"
-
-msgid "Very sad..."
-msgstr "Labai gaila..."
-
-msgid ""
-"We are very disappointed that you have decided not to support Ututi. We "
-"hope you will support us next time. Good luck!"
-msgstr ""
-"Mums labai gaila, kad nusprendėte neparemti Ututi. Tikimės, kad dar "
-"grįšite ir paremsite mus kitą kartą. Sėkmės!"
-
-msgid "back to the profile"
-msgstr "grįžti į profilį"
 
 msgid "Why we need support?"
 msgstr "Kodėl mums reikia paramos?"
@@ -4361,13 +4415,13 @@ msgid ""
 msgstr ""
 
 msgid "Authors"
-msgstr ""
+msgstr "Autoriai"
 
 msgid "Title of the Publication"
-msgstr ""
+msgstr "Publikacijos pavadinimas"
 
 msgid "Title of Journal"
-msgstr ""
+msgstr "Žurnalo pavadinimas"
 
 msgid ""
 "List languages that you speak, starting with ones that you are most "
@@ -4375,13 +4429,13 @@ msgid ""
 msgstr ""
 
 msgid "english"
-msgstr ""
+msgstr "anglų"
 
 msgid "russian"
-msgstr ""
+msgstr "rusų"
 
 msgid "german"
-msgstr ""
+msgstr "vokiečių"
 
 msgid "Delete this group?"
 msgstr "Panaikinti šią grupę?"
@@ -4468,9 +4522,6 @@ msgstr[2] "<span class='orange'>%(count)s</span> grupių"
 msgid "add a group"
 msgstr "pridėti grupę"
 
-msgid "Your biography"
-msgstr "Jūsų biografija"
-
 msgid "Write down your biography and research interests"
 msgstr ""
 
@@ -4516,10 +4567,10 @@ msgid ""
 "your research interests."
 msgstr ""
 
-msgid "View my public page"
+msgid "View profile page"
 msgstr ""
 
-msgid "Add my biography"
+msgid "Add biography"
 msgstr ""
 
 msgid ""
@@ -4587,6 +4638,13 @@ msgstr "Slaptažodis turi būti ne trumpesnis nei 5 simboliai.."
 
 msgid "Link Google or Facebook"
 msgstr "Susieti su Google arba Facebook"
+
+msgid ""
+"Click the buttons to link or unlink your profile with Google and/or "
+"Facebook"
+msgstr ""
+"Paspauskite mygtukus norėdami susieti arba atsieti savo paskyrą su Google"
+" ir/ar Facebook"
 
 msgid "Full University title:"
 msgstr "Visas universiteto pavadinimas:"
