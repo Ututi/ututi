@@ -152,7 +152,7 @@ ul#user-menu {
     float: right;
     list-style: none;
     max-width: 190px;
-    min-width: 100px;
+    min-width: 140px;
     color: #ffffff;
     padding-right: 10px;
 }
@@ -204,12 +204,12 @@ li.expanded li {
     border:0;
     height: 20px;
     line-height: 20px;
-    width: 120px;
+    width: 160px;
 }
 
 li.expanded li span,
 li.expanded li a {
-    padding:6px 21px 6px 6px;
+    padding: 6px;
 }
 
 /* End of header */

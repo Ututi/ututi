@@ -159,6 +159,11 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     ## settings pages
 
     @ActionProtector("user")
+    def settings(self):
+        # pick default settings tab
+        redirect(url(controller='profile', action='login_settings'))
+
+    @ActionProtector("user")
     def login_settings(self):
         c.tabs = self._account_settings_tabs()
         c.current_tab = 'login'
