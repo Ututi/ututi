@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-05-18 18:58+0300\n"
+"POT-Creation-Date: 2011-05-19 18:30+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -680,22 +680,31 @@ msgstr ""
 msgid "Wiki page created."
 msgstr ""
 
-msgid "Search"
-msgstr ""
-
-msgid "General information"
-msgstr ""
-
-msgid "Contacts"
-msgstr ""
-
-msgid "Wall"
+msgid "Login"
 msgstr ""
 
 msgid "Notifications"
 msgstr ""
 
+msgid "Photo"
+msgstr ""
+
+msgid "Contacts"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
 msgid "Your wall settings have been updated."
+msgstr ""
+
+msgid "Your profile was updated."
+msgstr ""
+
+msgid "Your photo successfully updated."
+msgstr ""
+
+msgid "Your photo was removed."
 msgstr ""
 
 msgid "Your Google account has been unlinked."
@@ -707,7 +716,8 @@ msgstr ""
 msgid "Your password has been changed!"
 msgstr ""
 
-msgid "Your profile was updated."
+#, python-format
+msgid "Password recovery email sent to %(user_email)s. Please check your inbox."
 msgstr ""
 
 msgid "Confirmation message sent. Please check your email."
@@ -718,9 +728,6 @@ msgid "Your email %s has been confirmed, thanks."
 msgstr ""
 
 msgid "Could not confirm email: invalid confirmation key."
-msgstr ""
-
-msgid "Your university information has been updated."
 msgstr ""
 
 #, python-format
@@ -885,9 +892,6 @@ msgid "Country does not exist."
 msgstr ""
 
 msgid "Please select country."
-msgstr ""
-
-msgid "Invalid password"
 msgstr ""
 
 msgid "Location does not exist."
@@ -1299,9 +1303,6 @@ msgstr ""
 msgid "Sign in with your university email"
 msgstr ""
 
-msgid "Login"
-msgstr ""
-
 msgid "Email address:"
 msgstr ""
 
@@ -1344,7 +1345,10 @@ msgstr ""
 msgid "search_"
 msgstr ""
 
-msgid "Settings"
+msgid "Account settings"
+msgstr ""
+
+msgid "Edit profile"
 msgstr ""
 
 msgid "Public profile"
@@ -3521,9 +3525,6 @@ msgstr ""
 msgid "My profile page"
 msgstr ""
 
-msgid "Edit my profile"
-msgstr ""
-
 msgid "View my profile page"
 msgstr ""
 
@@ -3559,7 +3560,16 @@ msgstr ""
 msgid "Universities"
 msgstr ""
 
+msgid "Edit your profile"
+msgstr ""
+
 msgid "back"
+msgstr ""
+
+msgid "Contact information"
+msgstr ""
+
+msgid "Be findable."
 msgstr ""
 
 msgid "Your GG number"
@@ -3574,9 +3584,9 @@ msgstr ""
 msgid ""
 "\n"
 "\n"
-"                      Should you not have received the code, please press "
+"                    Should you not have received the code, please press "
 "\"Send code again\".\n"
-"                      Also don't forget to add Ututi (<a "
+"                    Also don't forget to add Ututi (<a "
 "href=\"gg:5437377\">5437377</a>) to your friends!"
 msgstr ""
 
@@ -3619,164 +3629,47 @@ msgstr ""
 msgid "Email is not confirmed"
 msgstr ""
 
-msgid "Link with Google and Facebook"
-msgstr ""
-
-msgid "Link Google"
-msgstr ""
-
-msgid "Unlink Google"
-msgstr ""
-
-msgid "Link Facebook"
-msgstr ""
-
-msgid "Unlink Facebook"
-msgstr ""
-
-msgid "Click the buttons to link or unlink your profile with Google and/or Facebook"
-msgstr ""
-
-msgid "Email notification settings"
-msgstr ""
-
-msgid "Email me when"
-msgstr ""
-
-msgid "What notifications would you like to receive by email:"
-msgstr ""
-
-msgid "immediately"
-msgstr ""
-
-msgid "at the end of the day"
-msgstr ""
-
-msgid "never"
-msgstr ""
-
-msgid "Send me email:"
-msgstr ""
-
-msgid "Personally watched subjects' notifications"
-msgstr ""
-
-msgid "This subject will be removed from followed subject list."
-msgstr ""
-
-msgid "You do not follow any subjects."
-msgstr ""
-
-#, python-format
-msgid "Group's %(group_title)s notifications"
-msgstr ""
-
-msgid "This group does not follow any subjects."
-msgstr ""
-
-msgid "Group emails"
-msgstr ""
-
-msgid "Change picture"
-msgstr ""
-
-msgid "Delete current picture"
-msgstr ""
-
 msgid "Address of your website or blog"
+msgstr ""
+
+msgid "Your profile photo"
+msgstr ""
+
+msgid "Change or remove your profile photo."
+msgstr ""
+
+msgid "Change photo"
+msgstr ""
+
+msgid "General information"
+msgstr ""
+
+msgid "Edit your general information below."
 msgstr ""
 
 msgid "About yourself"
 msgstr ""
 
-msgid "Show my profile to unregistered users and search engines"
+msgid "Profile page"
 msgstr ""
 
-msgid "Ututi username"
-msgstr ""
-
-msgid ""
-"Setting Ututi username allows you to have a more personal URL of your Ututi "
-"profile page."
+msgid "You can set a Ututi username to have a more personal URL of your profile page."
 msgstr ""
 
 #, python-format
-msgid "Your current public profile page URL is %(user_url)s."
+msgid "Your current public profile page is %(user_url)s."
 msgstr ""
 
 msgid "Your new url will be: "
 msgstr ""
 
-msgid "Your Ututi username"
+msgid "Ututi username"
 msgstr ""
 
-msgid "Picture"
-msgstr ""
-
-msgid "Current password"
-msgstr ""
-
-msgid "New password"
-msgstr ""
-
-msgid "Repeat the new password"
+msgid "Show my profile to unregistered users and search engines"
 msgstr ""
 
 msgid "Edit a student group"
-msgstr ""
-
-msgid "News feed settings"
-msgstr ""
-
-msgid "Forum posts"
-msgstr ""
-
-msgid "New subjects watched by group"
-msgstr ""
-
-msgid "Subjects no longer watched by group"
-msgstr ""
-
-msgid "Mailing list posts"
-msgstr ""
-
-msgid "Changes in subjects"
-msgstr ""
-
-msgid "New group members"
-msgstr ""
-
-msgid "People who left groups"
-msgstr ""
-
-msgid "File uploads"
-msgstr ""
-
-msgid "Changes in wiki pages"
-msgstr ""
-
-msgid "New subjects"
-msgstr ""
-
-msgid "New wiki pages"
-msgstr ""
-
-msgid "Page changes"
-msgstr ""
-
-msgid "Watched group subjects"
-msgstr ""
-
-msgid "Subject updates"
-msgstr ""
-
-msgid "Moderated posts"
-msgstr ""
-
-msgid "New groups"
-msgstr ""
-
-msgid "Which events do You want to see in Your news feed?"
 msgstr ""
 
 msgid "What have I been doing?"
@@ -3805,6 +3698,9 @@ msgid ""
 msgstr ""
 
 msgid "Find your subjects"
+msgstr ""
+
+msgid "News feed settings"
 msgstr ""
 
 msgid "Invite your friends"
@@ -3854,15 +3750,12 @@ msgstr ""
 msgid "Tell some basic information about yourself by editing your profile."
 msgstr ""
 
-msgid "Edit profile"
-msgstr ""
-
 msgid "Welcome to Ututi"
 msgstr ""
 
 #, python-format
 msgid ""
-"Welcome to <strong>%(university)s</strong> private social networkcreated on "
+"Welcome to <strong>%(university)s</strong> private social network created on "
 "<a href=\"%(url)s\">Ututi platform</a>. Here students and teachers can create"
 " groups online, use the mailinglist for communication and the file storage "
 "for sharing information."
@@ -3898,6 +3791,131 @@ msgid ""
 msgstr ""
 
 msgid "back to the profile"
+msgstr ""
+
+msgid ""
+"To change your password, type your current password and repeat new password "
+"twice in the form below."
+msgstr ""
+
+msgid "Current password"
+msgstr ""
+
+msgid "New password"
+msgstr ""
+
+msgid "Repeat the new password"
+msgstr ""
+
+msgid "In case you forgot your password, use the button below to recover it."
+msgstr ""
+
+msgid "Link with Google and/or Facebook"
+msgstr ""
+
+msgid ""
+"You can log in to Ututi using your Google or Facebook account. Use buttons "
+"below to link or unlink these external accounts."
+msgstr ""
+
+msgid "Link Google"
+msgstr ""
+
+msgid "Unlink Google"
+msgstr ""
+
+msgid "Link Facebook"
+msgstr ""
+
+msgid "Unlink Facebook"
+msgstr ""
+
+msgid "Email me when"
+msgstr ""
+
+msgid "What notifications would you like to receive by email:"
+msgstr ""
+
+msgid "immediately"
+msgstr ""
+
+msgid "at the end of the day"
+msgstr ""
+
+msgid "never"
+msgstr ""
+
+msgid "Send me email:"
+msgstr ""
+
+msgid "Personally watched subjects' notifications"
+msgstr ""
+
+msgid "This subject will be removed from followed subject list."
+msgstr ""
+
+msgid "You do not follow any subjects."
+msgstr ""
+
+#, python-format
+msgid "Group's %(group_title)s notifications"
+msgstr ""
+
+msgid "This group does not follow any subjects."
+msgstr ""
+
+msgid "Group emails"
+msgstr ""
+
+msgid "Select which events you want to show up on your wall."
+msgstr ""
+
+msgid "Forum posts"
+msgstr ""
+
+msgid "New subjects watched by group"
+msgstr ""
+
+msgid "Subjects no longer watched by group"
+msgstr ""
+
+msgid "Mailing list posts"
+msgstr ""
+
+msgid "Changes in subjects"
+msgstr ""
+
+msgid "New group members"
+msgstr ""
+
+msgid "People who left groups"
+msgstr ""
+
+msgid "File uploads"
+msgstr ""
+
+msgid "Changes in wiki pages"
+msgstr ""
+
+msgid "New subjects"
+msgstr ""
+
+msgid "New wiki pages"
+msgstr ""
+
+msgid "Page changes"
+msgstr ""
+
+msgid "Watched group subjects"
+msgstr ""
+
+msgid "Subject updates"
+msgstr ""
+
+msgid "Moderated posts"
+msgstr ""
+
+msgid "New groups"
 msgstr ""
 
 msgid "Why we need support?"
@@ -4109,9 +4127,6 @@ msgstr[1] ""
 msgid "add a group"
 msgstr ""
 
-msgid "Your biography"
-msgstr ""
-
 msgid "Write down your biography and research interests"
 msgstr ""
 
@@ -4157,10 +4172,10 @@ msgid ""
 "research interests."
 msgstr ""
 
-msgid "View my public page"
+msgid "View profile page"
 msgstr ""
 
-msgid "Add my biography"
+msgid "Add biography"
 msgstr ""
 
 msgid "Ututi will keep track of your student groups and make it easy to reach them."
@@ -4225,6 +4240,9 @@ msgid "Password must contain at least 5 characters"
 msgstr ""
 
 msgid "Link Google or Facebook"
+msgstr ""
+
+msgid "Click the buttons to link or unlink your profile with Google and/or Facebook"
 msgstr ""
 
 msgid "Full University title:"

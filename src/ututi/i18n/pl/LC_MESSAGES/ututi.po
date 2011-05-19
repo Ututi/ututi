@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-05-18 18:58+0300\n"
+"PO-Revision-Date: 2011-05-19 18:30+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -739,23 +739,32 @@ msgstr "Grupa nie została określona."
 msgid "Wiki page created."
 msgstr "Wiki strona została utworzona"
 
-msgid "Search"
-msgstr "Szukaj"
-
-msgid "General information"
-msgstr "Informacje ogólne"
-
-msgid "Contacts"
-msgstr "Kontakty"
-
-msgid "Wall"
-msgstr "Tablica"
+msgid "Login"
+msgstr "Login"
 
 msgid "Notifications"
 msgstr "Powiadomienia"
 
+msgid "Photo"
+msgstr ""
+
+msgid "Contacts"
+msgstr "Kontakty"
+
+msgid "Search"
+msgstr "Szukaj"
+
 msgid "Your wall settings have been updated."
 msgstr "Ustawienia (strony)  zostały zaktualizowane."
+
+msgid "Your profile was updated."
+msgstr "Twój profil został zaktualizowany."
+
+msgid "Your photo successfully updated."
+msgstr ""
+
+msgid "Your photo was removed."
+msgstr ""
 
 msgid "Your Google account has been unlinked."
 msgstr "Twoje konto Google zostało odłączone"
@@ -766,8 +775,9 @@ msgstr "Twoje konto Facebook zostało rozłączone"
 msgid "Your password has been changed!"
 msgstr "Twoje hasło zostało zmienione!"
 
-msgid "Your profile was updated."
-msgstr "Twój profil został zaktualizowany."
+#, python-format
+msgid "Password recovery email sent to %(user_email)s. Please check your inbox."
+msgstr ""
 
 msgid "Confirmation message sent. Please check your email."
 msgstr "E-mail potwierdzający został już wysłany."
@@ -778,9 +788,6 @@ msgstr "Twój e-mail %s został potwierdzony, dziękujemy."
 
 msgid "Could not confirm email: invalid confirmation key."
 msgstr "E-mail nie może zostać potwierdzony: błędny kod potwierdzający"
-
-msgid "Your university information has been updated."
-msgstr "Informacje o Twojej uczelni zostały zaktualizowane."
 
 #, python-format
 msgid "Invalid email addresses: %(email_list)s"
@@ -951,9 +958,6 @@ msgstr "Kraj nie istnieje."
 
 msgid "Please select country."
 msgstr "Wybierz kraj."
-
-msgid "Invalid password"
-msgstr "Niepoprawne hasło"
 
 msgid "Location does not exist."
 msgstr "Lokalizacja nie istnieje."
@@ -1411,9 +1415,6 @@ msgstr "Jesteś nowy na Ututi?"
 msgid "Sign in with your university email"
 msgstr "Zarejestruj się za pomocą uczelnianego adresu e-mail."
 
-msgid "Login"
-msgstr "Login"
-
 msgid "Email address:"
 msgstr "Adres e-mail:"
 
@@ -1456,8 +1457,11 @@ msgstr "Szukaj "
 msgid "search_"
 msgstr "szukaj"
 
-msgid "Settings"
-msgstr "Ustawienia"
+msgid "Account settings"
+msgstr ""
+
+msgid "Edit profile"
+msgstr "Edytuj profil"
 
 msgid "Public profile"
 msgstr "Profil publiczny"
@@ -3903,9 +3907,6 @@ msgstr "Powiązani użytkownicy:"
 msgid "My profile page"
 msgstr ""
 
-msgid "Edit my profile"
-msgstr ""
-
 msgid "View my profile page"
 msgstr ""
 
@@ -3943,8 +3944,17 @@ msgstr "Dodaj grupę studencką"
 msgid "Universities"
 msgstr "Uczelnie"
 
+msgid "Edit your profile"
+msgstr ""
+
 msgid "back"
 msgstr "wróć"
+
+msgid "Contact information"
+msgstr ""
+
+msgid "Be findable."
+msgstr ""
 
 msgid "Your GG number"
 msgstr "Twoje GG"
@@ -3958,16 +3968,11 @@ msgstr "Wpisz kod, który otrzymałeś na GG"
 msgid ""
 "\n"
 "\n"
-"                      Should you not have received the code, please press"
-" \"Send code again\".\n"
-"                      Also don't forget to add Ututi (<a "
+"                    Should you not have received the code, please press "
+"\"Send code again\".\n"
+"                    Also don't forget to add Ututi (<a "
 "href=\"gg:5437377\">5437377</a>) to your friends!"
 msgstr ""
-"\n"
-"\n"
-"                      W przypadku nieotrzymania kodu, proszę wybrać "
-"\"Wyślij kod ponownie\". Nie zapomnij                       również aby "
-"dodać Ututi (<a href=\"gg:5437377\">5437377</a>) do znajomych!"
 
 msgid "Submit code"
 msgstr "Potwierdź kod"
@@ -4010,169 +4015,50 @@ msgstr "Otrzymaj e-mail z potwierdzeniem"
 msgid "Email is not confirmed"
 msgstr "Adres e-mail nie jest potwierdzony"
 
-msgid "Link with Google and Facebook"
-msgstr "Połącz z Google i Facebookiem"
-
-msgid "Link Google"
-msgstr "Połącz z Google"
-
-msgid "Unlink Google"
-msgstr "Zerwij połączenie z Google"
-
-msgid "Link Facebook"
-msgstr "Połącz z Facebookiem"
-
-msgid "Unlink Facebook"
-msgstr "Zerwij połączenie z Facebookiem"
-
-msgid ""
-"Click the buttons to link or unlink your profile with Google and/or "
-"Facebook"
-msgstr ""
-"Kliknij przyciski, aby połączyć się lub zerwać połączenie z Google i/lub "
-"Facebookiem"
-
-msgid "Email notification settings"
-msgstr "Ustawienia powiadomień e-mail"
-
-msgid "Email me when"
-msgstr "Wyślij mi wiadomość e-mail gdy"
-
-msgid "What notifications would you like to receive by email:"
-msgstr "Jakie powiadomienia chcesz dostawać e-mailem:"
-
-msgid "immediately"
-msgstr "natychmiast"
-
-msgid "at the end of the day"
-msgstr "pod koniec dnia"
-
-msgid "never"
-msgstr "nigdy"
-
-msgid "Send me email:"
-msgstr "Wyślij mi wiadomość e-mail:"
-
-msgid "Personally watched subjects' notifications"
-msgstr "Obejrzane powiadomienia o obserwowanych przedmiotach"
-
-msgid "This subject will be removed from followed subject list."
-msgstr "Ten przedmiot zostanie usunięty z listy śledzonych przedmiotów."
-
-msgid "You do not follow any subjects."
-msgstr "Nie śledzisz żadnych przedmiotów."
-
-#, python-format
-msgid "Group's %(group_title)s notifications"
-msgstr "Powiadomienia grupy %(group_title)s"
-
-msgid "This group does not follow any subjects."
-msgstr "Ta grupa nie śledzi żadnych przedmiotów."
-
-msgid "Group emails"
-msgstr "Grupowe adresy e-mail"
-
-msgid "Change picture"
-msgstr "Zmień zdjęcie"
-
-msgid "Delete current picture"
-msgstr "Usuń obecne zdjęcie"
-
 msgid "Address of your website or blog"
 msgstr "Adres Twojej strony lub bloga"
+
+msgid "Your profile photo"
+msgstr ""
+
+msgid "Change or remove your profile photo."
+msgstr ""
+
+msgid "Change photo"
+msgstr ""
+
+msgid "General information"
+msgstr "Informacje ogólne"
+
+msgid "Edit your general information below."
+msgstr ""
 
 msgid "About yourself"
 msgstr "O Tobie"
 
-msgid "Show my profile to unregistered users and search engines"
-msgstr "Pokazuj mój profil niezarejestrowanym użytkownikom i wyszukiwarkom"
-
-msgid "Ututi username"
+msgid "Profile page"
 msgstr ""
 
 msgid ""
-"Setting Ututi username allows you to have a more personal URL of your "
-"Ututi profile page."
+"You can set a Ututi username to have a more personal URL of your profile "
+"page."
 msgstr ""
 
 #, python-format
-msgid "Your current public profile page URL is %(user_url)s."
+msgid "Your current public profile page is %(user_url)s."
 msgstr ""
 
 msgid "Your new url will be: "
 msgstr ""
 
-msgid "Your Ututi username"
+msgid "Ututi username"
 msgstr ""
 
-msgid "Picture"
-msgstr "Zdjęcie"
-
-msgid "Current password"
-msgstr "Aktualne hasło"
-
-msgid "New password"
-msgstr "Nowe hasło"
-
-msgid "Repeat the new password"
-msgstr "Wpisz ponownie nowe hasło"
+msgid "Show my profile to unregistered users and search engines"
+msgstr "Pokazuj mój profil niezarejestrowanym użytkownikom i wyszukiwarkom"
 
 msgid "Edit a student group"
 msgstr "Edytuj grupę studencką"
-
-msgid "News feed settings"
-msgstr "Ustawienia"
-
-msgid "Forum posts"
-msgstr "Posty na forach"
-
-msgid "New subjects watched by group"
-msgstr "Nowe przedmioty obserwowane przez grupę"
-
-msgid "Subjects no longer watched by group"
-msgstr "Przedmioty już nie jest obserwowane przez grupę"
-
-msgid "Mailing list posts"
-msgstr "Lista mailingowa"
-
-msgid "Changes in subjects"
-msgstr "Zmiany w przedmiotach"
-
-msgid "New group members"
-msgstr "Nowi członkowie grupy"
-
-msgid "People who left groups"
-msgstr "Ludzie, którzy opuścili grupę"
-
-msgid "File uploads"
-msgstr "Aktualizowanie plikó"
-
-msgid "Changes in wiki pages"
-msgstr "Zmiany w stronach wiki"
-
-msgid "New subjects"
-msgstr "Nowy przedmiot"
-
-msgid "New wiki pages"
-msgstr "Utwórz nowy dokument wiki"
-
-msgid "Page changes"
-msgstr "Zmiana strony"
-
-msgid "Watched group subjects"
-msgstr "Obserwuj przedmioty grupy"
-
-msgid "Subject updates"
-msgstr "Aktualizacja przedm"
-
-msgid "Moderated posts"
-msgstr "Zmoderowane posty"
-
-msgid "New groups"
-msgstr "Nowe grupy"
-
-msgid "Which events do You want to see in Your news feed?"
-msgstr "Jakie wydarzenia chcesz widzieć na swojej tablicy?"
 
 msgid "What have I been doing?"
 msgstr "Moja aktywność"
@@ -4203,6 +4089,9 @@ msgstr ""
 
 msgid "Find your subjects"
 msgstr ""
+
+msgid "News feed settings"
+msgstr "Ustawienia"
 
 msgid "Invite your friends"
 msgstr "Zaproś znajomych"
@@ -4253,24 +4142,16 @@ msgstr "Powiedz coś o sobie poprzez edycję swojego profilu."
 msgid "Tell some basic information about yourself by editing your profile."
 msgstr ""
 
-msgid "Edit profile"
-msgstr "Edytuj profil"
-
 msgid "Welcome to Ututi"
 msgstr "Witaj na Ututi"
 
 #, python-format
 msgid ""
-"Welcome to <strong>%(university)s</strong> private social networkcreated "
-"on <a href=\"%(url)s\">Ututi platform</a>. Here students and teachers can"
-" create groups online, use the mailinglist for communication and the file"
-" storage for sharing information."
+"Welcome to <strong>%(university)s</strong> private social network created"
+" on <a href=\"%(url)s\">Ututi platform</a>. Here students and teachers "
+"can create groups online, use the mailinglist for communication and the "
+"file storage for sharing information."
 msgstr ""
-"Witaj na prywatnym portalu społecznościowym "
-"<strong>%(university)s</strong> stworzonym na <a "
-"href=\"%(url)s\">platformie Ututi</a>. Tutaj studenci i wykładowcy mogą "
-"stworzyć grupy online, używać listy mailingowej dla usprawnienia "
-"komunikacji i magazynu plików do dzielenia się informacjami."
 
 #, python-format
 msgid ""
@@ -4307,6 +4188,131 @@ msgstr ""
 
 msgid "back to the profile"
 msgstr "wróć do profilu"
+
+msgid ""
+"To change your password, type your current password and repeat new "
+"password twice in the form below."
+msgstr ""
+
+msgid "Current password"
+msgstr "Aktualne hasło"
+
+msgid "New password"
+msgstr "Nowe hasło"
+
+msgid "Repeat the new password"
+msgstr "Wpisz ponownie nowe hasło"
+
+msgid "In case you forgot your password, use the button below to recover it."
+msgstr ""
+
+msgid "Link with Google and/or Facebook"
+msgstr ""
+
+msgid ""
+"You can log in to Ututi using your Google or Facebook account. Use "
+"buttons below to link or unlink these external accounts."
+msgstr ""
+
+msgid "Link Google"
+msgstr "Połącz z Google"
+
+msgid "Unlink Google"
+msgstr "Zerwij połączenie z Google"
+
+msgid "Link Facebook"
+msgstr "Połącz z Facebookiem"
+
+msgid "Unlink Facebook"
+msgstr "Zerwij połączenie z Facebookiem"
+
+msgid "Email me when"
+msgstr "Wyślij mi wiadomość e-mail gdy"
+
+msgid "What notifications would you like to receive by email:"
+msgstr "Jakie powiadomienia chcesz dostawać e-mailem:"
+
+msgid "immediately"
+msgstr "natychmiast"
+
+msgid "at the end of the day"
+msgstr "pod koniec dnia"
+
+msgid "never"
+msgstr "nigdy"
+
+msgid "Send me email:"
+msgstr "Wyślij mi wiadomość e-mail:"
+
+msgid "Personally watched subjects' notifications"
+msgstr "Obejrzane powiadomienia o obserwowanych przedmiotach"
+
+msgid "This subject will be removed from followed subject list."
+msgstr "Ten przedmiot zostanie usunięty z listy śledzonych przedmiotów."
+
+msgid "You do not follow any subjects."
+msgstr "Nie śledzisz żadnych przedmiotów."
+
+#, python-format
+msgid "Group's %(group_title)s notifications"
+msgstr "Powiadomienia grupy %(group_title)s"
+
+msgid "This group does not follow any subjects."
+msgstr "Ta grupa nie śledzi żadnych przedmiotów."
+
+msgid "Group emails"
+msgstr "Grupowe adresy e-mail"
+
+msgid "Select which events you want to show up on your wall."
+msgstr ""
+
+msgid "Forum posts"
+msgstr "Posty na forach"
+
+msgid "New subjects watched by group"
+msgstr "Nowe przedmioty obserwowane przez grupę"
+
+msgid "Subjects no longer watched by group"
+msgstr "Przedmioty już nie jest obserwowane przez grupę"
+
+msgid "Mailing list posts"
+msgstr "Lista mailingowa"
+
+msgid "Changes in subjects"
+msgstr "Zmiany w przedmiotach"
+
+msgid "New group members"
+msgstr "Nowi członkowie grupy"
+
+msgid "People who left groups"
+msgstr "Ludzie, którzy opuścili grupę"
+
+msgid "File uploads"
+msgstr "Aktualizowanie plikó"
+
+msgid "Changes in wiki pages"
+msgstr "Zmiany w stronach wiki"
+
+msgid "New subjects"
+msgstr "Nowy przedmiot"
+
+msgid "New wiki pages"
+msgstr "Utwórz nowy dokument wiki"
+
+msgid "Page changes"
+msgstr "Zmiana strony"
+
+msgid "Watched group subjects"
+msgstr "Obserwuj przedmioty grupy"
+
+msgid "Subject updates"
+msgstr "Aktualizacja przedm"
+
+msgid "Moderated posts"
+msgstr "Zmoderowane posty"
+
+msgid "New groups"
+msgstr "Nowe grupy"
 
 msgid "Why we need support?"
 msgstr "Dlaczego potrzebujemy wsparcia"
@@ -4543,9 +4549,6 @@ msgstr[2] "<span class='orange'>%(count)s</span> grup"
 msgid "add a group"
 msgstr "dodaj grupę"
 
-msgid "Your biography"
-msgstr "Twoja biografia"
-
 msgid "Write down your biography and research interests"
 msgstr ""
 
@@ -4591,10 +4594,10 @@ msgid ""
 "your research interests."
 msgstr ""
 
-msgid "View my public page"
+msgid "View profile page"
 msgstr ""
 
-msgid "Add my biography"
+msgid "Add biography"
 msgstr ""
 
 msgid ""
@@ -4662,6 +4665,13 @@ msgstr "Hasło musi zawierać co najmniej 5 znaków."
 
 msgid "Link Google or Facebook"
 msgstr "Połącz z Google lub Facebook."
+
+msgid ""
+"Click the buttons to link or unlink your profile with Google and/or "
+"Facebook"
+msgstr ""
+"Kliknij przyciski, aby połączyć się lub zerwać połączenie z Google i/lub "
+"Facebookiem"
 
 msgid "Full University title:"
 msgstr "Pełna nazwa uczelni:"
