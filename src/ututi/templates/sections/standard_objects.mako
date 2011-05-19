@@ -5,7 +5,7 @@
 ## Renders appropriate action button.
 ## Probably not a good idea this implicit thing.
 
-  %if c.user.is_teacher and c.user.teacher_verified:
+  %if c.user.is_teacher:
     %if c.user.teaches(subject):
       ${close_button(url(controller='profile', action='unteach_subject', subject_id=subject.id), class_='unteach-button')}
     %else:
@@ -77,7 +77,7 @@
 <%def name="subject_listitem_search_results(subject, n=0, with_buttons=True)">
   <div class="u-object subject-description save-space-right ${'with-top-line' if n else ''}">
     %if c.user is not None and with_buttons:
-      %if c.user.is_teacher and c.user.teacher_verified:
+      %if c.user.is_teacher:
         %if not c.user.teaches(subject):
           ${teach_button(subject.url(action='teach'))}
         %endif
