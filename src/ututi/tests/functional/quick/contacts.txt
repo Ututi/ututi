@@ -4,7 +4,7 @@ Functional tests for contacts form
     >>> browser = Browser.logIn()
 
     >>> browser.open('http://localhost/profile/edit/contacts')
-    >>> form = browser.getForm('contacts_form')
+    >>> form = browser.getForm('contacts-form')
     >>> form.getControl('Your email address').value = 'odmin@ututi.lt'
     >>> form.getControl('Save').click()
 
@@ -15,7 +15,7 @@ Functional tests for contacts form
     >>> print mail_queue.pop()
     <EmailInfo sender='info@ututi.lt' recipients=[u'odmin@ututi.lt']>
 
-    >>> form = browser.getForm('contacts_form')
+    >>> form = browser.getForm('contacts-form')
     >>> form.getControl('Your email address').value
     'odmin@ututi.lt'
 

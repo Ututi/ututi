@@ -223,28 +223,21 @@ Edit profile page brings user to his profile edit page (duh!):
 
 If user add some info, this action will be marked as complete:
 
+    >>> user.click('Contacts')
     >>> user.getControl('Address of your website').value = 'http://myblog.com'
     >>> user.click('Save')
     >>> user.click('Home')
     >>> user.printCssQuery('.step.complete span.title', strip=True)
     <span>Fill your profile information</span>
 
-Subject's section allows to add actions or visit subject catalog:
+Subject's section allows to lookup and create subjects. Let's
+create a subject now:
 
     >>> form = user.getForm('subject-search-form')
-    >>> form.getControl(name='text').value = 'something'
-    >>> form.getControl('Search').click()
+    >>> form.getControl(name='title').value = 'Algorithms'
+    >>> form.getControl('Create').click()
     >>> user.url
-    'http://localhost/school/uni/subjects'
-    >>> user.click('Home')
-    >>> user.click('Or create new subject')
-    >>> user.url
-    'http://localhost/subjects/add'
-
-Let's create a subject now:
-
-    >>> user.getControl('Subject title').value = 'Algorithms'
-    >>> user.click('Next')
+    'http://localhost/subjects/add_description'
     >>> user.getControl('Create').click()
 
 Now this action is also marked as complete:
@@ -264,14 +257,14 @@ Group's section offers to add student groups:
 Profile page section asks to add biography, and gives a link to
 public teacher's profile page:
 
-    >>> user.click('View my public page')
+    >>> user.click('View profile page')
     >>> user.url
     'http://localhost/teacher/2'
     >>> user.printCssQuery('.page-title', strip=True)
     <h1>Teacher User</h1>
     >>> user.goBack()
 
-    >>> user.click('Add my biography')
+    >>> user.click('Add biography')
     >>> user.getControl('Edit your biography').value = "Some <strong>cool</strong> biography!"
     >>> user.getControl('Save').click()
 
@@ -306,6 +299,7 @@ how current implementation works, and maybe it would be better not to switch
 again.) We will test this behavior by removing profile information:
 
     >>> user.click('Settings')
+    >>> user.click('Contacts')
     >>> user.getControl('Address of your website').value = ''
     >>> user.click('Save')
     >>> user.click('Home')

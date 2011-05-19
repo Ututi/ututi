@@ -12,20 +12,20 @@ User can now set his "username", so that the url would not have numerical
 id in it. He does this via his settings:
 
     >>> user.click('Settings')
-    >>> user.getControl('Your Ututi username').value = 'admin'
-    >>> user.click('Save')
+    >>> user.getControl('Ututi username').value = 'admin'
+    >>> user.click('Save', index=0)
     >>> user.click('Public profile')
     >>> user.url
     'http://localhost/user/admin'
 
     >>> user.click('Settings')
-    >>> user.getControl('Your Ututi username').value
+    >>> user.getControl('Ututi username').value
     'admin'
 
 This field is validated properly:
 
-    >>> user.getControl('Your Ututi username').value = 'a d m i n'
-    >>> user.click('Save')
+    >>> user.getControl('Ututi username').value = 'a d m i n'
+    >>> user.click('Save', index=0)
     >>> user.printCssQuery('.error-message',strip=True)
     <span>The field may only contain lowercase letters, numbers and the characters + - _ and . (dot)</span>
 
@@ -33,8 +33,8 @@ Two users cannot have same username:
 
     >>> another = Browser.logIn('user@ututi.lt', 'password')
     >>> another.click('Settings')
-    >>> another.getControl('Your Ututi username').value = 'admin'
-    >>> another.click('Save')
+    >>> another.getControl('Ututi username').value = 'admin'
+    >>> another.click('Save', index=0)
     >>> another.printCssQuery('.error-message',strip=True)
     <span>This username is used by another user.</span>
 
@@ -46,8 +46,8 @@ Teachers have separate URLs from users:
     'http://localhost/teacher/5'
 
     >>> teacher.click('Settings')
-    >>> teacher.getControl('Your Ututi username').value = 'benas.b'
-    >>> teacher.click('Save')
+    >>> teacher.getControl('Ututi username').value = 'benas.b'
+    >>> teacher.click('Save', index=0)
     >>> teacher.click('Public profile')
     >>> teacher.url
     'http://localhost/teacher/benas.b'
@@ -61,8 +61,8 @@ Teachers have separate URLs from users:
 User can reset his username to empty if he wants to:
 
     >>> user.click('Settings')
-    >>> user.getControl('Your Ututi username').value = ''
-    >>> user.click('Save')
+    >>> user.getControl('Ututi username').value = ''
+    >>> user.click('Save', index=0)
     >>> user.click('Public profile')
     >>> user.url
     'http://localhost/user/1'

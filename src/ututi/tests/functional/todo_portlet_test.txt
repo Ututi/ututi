@@ -82,7 +82,7 @@ marked as done. When all items are marked as done, the todo list is not shown:
     'http://localhost/profile/edit'
 
     >>> browser.getControl('About yourself').value = 'About myself'
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Save', index=0).click()
     >>> browser.getLink('Home').click()
 
     >>> browser.printQuery('id("todo-portlet")//text()')

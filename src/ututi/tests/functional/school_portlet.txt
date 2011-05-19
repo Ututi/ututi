@@ -30,15 +30,11 @@ SETING UP
 
 END OF SETTING UP
 
-Not logged in user can see students number of university
+Anonymous user can see "I study here" button which takes him to registration:
+
 
     >>> browser = Browser()
     >>> browser.open('http://localhost/school/vu')
-    >>> browser.printCssQuery("#location-info-portlet .member-count", strip=True)
-    <li>0 Members</li>
-
-He can see "I study here" button which takes him to registration:
-
     >>> browser.getControl('I study here').click()
     >>> browser.url
     'http://localhost/school/vu/register?'

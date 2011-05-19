@@ -24,11 +24,11 @@ will be registered as teacher:
     >>> user.click('Finish')
 
 Even though teacher is not verified, he can fill his profile information.
-From the "Get started" page he can click "Add my biography".
+From the "Get started" page he can click "Add biography".
 
-    >>> user.click('Add my biography')
-    >>> user.printCssQuery('h1.page-title', strip=True)
-    <h1>Your biography</h1>
+    >>> user.click('Add biography')
+    >>> user.url
+    'http://localhost/profile/edit/biography?'
 
 For the first time text area contains a template that teacher can edit.
 It also displays a related warning message:

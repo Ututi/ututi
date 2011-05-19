@@ -155,7 +155,7 @@ All the emails for approved messages have been sent:
     Ututi news: 1 new message awaiting moderation
     Moderatoriai (http://localhost/group/moderators)
     - There is 1 message in the moderation queue (http://localhost/group/moderators/mailinglist/administration)
-    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/settings/notifications).
 
     >>> mail_queue[:] = []
 
@@ -178,7 +178,7 @@ Let's try it with more messages in the queue:
     <BLANKLINE>
     - There are 3 messages in the moderation queue (http://localhost/group/moderators/mailinglist/administration)
     <BLANKLINE>
-    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
+    If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/settings/notifications).
     <BLANKLINE>
 
     >>> mail_queue[:] = []

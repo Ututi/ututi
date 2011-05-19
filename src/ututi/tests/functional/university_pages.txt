@@ -25,6 +25,7 @@ We should be able to click on a link that leads us to the page of the faculty.
     <a>Geografijos fakultetas</a>
 
 There is a search form on this page and we should be able to use it.
+
     >>> public_browser.getLink('Subjects').click()
     >>> public_browser.getControl(name='text').value = 'prof.'
     >>> public_browser.getControl('Search').click()
@@ -33,15 +34,6 @@ There is a search form on this page and we should be able to use it.
 
     >>> public_browser.printCssQuery('.search-item.snippet-subject .item-title a', strip=True)
     <a>Matematin&#279; analiz&#279;</a>
-
-The information portlet shows some statistics about the university:
-
-    >>> public_browser.printCssQuery("#location-info-portlet li", strip=True)
-    <li>1 Subject</li>
-    <li>1 Group</li>
-    <li>0 Members</li>
-    <li>0 Files</li>
-
 
 Let's log and test university page from logedin user's perpectives.
 
@@ -56,6 +48,14 @@ Let's log and test university page from logedin user's perpectives.
     Geografijos fakultetas
 
     >>> browser.getLink('Vilniaus universitetas').click()
+
+An information portlet appears and shows some statistics about the university:
+
+    >>> browser.printCssQuery("#location-info-portlet li", strip=True)
+    <li>1 Subject</li>
+    <li>1 Group</li>
+    <li>0 Members</li>
+    <li>0 Files</li>
 
 
 We should be able to edit the information of the location tag.

@@ -106,10 +106,9 @@ Let's see what teachers they have:
     <li> Lecturer: <br /> prof. E. Misevi&#269;ius </li>
     >>> teacher.open('http://localhost/subject/vu/algorithms')
     >>> teacher.printCssQuery('.subject-teacher', strip=True)
-    <li> Lecturer: <br /> Mr. Jones </li>
 
-Note that in the latter case, the teacher name has been left,
-but this is not a link to teacher's profile anymore.
+Note that in the latter case the lecturer name is not shown, because
+teacher was rejected.
 
 Let's also verify that "Test group" is OK:
 

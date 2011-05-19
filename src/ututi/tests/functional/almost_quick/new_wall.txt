@@ -22,7 +22,7 @@ Right next to the title there's a link to wall settings:
 
     >>> user3.getLink("News feed settings").click()
     >>> user3.url
-    'http://localhost/profile/edit/wall'
+    'http://localhost/profile/settings/wall'
 
     >>> user3.goBack()
 

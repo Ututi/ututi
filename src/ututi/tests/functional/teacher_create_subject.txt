@@ -61,7 +61,7 @@ Let's go to the settings and change our location information:
     >>> browser.getLink('Settings').click()
     >>> browser.getControl('University').value = 'Vilniaus universitetas'
     >>> browser.getControl('Department').value = 'Ekonomikos fakultetas'
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Save', index=0).click()
 
 Now back to home page and click to add another subject:
 

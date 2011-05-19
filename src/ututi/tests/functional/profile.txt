@@ -21,7 +21,7 @@ Now we'll try editing our profile information. First we need to log in.
 The user should be able to change his email:
 
     >>> browser.open('http://localhost/profile/edit/contacts')
-    >>> form = browser.getForm('contacts_form')
+    >>> form = browser.getForm('contacts-form')
     >>> form.getControl('Your email address').value = 'user@ututi.lt'
     >>> form.getControl('Save').click()
 
@@ -33,7 +33,7 @@ This email is already in use, so we won't be able to use it.
 Let's try something unique
 
     >>> browser.open('http://localhost/profile/edit/contacts')
-    >>> form = browser.getForm('contacts_form')
+    >>> form = browser.getForm('contacts-form')
     >>> form.getControl('Your email address').value = 'uniqueuser@ututi.lt'
     >>> form.getControl('Save').click()
 
@@ -47,15 +47,20 @@ There should be an email confirmation request in our inbox:
     >>> mail_queue[:] = []
 
 
-We'll go to our profile edit page. And change our name as well as upload a logo.
+We'll go to our profile edit page, change our name, add some additional
+information and upload a photo.
 
     >>> browser.open('http://localhost/profile/edit')
     >>> browser.getControl('Full name').value = 'Adminas Adminas'
     >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
-    >>> browser.getControl('Address of your website or blog').value = 'http://ututi.lt'
     >>> browser.getControl('About yourself').value = 'This is me'
-    >>> browser.getControl('Picture').add_file(*make_file('test_logo.png', 'test_logo.Png'))
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl('Save', index=0).click()
+    >>> browser.click('Contacts')
+    >>> browser.getControl('Address of your website or blog').value = 'http://ututi.lt'
+    >>> browser.click('Save')
+    >>> browser.click('Photo')
+    >>> browser.getControl(name='logo').add_file(*make_file('test_logo.png', 'test_logo.Png'))
+    >>> browser.click('Change photo')
 
     >>> browser.printCssQuery('.user-fullname', strip=True)
     <div>Adminas Adminas</div>
@@ -87,9 +92,9 @@ The original logo can be retrieved too:
 Logos are automatically resized if they are too big before storing
 them in the database:
 
-    >>> browser.open('http://localhost/profile/edit')
-    >>> browser.getControl('Picture').add_file(*make_file('test_logo_huge.png', 'test_logo.Png'))
-    >>> browser.getControl('Save').click()
+    >>> browser.open('http://localhost/profile/edit/photo')
+    >>> browser.getControl(name='logo').add_file(*make_file('test_logo_huge.png', 'test_logo.Png'))
+    >>> browser.getControl('Change photo').click()
 
     >>> browser.open('http://localhost/user/1/logo')
     >>> im = Image.open(StringIO.StringIO(browser.contents))
@@ -98,9 +103,8 @@ them in the database:
 
 Now let's try to delete the logo.
 
-    >>> browser.open('http://localhost/profile/edit')
-    >>> browser.getControl('Delete current picture').selected = True
-    >>> browser.getControl('Save').click()
+    >>> browser.open('http://localhost/profile/edit/photo')
+    >>> browser.click('Remove')
 
 The logo is gone from the profile page:
 
