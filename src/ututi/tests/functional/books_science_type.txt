@@ -25,7 +25,7 @@ Admin can create science type.
 
 Admin can edit science type.
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', 'science').click()
     >>> form = browser.getForm('science_type_form')
     >>> form.getControl('Name').value = 'neHumanitariai mokslai'
     >>> form.getControl(name='department').value = ['university']
@@ -42,7 +42,7 @@ Admin can delete city.
 
     >>> browser.url
     'http://localhost/admin/science_types'
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='science').click()
     >>> browser.getLink('Delete').click()
     >>> browser.url
     'http://localhost/admin/science_types'

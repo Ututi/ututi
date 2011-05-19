@@ -11,7 +11,7 @@ Let's find the group and change its default tab:
     >>> browser.url
     'http://localhost/group/moderators/home'
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='group').click()
 
     >>> browser.getControl('Default group tab').value=['files']
     >>> browser.getControl('Save').click()

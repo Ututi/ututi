@@ -86,7 +86,7 @@ This message will appear in the moderation queue:
 If we disable the moderation non-group members can't post messages to
 our mailing list:
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='group').click()
     >>> browser.getControl('Members only').click()
     >>> browser.getControl('Save').click()
 

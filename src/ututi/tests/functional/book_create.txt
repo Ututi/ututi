@@ -30,7 +30,7 @@ Setting up user profile information
 -----------------------------------
 
     >>> browser.open('http://localhost')
-    >>> browser.click('Edit profile')
+    >>> browser.follow('Edit profile')
     >>> browser.click('Contacts')
     >>> browser.getControl('Mobile phone number').value = ""
     >>> browser.click('Save')
@@ -77,7 +77,7 @@ When I add second book, my earlyer inserted phone book must by autofiled by the 
 Then I update my profile information and insert phone number
 
     >>> browser.open('http://localhost')
-    >>> browser.click('Edit profile')
+    >>> browser.follow('Edit profile')
     >>> browser.click('Contacts')
     >>> browser.getControl('Mobile phone number').value = "+37067422222"
 

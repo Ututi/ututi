@@ -26,7 +26,7 @@ Admin can create book type.
 
 Admin can edit book type.
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='book').click()
     >>> form = browser.getForm('book_type_form')
     >>> form.getControl('Name').value = 'Pratybos'
     >>> form.getControl('URL name').value = 'pratybos'
@@ -41,7 +41,7 @@ Admin can delete book type.
 
     >>> browser.url
     'http://localhost/admin/book_types'
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='book').click()
     >>> browser.getLink('Delete').click()
     >>> browser.url
     'http://localhost/admin/book_types'

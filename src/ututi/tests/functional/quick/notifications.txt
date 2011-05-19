@@ -21,7 +21,7 @@ The admin should have a new link on his dashboard, that lets him view all active
     safdsfasddf
     2030-09-30
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='edit_notification').click()
     >>> form = browser.getForm('notification_form')
     >>> form.getControl('Notification text').value = 'Hi!'
     >>> form.getControl('Valid until').value = '10/30/2030'
@@ -40,7 +40,7 @@ When user logs in, he sees notification message if notification is not expired
     >>> browser.printQuery("//div[@class='user-notification flash-message']/div/text()")
     Hi!
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='edit_notification').click()
     >>> form = browser.getForm('notification_form')
     >>> form.getControl('Valid until').value = '10/30/2000'
     >>> form.getControl('Save').click()

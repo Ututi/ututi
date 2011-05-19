@@ -33,7 +33,7 @@ Subjects can be tagged upon creation or when being edited.
 
 Let's open the edit view and see if the tags were saved:
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='subject').click()
     >>> browser.getControl('Tags:').value
     'tag1, tag2, tag 3'
     >>> browser.getControl('Tags:').value = 'tag2, tag 3, new tag'
@@ -44,7 +44,7 @@ Let's open the edit view and see if the tags were saved:
 
 Once again, to check if the tags were saved:
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='subject').click()
     >>> browser.getControl('Tags:').value
     'tag2, tag 3, new tag'
 

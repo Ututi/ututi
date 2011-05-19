@@ -9,7 +9,8 @@ not being on it, the email is just ignored:
     >>> browser.getLink('Moderatoriai', url='/group/moderators').click()
 
 Disable moderation first:
-    >>> browser.getLink('Edit').click()
+
+    >>> browser.getLink('Edit', url='group').click()
     >>> browser.getControl('Members only').click()
     >>> browser.getControl('Save').click()
 
@@ -24,7 +25,7 @@ non-group members will get posted into the queue.
 
 First we go to the settings page and set the value:
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='group').click()
     >>> browser.getControl('Everybody (moderated)').click()
     >>> browser.getControl('Save').click()
 

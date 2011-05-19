@@ -24,7 +24,7 @@ We've checked that already; let's move on.
 
 Let's have a look at the settings:
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='group').click()
 
     >>> browser.getControl('Title').value
     'Another test group'

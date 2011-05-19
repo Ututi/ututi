@@ -23,7 +23,7 @@ The link of the group leads to its home page.
 
 We can edit the group's information.
 
-   >>> browser.getLink('Edit').click()
+   >>> browser.getLink('Edit', url='group').click()
    >>> browser.url
    'http://localhost/group/moderators/edit'
 

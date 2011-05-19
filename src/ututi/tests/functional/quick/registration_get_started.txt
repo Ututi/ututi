@@ -337,7 +337,7 @@ subjects.
 The profile section asks user to fill in his profile information.
 There is a button that brings user to his profile settings:
 
-    >>> user.click('Edit profile')
+    >>> user.getControl('Edit profile').click()
     >>> user.url
     'http://localhost/profile/edit?'
 
@@ -376,7 +376,7 @@ his homepage is again switched to the "Get started" page. (This is how current
 implementation works, and maybe it would be better not to switch again.)
 We will test this behavior by removing profile information:
 
-    >>> user.click('Edit profile')
+    >>> user.getControl('Edit profile').click()
     >>> user.getControl('About yourself').value = ''
     >>> user.click('Save')
     >>> user.click('Home')

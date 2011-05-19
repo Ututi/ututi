@@ -24,7 +24,7 @@ Admin can create city.
 
 Admin can edit city.
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='city').click()
     >>> form = browser.getForm('city_form')
     >>> form.getControl('Name').value = 'Kaunas'
     >>> form.getControl('Edit').click()
@@ -37,7 +37,7 @@ Admin can delete city.
 
     >>> browser.url
     'http://localhost/admin/cities'
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='city').click()
     >>> browser.getLink('Delete').click()
     >>> browser.url
     'http://localhost/admin/cities'

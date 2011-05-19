@@ -24,7 +24,7 @@ Admin can create new school grade:
 
 Admin can edit school grades:
 
-    >>> browser.getLink('Edit').click()
+    >>> browser.getLink('Edit', url='school').click()
     >>> form = browser.getForm('school_grade_form')
     >>> form.getControl('Name').value = '1 gimnazijos kl.'
     >>> form.getControl('Edit').click()

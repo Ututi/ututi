@@ -215,9 +215,9 @@ User sees these options:
     <span>Complete your profile page</span>
     <span>Add your student groups</span>
 
-Edit profile page brings user to his profile edit page (duh!):
+Edit profile button brings user to his profile edit page (duh!):
 
-    >>> user.click('Edit profile')
+    >>> user.getControl('Edit profile', index=0).click()
     >>> user.url
     'http://localhost/profile/edit?'
 
@@ -298,7 +298,7 @@ subjects), his homepage is again switched to the "Get started" page. (This is
 how current implementation works, and maybe it would be better not to switch
 again.) We will test this behavior by removing profile information:
 
-    >>> user.click('Edit profile')
+    >>> user.getControl('Edit profile', index=0).click()
     >>> user.click('Contacts')
     >>> user.getControl('Address of your website').value = ''
     >>> user.click('Save')
