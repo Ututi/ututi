@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-05-19 18:30+0300\n"
-"Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
+"PO-Revision-Date: 2011-05-20 00:37+0300\n"
+"Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -4016,7 +4016,7 @@ msgid "Your current public profile page is %(user_url)s."
 msgstr ""
 
 msgid "Your new url will be: "
-msgstr ""
+msgstr "Jūsų naujas adresas: "
 
 msgid "Ututi username"
 msgstr "Ututi vartotojo vardas"
@@ -4039,7 +4039,7 @@ msgid ""
 msgstr "privati saugykla failams, kuriais nenorite dalintis su pašaliniais."
 
 msgid "Find your group"
-msgstr ""
+msgstr "Surask savo grupę"
 
 msgid "a place to discuss subject related questions with students and teachers."
 msgstr ""
@@ -4057,19 +4057,19 @@ msgstr ""
 " paskaitos medžiagą tiesiai į Ututi."
 
 msgid "Find your subjects"
-msgstr ""
+msgstr "Surask savo dalykus"
 
 msgid "News feed settings"
 msgstr "Naujienų nustatymai"
 
 msgid "Invite your friends"
-msgstr ""
+msgstr "Pakviesk draugų"
 
 msgid "Enter comma separated list of email addresses."
-msgstr ""
+msgstr "Įveskit el.pašto adresus atskiriant juos kableliais."
 
 msgid "Or use Facebook to invite your friends."
-msgstr ""
+msgstr "Arba pakviesk draugus naudojant Facebook,"
 
 msgid "Join the group"
 msgstr "Prisijungti prie grupės"
@@ -4112,6 +4112,8 @@ msgstr "Užpildykite savo profilį"
 
 msgid "Tell some basic information about yourself by editing your profile."
 msgstr ""
+"Įveskite šiek tiek informacijos apie save. Tai galima padaryti profilio "
+"nuostatuose."
 
 msgid "Welcome to Ututi"
 msgstr "Sveiki atvykę į Ututi"
@@ -4178,7 +4180,7 @@ msgid "In case you forgot your password, use the button below to recover it."
 msgstr ""
 
 msgid "Link with Google and/or Facebook"
-msgstr ""
+msgstr "Susieti su Google arba/ir Facebook"
 
 msgid ""
 "You can log in to Ututi using your Google or Facebook account. Use "
@@ -4222,20 +4224,20 @@ msgid "This subject will be removed from followed subject list."
 msgstr ""
 
 msgid "You do not follow any subjects."
-msgstr ""
+msgstr "Šiuo metu nestebima jokio dalyko."
 
 #, python-format
 msgid "Group's %(group_title)s notifications"
 msgstr "Grupės %(group_title)s pranešimai"
 
 msgid "This group does not follow any subjects."
-msgstr ""
+msgstr "Šį grupė nestegi jokių dalykų."
 
 msgid "Group emails"
-msgstr ""
+msgstr "Grupės el.paštas"
 
 msgid "Select which events you want to show up on your wall."
-msgstr ""
+msgstr "Pasirinkti kokia informacija turi būti rodoma naujienų sraute."
 
 msgid "Forum posts"
 msgstr "Forumų pranešimai"
@@ -4404,7 +4406,7 @@ msgid "List courses that you teach."
 msgstr ""
 
 msgid "Course title"
-msgstr ""
+msgstr "Kurso pavadinimas"
 
 msgid "Publications"
 msgstr ""
@@ -4530,7 +4532,7 @@ msgid "This information will be displayed on your %(profile_page_url)s."
 msgstr ""
 
 msgid "profile page"
-msgstr ""
+msgstr "profilio puslapis"
 
 msgid ""
 "Below you see a template that you can freely edit. Note that once your "
@@ -4538,28 +4540,28 @@ msgid ""
 msgstr ""
 
 msgid "Edit your biography"
-msgstr ""
+msgstr "Taisyti savo biografiją"
 
 msgid "Create your subjects"
-msgstr ""
+msgstr "Sukurtike dėstomus dalykus"
 
 msgid "Upload course material"
-msgstr ""
+msgstr "Įkelti kurso medžiagą"
 
 msgid "Edit subject notes"
-msgstr ""
+msgstr "Taisyti dalyko užrašus"
 
 msgid "Notify your students"
-msgstr ""
+msgstr "Informuokite savo studentus"
 
 msgid "Discuss the subject"
-msgstr ""
+msgstr "Diskutuoti apie dalykus"
 
 msgid "Find subjects that your teach or create them."
 msgstr ""
 
 msgid "Complete your profile page"
-msgstr ""
+msgstr "Užpildykite profilio informaciją"
 
 msgid ""
 "Ututi provides you a profile page that other people can access online. To"
@@ -4568,10 +4570,10 @@ msgid ""
 msgstr ""
 
 msgid "View profile page"
-msgstr ""
+msgstr "Peržiūrėti puslapį"
 
 msgid "Add biography"
-msgstr ""
+msgstr "Pridėti biografiją"
 
 msgid ""
 "Ututi will keep track of your student groups and make it easy to reach "
@@ -4579,7 +4581,7 @@ msgid ""
 msgstr ""
 
 msgid "Add student group"
-msgstr ""
+msgstr "Pridėtų studentų grupės kontaktus"
 
 msgid "Select an image file on your computer:"
 msgstr "Pasirinkti atvaizdo failą savo kompiuteryje"
