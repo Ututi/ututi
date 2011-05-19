@@ -42,7 +42,7 @@
       </p>
     </div>
 
-    <div id="google-and-facebook-buttons">
+    <div id="google-and-facebook-buttons" class="clearfix">
       %if not c.user.openid:
         <a id="google-link-button" href="${url(controller='profile', action='link_google')}">
           ${h.image('/img/google-button.png', alt=_('Link Google'))}
@@ -63,24 +63,24 @@
         </a>
       %endif
     </div>
+
+    ${init_facebook()}
+    <script>
+      $(document).ready(function() {
+        $('#fb-link-button').click(function() {
+            // attempt to login FB
+            FB.login(function(response) {
+                if (response.session && response.perms) {
+                    // user is logged in and granted some permissions.
+                    // perms is a comma separated list of granted permissions
+                    window.location = '${url(controller='profile', action='link_facebook')}';
+                }
+            }, {perms:'email'});
+
+            return false;
+        });
+      });
+    </script>
   </div>
 </div>
 
-${init_facebook()}
-
-<script>
-  $(document).ready(function() {
-    $('#fb-link-button').click(function() {
-        // attempt to login FB
-        FB.login(function(response) {
-            if (response.session && response.perms) {
-                // user is logged in and granted some permissions.
-                // perms is a comma separated list of granted permissions
-                window.location = '${url(controller='profile', action='link_facebook')}';
-            }
-        }, {perms:'email'});
-
-        return false;
-    });
-  });
-</script>

@@ -23,7 +23,9 @@
       });
     </script>
     <noscript>
-    ${_("Please have javascript enabled for Facebook functionality to work.")}
+      <p class="warning">
+        ${_("Please have javascript enabled for Facebook functionality to work.")}
+      </p>
     </noscript>
   %endif
 </%def>
