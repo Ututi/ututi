@@ -447,6 +447,7 @@ input {
         font-size: 11px;
         height: 20px;
         border: 1px solid #666666;
+        padding: 0 5px;
         background: none;
     }
 
