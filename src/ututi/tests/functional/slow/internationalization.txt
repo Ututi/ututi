@@ -44,7 +44,7 @@ The language add form does not allow adding duplicates:
 
 Let's edit english:
 
-    >>> browser.getLink('Edit', index=0).click()
+    >>> browser.getLink('Edit', url='language', index=0).click()
     >>> browser.url
     'http://localhost/admin/edit_language/en'
 
