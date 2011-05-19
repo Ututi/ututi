@@ -159,7 +159,14 @@ class ContactForm(Schema):
 
 class LogoUpload(Schema):
     """A schema for validating logo uploads."""
-    logo = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
+    allow_extra_fields = True
+    messages = {
+       'empty': _(u"Please select your photo."),
+       'bad_type': _(u"Please upload JPEG, PNG or GIF image.")
+    }
+    logo = FileUploadTypeValidator(not_empty=True,
+                                   allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'),
+                                   messages=messages)
 
 
 class HideElementForm(Schema):

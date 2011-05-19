@@ -28,12 +28,12 @@
 </div>
 
 <form id="photo-form"
-      action="${url(controller='profile', action='add_photo')}"
+      action="${url(controller='profile', action='update_photo')}"
       enctype="multipart/form-data"
       method="POST">
 
   <input type="file" name="logo" id="logo-field" />
-  <form:error name="logo-field" /> <!-- formencode errors container -->
+  <form:error name="logo" /> <!-- formencode errors container -->
 
   ${h.input_submit(_("Change photo"), name='change', id='choose-button')}
 </form>
