@@ -189,12 +189,13 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
     @validate(schema=SearchSubmit, post_only=False, on_get=True)
     def catalog(self, location, obj_type):
         c.current_menu_item = obj_type + 's'
-
         self.form_result['tagsitem'] = location.hierarchy()
         self.form_result['obj_type'] = obj_type
 
+        c.text = self.form_result.get('text', '')
+
         if obj_type == 'teacher':
-            self._search_teachers(location, self.form_result.get('text', ''))
+            self._search_teachers(location, c.text)
         else:
             self._search()
 
@@ -212,10 +213,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
     @validate(schema=SearchSubmit, post_only=False, on_get=True)
     def catalog_js(self, location):
         self.form_result['tagsitem'] = location.hierarchy()
-        if self.form_result.get('obj_type', None) is None:
-            self.form_result['obj_type'] = '*'
-
-        obj_type = self.form_result['obj_type']
+        obj_type = self.form_result.setdefault('obj_type', '*')
 
         if obj_type == 'teacher':
             self._search_teachers(location, self.form_result.get('text', ''))

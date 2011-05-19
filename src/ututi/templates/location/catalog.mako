@@ -38,11 +38,11 @@
 <%def name="empty_box()">
 </%def>
 
-%if c.results.item_count:
+%if c.text == '' and c.results.item_count == 0:
+  ${self.empty_box()}
+%else:
   <div id="search-panel">
     ${self.search_form()}
-    ${self.search_results(c.results)}
+    ${self.search_results(c.results, c.text)}
   </div>
-%else:
-  ${self.empty_box()}
 %endif

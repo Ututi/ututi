@@ -27,13 +27,18 @@ We should be able to click on a link that leads us to the page of the faculty.
 There is a search form on this page and we should be able to use it.
 
     >>> public_browser.getLink('Subjects').click()
-    >>> public_browser.getControl(name='text').value = 'prof.'
+    >>> public_browser.getControl(name='text').value = 'Matematinė'
     >>> public_browser.getControl('Search').click()
-    >>> public_browser.url
-    'http://localhost/school/vu/subjects?text=prof.&obj_type=subject'
+    >>> public_browser.printCssQuery('#search-results .item-title', strip=True)
+    <div> <a>Matematin&#279; analiz&#279;</a> </div>
 
-    >>> public_browser.printCssQuery('.search-item.snippet-subject .item-title a', strip=True)
-    <a>Matematin&#279; analiz&#279;</a>
+Regresion test: if search returns an empty set, it should display 0 results
+message instead of a there-are-no-subjects-at-all message:
+
+    >>> public_browser.getControl(name='text').value = 'somethingveryspecial'
+    >>> public_browser.getControl('Search').click()
+    >>> public_browser.printCssQuery('.result-count', strip=True)
+    <span> 0 results for <strong>somethingveryspecial</strong> </span>
 
 Let's log and test university page from logedin user's perpectives.
 
