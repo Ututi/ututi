@@ -85,7 +85,7 @@ Let's accept this invitation.
     >>> browser2.printQuery("//div[@class='flash-message']/span/text()")
     Congratulations! You are now a member of the group 'Moderatoriai'
 
-    >>> browser2.getLink('Settings').click()
+    >>> browser2.getLink('Edit profile').click()
     >>> browser2.getControl(name="location-0").value
     'U-niversity'
 

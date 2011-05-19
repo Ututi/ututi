@@ -298,7 +298,7 @@ subjects), his homepage is again switched to the "Get started" page. (This is
 how current implementation works, and maybe it would be better not to switch
 again.) We will test this behavior by removing profile information:
 
-    >>> user.click('Settings')
+    >>> user.click('Edit profile')
     >>> user.click('Contacts')
     >>> user.getControl('Address of your website').value = ''
     >>> user.click('Save')

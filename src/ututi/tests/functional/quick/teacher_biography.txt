@@ -69,7 +69,7 @@ Now let's go to Public profile and look at biography tab. Here should be our bio
 Regression test: saving in profile settings form does not reset
 teacher's biography:
 
-    >>> user.click('Settings')
+    >>> user.click('Edit profile')
     >>> user.click('Save')
     >>> user.click('Public profile')
     >>> user.click('Biography')
@@ -87,7 +87,7 @@ in settings page:
     >>> admin.click('Teachers')
     >>> admin.click('Confirm')
 
-    >>> user.click('Settings')
+    >>> user.click('Edit profile')
     >>> user.click('Biography')
     >>> user.getControl('Edit your biography').value
     'Some <strong>cool</strong> biography!'

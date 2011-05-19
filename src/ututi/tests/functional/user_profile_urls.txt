@@ -11,14 +11,14 @@ Every Ututi user has his public profile page, that other people can see:
 User can now set his "username", so that the url would not have numerical
 id in it. He does this via his settings:
 
-    >>> user.click('Settings')
+    >>> user.click('Edit profile')
     >>> user.getControl('Ututi username').value = 'admin'
     >>> user.click('Save', index=0)
     >>> user.click('Public profile')
     >>> user.url
     'http://localhost/user/admin'
 
-    >>> user.click('Settings')
+    >>> user.click('Edit profile')
     >>> user.getControl('Ututi username').value
     'admin'
 
@@ -32,7 +32,7 @@ This field is validated properly:
 Two users cannot have same username:
 
     >>> another = Browser.logIn('user@ututi.lt', 'password')
-    >>> another.click('Settings')
+    >>> another.click('Edit profile')
     >>> another.getControl('Ututi username').value = 'admin'
     >>> another.click('Save', index=0)
     >>> another.printCssQuery('.error-message',strip=True)
@@ -45,7 +45,7 @@ Teachers have separate URLs from users:
     >>> teacher.url
     'http://localhost/teacher/5'
 
-    >>> teacher.click('Settings')
+    >>> teacher.click('Edit profile')
     >>> teacher.getControl('Ututi username').value = 'benas.b'
     >>> teacher.click('Save', index=0)
     >>> teacher.click('Public profile')
@@ -60,7 +60,7 @@ Teachers have separate URLs from users:
 
 User can reset his username to empty if he wants to:
 
-    >>> user.click('Settings')
+    >>> user.click('Edit profile')
     >>> user.getControl('Ututi username').value = ''
     >>> user.click('Save', index=0)
     >>> user.click('Public profile')

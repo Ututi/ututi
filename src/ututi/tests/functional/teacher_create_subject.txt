@@ -58,7 +58,7 @@ This subject also appears on teacher's homepage:
 
 Let's go to the settings and change our location information:
 
-    >>> browser.getLink('Settings').click()
+    >>> browser.getLink('Edit profile').click()
     >>> browser.getControl('University').value = 'Vilniaus universitetas'
     >>> browser.getControl('Department').value = 'Ekonomikos fakultetas'
     >>> browser.getControl('Save', index=0).click()
