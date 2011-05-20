@@ -96,6 +96,6 @@
   </div>
 </div>
 
-${tabs(c.user_menu_items, c.user_menu_current_tab)}
+${tabs(c.tabs, c.current_tab)}
 
 ${next.body()}

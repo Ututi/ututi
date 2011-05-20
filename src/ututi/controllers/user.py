@@ -59,7 +59,7 @@ def teacher_profile_action(method):
 
         c.user_info = user
         c.all_teachers = get_all_teachers(user)
-        c.user_menu_items = user_menu_items()
+        c.tabs = teacher_tabs(user)
         return method(self, user)
     return _profile_action
 
@@ -75,24 +75,27 @@ def get_all_teachers(user):
         return []
 
 
-def user_menu_items():
+def teacher_tabs(teacher):
     """Generate a list of all possible actions."""
 
-    return [
+    tabs = [
         {'title': _("News feed"),
          'name': 'feed',
-         'link': c.user_info.url(),
-         'event': h.trackEvent(c.user_info, 'feed', 'breadcrumb')},
-        ] + [
-        {'title': _('Teaching'),
-         'name': 'subjects',
-         'link': c.user_info.url(action='teacher_subjects'),
-         'event': h.trackEvent(c.user_info, 'members', 'breadcrumb')},
-        {'title': _('Biography'),
-         'name': 'biography',
-         'link': c.user_info.url(action='teacher_biography'),
-         'event': h.trackEvent(c.user_info, 'biography', 'breadcrumb')},
-        ]
+         'link': teacher.url(),
+         'event': h.trackEvent(teacher, 'feed', 'breadcrumb')},
+    ]
+    if teacher.taught_subjects:
+        tabs.append({'title': _('Teaching'),
+                      'name': 'subjects',
+                      'link': teacher.url(action='teacher_subjects'),
+                      'event': h.trackEvent(teacher, 'members', 'breadcrumb')})
+    if teacher.description:
+        tabs.append({'title': _('Biography'),
+                      'name': 'biography',
+                      'link': teacher.url(action='teacher_biography'),
+                      'event': h.trackEvent(teacher, 'biography', 'breadcrumb')})
+
+    return tabs
 
 
 class UserInfoWallMixin(WallMixin):
@@ -143,7 +146,7 @@ class UserController(BaseController, UserInfoWallMixin):
     @teacher_profile_action
     def teacher_index(self, user):
         self._set_wall_variables(events_hidable=False)
-        c.user_menu_current_tab = 'feed'
+        c.current_tab = 'feed'
 
         if c.user:
             return render('user/teacher_profile.mako')
@@ -155,7 +158,7 @@ class UserController(BaseController, UserInfoWallMixin):
         if not c.user:
             redirect(user.url())
 
-        c.user_menu_current_tab = 'subjects'
+        c.current_tab = 'subjects'
         return render('user/teacher_subjects.mako')
 
     @teacher_profile_action
@@ -164,7 +167,7 @@ class UserController(BaseController, UserInfoWallMixin):
         if not c.user:
             redirect(user.url())
 
-        c.user_menu_current_tab = 'biography'
+        c.current_tab = 'biography'
         return render('user/teacher_biography.mako')
 
     @profile_action
