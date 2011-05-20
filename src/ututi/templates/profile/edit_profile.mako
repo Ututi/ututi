@@ -29,7 +29,9 @@
       </div>
       ${h.input_line('fullname', _('Full name'))}
       ${locationtag.location_widget(2, add_new=(c.tpl_lang=='pl'))}
-      %if not c.user.is_teacher:
+      %if c.user.is_teacher:
+        ${h.input_line('teacher_position', _('Position'), help_text=_("e.g. Associate professor"))}
+      %else:
         ${h.input_area('description', _('About yourself'), rows='5', col='40')}
       %endif
       ${h.input_submit()}

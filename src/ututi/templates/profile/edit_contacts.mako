@@ -33,6 +33,12 @@
 <form method="post" action="${url(controller='profile', action='update_contacts')}"
       id="contacts-form">
 
+  ## ADDRESS (FOR TEACHERS)
+
+  %if c.user.is_teacher:
+    ${h.input_line('work_address', _('Work address'))}
+  %endif
+
   ## GADU GADU
 
   %if c.gg_enabled:

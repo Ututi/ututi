@@ -129,7 +129,7 @@ class PhoneConfirmationForm(Schema):
 
 class ContactForm(Schema):
 
-    allow_extra_fields = False
+    allow_extra_fields = True
 
     msg = {'non_unique': _(u"This email is already in use.")}
     email = All(TranslatedEmailValidator(not_empty=True, strip=True),

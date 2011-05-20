@@ -219,6 +219,12 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         if c.user.location is not None:
             for n, tag in enumerate(c.user.location.hierarchy()):
                 defaults['location-%d' % n] = tag
+        if c.user.is_teacher:
+            additional = {
+                'teacher_position': c.user.teacher_position,
+                'work_address': c.user.work_address,
+            }
+            defaults.update(additional)
 
         return defaults
 
@@ -241,6 +247,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             'profile_is_public': None,
             'location': None,
             'url_name': None,
+            'teacher_position': None,
         }
         values.update(self.form_result)
 
@@ -253,6 +260,9 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         c.user.profile_is_public = bool(values['profile_is_public'])
         c.user.location = values['location']
         c.user.url_name = values['url_name']
+        if c.user.is_teacher:
+            # additional teacher fields
+            c.user.teacher_position = values['teacher_position']
         meta.Session.commit()
         h.flash(_('Your profile was updated.'))
         redirect(url(controller='profile', action='edit'))
@@ -408,6 +418,10 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             # site url
             c.user.site_url = self.form_result['site_url']
 
+            # address (teachers only)
+            if c.user.is_teacher:
+                c.user.work_address = self.form_result['work_address']
+
             if self.form_result['confirm_email']:
                 h.flash(_('Confirmation message sent. Please check your email.'))
                 email_confirmation_request(c.user, c.user.emails[0].email)
@@ -452,9 +466,11 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                 meta.Session.commit()
             elif phone_number != c.user.phone_number:
                 c.user.phone_number = phone_number
-                c.user.phone_confirmed = False
-                if phone_number:
-                    sms.confirmation_request(c.user)
+                if not c.user.is_teacher:
+                    # don't asks confirmations from teachers
+                    c.user.phone_confirmed = False
+                    if phone_number:
+                        sms.confirmation_request(c.user)
                 meta.Session.commit()
             elif phone_confirmation_key:
                 c.user.confirm_phone_number()
