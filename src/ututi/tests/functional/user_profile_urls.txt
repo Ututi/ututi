@@ -51,7 +51,7 @@ Teachers have separate URLs from users:
     >>> teacher.click('Public profile')
     >>> teacher.url
     'http://localhost/teacher/benas.b'
-    >>> teacher.click('Courses')
+    >>> teacher.click('Teaching')
     >>> teacher.url
     'http://localhost/teacher/benas.b/subjects'
     >>> teacher.click('Biography')

@@ -84,7 +84,7 @@ def user_menu_items():
          'link': c.user_info.url(),
          'event': h.trackEvent(c.user_info, 'feed', 'breadcrumb')},
         ] + [
-        {'title': _('Courses'),
+        {'title': _('Teaching'),
          'name': 'subjects',
          'link': c.user_info.url(action='teacher_subjects'),
          'event': h.trackEvent(c.user_info, 'members', 'breadcrumb')},
