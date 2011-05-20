@@ -123,6 +123,8 @@ def setup_orm(engine):
     global teachers_table
     teachers_table = Table("teachers", meta.metadata,
                         Column('teacher_position', Unicode(assert_unicode=True)),
+                        Column('work_address', Unicode(assert_unicode=True)),
+                        Column('publications', Unicode(assert_unicode=True)),
                         autoload=True,
                         useexisting=True,
                         autoload_with=engine)

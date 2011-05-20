@@ -86,6 +86,8 @@ create table teachers (
        id int8 references users(id) on delete cascade,
        teacher_verified boolean default null,
        teacher_position varchar(200) default null,
+       work_address varchar(200) default null,
+       publications text default null,
        primary key (id));;
 
 CREATE FUNCTION check_gadugadu() RETURNS trigger AS $$
