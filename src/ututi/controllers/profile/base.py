@@ -433,7 +433,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                 c.user.emails[0].email = email
                 c.user.emails[0].confirmed = False
                 email_confirmation_request(c.user, email)
-                meta.Session.commit()
                 sign_in_user(c.user)
 
             # handle GG
@@ -442,20 +441,16 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
             if self.form_result['resend_gadugadu_code']:
                 gg.confirmation_request(c.user)
-                meta.Session.commit()
             elif gadugadu_uin != c.user.gadugadu_uin:
                 c.user.gadugadu_uin = gadugadu_uin
                 c.user.gadugadu_confirmed = False
                 c.user.gadugadu_get_news = False
                 if gadugadu_uin:
                     gg.confirmation_request(c.user)
-                meta.Session.commit()
             elif gadugadu_confirmation_key:
                 c.user.gadugadu_confirmed = True
-                meta.Session.commit()
             else:
                 c.user.gadugadu_get_news = self.form_result['gadugadu_get_news']
-                meta.Session.commit()
 
             # handle phone number
             phone_number = self.form_result['phone_number']
@@ -463,7 +458,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
             if self.form_result['resend_phone_code']:
                 sms.confirmation_request(c.user)
-                meta.Session.commit()
             elif phone_number != c.user.phone_number:
                 c.user.phone_number = phone_number
                 if not c.user.is_teacher:
@@ -471,11 +465,11 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                     c.user.phone_confirmed = False
                     if phone_number:
                         sms.confirmation_request(c.user)
-                meta.Session.commit()
             elif phone_confirmation_key:
                 c.user.confirm_phone_number()
-                meta.Session.commit()
 
+        meta.Session.commit()
+        h.flash(_('Your contact information was updated.'))
         redirect(url(controller='profile', action='edit_contacts'))
 
     @ActionProtector("user")
