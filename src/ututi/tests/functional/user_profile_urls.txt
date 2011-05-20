@@ -51,12 +51,6 @@ Teachers have separate URLs from users:
     >>> teacher.click('Public profile')
     >>> teacher.url
     'http://localhost/teacher/benas.b'
-    >>> teacher.click('Teaching')
-    >>> teacher.url
-    'http://localhost/teacher/benas.b/subjects'
-    >>> teacher.click('Biography')
-    >>> teacher.url
-    'http://localhost/teacher/benas.b/biography'
 
 User can reset his username to empty if he wants to:
 
