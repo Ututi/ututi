@@ -20,7 +20,8 @@ from ututi.model import meta, File, TeacherGroup
 from ututi.model.events import TeacherMessageEvent
 from ututi.controllers.profile.base import ProfileControllerBase
 from ututi.controllers.profile.validators import BiographyForm, \
-        StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm
+        StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm, \
+        PublicationsForm
 
 def group_teacher_action(method):
     def _group_teacher_action(self, id=None):
@@ -76,10 +77,14 @@ class TeacherProfileController(ProfileControllerBase):
 
     def _edit_profile_tabs(self):
         tabs = ProfileControllerBase._edit_profile_tabs(self)
-        tabs.append(
+        tabs.extend([
             {'title': _("Biography"),
              'name': 'biography',
-             'link': url(controller='profile', action='edit_biography')})
+             'link': url(controller='profile', action='edit_biography')},
+            {'title': _("Publications"),
+             'name': 'publications',
+             'link': url(controller='profile', action='edit_publications')},
+        ])
         return tabs
 
     def _edit_biography_form(self):
@@ -109,6 +114,34 @@ class TeacherProfileController(ProfileControllerBase):
         h.flash(_('Your biography was updated.'))
 
         redirect(url(controller='profile', action='edit_biography'))
+
+    def _edit_publications_form(self):
+        c.tabs = self._edit_profile_tabs()
+        c.current_tab = 'publications'
+        return render('profile/teacher/edit_publications.mako')
+
+    @ActionProtector("user")
+    def edit_publications(self):
+        if c.user.publications and c.user.publications.strip():
+            # publication field is not empty
+            defaults = {'publications': c.user.publications}
+        else:
+            template = render('profile/teacher/publications_template.mako')
+            defaults = {'publications': template}
+            c.edit_template = True
+        return htmlfill.render(self._edit_publications_form(), defaults=defaults)
+
+    @validate(schema=PublicationsForm, form='_edit_publications_form')
+    @ActionProtector("user")
+    def update_publications(self):
+        if not hasattr(self, 'form_result'):
+            redirect(url(controller='profile', action='edit_publications'))
+
+        c.user.publications = self.form_result['publications']
+        meta.Session.commit()
+        h.flash(_('Your publications were updated.'))
+
+        redirect(url(controller='profile', action='edit_publications'))
 
     @ActionProtector("teacher")
     @validate(schema=StudentGroupForm, form='add_student_group', on_get=False)

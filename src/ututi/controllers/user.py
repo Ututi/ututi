@@ -94,6 +94,11 @@ def teacher_tabs(teacher):
                       'name': 'biography',
                       'link': teacher.url(action='teacher_biography'),
                       'event': h.trackEvent(teacher, 'biography', 'breadcrumb')})
+    if teacher.publications:
+        tabs.append({'title': _('Publications'),
+                      'name': 'publications',
+                      'link': teacher.url(action='teacher_publications'),
+                      'event': h.trackEvent(teacher, 'publications', 'breadcrumb')})
 
     return tabs
 
@@ -154,21 +159,22 @@ class UserController(BaseController, UserInfoWallMixin):
             return render('user/teacher_profile_public.mako')
 
     @teacher_profile_action
+    @ActionProtector("user")
     def teacher_subjects(self, user):
-        if not c.user:
-            redirect(user.url())
-
         c.current_tab = 'subjects'
         return render('user/teacher_subjects.mako')
 
     @teacher_profile_action
     @ActionProtector("user")
     def teacher_biography(self, user):
-        if not c.user:
-            redirect(user.url())
-
         c.current_tab = 'biography'
         return render('user/teacher_biography.mako')
+
+    @teacher_profile_action
+    @ActionProtector("user")
+    def teacher_publications(self, user):
+        c.current_tab = 'publications'
+        return render('user/teacher_publications.mako')
 
     @profile_action
     @ActionProtector("root")
