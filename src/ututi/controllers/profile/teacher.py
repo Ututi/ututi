@@ -139,7 +139,7 @@ class TeacherProfileController(ProfileControllerBase):
 
         c.user.publications = self.form_result['publications']
         meta.Session.commit()
-        h.flash(_('Your publications were updated.'))
+        h.flash(_('Your publication page was updated.'))
 
         redirect(url(controller='profile', action='edit_publications'))
 

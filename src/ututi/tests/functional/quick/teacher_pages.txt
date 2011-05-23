@@ -1,5 +1,5 @@
-Test teacher's "biography" functionality
-================================================
+Test teacher's biography page functionality
+===========================================
 
     >>> from ututi.lib.mailer import mail_queue
     >>> from ututi.lib.helpers import get_urls
@@ -102,6 +102,93 @@ in settings page:
          Some <strong>very cool</strong> biography!
     </div>
 
+If teacher removes his biography page by deleting it, he is again presented
+with a template:
+
+    >>> user.click('Edit profile')
+    >>> user.click('Biography')
+    >>> user.getControl('Edit your biography').value = ''
+    >>> user.click('Save')
+
+    >>> print user.getControl('Edit your biography').value
+    Provide any personal information that you would like to begin with.
+    Research interests
+    Include a brief summary of your interests. Cover past, current and future research plans.
+    Use bulleted list if needed.
+    Education
+    ...
+
+    >>> user.printCssQuery('.warning', strip=True)
+    <p>Below you see a template that you can freely edit.
+    Note that once your press "Save", it will become publicly
+    available in your profile page.</p>
+
 Mail queue is irrelevant for this test:
 
     >>> mail_queue[:] = []
+
+
+Test teacher's publication page functionality
+=============================================
+
+Teacher has a separate page where he can list his publications. This
+functionality is very similar to biography page and this test will
+overview main features.
+
+Teacher can enter his publications freeform by accessing "Publications" tab
+in his profile settings:
+
+    >>> user.click('Edit profile')
+    >>> user.click('Publications')
+    >>> user.url
+    'http://localhost/profile/edit/publications'
+
+For the first time text area contains a template that teacher can edit.
+It also displays a related warning message:
+
+    >>> print user.getControl('List your publications').value
+    List your publications that you consider most important, starting with most recent.
+    ...
+
+    >>> user.printCssQuery('.warning', strip=True)
+    <p>Below you see a template that you can freely edit.
+    Note that once your press "Save", it will become publicly
+    available in your profile page.</p>
+
+Let's try editing publications. Teacher cat enter rich text, using WYSIWYG
+editor:
+
+    >>> user.getControl('List your publications').value = "<a>Here</a> are my publications."
+    >>> user.getControl('Save').click()
+
+Publication page is created and a flash message is displayed to the teacher:
+
+    >>> user.printCssQuery('.flash-message-content', strip=True)
+    <span>Your publication page was updated.</span>
+
+Now let's go to Public profile and look at publication tab. We should see
+the text that teacher has just entered:
+
+    >>> user.click('Public profile')
+    >>> user.click('Publications')
+    >>> user.printCssQuery('#teacher-publications', strip=True)
+    <div>
+        <a>Here</a> are my publications.
+    </div>
+
+If teacher removes his publication page by deleting it, he is again presented
+with a template:
+
+    >>> user.click('Edit profile')
+    >>> user.click('Publications')
+    >>> user.getControl('List your publications').value = ''
+    >>> user.click('Save')
+
+    >>> print user.getControl('List your publications').value
+    List your publications that you consider most important, starting with most recent.
+    ...
+
+    >>> user.printCssQuery('.warning', strip=True)
+    <p>Below you see a template that you can freely edit.
+    Note that once your press "Save", it will become publicly
+    available in your profile page.</p>
