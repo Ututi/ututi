@@ -1265,6 +1265,24 @@ ul.feature-list {
     color: #6099cc;
 }
 
+ul.location-links {
+    display: inline;
+}
+
+ul.location-links li,
+.icon-list ul.location-links li { /* reset icon-list style */
+    display: inline;
+    margin-right: 2px;
+    padding-left: 10px;
+    background: url("/img/icons.com/arrow_right.png") no-repeat left center;
+}
+
+ul.location-links li.first,
+.icon-list ul.location-links li.first {
+    padding-left: 0;
+    background: none;
+}
+
 /* UTILITY CLASSES
  */
 

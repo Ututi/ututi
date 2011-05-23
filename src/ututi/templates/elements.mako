@@ -2,6 +2,33 @@
 Various reusable elements.
 </%doc>
 
+<%def name="location_links(location, full_title=False, external=False)">
+  <%doc>
+    Prints hierarchy of location tag with links.
+    - full_title -- use full titles instead of short ones,
+    - external -- use external site urls for links.
+  </%doc>
+  <ul class="location-links ${'full' if full_title else 'short'}">
+  %for index, tag in enumerate(location.hierarchy(True)):
+    <li class="${'first' if index == 0 else ''}">
+    %if external:
+      %if tag.site_url:
+        <a href="${tag.site_url}" class="external">
+          ${tag.title if full_title else tag.title_short}
+        </a>
+      %else:
+        ${tag.title if full_title else tag.title_short}
+      %endif
+    %else:
+      <a href="${tag.url()}">
+        ${tag.title if full_title else tag.title_short}
+      </a>
+    %endif
+    </li>
+  %endfor
+  </ul>
+</%def>
+
 <%def name="item_box(items, with_titles=False, per_row=None)">
   <%doc>
   Renders a box of item logos and optionally titles.

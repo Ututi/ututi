@@ -3,9 +3,8 @@
 <%namespace file="/portlets/user.mako" import="user_statistics_portlet,
         related_users_portlet, teacher_list_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet"/>
-<%namespace file="/elements.mako" import="tabs" />
+<%namespace file="/elements.mako" import="tabs, location_links" />
 <%namespace name="index" file="/user/index.mako" import="css" />
-<%namespace name="snippets" file="/sections/content_snippets.mako" />
 
 <%def name="portlets()">
   ${profile.portlets()}
@@ -66,7 +65,8 @@
     <ul class="icon-list">
 
       <li class="icon-network">
-        <strong>${_('Network')}:</strong> ${snippets.item_location_full(c.user_info)}
+        <strong>${_('Network:')}:</strong>
+        ${location_links(c.user_info.location, full_title=True)}
       </li>
 
       %if c.user_info.phone_number and c.user_info.phone_confirmed:

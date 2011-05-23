@@ -192,3 +192,37 @@ with a template:
     <p>Below you see a template that you can freely edit.
     Note that once your press "Save", it will become publicly
     available in your profile page.</p>
+
+
+Teacher public page details
+===========================
+
+Here we will test some of the details of teacher's public profile page.
+(Public profile page refers to what is shown to a user that is not logged in.)
+
+On the public profile page, teacher's location links to external web pages,
+instead of Ututi network pages:
+
+    >>> anonymous = Browser()
+    >>> anonymous.click('More')
+    >>> anonymous.click('U-niversity')
+    >>> anonymous.click('Teachers')
+    >>> anonymous.click('User')
+    >>> anonymous.printCssQuery('.location-links', strip=True)
+    <ul> <li>U-niversity</li> </ul>
+
+Now there are no links, because U-niversity has no site url set. Let's
+see what happens if we set one:
+
+    >>> admin = Browser.logIn()
+    >>> admin.open('http://localhost/structure/edit/1')
+    >>> admin.printCssQuery('h1')
+    <h1>U-niversity</h1>
+    >>> admin.getControl('Website').value = 'http://university.com'
+    >>> admin.click('Save')
+
+    >>> anonymous.reload()
+    >>> anonymous.printCssQuery('.location-links', strip=True)
+    <ul> <li> <a>U-niversity</a> </li> </ul>
+    >>> anonymous.getLink('U-niversity')
+    <Link text='U-niversity' url='http://university.com'>
