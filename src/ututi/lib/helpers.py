@@ -674,7 +674,8 @@ def user_done_items(user):
 def teacher_done_items(user):
     """Returns which actions teacher has done."""
     items = []
-    if user.site_url or user.phone_number:
+    if user.teacher_position or user.site_url \
+       or user.phone_number or user.work_address:
         items.append('profile')
     if user.description:
         items.append('biography')
