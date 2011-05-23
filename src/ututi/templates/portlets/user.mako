@@ -305,9 +305,11 @@
     <%def name="header()">
       ${title}
     </%def>
-    <ul class="teacher-list">
+    <ul class="icon-list" id="teacher-list">
     %for teacher in teachers:
-      <li>${h.link_to(teacher.fullname, teacher.url())}</li>
+      <li class="icon-teacher">
+        ${h.link_to(teacher.fullname, teacher.url())}
+      </li>
     %endfor
     </ul>
   </%self:portlet>
