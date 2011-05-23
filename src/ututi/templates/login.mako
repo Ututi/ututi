@@ -32,6 +32,9 @@
   #login-choice-right .button {
       margin: 20px 0;
   }
+  #login-or-remind {
+      width: 300px;
+  }
   #psw-remind-link {
       float: right;
       line-height: 20px;
@@ -66,7 +69,7 @@
       <label for="remember-me" class="notice">
         ${_('Keep me logged in on this computer')}
       </label>
-      <div class="clearfix" style="width: 210px">
+      <div class="clearfix" id="login-or-remind">
         <div id="psw-remind-link">
           <a href="${url(controller='home', action='pswrecovery')}"> ${_('Forgot password?')} </a>
         </div>

@@ -443,7 +443,7 @@ input {
     form input[type='text'],
     form input[type='password'],
     form textarea {
-        width: 300px;
+        width: 290px;
         font-size: 11px;
         height: 20px;
         border: 1px solid #666666;
