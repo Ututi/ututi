@@ -9,7 +9,7 @@
 
 <ul>
   <li>
-    ${_("Authors")}.  <a href="#"> <i>${_("Title")}</i></a>.
+    ${_("Authors")}.  <a href="http://example.com"> <i>${_("Title")}</i></a>.
     ${_("Name of series and volume")}, ${_("Year")}, ${_("Publishing house")},
     XXX p., ISBN XXX-XX-XXXX-XXX-X.
   </li>
@@ -21,10 +21,10 @@
   %for i in range(3):
   <li>
     ${_("Authors")}.  <b>${_("Title")}</b>.
-    <a href="#"><i>${_("Journal title")}</i></a>,
-    <a href="#">${_("Volume/issue")}</a>,
+    <a href="http://example.com"><i>${_("Journal title")}</i></a>,
+    <a href="http://example.com">${_("Volume/issue")}</a>,
     ${_("Year")}, p. XXX-XXX,
-    <a href="#">(PDF)</a>.
+    <a href="http://example.com">(PDF)</a>.
   </li>
   %endfor
 </ol>
