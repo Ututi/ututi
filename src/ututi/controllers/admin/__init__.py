@@ -23,7 +23,7 @@ from babel.dates import format_date
 
 from pylons import request, tmpl_context as c, url
 
-from ututi.lib.security import sign_in_admin_user
+from ututi.lib.security import sign_in_admin_user, sign_out_admin_user
 
 from ututi.lib.wall import WallMixin
 
@@ -136,6 +136,11 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
                 sign_in_admin_user(admin_user)
                 redirect(url(controller='admin', action='index'))
         return render('admin/login.mako')
+
+    @ActionProtector("root")
+    def logout(admin_user):
+        sign_out_admin_user()
+        redirect(url('frontpage'))
 
     def _stripAndDecode(self, rows):
         return [[column.strip().decode('utf-8') for column in row]
