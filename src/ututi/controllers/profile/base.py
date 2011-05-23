@@ -460,10 +460,13 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                 sms.confirmation_request(c.user)
             elif phone_number != c.user.phone_number:
                 c.user.phone_number = phone_number
-                if not c.user.is_teacher:
-                    # don't asks confirmations from teachers
-                    c.user.phone_confirmed = False
-                    if phone_number:
+                c.user.phone_confirmed = False
+                if phone_number:
+                    # new number
+                    if c.user.is_teacher:
+                        # don't asks confirmations from teachers
+                        c.user.phone_confirmed = True
+                    else:
                         sms.confirmation_request(c.user)
             elif phone_confirmation_key:
                 c.user.confirm_phone_number()
