@@ -1496,7 +1496,10 @@ ul.inline-list li {
     ul.icon-list li.icon-message { background-image: url('img/icons.com/message_small_grey.png'); }
     ul.icon-list li.icon-message.active { background-image: url('img/icons.com/message_small_orange.png'); }
     ul.icon-list li.icon-group { background-image: url('img/icons.com/group_small_grey.png'); }
-    ul.icon-list li.icon-network { background-image: url('img/icons.com/network_grey.png'); }
+    ul.icon-list li.icon-network {
+        background-image: url('img/icons.com/network_grey.png');
+        background-position: -2px center;
+    }
     ul.icon-list li.icon-subject { background-image: url('img/icons.com/subject_small_grey.png'); }
     ul.icon-list li.icon-mobile {
         background-image: url('img/icons.com/mobile.png');

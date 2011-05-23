@@ -3,6 +3,7 @@
         related_users_portlet, teacher_list_portlet, teacher_related_links_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet"/>
 <%namespace file="/elements.mako" import="tabs, location_links" />
+<%namespace name="base" file="/user/teacher_base.mako" />
 <%namespace name="index" file="/user/index.mako" import="css" />
 <%namespace name="snippets" file="/sections/content_snippets.mako" />
 
@@ -22,53 +23,16 @@
 </%def>
 
 <%def name="css()">
-   ${parent.css()}
-   ${index.css()}
+  ${parent.css()}
+  ${index.css()}
+  ${base.css()}
 </%def>
 
 <h1 class="page-title underline">
-  ${_('Teacher')} ${c.user_info.fullname}
+  ${c.user_info.fullname}
 </h1>
 
-<div id="user-information" class="clearfix">
-  <div class="user-logo">
-    <img id="user-logo" src="${c.user_info.url(action='logo', width=130)}" alt="logo" />
-  </div>
-
-  <div class="user-info">
-    <ul class="icon-list">
-
-      <li class="icon-network">
-        <strong>${_('Network')}:</strong>
-        ${location_links(c.user_info.location, full_title=True, external=True)}
-      </li>
-
-      %if c.user_info.phone_number and c.user_info.phone_confirmed:
-      <li class="icon-mobile">
-        <strong>${_('Phone:')}:</strong> ${c.user_info.phone_number}
-      </li>
-      %endif
-
-      %if c.user_info.emails:
-      <li class="icon-contact">
-        <strong>${_('E-mail')}:</strong> ${h.literal(', '.join([h.mail_to(email.email) for email in c.user_info.emails if email.confirmed]))}
-      </li>
-      %endif
-
-      %if c.user_info.site_url:
-      <li class="icon-internet">
-        <strong>${_('Personal webpage')}:</strong><br /><a href="${c.user_info.site_url}">${c.user_info.site_url}</a>
-      </li>
-      %endif
-
-      ## <li class="icon-social-buttons">
-      ##   <a href="#"><img src="${url('/img/social/facebook_16.png')}" /></a>
-      ##   <a href="#"><img src="${url('/img/social/twitter_16.png')}" /></a>
-      ## </div>
-
-    </ul>
-  </div>
-</div>
+${base.teacher_info_block()}
 
 <div class="section subjects">
   <div class="title">${_("Taught courses")}:</div>

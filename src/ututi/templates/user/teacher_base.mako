@@ -25,8 +25,11 @@
 </%def>
 
 <%def name="css()">
-   ${parent.css()}
-   ${index.css()}
+  ${parent.css()}
+  ${index.css()}
+  .teacher-position {
+    font-size: 14px;
+  }
 </%def>
 
 %if c.user is not None:
@@ -54,25 +57,38 @@
 %endif
 
 <h1 class="page-title underline">
-  ${_('Teacher')} ${c.user_info.fullname}
+  ${c.user_info.fullname}
 </h1>
 
+<%def name="teacher_info_block()">
 <div id="user-information" class="clearfix">
   <div class="user-logo">
     <img id="user-logo" src="${c.user_info.url(action='logo', width=130)}" alt="logo" />
   </div>
 
   <div class="user-info">
+
+    %if c.user_info.teacher_position:
+      <div class="teacher-position">
+        ${c.user_info.teacher_position}
+      </div>
+    %endif
+
+    <div class="teacher-location">
+      ${location_links(c.user_info.location, full_title=True, external=True)}
+    </div>
+
     <ul class="icon-list">
 
-      <li class="icon-network">
-        <strong>${_('Network:')}:</strong>
-        ${location_links(c.user_info.location, full_title=True)}
+      %if c.user_info.work_address:
+      <li class="icon-university">
+        <strong>${_('Address')}:</strong> ${c.user_info.work_address}
       </li>
+      %endif
 
       %if c.user_info.phone_number and c.user_info.phone_confirmed:
       <li class="icon-mobile">
-        <strong>${_('Phone:')}:</strong> ${c.user_info.phone_number}
+        <strong>${_('Phone')}:</strong> ${c.user_info.phone_number}
       </li>
       %endif
 
@@ -83,7 +99,7 @@
       %endif
 
       %if c.user_info.site_url:
-      <li class="icon-internet">
+      <li class="icon-network">
         <strong>${_('Personal webpage')}:</strong><br /><a href="${c.user_info.site_url}">${c.user_info.site_url}</a>
       </li>
       %endif
@@ -96,6 +112,9 @@
     </ul>
   </div>
 </div>
+</%def>
+
+${teacher_info_block()}
 
 ${tabs(c.tabs, c.current_tab)}
 
