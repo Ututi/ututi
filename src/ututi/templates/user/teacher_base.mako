@@ -1,7 +1,7 @@
 <%inherit file="/base.mako" />
 <%namespace file="/profile/base.mako" name="profile"/>
 <%namespace file="/portlets/user.mako" import="user_statistics_portlet,
-        related_users_portlet, teacher_list_portlet"/>
+        related_users_portlet, teacher_list_portlet, teacher_related_links_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet"/>
 <%namespace file="/elements.mako" import="tabs, location_links" />
 <%namespace name="index" file="/user/index.mako" import="css" />
@@ -11,6 +11,7 @@
 </%def>
 
 <%def name="portlets_right()">
+  ${teacher_related_links_portlet(c.user_info)}
   ${share_portlet(c.user_info)}
   ${user_statistics_portlet(c.user_info)}
   %if c.user_info.location:

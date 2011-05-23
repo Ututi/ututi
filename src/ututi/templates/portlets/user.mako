@@ -316,6 +316,31 @@
   %endif
 </%def>
 
+<%def name="teacher_related_links_portlet(teacher=None)">
+  <% if teacher is None: teacher = c.user %>
+  %if teacher:
+  <%self:portlet id="related-links-portlet">
+    <%def name="header()">
+      ${_("Related links:")}
+    </%def>
+    <ul class="icon-list" id="related-links-list">
+      %for tag in reversed(teacher.location.hierarchy(True)):
+        %if tag.site_url:
+          <li class="icon-university">
+            ${h.link_to(tag.title, tag.site_url)}
+          </li>
+        %endif
+      %endfor
+      <li class="icon-university">
+        ${h.link_to(_("%(title_abbr)s social network") % \
+          dict(title_abbr=teacher.location.title_short.upper()),
+          teacher.location.url())}
+      </li>
+    </ul>
+  </%self:portlet>
+  %endif
+</%def>
+
 <%def name="profile_page_portlet()">
   %if c.user is not None:
   <%self:portlet id="profile-page-portlet">
