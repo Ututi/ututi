@@ -26,7 +26,7 @@
 <div class="explanation-post-header">
   <h2>${_('Contact information')}</h2>
   <p class="tip">
-    ${_("Be findable.")}
+    ${_("Edit your contact information below. Some fields may require confirmation.")}
   </p>
 </div>
 
