@@ -1055,7 +1055,7 @@ ul.feature-list {
     color: #666666;
     font-size: 11px;
     padding: 10px 15px 10px 30px;
-    background: url("img/icons/dalykas-very-small.png") no-repeat 10px 10px;
+    background: url("img/icons.com/subject_medium_grey.png") no-repeat 10px 12px;
 }
 
     .subject-description.save-space-right {
@@ -1078,13 +1078,28 @@ ul.feature-list {
     }
 
     .subject-description dd.files {
-        padding-left: 18px;
-        background: url('img/icons/files_13.png') no-repeat left center;
+        padding-left: 16px;
+        background: url('img/icons.com/file_medium_grey.png') no-repeat left center;
+    }
+
+    .subject-description dd.settings {
+        padding-left: 16px;
+        background: url('/img/icons.com/settings.png') no-repeat left center;
+    }
+
+    .subject-description dd.feed {
+        padding-left: 20px;
+        background: url('/img/icons.com/message_medium_grey.png') no-repeat left center;
+    }
+
+    .subject-description dd.files {
+        padding-left: 16px;
+        background: url('img/icons.com/file_medium_grey.png') no-repeat left center;
     }
 
     .subject-description dd.pages {
-        padding-left: 18px;
-        background: url('img/icons/pages_13.png') no-repeat left center;
+        padding-left: 16px;
+        background: url('img/icons.com/wiki_medium_grey.png') no-repeat left center;
     }
 
     .subject-description dd.files,

@@ -1,5 +1,16 @@
 $(document).ready(function() {
 
+    $('.unteach-button').click(function() {
+      var actionurl = this.href + '&js=1';
+      var container = $(this).closest('.subject-description');
+      $.post(actionurl, function(status) {
+        if (status == 'OK')
+          container.slideUp('fast', function() {
+            $(this).remove();
+          });
+      });
+      return false;
+
     $('.group-description .click-action').click(function() {
         id = $(this).attr('id');
         if ($(this).hasClass('open')) {
