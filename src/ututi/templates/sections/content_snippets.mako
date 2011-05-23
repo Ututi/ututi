@@ -150,7 +150,8 @@ Snippets for rendering various content items, e.g. in search results.
 
 <%def name="subject(object)">
   <div class="search-item snippet-subject">
-    %if c.user is not None and not c.user.watches(object):
+    %if c.user is not None and not c.user.watches(object) \
+        and not c.user.is_teacher:
       <div class="action-button">
         ${h.button_to(_('Follow'), object.url(action='watch'), class_='dark add')}
       </div>
