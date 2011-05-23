@@ -54,6 +54,7 @@ class JSStructureForm(Schema):
 
 class EditStructureForm(NewStructureForm):
     logo_delete = validators.StringBoolean(if_missing=False)
+    site_url = validators.URL()
 
 
 class AutoCompletionForm(Schema):
@@ -148,6 +149,7 @@ class StructureController(BaseController):
             c.item.title = values['title']
             c.item.title_short = values['title_short']
             c.item.description = values['description']
+            c.item.site_url = values['site_url']
             c.item.region_id = int(values['region']) or None
 
             if values['logo_delete']:
