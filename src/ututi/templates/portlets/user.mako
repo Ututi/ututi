@@ -5,7 +5,7 @@
 <%def name="user_menu_portlet()">
   <%self:portlet id="user-menu-portlet">
   <ul id="user-sidebar-menu" class="icon-list">
-    %if c.user.is_freshman():
+    %if not c.user.is_teacher and c.user.is_freshman():
     <li class="icon-ututi"> <a href="${url(controller='profile', action='get_started')}">${_("Get started")}</a> </li>
     %endif
     %if c.user.is_teacher:

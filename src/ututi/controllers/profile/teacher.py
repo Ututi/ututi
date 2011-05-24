@@ -36,19 +36,12 @@ class TeacherProfileController(ProfileControllerBase):
 
     @ActionProtector("teacher")
     def home(self):
-        if c.user.is_freshman():
-            redirect(url(controller='profile', action='get_started'))
-        else:
-            redirect(url(controller='profile', action='dashboard'))
+        redirect(url(controller='profile', action='dashboard'))
 
     @ActionProtector("teacher")
     def register_welcome(self):
         c.welcome = True
-        return render('/profile/teacher/get_started.mako')
-
-    @ActionProtector("teacher")
-    def get_started(self):
-        return render('/profile/teacher/get_started.mako')
+        return render('/profile/teacher/dashboard.mako')
 
     @ActionProtector("teacher")
     def dashboard(self):
