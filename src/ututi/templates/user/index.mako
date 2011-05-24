@@ -42,32 +42,6 @@
   #user-information .about-self {
     margin-top: 10px;
   }
-  .section {
-    margin-top: 30px;
-    padding-left: 40px;
-    background-position: top left;
-    background-repeat: no-repeat;
-  }
-  .section.subjects {
-    background-image: url("/img/icons.com/about/subject.png");
-  }
-  .section.groups {
-    background-image: url("../img/icons.com/group_grand_grey.png");
-  }
-  .section.events {
-    background-image: url("../img/icons.com/clock_grand.png");
-  }
-  .section.biography {
-    background-image: url("/img/icons.com/about/wiki_edit.png");
-  }
-  .section .title {
-    border-bottom: 1px solid #f90;
-    font-size: 14px;
-    font-weight: bold;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
-    color: #333;
-  }
 </%def>
 
 %if c.user is not None:

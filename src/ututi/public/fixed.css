@@ -1030,22 +1030,31 @@ ul.feature-list {
     position: relative;
 }
 
-.u-object dt, .u-object dd {
-    display: inline;
-}
+    .u-object dt, .u-object dd {
+        display: inline;
+    }
 
-.u-object .hide_me {
-  position: absolute;
-  right: 30px;
-  top: 10px;
-  display: none;
-  width: 15px;
-  height: 15px;
-}
+    .u-object .hide_me {
+        position: absolute;
+        right: 30px;
+        top: 10px;
+        display: none;
+        width: 15px;
+        height: 15px;
+    }
 
-.row:hover .u-object .hide_me {
-  display: block;
-}
+    .row:hover .u-object .hide_me {
+        display: block;
+    }
+
+    .u-object .close-button {
+        float: right;
+        display: none;
+    }
+
+    .u-object:hover .close-button {
+        display: block;
+    }
 
 
 /* SUBJECT DESCRIPTION
@@ -1179,7 +1188,7 @@ ul.feature-list {
     color: #666666;
     font-size: 11px;
     padding: 10px 15px 10px 30px;
-    background: url("img/icons/icon-group-tiny.png") no-repeat 10px 10px;
+    background: url("/img/icons.com/group_medium_grey.png") no-repeat 10px 10px;
 }
 
     .group-description dd {
@@ -1193,10 +1202,6 @@ ul.feature-list {
     .group-description .group-title dt {
         font-size: 13px;
         font-weight: bold;
-    }
-
-    .group-description .group-title .group-email {
-        color: #999;
     }
 
     .group-description .group-actions {
@@ -1225,19 +1230,32 @@ ul.feature-list {
     }
 
         .group-description dd.files {
-            background: url('img/icons/file-off-small.png') no-repeat left;
+            padding-left: 16px;
+            background: url('/img/icons.com/file_medium_grey.png') no-repeat left center;
         }
 
         .group-description dd.messages {
-            background: url('img/icons/message-off-very-small.png') no-repeat left;
+            padding-left: 20px;
+            background: url('/img/icons.com/message_medium_grey.png') no-repeat left center;
         }
 
         .group-description dd.subjects {
-            background: url('img/icons/dalykas-very-small.png') no-repeat left;
+            background: url('/img/icons.com/subject_medium_grey.png') no-repeat left center;
+        }
+
+        .group-description dd.email {
+            padding-left: 14px;
+            background: url('/img/icons.com/contact_small.png') no-repeat left center;
         }
 
         .group-description dd.sms {
-            background: url('img/icons/sms_small.png') no-repeat left;
+            padding-left: 12px;
+            background: url('/img/icons.com/mobile.png') no-repeat left center;
+        }
+
+        .group-description dd.settings {
+            padding-left: 16px;
+            background: url('/img/icons.com/settings.png') no-repeat left center;
         }
 
 
@@ -1284,19 +1302,23 @@ ul.location-links {
     display: inline;
 }
 
-ul.location-links li,
-.icon-list ul.location-links li { /* reset icon-list style */
-    display: inline;
-    margin-right: 2px;
-    padding-left: 10px;
-    background: url("/img/icons.com/arrow_right.png") no-repeat left center;
-}
+    ul.location-links.short {
+        text-transform: uppercase;
+    }
 
-ul.location-links li.first,
-.icon-list ul.location-links li.first {
-    padding-left: 0;
-    background: none;
-}
+    ul.location-links li,
+    .icon-list ul.location-links li { /* reset icon-list style */
+        display: inline;
+        margin-right: 2px;
+        padding-left: 10px;
+        background: url("/img/icons.com/arrow_right.png") no-repeat left center;
+    }
+
+    ul.location-links li.first,
+    .icon-list ul.location-links li.first {
+        padding-left: 0;
+        background: none;
+    }
 
 /* UTILITY CLASSES
  */
@@ -1405,15 +1427,6 @@ ul.location-links li.first,
     .message {
         color: #333333;
     }
-
-/* CLICK ACTION BLOCKS
- a pattern-in-progress: click-action opens an associated click-action-block,
-  maintaining that one block of a group is shown at a time
- */
-.click-action-block {
-    display: none;
-}
-    .click-action-block.open { display: block; }
 
 /* CLICK2SHOW styles
  */
@@ -1878,36 +1891,43 @@ ul.tabs {
     }
 
 
-/* TEACHER'S VIEWS (HOME & PUBLIC)
+/* SECTION.
  */
 
-#teacher {}
+.section {
+    margin-top: 30px;
+    padding-left: 40px;
+    background-position: top left;
+    background-repeat: no-repeat;
+}
 
-    #teacher .section {
-        margin-top: 30px;
-        padding-left: 40px;
-        background-position: top left;
-        background-repeat: no-repeat;
-    }
-
-    #teacher .section.subjects {
+    .section.subjects {
         background-image: url("/img/icons.com/about/subject.png");
     }
 
-    #teacher .section.groups {
-        background-image: url("/img/icons.com/about/group.png");
+    .section.groups {
+        background-image: url("../img/icons.com/about/group.png");
     }
 
-    #teacher .section .title {
+    .section.events {
+        background-image: url("../img/icons.com/clock_grand.png");
+    }
+
+    .section.biography {
+        background-image: url("/img/icons.com/about/wiki_edit.png");
+    }
+
+    .section .title {
         position: relative;
         border-bottom: 1px solid #f90;
-        font-size: 13px;
+        font-size: 14px;
         font-weight: bold;
         padding-bottom: 5px;
         margin-bottom: 5px;
+        color: #333;
     }
 
-    #teacher .add-button {
+    .section .action-button {
         position: absolute;
         bottom: 2px;
         right: 0px;

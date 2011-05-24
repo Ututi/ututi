@@ -152,6 +152,7 @@ def setup_orm(engine):
 
     global teacher_groups_table
     teacher_groups_table = Table("teacher_groups", meta.metadata,
+                                 Column('title', Unicode(assert_unicode=True)),
                                  autoload=True,
                                  autoload_with=engine)
 

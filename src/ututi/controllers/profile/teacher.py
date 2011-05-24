@@ -147,11 +147,14 @@ class TeacherProfileController(ProfileControllerBase):
     @validate(schema=StudentGroupForm, form='add_student_group', on_get=False)
     def add_student_group(self):
         if hasattr(self, 'form_result'):
-            grp = TeacherGroup(self.form_result['title'],
-                               self.form_result['email'])
-            c.user.student_groups.append(grp)
+            group = TeacherGroup(self.form_result['title'],
+                                 self.form_result['email'])
+            c.user.student_groups.append(group)
             meta.Session.commit()
-            h.flash(_('Group added!'))
+            message = _(u'Group %(group_title)s (%(group_email)s) added!') % {
+                'group_title': group.title,
+                'group_email': group.email}
+            h.flash(message)
             redirect(url(controller='profile', action='dashboard'))
         return render('profile/add_student_group.mako')
 
@@ -177,7 +180,10 @@ class TeacherProfileController(ProfileControllerBase):
             group.email = self.form_result['email']
             group.update_binding()
             meta.Session.commit()
-            h.flash(_('Group updated!'))
+            message = _(u'Group %(group_title)s (%(group_email)s) updated!') % {
+                'group_title': group.title,
+                'group_email': group.email}
+            h.flash(message)
             redirect(url(controller='profile', action='dashboard'))
         return htmlfill.render(self._edit_student_group(), defaults=defaults)
 
@@ -190,9 +196,12 @@ class TeacherProfileController(ProfileControllerBase):
         if hasattr(self, 'form_result'):
             group = TeacherGroup.get(int(self.form_result['group_id']))
             if group is not None and group.teacher == c.user:
+                message = _(u'Group %(group_title)s (%(group_email)s) was deleted.') % {
+                    'group_title': group.title,
+                    'group_email': group.email}
                 meta.Session.delete(group)
                 meta.Session.commit()
-                h.flash(_('Group deleted.'))
+                h.flash(message)
             else:
                 abort(404)
         redirect(url(controller='profile', action='dashboard'))

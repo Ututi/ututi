@@ -1,38 +1,20 @@
 $(document).ready(function() {
 
-    $('.unteach-button').click(function() {
-      var actionurl = this.href + '&js=1';
-      var container = $(this).closest('.subject-description');
-      $.post(actionurl, function(status) {
-        if (status == 'OK')
-          container.slideUp('fast', function() {
-            $(this).remove();
-          });
-      });
-      return false;
-
-    $('.group-description .click-action').click(function() {
-        id = $(this).attr('id');
-        if ($(this).hasClass('open')) {
-            $(this).removeClass('open');
-            $('#' + id + '-block').slideUp(300);
-        } else {
-            $(this).closest('.group-description').find('a.click-action.open').each(function(){
-                $(this).removeClass('open');
-                var cls_id = $(this).attr('id');
-                $('#' + cls_id + '-block').slideUp(300);
-            });
-            $(this).addClass('open');
-            $('#' + id + '-block').slideDown(300);
-        }
+    $('.group-description .action-link').click(function() {
+        var group = $(this).closest('.group-description')
+        $('.action-block:visible').slideUp('fast');
+        if ($(this).hasClass('email'))
+            group.find('.email.action-block:hidden').slideDown('fast');
+        else if ($(this).hasClass('sms'))
+            group.find('.sms.action-block:hidden').slideDown('fast');
         return false;
     });
 
-    $('.message_send').click(function(){
+    $('.message-send').click(function(){
         var form = $(this).closest('form');
-        var message_send_url = $(".message_send_url", form).val();
-        subject = $('.message_subject', form).val();
-        message = $('.message', form).val();
+        var message_send_url = $(".message-send-url", form).val();
+        var subject = $('.message-subject', form).val();
+        var message = $('.message', form).val();
 
         if ((subject != '') && (message != '')) {
             form.ajaxSubmit({
@@ -40,19 +22,19 @@ $(document).ready(function() {
                 iframe: true,
                 dataType: 'json',
                 success: function(data, status) {
-                           return function() {
-                               if (data.success != true) {
-                                   for (var key in data.errors) {
-                                       var error = data.errors[key];
-                                       $('.'+key, form).parent().after($('<div class="error-message">'+error+'</div>'));
-                                   }
-                               } else {
-                                   $(form).find('input[type!="hidden"], textarea').val('');
-                                   container = $(form).closest('.group-description');
-                                   $('.send_message', container).click();
-                                   $('.message-sent', container).removeClass('hidden');
-                               }
-                           }(data, status, form);
+                   return function() {
+                       if (data.success != true) {
+                           for (var key in data.errors) {
+                               var error = data.errors[key];
+                               $('.'+key, form).parent().after($('<div class="error-message">'+error+'</div>'));
+                           }
+                       } else {
+                           $(form).find('input[type!="hidden"], textarea').val('');
+                           var container = $(form).closest('.group-description');
+                           $('.email.action-link', container).click();
+                           $('.message-sent', container).show().delay(3000).fadeOut();
+                       }
+                   }(data, status, form);
                 }
             });
         }
