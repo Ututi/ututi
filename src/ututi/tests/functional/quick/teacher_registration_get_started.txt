@@ -191,23 +191,17 @@ TODO for this test:
 
 
 
-Teacher's get started functionality
-===================================
+Teacher's dashboard get started functionality
+=============================================
 
-We will use one of the registered teachers to show teacher's "Get started"
-page functionality. To newly registered teacher Ututi shows "Get started"
-page as a home page.
+We will use one of the registered teachers to show teacher's dashboard
+page functionality.
 
     >>> user = Browser.logIn('user@example.com', 'password')
     >>> user.printCssQuery('.page-title', strip=True)
     <h1>Get started</h1>
 
-On the right hand menu there is also a "Get started" menu item:
-
-    >>> user.getLink('Get started')
-    <Link text='Get started' url='http://localhost/home/start'>
-
-User sees these options:
+User sees these recommended actions on his dashboard:
 
     >>> user.printCssQuery('.step span.title', strip=True)
     <span>Fill your profile information</span>
@@ -221,14 +215,16 @@ Edit profile button brings user to his profile edit page (duh!):
     >>> user.url
     'http://localhost/profile/edit?'
 
-If user add some info, this action will be marked as complete:
+If user add some info, this action will dissapear from the dashboard:
 
     >>> user.click('Contacts')
     >>> user.getControl('Address of your website').value = 'http://myblog.com'
     >>> user.click('Save')
     >>> user.click('Home')
-    >>> user.printCssQuery('.step.complete span.title', strip=True)
-    <span>Fill your profile information</span>
+    >>> user.printCssQuery('.step span.title', strip=True)
+    <span>Create your subjects</span>
+    <span>Complete your profile page</span>
+    <span>Add your student groups</span>
 
 Subject's section allows to lookup and create subjects. Let's
 create a subject now:
@@ -240,12 +236,12 @@ create a subject now:
     'http://localhost/subjects/add_description'
     >>> user.getControl('Create').click()
 
-Now this action is also marked as complete:
+Now this action has also disappeared:
 
     >>> user.click('Home')
-    >>> user.printCssQuery('.step.complete span.title', strip=True)
-    <span>Fill your profile information</span>
-    <span>Create your subjects</span>
+    >>> user.printCssQuery('.step span.title', strip=True)
+    <span>Complete your profile page</span>
+    <span>Add your student groups</span>
 
 Group's section offers to add student groups:
 
@@ -268,49 +264,15 @@ public teacher's profile page:
     >>> user.getControl('Edit your biography').value = "Some <strong>cool</strong> biography!"
     >>> user.getControl('Save').click()
 
-Now user has completed enough actions, so his homepage has been
-switched to teacher's dashboard:
+And if teacher downgrades some actions (i.e. removes all subjects), the
+appropriate action will again appear on his dashboard. We will test this
+behavior by removing profile information:
 
-    >>> user.click('Home')
-    >>> user.url
-    'http://localhost/profile/dashboard'
-
-The "Get started" menu item is removed as well:
-
-    >>> user.getLink('Get started')
-    Traceback (most recent call last):
-    ...
-    LinkNotFoundError
-
-He can, however, visit get started page if he really wants to:
-
-    >>> user.open('http://localhost/home/start')
-
-He will see, that three actions are now marked as complete:
-
-    >>> user.printCssQuery('.step.complete span.title', strip=True)
-    <span>Fill your profile information</span>
-    <span>Create your subjects</span>
-    <span>Complete your profile page</span>
-
-And if teacher downgrades to not having enough actions done (i.e. removes all
-subjects), his homepage is again switched to the "Get started" page. (This is
-how current implementation works, and maybe it would be better not to switch
-again.) We will test this behavior by removing profile information:
-
-    >>> user.getControl('Edit profile', index=0).click()
+    >>> user.click('Edit profile')
     >>> user.click('Contacts')
     >>> user.getControl('Address of your website').value = ''
     >>> user.click('Save')
     >>> user.click('Home')
-    >>> user.url
-    'http://localhost/home/start'
-
-    >>> user.printCssQuery('.step.complete span.title', strip=True)
-    <span>Create your subjects</span>
-    <span>Complete your profile page</span>
-
-"Get started" menu item is also available again:
-
-    >>> user.getLink('Get started')
-    <Link text='Get started' url='http://localhost/home/start'>
+    >>> user.printCssQuery('.step span.title', strip=True)
+    <span>Fill your profile information</span>
+    <span>Add your student groups</span>

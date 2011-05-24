@@ -41,22 +41,22 @@ If we click on the link, we are redirected to Benas' page:
 
 The selected course is now displayed in his home page:
 
-    >>> browser.getLink('Teacher dashboard').click()
+    >>> browser.getLink('Dashboard').click()
     >>> browser.printCssQuery('.subject-description-list dt a', strip=True)
     <a>Matematin&#279; analiz&#279;</a>
 
-Teacher can click "Create wiki page" link to be directed straight to 
-page creation view:
+Teacher can click "Wiki notes" link to be directed straight to
+subject's notes page:
 
-    >>> browser.getLink("Create wiki page").click()
+    >>> browser.getLink("Wiki notes").click()
     >>> browser.url
-    'http://localhost/subject/vu/mat_analize/notes/add'
+    'http://localhost/subject/vu/mat_analize/notes'
 
 As for files, there is no "add file" view available, and subjects home
 page is responsible for that functionality, so teacher is directed there:
 
     >>> browser.goBack()
-    >>> browser.getLink("Upload file").click()
+    >>> browser.getLink("Files").click()
     >>> browser.url
     'http://localhost/subject/vu/mat_analize/files'
 
@@ -93,7 +93,7 @@ appears. So let's again add and remove the course from taught courses list:
     Matematin&#279; analiz&#279; has been added to your taught courses list.
 
     >>> browser.getLink('Home').click()
-    >>> browser.getLink('Teacher dashboard').click()
+    >>> browser.getLink('Dashboard').click()
     >>> browser.getLink(url='/profile/unteach_subject?subject_id=3').click()
     >>> browser.printQuery("//div[@class='flash-message']/span//text()")
     Matematin&#279; analiz&#279; has been removed from your taught courses list.

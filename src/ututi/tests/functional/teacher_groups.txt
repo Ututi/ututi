@@ -5,12 +5,10 @@ Let's login as a verified teacher:
 
     >>> browser = Browser().logIn('benas@ututi.lt', 'password')
 
-    >>> browser.printQuery("id('groups_list')//div[@class='title']/text()")
-
 Let's add a group (since we have none at the moment):
 
-    >>> browser.click('Teacher dashboard')
-    >>> browser.getControl('Add students groups').click()
+    >>> browser.click('Dashboard')
+    >>> browser.getControl('Add student group').click()
     >>> browser.getControl('Title').value = 'group A'
     >>> browser.getControl('Email address').value = 'group@groups.google.com'
     >>> browser.getControl('Save').click()
@@ -19,7 +17,8 @@ Let's add a group (since we have none at the moment):
     group A
 
 Let's edit the group:
-    >>> browser.getLink('Edit this group').click()
+
+    >>> browser.getLink('Edit group').click()
     >>> browser.getControl('Title').value = 'Group A+'
     >>> browser.getControl('Save').click()
 
@@ -32,7 +31,7 @@ And delete it:
 
 Ok, let's add three groups: non-ututi, ututi (mailing list) and ututi (forum):
 
-    >>> browser.getControl('Add students groups').click()
+    >>> browser.getControl('Add student group').click()
     >>> browser.getControl('Title').value = 'outsiders'
     >>> browser.getControl('Email address').value = 'group@groups.google.com'
     >>> browser.getControl('Save').click()

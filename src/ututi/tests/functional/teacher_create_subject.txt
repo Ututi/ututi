@@ -4,11 +4,7 @@ Test teacher's create subject workflow
 Let's login as a verified teacher:
 
     >>> browser = Browser.logIn('benas@ututi.lt', 'password')
-
-We click the big button to create the first subject:
-
-    >>> browser.click('Teacher dashboard')
-    >>> browser.click('Add your courses')
+    >>> browser.open('http://localhost/subjects/add/')
 
 The teacher has been assigned to default location (U-niversity),
 so so location fields are prefilled:
@@ -52,7 +48,7 @@ On the subject page Benas is listed as the lecturer:
 This subject also appears on teacher's homepage:
 
     >>> browser.click('Home')
-    >>> browser.click('Teacher dashboard')
+    >>> browser.click('Dashboard')
     >>> browser.printCssQuery('.subject-description-list dt a', strip=True)
     <a>Math</a>
 
@@ -66,7 +62,7 @@ Let's go to the settings and change our location information:
 Now back to home page and click to add another subject:
 
     >>> browser.click('Home')
-    >>> browser.click('Teacher dashboard')
+    >>> browser.click('Dashboard')
     >>> browser.getControl('add courses').click()
 
 This time both location fields will be prefilled by default 
@@ -89,7 +85,6 @@ Let's fill out the form to create the subject:
 This subject also appears on teacher's homepage:
 
     >>> browser.getLink('Home').click()
-    >>> browser.click('Teacher dashboard')
     >>> browser.printCssQuery('.subject-description-list dt a', strip=True)
     <a>Math</a>
     <a>Literature</a>
