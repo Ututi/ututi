@@ -9,7 +9,7 @@
     <li class="icon-ututi"> <a href="${url(controller='profile', action='get_started')}">${_("Get started")}</a> </li>
     %endif
     %if c.user.is_teacher:
-    <li class="icon-feed"> <a href="${url(controller='profile', action='dashboard')}">${_("Teacher dashboard")}</a> </li>
+    <li class="icon-teacher"> <a href="${url(controller='profile', action='dashboard')}">${_("Dashboard")}</a> </li>
     %endif
     <li class="icon-feed"> <a href="${url(controller='profile', action='feed')}">${_("News feed")}</a> </li>
     <li class="icon-university"> <a href="${c.user.location.url()}">${_("University feed")}</a> </li>

@@ -1514,7 +1514,10 @@ ul.inline-list li {
         background-position: 1px center;
     }
     ul.icon-list li.icon-user { background-image: url('img/icons.com/user_small_grey.png'); }
-    ul.icon-list li.icon-teacher { background-image: url('img/icons.com/teacher_small_orange.png'); }
+    ul.icon-list li.icon-teacher {
+        background-image: url('img/icons.com/teacher_small_orange.png');
+        background-position: -1px center;
+    }
     ul.icon-list li.icon-file { background-image: url('img/icons.com/file_small_grey.png'); }
     ul.icon-list li.icon-file.active { background-image: url('img/icons.com/file_small_orange.png'); }
     ul.icon-list li.icon-time { background-image: url('img/icons.com/clock.png'); }
