@@ -1,4 +1,4 @@
-<%inherit file="/profile/base.mako" />
+<%inherit file="/profile/home_base.mako" />
 
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 <%namespace file="/widgets/tags.mako" import="*"/>
@@ -17,6 +17,23 @@ ${_('Create new subject')}
 <%def name="head_tags()">
   <%newlocationtag:head_tags />
 </%def>
+
+<div class="feature-box one-column icon-subject">
+  <div class="title">
+    ${_("Add courses you teach")}
+  </div>
+  <div class="clearfix">
+    <div class="feature icon-file-upload">
+      <strong>${_("Files upload")}</strong> &ndash; ${_("You will be able to upload course material, that will be accessable for everyone, who is following your course.")}
+    </div>
+    <div class="feature icon-discussions">
+      <strong>${_("Course discussions")}</strong> &ndash; ${_("Discuss course material and related subjects with your students.")}
+    </div>
+    <div class="feature icon-notifications">
+      <strong>${_("Automatic notifications")}</strong> &ndash; ${_("Ututi will automaticaly inform students and groups about changes in course material.")}
+    </div>
+  </div>
+</div>
 
 <%def name="form(action)">
 <form method="post" action="${action}" id="subject_add_form">

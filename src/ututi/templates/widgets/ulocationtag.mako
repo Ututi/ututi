@@ -1,15 +1,12 @@
+<%namespace file="/elements.mako" import="location_links" />
+
 <%def name="standard_location_widget()">
 %if hasattr(c, 'preset_location'):
 <div id="location-preview" class="formField" style="display: none">
   <label for="tags">
-    <span class="labelText">${_('University | Department:')}</span>
+    <span class="labelText">${_('University and department:')}</span>
   </label>
-  <% hierarchy_len = len(c.preset_location.hierarchy()) %>
-  <span class="location">
-    %for index, tag in enumerate(c.preset_location.hierarchy(True), 1):
-      ${tag.title} ${'|' if index != hierarchy_len else ''}
-    %endfor
-  </span>
+  ${location_links(c.preset_location)}
   <a id="location-edit-link" href="#">${_("Change")}</a>
 </div>
 <script type="text/javascript">

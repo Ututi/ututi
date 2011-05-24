@@ -1,4 +1,4 @@
-<%inherit file="/profile/base.mako" />
+<%inherit file="/profile/home_base.mako" />
 <%namespace file="/widgets/tags.mako" import="*"/>
 
 <%def name="head_tags()">

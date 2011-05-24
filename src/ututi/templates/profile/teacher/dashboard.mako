@@ -80,11 +80,14 @@ button.submit {
 </%def>
 
 <% done = h.teacher_done_items(c.user) %>
+<% counter = 1 %>
 
 <div class="steps">
-  <div class="step ${'complete' if 'profile' in done else ''}">
+  %if not 'profile' in done:
+  <div class="step">
     <div class="heading">
-      <span class="number">1</span>
+      <span class="number">${counter}</span>
+      <% counter += 1 %>
       <span class="title">${_("Fill your profile information")}</span>
     </div>
     <div class="content">
@@ -93,9 +96,12 @@ button.submit {
                     method='GET', class_='dark edit')}
     </div>
   </div>
-  <div class="step clearfix ${'complete' if 'subject' in done else ''}">
+  %endif
+  %if not 'subject' in done:
+  <div class="step clearfix">
     <div class="heading">
-      <span class="number">2</span>
+      <span class="number">${counter}</span>
+      <% counter += 1 %>
       <span class="title">${_("Create your subjects")}</span>
     </div>
     <%b:title_box title="${_('Features:')}" id="subject-features" class_="side-box">
@@ -115,9 +121,12 @@ button.submit {
       </form>
     </div>
   </div>
-  <div class="step ${'complete' if 'biography' in done else ''}">
+  %endif
+  %if not 'biography' in done:
+  <div class="step">
     <div class="heading">
-      <span class="number">3</span>
+      <span class="number">${counter}</span>
+      <% counter += 1 %>
       <span class="title">${_("Complete your profile page")}</span>
     </div>
     <div class="content">
@@ -132,9 +141,12 @@ button.submit {
                     method='GET', class_='dark add inline')}
     </div>
   </div>
-  <div class="step ${'complete' if 'group' in done else ''}">
+  %endif
+  %if not 'group' in done:
+  <div class="step">
     <div class="heading">
-      <span class="number">4</span>
+      <span class="number">${counter}</span>
+      <% counter += 1 %>
       <span class="title">${_("Add your student groups")}</span>
     </div>
     <div class="content">
@@ -143,45 +155,8 @@ button.submit {
         class_='add inline', method='GET', id='add-student-group')}
     </div>
   </div>
+  %endif
 </div>
-<%def name="teach_group_nag()">
-  <div class="feature-box one-column icon-group">
-    <div class="title">
-      ${_('Students groups that you teach to')}
-    </div>
-    <div class="clearfix">
-      <div class="feature icon-email">
-        ${h.literal(_("Easy way to contact your groups by sending a <strong>group message</strong>."))}
-      </div>
-    </div>
-    <div class="action-button">
-      ${h.button_to(_('Add students groups'), url(controller='profile', action='add_student_group'), class_='add', method='GET')}
-    </div>
-  </div>
-</%def>
-
-<%def name="teach_course_nag()">
-  <div class="feature-box one-column icon-subject">
-    <div class="title">
-      ${_("Add courses you teach")}
-    </div>
-    <div class="clearfix">
-      <div class="feature icon-file-upload">
-        <strong>${_("Files upload")}</strong> &ndash; ${_("You will be able to upload course material, that will be accessable for everyone, who is following your course.")}
-      </div>
-      <div class="feature icon-discussions">
-        <strong>${_("Course discussions")}</strong> &ndash; ${_("Discuss course material and related subjects with your students.")}
-      </div>
-      <div class="feature icon-notifications">
-        <strong>${_("Automatic notifications")}</strong> &ndash; ${_("Ututi will automaticaly inform students and groups about changes in course material.")}
-      </div>
-    </div>
-    <div class="action-button">
-      ${h.button_to(_('Add your courses'), url(controller='subject', action='add'), class_='add', method='GET')}
-      ${h.link_to(_("Or browse subjects' catalog"), c.user.location.url(action='catalog', obj_type='subject'), class_='browse-link')}
-    </div>
-  </div>
-</%def>
 
 <%def name="group_entry(group, first)">
 <div class="u-object group-description ${'with-top-line' if not first else ''}">
@@ -324,12 +299,8 @@ button.submit {
 
 %if c.user.taught_subjects:
   ${subject_section(c.user.taught_subjects)}
-%else:
-  ${self.teach_course_nag()}
 %endif
 
 %if c.user.student_groups:
   ${group_section(c.user.student_groups)}
-%else:
-  ${self.teach_group_nag()}
 %endif

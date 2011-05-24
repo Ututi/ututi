@@ -1,4 +1,4 @@
-<%inherit file="/profile/base.mako" />
+<%inherit file="/profile/home_base.mako" />
 <%namespace file="/search/index.mako" name="search" import="search_results"/>
 
 <%def name="pagetitle()">

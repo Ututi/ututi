@@ -128,7 +128,7 @@ class TeacherProfileController(ProfileControllerBase):
                 'group_email': group.email}
             h.flash(message)
             redirect(url(controller='profile', action='dashboard'))
-        return render('profile/add_student_group.mako')
+        return render('profile/teacher/add_student_group.mako')
 
     @ActionProtector("teacher")
     @validate(schema=StudentGroupForm, form='add_student_group', on_get=False)
@@ -160,7 +160,7 @@ class TeacherProfileController(ProfileControllerBase):
         return htmlfill.render(self._edit_student_group(), defaults=defaults)
 
     def _edit_student_group(self):
-        return render('profile/edit_student_group.mako')
+        return render('profile/teacher/edit_student_group.mako')
 
     @ActionProtector("teacher")
     @validate(schema=StudentGroupDeleteForm())
