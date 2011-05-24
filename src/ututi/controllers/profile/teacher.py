@@ -34,23 +34,6 @@ def group_teacher_action(method):
 
 class TeacherProfileController(ProfileControllerBase):
 
-    def _actions(self, selected):
-        """Generate a list of all possible actions.
-
-        The action with the name matching the `selected' parameter is
-        marked as selected.
-        """
-        bcs = {
-            'home':
-            {'title': _("Home"),
-             'link': url(controller='profile', action='home')},
-            'feed':
-            {'title': _("What's New?"),
-             'link': url(controller='profile', action='feed')},
-            }
-        if selected in bcs.keys():
-            return bcs[selected]
-
     @ActionProtector("teacher")
     def home(self):
         if c.user.is_freshman():
