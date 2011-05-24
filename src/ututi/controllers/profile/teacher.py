@@ -1,5 +1,3 @@
-import simplejson
-
 from formencode import htmlfill
 
 from pylons import tmpl_context as c, url
@@ -13,8 +11,6 @@ from ututi.lib.security import ActionProtector
 from ututi.lib.forms import validate
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.mailinglist import post_message
-from ututi.lib.validators import js_validate
-
 
 from ututi.model import meta, File, TeacherGroup
 from ututi.model.events import TeacherMessageEvent
@@ -211,18 +207,6 @@ class TeacherProfileController(ProfileControllerBase):
     @validate(schema=StudentGroupMessageForm())
     def studentgroup_send_message(self, group):
         if hasattr(self, 'form_result'):
-            return self._studentgroup_send_message(group)
-
-    @group_teacher_action
-    @ActionProtector("group_teacher")
-    @js_validate(schema=StudentGroupMessageForm())
-    def studentgroup_send_message_js(self, group):
-        if hasattr(self, 'form_result'):
-            output = self._studentgroup_send_message(group, js=True)
-            return simplejson.dumps(output)
-
-    def _studentgroup_send_message(self, group, js=False):
-        if hasattr(self, 'form_result'):
             subject = self.form_result['subject']
             message = self.form_result['message']
 
@@ -255,7 +239,9 @@ class TeacherProfileController(ProfileControllerBase):
                         attachments = [{'filename': self.form_result['file'].filename,
                                         'file': self.form_result['file'].file}]
 
-                    msg = EmailMessage(_('Message from Your teacher: %s') % subject,
+                    msg = EmailMessage(_('Message from %(teacher_name)s: %(subject)s') % {
+                                           'subject': subject,
+                                           'teacher_name': c.user.fullname},
                                        msg_text,
                                        sender=recipient.list_address,
                                        attachments=attachments)
@@ -278,8 +264,9 @@ class TeacherProfileController(ProfileControllerBase):
                 msg = EmailMessage(subject, msg_text, sender=c.user.emails[0].email, force=True, attachments=attachments)
                 msg.send(group.email)
 
-            if js:
-                return {'success': True}
-            else:
-                h.flash(_('Message sent.'))
-                redirect(url(controller='profile', action='dashboard'))
+            message = _(u'Message sent to %(group_title)s (%(group_email)s).') % {
+                'group_title': group.title,
+                'group_email': group.email}
+            h.flash(message)
+
+        redirect(url(controller='profile', action='dashboard'))

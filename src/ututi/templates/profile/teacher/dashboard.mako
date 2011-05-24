@@ -3,6 +3,23 @@
 <%namespace file="/widgets/sms.mako" import="sms_widget" />
 <%namespace name="elements" file="/elements.mako" />
 
+<%def name="head_tags()">
+  ${parent.head_tags()}
+  <script type="text/javascript">
+  $(document).ready(function() {
+      $('.group-description .action-link').click(function() {
+          var group = $(this).closest('.group-description')
+          $('.action-block:visible').slideUp('fast');
+          if ($(this).hasClass('email'))
+              group.find('.email.action-block:hidden').slideDown('fast');
+          else if ($(this).hasClass('sms'))
+              group.find('.sms.action-block:hidden').slideDown('fast');
+          return false;
+      });
+  });
+  </script>
+</%def>
+
 <%def name="css()">
 .group-description .action-reply {
     display: none;
@@ -40,16 +57,10 @@ button.submit {
     display: block;
     margin-top: 5px;
 }
-
 </%def>
 
 <%def name="pagetitle()">
   ${_("Dashboard")}
-</%def>
-
-<%def name="head_tags()">
-  ${parent.head_tags()}
-  ${h.javascript_link('/javascript/teacher_dashboard.js')}
 </%def>
 
 <%def name="teach_group_nag()">
@@ -131,7 +142,6 @@ button.submit {
 
   <div class="email action-block">
     <form method="POST" action="${url(controller='profile', action='studentgroup_send_message', id=group.id)}" class="inelement-form group-message-form" enctype="multipart/form-data">
-      <input type="hidden" name="message-send-url" class="message-send-url" value="${url(controller='profile', action='studentgroup_send_message_js', id=group.id)}" />
       ${h.input_line('subject', _('Message subject:'), class_='message_subject wide-input')}
       <div class="formField">
         <textarea name="message" class="message" rows="5" rows="50"></textarea>
