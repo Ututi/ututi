@@ -13,6 +13,8 @@ ${_('Add a student group')}
   }
 </%def>
 
+<%def name="group_action_url()">${url(controller='profile', action='add_student_group')}</%def>
+
 <div class="clearfix">
   <%b:title_box title="${_('Your student groups:')}" id="group-features">
     <ul class="feature-list small">
@@ -22,8 +24,7 @@ ${_('Add a student group')}
       <li class="sms">${_("Send SMS messages from your dashboard to Ututi groups")}</li>
     </ul>
   </%b:title_box>
-
-  <form method="post" action="${url(controller='profile', action='add_student_group')}" id="student_group_form" class="narrow">
+  <form method="post" action="${self.group_action_url()}" id="student_group_form" class="narrow">
     <fieldset>
     ${h.input_line('title', _('Title'),
       help_text=_("Enter a title to identify this group, e. g. Computer Science freshmen or CS 1st year."))}
