@@ -83,15 +83,6 @@ button.submit {
   %endif
 </%def>
 
-%if hasattr(c, 'welcome'):
-<div id="welcome-message">
-  ${h.literal(_('Welcome to <strong>%(university)s</strong> private social network '
-  'created on <a href="%(url)s">Ututi platform</a>. '
-  'Here students and teachers can create groups online, use the mailinglist for '
-  'communication and the file storage for sharing information.' % dict(university=c.user.location.title, url=url('/features'))))}
-</div>
-%endif
-
 <% done = h.teacher_done_items(c.user) %>
 <% counter = 1 %>
 
