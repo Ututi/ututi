@@ -10,7 +10,6 @@ CKEDITOR.editorConfig = function( config )
     // config.uiColor = '#AADC6E';
     config.toolbar = 'UToolBar';
 
-    config.width = '545px';
     config.resize_enabled = false;
     config.resize_maxWidth = '620px';
 

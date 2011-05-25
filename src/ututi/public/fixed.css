@@ -367,15 +367,14 @@ h2.single-title {
         margin-top: 10px;
     }
 
-/* NEW STYLE FORMS.
- * "new-style-form" is a namespace for now.
+/* FORMS.
  */
 
 input {
     margin: 0;
 }
 
-.new-style-form {
+form {
 }
 
     form .formField {
@@ -460,10 +459,6 @@ input {
         height: 80px;
     }
 
-    .new-style-form button {
-        margin-top: 20px;
-    }
-
     form .rightNext {
         margin-left: 15px;
     }
@@ -471,6 +466,17 @@ input {
     form .rightNext button {
         margin-top: -1px;
     }
+
+/* SOME ADJUSTMENTS FOR CKE EDITOR AND TAG WIDGET */
+
+.cke_skin_kama {
+    padding: 0 !important;
+    width: 560px;
+}
+
+.tag-widget {
+    width: 560px;
+}
 
 /* INLINE FORMS
  */

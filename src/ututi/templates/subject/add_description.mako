@@ -8,9 +8,6 @@ ${h.javascript_link('/javascript/ckeditor/ckeditor.js')}
 <%def name="css()">
 ${parent.css()}
 
-.tag-widget {
-  width: 560px;
-}
 .check-field {
   margin-top: 10px;
 }
