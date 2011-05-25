@@ -35,11 +35,11 @@ It also displays a related warning message:
 
     >>> print user.getControl('Edit your biography').value
     Provide any personal information that you would like to begin with.
-    Research interests
-    Include a brief summary of your interests. Cover past, current and future research plans.
-    Use bulleted list if needed.
-    Education
+    Affiliation
+    Specify your current position and responsibilities.
+    Research activities
     ...
+
 
     >>> user.printCssQuery('.warning', strip=True)
     <p>Below you see a template that you can freely edit.
@@ -60,7 +60,7 @@ Biography should be created and we should see flash message.
 Now let's go to Public profile and look at biography tab. Here should be our biography.
 
     >>> user.click('Public profile')
-    >>> user.click('Biography')
+    >>> user.click('General information')
     >>> user.printCssQuery('#teacher-biography')
     <div id="teacher-biography" class="wiki-page">
          Some <strong>cool</strong> biography!
@@ -72,7 +72,7 @@ teacher's biography:
     >>> user.click('Edit profile')
     >>> user.click('Save')
     >>> user.click('Public profile')
-    >>> user.click('Biography')
+    >>> user.click('General information')
     >>> user.printCssQuery('#teacher-biography')
     <div id="teacher-biography" class="wiki-page">
          Some <strong>cool</strong> biography!
@@ -96,7 +96,7 @@ in settings page:
     >>> user.printCssQuery('.flash-message-content', strip=True)
     <span>Your biography was updated.</span>
     >>> user.click('Public profile')
-    >>> user.click('Biography')
+    >>> user.click('General information')
     >>> user.printCssQuery('#teacher-biography')
     <div id="teacher-biography" class="wiki-page">
          Some <strong>very cool</strong> biography!
@@ -112,10 +112,9 @@ with a template:
 
     >>> print user.getControl('Edit your biography').value
     Provide any personal information that you would like to begin with.
-    Research interests
-    Include a brief summary of your interests. Cover past, current and future research plans.
-    Use bulleted list if needed.
-    Education
+    Affiliation
+    Specify your current position and responsibilities.
+    Research activities
     ...
 
     >>> user.printCssQuery('.warning', strip=True)
