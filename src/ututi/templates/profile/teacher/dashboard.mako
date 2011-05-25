@@ -303,7 +303,7 @@ button.submit {
 <%def name="group_section(groups)">
 <div class="section groups">
   <div class="title">
-    ${_("Student groups")}
+    ${_("My student groups")}
     <span class="action-button">
       ${h.button_to(_('add a group'), 
                     url(controller='profile', action='add_student_group'),
