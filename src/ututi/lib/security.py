@@ -135,7 +135,7 @@ def is_verified_teacher(user, context=None):
     return user is not None and user.is_teacher and user.teacher_verified
 
 def is_group_teacher(user, context=None):
-    return is_verified_teacher(user, context) and context.teacher == user
+    return is_teacher(user, context) and context.teacher == user
 
 def is_owner(user, context=None):
     return context.created is user
