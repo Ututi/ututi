@@ -2,4 +2,4 @@
 
 <%def name="pagetitle()">${_('Edit a student group')}</%def>
 
-<%def name="group_action_url()">${url(controller='profile', action='edit_student_group')}</%def>
+<%def name="group_action_url()">${url(controller='profile', action='edit_student_group', id=c.student_group.id)}</%def>
