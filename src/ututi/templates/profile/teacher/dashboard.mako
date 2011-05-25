@@ -119,7 +119,7 @@ button.submit {
     </div>
     <%b:title_box title="${_('Features:')}" id="subject-features" class_="side-box">
       <ul class="feature-list small">
-        <li class="file">${_("Upload course material")}</li>
+        <li class="files">${_("Upload course material")}</li>
         <li class="wiki">${_("Edit subject notes")}</li>
         <li class="notifications">${_("Notify your students")}</li>
         <li class="discussions">${_("Discuss the subject")}</li>

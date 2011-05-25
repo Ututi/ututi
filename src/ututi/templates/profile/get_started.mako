@@ -68,7 +68,7 @@ subject-search-form input,
     <%b:title_box title="${_('Features:')}" id="group-features" class_="side-box">
       <ul class="feature-list small">
         <li class="email">${_("Group's email")}</li>
-        <li class="file">${_("Private group files")}</li>
+        <li class="files">${_("Private group files")}</li>
         <li class="notifications">${_("Subject notifications")}</li>
         <li class="discussions">${_("Private discussions")}</li>
       </ul>
