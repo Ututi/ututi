@@ -199,7 +199,7 @@ page functionality.
 
     >>> user = Browser.logIn('user@example.com', 'password')
     >>> user.printCssQuery('.page-title', strip=True)
-    <h1>Get started</h1>
+    <h1>Dashboard</h1>
 
 User sees these recommended actions on his dashboard:
 
@@ -275,4 +275,5 @@ behavior by removing profile information:
     >>> user.click('Home')
     >>> user.printCssQuery('.step span.title', strip=True)
     <span>Fill your profile information</span>
+    <span>Complete your profile page</span>
     <span>Add your student groups</span>
