@@ -79,7 +79,7 @@ button.submit {
   %if hasattr(c, 'welcome'):
     ${_("Welcome to Ututi")}
   %else:
-    ${_("Get started")}
+    ${_("Dashboard")}
   %endif
 </%def>
 

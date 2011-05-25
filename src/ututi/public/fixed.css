@@ -989,8 +989,11 @@ ul.feature-list {
     ul.feature-list.small li {
         padding-left: 35px;
         min-height: 25px;
-        line-height: 25px;
         margin: 10px 0 0 0;
+    }
+
+    ul.feature-list.small li.group {
+        background: url(img/icons.com/about/group_smaller.png) no-repeat 4px center;
     }
 
     ul.feature-list.small li.discussions {
@@ -1001,7 +1004,7 @@ ul.feature-list {
         background: url(img/icons.com/about/email_smaller.png) no-repeat 2px center;
     }
 
-    ul.feature-list.small li.file {
+    ul.feature-list.small li.files {
         background: url(img/icons.com/about/file_smaller.png) no-repeat 8px center;
     }
 
@@ -1011,6 +1014,10 @@ ul.feature-list {
 
     ul.feature-list.small li.notifications {
         background: url(img/icons.com/about/notifications_smaller.png) no-repeat 2px center;
+    }
+
+    ul.feature-list.small li.sms {
+        background: url(img/icons.com/about/mobile_smaller.png) no-repeat 9px center;
     }
 
 .subject-list {
