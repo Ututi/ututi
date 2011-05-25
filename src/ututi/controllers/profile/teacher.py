@@ -131,7 +131,7 @@ class TeacherProfileController(ProfileControllerBase):
         return render('profile/teacher/add_student_group.mako')
 
     @ActionProtector("teacher")
-    @validate(schema=StudentGroupForm, form='add_student_group', on_get=False)
+    @validate(schema=StudentGroupForm, form='_edit_student_group', on_get=False)
     def edit_student_group(self, id):
         try:
             group = TeacherGroup.get(int(id))
