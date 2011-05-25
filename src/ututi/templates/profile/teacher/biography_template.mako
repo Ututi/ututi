@@ -2,10 +2,16 @@
   ${_("Provide any personal information that you would like to begin with.")}
 </p>
 
-<h2>${_("Research interests")}</h2>
+<h2>${_("Affiliation")}</h2>
 
 <p>
-  ${_("Include a brief summary of your interests. "
+  ${_("Specify your current position and responsibilities.")}
+</p>
+
+<h2>${_("Research activities")}</h2>
+
+<p>
+  ${_("Include a brief summary of your research activities and interests. "
       "Cover past, current and future research plans.")}
 </p>
 
@@ -13,70 +19,17 @@
   <li>${_("Use bulleted list if needed.")}</li>
 </ul>
 
-<h2>${_("Education")}</h2>
+<h2>${_("Scientific services")}</h2>
 
 <p>
-  ${_("List dates and institutions where you have studied starting with most recent.")}
+  ${_("Describe your scientific services. "
+      "For instance, you might want to mention that you belong "
+      "to editorial board of some scientific journal.")}
 </p>
 
-<ul>
-  <li>
-    <i>2000 &mdash; 2000</i>
-    ${_("Name of institution and degree title received")}
-  </li>
-  <li>
-    <i>2000 &mdash; 2000</i>
-    ${_("Name of institution and degree title received")}
-  </li>
-  <li>
-    <i>2000 &mdash; 2000</i>
-    ${_("Name of institution and degree title received")}
-  </li>
-</ul>
-
-<h2>${_("Work experience")}</h2>
+<h2>${_("Conferences, exchange programs, visits")}</h2>
 
 <p>
-  ${_("List dates, job titles and names of organizations where you have worked "
-      "starting with most recent.")}
+  ${_("List conferences that you participate in, exchange programs and other related information. "
+      "Cover past, present travels and future plans.")}
 </p>
-
-<ul>
-  <li>
-    <i>2000 &mdash; 2000</i>
-    ${_("Job title and name of organization")}
-  </li>
-  <li>
-    <i>2000 &mdash; 2000</i>
-    ${_("Job title and name of organization")}
-  </li>
-  <li>
-    <i>2000 &mdash; 2000</i>
-    ${_("Job title and name of organization")}
-  </li>
-</ul>
-
-<h2>${_("Taught courses")}</h2>
-
-<p>
-  ${_("List courses that you teach.")}
-</p>
-
-<ul>
-    <li>${_("Course title")}</li>
-    <li>${_("Course title")}</li>
-    <li>${_("Course title")}</li>
-</ul>
-
-<h2>Languages spoken</h2>
-
-<p>
-  ${_("List languages that you speak, starting with ones that you are "
-      "most fluent with.")}
-</p>
-
-<ul>
-    <li>${_("english")}</li>
-    <li>${_("russian")}</li>
-    <li>${_("german")}</li>
-</ul>
