@@ -79,21 +79,22 @@ def teacher_tabs(teacher):
     """Generate a list of all possible actions."""
 
     tabs = [
-        {'title': _("News feed"),
+        {'title': _("Activity"),
          'name': 'feed',
          'link': teacher.url(),
          'event': h.trackEvent(teacher, 'feed', 'breadcrumb')},
     ]
+    if teacher.description:
+        tabs.insert(0,
+                    {'title': _('General information'),
+                      'name': 'biography',
+                      'link': teacher.url(action='teacher_biography'),
+                      'event': h.trackEvent(teacher, 'biography', 'breadcrumb')})
     if teacher.taught_subjects:
         tabs.append({'title': _('Teaching'),
                       'name': 'subjects',
                       'link': teacher.url(action='teacher_subjects'),
                       'event': h.trackEvent(teacher, 'members', 'breadcrumb')})
-    if teacher.description:
-        tabs.append({'title': _('Biography'),
-                      'name': 'biography',
-                      'link': teacher.url(action='teacher_biography'),
-                      'event': h.trackEvent(teacher, 'biography', 'breadcrumb')})
     if teacher.publications:
         tabs.append({'title': _('Publications'),
                       'name': 'publications',
