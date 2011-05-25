@@ -1,4 +1,4 @@
-Test teacher's biography page functionality
+Test teacher's information page functionality
 ===========================================
 
     >>> from ututi.lib.mailer import mail_queue
@@ -24,16 +24,16 @@ will be registered as teacher:
     >>> user.click('Finish')
 
 Even though teacher is not verified, he can fill his profile information.
-From the "Get started" page he can click "Add biography".
+From the "Get started" page he can click "Add information".
 
-    >>> user.click('Add biography')
+    >>> user.click('Add information')
     >>> user.url
-    'http://localhost/profile/edit/biography?'
+    'http://localhost/profile/edit/information?'
 
 For the first time text area contains a template that teacher can edit.
 It also displays a related warning message:
 
-    >>> print user.getControl('Edit your biography').value
+    >>> print user.getControl('Edit your information').value
     Provide any personal information that you would like to begin with.
     Affiliation
     Specify your current position and responsibilities.
@@ -48,38 +48,38 @@ It also displays a related warning message:
 
 
 
-    >>> user.getControl('Edit your biography').value = "Some <strong>cool</strong> biography!"
+    >>> user.getControl('Edit your information').value = "Some <strong>cool</strong> information!"
     >>> user.getControl('Save').click()
 
-Biography should be created and we should see flash message.
+General Information should be created and we should see flash message.
 
     >>> user.printCssQuery('.flash-message-content', strip=True)
-    <span>Your biography was updated.</span>
+    <span>Your information was updated.</span>
     <span>At the moment you are not confirmed as teacher. Our administrators have been notified and will verify you shortly.</span>
 
-Now let's go to Public profile and look at biography tab. Here should be our biography.
+Now let's go to Public profile and look at information tab. Here should be our information.
 
     >>> user.click('Public profile')
     >>> user.click('General information')
-    >>> user.printCssQuery('#teacher-biography')
-    <div id="teacher-biography" class="wiki-page">
-         Some <strong>cool</strong> biography!
+    >>> user.printCssQuery('#teacher-information')
+    <div id="teacher-information" class="wiki-page">
+         Some <strong>cool</strong> information!
     </div>
 
 Regression test: saving in profile settings form does not reset
-teacher's biography:
+teacher's information:
 
     >>> user.click('Edit profile')
     >>> user.click('Save')
     >>> user.click('Public profile')
     >>> user.click('General information')
-    >>> user.printCssQuery('#teacher-biography')
-    <div id="teacher-biography" class="wiki-page">
-         Some <strong>cool</strong> biography!
+    >>> user.printCssQuery('#teacher-information')
+    <div id="teacher-information" class="wiki-page">
+         Some <strong>cool</strong> information!
     </div>
 
 
-After user is verified as a teacher, he still can edit his biography
+After user is verified as a teacher, he still can edit his information
 in settings page:
 
     >>> admin = Browser.logIn()
@@ -88,29 +88,29 @@ in settings page:
     >>> admin.click('Confirm')
 
     >>> user.click('Edit profile')
-    >>> user.click('Biography')
-    >>> user.getControl('Edit your biography').value
-    'Some <strong>cool</strong> biography!'
-    >>> user.getControl('Edit your biography').value = 'Some <strong>very cool</strong> biography!'
+    >>> user.click('General Information')
+    >>> user.getControl('Edit your information').value
+    'Some <strong>cool</strong> information!'
+    >>> user.getControl('Edit your information').value = 'Some <strong>very cool</strong> information!'
     >>> user.getControl('Save').click()
     >>> user.printCssQuery('.flash-message-content', strip=True)
-    <span>Your biography was updated.</span>
+    <span>Your information was updated.</span>
     >>> user.click('Public profile')
     >>> user.click('General information')
-    >>> user.printCssQuery('#teacher-biography')
-    <div id="teacher-biography" class="wiki-page">
-         Some <strong>very cool</strong> biography!
+    >>> user.printCssQuery('#teacher-information')
+    <div id="teacher-information" class="wiki-page">
+         Some <strong>very cool</strong> information!
     </div>
 
-If teacher removes his biography page by deleting it, he is again presented
+If teacher removes his information page by deleting it, he is again presented
 with a template:
 
     >>> user.click('Edit profile')
-    >>> user.click('Biography')
-    >>> user.getControl('Edit your biography').value = ''
+    >>> user.click('General Information')
+    >>> user.getControl('Edit your information').value = ''
     >>> user.click('Save')
 
-    >>> print user.getControl('Edit your biography').value
+    >>> print user.getControl('Edit your information').value
     Provide any personal information that you would like to begin with.
     Affiliation
     Specify your current position and responsibilities.
@@ -131,7 +131,7 @@ Test teacher's publication page functionality
 =============================================
 
 Teacher has a separate page where he can list his publications. This
-functionality is very similar to biography page and this test will
+functionality is very similar to information page and this test will
 overview main features.
 
 Teacher can enter his publications freeform by accessing "Publications" tab

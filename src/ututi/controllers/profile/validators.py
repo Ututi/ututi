@@ -47,15 +47,15 @@ class ProfileForm(Schema):
     url_name = URLNameValidator()
 
 
-class BiographyForm(Schema):
-    """A schema for validating user biography forms."""
+class InformationForm(Schema):
+    """A schema for validating user information forms."""
     pre_validators = [NestedVariables()]
     allow_extra_fields = True
     description = validators.String(strip=True)
 
 
 class PublicationsForm(Schema):
-    """A schema for validating user biography forms."""
+    """A schema for validating user information forms."""
     pre_validators = [NestedVariables()]
     allow_extra_fields = True
     publications = validators.String(strip=True)

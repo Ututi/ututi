@@ -250,7 +250,7 @@ Group's section offers to add student groups:
     'http://localhost/profile/add_student_group?'
     >>> user.goBack()
 
-Profile page section asks to add biography, and gives a link to
+Profile page section asks to add information, and gives a link to
 public teacher's profile page:
 
     >>> user.click('View profile page')
@@ -260,8 +260,8 @@ public teacher's profile page:
     <h1>User</h1>
     >>> user.goBack()
 
-    >>> user.click('Add biography')
-    >>> user.getControl('Edit your biography').value = "Some <strong>cool</strong> biography!"
+    >>> user.click('Add information')
+    >>> user.getControl('Edit your information').value = "Some <strong>cool</strong> information!"
     >>> user.getControl('Save').click()
 
 And if teacher downgrades some actions (i.e. removes all subjects), the

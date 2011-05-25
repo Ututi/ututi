@@ -87,9 +87,9 @@ def teacher_tabs(teacher):
     if teacher.description:
         tabs.insert(0,
                     {'title': _('General information'),
-                      'name': 'biography',
-                      'link': teacher.url(action='teacher_biography'),
-                      'event': h.trackEvent(teacher, 'biography', 'breadcrumb')})
+                      'name': 'information',
+                      'link': teacher.url(action='teacher_information'),
+                      'event': h.trackEvent(teacher, 'information', 'breadcrumb')})
     if teacher.taught_subjects:
         tabs.append({'title': _('Teaching'),
                       'name': 'subjects',
@@ -167,9 +167,9 @@ class UserController(BaseController, UserInfoWallMixin):
 
     @teacher_profile_action
     @ActionProtector("user")
-    def teacher_biography(self, user):
-        c.current_tab = 'biography'
-        return render('user/teacher_biography.mako')
+    def teacher_information(self, user):
+        c.current_tab = 'information'
+        return render('user/teacher_information.mako')
 
     @teacher_profile_action
     @ActionProtector("user")

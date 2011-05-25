@@ -249,7 +249,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         c.user.fullname = values['fullname']
         if values['description'] is not None:
             # this check is needed because description field
-            # is currently reused as teacher's biography and
+            # is currently reused as teacher's information and
             # is not displayed for teacher in this form.
             c.user.description = values['description']
         c.user.profile_is_public = bool(values['profile_is_public'])

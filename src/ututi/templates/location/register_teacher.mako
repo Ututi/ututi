@@ -25,7 +25,7 @@
   </div>
   <div class="clearfix">
     <div class="feature icon-cv">
-      ${h.literal(_("<strong>Fill in your biography</strong> to represent yourself to other members of your academic community."))}
+      ${h.literal(_("<strong>Fill in your information</strong> to represent yourself to other members of your academic community."))}
     </div>
     <div class="feature icon-file-upload">
       ${h.literal(_("<strong>Upload course material.</strong> It will become immediately available to everyone who is following your course."))}

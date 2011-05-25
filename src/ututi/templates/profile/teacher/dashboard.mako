@@ -126,7 +126,7 @@ button.submit {
     </div>
   </div>
   %endif
-  %if 'biography' not in done or 'publications' not in done:
+  %if 'information' not in done or 'publications' not in done:
   <div class="step">
     <div class="heading">
       <span class="number">${counter}</span>
@@ -135,9 +135,9 @@ button.submit {
     </div>
     <div class="content">
       <p>
-        %if 'biography' not in done:
+        %if 'information' not in done:
           ${_("Ututi provides you a profile page that other people can access online. "
-              "To have a complete page, please tell us some bits about your biography and your research interests.")}
+              "To have a complete page, please tell us some bits about your information and your research interests.")}
         %else:
           ${_("Ututi provides you a profile page that other people can access online. "
               "To have a complete page, please list your most important publications.")}
@@ -147,8 +147,8 @@ button.submit {
       <a class="forward-link" id="view-page-link" href="${c.user.url()}">
         ${_("View profile page")}
       </a>
-      %if 'biography' not in done:
-        ${h.button_to(_("Add biography"), url(controller='profile', action='edit_biography'),
+      %if 'information' not in done:
+        ${h.button_to(_("Add information"), url(controller='profile', action='edit_information'),
                       method='GET', class_='dark add inline')}
       %else:
         ${h.button_to(_("List publications"), url(controller='profile', action='edit_publications'),
@@ -327,7 +327,7 @@ button.submit {
 </div>
 </%def>
 
-%if 'profile' in done or 'biography' in done or 'publications' in done:
+%if 'profile' in done or 'information' in done or 'publications' in done:
   ${profile_section()}
 %endif
 

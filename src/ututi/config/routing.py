@@ -214,7 +214,7 @@ def make_map(config):
     # teacher profile pages
     map.connect('/teacher/{id}', controller='user', action='teacher_index')
     map.connect('/teacher/{id}/subjects', controller='user', action='teacher_subjects')
-    map.connect('/teacher/{id}/biography', controller='user', action='teacher_biography')
+    map.connect('/teacher/{id}/information', controller='user', action='teacher_information')
 
     # user profiles
     map.connect('/user/{id}', controller='user', action='index')
@@ -280,7 +280,7 @@ def make_map(config):
     map.connect('/profile/edit', controller='profile', action='edit')
     map.connect('/profile/edit/photo', controller='profile', action='edit_photo')
     map.connect('/profile/edit/contacts', controller='profile', action='edit_contacts')
-    map.connect('/profile/edit/biography', controller='profile', action='edit_biography')
+    map.connect('/profile/edit/information', controller='profile', action='edit_information')
     map.connect('/profile/edit/publications', controller='profile', action='edit_publications')
     map.connect('/profile/settings', controller='profile', action='settings')
     map.connect('/profile/settings/login', controller='profile', action='login_settings')

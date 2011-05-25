@@ -51,7 +51,7 @@
     <div class="clearfix">
       <div class="feature icon-file">
         <strong>${_("Teacher profile")}</strong>
-        - ${_("submit your CV, thoughts, biography and academic papers.")}
+        - ${_("submit your CV, thoughts, information and academic papers.")}
       </div>
       <div class="feature icon-subjects-file">
         <strong>${_("Course material sharing")}</strong>

@@ -15,7 +15,7 @@ from ututi.lib.mailinglist import post_message
 from ututi.model import meta, File, TeacherGroup
 from ututi.model.events import TeacherMessageEvent
 from ututi.controllers.profile.base import ProfileControllerBase
-from ututi.controllers.profile.validators import BiographyForm, \
+from ututi.controllers.profile.validators import InformationForm, \
         StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm, \
         PublicationsForm
 
@@ -50,42 +50,42 @@ class TeacherProfileController(ProfileControllerBase):
     def _edit_profile_tabs(self):
         tabs = ProfileControllerBase._edit_profile_tabs(self)
         tabs.extend([
-            {'title': _("Biography"),
-             'name': 'biography',
-             'link': url(controller='profile', action='edit_biography')},
+            {'title': _("General Information"),
+             'name': 'information',
+             'link': url(controller='profile', action='edit_information')},
             {'title': _("Publications"),
              'name': 'publications',
              'link': url(controller='profile', action='edit_publications')},
         ])
         return tabs
 
-    def _edit_biography_form(self):
+    def _edit_information_form(self):
         c.tabs = self._edit_profile_tabs()
-        c.current_tab = 'biography'
-        return render('profile/teacher/edit_biography.mako')
+        c.current_tab = 'information'
+        return render('profile/teacher/edit_information.mako')
 
     @ActionProtector("user")
-    def edit_biography(self):
+    def edit_information(self):
         if c.user.description and c.user.description.strip():
             # description is not empty
             defaults = {'description': c.user.description}
         else:
-            template = render('profile/teacher/biography_template.mako')
+            template = render('profile/teacher/information_template.mako')
             defaults = {'description': template}
             c.edit_template = True
-        return htmlfill.render(self._edit_biography_form(), defaults=defaults)
+        return htmlfill.render(self._edit_information_form(), defaults=defaults)
 
-    @validate(schema=BiographyForm, form='_edit_biography_form')
+    @validate(schema=InformationForm, form='_edit_information_form')
     @ActionProtector("user")
-    def update_biography(self):
+    def update_information(self):
         if not hasattr(self, 'form_result'):
-            redirect(url(controller='profile', action='edit_biography'))
+            redirect(url(controller='profile', action='edit_information'))
 
         c.user.description = self.form_result['description']
         meta.Session.commit()
-        h.flash(_('Your biography was updated.'))
+        h.flash(_('Your information was updated.'))
 
-        redirect(url(controller='profile', action='edit_biography'))
+        redirect(url(controller='profile', action='edit_information'))
 
     def _edit_publications_form(self):
         c.tabs = self._edit_profile_tabs()
