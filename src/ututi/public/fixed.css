@@ -1915,6 +1915,7 @@ ul.tabs {
     padding-left: 40px;
     background-position: top left;
     background-repeat: no-repeat;
+    min-height: 40px;
 }
 
     .section.subjects {
@@ -1932,6 +1933,12 @@ ul.tabs {
     .section.biography {
         background-image: url("/img/icons.com/about/wiki_edit.png");
     }
+
+    .section.profile {
+        background-image: url("/img/icons.com/about/file_edit.png");
+        background-position: 5px top;
+    }
+
 
     .section .title {
         position: relative;

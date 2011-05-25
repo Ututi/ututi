@@ -679,6 +679,8 @@ def teacher_done_items(user):
         items.append('profile')
     if user.description:
         items.append('biography')
+    if user.publications:
+        items.append('publications')
     if len(user.student_groups) > 0:
         items.append('group')
     if len(user.taught_subjects) > 0:
@@ -724,6 +726,10 @@ def teacher_todo_items(user):
         'title': _("Add your biography"),
         'link': url(controller='profile', action='edit_biography'),
         'done': 'biography' in done })
+    todo_items.append({
+        'title': _("List your publications"),
+        'link': url(controller='profile', action='edit_publications'),
+        'done': 'publications' in done })
     todo_items.append({
         'title': _("Add your student groups"),
         'link': url(controller='profile', action='add_student_group'),

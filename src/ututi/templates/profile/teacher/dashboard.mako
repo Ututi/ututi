@@ -135,7 +135,7 @@ button.submit {
     </div>
   </div>
   %endif
-  %if not 'biography' in done:
+  %if 'biography' not in done or 'publications' not in done:
   <div class="step">
     <div class="heading">
       <span class="number">${counter}</span>
@@ -144,14 +144,25 @@ button.submit {
     </div>
     <div class="content">
       <p>
-        ${_("Ututi provides you a profile page that other people can access online. "
-            "To have a complete page, please tell us some bits about your biography and your research interests.")}
+        %if 'biography' not in done:
+          ${_("Ututi provides you a profile page that other people can access online. "
+              "To have a complete page, please tell us some bits about your biography and your research interests.")}
+        %else:
+          ${_("Ututi provides you a profile page that other people can access online. "
+              "To have a complete page, please list your most important publications.")}
+        %endif
       </p>
+
       <a class="forward-link" id="view-page-link" href="${c.user.url()}">
         ${_("View profile page")}
       </a>
-      ${h.button_to(_("Add biography"), url(controller='profile', action='edit_biography'),
-                    method='GET', class_='dark add inline')}
+      %if 'biography' not in done:
+        ${h.button_to(_("Add biography"), url(controller='profile', action='edit_biography'),
+                      method='GET', class_='dark add inline')}
+      %else:
+        ${h.button_to(_("List publications"), url(controller='profile', action='edit_publications'),
+                      method='GET', class_='dark add inline')}
+      %endif
     </div>
   </div>
   %endif
@@ -272,7 +283,7 @@ button.submit {
 <%def name="subject_section(subjects)">
 <div class="section subjects">
   <div class="title">
-    ${_("My courses:")}
+    ${_("My courses")}
     <span class="action-button">
       ${h.button_to(_('add courses'),
                     url(controller='subject', action='add'),
@@ -309,6 +320,25 @@ button.submit {
   </div>
 </div>
 </%def>
+
+<%def name="profile_section()">
+<div class="section profile">
+  <div class="title">
+    ${_("My profile page")}
+    <span class="action-button">
+      ${h.button_to(_("edit profile"), url(controller='profile', action='edit'),
+                    method='GET', class_='dark edit')}
+    </span>
+  </div>
+  <a class="forward-link" href="${c.user.url()}">
+    ${_("View my profile page")}
+    </a>
+</div>
+</%def>
+
+%if 'profile' in done or 'biography' in done or 'publications' in done:
+  ${profile_section()}
+%endif
 
 %if c.user.taught_subjects:
   ${subject_section(c.user.taught_subjects)}
