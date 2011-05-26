@@ -18,14 +18,14 @@ ${_('Private social networks for universities')}
 <%
    nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
 %>
-<div id="anonymous-header">
-  <div id="header-container">
+<div id="header" class="anonymous">
+  <div id="header-inner">
     <a id="logo" href="${url('/')}"><img src="/img/Ututi_logo_big.png" alt="Ututi" title="Ututi"/></a>
     <span id="slogan">${_("Bringing students and teachers together")}</span>
     <ul id="nav">
       <li class="header-links"><a href="${url('/features')}">${_('What is Ututi?')}</a></li>
       <li class="header-links"><a href="${url('/contacts')}">${_('Contact us')}</a></li>
-      <li id="login-link" class="header-links"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Login')}</a></li>
+      <li class="header-links" id="login-link"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Login')}</a></li>
     </ul>
   </div>
 </div>
@@ -33,7 +33,7 @@ ${_('Private social networks for universities')}
 
 <%def name="loggedin_header()">
 <div id="header">
-  <div id="header-container">
+  <div id="header-inner">
     <div id="logo">
       <a href="${url('/')}"><img src="/img/Ututi_logo.png" alt="Ututi" title="Ututi" /></a>
     </div>
@@ -162,9 +162,6 @@ ${_('Private social networks for universities')}
     ${h.stylesheet_link(h.path_with_hash('/style.css'))}
     ${h.stylesheet_link(h.path_with_hash('/layout.css'))}
     ${h.stylesheet_link(h.path_with_hash('/fixed.css'))}
-    %if c.user is None:
-       ${h.stylesheet_link(h.path_with_hash('/anonymous.css'))}
-    %endif
     ${h.stylesheet_link(h.path_with_hash('/portlets.css'))}
     ${h.stylesheet_link(h.path_with_hash('/widgets.css'))}
     <!--[if IE]>
@@ -190,7 +187,7 @@ ${_('Private social networks for universities')}
       ${self.title()} - ${_('UTUTI')}
     </title>
   </head>
-  <body class="${self.body_class()}">
+  <body class="${self.body_class()} ${'anonymous' if c.user is None else ''}">
     %if c.testing:
     <div style="width: 200px; position: absolute; top: 0; left: 0; z-index: 1000; background: #f7ff00; padding: 5px;" id="test_warning">
       ${_('This is a testing version - this is just a copy of the information! Changes you make will not be persisted!')}

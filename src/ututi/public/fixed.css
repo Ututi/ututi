@@ -190,6 +190,14 @@ h2.single-title {
     margin-bottom: 15px;
 }
 
+/* STATIC CONTENT
+ */
+
+.static-content {}
+
+    .static-content h2 {
+        font-weight: bold;
+    }
 
 /* ROUNDED BLOCKS
  */
@@ -2038,5 +2046,154 @@ ul.tabs {
 
         #private-message-thread .action-block .action-button {
             display: inline;
+        }
+
+/* FRONT PAGE STYLE.
+ */
+
+#frontpage #sign-up {
+    width: 100%;
+    height: 265px;
+    background: #3d617a url("/img/bg_blue_repeat.png") repeat-x left bottom;
+}
+
+#frontpage #sign-up-inner {
+    width: 100%;
+    height: 265px;
+    margin: auto;
+    background: url("/img/bg_blue.png") no-repeat center bottom;
+}
+
+#frontpage .error span {
+    display: none;
+}
+
+#frontpage #sign-in-area {
+    width: 920px;
+    height: 265px;
+    margin: auto;
+    position: relative;
+}
+
+    #frontpage #sign-in-area h1 {
+        color: white;
+        font-size: 18px;
+        max-width: 550px;
+        padding-top: 45px;
+        padding-bottom: 15px;
+    }
+
+#frontpage button#learn-more {
+    text-align: center;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 25px;
+    position: absolute;
+    right: 45px;
+    bottom: 35px;
+    box-shadow: 3px 3px 10px #333;
+    -moz-box-shadow: 3px 3px 10px #333;
+    -webkit-box-shadow: 3px 3px 10px #333;
+    background-image: url('img/buttons/bg_big_grey.png');
+    max-height: 34px !important;
+}
+
+#frontpage button#learn-more:hover {
+    background-image: url('img/buttons/hover_big_grey.png');
+}
+
+#frontpage #about {
+    width: 100%;
+    background: #fff;
+}
+
+    #frontpage #about #about-inner {
+        width: 920px;
+        margin: auto;
+        padding: 20px 0;
+    }
+
+    #frontpage #about p {
+        color: #666;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+
+    #frontpage #about h2 {
+        font-size: 18px;
+        font-weight: bold;
+        color: #666;
+        width: 100%;
+    }
+
+    #frontpage #about h3 {
+        color: #666;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    #frontpage #about #features {
+        float: left;
+        width: 530px;
+        padding-right: 50px;
+    }
+
+        #frontpage #about #features h2 {
+            margin-bottom: 20px;
+        }
+
+    #frontpage #about .feature {
+        min-height: 60px;
+        padding-left: 100px;
+        margin-bottom: 25px;
+        background-position: left top;
+        background-repeat: no-repeat;
+    }
+
+    #frontpage #about .feature#discussions {
+        background-image: url('/img/icons.com/about/frontpage/discussions.png');
+    }
+
+    #frontpage #about .feature#social-network {
+        background-image: url('/img/icons.com/about/frontpage/social_network.png');
+    }
+
+    #frontpage #about .feature#personal-websites {
+        background-image: url('/img/icons.com/about/frontpage/sharing.png');
+    }
+
+    #frontpage #about #using-ututi {
+        float: left;
+        width: 320px;
+    }
+
+    #frontpage #about #using-ututi {}
+
+        #frontpage #about #using-ututi .university {
+            float: left;
+            width: 360px;
+            padding-right: 5px;
+            margin-top: 15px;
+        }
+
+        #frontpage #about #using-ututi .uni-logo {
+            float: left;
+            text-align: center;
+            width: 55px;
+        }
+
+        #frontpage #about #using-ututi .strong {
+            font-weight: bold;
+            float: right;
+            width: 300px;
+            margin: auto;
+        }
+
+        #frontpage #about #using-ututi .more {
+            padding-left: 60px;
+            padding-top: 10px;
+            display: inline-block;
         }
 

@@ -1,8 +1,7 @@
 import re
 import pkg_resources
 
-css_files = ['anonymous.css',
-             'books.css',
+css_files = ['books.css',
              'fixed.css',
              'ie.css',
              'layout.css',
