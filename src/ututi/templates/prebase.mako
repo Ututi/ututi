@@ -15,76 +15,104 @@ ${_('Private social networks for universities')}
 </%def>
 
 <%def name="anonymous_header()">
-<%
-   nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '')
-%>
-<div id="header" class="anonymous">
-  <div id="header-inner">
-    <a id="logo" href="${url('/')}"><img src="/img/Ututi_logo_big.png" alt="Ututi" title="Ututi"/></a>
-    <span id="slogan">${_("Bringing students and teachers together")}</span>
-    <ul id="nav">
-      <li class="header-links"><a href="${url('/features')}">${_('What is Ututi?')}</a></li>
-      <li class="header-links"><a href="${url('/contacts')}">${_('Contact us')}</a></li>
-      <li class="header-links" id="login-link"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Login')}</a></li>
-    </ul>
-  </div>
-</div>
+  <% nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '') %>
+  <a id="logo" href="${url('/')}"><img src="/img/Ututi_logo_big.png" alt="Ututi" title="Ututi"/></a>
+  <span id="slogan">${_("Bringing students and teachers together")}</span>
+  <ul id="nav">
+    <li class="header-links"><a href="${url('/features')}">${_('What is Ututi?')}</a></li>
+    <li class="header-links"><a href="${url('/contacts')}">${_('Contact us')}</a></li>
+    <li class="header-links" id="login-link"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Login')}</a></li>
+  </ul>
 </%def>
 
 <%def name="loggedin_header()">
-<div id="header">
-  <div id="header-inner">
-    <div id="logo">
-      <a href="${url('/')}"><img src="/img/Ututi_logo.png" alt="Ututi" title="Ututi" /></a>
-    </div>
-    <div id="top-panel">
-      <ul id="head-nav">
-        <li id="nav-home"><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
-        <li id="nav-university"><a href="${c.user.location.url()}">${_('My University')}</a></li>
-        <li id="nav-catalog"><a href="${url(controller='profile', action='browse')}">${_('Catalog')}</a></li>
-      </ul>
-      <form id="search-form" action="${url(controller='profile', action='search')}">
-        <label>
-          <span class="a11y">${_('Search text')}</span>
-          <input type="text" name="text"/>
-        </label>
-        ${h.input_submit(_('search_'))}
-      </form>
-      <ul id="user-menu">
-        <li class="expandable profile-nav">
-          <div class="fullname">${c.user.fullname}</div>
-          <div class="expandable-items">
-            <ul>
-              <li class="action"><a href="${url(controller='profile', action='settings')}">${_('Account settings')}</a></li>
-              <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Edit profile')}</a></li>
-              <li class="action"><a href="${c.user.url()}">${_('Public profile')}</a></li>
-              <li class="action"><a href="${url(controller='home', action='logout')}">${_('Logout')}</a></li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </div>
+  <div id="logo">
+    <a href="${url('/')}"><img src="/img/Ututi_logo.png" alt="Ututi" title="Ututi" /></a>
   </div>
-</div>
-<script type="text/javascript">
-    // nav ul li expandable
-    $('ul li.expandable').toggle(function() {
-        $(this).addClass('expanded').find('div:last-child ul').show();
-    }, function(){
-        $(this).removeClass('expanded').find('div:last-child ul').hide();
-    }).click(function(){ // remove selection
-        if(document.selection && document.selection.empty) {
-            document.selection.empty() ;
-        } else if(window.getSelection) {
-            var s = window.getSelection();
-            if(s && s.removeAllRanges)
-                s.removeAllRanges();
-        }
-    }).find('li a').click(function(ev){
-        ev.preventDefault();
-        window.location.href = $(this).attr('href');
-    });
-</script>
+  <div id="top-panel">
+    <ul id="head-nav">
+      <li id="nav-home"><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
+      <li id="nav-university"><a href="${c.user.location.url()}">${_('My University')}</a></li>
+      <li id="nav-catalog"><a href="${url(controller='profile', action='browse')}">${_('Catalog')}</a></li>
+    </ul>
+    <form id="search-form" action="${url(controller='profile', action='search')}">
+      <label>
+        <span class="a11y">${_('Search text')}</span>
+        <input type="text" name="text"/>
+      </label>
+      ${h.input_submit(_('search_'))}
+    </form>
+    <ul id="user-menu">
+      <li class="expandable profile-nav">
+        <div class="fullname">${c.user.fullname}</div>
+        <div class="expandable-items">
+          <ul>
+            <li class="action"><a href="${url(controller='profile', action='settings')}">${_('Account settings')}</a></li>
+            <li class="action"><a href="${url(controller='profile', action='edit')}">${_('Edit profile')}</a></li>
+            <li class="action"><a href="${c.user.url()}">${_('Public profile')}</a></li>
+            <li class="action"><a href="${url(controller='home', action='logout')}">${_('Logout')}</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+      // nav ul li expandable
+      $('ul li.expandable').toggle(function() {
+          $(this).addClass('expanded').find('div:last-child ul').show();
+      }, function(){
+          $(this).removeClass('expanded').find('div:last-child ul').hide();
+      }).click(function(){ // remove selection
+          if(document.selection && document.selection.empty) {
+              document.selection.empty() ;
+          } else if(window.getSelection) {
+              var s = window.getSelection();
+              if(s && s.removeAllRanges)
+                  s.removeAllRanges();
+          }
+      }).find('li a').click(function(ev){
+          ev.preventDefault();
+          window.location.href = $(this).attr('href');
+      });
+  </script>
+</%def>
+
+<%def name="header()">
+  %if c.user is None:
+    ${self.anonymous_header()}
+  %else:
+    ${self.loggedin_header()}
+  %endif
+</%def>
+
+<%def name="footer()">
+  <% nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '') %>
+  <div class="column left">
+    <form id="language-switch-form" action="${url('switch_language')}">
+      <input name="came_from" type="hidden" value="${request.url}" />
+      <label for="language-box">${_("Language:")}</label>
+      ${h.select('language', c.lang, h.get_languages(), id='language-box')}
+      ${h.input_submit(_('Select'))}
+      <script type="text/javascript">
+      $(document).ready(function() {
+          $('#language-box').change(function() {
+              $(this).closest('form').submit();
+          });
+          $('#language-box').val(lang);
+      });
+      </script>
+    </form>
+  </div>
+  <div class="column middle">Copyright © <a href="${url('frontpage')}">${_(u'„UTUTI Ltd.“')}</a></div>
+  <div class="column right link-color">
+    <a ${nofollow} href="${url(controller='home', action='about')}">${_('About')}</a>
+    |
+    <a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms')}</a>
+    |
+    <a href="${url(controller='home', action='contacts')}">${_('Contact Us')}</a>
+    |
+    <a href="#" id="feedback-link">${_('Feedback')}</a>
+  </div>
 </%def>
 
 <%def name="flash_messages()">
@@ -197,42 +225,16 @@ ${_('Private social networks for universities')}
     </script>
     %endif
 
-    %if c.user is None:
-    ${self.anonymous_header()}
-    %else:
-    ${self.loggedin_header()}
-    %endif
+    <div id="header" class="anonymous">
+      <div id="header-inner">
+        ${self.header()}
+      </div>
+    </div>
 
     ${next.body()}
 
     <div id="footer">
-      <% nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '') %>
-        <div class="column left">
-          <form id="language-switch-form" action="${url('switch_language')}">
-            <input name="came_from" type="hidden" value="${request.url}" />
-            <label for="language-box">${_("Language:")}</label>
-            ${h.select('language', c.lang, h.get_languages(), id='language-box')}
-            ${h.input_submit(_('Select'))}
-            <script type="text/javascript">
-            $(document).ready(function() {
-                $('#language-box').change(function() {
-                    $(this).closest('form').submit();
-                });
-                $('#language-box').val(lang);
-            });
-            </script>
-          </form>
-        </div>
-        <div class="column middle">Copyright © <a href="${url('frontpage')}">${_(u'„UTUTI Ltd.“')}</a></div>
-        <div class="column right link-color">
-          <a ${nofollow} href="${url(controller='home', action='about')}">${_('About')}</a>
-          |
-          <a ${nofollow} href="${url(controller='home', action='terms')}">${_('Terms')}</a>
-          |
-          <a href="${url(controller='home', action='contacts')}">${_('Contact Us')}</a>
-          |
-          <a href="#" id="feedback-link">${_('Feedback')}</a>
-        </div>
+      ${self.footer()}
     </div>
 
     %if c.lang in ['lt', 'en', 'pl']:
