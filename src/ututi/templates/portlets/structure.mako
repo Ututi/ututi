@@ -116,3 +116,24 @@
   </%self:portlet>
   %endif
 </%def>
+
+<%def name="location_teacher_list_portlet(location=None)">
+  <%
+  if location is None: location = c.location
+  teachers = h.location_teachers(location.id)
+  %>
+  %if teachers:
+  <%self:portlet id="location-teacher-list-portlet">
+    <%def name="header()">
+      ${' '.join(location.title_path + [_("teachers")])}
+    </%def>
+    <ul class="icon-list" id="teacher-list">
+    %for teacher in teachers:
+      <li class="icon-teacher">
+        ${h.link_to(teacher['name'], teacher['url'])}
+      </li>
+    %endfor
+    </ul>
+  </%self:portlet>
+  %endif
+</%def>

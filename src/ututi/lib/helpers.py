@@ -460,6 +460,17 @@ def location_members(location_id, limit=6):
             for member in members]
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
+def location_teachers(location_id):
+    from ututi.model import LocationTag, Teacher, meta
+    location = LocationTag.get(int(location_id))
+    ids = [t.id for t in location.flatten]
+    teachers = meta.Session.query(Teacher)\
+            .filter(Teacher.location_id.in_(ids))\
+            .order_by(Teacher.fullname).all()
+    return [{'name': teacher.fullname,
+             'url': teacher.url()} for teacher in teachers]
+
+@u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
 def subject_followers(subject_id, limit=6):
     from ututi.model import UserSubjectMonitoring, meta
     watches = meta.Session.query(UserSubjectMonitoring).filter_by(subject_id=subject_id, ignored=False)

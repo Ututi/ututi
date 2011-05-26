@@ -18,7 +18,6 @@ from ututi.lib.base import BaseController, render
 from ututi.lib.wall import WallMixin
 
 from ututi.model import meta, User, Medal
-from ututi.model.users import Teacher
 
 log = logging.getLogger(__name__)
 
@@ -58,48 +57,36 @@ def teacher_profile_action(method):
             deny(_('This user profile is not public'), 401)
 
         c.user_info = user
-        c.all_teachers = get_all_teachers(user)
         c.tabs = teacher_tabs(user)
         return method(self, user)
     return _profile_action
-
-
-def get_all_teachers(user):
-    if user.location:
-        location_ids = [loc.id for loc in user.location.flatten]
-        return meta.Session.query(Teacher)\
-            .filter(Teacher.id != user.id)\
-            .filter(Teacher.location_id.in_(location_ids))\
-            .order_by(Teacher.fullname).all()
-    else:
-        return []
 
 
 def teacher_tabs(teacher):
     """Generate a list of all possible actions."""
 
     tabs = [
-        {'title': _("Activity"),
-         'name': 'feed',
-         'link': teacher.url(),
-         'event': h.trackEvent(teacher, 'feed', 'breadcrumb')},
+        {'title': _('General information'),
+         'name': 'information',
+         'link': teacher.url(action='teacher_index'),
+         'event': h.trackEvent(teacher, 'information', 'breadcrumb')},
+        {'title': _('Teaching'),
+         'name': 'subjects',
+         'link': teacher.url(action='teacher_subjects'),
+         'event': h.trackEvent(teacher, 'members', 'breadcrumb')},
+        {'title': _('Publications'),
+         'name': 'publications',
+         'link': teacher.url(action='teacher_publications'),
+         'event': h.trackEvent(teacher, 'publications', 'breadcrumb')},
     ]
-    if teacher.description:
-        tabs.insert(0,
-                    {'title': _('General information'),
-                      'name': 'information',
-                      'link': teacher.url(action='teacher_information'),
-                      'event': h.trackEvent(teacher, 'information', 'breadcrumb')})
-    if teacher.taught_subjects:
-        tabs.append({'title': _('Teaching'),
-                      'name': 'subjects',
-                      'link': teacher.url(action='teacher_subjects'),
-                      'event': h.trackEvent(teacher, 'members', 'breadcrumb')})
-    if teacher.publications:
-        tabs.append({'title': _('Publications'),
-                      'name': 'publications',
-                      'link': teacher.url(action='teacher_publications'),
-                      'event': h.trackEvent(teacher, 'publications', 'breadcrumb')})
+    if c.user is not None:
+        # only for logged-in users
+        tabs.append(
+            {'title': _("Activity"),
+             'name': 'feed',
+             'link': teacher.url(action='teacher_activity'),
+             'event': h.trackEvent(teacher, 'feed', 'breadcrumb')})
+
 
     return tabs
 
@@ -151,31 +138,25 @@ class UserController(BaseController, UserInfoWallMixin):
 
     @teacher_profile_action
     def teacher_index(self, user):
-        self._set_wall_variables(events_hidable=False)
-        c.current_tab = 'feed'
-
-        if c.user:
-            return render('user/teacher_profile.mako')
-        else:
-            return render('user/teacher_profile_public.mako')
+        c.current_tab = 'information'
+        return render('user/teacher_information.mako')
 
     @teacher_profile_action
-    @ActionProtector("user")
     def teacher_subjects(self, user):
         c.current_tab = 'subjects'
         return render('user/teacher_subjects.mako')
 
     @teacher_profile_action
-    @ActionProtector("user")
-    def teacher_information(self, user):
-        c.current_tab = 'information'
-        return render('user/teacher_information.mako')
-
-    @teacher_profile_action
-    @ActionProtector("user")
     def teacher_publications(self, user):
         c.current_tab = 'publications'
         return render('user/teacher_publications.mako')
+
+    @teacher_profile_action
+    @ActionProtector("user")
+    def teacher_activity(self, user):
+        self._set_wall_variables(events_hidable=False)
+        c.current_tab = 'feed'
+        return render('user/teacher_activity.mako')
 
     @profile_action
     @ActionProtector("root")

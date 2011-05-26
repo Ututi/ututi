@@ -299,23 +299,6 @@
   </%self:portlet>
 </%def>
 
-<%def name="teacher_list_portlet(title, teachers)">
-  %if teachers:
-  <%self:portlet id="teacher_list_portlet">
-    <%def name="header()">
-      ${title}
-    </%def>
-    <ul class="icon-list" id="teacher-list">
-    %for teacher in teachers:
-      <li class="icon-teacher">
-        ${h.link_to(teacher.fullname, teacher.url())}
-      </li>
-    %endfor
-    </ul>
-  </%self:portlet>
-  %endif
-</%def>
-
 <%def name="teacher_related_links_portlet(teacher=None)">
   <% if teacher is None: teacher = c.user %>
   %if teacher:

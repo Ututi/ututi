@@ -1,22 +1,30 @@
 <%inherit file="/base.mako" />
 <%namespace file="/profile/base.mako" name="profile"/>
 <%namespace file="/portlets/user.mako" import="user_statistics_portlet,
-        related_users_portlet, teacher_list_portlet, teacher_related_links_portlet"/>
+        related_users_portlet, teacher_related_links_portlet"/>
+<%namespace file="/portlets/structure.mako" import="location_teacher_list_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet"/>
 <%namespace file="/elements.mako" import="tabs, location_links" />
 <%namespace name="index" file="/user/index.mako" import="css" />
 
-<%def name="portlets()">
-  ${profile.portlets()}
-</%def>
-
-<%def name="portlets_secondary()">
+<%def name="teacher_page_portlets()">
   ${teacher_related_links_portlet(c.user_info)}
   ${share_portlet(c.user_info)}
   ${user_statistics_portlet(c.user_info)}
-  %if c.user_info.location:
-  <% title = ' '.join(c.user_info.location.title_path) + ' ' + _("teachers") %>
-  ${teacher_list_portlet(title, c.all_teachers)}
+  ${location_teacher_list_portlet(c.user_info.location)}
+</%def>
+
+<%def name="portlets()">
+  %if c.user is not None:
+    ${profile.portlets()}
+  %else:
+    ${teacher_page_portlets()}
+  %endif
+</%def>
+
+<%def name="portlets_secondary()">
+  %if c.user is not None:
+    ${teacher_page_portlets()}
   %endif
 </%def>
 

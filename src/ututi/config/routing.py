@@ -214,7 +214,8 @@ def make_map(config):
     # teacher profile pages
     map.connect('/teacher/{id}', controller='user', action='teacher_index')
     map.connect('/teacher/{id}/subjects', controller='user', action='teacher_subjects')
-    map.connect('/teacher/{id}/information', controller='user', action='teacher_information')
+    map.connect('/teacher/{id}/publications', controller='user', action='teacher_publications')
+    map.connect('/teacher/{id}/activity', controller='user', action='teacher_activity')
 
     # user profiles
     map.connect('/user/{id}', controller='user', action='index')
