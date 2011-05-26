@@ -31,10 +31,10 @@
 <tr class="${post_class}">
   <td class="author-logo">
     <a href="${message.author_or_anonymous.url()}">
-      %if message.author and message.author.logo is not None:
-        <img alt="user-logo" src="${url(controller='user', action='logo', id=message.author.id, width='45', height='60')}"/>
+      %if message.author is not None:
+        <img alt="user-logo" src="${message.author.url(action='logo', width=45)}"/>
       %else:
-        ${h.image('/images/user_logo_45x60.png', alt='logo', id='group-logo')|n}
+        ${h.image('/images/user_logo_45x60.png', alt='logo', id='group-logo')}
       %endif
     </a>
   </td>

@@ -82,6 +82,9 @@ class AdminUser(object):
         except NoResultFound:
             return None
 
+    def has_logo(self):
+        return False
+
 
 class Author(object):
     """The Author object - for references to authorship. Persists even when the user is deleted."""
@@ -100,6 +103,13 @@ class Author(object):
                    action=action,
                    id=self.id,
                    **kwargs)
+
+    @property
+    def logo(self):
+        return None
+
+    def has_logo(self):
+        return False
 
 
 class User(Author):

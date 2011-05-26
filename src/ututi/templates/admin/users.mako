@@ -104,11 +104,9 @@
         <td style="text-align: center; white-space: nowrap">
           ${h.fmt_dt(user.accepted_terms) if user.accepted_terms else ''}
         </td>
-        % if user.logo is not None:
-           <td>
-              <img style="padding: 3px;" src="${url(controller='user', action='logo', id=user.id, width=72, height=72)}" />
-           </td>
-        % endif
+         <td>
+            <img style="padding: 3px;" src="${user.url(action='logo', width=72, height=72)}" />
+         </td>
     </tr>
     %endfor
   </table>

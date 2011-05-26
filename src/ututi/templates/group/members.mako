@@ -73,11 +73,7 @@
     <div class="user-logo">
       <a href="${url(controller="user", action="index", id=member.user.id)}"
          title="${member.user.fullname}">
-        %if member.user.logo is not None:
-          <img src="${url(controller='user', action='logo', id=member.user.id, width=60, height=70)}" alt="logo" />
-        %else:
-          ${h.image('/img/avatar-light.png', alt='logo')}
-        %endif
+        <img src="${member.user.url(action='logo', width=60)}" alt="logo" />
       </a>
     </div>
     <div>

@@ -75,11 +75,7 @@ ${h.link_to(_('Back to catalog'), url(controller="books", action="index"), class
   <div class="owner-information">
     <p>${_("Owner information")}</p>
     <div class="profile">
-      %if c.book.created.logo is not None:
-      <img src="${url(controller='user', action='logo', id=c.book.created.id, width=70, height=70)}" alt="logo" class="floatleft" />
-      %else:
-      ${h.image('/img/profile-avatar.png', alt='logo')|n}\
-      %endif
+      <img src="${c.book.created.url(action='logo', width=70, height=70)}" alt="logo" class="floatleft" />
       <div><h3>${c.book.created.fullname}</h3></div>
       <div><a href="mailto:${c.book.created.emails[0].email}">${c.book.created.emails[0].email}</a></div>
       %if c.book.created.phone_number is not None and c.book.created.phone_number != "":

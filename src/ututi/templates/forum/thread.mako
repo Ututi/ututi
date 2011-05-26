@@ -52,11 +52,7 @@
   <tr class="thread-post">
     <td class="author-logo">
       <a href="${forum_post.created.url()}">
-        %if forum_post.created.logo is not None:
-          <img alt="user-logo" src="${url(controller='user', action='logo', id=forum_post.created.id, width='45', height='60')}"/>
-        %else:
-          ${h.image('/images/user_logo_45x60.png', alt='logo', id='group-logo')|n}
-        %endif
+        <img alt="user-logo" src="${forum_post.created.url(action='logo', width=45)}"/>
       </a>
     </td>
     <td class="forum_post">
