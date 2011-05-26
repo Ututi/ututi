@@ -15,7 +15,7 @@
   ${base.portlets()}
 </%def>
 
-<%def name="portlets_right()">
+<%def name="portlets_secondary()">
   ${share_portlet(c.subject, _("Share this subject:"))}
   ${subject_followers_portlet()}
   ${subject_related_subjects_portlet()}

@@ -10,7 +10,7 @@
   ${profile.portlets()}
 </%def>
 
-<%def name="portlets_right()">
+<%def name="portlets_secondary()">
   ${teacher_related_links_portlet(c.user_info)}
   ${share_portlet(c.user_info)}
   ${user_statistics_portlet(c.user_info)}

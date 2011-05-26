@@ -10,7 +10,7 @@
   ${profile.portlets()}
 </%def>
 
-<%def name="portlets_right()">
+<%def name="portlets_secondary()">
   ${about_portlet()}
   %if c.user.is_teacher:
   ${profile_page_portlet()}

@@ -6,8 +6,8 @@
   ${profile.portlets()}
 </%def>
 
-<%def name="portlets_right()">
-  ${profile.portlets_right()}
+<%def name="portlets_secondary()">
+  ${profile.portlets_secondary()}
 </%def>
 
 <%def name="pagetitle()">

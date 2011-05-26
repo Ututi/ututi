@@ -9,7 +9,7 @@
   ${profile.portlets()}
 </%def>
 
-<%def name="portlets_right()">
+<%def name="portlets_secondary()">
   ${user_statistics_portlet(c.user_info)}
   ${related_users_portlet(c.user_info)}
   ${user_medals(c.user_info)}

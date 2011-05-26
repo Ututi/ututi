@@ -13,7 +13,7 @@
   ${profile.portlets()}
 </%def>
 
-<%def name="portlets_right()">
+<%def name="portlets_secondary()">
 ${group_right_sidebar()}
 </%def>
 

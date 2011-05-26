@@ -4,7 +4,7 @@
   Here will be important portlets.
 </%def>
 
-<%def name="portlets_right()">
+<%def name="portlets_secondary()">
   Here will be not so important portlets.
 </%def>
 

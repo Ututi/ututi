@@ -1,46 +1,50 @@
 <%inherit file="/prebase.mako" />
 
 <%def name="portlets()"></%def>
-<%def name="portlets_right()"></%def>
+<%def name="portlets_secondary()"></%def>
 
 <%
 
 # get sidebar contents
 
-left_sidebar = capture(self.portlets)
-right_sidebar = capture(self.portlets_right)
+first_sidebar_content = capture(self.portlets)
+second_sidebar_content = capture(self.portlets_secondary)
 
-# pick CSS classes
-# (note that currently we dont support standalone righthand sidebar)
+first_sidebar = bool(first_sidebar_content.strip())
+second_sidebar = bool(second_sidebar_content.strip())
 
-if left_sidebar and right_sidebar:
-  classes = 'with-left-sidebar with-right-sidebar'
-elif left_sidebar:
-  classes = 'with-left-sidebar'
+# count sidebars and pick CSS classes
+
+if first_sidebar and second_sidebar:
+  layout = 'two-sidebars'
+elif first_sidebar:
+  layout = 'one-sidebar'
 else:
-  classes = ''
+  layout = ''
 
 %>
 
-<div id="layout-wrap" class="${classes} clearfix">
+<div id="layout-wrap" class="${layout} clearfix">
   <div id="main-content">
     <div class="content-inner">
       ${self.flash_messages()}
       ${next.body()}
     </div>
   </div>
-  %if left_sidebar:
-  <div id="left-sidebar">
+  %if first_sidebar:
+  <div id="first-sidebar">
     <div class="sidebar-inner">
-      ${self.portlets()}
+      ${h.literal(first_sidebar_content)}
+    </div>
+  </div>
+  ## for current layout second sidebar is only possible
+  ## if first one is present
+  %if second_sidebar:
+  <div id="second-sidebar">
+    <div class="sidebar-inner">
+      ${h.literal(second_sidebar_content)}
     </div>
   </div>
   %endif
-  %if right_sidebar:
-  <div id="right-sidebar">
-    <div class="sidebar-inner">
-      ${self.portlets_right()}
-    </div>
-  </div>
   %endif
 </div>

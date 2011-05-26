@@ -234,19 +234,19 @@ li.expanded li a {
 /* Left sidebar.
  */
 
-#layout-wrap.with-left-sidebar #main-content {
-    float: left;
+#layout-wrap.one-sidebar #main-content {
     width: 800px;
     margin-left: 180px;
     margin-right: -980px;
     border-left: 1px solid #eeeeee;
 }
 
-#layout-wrap #left-sidebar {
-    display: none; /* so you don't forget to add .with-left-sidebar */
+#layout-wrap #first-sidebar {
+    display: none; /* so you don't forget to add .one-sidebar */
 }
 
-#layout-wrap.with-left-sidebar #left-sidebar {
+#layout-wrap.one-sidebar #first-sidebar,
+#layout-wrap.two-sidebars #first-sidebar {
     display: block;
     float: left;
     width: 180px;
@@ -259,15 +259,18 @@ li.expanded li a {
 /* Right sidebar.
  */
 
-#layout-wrap #right-sidebar {
-    display: none; /* so you don't forget to add .with-right-sidebar */
+#layout-wrap #second-sidebar {
+    display: none; /* so you don't forget to add .two-sidebars */
 }
 
-#layout-wrap.with-right-sidebar #main-content {
+#layout-wrap.two-sidebars #main-content {
     width: 600px;
+    margin-left: 180px;
+    margin-right: -980px;
+    border-left: 1px solid #eeeeee;
 }
 
-#layout-wrap.with-right-sidebar #right-sidebar {
+#layout-wrap.two-sidebars #second-sidebar {
     display: block;
     float: left;
     width: 200px;
@@ -276,7 +279,7 @@ li.expanded li a {
     padding: 0;
 }
 
-#right-sidebar .portlet {
+#second-sidebar .portlet {
     width: 175px;
 }
 
@@ -295,6 +298,6 @@ li.expanded li a {
     overflow: hidden;
 }
 
-#left-sidebar .sidebar-inner {
+#first-sidebar .sidebar-inner {
     padding-left: 12px;
 }
