@@ -1789,7 +1789,7 @@ class LocationTag(Tag):
         #items.extend(meta.Session.query(cls).filter_by(title_short=title).all())
         return items
 
-    def url(self, controller='structureview', action='index', **kwargs):
+    def url(self, controller='location', action='index', **kwargs):
         return url(controller=controller,
                    action=action,
                    path=self.url_path,

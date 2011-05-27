@@ -12,7 +12,7 @@
 <%def name="pagetitle()">${_('Teachers')}</%def>
 
 <%def name="search_results(results, search_query=None)">
-  <%search:search_results results="${results}" controller='structureview' action='catalog_js' display="${self.teacher_snippet}">
+  <%search:search_results results="${results}" controller='location' action='catalog_js' display="${self.teacher_snippet}">
     <%def name="header()">
       <div class="clearfix">
         <span class="result-count">

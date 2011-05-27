@@ -26,7 +26,7 @@ from ututi.controllers.search import SearchSubmit, SearchBaseController
 
 log = logging.getLogger(__name__)
 
-def structure_menu_items():
+def location_menu_items():
     return [
         {'title': _("News feed"),
          'name': 'feed',
@@ -41,7 +41,7 @@ def structure_menu_items():
          'name': 'teachers',
          'link': c.location.url(action='catalog', obj_type='teacher')}]
 
-def structure_menu_public_items():
+def location_menu_public_items():
     return [
         {'title': _("About"),
          'name': 'about',
@@ -76,9 +76,9 @@ def location_action(method):
         c.location = location
         c.breadcrumbs = location_breadcrumbs(location)
         if c.user:
-            c.menu_items = structure_menu_items()
+            c.menu_items = location_menu_items()
         else:
-            c.menu_items = structure_menu_public_items()
+            c.menu_items = location_menu_public_items()
 
         c.current_menu_item = None
         if obj_type is None:
@@ -113,7 +113,7 @@ class TeacherRegistrationForm(Schema):
                           UniversityPolicyEmailValidator())
 
 
-class StructureviewWallMixin(WallMixin):
+class LocationWallMixin(WallMixin):
 
     def _wall_events_query(self):
         """WallMixin implementation."""
@@ -160,7 +160,7 @@ class TeacherSearchMixin():
         c.searched = True
 
 
-class StructureviewController(SearchBaseController, UniversityListMixin, StructureviewWallMixin, TeacherSearchMixin):
+class LocationController(SearchBaseController, UniversityListMixin, LocationWallMixin, TeacherSearchMixin):
 
     @location_action
     def index(self, location):
@@ -265,7 +265,7 @@ class StructureviewController(SearchBaseController, UniversityListMixin, Structu
 
             meta.Session.commit()
             h.flash(_("Information updated."))
-        redirect(url(controller='structureview', action='index', path='/'.join(location.path)))
+        redirect(url(controller='location', action='index', path='/'.join(location.path)))
 
     @location_action
     def login(self, location):

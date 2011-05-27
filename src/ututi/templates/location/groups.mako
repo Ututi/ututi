@@ -4,7 +4,7 @@
 <%def name="pagetitle()">${_('Groups')}</%def>
 
 <%def name="search_results(results, search_query=None)">
-  <%search:search_results results="${results}" controller='structureview' action='catalog_js'>
+  <%search:search_results results="${results}" controller='location' action='catalog_js'>
     <%def name="header()">
       <div class="clearfix">
         <span class="result-count">
