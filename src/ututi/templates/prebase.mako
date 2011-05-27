@@ -234,7 +234,9 @@ ${_('Private social networks for universities')}
     ${next.body()}
 
     <div id="footer">
-      ${self.footer()}
+      <div id="footer-inner">
+        ${self.footer()}
+      </div>
     </div>
 
     %if c.lang in ['lt', 'en', 'pl']:
