@@ -288,6 +288,13 @@ button.submit {
       %endfor
     </dl>
   </div>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('.subject-description-list a.unteach-button').click(function() {
+      return confirm('${_("Are you sure you want to delete this subject?")}');
+    });
+  });
+  </script>
 </div>
 </%def>
 
@@ -309,6 +316,13 @@ button.submit {
       %endfor
     </dl>
   </div>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('.group-description-list .close-button').click(function() {
+      return confirm('${_("Are you sure you want to delete this group?")}');
+    });
+  });
+  </script>
 </div>
 </%def>
 
