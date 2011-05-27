@@ -33,7 +33,7 @@
   #user-information {
     margin: 15px 0;
   }
-  #user-information .user-logo,
+  #user-information .user-logo-container,
   #user-information .user-info {
     float: left;
     margin-right: 20px;
@@ -73,7 +73,7 @@
 </h1>
 
 <div id="user-information" class="clearfix">
-  <div class="user-logo">
+  <div class="user-logo-container">
     <img id="user-logo" src="${c.user_info.url(action='logo', width=120)}" alt="logo" />
   </div>
 

@@ -1,0 +1,223 @@
+/*
+ * Branded CSS for VU MIF.
+ *
+ */
+
+/* General
+ */
+
+body {
+    background: white;
+    color: black;
+}
+
+#layout-wrap {
+    border: none;
+}
+
+h1,
+h1.page-title {
+    font-weight: normal;
+    font-size: 24px;
+    color: #820505;
+}
+
+.underline,
+h1.underline,
+h1.page-title.underline {
+    border-bottom: 1px solid #820505;
+}
+
+h1.page-title {
+    display: none;
+}
+
+/* Layout
+ */
+
+#layout-wrap.one-sidebar #main-content {
+    margin-left: 0;
+    margin-right: 0;
+    border: none;
+}
+
+#layout-wrap.one-sidebar #first-sidebar {
+    border: none;
+    /* margin-top: 250px; */
+}
+
+#main-content .content-inner {
+    padding: 20px 0;
+}
+
+#layout-wrap.one-sidebar ul.tabs {
+    /* width: 980px; */
+}
+
+ul.tabs {
+    display: block;
+    background: #820505;
+    border: none;
+    padding: 0;
+    height: 35px;
+}
+
+ul.tabs li {
+    float: left;
+    height: 35px;
+    padding: 0 15px;
+}
+
+ul.tabs li:hover,
+ul.tabs li.current {
+    border: none;
+    background: #952d2d;
+}
+
+ul.tabs li a,
+ul.tabs li.current a {
+    position: static;
+    display: block;
+    padding: 0;
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 35px;
+    background: none;
+}
+
+/* Header
+ */
+
+.anonymous #header,
+.anonymous #header #header-inner {
+    height: 125px;
+    background: white;
+    padding: 0;
+}
+
+.anonymous #header {
+    border-bottom: 6px solid #820505;
+}
+
+.anonymous #header #header-inner {
+    position: relative;
+    width: 980px;
+}
+
+.anonymous #header img.university-logo {
+    position: absolute;
+    height: 100px;
+}
+
+.anonymous #header img.university-logo.logo-1 {
+    left: 0px;
+    top: 10px;
+}
+
+.anonymous #header img.university-logo.logo-2 {
+    right: 0px;
+    top: 10px;
+}
+
+.anonymous #header .university-title {
+    font-family: Times New Roman, Times, serif;
+    font-variant: small-caps;
+    position: absolute;
+}
+
+.anonymous #header .university-title.title-1 {
+    font-size: 32px;
+    left: 100px;
+    top: 25px;
+}
+
+.anonymous #header .university-title.title-2 {
+    font-size: 40px;
+    letter-spacing: -2px;
+    left: 180px;
+    bottom: 20px;
+}
+
+/* FOOTER
+ */
+
+#footer {
+    width: 100%;
+    border-top: 2px solid #820505;
+}
+
+#footer #footer-inner {
+    width: 980px;
+    margin: auto;
+}
+
+/* PORTLETS
+ */
+
+.portlet .header {
+    font-size: 16px;
+    font-weight: normal;
+    text-transform: none;
+    color: #820505;
+    border-bottom: 1px solid #820505;
+}
+
+/* WIKI PAGES
+ */
+
+.wiki-page {
+    color: black;
+}
+
+    .wiki-page h2 {
+        color: #820505;
+        font-size: 14px;
+        font-weight: normal;
+        text-decoration: underline;
+    }
+
+/* TEACHER INFORMATION BLOCK
+ */
+
+#user-information {
+    margin-top: 0 !important;
+}
+
+#user-information .user-logo-container {
+    margin-right: 25px !important;
+}
+
+#user-information #user-logo {
+    width: 150px !important;
+    height: 150px !important;
+}
+
+
+#user-information .user-info .teacher-name {
+    display: block;
+    margin-top: -5px;
+    margin-bottom: 2px;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#user-information .user-info .teacher-position {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+#user-information .user-info .teacher-location {
+    margin-bottom: 5px;
+}
+
+#user-information .user-info #teacher-contact-information li {
+    background: none;
+    padding-left: 0;
+}
+
+#user-information .user-info #teacher-contact-information .label {
+    margin-right: 10px;
+}

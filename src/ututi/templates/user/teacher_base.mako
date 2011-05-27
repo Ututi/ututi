@@ -28,6 +28,28 @@
   %endif
 </%def>
 
+<%def name="branded_header()">
+  %for index, loc in enumerate(c.user_info.location.hierarchy(True), 1):
+    <img class="university-logo logo-${index}" src="${url(controller='structure', action='logo', id=loc.id, width=140)}" alt="${loc.title}" />
+    <div class="university-title title-${index}">${loc.title}</div>
+  %endfor
+</%def>
+
+<%def name="header()">
+  %if c.user is None and c.user_info.location.title_path == ['vu', 'mif']:
+    ${branded_header()}
+  %else:
+    ${parent.header()}
+  %endif
+</%def>
+
+<%def name="head_tags()">
+  ${parent.head_tags()}
+  %if c.user is None and c.user_info.location.title_path == ['vu', 'mif']:
+    ${h.stylesheet_link(h.path_with_hash('/css/branded/vu-mif.css'))}
+  %endif
+</%def>
+
 <%def name="title()">
   ${c.user_info.fullname}
 </%def>
@@ -37,6 +59,16 @@
   ${index.css()}
   .teacher-position {
     font-size: 14px;
+  }
+  #user-information .label {
+    font-weight: bold;
+  }
+  #user-information .teacher-name {
+    display: none;
+  }
+  #user-information #user-logo {
+    width: 130px;
+    height: 130px;
   }
 </%def>
 
@@ -70,11 +102,15 @@
 
 <%def name="teacher_info_block()">
 <div id="user-information" class="clearfix">
-  <div class="user-logo">
-    <img id="user-logo" src="${c.user_info.url(action='logo', width=130)}" alt="logo" />
+  <div class="user-logo-container">
+    <img id="user-logo" src="${c.user_info.url(action='logo', width=200)}" alt="logo" />
   </div>
 
   <div class="user-info">
+
+    <div class="teacher-name">
+      ${c.user_info.fullname}
+    </div>
 
     %if c.user_info.teacher_position:
       <div class="teacher-position">
@@ -86,29 +122,29 @@
       ${location_links(c.user_info.location, full_title=True, external=True)}
     </div>
 
-    <ul class="icon-list">
+    <ul class="icon-list" id="teacher-contact-information">
 
       %if c.user_info.work_address:
-      <li class="icon-university">
-        <strong>${_('Address')}:</strong> ${c.user_info.work_address}
+      <li class="address icon-university">
+        <span class="label">${_('Address')}:</span> ${c.user_info.work_address}
       </li>
       %endif
 
       %if c.user_info.phone_number and c.user_info.phone_confirmed:
-      <li class="icon-mobile">
-        <strong>${_('Phone')}:</strong> ${c.user_info.phone_number}
+      <li class="phone icon-mobile">
+        <span class="label">${_('Phone')}:</span> ${c.user_info.phone_number}
       </li>
       %endif
 
       %if c.user_info.emails:
-      <li class="icon-contact">
-        <strong>${_('E-mail')}:</strong> ${h.literal(', '.join([h.mail_to(email.email) for email in c.user_info.emails if email.confirmed]))}
+      <li class="email icon-contact">
+        <span class="label">${_('E-mail')}:</span> ${h.literal(', '.join([h.mail_to(email.email) for email in c.user_info.emails if email.confirmed]))}
       </li>
       %endif
 
       %if c.user_info.site_url:
-      <li class="icon-network">
-        <strong>${_('Personal webpage')}:</strong><br /><a href="${c.user_info.site_url}">${c.user_info.site_url}</a>
+      <li class="webpage icon-network">
+        <span class="label">${_('Personal webpage')}:</span> <a href="${c.user_info.site_url}">${c.user_info.site_url}</a>
       </li>
       %endif
 
