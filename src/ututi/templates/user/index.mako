@@ -121,7 +121,7 @@
 
 </div>
 
-<div class="section subjects">
+<div class="page-section subjects">
   <div class="title">${_("Subjects:")}</div>
   %if c.user_info.watched_subjects:
   <div class="search-results-container">
@@ -134,7 +134,7 @@
   %endif
 </div>
 
-<div class="section groups">
+<div class="page-section groups">
   <div class="title">${_("Groups:")}</div>
   %if c.user_info.groups:
   <div class="search-results-container">
@@ -147,7 +147,7 @@
   %endif
 </div>
 
-<div class="section events">
+<div class="page-section events">
   <div class="title">${_("Activity:")}</div>
   %if c.events:
     <div class="wall">

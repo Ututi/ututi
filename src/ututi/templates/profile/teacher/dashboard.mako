@@ -272,7 +272,7 @@ button.submit {
 </%def>
 
 <%def name="subject_section(subjects)">
-<div class="section subjects">
+<div class="page-section subjects">
   <div class="title">
     ${_("My courses")}
     <span class="action-button">
@@ -292,7 +292,7 @@ button.submit {
 </%def>
 
 <%def name="group_section(groups)">
-<div class="section groups">
+<div class="page-section groups">
   <div class="title">
     ${_("My student groups")}
     <span class="action-button">
@@ -313,7 +313,7 @@ button.submit {
 </%def>
 
 <%def name="profile_section()">
-<div class="section profile">
+<div class="page-section profile">
   <div class="title">
     ${_("My profile page")}
     <span class="action-button">

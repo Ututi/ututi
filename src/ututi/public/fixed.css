@@ -1918,7 +1918,7 @@ ul.tabs {
 /* SECTION.
  */
 
-.section {
+.page-section {
     margin-top: 30px;
     padding-left: 40px;
     background-position: top left;
@@ -1926,29 +1926,29 @@ ul.tabs {
     min-height: 40px;
 }
 
-    .section.subjects {
+    .page-section.subjects {
         background-image: url("/img/icons.com/about/subject.png");
     }
 
-    .section.groups {
+    .page-section.groups {
         background-image: url("../img/icons.com/about/group.png");
     }
 
-    .section.events {
+    .page-section.events {
         background-image: url("../img/icons.com/clock_grand.png");
     }
 
-    .section.information {
+    .page-section.information {
         background-image: url("/img/icons.com/about/wiki_edit.png");
     }
 
-    .section.profile {
+    .page-section.profile {
         background-image: url("/img/icons.com/about/file_edit.png");
         background-position: 5px top;
     }
 
 
-    .section .title {
+    .page-section .title {
         position: relative;
         border-bottom: 1px solid #f90;
         font-size: 14px;
@@ -1958,7 +1958,7 @@ ul.tabs {
         color: #333;
     }
 
-    .section .action-button {
+    .page-section .action-button {
         position: absolute;
         bottom: 2px;
         right: 0px;
