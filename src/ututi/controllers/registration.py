@@ -378,6 +378,7 @@ class RegistrationController(BaseController, FederationMixin):
             return htmlfill.render(self._university_create_form(), defaults=defaults)
 
         registration.university_title = self.form_result['title']
+        registration.university_country = self.form_result['country']
         registration.university_site_url = self.form_result['site_url']
         registration.university_logo = self.form_result['logo'].file.read()
         registration.university_member_policy = self.form_result['member_policy']
