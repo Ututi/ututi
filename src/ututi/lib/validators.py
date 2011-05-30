@@ -5,7 +5,7 @@ from os.path import splitext
 from decorator import decorator
 from lxml.html.clean import Cleaner
 
-from formencode import validators, Invalid, htmlfill, variabledecode
+from formencode import validators, Invalid, htmlfill, variabledecode, Schema
 import formencode
 from pylons.i18n import _
 from pylons import config, tmpl_context as c
@@ -161,6 +161,18 @@ class LocationIdValidator(validators.FormValidator):
             raise Invalid(self.message('duplicate', state),
                           form_dict, state,
                           error_dict={'title_short' : Invalid(self.message('duplicate', state), form_dict, state)})
+
+
+class MemberPolicyValidator(validators.OneOf):
+
+    messages = dict(
+        missing=_(u"Please specify member policy."),
+        invalid=_(u"Invalid policy selected."),
+        notIn=_(u"Invalid policy selected."))
+
+    def __init__(self):
+        validators.OneOf.__init__(self,
+          LocationTag.member_policies)
 
 
 class PhoneNumberValidator(validators.FancyValidator):
@@ -533,6 +545,18 @@ class FileUploadTypeValidator(validators.FancyValidator):
         if value is not None:
             if splitext(value.filename)[1].lower() not in self.allowed_types:
                 raise Invalid(self.message('bad_type', state, allowed=', '.join(self.allowed_types)), value, state)
+
+
+class LogoUpload(Schema):
+    """A schema for validating logo uploads."""
+    allow_extra_fields = True
+    messages = {
+       'empty': _(u"Please select your photo."),
+       'bad_type': _(u"Please upload JPEG, PNG or GIF image.")
+    }
+    logo = FileUploadTypeValidator(not_empty=True,
+                                   allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'),
+                                   messages=messages)
 
 
 class GroupCouponValidator(validators.FancyValidator):

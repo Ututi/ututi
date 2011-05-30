@@ -64,7 +64,7 @@
     #navigation-portlet ul li a {
         display: block;
         margin: 0;
-        padding: 3px 5px 3px 30px;
+        padding: 5px 5px 5px 30px;
         background-position: 12px center;
         background-repeat: no-repeat;
         outline: none;
@@ -98,6 +98,13 @@
     }
     #navigation-portlet ul li.teachers a {
         background-image: url('/img/icons.com/teacher_small_orange.png');
+    }
+    #navigation-portlet ul li.settings a {
+        background-image: url('/img/icons.com/settings.png');
+    }
+    #navigation-portlet ul li.registration a {
+        background-image: url('/img/icons.com/contact_small.png');
+        background-position: 13px center;
     }
 
 #about-ututi-portlet { }

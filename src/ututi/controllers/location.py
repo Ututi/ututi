@@ -12,14 +12,16 @@ from pylons.templating import render_mako_def
 import ututi.lib.helpers as h
 from ututi.lib.base import render
 from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, \
-        FileUploadTypeValidator, validate, TranslatedEmailValidator, \
-        UniversityPolicyEmailValidator, UniqueLocationEmail
+        validate, TranslatedEmailValidator, \
+        UniversityPolicyEmailValidator, UniqueLocationEmail, \
+        MemberPolicyValidator, EmailDomainValidator, AvailableEmailDomain, \
+        LogoUpload, CountryValidator
 from ututi.lib.wall import WallMixin
 from ututi.lib.search import search_query_count
 from ututi.lib.emails import teacher_request_email
 from ututi.lib.security import ActionProtector
 from ututi.model import Subject, Group, Teacher
-from ututi.model import LocationTag, meta
+from ututi.model import LocationTag, EmailDomain, meta
 from ututi.model.users import User, UserRegistration
 from ututi.controllers.home import UniversityListMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -52,6 +54,16 @@ def location_menu_public_items():
         {'title': _("Teachers"),
          'name': 'teachers',
          'link': c.location.url(action='catalog', obj_type='teacher')}]
+
+def location_edit_menu_items():
+    return [
+        {'title': _("General information"),
+         'name': 'settings',
+         'link': c.location.url(action='edit')},
+        {'title': _("Registration settings"),
+         'name': 'registration',
+         'link': c.location.url(action='edit_registration')},
+    ]
 
 def location_breadcrumbs(location):
     breadcrumbs = []
@@ -92,12 +104,22 @@ class LocationEditForm(Schema):
     allow_extra_fields = True
     title = validators.UnicodeString(not_empty=True, strip=True)
     title_short = compound.All(validators.UnicodeString(not_empty=True, strip=True, max=50), ShortTitleValidator)
-    logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
-    logo_delete = validators.StringBoolean(if_missing=False)
+    country = CountryValidator(not_empty=True)
     site_url = validators.URL()
     chained_validators = [
         LocationIdValidator()
         ]
+
+
+class NewDomainForm(Schema):
+    domain_name = compound.Pipe(validators.String(not_empty=True, strip=True),
+                                EmailDomainValidator(),
+                                AvailableEmailDomain())
+
+
+class RegistrationSettingsForm(Schema):
+    allow_extra_fields = True
+    member_policy = MemberPolicyValidator()
 
 
 class RegistrationForm(Schema):
@@ -169,9 +191,6 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         else:
             redirect(location.url(action='about'))
 
-    def _edit_form(self):
-        return render('location/edit.mako')
-
     @location_action
     def about(self, location):
         c.current_menu_item = 'about'
@@ -238,34 +257,99 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
                                    results=c.results,
                                    search_query=search_query)
 
+    def _edit_form(self):
+        c.menu_items = location_edit_menu_items()
+        c.current_menu_item = 'settings'
+        return render('location/edit.mako')
+
     @location_action
     def edit(self, location):
         defaults = {
-            'old_path': '/'.join(location.path),
             'title': location.title,
             'title_short': location.title_short,
-            'site_url': location.site_url
-            }
+            'site_url': location.site_url,
+            'country': location.country.id,
+        }
+        defaults['old_path'] = '/'.join(location.path)
         return htmlfill.render(self._edit_form(), defaults=defaults, force_defaults=False)
 
     @location_action
     @validate(schema=LocationEditForm, form='_edit_form')
     def update(self, location):
-
         if hasattr(self, 'form_result'):
             location.title = self.form_result['title']
-            location.site_url = self.form_result['site_url']
             location.title_short = self.form_result['title_short']
-            if self.form_result['logo_delete']:
-                location.logo = None
-
-            if self.form_result['logo_upload'] is not None and self.form_result['logo_upload'] != '':
-                logo = self.form_result['logo_upload']
-                location.logo = logo.file.read()
-
+            location.site_url = self.form_result['site_url']
+            location.country = self.form_result['country']
             meta.Session.commit()
             h.flash(_("Information updated."))
-        redirect(url(controller='location', action='index', path='/'.join(location.path)))
+        redirect(location.url(action='edit'))
+
+    def _edit_registration_form(self):
+        c.menu_items = location_edit_menu_items()
+        c.current_menu_item = 'registration'
+        return render('location/edit_registration.mako')
+
+    @location_action
+    @validate(schema=RegistrationSettingsForm, form='_edit_registration_form')
+    def edit_registration(self, location):
+        if hasattr(self, 'form_result'):
+            location.member_policy = self.form_result['member_policy']
+            h.flash(_("Registration settings updated."))
+            meta.Session.commit()
+
+        defaults = {
+            'member_policy': location.member_policy
+        }
+        return htmlfill.render(self._edit_registration_form(),
+                               defaults=defaults,
+                               force_defaults=False)
+
+    @location_action
+    def delete_domain(self, location):
+        if 'domain_id' in request.POST:
+            try:
+                id = int(request.POST['domain_id'])
+            except ValueError:
+                abort(404)
+            domain = EmailDomain.get(id)
+            if domain is not None and domain.location == location:
+                domain.delete()
+                meta.Session.commit()
+                h.flash("Email domain %(domain_name)s deleted." % {
+                    'domain_name': domain.domain_name})
+        redirect(location.url(action='edit_registration'))
+
+    @location_action
+    @validate(schema=NewDomainForm, form='_edit_registration_form', force_defaults=False)
+    def add_domain(self, location):
+        if hasattr(self, 'form_result'):
+            domain_name = self.form_result['domain_name']
+            meta.Session.add(EmailDomain(domain_name, location))
+            meta.Session.commit()
+        redirect(location.url(action='edit_registration'))
+
+    @location_action
+    @validate(LogoUpload, form='edit_photo')
+    def update_logo(self, location):
+        if hasattr(self, 'form_result'):
+            logo = self.form_result['logo']
+            if logo is not None:
+                location.logo = logo.file.read()
+                meta.Session.commit()
+                if 'js' not in request.params:
+                    h.flash(_("Logo successfully updated."))
+            if 'js' in request.params:
+                return 'OK'
+        redirect(location.url(action='edit'))
+
+    @location_action
+    def remove_logo(self, location):
+        location.logo = None
+        meta.Session.commit()
+        h.flash(_("Your logo was removed."))
+        redirect(location.url(action='edit'))
+
 
     @location_action
     def login(self, location):

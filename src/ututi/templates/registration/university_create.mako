@@ -33,7 +33,7 @@
       method="POST">
 
   ${h.input_line('title', _("Full University title:"))}
-  ${h.select_line('country', _("Country:"), c.countries)}
+  ${h.country_select(_("Country:"), empty_name=_("(Select country from list)"))}
   ${h.input_line('site_url', _("University website:"))}
 
   <label for="logo-field">
@@ -75,7 +75,7 @@
     });
   </script>
 
-  ${h.select_radio('member_policy', _("Accessibility:"), c.policies)}
+  ${h.member_policy_select(_("Accessibility:"))}
 
   ${h.input_submit(_("Next"))}
 </form>

@@ -27,14 +27,14 @@ from ututi.lib.forms import validate
 from ututi.lib.invitations import make_email_invitations, make_facebook_invitations
 from ututi.lib.messaging import EmailMessage
 from ututi.lib import gg, sms
-from ututi.lib.validators import js_validate
+from ututi.lib.validators import js_validate, LogoUpload
 
 from ututi.model.events import Event
 from ututi.model import meta, Email, User
 
 from ututi.controllers.profile.validators import HideElementForm, \
     MultiRcptEmailForm, FriendsInvitationJSForm, ContactForm, \
-    ProfileForm, PasswordChangeForm, LogoUpload
+    ProfileForm, PasswordChangeForm
 from ututi.controllers.profile.wall import UserWallMixin
 from ututi.controllers.profile.subjects import WatchedSubjectsMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController

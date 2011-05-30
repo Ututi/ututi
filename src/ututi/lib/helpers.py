@@ -418,6 +418,29 @@ def input_submit_text_button(text=None, name=None, **html_options):
     html_options.setdefault('value', text)
     return HTML.button(c=[HTML.span(text)], **html_options)
 
+def member_policy_select(label, name='member_policy'):
+    from ututi.model import LocationTag
+    label_texts = {
+        'RESTRICT_EMAIL':
+         _("Only people with confirmed university email can register"),
+        'ALLOW_INVITES':
+         _("People with confirmed university email can register and other can be invited"),
+        'PUBLIC':
+         _("Everyone can register to this university"),
+    }
+    radios = [(policy, label_texts.get(policy, policy)) \
+               for policy in LocationTag.member_policies]
+    # the idea is that available member_policies 
+    # are defined in LocationTag and here only labels are added.
+    return select_radio(name, label, radios)
+
+def country_select(label, name='country', empty_name=None):
+    from ututi.model.i18n import Country
+    options = [(country.id, country.name) for country in Country.all()]
+    if empty_name:
+        options.insert(0, ('', empty_name))
+    return select_line(name, label, options)
+
 def link_to(label, url='', max_length=None, **attrs):
     if max_length is not None:
         attrs['title'] = label

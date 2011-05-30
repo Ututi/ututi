@@ -59,6 +59,10 @@ class Country(Model):
         except NoResultFound:
             return None
 
+    @classmethod
+    def all(cls):
+        return meta.Session.query(cls).order_by(cls.name.asc()).all()
+
 
 def setup_orm(engine):
     global languages_table

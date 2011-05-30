@@ -13,12 +13,6 @@ ${parent.css()}
   display: block;
   margin-bottom: 10px;
 }
-.explanation-post-header {
-    margin: 20px 0 15px;
-}
-.explanation-post-header p.tip {
-    margin-top: 0px;
-}
 </%def>
 
 <div class="above-tabs">

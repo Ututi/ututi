@@ -1834,7 +1834,7 @@ class LocationTag(Tag):
         return grps
 
     def info_dict(self):
-        """Cacheable dict containing essential info about this subject."""
+        """Cacheable dict containing essential info about this location tag."""
         return {'has_logo': bool(self.logo is not None),
                 'id': self.id,
                 'parent_id': self.parent_id,
@@ -1851,6 +1851,8 @@ class LocationTag(Tag):
                     caption=self.title_short,
                     link=self.url(qualified=True),
                     description=self.description)
+
+    member_policies = ('RESTRICT_EMAIL', 'ALLOW_INVITES', 'PUBLIC')
 
     @property
     def public(self):

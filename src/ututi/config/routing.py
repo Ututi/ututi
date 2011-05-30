@@ -262,7 +262,6 @@ def make_map(config):
 
     map.connect('/school/*path/update', controller='location', action='update')
     map.connect('/school/*path/login', controller='location', action='login')
-    map.connect('/school/*path/edit', controller='location', action='edit')
     map.connect('/school/*path/catalog_js', controller='location', action='catalog_js')
     map.connect('/school/*path/about', controller='location', action='about')
     map.connect('/school/*path/feed', controller='location', action='feed')
@@ -272,6 +271,16 @@ def make_map(config):
     map.connect('/school/*path/register', controller='location', action='register')
     map.connect('/school/*path/register/teacher', controller='location', action='register_teacher')
     map.connect('/school/*path/register/teacher/existing', controller='location', action='register_teacher_existing')
+
+    # location setting actions
+    map.connect('/school/*path/edit', controller='location', action='edit')
+    map.connect('/school/*path/edit/registration', controller='location', action='edit_registration')
+    map.connect('/school/*path/edit/add_domain', controller='location', action='add_domain')
+    map.connect('/school/*path/edit/delete_domain', controller='location', action='delete_domain')
+    map.connect('/school/*path/edit/update_logo', controller='location', action='update_logo')
+    map.connect('/school/*path/edit/remove_logo', controller='location', action='remove_logo')
+
+    # rest
     map.connect('/school/*path', controller='location', action='index')
 
     # other user views

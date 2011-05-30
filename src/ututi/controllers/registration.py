@@ -16,7 +16,7 @@ from ututi.lib.invitations import bind_group_invitations, \
     process_registration_invitations
 from ututi.lib.validators import validate, TranslatedEmailValidator, \
     FileUploadTypeValidator, SeparatedListValidator, CountryValidator, \
-    AvailableEmailDomain, EmailDomainValidator
+    AvailableEmailDomain, EmailDomainValidator, MemberPolicyValidator
 from ututi.lib.emails import teacher_registered_email
 import ututi.lib.helpers as h
 
@@ -29,13 +29,6 @@ from openid.consumer.consumer import Consumer, DiscoveryFailure
 from openid.extensions import ax
 
 from xml.sax.saxutils import quoteattr
-
-member_policies = [('RESTRICT_EMAIL',
-                    _("Only people with confirmed university email can register")),
-                   ('ALLOW_INVITES',
-                    _("People with confirmed university email can register and other can be invited")),
-                   ('PUBLIC',
-                    _("Everyone can register to this university"))]
 
 class PasswordOrFederatedLogin(validators.String):
     """Allow empty password if OpenID and/or FB are provided.
@@ -99,10 +92,7 @@ class UniversityCreateForm(Schema):
     allowed_types = ('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif')
     logo = FileUploadTypeValidator(allowed_types=allowed_types, not_empty=True, messages=msg)
 
-    msg = {'missing': _(u"Please specify member policy."),
-           'invalid': _(u"Invalid policy selected."),
-           'notIn': _(u"Invalid policy selected.") }
-    member_policy = validators.OneOf(dict(member_policies).keys(), messages=msg)
+    member_policy = MemberPolicyValidator()
 
     allowed_domains = ForEach(Pipe(validators.String(strip=True),
                                    EmailDomainValidator(),
@@ -365,12 +355,6 @@ class RegistrationController(BaseController, FederationMixin):
         return render('registration/university_info.mako')
 
     def _university_create_form(self):
-        countries = meta.Session.query(Country).order_by(Country.name.asc()).all()
-        c.countries = [('', _("(Select country from list)"))] + \
-                [(country.id, country.name) for country in countries]
-
-        global member_policies
-        c.policies = member_policies
         c.active_step = 'university_info'
         c.max_allowed_domains = 50
         c.user_domain = c.registration.email.split('@')[1]

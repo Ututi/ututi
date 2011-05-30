@@ -10,7 +10,7 @@ from formencode.variabledecode import NestedVariables
 from ututi.model.users import User
 from ututi.lib.validators import UserPasswordValidator, TranslatedEmailValidator, \
     UniqueEmail, LocationTagsValidator, PhoneNumberValidator, \
-    FileUploadTypeValidator, SeparatedListValidator, URLNameValidator
+    SeparatedListValidator, URLNameValidator
 
 
 class LocationForm(Schema):
@@ -163,18 +163,6 @@ class ContactForm(Schema):
 
     chained_validators = [GaduGaduConfirmationNumber(),
                           PhoneConfirmationNumber()]
-
-
-class LogoUpload(Schema):
-    """A schema for validating logo uploads."""
-    allow_extra_fields = True
-    messages = {
-       'empty': _(u"Please select your photo."),
-       'bad_type': _(u"Please upload JPEG, PNG or GIF image.")
-    }
-    logo = FileUploadTypeValidator(not_empty=True,
-                                   allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'),
-                                   messages=messages)
 
 
 class HideElementForm(Schema):

@@ -411,7 +411,7 @@ form {
 
     form span.radioField label {
         display: block;
-        margin: 2px 0px;
+        margin: 5px 0px;
     }
 
     form span.radioField label input {
@@ -1557,6 +1557,7 @@ ul.inline-list li {
         background-image: url('img/icons.com/mobile.png');
         background-position: 2px center;
     }
+    ul.icon-list li.icon-email-domain { background-image: url('img/icons.com/contact_small.png'); }
     ul.icon-list li.icon-email {
         background-image: url('img/icons.com/email.png');
         padding-left: 22px;
@@ -1963,6 +1964,15 @@ ul.tabs {
         bottom: 2px;
         right: 0px;
     }
+
+/* SETTINGS PAGES */
+
+.explanation-post-header {
+    margin: 20px 0 15px;
+}
+.explanation-post-header p.tip {
+    margin-top: 0px;
+}
 
 /* PRIVATE MESSAGES */
 
