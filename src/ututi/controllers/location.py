@@ -269,9 +269,10 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             'title': location.title,
             'title_short': location.title_short,
             'site_url': location.site_url,
-            'country': location.country.id,
             'description': location.description,
         }
+        if location.country:
+            defaults['country'] = location.country.id
         defaults['old_path'] = '/'.join(location.path)
         return htmlfill.render(self._edit_form(), defaults=defaults, force_defaults=False)
 
