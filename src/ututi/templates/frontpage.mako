@@ -61,7 +61,7 @@
           <div class="uni-logo"><img src="${url('/img/icons.com/universities/VPU_logo.png')}" alt="VPU logo" title="Vilnius Pedagogical University" /></div>
           <div class="strong" style="padding-top: 10px;"><a href="${url('/school/vpu')}">Vilnius Pedagogical University</a></div>
         </div>
-        <div class="more">${h.link_to(_('More'), url(controller='search', action='browse'))}</a></div>
+        <div class="more">${h.link_to(_('More...'), url(controller='search', action='browse'))}</a></div>
       </div>
     </div>
   </div>
