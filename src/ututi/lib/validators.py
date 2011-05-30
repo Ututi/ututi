@@ -226,22 +226,6 @@ class InURLValidator(validators.FancyValidator):
             raise Invalid(self.message('badId', state), value, state)
 
 
-class ShortTitleValidator(validators.FancyValidator):
-    """ A validator for location tag short titles. """
-    messages = {
-        'badId': _(u"The field may only contain letters, numbers and the characters + - _"),
-        'empty': _("The field may not be left empty.")
-        }
-
-    def validate_python(self, value, state):
-        if value == '':
-            raise Invalid(self.message('empty', state), value, state)
-
-        valueRE = re.compile("^[\w+-]+$", re.I | re.UNICODE)
-        if not valueRE.search(value):
-            raise Invalid(self.message('badId', state), value, state)
-
-
 class TagsValidator(validators.FormValidator):
 
     messages = {

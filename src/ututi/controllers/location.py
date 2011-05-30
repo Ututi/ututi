@@ -11,7 +11,7 @@ from pylons.templating import render_mako_def
 
 import ututi.lib.helpers as h
 from ututi.lib.base import render
-from ututi.lib.validators import LocationIdValidator, ShortTitleValidator, \
+from ututi.lib.validators import LocationIdValidator, InURLValidator, \
         validate, TranslatedEmailValidator, \
         UniversityPolicyEmailValidator, UniqueLocationEmail, \
         MemberPolicyValidator, EmailDomainValidator, AvailableEmailDomain, \
@@ -103,7 +103,7 @@ def location_action(method):
 class LocationEditForm(Schema):
     allow_extra_fields = True
     title = validators.UnicodeString(not_empty=True, strip=True)
-    title_short = compound.All(validators.UnicodeString(not_empty=True, strip=True, max=50), ShortTitleValidator)
+    title_short = compound.All(validators.UnicodeString(not_empty=True, strip=True, max=50), InURLValidator)
     country = CountryValidator(not_empty=True)
     site_url = validators.URL()
     description = validators.UnicodeString(strip=True)

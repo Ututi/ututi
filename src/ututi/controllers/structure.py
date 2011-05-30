@@ -14,7 +14,7 @@ from pylons.i18n import _
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_logo
 from ututi.lib.base import BaseController, render
-from ututi.lib.validators import ShortTitleValidator, FileUploadTypeValidator, validate
+from ututi.lib.validators import InURLValidator, FileUploadTypeValidator, validate
 from ututi.model import meta, LocationTag, SimpleTag, Tag, Region
 
 log = logging.getLogger(__name__)
@@ -241,7 +241,7 @@ class StructureController(BaseController):
                         break
                 else:
                     try:
-                        ShortTitleValidator.to_python(item['title_short'])
+                        InURLValidator.to_python(item['title_short'])
 
                         existing = meta.Session.query(LocationTag).filter(or_(func.lower(LocationTag.title_short) == item['title_short'].lower(),
                                                                               func.lower(LocationTag.title) == item['title'].lower()))\
