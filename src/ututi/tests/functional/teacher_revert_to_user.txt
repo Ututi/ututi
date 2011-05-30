@@ -64,10 +64,10 @@ Ututi group and one "external" group:
 
 Let's see what we have now:
 
-    >>> teacher.printCssQuery('.section.subjects dt', strip=True)
+    >>> teacher.printCssQuery('.page-section.subjects dt', strip=True)
     <dt> <a>Matematin&#279; analiz&#279;</a> </dt>
     <dt> <a>Algorithms</a> </dt>
-    >>> teacher.printCssQuery('.section.groups dt', strip=True)
+    >>> teacher.printCssQuery('.page-section.groups dt', strip=True)
     <dt>Ututi group</dt>
     <dt>Google group</dt>
 

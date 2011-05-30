@@ -65,16 +65,15 @@ An information portlet appears and shows some statistics about the university:
 
 We should be able to edit the information of the location tag.
     >>> browser.getLink('Edit information').click()
-    >>> browser.getControl('Title').value = 'Kapsuko universitetas'
+    >>> browser.getControl('Full University title').value = 'Kapsuko universitetas'
     >>> browser.getControl('Short title').value = 'KU'
-    >>> browser.getControl('Website').value = 'http://ku.lt'
+    >>> browser.getControl('Country').displayValue = ['Lithuania']
+    >>> browser.getControl('University website').value = 'http://ku.lt'
     >>> browser.getControl('Save').click()
-
-    >>> browser.url
-    'http://localhost/school/ku/feed'
 
 And the updated information should be visible in the university page:
 
+    >>> browser.open('http://localhost/school/ku')
     >>> browser.printCssQuery(".page-title", strip=True)
     <h1>Kapsuko universitetas</h1>
     >>> browser.printCssQuery("#location-info-portlet a", strip=True)
@@ -92,14 +91,17 @@ Let's see if the faculty page looks ok.
     <li>0 Files</li>
 
 Let's try to edit it.
+
     >>> browser.getLink('Edit information').click()
+    >>> browser.getControl('Country').displayValue = ['Lithuania']
+    >>> browser.getControl('Save').click()
 
 We should only be able to enter URL-ready short titles:
 
     >>> browser.getControl('Short title').value = 'Text with breaks'
     >>> browser.getControl('Save').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
-    The field may only contain letters, numbers and the characters + - _
+    The field may only contain letters, numbers and the characters + - _ and . (dot)
 
 What is more, these fields should be allowed to clash with existing ones:
     >>> browser.getControl('Short title').value = 'ef'
@@ -116,16 +118,15 @@ Even with a different case:
 They need to be unique.
 
     >>> browser.getControl('Short title').value = 'ggf'
+    >>> browser.getControl('Save').click()
 
 Oh, and we can upload logos too:
 
-    >>> browser.getControl('Logo').add_file(*make_file('test_logo.png'))
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl(name='logo').add_file(*make_file('test_logo.png'))
+    >>> browser.getControl('Change logo').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
 
-    >>> browser.url
-    'http://localhost/school/ku/ggf/feed'
-
+    >>> browser.open('http://localhost/school/ku/ggf/feed')
     >>> browser.printCssQuery("#location-logo-portlet img")
     <img src="/structure/5/logo/140" alt="Geografijos fakultetas" />
 
