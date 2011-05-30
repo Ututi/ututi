@@ -32,15 +32,20 @@
       </p>
     </div>
     <ul class="email-domains icon-list">
-    %for domain in c.location.email_domains:
-      <li class="icon-email-domain">
-        ${domain.domain_name}
-        <form action="${c.location.url(action='delete_domain')}" method="post" class="delete-button">
-          <input type="hidden" name="domain_id" value="${domain.id}" />
-          <input type="image" src="/img/icons.com/close.png" title="${_('Delete this domain')}" />
-        </form>
-      </li>
-    %endfor
+    %if c.location.email_domains:
+      %for domain in c.location.email_domains:
+        <li class="icon-email-domain">
+          ${domain.domain_name}
+          <form action="${c.location.url(action='delete_domain')}" method="post" class="delete-button">
+            <input type="hidden" name="domain_id" value="${domain.id}" />
+            <input type="image" src="/img/icons.com/close.png" title="${_('Delete this domain')}" />
+          </form>
+        </li>
+      %endfor
+    %else:
+      <p class="warning">
+        ${_("Currently no email domains are assigned to this University.")}
+    %endif
     <form action="${c.location.url(action='add_domain')}" method="post" class="narrow">
       ${h.input_line('domain_name', _("New email domain:"))}
       ${h.input_submit(_("Add"), class_='inline dark add')}
