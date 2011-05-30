@@ -35,6 +35,7 @@
       ${h.input_line('title_short', _('Short title:'))}
       ${h.country_select(_("Country:"), empty_name=_("(Select country from list)"))}
       ${h.input_line('site_url', _("University website:"))}
+      ${h.input_area('description', _("Description:"))}
       ${h.input_submit()}
     </form>
   </div>

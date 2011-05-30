@@ -106,6 +106,7 @@ class LocationEditForm(Schema):
     title_short = compound.All(validators.UnicodeString(not_empty=True, strip=True, max=50), ShortTitleValidator)
     country = CountryValidator(not_empty=True)
     site_url = validators.URL()
+    description = validators.UnicodeString(strip=True)
     chained_validators = [
         LocationIdValidator()
         ]
@@ -269,6 +270,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             'title_short': location.title_short,
             'site_url': location.site_url,
             'country': location.country.id,
+            'description': location.description,
         }
         defaults['old_path'] = '/'.join(location.path)
         return htmlfill.render(self._edit_form(), defaults=defaults, force_defaults=False)
@@ -281,6 +283,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             location.title_short = self.form_result['title_short']
             location.site_url = self.form_result['site_url']
             location.country = self.form_result['country']
+            location.description = self.form_result['description']
             meta.Session.commit()
             h.flash(_("Information updated."))
         redirect(location.url(action='edit'))
