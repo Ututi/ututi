@@ -1,4 +1,4 @@
-<%inherit file="/user/teacher_base.mako" />
+<%inherit file="/user/external/teacher_base.mako" />
 
 %if c.teacher.description:
   <div id="teacher-information" class="wiki-page">
