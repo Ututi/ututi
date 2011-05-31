@@ -240,3 +240,11 @@
       Only %s students and teachers can join this network.') % (user.location.title, user.location.title_short))}</p>
   </%self:portlet>
 </%def>
+
+<%def name="powered_by_ututi()">
+  <%self:portlet id="powered-by-ututi-portlet">
+    <a href="${url('frontpage')}">
+      <img src="/img/powered-by-ututi.png" alt="${_("Powered by Ututi")}" />
+    </a>
+  </%self:portlet>
+</%def>

@@ -386,3 +386,9 @@
     #location-teacher-list-portlet .header .university-abbr {
         text-transform: uppercase;
     }
+
+#powered-by-ututi-portlet { }
+
+    #powered-by-ututi-portlet a {
+        outline: none;
+    }

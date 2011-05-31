@@ -1,13 +1,12 @@
 <%inherit file="/base.mako" />
 <%namespace file="/profile/base.mako" name="profile"/>
-<%namespace file="/portlets/user.mako" import="user_statistics_portlet,
-        related_users_portlet, teacher_related_links_portlet"/>
-<%namespace file="/portlets/structure.mako" import="location_teacher_list_portlet"/>
-<%namespace file="/portlets/universal.mako" import="share_portlet"/>
+<%namespace file="/portlets/user.mako" import="teacher_related_links_portlet"/>
+<%namespace file="/portlets/universal.mako" import="powered_by_ututi"/>
 <%namespace file="/elements.mako" import="tabs, location_links" />
 
 <%def name="portlets()">
   ${teacher_related_links_portlet(c.teacher)}
+  ${powered_by_ututi()}
 </%def>
 
 <%def name="head_tags()">
