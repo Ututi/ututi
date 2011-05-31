@@ -122,8 +122,13 @@ class UserInfoWallMixin(WallMixin):
         t_evt = meta.metadata.tables['events']
         evts_generic = generic_events_query()
 
+        if hasattr(c, 'teacher'):
+            user_id = c.teacher.id
+        else:
+            user_id = c.user_info.id
+
         query = evts_generic\
-            .where(t_evt.c.author_id == c.user_info.id)
+            .where(t_evt.c.author_id == user_id)
 
         # XXX using literal_column, this is because I don't know how
         # to refer to the column in the query directly
