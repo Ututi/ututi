@@ -1,8 +1,8 @@
 <%inherit file="/user/teacher_base.mako" />
 
-%if c.user_info.description:
+%if c.teacher.description:
   <div id="teacher-information" class="wiki-page">
-    ${h.html_cleanup(c.user_info.description)}
+    ${h.html_cleanup(c.teacher.description)}
   </div>
 %else:
   <div id="no-description-block">

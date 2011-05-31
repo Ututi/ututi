@@ -641,6 +641,8 @@ class Teacher(User):
 
     def url(self, controller='user', action='teacher_index', **kwargs):
         kwargs.setdefault('id', self.url_name or self.id)
+        if action.startswith('external'):
+            kwargs.setdefault('path', self.location.url_path)
         return url(controller=controller, action=action, **kwargs)
 
     def is_freshman(self):

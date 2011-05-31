@@ -8,10 +8,10 @@
 <%namespace name="index" file="/user/index.mako" import="css" />
 
 <%def name="teacher_page_portlets()">
-  ${teacher_related_links_portlet(c.user_info)}
-  ${share_portlet(c.user_info)}
-  ${user_statistics_portlet(c.user_info)}
-  ${location_teacher_list_portlet(c.user_info.location)}
+  ${teacher_related_links_portlet(c.teacher)}
+  ${share_portlet(c.teacher)}
+  ${user_statistics_portlet(c.teacher)}
+  ${location_teacher_list_portlet(c.teacher.location)}
 </%def>
 
 <%def name="portlets()">
@@ -29,14 +29,14 @@
 </%def>
 
 <%def name="branded_header()">
-  %for index, loc in enumerate(c.user_info.location.hierarchy(True), 1):
+  %for index, loc in enumerate(c.teacher.location.hierarchy(True), 1):
     <img class="university-logo logo-${index}" src="${url(controller='structure', action='logo', id=loc.id, width=300)}" alt="${loc.title}" />
     <div class="university-title title-${index}">${loc.title}</div>
   %endfor
 </%def>
 
 <%def name="header()">
-  %if c.user is None and c.user_info.location.title_path == ['vu', 'mif']:
+  %if c.user is None and c.teacher.location.title_path == ['vu', 'mif']:
     ${branded_header()}
   %else:
     ${parent.header()}
@@ -45,13 +45,13 @@
 
 <%def name="head_tags()">
   ${parent.head_tags()}
-  %if c.user is None and c.user_info.location.title_path == ['vu', 'mif']:
+  %if c.user is None and c.teacher.location.title_path == ['vu', 'mif']:
     ${h.stylesheet_link(h.path_with_hash('/css/branded/vu-mif.css'))}
   %endif
 </%def>
 
 <%def name="title()">
-  ${c.user_info.fullname}
+  ${c.teacher.fullname}
 </%def>
 
 <%def name="css()">
@@ -77,18 +77,18 @@
   <ul class="icon-list">
     %if h.check_crowds(['root']):
       <li class="icon-admin">
-        <a href="${c.user_info.url(action='login_as')}">
-          ${_('Log in as %(user)s') % dict(user=c.user_info.fullname)}
+        <a href="${c.teacher.url(action='login_as')}">
+          ${_('Log in as %(user)s') % dict(user=c.teacher.fullname)}
         </a>
       <li>
       <li class="icon-admin">
-        <a href="${c.user_info.url(action='medals')}">
+        <a href="${c.teacher.url(action='medals')}">
           ${_('Award medals')}
         </a>
       </li>
     %endif
     <li class="icon-message">
-      <a href="${url(controller='messages', action='new_message', user_id=c.user_info.id)}">
+      <a href="${url(controller='messages', action='new_message', user_id=c.teacher.id)}">
         ${_("Send private message")}
       </a>
     </li>
@@ -97,54 +97,54 @@
 %endif
 
 <h1 class="page-title underline">
-  ${c.user_info.fullname}
+  ${c.teacher.fullname}
 </h1>
 
 <%def name="teacher_info_block()">
 <div id="user-information" class="clearfix">
   <div class="user-logo-container">
-    <img id="user-logo" src="${c.user_info.url(action='logo', width=200)}" alt="logo" />
+    <img id="user-logo" src="${c.teacher.url(action='logo', width=200)}" alt="logo" />
   </div>
 
   <div class="user-info">
 
     <div class="teacher-name">
-      ${c.user_info.fullname}
+      ${c.teacher.fullname}
     </div>
 
-    %if c.user_info.teacher_position:
+    %if c.teacher.teacher_position:
       <div class="teacher-position">
-        ${c.user_info.teacher_position}
+        ${c.teacher.teacher_position}
       </div>
     %endif
 
     <div class="teacher-location">
-      ${location_links(c.user_info.location, full_title=True, external=True)}
+      ${location_links(c.teacher.location, full_title=True, external=True)}
     </div>
 
     <ul class="icon-list" id="teacher-contact-information">
 
-      %if c.user_info.work_address:
+      %if c.teacher.work_address:
       <li class="address icon-university">
-        <span class="label">${_('Address')}:</span> ${c.user_info.work_address}
+        <span class="label">${_('Address')}:</span> ${c.teacher.work_address}
       </li>
       %endif
 
-      %if c.user_info.phone_number and c.user_info.phone_confirmed:
+      %if c.teacher.phone_number and c.teacher.phone_confirmed:
       <li class="phone icon-mobile">
-        <span class="label">${_('Phone')}:</span> ${c.user_info.phone_number}
+        <span class="label">${_('Phone')}:</span> ${c.teacher.phone_number}
       </li>
       %endif
 
-      %if c.user_info.emails:
+      %if c.teacher.emails:
       <li class="email icon-contact">
-        <span class="label">${_('E-mail')}:</span> ${h.literal(', '.join([h.mail_to(email.email) for email in c.user_info.emails if email.confirmed]))}
+        <span class="label">${_('E-mail')}:</span> ${h.literal(', '.join([h.mail_to(email.email) for email in c.teacher.emails if email.confirmed]))}
       </li>
       %endif
 
-      %if c.user_info.site_url:
+      %if c.teacher.site_url:
       <li class="webpage icon-network">
-        <span class="label">${_('Personal webpage')}:</span> <a href="${c.user_info.site_url}">${c.user_info.site_url}</a>
+        <span class="label">${_('Personal webpage')}:</span> <a href="${c.teacher.site_url}">${c.teacher.site_url}</a>
       </li>
       %endif
 

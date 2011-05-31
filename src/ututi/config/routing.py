@@ -217,6 +217,12 @@ def make_map(config):
     map.connect('/teacher/{id}/publications', controller='user', action='teacher_publications')
     map.connect('/teacher/{id}/activity', controller='user', action='teacher_activity')
 
+    # external teacher profile pages
+    map.connect('/*path/teacher/{id}', controller='user', action='external_teacher_index')
+    map.connect('/*path/teacher/{id}/subjects', controller='user', action='external_teacher_subjects')
+    map.connect('/*path/teacher/{id}/publications', controller='user', action='external_teacher_publications')
+    map.connect('/*path/teacher/{id}/activity', controller='user', action='external_teacher_activity')
+
     # user profiles
     map.connect('/user/{id}', controller='user', action='index')
     map.connect('/user/{id}/{action}', controller='user')

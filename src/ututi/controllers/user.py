@@ -5,19 +5,17 @@ from sqlalchemy.sql.expression import literal_column
 from sqlalchemy.sql.expression import or_, and_
 from pylons.controllers.util import abort, redirect
 from pylons import tmpl_context as c, request, url
-from routes.util import url_for
 
 from pylons.i18n import _
 
 from ututi.controllers.home import sign_in_user
 
-import ututi.lib.helpers as h
 from ututi.lib.security import ActionProtector, deny
 from ututi.lib.image import serve_logo
 from ututi.lib.base import BaseController, render
 from ututi.lib.wall import WallMixin
 
-from ututi.model import meta, User, Medal
+from ututi.model import meta, User, Medal, LocationTag
 
 log = logging.getLogger(__name__)
 
@@ -56,39 +54,57 @@ def teacher_profile_action(method):
         if not user.profile_is_public and not c.user:
             deny(_('This user profile is not public'), 401)
 
-        c.user_info = user
+        c.teacher = user
         c.tabs = teacher_tabs(user)
         return method(self, user)
     return _profile_action
 
 
-def teacher_tabs(teacher):
-    """Generate a list of all possible actions."""
+def external_teacher_profile_action(method):
+    def _profile_action(self, path, id):
+        location = LocationTag.get(path)
+        user = find_user(id)
 
-    tabs = [
+        if user is None or not user.is_teacher or user.location != location:
+            abort(404)
+
+        if not user.profile_is_public and not c.user:
+            deny(_('This user profile is not public'), 401)
+
+        c.teacher = user
+        c.tabs = external_teacher_tabs(user)
+        return method(self, user)
+    return _profile_action
+
+
+def teacher_tabs(teacher):
+    return [
         {'title': _('General information'),
          'name': 'information',
-         'link': teacher.url(action='teacher_index'),
-         'event': h.trackEvent(teacher, 'information', 'breadcrumb')},
+         'link': teacher.url(action='teacher_index')},
         {'title': _('Teaching'),
          'name': 'subjects',
-         'link': teacher.url(action='teacher_subjects'),
-         'event': h.trackEvent(teacher, 'members', 'breadcrumb')},
+         'link': teacher.url(action='teacher_subjects')},
         {'title': _('Publications'),
          'name': 'publications',
-         'link': teacher.url(action='teacher_publications'),
-         'event': h.trackEvent(teacher, 'publications', 'breadcrumb')},
+         'link': teacher.url(action='teacher_publications')},
+        {'title': _("Activity"),
+         'name': 'feed',
+         'link': teacher.url(action='teacher_activity')},
     ]
-    if c.user is not None:
-        # only for logged-in users
-        tabs.append(
-            {'title': _("Activity"),
-             'name': 'feed',
-             'link': teacher.url(action='teacher_activity'),
-             'event': h.trackEvent(teacher, 'feed', 'breadcrumb')})
 
-
-    return tabs
+def external_teacher_tabs(teacher):
+    return [
+        {'title': _('General information'),
+         'name': 'information',
+         'link': teacher.url(action='external_teacher_index')},
+        {'title': _('Teaching'),
+         'name': 'subjects',
+         'link': teacher.url(action='external_teacher_subjects')},
+        {'title': _('Publications'),
+         'name': 'publications',
+         'link': teacher.url(action='external_teacher_publications')},
+    ]
 
 
 class UserInfoWallMixin(WallMixin):
@@ -120,34 +136,29 @@ class UserInfoWallMixin(WallMixin):
 
 class UserController(BaseController, UserInfoWallMixin):
 
-    def _check_visibility(self, user):
-        if not user.profile_is_public and not c.user:
-            deny(_('This user profile is not public'), 401)
-
     @profile_action
     def index(self, user):
         self._set_wall_variables(events_hidable=False)
-
-        ## TODO: Delete
-        c.breadcrumbs = [
-            {'title': user.fullname,
-             'link': url_for(controller='user', action='index', id=user.id)}
-            ]
-
         return render('user/index.mako')
 
     @teacher_profile_action
     def teacher_index(self, user):
+        if c.user is None:
+            redirect(user.url(action='external_teacher_index'))
         c.current_tab = 'information'
         return render('user/teacher_information.mako')
 
     @teacher_profile_action
     def teacher_subjects(self, user):
+        if c.user is None:
+            redirect(user.url(action='external_teacher_subjects'))
         c.current_tab = 'subjects'
         return render('user/teacher_subjects.mako')
 
     @teacher_profile_action
     def teacher_publications(self, user):
+        if c.user is None:
+            redirect(user.url(action='external_teacher_publications'))
         c.current_tab = 'publications'
         return render('user/teacher_publications.mako')
 
@@ -157,6 +168,21 @@ class UserController(BaseController, UserInfoWallMixin):
         self._set_wall_variables(events_hidable=False)
         c.current_tab = 'feed'
         return render('user/teacher_activity.mako')
+
+    @external_teacher_profile_action
+    def external_teacher_index(self, user):
+        c.current_tab = 'information'
+        return render('user/external/teacher_information.mako')
+
+    @external_teacher_profile_action
+    def external_teacher_subjects(self, user):
+        c.current_tab = 'subjects'
+        return render('user/external/teacher_subjects.mako')
+
+    @external_teacher_profile_action
+    def external_teacher_publications(self, user):
+        c.current_tab = 'publications'
+        return render('user/external/teacher_publications.mako')
 
     @profile_action
     @ActionProtector("root")
