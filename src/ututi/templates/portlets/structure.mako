@@ -125,7 +125,7 @@
   %if teachers:
   <%self:portlet id="location-teacher-list-portlet">
     <%def name="header()">
-      ${' '.join(location.title_path + [_("teachers")])}
+      <span class="university-abbr">${' '.join(location.title_path)}</span> ${_("teachers:")}
     </%def>
     <ul class="icon-list" id="teacher-list">
     %for teacher in teachers:

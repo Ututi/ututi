@@ -380,3 +380,9 @@
     #profile-page-portlet button {
         margin: 10px 0;
     }
+
+#location-teacher-list-portlet { }
+
+    #location-teacher-list-portlet .header .university-abbr {
+        text-transform: uppercase;
+    }
