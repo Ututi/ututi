@@ -256,9 +256,6 @@
     ${_("Login:")}
   </%def>
   <form id="login-form" method="post" action="${url(controller='home', action='login')}">
-    %if c.came_from:
-      <input type="hidden" name="came_from" value="${c.came_from}" />
-    %endif
     %if location is not None:
       <input type="hidden" name="location" value="${location.root.id}" />
     %endif
@@ -283,6 +280,32 @@
       <a href="${register_action}" id="register-link">${_("Register")}</a>
     </p>
   </form>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#login-form button.submit').click(function() {
+        var form = $(this).closest('form');
+        $.post(
+          "${url(controller='home', action='login', js=1)}",
+          form.serialize(),
+          function(data) {
+            if (data.success) {
+              window.location.href = "${url(controller='profile', action='home')}";
+            }
+            else {
+              $('.error-message', form).remove(); // remove previous error messages
+              for (var key in data.errors) {
+                $(document.createElement('p'))
+                 .addClass('error-message')
+                 .html(data.errors[key])
+                 .insertBefore($('button.submit', form));
+              }
+            }
+          }
+        );
+        return false;
+      });
+    });
+  </script>
 </%self:portlet>
 %endif
 </%def>

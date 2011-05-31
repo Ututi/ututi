@@ -1,4 +1,5 @@
 import logging
+
 from datetime import date, timedelta
 
 from formencode import Schema, validators, All, htmlfill
@@ -13,6 +14,7 @@ from pylons import request, tmpl_context as c, url, session, config, response
 from pylons.controllers.util import abort, redirect
 from pylons.i18n import _
 from pylons.templating import render_mako_def
+from pylons.decorators import jsonify
 
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql import func
@@ -322,6 +324,16 @@ class HomeController(UniversityListMixin):
 
         sign_in_user(user, long_session=remember)
 
+    @jsonify
+    def _js_login(self, username, password, location, remember):
+        errors = None
+        if username and password:
+            errors = self._try_sign_in(username, password, location, remember)
+            if errors is None:
+                return {'success': True}
+        return {'success': False, 'errors': errors}
+
+
     def login(self):
         # here below email get parameter may be used for convenience
         # i.e. when redirecting from sign-up form
@@ -330,15 +342,16 @@ class HomeController(UniversityListMixin):
         location = request.POST.get('location')
         location = int(location) if location else None
         remember = bool(request.POST.get('remember'))
-        errors = None
 
+        if 'js' in request.params:
+            return self._js_login(username, password, location, remember)
+
+        errors = None
         if username and password:
             # form was posted
-            if location is not None: location = int(location)
             errors = self._try_sign_in(username, password, location, remember)
             if errors is None:
-                destination = c.came_from or url(controller='profile', action='home')
-                redirect(destination)
+                redirect(c.came_from or url(controller='profile', action='home'))
 
         # show the form, possibly with errors.
         return htmlfill.render(render('login.mako'),
