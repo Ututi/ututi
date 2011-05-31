@@ -86,10 +86,18 @@ ul.tabs li.current a {
 /* Header
  */
 
-.anonymous #header,
-.anonymous #header #header-inner {
+.anonymous #header #header-inner * {
+    display: none;
+}
+
+.anonymous #header {
     height: 125px;
     background: white;
+    padding: 0;
+}
+.anonymous #header #header-inner {
+    height: 125px;
+    background: url("header-bg.png") no-repeat center center;
     padding: 0;
 }
 

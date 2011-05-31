@@ -14,25 +14,10 @@
   ${location_teacher_list_portlet(c.teacher.location)}
 </%def>
 
-<%def name="branded_header()">
-  %for index, loc in enumerate(c.teacher.location.hierarchy(True), 1):
-    <img class="university-logo logo-${index}" src="${url(controller='structure', action='logo', id=loc.id, width=300)}" alt="${loc.title}" />
-    <div class="university-title title-${index}">${loc.title}</div>
-  %endfor
-</%def>
-
-<%def name="header()">
-  %if c.teacher.location.title_path == ['vu', 'mif']:
-    ${branded_header()}
-  %else:
-    ${parent.header()}
-  %endif
-</%def>
-
 <%def name="head_tags()">
   ${parent.head_tags()}
   %if c.teacher.location.title_path == ['vu', 'mif']:
-    ${h.stylesheet_link(h.path_with_hash('/css/branded/vu-mif.css'))}
+    ${h.stylesheet_link(h.path_with_hash('/branded/vu/mif/style.css'))}
   %endif
 </%def>
 
