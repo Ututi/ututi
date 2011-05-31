@@ -100,17 +100,22 @@ ul.tabs li.current a {
 /* Header
  */
 
+.anonymous #header #header-inner *,
 #header #header-inner * {
     display: none;
 }
 
+.anonymous #header,
 #header {
     height: 125px;
     background: white;
     padding: 0;
     border-bottom: 6px solid #820505;
 }
+
+.anonymous #header #header-inner,
 #header #header-inner {
+    width: 980px;
     height: 125px;
     background: url("header-bg.png") no-repeat center center;
     padding: 0;
