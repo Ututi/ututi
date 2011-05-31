@@ -166,6 +166,18 @@ ul.tabs li.current a {
     border-bottom: 1px solid #820505;
 }
 
+#login-portlet .textField input {
+    width: 190px;
+}
+
+#login-portlet button.submit {
+    font-weight: bold;
+}
+
+#login-portlet .error-message {
+    color: #820505;
+}
+
 /* WIKI PAGES
  */
 
