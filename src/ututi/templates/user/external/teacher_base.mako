@@ -7,25 +7,11 @@
 <%namespace file="/elements.mako" import="tabs, location_links" />
 <%namespace name="index" file="/user/index.mako" import="css" />
 
-<%def name="teacher_page_portlets()">
+<%def name="portlets()">
   ${teacher_related_links_portlet(c.teacher)}
   ${share_portlet(c.teacher)}
   ${user_statistics_portlet(c.teacher)}
   ${location_teacher_list_portlet(c.teacher.location)}
-</%def>
-
-<%def name="portlets()">
-  %if c.user is not None:
-    ${profile.portlets()}
-  %else:
-    ${teacher_page_portlets()}
-  %endif
-</%def>
-
-<%def name="portlets_secondary()">
-  %if c.user is not None:
-    ${teacher_page_portlets()}
-  %endif
 </%def>
 
 <%def name="branded_header()">
@@ -36,7 +22,7 @@
 </%def>
 
 <%def name="header()">
-  %if c.user is None and c.teacher.location.title_path == ['vu', 'mif']:
+  %if c.teacher.location.title_path == ['vu', 'mif']:
     ${branded_header()}
   %else:
     ${parent.header()}
@@ -45,7 +31,7 @@
 
 <%def name="head_tags()">
   ${parent.head_tags()}
-  %if c.user is None and c.teacher.location.title_path == ['vu', 'mif']:
+  %if c.teacher.location.title_path == ['vu', 'mif']:
     ${h.stylesheet_link(h.path_with_hash('/css/branded/vu-mif.css'))}
   %endif
 </%def>
@@ -71,30 +57,6 @@
     height: 130px;
   }
 </%def>
-
-%if c.user is not None:
-<div id="public-profile-actions" class="clearfix">
-  <ul class="icon-list">
-    %if h.check_crowds(['root']):
-      <li class="icon-admin">
-        <a href="${c.teacher.url(action='login_as')}">
-          ${_('Log in as %(user)s') % dict(user=c.teacher.fullname)}
-        </a>
-      <li>
-      <li class="icon-admin">
-        <a href="${c.teacher.url(action='medals')}">
-          ${_('Award medals')}
-        </a>
-      </li>
-    %endif
-    <li class="icon-message">
-      <a href="${url(controller='messages', action='new_message', user_id=c.teacher.id)}">
-        ${_("Send private message")}
-      </a>
-    </li>
-  </ul>
-</div>
-%endif
 
 <h1 class="page-title underline">
   ${c.teacher.fullname}
