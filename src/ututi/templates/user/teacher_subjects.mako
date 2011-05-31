@@ -10,6 +10,6 @@
     %endfor
   </div>
   %else:
-    ${_("%(teacher_name)s doesn't teach any course.") % dict(teacher_name=c.teacher.fullname)}
+    ${_("%(teacher)s does not teach any course.") % dict(teacher=c.teacher.fullname)}
   %endif
 </div>
