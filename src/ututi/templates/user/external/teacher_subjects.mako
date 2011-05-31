@@ -1,6 +1,8 @@
 <%inherit file="/user/external/teacher_base.mako" />
 <%namespace name="snippets" file="/sections/content_snippets.mako" />
 
+<%def name="pagetitle()">${_("Teaching")}</%def>
+
 <div class="page-section subjects">
   <div class="title">${_("Taught courses")}:</div>
   %if c.teacher.taught_subjects:

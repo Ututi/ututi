@@ -49,18 +49,11 @@
   #user-information .label {
     font-weight: bold;
   }
-  #user-information .teacher-name {
-    display: none;
-  }
   #user-information #user-logo {
     width: 130px;
     height: 130px;
   }
 </%def>
-
-<h1 class="page-title underline">
-  ${c.teacher.fullname}
-</h1>
 
 <%def name="teacher_info_block()">
 <div id="user-information" class="clearfix">
@@ -123,5 +116,11 @@
 ${teacher_info_block()}
 
 ${tabs(c.tabs, c.current_tab)}
+
+<%def name="pagetitle()"></%def>
+
+<h1 class="page-title underline">
+  ${self.pagetitle()}
+</h1>
 
 ${next.body()}
