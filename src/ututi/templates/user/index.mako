@@ -30,18 +30,6 @@
   #public-profile-actions ul {
     float: right;
   }
-  #user-information {
-    margin: 15px 0;
-  }
-  #user-information .user-logo-container,
-  #user-information .user-info {
-    float: left;
-    margin-right: 20px;
-    max-width: 390px;
-  }
-  #user-information .about-self {
-    margin-top: 10px;
-  }
 </%def>
 
 %if c.user is not None:

@@ -5,13 +5,9 @@
 <%namespace file="/portlets/structure.mako" import="location_teacher_list_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet"/>
 <%namespace file="/elements.mako" import="tabs, location_links" />
-<%namespace name="index" file="/user/index.mako" import="css" />
 
 <%def name="portlets()">
   ${teacher_related_links_portlet(c.teacher)}
-  ${share_portlet(c.teacher)}
-  ${user_statistics_portlet(c.teacher)}
-  ${location_teacher_list_portlet(c.teacher.location)}
 </%def>
 
 <%def name="head_tags()">
@@ -27,7 +23,6 @@
 
 <%def name="css()">
   ${parent.css()}
-  ${index.css()}
   .teacher-position {
     font-size: 14px;
   }

@@ -72,7 +72,7 @@ Various reusable elements.
     current = getattr(c, 'current_tab', None)
 %>
 %if tabs:
-<ul class="tabs">
+<ul class="tabs clearfix">
     %for tab in tabs:
       <li class="${'current' if tab['name'] == current else ''}">
         <a href="${tab['link']}">${tab['title']}</a>

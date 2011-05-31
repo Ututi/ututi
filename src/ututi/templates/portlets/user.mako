@@ -310,7 +310,13 @@
       %for tag in reversed(teacher.location.hierarchy(True)):
         %if tag.site_url:
           <li class="icon-university">
-            ${h.link_to(tag.title, tag.site_url)}
+            <%
+            if tag.parent is None:
+              title = tag.title # use full title
+            else:
+              title = ' '.join([t.upper() for t in tag.title_path] + [_("website")])
+            %>
+            ${h.link_to(title, tag.site_url)}
           </li>
         %endif
       %endfor

@@ -79,7 +79,7 @@ def external_teacher_profile_action(method):
 
 def teacher_tabs(teacher):
     return [
-        {'title': _('General information'),
+        {'title': _('General'),
          'name': 'information',
          'link': teacher.url(action='teacher_index')},
         {'title': _('Teaching'),
@@ -95,15 +95,15 @@ def teacher_tabs(teacher):
 
 def external_teacher_tabs(teacher):
     return [
-        {'title': _('General information'),
+        {'title': _('General'),
          'name': 'information',
          'link': teacher.url(action='external_teacher_index')},
-        {'title': _('Teaching'),
-         'name': 'subjects',
-         'link': teacher.url(action='external_teacher_subjects')},
         {'title': _('Publications'),
          'name': 'publications',
          'link': teacher.url(action='external_teacher_publications')},
+        {'title': _('Teaching'),
+         'name': 'subjects',
+         'link': teacher.url(action='external_teacher_subjects')},
     ]
 
 
