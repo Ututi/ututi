@@ -248,3 +248,41 @@
     </a>
   </%self:portlet>
 </%def>
+
+<%def name="login_portlet(location=None)">
+%if c.user is None or (location is not None and c.user.location.root != location.root):
+<%self:portlet id="login-portlet">
+  <%def name="header()">
+    ${_("Login:")}
+  </%def>
+  <form id="login-form" method="post" action="${url(controller='home', action='login')}">
+    %if c.came_from:
+      <input type="hidden" name="came_from" value="${c.came_from}" />
+    %endif
+    %if location is not None:
+      <input type="hidden" name="location" value="${location.root.id}" />
+    %endif
+    ${h.input_line('username', _('Email address:'))}
+    ${h.input_psw('password', _('Password:'))}
+    <input id="remember" type="checkbox" name="remember" />
+    <label for="remember-me" class="notice">
+      ${_('Keep me logged in')}
+    </label>
+    ${h.input_submit(_('Login'), class_='dark')}
+    <p>
+      <a href="${url(controller='home', action='pswrecovery')}">${_('Forgot password?')}</a>
+    </p>
+    <%
+    if location is None:
+      register_action = url('frontpage')
+    else:
+      register_action = location.url(action='register')
+    %>
+    <p>
+      ${_("Not a member yet?")}
+      <a href="${register_action}" id="register-link">${_("Register")}</a>
+    </p>
+  </form>
+</%self:portlet>
+%endif
+</%def>

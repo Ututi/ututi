@@ -321,8 +321,6 @@ class HomeController(UniversityListMixin):
             return {'password': _('Incorrect password.')}
 
         sign_in_user(user, long_session=remember)
-        destination = c.came_from or url(controller='profile', action='home')
-        redirect(destination)
 
     def login(self):
         # here below email get parameter may be used for convenience
@@ -338,9 +336,11 @@ class HomeController(UniversityListMixin):
             # form was posted
             if location is not None: location = int(location)
             errors = self._try_sign_in(username, password, location, remember)
+            if errors is None:
+                destination = c.came_from or url(controller='profile', action='home')
+                redirect(destination)
 
-        # try_sign_in redirects upon successful authentication,
-        # otherwise we show the form, possibly with errors.
+        # show the form, possibly with errors.
         return htmlfill.render(render('login.mako'),
                                errors=errors,
                                error_formatters=u_error_formatters,

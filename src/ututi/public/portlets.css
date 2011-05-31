@@ -392,3 +392,25 @@
     #powered-by-ututi-portlet a {
         outline: none;
     }
+
+#login-portlet { }
+
+    #login-portlet .content {
+        margin-top: 10px;
+    }
+
+    #login-portlet .textField input {
+        width: 145px;
+    }
+
+    #login-portlet .labelText {
+        font-weight: normal;
+    }
+
+    #login-portlet button.submit {
+        margin-top: 5px;
+    }
+
+    #login-portlet #register-link {
+        font-weight: bold;
+    }
