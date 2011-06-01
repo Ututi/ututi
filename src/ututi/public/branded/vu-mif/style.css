@@ -252,10 +252,17 @@ ul.tabs li.current a {
 #taught-courses-list {
     background: none;
     padding-left: 0;
+    margin-top: 0;
+    margin-left: 5px;
 }
 
 #taught-courses-list .title {
     display: none;
+}
+
+#taught-courses-list .snippet-subject {
+    background: none;
+    padding-left: 0;
 }
 
 #taught-courses-list .snippet-subject .item-title {
