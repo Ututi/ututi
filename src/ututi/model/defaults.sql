@@ -35,6 +35,14 @@ insert into countries (name, timezone, locale, language_id) values
        ('Lithuania', 'Europe/Vilnius', 'lt_LT', 'lt'),
        ('Poland', 'Europe/Warsaw', 'pl_PL', 'pl');;
 
+/* A table for custom Ututi theming data.
+ */
+CREATE TABLE themes (
+       id bigserial not null,
+       header_background_color varchar(6) default null,
+       header_color varchar(6) default null,
+       header_logo bytea default null,
+       primary key (id));;
 
 create table admin_users(
        id bigserial not null,
@@ -1693,12 +1701,3 @@ create table email_domains (
        unique(domain_name));;
 
 create index email_domains_domain_name_idx on email_domains(domain_name);
-
-/* A table for custom Ututi theming data.
- */
-CREATE TABLE themes (
-       id bigserial not null,
-       header_background_color varchar(6) default null,
-       header_color varchar(6) default null,
-       header_logo bytea default null,
-       primary key (id));;
