@@ -1,4 +1,5 @@
 <%inherit file="/group/base.mako" />
+<%namespace file="/profile/base.mako" name="profile" />
 <%namespace file="/portlets/sections.mako" import="*"/>
 <%namespace file="/group/base.mako" import="*"/>
 
@@ -7,7 +8,7 @@
 </%def>
 
 <%def name="portlets()">
-  ${group_sidebar()}
+  ${profile.portlets()}
 </%def>
 
 <%def name="head_tags()">
