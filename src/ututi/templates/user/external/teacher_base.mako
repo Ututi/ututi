@@ -13,7 +13,7 @@
 <%def name="head_tags()">
   ${parent.head_tags()}
   %if c.teacher.location.title_path == ['vu', 'mif']:
-    ${h.stylesheet_link(h.path_with_hash('/branded/vu/mif/style.css'))}
+    ${h.stylesheet_link(h.path_with_hash('/branded/vu-mif/style.css'))}
   %endif
 </%def>
 
