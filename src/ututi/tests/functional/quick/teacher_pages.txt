@@ -60,7 +60,7 @@ General Information should be created and we should see flash message.
 Now let's go to Public profile and look at information tab. Here should be our information.
 
     >>> user.click('Public profile')
-    >>> user.click('General information')
+    >>> user.click('General')
     >>> user.printCssQuery('#teacher-information')
     <div id="teacher-information" class="wiki-page">
          Some <strong>cool</strong> information!
@@ -72,7 +72,7 @@ teacher's information:
     >>> user.click('Edit profile')
     >>> user.click('Save')
     >>> user.click('Public profile')
-    >>> user.click('General information')
+    >>> user.click('General')
     >>> user.printCssQuery('#teacher-information')
     <div id="teacher-information" class="wiki-page">
          Some <strong>cool</strong> information!
@@ -96,7 +96,7 @@ in settings page:
     >>> user.printCssQuery('.flash-message-content', strip=True)
     <span>Your information was updated.</span>
     >>> user.click('Public profile')
-    >>> user.click('General information')
+    >>> user.click('General')
     >>> user.printCssQuery('#teacher-information')
     <div id="teacher-information" class="wiki-page">
          Some <strong>very cool</strong> information!
