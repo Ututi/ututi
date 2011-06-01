@@ -34,6 +34,7 @@ from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Author
 from ututi.model.users import Teacher, TeacherGroup, AdminUser, UserRegistration
 from ututi.model.util import logo_property
 from ututi.model.i18n import Country
+from ututi.model.theming import Theme
 from ututi.model.base import Model
 from ututi.model import meta
 from ututi.lib.messaging import SMSMessage
@@ -207,7 +208,8 @@ def setup_orm(engine):
                                                 backref=backref('parent',
                                                                 remote_side=tags_table.c.id)),
                            'region': relation(Region, backref='tags'),
-                           'country': relation(Country, backref='countries')})
+                           'country': relation(Country, backref='locations'),
+                           'theme': relation(Theme)})
 
     orm.mapper(SimpleTag,
                inherits=tag_mapper,
@@ -466,6 +468,7 @@ def setup_orm(engine):
                                          autoload=True,
                                          autoload_with=engine)
 
+
     orm.mapper(Group, groups_table,
                inherits=ContentItem,
                polymorphic_identity='group',
@@ -699,6 +702,9 @@ def setup_orm(engine):
 
     from ututi.model import i18n
     i18n.setup_orm(engine)
+
+    from ututi.model import theming
+    theming.setup_orm(engine)
 
 
 def reset_db(engine):
