@@ -235,6 +235,7 @@ create table tags (id bigserial not null,
        region_id int8 default null references regions(id) on delete restrict,
        parent_id int8 default null references tags(id) on delete cascade,
        country_id int8 default null references countries(id) on delete cascade,
+       theme_id int8 default null references themes(id) on delete set null,
        primary key (id),
        unique(parent_id, title));;
 
