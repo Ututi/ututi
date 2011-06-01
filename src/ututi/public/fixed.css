@@ -1484,8 +1484,12 @@ ul.location-links {
 
     .wiki-page h4, .wiki-page h5, .wiki-page h6 { font-size: 10px; }
 
+    .wiki-page p {
+        margin: 10px 0px;
+    }
+
     .wiki-page ul, .wiki-page ol {
-        margin-left: 2em;
+        margin: 10px 0 10px 10px;
         list-style: disc inside none;
     }
 
