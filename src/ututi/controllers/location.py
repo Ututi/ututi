@@ -23,6 +23,7 @@ from ututi.lib.security import ActionProtector
 from ututi.model import Subject, Group, Teacher
 from ututi.model import LocationTag, EmailDomain, meta
 from ututi.model.users import User, UserRegistration
+from ututi.model.theming import Theme
 from ututi.controllers.home import UniversityListMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
 
@@ -63,6 +64,9 @@ def location_edit_menu_items():
         {'title': _("Registration settings"),
          'name': 'registration',
          'link': c.location.url(action='edit_registration')},
+        {'title': _("Custom theme"),
+         'name': 'theming',
+         'link': c.location.url(action='edit_theme')},
     ]
 
 def location_breadcrumbs(location):
@@ -354,6 +358,28 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         h.flash(_("Your logo was removed."))
         redirect(location.url(action='edit'))
 
+    @location_action
+    def edit_theme(self, location):
+        c.menu_items = location_edit_menu_items()
+        c.current_menu_item = 'theming'
+        if location.theme is None:
+            return render('location/edit_theme_disabled.mako')
+        else:
+            return render('location/edit_theme_enabled.mako')
+
+    @location_action
+    def enable_theme(self, location):
+        if 'enable_theme' in request.POST and location.theme is None:
+            location.theme = Theme()
+            meta.Session.commit()
+        redirect(location.url(action='edit_theme'))
+
+    @location_action
+    def disable_theme(self, location):
+        if 'disable_theme' in request.POST and location.theme is not None:
+            location.theme.delete()
+            meta.Session.commit()
+        redirect(location.url(action='edit_theme'))
 
     @location_action
     def login(self, location):

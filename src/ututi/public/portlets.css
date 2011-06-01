@@ -106,6 +106,10 @@
         background-image: url('/img/icons.com/contact_small.png');
         background-position: 13px center;
     }
+    #navigation-portlet ul li.theming a {
+        background-image: url('/img/icons.com/brush_small_grey.png');
+        background-position: 13px center;
+    }
 
 #about-ututi-portlet { }
 

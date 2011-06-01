@@ -285,6 +285,9 @@ def make_map(config):
     map.connect('/school/*path/edit/delete_domain', controller='location', action='delete_domain')
     map.connect('/school/*path/edit/update_logo', controller='location', action='update_logo')
     map.connect('/school/*path/edit/remove_logo', controller='location', action='remove_logo')
+    map.connect('/school/*path/edit/theme', controller='location', action='edit_theme')
+    map.connect('/school/*path/edit/enable_theme', controller='location', action='enable_theme')
+    map.connect('/school/*path/edit/disable_theme', controller='location', action='disable_theme')
 
     # rest
     map.connect('/school/*path', controller='location', action='index')
