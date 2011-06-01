@@ -245,3 +245,19 @@ ul.tabs li.current a {
 #user-information .user-info #teacher-contact-information .label {
     margin-right: 10px;
 }
+
+/* TAUGHT COURSES LIST
+ */
+
+#taught-courses-list {
+    background: none;
+    padding-left: 0;
+}
+
+#taught-courses-list .title {
+    display: none;
+}
+
+#taught-courses-list .snippet-subject .item-title {
+    font-size: 14px;
+}

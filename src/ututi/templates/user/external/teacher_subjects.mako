@@ -3,7 +3,7 @@
 
 <%def name="pagetitle()">${_("Teaching")}</%def>
 
-<div class="page-section subjects">
+<div class="page-section subjects" id="taught-courses-list">
   <div class="title">${_("Taught courses")}:</div>
   %if c.teacher.taught_subjects:
   <div class="search-results-container">
