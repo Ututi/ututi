@@ -370,7 +370,13 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
     @location_action
     def enable_theme(self, location):
         if 'enable_theme' in request.POST and location.theme is None:
-            location.theme = Theme()
+            # initialize new theme
+            parent_theme = location.get_theme()
+            if parent_theme is not None:
+                location.theme = parent_theme.clone()
+            else:
+                location.theme = Theme()
+                location.theme.header_logo = location.logo
             meta.Session.commit()
         redirect(location.url(action='edit_theme'))
 

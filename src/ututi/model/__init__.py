@@ -1864,6 +1864,13 @@ class LocationTag(Tag):
     def public(self):
         return self.member_policy == 'PUBLIC'
 
+    def get_theme(self):
+        """Returns theme assigned to this LocationTag or it's closest parent."""
+        location = self
+        while location:
+            if location.theme is not None:
+                return location.theme
+
 
 def cleanupFileName(filename):
     return filename.split('\\')[-1].split('/')[-1]

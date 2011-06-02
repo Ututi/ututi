@@ -11,6 +11,14 @@ class Theme(Model):
 
     header_logo = logo_property(logo_attr='raw_header_logo')
 
+    def clone(self):
+        """Return a copy of this theme. No magic."""
+        new_theme = self.__class__()
+        new_theme.header_background = self.header_background
+        new_theme.header_color = self.header_color
+        new_theme.header_logo = self.header_logo
+        return new_theme
+
 
 def setup_orm(engine):
     themes_table = Table("themes", meta.metadata,
