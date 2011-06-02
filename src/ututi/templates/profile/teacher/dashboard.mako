@@ -144,8 +144,8 @@ button.submit {
         %endif
       </p>
 
-      <a class="forward-link" id="view-page-link" href="${c.user.url()}">
-        ${_("View profile page")}
+      <a class="forward-link" id="view-page-link" href="${c.user.url(action='external_teacher_index')}">
+        ${_("View my page")}
       </a>
       %if 'information' not in done:
         ${h.button_to(_("Add information"), url(controller='profile', action='edit_information'),
@@ -335,8 +335,8 @@ button.submit {
                     method='GET', class_='dark edit')}
     </span>
   </div>
-  <a class="forward-link" href="${c.user.url()}">
-    ${_("View my profile page")}
+  <a class="forward-link" href="${c.user.url(action='external_teacher_index')}">
+    ${_("View my page")}
     </a>
 </div>
 </%def>

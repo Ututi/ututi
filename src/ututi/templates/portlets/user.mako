@@ -330,16 +330,16 @@
   %endif
 </%def>
 
-<%def name="profile_page_portlet()">
-  %if c.user is not None:
+<%def name="teacher_page_portlet()">
+  %if c.user is not None and c.user.is_teacher:
   <%self:portlet id="profile-page-portlet">
     <%def name="header()">
-      ${_("My profile page")}
+      ${_("My web page")}
     </%def>
     ${h.button_to(_("Edit profile"), url(controller='profile', action='edit'),
                   method='GET', class_='dark edit')}
-    <a class="forward-link" href="${c.user.url()}">
-      ${_("View my profile page")}
+    <a class="forward-link" href="${c.user.url(action='external_teacher_index')}">
+      ${_("View my page")}
     </a>
   </%self:portlet>
   %endif

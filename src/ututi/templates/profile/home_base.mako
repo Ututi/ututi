@@ -1,7 +1,7 @@
 <%inherit file="/base.mako" />
 <%namespace file="/profile/base.mako" name="profile" />
 <%namespace file="/portlets/user.mako" import="invite_friends_portlet,
-                                               profile_page_portlet,
+                                               teacher_page_portlet,
                                                todo_portlet"/>
 <%namespace file="/portlets/universal.mako" import="users_online_portlet,
                                                     about_portlet"/>
@@ -13,7 +13,7 @@
 <%def name="portlets_secondary()">
   ${about_portlet()}
   %if c.user.is_teacher:
-  ${profile_page_portlet()}
+  ${teacher_page_portlet()}
   %endif
   ${todo_portlet()}
   ${invite_friends_portlet()}
