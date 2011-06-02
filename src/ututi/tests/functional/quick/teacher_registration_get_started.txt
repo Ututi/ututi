@@ -253,11 +253,11 @@ Group's section offers to add student groups:
 Profile page section asks to add information, and gives a link to
 public teacher's profile page:
 
-    >>> user.click('View profile page')
+    >>> user.click('View my page')
     >>> user.url
-    'http://localhost/teacher/2'
-    >>> user.printCssQuery('.page-title', strip=True)
-    <h1>User</h1>
+    'http://localhost/public/uni/teacher/2'
+    >>> user.printCssQuery('.teacher-name', strip=True)
+    <div>User</div>
     >>> user.goBack()
 
     >>> user.click('Add information')
