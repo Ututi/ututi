@@ -78,33 +78,46 @@ def external_teacher_profile_action(method):
 
 
 def teacher_tabs(teacher):
-    return [
+    tabs = [
         {'title': _('General'),
          'name': 'information',
          'link': teacher.url(action='teacher_index')},
-        {'title': _('Teaching'),
-         'name': 'subjects',
-         'link': teacher.url(action='teacher_subjects')},
-        {'title': _('Publications'),
-         'name': 'publications',
-         'link': teacher.url(action='teacher_publications')},
-        {'title': _("Activity"),
-         'name': 'feed',
-         'link': teacher.url(action='teacher_activity')},
     ]
+    if teacher.publications:
+        tabs.append({
+            'title': _('Publications'),
+            'name': 'publications',
+            'link': teacher.url(action='teacher_publications')})
+    if teacher.taught_subjects:
+        tabs.append({
+            'title': _('Teaching'),
+            'name': 'subjects',
+            'link': teacher.url(action='teacher_subjects')})
+    tabs.append({
+        'title': _("Activity"),
+        'name': 'feed',
+        'link': teacher.url(action='teacher_activity')})
+
+    return tabs
 
 def external_teacher_tabs(teacher):
-    return [
+    tabs = [
         {'title': _('General'),
          'name': 'information',
          'link': teacher.url(action='external_teacher_index')},
-        {'title': _('Publications'),
-         'name': 'publications',
-         'link': teacher.url(action='external_teacher_publications')},
-        {'title': _('Teaching'),
-         'name': 'subjects',
-         'link': teacher.url(action='external_teacher_subjects')},
     ]
+    if teacher.publications:
+        tabs.append({
+            'title': _('Publications'),
+            'name': 'publications',
+            'link': teacher.url(action='external_teacher_publications')})
+    if teacher.taught_subjects:
+        tabs.append({
+            'title': _('Teaching'),
+            'name': 'subjects',
+            'link': teacher.url(action='external_teacher_subjects')})
+
+    return tabs
 
 
 class UserInfoWallMixin(WallMixin):
