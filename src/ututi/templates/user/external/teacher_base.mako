@@ -99,6 +99,12 @@ ${tabs(c.tabs, c.current_tab)}
 
 <%def name="pagetitle()"></%def>
 
+%if c.user is c.teacher and hasattr(self, 'actionlink'):
+  <div class="above-page-title" id="edit-action-link">
+    ${self.actionlink()}
+  </div>
+%endif
+
 <h1 class="page-title underline">
   ${self.pagetitle()}
 </h1>

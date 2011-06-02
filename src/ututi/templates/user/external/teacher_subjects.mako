@@ -3,6 +3,12 @@
 
 <%def name="pagetitle()">${_("Teaching")}</%def>
 
+<%def name="actionlink()">
+  <a href="${url(controller='subject', action='add')}">
+    ${_("add course")}
+  </a>
+</%def>
+
 <div class="page-section subjects" id="taught-courses-list">
   <div class="title">${_("Taught courses")}:</div>
   %if c.teacher.taught_subjects:

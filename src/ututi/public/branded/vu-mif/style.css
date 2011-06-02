@@ -134,6 +134,18 @@ ul.tabs li.current a {
     margin: auto;
 }
 
+/* ACTION LINKS
+ */
+
+.above-page-title {
+    margin-bottom: -42px;
+    margin-top: 28px;
+}
+
+#edit-action-link {
+    padding-right: 5px;
+}
+
 /* PORTLETS
  */
 

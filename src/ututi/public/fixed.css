@@ -177,6 +177,13 @@ h1.page-title {
     margin-bottom: 15px;
 }
 
+.above-page-title {
+    /* container that may be placed above page title */
+    text-align: right;
+    margin-top: 20px;
+    margin-bottom: -24px;
+}
+
 h1.underline,
 h2.underline {
     border-bottom: 1px solid #ff9900;
