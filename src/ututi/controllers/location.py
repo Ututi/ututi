@@ -15,7 +15,7 @@ from ututi.lib.validators import LocationIdValidator, InURLValidator, \
         validate, TranslatedEmailValidator, \
         UniversityPolicyEmailValidator, UniqueLocationEmail, \
         MemberPolicyValidator, EmailDomainValidator, AvailableEmailDomain, \
-        LogoUpload, CountryValidator
+        LogoUpload, CountryValidator, ColorHexCode
 from ututi.lib.wall import WallMixin
 from ututi.lib.search import search_query_count
 from ututi.lib.emails import teacher_request_email
@@ -114,6 +114,12 @@ class LocationEditForm(Schema):
     chained_validators = [
         LocationIdValidator()
         ]
+
+
+class ThemeForm(Schema):
+    header_text = validators.String(strip=True, max=10)
+    header_background_color = ColorHexCode()
+    header_color = ColorHexCode()
 
 
 class NewDomainForm(Schema):
@@ -358,6 +364,9 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         h.flash(_("Your logo was removed."))
         redirect(location.url(action='edit'))
 
+    def _edit_theme_form(self):
+        return render('location/edit_theme_enabled.mako')
+
     @location_action
     def edit_theme(self, location):
         c.menu_items = location_edit_menu_items()
@@ -365,7 +374,9 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         if location.theme is None:
             return render('location/edit_theme_disabled.mako')
         else:
-            return render('location/edit_theme_enabled.mako')
+            return htmlfill.render(
+                self._edit_theme_form(),
+                defaults=location.theme.values())
 
     @location_action
     def enable_theme(self, location):
@@ -377,6 +388,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             else:
                 location.theme = Theme()
                 location.theme.header_logo = location.logo
+                location.theme.header_text = ' '.join(location.path).upper()
             meta.Session.commit()
         redirect(location.url(action='edit_theme'))
 
@@ -384,6 +396,14 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
     def disable_theme(self, location):
         if 'disable_theme' in request.POST and location.theme is not None:
             location.theme.delete()
+            meta.Session.commit()
+        redirect(location.url(action='edit_theme'))
+
+    @location_action
+    @validate(ThemeForm, form='_edit_theme_form')
+    def update_theme(self, location):
+        if hasattr(self, 'form_result') and location.theme is not None:
+            location.theme.update(self.form_result)
             meta.Session.commit()
         redirect(location.url(action='edit_theme'))
 

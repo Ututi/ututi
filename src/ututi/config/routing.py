@@ -266,7 +266,6 @@ def make_map(config):
                 controller='profile',
                 action='logo')
 
-    map.connect('/school/*path/update', controller='location', action='update')
     map.connect('/school/*path/login', controller='location', action='login')
     map.connect('/school/*path/catalog_js', controller='location', action='catalog_js')
     map.connect('/school/*path/about', controller='location', action='about')
@@ -280,6 +279,7 @@ def make_map(config):
 
     # location setting actions
     map.connect('/school/*path/edit', controller='location', action='edit')
+    map.connect('/school/*path/update', controller='location', action='update')
     map.connect('/school/*path/edit/registration', controller='location', action='edit_registration')
     map.connect('/school/*path/edit/add_domain', controller='location', action='add_domain')
     map.connect('/school/*path/edit/delete_domain', controller='location', action='delete_domain')
@@ -288,6 +288,7 @@ def make_map(config):
     map.connect('/school/*path/edit/theme', controller='location', action='edit_theme')
     map.connect('/school/*path/edit/enable_theme', controller='location', action='enable_theme')
     map.connect('/school/*path/edit/disable_theme', controller='location', action='disable_theme')
+    map.connect('/school/*path/edit/update_theme', controller='location', action='update_theme')
 
     # rest
     map.connect('/school/*path', controller='location', action='index')
@@ -394,6 +395,11 @@ def make_map(config):
 
     map.connect('switch_language', '/switch_language', controller='home', action='switch_language')
 
+    # theme actions
+    map.connect('/theme/{id}/update/header_logo', controller='theming', action='update_header_logo')
+    map.connect('/theme/{id}/header_logo/{size}', controller='theming', action='header_logo')
+
+    # general rules
     map.connect('/{controller}', action='index')
     map.connect('/{controller}/{action}')
     map.connect('/{controller}/{action}/{id}')

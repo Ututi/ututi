@@ -8,7 +8,8 @@ from pylons import response
 from pylons.controllers.util import abort
 
 from ututi.lib.cache import u_cache
-from ututi.model import Group, User, LocationTag, Book, UserRegistration
+from ututi.model import Group, User, LocationTag, Book, \
+        UserRegistration, Theme
 
 
 def serve_logo(obj_type, obj_id=None, width=None, height=None,
@@ -44,7 +45,14 @@ def prepare_logo(obj_type, obj_id, width=None, height=None, default_img_path=Non
         if obj_type == 'user':
             obj = User.get_global(obj_id)
         else:
-            obj_cls = {'book': Book, 'group': Group, 'locationtag': LocationTag, 'registration': UserRegistration}[obj_type]
+            obj_types = {
+                'book': Book,
+                'group': Group,
+                'locationtag': LocationTag,
+                'registration': UserRegistration,
+                'theme': Theme,
+            }
+            obj_cls = obj_types[obj_type]
             obj = obj_cls.get(obj_id)
 
     if obj is not None and obj.has_logo():

@@ -66,6 +66,25 @@ def html_cleanup(input):
     return sane[len('<div>'):-len('</div>')]
 
 
+class ColorHexCode(validators.FancyValidator):
+    """ A validator for strings that appear in urls"""
+    messages = {
+        'invalid': _(u"Please enter a proper color hex code."),
+        'badLength': _(u"Color hex code should contain exactly six or three characters."),
+    }
+
+    def _to_python(self, value, state):
+        value = value.strip().upper()
+        if not value:
+            return None
+        if len(value) not in (3, 6):
+            raise Invalid(self.message('badLength', state), value, state)
+        valueRE = re.compile("[0-9A-F]+$", re.I)
+        if not valueRE.search(value):
+            raise Invalid(self.message('invalid', state), value, state)
+        return value
+
+
 class CountryValidator(validators.FancyValidator):
     """A validator that converts country id to Country.
     Should normally be used to validate input from select box."""
