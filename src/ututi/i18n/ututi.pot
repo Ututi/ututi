@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-05-20 12:35+0300\n"
+"POT-Creation-Date: 2011-06-02 17:32+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -466,6 +466,53 @@ msgstr ""
 msgid "Your password has been updated. Welcome back!"
 msgstr ""
 
+msgid "Groups"
+msgstr ""
+
+msgid "Teachers"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "General information"
+msgstr ""
+
+msgid "Registration settings"
+msgstr ""
+
+msgid "Custom theme"
+msgstr ""
+
+msgid "Information updated."
+msgstr ""
+
+msgid "Registration settings updated."
+msgstr ""
+
+msgid "Logo successfully updated."
+msgstr ""
+
+msgid "Your logo was removed."
+msgstr ""
+
+msgid "Wrong username or password!"
+msgstr ""
+
+msgid "You seem to have entered your username and password wrong, please try again!"
+msgstr ""
+
+msgid "The email you entered is registered in Ututi. Please login to proceed."
+msgstr ""
+
+msgid "You already have a teacher account."
+msgstr ""
+
+msgid ""
+"Thank You! Your request to become a teacher has been received. We will notify"
+" You once we grant You the rights of a teacher."
+msgstr ""
+
 msgid ""
 "The mailing list for this group has been disabled. Please use the web-based "
 "forum instead."
@@ -524,15 +571,6 @@ msgstr ""
 msgid "The Ututi group \"%s\" has run out of private file space"
 msgstr ""
 
-msgid "Only people with confirmed university email can register"
-msgstr ""
-
-msgid "People with confirmed university email can register and other can be invited"
-msgstr ""
-
-msgid "Everyone can register to this university"
-msgstr ""
-
 msgid "Please enter your password."
 msgstr ""
 
@@ -552,12 +590,6 @@ msgid "Please enter university web site."
 msgstr ""
 
 msgid "Please select logo."
-msgstr ""
-
-msgid "Please specify member policy."
-msgstr ""
-
-msgid "Invalid policy selected."
 msgstr ""
 
 msgid "Please enter your full name."
@@ -590,9 +622,6 @@ msgstr ""
 msgid "Your invitation has expired."
 msgstr ""
 
-msgid "(Select country from list)"
-msgstr ""
-
 msgid "The element does not exist."
 msgstr ""
 
@@ -606,35 +635,6 @@ msgid "Choose a different short title"
 msgstr ""
 
 msgid "The short title must contain no spaces"
-msgstr ""
-
-msgid "Groups"
-msgstr ""
-
-msgid "Teachers"
-msgstr ""
-
-msgid "About"
-msgstr ""
-
-msgid "Information updated."
-msgstr ""
-
-msgid "Wrong username or password!"
-msgstr ""
-
-msgid "You seem to have entered your username and password wrong, please try again!"
-msgstr ""
-
-msgid "The email you entered is registered in Ututi. Please login to proceed."
-msgstr ""
-
-msgid "You already have a teacher account."
-msgstr ""
-
-msgid ""
-"Thank You! Your request to become a teacher has been received. We will notify"
-" You once we grant You the rights of a teacher."
 msgstr ""
 
 msgid "Subject information"
@@ -668,10 +668,13 @@ msgstr ""
 msgid "This user profile is not public"
 msgstr ""
 
-msgid "Courses"
+msgid "Publications"
 msgstr ""
 
-msgid "Biography"
+msgid "Teaching"
+msgstr ""
+
+msgid "Activity"
 msgstr ""
 
 msgid "The group is not specified."
@@ -730,6 +733,9 @@ msgstr ""
 msgid "Could not confirm email: invalid confirmation key."
 msgstr ""
 
+msgid "Your contact information was updated."
+msgstr ""
+
 #, python-format
 msgid "Invalid email addresses: %(email_list)s"
 msgstr ""
@@ -742,26 +748,39 @@ msgstr ""
 msgid "Invitations sent to %(email_list)s"
 msgstr ""
 
+msgid "General Information"
+msgstr ""
+
+msgid "Your information was updated."
+msgstr ""
+
+msgid "Your publication page was updated."
+msgstr ""
+
+#, python-format
+msgid "Group %(group_title)s (%(group_email)s) added!"
+msgstr ""
+
+#, python-format
+msgid "Group %(group_title)s (%(group_email)s) updated!"
+msgstr ""
+
+#, python-format
+msgid "Group %(group_title)s (%(group_email)s) was deleted."
+msgstr ""
+
+#, python-format
+msgid "Message from %(teacher_name)s: %(subject)s"
+msgstr ""
+
+#, python-format
+msgid "Message sent to %(group_title)s (%(group_email)s)."
+msgstr ""
+
 msgid "Home"
 msgstr ""
 
 msgid "What's New?"
-msgstr ""
-
-msgid "Your biography was updated."
-msgstr ""
-
-msgid "Group added!"
-msgstr ""
-
-msgid "Group updated!"
-msgstr ""
-
-msgid "Group deleted."
-msgstr ""
-
-#, python-format
-msgid "Message from Your teacher: %s"
 msgstr ""
 
 msgid "My subjects"
@@ -842,6 +861,15 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+msgid "Only people with confirmed university email can register"
+msgstr ""
+
+msgid "People with confirmed university email can register and other can be invited"
+msgstr ""
+
+msgid "Everyone can register to this university"
+msgstr ""
+
 #, python-format
 msgid "%(num)s second ago"
 msgid_plural "%(num)s seconds ago"
@@ -878,7 +906,10 @@ msgstr ""
 msgid "Fill profile information"
 msgstr ""
 
-msgid "Add your biography"
+msgid "Add your information"
+msgstr ""
+
+msgid "List your publications"
 msgstr ""
 
 msgid "Add your student groups"
@@ -903,6 +934,12 @@ msgstr ""
 msgid "Such short title already exists, choose a different one."
 msgstr ""
 
+msgid "Please specify member policy."
+msgstr ""
+
+msgid "Invalid policy selected."
+msgstr ""
+
 msgid "Invalid phone number; use the format +37069912345"
 msgstr ""
 
@@ -918,9 +955,6 @@ msgstr ""
 msgid ""
 "The field may only contain letters, numbers and the characters + - _ and . "
 "(dot)"
-msgstr ""
-
-msgid "The field may only contain letters, numbers and the characters + - _"
 msgstr ""
 
 msgid "The tag is too long."
@@ -1294,7 +1328,7 @@ msgstr ""
 msgid "Using Ututi:"
 msgstr ""
 
-msgid "More"
+msgid "More..."
 msgstr ""
 
 msgid "New in Ututi?"
@@ -1357,20 +1391,6 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-msgid "Close"
-msgstr ""
-
-msgid "No, thanks"
-msgstr ""
-
-msgid "UTUTI"
-msgstr ""
-
-msgid ""
-"This is a testing version - this is just a copy of the information! Changes "
-"you make will not be persisted!"
-msgstr ""
-
 msgid "Language:"
 msgstr ""
 
@@ -1387,6 +1407,20 @@ msgid "Contact Us"
 msgstr ""
 
 msgid "Feedback"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "No, thanks"
+msgstr ""
+
+msgid "UTUTI"
+msgstr ""
+
+msgid ""
+"This is a testing version - this is just a copy of the information! Changes "
+"you make will not be persisted!"
 msgstr ""
 
 msgid "Loading..."
@@ -2895,13 +2929,72 @@ msgstr ""
 msgid "Departments:"
 msgstr ""
 
-msgid "Short title"
+msgid "Edit general information of your university below."
 msgstr ""
 
-msgid "Website"
+msgid "Full University title:"
 msgstr ""
 
-msgid "Logo"
+msgid "Short title:"
+msgstr ""
+
+msgid "Country:"
+msgstr ""
+
+msgid "(Select country from list)"
+msgstr ""
+
+msgid "University website:"
+msgstr ""
+
+msgid "University logo"
+msgstr ""
+
+msgid "Upload a high quality logo for your University."
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Network settings:"
+msgstr ""
+
+msgid "University settings"
+msgstr ""
+
+msgid "Registration control"
+msgstr ""
+
+msgid "Choose who can join your social network."
+msgstr ""
+
+msgid "Choose your policy:"
+msgstr ""
+
+msgid ""
+"Enter a list of email domains that belong to your university. This is "
+"particularly important if you want to control who is registering to your "
+"network."
+msgstr ""
+
+msgid "Delete this domain"
+msgstr ""
+
+msgid "Currently no email domains are assigned to this University."
+msgstr ""
+
+msgid "New email domain:"
+msgstr ""
+
+msgid ""
+"Ututi let's you theme your network, including custom colors, header logo and "
+"text."
+msgstr ""
+
+msgid "Enable custom theming"
+msgstr ""
+
+msgid "Disable custom theming"
 msgstr ""
 
 msgid ""
@@ -2978,7 +3071,7 @@ msgid "Ututi teacher accounts:"
 msgstr ""
 
 msgid ""
-"<strong>Fill in your biography</strong> to represent yourself to other "
+"<strong>Fill in your information</strong> to represent yourself to other "
 "members of your academic community."
 msgstr ""
 
@@ -3048,7 +3141,7 @@ msgstr ""
 msgid "Teacher profile"
 msgstr ""
 
-msgid "submit your CV, thoughts, biography and academic papers."
+msgid "submit your CV, thoughts, information and academic papers."
 msgstr ""
 
 msgid "Course material sharing"
@@ -3093,9 +3186,6 @@ msgid "Emails that are allowed to post to the mailing list of this group"
 msgstr ""
 
 msgid "Invite to group"
-msgstr ""
-
-msgid "Remove"
 msgstr ""
 
 msgid "Moderation queue"
@@ -3363,6 +3453,9 @@ msgstr ""
 msgid "Members:"
 msgstr ""
 
+msgid "teachers:"
+msgstr ""
+
 msgid "Info"
 msgstr ""
 
@@ -3455,10 +3548,22 @@ msgid ""
 "and teachers can join this network."
 msgstr ""
 
+msgid "Powered by Ututi"
+msgstr ""
+
+msgid "Login:"
+msgstr ""
+
+msgid "Keep me logged in"
+msgstr ""
+
+msgid "Not a member yet?"
+msgstr ""
+
 msgid "Get started"
 msgstr ""
 
-msgid "Teacher dashboard"
+msgid "Dashboard"
 msgstr ""
 
 msgid "University feed"
@@ -3522,10 +3627,20 @@ msgstr[1] ""
 msgid "Related members:"
 msgstr ""
 
-msgid "My profile page"
+msgid "Related links:"
 msgstr ""
 
-msgid "View my profile page"
+msgid "website"
+msgstr ""
+
+#, python-format
+msgid "%(title_abbr)s social network"
+msgstr ""
+
+msgid "My web page"
+msgstr ""
+
+msgid "View my page"
 msgstr ""
 
 msgid "Friends of ututi"
@@ -3554,9 +3669,6 @@ msgid ""
 " textbook."
 msgstr ""
 
-msgid "Add a student group"
-msgstr ""
-
 msgid "Universities"
 msgstr ""
 
@@ -3569,7 +3681,10 @@ msgstr ""
 msgid "Contact information"
 msgstr ""
 
-msgid "Be findable."
+msgid "Edit your contact information below. Some fields may require confirmation."
+msgstr ""
+
+msgid "Work address"
 msgstr ""
 
 msgid "Your GG number"
@@ -3641,10 +3756,10 @@ msgstr ""
 msgid "Change photo"
 msgstr ""
 
-msgid "General information"
+msgid "Edit your general information below."
 msgstr ""
 
-msgid "Edit your general information below."
+msgid "e.g. Associate professor"
 msgstr ""
 
 msgid "About yourself"
@@ -3667,9 +3782,6 @@ msgid "Ututi username"
 msgstr ""
 
 msgid "Show my profile to unregistered users and search engines"
-msgstr ""
-
-msgid "Edit a student group"
 msgstr ""
 
 msgid "What have I been doing?"
@@ -3980,169 +4092,32 @@ msgstr ""
 msgid "Notification settings"
 msgstr ""
 
-msgid "Provide any personal information that you would like to begin with."
+msgid "Add a student group"
 msgstr ""
 
-msgid "Research interests"
+msgid "Your student groups:"
 msgstr ""
 
-msgid ""
-"Include a brief summary of your interests. Cover past, current and future "
-"research plans."
+msgid "Keep track of your student groups"
 msgstr ""
 
-msgid "Use bulleted list if needed."
+msgid "Email your students from your dashboard"
 msgstr ""
 
-msgid "Education"
+msgid "Attach files to your messages"
 msgstr ""
 
-msgid "List dates and institutions where you have studied starting with most recent."
-msgstr ""
-
-msgid "Name of institution and degree title received"
-msgstr ""
-
-msgid "Work experience"
+msgid "Send SMS messages from your dashboard to Ututi groups"
 msgstr ""
 
 msgid ""
-"List dates, job titles and names of organizations where you have worked "
-"starting with most recent."
-msgstr ""
-
-msgid "Job title and name of organization"
-msgstr ""
-
-msgid "Taught courses"
-msgstr ""
-
-msgid "List courses that you teach."
-msgstr ""
-
-msgid "Course title"
-msgstr ""
-
-msgid "Publications"
+"Enter a title to identify this group, e. g. Computer Science freshmen or CS "
+"1st year."
 msgstr ""
 
 msgid ""
-"List your publications that you consider most important, starting with most "
-"recent."
-msgstr ""
-
-msgid "Authors"
-msgstr ""
-
-msgid "Title of the Publication"
-msgstr ""
-
-msgid "Title of Journal"
-msgstr ""
-
-msgid ""
-"List languages that you speak, starting with ones that you are most fluent "
-"with."
-msgstr ""
-
-msgid "english"
-msgstr ""
-
-msgid "russian"
-msgstr ""
-
-msgid "german"
-msgstr ""
-
-msgid "Delete this group?"
-msgstr ""
-
-msgid "Students groups that you teach to"
-msgstr ""
-
-msgid "Easy way to contact your groups by sending a <strong>group message</strong>."
-msgstr ""
-
-msgid "Add students groups"
-msgstr ""
-
-msgid "My courses:"
-msgstr ""
-
-msgid "add courses"
-msgstr ""
-
-msgid "Add courses you teach"
-msgstr ""
-
-msgid "Files upload"
-msgstr ""
-
-msgid ""
-"You will be able to upload course material, that will be accessable for "
-"everyone, who is following your course."
-msgstr ""
-
-msgid "Course discussions"
-msgstr ""
-
-msgid "Discuss course material and related subjects with your students."
-msgstr ""
-
-msgid "Automatic notifications"
-msgstr ""
-
-msgid ""
-"Ututi will automaticaly inform students and groups about changes in course "
-"material."
-msgstr ""
-
-msgid "Add your courses"
-msgstr ""
-
-msgid "Or browse subjects' catalog"
-msgstr ""
-
-msgid "Add:"
-msgstr ""
-
-msgid "Create wiki page"
-msgstr ""
-
-msgid "The subject is watched by:"
-msgstr ""
-
-#, python-format
-msgid "<span class='orange'>%(count)s</span> user"
-msgid_plural "<span class='orange'>%(count)s</span> users"
-msgstr[0] ""
-msgstr[1] ""
-
-#, python-format
-msgid "<span class='orange'>%(count)s</span> group"
-msgid_plural "<span class='orange'>%(count)s</span> groups"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "add a group"
-msgstr ""
-
-msgid "Write down your biography and research interests"
-msgstr ""
-
-#, python-format
-msgid "This information will be displayed on your %(profile_page_url)s."
-msgstr ""
-
-msgid "profile page"
-msgstr ""
-
-msgid ""
-"Below you see a template that you can freely edit. Note that once your press "
-"\"Save\", it will become publicly available in your profile page."
-msgstr ""
-
-msgid "Edit your biography"
+"Enter email address for this group. It can be Ututi or any other mailing "
+"list, or a private email address."
 msgstr ""
 
 msgid "Create your subjects"
@@ -4168,20 +4143,171 @@ msgstr ""
 
 msgid ""
 "Ututi provides you a profile page that other people can access online. To "
-"have a complete page, please tell us some bits about your biography and your "
-"research interests."
+"have a complete page, please tell us some bits about your information and "
+"your research interests."
 msgstr ""
 
-msgid "View profile page"
+msgid ""
+"Ututi provides you a profile page that other people can access online. To "
+"have a complete page, please list your most important publications."
 msgstr ""
 
-msgid "Add biography"
+msgid "Add information"
+msgstr ""
+
+msgid "List publications"
 msgstr ""
 
 msgid "Ututi will keep track of your student groups and make it easy to reach them."
 msgstr ""
 
 msgid "Add student group"
+msgstr ""
+
+msgid "Delete this group"
+msgstr ""
+
+msgid "Edit group"
+msgstr ""
+
+msgid "Send SMS"
+msgstr ""
+
+msgid "Message subject:"
+msgstr ""
+
+msgid "Attachment:"
+msgstr ""
+
+msgid "Your message was successfully sent."
+msgstr ""
+
+msgid "Your SMS was successfully sent."
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Wiki notes"
+msgstr ""
+
+msgid "My courses"
+msgstr ""
+
+msgid "add courses"
+msgstr ""
+
+msgid "Are you sure you want to delete this subject?"
+msgstr ""
+
+msgid "My student groups"
+msgstr ""
+
+msgid "add a group"
+msgstr ""
+
+msgid "Are you sure you want to delete this group?"
+msgstr ""
+
+msgid "My profile page"
+msgstr ""
+
+msgid "edit profile"
+msgstr ""
+
+msgid "Write down your information and research interests"
+msgstr ""
+
+#, python-format
+msgid "This information will be displayed on your %(profile_page_url)s."
+msgstr ""
+
+msgid "profile page"
+msgstr ""
+
+msgid "Edit your information"
+msgstr ""
+
+#, python-format
+msgid "Your publications will be displayed on your %(profile_page_url)s."
+msgstr ""
+
+msgid "Edit a student group"
+msgstr ""
+
+msgid ""
+"Below you see a template that you can freely edit. Note that once your press "
+"\"Save\", it will become publicly available in your profile page."
+msgstr ""
+
+msgid "Provide any personal information that you would like to begin with."
+msgstr ""
+
+msgid "Affiliation"
+msgstr ""
+
+msgid "Specify your current position and responsibilities."
+msgstr ""
+
+msgid "Research activities"
+msgstr ""
+
+msgid ""
+"Include a brief summary of your research activities and interests. Cover "
+"past, current and future research plans."
+msgstr ""
+
+msgid "Use bulleted list if needed."
+msgstr ""
+
+msgid "Scientific services"
+msgstr ""
+
+msgid ""
+"Describe your scientific services. For instance, you might want to mention "
+"that you belong to editorial board of some scientific journal."
+msgstr ""
+
+msgid "Conferences, exchange programs, visits"
+msgstr ""
+
+msgid ""
+"List conferences that you participate in, exchange programs and other related"
+" information. Cover past, present travels and future plans."
+msgstr ""
+
+msgid ""
+"List your publications that you consider most important, starting with most "
+"recent."
+msgstr ""
+
+msgid ""
+"If the list is very long, organize your publications into sections as shown "
+"below."
+msgstr ""
+
+msgid "Textbooks"
+msgstr ""
+
+msgid "Authors"
+msgstr ""
+
+msgid "Name of series and volume"
+msgstr ""
+
+msgid "Year"
+msgstr ""
+
+msgid "Publishing house"
+msgstr ""
+
+msgid "Papers"
+msgstr ""
+
+msgid "Journal title"
+msgstr ""
+
+msgid "Volume/issue"
 msgstr ""
 
 msgid "Select an image file on your computer:"
@@ -4243,15 +4369,6 @@ msgid "Link Google or Facebook"
 msgstr ""
 
 msgid "Click the buttons to link or unlink your profile with Google and/or Facebook"
-msgstr ""
-
-msgid "Full University title:"
-msgstr ""
-
-msgid "Country:"
-msgstr ""
-
-msgid "University website:"
 msgstr ""
 
 msgid "University logo:"
@@ -4489,33 +4606,6 @@ msgstr ""
 msgid "Group files"
 msgstr ""
 
-msgid "Edit group"
-msgstr ""
-
-msgid "Edit this group"
-msgstr ""
-
-msgid "Delete this group"
-msgstr ""
-
-msgid "Contact the group:"
-msgstr ""
-
-msgid "Send SMS"
-msgstr ""
-
-msgid "Message subject:"
-msgstr ""
-
-msgid "Attachment:"
-msgstr ""
-
-msgid "Your message was successfully sent."
-msgstr ""
-
-msgid "Your SMS was successfully sent."
-msgstr ""
-
 msgid "Share:"
 msgstr ""
 
@@ -4638,6 +4728,12 @@ msgstr ""
 msgid "%(user_link)s has modified a page %(page_link)s"
 msgstr ""
 
+msgid "Short title"
+msgstr ""
+
+msgid "Website"
+msgstr ""
+
 msgid "Region"
 msgstr ""
 
@@ -4648,6 +4744,9 @@ msgid "Parent"
 msgstr ""
 
 msgid "Select a parent"
+msgstr ""
+
+msgid "Logo"
 msgstr ""
 
 msgid "Browse the hierarchy"
@@ -4662,7 +4761,27 @@ msgstr ""
 msgid "Create new subject"
 msgstr ""
 
+msgid "Subject features:"
+msgstr ""
+
+msgid "Upload and share course material"
+msgstr ""
+
+msgid "Discuss with other people interested in the subject"
+msgstr ""
+
+msgid "Put lecture notes to subject page and edit them together"
+msgstr ""
+
+msgid "Get notifications related to this subject"
+msgstr ""
+
 msgid "Subject title:"
+msgstr ""
+
+msgid ""
+"It's best to use exactly the same title that is used in your university for "
+"this subject. It does not need to be unique."
 msgstr ""
 
 msgid "Enter subject details"
@@ -4847,34 +4966,31 @@ msgstr ""
 msgid "Award"
 msgstr ""
 
-msgid "teachers"
+msgid "Teacher's activity:"
 msgstr ""
 
-msgid "Network"
-msgstr ""
-
-msgid "Phone:"
+msgid "Address"
 msgstr ""
 
 msgid "Personal webpage"
 msgstr ""
 
-msgid "There is no biography."
-msgstr ""
-
-msgid "Teacher's activity:"
+#, python-format
+msgid "%(teacher)s has not provided any information."
 msgstr ""
 
 #, python-format
-msgid "Other %(university)s teachers"
+msgid "%(teacher)s has not listed any publications."
+msgstr ""
+
+msgid "Taught courses"
 msgstr ""
 
 #, python-format
-msgid "Teacher's %(user)s public profile"
+msgid "%(teacher)s does not teach any course."
 msgstr ""
 
-#, python-format
-msgid "%(user_name)s doesn't teach any course."
+msgid "add course"
 msgstr ""
 
 msgid "Please have javascript enabled for Facebook functionality to work."
@@ -4939,6 +5055,9 @@ msgid ""
 msgstr ""
 
 msgid "Purchase SMS credits"
+msgstr ""
+
+msgid "University and department:"
 msgstr ""
 
 msgid "Full title"

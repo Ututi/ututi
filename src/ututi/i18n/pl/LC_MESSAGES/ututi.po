@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-05-20 12:35+0300\n"
+"PO-Revision-Date: 2011-06-02 17:32+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -506,6 +506,59 @@ msgstr "Profil użytkownika nie istnieje."
 msgid "Your password has been updated. Welcome back!"
 msgstr "Twoje hasło zostało zaktualizowane. Witaj ponownie!"
 
+msgid "Groups"
+msgstr "Grupy"
+
+msgid "Teachers"
+msgstr "Wykładowcy"
+
+msgid "About"
+msgstr "O Ututi"
+
+msgid "General information"
+msgstr "Informacje ogólne"
+
+msgid "Registration settings"
+msgstr ""
+
+msgid "Custom theme"
+msgstr ""
+
+msgid "Information updated."
+msgstr "Informacje zostały zaktualizowane."
+
+msgid "Registration settings updated."
+msgstr ""
+
+msgid "Logo successfully updated."
+msgstr ""
+
+msgid "Your logo was removed."
+msgstr ""
+
+msgid "Wrong username or password!"
+msgstr "Niepoprawny login lub hasło!"
+
+msgid ""
+"You seem to have entered your username and password wrong, please try "
+"again!"
+msgstr "Login nie pasuje do hasła. Próbuj jeszcze raz!"
+
+msgid "The email you entered is registered in Ututi. Please login to proceed."
+msgstr ""
+"Ten adres e-mail jest już zarejestrowany w Ututi. Proszę się zalogować "
+"aby kontynuować."
+
+msgid "You already have a teacher account."
+msgstr "Masz już konto wykładowcy."
+
+msgid ""
+"Thank You! Your request to become a teacher has been received. We will "
+"notify You once we grant You the rights of a teacher."
+msgstr ""
+"Dziękujemy! Otrzymaliśmy Twoje podanie. Powiadomimy Cię gdy zostaną Ci "
+"przyznane prawa wykładowcy."
+
 msgid ""
 "The mailing list for this group has been disabled. Please use the web-"
 "based forum instead."
@@ -571,21 +624,6 @@ msgstr "Subskrypcja prywatnej przestrzeni grupy na  \"%s\\ niedługo się kończ
 msgid "The Ututi group \"%s\" has run out of private file space"
 msgstr "Grupa \"%s\" nie posiada już prywatnej przestrzeni na pliki."
 
-msgid "Only people with confirmed university email can register"
-msgstr ""
-"Tylko osoby z potwierdzonym uniwersyteckim adresem e-mail mogą się "
-"zarejestrować"
-
-msgid ""
-"People with confirmed university email can register and other can be "
-"invited"
-msgstr ""
-"Osoby z potwierdzonym uniwersyteckim adresem e-mail mogą się zarejstrować"
-" i zapraszać innych"
-
-msgid "Everyone can register to this university"
-msgstr "Każdy może się zapisać do tego uniwersytetu"
-
 msgid "Please enter your password."
 msgstr "Wpisz swoje hasło."
 
@@ -606,12 +644,6 @@ msgstr "Wpisz adres strony uniwersytetu."
 
 msgid "Please select logo."
 msgstr "Wybierz logo."
-
-msgid "Please specify member policy."
-msgstr "Uściślij politykę korzystania ze strony."
-
-msgid "Invalid policy selected."
-msgstr "Wybrano niewłaściwą politykę."
 
 msgid "Please enter your full name."
 msgstr "Wpisz swoje pełne imię."
@@ -643,9 +675,6 @@ msgstr "Twój kod potwierdzający został wysłany ponownie."
 msgid "Your invitation has expired."
 msgstr "Twoje zaproszenie uległo przedawnieniu."
 
-msgid "(Select country from list)"
-msgstr "(Wybierz kraj z listy)"
-
 msgid "The element does not exist."
 msgstr "Element nie istnieje."
 
@@ -660,41 +689,6 @@ msgstr "Wybierz inną nazwę skróconą"
 
 msgid "The short title must contain no spaces"
 msgstr "Skrócona nazwa nie powinna zawierać spacji"
-
-msgid "Groups"
-msgstr "Grupy"
-
-msgid "Teachers"
-msgstr "Wykładowcy"
-
-msgid "About"
-msgstr "O Ututi"
-
-msgid "Information updated."
-msgstr "Informacje zostały zaktualizowane."
-
-msgid "Wrong username or password!"
-msgstr "Niepoprawny login lub hasło!"
-
-msgid ""
-"You seem to have entered your username and password wrong, please try "
-"again!"
-msgstr "Login nie pasuje do hasła. Próbuj jeszcze raz!"
-
-msgid "The email you entered is registered in Ututi. Please login to proceed."
-msgstr ""
-"Ten adres e-mail jest już zarejestrowany w Ututi. Proszę się zalogować "
-"aby kontynuować."
-
-msgid "You already have a teacher account."
-msgstr "Masz już konto wykładowcy."
-
-msgid ""
-"Thank You! Your request to become a teacher has been received. We will "
-"notify You once we grant You the rights of a teacher."
-msgstr ""
-"Dziękujemy! Otrzymaliśmy Twoje podanie. Powiadomimy Cię gdy zostaną Ci "
-"przyznane prawa wykładowcy."
 
 msgid "Subject information"
 msgstr "Informacje o przedmiocie"
@@ -727,11 +721,14 @@ msgstr "Nowa notatka"
 msgid "This user profile is not public"
 msgstr "Profil tego użytkownika nie jest publiczny"
 
-msgid "Courses"
-msgstr "Przedmioty"
+msgid "Publications"
+msgstr ""
 
-msgid "Biography"
-msgstr "Biografia"
+msgid "Teaching"
+msgstr ""
+
+msgid "Activity"
+msgstr ""
 
 msgid "The group is not specified."
 msgstr "Grupa nie została określona."
@@ -789,6 +786,9 @@ msgstr "Twój e-mail %s został potwierdzony, dziękujemy."
 msgid "Could not confirm email: invalid confirmation key."
 msgstr "E-mail nie może zostać potwierdzony: błędny kod potwierdzający"
 
+msgid "Your contact information was updated."
+msgstr ""
+
 #, python-format
 msgid "Invalid email addresses: %(email_list)s"
 msgstr "Niewłaściwy adres e-mail: %(email_list)s"
@@ -801,27 +801,40 @@ msgstr "Te adresy są już zarejestrowane na Ututi: %(email_list)s"
 msgid "Invitations sent to %(email_list)s"
 msgstr "Zaproszenia wysłane do %(email_list)s"
 
+msgid "General Information"
+msgstr ""
+
+msgid "Your information was updated."
+msgstr ""
+
+msgid "Your publication page was updated."
+msgstr ""
+
+#, python-format
+msgid "Group %(group_title)s (%(group_email)s) added!"
+msgstr ""
+
+#, python-format
+msgid "Group %(group_title)s (%(group_email)s) updated!"
+msgstr ""
+
+#, python-format
+msgid "Group %(group_title)s (%(group_email)s) was deleted."
+msgstr ""
+
+#, python-format
+msgid "Message from %(teacher_name)s: %(subject)s"
+msgstr ""
+
+#, python-format
+msgid "Message sent to %(group_title)s (%(group_email)s)."
+msgstr ""
+
 msgid "Home"
 msgstr "Home"
 
 msgid "What's New?"
 msgstr "Co nowego?"
-
-msgid "Your biography was updated."
-msgstr "Biografia została aktualizowana."
-
-msgid "Group added!"
-msgstr "Grupa została dodana!"
-
-msgid "Group updated!"
-msgstr "Grupa została zaktualizowana!"
-
-msgid "Group deleted."
-msgstr "Grupa została usunięta."
-
-#, python-format
-msgid "Message from Your teacher: %s"
-msgstr "Wiadomość od Twojego wykładowcy: %s"
 
 msgid "My subjects"
 msgstr "Przedmioty"
@@ -903,6 +916,21 @@ msgstr ""
 msgid "Save"
 msgstr "Zachowaj"
 
+msgid "Only people with confirmed university email can register"
+msgstr ""
+"Tylko osoby z potwierdzonym uniwersyteckim adresem e-mail mogą się "
+"zarejestrować"
+
+msgid ""
+"People with confirmed university email can register and other can be "
+"invited"
+msgstr ""
+"Osoby z potwierdzonym uniwersyteckim adresem e-mail mogą się zarejstrować"
+" i zapraszać innych"
+
+msgid "Everyone can register to this university"
+msgstr "Każdy może się zapisać do tego uniwersytetu"
+
 #, python-format
 msgid "%(num)s second ago"
 msgid_plural "%(num)s seconds ago"
@@ -943,7 +971,10 @@ msgstr "Znajdź / utwórz przedmioty"
 msgid "Fill profile information"
 msgstr ""
 
-msgid "Add your biography"
+msgid "Add your information"
+msgstr ""
+
+msgid "List your publications"
 msgstr ""
 
 msgid "Add your student groups"
@@ -968,6 +999,12 @@ msgstr "Podaj, proszę,swoją uczelnię."
 msgid "Such short title already exists, choose a different one."
 msgstr "Taka nazwa już istnieje. Wybierz inną."
 
+msgid "Please specify member policy."
+msgstr "Uściślij politykę korzystania ze strony."
+
+msgid "Invalid policy selected."
+msgstr "Wybrano niewłaściwą politykę."
+
 msgid "Invalid phone number; use the format +37069912345"
 msgstr "Niepoprawny numer telefonu; użyj formatu +48123456789"
 
@@ -984,9 +1021,6 @@ msgid ""
 "The field may only contain letters, numbers and the characters + - _ and "
 ". (dot)"
 msgstr ""
-
-msgid "The field may only contain letters, numbers and the characters + - _"
-msgstr "Ta nazwa może składać się wyłącznie z liter, cyfr oraz symboli + - _"
 
 msgid "The tag is too long."
 msgstr "Tag jest zbyt długi."
@@ -1406,8 +1440,8 @@ msgstr ""
 msgid "Using Ututi:"
 msgstr "Używają Ututi:"
 
-msgid "More"
-msgstr "Więcej"
+msgid "More..."
+msgstr ""
 
 msgid "New in Ututi?"
 msgstr "Jesteś nowy na Ututi?"
@@ -1469,22 +1503,6 @@ msgstr "Profil publiczny"
 msgid "Logout"
 msgstr "Wyloguj"
 
-msgid "Close"
-msgstr "Zamknij"
-
-msgid "No, thanks"
-msgstr "Nie, dziękuję"
-
-msgid "UTUTI"
-msgstr "UTUTI"
-
-msgid ""
-"This is a testing version - this is just a copy of the information! "
-"Changes you make will not be persisted!"
-msgstr ""
-"To jest wersja testowa - to jest kopia informacji właściwych! Wprowadzone"
-" przez Ciebie zmiany nie zostaną wprowadzone!"
-
 msgid "Language:"
 msgstr "Język:"
 
@@ -1502,6 +1520,22 @@ msgstr "Skontaktuj się z nami"
 
 msgid "Feedback"
 msgstr "Feedback"
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "No, thanks"
+msgstr "Nie, dziękuję"
+
+msgid "UTUTI"
+msgstr "UTUTI"
+
+msgid ""
+"This is a testing version - this is just a copy of the information! "
+"Changes you make will not be persisted!"
+msgstr ""
+"To jest wersja testowa - to jest kopia informacji właściwych! Wprowadzone"
+" przez Ciebie zmiany nie zostaną wprowadzone!"
 
 msgid "Loading..."
 msgstr "Ładuje..."
@@ -3210,14 +3244,73 @@ msgstr ""
 msgid "Departments:"
 msgstr "Wydziały:"
 
-msgid "Short title"
-msgstr "Krótki tytuł"
+msgid "Edit general information of your university below."
+msgstr ""
 
-msgid "Website"
-msgstr "Strona internetowa"
+msgid "Full University title:"
+msgstr "Pełna nazwa uczelni:"
 
-msgid "Logo"
-msgstr "Logo"
+msgid "Short title:"
+msgstr ""
+
+msgid "Country:"
+msgstr "Państwo:"
+
+msgid "(Select country from list)"
+msgstr "(Wybierz kraj z listy)"
+
+msgid "University website:"
+msgstr "Strona internetowa uczelni:"
+
+msgid "University logo"
+msgstr ""
+
+msgid "Upload a high quality logo for your University."
+msgstr ""
+
+msgid "Remove"
+msgstr "Usuń"
+
+msgid "Network settings:"
+msgstr ""
+
+msgid "University settings"
+msgstr ""
+
+msgid "Registration control"
+msgstr ""
+
+msgid "Choose who can join your social network."
+msgstr ""
+
+msgid "Choose your policy:"
+msgstr ""
+
+msgid ""
+"Enter a list of email domains that belong to your university. This is "
+"particularly important if you want to control who is registering to your "
+"network."
+msgstr ""
+
+msgid "Delete this domain"
+msgstr ""
+
+msgid "Currently no email domains are assigned to this University."
+msgstr ""
+
+msgid "New email domain:"
+msgstr ""
+
+msgid ""
+"Ututi let's you theme your network, including custom colors, header logo "
+"and text."
+msgstr ""
+
+msgid "Enable custom theming"
+msgstr ""
+
+msgid "Disable custom theming"
+msgstr ""
 
 msgid ""
 "This is a list of all the recent events in the subjects and groups of "
@@ -3308,11 +3401,9 @@ msgid "Ututi teacher accounts:"
 msgstr "Konta wykładowców na Ututi:"
 
 msgid ""
-"<strong>Fill in your biography</strong> to represent yourself to other "
+"<strong>Fill in your information</strong> to represent yourself to other "
 "members of your academic community."
 msgstr ""
-"<strong>Wypełnij swoją biografię</strong> aby zaprezentować się innym "
-"członkom społeczności akademickiej."
 
 msgid ""
 "<strong>Upload course material.</strong> It will become immediately "
@@ -3393,8 +3484,8 @@ msgstr "O wykładowcach:"
 msgid "Teacher profile"
 msgstr "Profil wykładowcy"
 
-msgid "submit your CV, thoughts, biography and academic papers."
-msgstr "dodaj swoje CV, rozważania, biografię i publikacje akademickie."
+msgid "submit your CV, thoughts, information and academic papers."
+msgstr ""
 
 msgid "Course material sharing"
 msgstr "Dzielenie się materiałami z przedmiotu"
@@ -3441,9 +3532,6 @@ msgstr "E-maile, które są dopuszczone na listę dyskusyjną tej grupy"
 
 msgid "Invite to group"
 msgstr "Zaproś do grupy"
-
-msgid "Remove"
-msgstr "Usuń"
 
 msgid "Moderation queue"
 msgstr "Kolejka do moderacji"
@@ -3734,6 +3822,9 @@ msgstr "Wszystkie grupy"
 msgid "Members:"
 msgstr "Członkowie:"
 
+msgid "teachers:"
+msgstr ""
+
 msgid "Info"
 msgstr "Info "
 
@@ -3833,10 +3924,22 @@ msgstr ""
 "To jest zweryfikowana sieć do <strong>%s</strong>.  Tylko %s studenci i "
 "wykładowcy mogą dołączyć do tej sieci."
 
+msgid "Powered by Ututi"
+msgstr ""
+
+msgid "Login:"
+msgstr ""
+
+msgid "Keep me logged in"
+msgstr ""
+
+msgid "Not a member yet?"
+msgstr ""
+
 msgid "Get started"
 msgstr "Zacznij"
 
-msgid "Teacher dashboard"
+msgid "Dashboard"
 msgstr ""
 
 msgid "University feed"
@@ -3904,10 +4007,20 @@ msgstr[2] "%(count)s ściągniętych plików"
 msgid "Related members:"
 msgstr "Powiązani użytkownicy:"
 
-msgid "My profile page"
+msgid "Related links:"
 msgstr ""
 
-msgid "View my profile page"
+msgid "website"
+msgstr ""
+
+#, python-format
+msgid "%(title_abbr)s social network"
+msgstr ""
+
+msgid "My web page"
+msgstr ""
+
+msgid "View my page"
 msgstr ""
 
 msgid "Friends of ututi"
@@ -3938,9 +4051,6 @@ msgstr ""
 "Tutaj możesz tanio kupić materiały do nauki lub znaleźć nowego "
 "właściciela Twoich starych książek."
 
-msgid "Add a student group"
-msgstr "Dodaj grupę studencką"
-
 msgid "Universities"
 msgstr "Uczelnie"
 
@@ -3953,7 +4063,10 @@ msgstr "wróć"
 msgid "Contact information"
 msgstr ""
 
-msgid "Be findable."
+msgid "Edit your contact information below. Some fields may require confirmation."
+msgstr ""
+
+msgid "Work address"
 msgstr ""
 
 msgid "Your GG number"
@@ -4027,10 +4140,10 @@ msgstr ""
 msgid "Change photo"
 msgstr ""
 
-msgid "General information"
-msgstr "Informacje ogólne"
-
 msgid "Edit your general information below."
+msgstr ""
+
+msgid "e.g. Associate professor"
 msgstr ""
 
 msgid "About yourself"
@@ -4056,9 +4169,6 @@ msgstr ""
 
 msgid "Show my profile to unregistered users and search engines"
 msgstr "Pokazuj mój profil niezarejestrowanym użytkownikom i wyszukiwarkom"
-
-msgid "Edit a student group"
-msgstr "Edytuj grupę studencką"
 
 msgid "What have I been doing?"
 msgstr "Moja aktywność"
@@ -4390,181 +4500,32 @@ msgstr "Nie obserwujesz żadnego przedmiotu"
 msgid "Notification settings"
 msgstr "Ustawienia powiadomień"
 
-msgid "Provide any personal information that you would like to begin with."
+msgid "Add a student group"
+msgstr "Dodaj grupę studencką"
+
+msgid "Your student groups:"
 msgstr ""
 
-msgid "Research interests"
+msgid "Keep track of your student groups"
 msgstr ""
 
-msgid ""
-"Include a brief summary of your interests. Cover past, current and future"
-" research plans."
+msgid "Email your students from your dashboard"
 msgstr ""
 
-msgid "Use bulleted list if needed."
+msgid "Attach files to your messages"
 msgstr ""
 
-msgid "Education"
-msgstr "Edukacja"
-
-msgid ""
-"List dates and institutions where you have studied starting with most "
-"recent."
-msgstr ""
-
-msgid "Name of institution and degree title received"
-msgstr ""
-
-msgid "Work experience"
+msgid "Send SMS messages from your dashboard to Ututi groups"
 msgstr ""
 
 msgid ""
-"List dates, job titles and names of organizations where you have worked "
-"starting with most recent."
-msgstr ""
-
-msgid "Job title and name of organization"
-msgstr ""
-
-msgid "Taught courses"
-msgstr "Nauczane przedmioty"
-
-msgid "List courses that you teach."
-msgstr ""
-
-msgid "Course title"
-msgstr ""
-
-msgid "Publications"
+"Enter a title to identify this group, e. g. Computer Science freshmen or "
+"CS 1st year."
 msgstr ""
 
 msgid ""
-"List your publications that you consider most important, starting with "
-"most recent."
-msgstr ""
-
-msgid "Authors"
-msgstr ""
-
-msgid "Title of the Publication"
-msgstr ""
-
-msgid "Title of Journal"
-msgstr ""
-
-msgid ""
-"List languages that you speak, starting with ones that you are most "
-"fluent with."
-msgstr ""
-
-msgid "english"
-msgstr "angielski"
-
-msgid "russian"
-msgstr "rosyjski"
-
-msgid "german"
-msgstr "niemiecki"
-
-msgid "Delete this group?"
-msgstr "Chcesz usunąć tę grupę?"
-
-msgid "Students groups that you teach to"
-msgstr "Grupy studenckie, które uczysz"
-
-msgid ""
-"Easy way to contact your groups by sending a <strong>group "
-"message</strong>."
-msgstr ""
-"Prosty sposób, aby skontaktować się z Twoimi grupami wysyłając "
-"<strong>wiadomość grupową</strong>."
-
-msgid "Add students groups"
-msgstr "Dodaj grupy studenckie"
-
-msgid "My courses:"
-msgstr "Moje przedmioty:"
-
-msgid "add courses"
-msgstr "dodaj przedmioty"
-
-msgid "Add courses you teach"
-msgstr "Dodaj przedmioty, których uczysz"
-
-msgid "Files upload"
-msgstr "Przesyłanie plików"
-
-msgid ""
-"You will be able to upload course material, that will be accessable for "
-"everyone, who is following your course."
-msgstr ""
-"Możesz przesyłać materiały do nauki, a będą one dostępne dla wszystkich, "
-"którzy obserwują Twój przedmiot."
-
-msgid "Course discussions"
-msgstr "Dyskusje o przedmiocie"
-
-msgid "Discuss course material and related subjects with your students."
-msgstr "Rozmawiaj o przedmiocie i innych sprawach ze swoimi studentami."
-
-msgid "Automatic notifications"
-msgstr "Automatyczne powiadomienia"
-
-msgid ""
-"Ututi will automaticaly inform students and groups about changes in "
-"course material."
-msgstr ""
-"Ututi będzie automatycznie powiadamiać studentów i grupy o zmianach w "
-"przedmiocie."
-
-msgid "Add your courses"
-msgstr "Dodaj swoje przedmioty"
-
-msgid "Or browse subjects' catalog"
-msgstr "Lub przejrzyj katalog przedmiotów"
-
-msgid "Add:"
-msgstr "Dodaj:"
-
-msgid "Create wiki page"
-msgstr "Stwórz stronę wiki"
-
-msgid "The subject is watched by:"
-msgstr "Przedmiot obserwuje/-ą:"
-
-#, python-format
-msgid "<span class='orange'>%(count)s</span> user"
-msgid_plural "<span class='orange'>%(count)s</span> users"
-msgstr[0] "<span class='orange'>%(count)s</span> użytkownik"
-msgstr[1] "<span class='orange'>%(count)s</span> użytkowników"
-msgstr[2] "<span class='orange'>%(count)s</span> użytkowników"
-
-#, python-format
-msgid "<span class='orange'>%(count)s</span> group"
-msgid_plural "<span class='orange'>%(count)s</span> groups"
-msgstr[0] "<span class='orange'>%(count)s</span> grupa"
-msgstr[1] "<span class='orange'>%(count)s</span> grupa"
-msgstr[2] "<span class='orange'>%(count)s</span> grup"
-
-msgid "add a group"
-msgstr "dodaj grupę"
-
-msgid "Write down your biography and research interests"
-msgstr ""
-
-#, python-format
-msgid "This information will be displayed on your %(profile_page_url)s."
-msgstr ""
-
-msgid "profile page"
-msgstr ""
-
-msgid ""
-"Below you see a template that you can freely edit. Note that once your "
-"press \"Save\", it will become publicly available in your profile page."
-msgstr ""
-
-msgid "Edit your biography"
+"Enter email address for this group. It can be Ututi or any other mailing "
+"list, or a private email address."
 msgstr ""
 
 msgid "Create your subjects"
@@ -4590,14 +4551,19 @@ msgstr ""
 
 msgid ""
 "Ututi provides you a profile page that other people can access online. To"
-" have a complete page, please tell us some bits about your biography and "
-"your research interests."
+" have a complete page, please tell us some bits about your information "
+"and your research interests."
 msgstr ""
 
-msgid "View profile page"
+msgid ""
+"Ututi provides you a profile page that other people can access online. To"
+" have a complete page, please list your most important publications."
 msgstr ""
 
-msgid "Add biography"
+msgid "Add information"
+msgstr ""
+
+msgid "List publications"
 msgstr ""
 
 msgid ""
@@ -4606,6 +4572,152 @@ msgid ""
 msgstr ""
 
 msgid "Add student group"
+msgstr ""
+
+msgid "Delete this group"
+msgstr "Usuń tę grupę"
+
+msgid "Edit group"
+msgstr "Edytuj grupę"
+
+msgid "Send SMS"
+msgstr "Wyślij SMS"
+
+msgid "Message subject:"
+msgstr "Temat wiadomości:"
+
+msgid "Attachment:"
+msgstr "Załącznik:"
+
+msgid "Your message was successfully sent."
+msgstr "Twoja wiadomość została wysłana."
+
+msgid "Your SMS was successfully sent."
+msgstr "Twój SMS został wysłany."
+
+msgid "Settings"
+msgstr ""
+
+msgid "Wiki notes"
+msgstr ""
+
+msgid "My courses"
+msgstr ""
+
+msgid "add courses"
+msgstr "dodaj przedmioty"
+
+msgid "Are you sure you want to delete this subject?"
+msgstr ""
+
+msgid "My student groups"
+msgstr ""
+
+msgid "add a group"
+msgstr "dodaj grupę"
+
+msgid "Are you sure you want to delete this group?"
+msgstr ""
+
+msgid "My profile page"
+msgstr ""
+
+msgid "edit profile"
+msgstr ""
+
+msgid "Write down your information and research interests"
+msgstr ""
+
+#, python-format
+msgid "This information will be displayed on your %(profile_page_url)s."
+msgstr ""
+
+msgid "profile page"
+msgstr ""
+
+msgid "Edit your information"
+msgstr ""
+
+#, python-format
+msgid "Your publications will be displayed on your %(profile_page_url)s."
+msgstr ""
+
+msgid "Edit a student group"
+msgstr "Edytuj grupę studencką"
+
+msgid ""
+"Below you see a template that you can freely edit. Note that once your "
+"press \"Save\", it will become publicly available in your profile page."
+msgstr ""
+
+msgid "Provide any personal information that you would like to begin with."
+msgstr ""
+
+msgid "Affiliation"
+msgstr ""
+
+msgid "Specify your current position and responsibilities."
+msgstr ""
+
+msgid "Research activities"
+msgstr ""
+
+msgid ""
+"Include a brief summary of your research activities and interests. Cover "
+"past, current and future research plans."
+msgstr ""
+
+msgid "Use bulleted list if needed."
+msgstr ""
+
+msgid "Scientific services"
+msgstr ""
+
+msgid ""
+"Describe your scientific services. For instance, you might want to "
+"mention that you belong to editorial board of some scientific journal."
+msgstr ""
+
+msgid "Conferences, exchange programs, visits"
+msgstr ""
+
+msgid ""
+"List conferences that you participate in, exchange programs and other "
+"related information. Cover past, present travels and future plans."
+msgstr ""
+
+msgid ""
+"List your publications that you consider most important, starting with "
+"most recent."
+msgstr ""
+
+msgid ""
+"If the list is very long, organize your publications into sections as "
+"shown below."
+msgstr ""
+
+msgid "Textbooks"
+msgstr ""
+
+msgid "Authors"
+msgstr ""
+
+msgid "Name of series and volume"
+msgstr ""
+
+msgid "Year"
+msgstr ""
+
+msgid "Publishing house"
+msgstr ""
+
+msgid "Papers"
+msgstr ""
+
+msgid "Journal title"
+msgstr ""
+
+msgid "Volume/issue"
 msgstr ""
 
 msgid "Select an image file on your computer:"
@@ -4672,15 +4784,6 @@ msgid ""
 msgstr ""
 "Kliknij przyciski, aby połączyć się lub zerwać połączenie z Google i/lub "
 "Facebookiem"
-
-msgid "Full University title:"
-msgstr "Pełna nazwa uczelni:"
-
-msgid "Country:"
-msgstr "Państwo:"
-
-msgid "University website:"
-msgstr "Strona internetowa uczelni:"
 
 msgid "University logo:"
 msgstr "Logo uczelni:"
@@ -4934,33 +5037,6 @@ msgstr "Przedmioty grupy"
 msgid "Group files"
 msgstr "Pliki grupy"
 
-msgid "Edit group"
-msgstr "Edytuj grupę"
-
-msgid "Edit this group"
-msgstr "Edytuj tę grupę"
-
-msgid "Delete this group"
-msgstr "Usuń tę grupę"
-
-msgid "Contact the group:"
-msgstr "Skontaktuj się z grupą:"
-
-msgid "Send SMS"
-msgstr "Wyślij SMS"
-
-msgid "Message subject:"
-msgstr "Temat wiadomości:"
-
-msgid "Attachment:"
-msgstr "Załącznik:"
-
-msgid "Your message was successfully sent."
-msgstr "Twoja wiadomość została wysłana."
-
-msgid "Your SMS was successfully sent."
-msgstr "Twój SMS został wysłany."
-
 msgid "Share:"
 msgstr "Udostępnij:"
 
@@ -5095,6 +5171,12 @@ msgstr "%(user_link)s tworzy stronę %(page_link)s"
 msgid "%(user_link)s has modified a page %(page_link)s"
 msgstr "%(user_link)s wprowadza zmiany na stronie %(page_link)s"
 
+msgid "Short title"
+msgstr "Krótki tytuł"
+
+msgid "Website"
+msgstr "Strona internetowa"
+
 msgid "Region"
 msgstr "Region"
 
@@ -5106,6 +5188,9 @@ msgstr "Źródło"
 
 msgid "Select a parent"
 msgstr "Wybierz źródło"
+
+msgid "Logo"
+msgstr "Logo"
 
 msgid "Browse the hierarchy"
 msgstr "Przeglądaj hierarchię"
@@ -5119,8 +5204,28 @@ msgstr "Lokalizacja"
 msgid "Create new subject"
 msgstr "Utwórz nowy przedmiot"
 
+msgid "Subject features:"
+msgstr ""
+
+msgid "Upload and share course material"
+msgstr ""
+
+msgid "Discuss with other people interested in the subject"
+msgstr ""
+
+msgid "Put lecture notes to subject page and edit them together"
+msgstr ""
+
+msgid "Get notifications related to this subject"
+msgstr ""
+
 msgid "Subject title:"
 msgstr "Nazwa przedmiotu:"
+
+msgid ""
+"It's best to use exactly the same title that is used in your university "
+"for this subject. It does not need to be unique."
+msgstr ""
 
 msgid "Enter subject details"
 msgstr "Podaj szczegóły przedmiotu"
@@ -5326,35 +5431,32 @@ msgstr "Wyróżnij medalem"
 msgid "Award"
 msgstr "Wyróżnij"
 
-msgid "teachers"
-msgstr "wykładowcy"
+msgid "Teacher's activity:"
+msgstr "Aktywność wykładowcy:"
 
-msgid "Network"
-msgstr "Sieć"
-
-msgid "Phone:"
-msgstr "Numer telefonu:"
+msgid "Address"
+msgstr ""
 
 msgid "Personal webpage"
 msgstr "Osobista strona internetowa"
 
-msgid "There is no biography."
-msgstr "Nie ma biografii."
-
-msgid "Teacher's activity:"
-msgstr "Aktywność wykładowcy:"
+#, python-format
+msgid "%(teacher)s has not provided any information."
+msgstr ""
 
 #, python-format
-msgid "Other %(university)s teachers"
-msgstr "Inny wykładowcy %(university)s"
+msgid "%(teacher)s has not listed any publications."
+msgstr ""
+
+msgid "Taught courses"
+msgstr "Nauczane przedmioty"
 
 #, python-format
-msgid "Teacher's %(user)s public profile"
-msgstr "Publiczny profil wykładowcy %(user)s"
+msgid "%(teacher)s does not teach any course."
+msgstr ""
 
-#, python-format
-msgid "%(user_name)s doesn't teach any course."
-msgstr "%(user_name)s nie naucza żadnego przedmiotu."
+msgid "add course"
+msgstr ""
 
 msgid "Please have javascript enabled for Facebook functionality to work."
 msgstr "Aktywuj javascript, aby funkcja Facebook działała poprawnie."
@@ -5435,6 +5537,9 @@ msgstr ""
 
 msgid "Purchase SMS credits"
 msgstr "Kup punkty SMS"
+
+msgid "University and department:"
+msgstr ""
 
 msgid "Full title"
 msgstr "Pełna nazwa"
