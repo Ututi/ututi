@@ -91,6 +91,8 @@ def location_action(method):
         c.object_location = None
         c.location = location
         c.breadcrumbs = location_breadcrumbs(location)
+        c.theme = location.get_theme()
+
         if c.user:
             c.menu_items = location_menu_items()
         else:

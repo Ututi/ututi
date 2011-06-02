@@ -44,6 +44,7 @@ def subject_file_action(method):
         c.object_location = subject.location
         c.security_context = file
         c.subject = subject
+        c.theme = subject.location.get_theme()
         return method(self, subject, file)
     return _subject_action
 

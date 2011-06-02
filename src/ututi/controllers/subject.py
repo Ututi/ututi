@@ -79,6 +79,7 @@ def subject_action(method):
         c.similar_subjects = find_similar_subjects(location.id, id)
         c.tabs = subject_menu_items()
         c.breadcrumbs = [{'link': subject.url(), 'title': subject.title}]
+        c.theme = subject.location.get_theme()
         return method(self, subject)
     return _subject_action
 

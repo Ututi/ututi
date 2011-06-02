@@ -225,6 +225,7 @@ def group_action(method):
         c.group_menu_items = group_menu_items()
         c.group_id = c.group.group_id
         c.controller = self.controller_name
+        c.theme = group.location.get_theme()
         return method(self, group)
     return _group_action
 

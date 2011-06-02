@@ -69,6 +69,7 @@ def structure_action(method):
             abort(404)
 
         c.item = item
+        c.theme = item.get_theme()
         return method(self, item)
     return _structure_action
 

@@ -48,6 +48,7 @@ def group_action(method):
         c.group = group
         c.group_menu_items = group_menu_items()
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
+        c.theme = group.location.get_theme()
         return method(self, group)
     return _group_action
 
@@ -88,6 +89,7 @@ def group_mailinglist_action(method):
         c.object_location = group.location
         c.group_menu_items = group_menu_items()
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
+        c.theme = group.location.get_theme()
         return method(self, group, thread)
     return _group_action
 
@@ -114,6 +116,7 @@ def mailinglist_file_action(method):
         c.group = group
         c.group_menu_items = group_menu_items()
         c.breadcrumbs = [{'title': group.title, 'link': group.url()}]
+        c.theme = group.location.get_theme()
         return method(self, group, message, file)
     return _group_action
 

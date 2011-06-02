@@ -130,6 +130,7 @@ class ForumController(BaseController):
             c.group_menu_items = group_menu_items()
             c.object_location = c.group.location
             c.security_context = c.group
+            c.theme = c.group.location.get_theme()
             c.breadcrumbs.append({'title': c.group.title, 'link': c.group.url()})
         else:
             c.group = None

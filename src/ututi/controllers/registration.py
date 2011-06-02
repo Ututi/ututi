@@ -137,6 +137,9 @@ def registration_action(method):
 
         c.active_step = None
 
+        if registration.location:
+            c.theme = registration.location.get_theme()
+
         return method(self, registration, *args)
     return _registration_action
 

@@ -59,6 +59,7 @@ def page_action(method):
         c.object_location = subject.location
         c.security_context = subject
         c.tabs = subject_menu_items()
+        c.theme = location.get_theme()
 
         return method(self, subject, page)
     return _page_action

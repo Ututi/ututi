@@ -1,6 +1,6 @@
 import logging
 
-from pylons import request
+from pylons import tmpl_context as c, request
 from pylons.controllers.util import abort
 
 from ututi.lib.validators import validate, LogoUpload
@@ -18,6 +18,8 @@ def theme_action(method):
 
         if theme is None:
             abort(404)
+
+        c.theme = theme
 
         return method(self, theme)
     return _theme_action

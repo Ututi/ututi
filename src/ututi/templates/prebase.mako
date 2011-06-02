@@ -8,7 +8,6 @@ ${_('Private social networks for universities')}
 </%def>
 
 <%def name="css()">
-
 </%def>
 
 <%def name="body_class()">
@@ -27,7 +26,13 @@ ${_('Private social networks for universities')}
 
 <%def name="loggedin_header()">
   <div id="logo">
-    <a href="${url('/')}"><img src="/img/Ututi_logo.png" alt="Ututi" title="Ututi" /></a>
+    %if c.theme:
+      <div id="branded-logo" style="background-image: url('${c.theme.url(action="header_logo", size=25)}'); color: #${c.theme.header_color}">
+        ${c.theme.header_text}
+      </div>
+    %else:
+      <a href="${url('/')}"><img src="/img/Ututi_logo.png" alt="Ututi" title="Ututi" /></a>
+    %endif
   </div>
   <div id="top-panel">
     <ul id="head-nav">
@@ -210,6 +215,11 @@ ${_('Private social networks for universities')}
     ${self.head_tags()}
     <style type="text/css">
       ${self.css()}
+      %if c.theme is not None:
+      #header {
+        background-color: #${c.theme.header_background_color};
+      }
+      %endif
     </style>
     <title>
       ${self.title()} - ${_('UTUTI')}

@@ -67,6 +67,7 @@ class BaseController(WSGIController):
         c.message_class = None
         c.text = None
         c.tags = None
+        c.theme = None
         c.pylons_config = config
 
         c.testing = asbool(config.get('testing', False))
@@ -125,6 +126,9 @@ class BaseController(WSGIController):
         finally:
             if not succeeded:
                 meta.Session.remove()
+
+        if c.user is not None:
+            c.theme = c.user.location.get_theme()
 
         request_start_walltime = time.time()
         request_start_cputime = time.clock()

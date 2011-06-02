@@ -39,6 +39,7 @@ def profile_action(method):
             deny(_('This user profile is not public'), 401)
 
         c.user_info = user
+        c.theme = user.location.get_theme()
 
         return method(self, user)
     return _profile_action
@@ -56,6 +57,8 @@ def teacher_profile_action(method):
 
         c.teacher = user
         c.tabs = teacher_tabs(user)
+        c.theme = user.location.get_theme()
+
         return method(self, user)
     return _profile_action
 
@@ -73,6 +76,8 @@ def external_teacher_profile_action(method):
 
         c.teacher = user
         c.tabs = external_teacher_tabs(user)
+        c.theme = user.location.get_theme()
+
         return method(self, user)
     return _profile_action
 

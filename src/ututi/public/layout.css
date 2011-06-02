@@ -69,12 +69,25 @@ html, body {
     float: left;
     width: 175px;
     text-align: left;
-    padding: 0px 0px 3px 5px;
+    padding-left: 5px;
     border: 0px;
 }
 
+/* Branded logo.
+ */
+
+#header #header-inner #logo #branded-logo {
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 35px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+
 #top-panel {
-    background-color: #6d6d6d;
+    background-color: rgba(255, 255, 255, 0.28);
     float: left;
     width: 800px;
     height: 20px;
