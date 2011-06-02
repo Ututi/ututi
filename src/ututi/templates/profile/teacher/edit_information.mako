@@ -4,7 +4,7 @@
   <h2>${_('Write down your information and research interests')}</h2>
   <div class="tip">
     ${h.literal(_('This information will be displayed on your %(profile_page_url)s.') % \
-                dict(profile_page_url=h.link_to(_('profile page'), c.user.url())))}
+                dict(profile_page_url=h.link_to(_('profile page'), c.user.url(action='external_teacher_index'))))}
   </div>
 </div>
 
