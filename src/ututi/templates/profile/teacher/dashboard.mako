@@ -4,6 +4,9 @@
 <%namespace name="location" file="/widgets/ulocationtag.mako" />
 <%namespace file="/widgets/sms.mako" import="sms_widget" />
 <%namespace name="elements" file="/elements.mako" />
+<%namespace file="/portlets/user.mako" import="invite_friends_portlet"/>
+<%namespace file="/portlets/universal.mako" import="users_online_portlet,
+                                                    about_portlet"/>
 
 <%def name="head_tags()">
   ${parent.head_tags()}
@@ -20,6 +23,12 @@
       });
   });
   </script>
+</%def>
+
+<%def name="portlets_secondary()">
+  ${about_portlet()}
+  ${invite_friends_portlet()}
+  ${users_online_portlet()}
 </%def>
 
 <%def name="css()">
