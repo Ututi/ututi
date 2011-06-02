@@ -1870,6 +1870,7 @@ class LocationTag(Tag):
         while location:
             if location.theme is not None:
                 return location.theme
+            location = location.parent
 
 
 def cleanupFileName(filename):
