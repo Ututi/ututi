@@ -42,6 +42,7 @@ CREATE TABLE themes (
        header_background_color varchar(6) default null,
        header_color varchar(6) default null,
        header_logo bytea default null,
+       header_text varchar(100) default null,
        primary key (id));;
 
 create table admin_users(

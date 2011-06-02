@@ -1,5 +1,6 @@
-from sqlalchemy import orm, Table
+from sqlalchemy import orm, Table, Column
 from sqlalchemy.orm import deferred
+from sqlalchemy.types import Unicode
 
 from ututi.model import meta
 from ututi.model.base import Model
@@ -22,7 +23,9 @@ class Theme(Model):
 
 def setup_orm(engine):
     themes_table = Table("themes", meta.metadata,
+                         Column('header_text', Unicode(assert_unicode=True)),
                          autoload=True,
+                         useexisting=True,
                          autoload_with=engine)
 
     orm.mapper(Theme, themes_table,
