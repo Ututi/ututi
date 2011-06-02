@@ -1707,7 +1707,7 @@ class LocationTag(Tag):
         return '/'.join(self.path)
 
     @property
-    def root(self, full=False):
+    def root(self):
         """Return root location of this location tag.
         If tag has no parent, will return this tag itself."""
         root = self
