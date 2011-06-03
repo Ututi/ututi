@@ -217,12 +217,6 @@ def make_map(config):
     map.connect('/teacher/{id}/publications', controller='user', action='teacher_publications')
     map.connect('/teacher/{id}/activity', controller='user', action='teacher_activity')
 
-    # external teacher profile pages
-    map.connect('/school/*path/teacher/{id}', controller='user', action='external_teacher_index')
-    map.connect('/school/*path/teacher/{id}/subjects', controller='user', action='external_teacher_subjects')
-    map.connect('/school/*path/teacher/{id}/publications', controller='user', action='external_teacher_publications')
-    map.connect('/school/*path/teacher/{id}/activity', controller='user', action='external_teacher_activity')
-
     # user profiles
     map.connect('/user/{id}', controller='user', action='index')
     map.connect('/user/{id}/{action}', controller='user')
@@ -289,6 +283,12 @@ def make_map(config):
     map.connect('/school/*path/edit/enable_theme', controller='location', action='enable_theme')
     map.connect('/school/*path/edit/disable_theme', controller='location', action='disable_theme')
     map.connect('/school/*path/edit/update_theme', controller='location', action='update_theme')
+
+    # external teacher profile pages
+    map.connect('/school/*path/teacher/{id}', controller='user', action='external_teacher_index')
+    map.connect('/school/*path/teacher/{id}/subjects', controller='user', action='external_teacher_subjects')
+    map.connect('/school/*path/teacher/{id}/publications', controller='user', action='external_teacher_publications')
+    map.connect('/school/*path/teacher/{id}/activity', controller='user', action='external_teacher_activity')
 
     # rest
     map.connect('/school/*path', controller='location', action='index')
