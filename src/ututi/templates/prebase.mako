@@ -15,7 +15,7 @@ ${_('Private social networks for universities')}
 
 <%def name="anonymous_header()">
   <% nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '') %>
-  <a id="logo" href="${url('/')}"><img src="/img/Ututi_logo_big.png" alt="Ututi" title="Ututi"/></a>
+  <a id="logo" href="${url('/')}"><img src="${url('/img/Ututi_logo_big.png')}" alt="Ututi" title="Ututi"/></a>
   <span id="slogan">${_("Bringing students and teachers together")}</span>
   <ul id="nav">
     <li class="header-links"><a href="${url('/features')}">${_('What is Ututi?')}</a></li>
@@ -31,7 +31,7 @@ ${_('Private social networks for universities')}
         ${c.theme.header_text}
       </div>
     %else:
-      <a href="${url('/')}"><img src="/img/Ututi_logo.png" alt="Ututi" title="Ututi" /></a>
+      <a href="${url('/')}"><img src="${url('/img/Ututi_logo.png')}" alt="Ututi" title="Ututi" /></a>
     %endif
   </div>
   <div id="top-panel">
@@ -282,7 +282,6 @@ ${_('Private social networks for universities')}
     </script>
     %endif
 
-    <script src="/javascript/jquery.blockUI.js"></script>
     <div id="loading" style="display: none">
         ${_('Loading...')}
     </div>

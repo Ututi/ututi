@@ -244,7 +244,7 @@
 <%def name="powered_by_ututi()">
   <%self:portlet id="powered-by-ututi-portlet">
     <a href="${url('frontpage')}">
-      <img src="/img/powered-by-ututi.png" alt="${_("Powered by Ututi")}" />
+      <img src="${url('/img/powered-by-ututi.png')}" alt="${_("Powered by Ututi")}" />
     </a>
   </%self:portlet>
 </%def>
