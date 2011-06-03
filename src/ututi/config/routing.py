@@ -286,7 +286,7 @@ def make_map(config):
 
     # external teacher profile pages
     map.connect('/school/*path/teacher/{id}', controller='user', action='external_teacher_index')
-    map.connect('/school/*path/teacher/{id}/subjects', controller='user', action='external_teacher_subjects')
+    map.connect('/school/*path/teacher/{id}/teaching', controller='user', action='external_teacher_subjects')
     map.connect('/school/*path/teacher/{id}/publications', controller='user', action='external_teacher_publications')
     map.connect('/school/*path/teacher/{id}/activity', controller='user', action='external_teacher_activity')
 
