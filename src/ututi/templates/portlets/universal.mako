@@ -280,6 +280,8 @@
       <a href="${register_action}" id="register-link">${_("Register")}</a>
     </p>
   </form>
+  %if False:
+  <%doc>Enable javascript when URL problems are resolved.</%doc>
   <script type="text/javascript">
     $(document).ready(function() {
       $('#login-form button.submit').click(function() {
@@ -306,6 +308,7 @@
       });
     });
   </script>
+  %endif
 </%self:portlet>
 %endif
 </%def>
