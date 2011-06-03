@@ -255,7 +255,7 @@ public teacher's profile page:
 
     >>> user.click('View my page')
     >>> user.url
-    'http://localhost/public/uni/teacher/2'
+    'http://localhost/school/uni/teacher/2'
     >>> user.printCssQuery('.teacher-name', strip=True)
     <div>User</div>
     >>> user.goBack()
