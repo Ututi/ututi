@@ -40,6 +40,7 @@ def render_def(*args, **kwargs):
     kwargs['v'] = render_view
     return render_mako_def(*args, **kwargs)
 
+
 class BaseController(WSGIController):
 
     def __call__(self, environ, start_response):
@@ -133,10 +134,36 @@ class BaseController(WSGIController):
         request_start_walltime = time.time()
         request_start_cputime = time.clock()
 
+        # Push vhm url function
+        vhm_root = request.headers.get('X-Vhm-Root', '')
+        vhm_host = request.headers.get('X-Vhm-Host')
+        vhm_host_dir = request.headers.get('X-Vhm-Host-Dir')
+
+        if vhm_host and vhm_host_dir:
+            request.environ['HTTP_X_FORWARDED_HOST'] = vhm_host
+            old_url = url._current_obj()
+
+            def new_url(*args, **kwargs):
+                urlstring = old_url(*args, **kwargs)
+                if urlstring.startswith(vhm_host_dir):
+                    return vhm_root + urlstring.replace(vhm_host_dir, '') or '/'
+                else:
+                    kwargs['qualified'] = True
+                    return old_url(*args, **kwargs)
+
+            def current_url_proxy(*args, **kwargs):
+                return old_url.current(*args, **kwargs)
+
+            new_url.current = current_url_proxy
+            url._push_object(new_url)
+
         try:
             return WSGIController.__call__(self, environ, start_response)
         finally:
             meta.Session.remove()
+
+            if vhm_host and vhm_host_dir:
+                url._pop_object(new_url)
 
             # Performance logging.
             perflog.log(logging.INFO,
