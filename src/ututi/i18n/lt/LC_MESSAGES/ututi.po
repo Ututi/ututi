@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-06-03 00:41+0300\n"
+"PO-Revision-Date: 2011-06-03 16:57+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -287,7 +287,7 @@ msgid "Delete member"
 msgstr "Šalinti narį"
 
 msgid "General"
-msgstr "Bendras"
+msgstr "Pradžia"
 
 msgid "Discussions on anything and everything"
 msgstr "Diskusijos apie viską ir visus"
@@ -676,7 +676,7 @@ msgid "Your wall settings have been updated."
 msgstr "Tavo sienos nustatymai pakeisti"
 
 msgid "Your profile was updated."
-msgstr "Tavo profilis sėkmingai atnaujintas!"
+msgstr "Profilis sėkmingai atnaujintas."
 
 msgid "Your photo successfully updated."
 msgstr "Jūsų nuotrauka sėkmingai atnaujinta."
@@ -723,7 +723,7 @@ msgid "Invitations sent to %(email_list)s"
 msgstr "Pakvietimai nusiųsti %(email_list)s"
 
 msgid "General Information"
-msgstr ""
+msgstr "Bendrinė informacija"
 
 msgid "Your information was updated."
 msgstr ""
@@ -1312,7 +1312,7 @@ msgid "Private social networks for universities"
 msgstr "Privatūs socialiniai tinklai universitetams"
 
 msgid "Bringing students and teachers together"
-msgstr "Jungiantis studentus ir dėstytojus"
+msgstr "Jungiame studentus ir dėstytojus"
 
 msgid "My University"
 msgstr "Mano universitetas"
@@ -3474,7 +3474,7 @@ msgid "Powered by Ututi"
 msgstr ""
 
 msgid "Login:"
-msgstr ""
+msgstr "Prisijungimas:"
 
 msgid "Keep me logged in"
 msgstr ""
@@ -3564,7 +3564,7 @@ msgid "%(title_abbr)s social network"
 msgstr ""
 
 msgid "My web page"
-msgstr ""
+msgstr "Mano svetainė"
 
 msgid "View my page"
 msgstr "Rodyti svetainę"
@@ -3609,7 +3609,7 @@ msgid "Edit your contact information below. Some fields may require confirmation
 msgstr ""
 
 msgid "Work address"
-msgstr ""
+msgstr "Darbo adresas"
 
 msgid "Your GG number"
 msgstr "Tavo GG numeris"
@@ -3685,7 +3685,7 @@ msgid "Edit your general information below."
 msgstr "Įveskite savo bendrinę informaciją žemiau."
 
 msgid "e.g. Associate professor"
-msgstr ""
+msgstr "pvz. Associate professor"
 
 msgid "About yourself"
 msgstr "Šiek tiek informacijos apie save"
