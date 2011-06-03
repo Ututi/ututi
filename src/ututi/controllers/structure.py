@@ -168,7 +168,8 @@ class StructureController(BaseController):
         redirect(url(controller='structure', action='index'))
 
     def logo(self, id, width=None, height=None):
-        return serve_logo('locationtag', int(id), width=width, height=height)
+        return serve_logo('locationtag', int(id), width=width, height=height,
+                         cache=False)
 
     @validate(schema=AutoCompletionForm, post_only=False, on_get=True)
     @jsonify
