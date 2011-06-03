@@ -175,6 +175,10 @@ ul#user-menu li.expandable {
     margin-right:12px;
 }
 
+ul#user-menu li.expandable.expanded {
+    border: 1px solid #6d6d6d;
+}
+
 ul#user-menu li.expandable div.fullname {
     padding: 0px 20px 3px 5px;
     background-image: url('img/icons/header_arrow.png');
