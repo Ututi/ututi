@@ -16,7 +16,9 @@ import lxml
 
 # Import helpers as desired, or define your own, ie:
 #from webhelpers.html.tags import checkbox, password
-from webhelpers.html.tags import stylesheet_link, javascript_link, image, select, radio
+from webhelpers.html.tags import stylesheet_link as orig_stylesheet_link
+from webhelpers.html.tags import javascript_link as orig_javascript_link
+from webhelpers.html.tags import image, select, radio
 from webhelpers.html.tags import link_to as orig_link_to
 from webhelpers.html.builder import literal
 
@@ -37,6 +39,13 @@ flash = _Flash()
 
 from addhrefs import addhrefs
 
+def javascript_link(*urls, **attrs):
+    from pylons import url
+    return orig_javascript_link(*map(url, urls), **attrs)
+
+def stylesheet_link(*urls, **attrs):
+    from pylons import url
+    return orig_stylesheet_link(*map(url, urls), **attrs)
 
 def button_to(title, url='', **html_options):
     """Generate a form containing a sole button that submits to
