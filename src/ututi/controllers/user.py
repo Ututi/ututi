@@ -76,7 +76,7 @@ def external_teacher_profile_action(method):
 
         c.teacher = user
         c.tabs = external_teacher_tabs(user)
-        c.theme = user.location.get_theme()
+        c.theme = None
 
         return method(self, user)
     return _profile_action
