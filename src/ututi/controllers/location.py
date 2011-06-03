@@ -374,6 +374,9 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         c.menu_items = location_edit_menu_items()
         c.current_menu_item = 'theming'
         if location.theme is None:
+            c.example_theme = Theme()
+            c.example_theme.header_logo = location.logo
+            c.example_theme.header_text = ' '.join(location.path).upper()
             return render('location/edit_theme_disabled.mako')
         else:
             return htmlfill.render(
