@@ -48,7 +48,7 @@ def location_menu_public_items():
     return [
         {'title': _("About"),
          'name': 'about',
-         'link': c.location.url(action='index')},
+         'link': c.location.url(action='about')},
         {'title': _("Subjects"),
          'name': 'subjects',
          'link': c.location.url(action='catalog', obj_type='subject')},
