@@ -131,39 +131,16 @@ class BaseController(WSGIController):
         if c.user is not None:
             c.theme = c.user.location.get_theme()
 
+        self._push_custom_urls()
+
         request_start_walltime = time.time()
         request_start_cputime = time.clock()
-
-        # Push vhm url function
-        vhm_root = request.headers.get('X-Vhm-Root', '')
-        vhm_host = request.headers.get('X-Vhm-Host')
-        vhm_host_dir = request.headers.get('X-Vhm-Host-Dir')
-
-        if vhm_host and vhm_host_dir:
-            request.environ['HTTP_X_FORWARDED_HOST'] = vhm_host
-            old_url = url._current_obj()
-
-            def new_url(*args, **kwargs):
-                urlstring = old_url(*args, **kwargs)
-                if urlstring.startswith(vhm_host_dir):
-                    return vhm_root + urlstring.replace(vhm_host_dir, '') or '/'
-                else:
-                    kwargs['qualified'] = True
-                    return old_url(*args, **kwargs)
-
-            def current_url_proxy(*args, **kwargs):
-                return old_url.current(*args, **kwargs)
-
-            new_url.current = current_url_proxy
-            url._push_object(new_url)
 
         try:
             return WSGIController.__call__(self, environ, start_response)
         finally:
             meta.Session.remove()
-
-            if vhm_host and vhm_host_dir:
-                url._pop_object(new_url)
+            self._pop_custom_urls()
 
             # Performance logging.
             perflog.log(logging.INFO,
@@ -173,3 +150,57 @@ class BaseController(WSGIController):
                         duration=time.time() - request_start_walltime,
                         duration_cpu=time.clock() - request_start_cputime,
                         user_email=user_email))
+
+    def _push_custom_urls(self):
+        """
+        Push custom URL function to generate proper URLs for
+        external pages (i.e. http://mif.vu.lt/ututi/teachers)
+        as well as internal pages (i.e. http://ututi.com/about.
+
+        We use absolute URLs, otherwise pylons redirect() makes
+        up wrong URLs (it does not use url function).
+
+        Example configuration for external server:
+
+        RewriteRule ^/ututi(/(.*))?$ http://ututi.com/school/uni$2 [P,L]
+        RequestHeader add X-Vhm-Root-Dir /ututi
+        RequestHeader add X-Vhm-Host-Dir /school/uni
+        """
+
+        if hasattr(self, '_pushed_url_object'):
+            return
+
+        ututi_host = request.headers.get('Host')
+        ututi_dir = request.headers.get('X-Vhm-Host-Dir')
+        external_host = request.headers.get('X-Forwarded-Host')
+        external_dir = request.headers.get('X-Vhm-Root-Dir', '')
+
+        if ututi_dir:
+            orig_url = url._current_obj()
+
+            def new_url(*args, **kwargs):
+                urlstring = orig_url(*args, **kwargs)
+                kwargs['qualified'] = True
+                if urlstring.startswith(ututi_dir):
+                    kwargs['host'] = external_host
+                    return orig_url(*args, **kwargs)\
+                            .replace(ututi_dir, external_dir, 1)
+                else:
+                    kwargs['host'] = ututi_host
+                    return orig_url(*args, **kwargs)
+
+            def current_url_proxy(*args, **kwargs):
+                # TODO: reimplement the same logic as in new_url,
+                # so we don't depend on internal _use_current parameter.
+                kwargs['_use_current'] = True
+                return new_url(*args, **kwargs)
+
+            new_url.current = current_url_proxy
+            url._push_object(new_url)
+            self._pushed_url_object = new_url
+
+    def _pop_custom_urls(self):
+        if hasattr(self, '_pushed_url_object'):
+            url._pop_object(self._pushed_url_object)
+            delattr(self, '_pushed_url_object')
+
