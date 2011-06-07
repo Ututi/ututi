@@ -55,7 +55,7 @@
     display: inline;
     margin-right: 2px;
     padding-left: 12px;
-    background: url("/img/icons.com/arrow_right.png") no-repeat left center;
+    background: url("${url('/img/icons.com/arrow_right.png')}") no-repeat left center;
   }
   ul#breadcrumbs li.first {
     padding-left: 0;
