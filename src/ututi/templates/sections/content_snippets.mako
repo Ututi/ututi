@@ -83,7 +83,11 @@ Snippets for rendering various content items, e.g. in search results.
     </div>
     <div class="heading">
       <div class="item-title">
-        <a href="${object.url()}" title="${object.fullname}">${object.fullname}</a>
+        %if c.user is None:
+          <a href="${object.url(action='external_teacher_index')}" title="${object.fullname}">${object.fullname}</a>
+        %else:
+          <a href="${object.url()}" title="${object.fullname}">${object.fullname}</a>
+        %endif
       </div>
     </div>
     <ul class="statistics icon-list">
