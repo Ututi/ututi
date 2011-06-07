@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-06-02 17:32+0300\n"
+"PO-Revision-Date: 2011-06-07 21:02+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=((n * 1) != 1)\n"
@@ -927,6 +927,12 @@ msgstr ""
 
 #, python-format
 msgid "Ututi registration code: %s"
+msgstr ""
+
+msgid "Please enter a proper color hex code."
+msgstr ""
+
+msgid "Color hex code should contain exactly six or three characters."
 msgstr ""
 
 msgid "Country does not exist."
@@ -3018,7 +3024,22 @@ msgstr ""
 msgid "Enable custom theming"
 msgstr ""
 
+msgid "Choose other logo"
+msgstr ""
+
+msgid "Header text:"
+msgstr ""
+
+msgid "Header background color:"
+msgstr ""
+
+msgid "Header text color:"
+msgstr ""
+
 msgid "Disable custom theming"
+msgstr ""
+
+msgid "Are you sure you want to reset your custom theme?"
 msgstr ""
 
 msgid ""
