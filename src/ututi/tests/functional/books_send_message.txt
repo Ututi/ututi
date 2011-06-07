@@ -8,7 +8,7 @@ Set up
 
     >>> from ututi.tests.functional import setUpBooks
     >>> setUpBooks(browser)
-    >>> browser.open('http://localhost/books/')
+    >>> browser.open('http://localhost/books')
 
     >>> browser.click('Upload a Book')
     >>> browser.getControl('Book title').value = "My physics book"

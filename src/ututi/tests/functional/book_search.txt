@@ -8,7 +8,7 @@ Set up
 
     >>> from ututi.tests.functional import setUpBooks
     >>> setUpBooks(browser)
-    >>> browser.open('http://localhost/books/')
+    >>> browser.open('http://localhost/books')
 
 Now let's find some books:
 

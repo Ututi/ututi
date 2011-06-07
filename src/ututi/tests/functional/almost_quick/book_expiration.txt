@@ -8,7 +8,7 @@ Set up
     >>> import datetime
     >>> from ututi.tests.functional import setUpBooks, setBooksExpirationTime, booksExpirationDates
     >>> setUpBooks(browser)
-    >>> browser.open('http://localhost/books/')
+    >>> browser.open('http://localhost/books')
 
 Add book
 

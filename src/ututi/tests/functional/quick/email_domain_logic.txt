@@ -13,7 +13,7 @@ and other belong to universtities. Domain database can be accessed and
 edited via admin's dashboard:
 
     >>> admin = Browser.logIn()
-    >>> admin.open('http://localhost/admin/')
+    >>> admin.open('http://localhost/admin')
     >>> admin.click('Email domains')
 
 Currently there are no domains:

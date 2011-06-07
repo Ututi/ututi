@@ -4,7 +4,7 @@ Test teacher's create subject workflow
 Let's login as a verified teacher:
 
     >>> browser = Browser.logIn('benas@ututi.lt', 'password')
-    >>> browser.open('http://localhost/subjects/add/')
+    >>> browser.open('http://localhost/subjects/add')
 
 The teacher has been assigned to default location (U-niversity),
 so so location fields are prefilled:
