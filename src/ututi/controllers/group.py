@@ -542,12 +542,10 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         if not group.mailinglist_enabled and not group.forum_categories:
             group.forum_categories.append(ForumCategory(_('General'), _('Discussions on anything and everything')))
 
-        if not (group.is_watching_subjects() and \
-                group.wants_to_watch_subjects):
+        if not (group.is_watching_subjects() and group.wants_to_watch_subjects):
             group.wants_to_watch_subjects = bool(self.form_result['can_add_subjects'])
 
-        if not (group.is_storing_files() and \
-                group.has_file_area):
+        if not (group.is_storing_files() and group.has_file_area):
             group.has_file_area = bool(self.form_result['file_storage'])
 
         # Fix default tab setting if needed.
