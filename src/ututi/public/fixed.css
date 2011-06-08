@@ -482,6 +482,18 @@ form {
         margin-top: -1px;
     }
 
+    form .formField.checkbox input {
+        margin-right: 5px;
+    }
+
+    form .formField.checkbox .labelText {
+        display: inline;
+        font-weight: normal;
+        position: relative;
+        top: -2px;
+    }
+
+
 /* SOME ADJUSTMENTS FOR CKE EDITOR AND TAG WIDGET */
 
 .cke_skin_kama {

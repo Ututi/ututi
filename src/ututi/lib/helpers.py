@@ -429,6 +429,20 @@ def input_submit_text_button(text=None, name=None, **html_options):
     html_options.setdefault('value', text)
     return HTML.button(c=[HTML.span(text)], **html_options)
 
+def checkbox(label, name, checked=False, **kwargs):
+    kwargs['type'] = 'checkbox'
+    kwargs['name'] = name
+    if checked:
+        kwargs['checked'] = 'checked'
+    kwargs.setdefault('id', name)
+    return HTML.div(class_='formField checkbox',
+                    id='%s-field' % kwargs['id'],
+                    c=[HTML.label(for_=name, c=[
+                    HTML.input(**kwargs),
+                    HTML.span(class_='labelText', c=[label])
+                    ]),
+                    HTML.literal('<form:error name="%s" />' % name)])
+
 def member_policy_select(label, name='member_policy'):
     from ututi.model import LocationTag
     label_texts = {
