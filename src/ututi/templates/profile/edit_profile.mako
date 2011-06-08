@@ -63,7 +63,7 @@
       <div style="margin-bottom:20px">
         <label for="profile-is-public">
           <input type="checkbox" name="profile_is_public" class="checkbox"
-                 id="profile_is_public" />
+                 id="profile-is-public" />
           ${_('Show my profile to unregistered users and search engines')}
         </label>
       </div>
