@@ -478,7 +478,7 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         c.years = [('', _('Select the year'))] + \
             [(y, y) for y in range(c.current_year - 10, c.current_year + 5)]
         files_link = ('files', _('Files')) if c.group.has_file_area else None
-        subjects_link = ('subjects', _('Subjects')) if c.group.has_file_area else None
+        subjects_link = ('subjects', _('Subjects')) if c.group.wants_to_watch_subjects else None
         c.tabs = [('home', _("News feed")),
                   ('members', _('Members'))
                   ] + ([files_link] if files_link else []) + [
