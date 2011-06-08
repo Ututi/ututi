@@ -127,6 +127,31 @@ class GroupLiveSearchForm(Schema):
                     LocationTagsValidator())
 
 
+class GroupOptionsValidator(validators.FormValidator):
+    """Validate if user is not trying to disable file area
+    with files in it, or disable subjects area while group is
+    watching subjects. Uses context c.group."""
+
+    messages = {
+        'fileAreaError': _('File area cannot be disabled if group has files.'),
+        'subjectsError': _('Subjects section cannot be disabled '
+                           'if group is following any subjects.'),
+    }
+
+    def validate_python(self, field_dict, state):
+        file_option = field_dict.get('file_storage', False)
+        subjects_option = field_dict.get('can_add_subjects', False)
+
+        errors = {}
+        if c.group.is_storing_files() and file_option == False:
+            errors['file_storage'] = self.message('fileAreaError', state)
+        if c.group.is_watching_subjects() and subjects_option == False:
+            errors['can_add_subjects'] = self.message('subjectsError', state)
+
+        if errors:
+            error_message = '<br>\n'.join(errors.values())
+            raise Invalid(error_message, field_dict, state, error_dict=errors)
+
 class EditGroupForm(GroupForm):
     """A schema for validating group edits."""
 
@@ -136,8 +161,10 @@ class EditGroupForm(GroupForm):
     mailinglist_moderated = validators.OneOf(['members', 'moderated'])
     location = Pipe(ForEach(validators.String(strip=True)),
                     LocationTagsValidator())
-    can_add_subjects = validators.Bool()
-    file_storage = validators.Bool()
+    can_add_subjects = validators.Bool(if_missing=False)
+    file_storage = validators.Bool(if_missing=False)
+
+    chained_validators = [GroupOptionsValidator()]
 
 
 class NewGroupForm(GroupForm):
@@ -538,19 +565,25 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         group.mailinglist_moderated = (
                 self.form_result['mailinglist_moderated'] == 'moderated')
         group.mailinglist_enabled = True
+        group.wants_to_watch_subjects = self.form_result['can_add_subjects']
+        group.has_file_area = self.form_result['file_storage']
 
         if not group.mailinglist_enabled and not group.forum_categories:
             group.forum_categories.append(ForumCategory(_('General'), _('Discussions on anything and everything')))
 
-        if not (group.is_watching_subjects() and group.wants_to_watch_subjects):
-            group.wants_to_watch_subjects = bool(self.form_result['can_add_subjects'])
-
-        if not (group.is_storing_files() and group.has_file_area):
-            group.has_file_area = bool(self.form_result['file_storage'])
 
         # Fix default tab setting if needed.
-        if group.default_tab == 'forum' or group.default_tab == 'mailinglist':
+        if group.default_tab == 'forum' \
+           or group.default_tab == 'mailinglist':
             group.default_tab = 'home'
+
+        if group.default_tab == 'files' \
+           and not group.has_file_area:
+            group.default_tab =  'home'
+
+        if group.default_tab == 'subjects' \
+           and not group.wants_to_watch_subjects:
+            group.default_tab == 'home'
 
         if values['logo_delete']:
             group.logo = None
