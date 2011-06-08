@@ -75,6 +75,7 @@ def external_teacher_profile_action(method):
             deny(_('This user profile is not public'), 401)
 
         c.teacher = user
+        c.location = user.location
         c.tabs = external_teacher_tabs(user)
         c.theme = None
 
