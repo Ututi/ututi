@@ -24,7 +24,7 @@ from ututi.model import Subject, Group, Teacher
 from ututi.model import LocationTag, EmailDomain, meta
 from ututi.model.users import User, UserRegistration
 from ututi.model.theming import Theme
-from ututi.controllers.home import UniversityListMixin
+from ututi.controllers.home import UniversityListMixin, switch_language
 from ututi.controllers.search import SearchSubmit, SearchBaseController
 
 log = logging.getLogger(__name__)
@@ -499,3 +499,13 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         teacher_request_email(c.user)
         h.flash(_('Thank You! Your request to become a teacher has been received. We will notify You once we grant You the rights of a teacher.'))
         redirect(location.url())
+
+    @location_action
+    def switch_language(self, location):
+        # This is a general language switcher, but is placed here to
+        # have a separate route for use in external university pages.
+        language = request.params.get('language', 'en')
+        # TODO validate
+        switch_language(language)
+        redirect(c.came_from or location.url())
+

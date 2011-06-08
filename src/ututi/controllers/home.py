@@ -35,6 +35,12 @@ from ututi.model.events import Event
 
 log = logging.getLogger(__name__)
 
+def switch_language(language):
+    # TODO move to lib
+    # TODO store on user if user is logged in
+    session['language'] = language
+    session.save()
+
 def info_menu_items():
     return [
         {'title': _("What is Ututi?"),
@@ -455,9 +461,7 @@ class HomeController(UniversityListMixin):
     def switch_language(self):
         language = request.params.get('language', 'en')
         # TODO validate
-        # TODO store on user if user is logged in
-        session['language'] = language
-        session.save()
+        switch_language(language)
         redirect(c.came_from or url('/'))
 
     def register(self):

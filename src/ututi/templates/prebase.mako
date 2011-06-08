@@ -93,8 +93,14 @@ ${_('Private social networks for universities')}
 <%def name="footer()">
   <% nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '') %>
   <div class="column left">
-    <form id="language-switch-form" action="${url('switch_language')}">
-      <input name="came_from" type="hidden" value="${request.url}" />
+    <%
+    if hasattr(c, 'location'):
+      lang_switch_action = c.location.url(action='switch_language')
+    else:
+      lang_switch_action = url('switch_language')
+    %>
+    <form id="language-switch-form" action="${lang_switch_action}">
+      <input name="came_from" type="hidden" value="${url.current()}" />
       <label for="language-box">${_("Language:")}</label>
       ${h.select('language', c.lang, h.get_languages(), id='language-box')}
       ${h.input_submit(_('Select'))}
