@@ -88,6 +88,7 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
      border-bottom: 1px solid #FF9900;
   }
 
+  .group-functionality,
   .privacy-settings,
   .delete-group {
      margin-left: 180px;
@@ -106,7 +107,7 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
 
 
 <form method="post" action="${url(controller='group', action='update', id=c.group.group_id)}" name="edit_profile_form" enctype="multipart/form-data"
-      id="group_settings_form">
+      id="group_settings_form" class="narrow">
   <table>
     <tr>
       <td style="width: 180px; padding-top: 10px; vertical-align: top;">
@@ -146,10 +147,15 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
           ${logo_field()}
           ${location_field()}
         </div>
-
-        ${h.select_line('default_tab', _('Default group tab:'), c.tabs)}
       </td>
   </tr></table>
+
+  <h2 class="subtitle">${_("Group's functionality:")}</h2>
+  <div class="group-functionality">
+    ${h.checkbox(_('Group has a file storage'), 'file_storage')}
+    ${h.checkbox(_('Group wants to follow subjects'), 'can_add_subjects')}
+    ${h.select_line('default_tab', _('Default group tab:'), c.tabs)}
+  </div>
 
   <h2 class="subtitle">${_('Access settings:')}</h2>
   <div class="privacy-settings">
