@@ -384,15 +384,17 @@ def input_area(name, title, value='', cols='50', rows='5', help_text=None, disab
         expl = HTML.span(class_='helpText', c=help_text)
     if disabled:
         kwargs['disabled'] = 'disabled'
+    kwargs.setdefault('id', name)
 
-    return HTML.label(c=[
-        HTML.span(class_='labelText', c=[title]),
-        HTML.span(class_='textField', c=[
-            HTML.textarea(name_=name, id_=name, cols=cols, rows=rows, c=[value], **kwargs),
-            ]),
-        expl,
-        HTML.literal('<form:error name="%s" />' % name)])
-
+    return HTML.div(class_='formField',
+                    id='%s-field' % kwargs['id'],
+                    c=[HTML.label(for_=name, c=[
+                    HTML.span(class_='labelText', c=[title]),
+                    HTML.span(class_='textField', c=[
+                        HTML.textarea(name_=name, id_=name, cols=cols, rows=rows, c=[value], **kwargs),
+                        ])]),
+                    HTML.literal('<form:error name="%s" />' % name),
+                    expl])
 
 def input_wysiwyg(name, title, value='', cols='60', rows='15'):
     return HTML.div(class_='form-field', c=[
