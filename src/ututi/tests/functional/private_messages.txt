@@ -18,9 +18,10 @@ Let's send a message:
     >>> browser.open('http://localhost/user/3')
     >>> browser.click('Send private message')
 
-    >>> browser.getControl('Subject').value = 'First message'
-    >>> browser.getControl('Message').value = 'First!'
-    >>> browser.getControl('Post').click()
+    >>> form = browser.getForm('new_message_form')
+    >>> form.getControl('Subject').value = 'First message'
+    >>> form.getControl('Message').value = 'First!'
+    >>> form.getControl('Post').click()
 
     >>> browser.printQuery("//div[@class='flash-message']/span/text()")
     Message sent.
@@ -142,9 +143,10 @@ Private messages sent to self can be deleted too:
 
     >>> browser2.open('http://localhost/user/3')
     >>> browser2.click('Send private message')
-    >>> browser2.getControl('Subject').value = 'Alter ego'
-    >>> browser2.getControl('Message').value = 'Talking to myself.'
-    >>> browser2.getControl('Post').click()
+    >>> form = browser2.getForm('new_message_form')
+    >>> form.getControl('Subject').value = 'Alter ego'
+    >>> form.getControl('Message').value = 'Talking to myself.'
+    >>> form.getControl('Post').click()
 
     >>> browser2.getLink('Home').click()
     >>> browser2.getLink('Private messages').click()

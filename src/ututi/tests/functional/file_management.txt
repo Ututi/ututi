@@ -203,7 +203,7 @@ Flagging files:
     >>> print app.get('/subject/vu/mat_analize/file/4/flag').body
     <form method="post" action="." class="fullForm fileFlagForm">
       <div>
-        <label><span class="labelText">Please state the reason why the file 'text;for you.txt' is inappropriate:</span><span class="textField"><textarea cols="30" id="reason" name="reason" rows="5"></textarea></span></label>
+        <div class="formField" id="reason-field"><label for="reason"><span class="labelText">Please state the reason why the file 'text;for you.txt' is inappropriate:</span><span class="textField"><textarea cols="30" id="reason" name="reason" rows="5"></textarea></span></label></div>
         <button class="submit" value="Submit">Submit</button>
       </div>
     </form>

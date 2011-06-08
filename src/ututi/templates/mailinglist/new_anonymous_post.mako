@@ -7,7 +7,7 @@ ${_('Message to the group')}
 <h1>${_('Message')}</h1>
 
 <form method="post" action="${url(controller='mailinglist', action='post_anonymous', id=c.group.group_id)}"
-     id="group_add_form" class="fullForm" enctype="multipart/form-data">
+     id="anonymous-post-form">
   ${h.input_line('subject', _('Subject'))}
   ${h.input_area('message', _('Message'))}
   <br />

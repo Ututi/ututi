@@ -72,9 +72,10 @@ message:
     >>> user2 = Browser.logIn('user2@ututi.lt', 'password')
     >>> user2.open('http://localhost/group/moderators')
     >>> user2.getLink('moderators@groups.ututi.lt').click()
-    >>> user2.getControl('Subject').value = "Hi group!"
-    >>> user2.getControl('Message').value = u"This is my message"
-    >>> user2.getControl('Post').click()
+    >>> form = user2.getForm('anonymous-post-form')
+    >>> form.getControl('Subject').value = "Hi group!"
+    >>> form.getControl('Message').value = u"This is my message"
+    >>> form.getControl('Post').click()
 
 This message will appear in the moderation queue:
 
