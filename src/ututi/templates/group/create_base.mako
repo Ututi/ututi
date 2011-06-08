@@ -93,14 +93,7 @@
 </%def>
 
 <%def name="year_field()">
-  <label for="year"><span class="labelText">${_("Entrance year:")}</span></label>
-  <form:error name="year" />
-  <select name="year" id="year">
-    <option value="">${_('Select the year')}</option>
-    %for year in c.years:
-      <option value="${year}">${year}</option>
-    %endfor
-  </select>
+  ${h.select_line('year', _('Entrance year:'), c.years)}
 </%def>
 
 <%def name="can_add_subjects(enabled=True, tooltip_text=None)">
@@ -139,7 +132,6 @@
 
 <%def name="description_field()">
   ${h.input_area('description', _('Description:'))}
-  <br />
 </%def>
 
 <%def name="group_id()">

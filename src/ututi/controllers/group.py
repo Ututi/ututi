@@ -398,7 +398,8 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
 
     def _create_form(self):
         c.current_year = date.today().year
-        c.years = range(c.current_year - 10, c.current_year + 5)
+        c.years = [('', _('Select the year'))] + \
+            [(y, y) for y in range(c.current_year - 10, c.current_year + 5)]
         return render('group/create.mako')
 
     @set_login_url
@@ -474,7 +475,8 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
 
     def _edit_form(self):
         c.current_year = date.today().year
-        c.years = range(c.current_year - 10, c.current_year + 5)
+        c.years = [('', _('Select the year'))] + \
+            [(y, y) for y in range(c.current_year - 10, c.current_year + 5)]
         files_link = ('files', _('Files')) if c.group.has_file_area else None
         subjects_link = ('subjects', _('Subjects')) if c.group.has_file_area else None
         c.tabs = [('home', _("News feed")),

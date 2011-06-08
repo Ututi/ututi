@@ -147,11 +147,7 @@ ${h.javascript_link('/javascript/js-alternatives.js')|n}
           ${location_field()}
         </div>
 
-        <label for="default_tab">
-          <span class="labelText">${_('Default group tab')}</span>
-        </label>
-        ${h.select("default_tab", c.group.default_tab, c.tabs)}
-
+        ${h.select_line('default_tab', _('Default group tab:'), c.tabs)}
       </td>
   </tr></table>
 
