@@ -1970,7 +1970,7 @@ ul.tabs {
         color: #333;
     }
 
-    .page-section .action-button {
+    .page-section .title .action-button {
         position: absolute;
         bottom: 2px;
         right: 0px;
