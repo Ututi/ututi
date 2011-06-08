@@ -130,7 +130,7 @@ class GroupLiveSearchForm(Schema):
 class EditGroupForm(GroupForm):
     """A schema for validating group edits."""
 
-    default_tab = validators.OneOf(['home', 'members', 'files', 'subjects'])
+    default_tab = validators.OneOf(['home', 'members', 'files', 'subjects', 'page'])
     approve_new_members = validators.OneOf(['none', 'admin'])
     forum_visibility = validators.OneOf(['public', 'members'])
     mailinglist_moderated = validators.OneOf(['members', 'moderated'])
