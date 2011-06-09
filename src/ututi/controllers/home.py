@@ -14,7 +14,6 @@ from pylons import request, tmpl_context as c, url, session, config, response
 from pylons.controllers.util import abort, redirect
 from pylons.i18n import _
 from pylons.templating import render_mako_def
-from pylons.decorators import jsonify
 
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql import func
@@ -28,6 +27,7 @@ from ututi.lib.security import sign_out_user
 from ututi.lib.security import ActionProtector, sign_in_user, bot_protect
 from ututi.lib.validators import (validate, u_error_formatters,
                                   TranslatedEmailValidator, ForbidPublicEmail)
+from ututi.lib.decorators import jsonpify
 from ututi.model import (meta, User, Region, LocationTag, Payment,
                          UserRegistration, EmailDomain)
 from ututi.model import Subject, Group, SearchItem
@@ -330,7 +330,7 @@ class HomeController(UniversityListMixin):
 
         sign_in_user(user, long_session=remember)
 
-    @jsonify
+    @jsonpify(prefix='check_login')
     def _js_login(self, username, password, location, remember):
         errors = None
         if username and password:
@@ -341,13 +341,16 @@ class HomeController(UniversityListMixin):
 
 
     def login(self):
-        # here below email get parameter may be used for convenience
-        # i.e. when redirecting from sign-up form
-        username = request.POST.get('username') or request.GET.get('email')
-        password = request.POST.get('password')
-        location = request.POST.get('location')
+        # Here below email get parameter may be used for convenience
+        # i.e. when redirecting from sign-up form.
+        # POST and GET params are accepted for external javascript logins
+        # to work via JSONP (see _js_login above).
+
+        username = request.params.get('username') or request.params.get('email')
+        password = request.params.get('password')
+        location = request.params.get('location')
         location = int(location) if location else None
-        remember = bool(request.POST.get('remember'))
+        remember = bool(request.params.get('remember'))
 
         if 'js' in request.params:
             return self._js_login(username, password, location, remember)

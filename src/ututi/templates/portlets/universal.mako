@@ -280,35 +280,35 @@
       <a href="${register_action}" id="register-link">${_("Register")}</a>
     </p>
   </form>
-  %if False:
-  <%doc>Enable javascript when URL problems are resolved.</%doc>
   <script type="text/javascript">
+    function check_login(response) {
+      if (response.success) {
+        window.location.href = "${url(controller='profile', action='home')}";
+      }
+      else {
+        var form = $("#login-form");
+        $('.error-message', form).remove(); // remove previous error messages
+        for (var key in response.errors) {
+          $(document.createElement('p'))
+           .addClass('error-message')
+           .html(response.errors[key])
+           .insertBefore($('button.submit', form));
+        }
+      }
+    }
     $(document).ready(function() {
       $('#login-form button.submit').click(function() {
-        var form = $(this).closest('form');
-        $.post(
-          "${url(controller='home', action='login', js=1)}",
-          form.serialize(),
-          function(data) {
-            if (data.success) {
-              window.location.href = "${url(controller='profile', action='home')}";
-            }
-            else {
-              $('.error-message', form).remove(); // remove previous error messages
-              for (var key in data.errors) {
-                $(document.createElement('p'))
-                 .addClass('error-message')
-                 .html(data.errors[key])
-                 .insertBefore($('button.submit', form));
-              }
-            }
-          }
-        );
+        // make a JSONP request
+        var login_url = "${url(controller='home', action='login', js=1)}" +
+          '&' + $(this).closest('form').serialize();
+        $(document.createElement('script'))
+         .attr('type', 'text/javascript')
+         .attr('src', login_url)
+         .appendTo($('body'));
         return false;
       });
     });
   </script>
-  %endif
 </%self:portlet>
 %endif
 </%def>
