@@ -163,6 +163,7 @@ class BaseController(WSGIController):
         Example configuration for external server:
 
         RewriteRule ^/ututi(/(.*))?$ http://ututi.com/school/uni$2 [P,L]
+        RequestHeader add X-Vhm-Root mif.vu.lt
         RequestHeader add X-Vhm-Root-Dir /ututi
         RequestHeader add X-Vhm-Host-Dir /school/uni
         """
@@ -172,7 +173,7 @@ class BaseController(WSGIController):
 
         ututi_host = request.headers.get('Host')
         ututi_dir = request.headers.get('X-Vhm-Host-Dir')
-        external_host = request.headers.get('X-Forwarded-Host')
+        external_host = request.headers.get('X-Vhm-Root')
         external_dir = request.headers.get('X-Vhm-Root-Dir', '')
 
         if ututi_dir:
