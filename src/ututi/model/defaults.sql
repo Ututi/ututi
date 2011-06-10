@@ -27,6 +27,13 @@ create table i18n_texts (
        id bigserial not null,
        primary key (id));
 
+/* Creates a new i18n_text object and returns it's id. */
+CREATE FUNCTION create_i18n_text() RETURNS int8 AS $$
+    BEGIN
+        INSERT INTO i18n_texts DEFAULT VALUES;
+        RETURN currval(pg_get_serial_sequence('i18n_texts', 'id'));
+    END
+$$ LANGUAGE plpgsql;;
 
 create table i18n_texts_versions (
        i18n_texts_id int8 not null references i18n_texts(id) on delete cascade,
@@ -109,7 +116,29 @@ create table teachers (
        teacher_position varchar(200) default null,
        work_address varchar(200) default null,
        publications text default null,
+       general_info_id int8 not null references i18n_texts(id) on delete restrict,
        primary key (id));;
+
+
+CREATE FUNCTION teacher_insert_trg() RETURNS TRIGGER AS $$
+    BEGIN
+        NEW.general_info_id := create_i18n_text();
+        RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER teacher_insert_trg BEFORE INSERT ON teachers FOR EACH ROW
+    EXECUTE PROCEDURE teacher_insert_trg();
+
+CREATE FUNCTION teacher_delete_trg() RETURNS trigger AS $$
+    BEGIN
+        DELETE FROM i18n_texts WHERE id = OLD.general_info_id;
+        RETURN NULL;
+    END
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER teacher_delete_trg AFTER DELETE ON teachers FOR EACH ROW
+    EXECUTE PROCEDURE teacher_delete_trg();
 
 CREATE FUNCTION check_gadugadu() RETURNS trigger AS $$
     BEGIN
