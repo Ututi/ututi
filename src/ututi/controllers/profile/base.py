@@ -280,14 +280,14 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                     h.flash(_("Your photo successfully updated."))
             if 'js' in request.params:
                 return 'OK'
-        redirect(url(controller='profile', action='edit_photo'))
+        redirect(url(controller='profile', action='edit'))
 
     @ActionProtector("user")
     def remove_photo(self):
         c.user.logo = None
         meta.Session.commit()
         h.flash(_("Your photo was removed."))
-        redirect(url(controller='profile', action='edit_photo'))
+        redirect(url(controller='profile', action='edit'))
 
     @ActionProtector("user")
     def link_google(self):

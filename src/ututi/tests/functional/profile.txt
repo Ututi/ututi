@@ -57,7 +57,7 @@ information and upload a photo.
     >>> browser.click('Contacts')
     >>> browser.getControl('Address of your website or blog').value = 'http://ututi.lt'
     >>> browser.click('Save')
-    >>> browser.click('Photo')
+    >>> browser.click('General')
     >>> browser.getControl(name='logo').add_file(*make_file('test_logo.png', 'test_logo.Png'))
     >>> browser.click('Change photo')
 
