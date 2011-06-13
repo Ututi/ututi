@@ -204,14 +204,14 @@ page functionality.
 User sees these recommended actions on his dashboard:
 
     >>> user.printCssQuery('.step span.title', strip=True)
-    <span>Fill your profile information</span>
+    <span>Fill your page</span>
     <span>Create your subjects</span>
     <span>Complete your profile page</span>
     <span>Add your student groups</span>
 
 Edit profile button brings user to his profile edit page (duh!):
 
-    >>> user.getControl('Edit profile', index=0).click()
+    >>> user.getControl('Edit your page').click()
     >>> user.url
     'http://localhost/profile/edit?'
 
@@ -274,6 +274,6 @@ behavior by removing profile information:
     >>> user.click('Save')
     >>> user.click('Home')
     >>> user.printCssQuery('.step span.title', strip=True)
-    <span>Fill your profile information</span>
+    <span>Fill your page</span>
     <span>Complete your profile page</span>
     <span>Add your student groups</span>
