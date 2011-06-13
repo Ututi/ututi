@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-06-13 20:03+0300\n"
+"POT-Creation-Date: 2011-06-13 23:46+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4159,54 +4159,13 @@ msgstr ""
 msgid "Fill your page"
 msgstr ""
 
-msgid "Tell some basic information about yourself."
+msgid "My profile page"
 msgstr ""
 
-msgid "Edit your page"
+msgid "edit my page"
 msgstr ""
 
-msgid "Create your subjects"
-msgstr ""
-
-msgid "Upload course material"
-msgstr ""
-
-msgid "Edit subject notes"
-msgstr ""
-
-msgid "Notify your students"
-msgstr ""
-
-msgid "Discuss the subject"
-msgstr ""
-
-msgid "Find subjects that your teach or create them."
-msgstr ""
-
-msgid "Complete your profile page"
-msgstr ""
-
-msgid ""
-"Ututi provides you a profile page that other people can access online. To "
-"have a complete page, please tell us some bits about your information and "
-"your research interests."
-msgstr ""
-
-msgid ""
-"Ututi provides you a profile page that other people can access online. To "
-"have a complete page, please list your most important publications."
-msgstr ""
-
-msgid "Add information"
-msgstr ""
-
-msgid "List publications"
-msgstr ""
-
-msgid "Ututi will keep track of your student groups and make it easy to reach them."
-msgstr ""
-
-msgid "Add student group"
+msgid "Edit my page"
 msgstr ""
 
 msgid "Delete this group"
@@ -4236,10 +4195,28 @@ msgstr ""
 msgid "Wiki notes"
 msgstr ""
 
+msgid "Create your subjects"
+msgstr ""
+
 msgid "My courses"
 msgstr ""
 
 msgid "add courses"
+msgstr ""
+
+msgid "Upload course material"
+msgstr ""
+
+msgid "Edit subject notes"
+msgstr ""
+
+msgid "Notify your students"
+msgstr ""
+
+msgid "Discuss the subject"
+msgstr ""
+
+msgid "Find subjects that your teach or create them."
 msgstr ""
 
 msgid "Are you sure you want to delete this subject?"
@@ -4251,13 +4228,13 @@ msgstr ""
 msgid "add a group"
 msgstr ""
 
+msgid "Ututi will keep track of your student groups and make it easy to reach them."
+msgstr ""
+
+msgid "Add student group"
+msgstr ""
+
 msgid "Are you sure you want to delete this group?"
-msgstr ""
-
-msgid "My profile page"
-msgstr ""
-
-msgid "edit profile"
 msgstr ""
 
 msgid "Write down your information and research interests"
