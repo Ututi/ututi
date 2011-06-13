@@ -33,7 +33,7 @@ from ututi.migration import GreatMigrator
 from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Author
 from ututi.model.users import Teacher, TeacherGroup, AdminUser, UserRegistration
 from ututi.model.util import logo_property
-from ututi.model.i18n import Country
+from ututi.model.i18n import Country, I18nText
 from ututi.model.theming import Theme
 from ututi.model.base import Model
 from ututi.model import meta
@@ -314,7 +314,8 @@ def setup_orm(engine):
                inherits=User,
                properties = {'taught_subjects' : relation(Subject,
                                                           secondary=teacher_subjects_table,
-                                                          backref="teachers")})
+                                                          backref="teachers"),
+                             'general_info': relation(I18nText)})
 
     orm.mapper(TeacherGroup,
                teacher_groups_table,
