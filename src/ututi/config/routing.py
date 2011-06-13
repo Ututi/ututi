@@ -299,6 +299,7 @@ def make_map(config):
     map.connect('/profile/edit/photo', controller='profile', action='edit_photo')
     map.connect('/profile/edit/contacts', controller='profile', action='edit_contacts')
     map.connect('/profile/edit/information', controller='profile', action='edit_information')
+    map.connect('/profile/edit/information/{lang}', controller='profile', action='edit_information')
     map.connect('/profile/edit/publications', controller='profile', action='edit_publications')
     map.connect('/profile/settings', controller='profile', action='settings')
     map.connect('/profile/settings/login', controller='profile', action='login_settings')

@@ -14,6 +14,7 @@ from ututi.lib.mailinglist import post_message
 
 from ututi.model import meta, File, TeacherGroup
 from ututi.model.events import TeacherMessageEvent
+from ututi.model.i18n import Language
 from ututi.controllers.profile.base import ProfileControllerBase
 from ututi.controllers.profile.validators import InformationForm, \
         StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm, \
@@ -30,6 +31,17 @@ def group_teacher_action(method):
         c.group = group
         return method(self, group)
     return _group_teacher_action
+
+
+def multilanguage(method):
+    def _multilanguage(self, lang=None):
+        language = None
+        if lang is not None:
+            language = Language.get(lang)
+            if language is None:
+                abort(404)
+        return method(self, language)
+    return _multilanguage
 
 
 class TeacherProfileController(ProfileControllerBase):
@@ -59,21 +71,28 @@ class TeacherProfileController(ProfileControllerBase):
         ])
         return tabs
 
-    def _edit_information_form(self):
+    def _edit_information_form(self, edit_language=None):
         c.tabs = self._edit_profile_tabs()
         c.current_tab = 'information'
+        c.edit_languages = Language.all()
+        c.edit_language = edit_language or self.form_result.get('language')
         return render('profile/teacher/edit_information.mako')
 
     @ActionProtector("user")
-    def edit_information(self):
-        if c.user.description and c.user.description.strip():
-            # description is not empty
-            defaults = {'description': c.user.description}
+    @multilanguage
+    def edit_information(self, language):
+        if language is None:
+            redirect(url(controller='profile', action='edit_information',
+                         lang=c.lang))
+
+        version = c.user.general_info.get_version(language)
+        if version is not None and version.text:
+            defaults = { 'text': version.text, 'language': language.id }
         else:
             template = render('profile/teacher/information_template.mako')
-            defaults = {'description': template}
+            defaults = { 'text': template, 'language': language.id }
             c.edit_template = True
-        return htmlfill.render(self._edit_information_form(), defaults=defaults)
+        return htmlfill.render(self._edit_information_form(language), defaults=defaults)
 
     @validate(schema=InformationForm, form='_edit_information_form')
     @ActionProtector("user")
@@ -81,11 +100,14 @@ class TeacherProfileController(ProfileControllerBase):
         if not hasattr(self, 'form_result'):
             redirect(url(controller='profile', action='edit_information'))
 
-        c.user.description = self.form_result['description']
+        lang = self.form_result['language']
+        text = self.form_result['text']
+        c.user.general_info.set_text(lang, text)
         meta.Session.commit()
         h.flash(_('Your information was updated.'))
 
-        redirect(url(controller='profile', action='edit_information'))
+        redirect(url(controller='profile', action='edit_information',
+                     lang=lang.id))
 
     def _edit_publications_form(self):
         c.tabs = self._edit_profile_tabs()

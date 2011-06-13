@@ -481,6 +481,12 @@ class LanguageValidator(validators.FancyValidator):
         elif value is self._notfoundmarker:
             raise Invalid(self.message('bad_lang', state), value, state)
 
+    def _from_python(self, value, state):
+        if isinstance(value, Language):
+            return value.id
+        else:
+            return None
+
 
 def manual_validate(schema):
     """Validate a formencode schema.

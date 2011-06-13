@@ -10,7 +10,7 @@ from formencode.variabledecode import NestedVariables
 from ututi.model.users import User
 from ututi.lib.validators import UserPasswordValidator, TranslatedEmailValidator, \
     UniqueEmail, LocationTagsValidator, PhoneNumberValidator, \
-    SeparatedListValidator, URLNameValidator
+    SeparatedListValidator, URLNameValidator, LanguageValidator
 
 
 class LocationForm(Schema):
@@ -51,7 +51,8 @@ class InformationForm(Schema):
     """A schema for validating user information forms."""
     pre_validators = [NestedVariables()]
     allow_extra_fields = True
-    description = validators.String(strip=True)
+    language = LanguageValidator()
+    text = validators.String(strip=True)
 
 
 class PublicationsForm(Schema):
