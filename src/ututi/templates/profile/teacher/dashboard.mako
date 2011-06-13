@@ -112,16 +112,21 @@ button.submit {
     ${_("Fill your page")}
     %else:
     ${_("My profile page")}
-    %endif
     <span class="action-button">
-      ${h.button_to(_("edit profile"), url(controller='profile', action='edit'),
+      ${h.button_to(_("edit my page"), url(controller='profile', action='edit'),
                     method='GET', class_='dark edit')}
     </span>
+    %endif
   </div>
   <p>${_("Tell some basic information about yourself by editing your profile.")}</p>
+  %if not 'profile' in done:
+  ${h.button_to(_("Edit my page"), url(controller='profile', action='edit'),
+                   method='GET', class_='dark edit')}
+  %else:
   <a class="forward-link" href="${c.user.url(action='external_teacher_index')}">
     ${_("View my page")}
-    </a>
+  </a>
+  %endif
 </div>
 </%def>
 
@@ -280,7 +285,7 @@ button.submit {
 <div class="page-section groups">
   <div class="title">
     %if not 'group' in done:
-    <span class="title">${_("Add your student groups")}</span>
+    ${_("Add your student groups")}
     %else:
     ${_("My student groups")}
     <span class="action-button">

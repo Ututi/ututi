@@ -203,28 +203,38 @@ page functionality.
 
 User sees these recommended actions on his dashboard:
 
-    >>> user.printCssQuery('.step span.title', strip=True)
-    <span>Fill your page</span>
-    <span>Create your subjects</span>
-    <span>Complete your profile page</span>
-    <span>Add your student groups</span>
+    >>> user.printCssQuery('.page-section > div.title', strip=True)
+    <div>Fill your page</div>
+    <div>Create your subjects</div>
+    <div>Add your student groups</div>
 
 Edit profile button brings user to his profile edit page (duh!):
 
-    >>> user.getControl('Edit your page').click()
+    >>> user.getControl('Edit my page', index=0).click()
     >>> user.url
     'http://localhost/profile/edit?'
 
-If user add some info, this action will dissapear from the dashboard:
+If user add some info, this action will change:
 
     >>> user.click('Contacts')
     >>> user.getControl('Address of your website').value = 'http://myblog.com'
     >>> user.click('Save')
     >>> user.click('Home')
-    >>> user.printCssQuery('.step span.title', strip=True)
-    <span>Create your subjects</span>
-    <span>Complete your profile page</span>
-    <span>Add your student groups</span>
+    >>> user.printCssQuery('.page-section > div.title', strip=True)
+    <div>
+        My profile page
+        <span>
+        <form>
+          <fieldset>
+            <button>
+              <span>edit my page</span>
+            </button>
+          </fieldset>
+        </form>
+      </span>
+    </div>
+    <div>Create your subjects</div>
+    <div>Add your student groups</div>
 
 Subject's section allows to lookup and create subjects. Let's
 create a subject now:
@@ -236,12 +246,35 @@ create a subject now:
     'http://localhost/subjects/add_description'
     >>> user.getControl('Create').click()
 
-Now this action has also disappeared:
+Now this action has also will change:
 
     >>> user.click('Home')
-    >>> user.printCssQuery('.step span.title', strip=True)
-    <span>Complete your profile page</span>
-    <span>Add your student groups</span>
+    >>> user.printCssQuery('.page-section > div.title', strip=True)
+    <div>
+        My profile page
+        <span>
+        <form>
+          <fieldset>
+            <button>
+              <span>edit my page</span>
+            </button>
+          </fieldset>
+        </form>
+      </span>
+    </div>
+    <div>
+        My courses
+        <span>
+        <form>
+          <fieldset>
+            <button>
+              <span>add courses</span>
+            </button>
+          </fieldset>
+        </form>
+      </span>
+    </div>
+    <div>Add your student groups</div>
 
 Group's section offers to add student groups:
 
@@ -249,20 +282,6 @@ Group's section offers to add student groups:
     >>> user.url
     'http://localhost/profile/add_student_group?'
     >>> user.goBack()
-
-Profile page section asks to add information, and gives a link to
-public teacher's profile page:
-
-    >>> user.click('View my page')
-    >>> user.url
-    'http://localhost/school/uni/teacher/2'
-    >>> user.printCssQuery('.teacher-name', strip=True)
-    <div>User</div>
-    >>> user.goBack()
-
-    >>> user.click('Add information')
-    >>> user.getControl('Edit your information').value = "Some <strong>cool</strong> information!"
-    >>> user.getControl('Save').click()
 
 And if teacher downgrades some actions (i.e. removes all subjects), the
 appropriate action will again appear on his dashboard. We will test this
@@ -273,7 +292,18 @@ behavior by removing profile information:
     >>> user.getControl('Address of your website').value = ''
     >>> user.click('Save')
     >>> user.click('Home')
-    >>> user.printCssQuery('.step span.title', strip=True)
-    <span>Fill your page</span>
-    <span>Complete your profile page</span>
-    <span>Add your student groups</span>
+    >>> user.printCssQuery('.page-section > div.title', strip=True)
+    <div>Fill your page</div>
+    <div>
+        My courses
+        <span>
+        <form>
+          <fieldset>
+            <button>
+              <span>add courses</span>
+            </button>
+          </fieldset>
+        </form>
+      </span>
+    </div>
+    <div>Add your student groups</div>

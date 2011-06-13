@@ -23,16 +23,11 @@ will be registered as teacher:
     >>> user.click('Skip')
     >>> user.click('Finish')
 
-Even though teacher is not verified, he can fill his profile information.
-From the "Get started" page he can click "Add information".
-
-    >>> user.click('Add information')
-    >>> user.url
-    'http://localhost/profile/edit/information/en'
-
 For the first time text area contains a template that teacher can edit.
 It also displays a related warning message:
 
+    >>> user.click('Edit my page')
+    >>> user.click('General Information')
     >>> print user.getControl('Edit your information').value
     Provide any personal information that you would like to begin with.
     Affiliation
