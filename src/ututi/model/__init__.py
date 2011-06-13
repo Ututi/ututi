@@ -1865,13 +1865,23 @@ class LocationTag(Tag):
     def public(self):
         return self.member_policy == 'PUBLIC'
 
+    def all_up(self):
+        loc = self
+        while loc:
+            yield loc
+            loc = loc.parent
+
     def get_theme(self):
         """Returns theme assigned to this LocationTag or it's closest parent."""
-        location = self
-        while location:
-            if location.theme is not None:
-                return location.theme
-            location = location.parent
+        for loc in self.all_up():
+            if loc.theme is not None:
+                return loc.theme
+
+    def get_country(self):
+        """Returns country assigned to this LocationTag or it's closest parent."""
+        for loc in self.all_up():
+            if loc.country is not None:
+                return loc.country
 
 
 def cleanupFileName(filename):

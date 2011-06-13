@@ -74,7 +74,15 @@ class TeacherProfileController(ProfileControllerBase):
     def _edit_information_form(self, edit_language=None):
         c.tabs = self._edit_profile_tabs()
         c.current_tab = 'information'
-        c.edit_languages = Language.all()
+
+        country = c.user.location.get_country()
+        if country is not None:
+            c.edit_languages = [country.language]
+            if country.language.id != 'en':
+                c.edit_languages.append(Language.get('en'))
+        else:
+            c.edit_languages = Language.all()
+
         c.edit_language = edit_language or self.form_result.get('language')
         return render('profile/teacher/edit_information.mako')
 
@@ -82,8 +90,14 @@ class TeacherProfileController(ProfileControllerBase):
     @multilanguage
     def edit_information(self, language):
         if language is None:
+            country = c.user.location.get_country()
+            if country is not None:
+                default_lang = country.language.id
+            else:
+                default_lang = c.lang
+
             redirect(url(controller='profile', action='edit_information',
-                         lang=c.lang))
+                         lang=default_lang))
 
         version = c.user.general_info.get_version(language)
         if version is not None and version.text:
