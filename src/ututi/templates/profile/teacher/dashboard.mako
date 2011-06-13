@@ -1,4 +1,4 @@
-<%inherit file="/profile/get_started_base.mako" />
+<%inherit file="/profile/home_base.mako" />
 <%namespace file="/sections/standard_buttons.mako" import="close_button" />
 <%namespace name="b" file="/sections/standard_blocks.mako" import="title_box"/>
 <%namespace name="location" file="/widgets/ulocationtag.mako" />
@@ -33,6 +33,16 @@
 
 <%def name="css()">
 ${parent.css()}
+
+.alternative-link {
+  font-size: 11px;
+  margin-top: 5px;
+}
+.create-subject .side-box {
+  float: right;
+  border-color: #eee;
+}
+
 #view-page-link {
   float: right;
 }
@@ -95,92 +105,25 @@ button.submit {
 <% done = h.teacher_done_items(c.user) %>
 <% counter = 1 %>
 
-<div class="steps">
-  %if not 'profile' in done:
-  <div class="step">
-    <div class="heading">
-      <span class="number">${counter}</span>
-      <% counter += 1 %>
-      <span class="title">${_("Fill your page")}</span>
-    </div>
-    <div class="content">
-      <p>${_("Tell some basic information about yourself.")}</p>
-      ${h.button_to(_("Edit your page"), url(controller='profile', action='edit'),
+<%def name="profile_section()">
+<div class="page-section profile">
+  <div class="title">
+    %if not 'profile' in done:
+    ${_("Fill your page")}
+    %else:
+    ${_("My profile page")}
+    %endif
+    <span class="action-button">
+      ${h.button_to(_("edit profile"), url(controller='profile', action='edit'),
                     method='GET', class_='dark edit')}
-    </div>
+    </span>
   </div>
-  %endif
-  %if not 'subject' in done:
-  <div class="step clearfix">
-    <div class="heading">
-      <span class="number">${counter}</span>
-      <% counter += 1 %>
-      <span class="title">${_("Create your subjects")}</span>
-    </div>
-    <%b:title_box title="${_('Features:')}" id="subject-features" class_="side-box">
-      <ul class="feature-list small">
-        <li class="files">${_("Upload course material")}</li>
-        <li class="wiki">${_("Edit subject notes")}</li>
-        <li class="notifications">${_("Notify your students")}</li>
-        <li class="discussions">${_("Discuss the subject")}</li>
-      </ul>
-    </%b:title_box>
-    <div class="content">
-      <p>${_("Find subjects that your teach or create them.")}</p>
-      <form id="subject-search-form" action="${url(controller='subject', action='lookup')}" method="POST">
-        <input type="text" name="title" />
-        ${location.hidden_fields(c.user.location)}
-        ${h.input_submit(_('Create'), '', class_='inline')}
-      </form>
-    </div>
-  </div>
-  %endif
-  %if 'information' not in done or 'publications' not in done:
-  <div class="step">
-    <div class="heading">
-      <span class="number">${counter}</span>
-      <% counter += 1 %>
-      <span class="title">${_("Complete your profile page")}</span>
-    </div>
-    <div class="content">
-      <p>
-        %if 'information' not in done:
-          ${_("Ututi provides you a profile page that other people can access online. "
-              "To have a complete page, please tell us some bits about your information and your research interests.")}
-        %else:
-          ${_("Ututi provides you a profile page that other people can access online. "
-              "To have a complete page, please list your most important publications.")}
-        %endif
-      </p>
-
-      <a class="forward-link" id="view-page-link" href="${c.user.url(action='external_teacher_index')}">
-        ${_("View my page")}
-      </a>
-      %if 'information' not in done:
-        ${h.button_to(_("Add information"), url(controller='profile', action='edit_information'),
-                      method='GET', class_='dark add inline')}
-      %else:
-        ${h.button_to(_("List publications"), url(controller='profile', action='edit_publications'),
-                      method='GET', class_='dark add inline')}
-      %endif
-    </div>
-  </div>
-  %endif
-  %if not 'group' in done:
-  <div class="step">
-    <div class="heading">
-      <span class="number">${counter}</span>
-      <% counter += 1 %>
-      <span class="title">${_("Add your student groups")}</span>
-    </div>
-    <div class="content">
-      <p>${_("Ututi will keep track of your student groups and make it easy to reach them.")}</p>
-      ${h.button_to(_('Add student group'), url(controller='profile', action='add_student_group'),
-        class_='add inline', method='GET', id='add-student-group')}
-    </div>
-  </div>
-  %endif
+  <p>${_("Tell some basic information about yourself by editing your profile.")}</p>
+  <a class="forward-link" href="${c.user.url(action='external_teacher_index')}">
+    ${_("View my page")}
+    </a>
 </div>
+</%def>
 
 <%def name="group_entry(group, first)">
 <div class="u-object group-description ${'with-top-line' if not first else ''}">
@@ -283,13 +226,37 @@ button.submit {
 <%def name="subject_section(subjects)">
 <div class="page-section subjects">
   <div class="title">
+    %if not 'subject' in done:
+    ${_("Create your subjects")}
+    %else:
     ${_("My courses")}
     <span class="action-button">
       ${h.button_to(_('add courses'),
                     url(controller='subject', action='add'),
                     class_='dark add')}
     </span>
+    %endif
   </div>
+  %if not 'subject' in done:
+  <div class="create-subject clearfix">
+    <%b:title_box title="${_('Features:')}" id="subject-features" class_="side-box">
+    <ul class="feature-list small">
+      <li class="files">${_("Upload course material")}</li>
+      <li class="wiki">${_("Edit subject notes")}</li>
+      <li class="notifications">${_("Notify your students")}</li>
+      <li class="discussions">${_("Discuss the subject")}</li>
+    </ul>
+    </%b:title_box>
+    <div class="content">
+      <p>${_("Find subjects that your teach or create them.")}</p>
+      <form id="subject-search-form" action="${url(controller='subject', action='lookup')}" method="POST">
+        <input type="text" name="title" />
+        ${location.hidden_fields(c.user.location)}
+        ${h.input_submit(_('Create'), '', class_='inline')}
+      </form>
+    </div>
+  </div>
+  %else:
   <div class="subject-description-list">
     <dl>
       %for n, subject in enumerate(subjects):
@@ -297,6 +264,8 @@ button.submit {
       %endfor
     </dl>
   </div>
+  %endif
+
   <script type="text/javascript">
   $(document).ready(function() {
     $('.subject-description-list a.unteach-button').click(function() {
@@ -310,6 +279,9 @@ button.submit {
 <%def name="group_section(groups)">
 <div class="page-section groups">
   <div class="title">
+    %if not 'group' in done:
+    <span class="title">${_("Add your student groups")}</span>
+    %else:
     ${_("My student groups")}
     <span class="action-button">
       ${h.button_to(_('add a group'), 
@@ -317,7 +289,15 @@ button.submit {
                     class_='dark add',
                     method='GET')}
     </span>
+    %endif
   </div>
+  %if not 'group' in done:
+  <div class="content">
+    <p>${_("Ututi will keep track of your student groups and make it easy to reach them.")}</p>
+    ${h.button_to(_('Add student group'), url(controller='profile', action='add_student_group'),
+       class_='add inline', method='GET', id='add-student-group')}
+  </div>
+  %else:
   <div class="group-description-list">
     <dl>
       %for n, group in enumerate(groups):
@@ -332,32 +312,10 @@ button.submit {
     });
   });
   </script>
+  %endif
 </div>
 </%def>
 
-<%def name="profile_section()">
-<div class="page-section profile">
-  <div class="title">
-    ${_("My profile page")}
-    <span class="action-button">
-      ${h.button_to(_("edit profile"), url(controller='profile', action='edit'),
-                    method='GET', class_='dark edit')}
-    </span>
-  </div>
-  <a class="forward-link" href="${c.user.url(action='external_teacher_index')}">
-    ${_("View my page")}
-    </a>
-</div>
-</%def>
-
-%if 'profile' in done or 'information' in done or 'publications' in done:
-  ${profile_section()}
-%endif
-
-%if c.user.taught_subjects:
-  ${subject_section(c.user.taught_subjects)}
-%endif
-
-%if c.user.student_groups:
-  ${group_section(c.user.student_groups)}
-%endif
+${profile_section()}
+${subject_section(c.user.taught_subjects)}
+${group_section(c.user.student_groups)}
