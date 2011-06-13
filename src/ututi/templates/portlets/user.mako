@@ -289,7 +289,7 @@
        <img src="${user.url(action='logo', width=60)}" alt="logo" />
      </div>
      <div class="user-fullname break-word">
-       ${_("Teacher")} ${user.fullname}
+       ${user.fullname}
      </div>
      %if user is c.user:
      <div class="edit-profile-link break-word">
