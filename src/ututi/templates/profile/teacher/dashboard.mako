@@ -101,11 +101,11 @@ button.submit {
     <div class="heading">
       <span class="number">${counter}</span>
       <% counter += 1 %>
-      <span class="title">${_("Fill your profile information")}</span>
+      <span class="title">${_("Fill your page")}</span>
     </div>
     <div class="content">
-      <p>${_("Tell some basic information about yourself by editing your profile.")}</p>
-      ${h.button_to(_("Edit profile"), url(controller='profile', action='edit'),
+      <p>${_("Tell some basic information about yourself.")}</p>
+      ${h.button_to(_("Edit your page"), url(controller='profile', action='edit'),
                     method='GET', class_='dark edit')}
     </div>
   </div>

@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-06-07 21:02+0300\n"
-"Last-Translator: Jaro <jaro@akl.lt>\n"
+"PO-Revision-Date: 2011-06-13 20:03+0300\n"
+"Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -263,6 +263,12 @@ msgstr "Toks ID jau egzistuoja. Reikia naujo."
 msgid "Id cannot be used as an email address."
 msgstr "ID nėra el. paštas. Ar ne?"
 
+msgid "File area cannot be disabled if group has files."
+msgstr "Failų saugykla negali būti išjungta, jei grupė turi failų."
+
+msgid "Subjects section cannot be disabled if group is following any subjects."
+msgstr "Dalykų skirsnis negali būti išjungtas, jei grupė stebi bent vieną dalyką."
+
 msgid "Please enter a title."
 msgstr "Įvesk pavadinimą."
 
@@ -304,6 +310,9 @@ msgstr "Tavo prašymas prisijungti prie grupės vis dar svarstomas. Kantrybės."
 
 msgid "The group's front page was updated."
 msgstr "Grupės puslapis buvo atnaujintas."
+
+msgid "Select the year"
+msgstr "Pasirinkite metus"
 
 msgid "Administrator"
 msgstr "Administratorius"
@@ -507,16 +516,16 @@ msgid "General information"
 msgstr "Bendra informacija"
 
 msgid "Registration settings"
-msgstr ""
+msgstr "Registracijos nustatymai"
 
 msgid "Custom theme"
-msgstr ""
+msgstr "Temos nuostatos"
 
 msgid "Information updated."
 msgstr "Informacija atnaujinta."
 
 msgid "Registration settings updated."
-msgstr ""
+msgstr "Registracijos nustatymai atnaujinti."
 
 msgid "Logo successfully updated."
 msgstr "Logotipas sėkmingai atnaujintas."
@@ -710,7 +719,7 @@ msgid "Teaching"
 msgstr "Dėstymas"
 
 msgid "Activity"
-msgstr ""
+msgstr "Veikla"
 
 msgid "The group is not specified."
 msgstr "Grupė nenurodyta"
@@ -771,7 +780,7 @@ msgid "Could not confirm email: invalid confirmation key."
 msgstr "Nepavyko patvirtinti adreso: neteisingas patvirtinimo raktas."
 
 msgid "Your contact information was updated."
-msgstr ""
+msgstr "Jūsų kontaktinė informacija buvo atnaujinta."
 
 #, python-format
 msgid "Invalid email addresses: %(email_list)s"
@@ -789,30 +798,30 @@ msgid "General Information"
 msgstr "Bendrinė informacija"
 
 msgid "Your information was updated."
-msgstr ""
+msgstr "Jūsų informacija atnaujinta."
 
 msgid "Your publication page was updated."
-msgstr ""
+msgstr "Jūsų publikacijų puslapis atnaujintas."
 
 #, python-format
 msgid "Group %(group_title)s (%(group_email)s) added!"
-msgstr ""
+msgstr "Grupė %(group_title)s (%(group_email)s) pridėta!"
 
 #, python-format
 msgid "Group %(group_title)s (%(group_email)s) updated!"
-msgstr ""
+msgstr "Grupė %(group_title)s (%(group_email)s) atnaujinta!"
 
 #, python-format
 msgid "Group %(group_title)s (%(group_email)s) was deleted."
-msgstr ""
+msgstr "Grupė %(group_title)s (%(group_email)s) ištrinta."
 
 #, python-format
 msgid "Message from %(teacher_name)s: %(subject)s"
-msgstr ""
+msgstr "Žinutė nuo %(teacher_name)s: %(subject)s"
 
 #, python-format
 msgid "Message sent to %(group_title)s (%(group_email)s)."
-msgstr ""
+msgstr "Žinutė išsiųsta %(group_title)s (%(group_email)s)."
 
 msgid "Home"
 msgstr "Pradžia"
@@ -954,10 +963,10 @@ msgid "Fill profile information"
 msgstr "Užpildykite profilio informaciją"
 
 msgid "Add your information"
-msgstr ""
+msgstr "Pridėkite informaciją apie save"
 
 msgid "List your publications"
-msgstr ""
+msgstr "Išrašykite savo publikacijas"
 
 msgid "Add your student groups"
 msgstr "Pridėkite savo studentų grupes"
@@ -967,10 +976,10 @@ msgid "Ututi registration code: %s"
 msgstr "Ututi registracijos kodas: %s"
 
 msgid "Please enter a proper color hex code."
-msgstr ""
+msgstr "Įveskite tinkamą spalvos šešioliktainį kodą."
 
 msgid "Color hex code should contain exactly six or three characters."
-msgstr ""
+msgstr "Spalvų šešioliktainiai kodai turi būti iš šešių arba trijų simbolių."
 
 msgid "Country does not exist."
 msgstr "Tokia šalis neegzistuoja."
@@ -2811,9 +2820,6 @@ msgstr "Pavadinimas:"
 msgid "Entrance year:"
 msgstr "Stojimo metai:"
 
-msgid "Select the year"
-msgstr "Pasirinkite metus"
-
 msgid "Group can subscribe to subjects"
 msgstr "Grupė gali būti susiejama su studijuojamais dalykais"
 
@@ -2844,8 +2850,17 @@ msgstr "Pakeisti logo"
 msgid "Delete current logo"
 msgstr "Trinti dabartinį logo"
 
-msgid "Default group tab"
-msgstr "Pradinis grupės skirtukas"
+msgid "Group's functionality:"
+msgstr "Grupės funkcionalumas:"
+
+msgid "Group has a file storage"
+msgstr "Grupė turi failų saugyklą"
+
+msgid "Group wants to follow subjects"
+msgstr "Grupė gali sekti dalykus"
+
+msgid "Default group tab:"
+msgstr "Pagrindinis grupės skirsnis:"
 
 msgid "Access settings:"
 msgstr "Naudojimo nustatymai:"
@@ -3217,13 +3232,13 @@ msgid "Departments:"
 msgstr "Fakultetai:"
 
 msgid "Edit general information of your university below."
-msgstr ""
+msgstr "Žemiau galite redaguoti universiteto informaciją."
 
 msgid "Full University title:"
 msgstr "Visas universiteto pavadinimas:"
 
 msgid "Short title:"
-msgstr ""
+msgstr "Pavadinimo trumpinys:"
 
 msgid "Country:"
 msgstr "Šalis:"
@@ -3235,69 +3250,74 @@ msgid "University website:"
 msgstr "Universiteto tinklapis:"
 
 msgid "University logo"
-msgstr ""
+msgstr "Universiteto logotipas"
 
 msgid "Upload a high quality logo for your University."
-msgstr ""
+msgstr "Įkelkite aukštos kokybės logotipą jūsų universitetui."
 
 msgid "Remove"
 msgstr "Išmesti"
 
 msgid "Network settings:"
-msgstr ""
+msgstr "Tinklo nustatymai:"
 
 msgid "University settings"
-msgstr ""
+msgstr "Universiteto nustatymai"
 
 msgid "Registration control"
-msgstr ""
+msgstr "Registacijų valdymas"
 
 msgid "Choose who can join your social network."
-msgstr ""
+msgstr "Nurodykite, kas gali prisijungti prie socialinio tinklo."
 
 msgid "Choose your policy:"
-msgstr ""
+msgstr "Nurodykite savo politiką:"
 
 msgid ""
 "Enter a list of email domains that belong to your university. This is "
 "particularly important if you want to control who is registering to your "
 "network."
 msgstr ""
+"Įveskite sąrašą domenų, kurie priklauso jūsų universitetui. Tai ypač "
+"svarbu, jei norite kontroliuoti, kas gali užsiregistruoti jūsų "
+"socialiniame tinkle."
 
 msgid "Delete this domain"
-msgstr ""
+msgstr "Ištrinti šį domeną"
 
 msgid "Currently no email domains are assigned to this University."
-msgstr ""
+msgstr "Kol kas nėra jokių el. pašto domenų, priskirtų šiam universitetui."
 
 msgid "New email domain:"
-msgstr ""
+msgstr "Naujas el. pašto domenas:"
 
 msgid ""
 "Ututi let's you theme your network, including custom colors, header logo "
 "and text."
 msgstr ""
+"Ututi leidžia tinkinti jūsų tinklo temą, pakeičiant spalvas, viršutinės "
+"juostos logotipą bei tekstą."
 
 msgid "Enable custom theming"
-msgstr ""
+msgstr "Įjungti temos nuostatas"
 
 msgid "Choose other logo"
-msgstr ""
+msgstr "Parinkti kitą logotipą"
 
 msgid "Header text:"
-msgstr ""
+msgstr "Viršutinės juostos tekstas:"
 
 msgid "Header background color:"
-msgstr ""
+msgstr "Viršutinės juostos fonas:"
 
 msgid "Header text color:"
-msgstr ""
+msgstr "Viršutinės juostos tekstas:"
 
 msgid "Disable custom theming"
-msgstr ""
+msgstr "Išjungti temos nuostatas"
 
 msgid "Are you sure you want to reset your custom theme?"
-msgstr ""
+msgstr "Ar tikrai norite panaikinti jūsų temos nuostatas?"
 
 msgid ""
 "This is a list of all the recent events in the subjects and groups of "
@@ -3388,6 +3408,8 @@ msgid ""
 "<strong>Fill in your information</strong> to represent yourself to other "
 "members of your academic community."
 msgstr ""
+"<strong>Užpildykite informaciją apie save</strong>, kad pristatytumėte "
+"save kitiems akademinės bendruomenės nariams."
 
 msgid ""
 "<strong>Upload course material.</strong> It will become immediately "
@@ -3468,7 +3490,7 @@ msgid "Teacher profile"
 msgstr "Dėstytojo profilis"
 
 msgid "submit your CV, thoughts, information and academic papers."
-msgstr ""
+msgstr "rašykite savo CV, mintis, informaciją apie save bei mokslinius straipsnis."
 
 msgid "Course material sharing"
 msgstr "Dalinimasis akademine medžiaga"
@@ -3804,7 +3826,7 @@ msgid "Members:"
 msgstr "Nariai:"
 
 msgid "teachers:"
-msgstr ""
+msgstr "dėstytojai:"
 
 msgid "Info"
 msgstr "Informacija"
@@ -3906,22 +3928,22 @@ msgstr ""
 "dėstytojai gali prisijungti."
 
 msgid "Powered by Ututi"
-msgstr ""
+msgstr "Sukurtas Ututi"
 
 msgid "Login:"
 msgstr "Prisijungimas:"
 
 msgid "Keep me logged in"
-msgstr ""
+msgstr "Prisiminti mane"
 
 msgid "Not a member yet?"
-msgstr ""
+msgstr "Dar ne narys?"
 
 msgid "Get started"
 msgstr "Pradžia"
 
 msgid "Dashboard"
-msgstr ""
+msgstr "Įrankinė"
 
 msgid "University feed"
 msgstr "Universiteto naujienos"
@@ -3989,14 +4011,14 @@ msgid "Related members:"
 msgstr "Susiję nariai:"
 
 msgid "Related links:"
-msgstr ""
+msgstr "Susijusios nuorodos:"
 
 msgid "website"
-msgstr ""
+msgstr "svetainė"
 
 #, python-format
 msgid "%(title_abbr)s social network"
-msgstr ""
+msgstr "%(title_abbr)s socialinis tinklas"
 
 msgid "My web page"
 msgstr "Mano svetainė"
@@ -4046,6 +4068,8 @@ msgstr "Kontaktinė informacija"
 
 msgid "Edit your contact information below. Some fields may require confirmation."
 msgstr ""
+"Redaguokite savo kontaktinę informaciją žemiau. Kai kuriuos laukus gali "
+"reikėti patvirtinti."
 
 msgid "Work address"
 msgstr "Darbo adresas"
@@ -4237,7 +4261,7 @@ msgstr ""
 " sekėjais."
 
 msgid "Fill your profile information"
-msgstr "Užpildykite savo profilį"
+msgstr "Užpildykite informaciją apie save"
 
 msgid "Tell some basic information about yourself by editing your profile."
 msgstr ""
@@ -4504,32 +4528,43 @@ msgid "Add a student group"
 msgstr "Pridėti studentų grupę"
 
 msgid "Your student groups:"
-msgstr ""
+msgstr "Jūsų studentų grupės:"
 
 msgid "Keep track of your student groups"
-msgstr ""
+msgstr "Sekite savo studentų grupes"
 
 msgid "Email your students from your dashboard"
-msgstr ""
+msgstr "Parašykite savo studentams tiesiai iš įrankinės"
 
 msgid "Attach files to your messages"
-msgstr ""
+msgstr "Prisekite failus prie savo žinučių"
 
 msgid "Send SMS messages from your dashboard to Ututi groups"
-msgstr ""
+msgstr "Siųskite SMS žinutes Ututi grupėms tiesiai iš įrankinės"
 
 msgid ""
 "Enter a title to identify this group, e. g. Computer Science freshmen or "
 "CS 1st year."
-msgstr ""
+msgstr "Įveskite savo pavadinimą šiai grupei, pvz. Informatika 1 kursas."
 
 msgid ""
 "Enter email address for this group. It can be Ututi or any other mailing "
 "list, or a private email address."
 msgstr ""
+"Įveskite grupės el. pašto adresą. Tai gali būti Ututi ar kokia nors kita "
+"pašto konferencija, arba asmeninis el. pašto adresas."
+
+msgid "Fill your page"
+msgstr "Užpildykite savo svetainę"
+
+msgid "Tell some basic information about yourself."
+msgstr "Pateikite šiek tiek informacijos apie save."
+
+msgid "Edit your page"
+msgstr "Redaguokite savo svetainę"
 
 msgid "Create your subjects"
-msgstr "Sukurtike dėstomus dalykus"
+msgstr "Sukurkite dėstomus dalykus"
 
 msgid "Upload course material"
 msgstr "Įkelti kurso medžiagą"
@@ -4554,17 +4589,23 @@ msgid ""
 " have a complete page, please tell us some bits about your information "
 "and your research interests."
 msgstr ""
+"Ututi suteikia jums asmeninę svetainę, kurią kiti žmonės gali pasiekti "
+"internete. Kad turėtumėte pilnavertę svetainę, pateikite šiek tiek "
+"informacijos apie save bei savo mokslinius interesus."
 
 msgid ""
 "Ututi provides you a profile page that other people can access online. To"
 " have a complete page, please list your most important publications."
 msgstr ""
+"Ututi suteikia jums asmeninę svetainę, kurią kiti žmonės gali pasiekti "
+"internete. Kad turėtumėte pilnavertę svetainę, išrašykite savo "
+"svarbiausias publikacijas."
 
 msgid "Add information"
 msgstr "Pridėti aprašymą"
 
 msgid "List publications"
-msgstr ""
+msgstr "Išrašykite publikacijas"
 
 msgid ""
 "Ututi will keep track of your student groups and make it easy to reach "
@@ -4610,7 +4651,7 @@ msgid "add courses"
 msgstr "pridėti kursus"
 
 msgid "Are you sure you want to delete this subject?"
-msgstr ""
+msgstr "Ar tikrai norite ištrinti šį dalyką?"
 
 msgid "My student groups"
 msgstr "Studentų grupės"
@@ -4619,7 +4660,7 @@ msgid "add a group"
 msgstr "pridėti grupę"
 
 msgid "Are you sure you want to delete this group?"
-msgstr ""
+msgstr "Ar tikrai norite ištrinti šią grupę?"
 
 msgid "My profile page"
 msgstr "Mano svetainė"
@@ -4628,21 +4669,21 @@ msgid "edit profile"
 msgstr "keisti profilį"
 
 msgid "Write down your information and research interests"
-msgstr ""
+msgstr "Užrašykite informaciją apie save bei savo mokslinius interesus"
+
+msgid "link_to_profile_page"
+msgstr "asmeninėje svetainėje"
 
 #, python-format
 msgid "This information will be displayed on your %(profile_page_url)s."
 msgstr "Ši informacija bus pateikiama jūsų %(profile_page_url)s."
 
-msgid "profile page"
-msgstr "svetainėje"
-
 msgid "Edit your information"
-msgstr ""
+msgstr "Redaguokite informaciją apie save"
 
 #, python-format
 msgid "Your publications will be displayed on your %(profile_page_url)s."
-msgstr ""
+msgstr "Jūsų pateiktos publikacijos bus matomos jūsų %(profile_page_url)s."
 
 msgid "Edit a student group"
 msgstr "Redaguoti grupę"
@@ -4658,37 +4699,44 @@ msgid "Provide any personal information that you would like to begin with."
 msgstr "Pateikite bet kokią informaciją apie save, nuo kurios norėtumėte pradėti."
 
 msgid "Affiliation"
-msgstr ""
+msgstr "Profesinė veikla"
 
 msgid "Specify your current position and responsibilities."
-msgstr ""
+msgstr "Nurodykite savo dabartinę poziciją bei atsakomybes."
 
 msgid "Research activities"
-msgstr ""
+msgstr "Mokslo tyrimai"
 
 msgid ""
 "Include a brief summary of your research activities and interests. Cover "
 "past, current and future research plans."
 msgstr ""
+"Glaustai aprašykite savo mokslinių tyrimų interesus ir veiklą. Apžvelkite"
+" praeitį, dabartinius tyrimus bei ateities planus."
 
 msgid "Use bulleted list if needed."
 msgstr "Galite išvardinti papunkčiui."
 
 msgid "Scientific services"
-msgstr ""
+msgstr "Mokslinė veikla"
 
 msgid ""
 "Describe your scientific services. For instance, you might want to "
 "mention that you belong to editorial board of some scientific journal."
 msgstr ""
+"Aprašykite savo mokslinę veiklą. Pavyzdžiui, galbūt esate kurio nors "
+"mokslinio žurnalo red. kolegijos narys."
 
 msgid "Conferences, exchange programs, visits"
-msgstr ""
+msgstr "Konferencijos, mainų programos, vizitai"
 
 msgid ""
 "List conferences that you participate in, exchange programs and other "
 "related information. Cover past, present travels and future plans."
 msgstr ""
+"Išvardinkite konferencijas, kuriose dalyvaujate, mainų programas bei "
+"panašią informaciją. Apžvelkite praeitas bei artimiausias ateinančias "
+"keliones."
 
 msgid ""
 "List your publications that you consider most important, starting with "
@@ -4699,30 +4747,32 @@ msgid ""
 "If the list is very long, organize your publications into sections as "
 "shown below."
 msgstr ""
+"Jei sąrašas labai ilgas, suskirstykite savo publikacijas į skirsnius, "
+"kaip parodyta žemiau."
 
 msgid "Textbooks"
-msgstr ""
+msgstr "Vadovėliai"
 
 msgid "Authors"
 msgstr "Autoriai"
 
 msgid "Name of series and volume"
-msgstr ""
+msgstr "Serijos pavadinimas ir tomas"
 
 msgid "Year"
-msgstr ""
+msgstr "Metai"
 
 msgid "Publishing house"
-msgstr ""
+msgstr "Leidykla"
 
 msgid "Papers"
-msgstr ""
+msgstr "Straipsniai"
 
 msgid "Journal title"
-msgstr ""
+msgstr "Žurnalo pavadinimas"
 
 msgid "Volume/issue"
-msgstr ""
+msgstr "Tomas/numeris"
 
 msgid "Select an image file on your computer:"
 msgstr "Pasirinkti atvaizdo failą savo kompiuteryje"
@@ -5220,19 +5270,19 @@ msgid "Create new subject"
 msgstr "Sukurti naują dalyką"
 
 msgid "Subject features:"
-msgstr ""
+msgstr "Dalykų ypatybės:"
 
 msgid "Upload and share course material"
-msgstr ""
+msgstr "Įkelkite ir dalinkitės kurso medžiaga"
 
 msgid "Discuss with other people interested in the subject"
-msgstr ""
+msgstr "Diskutuokite su kitais žmonėmis, besidominčiais šiuo dalyku"
 
 msgid "Put lecture notes to subject page and edit them together"
-msgstr ""
+msgstr "Įkelkite paskaitos užrašus į dalyko puslapį ir redaguokite juos kartu"
 
 msgid "Get notifications related to this subject"
-msgstr ""
+msgstr "Gaukite priminimus, susijusius su šiuo dalyku"
 
 msgid "Subject title:"
 msgstr "Dalyko pavadinimas:"
@@ -5241,6 +5291,8 @@ msgid ""
 "It's best to use exactly the same title that is used in your university "
 "for this subject. It does not need to be unique."
 msgstr ""
+"Geriausia naudoti tiksliai tokį dalyko pavadinimą, koks yra naudojamas "
+"internete. Pavadinimai neturi būti unikalūs."
 
 msgid "Enter subject details"
 msgstr "Įvesti dalyko detales"
@@ -5448,18 +5500,18 @@ msgstr "Asmeninis puslapis"
 
 #, python-format
 msgid "%(teacher)s has not provided any information."
-msgstr ""
+msgstr "%(teacher)s nėra pateikęs informacijos apie save."
 
 #, python-format
 msgid "%(teacher)s has not listed any publications."
-msgstr ""
+msgstr "%(teacher)s nepateikė jokių publikacijų."
 
 msgid "Taught courses"
 msgstr "Dėstomi dalykai"
 
 #, python-format
 msgid "%(teacher)s does not teach any course."
-msgstr ""
+msgstr "%(teacher)s nedėsto jokio kurso."
 
 msgid "add course"
 msgstr "pridėti dalyką"

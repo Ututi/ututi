@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-06-07 21:02+0300\n"
+"PO-Revision-Date: 2011-06-13 20:03+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=((n * 1) != 1)\n"
@@ -255,6 +255,12 @@ msgstr ""
 msgid "Id cannot be used as an email address."
 msgstr ""
 
+msgid "File area cannot be disabled if group has files."
+msgstr ""
+
+msgid "Subjects section cannot be disabled if group is following any subjects."
+msgstr ""
+
 msgid "Please enter a title."
 msgstr ""
 
@@ -295,6 +301,9 @@ msgid "Your request to join the group is still being processed."
 msgstr ""
 
 msgid "The group's front page was updated."
+msgstr ""
+
+msgid "Select the year"
 msgstr ""
 
 msgid "Administrator"
@@ -2589,9 +2598,6 @@ msgstr ""
 msgid "Entrance year:"
 msgstr ""
 
-msgid "Select the year"
-msgstr ""
-
 msgid "Group can subscribe to subjects"
 msgstr ""
 
@@ -2622,7 +2628,16 @@ msgstr ""
 msgid "Delete current logo"
 msgstr ""
 
-msgid "Default group tab"
+msgid "Group's functionality:"
+msgstr ""
+
+msgid "Group has a file storage"
+msgstr ""
+
+msgid "Group wants to follow subjects"
+msgstr ""
+
+msgid "Default group tab:"
 msgstr ""
 
 msgid "Access settings:"
@@ -4169,6 +4184,15 @@ msgid ""
 "list, or a private email address."
 msgstr ""
 
+msgid "Fill your page"
+msgstr ""
+
+msgid "Tell some basic information about yourself."
+msgstr ""
+
+msgid "Edit your page"
+msgstr ""
+
 msgid "Create your subjects"
 msgstr ""
 
@@ -4269,11 +4293,11 @@ msgstr ""
 msgid "Write down your information and research interests"
 msgstr ""
 
+msgid "link_to_profile_page"
+msgstr "profile page"
+
 #, python-format
 msgid "This information will be displayed on your %(profile_page_url)s."
-msgstr ""
-
-msgid "profile page"
 msgstr ""
 
 msgid "Edit your information"

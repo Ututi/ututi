@@ -17,8 +17,10 @@
 <div class="explanation-post-header">
   <h2>${_('Write down your information and research interests')}</h2>
   <div class="tip">
+    ## TRANSLATORS: please translate it as "profile page" (as in "on your profile page")
+    <% link_to_profile_page = h.link_to(_('link_to_profile_page'), c.user.url(action='external_teacher_index')) %>
     ${h.literal(_('This information will be displayed on your %(profile_page_url)s.') % \
-                dict(profile_page_url=h.link_to(_('profile page'), c.user.url(action='external_teacher_index'))))}
+                dict(profile_page_url=link_to_profile_page))}
   </div>
 </div>
 

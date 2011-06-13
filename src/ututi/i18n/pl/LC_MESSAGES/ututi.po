@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-06-07 21:02+0300\n"
+"PO-Revision-Date: 2011-06-13 20:03+0300\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -274,6 +274,12 @@ msgstr "Takie ID już istnieje. Wybierz inne."
 msgid "Id cannot be used as an email address."
 msgstr "ID nie może być wykorzystywane jako adres e-mail"
 
+msgid "File area cannot be disabled if group has files."
+msgstr ""
+
+msgid "Subjects section cannot be disabled if group is following any subjects."
+msgstr ""
+
 msgid "Please enter a title."
 msgstr "Podaj tytuł"
 
@@ -315,6 +321,9 @@ msgstr "Twoje zgłoszenie jeszcze nie zostało zaakceptowane."
 
 msgid "The group's front page was updated."
 msgstr "Strona główna grupy została zaktualizowana."
+
+msgid "Select the year"
+msgstr "Wybierz rok"
 
 msgid "Administrator"
 msgstr "Administrator"
@@ -2852,9 +2861,6 @@ msgstr "Tytuł:"
 msgid "Entrance year:"
 msgstr "Rok przyjęcia:"
 
-msgid "Select the year"
-msgstr "Wybierz rok"
-
 msgid "Group can subscribe to subjects"
 msgstr "Grupy mogą obserwować zmiany w przedmiotach"
 
@@ -2885,8 +2891,17 @@ msgstr "Zmień logo"
 msgid "Delete current logo"
 msgstr "Usuń aktualne logo"
 
-msgid "Default group tab"
-msgstr "Podstawowy widok"
+msgid "Group's functionality:"
+msgstr ""
+
+msgid "Group has a file storage"
+msgstr ""
+
+msgid "Group wants to follow subjects"
+msgstr ""
+
+msgid "Default group tab:"
+msgstr ""
 
 msgid "Access settings:"
 msgstr "Dostęp do ustawień:"
@@ -4588,6 +4603,15 @@ msgstr ""
 "Wpisz adres e-mail dla tej grupy. Może to być Ututi, prywatny adres "
 "e-mail lub każda inna lista mailingowa."
 
+msgid "Fill your page"
+msgstr ""
+
+msgid "Tell some basic information about yourself."
+msgstr ""
+
+msgid "Edit your page"
+msgstr ""
+
 msgid "Create your subjects"
 msgstr "Utwórz swoje przedmioty"
 
@@ -4695,12 +4719,12 @@ msgstr ""
 "Wpisz informacje o sobie i swoich zainteresowaniach dotyczących badań "
 "naukowych"
 
+msgid "link_to_profile_page"
+msgstr ""
+
 #, python-format
 msgid "This information will be displayed on your %(profile_page_url)s."
 msgstr "Te informacje będą widoczne na Twojej %(profile_page_url)s."
-
-msgid "profile page"
-msgstr "strona profilowa"
 
 msgid "Edit your information"
 msgstr "Edytuj informacje o sobie"
