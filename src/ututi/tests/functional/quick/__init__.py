@@ -34,10 +34,11 @@ def tearDown(test):
     meta.Session.execute("truncate school_grades cascade")
     meta.Session.execute("truncate books cascade")
     meta.Session.execute("truncate content_items cascade")
+    meta.Session.execute("truncate authors cascade")
+    meta.Session.execute("truncate i18n_texts cascade")
     relnames = meta.Session.query('relname').from_statement(
                "select relname from pg_class where relkind = 'S'")
     for name, in relnames:
         if not name.startswith('admin_users'):
             meta.Session.execute('alter sequence %s restart with 1' % name)
-    meta.Session.execute("truncate authors cascade")
     meta.Session.commit()
