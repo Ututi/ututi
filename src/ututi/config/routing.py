@@ -296,7 +296,6 @@ def make_map(config):
     map.connect('/profile/confirm_emails', controller='profile', action='confirm_emails')
     map.connect('/confirm_user_email/{key}', controller='profile', action='confirm_user_email')
     map.connect('/profile/edit', controller='profile', action='edit')
-    map.connect('/profile/edit/photo', controller='profile', action='edit_photo')
     map.connect('/profile/edit/contacts', controller='profile', action='edit_contacts')
     map.connect('/profile/edit/information', controller='profile', action='edit_information')
     map.connect('/profile/edit/information/{lang}', controller='profile', action='edit_information')

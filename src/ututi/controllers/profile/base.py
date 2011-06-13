@@ -71,9 +71,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             {'title': _("General"),
              'name': 'general',
              'link': url(controller='profile', action='edit')},
-            {'title': _("Photo"),
-             'name': 'photo',
-             'link': url(controller='profile', action='edit_photo')},
             {'title': _("Contacts"),
              'name': 'contacts',
              'link': url(controller='profile', action='edit_contacts')},
@@ -271,12 +268,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     def edit_contacts(self):
         return htmlfill.render(self._edit_contacts_form(),
                                defaults=self._edit_form_defaults())
-
-    @ActionProtector("user")
-    def edit_photo(self):
-        c.tabs = self._edit_profile_tabs()
-        c.current_tab ='photo'
-        return render('profile/edit_photo.mako')
 
     @ActionProtector("user")
     @validate(LogoUpload, form='edit_photo')
