@@ -4,6 +4,7 @@ from pylons import tmpl_context as c, url
 from pylons.controllers.util import abort, redirect
 
 from pylons.i18n import _
+from pylons.i18n.translation import set_lang
 
 import ututi.lib.helpers as h
 from ututi.lib.base import render
@@ -104,7 +105,9 @@ class TeacherProfileController(ProfileControllerBase):
             defaults = { 'general_info_text': version.text,
                          'language': language.id }
         else:
+            set_lang(language.id) # XXX cheap language switch
             template = render('profile/teacher/information_template.mako')
+            set_lang(c.lang) # restore language
             defaults = { 'general_info_text': template,
                          'language': language.id }
             c.edit_template = True
