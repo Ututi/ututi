@@ -276,6 +276,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         return render('location/edit.mako')
 
     @location_action
+    @ActionProtector('moderator')
     def edit(self, location):
         defaults = {
             'title': location.title,
@@ -289,6 +290,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         return htmlfill.render(self._edit_form(), defaults=defaults, force_defaults=False)
 
     @location_action
+    @ActionProtector('moderator')
     @validate(schema=LocationEditForm, form='_edit_form')
     def update(self, location):
         if hasattr(self, 'form_result'):
@@ -307,6 +309,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         return render('location/edit_registration.mako')
 
     @location_action
+    @ActionProtector('moderator')
     @validate(schema=RegistrationSettingsForm, form='_edit_registration_form')
     def edit_registration(self, location):
         if hasattr(self, 'form_result'):
@@ -322,6 +325,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
                                force_defaults=False)
 
     @location_action
+    @ActionProtector('moderator')
     def delete_domain(self, location):
         if 'domain_id' in request.POST:
             try:
@@ -337,6 +341,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         redirect(location.url(action='edit_registration'))
 
     @location_action
+    @ActionProtector('moderator')
     @validate(schema=NewDomainForm, form='_edit_registration_form', force_defaults=False)
     def add_domain(self, location):
         if hasattr(self, 'form_result'):
@@ -346,6 +351,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         redirect(location.url(action='edit_registration'))
 
     @location_action
+    @ActionProtector('moderator')
     @validate(LogoUpload, form='edit_photo')
     def update_logo(self, location):
         if hasattr(self, 'form_result'):
@@ -360,6 +366,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         redirect(location.url(action='edit'))
 
     @location_action
+    @ActionProtector('moderator')
     def remove_logo(self, location):
         location.logo = None
         meta.Session.commit()
@@ -370,6 +377,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         return render('location/edit_theme_enabled.mako')
 
     @location_action
+    @ActionProtector('moderator')
     def edit_theme(self, location):
         c.menu_items = location_edit_menu_items()
         c.current_menu_item = 'theming'
@@ -384,6 +392,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
                 defaults=location.theme.values())
 
     @location_action
+    @ActionProtector('moderator')
     def enable_theme(self, location):
         if 'enable_theme' in request.POST and location.theme is None:
             # initialize new theme
@@ -398,6 +407,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         redirect(location.url(action='edit_theme'))
 
     @location_action
+    @ActionProtector('moderator')
     def disable_theme(self, location):
         if 'disable_theme' in request.POST and location.theme is not None:
             location.theme.delete()
@@ -405,6 +415,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         redirect(location.url(action='edit_theme'))
 
     @location_action
+    @ActionProtector('moderator')
     @validate(ThemeForm, form='_edit_theme_form')
     def update_theme(self, location):
         if hasattr(self, 'form_result') and location.theme is not None:
