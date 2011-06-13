@@ -208,9 +208,10 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             'profile_is_public': c.user.profile_is_public,
             'url_name': c.user.url_name,
         }
-        if c.user.location is not None:
-            for n, tag in enumerate(c.user.location.hierarchy()):
-                defaults['location-%d' % n] = tag
+        # TODO Move this code to profile settings
+        #if c.user.location is not None:
+        #    for n, tag in enumerate(c.user.location.hierarchy()):
+        #        defaults['location-%d' % n] = tag
         if c.user.is_teacher:
             additional = {
                 'teacher_position': c.user.teacher_position,
@@ -237,7 +238,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             'fullname': None,
             'description': None,
             'profile_is_public': None,
-            'location': None,
             'url_name': None,
             'teacher_position': None,
         }
@@ -250,7 +250,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             # is not displayed for teacher in this form.
             c.user.description = values['description']
         c.user.profile_is_public = bool(values['profile_is_public'])
-        c.user.location = values['location']
         c.user.url_name = values['url_name']
         if c.user.is_teacher:
             # additional teacher fields

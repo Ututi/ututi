@@ -28,7 +28,6 @@
         </p>
       </div>
       ${h.input_line('fullname', _('Full name'))}
-      ${locationtag.location_widget(2, add_new=(c.tpl_lang=='pl'))}
       %if c.user.is_teacher:
         ${h.input_line('teacher_position', _('Position'), help_text=_("e.g. Associate professor"))}
       %else:

@@ -52,7 +52,6 @@ information and upload a photo.
 
     >>> browser.open('http://localhost/profile/edit')
     >>> browser.getControl('Full name').value = 'Adminas Adminas'
-    >>> browser.getControl(name='location-0').value = 'Vilniaus universitetas'
     >>> browser.getControl('About yourself').value = 'This is me'
     >>> browser.getControl('Save', index=0).click()
     >>> browser.click('Contacts')
