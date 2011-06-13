@@ -46,7 +46,7 @@ Teachers have separate URLs from users:
     'http://localhost/teacher/5'
 
     >>> teacher.getLink('Edit profile').click()
-    >>> teacher.getControl('Ututi username').value = 'benas.b'
+    >>> teacher.getControl('Webpage address').value = 'benas.b'
     >>> teacher.click('Save', index=0)
     >>> teacher.click('Public profile')
     >>> teacher.url

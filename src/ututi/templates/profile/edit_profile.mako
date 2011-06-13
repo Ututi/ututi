@@ -15,12 +15,25 @@
   .left-right {
     margin-top: 20px;
   }
+  #photo-preview {
+    margin-bottom: 10px;
+  }
+  #photo-preview img {
+    width: 200px;
+    height: 200px;
+    padding: 5px;
+    border: 1px solid #666666;
+  }
+  #remove-button {
+    margin-top: 20px;
+  }
 </%def>
 
-<form method="post" action="${url(controller='profile', action='update')}"
-      name="edit_profile_form" enctype="multipart/form-data" class="narrow">
   <div class="left-right">
     <div class="left">
+      <form method="post" action="${url(controller='profile', action='update')}"
+            name="edit_profile_form" enctype="multipart/form-data" class="narrow">
+
       <div class="explanation-post-header" style="margin-top:0">
         <h2>${_('General information')}</h2>
         <p class="tip">
@@ -33,22 +46,16 @@
       %else:
         ${h.input_area('description', _('About yourself'), rows='5', col='40')}
       %endif
-      ${h.input_submit()}
-    </div>
-    <div class="right">
-      <div class="explanation-post-header" style="margin-top:0">
-        <h2>${_("Profile page")}</h2>
-        <p class="tip">
-          <% user_url = c.user.url(qualified=True) %>
-          ${_("You can set a Ututi username to have a more personal URL of your profile page.")}
-          ${h.literal(_("Your current public profile page is %(user_url)s.") % dict(user_url=h.link_to(user_url, user_url)))}
-        </p>
-      </div>
+
       <% help_text = _("Your new url will be: ") + \
              h.literal('<br /><span class="link-color">') + \
              c.user.url(id='', qualified=True) + \
              h.literal('<span id="user-url-preview"></span></span>') %>
+      %if c.user.is_teacher:
+      ${h.input_line('url_name', _('Webpage address'), help_text=help_text)}
+      %else:
       ${h.input_line('url_name', _('Ututi username'), help_text=help_text)}
+      %endif
       <script type="text/javascript">
         function update_url_preview() {
           $('#user-url-preview').html($(this).val());
@@ -59,6 +66,8 @@
           $('#url_name').change();
         });
       </script>
+
+      %if not c.user.is_teacher:
       <div style="margin-bottom:20px">
         <label for="profile-is-public">
           <input type="checkbox" name="profile_is_public" class="checkbox"
@@ -66,8 +75,64 @@
           ${_('Show my profile to unregistered users and search engines')}
         </label>
       </div>
+      %endif
 
       ${h.input_submit()}
+</form>
+
+    </div>
+    <div class="right">
+      <div class="explanation-post-header" style="margin-top:0">
+        <h2>${_("Your profile photo")}</h2>
+        <p class="tip">
+          ${_("Change or remove your profile photo.")}
+        </p>
+      </div>
+
+      <div id="photo-preview">
+        <img src="${c.user.url(action='logo', width=300)}" />
+      </div>
+
+      <form id="photo-form"
+            action="${url(controller='profile', action='update_photo')}"
+            enctype="multipart/form-data"
+            method="POST">
+
+        <input type="file" name="logo" id="logo-field" />
+        <form:error name="logo" /> <!-- formencode errors container -->
+
+        ${h.input_submit(_("Change photo"), name='change', id='choose-button')}
+      </form>
+
+      ${h.button_to(_("Remove"), url(controller='profile', action='remove_photo'),
+                    id='remove-button', class_='dark')}
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#logo-field').hide();
+    new AjaxUpload('#choose-button', {
+        action: "${url(controller='profile', action='update_photo')}" + "?js",
+        name: 'logo',
+        autoSubmit: true,
+        responseType: false,
+        onSubmit: function(file, extension) {
+            if (!(extension && /^(jpg|png|jpeg|gif|tiff|bmp)$/.test(extension))) {
+                $('.error-message').remove(); // remove old messages
+                $('#logo-field').before('<span class="error-message">This file type is not supported.</span>');
+                return false;
+            }
+        },
+        onComplete: function(file, response) {
+            var image_src = "${c.user.url(action='logo', width=300)}";
+            var timestamp = new Date().getTime();
+            $('#photo-preview img').attr('src', image_src + '?' + timestamp);
+            $('.error-message').remove();
+        }
+    });
+  });
+</script>
+
+
     </div>
   </div>
-</form>
