@@ -28,7 +28,7 @@ From the "Get started" page he can click "Add information".
 
     >>> user.click('Add information')
     >>> user.url
-    'http://localhost/profile/edit/information?'
+    'http://localhost/profile/edit/information/en'
 
 For the first time text area contains a template that teacher can edit.
 It also displays a related warning message:
