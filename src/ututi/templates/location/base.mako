@@ -10,13 +10,10 @@
 <%def name="portlets()">
 %if c.user is not None:
   ${location_logo_portlet()}
-  ${navigation_portlet(c.menu_items, c.current_menu_item)}
   ${location_admin_portlet()}
-  ${location_info_portlet()}
+  ${navigation_portlet(c.menu_items, c.current_menu_item)}
   ${location_register_teacher_portlet()}
-  ${share_portlet(c.location)}
-  ${location_members_portlet(count=6)}
-  ${location_groups_portlet()}
+  ${location_info_portlet()}
 %else:
   ${location_logo_portlet()}
   ${navigation_portlet(c.menu_items, c.current_menu_item)}
@@ -26,6 +23,15 @@
   ${create_network_portlet()}
 %endif
 </%def>
+
+<%def name="portlets_secondary()">
+%if c.user is not None:
+  ${share_portlet(c.location)}
+  ${location_members_portlet(count=6)}
+  ${location_groups_portlet()}
+%endif
+</%def>
+
 
 <%def name="title()">
   ${c.location.title}
