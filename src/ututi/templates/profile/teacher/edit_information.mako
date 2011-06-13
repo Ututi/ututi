@@ -40,6 +40,6 @@ ${self.template_warning()}
 
 <form id="information-form" class="text-form" method="post" action="${url(controller='profile', action='update_information')}">
   ${h.input_hidden('language')}
-  ${h.input_area('text', _('Edit your information'), class_='ckeditor')}
+  ${h.input_area('general_info_text', _('Edit your information'), class_='ckeditor')}
   ${h.input_submit(_('Save'))}
 </form>

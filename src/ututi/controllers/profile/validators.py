@@ -52,7 +52,7 @@ class InformationForm(Schema):
     pre_validators = [NestedVariables()]
     allow_extra_fields = True
     language = LanguageValidator()
-    text = validators.String(strip=True)
+    general_info_text = validators.String(strip=True)
 
 
 class PublicationsForm(Schema):

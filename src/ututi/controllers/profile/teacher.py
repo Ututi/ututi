@@ -87,10 +87,12 @@ class TeacherProfileController(ProfileControllerBase):
 
         version = c.user.general_info.get_version(language)
         if version is not None and version.text:
-            defaults = { 'text': version.text, 'language': language.id }
+            defaults = { 'general_info_text': version.text,
+                         'language': language.id }
         else:
             template = render('profile/teacher/information_template.mako')
-            defaults = { 'text': template, 'language': language.id }
+            defaults = { 'general_info_text': template,
+                         'language': language.id }
             c.edit_template = True
         return htmlfill.render(self._edit_information_form(language), defaults=defaults)
 
@@ -101,7 +103,7 @@ class TeacherProfileController(ProfileControllerBase):
             redirect(url(controller='profile', action='edit_information'))
 
         lang = self.form_result['language']
-        text = self.form_result['text']
+        text = self.form_result['general_info_text']
         c.user.general_info.set_text(lang, text)
         meta.Session.commit()
         h.flash(_('Your information was updated.'))
