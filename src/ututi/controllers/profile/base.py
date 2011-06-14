@@ -252,8 +252,8 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         c.user.profile_is_public = bool(values['profile_is_public'])
         c.user.url_name = values['url_name']
         if c.user.is_teacher:
-            # additional teacher fields
-            c.user.teacher_position = values['teacher_position']
+            c.user.profile_is_public = True # teacher profile always public
+            c.user.teacher_position = values['teacher_position'] # additional teacher fields
         meta.Session.commit()
         h.flash(_('Your profile was updated.'))
         redirect(url(controller='profile', action='edit'))
