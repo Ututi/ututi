@@ -27,6 +27,15 @@
   #remove-button {
     margin-top: 20px;
   }
+
+  .base-url {
+    color: #666666;
+    font-size: 12px;
+  }
+
+  #url_name {
+    width: 130px;
+  }
 </%def>
 
   <div class="left-right">
@@ -52,7 +61,15 @@
              c.user.url(id='', qualified=True) + \
              h.literal('<span id="user-url-preview"></span></span>') %>
       %if c.user.is_teacher:
-      ${h.input_line('url_name', _('Webpage address'), help_text=help_text)}
+      <div class="formField">
+        <label for="url_name">
+          <span class="labelText">${_('Page address')}</span>
+          <span class="textField">
+            <span class="base-url">${c.user.url(id='', qualified=True)}</span>
+            <input id="url_name" type="text" value="" name="url_name" />
+          </span>
+        </label>
+      </div>
       %else:
       ${h.input_line('url_name', _('Ututi username'), help_text=help_text)}
       %endif
