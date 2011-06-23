@@ -234,7 +234,7 @@ If user add some info, this action will change:
       </span>
     </div>
     <div>Create your subjects</div>
-    <div>Add your student groups</div>
+    <div>Add your students' contacts</div>
 
 Subject's section allows to lookup and create subjects. Let's
 create a subject now:
@@ -274,7 +274,7 @@ Now this action has also will change:
         </form>
       </span>
     </div>
-    <div>Add your student groups</div>
+    <div>Add your students' contacts</div>
 
 Group's section offers to add student groups:
 
@@ -306,4 +306,4 @@ behavior by removing profile information:
         </form>
       </span>
     </div>
-    <div>Add your student groups</div>
+    <div>Add your students' contacts</div>
