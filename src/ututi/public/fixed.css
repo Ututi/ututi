@@ -115,7 +115,7 @@ button.dark:hover {
 }
 
 button.add {
-    padding-left: 12px;
+    padding-left: 15px;
     background-image: url('img/buttons/bg_add_orange.png');
 }
 
@@ -735,6 +735,7 @@ form.inline-form button {
                 background-color: #e6e6e6;
                 padding: 8px 14px 8px 8px; /* 14px to compensate textarea padding */
                 margin-bottom: 3px;
+                border-bottom: 1px solid #ccc;
             }
 
             .wall .wall-entry .action-block {
@@ -1745,6 +1746,7 @@ ul.medium-icon-list {
     background-position: 10px 10px;
     padding: 12px 25px 20px 45px;
     margin-bottom: 10px;
+    border: 1px solid #cccccc;
 }
 
     .feature-box.icon-subject {
@@ -1934,7 +1936,7 @@ ul.tabs {
     /* Container that may be placed above the tabs.
      */
     .above-tabs {
-        margin-bottom: -16px;
+        margin-bottom: -14px;
         text-align: right;
     }
 
