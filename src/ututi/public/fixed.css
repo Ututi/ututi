@@ -1973,6 +1973,10 @@ ul.tabs {
         background-position: 5px top;
     }
 
+    .page-section.feature-box.profile {
+        background-image: url("/img/icons.com/about/file_edit.png");
+        background-position: 22px 8px;
+    }
 
     .page-section .title {
         position: relative;

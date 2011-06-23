@@ -106,28 +106,30 @@ button.submit {
 <% counter = 1 %>
 
 <%def name="profile_section()">
+%if not 'profile' in done:
+<div class="page-section feature-box profile">
+  <div class="title">
+    ${_("Fill your page")}
+  </div>
+  <p>${_("Tell some basic information about yourself by editing your profile.")}</p>
+  ${h.button_to(_("Edit my page"), url(controller='profile', action='edit'),
+                   method='GET', class_='dark edit')}
+</div>
+%else:
 <div class="page-section profile">
   <div class="title">
-    %if not 'profile' in done:
-    ${_("Fill your page")}
-    %else:
     ${_("My profile page")}
     <span class="action-button">
       ${h.button_to(_("edit my page"), url(controller='profile', action='edit'),
                     method='GET', class_='dark edit')}
     </span>
-    %endif
   </div>
   <p>${_("Tell some basic information about yourself by editing your profile.")}</p>
-  %if not 'profile' in done:
-  ${h.button_to(_("Edit my page"), url(controller='profile', action='edit'),
-                   method='GET', class_='dark edit')}
-  %else:
   <a class="forward-link" href="${c.user.url(action='external_teacher_index')}">
     ${_("View my page")}
   </a>
-  %endif
 </div>
+%endif
 </%def>
 
 <%def name="group_entry(group, first)">
@@ -257,7 +259,7 @@ button.submit {
       <form id="subject-search-form" action="${url(controller='subject', action='lookup')}" method="POST">
         <input type="text" name="title" />
         ${location.hidden_fields(c.user.location)}
-        ${h.input_submit(_('Create'), '', class_='inline')}
+        ${h.input_submit(_('Create course'), '', class_='inline')}
       </form>
     </div>
   </div>
@@ -285,11 +287,11 @@ button.submit {
 <div class="page-section groups">
   <div class="title">
     %if not 'group' in done:
-    ${_("Add your student groups")}
+    ${_("Add your students' contacts")}
     %else:
-    ${_("My student groups")}
+    ${_("My students' contacts")}
     <span class="action-button">
-      ${h.button_to(_('add a group'), 
+      ${h.button_to(_('add a contact'),
                     url(controller='profile', action='add_student_group'),
                     class_='dark add',
                     method='GET')}
@@ -300,7 +302,7 @@ button.submit {
   <div class="content">
     <p>${_("Ututi will keep track of your student groups and make it easy to reach them.")}</p>
     ${h.button_to(_('Add student group'), url(controller='profile', action='add_student_group'),
-       class_='add inline', method='GET', id='add-student-group')}
+       class_='dark add inline', method='GET', id='add-student-group')}
   </div>
   %else:
   <div class="group-description-list">
