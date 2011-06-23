@@ -206,7 +206,7 @@ User sees these recommended actions on his dashboard:
     >>> user.printCssQuery('.page-section > div.title', strip=True)
     <div>Fill your page</div>
     <div>Create your subjects</div>
-    <div>Add your student groups</div>
+    <div>Add your students' contacts</div>
 
 Edit profile button brings user to his profile edit page (duh!):
 

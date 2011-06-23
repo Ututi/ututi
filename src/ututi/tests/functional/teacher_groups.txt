@@ -36,12 +36,12 @@ Ok, let's add three groups: non-ututi, ututi (mailing list) and ututi (forum):
     >>> browser.getControl('Email address').value = 'group@groups.google.com'
     >>> browser.getControl('Save').click()
 
-    >>> browser.getControl('add a group').click()
+    >>> browser.getControl('add a contact').click()
     >>> browser.getControl('Title').value = 'insiders - mailing list'
     >>> browser.getControl('Email address').value = 'moderators@groups.ututi.lt'
     >>> browser.getControl('Save').click()
 
-    >>> browser.getControl('add a group').click()
+    >>> browser.getControl('add a contact').click()
     >>> browser.getControl('Title').value = 'insiders - forum'
     >>> browser.getControl('Email address').value = 'testgroup@groups.ututi.lt'
     >>> browser.getControl('Save').click()
