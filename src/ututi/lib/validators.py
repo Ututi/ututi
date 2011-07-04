@@ -297,13 +297,18 @@ class TranslatedEmailValidator(validators.Email):
     }
 
     def validate_python(self, value, state):
-        """Added extra validation here. Thus the class should be renamed to EmailValidation.
-           A real fix would be to write custum Ututi email validator."""
+        # Added extra validation here. Thus the class should be renamed to EmailValidation.
+        # A real fix would be to write custum Ututi email validator.
         validators.Email.validate_python(self, value, state)
         try:
             value.encode('ascii')
         except UnicodeEncodeError:
             raise Invalid(self.message('nonAscii', state), value, state)
+
+    def _to_python(self, value, state):
+        # Lowercase email here, so we don't have to deal with
+        # differentl capitalization of emails
+        return value.strip().lower()
 
 
 class UniqueEmail(validators.FancyValidator):
