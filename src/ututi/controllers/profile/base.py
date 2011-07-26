@@ -206,6 +206,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             'site_url': c.user.site_url,
             'description': c.user.description,
             'profile_is_public': c.user.profile_is_public,
+            'email_is_public': c.user.email_is_public,
             'url_name': c.user.url_name,
         }
         # TODO Move this code to profile settings
@@ -403,9 +404,10 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             # site url
             c.user.site_url = self.form_result['site_url']
 
-            # address (teachers only)
+            # address and email visibility (teachers only)
             if c.user.is_teacher:
                 c.user.work_address = self.form_result['work_address']
+                c.user.email_is_public = 'email_is_public' in self.form_result
 
             if self.form_result['confirm_email']:
                 h.flash(_('Confirmation message sent. Please check your email.'))

@@ -112,6 +112,15 @@
   %if c.user.isConfirmed:
     ${h.input_line('email', _('Your email address'))}
     <p class="field-status confirmed">${_('Email is confirmed')}</p>
+    %if c.user.is_teacher:
+    <div style="margin-bottom:20px">
+      <label for="email-is-public">
+        <input type="checkbox" name="email_is_public" class="checkbox"
+               id="email-is-public" />
+        ${_('Show my email to unregistered users.')}
+      </label>
+    </div>
+    %endif
   %else:
     ${h.input_line('email', _('Your email address'),
                    right_next= h.input_submit_text_button(_('Get confirmation email'), name='confirm_email'))}

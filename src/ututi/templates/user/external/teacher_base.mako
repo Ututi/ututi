@@ -71,7 +71,7 @@
       </li>
       %endif
 
-      %if c.teacher.emails:
+      %if c.teacher.emails and (c.user or c.teacher.email_is_public):
       <li class="email icon-contact">
         <span class="label">${_('E-mail')}:</span> ${h.literal(', '.join([h.mail_to(email.email) for email in c.teacher.emails if email.confirmed]))}
       </li>

@@ -102,6 +102,7 @@ create table users (
        phone_confirmation_key char(32) default '',
        sms_messages_remaining int8 default 30,
        profile_is_public boolean default true,
+       email_is_public boolean default true,
        hidden_blocks text default '',
        last_seen_feed timestamp not null default (now() at time zone 'UTC'),
        location_country varchar(5) default null,
