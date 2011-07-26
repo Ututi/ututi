@@ -1,9 +1,8 @@
-drop table school_grades;
-drop table cities;
-drop TABLE science_types;
-drop table book_types;
-drop TABLE books;
-drop FUNCTION update_book_worker;
-drop FUNCTION update_book_search;
-CREATE TRIGGER update_book_search;
+drop FUNCTION update_book_worker(books) cascade;
+drop FUNCTION update_book_search() cascade;
 
+drop table school_grades cascade;
+drop table cities cascade;
+drop TABLE science_types cascade;
+drop table book_types cascade;
+drop TABLE books cascade;
