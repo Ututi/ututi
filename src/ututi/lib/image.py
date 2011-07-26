@@ -8,7 +8,7 @@ from pylons import response
 from pylons.controllers.util import abort
 
 from ututi.lib.cache import u_cache
-from ututi.model import Group, User, LocationTag, Book, \
+from ututi.model import Group, User, LocationTag, \
         UserRegistration, Theme
 
 
@@ -46,7 +46,6 @@ def prepare_logo(obj_type, obj_id, width=None, height=None, default_img_path=Non
             obj = User.get_global(obj_id)
         else:
             obj_types = {
-                'book': Book,
                 'group': Group,
                 'locationtag': LocationTag,
                 'registration': UserRegistration,

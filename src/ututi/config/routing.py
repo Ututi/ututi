@@ -183,23 +183,6 @@ def make_map(config):
                 controller='subject',
                 action='home')
 
-    # books
-    map.connect('/books', controller='books', action='index')
-    map.connect('/books/{id}/update', controller='books', action='update')
-    map.connect('/books/{id}/logo/{width}/{height}',
-                controller='books', action='logo')
-    map.connect('/books/{id}/logo/{width}',
-                controller='books', action='logo')
-    map.connect('/books/catalog/{books_department}/location/{location_id}', controller="books", action="catalog")
-    map.connect('/books/catalog/{books_department}/location/{location_id}/science/{science_type_id}', controller="books", action="catalog")
-    map.connect('/books/catalog/{books_department}/science/{science_type_id}', controller="books", action="catalog")
-    map.connect('/books/catalog/{books_department}/science/{science_type_id}', controller="books", action="catalog")
-    map.connect('/books/catalog/{books_department}/{books_type_name}/science/{science_type_id}', controller="books", action="catalog")
-    map.connect('/books/catalog/{books_department}/{books_type_name}/school_grade/{school_grade_id}', controller="books", action="catalog")
-    map.connect('/books/catalog/{books_department}/{books_type_name}/location/{location_id}', controller="books", action="catalog")
-    map.connect('/books/catalog/{books_department}/{books_type_name}', controller="books", action="catalog")
-    map.connect('/books/catalog/{books_department}', controller="books", action="catalog")
-
     # anonymous user logo actions
     map.connect('/user/logo/{width}/{height}',
                 controller='anonymous',

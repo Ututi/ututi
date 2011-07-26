@@ -31,24 +31,3 @@
 </div>
 </%self:portlet>
 </%def>
-
-<%def name="ubooks_portlet()">
-%if c.tpl_lang == 'lt':
-<%self:uportlet id="ubooks-portlet">
-<%def name="header()">
-  ${_("Ututi recommends")}
-</%def>
-  <p id="virtual-book-market">
-    ${_("Virtual book market")}
-    <br />
-    <a href="http://books.ututi.lt">books.ututi.lt</a>
-  </p>
-  <p id="here-you-can-buy">
-    ${_("Here you can buy study material cheaply or find a new owner for your good old textbook.")}
-  </p>
-  <p class="right_arrow" id="ubooks-link">
-    <a href="http://books.ututi.lt">books.ututi.lt</a>
-  </p>
-</%self:uportlet>
-%endif
-</%def>

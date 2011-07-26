@@ -69,12 +69,32 @@ Now let's visit i18n texts view:
 
 Currently table lists few i18n texts in "Pirate english":
 
-    >>> browser.printQuery('id("texts_list")//td/text()')
-    about Pirate english 
-    about_books Pirate english
-    advertising Pirate english
-    banners Pirate english
-    group_pay Pirate english
+    >>> browser.printCssQuery('#texts_list td', strip=True)
+    <td>about</td>
+    <td>Pirate english</td>
+    <td>
+      <a>Edit</a>
+    </td>
+    <td>about_books</td>
+    <td>Pirate english</td>
+    <td>
+      <a>Edit</a>
+    </td>
+    <td>advertising</td>
+    <td>Pirate english</td>
+    <td>
+      <a>Edit</a>
+    </td>
+    <td>banners</td>
+    <td>Pirate english</td>
+    <td>
+      <a>Edit</a>
+    </td>
+    <td>group_pay</td>
+    <td>Pirate english</td>
+    <td>
+      <a>Edit</a>
+    </td>
 
 Let's add "Terms of use" texts in two different languages:
 
@@ -90,14 +110,42 @@ Let's add "Terms of use" texts in two different languages:
     >>> form.getControl(name='text').value = 'Terms of use <b>PL</b> content'
     >>> form.getControl('Save').click()
 
-    >>> browser.printQuery('id("texts_list")//td/text()')
-    about Pirate english 
-    about_books Pirate english
-    advertising Pirate english
-    banners Pirate english
-    group_pay Pirate english
-    terms Lithuanian
-    terms Polish
+    >>> browser.printCssQuery('#texts_list td', strip=True)
+    <td>about</td>
+    <td>Pirate english</td>
+    <td>
+      <a>Edit</a>
+    </td>
+    <td>about_books</td>
+    <td>Pirate english</td>
+    <td>
+      <a>Edit</a>
+    </td>
+    <td>advertising</td>
+    <td>Pirate english</td>
+    <td>
+      <a>Edit</a>
+    </td>
+    <td>banners</td>
+    <td>Pirate english</td>
+    <td>
+      <a>Edit</a>
+    </td>
+    <td>group_pay</td>
+    <td>Pirate english</td>
+    <td>
+      <a>Edit</a>
+    </td>
+    <td>terms</td>
+    <td>Lithuanian</td>
+    <td>
+      <a>Edit</a>
+    </td>
+    <td>terms</td>
+    <td>Polish</td>
+    <td>
+      <a>Edit</a>
+    </td>
 
 Let's check if these texts appear in /terms in correct language:
 

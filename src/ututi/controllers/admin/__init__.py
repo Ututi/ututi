@@ -34,16 +34,14 @@ from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, val
 from ututi.lib.emails import teacher_confirmed_email
 from ututi.model.users import AdminUser
 from ututi.model.events import Event
-from ututi.model import Department
 from ututi.model import FileDownload
 from ututi.model import SMS, GroupCoupon
 from ututi.model import (meta, User, Email, Group, Subject,
                          File, PrivateMessage, Teacher, LocationTag)
-from ututi.model import Notification, City, ScienceType, SchoolGrade, BookType
+from ututi.model import Notification
 from ututi.model import EmailDomain
 from ututi.model.i18n import Language, LanguageText
 from ututi.controllers.admin.export import UniversityExportMixin
-from ututi.controllers.books import BookDepartmentValidator
 
 from ututi.lib import helpers as h
 
@@ -75,28 +73,6 @@ class TeacherSearchForm(Schema):
     allow_extra_fields = True
     user_id = Int(not_empty=False)
     user_name = String(not_empty=False)
-
-
-class CityForm(Schema):
-    allow_extra_fields = True
-    name = String(min=1)
-
-
-class SchoolGradeForm(Schema):
-    allow_extra_fields = True
-    name = String(min=1)
-
-
-class ScienceTypeForm(Schema):
-    allow_extra_fields = True
-    name = String(min=3)
-    department = BookDepartmentValidator(not_empty=True)
-
-
-class BookTypeForm(Schema):
-    allow_extra_fields = True
-    name = String(min=1)
-    url_name = Regex(r'^[a-z-]+$', not_empty=True)
 
 
 class LanguageAddForm(Schema):
@@ -401,184 +377,6 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
             notification.valid_until = self.form_result['valid_until']
             meta.Session.commit()
         redirect(url(controller='admin', action='notifications'))
-
-    @ActionProtector("root")
-    def cities(self):
-        cities = meta.Session.query(City).order_by(City.name.asc())
-        c.cities = self._make_pages(cities)
-        return render('admin/cities.mako')
-
-    @ActionProtector("root")
-    @validate(schema=CityForm, form='cities')
-    def create_city(self):
-        if hasattr(self, 'form_result'):
-            city = City(name=self.form_result['name'])
-            meta.Session.add(city)
-            meta.Session.commit()
-        redirect(url(controller="admin", action="cities"))
-
-    @ActionProtector("root")
-    def _edit_city_form(self):
-        return render('admin/city_edit.mako')
-
-    @ActionProtector("root")
-    def edit_city(self, id):
-        c.city = meta.Session.query(City).filter(City.id == id).one()
-        defaults = {
-            'id': c.city.id,
-            'name': c.city.name}
-        return htmlfill.render(self._edit_city_form(), defaults)
-
-    @ActionProtector("root")
-    @validate(schema=CityForm, form='_edit_city_form')
-    def update_city(self, id):
-        city = meta.Session.query(City).filter(City.id == id).one()
-        if hasattr(self, 'form_result'):
-            city.name = self.form_result['name']
-            meta.Session.commit()
-        redirect(url(controller="admin", action="cities"))
-
-    @ActionProtector("root")
-    def delete_city(self, id):
-        city = meta.Session.query(City).filter(City.id == id).one()
-        meta.Session.delete(city)
-        meta.Session.commit()
-        redirect(url(controller="admin", action="cities"))
-
-    @ActionProtector("root")
-    def school_grades(self):
-        school_grade = meta.Session.query(SchoolGrade).order_by(SchoolGrade.id.asc())
-        c.school_grades = self._make_pages(school_grade)
-        return render('admin/school_grades.mako')
-
-    @ActionProtector("root")
-    def _edit_school_grade_form(self):
-        return render('admin/school_grade_edit.mako')
-
-
-    @ActionProtector("root")
-    def edit_school_grade(self, id):
-        c.school_grade = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == id).one()
-        defaults = {'id': c.school_grade.id,
-                    'name': c.school_grade.name}
-        return htmlfill.render(self._edit_school_grade_form(), defaults)
-
-    @ActionProtector("root")
-    @validate(schema=SchoolGradeForm, form='school_grade')
-    def update_school_grade(self, id):
-        school_grade = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == id).one()
-        if hasattr(self, 'form_result'):
-            school_grade.name = self.form_result['name']
-            meta.Session.commit()
-        redirect(url(controller="admin", action="school_grades"))
-
-    @ActionProtector("root")
-    def delete_school_grade(self, id):
-        school_grade = meta.Session.query(SchoolGrade).filter(SchoolGrade.id == id).one()
-        meta.Session.delete(school_grade)
-        meta.Session.commit()
-        redirect(url(controller="admin", action="school_grades"))
-
-    @ActionProtector("root")
-    @validate(schema=SchoolGradeForm, form='school_grade')
-    def create_school_grade(self):
-        if hasattr(self, 'form_result'):
-            school_grade = SchoolGrade(name=self.form_result['name'])
-            meta.Session.add(school_grade)
-            meta.Session.commit()
-        redirect(url(controller="admin", action="school_grades"))
-
-    def science_types(self):
-        science_types = meta.Session.query(ScienceType).order_by(ScienceType.book_department_id.asc(), ScienceType.name.asc())
-        c.book_departments = [('', '')] + [(d.name, d.title) for d in Department.values()]
-        c.science_types = self._make_pages(science_types)
-        return render('admin/science_types.mako')
-
-    @ActionProtector("root")
-    @validate(schema=ScienceTypeForm, form='science_types')
-    def create_science_type(self):
-        if hasattr(self, 'form_result'):
-            science_type = ScienceType(name=self.form_result['name'], book_department_id=self.form_result['department'].id)
-            meta.Session.add(science_type)
-            meta.Session.commit()
-        redirect(url(controller="admin", action="science_types"))
-
-    @ActionProtector("root")
-    def _edit_science_type_form(self):
-        c.book_departments = [(d.name, d.title) for d in Department.values()]
-        return render('admin/science_type_edit.mako')
-
-    @ActionProtector("root")
-    def edit_science_type(self, id):
-        c.science_type = meta.Session.query(ScienceType).filter(ScienceType.id == id).one()
-        defaults = {
-            'id': c.science_type.id,
-            'name': c.science_type.name,
-            'department': Department.get(c.science_type.book_department_id).name}
-        return htmlfill.render(self._edit_science_type_form(), defaults)
-
-    @ActionProtector("root")
-    @validate(schema=ScienceTypeForm, form='_edit_science_type_form')
-    def update_science_type(self, id):
-        science_type = meta.Session.query(ScienceType).filter(ScienceType.id == id).one()
-        if hasattr(self, 'form_result'):
-            science_type.name = self.form_result['name']
-            science_type.book_department_id = self.form_result['department'].id
-            meta.Session.commit()
-        redirect(url(controller="admin", action="science_types"))
-
-    @ActionProtector("root")
-    def delete_science_type(self, id):
-        science_type = meta.Session.query(ScienceType).filter(ScienceType.id == id).one()
-        meta.Session.delete(science_type)
-        meta.Session.commit()
-        redirect(url(controller="admin", action="science_types"))
-
-    @ActionProtector("root")
-    def book_types(self):
-        book_types = meta.Session.query(BookType).order_by(BookType.name.asc())
-        c.book_types = self._make_pages(book_types)
-        return render('admin/book_types.mako')
-
-    @ActionProtector("root")
-    @validate(schema=BookTypeForm, form='book_types')
-    def create_book_type(self):
-        if hasattr(self, 'form_result'):
-            book_type = BookType(name=self.form_result['name'],
-                                 url_name=self.form_result['url_name'])
-            meta.Session.add(book_type)
-            meta.Session.commit()
-        redirect(url(controller="admin", action="book_types"))
-
-    @ActionProtector("root")
-    def _edit_book_type_form(self):
-        return render('admin/book_type_edit.mako')
-
-    @ActionProtector("root")
-    def edit_book_type(self, id):
-        c.book_type = meta.Session.query(BookType).filter(BookType.id == id).one()
-        defaults = {
-            'id': c.book_type.id,
-            'name': c.book_type.name,
-            'url_name': c.book_type.url_name}
-        return htmlfill.render(self._edit_book_type_form(), defaults)
-
-    @ActionProtector("root")
-    @validate(schema=BookTypeForm, form='_edit_book_type_form')
-    def update_book_type(self, id):
-        book_type = meta.Session.query(BookType).filter(BookType.id == id).one()
-        if hasattr(self, 'form_result'):
-            book_type.name = self.form_result['name']
-            book_type.url_name = self.form_result['url_name']
-            meta.Session.commit()
-        redirect(url(controller="admin", action="book_types"))
-
-    @ActionProtector("root")
-    def delete_book_type(self, id):
-        book_type = meta.Session.query(BookType).filter(BookType.id == id).one()
-        meta.Session.delete(book_type)
-        meta.Session.commit()
-        redirect(url(controller="admin", action="book_types"))
 
     @ActionProtector("root")
     @validate(schema=TeacherSearchForm, form='teachers')

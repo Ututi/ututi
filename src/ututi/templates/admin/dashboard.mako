@@ -45,14 +45,6 @@
   <li>${h.link_to('SMSs', url(controller='admin', action='sms'))}</li>
 </ul>
 
-<h2>${_('uBooks controls:')}</h2>
-<ul class="clearfix">
-  <li>${h.link_to('Book science types', url(controller='admin', action='science_types'))}</li>
-  <li>${h.link_to('Book types', url(controller='admin', action='book_types'))}</li>
-  <li>${h.link_to('Cities', url(controller='admin', action='cities'))}</li>
-  <li>${h.link_to('School grades', url(controller='admin', action='school_grades'))}</li>
-</ul>
-
 <h2>${_('University administration:')}</h2>
 <ul class="clearfix">
   <li>${h.link_to('Email domains', url(controller='admin', action='email_domains'))}</li>

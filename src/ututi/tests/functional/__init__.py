@@ -19,7 +19,7 @@ from ututi.tests.data import create_user
 from ututi.lib.mailer import mail_queue
 from ututi.model.events import Event
 from ututi.model import (Group, meta, LocationTag, SimpleTag, User, Teacher,
-                         Subject, Email, Region, Book)
+                         Subject, Email, Region)
 
 def ftest_setUp(test):
     ututi.tests.setUp(test)
@@ -222,78 +222,6 @@ def printEmails():
         print email.recipients
         print email.payload()
 
-
-def setUpBooks(browser):
-    # Add some disciplines
-    browser.open('http://localhost/admin/science_types')
-    form = browser.getForm('science_type_form')
-    form.getControl('Name').value = 'Fizika'
-    form.getControl(name='department').value = ['school']
-    form.getControl('Save').click()
-
-    browser.open('http://localhost/admin/science_types')
-    form = browser.getForm('science_type_form')
-    form.getControl('Name').value = 'Matematika'
-    form.getControl(name='department').value = ['school']
-    form.getControl('Save').click()
-
-    browser.open('http://localhost/admin/science_types')
-    form = browser.getForm('science_type_form')
-    form.getControl('Name').value = 'Realiniai mokslai'
-    form.getControl(name='department').value = ['university']
-    form.getControl('Save').click()
-
-    browser.open('http://localhost/admin/science_types')
-    form = browser.getForm('science_type_form')
-    form.getControl('Name').value = 'Humanitariniai mokslai'
-    form.getControl(name='department').value = ['university']
-    form.getControl('Save').click()
-
-    browser.open('http://localhost/admin/science_types')
-    form = browser.getForm('science_type_form')
-    form.getControl('Name').value = 'Kita'
-    form.getControl(name='department').value = ['other']
-    form.getControl('Save').click()
-
-    browser.open('http://localhost/admin/science_types')
-    form = browser.getForm('science_type_form')
-    form.getControl('Name').value = 'Visai kita'
-    form.getControl(name='department').value = ['other']
-    form.getControl('Save').click()
-
-    # Add a book type
-    browser.open('http://localhost/admin/book_types')
-    form = browser.getForm('book_type_form')
-    form.getControl('Name').value = 'Vadovėlis'
-    form.getControl('URL name').value = 'vadovelis'
-    form.getControl('Save').click()
-
-    # Add some cities
-    browser.open('http://localhost/admin/cities')
-    form = browser.getForm('city_form')
-    form.getControl('Name').value = 'Vilnius'
-    form.getControl('Save').click()
-
-    form = browser.getForm('city_form')
-    form.getControl('Name').value = 'Kaunas'
-    form.getControl('Save').click()
-
-    # Add a school grade
-    browser.open('http://localhost/admin/school_grades')
-    form = browser.getForm('school_grade_form')
-    form.getControl('Name').value = '1 kl.'
-    form.getControl('Save').click()
-
-def setBooksExpirationTime(dt):
-    for book in meta.Session.query(Book).all():
-        book.valid_until = dt
-    meta.Session.commit()
-
-def booksExpirationDates():
-    expiration_date = []
-    for book in meta.Session.query(Book).all():
-       expiration_date.append(book.valid_until)
-    return expiration_date
 
 def setup_university_export():
     uni = LocationTag.get('uni')
