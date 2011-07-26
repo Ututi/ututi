@@ -1110,7 +1110,7 @@ div.message-list-off, div.message-list-off1 {
 div.message-list-on div.m-on, div.message-list-off div.m-on,
 div.message-list-on1 div.m-on, div.message-list-off1 div.m-on {
     padding:6px 0 6px 45px;
-    width:340px;
+    width:330px;
 }
 div.message-list-on div.user, div.message-list-off div.user,
 div.message-list-on1 div.user, div.message-list-off1 div.user {
