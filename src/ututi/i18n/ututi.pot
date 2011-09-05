@@ -1,0 +1,4795 @@
+# Translations template for ututi.
+# Copyright (C) 2011 ORGANIZATION
+# This file is distributed under the same license as the ututi project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ututi 0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2011-09-05 07:02+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.5\n"
+
+#, python-format
+msgid ""
+"Document at %(url)s was not found, but maybe you are interested in something "
+"else?"
+msgstr ""
+
+msgid ""
+"Monkeys are ashamed of what you said and are now working even harder to fix "
+"the problem. Until they do that, try to search for something else."
+msgstr ""
+
+msgid "User kicked monkeys"
+msgstr ""
+
+msgid ""
+"Ouch! Monkeys were kicked and are trying to work harder.  Until they fix "
+"this, try to search for something else."
+msgstr ""
+
+msgid "Error message"
+msgstr ""
+
+msgid "This Google account is already linked to another Ututi account."
+msgstr ""
+
+msgid "Your Google account has been associated with your Ututi account."
+msgstr ""
+
+msgid "This Facebook account is already linked to another Ututi account."
+msgstr ""
+
+msgid "Your Facebook account has been associated with your Ututi account."
+msgstr ""
+
+msgid "Authentication failed, please try again."
+msgstr ""
+
+msgid "Linked to Google account."
+msgstr ""
+
+#, python-format
+msgid "Verification of %s failed: %s"
+msgstr ""
+
+msgid "Verification cancelled"
+msgstr ""
+
+#, python-format
+msgid "<a href=%s>Setup needed</a>"
+msgstr ""
+
+msgid "Setup needed"
+msgstr ""
+
+#, python-format
+msgid "Authentication failed: %s"
+msgstr ""
+
+msgid "Facebook did not provide your email address."
+msgstr ""
+
+msgid "Login failed. Please login using your username and bind your account first."
+msgstr ""
+
+#, python-format
+msgid "Your Google account \"%s\" has been linked to your existing Ututi account."
+msgstr ""
+
+#, python-format
+msgid "Your Facebook account \"%s\" has been linked to your existing Ututi account."
+msgstr ""
+
+msgid "Failed to link Facebook account"
+msgstr ""
+
+msgid "Linked to Facebook account."
+msgstr ""
+
+msgid "Files"
+msgstr ""
+
+msgid "You have no right to download this file."
+msgstr ""
+
+#, python-format
+msgid "Your phone number (+%s) is not registered in Ututi."
+msgstr ""
+
+#, python-format
+msgid "You have purchased %(count)d SMS credit for %(price).2f Lt;"
+msgid_plural "You have purchased %(count)d SMS credits for %(price).2f Lt;"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid " You now have %(count)d credit."
+msgid_plural " You now have %(count)d credits."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "Invalid group: %s"
+msgstr ""
+
+#, python-format
+msgid "Purchased another month of group space for \"%s\" (until %s)."
+msgstr ""
+
+#, python-format
+msgid "Invalid group message: %s"
+msgstr ""
+
+#, python-format
+msgid "The phone number %s is not associated with a Ututi user"
+msgstr ""
+
+#, python-format
+msgid "More than %d recipient, cannot send message."
+msgid_plural "More than %d recipients, cannot send message."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "SMS message sent to group %s."
+msgstr ""
+
+msgid "Community page"
+msgstr ""
+
+msgid "Ututi community forum."
+msgstr ""
+
+msgid "Ututi bugs"
+msgstr ""
+
+msgid "Report Ututi bugs here."
+msgstr ""
+
+msgid ""
+"The web-based forum for this group has been disabled. Please use the mailing "
+"list instead."
+msgstr ""
+
+msgid "Reply sent"
+msgstr ""
+
+msgid "Post updated."
+msgstr ""
+
+msgid ""
+"Unable to edit post, probably because somebody has already replied to your "
+"post."
+msgstr ""
+
+msgid ""
+"Unable to delete post, probably because somebody has already replied to your "
+"post."
+msgstr ""
+
+msgid "Post deleted."
+msgstr ""
+
+msgid "Thread deleted."
+msgstr ""
+
+msgid "Such id already exists, choose a different one."
+msgstr ""
+
+msgid "Id cannot be used as an email address."
+msgstr ""
+
+msgid "File area cannot be disabled if group has files."
+msgstr ""
+
+msgid "Subjects section cannot be disabled if group is following any subjects."
+msgstr ""
+
+msgid "Please enter a title."
+msgstr ""
+
+msgid "Please enter a group identifier."
+msgstr ""
+
+msgid "The group identifier must be at least 4 characters long."
+msgstr ""
+
+msgid "Subjects"
+msgstr ""
+
+msgid "News feed"
+msgstr ""
+
+msgid "Members"
+msgstr ""
+
+msgid "Notes"
+msgstr ""
+
+msgid "You have to log in or register to request group membership."
+msgstr ""
+
+#, python-format
+msgid "You are now a member of the group %s!"
+msgstr ""
+
+msgid ""
+"Your request to join the group has been forwarded to the group's "
+"administrators. Thanks!"
+msgstr ""
+
+msgid "You already are a member of this group."
+msgstr ""
+
+msgid "Your request to join the group is still being processed."
+msgstr ""
+
+msgid "The group's front page was updated."
+msgstr ""
+
+msgid "Select the year"
+msgstr ""
+
+msgid "Administrator"
+msgstr ""
+
+msgid "Member"
+msgstr ""
+
+msgid "Delete member"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "Discussions on anything and everything"
+msgstr ""
+
+msgid "Group information and settings updated."
+msgstr ""
+
+#, python-format
+msgid "Invited %(num)d friend."
+msgid_plural "Invited %(num)d friends."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "Invalid email addresses detected: %s"
+msgstr ""
+
+msgid "Invitation cancelled"
+msgstr ""
+
+#, python-format
+msgid "New member %s added."
+msgstr ""
+
+msgid "Users invited."
+msgstr ""
+
+#, python-format
+msgid "Congratulations! You are now a member of the group '%s'"
+msgstr ""
+
+#, python-format
+msgid "Invitation to group '%s' rejected."
+msgstr ""
+
+#, python-format
+msgid "Group membership denied to %s."
+msgstr ""
+
+msgid "Error confirming membership request."
+msgstr ""
+
+#, python-format
+msgid "The status of the user %(fullname)s was updated."
+msgstr ""
+
+msgid "Problem updating the status of the user."
+msgstr ""
+
+msgid "The group must have at least one administrator!"
+msgstr ""
+
+msgid "Problem updating the status of the user. Cannot find such user."
+msgstr ""
+
+msgid "You can't delete a group while it has members!"
+msgstr ""
+
+#, python-format
+msgid "Group '%(group_title)s' has been deleted!"
+msgstr ""
+
+msgid "Why would you want to send an empty SMS message?"
+msgstr ""
+
+msgid ""
+"Nobody received your message... No other group members have confirmed their "
+"phone numbers yet. Please encourage them to do so!"
+msgstr ""
+
+#, python-format
+msgid "Not enough SMS credits: you need %d, but you have only %d."
+msgstr ""
+
+msgid "SMS reply sent"
+msgstr ""
+
+#, python-format
+msgid "SMS sent! (%d credits used up, %d remaining)"
+msgstr ""
+
+msgid "What is Ututi?"
+msgstr ""
+
+msgid "Contact us"
+msgstr ""
+
+msgid "Please enter your password to register."
+msgstr ""
+
+msgid "The password must be at least 5 symbols long."
+msgstr ""
+
+msgid "Passwords do not match."
+msgstr ""
+
+msgid ""
+"Please use your university email or <a href=\"/browse\">choose university "
+"from the list</a>."
+msgstr ""
+
+msgid "Wrong email address."
+msgstr ""
+
+msgid "Field can't be empty."
+msgstr ""
+
+msgid "Message to Ututi.com team"
+msgstr ""
+
+msgid "Your message was succesfully sent."
+msgstr ""
+
+msgid "You have to be logged in to download a file!"
+msgstr ""
+
+#, python-format
+msgid ""
+"After logging in you will be redirected to the download page of the file "
+"<strong>%(filename)s</strong> and the download will start automatically."
+msgstr ""
+
+msgid "You have to log in or register to join a group!"
+msgstr ""
+
+msgid "After logging in or registering, your request to join the group will be sent."
+msgstr ""
+
+msgid "Please log in to donate"
+msgstr ""
+
+msgid ""
+"Please log in before you donate so that we can associate the money you donate"
+" with your account."
+msgstr ""
+
+msgid "Permission denied!"
+msgstr ""
+
+msgid ""
+"Only registered users can perform this action. Please log in, or register an "
+"account on our system."
+msgstr ""
+
+msgid "Incorrect username."
+msgstr ""
+
+msgid "Please select your network."
+msgstr ""
+
+msgid "Incorrect password."
+msgstr ""
+
+msgid "Password recovery email sent. Please check your inbox."
+msgstr ""
+
+msgid "User account not found."
+msgstr ""
+
+msgid "Your password has been updated. Welcome back!"
+msgstr ""
+
+msgid "Groups"
+msgstr ""
+
+msgid "Teachers"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "General information"
+msgstr ""
+
+msgid "Registration settings"
+msgstr ""
+
+msgid "Custom theme"
+msgstr ""
+
+msgid "Information updated."
+msgstr ""
+
+msgid "Registration settings updated."
+msgstr ""
+
+msgid "Logo successfully updated."
+msgstr ""
+
+msgid "Your logo was removed."
+msgstr ""
+
+msgid "Wrong username or password!"
+msgstr ""
+
+msgid "You seem to have entered your username and password wrong, please try again!"
+msgstr ""
+
+msgid "The email you entered is registered in Ututi. Please login to proceed."
+msgstr ""
+
+msgid "You already have a teacher account."
+msgstr ""
+
+msgid ""
+"Thank You! Your request to become a teacher has been received. We will notify"
+" You once we grant You the rights of a teacher."
+msgstr ""
+
+msgid ""
+"The mailing list for this group has been disabled. Please use the web-based "
+"forum instead."
+msgstr ""
+
+msgid "Your message to the group was successfully sent."
+msgstr ""
+
+#, python-format
+msgid "Message %(link_to_message)s has been approved."
+msgstr ""
+
+#, python-format
+msgid "Could not approve %(link_to_message)s as it was already approved."
+msgstr ""
+
+#, python-format
+msgid "Message %(link_to_message)s has been rejected."
+msgstr ""
+
+#, python-format
+msgid "Could not reject %(link_to_message)s as it was already approved."
+msgstr ""
+
+msgid "Message sent."
+msgstr ""
+
+#, python-format
+msgid "Ututi news: %(changes)s"
+msgstr ""
+
+#, python-format
+msgid "%(file_count)d new file"
+msgid_plural "%(file_count)d new files"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(page_count)d new page"
+msgid_plural "%(page_count)d new pages"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "Ututi news: %(file_changes)s and %(page_changes)s"
+msgstr ""
+
+#, python-format
+msgid "%(message_count)d new message awaiting moderation"
+msgid_plural "%(message_count)d new messages awaiting moderation"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "The private space subscription for \"%s\" is about to expire"
+msgstr ""
+
+#, python-format
+msgid "The Ututi group \"%s\" has run out of private file space"
+msgstr ""
+
+msgid "Please enter your password."
+msgstr ""
+
+msgid "Password must be at least 5 characters long."
+msgstr ""
+
+msgid "Please select your photo."
+msgstr ""
+
+msgid "Please upload JPEG, PNG or GIF image."
+msgstr ""
+
+msgid "Please enter university title."
+msgstr ""
+
+msgid "Please enter university web site."
+msgstr ""
+
+msgid "Please select logo."
+msgstr ""
+
+msgid "Please enter your full name."
+msgstr ""
+
+msgid "University information"
+msgstr ""
+
+msgid "Personal information"
+msgstr ""
+
+msgid "Add your photo"
+msgstr ""
+
+msgid "Invite friends"
+msgstr ""
+
+msgid "Unlinked from Google account."
+msgstr ""
+
+msgid "This Facebook account is already linked to another user."
+msgstr ""
+
+msgid "Unlinked from Facebook account."
+msgstr ""
+
+msgid "Your confirmation code was resent."
+msgstr ""
+
+msgid "Your invitation has expired."
+msgstr ""
+
+msgid "The element does not exist."
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "The entry already exists"
+msgstr ""
+
+msgid "Choose a different short title"
+msgstr ""
+
+msgid "The short title must contain no spaces"
+msgstr ""
+
+msgid "Subject information"
+msgstr ""
+
+msgid "Please enter subject title"
+msgstr ""
+
+#, python-format
+msgid "You are now watching the subject %s"
+msgstr ""
+
+msgid "The subject has been added to your watched subjects list."
+msgstr ""
+
+msgid "The subject has been removed from your watched subjects list."
+msgstr ""
+
+msgid "The course is already in your taught courses list."
+msgstr ""
+
+msgid "The course was not in your taught courses list."
+msgstr ""
+
+msgid "You have no right to delete this folder."
+msgstr ""
+
+msgid "New page"
+msgstr ""
+
+msgid "This user profile is not public"
+msgstr ""
+
+msgid "Publications"
+msgstr ""
+
+msgid "Teaching"
+msgstr ""
+
+msgid "Activity"
+msgstr ""
+
+msgid "The group is not specified."
+msgstr ""
+
+msgid "Wiki page created."
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
+
+msgid "Contacts"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Your wall settings have been updated."
+msgstr ""
+
+msgid "Your profile was updated."
+msgstr ""
+
+msgid "Your photo successfully updated."
+msgstr ""
+
+msgid "Your photo was removed."
+msgstr ""
+
+msgid "Your Google account has been unlinked."
+msgstr ""
+
+msgid "Your Facebook account has been unlinked."
+msgstr ""
+
+msgid "Your password has been changed!"
+msgstr ""
+
+#, python-format
+msgid "Password recovery email sent to %(user_email)s. Please check your inbox."
+msgstr ""
+
+msgid "Confirmation message sent. Please check your email."
+msgstr ""
+
+#, python-format
+msgid "Your email %s has been confirmed, thanks."
+msgstr ""
+
+msgid "Could not confirm email: invalid confirmation key."
+msgstr ""
+
+msgid "Your contact information was updated."
+msgstr ""
+
+#, python-format
+msgid "Invalid email addresses: %(email_list)s"
+msgstr ""
+
+#, python-format
+msgid "These addresses are already registered in Ututi: %(email_list)s"
+msgstr ""
+
+#, python-format
+msgid "Invitations sent to %(email_list)s"
+msgstr ""
+
+msgid "General Information"
+msgstr ""
+
+msgid "Your information was updated."
+msgstr ""
+
+msgid "Your publication page was updated."
+msgstr ""
+
+#, python-format
+msgid "Group %(group_title)s (%(group_email)s) added!"
+msgstr ""
+
+#, python-format
+msgid "Group %(group_title)s (%(group_email)s) updated!"
+msgstr ""
+
+#, python-format
+msgid "Group %(group_title)s (%(group_email)s) was deleted."
+msgstr ""
+
+#, python-format
+msgid "Message from %(teacher_name)s: %(subject)s"
+msgstr ""
+
+#, python-format
+msgid "Message sent to %(group_title)s (%(group_email)s)."
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "What's New?"
+msgstr ""
+
+msgid "My subjects"
+msgstr ""
+
+msgid "Your phone number has been updated."
+msgstr ""
+
+msgid "Your phone number has been confirmed."
+msgstr ""
+
+msgid "You can't choose this department."
+msgstr ""
+
+msgid "This is not the confirmation code we sent you."
+msgstr ""
+
+msgid "This email is already in use."
+msgstr ""
+
+msgid "Please enter email subject."
+msgstr ""
+
+msgid "Message can not be empty."
+msgstr ""
+
+msgid "Please enter at least one email address."
+msgstr ""
+
+msgid "Invitation to Ututi"
+msgstr ""
+
+msgid "Confirm your email for Ututi"
+msgstr ""
+
+msgid "Confirm the email for Ututi"
+msgstr ""
+
+msgid "Ututi group invitation"
+msgstr ""
+
+msgid "Ututi password recovery"
+msgstr ""
+
+msgid "Ututi group membership request"
+msgstr ""
+
+msgid "Ututi group membership confirmation"
+msgstr ""
+
+msgid "Group space bought"
+msgstr ""
+
+msgid "Your account has been confirmed!"
+msgstr ""
+
+msgid "New teacher!"
+msgstr ""
+
+msgid "Request to be come a teacher!"
+msgstr ""
+
+msgid "Community"
+msgstr ""
+
+msgid "Bugs"
+msgstr ""
+
+msgid "ututi-community"
+msgstr ""
+
+msgid "ututi-bugs"
+msgstr ""
+
+msgid "To confirm your gadu gadu enter this code in your profile page."
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Only people with confirmed university email can register"
+msgstr ""
+
+msgid "People with confirmed university email can register and other can be invited"
+msgstr ""
+
+msgid "Everyone can register to this university"
+msgstr ""
+
+#, python-format
+msgid "%(num)s second ago"
+msgid_plural "%(num)s seconds ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(num)s minute ago"
+msgid_plural "%(num)s minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(num)s hour ago"
+msgid_plural "%(num)s hours ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(num)s day ago"
+msgid_plural "%(num)s days ago"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Invite others to join"
+msgstr ""
+
+msgid "Join / create a group"
+msgstr ""
+
+msgid "Find / create your subjects"
+msgstr ""
+
+msgid "Fill profile information"
+msgstr ""
+
+msgid "Add your information"
+msgstr ""
+
+msgid "List your publications"
+msgstr ""
+
+msgid "Add your student groups"
+msgstr ""
+
+#, python-format
+msgid "Ututi registration code: %s"
+msgstr ""
+
+msgid "Please enter a proper color hex code."
+msgstr ""
+
+msgid "Color hex code should contain exactly six or three characters."
+msgstr ""
+
+msgid "Country does not exist."
+msgstr ""
+
+msgid "Please select country."
+msgstr ""
+
+msgid "Location does not exist."
+msgstr ""
+
+msgid "Please specify your university."
+msgstr ""
+
+msgid "Such short title already exists, choose a different one."
+msgstr ""
+
+msgid "Please specify member policy."
+msgstr ""
+
+msgid "Invalid policy selected."
+msgstr ""
+
+msgid "Invalid phone number; use the format +37069912345"
+msgstr ""
+
+msgid "Phone number too long; use the format +37069912345"
+msgstr ""
+
+msgid "Phone number too short; use the format +37069912345"
+msgstr ""
+
+msgid "The field may not be left empty."
+msgstr ""
+
+msgid ""
+"The field may only contain letters, numbers and the characters + - _ and . "
+"(dot)"
+msgstr ""
+
+msgid "The tag is too long."
+msgstr ""
+
+msgid "This username is used by another user."
+msgstr ""
+
+msgid ""
+"The field may only contain lowercase letters, numbers and the characters + - "
+"_ and . (dot)"
+msgstr ""
+
+msgid "Please enter an email address"
+msgstr ""
+
+msgid "An email address must contain a single @"
+msgstr ""
+
+#, python-format
+msgid ""
+"The username portion of the email address is invalid (the portion before the "
+"@: %(username)s)"
+msgstr ""
+
+msgid "Email address cannot contain unicode characters"
+msgstr ""
+
+#, python-format
+msgid "An error occured when trying to connect to the server: %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"The domain portion of the email address is invalid (the portion after the @: "
+"%(domain)s)"
+msgstr ""
+
+#, python-format
+msgid ""
+"The domain of the email address does not exist (the portion after the @: "
+"%(domain)s)"
+msgstr ""
+
+msgid "The email already exists."
+msgstr ""
+
+msgid "Enter a valid email."
+msgstr ""
+
+#, python-format
+msgid "%(email)s is already registered in %(university)s network."
+msgstr ""
+
+msgid "Public email domains are not allowed."
+msgstr ""
+
+msgid "You have to use university email address to register at this university."
+msgstr ""
+
+msgid "Enter a valid email domain."
+msgstr ""
+
+#, python-format
+msgid "Email domain %(domain_name)s is not available."
+msgstr ""
+
+msgid "You must start your URL with http://, https://, etc"
+msgstr ""
+
+#, python-format
+msgid "%(domain_name)s is not a valid email domain."
+msgstr ""
+
+#, python-format
+msgid "You must provide a full domain name (like %(domain)s.com)"
+msgstr ""
+
+msgid "Enter a valid language."
+msgstr ""
+
+msgid "Language with this id already exists."
+msgstr ""
+
+msgid "Language does not exist."
+msgstr ""
+
+msgid "Id does not reference a group or a subject."
+msgstr ""
+
+msgid "Please select a file."
+msgstr ""
+
+#, python-format
+msgid "Bad file type, only files of the types '%(allowed)s' are supported."
+msgstr ""
+
+msgid "Such coupon code already exists, choose a different one."
+msgstr ""
+
+msgid "Such a coupon code does not exist."
+msgstr ""
+
+msgid "Please enter at least one value."
+msgstr ""
+
+msgid "Invalid subject"
+msgstr ""
+
+#, python-format
+msgid "unlimited group private files for %(day_count)d day"
+msgid_plural "unlimited group private files for %(day_count)d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "A new file has been uploaded for the %(title)s:"
+msgstr ""
+
+#, python-format
+msgid "Page %(page_title)s (%(page_url)s) was created."
+msgstr ""
+
+#, python-format
+msgid "Page %(page_title)s was created."
+msgstr ""
+
+#, python-format
+msgid "New page %(link_to_page)s of a subject %(link_to_subject)s was created"
+msgstr ""
+
+#, python-format
+msgid "Page %(page_title)s (%(page_url)s) was updated."
+msgstr ""
+
+#, python-format
+msgid "Page %(page_title)s was updated."
+msgstr ""
+
+#, python-format
+msgid "Page %(page)s of a subject %(subject)s was updated"
+msgstr ""
+
+#, python-format
+msgid "Page %(link_to_page)s of a subject %(link_to_subject)s was updated"
+msgstr ""
+
+#, python-format
+msgid "File %(file_title)s (%(file_url)s) was uploaded."
+msgstr ""
+
+#, python-format
+msgid "File %(file_title)s was uploaded."
+msgstr ""
+
+#, python-format
+msgid "A new file %(link_to_file)s for a subject %(link_to_subject)s was uploaded"
+msgstr ""
+
+#, python-format
+msgid "A new file %(link_to_file)s for a group %(link_to_group)s was uploaded"
+msgstr ""
+
+#, python-format
+msgid "A new folder '%(folder_title)s' for a subject %(link_to_subject)s was created"
+msgstr ""
+
+#, python-format
+msgid "A new folder '%(folder_title)s' for a group %(link_to_group)s was uploaded"
+msgstr ""
+
+#, python-format
+msgid "New subject %(link_to_subject)s was created"
+msgstr ""
+
+#, python-format
+msgid "New group %(link_to_group)s was created"
+msgstr ""
+
+#, python-format
+msgid "Subject %(link_to_subject)s was modified"
+msgstr ""
+
+#, python-format
+msgid "Teacher %(link_to_author)s sent message to the group %(link_to_group)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"New email post %(link_to_message)s was posted on %(link_to_group)s mailing "
+"list"
+msgstr ""
+
+#, python-format
+msgid ""
+"There is %(number_of_messages)d message in the moderation queue "
+"(%(moderation_queue_link)s)"
+msgid_plural ""
+"There are %(number_of_messages)d messages in the moderation queue "
+"(%(moderation_queue_link)s)"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"There is %(number_of_messages)d message waiting in the <a "
+"href=\"%(moderation_queue_link)s\">moderation queue</a>"
+msgid_plural ""
+"There are %(number_of_messages)d waiting in the <a "
+"href=\"%(moderation_queue_link)s\">moderation queue</a>"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"New email post %(link_to_message)s was posted in %(link_to_group)s moderation"
+" queue"
+msgstr ""
+
+#, python-format
+msgid "New forum post %(link_to_message)s posted on %(link_to_group)s forums"
+msgstr ""
+
+#, python-format
+msgid "%(link_to_author)s sent an SMS: <em>%(text)s</em>"
+msgstr ""
+
+#, python-format
+msgid "%(link_to_author)s sent an private message: <em>%(text)s</em>"
+msgstr ""
+
+#, python-format
+msgid "Member %(link_to_user)s joined the group %(link_to_group)s"
+msgstr ""
+
+#, python-format
+msgid "Member %(link_to_user)s left the group %(link_to_group)s"
+msgstr ""
+
+#, python-format
+msgid "Group %(link_to_group)s started watching subject %(link_to_subject)s"
+msgstr ""
+
+#, python-format
+msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
+msgstr ""
+
+msgid "(no subject)"
+msgstr ""
+
+msgid "Anonymous"
+msgstr ""
+
+msgid "Admin"
+msgstr ""
+
+msgid "Distinguished moderator"
+msgstr ""
+
+msgid "Champion"
+msgstr ""
+
+msgid "Distinguished user"
+msgstr ""
+
+msgid "Gold sponsor"
+msgstr ""
+
+msgid "Sponsor"
+msgstr ""
+
+msgid "Moderator"
+msgstr ""
+
+msgid "Group admin"
+msgstr ""
+
+msgid "teacher"
+msgstr ""
+
+msgid "Teacher"
+msgstr ""
+
+msgid ""
+"You do not have the rights to see this page, or perform this action. Go back "
+"or go to the search page please."
+msgstr ""
+
+msgid "go back"
+msgstr ""
+
+msgid "go find something else"
+msgstr ""
+
+msgid "Error!"
+msgstr ""
+
+msgid "Our highly trained monkeys are fixing this problem right now."
+msgstr ""
+
+msgid "If You wish, You can shout at the monkeys:"
+msgstr ""
+
+msgid "Shout!"
+msgstr ""
+
+msgid "or"
+msgstr ""
+
+msgid "Kick a monkey!"
+msgstr ""
+
+msgid "go find something"
+msgstr ""
+
+msgid ""
+"Image from flickr: "
+"http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
+msgstr ""
+
+msgid "Sign up to join your university's social network or create it yourself"
+msgstr ""
+
+msgid "Enter your academic email"
+msgstr ""
+
+msgid "Sign Up"
+msgstr ""
+
+msgid ""
+"Only people with a verified university / college email address can join your "
+"network."
+msgstr ""
+
+msgid "Learn more"
+msgstr ""
+
+msgid "Private social networks for universities."
+msgstr ""
+
+msgid ""
+"Ututi is a platform for creating academical social networks. It helps engage "
+"your students and teachers and improve the quality of your studies."
+msgstr ""
+
+msgid "Social discussions about course material between students and teachers."
+msgstr ""
+
+msgid ""
+"Students and teachers can discuss course material, academical matters and "
+"university life in a modern way."
+msgstr ""
+
+msgid "Course material publishing."
+msgstr ""
+
+msgid ""
+"Teachers can create areas for course information where students will be able "
+"to access, share and comment study materials."
+msgstr ""
+
+msgid "Using Ututi:"
+msgstr ""
+
+msgid "More..."
+msgstr ""
+
+msgid "New in Ututi?"
+msgstr ""
+
+msgid "Sign in with your university email"
+msgstr ""
+
+msgid "Email address:"
+msgstr ""
+
+msgid "Password:"
+msgstr ""
+
+msgid "Select network:"
+msgstr ""
+
+msgid "Keep me logged in on this computer"
+msgstr ""
+
+msgid "Forgot password?"
+msgstr ""
+
+msgid "Or log in using Facebook or Google"
+msgstr ""
+
+msgid "Log in using Facebook"
+msgstr ""
+
+msgid "Log in using Google"
+msgstr ""
+
+msgid "Private social networks for universities"
+msgstr ""
+
+msgid "Bringing students and teachers together"
+msgstr ""
+
+msgid "My University"
+msgstr ""
+
+msgid "Catalog"
+msgstr ""
+
+msgid "Search text"
+msgstr ""
+
+msgid "search_"
+msgstr ""
+
+msgid "Account settings"
+msgstr ""
+
+msgid "Edit profile"
+msgstr ""
+
+msgid "Public profile"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Language:"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "„UTUTI Ltd.“"
+msgstr ""
+
+msgid "Terms"
+msgstr ""
+
+msgid "Contact Us"
+msgstr ""
+
+msgid "Feedback"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "No, thanks"
+msgstr ""
+
+msgid "UTUTI"
+msgstr ""
+
+msgid ""
+"This is a testing version - this is just a copy of the information! Changes "
+"you make will not be persisted!"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Statistics"
+msgstr ""
+
+msgid "Statistics by Region"
+msgstr ""
+
+msgid ""
+"Here you see information how many people are added information where they are"
+" study."
+msgstr ""
+
+msgid "Statistics by Geo location"
+msgstr ""
+
+msgid "Here you see how many people in some cities was logedin more than 2 times."
+msgstr ""
+
+msgid "Most active user"
+msgstr ""
+
+msgid "Here you see most altruistic users."
+msgstr ""
+
+msgid "Terms of use"
+msgstr ""
+
+msgid "Found out enough?"
+msgstr ""
+
+msgid "Join Ututi!"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "Ututi - your university on the web"
+msgstr ""
+
+msgid ""
+"Your academic groups and subjects containing related materials: files, notes "
+"and descriptions. "
+msgstr ""
+
+msgid "All these things are combined in the handy Ututi system."
+msgstr ""
+
+msgid "What groups can do: email"
+msgstr ""
+
+msgid ""
+"It is a communication tool for You and Your classmates. Ututi groups work "
+"just like mailing lists: every member can receive these messages in their "
+"email account and can reply to them from there (You do not have to log on to "
+"Ututi every time). "
+msgstr ""
+
+msgid ""
+"You can always choose not to receive these email messages in the group "
+"settings."
+msgstr ""
+
+msgid "What groups can do: subjects"
+msgstr ""
+
+msgid ""
+"Every group studies subjects. Ututi also has a catalog of academic subjects. "
+"Here the subjects are classified by the university and faculty. Every group "
+"can mark the subjects it is studying in the \"subjects\" area."
+msgstr ""
+
+msgid ""
+"Members of the group receive notifications about the changes in all watched "
+"subjects: what files were uploaded, pages created or descriptions changed."
+msgstr ""
+
+msgid ""
+"You can find new subjects by using our search and if they do not exist - "
+"create them :)"
+msgstr ""
+
+msgid "What groups can do: files"
+msgstr ""
+
+msgid ""
+"Ututi makes it easy to share files. In the \"files\" area members of the "
+"group can see the private files of the group and all the files of the "
+"subjects the group is watching."
+msgstr ""
+
+msgid "Private files are kept in a separate folder. Their size is limited to 200 Mb."
+msgstr ""
+
+msgid ""
+"Public files are kept in the folders belonging to the subjects. The folders "
+"are visible in the group when it is watching these subjects. The size and "
+"amount of public files is not limited. What is more, files can be added to "
+"subjects not only by your group, but also by other groups and Ututi members. "
+"This makes it easy to share information."
+msgstr ""
+
+msgid "What groups can do: events"
+msgstr ""
+
+msgid ""
+"All the events of a groups: new members, files, subjects are visible in the "
+"\"whats new\" section."
+msgstr ""
+
+msgid "What members can do: subjects"
+msgstr ""
+
+msgid ""
+"Not only groups, but also single Ututi members can watch subjects. You can "
+"easily start watching a subject by visiting its page and clicking on the link"
+" \"start watching\"."
+msgstr ""
+
+msgid ""
+"You can view all the subjects You are watching in the \"files\" area of Your "
+"profile."
+msgstr ""
+
+msgid ""
+"Here You can also choose to ignore the subjects watched by Your group - by "
+"clicking on the \"eye\" icon next to a subject You will stop receiving "
+"notifications about its events, but other classmates will continue watching "
+"it. "
+msgstr ""
+
+msgid ""
+"What is more, You can specify how often You want to receive email "
+"notifications about events in Your watched subjects."
+msgstr ""
+
+msgid "What members can do: home"
+msgstr ""
+
+msgid ""
+"In Your home area You will see what is happening in Your group and the "
+"subjects either You or Your group are watching."
+msgstr ""
+
+msgid ""
+"From here You can also easily create a subject, upload a file, invite people "
+"to use Ututi."
+msgstr ""
+
+msgid "Overview:"
+msgstr ""
+
+msgid "About Ututi"
+msgstr ""
+
+msgid "Contact us using this form"
+msgstr ""
+
+msgid "Name:"
+msgstr ""
+
+msgid "Email adress:"
+msgstr ""
+
+msgid "Message:"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Contact information:"
+msgstr ""
+
+msgid "Private social networks for Universities and Colleges"
+msgstr ""
+
+msgid ""
+"Ututi is a platform for creating academic social networks.It helps engage "
+"your students and teachers and improve the qualityof your studies."
+msgstr ""
+
+msgid ""
+"Here students and teachers can create groups online, use the mailinglist for "
+"communication and the file storage for sharing information."
+msgstr ""
+
+msgid ""
+"What is more, here Teachers will create for courses information wherestudents"
+" will be able to access, share and comment study materials."
+msgstr ""
+
+msgid "Key features"
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "Editing"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Adminstration dashboard"
+msgstr ""
+
+msgid "Ututi controls:"
+msgstr ""
+
+msgid "University administration:"
+msgstr ""
+
+msgid "Standard UI patterns/objects:"
+msgstr ""
+
+#, python-format
+msgid "found %(count)s file"
+msgid_plural "found %(count)s files"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "deleted by <a href=\"%(user_url)s\">%(user)s</a> on %(date)s"
+msgstr ""
+
+msgid "undelete"
+msgstr ""
+
+msgid "Parent id"
+msgstr ""
+
+msgid "Undelete"
+msgstr ""
+
+msgid ""
+"Parent id can be a path, e.g. subject/vu/matematika, group/matematikai, or a "
+"numeric id."
+msgstr ""
+
+msgid "Create new"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Upload"
+msgstr ""
+
+msgid "Email domains"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Events"
+msgstr ""
+
+#, python-format
+msgid "found %(count)s event"
+msgid_plural "found %(count)s events"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Group Coupons"
+msgstr ""
+
+#, python-format
+msgid "found %(count)s coupon"
+msgid_plural "found %(count)s coupons"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Code"
+msgstr ""
+
+msgid "Created"
+msgstr ""
+
+msgid "Valid until"
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Parameter"
+msgstr ""
+
+msgid "Groups using"
+msgstr ""
+
+msgid "Day count (for unlimited space)"
+msgstr ""
+
+#, python-format
+msgid "found %(count)s group"
+msgid_plural "found %(count)s groups"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "I18n texts"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Id"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Text id"
+msgstr ""
+
+msgid "Text language"
+msgstr ""
+
+msgid "Language title"
+msgstr ""
+
+msgid "Languages"
+msgstr ""
+
+msgid "Language id"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Post"
+msgstr ""
+
+msgid "Sending..."
+msgstr ""
+
+msgid "Notification"
+msgstr ""
+
+msgid "Notification text"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "SMS messages"
+msgstr ""
+
+#, python-format
+msgid "found %(count)s message"
+msgid_plural "found %(count)s messages"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Sender"
+msgstr ""
+
+msgid "Recipient"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Last send"
+msgstr ""
+
+msgid "Not yet sent"
+msgstr ""
+
+msgid "delivered"
+msgstr ""
+
+msgid "delivery failure"
+msgstr ""
+
+msgid "buffered"
+msgstr ""
+
+msgid "smsc submit"
+msgstr ""
+
+msgid "smsc reject"
+msgstr ""
+
+msgid "Message sent"
+msgstr ""
+
+msgid "SMSC login problem"
+msgstr ""
+
+msgid "SMSC error"
+msgstr ""
+
+msgid "Country not allowed"
+msgstr ""
+
+msgid "Missing params"
+msgstr ""
+
+msgid "Operator not allowed"
+msgstr ""
+
+msgid "IP not allowed"
+msgstr ""
+
+msgid "Number"
+msgstr ""
+
+#, python-format
+msgid "found %(count)s subject"
+msgid_plural "found %(count)s subjects"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Fullname"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "University"
+msgstr ""
+
+msgid "Make a teacher"
+msgstr ""
+
+msgid "Unverified teachers"
+msgstr ""
+
+#, python-format
+msgid "%(count)s teacher"
+msgid_plural "%(count)s teachers"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Position"
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Deny"
+msgstr ""
+
+msgid "Make any user a teacher:"
+msgstr ""
+
+msgid "User ID"
+msgstr ""
+
+msgid "User name or email fragment"
+msgstr ""
+
+msgid "Find"
+msgstr ""
+
+msgid "Ututi users:"
+msgstr ""
+
+msgid "Downloads"
+msgstr ""
+
+msgid "Downloads (Mb)"
+msgstr ""
+
+msgid "Uploads"
+msgstr ""
+
+msgid "Pages"
+msgstr ""
+
+msgid "Messages"
+msgstr ""
+
+msgid "User Id"
+msgstr ""
+
+#, python-format
+msgid "found %(count)s user"
+msgid_plural "found %(count)s users"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"We have received a request to confirm the ownership of this email on the "
+"Ututi system. If this email belongs to you, confirm it by clicking on this "
+"link:"
+msgstr ""
+
+msgid "Ututi team"
+msgstr ""
+
+msgid "Hello, this is a message sent from ututi.com contact us form."
+msgstr ""
+
+#, python-format
+msgid "%(person_title)s posted on the '%(forum_title)s' forum:"
+msgstr ""
+
+msgid "You can find the thread online here:"
+msgstr ""
+
+msgid "The Ututi team"
+msgstr ""
+
+#, python-format
+msgid "Your request to join the group %(groupname)s has been confirmed."
+msgstr ""
+
+#, python-format
+msgid "You may visit the group's page here: %(url)s ."
+msgstr ""
+
+#, python-format
+msgid "Your request to join the group %(groupname)s has been denied."
+msgstr ""
+
+#, python-format
+msgid "%(fullname)s has requested to become a member of the group %(groupname)s."
+msgstr ""
+
+#, python-format
+msgid "You may confirm or deny this request here: %(url)s ."
+msgstr ""
+
+#, python-format
+msgid "Space for private files was bought for '%(groupname)s' group."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"the private space subscription for the Ututi group \"%(group_title)s\"\n"
+"is about to expire.  When it expires, you will not be able to upload\n"
+"more files to your file area.  Please extend your subscription on the\n"
+"group page at %(group_url)s .\n"
+"\n"
+"--\n"
+"The Ututi team\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"your group \"%(group_title)s\" has just run out of private group space.\n"
+"If you want to use private group space further, please purchase a "
+"subscription\n"
+"on the group page at %(group_url)s, and the group file limit\n"
+"will be raised to %(size)s.\n"
+"\n"
+"--\n"
+"The Ututi team\n"
+msgstr ""
+
+msgid "Hi"
+msgstr ""
+
+#, python-format
+msgid "You may join group %(group_title)s by following this link:"
+msgstr ""
+
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"Your friend %(author)s is using Ututi.com, academical social networtk, and\n"
+"wants to invite you to a group %(group_title)s (%(group_url)s).\n"
+"In Ututi you can find coursework, share files with other members of \n"
+"the group and use the group forums.\n"
+"\n"
+"Since you do not appear to be a Ututi user at the moment, to become a\n"
+"member of this group, you need to register first.\n"
+"\n"
+"You may register by following this link: %(link)s\n"
+"\n"
+"--\n"
+"The Ututi team\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"Your friend %(author)s wants to invite you to the group\n"
+"%(group_title)s (%(group_url)s). After joining you will be able to\n"
+"watch subjects your group is studying, share files with other members\n"
+"of the group and use the group forum.\n"
+"\n"
+"You may accept or reject the invitation here: %(invitation_url)s\n"
+"\n"
+"We hope you will find Ututi useful!\n"
+"\n"
+"--\n"
+"The Ututi team\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"If you want to stop getting these emails - you can change your subscription "
+"settings in your <a href=\"%(url)s\">notification settings page</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you want to stop getting these emails - you can change your subscription "
+"settings in your notification settings page (%(url)s)."
+msgstr ""
+
+msgid ""
+"We have received a request to reset Your password on the Ututi system. If You"
+" did not request the password to be recovered, please ignore this message."
+msgstr ""
+
+msgid "If You did forget Your password, follow this link to recover it:"
+msgstr ""
+
+msgid "Hello!"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_name)s has been using Ututi, a portal for students, for some time now "
+"and recommends you to try it."
+msgstr ""
+
+msgid ""
+"Ututi is a system for students that encourages collaboration and sharing of "
+"study materials. We provide tools that make storing lecture notes, sharing "
+"files and communicating with your classmates much, much easier."
+msgstr ""
+
+#, python-format
+msgid ""
+"If You would like to join Ututi now, please follow this <a "
+"href=\"%(link)s\">link</a>."
+msgstr ""
+
+msgid "Looking forward to meeting you,<br/>The Ututi team"
+msgstr ""
+
+msgid "If you would like to join Ututi now, please follow this link:"
+msgstr ""
+
+msgid "Your request to join Ututi as a teacher has been confirmed!"
+msgstr ""
+
+#, python-format
+msgid "You may now visit your Ututi dashboard here: %(url)s ."
+msgstr ""
+
+msgid "At Ututi you will be able to:"
+msgstr ""
+
+msgid "Create your own profile with all Your courses and materials."
+msgstr ""
+
+msgid ""
+"Easily publish Your lecture notes so that Your students can find and access "
+"them."
+msgstr ""
+
+msgid "Easily communicate with Your students."
+msgstr ""
+
+#, python-format
+msgid "The teacher %(teacher_name)s ( %(teacher_url)s ) sent a message to Your group:"
+msgstr ""
+
+msgid "If You reply to this message, the teacher will not get Your replies."
+msgstr ""
+
+msgid "A new teacher has registered:"
+msgstr ""
+
+msgid "Ututi"
+msgstr ""
+
+msgid "Your request to join Ututi as a teacher has been rejected."
+msgstr ""
+
+#, python-format
+msgid "If this was a misunderstanding, please contact us directly at: %(email)s."
+msgstr ""
+
+msgid "A user wants to become a teacher:"
+msgstr ""
+
+msgid "No categories yet."
+msgstr ""
+
+msgid "New category"
+msgstr ""
+
+msgid "Back to thread"
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Back to category list"
+msgstr ""
+
+msgid "Edit category"
+msgstr ""
+
+msgid "Delete category"
+msgstr ""
+
+msgid "Change"
+msgstr ""
+
+msgid "New topic"
+msgstr ""
+
+#, python-format
+msgid "%(count)s reply"
+msgid_plural "%(count)s replies"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "Show other %(count)s message"
+msgid_plural "Show other %(count)s messages"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Mark all as read"
+msgstr ""
+
+msgid "There are no forum messages."
+msgstr ""
+
+msgid "Category title"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Back to the topic list"
+msgstr ""
+
+msgid "Subscribe to emails"
+msgstr ""
+
+msgid "Unsubscribe from emails"
+msgstr ""
+
+msgid "Delete thread"
+msgstr ""
+
+msgid "Reply"
+msgstr ""
+
+msgid "New subject"
+msgstr ""
+
+msgid "Group Subjects"
+msgstr ""
+
+msgid "back to Subject selection"
+msgstr ""
+
+msgid "Invite group members"
+msgstr ""
+
+msgid "Finish choosing subjects"
+msgstr ""
+
+msgid "Mailing list address"
+msgstr ""
+
+msgid "Edit group settings"
+msgstr ""
+
+msgid "become a member"
+msgstr ""
+
+msgid "Edit Settings"
+msgstr ""
+
+#, python-format
+msgid "Congratulations! You have purchased %s personal SMS credits."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can use these credits to send %s messages. For example, if your group has"
+" 20 members with registered phone numbers, one message will cost 20 SMS "
+"credits."
+msgstr ""
+
+msgid "Happy cat"
+msgstr ""
+
+msgid "Thanks!"
+msgstr ""
+
+msgid "Congratulations! You have increased the group's private file limit."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can now store up to %(size)s in your group's private area. Time period "
+"extension: %(time)s."
+msgstr ""
+
+msgid "Have fun using Ututi groups!"
+msgstr ""
+
+msgid "You have decided not to increase your group's private file limit."
+msgstr ""
+
+msgid "Perhaps you will change your mind later?"
+msgstr ""
+
+msgid "Sad cat"
+msgstr ""
+
+msgid "You have decided not to buy extra SMS credits."
+msgstr ""
+
+msgid "About groups"
+msgstr ""
+
+msgid "Discussions"
+msgstr ""
+
+msgid "a place to discuss study matters and your student life."
+msgstr ""
+
+msgid "Email address"
+msgstr ""
+
+msgid ""
+"each group has an email address. If someone writes to this address, all "
+"groupmates will receive the email."
+msgstr ""
+
+msgid "Private group files"
+msgstr ""
+
+msgid ""
+"each group has a private file storage area for files that you don't want to "
+"share with outsiders."
+msgstr ""
+
+msgid "Subject notifications"
+msgstr ""
+
+msgid "receive notifications from subjects that your group is following."
+msgstr ""
+
+msgid "Recommended groups"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "Group settings"
+msgstr ""
+
+msgid "Create group"
+msgstr ""
+
+msgid "is invalid."
+msgstr ""
+
+msgid "is free!"
+msgstr ""
+
+msgid "Title:"
+msgstr ""
+
+msgid "Entrance year:"
+msgstr ""
+
+msgid "Group can subscribe to subjects"
+msgstr ""
+
+msgid "Group has a file storage area"
+msgstr ""
+
+msgid "Picture:"
+msgstr ""
+
+msgid "Description:"
+msgstr ""
+
+msgid "Moderators"
+msgstr ""
+
+msgid "No groups found."
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "The file type is not supported."
+msgstr ""
+
+msgid "Change logo"
+msgstr ""
+
+msgid "Delete current logo"
+msgstr ""
+
+msgid "Group's functionality:"
+msgstr ""
+
+msgid "Group has a file storage"
+msgstr ""
+
+msgid "Group wants to follow subjects"
+msgstr ""
+
+msgid "Default group tab:"
+msgstr ""
+
+msgid "Access settings:"
+msgstr ""
+
+msgid "Joining the group:"
+msgstr ""
+
+msgid "Anyone can join the group;"
+msgstr ""
+
+msgid "Administrators have to approve new members."
+msgstr ""
+
+msgid "Group discussions are visibile for:"
+msgstr ""
+
+msgid "Everybody;"
+msgstr ""
+
+msgid "Group members only."
+msgstr ""
+
+msgid "Who can send messages to the mailing list:"
+msgstr ""
+
+msgid "Members only;"
+msgstr ""
+
+msgid "Everybody (moderated)."
+msgstr ""
+
+msgid ""
+"If you select 'moderated', you can pick the people who you want to allow to "
+"post to the mailing list."
+msgstr ""
+
+msgid "Delete group:"
+msgstr ""
+
+msgid "You can delete group only if you are last member of the group."
+msgstr ""
+
+msgid "Delete group"
+msgstr ""
+
+msgid "Edit group front page"
+msgstr ""
+
+msgid "Group page is visible to everybody"
+msgstr ""
+
+#, python-format
+msgid "You can keep up to %s of private group files here (e.g. pictures)"
+msgstr ""
+
+msgid "Add more subjects"
+msgstr ""
+
+msgid "Congratulations, you have created a new group!"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"Ututi groups are a communication tool for you and your friends. Here\n"
+"your group can use the <a href=\"%(link_to_forums)s\">forums</a> and store\n"
+"private files.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"Ututi groups are a communication tool for you and your friends. Here\n"
+"your group can use the <a href=\"%(link_to_forums)s\">forums</a>, keep\n"
+"private files and <a href=\"%(link_to_subjects)s\">watch subjects</a>\n"
+"you are studying.\n"
+msgstr ""
+
+#, python-format
+msgid "Invite friends to %s"
+msgstr ""
+
+msgid "Invite your friends to Ututi!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Join our group <a href=\"%s\">%s</a> in Ututi, a system for exchanging study "
+"materials and information."
+msgstr ""
+
+msgid "Join group"
+msgstr ""
+
+msgid "You have to log in to Facebook in order to use this invitation form."
+msgstr ""
+
+msgid "Invite your groupmates"
+msgstr ""
+
+msgid "Enter emails of your classmates, separated with commas."
+msgstr ""
+
+msgid "Invite"
+msgstr ""
+
+msgid "Invite your groupmates using Facebook"
+msgstr ""
+
+msgid "Facebook"
+msgstr ""
+
+msgid "Finish"
+msgstr ""
+
+msgid "Invited users (invitations not accepted yet)"
+msgstr ""
+
+msgid "Send again"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Awaiting confirmation"
+msgstr ""
+
+msgid "Group members"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid "Phone number"
+msgstr ""
+
+msgid "Last seen"
+msgstr ""
+
+msgid "unconfirmed"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "What is a group notes and who sees it?"
+msgstr ""
+
+msgid ""
+"The group notes is the face of the group. It may be public or visible only to"
+" group members, depending on configuration."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can change visibility settings in the <a href=\"%s\">group settings</a> "
+"screen."
+msgstr ""
+
+msgid "What are the uses of a group notes?"
+msgstr ""
+
+msgid ""
+"Calendaring. Read this <a href=\"http://blog.ututi.lt/2009/05/28/naudotoju-"
+"isradingumas/\">blog post</a> for more information."
+msgstr ""
+
+msgid "A news board for timetables and posters."
+msgstr ""
+
+msgid "Description of the group for users who are not members of the group yet."
+msgstr ""
+
+msgid "Edit your group note now!"
+msgstr ""
+
+msgid "Edit note"
+msgstr ""
+
+msgid "Go to the group's files"
+msgstr ""
+
+msgid "Make your group's file space unlimited"
+msgstr ""
+
+#, python-format
+msgid ""
+"The amount of group's private files is limited to %(limit)s. This is so "
+"because Ututi encourages users to store their files in publicly accessible "
+"subjects where they can be shared with all the users. But if You want to keep"
+" more than %(limit)s of files, You can do this."
+msgstr ""
+
+msgid "There are no ways to pay for additional group space at the moment."
+msgstr ""
+
+msgid "You have decided not to increase your group's file limit"
+msgstr ""
+
+msgid ""
+"We hope you did not increase uour group's file limit because you decided to "
+"store files in the public subject folders and share them with everybody :)"
+msgstr ""
+
+msgid "back to the group's files"
+msgstr ""
+
+msgid "Paying for the group is not possible at the moment"
+msgstr ""
+
+msgid "At the moment payments for the group's file limit cannot be made."
+msgstr ""
+
+msgid "Back to the group's files"
+msgstr ""
+
+msgid "Watch"
+msgstr ""
+
+#, python-format
+msgid "%(count)s <span class=\"a11y\">file</span>"
+msgid_plural "%(count)s <span class=\"a11y\">files</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s <span class=\"a11y\">wiki page</span>"
+msgid_plural "%(count)s <span class=\"a11y\">wiki pages</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Watched by:"
+msgstr ""
+
+#, python-format
+msgid "%(count)s group"
+msgid_plural "%(count)s groups"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "and"
+msgstr ""
+
+#, python-format
+msgid "%(count)s member"
+msgid_plural "%(count)s members"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Back to subject list"
+msgstr ""
+
+msgid "Your group is not watching any subjects. Add them by searching."
+msgstr ""
+
+msgid "Choose subjects from list"
+msgstr ""
+
+msgid "Create a new subject"
+msgstr ""
+
+msgid "add new subject"
+msgstr ""
+
+msgid "No watched subjects were found."
+msgstr ""
+
+msgid "Subject rating:"
+msgstr ""
+
+msgid "Write your topic"
+msgstr ""
+
+msgid "Root"
+msgstr ""
+
+msgid "Upload file"
+msgstr ""
+
+msgid "File upload failed."
+msgstr ""
+
+msgid "Group message"
+msgstr ""
+
+msgid "This group does not have a file area of has reached its limits."
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Reset your password"
+msgstr ""
+
+msgid "Enter Your new password."
+msgstr ""
+
+msgid "Repeat Your new password."
+msgstr ""
+
+msgid "Change password"
+msgstr ""
+
+msgid "Recover your password"
+msgstr ""
+
+msgid "Enter your email:"
+msgstr ""
+
+msgid "Recover password"
+msgstr ""
+
+msgid "+ Add department"
+msgstr ""
+
+msgid "Private social network"
+msgstr ""
+
+msgid "Academic resources"
+msgstr ""
+
+msgid "Add your study material (notes and files)."
+msgstr ""
+
+msgid "Student groups"
+msgstr ""
+
+msgid "Create and join private or public groups to communicate and collaborate."
+msgstr ""
+
+msgid "Share knowledge and discuss academic subjects with students and teachers."
+msgstr ""
+
+msgid "Departments:"
+msgstr ""
+
+msgid "Edit general information of your university below."
+msgstr ""
+
+msgid "Full University title:"
+msgstr ""
+
+msgid "Short title:"
+msgstr ""
+
+msgid "Country:"
+msgstr ""
+
+msgid "(Select country from list)"
+msgstr ""
+
+msgid "University website:"
+msgstr ""
+
+msgid "University logo"
+msgstr ""
+
+msgid "Upload a high quality logo for your University."
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Network settings:"
+msgstr ""
+
+msgid "University settings"
+msgstr ""
+
+msgid "Registration control"
+msgstr ""
+
+msgid "Choose who can join your social network."
+msgstr ""
+
+msgid "Choose your policy:"
+msgstr ""
+
+msgid ""
+"Enter a list of email domains that belong to your university. This is "
+"particularly important if you want to control who is registering to your "
+"network."
+msgstr ""
+
+msgid "Delete this domain"
+msgstr ""
+
+msgid "Currently no email domains are assigned to this University."
+msgstr ""
+
+msgid "New email domain:"
+msgstr ""
+
+msgid ""
+"Ututi let's you theme your network, including custom colors, header logo and "
+"text."
+msgstr ""
+
+msgid "Enable custom theming"
+msgstr ""
+
+msgid "Choose other logo"
+msgstr ""
+
+msgid "Header text:"
+msgstr ""
+
+msgid "Header background color:"
+msgstr ""
+
+msgid "Header text color:"
+msgstr ""
+
+msgid "Disable custom theming"
+msgstr ""
+
+msgid "Are you sure you want to reset your custom theme?"
+msgstr ""
+
+msgid ""
+"This is a list of all the recent events in the subjects and groups of this "
+"university."
+msgstr ""
+
+msgid "Sorry, nothing new at the moment."
+msgstr ""
+
+#, python-format
+msgid "%(result_count)s result for <strong>%(search_query)s</strong>"
+msgid_plural "%(result_count)s results for <strong>%(search_query)s</strong>"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(result_count)s result <strong>total</strong>"
+msgid_plural "%(result_count)s results <strong>total</strong>"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Can't find your group?"
+msgstr ""
+
+msgid "Create a new group"
+msgstr ""
+
+msgid "About groups:"
+msgstr ""
+
+msgid "E-mail"
+msgstr ""
+
+msgid ""
+"private file storage area for files that you don't want to share with "
+"outsiders. "
+msgstr ""
+
+msgid "Your email address"
+msgstr ""
+
+msgid "Join as student"
+msgstr ""
+
+msgid "Enter your email"
+msgstr ""
+
+msgid "Ututi student accounts:"
+msgstr ""
+
+msgid ""
+"<strong>Join or create your group</strong> for easy communication and "
+"collaboration with your classmates."
+msgstr ""
+
+msgid ""
+"<strong>Start following courses</strong> that interest you. Find course "
+"material and receive notifications about course related updates."
+msgstr ""
+
+msgid ""
+"<strong>Upload files</strong> to share them with your classmates. Files "
+"uploaded to course catalog will be available to everyone who is interested in"
+" the subject."
+msgstr ""
+
+msgid ""
+"<strong>Create wiki notes</strong> and edit them together with other people "
+"on the network. You can even take notes to Ututi during your lectures."
+msgstr ""
+
+msgid "Join as teacher"
+msgstr ""
+
+msgid "Ututi teacher accounts:"
+msgstr ""
+
+msgid ""
+"<strong>Fill in your information</strong> to represent yourself to other "
+"members of your academic community."
+msgstr ""
+
+msgid ""
+"<strong>Upload course material.</strong> It will become immediately available"
+" to everyone who is following your course."
+msgstr ""
+
+msgid ""
+"<strong>Select and organize your publications</strong> that will be displayed"
+" on your Ututi profile page."
+msgstr ""
+
+msgid ""
+"<strong>Contact your followers</strong> by sending group or private messages,"
+" or firing discussions on the course wall."
+msgstr ""
+
+msgid "Can't find your subject?"
+msgstr ""
+
+msgid "About subjects:"
+msgstr ""
+
+msgid "A place for course material sharing"
+msgstr ""
+
+msgid ""
+"upload and share course material with students of your class, university or "
+"the entire world."
+msgstr ""
+
+msgid "Subject forum"
+msgstr ""
+
+msgid ""
+"a place to discuss the learning matters. Subject forums bring you to your "
+"students closer than ever before!"
+msgstr ""
+
+msgid "Monitoring wiki notes"
+msgstr ""
+
+msgid "create notes for your courses collaboratively with your students."
+msgstr ""
+
+msgid "Easy way to reach your students"
+msgstr ""
+
+msgid "send messages to all of your students at once."
+msgstr ""
+
+msgid ""
+"When you update subject information or upload a new file, your students will "
+"be notified automatically."
+msgstr ""
+
+msgid "Are you also a teacher in this University?"
+msgstr ""
+
+msgid "I am a teacher"
+msgstr ""
+
+msgid "About teachers:"
+msgstr ""
+
+msgid "Teacher profile"
+msgstr ""
+
+msgid "submit your CV, thoughts, information and academic papers."
+msgstr ""
+
+msgid "Course material sharing"
+msgstr ""
+
+msgid "Direct messaging"
+msgstr ""
+
+msgid "create a private dialog with one or multiple students or groups."
+msgstr ""
+
+msgid "discuss tought courses with your students."
+msgstr ""
+
+msgid "Become a teacher"
+msgstr ""
+
+msgid "Message approved"
+msgstr ""
+
+msgid "Message rejected"
+msgstr ""
+
+msgid "Message already approved"
+msgstr ""
+
+msgid "Working..."
+msgstr ""
+
+msgid ""
+"Error: could not reach server or this message was already moderated. Please "
+"try refreshing the page."
+msgstr ""
+
+msgid "Approve"
+msgstr ""
+
+msgid "Reject"
+msgstr ""
+
+msgid "Emails that are allowed to post to the mailing list of this group"
+msgstr ""
+
+msgid "Invite to group"
+msgstr ""
+
+msgid "Moderation queue"
+msgstr ""
+
+msgid "No messages to be moderated yet."
+msgstr ""
+
+msgid "Back to the moderation queue"
+msgstr ""
+
+msgid "Message to the group"
+msgstr ""
+
+msgid "Private messages"
+msgstr ""
+
+msgid "You can send a new message to a user from his or her public profile page."
+msgstr ""
+
+#, python-format
+msgid "%(count)s message"
+msgid_plural "%(count)s messages"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No messages."
+msgstr ""
+
+msgid "New message"
+msgstr ""
+
+msgid "Back to message list"
+msgstr ""
+
+msgid "Write a reply"
+msgstr ""
+
+#, python-format
+msgid "Back to %(subject_title)s"
+msgstr ""
+
+msgid "Go back to history"
+msgstr ""
+
+msgid "Restore previous"
+msgstr ""
+
+msgid "Edit page"
+msgstr ""
+
+#, python-format
+msgid "Back to %(page_title)s"
+msgstr ""
+
+msgid "Go back to page"
+msgstr ""
+
+msgid "Show"
+msgstr ""
+
+msgid "Compare with previous"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+#, python-format
+msgid ""
+"You are viewing an old version of this page created by %(link_to_user)s on "
+"%(date)s"
+msgstr ""
+
+#, python-format
+msgid "Go back to %(subject_title)s notes"
+msgstr ""
+
+msgid "edit"
+msgstr ""
+
+msgid "history"
+msgstr ""
+
+msgid "delete"
+msgstr ""
+
+msgid "Last edit: "
+msgstr ""
+
+#, python-format
+msgid "<em>%(count)s</em> active poster"
+msgid_plural "<em>%(count)s</em> active posters"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "<em>%(count)s</em> topic"
+msgid_plural "<em>%(count)s</em> topics"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "<em>%(count)s</em> post"
+msgid_plural "<em>%(count)s</em> posts"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "There are no messages."
+msgstr ""
+
+msgid "Messages in community forum"
+msgstr ""
+
+msgid "You found a bug in our system? Something is broken? Report it."
+msgstr ""
+
+msgid "Messages in Bugs forum"
+msgstr ""
+
+msgid "Report a bug"
+msgstr ""
+
+msgid "Group information"
+msgstr ""
+
+msgid "Remaining private space:"
+msgstr ""
+
+msgid "Get more space"
+msgstr ""
+
+#, python-format
+msgid ""
+"The amount of group's private files is limited to %(limit)s. This is so "
+"because Ututi encourages users to store their files in publicly accessible "
+"subjects where they can be shared with all the users. But if you want to keep"
+" more than %(limit)s of files, you can do this."
+msgstr ""
+
+msgid "SMS message"
+msgstr ""
+
+#, python-format
+msgid ""
+"Send an SMS message to number <span style=\"font-size: "
+"14px\">%(phone)s</span> with the following content:"
+msgstr ""
+
+#, python-format
+msgid ""
+"The SMS costs <strong>%(price).2f Lt</strong> and will increase your file "
+"limit to <strong>%(limit)s</strong> for another month."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your private file area is limited to %(limit)s until "
+"<strong>%(date)s</strong>."
+msgstr ""
+
+msgid "E-banking"
+msgstr ""
+
+msgid ""
+"There are no possibility to pay for additional group space by bank at the "
+"moment."
+msgstr ""
+
+msgid "Purchase group private space"
+msgstr ""
+
+msgid "More settings"
+msgstr ""
+
+msgid "Do not get email"
+msgstr ""
+
+msgid "Get email"
+msgstr ""
+
+msgid "Leave group"
+msgstr ""
+
+msgid "Invite others to group:"
+msgstr ""
+
+msgid "Recipients:"
+msgstr ""
+
+msgid "Enter comma separated list of email addresses"
+msgstr ""
+
+msgid "Add personal message (optional):"
+msgstr ""
+
+msgid "Send invitation"
+msgstr ""
+
+msgid "Your invitations were successfully sent."
+msgstr ""
+
+msgid "Invite friends via email"
+msgstr ""
+
+msgid "Group members:"
+msgstr ""
+
+msgid "Settings:"
+msgstr ""
+
+msgid "Send SMS message to group"
+msgstr ""
+
+msgid "Everywhere"
+msgstr ""
+
+msgid "in-Subjects"
+msgstr ""
+
+msgid "Search-btn"
+msgstr ""
+
+msgid "Tags"
+msgstr ""
+
+msgid "Info:"
+msgstr ""
+
+#, python-format
+msgid "%(count)s Subject"
+msgid_plural "%(count)s Subjects"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s Group"
+msgid_plural "%(count)s Groups"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s Member"
+msgid_plural "%(count)s Members"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s File"
+msgid_plural "%(count)s Files"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Administration:"
+msgstr ""
+
+msgid "Edit information"
+msgstr ""
+
+msgid "I study here"
+msgstr ""
+
+msgid "I teach here"
+msgstr ""
+
+msgid "Latest groups:"
+msgstr ""
+
+msgid "All groups"
+msgstr ""
+
+msgid "Members:"
+msgstr ""
+
+msgid "teachers:"
+msgstr ""
+
+msgid "Info"
+msgstr ""
+
+msgid "more"
+msgstr ""
+
+msgid "Remove from my taught courses"
+msgstr ""
+
+msgid "I teach this course"
+msgstr ""
+
+msgid "Unfollow"
+msgstr ""
+
+msgid "Follow"
+msgstr ""
+
+msgid "University:"
+msgstr ""
+
+msgid "Faculty / department:"
+msgstr ""
+
+msgid "Lecturer:"
+msgid_plural "Lecturers:"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Files and wiki notes:"
+msgstr ""
+
+msgid "Followers:"
+msgstr ""
+
+msgid "Related subjects:"
+msgstr ""
+
+msgid "Lect."
+msgstr ""
+
+msgid "Create your own social network"
+msgstr ""
+
+msgid "About Ututi:"
+msgstr ""
+
+msgid ""
+"Ututi lets you create a social network for your university. Here you will "
+"find online groups, teacher profiles and course pages. Ututi is a tool to "
+"share information and build your online academic community."
+msgstr ""
+
+msgid "Learn more..."
+msgstr ""
+
+msgid "People online:"
+msgstr ""
+
+msgid "upload a file to.."
+msgstr ""
+
+msgid "Quickly upload files to your groups and subjects."
+msgstr ""
+
+msgid "Tell a friend:"
+msgstr ""
+
+msgid "Here's what I've found in Ututi"
+msgstr ""
+
+msgid "Your email"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "E-mail subject"
+msgstr ""
+
+msgid "Your email was successfully sent."
+msgstr ""
+
+msgid "Send email"
+msgstr ""
+
+#, python-format
+msgid ""
+"This is the verified network for <strong>%s</strong>.      Only %s students "
+"and teachers can join this network."
+msgstr ""
+
+msgid "Powered by Ututi"
+msgstr ""
+
+msgid "Login:"
+msgstr ""
+
+msgid "Keep me logged in"
+msgstr ""
+
+msgid "Not a member yet?"
+msgstr ""
+
+msgid "Register"
+msgstr ""
+
+msgid "Get started"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "University feed"
+msgstr ""
+
+#, python-format
+msgid "Private messages (%(count)s)"
+msgstr ""
+
+msgid "My subjects:"
+msgstr ""
+
+msgid "Add subject"
+msgstr ""
+
+msgid "My groups:"
+msgstr ""
+
+msgid "Find groups"
+msgstr ""
+
+msgid "Create new group"
+msgstr ""
+
+msgid "(edit profile)"
+msgstr ""
+
+msgid "Medals"
+msgstr ""
+
+msgid "What to do next?"
+msgstr ""
+
+msgid "Invite friends:"
+msgstr ""
+
+#, python-format
+msgid "%(count)s subject"
+msgid_plural "%(count)s subjects"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s wiki note"
+msgid_plural "%(count)s wiki notes"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s file uploaded"
+msgid_plural "%(count)s files uploaded"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(count)s file downloaded"
+msgid_plural "%(count)s files downloaded"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Related members:"
+msgstr ""
+
+msgid "Related links:"
+msgstr ""
+
+msgid "website"
+msgstr ""
+
+#, python-format
+msgid "%(title_abbr)s social network"
+msgstr ""
+
+msgid "My web page"
+msgstr ""
+
+msgid "View my page"
+msgstr ""
+
+msgid "Friends of ututi"
+msgstr ""
+
+msgid "facebook_link"
+msgstr ""
+
+msgid "Find us on Facebook"
+msgstr ""
+
+msgid "blog_link"
+msgstr ""
+
+msgid "Read our blog"
+msgstr ""
+
+msgid "Universities"
+msgstr ""
+
+msgid "Edit your page"
+msgstr ""
+
+msgid "Edit your profile"
+msgstr ""
+
+msgid "show my page"
+msgstr ""
+
+msgid "back"
+msgstr ""
+
+msgid "Contact information"
+msgstr ""
+
+msgid "Edit your contact information below. Some fields may require confirmation."
+msgstr ""
+
+msgid "Work address"
+msgstr ""
+
+msgid "Your GG number"
+msgstr ""
+
+msgid "GG number is not confirmed"
+msgstr ""
+
+msgid "Enter the code that you have received in your GG"
+msgstr ""
+
+msgid ""
+"\n"
+"\n"
+"                    Should you not have received the code, please press "
+"\"Send code again\".\n"
+"                    Also don't forget to add Ututi (<a "
+"href=\"gg:5437377\">5437377</a>) to your friends!"
+msgstr ""
+
+msgid "Submit code"
+msgstr ""
+
+msgid "Send code again"
+msgstr ""
+
+msgid "GG number is confirmed"
+msgstr ""
+
+msgid "Receive news into gg"
+msgstr ""
+
+msgid "Use international format, +XXXXXXXXXXX"
+msgstr ""
+
+msgid "Mobile phone number"
+msgstr ""
+
+msgid "Number is not confirmed"
+msgstr ""
+
+msgid "Enter the code that you have received by SMS"
+msgstr ""
+
+msgid "Should you not have received the code, please press \"Send code again\""
+msgstr ""
+
+msgid "Number is confirmed"
+msgstr ""
+
+msgid "Email is confirmed"
+msgstr ""
+
+msgid "Show my email to unregistered users."
+msgstr ""
+
+msgid "Get confirmation email"
+msgstr ""
+
+msgid "Email is not confirmed"
+msgstr ""
+
+msgid "Address of your website or blog"
+msgstr ""
+
+msgid "Edit your general information below."
+msgstr ""
+
+msgid "Full name"
+msgstr ""
+
+msgid "e.g. Associate professor"
+msgstr ""
+
+msgid "About yourself"
+msgstr ""
+
+msgid "Your new url will be: "
+msgstr ""
+
+msgid "Page address"
+msgstr ""
+
+msgid "Ututi username"
+msgstr ""
+
+msgid "Show my profile to unregistered users and search engines"
+msgstr ""
+
+msgid "Your profile photo"
+msgstr ""
+
+msgid "Change or remove your profile photo."
+msgstr ""
+
+msgid "Change photo"
+msgstr ""
+
+msgid "What have I been doing?"
+msgstr ""
+
+msgid "You haven't contributed much, have you?"
+msgstr ""
+
+msgid ""
+"private file storage area for files that you don't want to share with "
+"outsiders."
+msgstr ""
+
+msgid "Find your group"
+msgstr ""
+
+msgid "a place to discuss subject related questions with students and teachers."
+msgstr ""
+
+msgid "Shared notes"
+msgstr ""
+
+msgid ""
+"create wiki notes collaboratively with your class-mates or take notes during "
+"the lecture and upload it directly to Ututi."
+msgstr ""
+
+msgid "Find your subjects"
+msgstr ""
+
+msgid "News feed settings"
+msgstr ""
+
+msgid "Invite your friends"
+msgstr ""
+
+msgid "Enter comma separated list of email addresses."
+msgstr ""
+
+msgid "Or use Facebook to invite your friends."
+msgstr ""
+
+msgid "Join the group"
+msgstr ""
+
+msgid "Features:"
+msgstr ""
+
+msgid "Group's email"
+msgstr ""
+
+msgid "Private discussions"
+msgstr ""
+
+msgid "Find and join your group or create a new one."
+msgstr ""
+
+msgid "Or browse group catalog"
+msgstr ""
+
+msgid "Choose your subjects"
+msgstr ""
+
+msgid "Find subjects in your university and start following them."
+msgstr ""
+
+msgid "Or create new subject"
+msgstr ""
+
+msgid ""
+"Share course material, create wiki notes and discuss with other subject "
+"followers."
+msgstr ""
+
+msgid "Fill your profile information"
+msgstr ""
+
+msgid "Tell some basic information about yourself by editing your profile."
+msgstr ""
+
+msgid "Welcome to Ututi"
+msgstr ""
+
+#, python-format
+msgid ""
+"Welcome to <strong>%(university)s</strong> private social network created on "
+"<a href=\"%(url)s\">Ututi platform</a>. Here students and teachers can create"
+" groups online, use the mailinglist for communication and the file storage "
+"for sharing information."
+msgstr ""
+
+#, python-format
+msgid ""
+"Join %(university_link)s social network in Ututi, a system for exchanging "
+"study material and information."
+msgstr ""
+
+msgid "Invite your classmates to Ututi!"
+msgstr ""
+
+msgid "Join Ututi"
+msgstr ""
+
+msgid "notification settings"
+msgstr ""
+
+msgid "add subject"
+msgstr ""
+
+msgid "Show subjects from my groups"
+msgstr ""
+
+msgid "Very sad..."
+msgstr ""
+
+msgid ""
+"We are very disappointed that you have decided not to support Ututi. We hope "
+"you will support us next time. Good luck!"
+msgstr ""
+
+msgid "back to the profile"
+msgstr ""
+
+msgid ""
+"To change your password, type your current password and repeat new password "
+"twice in the form below."
+msgstr ""
+
+msgid "Current password"
+msgstr ""
+
+msgid "New password"
+msgstr ""
+
+msgid "Repeat the new password"
+msgstr ""
+
+msgid "In case you forgot your password, use the button below to recover it."
+msgstr ""
+
+msgid "Link with Google and/or Facebook"
+msgstr ""
+
+msgid ""
+"You can log in to Ututi using your Google or Facebook account. Use buttons "
+"below to link or unlink these external accounts."
+msgstr ""
+
+msgid "Link Google"
+msgstr ""
+
+msgid "Unlink Google"
+msgstr ""
+
+msgid "Link Facebook"
+msgstr ""
+
+msgid "Unlink Facebook"
+msgstr ""
+
+msgid "Email me when"
+msgstr ""
+
+msgid "What notifications would you like to receive by email:"
+msgstr ""
+
+msgid "immediately"
+msgstr ""
+
+msgid "at the end of the day"
+msgstr ""
+
+msgid "never"
+msgstr ""
+
+msgid "Send me email:"
+msgstr ""
+
+msgid "Personally watched subjects' notifications"
+msgstr ""
+
+msgid "This subject will be removed from followed subject list."
+msgstr ""
+
+msgid "You do not follow any subjects."
+msgstr ""
+
+#, python-format
+msgid "Group's %(group_title)s notifications"
+msgstr ""
+
+msgid "This group does not follow any subjects."
+msgstr ""
+
+msgid "Group emails"
+msgstr ""
+
+msgid "Select which events you want to show up on your wall."
+msgstr ""
+
+msgid "Forum posts"
+msgstr ""
+
+msgid "New subjects watched by group"
+msgstr ""
+
+msgid "Subjects no longer watched by group"
+msgstr ""
+
+msgid "Mailing list posts"
+msgstr ""
+
+msgid "Changes in subjects"
+msgstr ""
+
+msgid "New group members"
+msgstr ""
+
+msgid "People who left groups"
+msgstr ""
+
+msgid "File uploads"
+msgstr ""
+
+msgid "Changes in wiki pages"
+msgstr ""
+
+msgid "New subjects"
+msgstr ""
+
+msgid "New wiki pages"
+msgstr ""
+
+msgid "Page changes"
+msgstr ""
+
+msgid "Watched group subjects"
+msgstr ""
+
+msgid "Subject updates"
+msgstr ""
+
+msgid "Moderated posts"
+msgstr ""
+
+msgid "New groups"
+msgstr ""
+
+msgid "Why we need support?"
+msgstr ""
+
+msgid ""
+"Ututi is just like wikipedia: every user can change, create, see and download"
+" the content for free.  But maintainance of servers, development and "
+"supervision requires recources.  So if Ututi has helped you pass an exam, "
+"write your thesis or you just like Ututi, we are asking you to contribute by "
+"making a small donation :)"
+msgstr ""
+
+msgid ""
+"If you donate at least 50 Lt, you will receive a gift &mdash; an Ututi "
+"T-shirt. You can donate this amount in parts."
+msgstr ""
+
+msgid "I want to donate:"
+msgstr ""
+
+msgid "5 litas"
+msgstr ""
+
+msgid "10 litas"
+msgstr ""
+
+msgid "50 litas"
+msgstr ""
+
+msgid "Thank you for supporting Ututi!"
+msgstr ""
+
+msgid ""
+"You have just contributed to the development of Ututi! A medal, signifying "
+"your Ututi supporter status, should soon appear in your profile. Good luck "
+"continuing to use Ututi!"
+msgstr ""
+
+msgid "Write note title here"
+msgstr ""
+
+msgid ""
+"You need to be a member of a group or have subjects that you are studying to "
+"be able to quickly upload files."
+msgstr ""
+
+msgid ""
+"You or your group need to have subjects that you are studying to be able to "
+"quickly create wiki notes in them."
+msgstr ""
+
+msgid "Wiki note"
+msgstr ""
+
+msgid "Add a subject"
+msgstr ""
+
+msgid "You are not watching any subjects."
+msgstr ""
+
+msgid "Notification settings"
+msgstr ""
+
+msgid "Add a student group"
+msgstr ""
+
+msgid "Your student groups:"
+msgstr ""
+
+msgid "Keep track of your student groups"
+msgstr ""
+
+msgid "Email your students from your dashboard"
+msgstr ""
+
+msgid "Attach files to your messages"
+msgstr ""
+
+msgid "Send SMS messages from your dashboard to Ututi groups"
+msgstr ""
+
+msgid ""
+"Enter a title to identify this group, e. g. Computer Science freshmen or CS "
+"1st year."
+msgstr ""
+
+msgid ""
+"Enter email address for this group. It can be Ututi or any other mailing "
+"list, or a private email address."
+msgstr ""
+
+msgid "Fill your page"
+msgstr ""
+
+msgid "Edit my page"
+msgstr ""
+
+msgid "My profile page"
+msgstr ""
+
+msgid "edit my page"
+msgstr ""
+
+msgid "Delete this group"
+msgstr ""
+
+msgid "Edit group"
+msgstr ""
+
+msgid "Send message"
+msgstr ""
+
+msgid "Send SMS"
+msgstr ""
+
+msgid "Message subject:"
+msgstr ""
+
+msgid "Attachment:"
+msgstr ""
+
+msgid "Your message was successfully sent."
+msgstr ""
+
+msgid "Your SMS was successfully sent."
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Wiki notes"
+msgstr ""
+
+msgid "Create your subjects"
+msgstr ""
+
+msgid "My courses"
+msgstr ""
+
+msgid "add courses"
+msgstr ""
+
+msgid "Upload course material"
+msgstr ""
+
+msgid "Edit subject notes"
+msgstr ""
+
+msgid "Notify your students"
+msgstr ""
+
+msgid "Discuss the subject"
+msgstr ""
+
+msgid "Find subjects that your teach or create them."
+msgstr ""
+
+msgid "Create course"
+msgstr ""
+
+msgid "Are you sure you want to delete this subject?"
+msgstr ""
+
+msgid "Add your students' contacts"
+msgstr ""
+
+msgid "My students' contacts"
+msgstr ""
+
+msgid "add a contact"
+msgstr ""
+
+msgid "Ututi will keep track of your student groups and make it easy to reach them."
+msgstr ""
+
+msgid "Add student group"
+msgstr ""
+
+msgid "Are you sure you want to delete this group?"
+msgstr ""
+
+msgid "Write down your information and research interests"
+msgstr ""
+
+msgid "link_to_profile_page"
+msgstr ""
+
+#, python-format
+msgid "This information will be displayed on your %(profile_page_url)s."
+msgstr ""
+
+msgid "Edit your information"
+msgstr ""
+
+#, python-format
+msgid "Your publications will be displayed on your %(profile_page_url)s."
+msgstr ""
+
+msgid "Edit a student group"
+msgstr ""
+
+msgid ""
+"Below you see a template that you can freely edit. Note that once your press "
+"\"Save\", it will become publicly available in your profile page."
+msgstr ""
+
+msgid "Provide any personal information that you would like to begin with."
+msgstr ""
+
+msgid "Affiliation"
+msgstr ""
+
+msgid "Specify your current position and responsibilities."
+msgstr ""
+
+msgid "Research activities"
+msgstr ""
+
+msgid ""
+"Include a brief summary of your research activities and interests. Cover "
+"past, current and future research plans."
+msgstr ""
+
+msgid "Use bulleted list if needed."
+msgstr ""
+
+msgid "Scientific services"
+msgstr ""
+
+msgid ""
+"Describe your scientific services. For instance, you might want to mention "
+"that you belong to editorial board of some scientific journal."
+msgstr ""
+
+msgid "Conferences, exchange programs, visits"
+msgstr ""
+
+msgid ""
+"List conferences that you participate in, exchange programs and other related"
+" information. Cover past, present travels and future plans."
+msgstr ""
+
+msgid ""
+"List your publications that you consider most important, starting with most "
+"recent."
+msgstr ""
+
+msgid ""
+"If the list is very long, organize your publications into sections as shown "
+"below."
+msgstr ""
+
+msgid "Textbooks"
+msgstr ""
+
+msgid "Authors"
+msgstr ""
+
+msgid "Name of series and volume"
+msgstr ""
+
+msgid "Year"
+msgstr ""
+
+msgid "Publishing house"
+msgstr ""
+
+msgid "Papers"
+msgstr ""
+
+msgid "Journal title"
+msgstr ""
+
+msgid "Volume/issue"
+msgstr ""
+
+msgid "Select an image file on your computer:"
+msgstr ""
+
+msgid "Choose"
+msgstr ""
+
+msgid "Select an image if you want to replace your photo"
+msgstr ""
+
+msgid "You have not set your photo yet"
+msgstr ""
+
+msgid "Skip"
+msgstr ""
+
+msgid "Registration"
+msgstr ""
+
+#, python-format
+msgid "Step %(step_num)s"
+msgstr ""
+
+msgid "Registration to Ututi"
+msgstr ""
+
+msgid "Email approval"
+msgstr ""
+
+msgid "We need to approve that you are the owner of this email address."
+msgstr ""
+
+#, python-format
+msgid "You have received a confirmation code to %(email_address)s."
+msgstr ""
+
+msgid "Did not get the confirmation code? Press \"Send again\" button."
+msgstr ""
+
+msgid ""
+"Ututi is most valuable when used together with your classmates and friends. "
+"Take a minute to invite them now."
+msgstr ""
+
+msgid "Enter emails of your classmates, separated with commas and/or whitespace."
+msgstr ""
+
+msgid "Invite friends via facebook"
+msgstr ""
+
+msgid "Full name:"
+msgstr ""
+
+msgid "Password must contain at least 5 characters"
+msgstr ""
+
+msgid "Link Google or Facebook"
+msgstr ""
+
+msgid "Click the buttons to link or unlink your profile with Google and/or Facebook"
+msgstr ""
+
+msgid "University logo:"
+msgstr ""
+
+msgid "University emails:"
+msgstr ""
+
+msgid "Enter email domains that belong to this university."
+msgstr ""
+
+msgid "Add more"
+msgstr ""
+
+msgid "Accessibility:"
+msgstr ""
+
+#, python-format
+msgid "You are registering to <strong>%(university_name)s</strong> network."
+msgstr ""
+
+#, python-format
+msgid "%(count)s person on this network:"
+msgid_plural "%(count)s people on this network:"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "It is not your university? Use another email address or %(contact_us_link)s."
+msgstr ""
+
+#, python-format
+msgid "%(count)s file"
+msgid_plural "%(count)s files"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "More universities"
+msgstr ""
+
+msgid "Pick your region"
+msgstr ""
+
+msgid "Regions of Poland"
+msgstr ""
+
+msgid "Were you looking for a university or department?"
+msgstr ""
+
+msgid "show-subjects"
+msgstr ""
+
+msgid "show-files"
+msgstr ""
+
+msgid "show-pages"
+msgstr ""
+
+msgid "show-groups"
+msgstr ""
+
+msgid "show-posts"
+msgstr ""
+
+msgid "show-everything"
+msgstr ""
+
+msgid "Show only:"
+msgstr ""
+
+msgid "search results"
+msgstr ""
+
+#, python-format
+msgid "found %(count)s result"
+msgid_plural "found %(count)s results"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No results found."
+msgstr ""
+
+msgid "Join"
+msgstr ""
+
+msgid "[DELETED]"
+msgstr ""
+
+msgid "Book"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "The data"
+msgstr ""
+
+msgid "The actions"
+msgstr ""
+
+msgid "Uploading"
+msgstr ""
+
+msgid "Done"
+msgstr ""
+
+msgid "Suspicious file?"
+msgstr ""
+
+msgid "Teacher's material"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "edit file name"
+msgstr ""
+
+msgid "delete file"
+msgstr ""
+
+msgid "flag as suspicious"
+msgstr ""
+
+msgid "deleted"
+msgstr ""
+
+msgid "restore file"
+msgstr ""
+
+msgid "Here"
+msgstr ""
+
+msgid "There are no files here, this folder is empty!"
+msgstr ""
+
+#, python-format
+msgid "Show the other %(count)s file"
+msgid_plural "Show the other %(count)s files"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "(Delete)"
+msgstr ""
+
+msgid "free space:"
+msgstr ""
+
+#, python-format
+msgid "Please state the reason why the file '%s' is inappropriate:"
+msgstr ""
+
+msgid "Your e-mail (optional)"
+msgstr ""
+
+msgid "Increase limits"
+msgstr ""
+
+msgid "upload file to..."
+msgstr ""
+
+msgid "unlimited"
+msgstr ""
+
+msgid "New folder:"
+msgstr ""
+
+msgid "create"
+msgstr ""
+
+msgid ""
+"No more space for private files. We recommend moving files into subjects or "
+"upgrading the group."
+msgstr ""
+
+msgid "Trash"
+msgstr ""
+
+msgid "There are no deleted files."
+msgstr ""
+
+msgid ""
+"At the moment you are not confirmed as teacher. Our administrators have been "
+"notified and will verify you shortly."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your email (%(email)s) is not confirmed! Please confirm your email by "
+"clicking on the link sent to your address or "
+msgstr ""
+
+msgid "get another confirmation email"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your <strong>gadu gadu number</strong> is not confirmed! Please <a "
+"href=\"%s\">confirm</a> it by entering the code sent to you."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your phone is not confirmed! Please <a href=\"%s\">confirm</a> it by entering"
+" the code sent to you."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(author)s has sent you an invitation to group %(group)s. Do you want to "
+"become a member of this group?"
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user)s wants to join the group %(group)s. Do you want to confirm this "
+"membership?"
+msgstr ""
+
+msgid "I teach this"
+msgstr ""
+
+msgid "Write message"
+msgstr ""
+
+msgid "Group messages"
+msgstr ""
+
+msgid "Group forum"
+msgstr ""
+
+msgid "Group subjects"
+msgstr ""
+
+msgid "Group files"
+msgstr ""
+
+msgid "Share:"
+msgstr ""
+
+msgid "less"
+msgstr ""
+
+msgid "See older events..."
+msgstr ""
+
+msgid "Ignore events like this"
+msgstr ""
+
+#, python-format
+msgid "Show older messages (%(message_count)s)"
+msgstr ""
+
+msgid "Send reply"
+msgstr ""
+
+#, python-format
+msgid "and %(count)s more file"
+msgid_plural "and %(count)s more files"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "with %(count)s comment"
+msgid_plural "with %(count)s comments"
+msgstr[0] ""
+msgstr[1] ""
+
+#. TRANSLATORS: translate this as a verb 'Comment'
+msgid "comment_on_wall"
+msgstr ""
+
+#. TRANSLATORS: translate this as a verb 'Edit'
+msgid "edit_on_wall"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has uploaded a new file"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has created a new folder %(folder_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has edited the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has created the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has created the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has sent a message to the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s to the group's "
+"%(group_link)s moderation queue"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user_link)s has posted a new message %(message_link)s in the forum "
+"%(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "You have sent an sms to the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has sent an sms to the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s and %(count)s more person have joined the group %(group_link)s"
+msgid_plural "%(user_link)s and %(count)s more people have joined the group %(group_link)s"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(user_link)s has joined the group %(group_link)s"
+msgstr ""
+
+msgid "show all"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s and %(count)s more person have left the group %(group_link)s"
+msgid_plural "%(user_link)s and %(count)s more people have left the group %(group_link)s"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(user_link)s has left the group %(group_link)s"
+msgstr ""
+
+#, python-format
+msgid "The group %(group_link)s has started watching the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid "The group %(group_link)s has stopped watching the subject %(subject_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has created a page %(page_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has modified a page %(page_link)s"
+msgstr ""
+
+msgid "Short title"
+msgstr ""
+
+msgid "Website"
+msgstr ""
+
+msgid "Region"
+msgstr ""
+
+msgid "(none)"
+msgstr ""
+
+msgid "Parent"
+msgstr ""
+
+msgid "Select a parent"
+msgstr ""
+
+msgid "Logo"
+msgstr ""
+
+msgid "Browse the hierarchy"
+msgstr ""
+
+msgid "[Edit]"
+msgstr ""
+
+msgid "Regions for locations"
+msgstr ""
+
+msgid "Create new subject"
+msgstr ""
+
+msgid "Subject features:"
+msgstr ""
+
+msgid "Upload and share course material"
+msgstr ""
+
+msgid "Discuss with other people interested in the subject"
+msgstr ""
+
+msgid "Put lecture notes to subject page and edit them together"
+msgstr ""
+
+msgid "Get notifications related to this subject"
+msgstr ""
+
+msgid "Subject title:"
+msgstr ""
+
+msgid ""
+"It's best to use exactly the same title that is used in your university for "
+"this subject. It does not need to be unique."
+msgstr ""
+
+msgid "Enter subject details"
+msgstr ""
+
+msgid "Tags:"
+msgstr ""
+
+msgid "Subject description:"
+msgstr ""
+
+msgid "I want to follow this subject"
+msgstr ""
+
+msgid "Similar subjects found"
+msgstr ""
+
+msgid "Please check that your subject is not in the list below."
+msgstr ""
+
+msgid "Did you mean:"
+msgstr ""
+
+msgid "No, I want to create a new subject that is not in this list."
+msgstr ""
+
+msgid "Subject has been deleted, you can restore it if you want to."
+msgstr ""
+
+msgid "Restore subject"
+msgstr ""
+
+msgid ""
+"Subject has been deleted, it will soon disappear from your watched subjects "
+"list."
+msgstr ""
+
+msgid "Share this subject:"
+msgstr ""
+
+msgid "Edit subject"
+msgstr ""
+
+msgid "Back to subject"
+msgstr ""
+
+msgid "Edit subject's info"
+msgstr ""
+
+msgid "University | Department:"
+msgstr ""
+
+msgid "Department:"
+msgstr ""
+
+#, python-format
+msgid "%(subject_link)s has been added to your watched subject list."
+msgstr ""
+
+#, python-format
+msgid "%(subject_link)s has been removed from your watched subject list."
+msgstr ""
+
+#, python-format
+msgid "%(subject_link)s has been added to your taught courses list."
+msgstr ""
+
+#, python-format
+msgid "%(subject_link)s has been removed from your taught courses list."
+msgstr ""
+
+msgid "Subject files"
+msgstr ""
+
+msgid "No description"
+msgstr ""
+
+msgid ""
+"Add description to help your friends find this subject. You can also list "
+"main topics and references here."
+msgstr ""
+
+msgid "Add description"
+msgstr ""
+
+msgid "Create new Wiki note"
+msgstr ""
+
+msgid "Created (edited) by"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "No Wiki notes in this subject."
+msgstr ""
+
+msgid "About Wiki notes:"
+msgstr ""
+
+msgid ""
+"Create wiki notes collaborating with your groupmates. Everyone who follows "
+"the subject can edit it's wiki notes."
+msgstr ""
+
+msgid ""
+"<strong>Take notes during lecture</strong> on your laptop and upload it "
+"directly to Ututi."
+msgstr ""
+
+#, python-format
+msgid "Log in as %(user)s"
+msgstr ""
+
+msgid "Award medals"
+msgstr ""
+
+msgid "Send private message"
+msgstr ""
+
+msgid "Subjects:"
+msgstr ""
+
+#, python-format
+msgid "%(user_name)s does not follow any subject."
+msgstr ""
+
+msgid "Groups:"
+msgstr ""
+
+#, python-format
+msgid "%(user_name)s is not a member of any group."
+msgstr ""
+
+msgid "Activity:"
+msgstr ""
+
+msgid "No activity yet."
+msgstr ""
+
+msgid "Back to profile"
+msgstr ""
+
+msgid "Current medals"
+msgstr ""
+
+msgid "Take away"
+msgstr ""
+
+msgid "Award a medal"
+msgstr ""
+
+msgid "Award"
+msgstr ""
+
+msgid "Teacher's activity:"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "Personal webpage"
+msgstr ""
+
+#, python-format
+msgid "%(teacher)s has not provided any information."
+msgstr ""
+
+#, python-format
+msgid "%(teacher)s has not listed any publications."
+msgstr ""
+
+msgid "Taught courses"
+msgstr ""
+
+#, python-format
+msgid "%(teacher)s does not teach any course."
+msgstr ""
+
+msgid "add course"
+msgstr ""
+
+msgid "Please have javascript enabled for Facebook functionality to work."
+msgstr ""
+
+msgid "Connect"
+msgstr ""
+
+msgid ""
+"Send an SMS message to all your classmates. The service is paid by SMS "
+"credits (1 credit = 1 SMS message to one person). The cost of an SMS message "
+"depends on the number of members in the group."
+msgstr ""
+
+msgid "Credits left:"
+msgstr ""
+
+msgid "Purchase credits"
+msgstr ""
+
+msgid "Message text:"
+msgstr ""
+
+msgid "You do not have enough SMS credits to send a message to this group."
+msgstr ""
+
+msgid "No one in this group has confirmed their phone numbers."
+msgstr ""
+
+msgid "Cost:"
+msgstr ""
+
+msgid "SMS credits"
+msgstr ""
+
+msgid ""
+"one SMS credit allows you to send one SMS message to a single recipient. When"
+" sending a message to a group, one credit is charged for every recipient."
+msgstr ""
+
+msgid "Send a message from your phone!"
+msgstr ""
+
+#, python-format
+msgid ""
+"You can send a message to your group directly from your phone. The message "
+"costs <strong>%(price).2f Lt</strong>, which pays for the delivery of the "
+"message to all recipients (your SMS credits will not be charged). Send the "
+"following text to number %(phone)s:"
+msgstr ""
+
+msgid "Your text"
+msgstr ""
+
+msgid ""
+"SMS credits can be used to send SMS messages to members of a group. There are"
+" two ways to purchase SMS credits:"
+msgstr ""
+
+#, python-format
+msgid ""
+"The SMS costs <strong>%(price).2f Lt</strong> and <strong>%(credits)d "
+"credits</strong> will be added to your account (one credit is one SMS to a "
+"single person)."
+msgstr ""
+
+msgid "Purchase SMS credits"
+msgstr ""
+
+msgid "University and department:"
+msgstr ""
+
+msgid "Full title"
+msgstr ""
+
+msgid "e.g. LKKA"
+msgstr ""
+
+msgid "Department"
+msgstr ""
+
+msgid "Section"
+msgstr ""
+
+msgid "Add university"
+msgstr ""
+
+msgid "Add department"
+msgstr ""
+
+msgid "Add section"
+msgstr ""
+
