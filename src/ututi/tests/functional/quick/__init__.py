@@ -21,6 +21,10 @@ def setUp(test):
     res = meta.Session.execute("select * from users where id = 1")
     if not list(res):
         create_user()
+
+        # User with second email
+        create_user('Some user', 'second@mif.stud.vu.lt', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7', 'uni', 'second@gmail.com')
+
     meta.Session.commit()
 
 

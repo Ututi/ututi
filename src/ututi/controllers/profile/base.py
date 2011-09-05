@@ -416,9 +416,17 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
             # handle email
             email = self.form_result['email']
+            confirmed = False
             if email != c.user.emails[0].email:
+                # XXX Allow user to set default email if it already added as second.
+                if len(c.user.emails) > 1:
+                    if c.user.emails[1].email == email:
+                        del c.user.emails[1]
+                        meta.Session.commit()
+                        confirmed = True
+
                 c.user.emails[0].email = email
-                c.user.emails[0].confirmed = False
+                c.user.emails[0].confirmed = confirmed
                 email_confirmation_request(c.user, email)
                 sign_in_user(c.user)
 
