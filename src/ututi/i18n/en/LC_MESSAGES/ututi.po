@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2011-06-23 18:45+0300\n"
+"PO-Revision-Date: 2011-09-05 04:05+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=((n * 1) != 1)\n"
@@ -16,69 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.5\n"
-
-msgid "Specify correct book department."
-msgstr ""
-
-msgid "Specify book department."
-msgstr ""
-
-msgid "Specify correct science type."
-msgstr ""
-
-msgid "Specify science type."
-msgstr ""
-
-msgid "Selected city is not valid."
-msgstr ""
-
-msgid "Specify a city please."
-msgstr ""
-
-msgid "Selected book type is not valid."
-msgstr ""
-
-msgid "Specify book type."
-msgstr ""
-
-msgid "Selected school grade is not valid."
-msgstr ""
-
-msgid "Please specify school grade"
-msgstr ""
-
-msgid "Book was added succesfully"
-msgstr ""
-
-msgid "Only owner of this book can do this action"
-msgstr ""
-
-msgid "Book was updated succesfully"
-msgstr ""
-
-#, python-format
-msgid "All cities (%(book_count)s)"
-msgstr ""
-
-#, python-format
-msgid "%(city)s (%(book_count)s)city"
-msgstr ""
-
-msgid "You don't have rights to make this action"
-msgstr ""
-
-#, python-format
-msgid "%(ubooks_label)s: %(user_name)s asks about book %(book_title)s"
-msgstr ""
-
-msgid "uBooks"
-msgstr ""
-
-msgid "Message sent."
-msgstr ""
-
-msgid "The book has been successfully deleted"
-msgstr ""
 
 #, python-format
 msgid ""
@@ -552,6 +489,9 @@ msgstr ""
 
 #, python-format
 msgid "Could not reject %(link_to_message)s as it was already approved."
+msgstr ""
+
+msgid "Message sent."
 msgstr ""
 
 #, python-format
@@ -1094,15 +1034,6 @@ msgstr[1] ""
 
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
-msgstr ""
-
-msgid "Students books"
-msgstr ""
-
-msgid "School books"
-msgstr ""
-
-msgid "Other books"
 msgstr ""
 
 #, python-format
@@ -1650,7 +1581,7 @@ msgstr ""
 msgid "Key features"
 msgstr ""
 
-msgid "Book_Type"
+msgid "City"
 msgstr ""
 
 msgid "Editing"
@@ -1659,37 +1590,13 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-msgid "URL name"
-msgstr ""
-
-msgid "Use only lowercase letters 'a' to 'z' and a dash '-'"
-msgstr ""
-
 msgid "Edit"
-msgstr ""
-
-msgid "Actions"
-msgstr ""
-
-msgid "Book types"
-msgstr ""
-
-msgid "Add"
-msgstr ""
-
-msgid "City"
-msgstr ""
-
-msgid "Cities"
 msgstr ""
 
 msgid "Adminstration dashboard"
 msgstr ""
 
 msgid "Ututi controls:"
-msgstr ""
-
-msgid "uBooks controls:"
 msgstr ""
 
 msgid "University administration:"
@@ -1738,6 +1645,9 @@ msgid "Email domains"
 msgstr ""
 
 msgid "List"
+msgstr ""
+
+msgid "Add"
 msgstr ""
 
 msgid "Events"
@@ -1797,6 +1707,9 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+msgid "Actions"
+msgstr ""
+
 msgid "Text id"
 msgstr ""
 
@@ -1837,21 +1750,6 @@ msgid "Notification text"
 msgstr ""
 
 msgid "Content"
-msgstr ""
-
-msgid "School grade"
-msgstr ""
-
-msgid "School grades"
-msgstr ""
-
-msgid "Science type"
-msgstr ""
-
-msgid "Book department"
-msgstr ""
-
-msgid "Science types"
 msgstr ""
 
 msgid "SMS messages"
@@ -1991,209 +1889,6 @@ msgid "found %(count)s user"
 msgid_plural "found %(count)s users"
 msgstr[0] ""
 msgstr[1] ""
-
-msgid "Book title"
-msgstr ""
-
-msgid "Author"
-msgstr ""
-
-msgid "Image"
-msgstr ""
-
-msgid "Price"
-msgstr ""
-
-msgid "Discipline"
-msgstr ""
-
-msgid "Type"
-msgstr ""
-
-msgid "Comment"
-msgstr ""
-
-msgid "Owner information"
-msgstr ""
-
-msgid "Full name"
-msgstr ""
-
-msgid "Phone number"
-msgstr ""
-
-msgid "New book"
-msgstr ""
-
-msgid "Book cover"
-msgstr ""
-
-#. TRANSLATORS: translate this as a single word 'More'
-msgid "more_about_book"
-msgstr ""
-
-msgid "Learning books market"
-msgstr ""
-
-msgid "Main menu"
-msgstr ""
-
-msgid "About U-Books"
-msgstr ""
-
-#, python-format
-msgid "My books (%(book_count)d)"
-msgstr ""
-
-msgid "Upload a Book"
-msgstr ""
-
-msgid "Register"
-msgstr ""
-
-msgid "log out"
-msgstr ""
-
-msgid "ututi_link"
-msgstr ""
-
-msgid "UAB „UTUTI“"
-msgstr ""
-
-msgid "About ututi"
-msgstr ""
-
-msgid "ututi_blog_url"
-msgstr ""
-
-msgid "U-blog"
-msgstr ""
-
-#, python-format
-msgid "%d book"
-msgid_plural "%d books"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Order by"
-msgstr ""
-
-msgid "Disciplines"
-msgstr ""
-
-msgid "All books"
-msgstr ""
-
-msgid "Filter"
-msgstr ""
-
-msgid "Edit book"
-msgstr ""
-
-msgid "Back to my books"
-msgstr ""
-
-msgid "Delete image"
-msgstr ""
-
-msgid "U-Books - what's that?"
-msgstr ""
-
-msgid "Add book"
-msgstr ""
-
-msgid "It's school books exchange / selling place."
-msgstr ""
-
-msgid "It's place where you can get cheap stydy book."
-msgstr ""
-
-msgid "It's place where you find new owner for you old good textbook."
-msgstr ""
-
-msgid "Newest books"
-msgstr ""
-
-msgid "Log in or register using your Google or Facebook account"
-msgstr ""
-
-msgid "Connect"
-msgstr ""
-
-msgid "Log in directly to Ututi"
-msgstr ""
-
-msgid "Your email address"
-msgstr ""
-
-msgid "First time here?"
-msgstr ""
-
-msgid "Register!"
-msgstr ""
-
-msgid "Register as a new Ututi user"
-msgstr ""
-
-msgid "Gadu gadu"
-msgstr ""
-
-msgid "Repeat password"
-msgstr ""
-
-msgid "I agree to the "
-msgstr ""
-
-msgid "terms of use"
-msgstr ""
-
-msgid "Books added"
-msgstr ""
-
-msgid "My books"
-msgstr ""
-
-msgid "You haven't added any books yet."
-msgstr ""
-
-msgid "Restore"
-msgstr ""
-
-msgid "All Books"
-msgstr ""
-
-msgid "Books for school"
-msgstr ""
-
-msgid "Books for students"
-msgstr ""
-
-msgid "Other"
-msgstr ""
-
-msgid "Our friends"
-msgstr ""
-
-msgid "Search-btn"
-msgstr "Search"
-
-msgid "Search results"
-msgstr ""
-
-msgid "Back to catalog"
-msgstr ""
-
-msgid "Book type"
-msgstr ""
-
-msgid "Phone"
-msgstr ""
-
-msgid "Write to owner:"
-msgstr ""
-
-msgid "Send message"
-msgstr ""
 
 msgid ""
 "We have received a request to confirm the ownership of this email on the "
@@ -2770,6 +2465,9 @@ msgstr ""
 msgid "User"
 msgstr ""
 
+msgid "Phone number"
+msgstr ""
+
 msgid "Last seen"
 msgstr ""
 
@@ -3091,6 +2789,9 @@ msgid ""
 "outsiders. "
 msgstr ""
 
+msgid "Your email address"
+msgstr ""
+
 msgid "Join as student"
 msgstr ""
 
@@ -3308,6 +3009,9 @@ msgstr ""
 msgid "Compare with previous"
 msgstr ""
 
+msgid "Restore"
+msgstr ""
+
 #, python-format
 msgid ""
 "You are viewing an old version of this page created by %(link_to_user)s "
@@ -3459,6 +3163,9 @@ msgstr ""
 
 msgid "in-Subjects"
 msgstr "Subjects"
+
+msgid "Search-btn"
+msgstr "Search"
 
 msgid "Tags"
 msgstr ""
@@ -3619,6 +3326,9 @@ msgstr ""
 msgid "Not a member yet?"
 msgstr ""
 
+msgid "Register"
+msgstr ""
+
 msgid "Get started"
 msgstr ""
 
@@ -3717,17 +3427,6 @@ msgstr ""
 msgid "Read our blog"
 msgstr ""
 
-msgid "Ututi recommends"
-msgstr ""
-
-msgid "Virtual book market"
-msgstr ""
-
-msgid ""
-"Here you can buy study material cheaply or find a new owner for your good"
-" old textbook."
-msgstr ""
-
 msgid "Universities"
 msgstr ""
 
@@ -3803,6 +3502,9 @@ msgstr ""
 msgid "Email is confirmed"
 msgstr ""
 
+msgid "Show my email to unregistered users."
+msgstr ""
+
 msgid "Get confirmation email"
 msgstr ""
 
@@ -3813,6 +3515,9 @@ msgid "Address of your website or blog"
 msgstr ""
 
 msgid "Edit your general information below."
+msgstr ""
+
+msgid "Full name"
 msgstr ""
 
 msgid "e.g. Associate professor"
@@ -4196,6 +3901,9 @@ msgstr ""
 msgid "Edit group"
 msgstr ""
 
+msgid "Send message"
+msgstr ""
+
 msgid "Send SMS"
 msgstr ""
 
@@ -4514,6 +4222,9 @@ msgid "[DELETED]"
 msgstr ""
 
 msgid "Book"
+msgstr ""
+
+msgid "Price"
 msgstr ""
 
 msgid "The data"
@@ -5003,6 +4714,9 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
+msgid "Phone"
+msgstr ""
+
 msgid "Personal webpage"
 msgstr ""
 
@@ -5025,6 +4739,9 @@ msgid "add course"
 msgstr ""
 
 msgid "Please have javascript enabled for Facebook functionality to work."
+msgstr ""
+
+msgid "Connect"
 msgstr ""
 
 msgid ""

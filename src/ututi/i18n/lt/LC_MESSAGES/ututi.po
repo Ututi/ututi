@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-06-23 18:45+0300\n"
+"PO-Revision-Date: 2011-09-05 04:05+0200\n"
 "Last-Translator: Jaro <jaro@akl.lt>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -13,69 +13,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.5\n"
-
-msgid "Specify correct book department."
-msgstr "Nurodykite tinkamą knygos paskirtį."
-
-msgid "Specify book department."
-msgstr "Nurodykite knygos paskirtį."
-
-msgid "Specify correct science type."
-msgstr "Nurodykite tinkamą mokslo šaką."
-
-msgid "Specify science type."
-msgstr "Nurodykite mokslo šaką."
-
-msgid "Selected city is not valid."
-msgstr "Pasirinktas miestas netinkamas."
-
-msgid "Specify a city please."
-msgstr "Nurodykite miestą."
-
-msgid "Selected book type is not valid."
-msgstr "Pasirinktas knygos tipas netinkamas."
-
-msgid "Specify book type."
-msgstr "Nurodykite knygos tipą."
-
-msgid "Selected school grade is not valid."
-msgstr "Pasirinkta klasė netinkama."
-
-msgid "Please specify school grade"
-msgstr "Nurodykite klasę"
-
-msgid "Book was added succesfully"
-msgstr "Knyga sukurta sėkmingai"
-
-msgid "Only owner of this book can do this action"
-msgstr "Tai gali daryti tik knygos savininkas"
-
-msgid "Book was updated succesfully"
-msgstr "Knyga atnaujinta sėkmingai"
-
-#, python-format
-msgid "All cities (%(book_count)s)"
-msgstr "Visi miestai (%(book_count)s)"
-
-#, python-format
-msgid "%(city)s (%(book_count)s)city"
-msgstr "%(city)s (%(book_count)s)"
-
-msgid "You don't have rights to make this action"
-msgstr "Neturite reikiamų teisių"
-
-#, python-format
-msgid "%(ubooks_label)s: %(user_name)s asks about book %(book_title)s"
-msgstr "%(ubooks_label)s: %(user_name)s teiraujasi dėl knygos %(book_title)s"
-
-msgid "uBooks"
-msgstr "uKnygos"
-
-msgid "Message sent."
-msgstr "Pranešimas išsiųstas."
-
-msgid "The book has been successfully deleted"
-msgstr "Jūs sėkmingai pašalinote knygą"
 
 #, python-format
 msgid ""
@@ -577,6 +514,9 @@ msgstr "Žinutė %(link_to_message)s buvo atmesta."
 #, python-format
 msgid "Could not reject %(link_to_message)s as it was already approved."
 msgstr "Nepavyko atmesti žinutės %(link_to_message)s, nes ji jau buvo atmesta."
+
+msgid "Message sent."
+msgstr "Pranešimas išsiųstas."
 
 #, python-format
 msgid "Ututi news: %(changes)s"
@@ -1141,15 +1081,6 @@ msgstr[2] "neribota grupės privačių failų vieta %(day_count)d dienų"
 #, python-format
 msgid "A new file has been uploaded for the %(title)s:"
 msgstr "%(title)s buvo įkeltas naujas failas:"
-
-msgid "Students books"
-msgstr "Knygos studentams"
-
-msgid "School books"
-msgstr "Knygos mokiniams"
-
-msgid "Other books"
-msgstr "Kitos knygos"
 
 #, python-format
 msgid "Page %(page_title)s (%(page_url)s) was created."
@@ -1787,8 +1718,8 @@ msgstr ""
 msgid "Key features"
 msgstr "Galimybės"
 
-msgid "Book_Type"
-msgstr "Knygos tipas"
+msgid "City"
+msgstr "Miestas"
 
 msgid "Editing"
 msgstr "Redagavimas"
@@ -1796,38 +1727,14 @@ msgstr "Redagavimas"
 msgid "Name"
 msgstr "Vardas"
 
-msgid "URL name"
-msgstr "URL vardas"
-
-msgid "Use only lowercase letters 'a' to 'z' and a dash '-'"
-msgstr "Naudokite tik mažąsias lotyniškas raides ir brūkšnelį '-'"
-
 msgid "Edit"
 msgstr "Keisti"
-
-msgid "Actions"
-msgstr "Veiksmai"
-
-msgid "Book types"
-msgstr "Knygų tipai"
-
-msgid "Add"
-msgstr "Pridėti"
-
-msgid "City"
-msgstr "Miestas"
-
-msgid "Cities"
-msgstr "Miestai"
 
 msgid "Adminstration dashboard"
 msgstr "Administravimas"
 
 msgid "Ututi controls:"
 msgstr "Ututi valdymas:"
-
-msgid "uBooks controls:"
-msgstr "uBooks įrankiai:"
 
 msgid "University administration:"
 msgstr "Universiteto administracija:"
@@ -1879,6 +1786,9 @@ msgstr "El. pašto domenai"
 
 msgid "List"
 msgstr "Sąrašas"
+
+msgid "Add"
+msgstr "Pridėti"
 
 msgid "Events"
 msgstr "Įvykiai"
@@ -1940,6 +1850,9 @@ msgstr "Id"
 msgid "Language"
 msgstr "Kalba"
 
+msgid "Actions"
+msgstr "Veiksmai"
+
 msgid "Text id"
 msgstr "Teksto id"
 
@@ -1981,21 +1894,6 @@ msgstr "Pranešimo tekstas"
 
 msgid "Content"
 msgstr "Turinys"
-
-msgid "School grade"
-msgstr "Klasė"
-
-msgid "School grades"
-msgstr "Klasės"
-
-msgid "Science type"
-msgstr "Mokslo šaka"
-
-msgid "Book department"
-msgstr "Knygos paskirtis"
-
-msgid "Science types"
-msgstr "Mokslo šakos"
 
 msgid "SMS messages"
 msgstr "SMS žinutės"
@@ -2138,210 +2036,6 @@ msgid_plural "found %(count)s users"
 msgstr[0] "rastas %(count)s naudotojas"
 msgstr[1] "rasti %(count)s naudotojai"
 msgstr[2] "rasta %(count)s naudotojų"
-
-msgid "Book title"
-msgstr "Knygos pavadinimas"
-
-msgid "Author"
-msgstr "Autorius"
-
-msgid "Image"
-msgstr "Paveiksliukas"
-
-msgid "Price"
-msgstr "Kaina"
-
-msgid "Discipline"
-msgstr "Mokslo šaka"
-
-msgid "Type"
-msgstr "Tipas"
-
-msgid "Comment"
-msgstr "Pastabos"
-
-msgid "Owner information"
-msgstr "Savininko informacija"
-
-msgid "Full name"
-msgstr "Vardas, pavardė"
-
-msgid "Phone number"
-msgstr "Telefono numeris"
-
-msgid "New book"
-msgstr "Nauja knyga"
-
-msgid "Book cover"
-msgstr "Knygos viršelis"
-
-#. TRANSLATORS: translate this as a single word 'More'
-msgid "more_about_book"
-msgstr "Plačiau"
-
-msgid "Learning books market"
-msgstr "Mokslo knygų mugė"
-
-msgid "Main menu"
-msgstr "Pagrindinis meniu"
-
-msgid "About U-Books"
-msgstr "Apie U-Knygas"
-
-#, python-format
-msgid "My books (%(book_count)d)"
-msgstr "Mano knygos (%(book_count)d)"
-
-msgid "Upload a Book"
-msgstr "Įkelti Knygą"
-
-msgid "Register"
-msgstr "Registruotis"
-
-msgid "log out"
-msgstr "išeiti"
-
-msgid "ututi_link"
-msgstr "http://ututi.lt"
-
-msgid "UAB „UTUTI“"
-msgstr "UAB „UTUTI“"
-
-msgid "About ututi"
-msgstr "Apie ututi"
-
-msgid "ututi_blog_url"
-msgstr "http://blog.ututi.lt/category/news/"
-
-msgid "U-blog"
-msgstr "Ututi blogas"
-
-#, python-format
-msgid "%d book"
-msgid_plural "%d books"
-msgstr[0] "%d knyga"
-msgstr[1] "%d knygos"
-msgstr[2] "%d knygų"
-
-msgid "Order by"
-msgstr "Rūšiuoti pagal"
-
-msgid "Disciplines"
-msgstr "Mokslo šakos"
-
-msgid "All books"
-msgstr "Visos knygos"
-
-msgid "Filter"
-msgstr "Filtruoti"
-
-msgid "Edit book"
-msgstr "Redaguoti knygą"
-
-msgid "Back to my books"
-msgstr "Grįžti į mano knygas"
-
-msgid "Delete image"
-msgstr "Trinti paveiksliuką"
-
-msgid "U-Books - what's that?"
-msgstr "U-Knygos - kas tai?"
-
-msgid "Add book"
-msgstr "Įkelk knygą"
-
-msgid "It's school books exchange / selling place."
-msgstr "Tai mokslo knygų mainų / prekybos vieta."
-
-msgid "It's place where you can get cheap stydy book."
-msgstr "Tai vieta, kur gali rasti nebrangių knygų studijoms."
-
-msgid "It's place where you find new owner for you old good textbook."
-msgstr "Tai vieta, kur tavo senas vadovėlis gali rasti naują šeimininką."
-
-msgid "Newest books"
-msgstr "Naujausios knygos"
-
-msgid "Log in or register using your Google or Facebook account"
-msgstr "Prisijunk arba registruokis per savo Google ar Facebook paskyrą"
-
-msgid "Connect"
-msgstr "Prisijungti"
-
-msgid "Log in directly to Ututi"
-msgstr "Junkis tiesiai į Ututi"
-
-msgid "Your email address"
-msgstr "El. pašto adresas"
-
-msgid "First time here?"
-msgstr "Pirmą kartą čia?"
-
-msgid "Register!"
-msgstr "Registruokis!"
-
-msgid "Register as a new Ututi user"
-msgstr "Registruokis kaip naujas Ututi narys"
-
-msgid "Gadu gadu"
-msgstr "Gadu gadu"
-
-msgid "Repeat password"
-msgstr "Pakartoti slaptažodį"
-
-msgid "I agree to the "
-msgstr "Sutinku su"
-
-msgid "terms of use"
-msgstr "naudojimosi sistema taisyklėmis"
-
-msgid "Books added"
-msgstr "Pridėtos knygos"
-
-msgid "My books"
-msgstr "Mano knygos"
-
-msgid "You haven't added any books yet."
-msgstr "Jūs dar neįkėlėte knygų."
-
-msgid "Restore"
-msgstr "Atstatyti"
-
-msgid "All Books"
-msgstr "Visos knygos"
-
-msgid "Books for school"
-msgstr "Knygos mokiniams"
-
-msgid "Books for students"
-msgstr "Knygos studentams"
-
-msgid "Other"
-msgstr "Kitkas"
-
-msgid "Our friends"
-msgstr "Mūsų draugai"
-
-msgid "Search-btn"
-msgstr "Ieškok"
-
-msgid "Search results"
-msgstr "Paieškos rezultatai"
-
-msgid "Back to catalog"
-msgstr "Atgal į katalogą"
-
-msgid "Book type"
-msgstr "Knygos tipas"
-
-msgid "Phone"
-msgstr "Tel. numeris"
-
-msgid "Write to owner:"
-msgstr "Parašyk knygos savininkui:"
-
-msgid "Send message"
-msgstr "Siųsti žinutę"
 
 msgid ""
 "We have received a request to confirm the ownership of this email on the "
@@ -3005,6 +2699,9 @@ msgstr "Grupės nariai"
 msgid "User"
 msgstr "Naudotojas"
 
+msgid "Phone number"
+msgstr "Telefono numeris"
+
 msgid "Last seen"
 msgstr "Paskutinį sykį matytas"
 
@@ -3355,6 +3052,9 @@ msgid ""
 "outsiders. "
 msgstr "Privatūs failais, kurių nenorite viešinti pašaliniams."
 
+msgid "Your email address"
+msgstr "El. pašto adresas"
+
 msgid "Join as student"
 msgstr "Studento registracija"
 
@@ -3600,6 +3300,9 @@ msgstr "Rodyti"
 msgid "Compare with previous"
 msgstr "Palyginti su praeita versija"
 
+msgid "Restore"
+msgstr "Atstatyti"
+
 #, python-format
 msgid ""
 "You are viewing an old version of this page created by %(link_to_user)s "
@@ -3766,6 +3469,9 @@ msgstr "visur"
 
 msgid "in-Subjects"
 msgstr "dalykai"
+
+msgid "Search-btn"
+msgstr "Ieškok"
 
 msgid "Tags"
 msgstr "Žymos"
@@ -3936,6 +3642,9 @@ msgstr "Prisiminti mane"
 msgid "Not a member yet?"
 msgstr "Dar ne narys?"
 
+msgid "Register"
+msgstr "Registruotis"
+
 msgid "Get started"
 msgstr "Pradžia"
 
@@ -4038,19 +3747,6 @@ msgstr "http://blog.ututi.lt"
 msgid "Read our blog"
 msgstr "Mūsų blogas"
 
-msgid "Ututi recommends"
-msgstr "Ututi rekomenduoja"
-
-msgid "Virtual book market"
-msgstr "Virtualus knygų turgelis"
-
-msgid ""
-"Here you can buy study material cheaply or find a new owner for your good"
-" old textbook."
-msgstr ""
-"Čia gali įsigyti nebrangių knygų studijoms arba surasti naują šeimininką "
-"savo senam geram vadovėliui."
-
 msgid "Universities"
 msgstr "Universitetai"
 
@@ -4133,6 +3829,9 @@ msgstr "Numeris patvirtintas"
 msgid "Email is confirmed"
 msgstr "El. pašto adresas patvirtintas"
 
+msgid "Show my email to unregistered users."
+msgstr "Rodyti el.pašto adresą neregistruotiems naudotojams."
+
 msgid "Get confirmation email"
 msgstr "Gauti patvirtinimo laišką"
 
@@ -4144,6 +3843,9 @@ msgstr "Nuosavo puslapio arba blog'o adresas"
 
 msgid "Edit your general information below."
 msgstr "Įveskite savo bendrinę informaciją žemiau."
+
+msgid "Full name"
+msgstr "Vardas, pavardė"
 
 msgid "e.g. Associate professor"
 msgstr "pvz. Associate professor"
@@ -4564,6 +4266,9 @@ msgstr "Trinti šią grupę"
 msgid "Edit group"
 msgstr "Redaguoti grupę"
 
+msgid "Send message"
+msgstr "Siųsti žinutę"
+
 msgid "Send SMS"
 msgstr "Siųsti SMS"
 
@@ -4907,6 +4612,9 @@ msgstr "[PAŠALINTAS]"
 
 msgid "Book"
 msgstr "Knyga"
+
+msgid "Price"
+msgstr "Kaina"
 
 msgid "The data"
 msgstr "Duomenys"
@@ -5426,6 +5134,9 @@ msgstr "Dėstytojo veikla:"
 msgid "Address"
 msgstr "Adresas"
 
+msgid "Phone"
+msgstr "Tel. numeris"
+
 msgid "Personal webpage"
 msgstr "Asmeninis puslapis"
 
@@ -5449,6 +5160,9 @@ msgstr "pridėti dalyką"
 
 msgid "Please have javascript enabled for Facebook functionality to work."
 msgstr "Įsidiekite Javascript norėdami naudoti Facebook."
+
+msgid "Connect"
+msgstr "Prisijungti"
 
 msgid ""
 "Send an SMS message to all your classmates. The service is paid by SMS "
