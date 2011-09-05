@@ -118,6 +118,7 @@ It displays some people from this university:
 
     >>> browser.printCssQuery('#people-box .name', strip=True)
     <div> <a>Administrator of the university</a> </div>
+    <div> <a>Some user</a> </div>
 
 "Contact us" link brings user to Ututi contact page:
 
