@@ -34,7 +34,7 @@ from ututi.model import meta, Email, User
 
 from ututi.controllers.profile.validators import HideElementForm, \
     MultiRcptEmailForm, FriendsInvitationJSForm, ContactForm, \
-    ProfileForm, PasswordChangeForm
+    ProfileForm, PasswordChangeForm, DeleteMeForm
 from ututi.controllers.profile.wall import UserWallMixin
 from ututi.controllers.profile.subjects import WatchedSubjectsMixin
 from ututi.controllers.search import SearchSubmit, SearchBaseController
@@ -335,7 +335,17 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             meta.Session.commit()
             h.flash(_('Your password has been changed!'))
         redirect(url(controller='profile', action='login_settings'))
-
+    
+    @ActionProtector("user")
+    @validate(DeleteMeForm, form='login_settings', ignore_request=True)
+    def delete_my_account(self):
+        if hasattr(self, 'form_result'):
+                h.flash(_('Password is correct'))
+                c.user.delete_user()
+                meta.Session.commit()
+                redirect(url(controller='home', action='logout'))            
+        redirect(url(controller='profile', action='login_settings'))
+        
     @ActionProtector("user")
     def recover_password(self):
         if not c.user.recovery_key:

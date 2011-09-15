@@ -5317,3 +5317,11 @@ msgstr "Dodaj wydział"
 msgid "Add section"
 msgstr "Dodaj kierunek"
 
+msgid "Delete account"
+msgstr "Usuń konto"
+
+msgid "Delete my account"
+msgstr "Usuń konto"
+
+msgid "To delete your account, type your current password in the form below."
+msgstr ""

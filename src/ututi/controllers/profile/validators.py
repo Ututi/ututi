@@ -83,7 +83,13 @@ class PasswordChangeForm(Schema):
                                                  'repeat_password',
                                                  messages=msg)]
 
-
+class DeleteMeForm(Schema):
+    allow_extra_fields = False
+    passwordd = UserPasswordValidator(not_empty=True)
+    msg = {'empty': _(u"Please enter your password."),
+           'tooShort': _(u"The password must be at least 5 symbols long.")}
+    
+                                                 
 class GaduGaduConfirmationNumber(validators.FormValidator):
 
     messages = {

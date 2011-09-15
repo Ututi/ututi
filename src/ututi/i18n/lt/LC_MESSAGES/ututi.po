@@ -5264,3 +5264,12 @@ msgstr "Sukurk fakultetą"
 msgid "Add section"
 msgstr "Sukurk katedrą"
 
+msgid "Delete account"
+msgstr "Ištrinti paskyrą"
+
+msgid "Delete my account"
+msgstr "Noriu ištrinti savo paskyrą"
+
+msgid "To delete your account, type your current password in the form below."
+msgstr "Jei norite ištrinti savo paskyrą, įveskite esamą slaptažodį į žemiau esančią formą."
+

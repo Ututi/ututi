@@ -9,6 +9,7 @@
 </%def>
 
 <div class="left-right">
+
   <div class="left">
     <div class="explanation-post-header" style="margin-top:0">
       <h2>${_('Change password')}</h2>
@@ -21,6 +22,17 @@
       ${h.input_psw('new_password', _('New password'))}
       ${h.input_psw('repeat_password', _('Repeat the new password'))}
       ${h.input_submit(_('Change password'))}
+    </form>
+    
+    <div class="explanation-post-header" style="margin-top:30px">
+      <h2>${_('Delete account')}</h2>
+      <p class="tip">
+        ${_("To delete your account, type your current password in the form below.")}
+      </p>
+    </div>
+    <form method="post" action="${url(controller='profile', action='delete_my_account')}" id="delete-my-account-form" class="narrow">
+      ${h.input_psw('passwordd', _('Current password'))}
+      ${h.input_submit(_('Delete my account'),'delete_me_btn')}
     </form>
   </div>
   <div class="right">

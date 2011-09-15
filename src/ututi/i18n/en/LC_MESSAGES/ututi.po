@@ -4830,3 +4830,11 @@ msgstr ""
 msgid "Add section"
 msgstr ""
 
+msgid "Delete account"
+msgstr ""
+
+msgid "Delete my account"
+msgstr ""
+
+msgid "To delete your account, type your current password in the form below."
+msgstr ""
