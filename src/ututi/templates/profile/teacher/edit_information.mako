@@ -29,12 +29,13 @@ ${self.template_warning()}
 <ul id="language-links">
   %for language in c.edit_languages:
     %if language is c.edit_language:
-      <li>${language.title}</li>
+      <li class="cont-lang ${language.id}" ><span >&nbsp;</span>${language.title}</li>
     %else:
-      <li>
-        <a href="${url(controller='profile', action='edit_information', lang=language.id)}">
-          ${language.title}
-        </a>
+      <li class="cont-lang ${language.id}">
+            <a href="${url(controller='profile', action='edit_information', lang=language.id)}">
+              <span>&nbsp;</span>
+              ${language.title}
+            </a>
       </li>
     %endif
   %endfor

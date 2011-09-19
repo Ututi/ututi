@@ -4211,4 +4211,31 @@ a.disabled, a.disabled:hover {
     background: url(img/icons/teacher_small.png) no-repeat left center;
 }
 
+#language-links li{
+    font-weight: bold;
+    position: relative;
+    padding-left: 28px;
+}
+
+#language-links li.cont-lang span{
+    background: url(img/icons/flags.png) no-repeat left center;
+    background-repeat: no-repeat;
+    left:0px;
+    margin-top: -4px;
+    padding-left: 24px;
+    padding-top: 24px;
+    font-size: 0px;
+    line-height: 0px;
+    z-index: 10;
+    position: absolute;
+}
+#language-links li.cont-lang.en span{
+    background-position: 0px 0px;
+}
+#language-links li.cont-lang.lt span{
+    background-position: -24px 0px;
+}
+#language-links li.cont-lang.pl span{
+    background-position: -48px 0px;
+}
 /* End teacher's material specific stylings */
