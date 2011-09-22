@@ -335,7 +335,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             meta.Session.commit()
             h.flash(_('Your password has been changed!'))
         redirect(url(controller='profile', action='login_settings'))
-    
+
     @ActionProtector("user")
     @validate(DeleteMeForm, form='login_settings', ignore_request=True)
     def delete_my_account(self):
@@ -343,9 +343,9 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                 h.flash(_('Password is correct'))
                 c.user.delete_user()
                 meta.Session.commit()
-                redirect(url(controller='home', action='logout'))            
+                redirect(url(controller='home', action='logout'))
         redirect(url(controller='profile', action='login_settings'))
-        
+
     @ActionProtector("user")
     def recover_password(self):
         if not c.user.recovery_key:
