@@ -340,7 +340,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     @validate(DeleteMeForm, form='login_settings', ignore_request=True)
     def delete_my_account(self):
         if hasattr(self, 'form_result'):
-                h.flash(_('Password is correct'))
+                h.flash(_('Your account has been successfully removed!'))
                 c.user.delete_user()
                 meta.Session.commit()
                 redirect(url(controller='home', action='logout'))
