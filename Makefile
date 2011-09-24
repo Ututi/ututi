@@ -211,7 +211,7 @@ download_pl_backup:
 .PHONY: import_backup
 import_backup: instance/var/run/.s.PGSQL.${PGPORT}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
-	droplang plpgsql development -h ${PWD}/instance/var/run/ || true
+	${PG_PATH}/droplang plpgsql development -h ${PWD}/instance/var/run/ || true
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	${PG_PATH}/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
 	psql -h ${PWD}/instance/var/run/ -d development -c "update users set password = '2M/gReXQLaGpx28PT7mBFLWS0sC04eClUH80'"
