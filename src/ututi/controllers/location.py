@@ -191,7 +191,8 @@ class TeacherSearchMixin():
             query,
             page=c.page,
             items_per_page = 30,
-            item_count = search_query_count(query))
+            item_count = search_query_count(query),
+            obj_type='teacher')
         c.searched = True
 
 
