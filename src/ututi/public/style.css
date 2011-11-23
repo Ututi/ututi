@@ -2285,7 +2285,8 @@ div.section div.controls div.single_upload {
 
 div.upload_forbidden {
     clear: left;
-    margin-top: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     background: #f2f2f2 url("../images/details/icon_exclamation.png") 5px center no-repeat;
     padding: 2px 0 2px 15px;
     font-size: 12px;
@@ -3911,7 +3912,7 @@ body.anonymous_index #ututi_login_section_portlet .content {
 
 .static-content {
     margin: 10px 0 10px 0;
-    width: 600px;
+    width: 570px;
 }
 
 .static-content p {
