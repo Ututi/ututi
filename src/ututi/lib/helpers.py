@@ -201,6 +201,12 @@ def fmt_shortdate(dt):
     localtime = pytz.utc.localize(dt).astimezone(get_timezone())
     return dates.format_datetime(localtime, fmt, locale=get_locale())
 
+def fmt_normaldate(dt):
+    """Format date and time for output."""
+    from babel import dates
+    fmt = "yyyy-MM-dd"
+    localtime = pytz.utc.localize(dt).astimezone(get_timezone())
+    return dates.format_datetime(localtime, fmt, locale=get_locale())
 
 def nl2br(text):
     return literal('<br/>'.join(cgi.escape(text).split("\n")))
@@ -283,6 +289,16 @@ def html_strip(html_text):
 def single_line(text):
     if isinstance(text, basestring):
         return text.replace('\n', '').replace('\r', '').strip()
+
+def file_name(string):
+    resultstring = '';
+    MaxLength = 35; 
+    if len(string) > MaxLength:
+        resultstring = string[:MaxLength]+"...";
+    else:
+        resultstring = string
+        
+    return resultstring
 
 def file_size(size):
     suffixes = [("", 2**10),

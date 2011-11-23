@@ -11,12 +11,17 @@
 </%def>
 
 <%files:file_browser obj="${c.group}" comment="${_('You can keep up to %s of private group files here (e.g. pictures)') % h.file_size(c.group.available_size)}" controls="['upload', 'folder', 'size', 'list']"/>
-
-% for n, subject in enumerate(c.group.watched_subjects):
-  <%files:file_browser obj="${subject}" section_id="${n + 1}" collapsible="True"/>
-% endfor
-<br/>
-%if c.group.is_admin(c.user):
-
-${h.button_to(_('Add more subjects'), c.group.url(action='subjects_watch'), method='get')}
-%endif
+<div class="group_subject_cont" >
+	<div class="group_subject_files_cont" >
+		% for n, subject in enumerate(c.group.watched_subjects):
+			<% subject.subjectfiles = True %>
+		  	<div class="group_subject_files_browser" >
+		  		<%files:file_browser obj="${subject}" section_id="${n + 1}" collapsible="True"/>
+		  	</div>
+		% endfor
+	</div>
+	<br/>
+	%if c.group.is_admin(c.user):
+		${h.button_to(_('Add more subjects'), c.group.url(action='subjects_watch'), method='get')}
+	%endif	
+</div>

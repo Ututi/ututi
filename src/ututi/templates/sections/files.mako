@@ -6,6 +6,31 @@
 <script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
+
+	$('.files_more').click(function(){
+		var clickObj = $(this);
+		var parentCont = clickObj.parent();
+		var showFiles = parentCont.find('.file.show');		
+		
+		if ( showFiles.length > 0 ) {
+			parentCont.removeClass('open');
+			showFiles.fadeIn(500,function(){
+				showFiles.removeClass('show');
+				showFiles.addClass('hide');
+			});
+			clickObj.hide();
+		} else {
+			var hideFiles = parentCont.find('.file.hide');
+			hideFiles.removeClass('hide');
+			hideFiles.addClass('show');
+			parentCont.addClass('open');
+			clickObj.show();
+		}
+		
+		return false; 
+		
+	});
+	
     $('.clickBlock .clickAction').click(function(){
         $(this).closest('.clickBlock').toggleClass('open').find('.showBlock').toggle();
     });
@@ -74,7 +99,10 @@ $(document).ready(function(){
               })
           }
     }
-
+    
+	var DOMBody = $('body');
+	var FolderList = $('.file_upload_dropdown');
+	
     var sortable_config = {
       connectWith: ['.folder'],
       cancel: '.message',
@@ -92,7 +120,6 @@ $(document).ready(function(){
 
     function setUpFolder(i, btn) {
       var button = $(btn);
-
       var ids = button[0].id.split('-');
       var ign = ids[0];
       var i1 = ids[1];
@@ -103,7 +130,7 @@ $(document).ready(function(){
       var result_area_id = '#file_area-' + i1 + '-' + i2;
       var result_area = $(result_area_id);
       var upload_url = $('#file_upload_url-' + i1).val();
-
+	  
       new AjaxUpload(button,{
           action: upload_url,
           name: 'attachment',
@@ -129,10 +156,14 @@ $(document).ready(function(){
               iframe['interval'] = interval;
           },
           onComplete: function(file, response, iframe){
+          	  FolderList.hide();
               if (response != 'UPLOAD_FAILED') {
                   iframe['progress_ticker'].text("${_('Done')}").parent().addClass('done');
                   window.clearInterval(iframe['interval']);
-                  $('.folder', result_area).append(response);
+                  var newFileDomObj = $(response);
+                  newFileDomObj.hide();
+                  $('.folder', result_area).append(newFileDomObj);
+                  newFileDomObj.fadeIn(1000);
                   $('.folder .message', result_area).hide();
                   $('.folder_file_area .delete_folder_button', result_area).hide();
                   updateSizeInformation($(result_area).parents('.section'));
@@ -151,8 +182,10 @@ $(document).ready(function(){
           return false;
       });
     }
-
+	
     var buttons = $('.file_upload_dropdown .upload');
+    DOMBody.click(function(){ FolderList.hide(); });
+     
     buttons.each(setUpFolder);
     $('.single_upload .upload').each(setUpFolder);
 
@@ -336,7 +369,6 @@ $(document).ready(function(){
     }
 
     $('.rename_confirm').live('click', performFileRename);
-
     $('.new_folder_button').live('click', function (event) {
         newFolder($(this));
         return false;
@@ -378,178 +410,198 @@ $(document).ready(function(){
                  }
                },
                'json');
-
       }
     }
-
 });
 //]]>
 </script>
 </%def>
 
 <%def name="file(file, new_file=False, hidden=False)">
-  %if file.deleted is None:
-            <li class="${file.created.is_teacher and 'teacher-content ' or ''}file${hidden and ' show' or ''}">
-              <span class="tooltip-container">
-                %if file.created.is_teacher:
-                  <span class="teacher-tooltip">
-                  ${tooltip(_("Teacher's material"), img='/img/icons/teacher-cap.png')}
-                  </span>
-                %endif
-              </span><span class="file-description">
-                %if new_file: ## catch eye
-                  ${h.image('/images/details/icon_drag_file_orange.png', alt='file icon', class_='drag-target')}
-                %else:
-                  ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')}
-                %endif
-                  ${h.link_to(file.title, file.url(), class_='filename')}
-                %if file.can_write():
-                  <span class="file_rename_form hidden">
-                    <span class="file_rename_input_decorator">
-                      <input class="file_rename_input" type="text" />
-                    </span>
-                    ${h.input_submit(_('Rename'), class_='rename_confirm btn')}
-                  </span>
-                  <img src="${url('/images/details/icon_rename.png')}" alt="${_('edit file name')}" class="rename_button" />
-                %endif
-                <span class="size">(${h.file_size(file.size)})</span>
-                <span class="date">${h.fmt_dt(file.created_on)}</span>
-                <a href="${url(controller='user', action='index', id=file.created_by)}" class="author">
-                  ${file.created.fullname}
-                </a>
-                <input class="move_url" type="hidden" value="${file.url(action='move')}" />
-                <input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
-                <input class="delete_url" type="hidden" value="${file.url(action='delete')}" />
-                <input class="flag_url" type="hidden" value="${file.url(action='flag')}" />
-                <input class="rename_url" type="hidden" value="${file.url(action='rename')}" />
-                <input class="folder_title_value" type="hidden" value="${file.folder}" />
-                %if file.can_write():
-                  <img src="${url('/images/delete.png')}" alt="${_('delete file')}" class="delete_button" />
-                %elif file.parent.flaggable_files:
-                  <img src="${url('/img/icons/flag-small.png')}" alt="${_('flag as suspicious')}" class="flag_button" />
-                %endif
-              </span>
-            </li>
-  %else: ## deleted file
-            <li class="${file.created.is_teacher and 'teacher-content ' or ''}file">
-              <span class="tooltip-container">
-                %if file.created.is_teacher:
-                  <span class="teacher-tooltip">
-                  ${tooltip(_("Teacher's material"), img='/img/icons/teacher-cap.png')}
-                  </span>
-                %endif
-              </span><span class="file-description">
-                ${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')}
-                <span class="file_name">
-                  ${file.title}
-                </span>
-                %if file.folder:
-                <span class="folder_title">(${file.folder})</span>
-                %endif
-                <span class="size">(${h.file_size(file.size)})</span>
-                <span class="date">${_('deleted')} ${h.fmt_dt(file.deleted_on)}</span>,
-                <a href="${file.deleted.url()}" class="${'author' if file.deleted == file.created else 'deleted-by'}">
-                  ${file.deleted.fullname}
-                </a>
-                <input class="move_url" type="hidden" value="${file.url(action='move')}" />
-                <input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
-                <input class="restore_url" type="hidden" value="${file.url(action='restore')}" />
-                <input class="folder_title_value" type="hidden" value="${file.folder}" />
-                <span>
-                  <img src="${url('/images/restore.png')}" alt="${_('restore file')}" class="restore_button" />
-                </span>
-              </span>
-            </li>
-  %endif
+	%if file.deleted is None:
+		<li class="${file.created.is_teacher and 'teacher-content ' or ''}file${hidden and ' show' or ''}">
+			<span class="tooltip-container">
+				%if file.created.is_teacher:
+					<span class="teacher-tooltip">${tooltip(_("Teacher's material"), img='/img/icons/teacher-cap.png')}</span>
+				%endif
+			</span>
+			<span class="file-description">
+				%if new_file: ## catch eye
+					${h.image('/img/icons.com/file_move_medium_orange.png', alt='file icon', class_='drag-target')}
+				%else:
+					${h.image('/img/icons.com/file_move_medium_grey.png', alt='file icon', class_='drag-target')}
+				%endif
+				${h.link_to(file.title, file.url(), class_='filename')}
+				<!--Edit file name -->
+				%if file.can_write():
+					<span class="file_rename_form hidden">
+						<span class="file_rename_input_decorator">
+							<input class="file_rename_input" type="text" />
+				    	</span>
+				    	${h.input_submit(_('Rename'), class_='rename_confirm btn')}
+					</span>
+				%endif
+				<!--FileSize-->
+				<span class="size">(${h.file_size(file.size)})</span>
+				<input class="move_url" type="hidden" value="${file.url(action='move')}" />
+				<input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
+				<input class="delete_url" type="hidden" value="${file.url(action='delete')}" />
+				<input class="flag_url" type="hidden" value="${file.url(action='flag')}" />
+				<input class="rename_url" type="hidden" value="${file.url(action='rename')}" />
+				<input class="folder_title_value" type="hidden" value="${file.folder}" />
+			</span>
+			<span class="file-owner" >
+				<a href="${url(controller='user', action='index', id=file.created_by)}" class="author" title="${file.created.fullname}" >
+				     ${h.file_name(file.created.fullname)}
+				</a>
+			</span>
+	  		<span class="file-date" ><span class="date">${h.fmt_normaldate(file.created_on)}</span></span>
+			<span class="file-actions" >
+				<!--Edit file btn-->
+				%if file.can_write():
+					<img src="${url('/images/details/icon_rename.png')}" alt="${_('edit file name')}" class="rename_button" />
+				%endif
+				<!--Delete file BTN-->
+				%if file.can_write():
+					<img src="${url('/images/delete.png')}" alt="${_('delete file')}" class="delete_button" />
+				%elif file.parent.flaggable_files:
+					<img src="${url('/img/icons/flag-small.png')}" alt="${_('flag as suspicious')}" class="flag_button" />
+				%endif
+			</span>
+		</li>
+	%else: ## deleted file
+		<li class="${file.created.is_teacher and 'teacher-content ' or ''}file">
+			<span class="tooltip-container">
+				%if file.created.is_teacher:
+					<span class="teacher-tooltip">
+						${tooltip(_("Teacher's material"), img='/img/icons/teacher-cap.png')}
+					</span>
+				%endif
+			</span>
+			<span class="file-description">${h.image('/images/details/icon_drag_file.png', alt='file icon', class_='drag-target')}
+				<span class="file_name">
+					${file.title}
+				</span>
+			    %if file.folder:
+					<span class="folder_title">(${file.folder})</span>
+			    %endif
+			     <!--FileSize-->
+				<span class="size">(${h.file_size(file.size)})</span>
+			    <input class="move_url" type="hidden" value="${file.url(action='move')}" />
+			    <input class="copy_url" type="hidden" value="${file.url(action='copy')}" />
+			    <input class="restore_url" type="hidden" value="${file.url(action='restore')}" />
+			    <input class="folder_title_value" type="hidden" value="${file.folder}" />
+			</span>
+			<span class="file-owner" >
+				<a href="${file.deleted.url()}" class="${'author' if file.deleted == file.created else 'deleted-by'}">
+			    	${h.file_name(file.deleted.fullname)}
+			    </a>
+			</span>
+			<span class="file-date" ><span class="date">${h.fmt_normaldate(file.deleted_on)}</span></span>
+			<span class="file-actions" >
+				<img src="${url('/images/restore.png')}" alt="${_('restore file')}" class="restore_button" />
+			</span>
+		</li>
+	%endif
 </%def>
 
 <%def name="folder_button(folder, section_id, fid, cls='', title=None)">
-  <%
-     if title is None and folder.title != '':
-         title = folder.title
-     elif title is None and folder.title == '':
-         title = _('Here')
-  %>
-  <div class="target_item ${cls}"><div class="upload target" id="file_upload_button-${section_id}-${fid}">${h.ellipsis(title, 17)}</div></div>
+	<%
+	if title is None and folder.title != '':
+		title = folder.title
+	elif title is None and folder.title == '':
+		title = _('Here')
+	%>
+	<div class="target_item ${cls}"><div class="upload target" id="file_upload_button-${section_id}-${fid}">${h.ellipsis(title, 17)}</div></div>
 </%def>
 
-
 <%def name="root_folder(folder, section_id, fid)">
-      <div class="folder_file_area root_folder" id="file_area-${section_id}-${fid}">
-        <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
+	<div class="folder_file_area root_folder click2show" id="file_area-${section_id}-${fid}">
+		<input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
         <%
+           morefiles = False
+           nofilesinlist = 0
            files = [file for file in folder if file.deleted is None]
            # show teacher files before the rest (python sort is stable)
            files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
            hidden = False
            file_count = len(files)
         %>
-          <ul class="folder${file_count >= 4 and ' click2show' or ''}">
-        % if files:
-              <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
-              % for n, file in enumerate(files):
-                <%
-                    if n > 2 and file_count >= 4:
-                        hidden = True
-                %>
-                %if n == 3 and file_count >= 4:
-                    <li class="click hide files_more">
-                      <span class="green verysmall">
-                      ${ungettext("Show the other %(count)s file", "Show the other %(count)s files", file_count - n ) % dict(count = file_count - n)}
-                      </span>
-                    </li>
-                %endif
-                <%self:file file="${file}" hidden="${hidden}" />
-              % endfor
-        % else:
-              <li class="message">${_("There are no files here, this folder is empty!")}</li>
-        % endif
-
-          </ul>
-      </div>
+		<ul class="folder${file_count >= 4 and ' click2show' or ''}">
+	        % if files:
+	              <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
+	              % for n, file in enumerate(files):
+	                %if n > 2 and file_count >= 4:
+	                	<% hidden = True %>
+	                	<% morefiles = True %>
+	                	<% nofilesinlist = 1+nofilesinlist %>
+	                %endif
+	                <%self:file file="${file}" hidden="${hidden}" />
+	              % endfor
+	        % else:
+	              <li class="message">${_("There are no files here, this folder is empty!")}</li>
+	        % endif
+		</ul>
+		<div class="spliter">&nbsp;</div>
+          %if morefiles:
+			<li class="hide files_more click2show">
+				<span class="green verysmall">
+					${ungettext("Show the other %(count)s file", "Show the other %(count)s files", file_count - n ) % dict(count = nofilesinlist)}
+				</span>
+			</li>
+	      %endif
+		</div>
+	</div>	
 </%def>
 
 <%def name="sub_folder(folder, section_id, fid)">
-        <%
-           style = ''
-           files = [file for file in folder if file.deleted is None]
-           # show teacher files before the rest (python sort is stable)
-           files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
-           file_count = len(files)
-           is_open = file_count > 4
-           if files:
-               style = h.literal('style="display: none;"')
-        %>
-      <div class="folder_file_area subfolder click2show${bool(files) and ' open' or ''}" id="file_area-${section_id}-${fid}">
+	<%
+	   morefiles = False
+	   nofilesinlist = 0
+	   style = ''
+	   files = [file for file in folder if file.deleted is None]
+	   # show teacher files before the rest (python sort is stable)
+	   files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
+	   file_count = len(files)
+	   is_open = file_count > 4
+	   if files:
+	       style = h.literal('style="display: none;"')
+	%>
+	<div class="folder_file_area subfolder click2show${bool(files) and ' open' or ''}" id="file_area-${section_id}-${fid}">
         <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
         <h4 class="${is_open and 'click' or ''}">
           <span class="cont">
             ${folder.title}
             <span class="small">(${ungettext("%(count)s file", "%(count)s files", len(files)) % dict(count=len(files))})</span>
-            % if folder.can_write(c.user):
-              <a ${style} href="${folder.parent.url(action='delete_folder', folder=folder.title)}" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("(Delete)")}</a>
-            % endif
+	            % if folder.can_write(c.user):
+	              <a ${style} href="${folder.parent.url(action='delete_folder', folder=folder.title)}" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("(Delete)")}</a>
+	            % endif
           </span>
         </h4>
-        <ul class="folder">
-        % if files:
-              <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
-              % for n, file in enumerate(files):
-                <%self:file file="${file}" hidden="${n > 2}"/>
-                %if n == 3 and file_count >= 4:
-                    <li class="click hide files_more">
-                      <span class="green verysmall">
-                      ${ungettext("Show the other %(count)s file", "Show the other %(count)s files", file_count - n ) % dict(count = file_count - n)}
-                      </span>
-                    </li>
-                %endif
-              % endfor
-        % else:
-              <li class="message">${_("There are no files here, this folder is empty!")}</li>
-        % endif
-
-          </ul>
-      </div>
+		<ul class="folder">
+	        %if files:
+	              <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
+	              % for n, file in enumerate(files):
+	              	
+	                <%self:file file="${file}" hidden="${n > 2}"/>
+	                %if n > 3 and file_count >= 4:
+	                	<% morefiles = True %>
+	                	<% nofilesinlist = nofilesinlist + 1 %>
+	                %endif
+	              % endfor
+	        %else:
+	              <li class="message">${_("There are no files here, this folder is empty!")}</li>
+	        %endif
+		</ul>
+		<div class="spliter">&nbsp;</div>
+           %if morefiles:
+	        	<li class="hide files_more">
+	              <span class="green verysmall">
+	              	${ungettext("Show the other %(count)s file", "Show the other %(count)s files", file_count - n ) % dict(count = nofilesinlist)}
+	              </span>
+	            </li>
+	       %endif
+	</div>
 </%def>
 
 <%def name="folder(folder, section_id, fid)">
@@ -558,7 +610,6 @@ $(document).ready(function(){
       %else:
           <%self:sub_folder  folder="${folder}" section_id="${section_id}" fid="${fid}" />
       %endif
-
 </%def>
 
 <%def name="free_space_indicator(obj)">
@@ -582,31 +633,25 @@ $(document).ready(function(){
 </%def>
 
 <%def name="upload_control(obj, section_id=0)">
-
-  <input type="hidden" id="file_upload_url-${section_id}"
-         value="${obj.url(action='upload_file')}" />
-  <input type="hidden" id="create_folder_url-${section_id}"
-         value="${obj.url(action='js_create_folder')}" />
-  <input type="hidden" id="delete_folder_url-${section_id}"
-         value="${obj.url(action='js_delete_folder')}" />
+  <input type="hidden" id="file_upload_url-${section_id}"   value="${obj.url(action='upload_file')}" />
+  <input type="hidden" id="create_folder_url-${section_id}" value="${obj.url(action='js_create_folder')}" />
+  <input type="hidden" id="delete_folder_url-${section_id}" value="${obj.url(action='js_delete_folder')}" />
   <input type="hidden" class="id" value="${obj.id}" />
-
-  <div id="file_upload_progress-${section_id}" class="file_upload_progress">
-  </div>
-  <%
-      n = len(obj.folders)
-  %>
+  <div id="file_upload_progress-${section_id}" class="file_upload_progress"></div>
+  <% n = len(obj.folders) %>
   <div class="upload_control no_upload ${'' if obj.upload_status == obj.LIMIT_REACHED else 'hidden'}">
-    <table><tr>
-        <td colspan="2" style="text-align: center;">
-          ${h.button_to(_('Increase limits'), obj.url(action='pay'))}
-        </td>
-    </tr></table>
+    <table>
+    	<tr>
+        	<td colspan="2" style="text-align: center;">${h.button_to(_('Increase limits'), obj.url(action='pay'))}</td>
+    	</tr>
+    </table>
   </div>
   <div class="upload_control single_upload ${'' if obj.upload_status == obj.CAN_UPLOAD_SINGLE_FOLDER else 'hidden'}">
-    <div class="button"><div class="inner">
-      <%self:folder_button folder="${obj.folders[0]}" section_id="${section_id}" fid="${0}" title="${_('Upload file')}" />
-    </div></div>
+    <div class="button">
+    	<div class="inner">
+      		<%self:folder_button folder="${obj.folders[0]}" section_id="${section_id}" fid="${0}" title="${_('Upload file')}" />
+    	</div>
+    </div>
   </div>
   <div class="upload_control file_upload upload_dropdown click2show ${'' if obj.upload_status == obj.CAN_UPLOAD else 'hidden'}">
     <div class="click button">
@@ -630,110 +675,118 @@ $(document).ready(function(){
 </%def>
 
 <%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None, controls=['upload', 'folder', 'title'])">
+<%prebase:normal_block class_="portletGroupFiles clickBlock ${collapsible and 'collapsible' or 'open'}" id="subject_files">
+	<div class="section ${collapsible and '' or 'open'} ${('size' in controls) and 'size_indicated' or ''}" id="file_section-${section_id}">
+	    <%
+	       cls_head = cls_container = ''
+	       if collapsible:
+	           cls_head = 'clickAction'
+	           cls_container = 'showBlock'
+	    %>
+	    ##%if 'title' in controls:
+		<div class="GroupFiles" >
+			<h2 class="portletTitle bold ${cls_head}" style="border-bottom: 0;">
+				%if title is None:
+					${h.ellipsis(obj.title, 80)}
+				%else:
+					${h.ellipsis(title, 80)}
+				%endif
+				<span style="font-weight: normal; font-size: 12px">(${ungettext("%(count)s file", "%(count)s files", obj.file_count) % dict(count=obj.file_count)})</span>
+				<span class="cont"></span>
+				%if 'size' in controls:
+					<div style="float: right; margin-top: -10px; margin-right: 8px">
+						${free_space_indicator(obj)}
+						<br />
+						${free_space_text(obj)}
+					</div>
+				%endif
+				%if 'unlimited' in controls:
+					<span class="unlimited_size">${_('unlimited')}</span>
+				%endif
+	      </h2>
+	    </div>
+	    ##%endif
 
-<%prebase:rounded_block class_="portletGroupFiles clickBlock ${collapsible and 'collapsible' or 'open'}" id="subject_files">
-
-  <div class="section ${collapsible and '' or 'open'} ${('size' in controls) and 'size_indicated' or ''}" id="file_section-${section_id}">
-    <%
-       cls_head = cls_container = ''
-       if collapsible:
-           cls_head = 'clickAction'
-           cls_container = 'showBlock'
-    %>
-
-    ##%if 'title' in controls:
-    <div class="GroupFiles" style="border-bottom: 0">
-      <h2 class="portletTitle bold ${cls_head}" style="border-bottom: 0;">
-        %if title is None:
-        ${h.ellipsis(obj.title, 80)}
-        %else:
-        ${h.ellipsis(title, 80)}
-        %endif
-        <span style="font-weight: normal; font-size: 12px">(${ungettext("%(count)s file", "%(count)s files", obj.file_count) % dict(count=obj.file_count)})</span>
-        <span class="cont"></span>
-        %if 'size' in controls:
-          <div style="float: right; margin-top: -10px; margin-right: 8px">
-          ${free_space_indicator(obj)}
-          <br />
-          ${free_space_text(obj)}
-        </div>
-        %endif
-        %if 'unlimited' in controls:
-        <span class="unlimited_size">${_('unlimited')}</span>
-        %endif
-      </h2>
-    </div>
-    ##%endif
-
-
-    <div class="container ${cls_container}">
-      %if comment:
-        <div class="comment" style="padding-top: 10px">
-          ${comment}
-        </div>
-      %endif
-
-      %if 'size' in controls:
-        <input type="hidden" id="file_size_url-${section_id}"
-               value="${obj.url(action='file_info')}" />
-        <input type="hidden" id="upload_status_url-${section_id}"
-               value="${obj.url(action='upload_status')}" />
-      %endif
-      %if c.user:
-      <div class="controls">
-        %if 'upload' in controls:
-          ${upload_control(obj, section_id=section_id)}
-        %endif
-
-        %if 'folder' in controls:
-        <div style="float: left; margin-left: 25px;">
-          <form action="${obj.url(action='create_folder')}">
-            <div class="folder_controls">
-              ${h.input_line('folder', _('New folder:'), class_="new-folder-name", id="new_folder_input-%s"%section_id)}
-              ${h.input_submit(_('create'), id="new_folder_button-%s" % section_id, class_="new_folder_button dark add")}
-            </div>
-          </form>
-        </div>
-        %endif
-        <br class="clear-left"/>
-        <div class="upload_control upload_forbidden ${'' if obj.upload_status == 0 else 'hidden'}">
-          ${_('No more space for private files. We recommend moving files into subjects or upgrading the group.')}
-        </div>
-      </div>
-      %endif
-      % for fid, folder in enumerate(obj.folders):
-        <%self:folder folder="${folder}" section_id="${section_id}" fid="${fid}" />
-      % endfor
-
-      <%
-      if h.check_crowds(['moderator'], context=obj):
-          style = ''
-          files = [file for file in obj.files
-                   if (file.deleted is not None and
-                       not file.isNullFile())]
-          # show teacher files before the rest (python sort is stable)
-          files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
-          if not files: style = h.literal('style="display: none"')
-      else:
-          style = h.literal('style="display: none"')
-          files = []
-      %>
-      <div ${style} class="folder_file_area subfolder trash_folder_file_area" id="file_area-${section_id}-trash">
-          <h4 class="trash_heading">${_('Trash')}</h4>
-          <ul class="folder trash_folder">
-        %if files:
-              <li style="display: none;" class="message">${_("There are no deleted files.")}</li>
-              %for file in files:
-                  <%self:file file="${file}" />
-              %endfor
-        %else:
-              <li class="message">${_("There are no deleted files.")}</li>
-        %endif
-          </ul>
-      </div>
-    </div>
-  </div>
-
-</%prebase:rounded_block>
-
+	    <div class="container ${cls_container}">
+		%if 'size' in controls:
+	        <input type="hidden" id="file_size_url-${section_id}" value="${obj.url(action='file_info')}" />
+	        <input type="hidden" id="upload_status_url-${section_id}" value="${obj.url(action='upload_status')}" />
+		%endif
+		%if c.user:
+		<div class="controls filesgroup_controls">
+			%if 'upload' in controls:
+				${upload_control(obj, section_id=section_id)}
+			%endif
+			%if 'folder' in controls:
+				<div style="float: right; margin-right: 0px; margin-top:-3px;">
+					<form action="${obj.url(action='create_folder')}">
+						<div class="folder_controls">
+							${h.input_line('folder', _('New folder:'), class_="new-folder-name", id="new_folder_input-%s"%section_id)}
+							${h.input_submit(_('create'), id="new_folder_button-%s" % section_id, class_="new_folder_button dark add")}
+						</div>
+			      </form>
+			    </div>
+			%endif
+			<br class="clear-left"/>
+			<div class="upload_control upload_forbidden ${'' if obj.upload_status == 0 else 'hidden'}">
+				${_('No more space for private files. We recommend moving files into subjects or upgrading the group.')}
+			</div>
+		</div>
+		%endif
+	      
+		<div class="file-tbl-header" >
+			<div class="file-tbl-header-row" >
+		      	<div class="hfile-description">${_('Filename')}</div>
+		      	<div class="file-owner" >${_('Posted by')}</div>
+		      	<div class="file-date" >${_('Date')}</div>
+		      	<div class="file-actions" >${_('Action')}</div>
+		  	</div>
+		</div>
+		
+		<div class="folder_file_area subfolder click2show" >
+		    <h3 class="">
+		      <span class="cont">
+		        	%if hasattr(obj,'subjectfiles'):
+			        	${_('SUBJECT FILES')}
+			        %else:
+			        	${_('GROUP FILES')}
+			        %endif
+		      </span>
+		    </h3>
+		</div>
+		
+		<div class="folders_container">
+			% for fid, folder in enumerate(obj.folders):
+				<%self:folder folder="${folder}" section_id="${section_id}" fid="${fid}" />
+			% endfor
+		</div>
+		
+		<%
+		if h.check_crowds(['moderator'], context=obj):
+			style = ''
+			files = [file for file in obj.files
+			         if (file.deleted is not None and
+			             not file.isNullFile())]
+			# show teacher files before the rest (python sort is stable)
+			files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
+			if not files: style = h.literal('style="display: none"')
+		else:
+			style = h.literal('style="display: none"')
+			files = []
+		%>
+		<div ${style} class="folder_file_area subfolder trash_folder_file_area" id="file_area-${section_id}-trash">
+			<h4 class="trash_heading">${_('Trash')}</h4>
+			<ul class="folder trash_folder">
+				%if files:
+				      <li style="display: none;" class="message">${_("There are no deleted files.")}</li>
+				      %for file in files:
+				          <%self:file file="${file}" />
+				      %endfor
+				%else:
+				      <li class="message">${_("There are no deleted files.")}</li>
+				%endif
+			</ul>
+		</div>
+	</div>
+</%prebase:normal_block>
 </%def>

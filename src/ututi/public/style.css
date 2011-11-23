@@ -890,7 +890,8 @@ p.qu{
     background-image: none;
     height: 100%;
     padding:0;
-    margin-bottom:20px;
+    margin-bottom:0px;
+    
 }
 .portletGroupFiles-single  {
     margin-bottom: 5px;
@@ -941,11 +942,19 @@ p.qu{
     vertical-align: bottom;
     width: 200px;
 }
+.portletGroupFiles li.message{
+	margin-left:23px;
+}
 .portletSetLocation .button,
 .portletGroupFiles .button {
     vertical-align: bottom;
     margin-left: -8px;
     margin-bottom: -2px;
+}
+.button.black{
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7A7A7A', endColorstr='#414141'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#7A7A7A), to(#414141)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #7A7A7A,  #414141); /* for firefox 3.6+ */ 
 }
 .portletSetLocation input,
 .portletSetLocation-nobg input,
@@ -972,10 +981,11 @@ p.qu{
     background-color: #f6f6f6;
 }
 div.GroupFiles, div.GroupFiles-nobg, div.GroupFilesGroups, div.GroupFilesDalykai, div.GroupFilesCont, div.GroupFilesWiki, div.GroupWiki {
-    border-bottom: 1px solid #ded8d8;
-    background: url('img/icons/file-off-big.png') no-repeat 10px 5px #f6f6f6;
-    height:40px;
+    /*border-bottom: 1px solid #ded8d8;*/
+    /*background: url('img/icons/file-off-big.png') no-repeat 10px 5px #f6f6f6;*/
+    /* height:40px; */
     position:relative;
+    height:25px;
 }
 div.GroupFilesGroups{
     background: url('img/icons/grupe-big-off.png') no-repeat 10px 5px #f6f6f6;
@@ -1147,6 +1157,27 @@ div.GroupFilesContent-line-dal{
     padding-bottom: 5px;
     padding-top: 5px;
 }
+div.group_subject_cont{
+}
+div.group_subject_cont button{
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7A7A7A', endColorstr='#625F5F'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#7A7A7A), to(#414141)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #7A7A7A,  #414141); /* for firefox 3.6+ */ 
+}
+div.group_subject_cont button:hover{
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#989898', endColorstr='#625F5F1'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#989898), to(#625F5F)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #989898,  #625F5F); /* for firefox 3.6+ */
+}
+div.group_subject_files_cont{
+	border-top:1px solid #FF9900;
+	padding-top:10px;
+	widht:100%;
+}
+div.group_subject_files_browser{
+	border-bottom: 1px solid #CCCCCC;
+	min-height:20px;
+}
 
 div.GroupFilesContent-line-last, div.GroupFilesContent-line-dal-last{
     border-bottom: none;
@@ -1158,10 +1189,42 @@ div.GroupFilesContent p.verysmall{
     padding: 0 0 0 40px;
 }
 
+.file-tbl-header{
+	width:100%;
+	height:20px;
+	border-bottom:1px solid #FF9900;
+	font-weight:bold;
+	position: relative;
+}
+.file-tbl-header-row{
+	width:100%;
+	float:left;
+	position: absolute;
+	left:0px;
+	top:0px;
+}
+	.file-tbl-header .hfile-description{
+		width:415px;
+		float:left;
+		margin-left:10px;
+	}
+	.file-tbl-header .file-owner{
+		width:192px;
+		float:left;
+	}
+	.file-tbl-header .file-date{
+		width:90px;
+		float:left;
+	}
+	.file-tbl-header .file-actions{
+		width:20px;
+		float:left;
+	}
+
 .files_more{
     cursor: pointer;
     list-style-type: none;
-    border-top: 1px solid #ded8d8;
+    border-top: 0px solid #ded8d8;
     width:158px;
     margin: 0 0 0 15px;
     text-align:center;
@@ -1177,7 +1240,7 @@ div.kiti-failai-100 {
 }
 
 div.GroupFiles h2, div.GroupFiles-nobg h2{
-    padding: 9px 0 0 45px;
+    padding: 0px 0 0 0px;
 }
 
 div.GroupFiles-nobg h2{
@@ -2126,6 +2189,9 @@ div.section h2.click {
 .root_folder {
     margin-top: 5px;
 }
+.folder_file_area.root_folder{
+    margin-left: -24px;
+}
 
 div.area_size {
     font-size: 12px;
@@ -2171,6 +2237,10 @@ div.section div.controls label {
     vertical-align: middle;
 }
 
+div.filesgroup_controls{
+	min-height:60px;
+}
+
 div.folder_controls {
     padding: 1px;
 }
@@ -2185,7 +2255,7 @@ div.folder_controls .labelText {
 }
 
 div.folder_controls button {
-    margin-top: 5px;
+    margin-top: 3px;
     margin-left: 10px;
     float: left;
 }
@@ -2195,6 +2265,9 @@ div.section div.controls .new-folder-name {
     vertical-align: top;
     font-size: 12px;
 }
+.textField input.new-folder-name{
+	width:140px;
+}
 
 div.section div.controls div.file_upload,
 div.section div.controls div.no_upload,
@@ -2202,10 +2275,12 @@ div.section div.controls div.single_upload {
     float: left;
     margin: 0;
     margin-right: 5px;
+    margin-left:8px;
     height: 20px;
     z-index: 10000;
-    width: 200px;
+    width: auto;
     background: white;
+    position:relative;
 }
 
 div.upload_forbidden {
@@ -2219,7 +2294,7 @@ div.upload_forbidden {
 
 div.section div.controls div.single_upload .target_item {
     height: 19px;
-    margin-right: -20px;
+    margin-right: 0px;
 }
 
 div.section div.controls div.single_upload .target_item div {
@@ -2230,6 +2305,20 @@ div.section div.controls div.single_upload .target_item div {
 div.section div.controls div.file_upload div.file_upload_dropdown {
     position: absolute;
     width: 150px;
+    left:-8px;
+  	
+  	-moz-box-shadow: 5px 5px 5px #ccc;
+  	-webkit-box-shadow: 5px 5px 5px #ccc;
+  	box-shadow: 5px 5px 5px #ccc;
+  	
+  	border:1px solid #ccc;
+  	overflow:hidden;
+   	-moz-border-radius: 3px; /* Firefox */
+  	-webkit-border-radius: 3px; /* Safari, Chrome */
+  	border-radius: 3px; /* CSS3 */
+  	
+  	
+  	margin-top:3px;
 }
 /* end controls section */
 
@@ -2237,27 +2326,65 @@ div.section div.controls div.file_upload div.file_upload_dropdown {
 ul.folder {
     padding: 0;
 }
-
+ul.folder.trash_folder{
+	margin-left: 0px;
+} 
+.trash_folder_file_area{
+	border-top:1px solid  #ccc;
+	padding-top: 10px;
+}
 li.message {
     list-style-type: none;
 }
 
 li.file {
-    line-height: 20px;
+    line-height: 10px;
     list-style-type: none;
     padding: 0;
     margin: 3px 0;
+    margin-left: 0px;
+    width:100%;
 }
 
     /* Fit tooltips on the left of file description. */
-
+    .subfolder li.file span.file-description {
+    	border:0px solid;
+    	width: 370px;
+    }
+    .subfolder .folder {
+    	
+    }
+    
     li.file span.tooltip-container,
     li.file span.file-description {
         display: inline-block;
+        width: 397px;
+    }
+    li.file span.file-owner {
+        display: inline-block;
+        margin-left: 15px;
+        width: 173px;
+        overflow:hidden;
+        text-align: left;
+        
+    }
+    li.file span.file-date {
+        display: inline-block;
+        margin-left: 15px;
+        width: 60px;
+        text-align: left;
+        
+    }
+    li.file span.file-actions {
+        display: inline-block;
+        margin-left: 0px;
+        width: 65px;
+        text-align:right;
     }
 
     li.file span.tooltip-container {
         width: 25px;
+        display: inline-block;
     }
 
     li.file img.drag-target {
@@ -2267,7 +2394,26 @@ li.file {
     li.file .file-description {
         width: 590px;
     }
-
+    button.rename_confirm.btn.submit{
+    	display: inline-block;
+    	margin-top: 0px;
+    }
+    .spliter{
+    	font-size:0px;
+		background-color:#ccc;
+		height:1px;
+		width:390px;
+		margin-left: 25px;
+    }
+    
+	.subfolder .spliter{
+		font-size:0px;
+		background-color:#ccc;
+		height:1px;
+		width:390px;
+		margin-left: 0px;
+	}
+	
     li.file img.tooltip {
         vertical-align: middle;
     }
@@ -2302,12 +2448,19 @@ li.file {
 /* end files */
 
 /* folders */
+.folder_file_area h3 {
+    height: 1.4em;
+    line-height: 1.6em;
+    padding: 0 0 0 25px;
+    margin: 3px 0;
+    background: url("img/icons.com/folder_open_medium_grey.png") left center no-repeat;
+}
 .folder_file_area h4 {
     height: 1.4em;
     line-height: 1.4em;
     padding: 0 0 0 25px;
     margin: 3px 0;
-    background: url("../images/details/icon_folder.png") left center no-repeat;
+    background: url("img/icons.com/folder_open_medium_grey.png") left center no-repeat;
 }
 
 .folder_file_area h4.trash_heading {
@@ -2323,8 +2476,32 @@ li.file {
     vertical-align: top;
 }
 
+.folder_file_area h3 .cont{
+    font-weight: bold;
+    text-transform: uppercase;
+    color:#666666;
+    font-size: 15px;
+}
+.folder_file_area h4 .cont{
+    font-weight: bold;
+    text-transform: uppercase;
+    color:#666666;
+}
+.folder_file_area h4 .cont .small{
+    text-transform:none;
+    font-weight:normal;
+}
+.folders_container{
+    margin-left: 10px;
+}
+
+
 .subfolder {
     margin-top: 10px;
+    margin-left:10px;
+}
+.folders_container .subfolder{
+	 margin-left:0px;
 }
 
 /* end folders */
@@ -2387,8 +2564,7 @@ div.back-link {
 }
 
 .section .container {
-    border-top: 1px solid #ded8d8;
-    padding-left: 20px;
+    padding-left: 0px;
     margin-bottom: 15px;
     padding-bottom: 5px;
 }
@@ -2446,61 +2622,81 @@ END OF FILES SECTION
 /* upload drop down (group files portlet, files view) */
 div.upload_dropdown,
 div.single_upload {
-    width: 150px;
+    width: auto;
 }
 
 div.upload_dropdown .button,
 div.single_upload .button {
-    height: 25px;
-    background: transparent url("../images/file_dropdown.png") left center no-repeat;
+    height: 19px;
+    background: transparent url("../images/file_dropdown_bg.png") 120px center no-repeat;
+    background-color:#414141;
+    
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7A7A7A', endColorstr='#414141'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#7A7A7A), to(#414141)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #7A7A7A,  #414141); /* for firefox 3.6+ */ 
+    
     padding: 0;
     padding-left: 4px;
-    color: #333333;
+    color: #fff;
+    border:1px solid #000;
+}
+div.single_upload .button:hover {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#989898', endColorstr='#625F5F1'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#989898), to(#625F5F)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #989898,  #625F5F); /* for firefox 3.6+ */
 }
 
 div.upload_dropdown .button div.inner,
 div.single_upload .button div.inner {
     height: 25px;
-    padding: 3px 20px 0 5px;
+    padding: 2px 20px 0 5px;
     margin: 0;
     cursor: pointer;
 }
-
+div.upload.target{
+	color:#fff;
+	cursor:pointer;
+}
 div.upload_dropdown .target_item {
     height: 20px;
-    background: transparent url("../images/file_dropdown_block.png") 0 -20px no-repeat;
+    background: transparent url("../img/icons.com/folder_open_medium_grey.png") 4px 4px no-repeat;
     padding: 0;
     padding-left: 25px;
     margin: 0;
     color: #d45500;
+    background-color:#F2F2F2;
+    border-bottom:1px solid #ccc;
 }
 
 div.upload_dropdown .target_item .target.hover {
     text-decoration: underline;
+    cursor:pointer;
 }
 
 div.upload_dropdown .target_item div {
     height: 20px;
     line-height: 20px;
-    background: transparent url("../images/file_dropdown_block.png") right -20px no-repeat;
+    background-color:#F2F2F2;
+    color:#000;
     padding: 0;
     margin: 0;
+    border-bottom:1px solid #ccc;
 }
 
 div.upload_dropdown .target_item.first {
-    background: transparent url("../images/file_dropdown_block.png") left 0 no-repeat;
+   
 }
 
 div.upload_dropdown .target_item.first div {
-    background: transparent url("../images/file_dropdown_block.png") right 0 no-repeat;
+   
 }
 
 div.upload_dropdown .target_item.last {
-    background: transparent url("../images/file_dropdown_block.png") left -40px no-repeat;
+    
 }
 
 div.upload_dropdown .target_item.last div {
-    background: transparent url("../images/file_dropdown_block.png") right -40px no-repeat;
+    
 }
 
 /*************************************************************************
@@ -3635,7 +3831,7 @@ table.group-members td.actions select {
 
 #subject_history .GroupFilesWiki,
 #subject_history .GroupWiki {
-    height: 40px;
+    min-height: 20px;
 }
 
 #wiki_history {

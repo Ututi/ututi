@@ -311,6 +311,7 @@ ${_('Private social networks for universities')}
   </body>
 </html>
 
+
 <%def name="rounded_block(class_='', id=None, style=None)">
 <div class="rounded-block ${class_}"
      %if id is not None:
@@ -325,7 +326,20 @@ ${_('Private social networks for universities')}
   <div class="ctr"></div>
   <div class="cbl"></div>
   <div class="cbr"></div>
+  ${caller.body()}
+</div>
+</%def>
 
+<%def name="normal_block(class_='', id=None, style=None)">
+<div class="normal-block ${class_}"
+     %if id is not None:
+       id="${id}"
+     %endif
+
+     %if style is not None:
+       style="${style}"
+     %endif
+> 
   ${caller.body()}
 </div>
 </%def>
