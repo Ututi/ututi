@@ -11,32 +11,42 @@ File upload:
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "text;for you.txt", "Test")])
     >>> print dedent(res.body)
-    <BLANKLINE>
+    <BLANKLINE>  
     <li class="file">
-      ...
-      <img alt="file icon" class="drag-target" src="/images/details/icon_drag_file_orange.png" />
-      <a class="filename" href="/subject/vu/mat_analize/file/4/get">text;for you.txt</a>
-      <span class="file_rename_form hidden">
-        <span class="file_rename_input_decorator">
-          <input class="file_rename_input" type="text" />
-        </span>
-        <button class="rename_confirm btn submit" value="Rename">Rename</button>
-      </span>
-      <img src="/images/details/icon_rename.png" alt="edit file name" class="rename_button" />
-      <span class="size">(4 B)</span>
-      <span class="date">...</span>
-      <a href="/user/1" class="author">
-        Adminas Adminovix
-      </a>
-      <input class="move_url" type="hidden" value="/subject/vu/mat_analize/file/4/move" />
-      <input class="copy_url" type="hidden" value="/subject/vu/mat_analize/file/4/copy" />
-      <input class="delete_url" type="hidden" value="/subject/vu/mat_analize/file/4/delete" />
-      <input class="flag_url" type="hidden" value="/subject/vu/mat_analize/file/4/flag" />
-      <input class="rename_url" type="hidden" value="/subject/vu/mat_analize/file/4/rename" />
-      <input class="folder_title_value" type="hidden" value="" />
-      <img src="/images/delete.png" alt="delete file" class="delete_button" />
-      ...
-    </li>
+     			<span class="tooltip-container">
+     			</span>
+     			<span class="file-description">
+     					<img alt="file icon" class="drag-target" src="/img/icons.com/file_move_medium_orange.png" />
+     				<a class="filename" href="/subject/vu/mat_analize/file/4/get">text;for you.txt</a>
+     				<!--Edit file name -->
+     					<span class="file_rename_form hidden">
+     						<span class="file_rename_input_decorator">
+     							<input class="file_rename_input" type="text" />
+     				    	</span>
+     				    	<button class="rename_confirm btn submit" value="Rename">Rename</button>
+     					</span>
+     				<!--FileSize-->
+     				<span class="size">(4 B)</span>
+     				<input class="move_url" type="hidden" value="/subject/vu/mat_analize/file/4/move" />
+     				<input class="copy_url" type="hidden" value="/subject/vu/mat_analize/file/4/copy" />
+     				<input class="delete_url" type="hidden" value="/subject/vu/mat_analize/file/4/delete" />
+     				<input class="flag_url" type="hidden" value="/subject/vu/mat_analize/file/4/flag" />
+     				<input class="rename_url" type="hidden" value="/subject/vu/mat_analize/file/4/rename" />
+     				<input class="folder_title_value" type="hidden" value="" />
+     			</span>
+     			<span class="file-owner" >
+     				<a href="/user/1" class="author" title="Adminas Adminovix" >
+     				     Adminas Adminovix
+     				</a>
+     			</span>
+     	  		<span class="file-date" ><span class="date">...</span></span>
+     			<span class="file-actions" >
+     				<!--Edit file btn-->
+     					<img src="/images/details/icon_rename.png" alt="edit file name" class="rename_button" />
+     				<!--Delete file BTN-->
+     					<img src="/images/delete.png" alt="delete file" class="delete_button" />
+     			</span>
+     		</li>
     <BLANKLINE>
 
     >>> res = app.post("/subject/vu/mat_analize/upload_file",
@@ -91,49 +101,63 @@ File upload:
 
 Empty folder creation:
 
-    >>> res = app.post("/subject/vu/mat_analize/js_create_folder",
-    ...                params={'folder': 'Buga Buga',
-    ...                        'section_id': '7'})
-    >>> print dedent(res.body)
-    <div class="target_item "><div class="upload target" id="file_upload_button...">Buga Buga</div></div>
-        <div class="folder_file_area subfolder click2show" id="file_area...">
-          <input class="folder_name" id="file_folder_name-..." type="hidden" value="Buga Buga" />
-          <h4 class="">
-            <span class="cont">
-              Buga Buga
-              <span class="small">(0 files)</span>
-                <a  href="/subject/vu/mat_analize/delete_folder?folder=Buga+Buga" id="delete_folder_button..." class="delete_folder_button">(Delete)</a>
-            </span>
-          </h4>
-          <ul class="folder">
-                <li class="message">There are no files here, this folder is empty!</li>
-            </ul>
-        </div>
-
+    >>> res = app.post("/subject/vu/mat_analize/js_create_folder",params={'folder': 'Buga Buga','section_id': '7'})
+    >>> print dedent(res.body)    
+    <BLANKLINE>
+    <BLANKLINE>
+    	<div class="target_item "><div class="upload target" id="file_upload_button-...">Buga Buga</div></div>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    	<div class="folder_file_area subfolder click2show" id="file_area-...">
+            <input class="folder_name" id="file_folder_name-..." type="hidden" value="Buga Buga" />
+            <h4 class="">
+              <span class="cont">
+                Buga Buga
+                <span class="small">(0 files)</span>
+    	              <a  href="/subject/vu/mat_analize/delete_folder?folder=Buga+Buga" id="delete_folder_button-..." class="delete_folder_button">(Delete)</a>
+              </span>
+            </h4>
+    		<ul class="folder">
+    	              <li class="message">There are no files here, this folder is empty!</li>
+    	</ul>
+     		<div class="spliter">&nbsp;</div>
+    	</div>
+    <BLANKLINE>
+    <BLANKLINE>
+    
+    
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/subject/vu/mat_analize/file/8/get')
     Traceback (most recent call last):
     ...
     HTTPError: HTTP Error 404: Not Found
 
-    >>> res = app.post("/group/moderators/js_create_folder",
-    ...                params={'folder': 'Uga Buga',
-    ...                        'section_id': '8'})
+    >>> res = app.post("/group/moderators/js_create_folder",params={'folder': 'Uga Buga','section_id': '8'})
     >>> print dedent(res.body)
-    <div class="target_item "><div class="upload target" id="file_upload_button-...">Uga Buga</div></div>
-        <div class="folder_file_area subfolder click2show" id="file_area-...">
-          <input class="folder_name" id="file_folder_name-..." type="hidden" value="Uga Buga" />
-          <h4 class="">
-            <span class="cont">
-              Uga Buga
-              <span class="small">(0 files)</span>
-                <a  href="/group/moderators/delete_folder?folder=Uga+Buga" id="delete_folder_button-..." class="delete_folder_button">(Delete)</a>
-            </span>
-          </h4>
-          <ul class="folder">
-                <li class="message">There are no files here, this folder is empty!</li>
-            </ul>
-        </div>
+    <BLANKLINE>
+    <BLANKLINE>
+    	<div class="target_item "><div class="upload target" id="file_upload_button-8...">Uga Buga</div></div>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    	<div class="folder_file_area subfolder click2show" id="file_area-8...">
+            <input class="folder_name" id="file_folder_name-8..." type="hidden" value="Uga Buga" />
+            <h4 class="">
+              <span class="cont">
+                Uga Buga
+                <span class="small">(0 files)</span>
+    	              <a  href="/group/moderators/delete_folder?folder=Uga+Buga" id="delete_folder_button-8..." class="delete_folder_button">(Delete)</a>
+              </span>
+            </h4>
+    		<ul class="folder">
+    	              <li class="message">There are no files here, this folder is empty!</li>
+    		</ul>
+    		<div class="spliter">&nbsp;</div>
+    	</div>
+    <BLANKLINE>
+    <BLANKLINE>
+    
 
 Deleting folders:
 
