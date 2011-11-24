@@ -981,9 +981,6 @@ p.qu{
     background-color: #f6f6f6;
 }
 div.GroupFiles, div.GroupFiles-nobg, div.GroupFilesGroups, div.GroupFilesDalykai, div.GroupFilesCont, div.GroupFilesWiki, div.GroupWiki {
-    /*border-bottom: 1px solid #ded8d8;*/
-    /*background: url('img/icons/file-off-big.png') no-repeat 10px 5px #f6f6f6;*/
-    /* height:40px; */
     position:relative;
     height:25px;
 }
@@ -1084,26 +1081,7 @@ div.GroupFiles-single h2 span{
 .forum-sidebar #group_info_portlet-header {
     margin-top: 12px;
 }
-/*
-div.active {
-    color: #333;
-    height:30px;
-    padding: 5px 15px 0 0;
-    background: url("img/icons/search-type-active.png") no-repeat center bottom;
-}
-div.not-active-out {
-    color: #333;
-    height:35px;
-    padding: 5px 15px 0 15px;
-    background: url("img/icons/search-type.png") repeat-x center bottom;
-}
-div.not-active {
-    color: #333;
-    height:30px;
-    padding: 5px 15px 0 15px;
-    background: url("img/icons/search-type.png") repeat-x center bottom;
-}
-*/
+
 div.message-list-on, div.message-list-on1 {
     border-bottom: 1px solid #ded8d8;
     background: url("img/icons.com/discussions_medium_orange.png") no-repeat 15px center;
