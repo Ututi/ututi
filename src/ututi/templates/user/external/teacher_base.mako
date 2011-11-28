@@ -14,6 +14,9 @@
   ${parent.head_tags()}
   %if c.teacher.location.title_path == ['vu', 'mif']:
     ${h.stylesheet_link(h.path_with_hash('/branded/vu-mif/style.css'))}
+    <script type="text/javascript">
+      $('#language-switch-form select option[value=pl]').remove();
+    </script>
   %endif
 </%def>
 
