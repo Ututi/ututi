@@ -49,6 +49,9 @@ class BaseController(WSGIController):
         # the request is routed to. This routing information is
         # available in environ['pylons.routes_dict']
 
+        if 'HTTP_X_FORWARDED_SCHEME' in environ:
+            environ['wsgi.url_scheme'] = environ.pop('HTTP_X_FORWARDED_SCHEME')
+
         # Global variables
         # XXX reduce the scope of most of them
         c.breadcrumbs = None
@@ -78,7 +81,6 @@ class BaseController(WSGIController):
         c.google_tracker = config['google_tracker']
         c.facebook_app_id = config.get('facebook.appid')
         config.get('facebook.appid')
-
         c.redirect_to = request.params.get('redirect_to', '')
         c.came_from = request.params.get('came_from', '')
         c.came_from_search = False #if the user came from google search
