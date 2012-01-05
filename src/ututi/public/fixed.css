@@ -1489,6 +1489,11 @@ ul.location-links {
   padding: 0 10px;
 }
 
+    .wiki-page table td{
+       border: 1px solid black;
+       padding: 2px;
+    }
+
     .wiki-page h1, .wiki-page h2, .wiki-page h3,
     .wiki-page h4, .wiki-page h5, .wiki-page h6 {
         margin-top: 1em;
