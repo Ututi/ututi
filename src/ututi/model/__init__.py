@@ -1645,6 +1645,12 @@ class LocationTag(Tag):
             root = root.parent
         return root
 
+    @property
+    def moderator_groups(self):
+        return meta.Session.query(Group)\
+            .filter(Group.location_id.in_([l.id for l in self.hierarchy(full=True)]))\
+            .filter(Group.moderators == True).all()
+
     def hierarchy(self, full=False):
         """Return a list of titles (or the full tags) of all the parents of the tag, including the tag itself."""
         location = self

@@ -111,8 +111,15 @@ def teacher_registered_email(teacher):
     msg = EmailMessage(_('New teacher!'), text, force=True)
     msg.send(config.get('ututi_email_from', 'info@ututi.pl'))
 
+    for group in teacher.location.moderator_groups:
+        msg.send(group.list_address)
+
+
 def teacher_request_email(user):
-    """Notify team of a new teacher."""
+    """Notify team of a user requesting to become a teacher."""
     text = render('/emails/teacher_request.mako', extra_vars={'user': user})
     msg = EmailMessage(_('Request to be come a teacher!'), text, force=True)
     msg.send(config.get('ututi_email_from', 'info@ututi.pl'))
+
+    for group in user.location.moderator_groups:
+        msg.send(group.list_address)

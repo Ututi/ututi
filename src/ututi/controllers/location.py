@@ -11,6 +11,7 @@ from pylons.i18n import _
 from pylons.templating import render_mako_def
 
 import ututi.lib.helpers as h
+from ututi.lib.emails import teacher_confirmed_email
 from ututi.lib.base import render
 from ututi.lib.validators import LocationIdValidator, InURLValidator, \
         validate, TranslatedEmailValidator, \
@@ -68,6 +69,9 @@ def location_edit_menu_items():
         {'title': _("Custom theme"),
          'name': 'theming',
          'link': c.location.url(action='edit_theme')},
+        {'title': _("Unverified teachers"),
+         'name': 'unverified_teachers',
+         'link': c.location.url(action='unverified_teachers')},
     ]
 
 def location_breadcrumbs(location):
@@ -521,6 +525,34 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         # TODO validate
         switch_language(language)
         redirect(c.came_from or location.url())
+
+    @location_action
+    @ActionProtector('moderator')
+    def unverified_teachers(self, location):
+        c.menu_items = location_edit_menu_items()
+        c.current_menu_item = 'unverified_teachers'
+        c.teachers = meta.Session.query(Teacher)\
+            .filter(Teacher.location==location)\
+            .filter(Teacher.teacher_verified == False).all()
+        c.found_users = []
+        return render('location/edit_teachers.mako')
+
+    @location_action
+    @ActionProtector('moderator')
+    def teacher_status(self, location):
+        command, id = request.urlvars['command'], request.urlvars['id']
+        teacher = meta.Session.query(Teacher).filter(Teacher.id == id).filter(Teacher.teacher_verified==False).one()
+        if command == 'confirm':
+            teacher.confirm()
+            meta.Session.commit()
+            teacher_confirmed_email(teacher, True)
+            h.flash('Teacher confirmed.')
+        else:
+            teacher.revert_to_user()
+            teacher_confirmed_email(teacher, False)
+            h.flash('Teacher rejected.')
+
+        redirect(location.url(action="unverified_teachers"))
 
     @location_action
     @jsonify

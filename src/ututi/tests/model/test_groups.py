@@ -6,7 +6,7 @@ from ututi.model.users import User
 from ututi.model.events import Event
 
 from ututi.tests import UtutiLayer
-from ututi.tests.model import setUpUser
+from ututi.tests.model import setUpUser, setUpModeratorGroup
 import ututi
 
 
@@ -148,17 +148,9 @@ def test_suite():
     suite.layer = UtutiLayer
     return suite
 
+
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
     setUpUser()
-
-    u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni'))
-    meta.set_active_user(u.id)
-
-    g = Group('moderators', u'Moderatoriai', LocationTag.get(u'vu'), date.today(), u'U2ti moderatoriai.')
-    g.add_member(u, True)
-    meta.Session.add(g)
-    meta.Session.commit()
-
-    meta.set_active_user(u.id)
+    setUpModeratorGroup()

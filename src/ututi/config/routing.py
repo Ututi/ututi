@@ -265,6 +265,8 @@ def make_map(config):
     map.connect('/school/*path/edit/enable_theme', controller='location', action='enable_theme')
     map.connect('/school/*path/edit/disable_theme', controller='location', action='disable_theme')
     map.connect('/school/*path/edit/update_theme', controller='location', action='update_theme')
+    map.connect('/school/*path/edit/unverified_teachers', controller='location', action='unverified_teachers')
+    map.connect('/school/*path/edit/teacher_status/{command}/{id}', controller='location', action='teacher_status')
 
     # external teacher profile pages
     map.connect('/school/*path/teacher/{id}', controller='user', action='external_teacher_index')

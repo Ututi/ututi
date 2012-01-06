@@ -4,6 +4,11 @@ Test registration of teachers
     >>> from ututi.lib.mailer import mail_queue
     >>> from ututi.lib.helpers import get_urls
 
+We will want to have a moderator group for this test:
+
+    >>> from ututi.tests.model import setUpModeratorGroup
+    >>> setUpModeratorGroup()
+
 There are several cases, how user may become a teacher.
 
 1. Anonymous teacher registration
@@ -36,9 +41,16 @@ Here. Let's look at what teacher sees:
     >>> user.printCssQuery(".flash-message-content", strip=True)
     <span>At the moment you are not confirmed as teacher. Our administrators have been notified and will verify you shortly.</span>
 
-The team gets a notification about new teacher:
+The team gets a notification about new teacher (both system admin, and
+moderators of the university):
 
-    >>> print mail_queue.pop().payload()
+    >>> print mail_queue
+    [<EmailInfo sender='info@ututi.lt' recipients=['info@ututi.lt']>,
+     <EmailInfo sender='info@ututi.lt' recipients=['moderators@groups.ututi.lt']>]
+
+    >>> msg = mail_queue.pop()
+    >>> msg = mail_queue.pop()
+    >>> print msg.payload()
     A new teacher has registered:
     User (user@example.com)
     U-niversity
@@ -60,6 +72,7 @@ Let's register one more teacher that later will be denied:
     >>> notteacher.click('Next')
     >>> notteacher.click('Skip')
     >>> notteacher.click('Finish')
+    >>> msg = mail_queue.pop()
     >>> print mail_queue.pop().payload()
     A new teacher has registered:
     Not a teacher (notteacher@example.com)
@@ -121,6 +134,7 @@ Let's login as admin@uni.ututi.com (default user) to test that.
     Thank You! Your request to become a teacher has been received.
     We will notify You once we grant You the rights of a teacher.
 
+    >>> msg = mail_queue.pop()
     >>> print mail_queue.pop().payload()
     A user wants to become a teacher:
     Administrator of the university (admin@uni.ututi.com)
@@ -156,6 +170,7 @@ way as any existing Ututi user (case above).
     >>> user.printQuery("//div[@class='flash-message']//span/text()")
     Thank You! Your request to become a teacher has been received.
     We will notify You once we grant You the rights of a teacher.
+    >>> msg = mail_queue.pop()
     >>> print mail_queue.pop().payload()
     A user wants to become a teacher:
     Administrator of the university (admin@uni.ututi.com)
