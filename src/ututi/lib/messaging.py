@@ -61,7 +61,7 @@ class EmailMessage(Message):
                 except (Invalid, UnicodeEncodeError):
                     log.debug("Invalid email %(email)s" % dict(email=recipient))
             else:
-                Message.send(self,recipient=recipient)
+                Message.send(self, recipient=recipient)
         else:
             raise RuntimeError("The message must have a subject and a text to be sent.")
 
