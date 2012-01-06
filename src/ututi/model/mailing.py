@@ -271,7 +271,8 @@ class GroupMailingListMessage(ContentItem):
         author = User.get_global(author_address)
         in_moderation_queue = False
 
-        whitelist = [i.email for i in g.whitelist]
+        whitelist = [i.email for i in g.whitelist] + [
+            config.get('ututi_email_from', 'info@ututi.pl')]
         if not (author_address in whitelist or
                 author is not None and g.is_member(author)
                 or force):

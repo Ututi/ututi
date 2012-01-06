@@ -1,0 +1,19 @@
+Return-Path: <info@ututi.lt>
+Date: Mon, 15 Jun 2009 17:05:31 +0300
+From: Ututi <info@ututi.lt>
+To: %(to)s%(reply_to)s
+Reply-To: info@ututi.lt
+Subject: %(subject)s
+Message-ID: <%(message_id)s>
+MIME-Version: 1.0
+Content-Disposition: inline
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Content-Type: text/plain; charset=us-ascii
+
+Confirm your varlius registration!
+
+Click the link now!
+
+Sincerely,
+
+Varlius staff

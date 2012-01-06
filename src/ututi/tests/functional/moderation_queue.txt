@@ -278,11 +278,16 @@ For rejected messages, 404 are returned:
     ...
     HTTPError: HTTP Error 404: Not Found
 
-Mail queue is empty now, as we popped all the messages that have been
-sent:
+If ututi administrator sends a message to the mailing list, it gets
+through:
 
+    >>> send_test_message('email_from_admin.txt', '78', to='moderators@groups.ututi.lt', subject='New teacher wants to be accepted')
     >>> mail_queue
-    []
+    [<EmailInfo sender='Ututi <info@ututi.lt>' recipients=['admin@uni.ututi.com']>]
+
+Clear the mail queue:
+
+    >>> mail_queue[:] = []
 
 XXX Assert that mailing queue is correct
 XXX Test moderation events being sent through email.
