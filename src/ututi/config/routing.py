@@ -247,6 +247,7 @@ def make_map(config):
     map.connect('/school/*path/groups', controller='location', action='catalog', obj_type='group')
     map.connect('/school/*path/subjects', controller='location', action='catalog', obj_type='subject')
     map.connect('/school/*path/teachers', controller='location', action='catalog', obj_type='teacher')
+    map.connect('/school/*path/teachers.json', controller='location', action='teachers_json')
     map.connect('/school/*path/register', controller='location', action='register')
     map.connect('/school/*path/register/teacher', controller='location', action='register_teacher')
     map.connect('/school/*path/register/teacher/existing', controller='location', action='register_teacher_existing')

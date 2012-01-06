@@ -3,6 +3,7 @@ import logging
 from formencode import Schema, validators, compound, htmlfill
 
 from webhelpers import paginate
+from pylons.decorators import jsonify
 from pylons.controllers.util import redirect, abort
 from pylons import request
 from pylons import tmpl_context as c, url
@@ -521,3 +522,14 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         switch_language(language)
         redirect(c.came_from or location.url())
 
+    @location_action
+    @jsonify
+    def teachers_json(self, location):
+        teachers = meta.Session.query(Teacher)\
+            .filter(Teacher.location==location)\
+            .filter(Teacher.teacher_verified == True).all()
+        return {'teachers': sorted([{'name': teacher.fullname,
+                                     'profile': teacher.url(action='external_teacher_index', qualified=True),
+                                     'registered': teacher.accepted_terms.strftime('%Y-%m-%d %H:%M:%S'),
+                                     'email': teacher.username if teacher.email_is_public else ''}
+                                    for teacher in teachers], key=lambda t: t['registered'])}
