@@ -46,6 +46,7 @@ def process_logo(value):
     orig_format = image.format
 
     image = _adjust_size(image)
+    image = image.convert('RGB')
 
     # Try saving as png
     png_buffer = StringIO.StringIO()

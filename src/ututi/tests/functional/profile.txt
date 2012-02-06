@@ -112,3 +112,18 @@ The logo is gone from the profile page:
 And you can't download it anymore:
 
     >>> browser.open('http://localhost/user/1/logo/45/60')
+
+Let's try uploading a logo that uses CMYK color space:
+
+    >>> browser.open('http://localhost/profile/edit/photo')
+    >>> browser.getControl(name='logo').add_file(*make_file('test_logo_cmyk.jpg', 'test_logo.jpg'))
+    >>> browser.getControl('Change photo').click()
+
+Let's check out the logo again.
+
+    >>> browser.open('http://localhost/user/1/logo/45/60')
+
+The content type should be PNG even though we uploaded a jpeg.
+
+    >>> browser.headers['content-type']
+    'image/png'
