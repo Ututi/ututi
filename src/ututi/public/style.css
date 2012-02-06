@@ -2319,7 +2319,7 @@ li.message {
 li.file {
     line-height: 10px;
     list-style-type: none;
-    padding: 0;
+    padding: 3px;
     margin: 3px 0;
     margin-left: 0px;
     width:100%;
