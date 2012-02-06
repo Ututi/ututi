@@ -2363,7 +2363,12 @@ class Notification(object):
     @classmethod
     def unseen_user_notification(cls, user):
         seen_notifications = [n.id for n in user.seen_notifications]
-        return meta.Session.query(cls).filter(and_(not_(cls.id.in_(seen_notifications)), cls.valid_until > date.today())).order_by(cls.id.asc()).first()
+        not_seen = True
+        if seen_notifications:
+            not_seen = not_(cls.id.in_(seen_notifications))
+        return meta.Session.query(cls)\
+            .filter(and_(not_seen, cls.valid_until > date.today()))\
+            .order_by(cls.id.asc()).first()
 
 
 class EmailDomain(Model):
