@@ -121,13 +121,14 @@ class WallMixin(object):
         t_comm = meta.metadata.tables['event_comments']
         t_ci = meta.metadata.tables['content_items']
 
+        event_id_in_list = t_comm.c.event_id.in_(event_ids) if event_ids else False
         comm = select([t_comm.c.content.label('message'),
                        t_ci.c.created_by.label('author_id'),
                        t_comm.c.event_id,
                        t_ci.c.created_on],
                        from_obj=[t_comm.join(t_ci, t_comm.c.id==t_ci.c.id)])\
-                      .where(t_comm.c.event_id.in_(event_ids))\
-                      .order_by(t_ci.c.created_on.desc())
+                      .where(event_id_in_list)\
+                      .order_by(t_ci.c.created_on.asc())
         comments = meta.Session.execute(comm).fetchall()
 
         comments_collection = defaultdict(list)
@@ -138,8 +139,9 @@ class WallMixin(object):
     def _get_event_children(self, event_ids):
         t_evt = meta.metadata.tables['events']
         evts_generic = generic_events_query()
+        parent_id_in_list = t_evt.c.parent_id.in_(event_ids) if event_ids else False
         children = meta.Session.execute(evts_generic\
-                                            .where(t_evt.c.parent_id.in_(event_ids))\
+                                            .where(parent_id_in_list)\
                                             .order_by(t_evt.c.created.asc())).fetchall()
 
         ids = [ch.id for ch in children]
@@ -153,8 +155,10 @@ class WallMixin(object):
         return children_collection
 
     def _get_sms_event_groups(self, events):
+        groups = []
         ids = [e.object_id for e in events if e.event_type == 'sms_message_sent']
-        groups = meta.Session.query(Group).filter(Group.id.in_(ids)).all()
+        if ids:
+            groups = meta.Session.query(Group).filter(Group.id.in_(ids)).all()
 
         groups_collection = dict()
         for group in groups:
@@ -163,10 +167,13 @@ class WallMixin(object):
 
     def _get_ml_attachments(self, event_ids):
         t_evt = meta.metadata.tables['events']
-        att = meta.Session.query(File).join((t_evt, t_evt.c.message_id==File.parent_id))\
-            .filter(or_(t_evt.c.id.in_(event_ids)))\
-            .order_by(File.filename.desc())\
-            .all()
+        att = []
+        if event_ids:
+            att = meta.Session.query(File).join((t_evt, t_evt.c.message_id==File.parent_id))\
+                .filter(t_evt.c.id.in_(event_ids))\
+                .order_by(File.filename.desc())\
+                .all()
+
         attachment_collection = defaultdict(list)
         for attachment in att:
             attachment_collection[attachment.parent_id].append(attachment)

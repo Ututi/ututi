@@ -172,8 +172,9 @@ class LocationWallMixin(WallMixin):
             .all()
         ids = [obj.id for obj in subjects + public_groups]
 
+        obj_id_in_list = t_evt.c.object_id.in_(ids) if ids else False
         return evts_generic\
-            .where(t_evt.c.object_id.in_(ids))
+            .where(obj_id_in_list)
 
 class TeacherSearchMixin():
 
