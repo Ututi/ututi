@@ -69,14 +69,16 @@ def init_model(engine):
 def setup_orm(engine):
     #relationships between content items and tags
     global files_table
+    warnings.simplefilter('ignore', SAWarning)
     files_table = Table("files", meta.metadata,
-                        Column('filename', Unicode(assert_unicode=True)),
-                        Column('folder', Unicode(assert_unicode=True)),
-                        Column('title', Unicode(assert_unicode=True)),
-                        Column('description', Unicode(assert_unicode=True)),
+                        Column('filename', Unicode()),
+                        Column('folder', Unicode()),
+                        Column('title', Unicode()),
+                        Column('description', Unicode()),
                         autoload=True,
                         useexisting=True,
                         autoload_with=engine)
+    warnings.simplefilter('default', SAWarning)
 
     global file_downloads_table
     file_downloads_table = Table("file_downloads", meta.metadata,
@@ -85,17 +87,19 @@ def setup_orm(engine):
 
 
     global forum_categories_table
-    forum_categories_table = Table("forum_categories", meta.metadata,
-                         Column('title', Unicode(assert_unicode=True)),
-                         Column('description', Unicode(assert_unicode=True)),
-                         autoload=True,
-                         autoload_with=engine)
+    forum_categories_table = Table(
+        "forum_categories", meta.metadata,
+        Column('title', Unicode()),
+        Column('description', Unicode()),
+        autoload=True,
+        autoload_with=engine,
+        useexisting=True)
 
 
     global forum_posts_table
     forum_posts_table = Table("forum_posts", meta.metadata,
-                              Column('title', Unicode(assert_unicode=True)),
-                              Column('message', Unicode(assert_unicode=True)),
+                              Column('title', Unicode()),
+                              Column('message', Unicode()),
                               autoload=True,
                               useexisting=True,
                               autoload_with=engine)
@@ -114,18 +118,18 @@ def setup_orm(engine):
 
     global users_table
     users_table = Table("users", meta.metadata,
-                        Column('description', Unicode(assert_unicode=True)),
-                        Column('location_city', Unicode(assert_unicode=True)),
-                        Column('site_url', Unicode(assert_unicode=True)),
+                        Column('description', Unicode()),
+                        Column('location_city', Unicode()),
+                        Column('site_url', Unicode()),
                         autoload=True,
                         useexisting=True,
                         autoload_with=engine)
 
     global teachers_table
     teachers_table = Table("teachers", meta.metadata,
-                        Column('teacher_position', Unicode(assert_unicode=True)),
-                        Column('work_address', Unicode(assert_unicode=True)),
-                        Column('publications', Unicode(assert_unicode=True)),
+                        Column('teacher_position', Unicode()),
+                        Column('work_address', Unicode()),
+                        Column('publications', Unicode()),
                         autoload=True,
                         useexisting=True,
                         autoload_with=engine)
@@ -133,7 +137,7 @@ def setup_orm(engine):
     global authors_table
     authors_table = Table("authors", meta.metadata,
                           Column('id', Integer, Sequence('authors_id_seq'), primary_key=True),
-                          Column('fullname', Unicode(assert_unicode=True)),
+                          Column('fullname', Unicode()),
                           autoload=True,
                           useexisting=True,
                           autoload_with=engine)
@@ -141,7 +145,7 @@ def setup_orm(engine):
     global admin_users_table
     admin_users_table = Table("admin_users", meta.metadata,
                               Column('id', Integer, Sequence('admin_users_id_seq'), primary_key=True),
-                              Column('fullname', Unicode(assert_unicode=True)),
+                              Column('fullname', Unicode()),
                               autoload=True,
                               useexisting=True,
                               autoload_with=engine)
@@ -152,10 +156,12 @@ def setup_orm(engine):
                                    autoload_with=engine)
 
     global teacher_groups_table
-    teacher_groups_table = Table("teacher_groups", meta.metadata,
-                                 Column('title', Unicode(assert_unicode=True)),
-                                 autoload=True,
-                                 autoload_with=engine)
+    teacher_groups_table = Table(
+        "teacher_groups", meta.metadata,
+        Column('title', Unicode()),
+        autoload=True,
+        autoload_with=engine,
+        useexisting=True)
 
     global content_items_table
     content_items_table = Table("content_items", meta.metadata,
@@ -168,15 +174,17 @@ def setup_orm(engine):
                                autoload_with=engine)
 
     global private_messages_table
-    private_messages_table = Table("private_messages", meta.metadata,
-                                   Column('subject', Unicode(assert_unicode=True)),
-                                   Column('content', Unicode(assert_unicode=True)),
-                                   autoload=True,
-                                   autoload_with=engine)
+    private_messages_table = Table(
+        "private_messages", meta.metadata,
+        Column('subject', Unicode()),
+        Column('content', Unicode()),
+        autoload=True,
+        autoload_with=engine,
+        useexisting=True)
 
     global regions_table
     regions_table = Table("regions", meta.metadata,
-                               Column('title', Unicode(assert_unicode=True)),
+                               Column('title', Unicode()),
                                autoload=True,
                                useexisting=True,
                                autoload_with=engine)
@@ -184,10 +192,10 @@ def setup_orm(engine):
     global tags_table
     tags_table = Table("tags", meta.metadata,
                                Column('id', Integer, Sequence('tags_id_seq'), primary_key=True),
-                               Column('title_short', Unicode(assert_unicode=True)),
-                               Column('title', Unicode(assert_unicode=True)),
-                               Column('description', Unicode(assert_unicode=True)),
-                               Column('site_url', Unicode(assert_unicode=True)),
+                               Column('title_short', Unicode()),
+                               Column('title', Unicode()),
+                               Column('description', Unicode()),
+                               Column('site_url', Unicode()),
                                useexisting=True,
                                autoload=True,
                                autoload_with=engine)
@@ -354,9 +362,9 @@ def setup_orm(engine):
 
     global user_registrations_table
     user_registrations_table = Table("user_registrations", meta.metadata,
-                                    Column('fullname', Unicode(assert_unicode=True)),
-                                    Column('university_title', Unicode(assert_unicode=True)),
-                                    Column('university_site_url', Unicode(assert_unicode=True)),
+                                    Column('fullname', Unicode()),
+                                    Column('university_title', Unicode()),
+                                    Column('university_site_url', Unicode()),
                                     autoload=True,
                                     autoload_with=engine)
 
@@ -387,8 +395,8 @@ def setup_orm(engine):
 
     global page_versions_table
     page_versions_table = Table("page_versions", meta.metadata,
-                                Column('title', Unicode(assert_unicode=True)),
-                                Column('content', Unicode(assert_unicode=True)),
+                                Column('title', Unicode()),
+                                Column('content', Unicode()),
                                 autoload=True,
                                 autoload_with=engine)
     orm.mapper(PageVersion, page_versions_table,
@@ -403,9 +411,9 @@ def setup_orm(engine):
 
     global subjects_table
     subjects_table = Table("subjects", meta.metadata,
-                           Column('title', Unicode(assert_unicode=True)),
-                           Column('lecturer', Unicode(assert_unicode=True)),
-                           Column('description', Unicode(assert_unicode=True)),
+                           Column('title', Unicode()),
+                           Column('lecturer', Unicode()),
+                           Column('description', Unicode()),
                            autoload=True,
                            useexisting=True,
                            autoload_with=engine)
@@ -440,9 +448,9 @@ def setup_orm(engine):
 
     global groups_table
     groups_table = Table("groups", meta.metadata,
-                         Column('title', Unicode(assert_unicode=True)),
-                         Column('description', Unicode(assert_unicode=True)),
-                         Column('page', Unicode(assert_unicode=True)),
+                         Column('title', Unicode()),
+                         Column('description', Unicode()),
+                         Column('page', Unicode()),
                          useexisting=True,
                          autoload=True,
                          autoload_with=engine)
@@ -566,7 +574,7 @@ def setup_orm(engine):
 
     global received_sms_messages
     received_sms_messages = Table("received_sms_messages", meta.metadata,
-                               Column('message_text', Unicode(assert_unicode=True)),
+                               Column('message_text', Unicode()),
                                useexisting=True,
                                autoload=True,
                                autoload_with=engine)
@@ -579,7 +587,7 @@ def setup_orm(engine):
 
     global outgoing_group_sms_messages_table
     outgoing_group_sms_messages_table = Table("outgoing_group_sms_messages", meta.metadata,
-                               Column('message_text', Unicode(assert_unicode=True)),
+                               Column('message_text', Unicode()),
                                useexisting=True,
                                autoload=True,
                                autoload_with=engine)
@@ -592,7 +600,7 @@ def setup_orm(engine):
 
     global sms_table
     sms_table = Table("sms_outbox", meta.metadata,
-                               Column('message_text', Unicode(assert_unicode=True)),
+                               Column('message_text', Unicode()),
                                useexisting=True,
                                autoload=True,
                                autoload_with=engine)
@@ -606,7 +614,7 @@ def setup_orm(engine):
 
     global notifications_table
     notifications_table = Table("notifications", meta.metadata,
-                               Column('content', Unicode(assert_unicode=True)),
+                               Column('content', Unicode()),
                                autoload=True,
                                autoload_with=engine)
 

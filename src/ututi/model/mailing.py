@@ -127,7 +127,7 @@ def setup_orm(engine):
     group_mailing_list_messages_table = Table(
         "group_mailing_list_messages",
         meta.metadata,
-        Column('subject', Unicode(assert_unicode=True)),
+        Column('subject', Unicode()),
         autoload=True,
         autoload_with=engine)
     global group_mailing_list_attachments_table

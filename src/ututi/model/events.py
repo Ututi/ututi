@@ -1,7 +1,9 @@
 import cgi
+import warnings
 import logging
 
 from sqlalchemy import orm, Column
+from sqlalchemy.exc import SAWarning
 from sqlalchemy.schema import Table
 from sqlalchemy.orm import backref
 from sqlalchemy.orm import relation
@@ -495,18 +497,21 @@ def setup_orm(engine):
     from ututi.model import content_items_table, files_table, pages_table, subjects_table
     from ututi.model import forum_posts_table, outgoing_group_sms_messages_table, private_messages_table, users_table
     from ututi.model.mailing import group_mailing_list_messages_table
+
+    warnings.simplefilter("ignore", SAWarning)
     global events_table
     events_table = Table(
         "events",
         meta.metadata,
         autoload=True,
         autoload_with=engine)
+    warnings.simplefilter("default", SAWarning)
 
     global event_comments_table
     event_comments_table = Table(
         "event_comments",
         meta.metadata,
-        Column('content', Unicode(assert_unicode=True)),
+        Column('content', Unicode()),
         autoload=True,
         autoload_with=engine)
 

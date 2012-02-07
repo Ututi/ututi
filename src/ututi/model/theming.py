@@ -53,7 +53,7 @@ class Theme(Model):
 
 def setup_orm(engine):
     themes_table = Table("themes", meta.metadata,
-                         Column('header_text', Unicode(assert_unicode=True)),
+                         Column('header_text', Unicode()),
                          autoload=True,
                          useexisting=True,
                          autoload_with=engine)

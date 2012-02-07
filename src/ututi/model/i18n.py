@@ -127,13 +127,13 @@ class Country(Model):
 
 def setup_orm(engine):
     languages_table = Table("languages", meta.metadata,
-        Column('title', Unicode(assert_unicode=True)),
+        Column('title', Unicode()),
         autoload=True,
         useexisting=True,
         autoload_with=engine)
 
     language_texts_table = Table("language_texts", meta.metadata,
-        Column('text', Unicode(assert_unicode=True)),
+        Column('text', Unicode()),
         autoload=True,
         autoload_with=engine)
 
@@ -142,7 +142,7 @@ def setup_orm(engine):
                              autoload_with=engine)
 
     i18n_texts_versions_table = Table("i18n_texts_versions", meta.metadata,
-        Column('text', Unicode(assert_unicode=True)),
+        Column('text', Unicode()),
         autoload=True,
         autoload_with=engine)
 
