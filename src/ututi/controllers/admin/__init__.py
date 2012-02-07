@@ -111,6 +111,8 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
             if admin_user:
                 sign_in_admin_user(admin_user)
                 redirect(url(controller='admin', action='index'))
+            else:
+                h.flash("Access denied!")
         return render('admin/login.mako')
 
     @ActionProtector("root")
