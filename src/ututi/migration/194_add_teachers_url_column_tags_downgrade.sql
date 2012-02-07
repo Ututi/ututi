@@ -1,0 +1,1 @@
+alter table tags drop column teachers_url;

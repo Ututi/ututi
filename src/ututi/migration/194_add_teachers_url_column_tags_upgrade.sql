@@ -1,0 +1,1 @@
+alter table tags add column teachers_url varchar default null;

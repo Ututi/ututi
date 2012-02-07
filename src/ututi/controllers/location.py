@@ -288,6 +288,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             'title': location.title,
             'title_short': location.title_short,
             'site_url': location.site_url,
+            'teachers_url': location.teachers_url,
             'description': location.description,
         }
         if location.country:
@@ -303,6 +304,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             location.title = self.form_result['title']
             location.title_short = self.form_result['title_short']
             location.site_url = self.form_result['site_url']
+            location.teachers_url = self.form_result['teachers_url']
             location.country = self.form_result['country']
             location.description = self.form_result['description']
             meta.Session.commit()

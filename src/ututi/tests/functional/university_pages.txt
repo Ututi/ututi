@@ -64,15 +64,32 @@ An information portlet appears and shows some statistics about the university:
 
 
 We should be able to edit the information of the location tag.
+
     >>> browser.getLink('Edit information').click()
     >>> browser.getControl('Full University title').value = 'Kapsuko universitetas'
     >>> browser.getControl('Short title').value = 'KU'
     >>> browser.getControl('Country').displayValue = ['Lithuania']
     >>> browser.getControl('University website').value = 'http://ku.lt'
+    >>> browser.getControl('Teachers url').value = 'http://ku.lt/teachers'
     >>> browser.getControl('Save').click()
 
-And the updated information should be visible in the university page:
+We have updated information successfully.
 
+    >>> browser.printCssQuery('.flash-message-content')
+    <span class="flash-message-content">Information updated.</span>
+
+    >>> browser.getControl('Full University title').value
+    'Kapsuko universitetas'
+    >>> browser.getControl('Short title').value
+    'ku'
+    >>> browser.getControl('Country').displayValue
+    ['Lithuania']
+    >>> browser.getControl('University website').value
+    'http://ku.lt'
+    >>> browser.getControl('Teachers url').value
+    'http://ku.lt/teachers'
+
+And the updated information should be visible in the university page:
     >>> browser.open('http://localhost/school/ku')
     >>> browser.printCssQuery(".page-title", strip=True)
     <h1>Kapsuko universitetas</h1>
