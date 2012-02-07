@@ -1,8 +1,8 @@
 Test subject wall action block
 ==============================
 
-
 Pick a subject.
+
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/admin/subjects')
     >>> browser.getLink(u'Matematin\u0117 analiz\u0117'.encode('utf-8')).click()
