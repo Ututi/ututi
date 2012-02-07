@@ -116,7 +116,7 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
         return render('admin/login.mako')
 
     @ActionProtector("root")
-    def logout(admin_user):
+    def logout(self):
         sign_out_admin_user()
         redirect(url('frontpage'))
 
