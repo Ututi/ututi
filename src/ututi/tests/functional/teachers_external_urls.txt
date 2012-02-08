@@ -1,0 +1,38 @@
+Test teacher's external urls
+============================
+
+Let's login as a verified teacher and go to profile:
+
+    >>> teacher = Browser.logIn('benas@ututi.lt', 'password')
+    >>> teacher.click('(edit profile)')
+
+Let's check teacher's page address is personal
+
+    >>> teacher.printCssQuery('.base-url', strip=True)
+    <span>http://localhost/teacher/</span>
+
+Let's login as admin and set teachers url
+
+    >>> admin = Browser.logIn('admin@uni.ututi.com', 'asdasd')
+    >>> admin.open('http://localhost/browse')
+    >>> admin.click('U-niversity')
+    >>> admin.printCssQuery('h1', strip=True)
+    <h1>U-niversity</h1>
+    >>> admin.click('Edit information')
+    >>> admin.getControl('Country:').displayValue = ['Lithuania']
+    >>> admin.getControl('Teachers url:').value = 'http://www.uni.lt/staff'
+    >>> admin.click('Save')
+
+Let's check that teachers url was updated successfully
+
+    >>> admin.printCssQuery('.flash-message-content', strip=True)
+    <span>Information updated.</span>
+
+    >>> admin.getControl('Teachers url:').value
+    'http://www.uni.lt/staff'
+
+Let's reload the page and check updated teachers url
+
+    >>> teacher.reload()
+    >>> teacher.printCssQuery('.base-url', strip=True)
+    <span>http://www.uni.lt/staff</span>

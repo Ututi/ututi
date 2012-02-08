@@ -225,6 +225,9 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     def _edit_profile_form(self):
         c.tabs = self._edit_profile_tabs()
         c.current_tab = 'general'
+        c.teachers_url = ''
+        if c.user.location.teachers_url:
+            c.teachers_url = c.user.location.teachers_url
         return render('profile/edit_profile.mako')
 
     @ActionProtector("user")

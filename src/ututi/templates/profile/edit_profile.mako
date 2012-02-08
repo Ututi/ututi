@@ -65,8 +65,12 @@
         <label for="url_name">
           <span class="labelText">${_('Page address')}</span>
           <span class="textField">
+          %if c.teachers_url:
+          <span class="base-url">${c.teachers_url}</span>
+          %else:
             <span class="base-url">${c.user.url(id='', qualified=True)}</span>
             <input id="url_name" type="text" value="" name="url_name" />
+          %endif
           </span>
         </label>
       </div>
