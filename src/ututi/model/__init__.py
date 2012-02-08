@@ -1032,7 +1032,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
 
     def snippet(self):
         """Render the group's information."""
-        return render_mako_def('/sections/content_snippets.mako','group', object=self)
+        return render_mako_def('/sections/content_snippets.mako', 'group', object=self)
 
     def __init__(self, group_id, title=u'', location=None, year=None, description=u''):
         self.group_id = group_id.strip().lower()
