@@ -43,3 +43,4 @@ In mail queue still must be only one message.
 
     >>> len(mail_queue)
     1
+    >>> mail_queue[:] = []
