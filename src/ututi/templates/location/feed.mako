@@ -15,9 +15,10 @@
 <div id="dashboard_action_blocks">
   <div class="action-block">
     <div class="arrow-up"></div>
-    <form name="discussion-form" id="discussion-form" action="/wall/start_discussion" method="POST">
-      <textarea id="message-text" name="message-text"></textarea>
-      <button class="dark inline action-button submit" value="Send">Send</button>
+    <form id="discussion-form" action="/wall/send_wall_message" method="POST">
+      <input id="message-send-url" type="hidden" value="/wall/send_wall_message_js">
+      <textarea id="message" name="message"></textarea>
+      <button id="message_send" class="dark inline action-button submit" value="Send">Send</button>
     </form>
   </div>
 </div>
@@ -35,8 +36,35 @@
 <script>
     $('#discussion_action_blocks').show();
     $('.action-block').show();
-    $('#message-text').click(function() {
+    $('#message').click(function() {
         $(this).css('min-height', '40px');
     });
-    $('#message-text').focus();
+
+    $('#message').focus();
+
+    $('#message_send').click(function() {
+        _gaq.push(['_trackEvent', 'group wall', 'action block submit', 'message send']);
+        form = $(this).closest('form');
+        message = $('#message', form).val();
+        message_send_url = $('#message-send-url', form).val();
+
+        if (message != '') {
+            $.post(message_send_url,
+                $(this).closest('form').serialize(),
+                    function(data, status) {
+                        if (data.success != true) {
+                            for (var key in data.errors) {
+                                var error = data.errors[key];
+                                $('#'+key).parent().after($('<div class="error-message">'+error+'</div>'));
+                            }
+                        } else {
+                            $('#send_message_block .cancel-button').click();
+                            reload_wall(data.evt);
+                        }
+                    },
+            "json");
+        }
+
+        return false;  
+    });  
 </script>
