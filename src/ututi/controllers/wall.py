@@ -66,6 +66,8 @@ class WikiForm(Schema):
 class WallReplyValidator(Schema):
     message = String(not_empty=True)
 
+class WallPostMessageValidator(Schema):
+    message = String(not_empty=True)
 
 class WallController(BaseController, FileViewMixin):
 
@@ -127,6 +129,19 @@ class WallController(BaseController, FileViewMixin):
             post = post_message(group, c.user, subject, message)
             evt = meta.Session.query(MailinglistPostCreatedEvent).filter_by(message_id=post.id).one().wall_entry()
             return evt
+
+    @ActionProtector("user")
+    @js_validate(schema=WallPostMessageValidator())
+    @jsonify
+    def send_wall_message_js(self):
+        message = self.form_result.get('message')
+        return {'success':True}
+
+    @ActionProtector("user")
+    @validate(schema=WallPostMessageValidator())
+    def send_wall_message(self):
+        message = self.form_result.get('message') 
+        return True
 
     @ActionProtector("user")
     def upload_file_js(self):
