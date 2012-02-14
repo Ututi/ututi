@@ -8,6 +8,7 @@ from sqlalchemy.orm import aliased
 
 from ututi.model import meta, SearchItem, LocationTag, ContentItem, TagSearchItem
 from ututi.model import Group
+from pylons import session
 
 log = logging.getLogger(__name__)
 
@@ -101,7 +102,8 @@ def _search_query_text(query, **kwargs):
 
     text = kwargs.get('text')
     if text:
-        query = query.filter(SearchItem.terms.op('@@')(func.to_tsquery(text)))
+        current_language = SearchItem.LANGUAGE_MAPPER[session['language']]
+        query = query.filter(SearchItem.terms.op('@@')(func.to_tsquery(current_language,text)))
     return query
 
 def _search_query_rank(query, **kwargs):

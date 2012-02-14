@@ -2227,7 +2227,15 @@ class SubscribedThread(object):
 
 search_items_table = None
 class SearchItem(object):
-    pass
+    """Language mapper.
+    
+    You can find more dictionaries in
+    /usr/share/postgresql/8.4/tsearch_data/ directory.
+
+    Key means information from the user session, value - filename in this
+    directory.
+    """
+    LANGUAGE_MAPPER = {'en': 'english', 'lt': 'lt', 'pl': 'pl'}
 
 tag_search_items_table = None
 class TagSearchItem(object):
