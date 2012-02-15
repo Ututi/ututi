@@ -15,8 +15,8 @@
 <div id="dashboard_action_blocks">
   <div class="action-block">
     <div class="arrow-up"></div>
-    <form id="discussion-form" action="${url(controller='wall', action='send_wall_message'}" method="POST">
-      <input id="message-send-url" type="hidden" value="${url(controller='wall', action='send_wall_message_js'}">
+    <form id="discussion-form" action="${url(controller='wall', action='send_wall_message')}" method="POST">
+      <input id="message-send-url" type="hidden" value="${url(controller='wall', action='send_wall_message_js')}">
       <textarea id="message" name="message"></textarea>
       <button id="message_send" class="dark inline action-button submit" value="Send">Send</button>
     </form>
