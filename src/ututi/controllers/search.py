@@ -12,6 +12,7 @@ from ututi.controllers.home import UniversityListMixin
 from ututi.lib.base import BaseController, render
 from ututi.lib.search import search_query, search_query_count, tag_search
 from ututi.lib.validators import validate
+from pylons import session
 
 log = logging.getLogger(__name__)
 
@@ -48,6 +49,8 @@ class SearchBaseController(BaseController):
         except ValueError:
             abort(404)
         c.page = page_no
+
+        search_params['language'] = session['language']
 
         if search_params != {}:
             query = search_query(**search_params)
