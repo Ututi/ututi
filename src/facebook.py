@@ -14,6 +14,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+"""
+Get this file from https://github.com/martey/python-sdk/blob/master/facebook.py
+"""
+
 """Python client library for the Facebook Platform.
 
 This client library is designed to support the Graph API and the official
@@ -34,22 +38,29 @@ usage of this module might look like this:
 """
 
 import cgi
-import hashlib
 import time
 import urllib
+import urllib2
+import hashlib
+import hmac
+import base64
+import logging
 
 # Find a JSON parser
 try:
-    import json
-    _parse_json = lambda s: json.loads(s)
+    import simplejson as json
 except ImportError:
     try:
-        import simplejson
-        _parse_json = lambda s: simplejson.loads(s)
+        from django.utils import simplejson as json
     except ImportError:
-        # For Google AppEngine
-        from django.utils import simplejson
-        _parse_json = lambda s: simplejson.loads(s)
+        import json
+_parse_json = json.loads
+
+# Find a query string parser
+try:
+    from urlparse import parse_qs
+except ImportError:
+    from cgi import parse_qs
 
 
 class GraphAPI(object):
@@ -123,7 +134,8 @@ class GraphAPI(object):
         extended permissions.
         """
         assert self.access_token, "Write operations require an access token"
-        return self.request(parent_object + "/" + connection_name, post_args=data)
+        return self.request(parent_object + "/" + connection_name,
+                            post_args=data)
 
     def put_wall_post(self, message, attachment={}, profile_id="me"):
         """Writes a wall post to the given profile's wall.
@@ -141,7 +153,8 @@ class GraphAPI(object):
              "picture": "http://www.example.com/thumbnail.jpg"}
 
         """
-        return self.put_object(profile_id, "feed", message=message, **attachment)
+        return self.put_object(profile_id, "feed", message=message,
+                               **attachment)
 
     def put_comment(self, object_id, message):
         """Writes the given comment on the given post."""
@@ -155,28 +168,204 @@ class GraphAPI(object):
         """Deletes the object with the given ID from the graph."""
         self.request(id, post_args={"method": "delete"})
 
+    def put_photo(self, image, message=None, album_id=None, **kwargs):
+        """Uploads an image using multipart/form-data
+        image=File like object for the image
+        message=Caption for your image
+        album_id=None posts to /me/photos which uses or creates and uses
+        an album for your application.
+        """
+        object_id = album_id or "me"
+        #it would have been nice to reuse self.request;
+        #but multipart is messy in urllib
+        post_args = {
+                  'access_token': self.access_token,
+                  'source': image,
+                  'message': message
+        }
+        post_args.update(kwargs)
+        content_type, body = self._encode_multipart_form(post_args)
+        req = urllib2.Request(("https://graph.facebook.com/%s/photos" %
+                               object_id),
+                              data=body)
+        req.add_header('Content-Type', content_type)
+        try:
+            data = urllib2.urlopen(req).read()
+        #For Python 3 use this:
+        #except urllib2.HTTPError as e:
+        except urllib2.HTTPError, e:
+            data = e.read()  # Facebook sends OAuth errors as 400, and urllib2
+                             # throws an exception, we want a GraphAPIError
+        try:
+            response = _parse_json(data)
+            # Raise an error if we got one, but don't not if Facebook just
+            # gave us a Bool value
+            if (response and isinstance(response, dict) and
+                response.get("error")):
+                raise GraphAPIError(response["error"].get("code", 1),
+                                    response["error"]["message"])
+        except ValueError:
+            response = data
+
+        return response
+
+    # based on: http://code.activestate.com/recipes/146306/
+    def _encode_multipart_form(self, fields):
+        """Fields are a dict of form name-> value
+        For files, value should be a file object.
+        Other file-like objects might work and a fake name will be chosen.
+        Return (content_type, body) ready for httplib.HTTP instance
+        """
+        BOUNDARY = '----------ThIs_Is_tHe_bouNdaRY_$'
+        CRLF = '\r\n'
+        L = []
+        for (key, value) in fields.items():
+            logging.debug("Encoding %s, (%s)%s" % (key, type(value), value))
+            if not value:
+                continue
+            L.append('--' + BOUNDARY)
+            if hasattr(value, 'read') and callable(value.read):
+                filename = getattr(value, 'name', '%s.jpg' % key)
+                L.append(('Content-Disposition: form-data;'
+                          'name="%s";'
+                          'filename="%s"') % (key, filename))
+                L.append('Content-Type: image/jpeg')
+                value = value.read()
+                logging.debug(type(value))
+            else:
+                L.append('Content-Disposition: form-data; name="%s"' % key)
+            L.append('')
+            if isinstance(value, unicode):
+                logging.debug("Convert to ascii")
+                value = value.encode('ascii')
+            L.append(value)
+        L.append('--' + BOUNDARY + '--')
+        L.append('')
+        body = CRLF.join(L)
+        content_type = 'multipart/form-data; boundary=%s' % BOUNDARY
+        return content_type, body
+
     def request(self, path, args=None, post_args=None):
         """Fetches the given path in the Graph API.
 
         We translate args to a valid query string. If post_args is given,
         we send a POST request to the given path with the given arguments.
         """
-        if not args: args = {}
+        args = args or {}
+
         if self.access_token:
             if post_args is not None:
                 post_args["access_token"] = self.access_token
             else:
                 args["access_token"] = self.access_token
         post_data = None if post_args is None else urllib.urlencode(post_args)
-        file = urllib.urlopen("https://graph.facebook.com/" + path + "?" +
+        try:
+            file = urllib2.urlopen("https://graph.facebook.com/" + path + "?" +
+                                  urllib.urlencode(args), post_data)
+        except urllib2.HTTPError, e:
+            response = _parse_json(e.read())
+            raise GraphAPIError(response["error"]["type"],
+                    response["error"]["message"])
+
+        try:
+            fileInfo = file.info()
+            if fileInfo.maintype == 'text':
+                response = _parse_json(file.read())
+            elif fileInfo.maintype == 'image':
+                mimetype = fileInfo['content-type']
+                response = {
+                    "data": file.read(),
+                    "mime-type": mimetype,
+                    "url": file.url,
+                }
+            else:
+                raise GraphAPIError('Response Error',
+                                    'Maintype was not text or image')
+        finally:
+            file.close()
+        if response and isinstance(response, dict) and response.get("error"):
+            raise GraphAPIError(response["error"]["type"],
+                                response["error"]["message"])
+        return response
+
+    def api_request(self, path, args=None, post_args=None):
+        """Fetches the given path in the Graph API.
+
+        We translate args to a valid query string. If post_args is given,
+        we send a POST request to the given path with the given arguments.
+        """
+        args = args or {}
+        if self.access_token:
+            if post_args is not None:
+                post_args["access_token"] = self.access_token
+            else:
+                args["access_token"] = self.access_token
+        if self.api_key:
+            if post_args is not None:
+                post_args["api_key"] = self.api_key
+            else:
+                args["api_key"] = self.api_key
+        if post_args is not None:
+            post_args["format"] = "json-strings"
+        else:
+            args["format"] = "json-strings"
+        post_data = None if post_args is None else urllib.urlencode(post_args)
+        file = urllib.urlopen("https://api.facebook.com/method/" + path + "?" +
                               urllib.urlencode(args), post_data)
         try:
             response = _parse_json(file.read())
         finally:
             file.close()
-        if response.get("error"):
+        if response and response.get("error"):
             raise GraphAPIError(response["error"]["type"],
                                 response["error"]["message"])
+        return response
+
+    def fql(self, query, args=None, post_args=None):
+        """FQL query.
+        Two reasons to have this method:
+        1. Graph api does not expose some info fields of a user, e.g.
+            a user's networks/affiliations, we have to fall back to old api.
+        2. FQL is a strong tool.
+        Example query: "SELECT affiliations FROM user WHERE uid = me()"
+
+        """
+        args = args or {}
+        if self.access_token:
+            if post_args is not None:
+                post_args["access_token"] = self.access_token
+            else:
+                args["access_token"] = self.access_token
+        post_data = None if post_args is None else urllib.urlencode(post_args)
+
+        """Check if query is a dict and
+           use the multiquery method
+           else use single query
+        """
+        if not isinstance(query, basestring):
+            args["queries"] = query
+            fql_method = 'fql.multiquery'
+        else:
+            args["query"] = query
+            fql_method = 'fql.query'
+
+        args["format"] = "json"
+
+        file = urllib2.urlopen("https://api.facebook.com/method/" +
+                               fql_method + "?" + urllib.urlencode(args),
+                               post_data)
+        try:
+            content = file.read()
+            response = _parse_json(content)
+            #Return a list if success, return a dictionary if failed
+            if type(response) is dict and "error_code" in response:
+                raise GraphAPIError(response["error_code"],
+                                    response["error_msg"])
+        except Exception, e:
+            raise e
+        finally:
+            file.close()
+
         return response
 
 
@@ -192,23 +381,124 @@ def get_user_from_cookie(cookies, app_id, app_secret):
     cookies should be a dictionary-like object mapping cookie names to
     cookie values.
 
-    If the user is logged in via Facebook, we return a dictionary with the
-    keys "uid" and "access_token". The former is the user's Facebook ID,
-    and the latter can be used to make authenticated requests to the Graph API.
-    If the user is not logged in, we return None.
+    If the user is logged in via Facebook, we return a dictionary with
+    the keys "uid" and "access_token". The former is the user's
+    Facebook ID, and the latter can be used to make authenticated
+    requests to the Graph API. If the user is not logged in, we
+    return None.
 
     Download the official Facebook JavaScript SDK at
     http://github.com/facebook/connect-js/. Read more about Facebook
     authentication at http://developers.facebook.com/docs/authentication/.
     """
-    cookie = cookies.get("fbs_" + app_id, "")
-    if not cookie: return None
-    args = dict((k, v[-1]) for k, v in cgi.parse_qs(cookie.strip('"')).items())
-    payload = "".join(k + "=" + args[k] for k in sorted(args.keys())
-                      if k != "sig")
-    sig = hashlib.md5(payload + app_secret).hexdigest()
-    expires = int(args["expires"])
-    if sig == args.get("sig") and (expires == 0 or time.time() < expires):
-        return args
-    else:
+    cookie = cookies.get("fbsr_" + app_id, "")
+    if not cookie:
         return None
+    parsed_request = parse_signed_request(cookie, app_secret)
+    try:
+        result = get_access_token_from_code(parsed_request["code"], "",
+                                          app_id, app_secret)
+    except GraphAPIError:
+        return None
+    result["uid"] = parsed_request["user_id"]
+    return result
+
+
+def parse_signed_request(signed_request, app_secret):
+    """ Return dictionary with signed request data.
+
+    We return a dictionary containing the information in the
+    signed_request. This includes a user_id if the user has authorised
+    your application, as well as any information requested.
+
+    If the signed_request is malformed or corrupted, False is returned.
+    """
+    try:
+        l = signed_request.split('.', 2)
+        encoded_sig = str(l[0])
+        payload = str(l[1])
+        sig = base64.urlsafe_b64decode(encoded_sig + "=" *
+                                       ((4 - len(encoded_sig) % 4) % 4))
+        data = base64.urlsafe_b64decode(payload + "=" *
+                                        ((4 - len(payload) % 4) % 4))
+    except IndexError:
+        # Signed request was malformed.
+        return False
+    except TypeError:
+        # Signed request had a corrupted payload.
+        return False
+
+    data = _parse_json(data)
+    if data.get('algorithm', '').upper() != 'HMAC-SHA256':
+        return False
+
+    expected_sig = hmac.new(app_secret,
+                            msg=payload,
+                            digestmod=hashlib.sha256).digest()
+    if sig != expected_sig:
+        return False
+
+    return data
+
+
+def auth_url(app_id, canvas_url, perms=None):
+    url = "https://www.facebook.com/dialog/oauth?"
+    kvps = {'client_id': app_id, 'redirect_uri': canvas_url}
+    if perms:
+        kvps['scope'] = ",".join(perms)
+    return url + urllib.urlencode(kvps)
+
+
+def get_access_token_from_code(code, redirect_uri, app_id, app_secret):
+    """
+    Get a user-specific access token from the "code" returned from a Facebook
+    OAuth dialog. Returns a dict containing the access token and its expiration
+    date (if applicable).
+
+    """
+    args = {
+        "code": code,
+        "redirect_uri": redirect_uri,
+        "client_id": app_id,
+        "client_secret": app_secret,
+    }
+    # We would use GraphAPI.request() here, except for that the fact that the
+    # response is a key-value pair, and not JSON.
+    response = urllib.urlopen("https://graph.facebook.com/oauth/access_token" +
+                              "?" + urllib.urlencode(args)).read()
+    query_str = parse_qs(response)
+    if "access_token" in query_str:
+        result = {"access_token": query_str["access_token"][0]}
+        if "expires" in query_str:
+            result["expires"] = query_str["expires"][0]
+        return result
+    else:
+        response = json.loads(response)
+        raise GraphAPIError(response["error"]["type"],
+                            response["error"]["message"])
+
+
+def get_app_access_token(app_id, app_secret):
+    """
+    Get the access_token for the app that can be used for insights and
+    creating test users.
+
+    app_id = retrieved from the developer page
+    app_secret = retrieved from the developer page
+    returns the application access_token
+
+    """
+    # Get an app access token
+    args = {'grant_type': 'client_credentials',
+            'client_id': app_id,
+            'client_secret': app_secret}
+
+    file = urllib2.urlopen("https://graph.facebook.com/oauth/access_token?" +
+                              urllib.urlencode(args))
+
+    try:
+        result = file.read().split("=")[1]
+    finally:
+        file.close()
+
+    return result
