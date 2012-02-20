@@ -2235,7 +2235,7 @@ class SearchItem(object):
     Key means information from the user session, value - filename in this
     directory.
     """
-    LANGUAGE_MAPPER = {'en': 'english', 'lt': 'lt', 'pl': 'pl'}
+    LANGUAGE_MAPPER = {'en': 'public.universal', 'lt': 'lt', 'pl': 'pl'}
 
 tag_search_items_table = None
 class TagSearchItem(object):
