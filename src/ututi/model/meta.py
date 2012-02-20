@@ -14,9 +14,13 @@ class UtutiSessionExtension(SessionExtension):
     def after_begin(self, session, transaction, connection):
 
         session.execute("SET LOCAL ututi.active_user TO 0")
-        session.execute("SET default_text_search_config TO 'pg_catalog.english'")
-
+       
         from pylons import request, config
+        from paste.deploy.converters import asbool
+
+        if asbool(config.get('init_dictionaries', 'true')):
+            session.execute("SET default_text_search_config TO 'public.universal'") 
+
         try:
             environ = request.environ
         except TypeError:
@@ -25,12 +29,6 @@ class UtutiSessionExtension(SessionExtension):
         user_id = environ.get('repoze.who.identity', None)
         if user_id is not None:
             session.execute("SET LOCAL ututi.active_user TO %d" % user_id)
-
-        language = config.get('lang', 'en')
-        if language in ('lt', 'pl'):
-            language == 'public.%s' % language
-            session.execute("SET default_text_search_config TO '%s'" % language)
-
 
 # SQLAlchemy session manager. Updated by model.init_model()
 Session = scoped_session(sessionmaker(extension=[UtutiSessionExtension()]))

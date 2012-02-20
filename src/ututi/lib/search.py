@@ -100,10 +100,14 @@ def _search_query_prepare_text(**kwargs):
 def _search_query_text(query, **kwargs):
     """Prepare the initial query, searching by text and ranking by the proximity."""
 
+    language = kwargs.get('language')
+
     text = kwargs.get('text')
     if text:
-        current_language = SearchItem.LANGUAGE_MAPPER[session['language']]
-        query = query.filter(SearchItem.terms.op('@@')(func.to_tsquery(current_language,text)))
+        if not language is None:
+            query = query.filter(SearchItem.terms.op('@@')(func.to_tsquery(SearchItem.LANGUAGE_MAPPER[language], text)))
+        else:
+            query = query.filter(SearchItem.terms.op('@@')(func.to_tsquery(text)))
     return query
 
 def _search_query_rank(query, **kwargs):
