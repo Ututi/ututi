@@ -94,13 +94,13 @@
           $('#facebook-login').click(function() {
               // attempt to login FB
               FB.login(function(response) {
-                  if (response.session && response.perms) {
+                  if (response.authResponse) {
                       // user is logged in and granted some permissions.
-                      // perms is a comma separated list of granted permissions
+                      // scope is a comma separated list of granted permissions
                       show_loading_message();
                       window.location = '${url(controller='federation', action='facebook_login', came_from=c.came_from)}';
                   }
-              }, {perms:'email'});
+              }, {scope:'email'});
 
               return false;
           });
