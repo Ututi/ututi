@@ -19,6 +19,7 @@
         status: true,
         cookie: true,
         xfbml: true,
+        oauth: true,
         channelUrl: '${url(controller='home', action='fbchannel', qualified=True)}'
       });
     </script>
@@ -69,12 +70,12 @@
         show_loading_message();
         // attempt to login FB
         FB.login(function(response) {
-            if (response.session && response.perms) {
+            if (response.authResponse && response.scope) {
                 // user is logged in and granted some permissions.
                 // perms is a comma separated list of granted permissions
                 window.location = '${action_url}';
             }
-        }, {perms:'email'});
+        }, {scope:'email'});
     });
   </script>
 </%def>
