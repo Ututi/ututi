@@ -7,10 +7,6 @@ import ututi
 def test_i18n_text_handling():
     """Tests I18nText class and version handling.
 
-
-        >>> from pylons import config
-        >>> config['init_dictionaries'] = 'False'
-
         >>> from ututi.model.i18n import Language, I18nText, I18nTextVersion
         >>> from ututi.model import meta
 
@@ -96,8 +92,6 @@ def test_i18n_text_handling():
 
         >>> text.get_version('en').text
         u'New english version.'
-
-        >>> del config['init_dictionaries']
 
     """
 

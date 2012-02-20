@@ -112,8 +112,6 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
-    from ututi.model import initialize_dictionaries
-    initialize_dictionaries(meta.engine)
 
     vu = LocationTag(u'Vilniaus universitetas', u'vu', u'', member_policy='PUBLIC')
     ef = LocationTag(u'Ekonomikos fakultetas', u'ef', u'', vu, member_policy='PUBLIC')

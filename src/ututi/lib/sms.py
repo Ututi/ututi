@@ -27,7 +27,7 @@ def send_sms(number, text, sender, recipient=None, parent=None):
 
     hold_emails = asbool(config.get('hold_emails', False))
     if hold_emails:
-        sms_queue.append((msg.recipient.phone_number, msg.message_text))
+        sms_queue.append((msg.recipient_number, msg.message_text))
 
 def confirmation_request(user):
     hash = md5(datetime.now().isoformat() + str(user.phone_number)).hexdigest()

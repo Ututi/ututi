@@ -16,7 +16,6 @@ def setup_app(command, conf, vars):
     if asbool(conf.get('reset_database', 'false')):
         reset_db(meta.engine)
 
-    if asbool(conf.get('init_dictionaries', 'true')):
-        initialize_dictionaries(meta.engine)
+    initialize_dictionaries(meta.engine)
 
     initialize_db_defaults(meta.engine)

@@ -14,13 +14,9 @@ class UtutiSessionExtension(SessionExtension):
     def after_begin(self, session, transaction, connection):
 
         session.execute("SET LOCAL ututi.active_user TO 0")
-       
-        from pylons import request, config
-        from paste.deploy.converters import asbool
+        session.execute("SET default_text_search_config TO 'public.universal'")
 
-        if asbool(config.get('init_dictionaries', 'true')):
-            session.execute("SET default_text_search_config TO 'public.universal'") 
-
+        from pylons import request
         try:
             environ = request.environ
         except TypeError:

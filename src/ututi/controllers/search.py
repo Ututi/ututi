@@ -50,7 +50,7 @@ class SearchBaseController(BaseController):
             abort(404)
         c.page = page_no
 
-        search_params['language'] = session['language']
+        search_params['language'] = c.lang
 
         if search_params != {}:
             query = search_query(**search_params)

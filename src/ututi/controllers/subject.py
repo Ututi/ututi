@@ -59,7 +59,7 @@ def find_similar_subjects(location_id, id, n=5):
     def filter_out(query):
         return query.filter(SearchItem.content_item_id != subject.id)
 
-    results = search(text=subject.title, obj_type='subject', disjunctive=False, limit=n, extra=filter_out, language=session['language'])
+    results = search(text=subject.title, obj_type='subject', disjunctive=False, limit=n, extra=filter_out, language=location.language)
     if not results:
         results = search(text=subject.title,
                 obj_type='subject',
@@ -68,7 +68,7 @@ def find_similar_subjects(location_id, id, n=5):
                 limit=5,
                 extra=filter_out,
                 rank_cutoff=0.1,
-                language=session['language'])
+                language=location.language)
     return [item.object.info_dict() for item in results]
 
 
@@ -250,7 +250,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         search_params['obj_type'] = 'subject'
         search_params['text'] = title
         search_params['tags'] = ', '.join(location.title_path)
-        search_params['language'] = session['language']
+        search_params['language'] = location.language
 
         query = search_query(**search_params)
         c.similar_subjects = paginate.Page(

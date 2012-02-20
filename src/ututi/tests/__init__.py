@@ -16,10 +16,12 @@ from nous.pylons.testing import PylonsTestBrowserLayer
 from nous.pylons.grok.testing import GrokLayer
 
 import pylons.test
+from pylons import config
 
 from nous.pylons.testing.browser import NousTestBrowser, NousTestApp
 
 from ututi.model import teardown_db_defaults
+from ututi.model import initialize_dictionaries
 from ututi.model import initialize_db_defaults
 from ututi.model import meta
 from ututi.lib.sms import sms_queue
@@ -43,6 +45,7 @@ class UtutiBaseLayer(LayerBase):
     def testSetUp(self):
         teardown_db_defaults(meta.engine, quiet=True)
         initialize_db_defaults(meta.engine)
+        initialize_dictionaries(meta.engine)
 
         config = pylons.test.pylonsapp.config
         config['tpl_lang'] = 'lt'
@@ -83,6 +86,7 @@ class UtutiQuickLayerBase(LayerBase):
     def setUp(self):
         teardown_db_defaults(meta.engine, quiet=True)
         initialize_db_defaults(meta.engine)
+        initialize_dictionaries(meta.engine)
 
     def tearDown(self):
         try:
@@ -274,8 +278,10 @@ if os.environ.get('TESTCSS'):
 def setUp(test):
     test.globs['app'] = NousTestApp(pylons.test.pylonsapp)
     test.globs['Browser'] = UtutiTestBrowser
+    config._push_object(pylons.test.pylonsapp.config)
 
 
 def tearDown(test):
+    config._pop_object(pylons.test.pylonsapp.config)
     del test.globs['app']
     del test.globs['Browser']

@@ -1628,6 +1628,12 @@ class LocationTag(Tag):
             self.region = region
 
     @property
+    def language(self):
+        if self.country is None:
+            return None
+        return self.country.language.id
+
+    @property
     def path(self):
         return [el.lower() for el in self.title_path]
 
