@@ -122,7 +122,9 @@
   <h1 class="page-title">
     ${self.pagetitle()}
   </h1>
-  <div class="sub-title">${_('Private social network')}</div>
+  <div class="sub-title">
+    ${h.literal(_('Welcome to the social network of %s') % ('<a href="#">%s</a>' % h.simple_declension(c.location.title, lang=c.lang)))} 
+  </div>
 </%def>
 
 <div class="clearfix">

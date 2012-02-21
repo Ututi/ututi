@@ -859,3 +859,12 @@ def thread_reply_dict(obj):
             author_id = obj.author_id,
             message = obj.fp_message,
             created_on = obj.created)
+
+def simple_declension(word, case='gen', lang='en'):
+    """Extremely naive declension for university names.
+    """
+    if lang == 'lt' and case == 'gen':
+        if word.endswith('as'):
+            return u"%so" % word[:-2]
+        return u"%sos" % word[:-1]
+    return word
