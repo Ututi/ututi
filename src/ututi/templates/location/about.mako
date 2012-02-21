@@ -57,8 +57,11 @@
   }
 
   .sub-title {
-    font-size: 18px;
-    font-weight: bold;
+    border-top: 1px solid #edf2f9;
+    border-bottom: 1px solid #edf2f9;
+    padding: 10px 0;
+    margin-top: 12px;
+    font-size: 12px;
     margin-bottom: 20px;
   }
 
@@ -123,7 +126,7 @@
     ${self.pagetitle()}
   </h1>
   <div class="sub-title">
-    ${h.literal(_('Welcome to the social network of %s') % ('<a href="#">%s</a>' % h.simple_declension(c.location.title, lang=c.lang)))} 
+    ${h.literal(_('Welcome to the social network of %s!') % ('<a href="#" target="_self" onclick="window.open(document.URL, this.target)">%s</a>' % h.simple_declension(c.location.title, lang=c.lang)))} 
   </div>
 </%def>
 
