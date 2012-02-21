@@ -131,7 +131,6 @@
 </%def>
 
 <div class="clearfix">
-  <img id="social-network" src="${url('/img/social_network.png')}" alt="Social network" />
   <ul class="about-box feature-box">
     <li class="feature icon-subjects-file"><strong>${_('Academic resources')}</strong> &ndash;
     ${_('Add your study material (notes and files).')}</li>
