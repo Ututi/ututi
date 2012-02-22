@@ -98,13 +98,13 @@
     background-color: #e3eaf4;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    height: 80px;
+    height: 70px;
 
-    background-image: linear-gradient(bottom, #FFFFFF 0%, #E3EAF4 100%);
-    background-image: -o-linear-gradient(bottom, #FFFFFF 0%, #E3EAF4 100%);
-    background-image: -moz-linear-gradient(bottom, #FFFFFF 0%, #E3EAF4 100%);
-    background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #E3EAF4 100%);
-    background-image: -ms-linear-gradient(bottom, #FFFFFF 0%, #E3EAF4 100%);
+    background-image: linear-gradient(center 80px, #FFFFFF 0%, #E3EAF4 100%);
+    background-image: -o-linear-gradient(center 80px, #FFFFFF 0%, #E3EAF4 100%);
+    background-image: -moz-linear-gradient(center 80px, #FFFFFF 0%, #E3EAF4 100%);
+    background-image: -webkit-linear-gradient(center 80px, #FFFFFF 0%, #E3EAF4 100%);
+    background-image: -ms-linear-gradient(center 80px, #FFFFFF 0%, #E3EAF4 100%);
 
     background-image: -webkit-gradient(
 	linear,
@@ -121,7 +121,8 @@
     font-size: 14px;
     padding: 20px 0 0 45px;
     color: #333333;
-    text-shadow: 0px 0px 1px #999999;
+    text-shadow: 0px 0px 1px #ffffff;
+    text-transform: uppercase;
 
     background-image: url('/img/login-arrow.png');
     background-repeat: no-repeat;
@@ -138,7 +139,7 @@
   }
 
   .login-box .login-box-content {
-    margin: 20px 0 30px 0;
+    margin: 0 0 30px 0;
   }
 
   .login-box .login-box-content button {
@@ -168,6 +169,115 @@
 
   .login-box .login-box-content img.icon {
     padding-right: 15px;
+  }
+
+  .login-box .login-box-content-buttons {
+    margin-top: 30px;
+  }
+
+  .login-box-content-loginform {
+    display: none;
+  }
+
+  .login-box-content-registerform {
+    display: none;
+  }
+
+  .login-box-content-loginform, .login-box-content-registerform {
+    width: 200px;
+    margin: 0 auto;
+  }
+
+  .login-box-content-loginform label, 
+  .login-box-content-registerform label {
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .login-box-content-loginform input[type=text], 
+  .login-box-content-loginform input[type=password],
+  .login-box-content-registerform input[type=text], 
+  .login-box-content-registerform input[type=password] {
+    width: 190px;
+    border: 1px solid #b9b9b9;
+    border-right: 2px solid #d6d6d6;
+    border-bottom: 2px solid #d6d6d6;
+    -moz-box-shadow: 0 0 0 2px #f2f2f2;
+    -webkit-box-shadow: 0 0 0 2px #f2f2f2;
+    box-shadow: 0 0 0 2px #f2f2f2;
+  }
+
+  #email {
+    margin-bottom: 13px;
+  }
+
+  #forgot_password {
+    font-size: 11px;
+    display: block;
+    margin-top: 2px;
+  }
+
+  #keep-me-logged-in {
+    margin: 10px 0;
+    font-size: 11px;
+    color: #3D617A;
+  }
+
+  #keep-me-logged-in input {
+    vertical-align: middle;
+  }
+
+  .login-box-content input[type=submit] {
+    background-image: linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+    background-image: -o-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+    background-image: -moz-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+    background-image: -webkit-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+    background-image: -ms-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+
+    background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, #545454),
+	color-stop(1, #6D6D6D)
+    );
+
+    color: #ffffff;
+    border: 1px solid #6d6d6d;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Arial,Verdana,sans-serif;
+    padding: 5px 10px;
+    margin: 0 2px;
+  }
+
+  .login-box-content input[type=button] {
+    color: #ffffff;
+    margin: 0 2px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Arial,Verdana,sans-serif;
+    padding: 5px 8px;
+    border: 1px solid #f09252;
+
+    background-image: linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+    background-image: -o-linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+    background-image: -moz-linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+    background-image: -webkit-linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+    background-image: -ms-linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+
+    background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, #EF843D),
+	color-stop(1, #F2975B)
+    );
+  }
+
+  .login-box-content-loginform-buttons {
+    text-align: center;
   }
 
 </%def>
@@ -221,15 +331,59 @@
 
   <div class="login-box">
     <div class="login-box-title">
-      <div class="login-box-title-text">REGISTRUOTIS</div>
+      <div class="login-box-title-text">Register or login</div>
       <hr />
     </div>
 
     <div class="login-box-content">
-      <button type="button"><img src="/img/student-icon.png" alt="I am a student" class="icon" />I am a student</button>
-      <button type="button"><img src="/img/teacher-icon.png" alt="I am a teacher" class="icon" />I am a teacher</button>
+      <div class="login-box-content-buttons">
+        <button type="button" class="student"><img src="/img/student-icon.png" alt="I am a student" class="icon" />I am a student</button>
+        <button type="button" class="teacher"><img src="/img/teacher-icon.png" alt="I am a teacher" class="icon" />I am a teacher</button>
+      </div>
+
+      <div class="login-box-content-loginform">
+        <form>
+          <label for="email">Email</label>
+          <input type="text" id="email" />
+          <label for="password">Password</label>
+          <input type="password" id="password"/>
+          <a href="#" id="forgot_password">Forgot password?</a>
+          <div id="keep-me-logged-in">
+            <input type="checkbox" checked="checked">
+            Keep me logged in
+          </div>
+          <div class="login-box-content-loginform-buttons">
+            <input type="submit" value="Login" />
+            <input type="button" value="Create an account" />
+          </div>
+        </form>
+      </div>
+
+      <div class="login-box-content-registerform">
+        register
+      </div>
     </div>
   </div>
+
+  
+
+  <script>
+    $(document).ready(function() {
+      var is_cookie = true; // here will be a feature in nearly future
+
+      $('.login-box-content button').click(function() {
+        console.log('clicked');
+        $('.login-box-content-buttons').hide();
+        if (is_cookie) {
+          console.log('login');
+          $('.login-box-content-loginform').show();
+        } else {
+          console.log('register');
+          $('.login-box-content-registerform').show();
+        }
+      });
+    });
+  </script>
 </%def>
 
 <div style="float: left; clear: left;">kazkas<!--<ul class="about-box feature-box">
