@@ -276,10 +276,6 @@
     );
   }
 
-  .login-box-content-loginform-buttons {
-    text-align: center;
-  }
-
 </%def>
 
 <%def name="university_entry(uni)">
@@ -337,50 +333,59 @@
 
     <div class="login-box-content">
       <div class="login-box-content-buttons">
-        <button type="button" class="student"><img src="/img/student-icon.png" alt="I am a student" class="icon" />I am a student</button>
-        <button type="button" class="teacher"><img src="/img/teacher-icon.png" alt="I am a teacher" class="icon" />I am a teacher</button>
+        <button type="button" class="student"><img src="/img/student-icon.png" alt="${_('I am a student')}" class="icon" />${_('I am a student')}</button>
+        <button type="button" class="teacher"><img src="/img/teacher-icon.png" alt="${_('I am a teacher')}" class="icon" />${_('I am a teacher')}</button>
       </div>
 
       <div class="login-box-content-loginform">
-        <form>
-          <label for="email">Email</label>
-          <input type="text" id="email" />
-          <label for="password">Password</label>
-          <input type="password" id="password"/>
-          <a href="#" id="forgot_password">Forgot password?</a>
+        <form action="/login" method="post">
+          <label for="email">${_('Email')}</label>
+          <input type="text" id="email" name="username" />
+          <label for="password">${_('Password')}</label>
+          <input type="password" id="password" name="password" />
+          <a href="/password" id="forgot_password">${_('Forgot password?')}</a>
           <div id="keep-me-logged-in">
-            <input type="checkbox" checked="checked">
-            Keep me logged in
+            <input type="checkbox" checked="checked" name="remember">
+            ${_('Keep me logged in')}
           </div>
-          <div class="login-box-content-loginform-buttons">
-            <input type="submit" value="Login" />
-            <input type="button" value="Create an account" />
-          </div>
+          <input type="submit" value="${_('Login')}" />
+          <input type="button" id="create_account" value="${_('Create an account')}" />
         </form>
       </div>
 
       <div class="login-box-content-registerform">
-        register
+        <form action="/register" method="POST">
+          <label for="email">${_('Email')}</label>
+          <input type="text" id="email" name="username" />
+          <label for="password">${_('Password')</label>
+          <input type="password" id="password" name="password" />
+          <a href="/password" id="forgot_password">${_('Forgot password?')}</a>
+          <div id="keep-me-logged-in">
+            <input type="checkbox" checked="checked" name="remember">
+            ${_('Keep me logged in')}
+          </div>
+          <input type="button" value="${_('Create an account')}" />
+        </form>
       </div>
     </div>
   </div>
-
-  
 
   <script>
     $(document).ready(function() {
       var is_cookie = true; // here will be a feature in nearly future
 
       $('.login-box-content button').click(function() {
-        console.log('clicked');
         $('.login-box-content-buttons').hide();
         if (is_cookie) {
-          console.log('login');
           $('.login-box-content-loginform').show();
         } else {
-          console.log('register');
           $('.login-box-content-registerform').show();
         }
+      });
+
+      $('#create_account').click(function() {
+        $('.login-box-content-loginform').hide();
+        $('.login-box-content-registerform').show();
       });
     });
   </script>
