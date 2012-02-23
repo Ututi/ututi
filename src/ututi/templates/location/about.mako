@@ -293,6 +293,55 @@
     border: none;
   }
 
+  .no-faculties-box {
+    background-color: #eff2f5;
+    -moz-border-radius: 15px;
+    border-radius: 10px;
+    border: 10px solid #eceff3;
+    font-family: Arial,Verdana,sans-serif;
+    margin-top: 5px;
+  }
+
+  .no-faculties-box-title {
+    padding: 25px;
+    color: #3d617a;
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 18px;
+  }
+
+  .no-faculties-box-features {
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 13px;
+  }
+
+  .no-faculties-box-features ul {
+    background: url('/img/icons.com/about/academics.png') center left no-repeat;
+  }
+
+  .no-faculties-box-features li {
+    margin-bottom: 16px;
+    list-style-type: none;
+    background: url('/img/icons.com/about/bullet.png') no-repeat;
+    padding-left: 20px;
+  }
+
+  .no-faculties-box-button {
+    border-top: 1px solid #dbe1e9;
+    margin: 25px 0 5px 0;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: Arial,Verdana,sans-serif;
+    padding: 10px 0 5px 15px;
+  }
+
+  .no-faculties-box-button a {
+    background: transparent url('/img/icons.com/about/add-faculty.png') center left no-repeat;
+    display: inline-block;
+    padding-left: 40px;
+    line-height: 35px;
+  }
+
 </%def>
 
 <%def name="university_entry(uni)">
@@ -328,6 +377,26 @@
   %endfor
 </div>
 %endif
+</%def>
+
+<%def name="no_faculties_box()">
+<div class="no-faculties-box">
+  <div class="no-faculties-box-title">
+    ${h.literal(_("Add faculties to %s's social network") % ('<strong>%s</strong>' % h.simple_declension(c.location.title, lang=c.lang)))}
+  </div>
+
+  <div class="no-faculties-box-features">
+    <ul>
+      <li>${_('Add a facultie you belong to')}</li>
+      <li>${_('Create your academic group')}</li>
+      <li>${_('Invite your coleagues and professors to join')}</li>
+    </ul>
+  </div>
+
+  <div class="no-faculties-box-button">
+    <a href="#" title="${_('Add a facultie now')}">${_('Add a facultie now')}</a>
+  </div>
+</div>
 </%def>
 
 <%def name="pageheader()">
@@ -437,4 +506,6 @@
 
 %if c.departments:
 ${university_box(c.departments, _("Departments:"))}
+%else:
+${no_faculties_box()}
 %endif
