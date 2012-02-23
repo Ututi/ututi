@@ -1750,7 +1750,6 @@ ul.medium-icon-list {
     background-repeat: no-repeat;
     background-position: 10px 10px;
     padding: 12px 25px 20px 45px;
-    margin-bottom: 10px;
     border: 1px solid #cccccc;
 }
 
@@ -1801,7 +1800,7 @@ ul.medium-icon-list {
         margin: 15px 30px 15px 0px;
         background-repeat: no-repeat;
         min-height: 35px;
-        padding-left: 50px;
+        padding-left: 45px;
     }
 
         .feature-box.simple .feature {
@@ -1829,14 +1828,14 @@ ul.medium-icon-list {
         background-position: 2px 5px;
     }
     .feature-box .icon-subjects-file {
-        background-image: url('img/icons.com/about/subjects_file.png');
+        background-image: url('img/icons.com/about/academic-resources.png');
     }
     .feature-box .icon-notifications {
         background-image: url('img/icons.com/about/notifications.png');
         background-position: 5px 0;
     }
     .feature-box .icon-group {
-        background-image: url('img/icons.com/about/group.png');
+        background-image: url('img/icons.com/about/students-groups.png');
         background-position: 5px 5px;
     }
     .feature-box .icon-subject {
@@ -1849,6 +1848,10 @@ ul.medium-icon-list {
     }
     .feature-box .icon-discussions {
         background-image: url('img/icons.com/about/discussions.png');
+        background-position: 2px 5px;
+    }
+    .feature-box .icon-teachers-profiles {
+        background-image: url('img/icons.com/about/teachers-profiles.png');
         background-position: 2px 5px;
     }
     .feature-box .icon-message {

@@ -8,7 +8,7 @@
   ${parent.css()}
 
   .university-box {
-    margin: 25px 0;
+    margin-bottom: 25px;
     padding: 10px 0;
   }
 
@@ -68,17 +68,16 @@
   }
 
   .about-box {
-    border: solid 1px #ccc;
-    margin: 5px 0;
     padding-left: 20px;
     padding-bottom: 10px;
-    width:250px;
+    width: 350px;
     float: right;
+    font-family: Arial,Verdana,sans-serif;
   }
 
   .about-box .feature {
-    width: 215px;
-    margin-top: 10px;
+    width: 380px;
+    margin-top: 4px;
   }
 
   .login-box {
@@ -276,6 +275,24 @@
     );
   }
 
+  .features {
+    float: left;
+    clear: left;
+  }
+
+  .features p {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 14px;
+  }
+
+  /* Overwrites a design from fixed.css .*/
+  .feature-box {
+    background: none;
+    border: none;
+  }
+
 </%def>
 
 <%def name="university_entry(uni)">
@@ -357,7 +374,7 @@
         <form action="/register" method="POST">
           <label for="email">${_('Email')}</label>
           <input type="text" id="email" name="username" />
-          <label for="password">${_('Password')</label>
+          <label for="password">${_('Password')}</label>
           <input type="password" id="password" name="password" />
           <a href="/password" id="forgot_password">${_('Forgot password?')}</a>
           <div id="keep-me-logged-in">
@@ -391,14 +408,30 @@
   </script>
 </%def>
 
-<div style="float: left; clear: left;">kazkas<!--<ul class="about-box feature-box">
-    <li class="feature icon-subjects-file"><strong>${_('Academic resources')}</strong> &ndash;
-    ${_('Add your study material (notes and files).')}</li>
-    <li class="feature icon-group"><strong>${_('Student groups')}</strong> &ndash;
-      ${_('Create and join private or public groups to communicate and collaborate.')}</li>
-    <li class="feature icon-discussions"><strong>${_('Discussions')}</strong> &ndash;
-      ${_('Share knowledge and discuss academic subjects with students and teachers.')}</li>
-  </ul>--></div>
+<div class="features">
+  <p>Here you can find:</p>
+  <ul class="about-box feature-box">
+    <li class="feature icon-subjects-file">
+      <strong>${_('Academic resources')}:</strong> 
+      ${_('teaching subjects with study materials (notes, files, presentations, audio&amp;video)')}.
+    </li>
+
+    <li class="feature icon-group">
+      <strong>${_('Students groups')}:</strong> 
+      ${_('private and public groups with files area, forum and email for communication and collaboration')}.
+    </li>
+
+    <li class="feature icon-discussions">
+      <strong>${_('Discussions')}:</strong> 
+      ${_('knowlenge sharing and discussions on academic subjects with students and teachers')}.
+    </li>
+
+    <li class="feature icon-teachers-profiles">
+      <strong>${_('Teachers profiles')}:</strong>
+      ${_('academic webpage  with teachers biography, publications, touch cources and contact information')}.
+    </li>
+  </ul>
+</div>
 
 <div class="clearfix"></div>
 
