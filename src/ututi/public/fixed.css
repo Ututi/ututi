@@ -277,7 +277,6 @@ h2.single-title {
 
 .single-title {
     background: none;
-    border-bottom: 1px solid #FF9900;
     padding: 2px 0;
     font-size: 12px;
     font-weight: bold;
@@ -1568,7 +1567,7 @@ ul.inline-list li {
         background-image: url('img/icons.com/teacher_small_orange.png');
         background-position: -1px center;
     }
-    ul.icon-list li.icon-file { background-image: url('img/icons.com/file_small_grey.png'); }
+    ul.icon-list li.icon-file { background-image: url('img/icons.com/file-icon.png'); }
     ul.icon-list li.icon-file.active { background-image: url('img/icons.com/file_small_orange.png'); }
     ul.icon-list li.icon-time { background-image: url('img/icons.com/clock.png'); }
     ul.icon-list li.icon-feed { background-image: url('img/icons.com/feed_small_grey.png'); }
@@ -1576,12 +1575,12 @@ ul.inline-list li {
     ul.icon-list li.icon-university { background-image: url('img/icons.com/university_small_grey.png'); }
     ul.icon-list li.icon-message { background-image: url('img/icons.com/message_small_grey.png'); }
     ul.icon-list li.icon-message.active { background-image: url('img/icons.com/message_small_orange.png'); }
-    ul.icon-list li.icon-group { background-image: url('img/icons.com/group_small_grey.png'); }
+    ul.icon-list li.icon-group { background-image: url('img/icons.com/group-icon.png'); }
     ul.icon-list li.icon-network {
         background-image: url('img/icons.com/network_grey.png');
         background-position: -2px center;
     }
-    ul.icon-list li.icon-subject { background-image: url('img/icons.com/subject_small_grey.png'); }
+    ul.icon-list li.icon-subject { background-image: url('img/icons.com/subject-icon.png'); }
     ul.icon-list li.icon-mobile {
         background-image: url('img/icons.com/mobile.png');
         background-position: 2px center;

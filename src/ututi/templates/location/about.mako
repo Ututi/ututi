@@ -24,9 +24,9 @@
 
   .university-box .university-entry {
     color: #666666;
-    width: 50%;
+    width: 300px;
     float: left;
-    margin-top: 5px;
+    margin-bottom: 30px;
   }
 
   .university-entry .logo {
@@ -35,14 +35,35 @@
     margin-top: 2px;
   }
 
+  .university-entry ul {
+    margin-left: 67px;
+  }
+
+  /* selects 2, 4, 6, 8, ... elements */
+  .university-entry:nth-child(2n) {
+    float: right;
+    width: 275px;
+  }
+
+  .university-entry:nth-child(2n + 1) {
+  }
+
+  .university-entry .title a {
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 13px;
+  }
+
   .university-entry .logo img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f2f2f2;
+    padding: 3px;
   }
 
   .university-entry .title {
     font-weight: bold;
     color: #333333;
+    margin: 5px 50px 0 67px;
   }
 
   .university-entry ul.statistics li {
@@ -295,7 +316,8 @@
 
   .no-faculties-box {
     background-color: #eff2f5;
-    -moz-border-radius: 15px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
     border-radius: 10px;
     border: 10px solid #eceff3;
     font-family: Arial,Verdana,sans-serif;
@@ -342,12 +364,45 @@
     line-height: 35px;
   }
 
+  .section-header {
+    background-color: #eceff3;
+    padding: 10px;
+    margin-bottom: 25px;
+
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+
+    -moz-box-shadow: 0 2px #dee3ea;
+    -webkit-box-shadow: 0 2px #dee3ea;
+    box-shadow: 0 2px #dee3ea;
+  }
+
+  .section-header h2 {
+    float: left;
+    font-family: Arial,Verdana,sans-serif;
+    font-weight: bold;
+  }
+
+  .section-header h2.academy {
+    background: transparent url('/img/icons.com/about/academy-small.png') center left no-repeat;
+    padding-left: 20px;
+    margin-left: 8px;
+  }
+
+  .section-header-links {
+    text-align: right; 
+    font-weight: bold;
+    font-size: 12px;
+    font-family: Arial,Verdana,sans-serif;
+  }
+
 </%def>
 
 <%def name="university_entry(uni)">
 <div class="university-entry clearfix">
   <div class="logo">
-    <img src="${url(controller='structure', action='logo', id=uni['id'], width=30, height=30)}"
+    <img src="${url(controller='structure', action='logo', id=uni['id'], width=40, height=40)}"
          alt="logo" />
   </div>
   <div class="title">
@@ -355,28 +410,37 @@
   </div>
   <ul class="icon-list statistics">
     <li class="icon-subject"> ${uni['n_subjects']} </li>
-    <li class="icon-group"> ${uni['n_groups']} </li>
     <li class="icon-file"> ${uni['n_files']} </li>
+    <li class="icon-group"> ${uni['n_groups']} </li>
   </ul>
 </div>
 </%def>
 
 <%def name="university_box(unis, title)">
 %if unis:
-<div class="university-box clearfix">
-  <div class="clearfix">
-    <h2 class="single-title">${title}</h2>
-    %if h.check_crowds(['moderator']):
-      <a class="create-link" href="${url(controller='structure', action='index')}">
-        ${_("+ Add department")}
-      </a>
-    %endif
+<div class="university-box">
+  <div class="section-header">
+    <h2 class="academy">Faculties of ${c.location.title}</h2>
+
+    <div class="section-header-links">
+      %if h.check_crowds(['moderator']):
+        <a class="create-link" href="">${_("+ Add department")}</a>
+      %endif
+      <a href="#">${_('All faculties')} >></a>
   </div>
+  </div>
+
+  <div class="clearfix"></div>
+
   %for uni in unis:
     ${university_entry(uni)}
   %endfor
 </div>
 %endif
+</%def>
+
+<%def name="teachers_box()">
+  
 </%def>
 
 <%def name="no_faculties_box()">
@@ -394,7 +458,7 @@
   </div>
 
   <div class="no-faculties-box-button">
-    <a href="#" title="${_('Add a facultie now')}">${_('Add a facultie now')}</a>
+    <a href="${url(controller='structure', action='index')}" title="${_('Add a facultie now')}">${_('Add a facultie now')}</a>
   </div>
 </div>
 </%def>
@@ -506,6 +570,7 @@
 
 %if c.departments:
 ${university_box(c.departments, _("Departments:"))}
+${teachers_box()}
 %else:
 ${no_faculties_box()}
 %endif
