@@ -1576,6 +1576,10 @@ ul.inline-list li {
     ul.icon-list li.icon-message { background-image: url('img/icons.com/message_small_grey.png'); }
     ul.icon-list li.icon-message.active { background-image: url('img/icons.com/message_small_orange.png'); }
     ul.icon-list li.icon-group { background-image: url('img/icons.com/group-icon.png'); }
+    ul.icon-list li.icon-academy { 
+        background-image: url('img/icons.com/academy-icon.png');
+        background-position: 0 4px; /* hack: if title is too long, correct background image position */
+    }
     ul.icon-list li.icon-network {
         background-image: url('img/icons.com/network_grey.png');
         background-position: -2px center;

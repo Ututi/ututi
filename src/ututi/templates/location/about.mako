@@ -29,13 +29,15 @@
     margin-bottom: 30px;
   }
 
-  .university-entry .logo {
+  .university-entry .logo,
+  .teacher-entry .logo {
     float: left;
     margin-right: 7px;
     margin-top: 2px;
   }
 
-  .university-entry ul {
+  .university-entry ul,
+  .teacher-entry ul {
     margin-left: 67px;
   }
 
@@ -48,28 +50,38 @@
   .university-entry:nth-child(2n + 1) {
   }
 
-  .university-entry .title a {
+  .university-entry .title a,
+  .teacher-entry .title a {
     font-family: Arial,Verdana,sans-serif;
     font-size: 13px;
   }
 
-  .university-entry .logo img {
+  .university-entry .logo img,
+  .teacher-entry .logo img {
     width: 40px;
     height: 40px;
     border: 4px solid #f2f2f2;
     padding: 3px;
   }
 
-  .university-entry .title {
+  .university-entry .title,
+  .teacher-entry .title {
     font-weight: bold;
     color: #333333;
     margin: 5px 50px 0 67px;
   }
 
-  .university-entry ul.statistics li {
+  .university-entry ul.statistics li,
+  .teacher-entry ul.statistics li {
     display: inline-block;
     margin-right: 5px;
     min-width: 20px;    /* makes icons line up nicely in list */
+  }
+
+  .teacher-entry {
+    width: 50%;
+    float: left;
+    margin-bottom: 30px;
   }
 
   h1.page-title {
@@ -397,6 +409,11 @@
     font-family: Arial,Verdana,sans-serif;
   }
 
+  .icon-academy a {
+    margin-right: 100px;
+    padding-right: 50px;
+  }
+
 </%def>
 
 <%def name="university_entry(uni)">
@@ -440,7 +457,40 @@
 </%def>
 
 <%def name="teachers_box()">
-  
+<div class="teachers-box clear">
+  <div class="section-header">
+    <h2 class="teacher">Teachers of ${c.location.title}</h2>
+
+    <div class="section-header-links">
+      % if h.check_crowds(['moderator']):
+        <a class="create-link" href="#">${_("+ Add teacher")}</a>
+      % endif
+      <a href="#">${_('All teachers')} >></a>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  ${teacher_entry()}
+</div>
+</%def>
+
+<%def name="teacher_entry()">
+% for i in range(10):
+<div class="teacher-entry clearfix">
+  <div class="logo">
+    <img src="/structure/180/logo/40/40" alt="logo" />
+  </div>
+
+  <div class="title">
+    <a href="#" title="title">Jonas Ponas</a>
+  </div>
+  <ul class="icon-list statistics">
+    <li class="icon-file"><a href="#">dalykas</a></li>
+    <li class="icon-academy"><a href="#">fakultetas</a></li>
+  </ul>
+</div>
+% endfor
 </%def>
 
 <%def name="no_faculties_box()">
@@ -570,7 +620,7 @@
 
 %if c.departments:
 ${university_box(c.departments, _("Departments:"))}
-${teachers_box()}
+## ${teachers_box()}
 %else:
 ${no_faculties_box()}
 %endif
