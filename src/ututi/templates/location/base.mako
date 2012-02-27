@@ -2,6 +2,7 @@
 <%namespace file="/portlets/structure.mako" import="location_logo_portlet, location_info_portlet,
                                                     location_admin_portlet, location_register_portlet,
                                                     location_register_teacher_portlet,
+                                                    location_dont_study_here_portlet,
                                                     location_members_portlet, location_groups_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet, about_ututi_portlet,
                                                     navigation_portlet, create_network_portlet" />
@@ -17,10 +18,11 @@
 %else:
   ${location_logo_portlet()}
   ${navigation_portlet(c.menu_items, c.current_menu_item)}
-  ${location_register_portlet()}
-  ${location_register_teacher_portlet()}
-  ${about_ututi_portlet()}
-  ${create_network_portlet()}
+  ${location_dont_study_here_portlet()}
+  ##${location_register_portlet()}
+  ##${location_register_teacher_portlet()}
+  ##${about_ututi_portlet()}
+  ##${create_network_portlet()}
 %endif
 </%def>
 

@@ -82,6 +82,16 @@
   %endif
 </%def>
 
+<%def name="location_dont_study_here_portlet()">
+ <%self:portlet id="dont-study-here-portlet">
+    <p><strong>${_("Don't study here?")}</strong></p>
+    <button class="student" type="button">
+        <img class="icon" alt="I am a student" src="/img/icons/add-icon.png">
+        ${_('Add your university')}
+    </button>
+  </%self:portlet> 
+</%def>
+
 <%def name="location_groups_portlet(location=None)">
   <%
   if location is None: location = c.location

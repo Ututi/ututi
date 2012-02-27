@@ -16,18 +16,24 @@
     %if title is not None:
     <%def name="header()">${title}</%def>
     %endif
-    <ul>
-      %for item in menu_items:
-      <%
-      classes = item['name']
-      if item['name'] == current:
-        classes += ' current'
-      %>
-      <li class="${classes}">
-        <a href="${item['link']}">${item['title']}</a>
-      </li>
-      %endfor
-    </ul>
+    <strong>${_('University already has')}:</strong>
+      <ul>
+        <li class="group"><strong>123</strong> grupes</li>
+        <li class="teacher"><strong>33</strong> destytojai</li>
+        <li class="subject"><strong>125</strong> dalykai</li>
+      </ul>
+##    <ul>
+##      %for item in menu_items:
+##      <%
+##     classes = item['name']
+##      if item['name'] == current:
+##        classes += ' current'
+##      %>
+##      <li class="${classes}">
+##        <a href="${item['link']}">${item['title']}</a>
+##      </li>
+##      %endfor
+##    </ul>
   </%self:portlet>
 %endif
 </%def>
