@@ -219,7 +219,7 @@ div#pager {
 #features-teacher-1 {
     position: relative;
     right: -340px;
-    top: 30px;
+    top: 15px;
     width: 160px;
     height: auto;
 }
@@ -227,7 +227,7 @@ div#pager {
 #features-teacher-2 {
     position: relative;
     right: -290px;
-    top: 92px;
+    top: 78px;
     width: 210px;
     height: auto;
 }
@@ -235,7 +235,7 @@ div#pager {
 #features-teacher-3 {
     position: relative;
     right: -330px;
-    top: 155px;
+    top: 140px;
     width: 170px;
     height: auto;
 }
