@@ -234,14 +234,13 @@ li.expanded li a {
 /* Anonymous header */
 
 .anonymous #header {
-    background: #333 url('img/header.png') no-repeat center top;
     height: 60px;
     width:100%;
-    min-width: 980px;
+    min-width: 1050px;
 }
 
     .anonymous #header #header-inner {
-        width: 940px;
+        width: 1010px;
         height: 60px;
         padding: 10px 20px 0;
         margin: auto;
@@ -254,16 +253,21 @@ li.expanded li a {
         padding: 0;
     }
 
+        .anonymous #header #header-inner #logo img {
+           margin-top: 7px; 
+        }
+
     .anonymous #header #slogan {
-        color: #ff9900;
-        font-size: 16px;
+        color: #ffc889;
+        font-size: 13px;
         display: inline;
         padding-left: 5px;
         font-weight: normal;
+        text-transform: uppercase;
     }
 
     .anonymous #header ul#nav {
-        margin-left: 130px;
+        margin-left: 250px;
         display: inline;
     }
 
@@ -294,14 +298,15 @@ li.expanded li a {
     background: #fff;
     border: solid 1px #bbb;
     border-top: none;
-    width: 980px;
+    width: 1010px;
     margin: 0 auto;
 }
 
 #layout-wrap #main-content {
     float: left;
-    width: 980px;
+    width: 1010px;
     padding: 0;
+    background-color: #ffffff;
 }
 
 /* Left sidebar.

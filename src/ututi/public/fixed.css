@@ -174,7 +174,9 @@ h1.page-title {
     margin: 0;
     font-size: 20px;
     font-weight: bold;
+    margin-top: 15px;
     margin-bottom: 15px;
+    color: #4d4d4d;
 }
 
 .above-page-title {
@@ -2122,17 +2124,43 @@ ul.tabs {
 /* FRONT PAGE STYLE.
  */
 
-#frontpage #sign-up {
-    width: 100%;
-    height: 265px;
-    background: #3d617a url("/img/bg_blue_repeat.png") repeat-x left bottom;
+#slides {
+    float: left;
+    width: 520px;
+    height: 370px;
 }
 
-#frontpage #sign-up-inner {
-    width: 100%;
-    height: 265px;
-    margin: auto;
-    background: url("/img/bg_blue.png") no-repeat center bottom;
+    #slides ul.pagination {
+        position: relative;
+        right: -520px;
+        top: -350px;    
+    }
+
+        #slides ul.pagination li a {
+            background-image: url("/img/pagination.png");
+            background-position: 0 0;
+            display: block;
+            float: left;
+            width: 9px;
+            height: 0;
+            padding-top: 9px;
+            overflow: hidden;
+            margin-left: 5px;
+        }
+
+        #slides ul.pagination li.current a {
+            background-position: 0 9px;
+        }
+
+.slides_container {
+    width: 520px;
+    height: 370px;
+}
+
+.slides_container div {
+    width: 520px;
+    height: 370px;
+    display: block;
 }
 
 #frontpage .error span {
@@ -2154,27 +2182,11 @@ ul.tabs {
         padding-bottom: 15px;
     }
 
-#frontpage button#learn-more {
-    text-align: center;
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 5px 25px;
-    position: absolute;
-    right: 45px;
-    bottom: 35px;
-    box-shadow: 3px 3px 10px #333;
-    -moz-box-shadow: 3px 3px 10px #333;
-    -webkit-box-shadow: 3px 3px 10px #333;
-    background-image: url('img/buttons/bg_big_grey.png');
-    max-height: 34px !important;
-}
-
 #frontpage button#learn-more:hover {
     background-image: url('img/buttons/hover_big_grey.png');
 }
 
-#frontpage #about {
+#frontpage {
     width: 100%;
     background: #fff;
 }

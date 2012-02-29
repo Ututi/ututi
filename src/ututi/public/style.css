@@ -188,6 +188,352 @@ div#pager {
     margin-left: 2em;
 }
 
+#features-teacher {
+    background-image: url("img/teachers_bg.png");
+    background-repeat: no-repeat;
+    background-position: 0 50px;
+}
+
+    .features-teacher-text {
+        font-weight: bold;
+        font-family: Arial,Verdana,sans-serif;
+    }
+
+    #features-teacher button {
+        font-size: 18px;
+        height: 45px;
+        position: relative;
+        bottom: -190px;
+        text-align: left;
+        width: 325px;
+    }
+
+        #features-teacher button img {
+            vertical-align: top;
+        }
+
+        #features-teacher button span {
+            padding-left: 10px; 
+        }
+
+#features-teacher-1 {
+    position: relative;
+    right: -340px;
+    top: 30px;
+    width: 160px;
+    height: auto;
+}
+
+#features-teacher-2 {
+    position: relative;
+    right: -290px;
+    top: 92px;
+    width: 210px;
+    height: auto;
+}
+
+#features-teacher-3 {
+    position: relative;
+    right: -330px;
+    top: 155px;
+    width: 170px;
+    height: auto;
+}
+
+#features-social-network {
+    background-image: url("img/social_network_bg.png");
+    background-repeat: no-repeat;
+    background-position: 120px 40px;
+}
+
+    #features-social-network ul {
+        margin-top: 40px; 
+    }
+
+        #features-social-network ul li {
+            margin-top: 20px;
+            padding-left: 25px;
+            font-weight: bold;
+            background: url("img/tick.png");
+            background-repeat: no-repeat;
+            font-family: Arial,Verdana,sans-serif;
+            font-size: 14px;
+            color: #535353;
+        }
+
+    #features-social-network button {
+        font-size: 18px;
+        height: 45px;
+        position: relative;
+        bottom: -85px;
+        text-align: left;
+        width: 280px;
+    }
+
+        #features-social-network button img {
+            vertical-align: middle;
+        }
+
+        #features-social-network button span {
+            padding-left: 10px;
+        }
+
+#features-student {
+    background-image: url("img/students_bg.png");
+    background-repeat: no-repeat;
+    background-position: 90px 50px;
+}
+
+    #features-student ul {
+        margin-top: 50px;
+    }
+
+        #features-student ul li {
+            margin-top: 20px;
+            padding-left: 20px;
+            font-weight: bold;
+            background: url("img/tick.png");
+            background-repeat: no-repeat;
+            color: #535353;
+            font-family: Arial,Verdana,sans-serif;
+            font-size: 13px;
+            width: 160px;
+        }
+
+    #features-student button {
+        margin-top: 80px;
+        text-align: left;
+        width: 290px;
+    }
+
+        #features-student button img {
+            vertical-align: middle;
+        }
+
+        #features-student button span {
+            font-size: 18px;
+            position: relative;
+            top: 3px;
+            padding-left: 10px; 
+        }
+
+.black-button, .black-button:hover {
+    background-image: -moz-linear-gradient(center bottom , #545454 0%, #6D6D6D 100%);
+    border: 1px solid #6D6D6D;
+    color: #ffffff;
+    margin: 0 2px;
+    padding: 5px 10px;
+    font-family: Arial,Verdana,sans-serif;
+}
+
+.login-box {
+    float: right;
+    margin: 7px 8px 0 0;
+    padding: 10px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    border: 1px solid #dfdfdf;
+    -moz-box-shadow: 0 0 0 6px #f2f2f2;
+    -webkit-box-shadow: 0 0 0 6px #f2f2f2;
+    box-shadow: 0 0 0 6px #f2f2f2;
+    width: 250px;
+}
+
+.login-box-title {
+    background-color: #e3eaf4;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    height: 70px;
+
+    background-image: linear-gradient(center 80px, #FFFFFF 0%, #E3EAF4 100%);
+    background-image: -o-linear-gradient(bottom,  #FFFFFF 0%, #E3EAF4 100%);
+    background-image: -moz-linear-gradient(center 80px, #FFFFFF 0%, #E3EAF4 100%);
+    background-image: -webkit-linear-gradient(center 80px, #FFFFFF 0%, #E3EAF4 100%);
+    background-image: -ms-linear-gradient(center 80px, #FFFFFF 0%, #E3EAF4 100%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, #FFFFFF),
+        color-stop(1.0, #E3EAF4)
+    );
+}
+
+.login-box-title-text {
+    font-weight: bold;
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 14px;
+    padding: 20px 0 0 45px;
+    color: #333333;
+    text-shadow: 0px 0px 1px #ffffff;
+    text-transform: uppercase;
+
+    background-image: url('/img/login-arrow.png');
+    background-repeat: no-repeat;
+    background-position: 18px 20px;
+}
+
+.login-box-title hr {
+    color: #eef2fa;
+    border: 0;
+    height: 1px;
+    background: #eef2fa;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.login-box .login-box-content {
+    margin: 0 0 30px 0;
+}
+
+
+.login-box .login-box-content button {
+    display: block;
+    margin: 0 auto 25px auto;
+    height: 50px;
+    width: 190px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    border: 1px solid #a0b0c8;
+
+    background-image: linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+    background-image: -o-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+    background-image: -moz-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+    background-image: -webkit-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+    background-image: -ms-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.01, #728BAF),
+        color-stop(0.6, #8EA2BF)
+    );
+}
+
+.login-box .login-box-content-buttons {
+    margin-top: 30px;
+}
+
+.login-box .login-box-content img.icon {
+    padding-right: 15px;
+}
+
+.login-box-content-loginform {
+    display: none;
+}
+
+.login-box-content-registerform {
+    display: none;
+}
+
+.login-box-content-loginform, .login-box-content-registerform {
+    width: 200px;
+    margin: 0 auto;
+}
+
+.login-box-content #name {
+    margin-bottom: 13px;
+}
+
+.login-box-content #email {
+    margin-bottom: 13px;
+}
+
+.login-box-content #university-you-belong-to {
+    margin-bottom: 30px;
+    width: 240px;
+    font-family: Arial,Verdana,sans-serif;
+    color: #999999;
+    height: 23px;
+    padding: 3px 0 0 3px;
+}
+
+    .login-box-content #university-you-belong-to option {
+        color: #000000;
+    }
+
+.login-box-content #accept-terms {
+    margin: 10px 0;
+    font-size: 13px;
+    color: #3D617A;
+    font-family: Arial,Verdana,sans-serif;
+}
+
+    .login-box-content #accept-terms input {
+        vertical-align: middle;
+    }
+
+.login-box-content-loginform label, 
+.login-box-content-registerform label {
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-box-content-loginform input, 
+.login-box-content-loginform select,
+.login-box-content-registerform input, 
+.login-box-content-registerform select {
+    width: 190px;
+    border: 1px solid #b9b9b9;
+    border-right: 2px solid #d6d6d6;
+    border-bottom: 2px solid #d6d6d6;
+    -moz-box-shadow: 0 0 0 2px #f2f2f2;
+    -webkit-box-shadow: 0 0 0 2px #f2f2f2;
+    box-shadow: 0 0 0 2px #f2f2f2;
+}
+
+.login-box-content input[type=submit] {
+    background-image: linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+    background-image: -o-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+    background-image: -moz-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+    background-image: -webkit-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+    background-image: -ms-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+
+    background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, #545454),
+	color-stop(1, #6D6D6D)
+    );
+
+    color: #ffffff;
+    border: 1px solid #6d6d6d;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Arial,Verdana,sans-serif;
+    padding: 5px 10px;
+    margin: 0 2px;
+  }
+
+  .login-box-content input[type=button] {
+    color: #ffffff;
+    margin: 0 2px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Arial,Verdana,sans-serif;
+    padding: 5px 8px;
+    border: 1px solid #f09252;
+
+    background-image: linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+    background-image: -o-linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+    background-image: -moz-linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+    background-image: -webkit-linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+    background-image: -ms-linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+
+    background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, #EF843D),
+	color-stop(1, #F2975B)
+    );
+  }
+
 .federated-registration-form {
     -moz-border-radius: 5px;
     border: 1px solid #ded8d8;
