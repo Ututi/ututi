@@ -106,8 +106,32 @@
         </div><!-- .login-box-content -->
       </div><!-- .login-box -->
 
-      <div class="clear">
-        universities
+      <div class="clear university-box">
+        <div class="section-header">
+            <h2 class="academy">universities</h2>
+            <div class="section-header-links">
+                <a href="#">More universities >></a>
+            </div>
+        </div>
+
+        <div>
+            % for i in range(10):
+                <div class="university-entry university-entry-frontpage clearfix ">
+                  <div class="logo">
+                    <img src="/structure/180/logo/40/40" alt="logo" />
+                  </div>
+
+                  <div class="title">
+                    <a href="#" title="title">Jonas Ponas</a>
+                  </div>
+                  <ul class="icon-list statistics">
+                    <li class="icon-subject">213</li>
+                    <li class="icon-file">12</li>
+                    <li class="icon-group">123</li>
+                  </ul>
+                </div>
+            % endfor
+        </div>
       </div>
     </div><!-- .container-inner -->
   </div><!-- #main-content -->

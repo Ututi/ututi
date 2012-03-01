@@ -2128,6 +2128,7 @@ ul.tabs {
     float: left;
     width: 520px;
     height: 370px;
+    margin-bottom: 50px;
 }
 
     #slides ul.pagination {

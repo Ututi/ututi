@@ -7,77 +7,6 @@
 <%def name="css()">
   ${parent.css()}
 
-  .university-box {
-    margin-bottom: 25px;
-    padding: 10px 0;
-  }
-
-  .university-box .box-title {
-    font-weight: bold;
-    margin-bottom: 10px;
-    float: left;
-  }
-
-  .university-box .create-link {
-    float: right;
-  }
-
-  .university-box .university-entry {
-    color: #666666;
-    width: 300px;
-    float: left;
-    margin-bottom: 30px;
-  }
-
-  .university-entry .logo,
-  .teacher-entry .logo {
-    float: left;
-    margin-right: 7px;
-    margin-top: 2px;
-  }
-
-  .university-entry ul,
-  .teacher-entry ul {
-    margin-left: 67px;
-  }
-
-  /* selects 2, 4, 6, 8, ... elements */
-  .university-entry:nth-child(2n) {
-    float: right;
-    width: 275px;
-  }
-
-  .university-entry:nth-child(2n + 1) {
-  }
-
-  .university-entry .title a,
-  .teacher-entry .title a {
-    font-family: Arial,Verdana,sans-serif;
-    font-size: 13px;
-  }
-
-  .university-entry .logo img,
-  .teacher-entry .logo img {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #f2f2f2;
-    padding: 3px;
-  }
-
-  .university-entry .title,
-  .teacher-entry .title {
-    font-weight: bold;
-    color: #333333;
-    margin: 5px 50px 0 67px;
-  }
-
-  .university-entry ul.statistics li,
-  .teacher-entry ul.statistics li {
-    display: inline-block;
-    margin-right: 5px;
-    min-width: 20px;    /* makes icons line up nicely in list */
-  }
-
   .teacher-entry {
     width: 50%;
     float: left;
@@ -197,38 +126,6 @@
     line-height: 35px;
   }
 
-  .section-header {
-    background-color: #eceff3;
-    padding: 10px;
-    margin-bottom: 25px;
-
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-
-    -moz-box-shadow: 0 2px #dee3ea;
-    -webkit-box-shadow: 0 2px #dee3ea;
-    box-shadow: 0 2px #dee3ea;
-  }
-
-  .section-header h2 {
-    float: left;
-    font-family: Arial,Verdana,sans-serif;
-    font-weight: bold;
-  }
-
-  .section-header h2.academy {
-    background: transparent url('/img/icons.com/about/academy-small.png') center left no-repeat;
-    padding-left: 20px;
-    margin-left: 8px;
-  }
-
-  .section-header-links {
-    text-align: right; 
-    font-weight: bold;
-    font-size: 12px;
-    font-family: Arial,Verdana,sans-serif;
-  }
 
   .icon-academy a {
     margin-right: 100px;
