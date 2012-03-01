@@ -38,6 +38,87 @@ body.noMenu #widthLimiter {
     font-weight: bold;
 }
 
+button {
+    /* default button look */
+    cursor: pointer;
+    font-size: 12px;
+    border: 1px solid #666666;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 2px 8px;
+    background: #ff9900 url('img/buttons/bg_small_orange.png') repeat-x left bottom;
+}
+
+button:hover {
+    background-image: url('img/buttons/hover_small_orange.png');
+}
+
+button.submit {
+    /* don't inline submit buttons */
+    display: block;
+    margin-top: 25px;
+}
+
+button.inline {
+    margin-top: 0;
+    margin-bottom: 0;
+    display: inline;
+}
+
+button.dark {
+    /* dark version of the button */
+    color: #ffffff;
+    padding: 0px 8px;
+    border: 1px solid #666666;
+    font-weight: normal;
+    background: #333 url('img/buttons/bg_small_grey.png') repeat-x left bottom;
+    height: 21px !important;
+    overflow: hidden;
+}
+
+button.dark:hover {
+    background-image: url('img/buttons/hover_small_grey.png');
+}
+
+button.add {
+    padding-left: 15px;
+    background-image: url('img/buttons/bg_add_orange.png');
+}
+
+button.add:hover {
+    background-image: url('img/buttons/hover_add_orange.png');
+}
+
+
+button.dark.add {
+    padding: 0 8px 0 16px;
+    background-image: url('img/buttons/bg_add_grey.png');
+}
+
+button.dark.add:hover {
+    background-image: url('img/buttons/hover_add_grey.png');
+}
+
+button.dark.edit {
+    padding: 0 8px 0 16px;
+    background-image: url('img/buttons/bg_edit_grey.png');
+}
+
+button.dark.edit:hover {
+    background-image: url('img/buttons/hover_edit_grey.png');
+}
+
+button.btn-text {
+    /* pretending to look like simple link */
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #3d617a; /* link color */
+    font: 12px normal Verdana, Arial, sans-serif;
+}
+
+
+
 /* begin pager */
 div#pager {
     text-align: center;
@@ -203,7 +284,7 @@ div#pager {
         font-size: 18px;
         height: 45px;
         position: relative;
-        bottom: -190px;
+        bottom: -180px;
         text-align: left;
         width: 325px;
     }
@@ -235,7 +316,7 @@ div#pager {
 #features-teacher-3 {
     position: relative;
     right: -330px;
-    top: 140px;
+    top: 135px;
     width: 170px;
     height: auto;
 }
@@ -265,7 +346,7 @@ div#pager {
         font-size: 18px;
         height: 45px;
         position: relative;
-        bottom: -85px;
+        bottom: -83px;
         text-align: left;
         width: 280px;
     }
@@ -301,9 +382,11 @@ div#pager {
         }
 
     #features-student button {
-        margin-top: 80px;
+        margin-top: 62px;
         text-align: left;
+        position: relative;
         width: 290px;
+        height: 45px;
     }
 
         #features-student button img {
@@ -316,7 +399,6 @@ div#pager {
             top: 3px;
             padding-left: 10px; 
         }
-
 
 .university-box {
     margin-bottom: 25px;
@@ -436,13 +518,25 @@ div#pager {
     font-family: Arial,Verdana,sans-serif;
 }
 
-.black-button, .black-button:hover {
+button.black, button.black:hover {
     background-image: -moz-linear-gradient(center bottom , #545454 0%, #6D6D6D 100%);
     border: 1px solid #6D6D6D;
     color: #ffffff;
     margin: 0 2px;
     padding: 5px 10px;
     font-family: Arial,Verdana,sans-serif;
+    background-image: -o-linear-gradient(bottom, #545454 -1%, #6D6D6D 100%);
+    background-image: -moz-linear-gradient(bottom, #545454 -1%, #6D6D6D 100%);
+    background-image: -webkit-linear-gradient(bottom, #545454 -1%, #6D6D6D 100%);
+    background-image: -ms-linear-gradient(bottom, #545454 -1%, #6D6D6D 100%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(-0.01, #545454),
+        color-stop(1, #6D6D6D)
+    );
 }
 
 .login-box {

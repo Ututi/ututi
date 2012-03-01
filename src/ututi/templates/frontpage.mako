@@ -18,7 +18,7 @@
               <li>Paskaitų medžiagos</li>
             </ul>
 
-            <button class="black-button">
+            <button class="black">
                 <img src="/img/icons/add-icon-big.png" />
                 <span>Pridek savo universiteta</span>
             </button>
@@ -31,7 +31,7 @@
             <div id="features-teacher-2" class="features-teacher-text">Akademinė svetainė su biografija, publikacijomis ir kontaktais</div>
             <div id="features-teacher-3" class="features-teacher-text">Patogus bendravimas su studentais</div>
 
-            <button class="black-button">
+            <button class="black">
                 <img src="/img/icons/teacher-icon-big.png" />
                 <span>Registruotis kaip destytojas</span>
             </button>
@@ -47,7 +47,7 @@
               <li>Ir dar daugiau...</li>
             </ul>
 
-            <button class="black-button">
+            <button class="black">
                 <img src="/img/icons/finder-icon.png" />
                 <span>Ieskoti savo universiteto</span>
             </button>
