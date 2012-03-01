@@ -258,9 +258,9 @@
       <div class="login-box-content-loginform">
         <form action="/login" method="post">
           <label for="email">${_('Email')}</label>
-          <input type="text" id="email" name="username" />
+          <input class="university-email" type="text" id="email" name="username" />
           <label for="password">${_('Password')}</label>
-          <input type="password" id="password" name="password" />
+          <input class="university-password" type="password" id="password" name="password" />
           <a href="/password" id="forgot_password">${_('Forgot password?')}</a>
           <div id="keep-me-logged-in">
             <input type="checkbox" checked="checked" name="remember">
@@ -274,9 +274,9 @@
       <div class="login-box-content-registerform">
         <form action="/register" method="POST">
           <label for="email">${_('Email')}</label>
-          <input type="text" id="email" name="username" />
+          <input class="university-email" type="text" id="email" name="username" />
           <label for="password">${_('Password')}</label>
-          <input type="password" id="password" name="password" />
+          <input class="university-password" type="password" id="password" name="password" />
           <a href="/password" id="forgot_password">${_('Forgot password?')}</a>
           <div id="keep-me-logged-in">
             <input type="checkbox" checked="checked" name="remember">

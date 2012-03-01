@@ -108,7 +108,7 @@
 
       <div class="clear university-box">
         <div class="section-header">
-            <h2 class="academy">universities</h2>
+            <h2 class="academy">Universities already are on Ututi</h2>
             <div class="section-header-links">
                 <a href="#">More universities >></a>
             </div>

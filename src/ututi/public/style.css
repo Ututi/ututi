@@ -655,6 +655,14 @@ button.black, button.black:hover {
     margin-bottom: 13px;
 }
 
+.login-box-content .university-email {
+    width: 190px;
+}
+
+.login-box-content .university-password {
+    width: 190px;
+}
+
 .login-box-content #university-you-belong-to {
     margin-bottom: 30px;
     width: 240px;
@@ -722,7 +730,7 @@ button.black, button.black:hover {
     margin: 0 2px;
   }
 
-  .login-box-content input[type=button] {
+.login-box-content input[type=button] {
     color: #ffffff;
     margin: 0 2px;
     font-size: 12px;
