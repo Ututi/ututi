@@ -690,7 +690,6 @@ button.black, button.black:hover {
 .login-box-content-loginform select,
 .login-box-content-registerform input, 
 .login-box-content-registerform select {
-    width: 190px;
     border: 1px solid #b9b9b9;
     border-right: 2px solid #d6d6d6;
     border-bottom: 2px solid #d6d6d6;
