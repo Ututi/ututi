@@ -15,6 +15,10 @@ body.noMenu #widthLimiter {
     padding-top: 81px;
 }
 
+.no-border {
+    border: none;
+}
+
 .green{
     color: #668000;
 }

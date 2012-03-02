@@ -1,8 +1,10 @@
 <%inherit file="/prebase.mako" />
 
 <script src="/javascript/slides.min.jquery.js"></script>
+<script>document.body.style.background="#ffffff";</script>
 
-<div id="layout-wrap" class="clearfix">
+
+<div id="layout-wrap" class="no-border">
   <div id="main-content">
     <div class="content-inner">
       <div id="slides">
@@ -141,6 +143,7 @@
   $(function() { 
     $("#slides").slides({
       preload: true,
+      preloadImage: '/img/loading.gif',
       play: 5000,
       pause: 2500,
       hoverPause: true
