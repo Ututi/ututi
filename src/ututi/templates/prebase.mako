@@ -249,7 +249,7 @@ ${_('Private social networks for universities')}
 
     ${next.body()}
 
-    <div id="footer">
+    <div id="footer" class="clear footer-frontpage">
       <div id="footer-inner">
         ${self.footer()}
       </div>

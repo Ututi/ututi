@@ -4,7 +4,7 @@
 <script>document.body.style.background="#ffffff";</script>
 
 
-<div id="layout-wrap" class="no-border">
+<div id="layout-wrap" class="clear no-border">
   <div id="main-content">
     <div class="content-inner">
       <div id="slides">

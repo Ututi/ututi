@@ -10,9 +10,13 @@ html, body {
 /* FOOTER.
  */
 
+.footer-frontpage {
+    border-top: 1px solid #dddddd;
+}
+
 #footer {
     height: 60px;
-    width: 980px;
+    width: 1010px;
     text-align: center;
     margin: auto;
     font-size: 11px;
