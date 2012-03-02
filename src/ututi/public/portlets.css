@@ -45,7 +45,10 @@
         background-position: 1px center;
     }
 
-#navigation-portlet { }
+#navigation-portlet { 
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 12px;
+}
 
     #navigation-portlet .header {
         margin-bottom: 2px;
@@ -54,11 +57,11 @@
     #navigation-portlet ul {
         position: relative;
         width: 180px; /* sidebar full width */
-        left: -12px;  /* sidebar left padding */
     }
 
     #navigation-portlet ul li {
-        margin: 0;
+        margin: 10px 0 0 0;
+        padding-left: 25px;
     }
 
     #navigation-portlet ul li a {
@@ -68,6 +71,21 @@
         background-position: 12px center;
         background-repeat: no-repeat;
         outline: none;
+    }
+
+    #navigation-portlet ul li.group {
+        background-image: url('/img/icons/groups-bigger-icon.png');    
+        background-repeat: no-repeat;
+    }
+
+    #navigation-portlet ul li.teacher {
+        background-image: url('/img/icons/teacher-bigger-icon.png');    
+        background-repeat: no-repeat;
+    }
+
+    #navigation-portlet ul li.subject {
+        background-image: url('/img/icons/subjects-bigger-icon.png');
+        background-repeat: no-repeat;
     }
 
     #navigation-portlet ul li.current a {
@@ -115,6 +133,52 @@
 
     #about-ututi-portlet p {
         padding-right: 10px;
+    }
+
+#dont-study-here-portlet { 
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 11px;
+}
+
+    #dont-study-here-portlet button {
+        display: block;
+        height: 45px;
+        width: 150px;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 12px;
+        border: 1px solid #a0b0c8;
+
+        background-image: linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+        background-image: -o-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+        background-image: -moz-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+        background-image: -webkit-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+        background-image: -ms-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#728BAF', endColorstr='#8EA2BF');
+
+        background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(0.01, #728BAF),
+            color-stop(0.6, #8EA2BF)
+        );
+    }
+
+    #dont-study-here-portlet button img {
+       float: left; 
+    }
+
+    #dont-study-here-portlet .portlet-inner {
+        border: none;
+        padding: 0;
+    }
+
+    #dont-study-here-portlet .portlet-inner p {
+        font-family: Arial,Verdana,sans-serif;
+        font-size: 13px;
+        margin: 10px 0 15px; 
     }
 
 #user-information-portlet { }

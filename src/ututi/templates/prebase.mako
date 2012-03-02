@@ -15,7 +15,7 @@ ${_('Private social networks for universities')}
 
 <%def name="anonymous_header()">
   <% nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '') %>
-  <a id="logo" href="${url('/')}"><img src="${url('/img/Ututi_logo_big.png')}" alt="Ututi" title="Ututi"/></a>
+  <a id="logo" href="${url('/')}"><img src="${url('/img/Ututi_logo.png')}" alt="Ututi" title="Ututi"/></a>
   <span id="slogan">${_("Bringing students and teachers together")}</span>
   <ul id="nav">
     <li class="header-links"><a href="${url('/features')}">${_('What is Ututi?')}</a></li>
@@ -249,7 +249,7 @@ ${_('Private social networks for universities')}
 
     ${next.body()}
 
-    <div id="footer">
+    <div id="footer" class="clear footer-frontpage">
       <div id="footer-inner">
         ${self.footer()}
       </div>

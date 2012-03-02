@@ -15,6 +15,10 @@ body.noMenu #widthLimiter {
     padding-top: 81px;
 }
 
+.no-border {
+    border: none;
+}
+
 .green{
     color: #668000;
 }
@@ -37,6 +41,84 @@ body.noMenu #widthLimiter {
 .bold {
     font-weight: bold;
 }
+
+button {
+    cursor: pointer;
+    font-size: 12px;
+    border: 1px solid #666666;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 2px 8px;
+    background: #ff9900 url('img/buttons/bg_small_orange.png') repeat-x left bottom;
+}
+
+button:hover {
+    background-image: url('img/buttons/hover_small_orange.png');
+}
+
+button.submit {
+    display: block;
+    margin-top: 25px;
+}
+
+button.inline {
+    margin-top: 0;
+    margin-bottom: 0;
+    display: inline;
+}
+
+button.dark {
+    color: #ffffff;
+    padding: 0px 8px;
+    border: 1px solid #666666;
+    font-weight: normal;
+    background: #333 url('img/buttons/bg_small_grey.png') repeat-x left bottom;
+    height: 21px !important;
+    overflow: hidden;
+}
+
+button.dark:hover {
+    background-image: url('img/buttons/hover_small_grey.png');
+}
+
+button.add {
+    padding-left: 15px;
+    background-image: url('img/buttons/bg_add_orange.png');
+}
+
+button.add:hover {
+    background-image: url('img/buttons/hover_add_orange.png');
+}
+
+
+button.dark.add {
+    padding: 0 8px 0 16px;
+    background-image: url('img/buttons/bg_add_grey.png');
+}
+
+button.dark.add:hover {
+    background-image: url('img/buttons/hover_add_grey.png');
+}
+
+button.dark.edit {
+    padding: 0 8px 0 16px;
+    background-image: url('img/buttons/bg_edit_grey.png');
+}
+
+button.dark.edit:hover {
+    background-image: url('img/buttons/hover_edit_grey.png');
+}
+
+button.btn-text {
+    /* pretending to look like simple link */
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #3d617a; /* link color */
+    font: 12px normal Verdana, Arial, sans-serif;
+}
+
+
 
 /* begin pager */
 div#pager {
@@ -187,6 +269,496 @@ div#pager {
     margin-top: 4px;
     margin-left: 2em;
 }
+
+#features-teacher {
+    background-image: url("img/teachers_bg.png");
+    background-repeat: no-repeat;
+    background-position: 0 50px;
+}
+
+    .features-teacher-text {
+        font-weight: bold;
+        font-family: Arial,Verdana,sans-serif;
+    }
+
+    #features-teacher button {
+        font-size: 18px;
+        height: 45px;
+        position: relative;
+        bottom: -180px;
+        text-align: left;
+    }
+
+        #features-teacher button img {
+            vertical-align: top;
+        }
+
+        #features-teacher button span {
+            padding-left: 10px; 
+        }
+
+#features-teacher-1 {
+    position: relative;
+    right: -340px;
+    top: 15px;
+    width: 160px;
+    height: auto;
+}
+
+#features-teacher-2 {
+    position: relative;
+    right: -290px;
+    top: 78px;
+    width: 210px;
+    height: auto;
+}
+
+#features-teacher-3 {
+    position: relative;
+    right: -330px;
+    top: 135px;
+    width: 170px;
+    height: auto;
+}
+
+#features-social-network {
+    background-image: url("img/social_network_bg.png");
+    background-repeat: no-repeat;
+    background-position: 120px 40px;
+}
+
+    #features-social-network ul {
+        margin-top: 40px; 
+    }
+
+        #features-social-network ul li {
+            margin-top: 20px;
+            padding-left: 25px;
+            font-weight: bold;
+            background: url("img/tick.png");
+            background-repeat: no-repeat;
+            font-family: Arial,Verdana,sans-serif;
+            font-size: 14px;
+            color: #535353;
+        }
+
+    #features-social-network button {
+        font-size: 18px;
+        height: 45px;
+        position: relative;
+        bottom: -83px;
+        text-align: left;
+    }
+
+        #features-social-network button img {
+            vertical-align: middle;
+        }
+
+        #features-social-network button span {
+            padding-left: 10px;
+        }
+
+#features-student {
+    background-image: url("img/students_bg.png");
+    background-repeat: no-repeat;
+    background-position: 90px 50px;
+}
+
+    #features-student ul {
+        margin-top: 50px;
+    }
+
+        #features-student ul li {
+            margin-top: 20px;
+            padding-left: 20px;
+            font-weight: bold;
+            background: url("img/tick.png");
+            background-repeat: no-repeat;
+            color: #535353;
+            font-family: Arial,Verdana,sans-serif;
+            font-size: 13px;
+            width: 160px;
+        }
+
+    #features-student button {
+        margin-top: 62px;
+        text-align: left;
+        position: relative;
+        height: 45px;
+    }
+
+        #features-student button img {
+            vertical-align: middle;
+        }
+
+        #features-student button span {
+            font-size: 18px;
+            position: relative;
+            top: 3px;
+            padding-left: 10px; 
+        }
+
+.university-box {
+    margin-bottom: 25px;
+    padding: 10px 0;
+}
+
+.university-box .box-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    float: left;
+}
+
+.university-box .create-link {
+    float: right;
+}
+
+.university-box .university-entry {
+    color: #666666;
+    width: 300px;
+    float: left;
+    margin-bottom: 30px;
+}
+
+.university-box .university-entry-frontpage {
+    width: 325px;
+}
+
+.university-box .university-entry-frontpage:nth-child(2n) {
+    float: left;
+    width: 325px;
+}
+
+.university-box .university-entry-frontpage:nth-child(3n) {
+
+}
+
+.university-entry .logo,
+.teacher-entry .logo {
+    float: left;
+    margin-right: 7px;
+    margin-top: 2px;
+}
+
+.university-entry ul,
+.teacher-entry ul {
+    margin-left: 67px;
+}
+
+/* selects 2, 4, 6, 8, ... elements */
+.university-entry:nth-child(2n) {
+    float: right;
+    width: 275px;
+}
+
+.university-entry:nth-child(2n + 1) {
+}
+
+.university-entry .title a,
+.teacher-entry .title a {
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 13px;
+}
+
+.university-entry .logo img,
+.teacher-entry .logo img {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f2f2f2;
+    padding: 3px;
+}
+
+.university-entry .title,
+.teacher-entry .title {
+    font-weight: bold;
+    color: #333333;
+    margin: 5px 50px 0 67px;
+}
+
+.university-entry ul.statistics li,
+.teacher-entry ul.statistics li {
+    display: inline-block;
+    margin-right: 5px;
+    min-width: 20px;    /* makes icons line up nicely in list */
+}
+
+
+.section-header {
+    background-color: #eceff3;
+    padding: 10px;
+    margin-bottom: 25px;
+
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+
+    -moz-box-shadow: 0 2px #dee3ea;
+    -webkit-box-shadow: 0 2px #dee3ea;
+    box-shadow: 0 2px #dee3ea;
+}
+
+.section-header h2 {
+    float: left;
+    font-family: Arial,Verdana,sans-serif;
+    font-weight: bold;
+}
+
+.section-header h2.academy {
+    background: transparent url('/img/icons.com/about/academy-small.png') center left no-repeat;
+    padding-left: 20px;
+    margin-left: 8px;
+}
+
+.section-header-links {
+    text-align: right; 
+    font-weight: bold;
+    font-size: 12px;
+    font-family: Arial,Verdana,sans-serif;
+}
+
+button.black, button.black:hover {
+    background-image: -moz-linear-gradient(center bottom , #545454 0%, #6D6D6D 100%);
+    border: 1px solid #6D6D6D;
+    color: #ffffff;
+    margin: 0 2px;
+    padding: 5px 10px;
+    font-family: Arial,Verdana,sans-serif;
+    background-image: -o-linear-gradient(bottom, #545454 -1%, #6D6D6D 100%);
+    background-image: -moz-linear-gradient(bottom, #545454 -1%, #6D6D6D 100%);
+    background-image: -webkit-linear-gradient(bottom, #545454 -1%, #6D6D6D 100%);
+    background-image: -ms-linear-gradient(bottom, #545454 -1%, #6D6D6D 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#545454', endColorstr='#6D6D6D');
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(-0.01, #545454),
+        color-stop(1, #6D6D6D)
+    );
+}
+
+.login-box {
+    float: right;
+    margin: 7px 8px 0 0;
+    padding: 10px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    border: 1px solid #dfdfdf;
+    -moz-box-shadow: 0 0 0 6px #f2f2f2;
+    -webkit-box-shadow: 0 0 0 6px #f2f2f2;
+    box-shadow: 0 0 0 6px #f2f2f2;
+    width: 250px;
+}
+
+.login-box-title {
+    background-color: #e3eaf4;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    height: 70px;
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E3EAF4', endColorstr='#FFFFFF');
+    background-image: linear-gradient(center 80px, #FFFFFF 0%, #E3EAF4 100%);
+    background-image: -o-linear-gradient(bottom,  #FFFFFF 0%, #E3EAF4 100%);
+    background-image: -moz-linear-gradient(center 80px, #FFFFFF 0%, #E3EAF4 100%);
+    background-image: -webkit-linear-gradient(center 80px, #FFFFFF 0%, #E3EAF4 100%);
+    background-image: -ms-linear-gradient(center 80px, #FFFFFF 0%, #E3EAF4 100%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, #FFFFFF),
+        color-stop(1.0, #E3EAF4)
+    );
+}
+
+.login-box-title-text {
+    font-weight: bold;
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 14px;
+    padding: 20px 0 0 45px;
+    color: #333333;
+    text-shadow: 0px 0px 1px #ffffff;
+    text-transform: uppercase;
+
+    background-image: url('/img/login-arrow.png');
+    background-repeat: no-repeat;
+    background-position: 18px 20px;
+}
+
+.login-box-title hr {
+    color: #eef2fa;
+    border: 0;
+    height: 1px;
+    background: #eef2fa;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.login-box .login-box-content {
+    margin: 0 0 30px 0;
+}
+
+
+.login-box .login-box-content button {
+    display: block;
+    margin: 0 auto 25px auto;
+    height: 50px;
+    width: 190px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    border: 1px solid #a0b0c8;
+
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#728BAF', endColorstr='#8EA2BF');
+    background-image: linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+    background-image: -o-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+    background-image: -moz-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+    background-image: -webkit-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+    background-image: -ms-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.01, #728BAF),
+        color-stop(0.6, #8EA2BF)
+    );
+}
+
+.login-box .login-box-content-buttons {
+    margin-top: 30px;
+}
+
+.login-box .login-box-content img.icon {
+    padding-right: 15px;
+}
+
+.login-box-content-loginform {
+    display: none;
+}
+
+.login-box-content-registerform {
+    display: none;
+}
+
+.login-box-content-loginform, .login-box-content-registerform {
+    width: 200px;
+    margin: 0 auto;
+}
+
+.login-box-content #name {
+    margin-bottom: 13px;
+}
+
+.login-box-content #email {
+    margin-bottom: 13px;
+}
+
+.login-box-content .university-email {
+    width: 190px;
+}
+
+.login-box-content .university-password {
+    width: 190px;
+}
+
+.login-box-content #university-you-belong-to {
+    margin-bottom: 30px;
+    width: 240px;
+    font-family: Arial,Verdana,sans-serif;
+    color: #999999;
+    height: 23px;
+    padding: 3px 0 0 3px;
+}
+
+    .login-box-content #university-you-belong-to option {
+        color: #000000;
+    }
+
+.login-box-content #accept-terms {
+    margin: 10px 0;
+    font-size: 13px;
+    color: #3D617A;
+    font-family: Arial,Verdana,sans-serif;
+}
+
+    .login-box-content #accept-terms input {
+        vertical-align: middle;
+    }
+
+.login-box-content-loginform label, 
+.login-box-content-registerform label {
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-box-content-loginform input, 
+.login-box-content-loginform select,
+.login-box-content-registerform input, 
+.login-box-content-registerform select {
+    border: 1px solid #b9b9b9;
+    border-right: 2px solid #d6d6d6;
+    border-bottom: 2px solid #d6d6d6;
+    -moz-box-shadow: 0 0 0 2px #f2f2f2;
+    -webkit-box-shadow: 0 0 0 2px #f2f2f2;
+    box-shadow: 0 0 0 2px #f2f2f2;
+}
+
+.login-box-content input[type=submit] {
+    background-image: linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+    background-image: -o-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+    background-image: -moz-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+    background-image: -webkit-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+    background-image: -ms-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#545454', endColorstr='#6D6D6D');
+
+    background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, #545454),
+	color-stop(1, #6D6D6D)
+    );
+
+    color: #ffffff;
+    border: 1px solid #6d6d6d;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Arial,Verdana,sans-serif;
+    padding: 5px 10px;
+    margin: 0 2px;
+  }
+
+.login-box-content input[type=button] {
+    color: #ffffff;
+    margin: 0 2px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Arial,Verdana,sans-serif;
+    padding: 5px 8px;
+    border: 1px solid #f09252;
+
+    background-image: linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+    background-image: -o-linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+    background-image: -moz-linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+    background-image: -webkit-linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+    background-image: -ms-linear-gradient(bottom, #EF843D 0%, #F2975B 100%);
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EF843D', endColorstr='#F2975B');
+
+    background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, #EF843D),
+	color-stop(1, #F2975B)
+    );
+  }
 
 .federated-registration-form {
     -moz-border-radius: 5px;
@@ -951,7 +1523,8 @@ p.qu{
     margin-left: -8px;
     margin-bottom: -2px;
 }
-.button.black{
+
+button.black{
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7A7A7A', endColorstr='#414141'); /* for IE */
 	background: -webkit-gradient(linear, left top, left bottom, from(#7A7A7A), to(#414141)); /* for webkit browsers */
 	background: -moz-linear-gradient(top,  #7A7A7A,  #414141); /* for firefox 3.6+ */ 

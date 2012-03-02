@@ -9,7 +9,7 @@ body {
 }
 
 h1 {
-    font-family: Verdana, Arial, sans-serif;
+    font-family: Arial, Verdana, sans-serif;
     font-weight: bold;
     font-size: 20px;
     color: #333333;
@@ -72,85 +72,6 @@ strong {
 /* BUTTONS
  */
 
-button {
-    /* default button look */
-    cursor: pointer;
-    font-size: 12px;
-    border: 1px solid #666666;
-    color: #ffffff;
-    font-weight: bold;
-    padding: 2px 8px;
-    background: #ff9900 url('img/buttons/bg_small_orange.png') repeat-x left bottom;
-}
-
-button:hover {
-    background-image: url('img/buttons/hover_small_orange.png');
-}
-
-button.submit {
-    /* don't inline submit buttons */
-    display: block;
-    margin-top: 25px;
-}
-
-button.inline {
-    margin-top: 0;
-    margin-bottom: 0;
-    display: inline;
-}
-
-button.dark {
-    /* dark version of the button */
-    color: #ffffff;
-    padding: 0px 8px;
-    border: 1px solid #666666;
-    font-weight: normal;
-    background: #333 url('img/buttons/bg_small_grey.png') repeat-x left bottom;
-    height: 21px !important;
-    overflow: hidden;
-}
-
-button.dark:hover {
-    background-image: url('img/buttons/hover_small_grey.png');
-}
-
-button.add {
-    padding-left: 15px;
-    background-image: url('img/buttons/bg_add_orange.png');
-}
-
-button.add:hover {
-    background-image: url('img/buttons/hover_add_orange.png');
-}
-
-
-button.dark.add {
-    padding: 0 8px 0 16px;
-    background-image: url('img/buttons/bg_add_grey.png');
-}
-
-button.dark.add:hover {
-    background-image: url('img/buttons/hover_add_grey.png');
-}
-
-button.dark.edit {
-    padding: 0 8px 0 16px;
-    background-image: url('img/buttons/bg_edit_grey.png');
-}
-
-button.dark.edit:hover {
-    background-image: url('img/buttons/hover_edit_grey.png');
-}
-
-button.btn-text {
-    /* pretending to look like simple link */
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #3d617a; /* link color */
-    font: 12px normal Verdana, Arial, sans-serif;
-}
-
 div.back-link {
     margin-left: 2px;
     margin-top: 10px;
@@ -174,7 +95,9 @@ h1.page-title {
     margin: 0;
     font-size: 20px;
     font-weight: bold;
+    margin-top: 15px;
     margin-bottom: 15px;
+    color: #4d4d4d;
 }
 
 .above-page-title {
@@ -277,7 +200,6 @@ h2.single-title {
 
 .single-title {
     background: none;
-    border-bottom: 1px solid #FF9900;
     padding: 2px 0;
     font-size: 12px;
     font-weight: bold;
@@ -1568,7 +1490,7 @@ ul.inline-list li {
         background-image: url('img/icons.com/teacher_small_orange.png');
         background-position: -1px center;
     }
-    ul.icon-list li.icon-file { background-image: url('img/icons.com/file_small_grey.png'); }
+    ul.icon-list li.icon-file { background-image: url('img/icons.com/file-icon.png'); }
     ul.icon-list li.icon-file.active { background-image: url('img/icons.com/file_small_orange.png'); }
     ul.icon-list li.icon-time { background-image: url('img/icons.com/clock.png'); }
     ul.icon-list li.icon-feed { background-image: url('img/icons.com/feed_small_grey.png'); }
@@ -1576,12 +1498,16 @@ ul.inline-list li {
     ul.icon-list li.icon-university { background-image: url('img/icons.com/university_small_grey.png'); }
     ul.icon-list li.icon-message { background-image: url('img/icons.com/message_small_grey.png'); }
     ul.icon-list li.icon-message.active { background-image: url('img/icons.com/message_small_orange.png'); }
-    ul.icon-list li.icon-group { background-image: url('img/icons.com/group_small_grey.png'); }
+    ul.icon-list li.icon-group { background-image: url('img/icons.com/group-icon.png'); }
+    ul.icon-list li.icon-academy { 
+        background-image: url('img/icons.com/academy-icon.png');
+        background-position: 0 4px; /* hack: if title is too long, correct background image position */
+    }
     ul.icon-list li.icon-network {
         background-image: url('img/icons.com/network_grey.png');
         background-position: -2px center;
     }
-    ul.icon-list li.icon-subject { background-image: url('img/icons.com/subject_small_grey.png'); }
+    ul.icon-list li.icon-subject { background-image: url('img/icons.com/subject-icon.png'); }
     ul.icon-list li.icon-mobile {
         background-image: url('img/icons.com/mobile.png');
         background-position: 2px center;
@@ -1750,7 +1676,6 @@ ul.medium-icon-list {
     background-repeat: no-repeat;
     background-position: 10px 10px;
     padding: 12px 25px 20px 45px;
-    margin-bottom: 10px;
     border: 1px solid #cccccc;
 }
 
@@ -1801,7 +1726,7 @@ ul.medium-icon-list {
         margin: 15px 30px 15px 0px;
         background-repeat: no-repeat;
         min-height: 35px;
-        padding-left: 50px;
+        padding-left: 45px;
     }
 
         .feature-box.simple .feature {
@@ -1829,14 +1754,14 @@ ul.medium-icon-list {
         background-position: 2px 5px;
     }
     .feature-box .icon-subjects-file {
-        background-image: url('img/icons.com/about/subjects_file.png');
+        background-image: url('img/icons.com/about/academic-resources.png');
     }
     .feature-box .icon-notifications {
         background-image: url('img/icons.com/about/notifications.png');
         background-position: 5px 0;
     }
     .feature-box .icon-group {
-        background-image: url('img/icons.com/about/group.png');
+        background-image: url('img/icons.com/about/students-groups.png');
         background-position: 5px 5px;
     }
     .feature-box .icon-subject {
@@ -1849,6 +1774,10 @@ ul.medium-icon-list {
     }
     .feature-box .icon-discussions {
         background-image: url('img/icons.com/about/discussions.png');
+        background-position: 2px 5px;
+    }
+    .feature-box .icon-teachers-profiles {
+        background-image: url('img/icons.com/about/teachers-profiles.png');
         background-position: 2px 5px;
     }
     .feature-box .icon-message {
@@ -2116,17 +2045,44 @@ ul.tabs {
 /* FRONT PAGE STYLE.
  */
 
-#frontpage #sign-up {
-    width: 100%;
-    height: 265px;
-    background: #3d617a url("/img/bg_blue_repeat.png") repeat-x left bottom;
+#slides {
+    float: left;
+    width: 520px;
+    height: 370px;
+    margin-bottom: 50px;
 }
 
-#frontpage #sign-up-inner {
-    width: 100%;
-    height: 265px;
-    margin: auto;
-    background: url("/img/bg_blue.png") no-repeat center bottom;
+    #slides ul.pagination {
+        position: relative;
+        right: -520px;
+        top: -350px;    
+    }
+
+        #slides ul.pagination li a {
+            background-image: url("/img/pagination.png");
+            background-position: 0 0;
+            display: block;
+            float: left;
+            width: 9px;
+            height: 0;
+            padding-top: 9px;
+            overflow: hidden;
+            margin-left: 5px;
+        }
+
+        #slides ul.pagination li.current a {
+            background-position: 0 9px;
+        }
+
+.slides_container {
+    width: 520px;
+    height: 370px;
+}
+
+.slides_container div {
+    width: 520px;
+    height: 370px;
+    display: block;
 }
 
 #frontpage .error span {
@@ -2148,27 +2104,11 @@ ul.tabs {
         padding-bottom: 15px;
     }
 
-#frontpage button#learn-more {
-    text-align: center;
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 5px 25px;
-    position: absolute;
-    right: 45px;
-    bottom: 35px;
-    box-shadow: 3px 3px 10px #333;
-    -moz-box-shadow: 3px 3px 10px #333;
-    -webkit-box-shadow: 3px 3px 10px #333;
-    background-image: url('img/buttons/bg_big_grey.png');
-    max-height: 34px !important;
-}
-
 #frontpage button#learn-more:hover {
     background-image: url('img/buttons/hover_big_grey.png');
 }
 
-#frontpage #about {
+#frontpage {
     width: 100%;
     background: #fff;
 }
