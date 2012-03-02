@@ -155,6 +155,8 @@
         background-image: -webkit-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
         background-image: -ms-linear-gradient(bottom, #728BAF 1%, #8EA2BF 60%);
 
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#728BAF', endColorstr='#8EA2BF');
+
         background-image: -webkit-gradient(
             linear,
             left bottom,
