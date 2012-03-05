@@ -117,19 +117,19 @@
         </div>
 
         <div>
-            % for i in range(10):
+            % for university in c.universities:
                 <div class="university-entry university-entry-frontpage clearfix ">
                   <div class="logo">
-                    <img src="/structure/180/logo/40/40" alt="logo" />
+                    <img src="${url(controller='structure', action='logo', id=university['id'], width=40, height=40)}" alt="logo" title="${university['title']}"/>
                   </div>
 
                   <div class="title">
-                    <a href="#" title="title">Jonas Ponas</a>
+                    <a href="${university['url']}" title="${university['title']}">${h.ellipsis(university['title'], 36)}</a>
                   </div>
                   <ul class="icon-list statistics">
-                    <li class="icon-subject">213</li>
-                    <li class="icon-file">12</li>
-                    <li class="icon-group">123</li>
+                    <li class="icon-subject" title="${_('Subjects')}">${university['n_subjects']}</li>
+                    <li class="icon-file" title="${_('Files')}">${university['n_files']}</li>
+                    <li class="icon-group" title="${_('Groups')}">${university['n_groups']}</li>
                   </ul>
                 </div>
             % endfor

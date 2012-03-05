@@ -107,6 +107,7 @@ class UniversityListMixin(BaseController):
         unis = meta.Session.query(LocationTag
                 ).filter(LocationTag.parent == None
                 ).order_by(LocationTag.title.asc())
+
         if region_id:
             unis = unis.filter_by(region_id=region_id)
         unis = unis.all()
@@ -198,7 +199,7 @@ class HomeController(UniversityListMixin):
             redirect(url(controller='profile', action='home'))
         else:
             self._get_unis()
-            (c.subjects, c.groups, c.universities) = (self._subjects(), self._groups(), self._universities(limit=10))
+            (c.subjects, c.groups, c.universities) = (self._subjects(), self._groups(), self._universities(limit=12))
 
             if request.params.has_key('js'):
                 return render_mako_def('/search/browse.mako','universities', unis=c.unis, ajax_url=url(controller='home', action='index'))
