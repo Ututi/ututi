@@ -7,6 +7,8 @@ SETING UP
     >>> from pkg_resources import resource_stream
     >>> from ututi.tests.functional import make_file
 
+Login as a root
+
     >>> browser = Browser.logIn()
     >>> browser.open('http://localhost/structure')
 
@@ -30,19 +32,16 @@ SETING UP
 
 END OF SETTING UP
 
-Anonymous user can see "I study here" button which takes him to registration:
-
+Anonymous user can see "Register or login" box:
 
     >>> browser = Browser()
     >>> browser.open('http://localhost/school/vu')
-    >>> browser.getControl('I study here').click()
-    >>> browser.url
-    'http://localhost/school/vu/register?'
+    >>> browser.printCssQuery('.login-box-title-text', strip=True)
+    <div>Register or login</div>
 
     >>> browser.open('http://localhost/school/vu/ef')
-    >>> browser.getControl('I study here').click()
-    >>> browser.url
-    'http://localhost/school/vu/ef/register?'
+    >>> browser.printCssQuery('.login-box-title-text', strip=True)
+    <div>Register or login</div>
 
 Logged user should not see "I study here" button in university and faculty portlet,
 because he already has his LocationTag set:
@@ -60,3 +59,13 @@ because he already has his LocationTag set:
 
     >>> browser.open('http://localhost/school/vu/ef')
     >>> browser.printCssQuery("#i-study-here-button", strip=True)
+
+Logged user should not see "Register or login" box in university and faculty pages:
+
+    >>> browser.open('http://localhost/school/vu')
+
+    >>> browser.open('http://localhost/school/vu')
+    >>> browser.printCssQuery('.login-box-title-text', strip=True)
+
+    >>> browser.open('http://localhost/school/vu/ef')
+    >>> browser.printCssQuery('.login-box-title-text', strip=True)
