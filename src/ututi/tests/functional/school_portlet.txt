@@ -43,7 +43,17 @@ Anonymous user can see "Register or login" box:
     >>> browser.printCssQuery('.login-box-title-text', strip=True)
     <div>Register or login</div>
 
-Logged user should not see "I study here" button in university and faculty portlet,
+Let's check that an anonymous user can see buttons for login and registration:
+
+    >>> browser.printCssQuery('#i-am-a-student', strip=True)
+    <button>
+    <img />I am a student</button>
+
+    >>> browser.printCssQuery('#i-am-a-teacher', strip=True)
+    <button>
+    <img />I am a teacher</button>
+
+Logged in user should not see "I study here" button in university and faculty portlet,
 because he already has his LocationTag set:
 
     >>> browser = Browser.logIn()
