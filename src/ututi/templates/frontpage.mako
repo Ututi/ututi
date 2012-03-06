@@ -22,7 +22,7 @@
 
             <button class="black">
                 <img src="/img/icons/add-icon-big.png" />
-                <span>Pridek savo universiteta</span>
+                <span>${_('Add your university')}</span>
             </button>
           </div>
 
@@ -35,7 +35,7 @@
 
             <button class="black">
                 <img src="/img/icons/teacher-icon-big.png" />
-                <span>Registruotis kaip destytojas</span>
+                <span>${_('Register as a teacher')}</span>
             </button>
           </div>
 
@@ -49,10 +49,12 @@
               <li>Ir dar daugiau...</li>
             </ul>
 
-            <button class="black">
-                <img src="/img/icons/finder-icon.png" />
-                <span>Ieskoti savo universiteto</span>
-            </button>
+            <form action="${url(controller='search', action='browse')}">
+                <button class="black">
+                    <img src="/img/icons/finder-icon.png" />
+                    <span>${_('Find your university')}</span>
+                </button>
+            </form>
           </div>
         </div><!-- .slides_container -->
       </div><!-- #slides -->
@@ -85,8 +87,10 @@
               <input type="text" name="email" id="email" style="width: 230px;">
               <label for="university">University you belong to</label>
               <select id="university-you-belong-to">
-                <option>Pick from the list</option>
-                <option>test2</option>
+                <option>${_('Pick from the list')}</option>
+                % for university in c.all_universities:
+                <option value="${university['id']}">${university['title']}</option>
+                % endfor
               </select>
               <div id="accept-terms">
                 <input type="checkbox" checked="checked" name="accept-terms">
@@ -97,7 +101,7 @@
           </div>
 
           <div class="login-box-content-registerform" style="width: 250px;">
-            <form method="POST" action="/register">
+            <form method="POST" action="/register" id="sign-up-form">
               <label for="name">Name</label>
               <input type="text" name="name" id="name" style="width: 230px;">
               <label for="password">Email</label>
