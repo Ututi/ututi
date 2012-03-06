@@ -245,7 +245,11 @@
 
   <div class="login-box">
     <div class="login-box-title">
-      <div class="login-box-title-text">Register or login</div>
+      <div class="login-box-title-text">${_('Register or login')}</div>
+      <div class="login-box-title-login-as-student" style="display: none;">${_('Login as a student')}</div>
+      <div class="login-box-title-login-as-teacher" style="display: none;">${_('Login as a teacher')}</div>
+      <div class="login-box-title-register-as-student" style="display: none;">${_('Register as a student')}</div>
+      <div class="login-box-title-register-as-teacher" style="display: none;">${_('Register as a teacher')}</div>
       <hr />
     </div>
 
@@ -288,25 +292,27 @@
     </div>
   </div>
 
-  <script>
-    $(document).ready(function() {
-      var is_cookie = true; // here will be a feature in nearly future
+    <script>
+        $(document).ready(function() {
+            $('.login-box-content button').click(function() {
+                var person = $(this).attr('class'); // teacher or student
 
-      $('.login-box-content button').click(function() {
-        $('.login-box-content-buttons').hide();
-        if (is_cookie) {
-          $('.login-box-content-loginform').show();
-        } else {
-          $('.login-box-content-registerform').show();
-        }
-      });
+                $('.login-box-title-text').hide();
+                $('.login-box-title-login-as-' + person).show();
 
-      $('#create_account').click(function() {
-        $('.login-box-content-loginform').hide();
-        $('.login-box-content-registerform').show();
-      });
-    });
-  </script>
+                $('.login-box-content-buttons').hide();
+                $('.login-box-content-loginform').show();
+
+                $('#create_account').click(function() {
+                    $('.login-box-title-login-as-' + person).hide();
+                    $('.login-box-title-register-as-' + person).show();
+
+                    $('.login-box-content-loginform').hide();
+                    $('.login-box-content-registerform').show();
+                });
+            });
+        });
+    </script>
 </%def>
 
 <div class="features">

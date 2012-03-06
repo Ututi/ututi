@@ -573,7 +573,11 @@ button.black, button.black:hover {
     );
 }
 
-.login-box-title-text {
+.login-box-title-text,
+.login-box-title-login-as-student,
+.login-box-title-login-as-teacher,
+.login-box-title-register-as-student,
+.login-box-title-register-as-teacher {
     font-weight: bold;
     font-family: Arial,Verdana,sans-serif;
     font-size: 14px;
