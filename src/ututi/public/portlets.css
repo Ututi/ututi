@@ -65,12 +65,7 @@
     }
 
     #navigation-portlet ul li a {
-        display: block;
-        margin: 0;
-        padding: 5px 5px 5px 30px;
-        background-position: 12px center;
-        background-repeat: no-repeat;
-        outline: none;
+        color: #333333;
     }
 
     #navigation-portlet ul li.group {
@@ -91,11 +86,6 @@
     #navigation-portlet ul li.current a {
         background-color: #ddd;
         font-weight: bold;
-    }
-
-    #navigation-portlet ul li a:focus,
-    #navigation-portlet ul li a:hover {
-        background-color: #eee;
     }
 
     /* menu icons

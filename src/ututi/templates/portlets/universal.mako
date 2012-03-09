@@ -18,22 +18,15 @@
     %endif
     <strong>${_('University already has')}:</strong>
       <ul>
-        <li class="group"><strong>123</strong> grupes</li>
-        <li class="teacher"><strong>33</strong> destytojai</li>
-        <li class="subject"><strong>125</strong> dalykai</li>
+        <li class="group"><strong>123</strong> ${_('groups')}</li>
+        % for menu_item in menu_items:
+            % if menu_item['name'] == 'teachers':
+            <li class="teacher"><a href="${url(menu_item['link'])}"><strong>33</strong> ${_('teachers')}</a></li>
+            % elif menu_item['name'] == 'subjects':
+            <li class="subject"><a href="${url(menu_item['link'])}"><strong>125</strong> ${_('subjects')}</a></li>
+            % endif
+        % endfor
       </ul>
-##    <ul>
-##      %for item in menu_items:
-##      <%
-##     classes = item['name']
-##      if item['name'] == current:
-##        classes += ' current'
-##      %>
-##      <li class="${classes}">
-##        <a href="${item['link']}">${item['title']}</a>
-##      </li>
-##      %endfor
-##    </ul>
   </%self:portlet>
 %endif
 </%def>
