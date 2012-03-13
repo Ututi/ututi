@@ -703,6 +703,7 @@ def teardown_db_defaults(engine, quiet=False):
     connection.execute("create schema public")
     tx.commit()
     connection.close()
+    meta.engine.dispose()
 
 
 content_items_table = None
