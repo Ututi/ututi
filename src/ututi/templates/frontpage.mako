@@ -27,13 +27,13 @@
           </div>
 
           <div id="features-teacher">
-            <h1 class="page-title">Teachers' academical workspaces</h1>
+            <h1 class="page-title">${_("Teachers' academical workspaces")}</h1>
 
             <div id="features-teacher-1" class="features-teacher-text">Erdvė destomu dalyku medziagai talpinti</div>
             <div id="features-teacher-2" class="features-teacher-text">Akademinė svetainė su biografija, publikacijomis ir kontaktais</div>
             <div id="features-teacher-3" class="features-teacher-text">Patogus bendravimas su studentais</div>
 
-            <button class="black">
+            <button class="black register-as-a-teacher">
                 <img src="/img/icons/teacher-icon-big.png" />
                 <span>${_('Register as a teacher')}</span>
             </button>
@@ -62,7 +62,7 @@
       <div class="login-box" style="width: 330px;">
         <div class="login-box-title">
           <div class="login-box-title-text">
-            Registruotis i universiteta
+            ${_('Register at the university')}
           </div>
 
           <hr />
@@ -71,16 +71,16 @@
         <div class="login-box-content" style="margin-bottom: 20px;">
           <div class="login-box-content-buttons">
             <button style="width: 220px" class="student" type="button">
-              <img class="icon" alt="I am a student" src="/img/student-icon.png">I am a student
+              <img class="icon" alt="${_('I am a student')}" src="/img/student-icon.png">${_('I am a student')}
             </button>
 
             <button style="width: 220px" class="teacher" type="button">
-              <img class="icon" alt="I am a teacher" src="/img/teacher-icon.png">I am a teacher
+              <img class="icon" alt="${_('I am a teacher')}" src="/img/teacher-icon.png">${_('I am a teacher')}
             </button>
           </div>
 
           <div class="login-box-content-loginform" style="width: 250px;">
-            <form method="post" action="/login">
+            <form method="post" id="sign-up-form2" action="/register">
               <label for="name">Name</label>
               <input type="text" name="name" id="name" style="width: 230px;">
               <label for="email">Email</label>
@@ -93,20 +93,10 @@
                 % endfor
               </select>
               <div id="accept-terms">
-                <input type="checkbox" checked="checked" name="accept-terms">
+                <input type="checkbox" name="accept-terms" id="accept-terms-checkbox">
                 <a href="#">${_('I accept terms and regulations')}</a>
               </div>
-              <input type="submit" value="Create an account">
-            </form>
-          </div>
-
-          <div class="login-box-content-registerform" style="width: 250px;">
-            <form method="POST" action="/register" id="sign-up-form">
-              <label for="name">Name</label>
-              <input type="text" name="name" id="name" style="width: 230px;">
-              <label for="password">Email</label>
-              <input type="text" name="email" id="email" style="width: 230px;">
-              <input type="submit" value="Create an account">
+              <input type="submit" value="Create an account" name="" id="create_button">
             </form>
           </div>
         </div><!-- .login-box-content -->
@@ -158,20 +148,54 @@
 
 <script>
     $(document).ready(function() {
-      var is_cookie = true; // here will be a feature in nearly future
+        var is_cookie = true; // here will be a feature in nearly future
 
-      $('.login-box-content button').click(function() {
-        $('.login-box-content-buttons').hide();
-        if (is_cookie) {
-          $('.login-box-content-loginform').show();
-        } else {
-          $('.login-box-content-registerform').show();
-        }
-      });
+        // if user clicks "I'm student" or "I'm a teacher"
+        $('.login-box-content button').click(function() {
+            var type = $(this).attr('class');
 
-      $('#create_account').click(function() {
-        $('.login-box-content-loginform').hide();
-        $('.login-box-content-registerform').show();
-      });
+            if (type == 'student') {
+                $('#create_button').attr('name', 'REGISTER_STUDENT');
+            } else {
+                $('#create_button').attr('name', 'REGISTER_TEACHER');
+            }
+
+            $('.login-box-content-buttons').hide();
+            if (is_cookie) {
+              $('.login-box-content-loginform').show();
+            } else {
+              $('.login-box-content-registerform').show();
+            }
+        });
+
+        // if user clicks on slide's button "Register as a teacher"
+        $('.register-as-a-teacher').click(function() {
+            $('.login-box-content-buttons').hide();
+            $('.login-box-content-loginform').show();
+
+            $('#create_button').attr('name', 'REGISTER_TEACHER');
+        });
+
+        // let's check validation of registration form:
+        // if user is clicked on checkbox, enable submiting
+        $('#accept-terms-checkbox').click(function() {
+            if (this.checked) {
+                $('#create_button').removeAttr('disabled');
+            } else {
+                $('#create_button').attr('disabled', 'disabled');
+            }
+        });
+
+        // let's check validation of ragistration form:
+        // login button's behaviour
+        $('#create_button').click(function() {
+            if ($('#accept-terms-checkbox').is(':checked')) {
+                // everything is ok, continue
+            } else {
+                $('#accept-terms span').remove();
+                $('#accept-terms').prepend('<span class="error-message">${_("You must agree to the terms")}<br /></span>');
+                return false;
+            }
+        });
     });
 </script>
