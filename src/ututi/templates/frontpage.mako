@@ -1,8 +1,8 @@
 <%inherit file="/prebase.mako" />
 
 <script src="/javascript/slides.min.jquery.js"></script>
+<script src="/javascript/jquery.colorbox-min.js"></script>
 <script>document.body.style.background="#ffffff";</script>
-
 
 <div id="layout-wrap" class="clear no-border">
   <div id="main-content">
@@ -10,28 +10,30 @@
       <div id="slides">
         <div class="slides_container">
           <div id="features-social-network">
-            <h1 class="page-title">Private social network for universities</h1>
+            <h1 class="page-title">${_('Private social network for universities')}</h1>
 
             <ul>
-              <li>Studentų grupės</li>
-              <li>Dėstytojai</li>
-              <li>Dėstomi dalykai</li>
-              <li>Universiteto naujienos</li>
-              <li>Paskaitų medžiagos</li>
+              <li>${_('Groups of students')}</li>
+              <li>${_('Teachers')}</li>
+              <li>${_('Subjects')}</li>
+              <li>${_('University news')}</li>
+              <li>${_('Lecture material')}</li>
             </ul>
 
-            <button class="black">
-                <img src="/img/icons/add-icon-big.png" />
-                <span>${_('Add your university')}</span>
-            </button>
+              <a class="add_university_button" href="#add_university">
+                  <button class="black">
+                      <img src="/img/icons/add-icon-big.png" />
+                      <span>${_('Add your university')}</span>
+                  </button>
+              </a>
           </div>
 
           <div id="features-teacher">
             <h1 class="page-title">${_("Teachers' academical workspaces")}</h1>
 
-            <div id="features-teacher-1" class="features-teacher-text">Erdvė destomu dalyku medziagai talpinti</div>
-            <div id="features-teacher-2" class="features-teacher-text">Akademinė svetainė su biografija, publikacijomis ir kontaktais</div>
-            <div id="features-teacher-3" class="features-teacher-text">Patogus bendravimas su studentais</div>
+            <div id="features-teacher-1" class="features-teacher-text">${_('Space to place lecture material')}</div>
+            <div id="features-teacher-2" class="features-teacher-text">${_('Academic site with biography, publications and contacts')}</div>
+            <div id="features-teacher-3" class="features-teacher-text">${_('Easy communicatio with students')}</div>
 
             <button class="black register-as-a-teacher">
                 <img src="/img/icons/teacher-icon-big.png" />
@@ -40,13 +42,13 @@
           </div>
 
           <div id="features-student">
-            <h1 class="page-title">Useful tools for students</h1>
+            <h1 class="page-title">${_('Useful tools for students')}</h1>
 
             <ul>
-              <li>Susirašinėjimas viešai ir grupės viduje</li>
-              <li>Iki 500Mb privati grupės failų talpykla</li>
-              <li>Dėstomų dalykų medžiaga</li>
-              <li>Ir dar daugiau...</li>
+              <li>${_('Correspondence publicly and inside of group')}</li>
+              <li>${_("Up to 500Mb private group's storage")}</li>
+              <li>${_('Lecture material')}</li>
+              <li>${_('And more...')}</li>
             </ul>
 
             <form action="${url(controller='search', action='browse')}">
@@ -81,11 +83,11 @@
 
           <div class="login-box-content-loginform" style="width: 250px;">
             <form method="post" id="sign-up-form2" action="/register">
-              <label for="name">Name</label>
+              <label for="name">${_('Name')}</label>
               <input type="text" name="name" id="name" style="width: 230px;">
-              <label for="email">Email</label>
+              <label for="email">${_('Email')}</label>
               <input type="text" name="email" id="email" style="width: 230px;">
-              <label for="university">University you belong to</label>
+              <label for="university">${_('University you belong to')}</label>
               <select id="university-you-belong-to">
                 <option>${_('Pick from the list')}</option>
                 % for university in c.all_universities:
@@ -96,7 +98,7 @@
                 <input type="checkbox" name="accept-terms" id="accept-terms-checkbox">
                 <a href="#">${_('I accept terms and regulations')}</a>
               </div>
-              <input type="submit" value="Create an account" name="" id="create_button">
+              <input type="submit" value="${_('Create an account')}" name="" id="create_button">
             </form>
           </div>
         </div><!-- .login-box-content -->
@@ -104,7 +106,7 @@
 
       <div class="clear university-box">
         <div class="section-header">
-            <h2 class="academy">Universities already are on Ututi</h2>
+            <h2 class="academy">${_('Universities already are on Ututi')}</h2>
             <div class="section-header-links">
                 <a href="${url(controller='search', action='browse')}">${_('More universities')} >></a>
             </div>
@@ -133,6 +135,45 @@
   </div><!-- #main-content -->
 </div><!-- #layout-wrap -->
 
+<div style="display: none;">
+    <div id="add_university" class="blue-box">
+        <div id="add_university_form">
+            <h2>${_('Add your university')}</h2>
+
+            <form method="post" action="${url(controller='structure', action='create')}"
+            name="new_structure_form" id="new_structure_form" class="fullForm"
+            enctype="multipart/form-data">
+
+               ${h.input_line('title', _('Title'))}
+               ${h.input_line('title_short', _('Short title'))}
+               ${h.input_line('url', _('WWW address'))}
+
+
+               <label>${_('Logo')}
+                 <form:error name="logo_upload"/>
+                 <input type="file" name="logo_upload" id="logo_upload" />
+               </label>
+
+                <br />
+                <input id="create_university_submit" class="black" type="submit" value="${_('Create university')}">
+            </form>
+        </div>
+
+        <div id="add_university_create_account" style="display: none;">
+            <h2>${_('Create account')}</h2>
+
+            <form method="post">
+               ${h.input_line('name', _('Name'))}
+               ${h.input_line('email', _('Email'))}
+               ${h.input_line('university', _('University'))}
+
+                <br />
+                <input class="black" type="submit" value="${_('Create university')}">
+            </form>
+        </div>
+    </div>
+</div>
+
 <script>
   $(function() { 
     $("#slides").slides({
@@ -148,6 +189,8 @@
 
 <script>
     $(document).ready(function() {
+        $(".add_university_button").colorbox({inline:true});
+
         var is_cookie = true; // here will be a feature in nearly future
 
         // if user clicks "I'm student" or "I'm a teacher"
@@ -196,6 +239,15 @@
                 $('#accept-terms').prepend('<span class="error-message">${_("You must agree to the terms")}<br /></span>');
                 return false;
             }
+        });
+
+        $('#create_university_submit').click(function() {
+            $('#add_university_form').hide();
+            $('#add_university_create_account').show();
+
+            $('#university').val($('#title').val());
+
+            return false;
         });
     });
 </script>

@@ -203,6 +203,7 @@ ${_('Private social networks for universities')}
     ${h.stylesheet_link(h.path_with_hash('/fixed.css'))}
     ${h.stylesheet_link(h.path_with_hash('/portlets.css'))}
     ${h.stylesheet_link(h.path_with_hash('/widgets.css'))}
+    ${h.stylesheet_link(h.path_with_hash('/colorbox.css'))}
     <!--[if IE]>
     ${h.stylesheet_link(h.path_with_hash('/ie.css'))}
     <![endif]-->

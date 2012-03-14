@@ -538,6 +538,7 @@ button.black, button.black:hover {
     );
 }
 
+.blue-box,
 .login-box {
     float: right;
     margin: 7px 8px 0 0;
@@ -712,7 +713,8 @@ button.black, button.black:hover {
     box-shadow: 0 0 0 2px #f2f2f2;
 }
 
-.login-box-content input[type=submit] {
+.login-box-content input[type=submit],
+input[type=submit].black {
     background-image: linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
     background-image: -o-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
     background-image: -moz-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
@@ -5015,4 +5017,18 @@ a.disabled, a.disabled:hover {
     border-bottom: 5px solid #e6e6e6;
     top: -13px;
     left: 30px;
+}
+
+#add_university {
+    background-color: #ffffff;
+    float: left;
+    margin: 20px;
+    width: auto;
+    padding: 30px;
+}
+
+#add_university_form h2,
+#add_university_create_account h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
 }
