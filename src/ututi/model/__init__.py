@@ -723,7 +723,7 @@ class ContentItem(object):
 
     def snippet(self):
         """Render a short snippet with the basic item's information. Used in search to render the results."""
-        return render_mako_def('/sections/content_snippets.mako','generic', object=self)
+        return render_mako_def('/sections/content_snippets.mako', 'generic', object=self)
 
     def isDeleted(self):
         return self.deleted_on is not None
