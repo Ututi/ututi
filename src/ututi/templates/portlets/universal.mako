@@ -18,12 +18,12 @@
     %endif
     <strong>${_('University already has')}:</strong>
       <ul>
-        <li class="group"><strong>123</strong> ${_('groups')}</li>
+        <li class="group"><strong>${c.total_groups}</strong> ${_('groups')}</li>
         % for menu_item in menu_items:
             % if menu_item['name'] == 'teachers':
-            <li class="teacher"><a href="${url(menu_item['link'])}"><strong>33</strong> ${_('teachers')}</a></li>
+            <li class="teacher"><a href="${url(menu_item['link'])}"><strong>${c.total_teachers}</strong> ${_('teachers')}</a></li>
             % elif menu_item['name'] == 'subjects':
-            <li class="subject"><a href="${url(menu_item['link'])}"><strong>125</strong> ${_('subjects')}</a></li>
+            <li class="subject"><a href="${url(menu_item['link'])}"><strong>${c.total_subjects}</strong> ${_('subjects')}</a></li>
             % endif
         % endfor
       </ul>
