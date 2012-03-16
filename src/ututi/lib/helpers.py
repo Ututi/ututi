@@ -868,3 +868,11 @@ def simple_declension(word, case='gen', lang='en'):
             return u"%so" % word[:-2]
         return u"%sos" % word[:-1]
     return word
+
+def get_university_stats(location):
+        """Sets statistic about selected university"""
+        from ututi.model import Subject, Group, Teacher
+
+        return {'total_teachers': location.count(Teacher),
+                'total_subjects': location.count(Subject),
+                'total_groups': location.count(Group)}

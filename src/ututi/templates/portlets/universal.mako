@@ -11,24 +11,36 @@
 </%def>
 
 <%def name="navigation_portlet(menu_items, current, title=None)">
-%if menu_items:
-  <%self:portlet id="navigation-portlet">
-    %if title is not None:
-    <%def name="header()">${title}</%def>
+  %if hasattr(c, 'location'):
+    <% university_stats = h.get_university_stats(c.location) %>
+    %if menu_items:
+      <%self:portlet id="navigation-portlet">
+        %if title is not None:
+          <%def name="header()">${title}</%def>
+        %endif
+        <strong>${_('University already has')}:</strong>
+        <ul>
+            <li class="group">
+                <a href="${c.location.url(action='catalog', obj_type='group')}">
+                    <strong>${university_stats['total_groups']}</strong> ${_('groups')}
+                </a>
+            </li>
+
+            <li class="teacher">
+                <a href="${c.location.url(action='catalog', obj_type='teacher')}">
+                    <strong>${university_stats['total_teachers']}</strong> ${_('teachers')}
+                </a>
+            </li>
+
+            <li class="subject">
+                <a href="${c.location.url(action='catalog', obj_type='subject')}">
+                    <strong>${university_stats['total_subjects']}</strong> ${_('subjects')}
+                </a>
+            </li>
+        </ul>
+      </%self:portlet>
     %endif
-    <strong>${_('University already has')}:</strong>
-      <ul>
-        <li class="group"><strong>${c.total_groups}</strong> ${_('groups')}</li>
-        % for menu_item in menu_items:
-            % if menu_item['name'] == 'teachers':
-            <li class="teacher"><a href="${url(menu_item['link'])}"><strong>${c.total_teachers}</strong> ${_('teachers')}</a></li>
-            % elif menu_item['name'] == 'subjects':
-            <li class="subject"><a href="${url(menu_item['link'])}"><strong>${c.total_subjects}</strong> ${_('subjects')}</a></li>
-            % endif
-        % endfor
-      </ul>
-  </%self:portlet>
-%endif
+  %endif
 </%def>
 
 <%def name="about_ututi_portlet()">

@@ -211,18 +211,9 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         else:
             redirect(location.url(action='about'))
 
-    def _set_university_stats(self, location):
-        """Sets statistic about selected university"""
-
-        c.total_teachers = location.count(Teacher)
-        c.total_subjects = location.count(Subject)
-        c.total_groups = location.count(Group)
-
     @location_action
     def about(self, location):
         self._get_departments(location)
-        self._set_university_stats(location)
-
         return render('location/about.mako')
 
     @location_action
@@ -235,8 +226,6 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
     @location_action
     @validate(schema=SearchSubmit, post_only=False, on_get=True)
     def catalog(self, location, obj_type):
-        self._set_university_stats(location)
-
         c.current_menu_item = obj_type + 's'
         self.form_result['tagsitem'] = location.hierarchy()
         self.form_result['obj_type'] = obj_type
