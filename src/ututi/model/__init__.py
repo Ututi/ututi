@@ -1346,7 +1346,7 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
 
     def snippet(self):
         """Render a short snippet with the basic item's information. Used in search to render the results."""
-        return render_mako_def('/sections/content_snippets.mako','subject', object=self)
+        return render_mako_def('/sections/content_snippets.mako', 'subject', object=self)
 
     def generate_new_id(self):
         title = urlify(self.title, 20)
@@ -1495,7 +1495,7 @@ class Page(ContentItem):
 
     def snippet(self):
         """Render a short snippet with the basic item's information. Used in search to render the results."""
-        return render_mako_def('/sections/content_snippets.mako','page', object=self)
+        return render_mako_def('/sections/content_snippets.mako', 'page', object=self)
 
 
 page_versions_table = None
