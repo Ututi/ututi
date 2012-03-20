@@ -140,23 +140,33 @@
         <div id="add_university_form">
             <h2>${_('Add your university')}</h2>
 
-            <form method="post" action="${url(controller='structure', action='create')}"
-            name="new_structure_form" id="new_structure_form" class="fullForm"
-            enctype="multipart/form-data">
+            <form method="post"
+                  action="${url(controller='structure', action='create_university')}"
+                  name="new_university_form"
+                  id="new_university_form"
+                  class="fullForm">
 
-               ${h.input_line('title', _('Title'))}
-               ${h.input_line('title_short', _('Short title'))}
-               ${h.input_line('url', _('WWW address'))}
-
-
-               <label>${_('Logo')}
-                 <form:error name="logo_upload"/>
-                 <input type="file" name="logo_upload" id="logo_upload" />
-               </label>
-
-                <br />
-                <input id="create_university_submit" class="black" type="submit" value="${_('Create university')}">
+              ${h.input_line('title', _('Title'))}
+              ${h.input_line('title_short', _('Short title'))}
+              ${h.input_line('url', _('WWW address'))}
             </form>
+
+            <form action="${url(controller='profile', action='update_photo')}"
+                  method="POST"
+                  enctype="multipart/form-data">
+
+              <label><strong>${_('Logo')}</strong></label>
+              <input type="file" name="logo_upload" id="logo_upload" />
+              <form:error name="logo_" /> <!-- formencode errors container -->
+            </form>
+
+            <br />
+            <br />
+
+            <input class="black" 
+                   type="button"
+                   id="create_university_button"
+                   value="${_('Create university')}" />
         </div>
 
         <div id="add_university_create_account" style="display: none;">
@@ -241,13 +251,36 @@
             }
         });
 
-        $('#create_university_submit').click(function() {
-            $('#add_university_form').hide();
-            $('#add_university_create_account').show();
+        $('#new_university_form').submit(function() {
+            $.ajax({
+                type: 'POST',
+                url: '${url(controller='structure', action='js_create_university')}',
+                data: $(this).serialize(),
+                success: function(data) {
+                    var errors = data.split('\n'); // splits error messages
 
-            $('#university').val($('#title').val());
+                    // restores default styling
+                    $('#new_university_form input').css('border', '1px solid #666666');
+
+                    for (var i in errors) {
+                        error = errors[i].split(': ');
+
+                        // make class instead
+                        $('#' + error[0]).css('border', '1px solid #ee0000');
+                    }
+                }
+            });
 
             return false;
         });
+
+        $('#create_university_button').click(function() {
+            $('#new_university_form').submit();
+        });
+
+        $('#add_university').resize(function(){
+            $.fn.colorbox.load();
+        });
+
     });
 </script>

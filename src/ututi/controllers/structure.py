@@ -1,3 +1,4 @@
+import formencode
 import logging
 
 from formencode import Schema, validators, Invalid, variabledecode, htmlfill
@@ -46,6 +47,11 @@ class NewStructureForm(Schema):
     description = validators.UnicodeString(strip=True)
     parent = StructureIdValidator()
 
+
+class NewUniversityForm(Schema):
+    title = validators.UnicodeString(not_empty=True, max=250)
+    title_short = validators.UnicodeString(not_empty=True, max=50)
+    url = validators.UnicodeString(not_empty=True, max=250)
 
 class JSStructureForm(Schema):
     allow_extra_fields = True
@@ -105,6 +111,33 @@ class StructureController(BaseController):
             parent.children.append(structure)
         meta.Session.commit()
         redirect(url(controller='structure', action='index'))
+
+    def js_create_university(self):
+        schema = NewUniversityForm()
+
+        try:
+            form_result = schema.to_python(dict(request.params))
+        except formencode.Invalid, error:
+            return unicode(error)
+        else:
+            university = LocationTag(title=form_result['title'],
+                                     title_short=form_result['title_short'],
+                                     url=form_result['url'],
+                                     logo=None)
+            return True
+
+    def create_university(self):
+        schema = NewUniversityForm()
+
+        try:
+            form_result = schema.to_python(dict(request.params))
+        except formencode.Invalid, error:
+            return unicode(error)
+        else:
+            university = LocationTag(title=form_result['title'],
+                                     title_short=form_result['title_short'],
+                                     url=form_result['url'],
+                                     logo=None)
 
     @ActionProtector("root")
     def regions(self):

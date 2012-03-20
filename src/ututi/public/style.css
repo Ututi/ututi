@@ -516,10 +516,11 @@ div#pager {
     font-family: Arial,Verdana,sans-serif;
 }
 
-button.black, button.black:hover {
+.black, .black:hover {
     background-image: -moz-linear-gradient(center bottom , #545454 0%, #6D6D6D 100%);
     border: 1px solid #6D6D6D;
     color: #ffffff;
+    font-weight: bold;
     margin: 0 2px;
     padding: 5px 10px;
     font-family: Arial,Verdana,sans-serif;
