@@ -40,7 +40,7 @@
   .about-box .feature {
     width: 380px;
     margin-top: 4px;
-  }  
+  }
 
   #forgot_password {
     font-size: 11px;
@@ -236,7 +236,7 @@
       </h1>
     </div>
     <div class="sub-title" style="clear: left;">
-      ${h.literal(_('Welcome to the social network of %s!') % ('<a href="#" target="_self" onclick="window.open(document.URL, this.target)">%s</a>' % h.simple_declension(c.location.title, lang=c.lang)))} 
+      ${h.literal(_('Welcome to the social network of %s!') % ('<a href="#" target="_self" onclick="window.open(document.URL, this.target)">%s</a>' % h.simple_declension(c.location.title, lang=c.lang)))}
     </div>
   </div>
 
