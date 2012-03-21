@@ -20,7 +20,7 @@ setup(
         "lxml",
         "nous.mailpost",
         "python_magic",
-        "PILwoTk",
+        "Pillow",
         "Babel",
         "translitcodec",
         "trans",
