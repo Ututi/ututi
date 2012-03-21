@@ -124,7 +124,6 @@ class StructureController(BaseController):
                                      title_short=form_result['title_short'],
                                      url=form_result['url'],
                                      logo=None)
-            return True
 
     def create_university(self):
         schema = NewUniversityForm()

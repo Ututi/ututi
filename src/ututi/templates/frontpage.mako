@@ -257,16 +257,22 @@
                 url: '${url(controller='structure', action='js_create_university')}',
                 data: $(this).serialize(),
                 success: function(data) {
-                    var errors = data.split('\n'); // splits error messages
+                    if (data) {
+                        var errors = data.split('\n'); // splits error messages
 
-                    // restores default styling
-                    $('#new_university_form input').css('border', '1px solid #666666');
+                        // restores default styling
+                        $('#new_university_form input').css('border', '1px solid #666666');
 
-                    for (var i in errors) {
-                        error = errors[i].split(': ');
+                        for (var i in errors) {
+                            error = errors[i].split(': ');
 
-                        // make class instead
-                        $('#' + error[0]).css('border', '1px solid #ee0000');
+                            // make class instead
+                            $('#' + error[0]).css('border', '1px solid #ee0000');
+                        }
+                    } else {
+                        $('#add_university_form').hide();
+                        $('#add_university_create_account').show();
+                        $('#university').val($('#title').val());
                     }
                 }
             });
@@ -277,10 +283,5 @@
         $('#create_university_button').click(function() {
             $('#new_university_form').submit();
         });
-
-        $('#add_university').resize(function(){
-            $.fn.colorbox.load();
-        });
-
     });
 </script>
