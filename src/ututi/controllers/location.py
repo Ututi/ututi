@@ -209,6 +209,9 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
     @location_action
     def about(self, location):
+        if c.user:
+            redirect(location.url(action='feed'))
+
         self._get_departments(location)
         return render('location/about.mako')
 
