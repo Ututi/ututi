@@ -122,8 +122,12 @@ class StructureController(BaseController):
         else:
             university = LocationTag(title=form_result['title'],
                                      title_short=form_result['title_short'],
-                                     url=form_result['url'],
-                                     logo=None)
+                                     member_policy='PUBLIC')
+
+            university.site_url = form_result['url']
+
+            meta.Session.add(university)
+            meta.Session.commit()
 
     def create_university(self):
         schema = NewUniversityForm()
@@ -135,8 +139,12 @@ class StructureController(BaseController):
         else:
             university = LocationTag(title=form_result['title'],
                                      title_short=form_result['title_short'],
-                                     url=form_result['url'],
-                                     logo=None)
+                                     member_policy='PUBLIC')
+
+            university.site_url = form_result['url']
+
+            meta.Session.add(university)
+            meta.Session.commit()
 
     @ActionProtector("root")
     def regions(self):
