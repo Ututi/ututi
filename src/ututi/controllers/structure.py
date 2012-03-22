@@ -211,6 +211,9 @@ class StructureController(BaseController):
         return serve_logo('locationtag', int(id), width=width, height=height,
                          cache=False)
 
+    def upload_logo(self):
+        pass
+
     @validate(schema=AutoCompletionForm, post_only=False, on_get=True)
     @jsonify
     def completions(self):

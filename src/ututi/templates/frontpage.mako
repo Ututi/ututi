@@ -156,8 +156,17 @@
                   enctype="multipart/form-data">
 
               <label><strong>${_('Logo')}</strong></label>
-              <input type="file" name="logo_upload" id="logo_upload" />
+              <input type="file" name="logo-field" id="logo-field" />
+              <button class="submit" id="choose-button">Change photo</button>
               <form:error name="logo_" /> <!-- formencode errors container -->
+            </form>
+
+            <br />
+
+            <form action="/profile/remove_photo"
+                  class="button-to"
+                  method="post">
+              <button class="dark" id="remove-button" type="submit">Remove</button>
             </form>
 
             <br />
@@ -282,6 +291,23 @@
 
         $('#create_university_button').click(function() {
             $('#new_university_form').submit();
+        });
+
+        $('#logo-field').hide();
+
+        new AjaxUpload('#choose-button', {
+            action: "${url(controller='structure', action='update_logo')}" + "?js",
+            name: 'logo',
+            autoSubmit: true,
+            responseType: false,
+            onSubmit: function(file, extension) {
+                if (!(extension && /^(jpg|png|jpeg|gif|tiff|bmp)$/.test(extension))) {
+                    $('.error-message').remove(); // remove old messages
+                    $('#logo-field').before('<span class="error-message">This file type is not supported.</span>');
+                    return false;
+                }
+            }
+            
         });
     });
 </script>
