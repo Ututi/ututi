@@ -148,28 +148,9 @@
 
               ${h.input_line('title', _('Title'))}
               ${h.input_line('title_short', _('Short title'))}
-              ${h.input_line('url', _('WWW address'))}
+              ${h.input_line('site_url', _('WWW address'))}
             </form>
 
-            <form action="${url(controller='profile', action='update_photo')}"
-                  method="POST"
-                  enctype="multipart/form-data">
-
-              <label><strong>${_('Logo')}</strong></label>
-              <input type="file" name="logo-field" id="logo-field" />
-              <button class="submit" id="choose-button">Change photo</button>
-              <form:error name="logo_" /> <!-- formencode errors container -->
-            </form>
-
-            <br />
-
-            <form action="/profile/remove_photo"
-                  class="button-to"
-                  method="post">
-              <button class="dark" id="remove-button" type="submit">Remove</button>
-            </form>
-
-            <br />
             <br />
 
             <input class="black" 
@@ -291,23 +272,6 @@
 
         $('#create_university_button').click(function() {
             $('#new_university_form').submit();
-        });
-
-        $('#logo-field').hide();
-
-        new AjaxUpload('#choose-button', {
-            action: "${url(controller='structure', action='update_logo')}" + "?js",
-            name: 'logo',
-            autoSubmit: true,
-            responseType: false,
-            onSubmit: function(file, extension) {
-                if (!(extension && /^(jpg|png|jpeg|gif|tiff|bmp)$/.test(extension))) {
-                    $('.error-message').remove(); // remove old messages
-                    $('#logo-field').before('<span class="error-message">This file type is not supported.</span>');
-                    return false;
-                }
-            }
-            
         });
     });
 </script>

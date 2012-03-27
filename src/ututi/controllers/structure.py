@@ -15,7 +15,7 @@ from pylons.i18n import _
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_logo
 from ututi.lib.base import BaseController, render
-from ututi.lib.validators import InURLValidator, FileUploadTypeValidator, validate
+from ututi.lib.validators import InURLValidator, FileUploadTypeValidator, validate, LogoUpload
 from ututi.model import meta, LocationTag, SimpleTag, Tag, Region
 
 log = logging.getLogger(__name__)
@@ -51,7 +51,7 @@ class NewStructureForm(Schema):
 class NewUniversityForm(Schema):
     title = validators.UnicodeString(not_empty=True, max=250)
     title_short = validators.UnicodeString(not_empty=True, max=50)
-    url = validators.UnicodeString(not_empty=True, max=250)
+    site_url = validators.UnicodeString(not_empty=True, max=250)
 
 class JSStructureForm(Schema):
     allow_extra_fields = True
@@ -113,21 +113,7 @@ class StructureController(BaseController):
         redirect(url(controller='structure', action='index'))
 
     def js_create_university(self):
-        schema = NewUniversityForm()
-
-        try:
-            form_result = schema.to_python(dict(request.params))
-        except formencode.Invalid, error:
-            return unicode(error)
-        else:
-            university = LocationTag(title=form_result['title'],
-                                     title_short=form_result['title_short'],
-                                     member_policy='PUBLIC')
-
-            university.site_url = form_result['url']
-
-            meta.Session.add(university)
-            meta.Session.commit()
+        self.create_university();
 
     def create_university(self):
         schema = NewUniversityForm()
@@ -139,6 +125,7 @@ class StructureController(BaseController):
         else:
             university = LocationTag(title=form_result['title'],
                                      title_short=form_result['title_short'],
+                                     confirmed=False,
                                      member_policy='PUBLIC')
 
             university.site_url = form_result['url']
@@ -210,9 +197,6 @@ class StructureController(BaseController):
     def logo(self, id, width=None, height=None):
         return serve_logo('locationtag', int(id), width=width, height=height,
                          cache=False)
-
-    def upload_logo(self):
-        pass
 
     @validate(schema=AutoCompletionForm, post_only=False, on_get=True)
     @jsonify
