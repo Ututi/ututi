@@ -136,9 +136,13 @@ class SearchSubjectForm(Schema):
         ]
 
 
-class NewSubjectForm(SubjectForm):
-    pass
-
+class NewSubjectForm(Schema):
+    allow_extra_fields = True
+    pre_validators = [NestedVariables()]
+    location = Pipe(ForEach(validators.UnicodeString(strip=True, max=250)),
+                    LocationTagsValidator())
+    title = validators.UnicodeString(strip=True)
+    lecturer = validators.UnicodeString(strip=True)
 
 class SubjectAddMixin(object):
 
@@ -161,7 +165,7 @@ class SubjectAddMixin(object):
         for tag in tags:
             stags.append(SimpleTag.get(tag))
 
-
+        
         subj = Subject(id, title, location, lecturer, description, stags)
 
         meta.Session.add(subj)
