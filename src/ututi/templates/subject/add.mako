@@ -20,6 +20,7 @@ ${_('Create new subject')}
 
 <%def name="head_tags()">
   <%newlocationtag:head_tags />
+  ${h.javascript_link('/javascript/ckeditor/ckeditor.js')}
 </%def>
 
 <%b:title_box title="${_('Subject features:')}" id="subject-features">
@@ -37,6 +38,13 @@ ${_('Create new subject')}
   ${standard_location_widget()}
   ${h.input_line('title', _('Subject title:'),
     help_text=_("It's best to use exactly the same title that is used in your university for this subject. It does not need to be unique."))}
+  ${h.input_line('lecturer', _('Subject lecturer:'))}
+  <div class="formField">
+    <label for="description">
+      <span class="labelText">${_('Subject description:')}</span>
+    </label>
+    <textarea class="line ckeditor" name="description" id="description" cols="60" rows="5"></textarea>
+  </div>
   ${h.input_submit(_('Next'))}
   </fieldset>
 </form>
