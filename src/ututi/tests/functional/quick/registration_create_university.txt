@@ -8,8 +8,9 @@ by entering his email and clicking 'Sign Up':
     >>> browser = Browser()
     >>> browser.open('http://localhost/')
     >>> form = browser.getForm('sign-up-form')
+    >>> form.getControl(name='name').value = 'User'
     >>> form.getControl(name='email').value = 'us er@example.com'
-    >>> form.getControl('Sign Up').click()
+    >>> form.getControl('Create an account').click()
 
 Email is not valid, so it is rejected:
 

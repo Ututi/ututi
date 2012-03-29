@@ -82,18 +82,23 @@
           </div>
 
           <div class="login-box-content-loginform" style="width: 250px;">
-            <form method="post" id="sign-up-form2" action="/register">
+            <form method="post" id="sign-up-form" action="/register">
               <label for="name">${_('Name')}</label>
-              <input type="text" name="name" id="name" style="width: 230px;">
+              <input type="text" name="name" id="name" style="width: 230px;" required>
               <label for="email">${_('Email')}</label>
-              <input type="text" name="email" id="email" style="width: 230px;">
-              <label for="university">${_('University you belong to')}</label>
-              <select id="university-you-belong-to">
+              <input type="text" name="email" id="email" style="width: 230px;" required>
+
+              <label for="university-you-belong-to">
+                  ${_('University you belong to')}
+                  <span class="error-message" id="location_id_errors"></span>
+              </label>
+              <select id="university-you-belong-to" name="location_id" required>
                 <option>${_('Pick from the list')}</option>
                 % for university in c.all_universities:
                 <option value="${university['id']}">${university['title']}</option>
                 % endfor
               </select>
+
               <div id="accept-terms">
                 <input type="checkbox" name="accept-terms" id="accept-terms-checkbox">
                 <a href="#">${_('I accept terms and regulations')}</a>
@@ -223,6 +228,7 @@
         // if user is clicked on checkbox, enable submiting
         $('#accept-terms-checkbox').click(function() {
             if (this.checked) {
+                $('#accept-terms span').remove();
                 $('#create_button').removeAttr('disabled');
             } else {
                 $('#create_button').attr('disabled', 'disabled');
@@ -239,6 +245,10 @@
                 $('#accept-terms').prepend('<span class="error-message">${_("You must agree to the terms")}<br /></span>');
                 return false;
             }
+        });
+
+        $('#sign-up-form').submit(function() {
+            // validation
         });
 
         $('#new_university_form').submit(function() {

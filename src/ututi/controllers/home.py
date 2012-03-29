@@ -40,7 +40,7 @@ def switch_language(language):
     # TODO store on user if user is logged in
     session['language'] = language
     session.save()
-
+    
 def info_menu_items():
     return [
         {'title': _("What is Ututi?"),
@@ -90,6 +90,7 @@ class RegistrationForm(Schema):
     email = Pipe(TranslatedEmailValidator(not_empty=True, strip=True),
                  ForbidPublicEmail(messages=msg))
 
+    name = validators.UnicodeString(not_empty=True)
 
 class ContactsForm(Schema):
     msg = {'invalid': _(u"Wrong email address."),
@@ -162,7 +163,6 @@ class UniversityListMixin(BaseController):
         c.teaser = not (request.params.has_key('page')
                         or request.params.has_key('sort')
                         or request.params.has_key('region_id'))
-
 
     def _get_departments(self, location):
         c.sort = request.params.get('sort', 'popular')
@@ -471,8 +471,15 @@ class HomeController(UniversityListMixin):
         redirect(c.came_from or url('/'))
 
     def register(self):
+        name = request.POST.get('name')
         email = request.POST.get('email')
-        if not email:
+        location_id = request.POST.get('location_id')
+
+        c.universities = self._universities(limit=12)
+        c.all_universities = self._universities()
+
+        # checks if email or name is not empty
+        if not email or not name:
             redirect(url('frontpage'))
 
         # redirect to login if user is already registered
@@ -489,6 +496,7 @@ class HomeController(UniversityListMixin):
                                    error_formatters=u_error_formatters)
 
         email = self.form_result['email']
+        name = self.form_result['name']
         location = None
 
         # try to select location by domain name
