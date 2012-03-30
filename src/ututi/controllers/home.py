@@ -83,6 +83,8 @@ class PasswordResetForm(Schema):
 
 
 class RegistrationForm(Schema):
+    allow_extra_fields = True
+
     msg = {'public': _(u'Please use your university email or '
                         '<a href="/browse">choose university '
                         'from the list</a>.')}
