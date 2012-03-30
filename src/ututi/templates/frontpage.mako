@@ -85,6 +85,7 @@
             <form method="post" id="sign-up-form" action="/register">
               <label for="name">${_('Name')}</label>
               <input type="text" name="name" id="name" style="width: 230px;" required>
+
               <label for="email">${_('Email')}</label>
               <input type="text" name="email" id="email" style="width: 230px;" required>
 
@@ -93,7 +94,7 @@
                   <span class="error-message" id="location_id_errors"></span>
               </label>
               <select id="university-you-belong-to" name="location_id" required>
-                <option>${_('Pick from the list')}</option>
+                <option value="-1">${_('Pick from the list')}</option>
                 % for university in c.all_universities:
                 <option value="${university['id']}">${university['title']}</option>
                 % endfor
@@ -235,9 +236,14 @@
             }
         });
 
-        // let's check validation of ragistration form:
-        // login button's behaviour
-        $('#create_button').click(function() {
+        $('#sign-up-form').submit(function() {
+            if ($('#university-you-belong-to option:selected').val() == -1) {
+                $('#university-you-belong-to').css('border', '1px solid red');
+                $('#location_id_errors').empty().append('${_("Required")}');
+
+                return false;
+            }
+
             if ($('#accept-terms-checkbox').is(':checked')) {
                 // everything is ok, continue
             } else {
@@ -247,8 +253,14 @@
             }
         });
 
-        $('#sign-up-form').submit(function() {
-            // validation
+        $('#university-you-belong-to').change(function() {
+            if ($('#university-you-belong-to option:selected').val() == -1) {
+                $('#university-you-belong-to').css('border', '1px solid red');
+                $('#location_id_errors').empty().append('${_("Required")}');
+            } else {
+                $('#university-you-belong-to').css('border', 'none');
+                $('#location_id_errors').empty();
+            }
         });
 
         $('#new_university_form').submit(function() {
