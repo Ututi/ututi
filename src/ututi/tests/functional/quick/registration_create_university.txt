@@ -17,7 +17,7 @@ Email is not valid, so it is rejected:
     >>> browser.url
     'http://localhost/register'
 
-    >>> browser.printCssQuery('#sign-up-form .error-message', strip=True)
+    >>> browser.printCssQuery('#sign-up-form .error-container .error-message', strip=True)
     <span>The username portion of the email address is invalid (the portion before the @: us er)</span>
 
 User sees the URL and some other time tries to reload it. If email
