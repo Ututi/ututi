@@ -82,7 +82,11 @@
           </div>
 
           <div class="login-box-content-loginform" style="width: 250px;">
-            <form method="post" id="sign-up-form" action="/register">
+            <form method="post" id="sign-up-form" action="${url(controller='home', action='register')}">
+              <div class="message-container">
+                <form:error name="email" format="raw" />
+              </div>
+
               <label for="name">${_('Name')}</label>
               <input type="text" name="name" id="name" style="width: 230px;" required>
 
@@ -101,7 +105,7 @@
               </select>
 
               <div id="accept-terms">
-                <input type="checkbox" name="accept-terms" id="accept-terms-checkbox">
+                <input type="checkbox" name="accept-terms" id="accept-terms-checkbox" value="1">
                 <a href="#">${_('I accept terms and regulations')}</a>
               </div>
               <input type="submit" value="${_('Create an account')}" name="" id="create_button">
