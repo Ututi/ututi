@@ -741,7 +741,8 @@ input[type=submit].black {
     margin: 0 2px;
   }
 
-.login-box-content input[type=button] {
+input[type=button],
+input[type=submit].orange {
     color: #ffffff;
     margin: 0 2px;
     font-size: 12px;

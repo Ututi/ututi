@@ -158,11 +158,8 @@
     <h2 class="academy">Faculties of ${c.location.title}</h2>
 
     <div class="section-header-links">
-      %if h.check_crowds(['moderator']):
-        <a class="create-link" href="">${_("+ Add department")}</a>
-      %endif
       <a href="#">${_('All faculties')} >></a>
-  </div>
+    </div>
   </div>
 
   <div class="clearfix"></div>
@@ -276,9 +273,9 @@
       </div>
 
       <div class="login-box-content-registerform">
-        <form action="/register" method="POST">
+        <form action="${c.location.url()}/register" method="POST" id="sign-up-form">
           <label for="email">${_('Email')}</label>
-          <input class="university-email" type="text" id="email" name="username" />
+          <input class="university-email" type="text" id="email" name="email" />
           <label for="password">${_('Password')}</label>
           <input class="university-password" type="password" id="password" name="password" />
           <a href="/password" id="forgot_password">${_('Forgot password?')}</a>
@@ -286,7 +283,7 @@
             <input type="checkbox" checked="checked" name="remember">
             ${_('Keep me logged in')}
           </div>
-          <input type="button" value="${_('Create an account')}" />
+          <input type="submit" class="orange" value="${_('Create an account')}" />
         </form>
       </div>
     </div>

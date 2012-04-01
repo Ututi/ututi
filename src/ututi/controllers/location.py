@@ -141,6 +141,7 @@ class RegistrationSettingsForm(Schema):
 
 
 class RegistrationForm(Schema):
+    allow_extra_fields = True
 
     email = compound.Pipe(TranslatedEmailValidator(not_empty=True, strip=True),
                           UniqueLocationEmail(),
