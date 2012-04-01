@@ -169,7 +169,7 @@
         <div id="add_university_create_account" style="display: none;">
             <h2>${_('Create account')}</h2>
 
-            <form method="post">
+            <form method="post" id="create-account-form">
                ${h.input_line('name', _('Name'))}
                ${h.input_line('email', _('Email'))}
                ${h.input_line('university', _('University'))}

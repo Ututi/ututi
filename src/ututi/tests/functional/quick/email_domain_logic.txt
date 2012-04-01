@@ -68,8 +68,10 @@ In order to test this, we'll go through the registration process:
     >>> user = Browser()
     >>> user.open('http://localhost/')
     >>> form = user.getForm('sign-up-form')
+    >>> form.getControl(name='name').value = 'User'
     >>> form.getControl(name='email').value = 'user@vu.lt'
-    >>> form.getControl('Sign Up').click()
+    >>> form.getControl(name='accept-terms').value = '1'
+    >>> form.getControl('Create an account').click()
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())
     >>> user.open(urls[0])
@@ -174,8 +176,10 @@ registration without asking user to confirm.
 
     >>> anonymous = Browser()
     >>> form = anonymous.getForm('sign-up-form')
+    >>> form.getControl(name='name').value = 'MIFuser'
     >>> form.getControl(name='email').value = 'user@mif.vu.lt'
-    >>> form.getControl('Sign Up').click()
+    >>> form.getControl(name='accept-terms').value = '1'
+    >>> form.getControl('Create an account').click()
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())
     >>> urls[0]
@@ -194,9 +198,11 @@ error message will be displayed.
 
     >>> anonymous = Browser()
     >>> form = anonymous.getForm('sign-up-form')
+    >>> form.getControl(name='name').value = 'Example'
     >>> form.getControl(name='email').value = 'user@example.com'
-    >>> form.getControl('Sign Up').click()
-    >>> anonymous.printCssQuery('.error-message', strip=True)
+    >>> form.getControl(name='accept-terms').value = '1'
+    >>> form.getControl('Create an account').click()
+    >>> anonymous.printCssQuery('#sign-up-form .error-container .error-message', strip=True)
     <span>Please use your university email or <a>choose university from the list</a>.</span>
 
 
@@ -206,11 +212,11 @@ Registration from university pages
 User may press "I study here" button from university page. User needs to enter
 his email and his email is validated against university email policy.
 
-    >>> anonymous.click('choose university from the list')
+    >>> anonymous.click('More universities >>')
     >>> anonymous.click('Vilnius University')
-    >>> anonymous.click('I study here')
-    >>> anonymous.getControl('Enter your academic email').value = 'user@example.com'
-    >>> anonymous.getControl('Sign Up').click()
+    >>> form = anonymous.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'user@example.com'
+    >>> anonymous.getControl('Create an account').click()
     >>> anonymous.url
     'http://localhost/school/vu.lt/register'
     >>> anonymous.printCssQuery('.error-message', strip=True)
@@ -276,9 +282,9 @@ In order to test this, we will register user@vu.lt to U-niversity.
 
     >>> user = Browser()
     >>> user.open('http://localhost/school/uni')
-    >>> user.click('I study here')
-    >>> user.getControl('Enter your email').value = 'user@vu.lt'
-    >>> user.click('Sign Up')
+    >>> form = user.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'user@vu.lt'
+    >>> form.getControl('Create an account').click()
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())
     >>> user.open(urls[0])
