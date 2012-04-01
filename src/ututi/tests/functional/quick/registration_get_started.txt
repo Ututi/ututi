@@ -2,24 +2,23 @@ User registration flow
 ======================
 
 
-A new Ututi user can start his registration on university page,
-by clicking 'I study here' button:
+A new Ututi user can start his registration on university page:
 
     >>> browser = Browser()
     >>> browser.open('http://localhost/school/uni')
 
-    >>> browser.getControl('I study here').click()
-
 User has to type in a valid email address to initiate registration:
 
-    >>> browser.getControl('Enter your email').value = 'what ever'
-    >>> browser.getControl('Sign Up').click()
+    >>> form = browser.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'what ever'
+    >>> form.getControl('Create an account').click()
     >>> browser.url
     'http://localhost/school/uni/register'
     >>> browser.printCssQuery('.error-message', strip=True)
     <span>An email address must contain a single @</span>
-    >>> browser.getControl('Enter your email').value = 'what ever@example.com'
-    >>> browser.getControl('Sign Up').click()
+    >>> form = browser.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'what ever@example.com'
+    >>> form.getControl('Sign Up').click()
     >>> browser.printCssQuery('.error-message', strip=True)
     <span>The username portion of the email address is invalid (the portion before the @: what ever)</span>
 
