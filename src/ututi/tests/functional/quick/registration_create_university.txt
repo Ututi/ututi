@@ -3,13 +3,14 @@ User registration flow including University create step
 
 
 A new Ututi user can start his registration on the frontpage,
-by entering his email and clicking 'Sign Up':
+by entering his name, email and clicking 'Accept terms' and 'Sign Up':
 
     >>> browser = Browser()
     >>> browser.open('http://localhost/')
     >>> form = browser.getForm('sign-up-form')
     >>> form.getControl(name='name').value = 'User'
     >>> form.getControl(name='email').value = 'us er@example.com'
+    >>> form.getControl(name='accept-terms').value = '1'
     >>> form.getControl('Create an account').click()
 
 Email is not valid, so it is rejected:
@@ -27,12 +28,14 @@ is not posted, this action redirects to the homepage:
     >>> browser.url
     'http://localhost/'
 
-This time user enters his email correctly and is redirected to email
-confirmation page:
+This time user enters his name and email correctly, accepts terms, and is
+redirected to email confirmation page:
 
     >>> form = browser.getForm('sign-up-form')
+    >>> form.getControl(name='name').value = 'User'
     >>> form.getControl(name='email').value = 'user@example.com'
-    >>> form.getControl('Sign Up').click()
+    >>> form.getControl(name='accept-terms').value = 1
+    >>> form.getControl('Create an account').click()
 
 TODO: what if user types in an existing email address?
 
@@ -259,8 +262,10 @@ ant type existing University title or website URL:
     >>> browser = Browser()
     >>> browser.open('http://localhost/')
     >>> form = browser.getForm('sign-up-form')
+    >>> form.getControl(name='name').value = 'My name'
     >>> form.getControl(name='email').value = 'user@u2ti.com'
-    >>> form.getControl('Sign Up').click()
+    >>> form.getControl(name='accept-terms').value = '1'
+    >>> form.getControl('Create an account').click()
 
 Let's check the emails:
 

@@ -476,12 +476,13 @@ class HomeController(UniversityListMixin):
         name = request.POST.get('name')
         email = request.POST.get('email')
         location_id = request.POST.get('location_id')
+        accept_terms = request.POST.get('accept-terms')
 
         c.universities = self._universities(limit=12)
         c.all_universities = self._universities()
 
-        # checks if email or name is not empty
-        if not email or not name:
+        # checks if email or name is not empty or not accepted terms
+        if not email or not name or accept_terms != '1':
             redirect(url('frontpage'))
 
         # redirect to login if user is already registered
