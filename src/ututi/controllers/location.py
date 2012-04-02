@@ -147,12 +147,16 @@ class RegistrationForm(Schema):
                           UniqueLocationEmail(),
                           UniversityPolicyEmailValidator())
 
+    password = validators.String(min=4)
+    remember = validators.StringBoolean(if_missing=False)
 
 class TeacherRegistrationForm(Schema):
 
     email = compound.Pipe(TranslatedEmailValidator(not_empty=True, strip=True),
                           UniversityPolicyEmailValidator())
 
+    password = validators.String(min=4)
+    remember = validators.StringBoolean(if_missing=False)
 
 class LocationWallMixin(WallMixin):
 

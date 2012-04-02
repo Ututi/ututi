@@ -10,9 +10,10 @@ will be registered as teacher:
 
     >>> user = Browser()
     >>> user.open('http://localhost/school/uni')
-    >>> user.click('I teach here')
-    >>> user.getControl('Enter your academic email').value = 'user@example.com'
-    >>> user.click('Sign Up')
+    >>> form = user.getForm('sign-up-form-teacher')
+    >>> form.getControl(name='email').value = 'user@example.com'
+    >>> form.getControl(name='password').value = 'testPassword'
+    >>> form.getControl('Create an account').click()
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())
     >>> user.open(urls[0])
@@ -200,7 +201,7 @@ instead of Ututi network pages:
     >>> anonymous = Browser()
     >>> anonymous.click('More')
     >>> anonymous.click('U-niversity')
-    >>> anonymous.click('Teachers')
+    >>> anonymous.getLink(id='teachers_link').click()
     >>> anonymous.click('User')
     >>> anonymous.printCssQuery('.location-links', strip=True)
     <ul> <li>U-niversity</li> </ul>

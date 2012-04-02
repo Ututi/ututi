@@ -19,6 +19,10 @@ body.noMenu #widthLimiter {
     border: none;
 }
 
+.hide {
+    display: none;
+}
+
 .green{
     color: #668000;
 }

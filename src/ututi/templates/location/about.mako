@@ -273,7 +273,11 @@
       </div>
 
       <div class="login-box-content-registerform">
-        <form action="${c.location.url()}/register" method="POST" id="sign-up-form">
+
+## There exist two registration forms: one for student, other - for teacher. Hack for tests.
+## Student registration form:
+
+        <form action="${c.location.url()}/register" method="POST" id="sign-up-form" class="hide">
           <label for="email">${_('Email')}</label>
           <input class="university-email" type="text" id="email" name="email" />
           <label for="password">${_('Password')}</label>
@@ -285,6 +289,22 @@
           </div>
           <input type="submit" class="orange" value="${_('Create an account')}" />
         </form>
+
+## Teacher registration form:
+
+        <form action="${c.location.url()}/register/teacher" method="POST" id="sign-up-form-teacher" class="hide">
+          <label for="email">${_('Email')}</label>
+          <input class="university-email" type="text" id="email" name="email" />
+          <label for="password">${_('Password')}</label>
+          <input class="university-password" type="password" id="password" name="password" />
+          <a href="/password" id="forgot_password">${_('Forgot password?')}</a>
+          <div id="keep-me-logged-in">
+            <input type="checkbox" checked="checked" name="remember">
+            ${_('Keep me logged in')}
+          </div>
+          <input type="submit" class="orange" value="${_('Create an account')}" />
+        </form>
+
       </div>
     </div>
   </div>
@@ -306,6 +326,12 @@
 
                     $('.login-box-content-loginform').hide();
                     $('.login-box-content-registerform').show();
+
+                    if (person == 'student') {
+                        $('#sign-up-form').show();
+                    } else {
+                        $('#sign-up-form-teacher').show();
+                    }
                 });
             });
         });

@@ -27,7 +27,7 @@
             </li>
 
             <li class="teacher">
-                <a href="${c.location.url(action='catalog', obj_type='teacher')}">
+                <a id="teachers_link" href="${c.location.url(action='catalog', obj_type='teacher')}">
                     <strong>${university_stats['total_teachers']}</strong> ${_('teachers')}
                 </a>
             </li>
