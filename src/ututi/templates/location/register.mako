@@ -5,16 +5,18 @@
 </%def>
 
 <form id="sign-up-form" method="POST" action="${c.location.url(action='register')}">
-  <form:error name="email" format="raw" />
   <fieldset id="register-fieldset">
     <label for="email">
     %if c.location.public:
-      ${_("Enter your email")}
+      ${_("Enter your email")}:
     %else:
-      ${_("Enter your academic email")}
+      ${_("Enter your academic email")}:
     %endif
     </label>
-    <input type="text" value="" name="email" id="email" class="email-input" />
+    <input type="text" value="" name="email" id="email" class="email-input" /><br /><br />
+
+    <label for="password">${_("Password")}:</label>
+    <input type="password" value="" name="password" id="password" />
     ${h.input_submit(_('Sign Up'))}
     %if not c.location.public:
     <div class="notice">
@@ -22,9 +24,6 @@
     </div>
     %endif
   </fieldset>
-  <script type="text/javascript">
-    $(document).ready(function(){$("#sign-up-form label").labelOver('over');});
-  </script>
 </form>
 
 <div class="feature-box simple">
