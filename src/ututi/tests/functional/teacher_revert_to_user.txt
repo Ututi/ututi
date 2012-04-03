@@ -10,7 +10,6 @@ Let's register a new teacher:
     >>> teacher.open('http://localhost/school/vu')
     >>> form = teacher.getForm('sign-up-form-teacher')
     >>> form.getControl(name='email').value = 'mrjones@vu.lt'
-    >>> form.getControl(name='password').value = 'MyPassword'
     >>> form.getControl('Create an account').click()
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())

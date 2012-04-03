@@ -14,9 +14,6 @@
     %endif
     </label>
     <input type="text" value="" name="email" id="email" class="email-input" /><br /><br />
-
-    <label for="password">${_("Password")}:</label>
-    <input type="password" value="" name="password" id="password" />
     ${h.input_submit(_('Sign Up'))}
     %if not c.location.public:
     <div class="notice">

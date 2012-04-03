@@ -216,7 +216,6 @@ his email and his email is validated against university email policy.
     >>> anonymous.click('Vilnius University')
     >>> form = anonymous.getForm('sign-up-form')
     >>> form.getControl(name='email').value = 'user@example.com'
-    >>> form.getControl(name='password').value = 'MyPassword'
     >>> form.getControl('Create an account').click()
     >>> anonymous.url
     'http://localhost/school/vu.lt/register'
@@ -226,7 +225,6 @@ his email and his email is validated against university email policy.
 Existing emails are also not allowed:
 
     >>> anonymous.getControl(name='email').value = 'user@vu.lt'
-    >>> anonymous.getControl(name='password').value = 'MyPassword'
     >>> anonymous.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('.error-message', strip=True)
     <span>user@vu.lt is already registered in Vilnius University network.</span>
@@ -234,7 +232,6 @@ Existing emails are also not allowed:
 user@mif.vu.lt works, because it conforms to university policy and is not taken:
 
     >>> anonymous.getControl(name='email').value = 'user@mif.vu.lt'
-    >>> anonymous.getControl(name='password').value = 'MyPassword'
     >>> anonymous.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
@@ -243,7 +240,6 @@ U-niversity has public member policy, therefore any valid email will validate:
 
     >>> anonymous.open('http://localhost/school/uni/register')
     >>> anonymous.getControl(name='email').value = 'admin@uni.ututi.com'
-    >>> anonymous.getControl(name='password').value = 'admin@uni.ututi.com'
     >>> anonymous.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('.error-message', strip=True)
     <span>admin@uni.ututi.com is already registered in U-niversity network.</span>
@@ -253,7 +249,6 @@ U-niversity has public member policy, therefore any valid email will validate:
     <h1>Email approval</h1>
     >>> anonymous.open('http://localhost/school/uni/register')
     >>> anonymous.getControl(name='email').value = 'user@mif.vu.lt'
-    >>> anonymous.getControl(name='password').value = 'MyPassword'
     >>> anonymous.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
@@ -289,7 +284,6 @@ In order to test this, we will register user@vu.lt to U-niversity.
     >>> user.open('http://localhost/school/uni')
     >>> form = user.getForm('sign-up-form')
     >>> form.getControl(name='email').value = 'user@vu.lt'
-    >>> form.getControl(name='password').value = 'MyPassword'
     >>> form.getControl('Create an account').click()
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())

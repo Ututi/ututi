@@ -22,7 +22,6 @@ will be registered as teacher:
     >>> user.open('http://localhost/school/uni')
     >>> form = user.getForm('sign-up-form-teacher')
     >>> form.getControl(name='email').value = 'user@example.com'
-    >>> form.getControl(name='password').value = 'MyPassword'
     >>> form.getControl('Create an account').click()
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())
@@ -63,7 +62,6 @@ Let's register one more teacher that later will be denied:
     >>> notteacher.open('http://localhost/school/uni')
     >>> form = notteacher.getForm('sign-up-form-teacher')
     >>> form.getControl(name='email').value = 'notteacher@example.com'
-    >>> form.getControl(name='password').value = 'MyPassword'
     >>> form.getControl('Create an account').click()
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())
@@ -162,7 +160,6 @@ way as any existing Ututi user (case above).
     >>> user.open('http://localhost/school/uni')
     >>> form = user.getForm('sign-up-form-teacher')
     >>> form.getControl(name='email').value = 'admin@uni.ututi.com'
-    >>> form.getControl(name='password').value = 'MyPassword'
     >>> form.getControl('Create an account').click()
     >>> user.url
     'http://localhost/login?came_from=%2Fschool%2Funi%2Fregister%2Fteacher%2Fexisting&email=admin%40uni.ututi.com'

@@ -12,7 +12,6 @@ will be registered as teacher:
     >>> user.open('http://localhost/school/uni')
     >>> form = user.getForm('sign-up-form-teacher')
     >>> form.getControl(name='email').value = 'user@example.com'
-    >>> form.getControl(name='password').value = 'testPassword'
     >>> form.getControl('Create an account').click()
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())
