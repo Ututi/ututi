@@ -267,8 +267,8 @@
             <input type="checkbox" checked="checked" name="remember">
             ${_('Keep me logged in')}
           </div>
-          <input type="submit" value="${_('Login')}" />
-          <input type="button" id="create_account" value="${_('Create an account')}" />
+          <input type="button" class="black" id="create_account" value="${_('Create an account')}" />
+          <input type="submit" class="orange" value="${_('Login')}" />
         </form>
       </div>
 
@@ -279,14 +279,9 @@
 
         <form action="${c.location.url()}/register" method="POST" id="sign-up-form" class="hide">
           <label for="email">${_('Email')}</label>
-          <input class="university-email" type="text" id="email" name="email" />
-          <label for="password">${_('Password')}</label>
-          <input class="university-password" type="password" id="password" name="password" />
-          <a href="/password" id="forgot_password">${_('Forgot password?')}</a>
-          <div id="keep-me-logged-in">
-            <input type="checkbox" checked="checked" name="remember">
-            ${_('Keep me logged in')}
-          </div>
+          <input class="university-email" type="text" id="email" name="email" required="required" />
+
+          <input type="button" class="black back_to_login_button" value="${_('Login')}" />
           <input type="submit" class="orange" value="${_('Create an account')}" />
         </form>
 
@@ -295,13 +290,8 @@
         <form action="${c.location.url()}/register/teacher" method="POST" id="sign-up-form-teacher" class="hide">
           <label for="email">${_('Email')}</label>
           <input class="university-email" type="text" id="email" name="email" />
-          <label for="password">${_('Password')}</label>
-          <input class="university-password" type="password" id="password" name="password" />
-          <a href="/password" id="forgot_password">${_('Forgot password?')}</a>
-          <div id="keep-me-logged-in">
-            <input type="checkbox" checked="checked" name="remember">
-            ${_('Keep me logged in')}
-          </div>
+
+          <input type="button" class="black back_to_login_button" value="${_('Login')}" />
           <input type="submit" class="orange" value="${_('Create an account')}" />
         </form>
 
@@ -332,6 +322,21 @@
                     } else {
                         $('#sign-up-form-teacher').show();
                     }
+                });
+
+                $('.back_to_login_button').click(function() {
+                    $('.login-box-content-registerform').hide();
+
+                    if (person == 'student') {
+                        $('#sign-up-form').hide();
+                    } else {
+                        $('#sign-up-form-teacher').hide();
+                    }
+
+                    $('.login-box-title-register-as-' + person).hide();
+                    $('.login-box-title-login-as-' + person).show();
+
+                    $('.login-box-content-loginform').show();
                 });
             });
         });

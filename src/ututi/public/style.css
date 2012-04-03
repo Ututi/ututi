@@ -719,7 +719,8 @@ div#pager {
 }
 
 .login-box-content input[type=submit],
-input[type=submit].black {
+input[type=submit].black,
+input[type=button].black {
     background-image: linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
     background-image: -o-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
     background-image: -moz-linear-gradient(bottom, #545454 0%, #6D6D6D 100%);
