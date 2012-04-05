@@ -1797,6 +1797,7 @@ class LocationTag(Tag):
                 'parent_id': self.parent_id,
                 'parent_has_logo': self.parent is not None and self.parent.logo is not None,
                 'url': self.url(),
+                'url_path': self.url_path,
                 'title': self.title,
                 'n_subjects': self.count('subject'),
                 'n_groups': self.count('group'),
