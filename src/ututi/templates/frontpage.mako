@@ -221,7 +221,7 @@
             $('.login-box-content-buttons').hide();
             $('.login-box-content-loginform').show();
 
-            $('#create_button').attr('name', 'REGISTER_TEACHER');
+            $('#person').val('teacher');
         });
 
         // let's check validation of registration form:
