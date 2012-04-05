@@ -10,7 +10,9 @@ by entering his name, email and clicking 'Accept terms' and 'Sign Up':
     >>> form = browser.getForm('sign-up-form')
     >>> form.getControl(name='name').value = 'User'
     >>> form.getControl(name='email').value = 'us er@example.com'
-    >>> form.getControl(name='accept-terms').value = '1'
+    >>> form.getControl(name='location_id').displayValue = ['--- Create new university ---']
+    >>> form.getControl(name='person').value = 'student'
+    >>> form.getControl(name='accept_terms').value = '1'
     >>> form.getControl('Create an account').click()
 
 Email is not valid, so it is rejected:
@@ -34,7 +36,9 @@ redirected to email confirmation page:
     >>> form = browser.getForm('sign-up-form')
     >>> form.getControl(name='name').value = 'User'
     >>> form.getControl(name='email').value = 'user@example.com'
-    >>> form.getControl(name='accept-terms').value = 1
+    >>> form.getControl(name='accept_terms').value = 1
+    >>> form.getControl(name='location_id').displayValue = ['--- Create new university ---']
+    >>> form.getControl(name='person').value = 'student'
     >>> form.getControl('Create an account').click()
 
 TODO: what if user types in an existing email address?
@@ -156,9 +160,7 @@ Before going next, user has to fill in his full name and password:
     >>> browser.getControl("Next").click()
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>Personal information</h1>
-
     >>> browser.printCssQuery('.error-message', strip=True)
-    <span>Please enter your full name.</span>
     <span>Please enter your password.</span>
 
     >>> form = browser.getForm('personal-info-form')
@@ -264,7 +266,9 @@ ant type existing University title or website URL:
     >>> form = browser.getForm('sign-up-form')
     >>> form.getControl(name='name').value = 'My name'
     >>> form.getControl(name='email').value = 'user@u2ti.com'
-    >>> form.getControl(name='accept-terms').value = '1'
+    >>> form.getControl(name='accept_terms').value = '1'
+    >>> form.getControl(name='location_id').displayValue = ['--- Create new university ---']
+    >>> form.getControl(name='person').value = 'student'
     >>> form.getControl('Create an account').click()
 
 Let's check the emails:

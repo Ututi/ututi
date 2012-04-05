@@ -70,7 +70,9 @@ In order to test this, we'll go through the registration process:
     >>> form = user.getForm('sign-up-form')
     >>> form.getControl(name='name').value = 'User'
     >>> form.getControl(name='email').value = 'user@vu.lt'
-    >>> form.getControl(name='accept-terms').value = '1'
+    >>> form.getControl(name='accept_terms').value = '1'
+    >>> form.getControl(name='location_id').displayValue = ['--- Create new university ---']
+    >>> form.getControl(name='person').value = 'student'
     >>> form.getControl('Create an account').click()
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())
@@ -178,7 +180,9 @@ registration without asking user to confirm.
     >>> form = anonymous.getForm('sign-up-form')
     >>> form.getControl(name='name').value = 'MIFuser'
     >>> form.getControl(name='email').value = 'user@mif.vu.lt'
-    >>> form.getControl(name='accept-terms').value = '1'
+    >>> form.getControl(name='accept_terms').value = '1'
+    >>> form.getControl(name='location_id').displayValue = ['Vilnius University']
+    >>> form.getControl(name='person').value = 'student'
     >>> form.getControl('Create an account').click()
     >>> msg = mail_queue.pop()
     >>> urls = get_urls(msg.payload())
@@ -200,7 +204,9 @@ error message will be displayed.
     >>> form = anonymous.getForm('sign-up-form')
     >>> form.getControl(name='name').value = 'Example'
     >>> form.getControl(name='email').value = 'user@example.com'
-    >>> form.getControl(name='accept-terms').value = '1'
+    >>> form.getControl(name='accept_terms').value = '1'
+    >>> form.getControl(name='location_id').displayValue = ['Vilnius University']
+    >>> form.getControl(name='person').value = 'student'
     >>> form.getControl('Create an account').click()
     >>> anonymous.printCssQuery('#sign-up-form .error-container .error-message', strip=True)
     <span>Please use your university email or <a>choose university from the list</a>.</span>
