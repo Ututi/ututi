@@ -40,7 +40,7 @@ def switch_language(language):
     # TODO store on user if user is logged in
     session['language'] = language
     session.save()
-    
+
 def info_menu_items():
     return [
         {'title': _("What is Ututi?"),
@@ -83,16 +83,22 @@ class PasswordResetForm(Schema):
 
 
 class RegistrationForm(Schema):
-    allow_extra_fields = True
-
     msg = {'public': _(u'Please use your university email or '
                         '<a href="/browse">choose university '
                         'from the list</a>.')}
     # url(controller='search', action='browse') here above
-    email = Pipe(TranslatedEmailValidator(not_empty=True, strip=True),
-                 ForbidPublicEmail(messages=msg))
+    email = Pipe(
+        TranslatedEmailValidator(not_empty=True, strip=True),
+        ForbidPublicEmail(messages=msg)
+    )
+    name = validators.UnicodeString(
+        not_empty=True,
+        min=3
+    )
+    location_id = validators.String(not_empty=True)
+    accept_terms = validators.StringBoolean(if_missing=False)
+    person = validators.String(not_empty=True)
 
-    name = validators.UnicodeString(not_empty=True)
 
 class ContactsForm(Schema):
     msg = {'invalid': _(u"Wrong email address."),
@@ -476,13 +482,14 @@ class HomeController(UniversityListMixin):
         name = request.POST.get('name')
         email = request.POST.get('email')
         location_id = request.POST.get('location_id')
-        accept_terms = request.POST.get('accept-terms')
+        accept_terms = request.POST.get('accept_terms')
+        person = request.POST.get('person')
 
         c.universities = self._universities(limit=12)
         c.all_universities = self._universities()
 
-        # checks if email or name is not empty or not accepted terms
-        if not email or not name or accept_terms != '1':
+        # checks if email, name, person are not empty
+        if not email or not name or not person or accept_terms != '1':
             redirect(url('frontpage'))
 
         # redirect to login if user is already registered
@@ -498,18 +505,13 @@ class HomeController(UniversityListMixin):
                                    errors=e.error_dict,
                                    error_formatters=u_error_formatters)
 
-        email = self.form_result['email']
-        name = self.form_result['name']
-        location = None
-
-        # try to select location by domain name
-        _, _, domain_name = email.rpartition('@')
-        domain = EmailDomain.get_by_name(domain_name)
-        if domain is not None:
-            location = domain.location
+        if location_id != '0':
+            location = LocationTag.get(location_id)
+        else:
+            location = None
 
         # lookup/create registration entry and send confirmation code to user
-        registration = UserRegistration.create_or_update(location, email)
+        registration = UserRegistration.create_or_update(location, email, name=name)
         meta.Session.commit()
         registration.send_confirmation_email()
 
