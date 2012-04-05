@@ -704,13 +704,15 @@ class TeacherGroup(object):
 class UserRegistration(object):
     """User registration data."""
 
-    def __init__(self, location=None, email=None, facebook_id=None):
+    def __init__(self, location=None, email=None, facebook_id=None, name=None):
         """Either email or facebook_id should be given, if location is None,
         then email is required  (this is checked in db).
         """
         self.location = location
         self.email = email
         self.facebook_id = facebook_id
+        self.fullname = name
+
         if email:
             self.hash = hashlib.md5(datetime.now().isoformat() + \
                                     email).hexdigest()
@@ -719,7 +721,7 @@ class UserRegistration(object):
                                     str(facebook_id)).hexdigest()
 
     @classmethod
-    def create_or_update(cls, location, email=None, facebook_id=None):
+    def create_or_update(cls, location, email=None, facebook_id=None, name=None):
         """If another pending registration is found in the same university,
         then it is updated and returned. Otherwise new registration is created.
         """
@@ -740,7 +742,7 @@ class UserRegistration(object):
         registration = q.first()
 
         if registration is None:
-            registration = cls(location, email, facebook_id)
+            registration = cls(location, email, facebook_id, name)
             meta.Session.add(registration)
         else:
             registration.location = location # update
