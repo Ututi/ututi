@@ -650,6 +650,10 @@ div#pager {
     display: none;
 }
 
+    .login-box-content-loginform div.error-container {
+        margin-left: 0;
+    }
+
 .login-box-content-registerform {
     display: none;
 }
