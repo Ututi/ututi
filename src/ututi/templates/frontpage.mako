@@ -95,17 +95,19 @@
                   <span class="error-message" id="location_id_errors"></span>
               </label>
               <select id="university-you-belong-to" name="location_id" required>
-                <option value="-1">${_('Pick from the list')}</option>
+                <option value="" selected>${_('Pick from the list')}:</option>
+                <option value="0">--- ${_('Create new university')} ---</option>
                 % for university in c.all_universities:
-                <option value="${university['id']}">${university['title']}</option>
+                <option value="${university['url_path']}">${university['title']}</option>
                 % endfor
               </select>
 
               <div id="accept-terms">
-                <input type="checkbox" name="accept-terms" id="accept-terms-checkbox" value="1">
+                <input type="checkbox" name="accept_terms" id="accept-terms-checkbox" value="1">
                 <a href="#">${_('I accept terms and regulations')}</a>
               </div>
-              <input type="submit" value="${_('Create an account')}" name="REGISTER_STUDENT" id="create_button">
+              <input type="hidden" value="" name="person" id="person" />
+              <input type="submit" value="${_('Create an account')}" id="create_button">
             </form>
           </div>
         </div><!-- .login-box-content -->
@@ -204,17 +206,13 @@
         $('.login-box-content button').click(function() {
             var type = $(this).attr('class');
 
-            if (type == 'student') {
-                $('#create_button').attr('name', 'REGISTER_STUDENT');
-            } else {
-                $('#create_button').attr('name', 'REGISTER_TEACHER');
-            }
+            $('#person').val(type);
 
             $('.login-box-content-buttons').hide();
             if (is_cookie) {
-              $('.login-box-content-loginform').show();
+                $('.login-box-content-loginform').show();
             } else {
-              $('.login-box-content-registerform').show();
+                $('.login-box-content-registerform').show();
             }
         });
 
@@ -261,7 +259,7 @@
         }
 
         $('#university-you-belong-to').change(function() {
-            if ($('#university-you-belong-to option:selected').val() == -1) {
+            if ($('#university-you-belong-to option:selected').val() == '') {
                 $('#university-you-belong-to').css('border', '1px solid red');
                 $('#location_id_errors').empty().append('${_("Required")}');
             } else {
