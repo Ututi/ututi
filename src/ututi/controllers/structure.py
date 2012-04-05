@@ -128,7 +128,7 @@ class StructureController(BaseController):
                                      confirmed=False,
                                      member_policy='PUBLIC')
 
-            university.site_url = form_result['url']
+            university.site_url = form_result['site_url']
 
             meta.Session.add(university)
             meta.Session.commit()
