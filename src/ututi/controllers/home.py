@@ -512,6 +512,10 @@ class HomeController(UniversityListMixin):
 
         # lookup/create registration entry and send confirmation code to user
         registration = UserRegistration.create_or_update(location, email, name=name)
+
+        if person == 'teacher':
+            registration.teacher = True
+
         meta.Session.commit()
         registration.send_confirmation_email()
 
