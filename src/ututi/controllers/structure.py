@@ -165,6 +165,7 @@ class StructureController(BaseController):
             'parent': c.item.parent,
             'region': c.item.region_id or 0,
             }
+        defaults['old_path'] = '/'.join(item.path)
         c.structure = meta.Session.query(LocationTag).filter_by(parent=None).filter(LocationTag.id != item.id).all()
         c.regions = meta.Session.query(Region).all()
         return htmlfill.render(self._edit_form(), defaults=defaults)

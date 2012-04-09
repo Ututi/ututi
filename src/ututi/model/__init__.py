@@ -1716,7 +1716,7 @@ class LocationTag(Tag):
         """A methot to return the tag by id."""
         tag = None
         try:
-            tag = meta.Session.query(cls).filter_BY(id==id).one()
+            tag = meta.Session.query(cls).filter_by(id=id).one()
         except NoResultFound:
             tag = None
         return tag

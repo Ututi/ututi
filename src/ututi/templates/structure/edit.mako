@@ -9,14 +9,11 @@
 <form method="post" action="${url(controller='structure', action='update', id=c.item.id)}"
       name="edit_structure_form" enctype="multipart/form-data" class="fullForm">
 
+   <input type="hidden" name="old_path" value="" />
    ${h.input_line('title', _('Title'))}
    ${h.input_line('title_short', _('Short title'))}
    ${h.input_line('site_url', _('Website'))}
-
-   <div>
-     <label for="description">${_('Description')}</label>
-     <textarea class="ckeditor" name="description" id="description" cols="80" rows="25"></textarea>
-   </div>
+   ${h.input_area('description', _('Description'))}
 
    <div>
      <label for="region">${_('Region')}</label>

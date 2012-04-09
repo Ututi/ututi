@@ -181,15 +181,14 @@ class LocationIdValidator(validators.FormValidator):
             path = old_location.path
             if len(path) > 0:         # If it's department
                 del(path[-1])         # then delete last element
-        elif parent:
+        if parent:
             parent_location = LocationTag.get_by_id(parent)
             path = parent_location.path
-            #meta.Session.query(LocationTag).filter_by(id=values['parent']).one()
 
         path.append(title_short)
         location = LocationTag.get(path)
 
-        if location is not None:
+        if location is not None and not location is old_location:
             raise Invalid(self.message('duplicate', state),
                           form_dict, state,
                           error_dict={'title_short' : Invalid(self.message('duplicate', state), form_dict, state)})
