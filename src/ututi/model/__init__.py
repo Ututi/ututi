@@ -1712,6 +1712,16 @@ class LocationTag(Tag):
         return tag
 
     @classmethod
+    def get_by_id(cls, id):
+        """A methot to return the tag by id."""
+        tag = None
+        try:
+            tag = meta.Session.query(cls).filter_BY(id==id).one()
+        except NoResultFound:
+            tag = None
+        return tag
+
+    @classmethod
     def get_by_title(cls, title):
         """A method to return the tag either by its full title or its short title.
 

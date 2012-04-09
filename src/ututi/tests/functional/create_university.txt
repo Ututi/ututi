@@ -34,3 +34,15 @@ Let's create new university.
     <a>Geografijos fakultetas</a>
     <a>New University</a>
 
+
+Create new university with existing short name.
+
+    >>> form = browser.getForm('new_structure_form')
+    >>> form.getControl(name='title').value = 'North University'
+    >>> form.getControl(name='title_short').value = "NU"
+    >>> form.getControl(name='description').value = "It's North University with NU as short name."
+    >>> form.getControl('Create').click()
+    >>> browser.printCssQuery('.error-message', strip=True)
+    <span>Such short title already exists, choose a different one.</span>
+
+

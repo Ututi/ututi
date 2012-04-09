@@ -1,7 +1,7 @@
 import formencode
 import logging
 
-from formencode import Schema, validators, Invalid, variabledecode, htmlfill
+from formencode import Schema, validators, Invalid, variabledecode, htmlfill, compound
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql import expression, func
 from sqlalchemy import or_
@@ -15,7 +15,7 @@ from pylons.i18n import _
 from ututi.lib.security import ActionProtector
 from ututi.lib.image import serve_logo
 from ututi.lib.base import BaseController, render
-from ututi.lib.validators import InURLValidator, FileUploadTypeValidator, validate
+from ututi.lib.validators import InURLValidator, FileUploadTypeValidator, validate, LocationIdValidator
 from ututi.model import meta, LocationTag, SimpleTag, Tag, Region
 
 log = logging.getLogger(__name__)
@@ -41,11 +41,14 @@ class StructureIdValidator(validators.FancyValidator):
 class NewStructureForm(Schema):
     allow_extra_fields = True
     title = validators.UnicodeString(not_empty=True, strip=True, max=250)
-    title_short = validators.UnicodeString(not_empty=True, strip=True, max=50)
+    title_short = compound.All(validators.UnicodeString(not_empty=True, strip=True, max=50), InURLValidator)
     region = validators.Int()
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     description = validators.UnicodeString(strip=True)
     parent = StructureIdValidator()
+    chained_validators = [
+        LocationIdValidator()
+        ]
 
 
 class NewUniversityForm(Schema):

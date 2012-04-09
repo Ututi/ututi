@@ -161,22 +161,35 @@ class LocationTagsValidator(validators.FancyValidator):
 
 
 class LocationIdValidator(validators.FormValidator):
+    """This validator is used for Unversity edit form and in admin view, where
+       we can have deal both with Universities and Departments, so we can't just
+       check locations or assume that there always will be old_path input."""
 
     messages = {
         'duplicate': _(u"Such short title already exists, choose a different one."),
     }
 
     def validate_python(self, form_dict, state):
-        old_location = LocationTag.get(form_dict.get('old_path', ''))
-        # XXX test for id matching a tag
+        old_path = form_dict.get('old_path', None)
+        parent = form_dict.get('parent', None)
         title_short = form_dict['title_short']
-        path = old_location.path
-        if len(path) > 0:
-            del(path[-1])
+        path = []
+
+        if old_path:
+            old_location = LocationTag.get(old_path)
+            # XXX test for id matching a tag
+            path = old_location.path
+            if len(path) > 0:         # If it's department
+                del(path[-1])         # then delete last element
+        elif parent:
+            parent_location = LocationTag.get_by_id(parent)
+            path = parent_location.path
+            #meta.Session.query(LocationTag).filter_by(id=values['parent']).one()
+
         path.append(title_short)
         location = LocationTag.get(path)
 
-        if location is not None and not location is old_location:
+        if location is not None:
             raise Invalid(self.message('duplicate', state),
                           form_dict, state,
                           error_dict={'title_short' : Invalid(self.message('duplicate', state), form_dict, state)})
