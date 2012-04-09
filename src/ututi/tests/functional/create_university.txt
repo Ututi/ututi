@@ -45,4 +45,3 @@ Create new university with existing short name.
     >>> browser.printCssQuery('.error-message', strip=True)
     <span>Such short title already exists, choose a different one.</span>
 
-
