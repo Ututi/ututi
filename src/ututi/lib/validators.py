@@ -174,6 +174,7 @@ class LocationIdValidator(validators.FormValidator):
         parent = form_dict.get('parent', None)
         title_short = form_dict['title_short']
         path = []
+        old_location = None
 
         if old_path:
             old_location = LocationTag.get(old_path)
