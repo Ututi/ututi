@@ -41,11 +41,7 @@
 
    ${h.input_line('title', _('Title'))}
    ${h.input_line('title_short', _('Short title'))}
-
-   <div>
-     <label for="description">${_('Description')}</label>
-     <textarea class="ckeditor" name="description" id="description" cols="80" rows="25"></textarea>
-   </div>
+   ${h.input_area('description', _('Description'))}
 
    <div>
      <label for="region">${_('Region')}</label>
