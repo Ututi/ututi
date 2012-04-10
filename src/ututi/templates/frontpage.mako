@@ -81,11 +81,10 @@
             </button>
           </div>
 
-          <div class="login-box-content-loginform" style="width: 250px;">
+          <div class="login-box-content-registerform" style="width: 250px;">
             <form method="post" id="sign-up-form" action="${url(controller='home', action='register')}">
               <label for="name">${_('Name')}</label>
               <input type="text" name="name" id="name" style="width: 230px;" required>
-
               <form:error name="email" format="raw" />
               <label for="email">${_('Email')}</label>
               <input type="text" name="email" id="email" style="width: 230px;" required>
@@ -162,22 +161,30 @@
 
             <br />
 
-            <input class="black" 
+            <input class="black"
                    type="button"
                    id="create_university_button"
                    value="${_('Create university')}" />
         </div>
 
-        <div id="add_university_create_account" style="display: none;">
+        <div id="add_university_create_account" style="display: none; height: 255px;">
             <h2>${_('Create account')}</h2>
 
-            <form method="post" id="create-account-form">
-               ${h.input_line('name', _('Name'))}
-               ${h.input_line('email', _('Email'))}
-               ${h.input_line('university', _('University'))}
+            <form method="post" id="create-account-form" action="/register">
+                <input type="hidden" name="location_id" id="pp_location_id" value="" />
+                <input type="hidden" name="person" id="pp_person" value="" />
+
+                ${h.input_line('name', _('Name'))}
+                ${h.input_line('email', _('Email'))}
+                ${_('University you belong to')}: <strong><div id="university_name"></div></strong><br /><br />
+
+                <div id="pp_accept-terms">
+                    <input type="checkbox" name="accept_terms" id="pp_accept-terms-checkbox" value="1">
+                    <a href="#">${_('I accept terms and regulations')}</a>
+                </div>
 
                 <br />
-                <input class="black" type="submit" value="${_('Create university')}">
+                <input class="black" type="submit" value="${_('Create an account')}" />
             </form>
         </div>
     </div>
@@ -199,8 +206,40 @@
 <script>
     $(document).ready(function() {
         $(".add_university_button").colorbox({inline:true});
+        var errors = 0;
 
-        var is_cookie = true; // here will be a feature in nearly future
+        // POP-UP starts
+        // Create user form validation
+        $('#create-account-form').submit(function() {
+            if ($('#create-account-form input[name="name"]').val().length == 0) {
+                $('#create-account-form input[name="name"]').css('border', '1px solid red');
+                errors += 1;
+            } else {
+                $('#create-account-form input[name="name"]').css('border', '1px solid black');
+            }
+
+            if ($('#create-account-form input[name="email"]').val().length == 0) {
+                $('#create-account-form input[name="email"]').css('border', '1px solid red');
+                errors += 1;
+            } else {
+                $('#create-account-form input[name="email"]').css('border', '1px solid black');
+            }
+
+            if ($('#pp_accept-terms-checkbox').is(':checked')) {
+                $('#pp_accept-terms span').remove();
+            } else {
+                errors += 1;
+                $('#pp_accept-terms span').remove();
+                $('#pp_accept-terms').prepend('<span class="error-message">${_("You must agree to the terms")}<br /></span>');
+            }
+
+            if (errors !== 0) {
+                return false;
+            }
+
+            errors = 0;
+        });
+        // POP-UP ends
 
         // if user clicks "I'm student" or "I'm a teacher"
         $('.login-box-content button').click(function() {
@@ -209,29 +248,28 @@
             $('#person').val(type);
 
             $('.login-box-content-buttons').hide();
-            if (is_cookie) {
-                $('.login-box-content-loginform').show();
-            } else {
-                $('.login-box-content-registerform').show();
-            }
+            $('.login-box-content-registerform').show();
         });
 
         // if user clicks on slide's button "Register as a teacher"
         $('.register-as-a-teacher').click(function() {
             $('.login-box-content-buttons').hide();
-            $('.login-box-content-loginform').show();
+            $('.login-box-content-registerform').show();
 
             $('#person').val('teacher');
         });
 
         // let's check validation of registration form:
-        // if user is clicked on checkbox, enable submiting
+        // if user is clicked on checkbox, enable submitting
         $('#accept-terms-checkbox').click(function() {
             if (this.checked) {
                 $('#accept-terms span').remove();
-                $('#create_button').removeAttr('disabled');
-            } else {
-                $('#create_button').attr('disabled', 'disabled');
+            }
+        });
+
+        $('#pp_accept-terms-checkbox').click(function() {
+            if (this.checked) {
+                $('#pp_accept-terms span').remove();
             }
         });
 
@@ -271,7 +309,7 @@
         $('#new_university_form').submit(function() {
             $.ajax({
                 type: 'POST',
-                url: '${url(controller='structure', action='js_create_university')}',
+                url: '${url(controller='structure', action='create_university')}',
                 data: $(this).serialize(),
                 success: function(data) {
                     if (data) {
@@ -289,7 +327,9 @@
                     } else {
                         $('#add_university_form').hide();
                         $('#add_university_create_account').show();
-                        $('#university').val($('#title').val());
+                        $('#university_name').text($('#title').val());
+                        $('#pp_location_id').val($('#title_short').val());
+                        $('#pp_person').val('student');
                     }
                 }
             });
