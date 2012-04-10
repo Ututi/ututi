@@ -115,9 +115,6 @@ class StructureController(BaseController):
         meta.Session.commit()
         redirect(url(controller='structure', action='index'))
 
-    def js_create_university(self):
-        self.create_university();
-
     def create_university(self):
         schema = NewUniversityForm()
 
