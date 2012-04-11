@@ -83,6 +83,7 @@
 
           <div class="login-box-content-registerform" style="width: 250px;">
             <form method="post" id="sign-up-form" action="${url(controller='home', action='register')}">
+              <form:error name="name" format="raw" />
               <label for="name">${_('Name')}</label>
               <input type="text" name="name" id="name" style="width: 230px;" required>
               <form:error name="email" format="raw" />
