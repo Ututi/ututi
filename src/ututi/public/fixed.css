@@ -371,6 +371,20 @@ form {
         color: #FFAA00;
     }
 
+    #new_university_form .formField {
+        margin: 0;
+    }
+
+    #new_university_form .error-message {
+        padding: 0;
+        line-height: normal;
+        margin: 0;
+    }
+
+    #new_university_form label .labelText {
+        margin-top: 10px;
+    }
+
     form .textarea span.error-message {
         display: block;
     }
