@@ -151,23 +151,27 @@
             <form method="post"
                   action="${url(controller='structure', action='create_university')}"
                   name="new_university_form"
-                  id="new_university_form"
-                  class="fullForm">
+                  id="new_university_form">
 
               ${h.input_line('title', _('Title'))}
+              <div id="title-errors-box" class="errors-box"></div>
+
               ${h.input_line('title_short', _('Short title'))}
+              <div id="title_short-errors-box" class="errors-box"></div>
+
               ${h.input_line('site_url', _('WWW address'))}
+              <div id="site_url-errors-box" class="errors-box"></div>
+
+              <br /><br />
+
+              <input class="black"
+                     type="button"
+                     id="create_university_button"
+                     value="${_('Create university')}" />
             </form>
-
-            <br />
-
-            <input class="black"
-                   type="button"
-                   id="create_university_button"
-                   value="${_('Create university')}" />
         </div>
 
-        <div id="add_university_create_account" style="display: none; height: 255px;">
+        <div id="add_university_create_account" style="display: none;">
             <h2>${_('Create account')}</h2>
 
             <form method="post" id="create-account-form" action="/register">
@@ -205,7 +209,7 @@
 
 <script>
     $(document).ready(function() {
-        $(".add_university_button").colorbox({inline:true});
+        $(".add_university_button").colorbox({inline:true, height: '450px'});
         var errors = 0;
 
         // POP-UP starts
@@ -313,17 +317,13 @@
                 data: $(this).serialize(),
                 success: function(data) {
                     if (data) {
-                        var errors = data.split('\n'); // splits error messages
+                        var errors = jQuery.parseJSON(data);
 
-                        // restores default styling
-                        $('#new_university_form input').css('border', '1px solid #666666');
+                        $('.errors-box').empty();
 
-                        for (var i in errors) {
-                            error = errors[i].split(': ');
-
-                            // make class instead
-                            $('#' + error[0]).css('border', '1px solid #ee0000');
-                        }
+                        $.each(errors, function(field, value) {
+                            $('#' + field + '-errors-box').append('<p class="error-message">' + value + '</p>');
+                        });
                     } else {
                         $('#add_university_form').hide();
                         $('#add_university_create_account').show();

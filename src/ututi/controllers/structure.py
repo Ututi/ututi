@@ -1,3 +1,4 @@
+from simplejson.encoder import JSONEncoder
 import formencode
 import logging
 
@@ -46,15 +47,16 @@ class NewStructureForm(Schema):
     logo_upload = FileUploadTypeValidator(allowed_types=('.jpg', '.png', '.bmp', '.tiff', '.jpeg', '.gif'))
     description = validators.UnicodeString(strip=True)
     parent = StructureIdValidator()
-    chained_validators = [
-        LocationIdValidator()
-        ]
+    
+    chained_validators = [LocationIdValidator()]
 
 
 class NewUniversityForm(Schema):
     title = validators.UnicodeString(not_empty=True, max=250)
-    title_short = validators.UnicodeString(not_empty=True, max=50)
-    site_url = validators.UnicodeString(not_empty=True, max=250)
+    title_short = compound.All(validators.UnicodeString(not_empty=True, strip=True, max=50), InURLValidator)
+    site_url = validators.URL(not_empty=True)
+
+    chained_validators = [LocationIdValidator()]
 
 class JSStructureForm(Schema):
     allow_extra_fields = True
@@ -121,7 +123,7 @@ class StructureController(BaseController):
         try:
             form_result = schema.to_python(dict(request.params))
         except formencode.Invalid, error:
-            return unicode(error)
+            return JSONEncoder().encode(error.unpack_errors())
         else:
             university = LocationTag(title=form_result['title'],
                                      title_short=form_result['title_short'],
