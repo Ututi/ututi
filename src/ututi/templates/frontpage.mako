@@ -297,7 +297,7 @@
         // checks if exists any error
         if ($('#sign-up-form .error-container').length > 0) {
             $('.login-box-content-buttons').hide();
-            $('.login-box-content-loginform').show();
+            $('.login-box-content-registerform').show();
         }
 
         $('#university-you-belong-to').change(function() {
