@@ -166,7 +166,7 @@
               <br /><br />
 
               <input class="black"
-                     type="button"
+                     type="submit"
                      id="create_university_button"
                      value="${_('Create university')}" />
             </form>
@@ -323,7 +323,7 @@
                         $('.errors-box').empty();
 
                         $.each(errors, function(field, value) {
-                            $('#' + field + '-errors-box').append('<p class="error-message">' + value + '</p>');
+                            $('#' + field + '-errors-box').append('<span class="error-message">' + value + '</span>');
                         });
                     } else {
                         $('#add_university_form').hide();
@@ -336,10 +336,6 @@
             });
 
             return false;
-        });
-
-        $('#create_university_button').click(function() {
-            $('#new_university_form').submit();
         });
     });
 </script>

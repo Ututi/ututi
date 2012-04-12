@@ -2,16 +2,16 @@ Create University flow (from front page)
 ========================================
 
 We can add new University to Ututi by two ways. In admin panel as an admin
-or from front page as an anonymouse user.
+or from front page as an anonymous user.
 
-Let's start from creating university from admin panel.
+Let's start to create university from admin panel.
 
 List of all universities and departments is shown in admin panel Universities view.
 
-    >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/admin')
-    >>> browser.getLink('Universities').click()
-    >>> browser.printCssQuery('#location_structure .tag_link', strip=True)
+    >>> admin = Browser.logIn()
+    >>> admin.open('http://localhost/admin')
+    >>> admin.getLink('Universities').click()
+    >>> admin.printCssQuery('#location_structure .tag_link', strip=True)
     <a>U-niversity</a>
     <a>D-epartment</a>
     <a>Vilniaus universitetas</a>
@@ -21,12 +21,12 @@ List of all universities and departments is shown in admin panel Universities vi
 
 Let's create new university.
 
-    >>> form = browser.getForm('new_structure_form')
+    >>> form = admin.getForm('new_structure_form')
     >>> form.getControl(name='title').value = 'New University'
     >>> form.getControl(name='title_short').value = "NU"
     >>> form.getControl(name='description').value = "It's our new University."
     >>> form.getControl('Create').click()
-    >>> browser.printCssQuery('#location_structure .tag_link', strip=True)
+    >>> admin.printCssQuery('#location_structure .tag_link', strip=True)
     <a>U-niversity</a>
     <a>D-epartment</a>
     <a>Vilniaus universitetas</a>
@@ -37,11 +37,76 @@ Let's create new university.
 
 Create new university with existing short name.
 
-    >>> form = browser.getForm('new_structure_form')
+    >>> form = admin.getForm('new_structure_form')
     >>> form.getControl(name='title').value = 'North University'
     >>> form.getControl(name='title_short').value = "NU"
     >>> form.getControl(name='description').value = "It's North University with NU as short name."
     >>> form.getControl('Create').click()
-    >>> browser.printCssQuery('.error-message', strip=True)
+    >>> admin.printCssQuery('.error-message', strip=True)
     <span>Such short title already exists, choose a different one.</span>
 
+
+Let's try to create an university as an anonymous from front page.
+First of all, we will enter some incorrect cases.
+
+    >>> anonymous = Browser()
+    >>> anonymous.open('http://localhost/')
+    >>> form = anonymous.getForm('new_university_form')
+    >>> form.getControl(name='title').value = 'A'
+    >>> form.getControl('Create university').click()
+
+New university was created unsuccessfully. While errors come from json, we will
+check list of universities.
+
+    >>> admin.open('http://localhost/admin')
+    >>> admin.getLink('Universities').click()
+    >>> admin.printCssQuery('#location_structure .tag_link', strip=True)
+    <a>U-niversity</a>
+    <a>D-epartment</a>
+    <a>Vilniaus universitetas</a>
+    <a>Ekonomikos fakultetas</a>
+    <a>Geografijos fakultetas</a>
+    <a>New University</a>
+
+Anonymous enters valid values, but one university exists with the same short title.
+
+    >>> anonymous.open('http://localhost/')
+    >>> form = anonymous.getForm('new_university_form')
+    >>> form.getControl(name='title').value = 'Another University'
+    >>> form.getControl(name='title_short').value = 'NU'
+    >>> form.getControl(name='site_url').value = 'www.au.com'
+    >>> form.getControl('Create university').click()
+
+New university was created unsuccessfully again.
+
+    >>> admin.open('http://localhost/admin')
+    >>> admin.getLink('Universities').click()
+    >>> admin.printCssQuery('#location_structure .tag_link', strip=True)
+    <a>U-niversity</a>
+    <a>D-epartment</a>
+    <a>Vilniaus universitetas</a>
+    <a>Ekonomikos fakultetas</a>
+    <a>Geografijos fakultetas</a>
+    <a>New University</a>
+
+OK, anonymous enters correct values:
+
+    >>> anonymous.open('http://localhost/')
+    >>> form = anonymous.getForm('new_university_form')
+    >>> form.getControl(name='title').value = 'Another University'
+    >>> form.getControl(name='title_short').value = 'AU'
+    >>> form.getControl(name='site_url').value = 'www.au.com'
+    >>> form.getControl('Create university').click()
+
+And new university was created successfully.
+
+    >>> admin.open('http://localhost/admin')
+    >>> admin.getLink('Universities').click()
+    >>> admin.printCssQuery('#location_structure .tag_link', strip=True)
+    <a>U-niversity</a>
+    <a>D-epartment</a>
+    <a>Vilniaus universitetas</a>
+    <a>Ekonomikos fakultetas</a>
+    <a>Geografijos fakultetas</a>
+    <a>New University</a>
+    <a>Another University</a>
