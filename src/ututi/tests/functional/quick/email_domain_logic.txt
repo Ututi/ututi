@@ -211,6 +211,31 @@ error message will be displayed.
     >>> anonymous.printCssQuery('#sign-up-form .error-container .error-message', strip=True)
     <span>Please use your university email or <a>choose university from the list</a>.</span>
 
+4. User enters email whose second level domain consists of only one letter.
+An error will be displayed.
+
+    >>> anonymous.open('http://localhost/')
+    >>> form = anonymous.getForm('sign-up-form')
+    >>> form.getControl(name='name').value = 'Example'
+    >>> form.getControl(name='email').value = 'user@u.s.e.r.com'
+    >>> form.getControl(name='accept_terms').value = '1'
+    >>> form.getControl(name='location_id').displayValue = ['Vilnius University']
+    >>> form.getControl(name='person').value = 'student'
+    >>> form.getControl('Create an account').click()
+    >>> anonymous.printCssQuery('#sign-up-form .error-container .error-message', strip=True)
+    <span>Email address is incorrect.</span>
+
+    >>> anonymous.open('http://localhost/')
+    >>> form = anonymous.getForm('sign-up-form')
+    >>> form.getControl(name='name').value = 'Example'
+    >>> form.getControl(name='email').value = 'user@u.com'
+    >>> form.getControl(name='accept_terms').value = '1'
+    >>> form.getControl(name='location_id').displayValue = ['Vilnius University']
+    >>> form.getControl(name='person').value = 'student'
+    >>> form.getControl('Create an account').click()
+    >>> anonymous.printCssQuery('#sign-up-form .error-container .error-message', strip=True)
+    <span>Email address is incorrect.</span>
+
 
 Registration from university pages
 ==================================

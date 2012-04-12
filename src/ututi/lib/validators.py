@@ -307,12 +307,20 @@ class TranslatedEmailValidator(validators.Email):
         'badDomain': _('The domain portion of the email address is invalid (the portion after the @: %(domain)s)'),
         'domainDoesNotExist': _('The domain of the email address does not exist (the portion after the @: %(domain)s)'),
         'non_unique': _(u"The email already exists."),
+        'non_correct': _(u"Email address is incorrect."),
     }
 
     def validate_python(self, value, state):
         # Added extra validation here. Thus the class should be renamed to EmailValidation.
         # A real fix would be to write custum Ututi email validator.
         validators.Email.validate_python(self, value, state)
+        
+        email_provider = value.rpartition('@')[2]
+        email_parts = email_provider.split('.')
+
+        if len(email_parts[-2]) < 2:
+            raise Invalid(self.message('non_correct', state), value, state)
+
         try:
             value.encode('ascii')
         except UnicodeEncodeError:
@@ -426,24 +434,6 @@ class AvailableEmailDomain(validators.FancyValidator):
             if existing is not None:
                 raise Invalid(self.message("non_unique", state, domain_name=existing.domain_name), value, state)
 
-
-class EmailAddress(validators.Email):
-
-    messages = {
-        'empty': _(u"Email address must be not empty."),
-        'non_correct': _(u"Email address is incorrect."),
-    }
-
-    def validate_python(self, value, state):
-        if value == '':
-            raise Invalid(self.message('empty', state), value, state)
-        else:
-            email_provider = value.rpartition('@')[2]
-            email_parts = email_provider.split('.')
-            
-            if len(email_parts[-2]) < 2:
-                raise Invalid(self.message('non_correct', state), value, state)
-        
 
 class EmailDomainValidator(validators.FancyValidator):
     """Validate a email domain, which is basically the same as URL."""

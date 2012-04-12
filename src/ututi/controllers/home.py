@@ -26,8 +26,7 @@ from ututi.lib.emails import email_password_reset
 from ututi.lib.security import sign_out_user
 from ututi.lib.security import ActionProtector, sign_in_user, bot_protect
 from ututi.lib.validators import (validate, u_error_formatters,
-                                  TranslatedEmailValidator, ForbidPublicEmail,
-                                  EmailAddress)
+                                  TranslatedEmailValidator, ForbidPublicEmail)
 from ututi.lib.decorators import jsonpify
 from ututi.model import (meta, User, Region, LocationTag, Payment,
                          UserRegistration, EmailDomain)
@@ -90,8 +89,7 @@ class RegistrationForm(Schema):
     # url(controller='search', action='browse') here above
     email = Pipe(
         TranslatedEmailValidator(not_empty=True, strip=True),
-        ForbidPublicEmail(messages=msg),
-        EmailAddress(not_empty=True)
+        ForbidPublicEmail(messages=msg)
     )
     name = validators.UnicodeString(
         not_empty=True,
