@@ -427,6 +427,24 @@ class AvailableEmailDomain(validators.FancyValidator):
                 raise Invalid(self.message("non_unique", state, domain_name=existing.domain_name), value, state)
 
 
+class EmailAddress(validators.Email):
+
+    messages = {
+        'empty': _(u"Email address must be not empty."),
+        'non_correct': _(u"Email address is incorrect."),
+    }
+
+    def validate_python(self, value, state):
+        if value == '':
+            raise Invalid(self.message('empty', state), value, state)
+        else:
+            email_provider = value.rpartition('@')[2]
+            email_parts = email_provider.split('.')
+            
+            if len(email_parts[-2]) < 2:
+                raise Invalid(self.message('non_correct', state), value, state)
+        
+
 class EmailDomainValidator(validators.FancyValidator):
     """Validate a email domain, which is basically the same as URL."""
 
