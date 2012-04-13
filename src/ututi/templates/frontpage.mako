@@ -1,7 +1,5 @@
 <%inherit file="/prebase.mako" />
 
-<script src="/javascript/slides.min.jquery.js"></script>
-<script src="/javascript/jquery.colorbox-min.js"></script>
 <script>document.body.style.background="#ffffff";</script>
 
 <div id="layout-wrap" class="clear no-border">
@@ -98,12 +96,13 @@
                 <option value="" selected>${_('Pick from the list')}:</option>
                 <option value="0">--- ${_('Create new university')} ---</option>
                 % for university in c.all_universities:
-                <option value="${university['url_path']}">${university['title']}</option>
+                <option value="${university['url_path']}"
+                        id="location_${university['id']}">${university['title']}</option>
                 % endfor
               </select>
 
               <div id="accept-terms">
-                <input type="checkbox" name="accept_terms" id="accept-terms-checkbox" value="1">
+                <input type="checkbox" name="accept_terms" id="accept-terms-checkbox" value="1" required="required">
                 <a href="#">${_('I accept terms and regulations')}</a>
               </div>
               <input type="hidden" value="" name="person" id="person" />
@@ -184,7 +183,7 @@
                 ${_('University you belong to')}: <strong><div id="university_name"></div></strong><br /><br />
 
                 <div id="pp_accept-terms">
-                    <input type="checkbox" name="accept_terms" id="pp_accept-terms-checkbox" value="1">
+                    <input type="checkbox" name="accept_terms" id="pp_accept-terms-checkbox" value="1" required="required">
                     <a href="#">${_('I accept terms and regulations')}</a>
                 </div>
 
@@ -196,146 +195,11 @@
 </div>
 
 <script>
-  $(function() { 
-    $("#slides").slides({
-      preload: true,
-      preloadImage: '/img/loading.gif',
-      play: 5000,
-      pause: 2500,
-      hoverPause: true
-    }); 
-  });
+    // Translations for /javascript/frontpage.js
+    var required = '${_("Required")}';
+    var agreement = '${_("You must agree to the terms")}'; 
 </script>
 
-
-<script>
-    $(document).ready(function() {
-        $(".add_university_button").colorbox({inline:true, height: '450px'});
-        var errors = 0;
-
-        // POP-UP starts
-        // Create user form validation
-        $('#create-account-form').submit(function() {
-            if ($('#create-account-form input[name="name"]').val().length == 0) {
-                $('#create-account-form input[name="name"]').css('border', '1px solid red');
-                errors += 1;
-            } else {
-                $('#create-account-form input[name="name"]').css('border', '1px solid black');
-            }
-
-            if ($('#create-account-form input[name="email"]').val().length == 0) {
-                $('#create-account-form input[name="email"]').css('border', '1px solid red');
-                errors += 1;
-            } else {
-                $('#create-account-form input[name="email"]').css('border', '1px solid black');
-            }
-
-            if ($('#pp_accept-terms-checkbox').is(':checked')) {
-                $('#pp_accept-terms span').remove();
-            } else {
-                errors += 1;
-                $('#pp_accept-terms span').remove();
-                $('#pp_accept-terms').prepend('<span class="error-message">${_("You must agree to the terms")}<br /></span>');
-            }
-
-            if (errors !== 0) {
-                return false;
-            }
-
-            errors = 0;
-        });
-        // POP-UP ends
-
-        // if user clicks "I'm student" or "I'm a teacher"
-        $('.login-box-content button').click(function() {
-            var type = $(this).attr('class');
-
-            $('#person').val(type);
-
-            $('.login-box-content-buttons').hide();
-            $('.login-box-content-registerform').show();
-        });
-
-        // if user clicks on slide's button "Register as a teacher"
-        $('.register-as-a-teacher').click(function() {
-            $('.login-box-content-buttons').hide();
-            $('.login-box-content-registerform').show();
-
-            $('#person').val('teacher');
-        });
-
-        // let's check validation of registration form:
-        // if user is clicked on checkbox, enable submitting
-        $('#accept-terms-checkbox').click(function() {
-            if (this.checked) {
-                $('#accept-terms span').remove();
-            }
-        });
-
-        $('#pp_accept-terms-checkbox').click(function() {
-            if (this.checked) {
-                $('#pp_accept-terms span').remove();
-            }
-        });
-
-        $('#sign-up-form').submit(function() {
-            if ($('#university-you-belong-to option:selected').val() == -1) {
-                $('#university-you-belong-to').css('border', '1px solid red');
-                $('#location_id_errors').empty().append('${_("Required")}');
-
-                return false;
-            }
-
-            if ($('#accept-terms-checkbox').is(':checked')) {
-                // everything is ok, continue
-            } else {
-                $('#accept-terms span').remove();
-                $('#accept-terms').prepend('<span class="error-message">${_("You must agree to the terms")}<br /></span>');
-                return false;
-            }
-        });
-
-        // checks if exists any error
-        if ($('#sign-up-form .error-container').length > 0) {
-            $('.login-box-content-buttons').hide();
-            $('.login-box-content-registerform').show();
-        }
-
-        $('#university-you-belong-to').change(function() {
-            if ($('#university-you-belong-to option:selected').val() == '') {
-                $('#university-you-belong-to').css('border', '1px solid red');
-                $('#location_id_errors').empty().append('${_("Required")}');
-            } else {
-                $('#university-you-belong-to').css('border', 'none');
-                $('#location_id_errors').empty();
-            }
-        });
-
-        $('#new_university_form').submit(function() {
-            $.ajax({
-                type: 'POST',
-                url: '${url(controller='structure', action='create_university')}',
-                data: $(this).serialize(),
-                success: function(data) {
-                    if (data) {
-                        var errors = jQuery.parseJSON(data);
-
-                        $('.errors-box').empty();
-
-                        $.each(errors, function(field, value) {
-                            $('#' + field + '-errors-box').append('<span class="error-message">' + value + '</span>');
-                        });
-                    } else {
-                        $('#add_university_form').hide();
-                        $('#add_university_create_account').show();
-                        $('#university_name').text($('#title').val());
-                        $('#pp_location_id').val($('#title_short').val());
-                        $('#pp_person').val('student');
-                    }
-                }
-            });
-
-            return false;
-        });
-    });
-</script>
+<script src="/javascript/slides.min.jquery.js"></script>
+<script src="/javascript/jquery.colorbox-min.js"></script>
+<script src="/javascript/frontpage.js"></script>
