@@ -13,6 +13,7 @@ from paste.util.converters import asbool
 from pylons import request, tmpl_context as c, url, session, config, response
 from pylons.controllers.util import abort, redirect
 from pylons.i18n import _
+from pylons.decorators import jsonify
 from pylons.templating import render_mako_def
 
 from sqlalchemy.orm.exc import NoResultFound
@@ -29,7 +30,7 @@ from ututi.lib.validators import (validate, u_error_formatters,
                                   TranslatedEmailValidator, ForbidPublicEmail)
 from ututi.lib.decorators import jsonpify
 from ututi.model import (meta, User, Region, LocationTag, Payment,
-                         UserRegistration, EmailDomain)
+                         UserRegistration)
 from ututi.model import Subject, Group, SearchItem
 from ututi.model.events import Event
 
@@ -215,6 +216,18 @@ class HomeController(UniversityListMixin):
                 return render_mako_def('/search/browse.mako','universities', unis=c.unis, ajax_url=url(controller='home', action='index'))
             c.slideshow = request.params.has_key('slide')
             return htmlfill.render(self._sign_up_form())
+
+    @jsonify
+    def js_get_departments(self):
+        location_id = request.params.get('location_id')
+
+        if location_id:
+            departments = self._departments(parent_id=location_id)
+            departments = [
+                (department['title'], department['url_path']) for department in departments
+            ]
+        
+            return departments
 
     @info_action
     def about(self):
