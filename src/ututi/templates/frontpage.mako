@@ -103,7 +103,7 @@
 
               <div id="accept-terms">
                 <input type="checkbox" name="accept_terms" id="accept-terms-checkbox" value="1" required="required">
-                <a href="#">${_('I accept terms and regulations')}</a>
+                <a href="${url(controller='home', action='terms')}">${_('I accept terms and regulations')}</a>
               </div>
               <input type="hidden" value="" name="person" id="person" />
               <input type="submit" value="${_('Create an account')}" id="create_button">
@@ -184,7 +184,7 @@
 
                 <div id="pp_accept-terms">
                     <input type="checkbox" name="accept_terms" id="pp_accept-terms-checkbox" value="1" required="required">
-                    <a href="#">${_('I accept terms and regulations')}</a>
+                    <a href="${url(controller='home', action='terms')}">${_('I accept terms and regulations')}</a>
                 </div>
 
                 <br />
