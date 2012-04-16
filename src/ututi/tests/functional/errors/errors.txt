@@ -95,3 +95,23 @@ different error message:
 
     >>> browser.printCssQuery("#permission-denied-message", strip=True)
     <div>You do not have the rights to see this page, or perform this action. Go back or go to the search page please.</div>
+    
+If anonymous user will get NotFound (404) error, then login form will be showed:
+
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/not-existing-page')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
+    >>> browser.printQuery("id('main-content')//h1", strip=True)
+    <h1>Login</h1>
+
+If user wil get NotFound (404) error, then search form will be showed:
+
+    >>> browser = Browser.logIn('user@ututi.lt', 'password')
+    >>> browser.open('http://localhost/not-existing-page')
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
+    >>> browser.printQuery("id('main-content')//h1", strip=True)
+    <h1>Search</h1>

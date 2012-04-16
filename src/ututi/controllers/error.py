@@ -5,7 +5,7 @@ from ututi.lib.base import render
 from ututi.lib.mailer import send_email
 
 from pylons.i18n import _
-from pylons import url, config
+from pylons import url, config, session
 
 from pylons.controllers.util import redirect
 
@@ -37,7 +37,13 @@ class ErrorController(SearchController):
             self.form_result = {}
             self._search()
             c.came_from = url('/')
-            return render('/search/index.mako')
+            
+            # if user is logged in, show search form, otherwise - login form 
+            try:
+                if session['login']:
+                    return render('/search/index.mako')
+            except KeyError:
+                return render('/login.mako')
 
         return render("/error.mako")
 
