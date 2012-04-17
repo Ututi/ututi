@@ -84,7 +84,7 @@ ${h.javascript_link('/javascript/search.js')|n}
       %if 'text' in parts:
         <input type="text" name="text" id="text" value="${text}" size="60"/>
       %endif
-      <button type="submit" value="${_('Search-btn')}" id="search-btn">
+      <button type="submit" value="${_('Search-btn')}" class="black" id="search-btn">
         ${_('Search-btn')}
       </button>
     </div>
