@@ -419,22 +419,14 @@ div#pager {
 
 .university-box .university-entry {
     color: #666666;
-    width: 300px;
+    width: 325px;
     float: left;
     margin-bottom: 30px;
-}
-
-.university-box .university-entry-frontpage {
-    width: 325px;
+    height: 60px;
 }
 
 .university-box .university-entry-frontpage:nth-child(2n) {
     float: left;
-    width: 325px;
-}
-
-.university-box .university-entry-frontpage:nth-child(3n) {
-
 }
 
 .university-entry .logo,
@@ -452,10 +444,6 @@ div#pager {
 /* selects 2, 4, 6, 8, ... elements */
 .university-entry:nth-child(2n) {
     float: right;
-    width: 275px;
-}
-
-.university-entry:nth-child(2n + 1) {
 }
 
 .university-entry .title a,
@@ -476,7 +464,7 @@ div#pager {
 .teacher-entry .title {
     font-weight: bold;
     color: #333333;
-    margin: 5px 50px 0 67px;
+    margin: 5px 40px 0 67px;
 }
 
 .university-entry ul.statistics li,
