@@ -153,7 +153,7 @@ class UniversityListMixin(BaseController):
         groups = meta.Session.query(Group).order_by(Group.created_on.desc()).limit(10).all()
         return [group.info_dict() for group in groups]
 
-    def _get_unis(self):
+    def _get_unis(self, items_per_page=16):
         """List universities.
 
         Paging and sorting are performed according to request parameters.
@@ -165,7 +165,7 @@ class UniversityListMixin(BaseController):
         c.unis = paginate.Page(
             unis,
             page=int(request.params.get('page', 1)),
-            items_per_page=16,
+            items_per_page=items_per_page,
             item_count=len(unis),
             **{'sort': c.sort}
             )
