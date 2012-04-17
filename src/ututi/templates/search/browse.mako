@@ -1,6 +1,7 @@
-<%inherit file="/base.mako" />
+<%inherit file="/search/base.mako" />
 <%namespace file="/portlets/facebook.mako" import="*"/>
 <%namespace file="/search/index.mako" import="search_form"/>
+<%namespace file="/frontpage.mako" import="unis_listing"/>
 
 <h1 class="page-title">${_('Universities')}</h1>
 
@@ -34,9 +35,11 @@
 </%def>
 
 <%def name="universities(unis, ajax_url)">
+  <div class="clear university-box">
   %for uni in unis:
-    ${location_tag(uni)}
+    ${unis_listing(uni)}
   %endfor
+  </div>
   <div id="pager">
     ${unis.pager(format='~3~',
                  partial_param='js',
@@ -50,7 +53,7 @@
        collapse_text = _('More universities')
   %>
   %if unis:
-  <div id="university-list" class="${c.teaser and 'collapsed_list' or ''}">
+  <div id="university-list" class="${c.teaser and 'collapsed_list' or ''} clear">
     ${universities(unis, ajax_url)}
   </div>
   %if collapse and len(unis) > 6:
