@@ -289,7 +289,7 @@ div#pager {
         font-size: 18px;
         height: 45px;
         position: relative;
-        bottom: -180px;
+        bottom: -184px;
         text-align: left;
     }
 
@@ -385,7 +385,7 @@ div#pager {
         }
 
     #features-student button {
-        margin-top: 62px;
+        margin-top: 83px;
         text-align: left;
         position: relative;
         height: 45px;
