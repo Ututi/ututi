@@ -77,7 +77,7 @@ class SearchController(SearchBaseController, UniversityListMixin):
         return render('/search/index.mako')
 
     def browse(self):
-        self._get_unis()
+        self._get_unis(items_per_page=18)
         c.teaser = False
 
         c.obj_type = '*'
