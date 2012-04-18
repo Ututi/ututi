@@ -31,3 +31,27 @@ user:
     >>> user = Browser.logIn()
     >>> user.open('http://localhost/search')
     >>> form = user.getForm('search_form')
+   
+Following code checks sorting by alphabet or popularity:
+
+    >>> anon.open('http://localhost/browse')
+    >>> anon.getLink('Alphabet').click()
+    >>> anon.printCssQuery('.university-entry .title a', strip=True)
+    <a>U-niversity</a>
+    <a>Vilniaus universitetas</a>
+
+    >>> anon.getLink('Popularity').click()
+    >>> anon.printCssQuery('.university-entry .title a', strip=True)
+    <a>Vilniaus universitetas</a>
+    <a>U-niversity</a>
+
+    >>> user.open('http://localhost/browse')
+    >>> user.getLink('Alphabet').click()
+    >>> user.printCssQuery('.university-entry .title a', strip=True)
+    <a>U-niversity</a>
+    <a>Vilniaus universitetas</a>
+
+    >>> user.getLink('Popularity').click()
+    >>> user.printCssQuery('.university-entry .title a', strip=True)
+    <a>Vilniaus universitetas</a>
+    <a>U-niversity</a>
