@@ -79,47 +79,50 @@ ${h.javascript_link('/javascript/search.js')|n}
        target = url(controller='search', action='index')
 %>
 <div class="search-controls">
-  <form method="get" action="${target}" id="search_form">
-    <div class="search-text-submit">
-      %if 'text' in parts:
-        <input type="text" name="text" id="text" value="${text}" size="60"/>
-      %endif
-      <button type="submit" value="${_('Search-btn')}" class="black" id="search-btn">
-        ${_('Search-btn')}
-      </button>
-    </div>
-    %if 'obj_type' in parts:
-    <%
-       types = [('subject', _('show-subjects')), ('file', _('show-files')), ('page', _('show-pages')), ('group', _('show-groups')), ('forum_post', _('show-posts')), ('*', _('show-everything'))]
-    %>
-    <div class="search-type js-alternatives">
-      <div class="js">
-        <div class="search-type-label">${_('Show only:')}</div>
-        %for value, title in types:
-          <%
-             cls = value == obj_type and 'active' or ''
-             id = value == '*' and 'any' or value
-          %>
-          <div id="search-type-${id}" class="search-type-item ${cls}">${title}</div>
-        %endfor
+  %if url.environ['pylons.routes_dict']['action'] != 'browse' or c.user:
+    <form method="get" action="${target}" id="search_form">
+      <div class="search-text-submit">
+        %if 'text' in parts:
+          <input type="text" name="text" id="text" value="${text}" size="60"/>
+        %endif
+        <button type="submit" value="${_('Search-btn')}" class="black" id="search-btn">
+          ${_('Search-btn')}
+        </button>
       </div>
-      <div class="non-js">
-        <select name="obj_type" id="obj_type">
+      %if 'obj_type' in parts:
+      <%
+         types = [('subject', _('show-subjects')), ('file', _('show-files')), ('page', _('show-pages')), ('group', _('show-groups')), ('forum_post', _('show-posts')), ('*', _('show-everything'))]
+      %>
+      <div class="search-type js-alternatives">
+        <div class="js">
+          <div class="search-type-label">${_('Show only:')}</div>
           %for value, title in types:
-            %if value == obj_type:
-              <option value="${value}" selected="selected">${title}</option>
-            %else:
-              <option value="${value}">${title}</option>
-            %endif
+            <%
+               cls = value == obj_type and 'active' or ''
+               id = value == '*' and 'any' or value
+            %>
+            <div id="search-type-${id}" class="search-type-item ${cls}">${title}</div>
           %endfor
-        </select>
+        </div>
+        <div class="non-js">
+          <select name="obj_type" id="obj_type">
+            %for value, title in types:
+              %if value == obj_type:
+                <option value="${value}" selected="selected">${title}</option>
+              %else:
+                <option value="${value}">${title}</option>
+              %endif
+            %endfor
+          </select>
+        </div>
       </div>
-    </div>
-    %else:
-      <input type="hidden" name="obj_type" value="${obj_type}" />
-    %endif
+      %else:
+        <input type="hidden" name="obj_type" value="${obj_type}" />
+      %endif
 
-  </form>
+    </form>
+  %endif
+
   %if js:
   <script type="text/javascript">
   //<![CDATA[

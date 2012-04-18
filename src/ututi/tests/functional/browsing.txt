@@ -1,0 +1,33 @@
+Test for browsing
+=================
+
+This test checks that search form from /browse route is
+hidding for anonymous user:
+
+    >>> anon = Browser()
+    >>> anon.open('http://localhost/browse')
+    >>> anon.getControl(name='text')
+    Traceback (most recent call last):
+    ...
+    LookupError: name 'text'
+
+/search route uses the same template, so search form must
+be showed for anonymous user:
+
+    >>> anon.open('http://localhost/search')
+    >>> anon.getControl(name='text')
+    <Control name='text' type='text'>
+
+Search form is showing from /browse route for logged in
+user:
+
+    >>> user = Browser.logIn()
+    >>> user.open('http://localhost/browse')
+    >>> form = user.getForm('search_form')
+
+Search form is showing from /search route for logged in
+user:
+
+    >>> user = Browser.logIn()
+    >>> user.open('http://localhost/search')
+    >>> form = user.getForm('search_form')
