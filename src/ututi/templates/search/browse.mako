@@ -5,6 +5,10 @@
 
 <h1 class="page-title">${_('Universities')}</h1>
 
+${_('Sort by')}: <a id="sort-alpha" class="sorting" href="/browse?sort=alpha">${_('Alphabet')}</a> | <a id="sort-popular" class="sorting active" href="/browse?sort=popular">${_('Popularity')}</a>
+
+<input type="hidden" id="sort-alpha-url" name="sort-alpha-url" value="/browse?sort=alpha&amp;js=True" />
+<input type="hidden" id="sort-popular-url" name="sort-popular-url" value="/browse?sort=popular&amp;js=True" />
 <%def name="location_tag(uni)">
 <div class="university_block">
   %if uni['has_logo']:
@@ -90,6 +94,8 @@
       $(document).ready(function() {
         $('#sort-alpha,#sort-popular').live("click", function() {
             var url = $('#'+$(this).attr('id')+'-url').val();
+            $('.sorting').removeClass('active');
+            $(this).addClass('active');
             $('#sorting').addClass('loading');
             $('#university-list').load(url);
             return false;
