@@ -759,6 +759,7 @@ form.inline-form button {
     background: transparent url("/img/icons.com/wiki_small_grey.png") left center no-repeat;
   }
 
+  a.active, a.active:hover,
   #dashboard_action_links a.action.active:hover,
   #dashboard_action_links a.action.open {
     color: #000;
