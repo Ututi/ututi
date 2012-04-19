@@ -5031,3 +5031,7 @@ a.disabled, a.disabled:hover {
     font-weight: bold;
     margin-bottom: 20px;
 }
+
+.single_button {
+    margin-bottom: 15px;
+}
