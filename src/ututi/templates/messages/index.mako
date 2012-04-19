@@ -5,18 +5,11 @@
   ${_('Private messages')}
 </%def>
 
-<div class="tip">
-  ${_('You can send a new message to a user from his or her public profile page.')}
+<div class="single_button">
+    <form id="message_button" action="${url(controller='messages', action='new_message')}">
+        <input type="submit" class="black" value="${_('Create message')}" />
+    </form>
 </div>
-
-##<div class="back-link">
-##  <a class="back-link" href="${url(controller='profile', action='home')}">${_('Back to profile')}</a>
-##</div>
-
-##  <div style="float: right; padding-top: 4px">
-##    ${h.button_to(_('New topic'), url(controller=c.controller, action='new_thread', id=c.group_id, category_id=category.id))}
-##  </div>
-
 
 <div id="private-messages">
   <div class="single-title">
