@@ -41,7 +41,7 @@
   </table>
 
   <div class="reply click2show">
-    <div class="action-tease click hide">${_('Write a reply')}</div>
+    <div class="action-tease click">${_('Write a reply')}</div>
     <div class="action-block show" id="send-message-block">
       <form method="POST" action="${url(controller='messages', action='reply', id=c.message.id)}" id="message_form" enctype="multipart/form-data">
         <input id="message-send-url" type="hidden" value="${url(controller='wall', action='send_message_js')}" />
