@@ -8,6 +8,7 @@ from ututi.model import meta, PrivateMessage, User
 from ututi.lib.base import render, BaseController
 from ututi.lib.security import ActionProtector
 import ututi.lib.helpers as h
+import json
 
 
 class MessagesController(BaseController):
@@ -59,6 +60,25 @@ class MessagesController(BaseController):
         redirect(url(controller='messages', action='thread', id=thread_id))
 
     @ActionProtector("user")
+    def find_user(self):
+        name = request.params.get('term')
+
+        if name:
+            users = meta.Session.query(User).filter(User.fullname.like('%' + name + '%')) \
+                                            .filter(User.id != c.user.id) \
+                                            .limit(10)
+            list_of_users = []
+
+            for user in users:
+                user_info = {}
+                user_info['label'] = user.fullname # is showing on the list
+                user_info['value'] = user.fullname # is coping in the input
+                user_info['id'] = user.id
+                list_of_users.append(user_info)
+
+            return json.dumps(list_of_users)
+
+    @ActionProtector("user")
     def delete(self, id):
         message = PrivateMessage.get(id)
         if c.user == message.recipient:
@@ -79,10 +99,15 @@ class MessagesController(BaseController):
     @ActionProtector("user")
     def new_message(self):
         user_id = request.params.get('user_id')
+
+        if request.params.get('uid'):
+            user_id = request.params.get('uid')
+
         try:
             c.recipient = meta.Session.query(User).filter_by(id=user_id).one()
         except NoResultFound:
-            abort(404)
+            pass
+
         if 'message' in request.params:
             msg = PrivateMessage(c.user, c.recipient,
                                  request.params.get('title'),
