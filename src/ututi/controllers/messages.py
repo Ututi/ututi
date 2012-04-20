@@ -100,6 +100,8 @@ class MessagesController(BaseController):
     @ActionProtector("user")
     def new_message(self):
         user_id = request.params.get('user_id')
+        message = request.params.get('message')
+        title = request.params.get('title')
 
         if request.params.get('uid'):
             user_id = request.params.get('uid')
@@ -109,7 +111,7 @@ class MessagesController(BaseController):
         except NoResultFound:
             pass
 
-        if 'message' in request.params:
+        if user_id and message and title:
             msg = PrivateMessage(c.user, c.recipient,
                                  request.params.get('title'),
                                  request.params.get('message'))
@@ -117,4 +119,6 @@ class MessagesController(BaseController):
             meta.Session.commit()
             h.flash(_('Message sent.'))
             redirect(url(controller='user', action='index', id=c.recipient.id))
+        else:
+            h.flash(_('All fields must be filled!'))
         return render('/messages/message_new.mako')
