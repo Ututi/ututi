@@ -160,3 +160,27 @@ The deleted message was marked as read:
     >>> browser2.getLink('Private messages')
     <Link text='Private messages' url='http://localhost/messages'>
 
+One user writes a message to other user. First user (uid=2) clicks on
+'Private message' link and fills in the form:
+
+    >>> browser2.getLink('Private message').click()
+    >>> form = browser2.getForm('message_button')
+    >>> form.getControl('Create message').click()
+    >>> browser2.url
+    'http://localhost/messages/new_message?'
+
+    >>> form = browser2.getForm('new_message_form')
+    >>> form.getControl(name='title').value = 'Testing subject'
+    >>> form.getControl(name='message').value = 'Text about anything'
+    >>> form.getControl(name='uid').value = '2'
+    >>> form.getControl('Post').click()
+
+Second user sees the message and can click on it:
+
+    >>> browser.reload()
+    >>> browser.printQuery("id('inbox-link')")
+    <a id="inbox-link" href="/messages">
+    <strong>Private messages (2)</strong>
+    </a>
+    >>> browser.getLink('Private messages (2)').click()
+    >>> browser.getLink('Testing subject').click()
