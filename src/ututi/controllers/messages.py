@@ -66,6 +66,7 @@ class MessagesController(BaseController):
         if name:
             users = meta.Session.query(User).filter(User.fullname.like('%' + name + '%')) \
                                             .filter(User.id != c.user.id) \
+                                            .filter(User.location_id == c.user.location.id) \
                                             .limit(10)
             list_of_users = []
 
