@@ -33,9 +33,9 @@
     <div class="contact-text">${_("Contact information:")}</div>
     <p><strong>UAB "Ututi"</strong></p>
     <p>Upės str. 5, Vilnius<br />Lithuania</p>
-    <p>Email: <a href="mailto:info@ututi.com">info@ututi.com</a><br />
-       Mobile phone: +370 683 79238</p>
-    <p>Company number: 302495065<br />
-       VAT number: LT10000510316</p>
+    <p>${_('Email')}: <a href="mailto:info@ututi.com">info@ututi.com</a><br />
+       ${_('Mobile phone')}: +370 683 79238</p>
+    <p>${_('Company number')}: 302495065<br />
+       ${_('VAT number')}: LT10000510316</p>
   </div>
 </div>
