@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2011-09-05 07:02+0200\n"
-"Last-Translator: Jaro <jaro@akl.lt>\n"
+"PO-Revision-Date: 2012-04-23 15:03+0100\n"
+"Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -458,6 +458,9 @@ msgstr "Registracijos nustatymai"
 msgid "Custom theme"
 msgstr "Temos nuostatos"
 
+msgid "Unverified teachers"
+msgstr "Nepatvirtinti dėstytojai"
+
 msgid "Information updated."
 msgstr "Informacija atnaujinta."
 
@@ -517,6 +520,9 @@ msgstr "Nepavyko atmesti žinutės %(link_to_message)s, nes ji jau buvo atmesta.
 
 msgid "Message sent."
 msgstr "Pranešimas išsiųstas."
+
+msgid "All fields must be filled!"
+msgstr "Visi laukai privalo būti užpildyti"
 
 #, python-format
 msgid "Ututi news: %(changes)s"
@@ -699,6 +705,9 @@ msgstr "Facebook paskyra atsieta."
 
 msgid "Your password has been changed!"
 msgstr "Tavo slaptažodis sėkmingai pakeistas!"
+
+msgid "Your account has been successfully removed!"
+msgstr "Jūsų paskyra buvo sėkmingai ištrinta!"
 
 #, python-format
 msgid "Password recovery email sent to %(user_email)s. Please check your inbox."
@@ -1007,6 +1016,9 @@ msgstr "El. pašto adreso domenas (dalis po @: %(domain)s) neegzistuoja."
 msgid "The email already exists."
 msgstr "Toks el. paštas jau yra."
 
+msgid "Email address is incorrect."
+msgstr "El.pašto adresas neteisingas."
+
 msgid "Enter a valid email."
 msgstr "Ei! Įvesk teisingą el. paštą."
 
@@ -1305,63 +1317,107 @@ msgstr ""
 "Paveiksliukas iš flickr: "
 "http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
 
-msgid "Sign up to join your university's social network or create it yourself"
-msgstr "Prisijunkite prie savo universiteto tinklo arba sukurkite naują"
+msgid "Private social network for universities"
+msgstr "Privatūs socialiniai tinklai universitetams"
 
-msgid "Enter your academic email"
-msgstr "Įvesti akademinį el. pašto adresą"
+msgid "Groups of students"
+msgstr "Studentų grupės"
 
-msgid "Sign Up"
-msgstr "Registruotis"
+msgid "University news"
+msgstr "Universiteto naujienos"
 
-msgid ""
-"Only people with a verified university / college email address can join "
-"your network."
-msgstr ""
-"Tik turintys patvirtintus universiteto / kolegijos el. pašto adresus gali"
-" prisijungti prie Jūsų tinklo."
+msgid "Lecture material"
+msgstr "Paskautų medžiaga"
 
-msgid "Learn more"
-msgstr "Sužinoti daugiau"
+msgid "Add your university"
+msgstr "Pridėti jūsų universitetą"
 
-msgid "Private social networks for universities."
-msgstr "Privatūs universitetų socialiniai tinklai."
+msgid "Teachers' academical workspaces"
+msgstr "Dėstytojų akademinė darbo erdvė"
 
-msgid ""
-"Ututi is a platform for creating academical social networks. It helps "
-"engage your students and teachers and improve the quality of your "
-"studies."
-msgstr ""
-"Ututi yra platforma, skirta kurti akademiniams socialiniams tinklams. Ji "
-"leidžia studentams ir dėstytojams bendradarbiauti patogiau bei "
-"efektyviau."
+msgid "Space to place lecture material"
+msgstr "Vieta akademinės medžiagos talpinimui"
 
-msgid "Social discussions about course material between students and teachers."
-msgstr "Diskusijos akademinėmis temomis tarp studentų ir dėstytojų."
+msgid "Academic site with biography, publications and contacts"
+msgstr "Akademinė svetainė su biografija, publikacijomis ir kontaktinę informacija"
 
-msgid ""
-"Students and teachers can discuss course material, academical matters and"
-" university life in a modern way."
-msgstr ""
-"Studentai ir dėstytojai gali diskutuoti akademinėmis temomis moderniu "
-"būdu."
+msgid "Easy communicatio with students"
+msgstr "Lengvas bendravimas su studentais"
 
-msgid "Course material publishing."
-msgstr "Kursų medžiagos viešinimas."
+msgid "Register as a teacher"
+msgstr "Dėstytojo registracija"
 
-msgid ""
-"Teachers can create areas for course information where students will be "
-"able to access, share and comment study materials."
-msgstr ""
-"Dėstytojai turi galimybę kurti savo dėstomų dalykų svetaines, kurias "
-"studentai galės stebėti, naudotis bei komentuoti jose esančią "
-"informaciją."
+msgid "Useful tools for students"
+msgstr "Naudingi įrankiai studentams"
 
-msgid "Using Ututi:"
-msgstr "Naudoja Ututi:"
+msgid "Correspondence publicly and inside of group"
+msgstr "Susirašynėkit viešai ir grupės viduje"
 
-msgid "More..."
-msgstr "Daugiau.."
+msgid "Up to 500Mb private group's storage"
+msgstr "Iki 500Mb grupės privatiems failams"
+
+msgid "And more..."
+msgstr "Ir daugiau..."
+
+msgid "Find your university"
+msgstr "Rasti universitetą"
+
+msgid "Register at the university"
+msgstr "Registuotis į universitetą"
+
+msgid "I am a student"
+msgstr "Aš studentas"
+
+msgid "I am a teacher"
+msgstr "Esu dėstytojas"
+
+msgid "Name"
+msgstr "Vardas"
+
+msgid "Email"
+msgstr "El. paštas"
+
+msgid "University you belong to"
+msgstr "Pasirinkite savo universitetą"
+
+msgid "Pick from the list"
+msgstr "Pasirinkti iš sąrašo"
+
+msgid "Create new university"
+msgstr "Sukurti naują universitetą"
+
+msgid "I accept terms and regulations"
+msgstr "Sutinku su teisėmis ir sąlygomis"
+
+msgid "Create an account"
+msgstr "Sukurti paskyrą"
+
+msgid "Universities already are on Ututi"
+msgstr "Ututi Universitetai"
+
+msgid "More universities"
+msgstr "Daugiau universitetų"
+
+msgid "Title"
+msgstr "Pavadinimas"
+
+msgid "Short title"
+msgstr "Trumpinys"
+
+msgid "WWW address"
+msgstr "WWW adresas"
+
+msgid "Create university"
+msgstr "Kurti universitetą"
+
+msgid "Create account"
+msgstr "Kurti paskyrą"
+
+msgid "Required"
+msgstr "Privalomas"
+
+msgid "You must agree to the terms"
+msgstr "Privalote sutikti su naudojimosi sistema sąlygomis"
 
 msgid "New in Ututi?"
 msgstr "Pirmąkart Ututi?"
@@ -1724,9 +1780,6 @@ msgstr "Miestas"
 msgid "Editing"
 msgstr "Redagavimas"
 
-msgid "Name"
-msgstr "Vardas"
-
 msgid "Edit"
 msgstr "Keisti"
 
@@ -1771,9 +1824,6 @@ msgstr ""
 
 msgid "Create new"
 msgstr "Sukurti naują"
-
-msgid "Title"
-msgstr "Pavadinimas"
 
 msgid "Description"
 msgstr "Aprašymas"
@@ -1969,17 +2019,11 @@ msgstr[2] "rasta %(count)s dalykų"
 msgid "Fullname"
 msgstr "Vardas ir pavardė"
 
-msgid "Email"
-msgstr "El. paštas"
-
 msgid "University"
 msgstr "Universitetas"
 
 msgid "Make a teacher"
 msgstr "Padaryti dėstytoju"
-
-msgid "Unverified teachers"
-msgstr "Nepatvirtinti dėstytojai"
 
 #, python-format
 msgid "%(count)s teacher"
@@ -2609,6 +2653,12 @@ msgstr "Grupės puslapis matomas visiems"
 msgid "You can keep up to %s of private group files here (e.g. pictures)"
 msgstr "Privatūs failai matomi TIK GRUPIOKAMS! Čia galite laikyti iki %s."
 
+msgid "GROUP FILES"
+msgstr "GRUPĖS FAILAI"
+
+msgid "SUBJECT FILES"
+msgstr "DALYKO FAILAI"
+
 msgid "Add more subjects"
 msgstr "Pridėk daugiau dalykų"
 
@@ -2897,30 +2947,86 @@ msgstr "Įveskite savo el. pašto adresą"
 msgid "Recover password"
 msgstr "Atstatyti slaptažodį"
 
-msgid "+ Add department"
-msgstr "+ Pridėti fakultetą"
+msgid "All faculties"
+msgstr "Visi fakultetai"
 
-msgid "Private social network"
-msgstr "Privatus socialinis tinklas"
+msgid "+ Add teacher"
+msgstr "+ Pridėti dėstytoją"
+
+msgid "All teachers"
+msgstr "Visi dėstytojai"
+
+#, python-format
+msgid "Add faculties to %s's social network"
+msgstr "Pridėti fakultetus prie %s socialinio tinklo"
+
+msgid "Add a facultie you belong to"
+msgstr "Pridėkit fakultetą kuriam priklausote"
+
+msgid "Create your academic group"
+msgstr "Sukurti akademinę grupę"
+
+msgid "Invite your coleagues and professors to join"
+msgstr "Pakvieskit jūsų kolegas ir profesorius prisijungti"
+
+msgid "Add a facultie now"
+msgstr "Pridėti fakultetą dabar"
+
+#, python-format
+msgid "Welcome to the social network of %s!"
+msgstr "Sveiki atvykę į %s socialinį tinklą!"
+
+msgid "Register or login"
+msgstr "Registracija arba prisijungimas"
+
+msgid "Login as a student"
+msgstr "Studento prisijungimas"
+
+msgid "Login as a teacher"
+msgstr "Dėstytojo prisijungimas"
+
+msgid "Register as a student"
+msgstr "Studento registracija"
+
+msgid "Keep me logged in"
+msgstr "Prisiminti mane"
 
 msgid "Academic resources"
 msgstr "Akademiniai resursai"
 
-msgid "Add your study material (notes and files)."
-msgstr "Pridėkite studijų medžiagą (užrašus bei failus)"
+msgid ""
+"teaching subjects with study materials (notes, files, presentations, "
+"audio&amp;video)"
+msgstr ""
+"dėstomi dalykai su paskaitų medžiaga (užrašai, failai, konspektai, "
+"prezentacios, audio&amp;video)"
 
-msgid "Student groups"
+msgid "Students groups"
 msgstr "Studentų grupės"
 
-msgid "Create and join private or public groups to communicate and collaborate."
+msgid ""
+"private and public groups with files area, forum and email for "
+"communication and collaboration"
 msgstr ""
-"Sukurkite arba prisijunkite prie privačių bei viešųjų grupių. Bendraukite"
-" ir mokykitės kartu."
+"privačios ir viešos grupės su failų saugykla, forumais ir el.pašto adresu"
+" bendravimui ir bendradarbiavimui"
 
-msgid "Share knowledge and discuss academic subjects with students and teachers."
+msgid ""
+"knowlenge sharing and discussions on academic subjects with students and "
+"teachers"
 msgstr ""
-"Dalinkitės akademinėmis žiniomis ir diskutuokite su studentais bei "
-"dėstytojais."
+"žinių dalinimąsis ir diskusijos akademinėmis temomis su studentais ir "
+"dėstytojais"
+
+msgid "Teachers profiles"
+msgstr "Dėstytojų profiliai"
+
+msgid ""
+"academic webpage  with teachers biography, publications, touch cources "
+"and contact information"
+msgstr ""
+"akademinis puslapis su dėstytojų biografija, publikacijomis, dėstomais "
+"dalykais ir contaktinę informacija"
 
 msgid "Departments:"
 msgstr "Fakultetai:"
@@ -2942,6 +3048,9 @@ msgstr "(Pasirinkti šalį iš sąrašo)"
 
 msgid "University website:"
 msgstr "Universiteto tinklapis:"
+
+msgid "Teachers url:"
+msgstr "Dėstytojų url:"
 
 msgid "University logo"
 msgstr "Universiteto logotipas"
@@ -3061,6 +3170,19 @@ msgstr "Studento registracija"
 msgid "Enter your email"
 msgstr "Jūsų el. pašto adresas"
 
+msgid "Enter your academic email"
+msgstr "Įvesti akademinį el. pašto adresą"
+
+msgid "Sign Up"
+msgstr "Registruotis"
+
+msgid ""
+"Only people with a verified university / college email address can join "
+"your network."
+msgstr ""
+"Tik turintys patvirtintus universiteto / kolegijos el. pašto adresus gali"
+" prisijungti prie Jūsų tinklo."
+
 msgid "Ututi student accounts:"
 msgstr "Ututi studentų paskyros:"
 
@@ -3177,9 +3299,6 @@ msgstr ""
 msgid "Are you also a teacher in this University?"
 msgstr "Esate ir dėstytojas šiame universitete?"
 
-msgid "I am a teacher"
-msgstr "Esu dėstytojas"
-
 msgid "About teachers:"
 msgstr "Apie dėstytojus:"
 
@@ -3252,8 +3371,8 @@ msgstr "Laiškas grupei"
 msgid "Private messages"
 msgstr "Privačios žinutės"
 
-msgid "You can send a new message to a user from his or her public profile page."
-msgstr "Naują žinutę naudotojui galite išsiųsti iš jo viešo profilio puslapio."
+msgid "Create message"
+msgstr "Sukurti žinutę"
 
 #, python-format
 msgid "%(count)s message"
@@ -3519,6 +3638,9 @@ msgstr "Aš čia studijuoju"
 msgid "I teach here"
 msgstr "Aš čia dėstau"
 
+msgid "Don't study here?"
+msgstr "Studijuoji kitur?"
+
 msgid "Latest groups:"
 msgstr "Naujausios grupės"
 
@@ -3575,6 +3697,18 @@ msgstr "Dėst."
 
 msgid "Create your own social network"
 msgstr "Sukurkite savo socialinį tinklą"
+
+msgid "University already has"
+msgstr "Universitete jau yra"
+
+msgid "groups"
+msgstr "grupės"
+
+msgid "teachers"
+msgstr "dėstytojai"
+
+msgid "subjects"
+msgstr "dalykai"
 
 msgid "About Ututi:"
 msgstr "Apie Ututi:"
@@ -3635,9 +3769,6 @@ msgstr "Sukurtas Ututi"
 
 msgid "Login:"
 msgstr "Prisijungimas:"
-
-msgid "Keep me logged in"
-msgstr "Prisiminti mane"
 
 msgid "Not a member yet?"
 msgstr "Dar ne narys?"
@@ -4028,6 +4159,17 @@ msgstr "Naujas slaptažodis"
 
 msgid "Repeat the new password"
 msgstr "Pakartok naują slaptažodį"
+
+msgid "Delete account"
+msgstr "Ištrinti paskyrą"
+
+msgid "To delete your account, type your current password in the form below."
+msgstr ""
+"Jei norite ištrinti savo paskyrą, įveskite esamą slaptažodį į žemiau "
+"esančią formą."
+
+msgid "Delete my account"
+msgstr "Noriu ištrinti savo paskyrą"
 
 msgid "In case you forgot your password, use the button below to recover it."
 msgstr "Jei pamiršote savo slaptažodį, galite jį atkurti paspausdami šį mygtuką."
@@ -4551,15 +4693,21 @@ msgstr ""
 "Tai ne Jūsų universitetas? Naudokite kitą el. pašto adresą arba "
 "susisiekite su mumis %(contact_us_link)s."
 
+msgid "Sort by"
+msgstr "Rūšiuoti pagal"
+
+msgid "Alphabet"
+msgstr "Abecėlės tvarka"
+
+msgid "Popularity"
+msgstr "Aktyvumas"
+
 #, python-format
 msgid "%(count)s file"
 msgid_plural "%(count)s files"
 msgstr[0] "%(count)s failas"
 msgstr[1] "%(count)s failai"
 msgstr[2] "%(count)s failų"
-
-msgid "More universities"
-msgstr "Daugiau universitetų"
 
 msgid "Pick your region"
 msgstr "Pasirinkite regioną"
@@ -4646,9 +4794,6 @@ msgstr "ištrinti failą"
 msgid "flag as suspicious"
 msgstr "žymėti kaip įtartiną"
 
-msgid "deleted"
-msgstr "ištrinta"
-
 msgid "restore file"
 msgstr "atstatyti failą"
 
@@ -4700,6 +4845,15 @@ msgstr ""
 "Privatiems grupės failams nebeliko vietos. Rekomenduojame perkelti failus"
 " į dalykus arba\n"
 "sumokėti už grupę be apribojimų."
+
+msgid "Filename"
+msgstr "Failo pavadinimas"
+
+msgid "Posted by"
+msgstr "Sukurta"
+
+msgid "Date"
+msgstr "Data"
 
 msgid "Trash"
 msgstr "Šiukšliadėžė"
@@ -4913,9 +5067,6 @@ msgstr "%(user_link)s sukūrė puslapį %(page_link)s"
 msgid "%(user_link)s has modified a page %(page_link)s"
 msgstr "%(user_link)s redagavo puslapį %(page_link)s"
 
-msgid "Short title"
-msgstr "Trumpinys"
-
 msgid "Website"
 msgstr "Internetinis puslapis"
 
@@ -4971,14 +5122,17 @@ msgstr ""
 "Geriausia naudoti tiksliai tokį dalyko pavadinimą, koks yra naudojamas "
 "internete. Pavadinimai neturi būti unikalūs."
 
+msgid "Subject lecturer:"
+msgstr "Dalyko dėstytojas:"
+
+msgid "Subject description:"
+msgstr "Dalyko aprašymas:"
+
 msgid "Enter subject details"
 msgstr "Įvesti dalyko detales"
 
 msgid "Tags:"
 msgstr "Žymės:"
-
-msgid "Subject description:"
-msgstr "Dalyko aprašymas:"
 
 msgid "I want to follow this subject"
 msgstr "Noriu sektį šį dalyką"
@@ -5061,9 +5215,6 @@ msgstr "Sukurti naują Wiki užrašą"
 
 msgid "Created (edited) by"
 msgstr "Sukurtas (taisytas)"
-
-msgid "Date"
-msgstr "Data"
 
 msgid "No Wiki notes in this subject."
 msgstr "Šiame dalyke Wiki užrašų nėra."
@@ -5263,13 +5414,4 @@ msgstr "Sukurk fakultetą"
 
 msgid "Add section"
 msgstr "Sukurk katedrą"
-
-msgid "Delete account"
-msgstr "Ištrinti paskyrą"
-
-msgid "Delete my account"
-msgstr "Noriu ištrinti savo paskyrą"
-
-msgid "To delete your account, type your current password in the form below."
-msgstr "Jei norite ištrinti savo paskyrą, įveskite esamą slaptažodį į žemiau esančią formą."
 

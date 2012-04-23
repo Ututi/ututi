@@ -1,14 +1,14 @@
 # Translations template for ututi.
-# Copyright (C) 2011 ORGANIZATION
+# Copyright (C) 2012 ORGANIZATION
 # This file is distributed under the same license as the ututi project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-09-05 07:02+0200\n"
+"POT-Creation-Date: 2012-04-23 15:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -430,6 +430,9 @@ msgstr ""
 msgid "Custom theme"
 msgstr ""
 
+msgid "Unverified teachers"
+msgstr ""
+
 msgid "Information updated."
 msgstr ""
 
@@ -484,6 +487,9 @@ msgid "Could not reject %(link_to_message)s as it was already approved."
 msgstr ""
 
 msgid "Message sent."
+msgstr ""
+
+msgid "All fields must be filled!"
 msgstr ""
 
 #, python-format
@@ -663,6 +669,9 @@ msgid "Your Facebook account has been unlinked."
 msgstr ""
 
 msgid "Your password has been changed!"
+msgstr ""
+
+msgid "Your account has been successfully removed!"
 msgstr ""
 
 #, python-format
@@ -954,6 +963,9 @@ msgstr ""
 msgid "The email already exists."
 msgstr ""
 
+msgid "Email address is incorrect."
+msgstr ""
+
 msgid "Enter a valid email."
 msgstr ""
 
@@ -1227,51 +1239,106 @@ msgid ""
 "http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
 msgstr ""
 
-msgid "Sign up to join your university's social network or create it yourself"
+msgid "Private social network for universities"
 msgstr ""
 
-msgid "Enter your academic email"
+msgid "Groups of students"
 msgstr ""
 
-msgid "Sign Up"
+msgid "University news"
 msgstr ""
 
-msgid ""
-"Only people with a verified university / college email address can join your "
-"network."
+msgid "Lecture material"
 msgstr ""
 
-msgid "Learn more"
+msgid "Add your university"
 msgstr ""
 
-msgid "Private social networks for universities."
+msgid "Teachers' academical workspaces"
 msgstr ""
 
-msgid ""
-"Ututi is a platform for creating academical social networks. It helps engage "
-"your students and teachers and improve the quality of your studies."
+msgid "Space to place lecture material"
 msgstr ""
 
-msgid "Social discussions about course material between students and teachers."
+msgid "Academic site with biography, publications and contacts"
 msgstr ""
 
-msgid ""
-"Students and teachers can discuss course material, academical matters and "
-"university life in a modern way."
+msgid "Easy communicatio with students"
 msgstr ""
 
-msgid "Course material publishing."
+msgid "Register as a teacher"
 msgstr ""
 
-msgid ""
-"Teachers can create areas for course information where students will be able "
-"to access, share and comment study materials."
+msgid "Useful tools for students"
 msgstr ""
 
-msgid "Using Ututi:"
+msgid "Correspondence publicly and inside of group"
 msgstr ""
 
-msgid "More..."
+msgid "Up to 500Mb private group's storage"
+msgstr ""
+
+msgid "And more..."
+msgstr ""
+
+msgid "Find your university"
+msgstr ""
+
+msgid "Register at the university"
+msgstr ""
+
+msgid "I am a student"
+msgstr ""
+
+msgid "I am a teacher"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "University you belong to"
+msgstr ""
+
+msgid "Pick from the list"
+msgstr ""
+
+msgid "Create new university"
+msgstr ""
+
+msgid "I accept terms and regulations"
+msgstr ""
+
+msgid "Create an account"
+msgstr ""
+
+msgid "Universities already are on Ututi"
+msgstr ""
+
+msgid "More universities"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Short title"
+msgstr ""
+
+msgid "WWW address"
+msgstr ""
+
+msgid "Create university"
+msgstr ""
+
+msgid "Create account"
+msgstr ""
+
+msgid "Required"
+msgstr ""
+
+msgid "You must agree to the terms"
 msgstr ""
 
 msgid "New in Ututi?"
@@ -1570,9 +1637,6 @@ msgstr ""
 msgid "Editing"
 msgstr ""
 
-msgid "Name"
-msgstr ""
-
 msgid "Edit"
 msgstr ""
 
@@ -1613,9 +1677,6 @@ msgid ""
 msgstr ""
 
 msgid "Create new"
-msgstr ""
-
-msgid "Title"
 msgstr ""
 
 msgid "Description"
@@ -1807,16 +1868,10 @@ msgstr[1] ""
 msgid "Fullname"
 msgstr ""
 
-msgid "Email"
-msgstr ""
-
 msgid "University"
 msgstr ""
 
 msgid "Make a teacher"
-msgstr ""
-
-msgid "Unverified teachers"
 msgstr ""
 
 #, python-format
@@ -2364,6 +2419,12 @@ msgstr ""
 msgid "You can keep up to %s of private group files here (e.g. pictures)"
 msgstr ""
 
+msgid "GROUP FILES"
+msgstr ""
+
+msgid "SUBJECT FILES"
+msgstr ""
+
 msgid "Add more subjects"
 msgstr ""
 
@@ -2621,25 +2682,77 @@ msgstr ""
 msgid "Recover password"
 msgstr ""
 
-msgid "+ Add department"
+msgid "All faculties"
 msgstr ""
 
-msgid "Private social network"
+msgid "+ Add teacher"
+msgstr ""
+
+msgid "All teachers"
+msgstr ""
+
+#, python-format
+msgid "Add faculties to %s's social network"
+msgstr ""
+
+msgid "Add a facultie you belong to"
+msgstr ""
+
+msgid "Create your academic group"
+msgstr ""
+
+msgid "Invite your coleagues and professors to join"
+msgstr ""
+
+msgid "Add a facultie now"
+msgstr ""
+
+#, python-format
+msgid "Welcome to the social network of %s!"
+msgstr ""
+
+msgid "Register or login"
+msgstr ""
+
+msgid "Login as a student"
+msgstr ""
+
+msgid "Login as a teacher"
+msgstr ""
+
+msgid "Register as a student"
+msgstr ""
+
+msgid "Keep me logged in"
 msgstr ""
 
 msgid "Academic resources"
 msgstr ""
 
-msgid "Add your study material (notes and files)."
+msgid ""
+"teaching subjects with study materials (notes, files, presentations, "
+"audio&amp;video)"
 msgstr ""
 
-msgid "Student groups"
+msgid "Students groups"
 msgstr ""
 
-msgid "Create and join private or public groups to communicate and collaborate."
+msgid ""
+"private and public groups with files area, forum and email for communication "
+"and collaboration"
 msgstr ""
 
-msgid "Share knowledge and discuss academic subjects with students and teachers."
+msgid ""
+"knowlenge sharing and discussions on academic subjects with students and "
+"teachers"
+msgstr ""
+
+msgid "Teachers profiles"
+msgstr ""
+
+msgid ""
+"academic webpage  with teachers biography, publications, touch cources and "
+"contact information"
 msgstr ""
 
 msgid "Departments:"
@@ -2661,6 +2774,9 @@ msgid "(Select country from list)"
 msgstr ""
 
 msgid "University website:"
+msgstr ""
+
+msgid "Teachers url:"
 msgstr ""
 
 msgid "University logo"
@@ -2774,6 +2890,17 @@ msgstr ""
 msgid "Enter your email"
 msgstr ""
 
+msgid "Enter your academic email"
+msgstr ""
+
+msgid "Sign Up"
+msgstr ""
+
+msgid ""
+"Only people with a verified university / college email address can join your "
+"network."
+msgstr ""
+
 msgid "Ututi student accounts:"
 msgstr ""
 
@@ -2866,9 +2993,6 @@ msgstr ""
 msgid "Are you also a teacher in this University?"
 msgstr ""
 
-msgid "I am a teacher"
-msgstr ""
-
 msgid "About teachers:"
 msgstr ""
 
@@ -2937,7 +3061,7 @@ msgstr ""
 msgid "Private messages"
 msgstr ""
 
-msgid "You can send a new message to a user from his or her public profile page."
+msgid "Create message"
 msgstr ""
 
 #, python-format
@@ -3184,6 +3308,9 @@ msgstr ""
 msgid "I teach here"
 msgstr ""
 
+msgid "Don't study here?"
+msgstr ""
+
 msgid "Latest groups:"
 msgstr ""
 
@@ -3240,6 +3367,18 @@ msgstr ""
 msgid "Create your own social network"
 msgstr ""
 
+msgid "University already has"
+msgstr ""
+
+msgid "groups"
+msgstr ""
+
+msgid "teachers"
+msgstr ""
+
+msgid "subjects"
+msgstr ""
+
 msgid "About Ututi:"
 msgstr ""
 
@@ -3292,9 +3431,6 @@ msgid "Powered by Ututi"
 msgstr ""
 
 msgid "Login:"
-msgstr ""
-
-msgid "Keep me logged in"
 msgstr ""
 
 msgid "Not a member yet?"
@@ -3654,6 +3790,15 @@ msgid "New password"
 msgstr ""
 
 msgid "Repeat the new password"
+msgstr ""
+
+msgid "Delete account"
+msgstr ""
+
+msgid "To delete your account, type your current password in the form below."
+msgstr ""
+
+msgid "Delete my account"
 msgstr ""
 
 msgid "In case you forgot your password, use the button below to recover it."
@@ -4132,14 +4277,20 @@ msgstr[1] ""
 msgid "It is not your university? Use another email address or %(contact_us_link)s."
 msgstr ""
 
+msgid "Sort by"
+msgstr ""
+
+msgid "Alphabet"
+msgstr ""
+
+msgid "Popularity"
+msgstr ""
+
 #, python-format
 msgid "%(count)s file"
 msgid_plural "%(count)s files"
 msgstr[0] ""
 msgstr[1] ""
-
-msgid "More universities"
-msgstr ""
 
 msgid "Pick your region"
 msgstr ""
@@ -4225,9 +4376,6 @@ msgstr ""
 msgid "flag as suspicious"
 msgstr ""
 
-msgid "deleted"
-msgstr ""
-
 msgid "restore file"
 msgstr ""
 
@@ -4274,6 +4422,15 @@ msgstr ""
 msgid ""
 "No more space for private files. We recommend moving files into subjects or "
 "upgrading the group."
+msgstr ""
+
+msgid "Filename"
+msgstr ""
+
+msgid "Posted by"
+msgstr ""
+
+msgid "Date"
 msgstr ""
 
 msgid "Trash"
@@ -4463,9 +4620,6 @@ msgstr ""
 msgid "%(user_link)s has modified a page %(page_link)s"
 msgstr ""
 
-msgid "Short title"
-msgstr ""
-
 msgid "Website"
 msgstr ""
 
@@ -4519,13 +4673,16 @@ msgid ""
 "this subject. It does not need to be unique."
 msgstr ""
 
+msgid "Subject lecturer:"
+msgstr ""
+
+msgid "Subject description:"
+msgstr ""
+
 msgid "Enter subject details"
 msgstr ""
 
 msgid "Tags:"
-msgstr ""
-
-msgid "Subject description:"
 msgstr ""
 
 msgid "I want to follow this subject"
@@ -4606,9 +4763,6 @@ msgid "Create new Wiki note"
 msgstr ""
 
 msgid "Created (edited) by"
-msgstr ""
-
-msgid "Date"
 msgstr ""
 
 msgid "No Wiki notes in this subject."
