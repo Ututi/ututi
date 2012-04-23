@@ -40,6 +40,26 @@
         </ul>
       </%self:portlet>
     %endif
+  %else:
+    %if menu_items:
+      <%self:portlet id="navigation-portlet">
+        %if title is not None:
+        <%def name="header()">${title}</%def>
+        %endif
+        <ul>
+          %for item in menu_items:
+          <%
+          classes = item['name']
+          if item['name'] == current:
+            classes += ' current'
+          %>
+          <li class="${classes}">
+            <a href="${item['link']}">${item['title']}</a>
+          </li>
+          %endfor
+        </ul>
+      </%self:portlet>
+    %endif
   %endif
 </%def>
 
