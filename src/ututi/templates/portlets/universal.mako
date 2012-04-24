@@ -19,20 +19,21 @@
           <%def name="header()">${title}</%def>
         %endif
         <strong>${_('University already has')}:</strong>
+
         <ul>
-            <li class="group">
+            <li class="group ${'current' if c.current_menu_item == 'group' else ''}">
                 <a href="${c.location.url(action='catalog', obj_type='group')}">
                     <strong>${university_stats['total_groups']}</strong> ${_('groups')}
                 </a>
             </li>
 
-            <li class="teacher">
+            <li class="teacher ${'current' if c.current_menu_item == 'teacher' else ''}">
                 <a id="teachers_link" href="${c.location.url(action='catalog', obj_type='teacher')}">
                     <strong>${university_stats['total_teachers']}</strong> ${_('teachers')}
                 </a>
             </li>
 
-            <li class="subject">
+            <li class="subject ${'current' if c.current_menu_item == 'subject' else ''}">
                 <a href="${c.location.url(action='catalog', obj_type='subject')}">
                     <strong>${university_stats['total_subjects']}</strong> ${_('subjects')}
                 </a>
