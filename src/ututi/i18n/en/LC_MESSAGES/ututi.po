@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-04-24 11:07+0100\n"
+"PO-Revision-Date: 2012-04-24 13:32+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=((n * 1) != 1)\n"
@@ -1624,6 +1624,15 @@ msgid "Send"
 msgstr ""
 
 msgid "Contact information:"
+msgstr ""
+
+msgid "Mobile phone"
+msgstr ""
+
+msgid "Company number"
+msgstr ""
+
+msgid "VAT number"
 msgstr ""
 
 msgid "Private social networks for Universities and Colleges"

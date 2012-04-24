@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-04-24 11:07+0100\n"
+"POT-Creation-Date: 2012-04-24 13:23+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1608,6 +1608,15 @@ msgid "Send"
 msgstr ""
 
 msgid "Contact information:"
+msgstr ""
+
+msgid "Mobile phone"
+msgstr ""
+
+msgid "Company number"
+msgstr ""
+
+msgid "VAT number"
 msgstr ""
 
 msgid "Private social networks for Universities and Colleges"

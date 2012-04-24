@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-04-24 11:07+0100\n"
+"PO-Revision-Date: 2012-04-24 13:32+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1327,7 +1327,7 @@ msgid "University news"
 msgstr "Universiteto naujienos"
 
 msgid "Lecture material"
-msgstr "Paskautų medžiaga"
+msgstr "Paskaitų medžiaga"
 
 msgid "Add your university"
 msgstr "Pridėti jūsų universitetą"
@@ -1339,7 +1339,7 @@ msgid "Space to place lecture material"
 msgstr "Vieta akademinės medžiagos talpinimui"
 
 msgid "Academic site with biography, publications and contacts"
-msgstr "Akademinė svetainė su biografija, publikacijomis ir kontaktinę informacija"
+msgstr "Akademinė svetainė su biografija, publikacijomis ir kontaktine informacija"
 
 msgid "Easy communicatio with students"
 msgstr "Lengvas bendravimas su studentais"
@@ -1351,7 +1351,7 @@ msgid "Useful tools for students"
 msgstr "Naudingi įrankiai studentams"
 
 msgid "Correspondence publicly and inside of group"
-msgstr "Susirašynėkit viešai ir grupės viduje"
+msgstr "Susirašinėkit viešai ir grupės viduje"
 
 msgid "Up to 500Mb private group's storage"
 msgstr "Iki 500Mb grupės privatiems failams"
@@ -1744,6 +1744,15 @@ msgstr "Siųsti"
 
 msgid "Contact information:"
 msgstr "Kontaktinė informacija:"
+
+msgid "Mobile phone"
+msgstr "Mobilusis telefonas"
+
+msgid "Company number"
+msgstr "Įmonės kodas"
+
+msgid "VAT number"
+msgstr "PVM mok. kodas"
 
 msgid "Private social networks for Universities and Colleges"
 msgstr "Privatūs socialiniai tinklai universitetams ir kolegijoms"
