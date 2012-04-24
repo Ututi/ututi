@@ -37,13 +37,13 @@ def location_menu_items():
          'name': 'feed',
          'link': c.location.url(action='feed')},
         {'title': _("Subjects"),
-         'name': 'subjects',
+         'name': 'subject',
          'link': c.location.url(action='catalog', obj_type='subject')},
         {'title': _("Groups"),
-         'name': 'groups',
+         'name': 'group',
          'link': c.location.url(action='catalog', obj_type='group')},
         {'title': _("Teachers"),
-         'name': 'teachers',
+         'name': 'teacher',
          'link': c.location.url(action='catalog', obj_type='teacher')}]
 
 def location_menu_public_items():
@@ -52,10 +52,10 @@ def location_menu_public_items():
          'name': 'about',
          'link': c.location.url(action='about')},
         {'title': _("Subjects"),
-         'name': 'subjects',
+         'name': 'subject',
          'link': c.location.url(action='catalog', obj_type='subject')},
         {'title': _("Teachers"),
-         'name': 'teachers',
+         'name': 'teacher',
          'link': c.location.url(action='catalog', obj_type='teacher')}]
 
 def location_edit_menu_items():
@@ -211,7 +211,6 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
     def about(self, location):
         if c.user:
             redirect(location.url(action='feed'))
-
         self._get_departments(location)
         return render('location/about.mako')
 

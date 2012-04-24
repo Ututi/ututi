@@ -102,6 +102,7 @@
 
     #navigation-portlet ul li.feed a {
         background-image: url('/img/icons.com/news_small_orange.png');
+        padding-left: 35px;
     }
 
     #navigation-portlet ul li.settings a {
@@ -120,6 +121,7 @@
     #navigation-portlet ul li.about a {
         background-image: url('/img/icons.com/university_small_orange.png');
         background-repeat: no-repeat;
+        padding-left: 35px;
     }
 
 #about-ututi-portlet { }

@@ -11,56 +11,25 @@
 </%def>
 
 <%def name="navigation_portlet(menu_items, current, title=None)">
-  %if hasattr(c, 'location'):
-    <% university_stats = h.get_university_stats(c.location) %>
-    %if menu_items:
-      <%self:portlet id="navigation-portlet">
-        %if title is not None:
-          <%def name="header()">${title}</%def>
-        %endif
-        <strong>${_('University already has')}:</strong>
-
-        <ul>
-            <li class="group ${'current' if c.current_menu_item == 'group' else ''}">
-                <a href="${c.location.url(action='catalog', obj_type='group')}">
-                    <strong>${university_stats['total_groups']}</strong> ${_('groups')}
-                </a>
-            </li>
-
-            <li class="teacher ${'current' if c.current_menu_item == 'teacher' else ''}">
-                <a id="teachers_link" href="${c.location.url(action='catalog', obj_type='teacher')}">
-                    <strong>${university_stats['total_teachers']}</strong> ${_('teachers')}
-                </a>
-            </li>
-
-            <li class="subject ${'current' if c.current_menu_item == 'subject' else ''}">
-                <a href="${c.location.url(action='catalog', obj_type='subject')}">
-                    <strong>${university_stats['total_subjects']}</strong> ${_('subjects')}
-                </a>
-            </li>
-        </ul>
-      </%self:portlet>
-    %endif
-  %else:
-    %if menu_items:
-      <%self:portlet id="navigation-portlet">
-        %if title is not None:
+  %if menu_items:
+    <%self:portlet id="navigation-portlet">
+      %if title is not None:
         <%def name="header()">${title}</%def>
-        %endif
-        <ul>
-          %for item in menu_items:
+      %endif
+      <ul>
+        %for item in menu_items:
           <%
-          classes = item['name']
-          if item['name'] == current:
-            classes += ' current'
+            classes = item['name']
+            if item['name'] == current:
+              classes += ' current'
           %>
+
           <li class="${classes}">
             <a href="${item['link']}">${item['title']}</a>
           </li>
-          %endfor
-        </ul>
-      </%self:portlet>
-    %endif
+        %endfor
+      </ul>
+    </%self:portlet>
   %endif
 </%def>
 
