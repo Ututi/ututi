@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-04-23 15:03+0100\n"
-"Last-Translator: Jaro <jaro@ututi.com>\n"
+"PO-Revision-Date: 2012-04-24 11:07+0100\n"
+"Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
 "&& n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
@@ -540,7 +540,7 @@ msgid "Message sent."
 msgstr "Wiadomość wysłana"
 
 msgid "All fields must be filled!"
-msgstr ""
+msgstr "Wszystkie pola muszą być uzupełnione"
 
 #, python-format
 msgid "Ututi news: %(changes)s"
@@ -725,7 +725,7 @@ msgid "Your password has been changed!"
 msgstr "Twoje hasło zostało zmienione!"
 
 msgid "Your account has been successfully removed!"
-msgstr ""
+msgstr "Twoje konto zostało usunięte!"
 
 #, python-format
 msgid "Password recovery email sent to %(user_email)s. Please check your inbox."
@@ -942,10 +942,10 @@ msgid "Ututi registration code: %s"
 msgstr "Kod rejestracji na Ututi: %s"
 
 msgid "Please enter a proper color hex code."
-msgstr ""
+msgstr "Zaznacz własciwy kod koloru"
 
 msgid "Color hex code should contain exactly six or three characters."
-msgstr ""
+msgstr "Kod koloru powinien zawierać trzy lub sześć znaków."
 
 msgid "Country does not exist."
 msgstr "Kraj nie istnieje."
@@ -1035,7 +1035,7 @@ msgid "The email already exists."
 msgstr "Taki e-mail już istnieje."
 
 msgid "Email address is incorrect."
-msgstr ""
+msgstr "Błędny adres e-mail"
 
 msgid "Enter a valid email."
 msgstr "Wprowadź aktualny e-mail."
@@ -1346,55 +1346,55 @@ msgstr ""
 "http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
 
 msgid "Private social network for universities"
-msgstr ""
+msgstr "Prywatna sieć społecznościowa dla uczelni"
 
 msgid "Groups of students"
-msgstr ""
+msgstr "Grupy studentów"
 
 msgid "University news"
-msgstr ""
+msgstr "Aktualności z uczelni"
 
 msgid "Lecture material"
-msgstr ""
+msgstr "Materiały dydaktyczne"
 
 msgid "Add your university"
-msgstr ""
+msgstr "Dodaj swoją uczelnię"
 
 msgid "Teachers' academical workspaces"
-msgstr ""
+msgstr "Platforma wspierająca pracę wykładowcy"
 
 msgid "Space to place lecture material"
-msgstr ""
+msgstr "Wirtualna biblioteka materiałów dydaktycznych"
 
 msgid "Academic site with biography, publications and contacts"
-msgstr ""
+msgstr "Strona uczelni wraz z sylwetkami, publikacjami i kontaktem do wykładowców"
 
 msgid "Easy communicatio with students"
-msgstr ""
+msgstr "Prosta i przyjemna komunikacja ze studentami"
 
 msgid "Register as a teacher"
-msgstr ""
+msgstr "Zarejestruj się jako wykładowca"
 
 msgid "Useful tools for students"
-msgstr ""
+msgstr "Użyteczne narzędzia dla studentów"
 
 msgid "Correspondence publicly and inside of group"
-msgstr ""
+msgstr "Korespondencja publiczna i wewnątrz grup"
 
 msgid "Up to 500Mb private group's storage"
-msgstr ""
+msgstr "Do 500MB przestrzeni dla grupy"
 
 msgid "And more..."
-msgstr ""
+msgstr "Więcej..."
 
 msgid "Find your university"
-msgstr ""
+msgstr "Znadź swoją uczelnię"
 
 msgid "Register at the university"
-msgstr ""
+msgstr "Zapisz się na uczelnię"
 
 msgid "I am a student"
-msgstr ""
+msgstr "Jestem studentem"
 
 msgid "I am a teacher"
 msgstr "Jestem wykładowcą"
@@ -1406,22 +1406,22 @@ msgid "Email"
 msgstr "E-mail"
 
 msgid "University you belong to"
-msgstr ""
+msgstr "Twoja uczelnia"
 
 msgid "Pick from the list"
-msgstr ""
+msgstr "Wybierz z listy"
 
 msgid "Create new university"
-msgstr ""
+msgstr "Dodaj nową uczelnię"
 
 msgid "I accept terms and regulations"
-msgstr ""
+msgstr "Akceptuję warunki regulaminu"
 
 msgid "Create an account"
-msgstr ""
+msgstr "Utwórz nowe konto"
 
 msgid "Universities already are on Ututi"
-msgstr ""
+msgstr "Uczelnia znajduje się już w sieci Ututi"
 
 msgid "More universities"
 msgstr "Więcej uczelni"
@@ -1433,19 +1433,19 @@ msgid "Short title"
 msgstr "Krótki tytuł"
 
 msgid "WWW address"
-msgstr ""
+msgstr "Adres WWW"
 
 msgid "Create university"
-msgstr ""
+msgstr "Dodaj uczelnię"
 
 msgid "Create account"
-msgstr ""
+msgstr "Utwórz konto"
 
 msgid "Required"
-msgstr ""
+msgstr "wymagany"
 
 msgid "You must agree to the terms"
-msgstr ""
+msgstr "Musisz zaakceptować warunki regulaminu"
 
 msgid "New in Ututi?"
 msgstr "Jesteś nowy na Ututi?"
@@ -2690,10 +2690,10 @@ msgid "You can keep up to %s of private group files here (e.g. pictures)"
 msgstr "Możesz przechowywać tu %s prywatnych plików grupy (n.p. zdjęć)"
 
 msgid "GROUP FILES"
-msgstr ""
+msgstr "PLIKI GRUPY"
 
 msgid "SUBJECT FILES"
-msgstr ""
+msgstr "PLIKI PRZEDMIOTU"
 
 msgid "Add more subjects"
 msgstr "Dodaj więcej przedmiotów"
@@ -2991,45 +2991,45 @@ msgid "Recover password"
 msgstr "Odzyskaj hasło"
 
 msgid "All faculties"
-msgstr ""
+msgstr "Dodaj przedmiot"
 
 msgid "+ Add teacher"
-msgstr ""
+msgstr "+ Dodaj wykładowcę"
 
 msgid "All teachers"
-msgstr ""
+msgstr "Wszyscy wykładowcy"
 
 #, python-format
 msgid "Add faculties to %s's social network"
-msgstr ""
+msgstr "Dodaj przedmiot do sieci społecznościowej %s"
 
 msgid "Add a facultie you belong to"
-msgstr ""
+msgstr "Dodaj swoje przedmioty"
 
 msgid "Create your academic group"
-msgstr ""
+msgstr "Utwórz grupę studencką"
 
 msgid "Invite your coleagues and professors to join"
-msgstr ""
+msgstr "Zaproś swoich kolegów i wykładowców"
 
 msgid "Add a facultie now"
-msgstr ""
+msgstr "Dodaj przedmiot"
 
 #, python-format
 msgid "Welcome to the social network of %s!"
-msgstr ""
+msgstr "Witaj w sieci uczelnianej %s!"
 
 msgid "Register or login"
-msgstr ""
+msgstr "Zarejestruj się lub zaloguj"
 
 msgid "Login as a student"
-msgstr ""
+msgstr "Zaloguj jako student"
 
 msgid "Login as a teacher"
-msgstr ""
+msgstr "Zaloguj jako wykładowca"
 
 msgid "Register as a student"
-msgstr ""
+msgstr "Zarejestruj się jako student"
 
 msgid "Keep me logged in"
 msgstr "Nie wylogowuj mnie"
@@ -3041,27 +3041,35 @@ msgid ""
 "teaching subjects with study materials (notes, files, presentations, "
 "audio&amp;video)"
 msgstr ""
+"przedmioty oraz materiały (notatki, dokumenty, prezentacje, pliki "
+"audio/video)"
 
 msgid "Students groups"
-msgstr ""
+msgstr "Grupy studentów"
 
 msgid ""
 "private and public groups with files area, forum and email for "
 "communication and collaboration"
 msgstr ""
+"prywatne i publiczne grupy zawierające pliki, forum oraz pocztę "
+"elektroniczną do komunikacji i współpracy"
 
 msgid ""
 "knowlenge sharing and discussions on academic subjects with students and "
 "teachers"
 msgstr ""
+"wymiana wiedzy i doświadczeń oraz dyskusje dotyczące przedmiotów ze "
+"studentami i wykładowcami"
 
 msgid "Teachers profiles"
-msgstr ""
+msgstr "Profile wykładowców"
 
 msgid ""
 "academic webpage  with teachers biography, publications, touch cources "
 "and contact information"
 msgstr ""
+"strona uczelniana z biografią, publikacjami, prowadzonymi kursami i "
+"danymi kontaktowymi wykładowców"
 
 msgid "Departments:"
 msgstr "Wydziały:"
@@ -3085,7 +3093,7 @@ msgid "University website:"
 msgstr "Strona internetowa uczelni:"
 
 msgid "Teachers url:"
-msgstr ""
+msgstr "Linki do wykładowców"
 
 msgid "University logo"
 msgstr "Logu uczelni"
@@ -3409,7 +3417,7 @@ msgid "Private messages"
 msgstr "Wiadomość prywatna"
 
 msgid "Create message"
-msgstr ""
+msgstr "Utwórz wiadomośćć"
 
 #, python-format
 msgid "%(count)s message"
@@ -3678,7 +3686,7 @@ msgid "I teach here"
 msgstr "Wykładam tutaj"
 
 msgid "Don't study here?"
-msgstr ""
+msgstr "Nie jesteś studentem tej uczelni?"
 
 msgid "Latest groups:"
 msgstr "Ostatnio założone grupy:"
@@ -3738,16 +3746,16 @@ msgid "Create your own social network"
 msgstr "Stwórz swoją własną sieć społecznościową"
 
 msgid "University already has"
-msgstr ""
+msgstr "Uczelnia ma już"
 
 msgid "groups"
-msgstr ""
+msgstr "grupy"
 
 msgid "teachers"
-msgstr ""
+msgstr "wykładowcy"
 
 msgid "subjects"
-msgstr ""
+msgstr "przedmioty"
 
 msgid "About Ututi:"
 msgstr "O Ututi:"
@@ -4732,13 +4740,13 @@ msgid ""
 msgstr "To nie Twój uniwersytet? Użyj innego adresu email lub %(contact_us_link)s."
 
 msgid "Sort by"
-msgstr ""
+msgstr "Sortuj według"
 
 msgid "Alphabet"
-msgstr ""
+msgstr "Alfabetu"
 
 msgid "Popularity"
-msgstr ""
+msgstr "Popularności"
 
 #, python-format
 msgid "%(count)s file"
@@ -4885,10 +4893,10 @@ msgstr ""
 "miejsca dla prywatnych plików grupy."
 
 msgid "Filename"
-msgstr ""
+msgstr "Nazwy pliku"
 
 msgid "Posted by"
-msgstr ""
+msgstr "Opublikowane przez"
 
 msgid "Date"
 msgstr "Data"
@@ -5158,7 +5166,7 @@ msgstr ""
 "używana na Twojej uczelni. Nie musi ona być oryginalna."
 
 msgid "Subject lecturer:"
-msgstr ""
+msgstr "Wykładowca przedmiotu:"
 
 msgid "Subject description:"
 msgstr "Opis przedmiotu:"
