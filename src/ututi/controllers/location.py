@@ -242,6 +242,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
                           'teacher': '/location/teachers.mako'}
 
         if obj_type in template_names:
+            c.current_menu_item = obj_type
             return render(template_names[obj_type])
         else:
             abort(404)
