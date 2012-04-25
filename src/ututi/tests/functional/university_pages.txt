@@ -155,16 +155,16 @@ Oh, and we can upload logos too:
     'http://localhost/school/ku/ggf/subjects'
 
     >>> browser.open('http://localhost/school/ku')
-    >>> browser.getLink('subjects').click()
+    >>> browser.getLink('Subjects').click()
     >>> browser.url
     'http://localhost/school/ku/subjects'
 
     >>> browser.open('http://localhost/school/ku/ggf')
-    >>> browser.getLink('teachers').click()
+    >>> browser.getLink('Teachers').click()
     >>> browser.url
     'http://localhost/school/ku/ggf/teachers'
 
     >>> browser.open('http://localhost/school/ku')
-    >>> browser.getLink('teachers').click()
+    >>> browser.getLink('Teachers').click()
     >>> browser.url
     'http://localhost/school/ku/teachers'
