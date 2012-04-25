@@ -1,13 +1,3 @@
-$(function() { 
-    $("#slides").slides({
-        preload: true,
-        preloadImage: '/img/loading.gif',
-        play: 5000,
-        pause: 2500,
-        hoverPause: true
-    }); 
-});
-
 $(document).ready(function() {
     $(".add_university_button").colorbox({inline:true, height: '450px'});
     var errors = 0;

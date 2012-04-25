@@ -17,6 +17,62 @@
     </div>
 </%def>
 
+<%def name="new_university_popup()">
+  <script src="/javascript/jquery.colorbox-min.js"></script>
+  <script src="/javascript/frontpage.js"></script>
+
+  <div style="display: none;">
+      <div id="add_university" class="blue-box">
+          <div id="add_university_form">
+              <h2>${_('Add your university')}</h2>
+
+              <form method="post"
+                    action="${url(controller='structure', action='create_university')}"
+                    name="new_university_form"
+                    id="new_university_form">
+
+                ${h.input_line('title', _('Title'))}
+                <div id="title-errors-box" class="errors-box"></div>
+
+                ${h.input_line('title_short', _('Short title'))}
+                <div id="title_short-errors-box" class="errors-box"></div>
+
+                ${h.input_line('site_url', _('WWW address'))}
+                <div id="site_url-errors-box" class="errors-box"></div>
+
+                <br /><br />
+
+                <input class="black"
+                       type="submit"
+                       id="create_university_button"
+                       value="${_('Create university')}" />
+              </form>
+          </div>
+
+          <div id="add_university_create_account" style="display: none;">
+              <h2>${_('Create account')}</h2>
+
+              <form method="post" id="create-account-form" action="/register">
+                  <input type="hidden" name="location_id" id="pp_location_id" value="" />
+                  <input type="hidden" name="person" id="pp_person" value="" />
+
+                  ${h.input_line('name', _('Name'))}
+                  ${h.input_line('email', _('Email'))}
+                  ${_('University you belong to')}: <strong><div id="university_name"></div></strong><br /><br />
+
+                  <div id="pp_accept-terms">
+                      <input type="checkbox" name="accept_terms" id="pp_accept-terms-checkbox" value="1" required="required">
+                      <a href="${url(controller='home', action='terms')}">${_('I accept terms and regulations')}</a>
+                  </div>
+
+                  <br />
+                  <input class="black" type="submit" value="${_('Create an account')}" />
+              </form>
+          </div>
+      </div>
+  </div>
+</%def>
+
 <script>document.body.style.background="#ffffff";</script>
 
 <div id="layout-wrap" class="clear no-border">
@@ -147,63 +203,23 @@
   </div><!-- #main-content -->
 </div><!-- #layout-wrap -->
 
-<div style="display: none;">
-    <div id="add_university" class="blue-box">
-        <div id="add_university_form">
-            <h2>${_('Add your university')}</h2>
-
-            <form method="post"
-                  action="${url(controller='structure', action='create_university')}"
-                  name="new_university_form"
-                  id="new_university_form">
-
-              ${h.input_line('title', _('Title'))}
-              <div id="title-errors-box" class="errors-box"></div>
-
-              ${h.input_line('title_short', _('Short title'))}
-              <div id="title_short-errors-box" class="errors-box"></div>
-
-              ${h.input_line('site_url', _('WWW address'))}
-              <div id="site_url-errors-box" class="errors-box"></div>
-
-              <br /><br />
-
-              <input class="black"
-                     type="submit"
-                     id="create_university_button"
-                     value="${_('Create university')}" />
-            </form>
-        </div>
-
-        <div id="add_university_create_account" style="display: none;">
-            <h2>${_('Create account')}</h2>
-
-            <form method="post" id="create-account-form" action="/register">
-                <input type="hidden" name="location_id" id="pp_location_id" value="" />
-                <input type="hidden" name="person" id="pp_person" value="" />
-
-                ${h.input_line('name', _('Name'))}
-                ${h.input_line('email', _('Email'))}
-                ${_('University you belong to')}: <strong><div id="university_name"></div></strong><br /><br />
-
-                <div id="pp_accept-terms">
-                    <input type="checkbox" name="accept_terms" id="pp_accept-terms-checkbox" value="1" required="required">
-                    <a href="${url(controller='home', action='terms')}">${_('I accept terms and regulations')}</a>
-                </div>
-
-                <br />
-                <input class="black" type="submit" value="${_('Create an account')}" />
-            </form>
-        </div>
-    </div>
-</div>
+${new_university_popup()}
 
 <script>
     // Translations for /javascript/frontpage.js
     var required = '${_("Required")}';
     var agreement = '${_("You must agree to the terms")}'; 
+
+
+  $(function() { 
+      $("#slides").slides({
+          preload: true,
+          preloadImage: '/img/loading.gif',
+          play: 5000,
+          pause: 2500,
+          hoverPause: true
+      }); 
+  });
 </script>
 
 <script src="/javascript/slides.min.jquery.js"></script>
-<script src="/javascript/jquery.colorbox-min.js"></script>
-<script src="/javascript/frontpage.js"></script>

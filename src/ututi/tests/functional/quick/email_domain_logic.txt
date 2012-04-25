@@ -255,32 +255,37 @@ his email and his email is validated against university email policy.
 
 Existing emails are also not allowed:
 
-    >>> anonymous.getControl(name='email').value = 'user@vu.lt'
-    >>> anonymous.getControl('Sign Up').click()
+    >>> form = anonymous.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'user@vu.lt'
+    >>> form.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('.error-message', strip=True)
     <span>user@vu.lt is already registered in Vilnius University network.</span>
 
 user@mif.vu.lt works, because it conforms to university policy and is not taken:
 
-    >>> anonymous.getControl(name='email').value = 'user@mif.vu.lt'
-    >>> anonymous.getControl('Sign Up').click()
+    >>> form = anonymous.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'user@mif.vu.lt'
+    >>> form.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
 
 U-niversity has public member policy, therefore any valid email will validate:
 
     >>> anonymous.open('http://localhost/school/uni/register')
-    >>> anonymous.getControl(name='email').value = 'admin@uni.ututi.com'
-    >>> anonymous.getControl('Sign Up').click()
+    >>> form = anonymous.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'admin@uni.ututi.com'
+    >>> form.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('.error-message', strip=True)
     <span>admin@uni.ututi.com is already registered in U-niversity network.</span>
-    >>> anonymous.getControl('Enter your email').value = 'user@example.com'
-    >>> anonymous.getControl('Sign Up').click()
+    >>> form = anonymous.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'user@example.com'
+    >>> form.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
     >>> anonymous.open('http://localhost/school/uni/register')
-    >>> anonymous.getControl(name='email').value = 'user@mif.vu.lt'
-    >>> anonymous.getControl('Sign Up').click()
+    >>> form = anonymous.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'user@mif.vu.lt'
+    >>> form.getControl('Sign Up').click()
     >>> anonymous.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
 

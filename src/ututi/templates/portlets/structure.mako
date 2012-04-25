@@ -1,5 +1,6 @@
 <%inherit file="/portlets/base.mako" />
 <%namespace file="/elements.mako" import="item_box" />
+<%namespace file="/frontpage.mako" import="new_university_popup" />
 
 <%def name="location_logo_portlet(location=None)">
   <% if location is None: location = c.location %>
@@ -85,10 +86,14 @@
 <%def name="location_dont_study_here_portlet()">
  <%self:portlet id="dont-study-here-portlet">
     <p><strong>${_("Don't study here?")}</strong></p>
-    <button class="student" type="button">
-        <img class="icon" alt="I am a student" src="/img/icons/add-icon.png">
-        ${_('Add your university')}
-    </button>
+    <a class="add_university_button" href="#add_university">
+      <button class="student" type="button">
+          <img class="icon" alt="I am a student" src="/img/icons/add-icon.png">
+          ${_('Add your university')}
+      </button>
+    </a>
+
+    ${new_university_popup()}
   </%self:portlet> 
 </%def>
 
@@ -147,3 +152,4 @@
   </%self:portlet>
   %endif
 </%def>
+

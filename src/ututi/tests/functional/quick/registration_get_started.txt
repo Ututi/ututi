@@ -24,22 +24,25 @@ User has to type in a valid email address to initiate registration:
 
 If user types in an existing email address, an error message will be displayed:
 
-    >>> browser.getControl('Enter your email').value = 'admin@uni.ututi.com'
-    >>> browser.getControl('Sign Up').click()
+    >>> form = browser.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'admin@uni.ututi.com'
+    >>> form.getControl('Sign Up').click()
     >>> browser.printCssQuery('.error-message', strip=True)
     <span>admin@uni.ututi.com is already registered in U-niversity network.</span>
 
 Regression test: non-ascii characters in email are not valid in Ututi:
 
-    >>> browser.getControl('Enter your email').value = u'\u016bser@example.com'.encode('utf-8')
-    >>> browser.getControl('Sign Up').click()
+    >>> form = browser.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = u'\u016bser@example.com'.encode('utf-8')
+    >>> form.getControl('Sign Up').click()
     >>> browser.printCssQuery('.error-message', strip=True)
     <span>Email address cannot contain unicode characters</span>
 
 User come back to registration view ant types new email:
 
-    >>> browser.getControl('Enter your email').value = 'user@example.com'
-    >>> browser.getControl('Sign Up').click()
+    >>> form = browser.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'user@example.com'
+    >>> form.getControl('Sign Up').click()
 
 A confirmation code is sent to user's email, and the page states so:
 
@@ -70,8 +73,9 @@ A flash message is displayed:
 The same thing happens if the user simply restarts the registration process:
 
     >>> browser.open('http://localhost/school/uni/register')
-    >>> browser.getControl(name='email').value = 'user@example.com'
-    >>> browser.getControl('Sign Up').click()
+    >>> form = browser.getForm('sign-up-form')
+    >>> form.getControl(name='email').value = 'user@example.com'
+    >>> form.getControl('Sign Up').click()
     >>> browser.printCssQuery('h1.page-title', strip=True)
     <h1>Email approval</h1>
 
