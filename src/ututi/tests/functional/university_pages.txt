@@ -28,7 +28,7 @@ We should be able to click on a link that leads us to the page of the faculty.
 
 There is a search form on this page and we should be able to use it.
 
-    >>> public_browser.getLink('subjects').click()
+    >>> public_browser.getLink('Subjects').click()
     >>> public_browser.getControl(name='text').value = 'Matematinė'
     >>> public_browser.getControl('Search').click()
     >>> public_browser.printCssQuery('#search-results .item-title', strip=True)
@@ -150,7 +150,7 @@ Oh, and we can upload logos too:
     <img src="/structure/5/logo/140" alt="Geografijos fakultetas" />
 
     >>> browser.open('http://localhost/school/ku/ggf')
-    >>> browser.getLink('subjects').click()
+    >>> browser.getLink('Subjects').click()
     >>> browser.url
     'http://localhost/school/ku/ggf/subjects'
 

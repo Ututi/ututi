@@ -200,7 +200,7 @@ instead of Ututi network pages:
     >>> anonymous = Browser()
     >>> anonymous.click('More')
     >>> anonymous.click('U-niversity')
-    >>> anonymous.getLink(id='teachers_link').click()
+    >>> anonymous.getLink('Teachers').click()
     >>> anonymous.click('User')
     >>> anonymous.printCssQuery('.location-links', strip=True)
     <ul> <li>U-niversity</li> </ul>
