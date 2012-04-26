@@ -152,6 +152,9 @@ class WhitelistEmailForm(Schema):
 
 class MailinglistController(BaseController):
 
+    def _new_thread_form(self):
+        return render('mailinglist/new.mako')
+
     @group_action
     @validate(NewMailForm, form='_new_thread_form')
     @ActionProtector("member", "admin")
@@ -160,9 +163,13 @@ class MailinglistController(BaseController):
                             c.user,
                             self.form_result['subject'],
                             self.form_result['message'])
-        redirect(url(controller='mailinglist',
-                    action='thread',
-                    id=group.group_id, thread_id=post.id))
+        redirect(url(controller='home',
+                    action='feed'))
+   
+    @group_action
+    @ActionProtector("member", "admin")
+    def new_thread(self, group):
+        return htmlfill.render(self._new_thread_form())
 
     @mailinglist_file_action
     @set_login_url

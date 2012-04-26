@@ -8,8 +8,6 @@ ${_('New topic')}
   <a class="back-link" href="${h.url_for(action='index')}">${_('Back to the topic list')}</a>
 </div>
 
-<h1>${_('New topic')}</h1>
-
 <form method="post" action="${url(controller='mailinglist', action='post', id=c.group.group_id)}"
       id="new_message_form" class="fullForm" enctype="multipart/form-data">
   ${h.input_line('subject', _('Subject'))}

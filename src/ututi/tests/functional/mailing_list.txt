@@ -1,0 +1,29 @@
+TESTS ABILITY TO SEND MAILING LIST
+==================================
+
+System has no holding messages:
+
+    >>> from ututi.lib.mailer import mail_queue
+    >>> len(mail_queue)
+    0
+
+User goes to group and clicks on group's email and writes 
+a message:
+
+    >>> browser = Browser.logIn()
+    >>> browser.getLink('Moderatoriai').click()
+    >>> browser.getLink('moderators@groups.ututi.lt').click()
+    >>> form = browser.getForm('new_message_form')
+    >>> form.getControl(name='subject').value = 'MySubject'
+    >>> form.getControl(name='message').value = 'My long message goes here...'
+    >>> form.getControl('Post').click()
+
+    >>> len(mail_queue)
+    1
+    
+    >>> mail_queue
+    [<EmailInfo sender='admin@uni.ututi.com' recipients=['admin@uni.ututi.com']>]
+
+    >>> msg = mail_queue[0]
+    >>> msg.payload()
+    'My long message goes here...'
