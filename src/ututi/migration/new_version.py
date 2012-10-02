@@ -32,20 +32,23 @@ def new_version(name, editor='vim'):
     version = int(old_version) + 1
     conf_file = conf_file.replace('MIN_VERSION = %s' % old_version,
                                   'MIN_VERSION = %s' % version)
-    file('__init__.py', 'w').write(conf_file)
-    os.system('git add __init__.py')
 
     # Create upgrade / downgrade scripts.
+    schema_diff = 'sh -c "cd ../../../ && make schema_diff"'
+    schema_diff_result = os.popen(schema_diff).read()
+
     migration_fn = '%03d_%s.py' % (version, name)
-    file(migration_fn, 'w').write(MIGRATION_FILE_TEMPLATE)
-    os.system('git add %s' % migration_fn)
     upgrade_fn = '%03d_%s_upgrade.sql' % (version, name)
-    file(upgrade_fn, 'w').write(UPGRADE_FILE_TEMPLATE)
-    os.system('git diff ../model/defaults.sql >> %s' % upgrade_fn)
     downgrade_fn = '%03d_%s_downgrade.sql' % (version, name)
-    file(downgrade_fn, 'w').write(DOWNGRADE_FILE_TEMPLATE)
-    os.system('git diff ../model/defaults.sql >> %s' % downgrade_fn)
+
+    file('__init__.py', 'w').write(conf_file)
+    file(migration_fn, 'w').write(MIGRATION_FILE_TEMPLATE)
+    file(upgrade_fn, 'w').write(UPGRADE_FILE_TEMPLATE + schema_diff_result)
+    file(downgrade_fn, 'w').write(DOWNGRADE_FILE_TEMPLATE + schema_diff_result)
+
     os.system('%s %s %s' % (editor, upgrade_fn, downgrade_fn))
+    os.system('git add __init__.py')
+    os.system('git add %s' % migration_fn)
     os.system('git add %s' % upgrade_fn)
     os.system('git add %s' % downgrade_fn)
 
