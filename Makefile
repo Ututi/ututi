@@ -34,67 +34,21 @@ bin/paster: buildout.cfg bin/buildout setup.py versions.cfg
 bin/tags: buildout.cfg bin/buildout setup.py versions.cfg
 	$(BUILDOUT)
 
-export PGPORT ?= 4455
+include postgresql.mk
 
-PG_PATH = $(shell if test -d /usr/lib/postgresql/8.3; then echo /usr/lib/postgresql/8.3; else echo /usr/lib/postgresql/8.4; fi)
-
-instance/var/data/postgresql.conf:
-	mkdir -p ${PWD}/instance/var/data
-	${PG_PATH}/bin/initdb -D ${PWD}/instance/var/data -E UNICODE
-	echo 'fsync = off' >> instance/var/data/postgresql.conf
-
-instance/var/data/initialized:
-	${PG_PATH}/bin/createuser --createdb    --no-createrole --no-superuser --login admin -h ${PWD}/instance/var/run
-	${PG_PATH}/bin/createuser --no-createdb --no-createrole --no-superuser --login test -h ${PWD}/instance/var/run
-	${PG_PATH}/bin/createdb --owner test -E UTF8 test -h ${PWD}/instance/var/run
-	${PG_PATH}/bin/createlang plpgsql test -h ${PWD}/instance/var/run || true
-	${PG_PATH}/bin/createdb --owner test -E UTF8 test2 -h ${PWD}/instance/var/run
-	${PG_PATH}/bin/createlang plpgsql test2 -h ${PWD}/instance/var/run || true
-	${PG_PATH}/bin/createdb --owner admin -E UTF8 development -h ${PWD}/instance/var/run
-	${PG_PATH}/bin/createlang plpgsql development -h ${PWD}/instance/var/run || true
-	bin/paster setup-app development.ini
-	echo 1 > ${PWD}/instance/var/data/initialized
-
-instance/done: instance/var/data/postgresql.conf
-	$(MAKE) start_database
-	$(MAKE) instance/var/data/initialized
-	$(MAKE) stop_database
-	echo 1 > ${PWD}/instance/done
-
-instance/var/run/.s.PGSQL.${PGPORT}:
-	mkdir -p ${PWD}/instance/var/run
-	mkdir -p ${PWD}/instance/var/log
-	${PG_PATH}/bin/pg_ctl -D ${PWD}/instance/var/data -o "-c unix_socket_directory=${PWD}/instance/var/run/ -c custom_variable_classes='ututi' -c ututi.active_user=0" start  -l ${PWD}/instance/var/log/pg.log
-	sleep 5
-
-.PHONY: testpsql
-testpsql:
-	psql -h ${PWD}/instance/var/run/ -d test
-
-.PHONY: testpsql2
-testpsql2:
-	psql -h ${PWD}/instance/var/run/ -d test2
-
-.PHONY: devpsql
-devpsql:
-	psql -h ${PWD}/instance/var/run/ -d development
-
-reset_devdb: instance/var/run/.s.PGSQL.${PGPORT}
-	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
-	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
+reset_devdb: ${PG_SOCKET}
+	$(MAKE) reset_development
 	rm -rf ${PWD}/instance/uploads
 	bin/paster setup-app development.ini
-	psql -h ${PWD}/instance/var/run/ -d development < src/ututi/model/data.sql
+	${PG_PATH}/bin/psql -h ${PG_RUN}/ -d development < src/ututi/model/data.sql
+
+reset_testdb: ${PG_SOCKET}
+	$(MAKE) reset_test
+	bin/paster setup-app test.ini
+	${PG_PATH}/bin/psql -h ${PG_RUN}/ -d test < src/ututi/model/data.sql
 
 .PHONY: instance
 instance: instance/done
-
-.PHONY: start_database
-start_database: instance/var/data/postgresql.conf instance/var/run/.s.PGSQL.${PGPORT}
-
-.PHONY: stop_database
-stop_database:
-	test -f ${PWD}/instance/var/data/postmaster.pid && ${PG_PATH}/bin/pg_ctl -D ${PWD}/instance/var/data stop -m i -o "-c unix_socket_directory=${PWD}/instance/var/run/" || true
 
 tags: buildout.cfg bin/buildout setup.py bin/tags
 	bin/tags
@@ -117,11 +71,11 @@ buildout:
 test: test1 test2
 
 .PHONY: test1
-test1: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
+test1: bin/test instance/done ${PG_SOCKET}
 	bin/test --layer=Ututi
 
 .PHONY: test2
-test2: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
+test2: bin/test instance/done ${PG_SOCKET}
 	bin/test --layer=U2ti
 
 .PHONY: utest
@@ -129,15 +83,15 @@ testall: bin/test
 	bin/test -u
 
 .PHONY: ftest
-ftest: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
+ftest: bin/test instance/done ${PG_SOCKET}
 	bin/test -f --at-level 2
 
 .PHONY: atest
-atest: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
+atest: bin/test instance/done ${PG_SOCKET}
 	bin/test --all
 
 .PHONY: run
-run: bin/paster instance/done instance/var/run/.s.PGSQL.${PGPORT}
+run: bin/paster instance/done ${PG_SOCKET}
 	bin/paster serve development.ini --reload --monitor-restart
 
 .PHONY: clean
@@ -146,7 +100,7 @@ clean:
 	find src/ -name '*.pyc' -exec rm '{}' ';'
 
 .PHONY: coverage
-coverage: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT}
+coverage: bin/test bin/coverage instance/done ${PG_SOCKET}
 	rm -rf .coverage
 	bin/coverage run bin/test
 
@@ -190,7 +144,7 @@ ubuntu-environment:
 	} fi
 
 .PHONY: shell
-shell: bin/paster instance/done instance/var/run/.s.PGSQL.${PGPORT}
+shell: bin/paster instance/done ${PG_SOCKET}
 	bin/paster --plugin=Pylons shell development.ini
 
 export BUILD_ID ?= `date +%Y-%m-%d_%H-%M-%S`
@@ -209,21 +163,12 @@ download_pl_backup:
 	mkdir -p backup
 	scp ututi.lt:/srv/ututi.pl/backup/dbdump ./backup/dbdump
 
-.PHONY: import_backup
-import_backup: instance/var/run/.s.PGSQL.${PGPORT}
-	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
-	${PG_PATH}/droplang plpgsql development -h ${PWD}/instance/var/run/ || true
-	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
-	${PG_PATH}/bin/pg_restore -d development -h ${PWD}/instance/var/run --no-owner < backup/dbdump || true
-	psql -h ${PWD}/instance/var/run/ -d development -c "update users set password = '2M/gReXQLaGpx28PT7mBFLWS0sC04eClUH80'"
-	psql -h ${PWD}/instance/var/run/ -d development -c "update admin_users set password = '2M/gReXQLaGpx28PT7mBFLWS0sC04eClUH80'"
-
 .PHONY: download_backup_files
 download_backup_files:
 	rsync -rtv ututi.lt:/srv/u2ti.com/backup/files_dump/ ./backup/files_dump/
 
 .PHONY: test_migration
-test_migration: instance/var/run/.s.PGSQL.${PGPORT}
+test_migration: ${PG_SOCKET}
 	$(MAKE) import_backup
 	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ development -s > before_migration.txt
 	${PWD}/bin/migrate development.ini upgrade_once
@@ -231,12 +176,8 @@ test_migration: instance/var/run/.s.PGSQL.${PGPORT}
 	${PWD}/bin/migrate development.ini downgrade
 	${PG_PATH}/bin/pg_dump --format=p -h ${PWD}/instance/var/run/ development -s > after_downgrade.txt
 
-.PHONY: dbdump
-dbdump: instance/var/run/.s.PGSQL.${PGPORT}
-	${PG_PATH}/bin/pg_dump --format=c -h ${PWD}/instance/var/run/ development > dbdump
-
 .PHONY: test_migration_2
-test_migration_2: instance/var/run/.s.PGSQL.${PGPORT}
+test_migration_2: ${PG_SOCKET}
 	psql -h ${PWD}/instance/var/run/ -d development -c "drop schema public cascade"
 	psql -h ${PWD}/instance/var/run/ -d development -c "create schema public"
 	${PWD}/bin/paster setup-app development.ini
@@ -276,7 +217,7 @@ update_expected_translations: bin/pofilter
 	mv ${PWD}/parts/test_translations/ ${PWD}/src/ututi/tests/expected_i18n_errors/
 
 .PHONY: test_all
-test_all: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
+test_all: bin/test instance/done ${PG_SOCKET}
 	! git --no-pager grep 'console.log' -- *.js *.mako *.html | grep -v '\(jquery\|ckeditor\|uservoice\)'
 	! git --no-pager grep 'pdb.set_trace' -- *.py
 	rm -rf data/templates/
@@ -284,19 +225,19 @@ test_all: bin/test instance/done instance/var/run/.s.PGSQL.${PGPORT}
 	$(MAKE) test_translations
 
 .PHONY: test_all_coverage
-test_all_coverage: bin/test bin/coverage instance/done instance/var/run/.s.PGSQL.${PGPORT}
+test_all_coverage: bin/test bin/coverage instance/done ${PG_SOCKET}
 	rm -rf data/templates/
 	bin/coverage run bin/test --all
 	$(MAKE) test_coverage
 	$(MAKE) test_translations
 
-migrate: instance/var/run/.s.PGSQL.${PGPORT}
+migrate: ${PG_SOCKET}
 	${PWD}/bin/migrate development.ini
 
-downgrade: instance/var/run/.s.PGSQL.${PGPORT}
+downgrade: ${PG_SOCKET}
 	${PWD}/bin/migrate development.ini downgrade
 
-start_sms: instance/var/run/.s.PGSQL.${PGPORT}
+start_sms: ${PG_SOCKET}
 	${PWD}/bin/sms_daemon start
 
 stop_sms:
@@ -304,3 +245,18 @@ stop_sms:
 
 ssh:
 	ssh -nNT -R 7137:localhost:5000 u2ti.com
+
+.PHONY: schema_diff
+schema_diff: ${PG_SOCKET}
+	@$(MAKE) import_backup_schema_into_test  > schema_diff.log 2>&1
+	@${PWD}/bin/migrate test.ini > schema_diff.log  2>&1
+	@${PG_PATH}/bin/pg_dump --format=p -h ${PG_RUN}/ test -s > actual.txt
+	@$(MAKE) reset_testdb > schema_diff.log 2>&1
+	@${PG_PATH}/bin/pg_dump --format=p -h ${PG_RUN}/ test -s > default.txt
+	@echo "-- upgrade"
+	@apgdiff actual.txt default.txt
+	@echo "-- downgrade"
+	@apgdiff default.txt actual.txt
+	@echo "/* Diff"
+	@git diff src/ututi/model/defaults.sql
+	@echo "*/"
