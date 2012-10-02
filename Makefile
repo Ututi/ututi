@@ -185,6 +185,7 @@ ubuntu-environment:
 	 apt-get build-dep python-psycopg2 python-imaging ; \
 	 apt-get install build-essential python-all python-all-dev postgresql enscript myspell-lt myspell-en-gb myspell-pl libxslt1-dev libpq-dev python-pyrex python-setuptools python-geoip; \
 	 apt-get remove python-egenix-mx-base-dev; \
+	 dpkg -i libs/ututi-pg-dictionaries_1.0_all.deb; \
 	 echo "Installation Complete: Next... Run 'make'."; \
 	} fi
 
