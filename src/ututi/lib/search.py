@@ -104,10 +104,11 @@ def _search_query_text(query, **kwargs):
 
     text = kwargs.get('text')
     if text:
-        if not language is None:
-            query = query.filter(SearchItem.terms.op('@@')(func.to_tsquery(SearchItem.LANGUAGE_MAPPER[language], text)))
+        if language is not None:
+            to_tsquery = func.to_tsquery(SearchItem.LANGUAGE_MAPPER[language], text)
         else:
-            query = query.filter(SearchItem.terms.op('@@')(func.to_tsquery(text)))
+            to_tsquery = func.to_tsquery(text)
+        query = query.filter(SearchItem.terms.op('@@')(to_tsquery))
     return query
 
 def _search_query_rank(query, **kwargs):
@@ -117,9 +118,13 @@ def _search_query_rank(query, **kwargs):
     """
     rank_func = None
     text = kwargs.get('text')
+    language = kwargs.get('language')
     rank_cutoff = kwargs.get('rank_cutoff')
 
-    rank_func = func.ts_rank_cd(SearchItem.terms, func.to_tsquery(text))
+    if language is not None:
+        rank_func = func.ts_rank_cd(SearchItem.terms, func.to_tsquery(SearchItem.LANGUAGE_MAPPER[language], text))
+    else:
+        rank_func = func.ts_rank_cd(SearchItem.terms, func.to_tsquery(text))
 
     if rank_cutoff is not None:
         query = query.filter(rank_func >= rank_cutoff)
