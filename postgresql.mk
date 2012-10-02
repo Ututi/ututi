@@ -14,8 +14,11 @@ ${PG_DATA}/postgresql.conf:
 
 ${PG_DATA}/initialized:
 	${PG_PATH}/bin/createdb -E UTF8 development -h ${PG_RUN}
+	${PG_PATH}/bin/createlang plpgsql development -h ${PG_RUN} || true
 	${PG_PATH}/bin/createdb -E UTF8 test -h ${PG_RUN}
+	${PG_PATH}/bin/createlang plpgsql test -h ${PG_RUN} || true
 	${PG_PATH}/bin/createdb -E UTF8 test2 -h ${PG_RUN}
+	${PG_PATH}/bin/createlang plpgsql test2 -h ${PG_RUN} || true
 	bin/paster setup-app development.ini
 	echo 1 > ${PG_DATA}/initialized
 
