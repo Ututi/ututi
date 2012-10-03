@@ -14,7 +14,7 @@ div#short-info-block {
       ${h.link_to(c.subject.location.title, c.subject.location.url())}
       %if not c.subject.teacher_repr and c.user:
         <a href="${c.subject.url(action='edit')}">
-          <img src="/img/icons.com/edit.png" alt="${_('Edit')}" />
+          <img src="${url('/img/icons.com/edit.png')}" alt="${_('Edit')}" />
         </a>
       %endif
     </li>
@@ -23,7 +23,7 @@ div#short-info-block {
       ${c.subject.teacher_repr}
       %if c.user:
         <a href="${c.subject.url(action='edit')}">
-          <img src="/img/icons.com/edit.png" alt="${_('Edit')}" />
+          <img src="${url('/img/icons.com/edit.png')}" alt="${_('Edit')}" />
         </a>
       %endif
     </li>

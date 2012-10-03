@@ -29,7 +29,7 @@
               (${ungettext("%(count)s message", "%(count)s messages", message.thread_length()) % dict(count=message.thread_length())})
             </span>
             ${h.button_to('Delete', url(controller='messages', action='delete', id=message.id), style='display: none')}
-            <a href="#" class="delete-message-link"><img src="/img/icons/cross_small.png" alt="delete" /></a>
+            <a href="#" class="delete-message-link"><img src="${url('/img/icons/cross_small.png')}" alt="delete" /></a>
           </div>
           <div class="grey verysmall">${h.ellipsis(message.content, 50)}</div>
         </div>

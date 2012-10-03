@@ -101,7 +101,7 @@
       %endif
       %if c.user and c.user.id == c.user_info.id:
         <a href="${url(controller='profile', action='edit')}" title="${_('Edit profile')}">
-          <img src="/img/icons.com/edit.png" alt="${_('Edit')}" />
+          <img src="${url('/img/icons.com/edit.png')}" alt="${_('Edit')}" />
         </a>
       %endif
     </div>

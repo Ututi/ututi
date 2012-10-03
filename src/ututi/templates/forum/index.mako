@@ -70,7 +70,7 @@
         <a href="${category.url()}">
           <span class="green verysmall">${ungettext("Show other %(count)s message", "Show other %(count)s messages", (len(messages)- n)) % dict(count = (len(messages)- n))}</span>
           <span>
-            <img src="/img/icons/arrow-very-small-down.png" alt="">
+            <img src="${url('/img/icons/arrow-very-small-down.png')}" alt="">
           </span>
         </a>
       </div>

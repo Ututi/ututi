@@ -68,7 +68,7 @@ ${group_right_sidebar()}
       %endif
       %if c.group.is_admin(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
         <a href="${c.group.url(action='edit')}" title="${_('Edit group settings')}">
-          <img src="/img/icons.com/edit.png" alt="${_('Edit')}" />
+          <img src="${url('/img/icons.com/edit.png')}" alt="${_('Edit')}" />
         </a>
       %endif
     </div>

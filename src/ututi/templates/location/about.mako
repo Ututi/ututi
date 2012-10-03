@@ -194,7 +194,7 @@
 % for i in range(10):
 <div class="teacher-entry clearfix">
   <div class="logo">
-    <img src="/structure/180/logo/40/40" alt="logo" />
+    <img src="${url('/structure/180/logo/40/40')}" alt="logo" />
   </div>
 
   <div class="title">
@@ -252,8 +252,8 @@
 
     <div class="login-box-content">
       <div class="login-box-content-buttons">
-        <button type="button" id="i-am-a-student" class="student"><img src="/img/student-icon.png" alt="${_('I am a student')}" class="icon" />${_('I am a student')}</button>
-        <button type="button" id="i-am-a-teacher" class="teacher"><img src="/img/teacher-icon.png" alt="${_('I am a teacher')}" class="icon" />${_('I am a teacher')}</button>
+        <button type="button" id="i-am-a-student" class="student"><img src="${url('/img/student-icon.png')}" alt="${_('I am a student')}" class="icon" />${_('I am a student')}</button>
+        <button type="button" id="i-am-a-teacher" class="teacher"><img src="${url('/img/teacher-icon.png')}" alt="${_('I am a teacher')}" class="icon" />${_('I am a teacher')}</button>
       </div>
 
       <div class="login-box-content-loginform">

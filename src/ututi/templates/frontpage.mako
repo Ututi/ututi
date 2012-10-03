@@ -18,8 +18,8 @@
 </%def>
 
 <%def name="new_university_popup()">
-  <script src="/javascript/jquery.colorbox-min.js"></script>
-  <script src="/javascript/frontpage.js"></script>
+  ${h.javascript_link('/javascript/jquery.colorbox-min.js')}
+  ${h.javascript_link('/javascript/frontpage.js')}
 
   <div style="display: none;">
       <div id="add_university" class="blue-box">
@@ -93,7 +93,7 @@
 
               <a class="add_university_button" href="#add_university">
                   <button class="black">
-                      <img src="/img/icons/add-icon-big.png" />
+                      <img src="${url('/img/icons/add-icon-big.png')}" />
                       <span>${_('Add your university')}</span>
                   </button>
               </a>
@@ -107,7 +107,7 @@
             <div id="features-teacher-3" class="features-teacher-text">${_('Easy communicatio with students')}</div>
 
             <button class="black register-as-a-teacher">
-                <img src="/img/icons/teacher-icon-big.png" />
+                <img src="${url('/img/icons/teacher-icon-big.png')}" />
                 <span>${_('Register as a teacher')}</span>
             </button>
           </div>
@@ -124,7 +124,7 @@
 
             <form action="${url(controller='search', action='browse')}">
                 <button class="black">
-                    <img src="/img/icons/finder-icon.png" />
+                    <img src="${url('/img/icons/finder-icon.png')}" />
                     <span>${_('Find your university')}</span>
                 </button>
             </form>
@@ -222,4 +222,4 @@ ${new_university_popup()}
   });
 </script>
 
-<script src="/javascript/slides.min.jquery.js"></script>
+${h.javascript_link('/javascript/slides.min.jquery.js')}
