@@ -1,5 +1,8 @@
 *.pyc
 *~
+actual.txt
+default.txt
+schema_diff.log
 bin/*
 parts/*
 develop-eggs/*
