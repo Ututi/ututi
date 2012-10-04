@@ -1,4 +1,5 @@
 """Pylons middleware initialization"""
+import sys
 from beaker.middleware import CacheMiddleware, SessionMiddleware
 from paste.cascade import Cascade
 from paste.registry import RegistryManager
@@ -54,14 +55,20 @@ def make_app(global_conf, full_stack=True, static_files=True, **app_conf):
     # CUSTOM MIDDLEWARE HERE (filtered by error handling middlewares)
 
     if asbool(full_stack):
-        # Handle Python exceptions
-        app = ErrorHandler(app, global_conf, **config['pylons.errorware'])
 
         # Display error documents for 401, 403, 404 status codes (and
         # 500 when debug is disabled)
         if asbool(config['debug']):
+            # Handle Python exceptions
+            app = ErrorHandler(app, global_conf, **config['pylons.errorware'])
             app = StatusCodeRedirect(app)
         else:
+            try:
+                from exceptional import ExceptionalMiddleware
+                app = ExceptionalMiddleware(app, config['exceptional.api_key'])
+            except:
+                print "ERROR: Cannot setup exceptional error reporting", sys.exc_info()
+                app = ErrorHandler(app, global_conf, **config['pylons.errorware'])
             app = StatusCodeRedirect(app, [400, 401, 403, 404, 500])
 
     # Establish the Registry for this application
