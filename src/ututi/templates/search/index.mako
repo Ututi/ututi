@@ -79,7 +79,7 @@ ${h.javascript_link('/javascript/search.js')|n}
        target = url(controller='search', action='index')
 %>
 <div class="search-controls">
-  %if url.environ['pylons.routes_dict']['action'] != 'browse' or c.user:
+  %if request.environ['pylons.routes_dict']['action'] != 'browse' or c.user:
     <form method="get" action="${target}" id="search_form">
       <div class="search-text-submit">
         %if 'text' in parts:
