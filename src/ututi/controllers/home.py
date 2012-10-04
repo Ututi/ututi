@@ -419,13 +419,15 @@ class HomeController(UniversityListMixin):
         return htmlfill.render(self._pswrecovery_form())
 
     def _pswreset_form(self):
+        c.key = (self.form_result.get('recovery_key', '')
+                 if hasattr(self, 'form_result')
+                 else request.environ['pylons.routes_dict']['key'])
         return render('home/password_resetform.mako')
 
     @validate(PasswordResetForm, form='_pswreset_form')
     def recovery(self, key=None):
         try:
             if hasattr(self, 'form_result'):
-                key = self.form_result.get('recovery_key', '')
                 defaults = {'recovery_key': key}
                 user = meta.Session.query(User).filter(User.recovery_key == key).one()
                 user.update_password(self.form_result.get('new_password'))
@@ -438,7 +440,6 @@ class HomeController(UniversityListMixin):
                 redirect(url(controller='profile', action='home'))
             else:
                 defaults={'recovery_key': key}
-            c.key = key
             return htmlfill.render(self._pswreset_form(), defaults=defaults)
         except NoResultFound:
             abort(404)
