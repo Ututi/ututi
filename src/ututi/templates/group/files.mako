@@ -15,7 +15,7 @@
 	<div class="group_subject_files_cont" >
 		% for n, subject in enumerate(c.group.watched_subjects):
 			<div class="group_subject_files_browser" >
-		  		<%files:file_browser obj="${subject}" section_id="${n + 1}" collapsible="True" files_title="${_('SUBJECT FILES')}"/>
+		  		<%files:file_browser obj="${subject}" section_id="${n + 1}" collapsible="True" collapsed="False" files_title="${_('SUBJECT FILES')}"/>
 		  	</div>
 		% endfor
 	</div>

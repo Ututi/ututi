@@ -515,25 +515,27 @@ $(document).ready(function(){
 	<div class="target_item ${cls}"><div class="upload target" id="file_upload_button-${section_id}-${fid}">${h.ellipsis(title, 17)}</div></div>
 </%def>
 
-<%def name="root_folder(folder, section_id, fid)">
+<%def name="root_folder(folder, section_id, fid, collapsed)">
 	<div class="folder_file_area root_folder click2show" id="file_area-${section_id}-${fid}">
 		<input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
         <%
-           more_files = False
-           more_files_count = 0
-           files = [file for file in folder if file.deleted is None]
-           # show teacher files before the rest (python sort is stable)
-           files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
-           hidden = False
-           file_count = len(files)
+            more_files = False
+            more_files_count = 0
+            files = [file for file in folder if file.deleted is None]
+            # show teacher files before the rest (python sort is stable)
+            files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
+            hidden = False
+            file_count = len(files)
+            have_hidden_files = False
         %>
 		<ul class="folder${file_count >= 4 and ' click2show' or ''}">
 	        % if files:
 	              <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
 	              % for n, file in enumerate(files):
 	                %if n > 2 and file_count >= 4:
-	                	<% hidden = True %>
+	                	<% hidden = collapsed %>
 	                	<% more_files = True %>
+                        <% have_hidden_files = True %>
 	                	<% more_files_count += 1 %>
 	                %endif
 	                <%self:file file="${file}" hidden="${hidden}" />
@@ -544,35 +546,36 @@ $(document).ready(function(){
 		</ul>
 		<div class="spliter">&nbsp;</div>
           %if more_files:
-			<li class="hide files_more click2show">
+            <% additional_class = '' if collapsed else 'hide' %>
+			<li class="${additional_class} files_more click2show">
 				<span class="green verysmall">
 					${ungettext("Show the other %(count)s file", "Show the other %(count)s files", file_count - n ) % dict(count = more_files_count)}
 				</span>
 			</li>
 	      %endif
 		</div>
-	</div>	
+	</div>
 </%def>
 
-<%def name="sub_folder(folder, section_id, fid)">
+<%def name="sub_folder(folder, section_id, fid, collapsed)">
 	<%
-	   more_files = False
-	   more_files_count = 0
-	   style = ''
-	   files = [file for file in folder if file.deleted is None]
-	   # show teacher files before the rest (python sort is stable)
-	   files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
-	   file_count = len(files)
-	   is_open = file_count > 4
-	   if files:
-	       style = h.literal('style="display: none;"')
+        more_files = False
+        more_files_count = 0
+        style = ''
+        files = [file for file in folder if file.deleted is None]
+        # show teacher files before the rest (python sort is stable)
+        files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
+        file_count = len(files)
+        is_open = file_count > 4
+        if files:
+            style = h.literal('style="display: none;"')
 	%>
 	<div class="folder_file_area subfolder click2show${bool(files) and ' open' or ''}" id="file_area-${section_id}-${fid}">
         <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
         <h4 class="${is_open and 'click' or ''}">
           <span class="cont">
             ${folder.title}
-            <span class="small">(${ungettext("%(count)s file", "%(count)s files", len(files)) % dict(count=len(files))})</span>
+            <span class="small">(${ungettext("%(count)s file", "%(count)s files", len(files)) % dict(count=file_count)})</span>
 	            % if folder.can_write(c.user):
 	              <a ${style} href="${folder.parent.url(action='delete_folder', folder=folder.title)}" id="delete_folder_button-${section_id}-${fid}" class="delete_folder_button">${_("(Delete)")}</a>
 	            % endif
@@ -582,12 +585,12 @@ $(document).ready(function(){
 	        %if files:
 	              <li style="display: none;" class="message">${_("There are no files here, this folder is empty!")}</li>
 	              % for n, file in enumerate(files):
-	              	
-	                <%self:file file="${file}" hidden="${n > 2}"/>
-	                %if n > 3 and file_count >= 4:
-	                	<% more_files = True %>
-	                	<% more_files_count += 1 %>
-	                %endif
+                      <% file_hidden = (n >= 3 and is_open) %>
+	                  <%self:file file="${file}" hidden="${file_hidden}"/>
+	                  %if n >= 3 and is_open:
+                        <% more_files = True %>
+                      	<% more_files_count += 1 %>
+	                  %endif
 	              % endfor
 	        %else:
 	              <li class="message">${_("There are no files here, this folder is empty!")}</li>
@@ -595,20 +598,21 @@ $(document).ready(function(){
 		</ul>
 		<div class="spliter">&nbsp;</div>
            %if more_files:
-	        	<li class="hide files_more">
+            <% additional_class = '' if collapsed else 'hide' %>
+			<li class="${additional_class} files_more">
 	              <span class="green verysmall">
-	              	${ungettext("Show the other %(count)s file", "Show the other %(count)s files", file_count - n ) % dict(count = more_files_count)}
+	              	${ungettext("Show the other %(count)s file", "Show the other %(count)s files", more_files_count ) % dict(count = more_files_count)}
 	              </span>
 	            </li>
 	       %endif
 	</div>
 </%def>
 
-<%def name="folder(folder, section_id, fid)">
+<%def name="folder(folder, section_id, fid, collapsed)">
       %if folder.title == '':
-          <%self:root_folder folder="${folder}" section_id="${section_id}" fid="${fid}" />
+          <%self:root_folder folder="${folder}" section_id="${section_id}" fid="${fid}" collapsed="${collapsed}" />
       %else:
-          <%self:sub_folder  folder="${folder}" section_id="${section_id}" fid="${fid}" />
+          <%self:sub_folder  folder="${folder}" section_id="${section_id}" fid="${fid}" collapsed="${collapsed}" />
       %endif
 </%def>
 
@@ -674,7 +678,7 @@ $(document).ready(function(){
   </div>
 </%def>
 
-<%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None, controls=['upload', 'folder', 'title'], files_title='FILES')">
+<%def name="file_browser(obj, section_id=0, collapsible=False, title=None, comment=None, controls=['upload', 'folder', 'title'], files_title='FILES', collapsed=True)">
 <%prebase:normal_block class_="portletGroupFiles clickBlock ${collapsible and 'collapsible' or 'open'}" id="subject_files">
 	<div class="section ${collapsible and '' or 'open'} ${('size' in controls) and 'size_indicated' or ''}" id="file_section-${section_id}">
 	    <%
@@ -731,7 +735,7 @@ $(document).ready(function(){
 			</div>
 		</div>
 		%endif
-	      
+
 		<div class="file-tbl-header" >
 			<div class="file-tbl-header-row" >
 		      	<div class="hfile-description">${_('Filename')}</div>
@@ -740,7 +744,7 @@ $(document).ready(function(){
 		      	<div class="file-actions" >${_('Action')}</div>
 		  	</div>
 		</div>
-		
+
 		<div class="folder_file_area subfolder click2show" >
 		    <h3 class="">
 		      <span class="cont" >
@@ -748,13 +752,13 @@ $(document).ready(function(){
 		      </span>
 		    </h3>
 		</div>
-		
+
 		<div class="folders_container">
 			% for fid, folder in enumerate(obj.folders):
-				<%self:folder folder="${folder}" section_id="${section_id}" fid="${fid}" />
+				<%self:folder folder="${folder}" section_id="${section_id}" fid="${fid}" collapsed="${collapsed}"/>
 			% endfor
 		</div>
-		
+
 		<%
 		if h.check_crowds(['moderator'], context=obj):
 			style = ''

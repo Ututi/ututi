@@ -2771,13 +2771,13 @@ span.unlimited_size {
 .click2show h2.click .cont,
 .clickBlock h2.clickAction .cont {
     padding-right: 15px;
-    background: transparent url("../images/details/arrow_expand_down.png") right center no-repeat;
+    background: transparent url("../images/details/arrow_expand_right.png") right center no-repeat;
 }
 
 .click2show.open h2.click .cont,
 .clickBlock.open h2.clickAction .cont {
     padding-right: 15px;
-    background: transparent url("../images/details/arrow_expand_right.png") right center no-repeat;
+    background: transparent url("../images/details/arrow_expand_down.png") right center no-repeat;
 }
 
 .section h2 .comment {
