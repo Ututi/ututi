@@ -585,7 +585,7 @@ $(document).ready(function(){
 	</div>
 </%def>
 
-<%def name="folder(folder, section_id, fid, collapsed)">
+<%def name="folder(folder, section_id, fid, collapsed=True)">
       %if folder.title == '':
           <%self:root_folder folder="${folder}" section_id="${section_id}" fid="${fid}" collapsed="${collapsed}" />
       %else:
