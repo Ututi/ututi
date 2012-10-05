@@ -4982,10 +4982,10 @@ a.disabled, a.disabled:hover {
     z-index: 10;
     position: absolute;
 }
-#language-links li.cont-lang.en span{
+#language-links li.cont-lang.lt span{
     background-position: 0px 0px;
 }
-#language-links li.cont-lang.lt span{
+#language-links li.cont-lang.en span{
     background-position: -24px 0px;
 }
 #language-links li.cont-lang.pl span{
