@@ -20,7 +20,7 @@
   }
   form #allowed-domains-container .textField {
     padding-left: 20px;
-    background: url('/img/icons.com/contact_small.png') no-repeat 8px center;
+    background: url('${url("/img/icons.com/contact_small.png")}') no-repeat 8px center;
   }
   form #add-more-link {
     margin-left: 20px;

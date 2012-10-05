@@ -100,13 +100,13 @@
   }
 
   .no-faculties-box-features ul {
-    background: url('/img/icons.com/about/academics.png') center left no-repeat;
+    background: url('${url("/img/icons.com/about/academics.png")}') center left no-repeat;
   }
 
   .no-faculties-box-features li {
     margin-bottom: 16px;
     list-style-type: none;
-    background: url('/img/icons.com/about/bullet.png') no-repeat;
+    background: url('${url("/img/icons.com/about/bullet.png")}') no-repeat;
     padding-left: 20px;
   }
 
@@ -120,7 +120,7 @@
   }
 
   .no-faculties-box-button a {
-    background: transparent url('/img/icons.com/about/add-faculty.png') center left no-repeat;
+    background: transparent url('${url("/img/icons.com/about/add-faculty.png")}') center left no-repeat;
     display: inline-block;
     padding-left: 40px;
     line-height: 35px;

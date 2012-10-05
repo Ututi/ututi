@@ -9,10 +9,10 @@ ${parent.css()}
     padding-right: 20px;
 }
 .select-interval-form.done {
-    background: url('/img/icons.com/ok.png') no-repeat right center;
+    background: url('${url("/img/icons.com/ok.png")}') no-repeat right center;
 }
 .select-interval-form.progress {
-    background: url('/images/details/icon_progress.gif') no-repeat right center;
+    background: url('${url("/images/details/icon_progress.gif")}') no-repeat right center;
 }
 .select-interval-form select {
     width: auto;
@@ -25,13 +25,13 @@ ${parent.css()}
     padding: 5px 0px 5px 20px;
 }
 .notification-block.subject .header {
-    background: url('/img/icons.com/subject_medium_grey.png') no-repeat left center;
+    background: url('${url("/img/icons.com/subject_medium_grey.png")}') no-repeat left center;
 }
 .notification-block.group .header {
-    background: url('/img/icons.com/group_medium_grey.png') no-repeat left center;
+    background: url('${url("/img/icons.com/group_medium_grey.png")}') no-repeat left center;
 }
 .notification-block.email .header {
-    background: url('/img/icons.com/email_medium_grey.png') no-repeat left center;
+    background: url('${url("/img/icons.com/email_medium_grey.png")}') no-repeat left center;
 }
 .notification-block .warning {
     font-size: 11px;

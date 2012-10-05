@@ -30,7 +30,7 @@ table.wiki-notes th.title {
   padding-left: 10px;
 }
 table.wiki-notes td.title {
-  background: url('/img/icons.com/wiki_medium_grey.png') no-repeat 10px center;
+  background: url('${url("/img/icons.com/wiki_medium_grey.png")}') no-repeat 10px center;
   padding-left: 25px;
 }
 table.wiki-notes td.title.deleted {

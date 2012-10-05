@@ -12,7 +12,7 @@ ${_('My subjects')}
 
 .portletGroupFiles.rounded-block .cbl,
 .portletGroupFiles.rounded-block .cbr {
-    background-image: url('/img/portlets_bg_white.png');
+    background-image: url('${url("/img/portlets_bg_white.png")}');
 }
 
 </%def>

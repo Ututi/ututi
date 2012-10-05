@@ -15,7 +15,7 @@
   ul#registration-steps {
     width: 845px !important;
     height: 40px !important;
-    background-image: url('/img/registration_steps_bg.png');
+    background-image: url('${url("/img/registration_steps_bg.png")}');
     background-repeat: no-repeat;
     list-style: none;
     margin-bottom: 20px;

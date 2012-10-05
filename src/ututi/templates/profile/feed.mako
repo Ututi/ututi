@@ -21,7 +21,7 @@
       float: right;
       margin-top: -33px; /* throws above page title (XXX) */
       padding-left: 14px;
-      background: url('/img/icons.com/settings.png') no-repeat left center;
+      background: url('${url("/img/icons.com/settings.png")}') no-repeat left center;
   }
 </%def>
 

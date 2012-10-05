@@ -88,7 +88,7 @@
     <p><strong>${_("Don't study here?")}</strong></p>
     <a class="add_university_button" href="#add_university">
       <button class="student" type="button">
-          <img class="icon" alt="I am a student" src="/img/icons/add-icon.png">
+          <img class="icon" alt="I am a student" src="${url('/img/icons/add-icon.png')}">
           ${_('Add your university')}
       </button>
     </a>
