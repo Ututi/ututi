@@ -37,8 +37,8 @@ class ErrorController(SearchController):
             self.form_result = {}
             self._search()
             c.came_from = url('/')
-            
-            # if user is logged in, show search form, otherwise - login form 
+
+            # if user is logged in, show search form, otherwise - login form
             try:
                 if session['login']:
                     return render('/search/index.mako')
