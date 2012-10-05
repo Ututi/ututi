@@ -6,6 +6,7 @@ $(document).ready(function() {
             el.find('.click2show .show').toggle();
             el.find(".hide").toggle();
             el.find('.click2show .hide').toggle();
+            el.find('.files_more').toggle();
             el.trigger("expand");
             return false;
         });
