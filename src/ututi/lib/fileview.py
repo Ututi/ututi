@@ -25,7 +25,8 @@ class FileViewMixin(object):
         return (render_mako_def('/sections/files.mako','folder_button',
                                 folder=folder, section_id=section_id, fid=fid) +
                 render_mako_def('/sections/files.mako','folder',
-                                folder=folder, section_id=section_id, fid=fid))
+                                folder=folder, section_id=section_id, fid=fid,
+                                collapsed=True))
 
     def _delete_folder(self, obj):
         folder_name = request.params['folder']

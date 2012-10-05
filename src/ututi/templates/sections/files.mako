@@ -542,12 +542,12 @@ $(document).ready(function(){
         # show teacher files before the rest (python sort is stable)
         files.sort(lambda x, y: int(y.created.is_teacher) - int(x.created.is_teacher))
         file_count = len(files)
-        is_open = file_count > 4
+        is_open = file_count >= 4
         if files:
             style = h.literal('style="display: none;"')
-        folder_expanded = 'open' if is_open and not collapsed else ''
+        folder_expanded = ' open' if is_open and not collapsed else ''
 	%>
-	<div class="folder_file_area subfolder click2show ${folder_expanded}" id="file_area-${section_id}-${fid}">
+	<div class="folder_file_area subfolder click2show${folder_expanded}" id="file_area-${section_id}-${fid}">
         <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
         <h4 class="${is_open and 'click' or ''}">
           <span class="cont">
