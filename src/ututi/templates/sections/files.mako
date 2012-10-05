@@ -7,30 +7,6 @@
 //<![CDATA[
 $(document).ready(function(){
 
-	$('.files_more').click(function(){
-		var clickObj = $(this);
-		var parentCont = clickObj.parent();
-		var showFiles = parentCont.find('.file.show');		
-		
-		if ( showFiles.length > 0 ) {
-			parentCont.removeClass('open');
-			showFiles.fadeIn(500,function(){
-				showFiles.removeClass('show');
-				showFiles.addClass('hide');
-			});
-			clickObj.hide();
-		} else {
-			var hideFiles = parentCont.find('.file.hide');
-			hideFiles.removeClass('hide');
-			hideFiles.addClass('show');
-			parentCont.addClass('open');
-			clickObj.show();
-		}
-		
-		return false; 
-		
-	});
-	
     $('.clickBlock .clickAction').click(function(){
         $(this).closest('.clickBlock').toggleClass('open').find('.showBlock').toggle();
     });
@@ -547,7 +523,7 @@ $(document).ready(function(){
 		<div class="spliter">&nbsp;</div>
           %if more_files:
             <% additional_class = '' if collapsed else 'hide' %>
-			<li class="${additional_class} files_more click2show">
+			<li class="${additional_class} files_more click">
 				<span class="green verysmall">
 					${ungettext("Show the other %(count)s file", "Show the other %(count)s files", file_count - n ) % dict(count = more_files_count)}
 				</span>
@@ -569,8 +545,9 @@ $(document).ready(function(){
         is_open = file_count > 4
         if files:
             style = h.literal('style="display: none;"')
+        folder_expanded = 'open' if is_open and not collapsed else ''
 	%>
-	<div class="folder_file_area subfolder click2show${bool(files) and ' open' or ''}" id="file_area-${section_id}-${fid}">
+	<div class="folder_file_area subfolder click2show ${folder_expanded}" id="file_area-${section_id}-${fid}">
         <input class="folder_name" id="file_folder_name-${section_id}-${fid}" type="hidden" value="${folder.title}" />
         <h4 class="${is_open and 'click' or ''}">
           <span class="cont">
@@ -599,7 +576,7 @@ $(document).ready(function(){
 		<div class="spliter">&nbsp;</div>
            %if more_files:
             <% additional_class = '' if collapsed else 'hide' %>
-			<li class="${additional_class} files_more">
+			<li class="${additional_class} files_more click">
 	              <span class="green verysmall">
 	              	${ungettext("Show the other %(count)s file", "Show the other %(count)s files", more_files_count ) % dict(count = more_files_count)}
 	              </span>
