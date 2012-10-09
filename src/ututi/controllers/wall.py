@@ -66,8 +66,16 @@ class WikiForm(Schema):
 class WallReplyValidator(Schema):
     message = String(not_empty=True)
 
+
 class WallPostMessageValidator(Schema):
     message = String(not_empty=True)
+
+
+class WallPostForm(Schema):
+    """Validate wall post form"""
+    allow_extra_fields = True
+    post = validators.String(not_empty=True)
+
 
 class WallController(BaseController, FileViewMixin):
 
@@ -204,6 +212,20 @@ class WallController(BaseController, FileViewMixin):
         meta.Session.add(page)
         meta.Session.commit()
         return page
+
+    @ActionProtector("user")
+    @validate(schema=WallPostForm())
+    def add_wall_post(self):
+        """This should add a wall post for specified user"""
+        # XXX
+        return {}
+
+    @ActionProtector("user")
+    @js_validate(schema=WallPostForm())
+    def add_wall_post_js(self):
+        """This should add a wall post for specified user when invoded through xhr"""
+        # XXX
+        return {}
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
