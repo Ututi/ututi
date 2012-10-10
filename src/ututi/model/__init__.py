@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-forum_posts_table = None
 regions_table = None
 teachers_table = None
 teacher_subjects_table = None
@@ -115,13 +114,12 @@ def setup_tables(engine):
           autoload_with=engine,
           useexisting=True)
 
-    global forum_posts_table
-    forum_posts_table = Table("forum_posts", meta.metadata,
-                              Column('title', Unicode()),
-                              Column('message', Unicode()),
-                              autoload=True,
-                              useexisting=True,
-                              autoload_with=engine)
+    Table("forum_posts", meta.metadata,
+          Column('title', Unicode()),
+          Column('message', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
     global seen_threads_table
     seen_threads_table = Table("seen_threads", meta.metadata,
