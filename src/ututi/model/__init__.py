@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-emails_table = None
 user_medals_table = None
 user_registrations_table = None
 subject_pages_table = None
@@ -202,10 +201,9 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global emails_table
-    emails_table = Table("emails", meta.metadata,
-                         autoload=True,
-                         autoload_with=engine)
+    Table("emails", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     Table("email_domains", meta.metadata,
           autoload=True,
