@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-regions_table = None
 teachers_table = None
 teacher_subjects_table = None
 emails_table = None
@@ -191,12 +190,11 @@ def setup_tables(engine):
           autoload_with=engine,
           useexisting=True)
 
-    global regions_table
-    regions_table = Table("regions", meta.metadata,
-                               Column('title', Unicode()),
-                               autoload=True,
-                               useexisting=True,
-                               autoload_with=engine)
+    Table("regions", meta.metadata,
+          Column('title', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
     Table("tags", meta.metadata,
           Column('id', Integer, Sequence('tags_id_seq'), primary_key=True),
