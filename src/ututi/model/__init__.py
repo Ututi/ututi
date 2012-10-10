@@ -59,10 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-teacher_groups_table = None
-email_domains_table = None
-files_table = None
-file_downloads_table = None
 forum_categories_table = None
 tags_table = None
 private_messages_table = None
@@ -101,24 +97,20 @@ notifications_viewed_table = None
 def setup_tables(engine):
     tables = {}
     #relationships between content items and tags
-    global files_table
     warnings.simplefilter('ignore', SAWarning)
-    files_table = Table("files", meta.metadata,
-                        Column('filename', Unicode()),
-                        Column('folder', Unicode()),
-                        Column('title', Unicode()),
-                        Column('description', Unicode()),
-                        autoload=True,
-                        useexisting=True,
-                        autoload_with=engine)
+    Table("files", meta.metadata,
+          Column('filename', Unicode()),
+          Column('folder', Unicode()),
+          Column('title', Unicode()),
+          Column('description', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
     warnings.simplefilter('default', SAWarning)
 
-
-    global file_downloads_table
-    file_downloads_table = Table("file_downloads", meta.metadata,
-                                 autoload=True,
-                                 autoload_with=engine)
-
+    Table("file_downloads", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     global forum_categories_table
     forum_categories_table = Table(
@@ -186,13 +178,11 @@ def setup_tables(engine):
                                    autoload=True,
                                    autoload_with=engine)
 
-    global teacher_groups_table
-    teacher_groups_table = Table(
-        "teacher_groups", meta.metadata,
-        Column('title', Unicode()),
-        autoload=True,
-        autoload_with=engine,
-        useexisting=True)
+    Table("teacher_groups", meta.metadata,
+          Column('title', Unicode()),
+          autoload=True,
+          autoload_with=engine,
+          useexisting=True)
 
     global content_items_table
     content_items_table = Table("content_items", meta.metadata,
@@ -236,10 +226,9 @@ def setup_tables(engine):
                          autoload=True,
                          autoload_with=engine)
 
-    global email_domains_table
-    email_domains_table = Table("email_domains", meta.metadata,
-                         autoload=True,
-                         autoload_with=engine)
+    Table("email_domains", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     global user_medals_table
     user_medals_table = Table("user_medals", meta.metadata,
