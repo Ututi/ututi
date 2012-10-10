@@ -289,10 +289,9 @@ class User(Author):
 
     @property
     def ignored_subjects(self):
-        from ututi.model import user_monitored_subjects_table
         from ututi.model import Subject
         from ututi.model import subjects_table
-        umst = user_monitored_subjects_table
+        umst = meta.metadata.tables['user_monitored_subjects']
         user_ignored_subjects = meta.Session.query(Subject)\
             .join((umst,
                    and_(umst.c.subject_id==subjects_table.c.id,
@@ -303,9 +302,9 @@ class User(Author):
 
     @property
     def watched_subjects(self):
-        from ututi.model import user_monitored_subjects_table, subjects_table
+        from ututi.model import subjects_table
         from ututi.model import Subject
-        umst = user_monitored_subjects_table
+        umst = meta.metadata.tables['user_monitored_subjects']
         directly_watched_subjects = meta.Session.query(Subject)\
             .join((umst,
                    and_(umst.c.subject_id==subjects_table.c.id,
@@ -316,9 +315,9 @@ class User(Author):
 
     @property
     def all_watched_subjects(self):
-        from ututi.model import user_monitored_subjects_table, subjects_table
+        from ututi.model import subjects_table
         from ututi.model import Subject
-        umst = user_monitored_subjects_table
+        umst = meta.metadata.tables['user_monitored_subjects']
         directly_watched_subjects = meta.Session.query(Subject)\
             .join((umst,
                    and_(umst.c.subject_id==subjects_table.c.id,

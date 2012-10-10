@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-user_monitored_subjects_table = None
 email_table = None
 teacher_groups_table = None
 email_domains_table = None
@@ -337,10 +336,9 @@ def setup_tables(engine):
                                     autoload=True,
                                     autoload_with=engine)
 
-    global user_monitored_subjects_table
-    user_monitored_subjects_table = Table("user_monitored_subjects", meta.metadata,
-                                        autoload=True,
-                                        autoload_with=engine)
+    Table("user_monitored_subjects", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     # ignoring error about unknown column type for now
     warnings.simplefilter("ignore", SAWarning)
