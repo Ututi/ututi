@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-subject_pages_table = None
 group_membership_types_table = None
 group_coupons_table = None
 coupon_usage_table = None
@@ -218,10 +217,9 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global subject_pages_table
-    subject_pages_table = Table("subject_pages", meta.metadata,
-                                autoload=True,
-                                autoload_with=engine)
+    Table("subject_pages", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     global pages_table
     pages_table = Table("pages", meta.metadata,
