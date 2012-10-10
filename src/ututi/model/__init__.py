@@ -80,7 +80,6 @@ group_invitations_table = None
 subjects_table = None
 pages_table = None
 page_versions_table = None
-content_tags_table = None
 seen_threads_table = None
 subscribed_threads_table = None
 search_items_table = None
@@ -185,10 +184,9 @@ def setup_tables(engine):
                                 autoload=True,
                                 autoload_with=engine)
 
-    global content_tags_table
-    content_tags_table = Table("content_tags", meta.metadata,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("content_tags", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     global private_messages_table
     private_messages_table = Table(
