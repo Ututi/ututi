@@ -124,9 +124,8 @@ class User(Author):
         meta.Session.expire(self)
 
     def change_type(self, type, **kwargs):
-        from ututi.model import authors_table
         conn = meta.engine.connect()
-        upd = authors_table.update().where(authors_table.c.id==self.id).values(type=type, **kwargs)
+        upd = authors_table.update().where(meta.metadata.tables['authors'].c.id==self.id).values(type=type, **kwargs)
         conn.execute(upd)
 
     @property
@@ -663,8 +662,9 @@ class Teacher(User):
                 self.watchSubject(subject)
         meta.Session.commit()
 
-        # a hack: cannot update a polymorphic descriptor column using the orm 
-        from ututi.model import authors_table, teachers_table
+        # a hack: cannot update a polymorphic descriptor column using the orm
+        authors_table = meta.metadata.tables['authors']
+        teachers_table = meta.metadata.tables['teachers']
         conn = meta.engine.connect()
         upd = authors_table.update().where(authors_table.c.id==self.id).values(type='user')
         ins = teachers_table.delete().where(teachers_table.c.id==self.id)

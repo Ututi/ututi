@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-authors_table = None
 user_monitored_subjects_table = None
 email_table = None
 teacher_groups_table = None
@@ -170,13 +169,12 @@ def setup_tables(engine):
                         useexisting=True,
                         autoload_with=engine)
 
-    global authors_table
-    authors_table = Table("authors", meta.metadata,
-                          Column('id', Integer, Sequence('authors_id_seq'), primary_key=True),
-                          Column('fullname', Unicode()),
-                          autoload=True,
-                          useexisting=True,
-                          autoload_with=engine)
+    Table("authors", meta.metadata,
+          Column('id', Integer, Sequence('authors_id_seq'), primary_key=True),
+          Column('fullname', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
     Table("admin_users", meta.metadata,
           Column('id', Integer, Sequence('admin_users_id_seq'), primary_key=True),
