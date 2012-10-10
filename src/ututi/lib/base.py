@@ -28,16 +28,12 @@ from ututi.model import meta
 perflog = logging.getLogger('performance')
 
 def render(*args, **kwargs):
-    from ututi.views import render_view
     kwargs.setdefault('extra_vars', {})
     if kwargs['extra_vars'] is None:
         kwargs['extra_vars'] = {}
-    kwargs['extra_vars']['v'] = render_view
     return render_mako(*args, **kwargs)
 
 def render_def(*args, **kwargs):
-    from ututi.views import render_view
-    kwargs['v'] = render_view
     return render_mako_def(*args, **kwargs)
 
 

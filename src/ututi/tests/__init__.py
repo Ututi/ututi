@@ -13,7 +13,6 @@ from zope.testbrowser.browser import Link
 from mechanize._mechanize import LinkNotFoundError
 from nous.pylons.testing import LayerBase, CompositeLayer
 from nous.pylons.testing import PylonsTestBrowserLayer
-from nous.pylons.grok.testing import GrokLayer
 
 import pylons.test
 from pylons import config
@@ -129,36 +128,30 @@ class UtutiQuickLayerBase(LayerBase):
         meta.Session.remove()
 
 
-UtutiLayer = CompositeLayer(GrokLayer,
-                            PylonsTestBrowserLayer('test.ini', conf_dir, meta),
+UtutiLayer = CompositeLayer(PylonsTestBrowserLayer('test.ini', conf_dir, meta),
                             UtutiBaseLayer(),
                             name='UtutiLayer')
 
-UtutiFunctionalLayer = CompositeLayer(GrokLayer,
-                                      PylonsTestBrowserLayer('test.ini', conf_dir, meta),
+UtutiFunctionalLayer = CompositeLayer(PylonsTestBrowserLayer('test.ini', conf_dir, meta),
                                       UtutiBaseLayer(),
                                       name='UtutiFunctionalLayer')
 
-U2tiFunctionalLayer = CompositeLayer(GrokLayer,
-                                     PylonsTestBrowserLayer('test2.ini', conf_dir, meta),
+U2tiFunctionalLayer = CompositeLayer(PylonsTestBrowserLayer('test2.ini', conf_dir, meta),
                                      UtutiBaseLayer(),
                                      name='U2tiFunctionalLayer')
 
-UtutiErrorsLayer = CompositeLayer(GrokLayer,
-                                  PylonsTestBrowserLayer('errors.ini', conf_dir, meta),
+UtutiErrorsLayer = CompositeLayer(PylonsTestBrowserLayer('errors.ini', conf_dir, meta),
                                   UtutiQuickLayerBase(),
                                   name='UtutiErrorsLayer')
 
 
-UtutiQuickLayer = CompositeLayer(GrokLayer,
-                                 PylonsTestBrowserLayer('test.ini', conf_dir, meta),
+UtutiQuickLayer = CompositeLayer(PylonsTestBrowserLayer('test.ini', conf_dir, meta),
                                  UtutiQuickLayerBase(),
                                  name='UtutiQuickLayer')
 
-U2tiQuickLayer = CompositeLayer(GrokLayer,
-                                 PylonsTestBrowserLayer('test2.ini', conf_dir, meta),
-                                 UtutiQuickLayerBase(),
-                                 name='U2tiQuickLayer')
+U2tiQuickLayer = CompositeLayer(PylonsTestBrowserLayer('test2.ini', conf_dir, meta),
+                                UtutiQuickLayerBase(),
+                                name='U2tiQuickLayer')
 
 
 class UtutiTestBrowser(NousTestBrowser):
