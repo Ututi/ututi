@@ -25,7 +25,6 @@ setup(
         "translitcodec",
         "trans",
         "python-openid",
-        "nous.pylons.grok",
         "nous.pylons.testing",
         "nous.pylons.geoip",
         "addhrefs",

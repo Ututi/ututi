@@ -51,13 +51,6 @@ from pylons.i18n import _, lazy_ugettext as ugettext
 
 log = logging.getLogger(__name__)
 
-users_table = None
-authors_table = None
-admin_users_table = None
-user_monitored_subjects_table = None
-email_table = None
-teacher_groups_table = None
-email_domains_table = None
 
 def init_model(engine):
     """Call me before using any of the tables or classes in the model"""
@@ -66,7 +59,52 @@ def init_model(engine):
     meta.engine = engine
 
 
-def setup_orm(engine):
+users_table = None
+authors_table = None
+admin_users_table = None
+user_monitored_subjects_table = None
+email_table = None
+teacher_groups_table = None
+email_domains_table = None
+files_table = None
+file_downloads_table = None
+forum_categories_table = None
+tags_table = None
+private_messages_table = None
+forum_posts_table = None
+regions_table = None
+teachers_table = None
+teacher_subjects_table = None
+emails_table = None
+user_medals_table = None
+user_registrations_table = None
+subject_pages_table = None
+group_membership_types_table = None
+group_coupons_table = None
+coupon_usage_table = None
+content_items_table = None
+group_whitelist_table = None
+group_members_table = None
+group_requests_table = None
+group_invitations_table = None
+subjects_table = None
+pages_table = None
+page_versions_table = None
+content_tags_table = None
+seen_threads_table = None
+subscribed_threads_table = None
+search_items_table = None
+tag_search_items_table = None
+payments_table = None
+sms_table = None
+received_sms_messages = None
+outgoing_group_sms_messages_table = None
+notifications_table = None
+notifications_viewed_table = None
+
+
+def setup_tables(engine):
+    tables = {}
     #relationships between content items and tags
     global files_table
     warnings.simplefilter('ignore', SAWarning)
@@ -79,6 +117,7 @@ def setup_orm(engine):
                         useexisting=True,
                         autoload_with=engine)
     warnings.simplefilter('default', SAWarning)
+
 
     global file_downloads_table
     file_downloads_table = Table("file_downloads", meta.metadata,
@@ -200,164 +239,20 @@ def setup_orm(engine):
                                autoload=True,
                                autoload_with=engine)
 
-    tag_mapper = orm.mapper(Tag,
-                            tags_table,
-                            polymorphic_on=tags_table.c.tag_type,
-                            polymorphic_identity='',
-                            properties={'raw_logo': deferred(tags_table.c.logo)})
-
-    orm.mapper(LocationTag,
-               inherits=Tag,
-               polymorphic_on=tags_table.c.tag_type,
-               polymorphic_identity='location',
-               properties={'children': relation(LocationTag,
-                                                order_by=LocationTag.title.asc(),
-                                                cascade="delete",
-                                                backref=backref('parent',
-                                                                remote_side=tags_table.c.id)),
-                           'region': relation(Region, backref='tags'),
-                           'country': relation(Country, backref='locations'),
-                           'theme': relation(Theme)})
-
-    orm.mapper(SimpleTag,
-               inherits=tag_mapper,
-               polymorphic_on=tags_table.c.tag_type,
-               polymorphic_identity='tag')
-
-    orm.mapper(ContentItem,
-               content_items_table,
-               polymorphic_on=content_items_table.c.content_type,
-               polymorphic_identity='generic',
-               properties={'created': relation(Author,
-                                               primaryjoin=content_items_table.c.created_by==authors_table.c.id,
-                                               backref="content_items"),
-                           'modified': relation(Author,
-                                                primaryjoin=content_items_table.c.modified_by==authors_table.c.id),
-                           'deleted': relation(Author,
-                                               primaryjoin=content_items_table.c.deleted_by==authors_table.c.id),
-                           'tags': relation(SimpleTag,
-                                            secondary=content_tags_table),
-                           'location': relation(LocationTag)})
-
-    orm.mapper(File, files_table,
-               inherits=ContentItem,
-               inherit_condition=files_table.c.id==ContentItem.id,
-               polymorphic_identity='file',
-               polymorphic_on=content_items_table.c.content_type,
-               extension=NotifyGG(),
-               properties = {'parent': relation(ContentItem,
-                                                primaryjoin=files_table.c.parent_id==content_items_table.c.id,
-                                                backref=backref("files", order_by=files_table.c.filename.asc()))})
-
-    orm.mapper(PrivateMessage, private_messages_table,
-               inherits=ContentItem,
-               inherit_condition=private_messages_table.c.id==ContentItem.id,
-               polymorphic_identity='private_message',
-               polymorphic_on=content_items_table.c.content_type,
-               properties = {
-                 'sender': relation(User,
-                      primaryjoin=private_messages_table.c.sender_id==users_table.c.id,
-                      backref=backref("messages_sent",
-                                      order_by=private_messages_table.c.id.asc())),
-                 'recipient': relation(User,
-                      primaryjoin=private_messages_table.c.recipient_id==users_table.c.id,
-                      backref=backref("messages_received",
-                                      order_by=private_messages_table.c.id.asc())),
-               })
-
-    orm.mapper(Region, regions_table)
-
-    orm.mapper(ForumCategory, forum_categories_table,
-               properties={'group': relation(Group,
-                                       backref=backref("forum_categories",
-                                          order_by=forum_categories_table.c.id.asc()))})
-
-    orm.mapper(ForumPost, forum_posts_table,
-               inherits=ContentItem,
-               inherit_condition=forum_posts_table.c.id==ContentItem.id,
-               polymorphic_identity='forum_post',
-               polymorphic_on=content_items_table.c.content_type,
-               properties = {'category': relation(ForumCategory,
-                                                  backref="posts"),
-                             'parent': relation(ContentItem,
-                                                primaryjoin=forum_posts_table.c.parent_id==content_items_table.c.id,
-                                                backref="forum_posts")
-                            })
-
-    orm.mapper(SeenThread, seen_threads_table,
-               properties = {'thread': relation(ForumPost),
-                             'user': relation(User)})
-
-
-    orm.mapper(SubscribedThread, subscribed_threads_table,
-               properties = {'thread': relation(ForumPost,
-                                                backref='subscriptions'),
-                             'user': relation(User)})
-
-    author_mapper = orm.mapper(Author,
-                               authors_table,
-                               polymorphic_on=authors_table.c.type,
-                               polymorphic_identity='nouser')
-
-
-    user_mapper = orm.mapper(User,
-                             users_table,
-                             inherits=Author,
-                             polymorphic_identity='user',
-                             properties = {'emails': relation(Email,
-                                                              backref='user',
-                                                              cascade='all, delete-orphan'),
-                                           'medals': relation(Medal, backref='user'),
-                                           'raw_logo': deferred(users_table.c.logo),
-                                           'location': relation(LocationTag,
-                                                                backref=backref('users',
-                                                                                lazy=True,
-                                                                                cascade='all, delete',
-                                                                                passive_deletes=True)
-                                                                )})
-
-    orm.mapper(Teacher,
-               teachers_table,
-               polymorphic_identity='teacher',
-               inherits=User,
-               properties = {'taught_subjects' : relation(Subject,
-                                                          secondary=teacher_subjects_table,
-                                                          backref="teachers"),
-                             'general_info': relation(I18nText)})
-
-    orm.mapper(TeacherGroup,
-               teacher_groups_table,
-               properties = {'group' : relation(Group, lazy=True),
-                             'teacher' : relation(Teacher,
-                                                  backref='student_groups')})
-
-    admin_user_mapper = orm.mapper(AdminUser,
-                                   admin_users_table)
-
-    orm.mapper(FileDownload,
-               file_downloads_table,
-               properties = {'user' : relation(User, backref='downloads'),
-                             'file' : relation(File, lazy=False)})
-
     global emails_table
     emails_table = Table("emails", meta.metadata,
                          autoload=True,
                          autoload_with=engine)
-    orm.mapper(Email, emails_table)
 
     global email_domains_table
     email_domains_table = Table("email_domains", meta.metadata,
                          autoload=True,
                          autoload_with=engine)
 
-    orm.mapper(EmailDomain, email_domains_table,
-               properties = {'location': relation(Tag, backref='email_domains')})
-
     global user_medals_table
     user_medals_table = Table("user_medals", meta.metadata,
                               autoload=True,
                               autoload_with=engine)
-    orm.mapper(Medal, user_medals_table)
 
 
     global user_registrations_table
@@ -368,17 +263,6 @@ def setup_orm(engine):
                                     autoload=True,
                                     autoload_with=engine)
 
-    orm.mapper(UserRegistration, user_registrations_table,
-               properties = {'location': relation(Tag),
-                             'raw_logo': deferred(user_registrations_table.c.logo),
-                             'inviter': relation(User,
-                                                 primaryjoin=user_registrations_table.c.inviter_id==users_table.c.id),
-                             'user': relation(User,
-                                              primaryjoin=user_registrations_table.c.user_id==users_table.c.id),
-                             'university_country': relation(Country),
-                             'raw_university_logo': deferred(user_registrations_table.c.university_logo)})
-
-
     global subject_pages_table
     subject_pages_table = Table("subject_pages", meta.metadata,
                                 autoload=True,
@@ -388,10 +272,8 @@ def setup_orm(engine):
     pages_table = Table("pages", meta.metadata,
                         autoload=True,
                         autoload_with=engine)
-    orm.mapper(Page, pages_table,
-               inherits=ContentItem,
-               polymorphic_identity='page',
-               polymorphic_on=content_items_table.c.content_type)
+
+
 
     global page_versions_table
     page_versions_table = Table("page_versions", meta.metadata,
@@ -399,15 +281,6 @@ def setup_orm(engine):
                                 Column('content', Unicode()),
                                 autoload=True,
                                 autoload_with=engine)
-    orm.mapper(PageVersion, page_versions_table,
-               inherits=ContentItem,
-               polymorphic_identity='page_version',
-               polymorphic_on=content_items_table.c.content_type,
-               inherit_condition=page_versions_table.c.id == content_items_table.c.id,
-               properties={'page': relation(Page,
-                                            primaryjoin=pages_table.c.id==page_versions_table.c.page_id,
-                                            backref=backref('versions',
-                                                            order_by=content_items_table.c.created_on.desc()))})
 
     global subjects_table
     subjects_table = Table("subjects", meta.metadata,
@@ -417,34 +290,16 @@ def setup_orm(engine):
                            autoload=True,
                            useexisting=True,
                            autoload_with=engine)
-    orm.mapper(Subject, subjects_table,
-               inherits=ContentItem,
-               polymorphic_identity='subject',
-               polymorphic_on=content_items_table.c.content_type,
-               properties={'pages': relation(Page,
-                                             secondary=subject_pages_table,
-                                             backref="subject")})
 
     global group_membership_types_table
     group_membership_types_table = Table("group_membership_types", meta.metadata,
                                          autoload=True,
                                          autoload_with=engine)
-    orm.mapper(GroupMembershipType,
-               group_membership_types_table)
 
     global group_members_table
     group_members_table = Table("group_members", meta.metadata,
                                 autoload=True,
                                 autoload_with=engine)
-    orm.mapper(GroupMember,
-               group_members_table,
-               properties = {'user': relation(User, backref='memberships'),
-                             'group': relation(Group,
-                                               backref=backref('members',
-                                                               cascade='save-update, merge, delete',
-                                                               order_by=group_members_table.c.membership_type.asc())),
-                             'role': relation(GroupMembershipType)})
-
 
     global groups_table
     groups_table = Table("groups", meta.metadata,
@@ -478,35 +333,6 @@ def setup_orm(engine):
                                          autoload_with=engine)
 
 
-    orm.mapper(Group, groups_table,
-               inherits=ContentItem,
-               polymorphic_identity='group',
-               polymorphic_on=content_items_table.c.content_type,
-               properties ={'watched_subjects': relation(Subject,
-                                                         backref=backref("watching_groups", lazy=True),
-                                                         secondary=group_watched_subjects_table),
-                            'raw_logo': deferred(groups_table.c.logo)})
-
-    orm.mapper(GroupWhitelistItem, group_whitelist_table,
-               properties = {'group': relation(Group,
-                                               backref=backref('whitelist',
-                                                               cascade='save-update, merge, delete',
-                                                               order_by=group_whitelist_table.c.id.asc()))})
-
-    orm.mapper(GroupSubjectMonitoring, group_watched_subjects_table,
-               properties ={'subject': relation(Subject),
-                            'group': relation(Group)
-                            })
-
-    orm.mapper(GroupCoupon, group_coupons_table,
-               properties ={'groups': relation(Group, secondary=coupon_usage_table, backref="coupons", lazy=True),
-                            'users': relation(User, secondary=coupon_usage_table, backref="coupons", lazy=True)})
-
-    orm.mapper(CouponUsage, coupon_usage_table,
-               properties ={'group': relation(Group, lazy=True),
-                            'user': relation(User, lazy=True),
-                            'coupon': relation(GroupCoupon, lazy=True)})
-
     global group_invitations_table
     group_invitations_table = Table("group_invitations", meta.metadata,
                                     autoload=True,
@@ -517,29 +343,10 @@ def setup_orm(engine):
                                     autoload=True,
                                     autoload_with=engine)
 
-    orm.mapper(PendingRequest, group_requests_table,
-               properties = {'group': relation(Group, backref=backref('requests', cascade='save-update, merge, delete')),
-                             'user': relation(User,
-                                              primaryjoin=group_requests_table.c.user_id==users_table.c.id,
-                                              backref='requests')})
-
-    orm.mapper(PendingInvitation, group_invitations_table,
-               properties = {'user': relation(User,
-                                              primaryjoin=group_invitations_table.c.user_id==users_table.c.id,
-                                              backref='invitations'),
-                             'author': relation(User,
-                                                primaryjoin=group_invitations_table.c.author_id==users_table.c.id),
-                             'group': relation(Group, backref=backref('invitations', cascade='save-update, merge, delete'))})
-
     global user_monitored_subjects_table
     user_monitored_subjects_table = Table("user_monitored_subjects", meta.metadata,
                                         autoload=True,
                                         autoload_with=engine)
-
-    orm.mapper(UserSubjectMonitoring, user_monitored_subjects_table,
-               properties ={'subject': relation(Subject, backref=backref("watching_users", lazy=True)),
-                            'user': relation(User)
-                            })
 
     # ignoring error about unknown column type for now
     warnings.simplefilter("ignore", SAWarning)
@@ -556,21 +363,12 @@ def setup_orm(engine):
 
     warnings.simplefilter("default", SAWarning)
 
-    orm.mapper(SearchItem, search_items_table,
-               properties={'object' : relation(ContentItem, lazy=True, backref=backref("search_item", uselist=False, cascade="all"))})
-
-    orm.mapper(TagSearchItem, tag_search_items_table,
-               properties={'tag' : relation(LocationTag)})
 
     global payments_table
     payments_table = Table("payments", meta.metadata,
                            autoload=True,
                            useexisting=True,
                            autoload_with=engine)
-    orm.mapper(Payment, payments_table,
-               properties={'user': relation(User),
-                           'group': relation(Group, backref=backref('payments',
-                                                                    order_by=payments_table.c.created.desc()))})
 
     global received_sms_messages
     received_sms_messages = Table("received_sms_messages", meta.metadata,
@@ -578,12 +376,6 @@ def setup_orm(engine):
                                useexisting=True,
                                autoload=True,
                                autoload_with=engine)
-    orm.mapper(ReceivedSMSMessage,
-               received_sms_messages,
-               properties = {
-                    'sender': relation(User, primaryjoin=received_sms_messages.c.sender_id==users_table.c.id),
-                    'group': relation(Group, primaryjoin=received_sms_messages.c.group_id==groups_table.c.group_id),
-               })
 
     global outgoing_group_sms_messages_table
     outgoing_group_sms_messages_table = Table("outgoing_group_sms_messages", meta.metadata,
@@ -591,12 +383,6 @@ def setup_orm(engine):
                                useexisting=True,
                                autoload=True,
                                autoload_with=engine)
-    orm.mapper(OutgoingGroupSMSMessage,
-               outgoing_group_sms_messages_table,
-               properties = {
-                    'sender': relation(User, primaryjoin=outgoing_group_sms_messages_table.c.sender_id==users_table.c.id),
-                    'group': relation(Group, primaryjoin=outgoing_group_sms_messages_table.c.group_id==groups_table.c.id),
-               })
 
     global sms_table
     sms_table = Table("sms_outbox", meta.metadata,
@@ -604,13 +390,6 @@ def setup_orm(engine):
                                useexisting=True,
                                autoload=True,
                                autoload_with=engine)
-    orm.mapper(SMS,
-               sms_table,
-               properties={'sender': relation(User, primaryjoin=sms_table.c.sender_uid==users_table.c.id),
-                           'recipient': relation(User, primaryjoin=sms_table.c.recipient_uid==users_table.c.id),
-                           'outgoing_group_message': relation(OutgoingGroupSMSMessage, primaryjoin=sms_table.c.outgoing_group_message_id==outgoing_group_sms_messages_table.c.id,
-                                                              backref='individual_messages'),
-                           })
 
     global notifications_table
     notifications_table = Table("notifications", meta.metadata,
@@ -623,11 +402,288 @@ def setup_orm(engine):
                                autoload=True,
                                autoload_with=engine)
 
+
+def setup_orm(meta):
+    engine = meta.engine
+    tables = meta.metadata.tables
+
+    tag_mapper = orm.mapper(Tag,
+                            tables['tags'],
+                            polymorphic_on=tables['tags'].c.tag_type,
+                            polymorphic_identity='',
+                            properties={'raw_logo': deferred(tables['tags'].c.logo)})
+
+    orm.mapper(LocationTag,
+               inherits=Tag,
+               polymorphic_on=tables['tags'].c.tag_type,
+               polymorphic_identity='location',
+               properties={'children': relation(LocationTag,
+                                                order_by=LocationTag.title.asc(),
+                                                cascade="delete",
+                                                backref=backref('parent',
+                                                                remote_side=tables['tags'].c.id)),
+                           'region': relation(Region, backref='tags'),
+                           'country': relation(Country, backref='locations'),
+                           'theme': relation(Theme)})
+
+    orm.mapper(SimpleTag,
+               inherits=tag_mapper,
+               polymorphic_on=tables['tags'].c.tag_type,
+               polymorphic_identity='tag')
+
+    orm.mapper(ContentItem,
+               tables['content_items'],
+               polymorphic_on=tables['content_items'].c.content_type,
+               polymorphic_identity='generic',
+               properties={'created': relation(Author,
+                                               primaryjoin=tables['content_items'].c.created_by==tables['authors'].c.id,
+                                               backref="content_items"),
+                           'modified': relation(Author,
+                                                primaryjoin=tables['content_items'].c.modified_by==tables['authors'].c.id),
+                           'deleted': relation(Author,
+                                               primaryjoin=tables['content_items'].c.deleted_by==tables['authors'].c.id),
+                           'tags': relation(SimpleTag,
+                                            secondary=tables['content_tags']),
+                           'location': relation(LocationTag)})
+
+    orm.mapper(File, tables['files'],
+               inherits=ContentItem,
+               inherit_condition=tables['files'].c.id==ContentItem.id,
+               polymorphic_identity='file',
+               polymorphic_on=tables['content_items'].c.content_type,
+               extension=NotifyGG(),
+               properties = {'parent': relation(ContentItem,
+                                                primaryjoin=tables['files'].c.parent_id==tables['content_items'].c.id,
+                                                backref=backref("files", order_by=tables['files'].c.filename.asc()))})
+
+    orm.mapper(PrivateMessage, tables['private_messages'],
+               inherits=ContentItem,
+               inherit_condition=tables['private_messages'].c.id==ContentItem.id,
+               polymorphic_identity='private_message',
+               polymorphic_on=tables['content_items'].c.content_type,
+               properties = {
+                 'sender': relation(User,
+                      primaryjoin=tables['private_messages'].c.sender_id==tables['users'].c.id,
+                      backref=backref("messages_sent",
+                                      order_by=tables['private_messages'].c.id.asc())),
+                 'recipient': relation(User,
+                      primaryjoin=tables['private_messages'].c.recipient_id==tables['users'].c.id,
+                      backref=backref("messages_received",
+                                      order_by=tables['private_messages'].c.id.asc())),
+               })
+
+    orm.mapper(Region, tables['regions'])
+
+    orm.mapper(ForumCategory, tables['forum_categories'],
+               properties={'group': relation(Group,
+                                       backref=backref("forum_categories",
+                                          order_by=tables['forum_categories'].c.id.asc()))})
+
+    orm.mapper(ForumPost, tables['forum_posts'],
+               inherits=ContentItem,
+               inherit_condition=tables['forum_posts'].c.id==ContentItem.id,
+               polymorphic_identity='forum_post',
+               polymorphic_on=tables['content_items'].c.content_type,
+               properties = {'category': relation(ForumCategory,
+                                                  backref="posts"),
+                             'parent': relation(ContentItem,
+                                                primaryjoin=tables['forum_posts'].c.parent_id==tables['content_items'].c.id,
+                                                backref="forum_posts")
+                            })
+
+    orm.mapper(SeenThread, tables['seen_threads'],
+               properties = {'thread': relation(ForumPost),
+                             'user': relation(User)})
+
+
+    orm.mapper(SubscribedThread, tables['subscribed_threads'],
+               properties = {'thread': relation(ForumPost,
+                                                backref='subscriptions'),
+                             'user': relation(User)})
+
+    author_mapper = orm.mapper(Author,
+                               tables['authors'],
+                               polymorphic_on=tables['authors'].c.type,
+                               polymorphic_identity='nouser')
+
+
+    user_mapper = orm.mapper(User,
+                             tables['users'],
+                             inherits=Author,
+                             polymorphic_identity='user',
+                             properties = {'emails': relation(Email,
+                                                              backref='user',
+                                                              cascade='all, delete-orphan'),
+                                           'medals': relation(Medal, backref='user'),
+                                           'raw_logo': deferred(tables['users'].c.logo),
+                                           'location': relation(LocationTag,
+                                                                backref=backref('users',
+                                                                                lazy=True,
+                                                                                cascade='all, delete',
+                                                                                passive_deletes=True)
+                                                                )})
+
+    orm.mapper(Teacher,
+               tables['teachers'],
+               polymorphic_identity='teacher',
+               inherits=User,
+               properties = {'taught_subjects' : relation(Subject,
+                                                          secondary=tables['teacher_taught_subjects'],
+                                                          backref="teachers"),
+                             'general_info': relation(I18nText)})
+
+    orm.mapper(TeacherGroup,
+               tables['teacher_groups'],
+               properties = {'group' : relation(Group, lazy=True),
+                             'teacher' : relation(Teacher,
+                                                  backref='student_groups')})
+
+    admin_user_mapper = orm.mapper(AdminUser,
+                                   tables['admin_users'])
+
+    orm.mapper(FileDownload,
+               tables['file_downloads'],
+               properties = {'user' : relation(User, backref='downloads'),
+                             'file' : relation(File, lazy=False)})
+    orm.mapper(Email, tables['emails'])
+
+    orm.mapper(EmailDomain, tables['email_domains'],
+               properties = {'location': relation(Tag, backref='email_domains')})
+
+    orm.mapper(Medal, tables['user_medals'])
+
+    orm.mapper(UserRegistration, tables['user_registrations'],
+               properties = {'location': relation(Tag),
+                             'raw_logo': deferred(tables['user_registrations'].c.logo),
+                             'inviter': relation(User,
+                                                 primaryjoin=tables['user_registrations'].c.inviter_id==tables['users'].c.id),
+                             'user': relation(User,
+                                              primaryjoin=tables['user_registrations'].c.user_id==tables['users'].c.id),
+                             'university_country': relation(Country),
+                             'raw_university_logo': deferred(tables['user_registrations'].c.university_logo)})
+
+    orm.mapper(Page, tables['pages'],
+               inherits=ContentItem,
+               polymorphic_identity='page',
+               polymorphic_on=tables['content_items'].c.content_type)
+
+    orm.mapper(PageVersion, tables['page_versions'],
+               inherits=ContentItem,
+               polymorphic_identity='page_version',
+               polymorphic_on=tables['content_items'].c.content_type,
+               inherit_condition=tables['page_versions'].c.id == tables['content_items'].c.id,
+               properties={'page': relation(Page,
+                                            primaryjoin=tables['pages'].c.id==tables['page_versions'].c.page_id,
+                                            backref=backref('versions',
+                                                            order_by=tables['content_items'].c.created_on.desc()))})
+
+    orm.mapper(Subject, tables['subjects'],
+               inherits=ContentItem,
+               polymorphic_identity='subject',
+               polymorphic_on=tables['content_items'].c.content_type,
+               properties={'pages': relation(Page,
+                                             secondary=tables['subject_pages'],
+                                             backref="subject")})
+
+    orm.mapper(GroupMembershipType,
+               tables['group_membership_types'])
+
+    orm.mapper(GroupMember,
+               tables['group_members'],
+               properties = {'user': relation(User, backref='memberships'),
+                             'group': relation(Group,
+                                               backref=backref('members',
+                                                               cascade='save-update, merge, delete',
+                                                               order_by=tables['group_members'].c.membership_type.asc())),
+                             'role': relation(GroupMembershipType)})
+
+    orm.mapper(Group, tables['groups'],
+               inherits=ContentItem,
+               polymorphic_identity='group',
+               polymorphic_on=tables['content_items'].c.content_type,
+               properties ={'watched_subjects': relation(Subject,
+                                                         backref=backref("watching_groups", lazy=True),
+                                                         secondary=tables['group_watched_subjects']),
+                            'raw_logo': deferred(tables['groups'].c.logo)})
+
+    orm.mapper(GroupWhitelistItem, tables['group_whitelist'],
+               properties = {'group': relation(Group,
+                                               backref=backref('whitelist',
+                                                               cascade='save-update, merge, delete',
+                                                               order_by=tables['group_whitelist'].c.id.asc()))})
+
+    orm.mapper(GroupSubjectMonitoring, tables['group_watched_subjects'],
+               properties ={'subject': relation(Subject),
+                            'group': relation(Group)
+                            })
+
+    orm.mapper(GroupCoupon, tables['group_coupons'],
+               properties ={'groups': relation(Group, secondary=tables['coupon_usage'], backref="coupons", lazy=True),
+                            'users': relation(User, secondary=tables['coupon_usage'], backref="coupons", lazy=True)})
+
+    orm.mapper(CouponUsage, tables['coupon_usage'],
+               properties ={'group': relation(Group, lazy=True),
+                            'user': relation(User, lazy=True),
+                            'coupon': relation(GroupCoupon, lazy=True)})
+
+    orm.mapper(PendingRequest, tables['group_requests'],
+               properties = {'group': relation(Group, backref=backref('requests', cascade='save-update, merge, delete')),
+                             'user': relation(User,
+                                              primaryjoin=tables['group_requests'].c.user_id==tables['users'].c.id,
+                                              backref='requests')})
+
+    orm.mapper(PendingInvitation, tables['group_invitations'],
+               properties = {'user': relation(User,
+                                              primaryjoin=tables['group_invitations'].c.user_id==tables['users'].c.id,
+                                              backref='invitations'),
+                             'author': relation(User,
+                                                primaryjoin=tables['group_invitations'].c.author_id==tables['users'].c.id),
+                             'group': relation(Group, backref=backref('invitations', cascade='save-update, merge, delete'))})
+
+    orm.mapper(UserSubjectMonitoring, tables['user_monitored_subjects'],
+               properties ={'subject': relation(Subject, backref=backref("watching_users", lazy=True)),
+                            'user': relation(User)
+                            })
+
+
+    orm.mapper(SearchItem, tables['search_items'],
+               properties={'object' : relation(ContentItem, lazy=True, backref=backref("search_item", uselist=False, cascade="all"))})
+
+    orm.mapper(TagSearchItem, tables['tag_search_items'],
+               properties={'tag' : relation(LocationTag)})
+
+    orm.mapper(Payment, tables['payments'],
+               properties={'user': relation(User),
+                           'group': relation(Group, backref=backref('payments',
+                                                                    order_by=tables['payments'].c.created.desc()))})
+
+    orm.mapper(ReceivedSMSMessage,
+               received_sms_messages,
+               properties = {
+                    'sender': relation(User, primaryjoin=received_sms_messages.c.sender_id==tables['users'].c.id),
+                    'group': relation(Group, primaryjoin=received_sms_messages.c.group_id==tables['groups'].c.group_id),
+               })
+
+    orm.mapper(OutgoingGroupSMSMessage,
+               tables['outgoing_group_sms_messages'],
+               properties = {
+                    'sender': relation(User, primaryjoin=tables['outgoing_group_sms_messages'].c.sender_id==tables['users'].c.id),
+                    'group': relation(Group, primaryjoin=tables['outgoing_group_sms_messages'].c.group_id==tables['groups'].c.id),
+               })
+
+    orm.mapper(SMS,
+               tables['sms_outbox'],
+               properties={'sender': relation(User, primaryjoin=tables['sms_outbox'].c.sender_uid==tables['users'].c.id),
+                           'recipient': relation(User, primaryjoin=tables['sms_outbox'].c.recipient_uid==tables['users'].c.id),
+                           'outgoing_group_message': relation(OutgoingGroupSMSMessage, primaryjoin=tables['sms_outbox'].c.outgoing_group_message_id==tables['outgoing_group_sms_messages'].c.id,
+                                                              backref='individual_messages'),
+                           })
+
     orm.mapper(Notification,
-               notifications_table,
+               tables['notifications'],
                properties={
                  'users': relation(User,
-                                   secondary=notifications_viewed_table,
+                                   secondary=tables['notifications_viewed'],
                                    backref="seen_notifications"),
                           })
 
@@ -706,7 +762,6 @@ def teardown_db_defaults(engine, quiet=False):
     meta.engine.dispose()
 
 
-content_items_table = None
 class ContentItem(object):
     """A generic class for content items."""
 
@@ -1173,7 +1228,6 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
             return GroupWhitelistItem(self, email)
         return None
 
-group_whitelist_table = None
 
 class GroupWhitelistItem(object):
     """Group mailing list whitelist item"""
@@ -1184,8 +1238,6 @@ class GroupWhitelistItem(object):
         self.group = group
         self.email = email
 
-
-group_members_table = None
 
 class GroupMember(object):
     """A membership object that associates a user with a group.
@@ -1225,8 +1277,6 @@ class GroupMembershipType(object):
             return None
 
 
-group_requests_table = None
-
 class PendingInvitation(object):
     """The group invites a user."""
 
@@ -1252,8 +1302,6 @@ class PendingInvitation(object):
             return None
 
 
-group_invitations_table = None
-
 class PendingRequest(object):
     """The user requests to join a group."""
     def __init__(self, user, group=None):
@@ -1273,7 +1321,6 @@ class PendingRequest(object):
             return None
 
 
-subjects_table = None
 class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
 
     def recipients(self, period):
@@ -1434,8 +1481,6 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
                     description=html_strip(self.description))
 
 
-pages_table = None
-
 class Page(ContentItem):
     """Class representing user-editable wiki-like pages."""
 
@@ -1498,8 +1543,6 @@ class Page(ContentItem):
         return render_mako_def('/sections/content_snippets.mako', 'page', object=self)
 
 
-page_versions_table = None
-
 class PageVersion(ContentItem):
     """Class representing one version of a page."""
 
@@ -1521,7 +1564,6 @@ class PageVersion(ContentItem):
                    **kwargs)
 
 
-content_tags_table = None
 class Tag(object):
     """Class representing tags in general."""
 
@@ -2180,7 +2222,6 @@ class ForumPost(ContentItem):
         return render_mako_def('/sections/content_snippets.mako','forum_post', object=self)
 
 
-seen_threads_table = None
 class SeenThread(object):
 
     def __init__(self, thread_id, user):
@@ -2200,7 +2241,6 @@ class SeenThread(object):
             return seen
 
 
-subscribed_threads_table = None
 class SubscribedThread(object):
     """A relationship between a thread and a user indicating a subscription.
 
@@ -2243,7 +2283,6 @@ class SubscribedThread(object):
             return subscription
 
 
-search_items_table = None
 class SearchItem(object):
     """Language mapper.
     
@@ -2255,11 +2294,11 @@ class SearchItem(object):
     """
     LANGUAGE_MAPPER = {'en': 'public.universal', 'lt': 'lt', 'pl': 'pl'}
 
-tag_search_items_table = None
+
 class TagSearchItem(object):
     pass
 
-payments_table = None
+
 class Payment(object):
 
     def __init__(self, **kwargs):
@@ -2318,7 +2357,6 @@ from ututi.model.mailing import GroupMailingListMessage
 
 #   conversation, comment (feedback)
 
-sms_table = None
 class SMS(object):
     """ Object for SMS messages stored in the database. """
 
@@ -2334,7 +2372,6 @@ class SMS(object):
             return None
 
 
-received_sms_messages = None
 class ReceivedSMSMessage(object):
     """An incoming SMS message."""
 
@@ -2364,7 +2401,6 @@ class ReceivedSMSMessage(object):
         return self.request_params()['sig'] == self.calculate_fortumo_sig()
 
 
-outgoing_group_sms_messages_table = None
 class OutgoingGroupSMSMessage(object):
     """An SMS message that has been sent to a group.
 
@@ -2382,8 +2418,6 @@ class OutgoingGroupSMSMessage(object):
                                    parent=self, ignored_recipients=[self.sender]))
 
 
-notifications_table = None
-notifications_viewed_table = None
 class Notification(object):
     """Class for users notifications """
 
