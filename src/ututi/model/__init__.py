@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-private_messages_table = None
 forum_posts_table = None
 regions_table = None
 teachers_table = None
@@ -187,14 +186,12 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global private_messages_table
-    private_messages_table = Table(
-        "private_messages", meta.metadata,
-        Column('subject', Unicode()),
-        Column('content', Unicode()),
-        autoload=True,
-        autoload_with=engine,
-        useexisting=True)
+    Table("private_messages", meta.metadata,
+          Column('subject', Unicode()),
+          Column('content', Unicode()),
+          autoload=True,
+          autoload_with=engine,
+          useexisting=True)
 
     global regions_table
     regions_table = Table("regions", meta.metadata,
