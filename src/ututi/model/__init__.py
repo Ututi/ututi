@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-email_table = None
 teacher_groups_table = None
 email_domains_table = None
 files_table = None
