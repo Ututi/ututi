@@ -147,7 +147,7 @@ def _search_query_default_sorting(query, **kwargs):
     elif obj_type == 'group':
         if not kwargs.get('grouped_search_items'):
             query = query.join((Group, Group.id==SearchItem.content_item_id))
-            query = query.order_by([Group.forum_is_public.desc(), ContentItem.modified_on.desc()])
+            query = query.order_by(Group.forum_is_public.desc(), ContentItem.modified_on.desc())
     elif obj_type == 'subject':
         query = query.order_by(SearchItem.rating.desc())
     return query
