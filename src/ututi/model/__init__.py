@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-group_whitelist_table = None
 group_members_table = None
 group_requests_table = None
 group_invitations_table = None
@@ -257,10 +256,9 @@ def setup_tables(engine):
                          autoload=True,
                          autoload_with=engine)
 
-    global group_whitelist_table
-    group_whitelist_table = Table("group_whitelist", meta.metadata,
-                                  autoload=True,
-                                  autoload_with=engine)
+    Table("group_whitelist", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     Table("coupon_usage", meta.metadata,
           useexisting=True,
