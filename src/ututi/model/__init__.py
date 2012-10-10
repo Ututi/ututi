@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-group_membership_types_table = None
 group_coupons_table = None
 coupon_usage_table = None
 content_items_table = None
@@ -244,10 +243,9 @@ def setup_tables(engine):
                            useexisting=True,
                            autoload_with=engine)
 
-    global group_membership_types_table
-    group_membership_types_table = Table("group_membership_types", meta.metadata,
-                                         autoload=True,
-                                         autoload_with=engine)
+    Table("group_membership_types", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     global group_members_table
     group_members_table = Table("group_members", meta.metadata,
