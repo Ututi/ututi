@@ -248,10 +248,9 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global group_watched_subjects_table
-    group_watched_subjects_table = Table("group_watched_subjects", meta.metadata,
-                                         autoload=True,
-                                         autoload_with=engine)
+    Table("group_watched_subjects", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     Table("group_invitations", meta.metadata,
           autoload=True,
@@ -793,7 +792,6 @@ class LimitedUploadMixin(object):
         return pts
 
 
-group_watched_subjects_table = None
 groups_table = None
 
 class GroupSubjectMonitoring(object):

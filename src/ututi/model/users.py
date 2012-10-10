@@ -334,8 +334,8 @@ class User(Author):
             .filter(and_(umst.c.user_id == self.id,
                          umst.c.ignored == True))
 
-        from ututi.model import group_watched_subjects_table, groups_table
-        gwst = group_watched_subjects_table
+        from ututi.model import groups_table
+        gwst = meta.metadata.tables['group_watched_subjects']
         gmt = meta.metadata.tables['group_members']
         gt = groups_table
         group_watched_subjects = meta.Session.query(Subject)\
