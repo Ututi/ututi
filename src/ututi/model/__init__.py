@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-teacher_groups_table = None
 email_domains_table = None
 files_table = None
 file_downloads_table = None
@@ -186,13 +185,11 @@ def setup_tables(engine):
                                    autoload=True,
                                    autoload_with=engine)
 
-    global teacher_groups_table
-    teacher_groups_table = Table(
-        "teacher_groups", meta.metadata,
-        Column('title', Unicode()),
-        autoload=True,
-        autoload_with=engine,
-        useexisting=True)
+    Table("teacher_groups", meta.metadata,
+          Column('title', Unicode()),
+          autoload=True,
+          autoload_with=engine,
+          useexisting=True)
 
     global content_items_table
     content_items_table = Table("content_items", meta.metadata,
