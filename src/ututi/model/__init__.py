@@ -61,7 +61,6 @@ def init_model(engine):
 
 subjects_table = None
 search_items_table = None
-tag_search_items_table = None
 payments_table = None
 sms_table = None
 received_sms_messages = None
@@ -281,10 +280,9 @@ def setup_tables(engine):
                                autoload=True,
                                autoload_with=engine)
 
-    global tag_search_items_table
-    tag_search_items_table = Table("tag_search_items", meta.metadata,
-                                   autoload=True,
-                                   autoload_with=engine)
+    Table("tag_search_items", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     warnings.simplefilter("default", SAWarning)
 
