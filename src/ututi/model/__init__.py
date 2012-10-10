@@ -60,7 +60,6 @@ def init_model(engine):
 
 
 subjects_table = None
-payments_table = None
 sms_table = None
 received_sms_messages = None
 outgoing_group_sms_messages_table = None
@@ -284,12 +283,10 @@ def setup_tables(engine):
 
     warnings.simplefilter("default", SAWarning)
 
-
-    global payments_table
-    payments_table = Table("payments", meta.metadata,
-                           autoload=True,
-                           useexisting=True,
-                           autoload_with=engine)
+    Table("payments", meta.metadata,
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
     global received_sms_messages
     received_sms_messages = Table("received_sms_messages", meta.metadata,
