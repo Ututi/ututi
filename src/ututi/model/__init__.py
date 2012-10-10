@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-teachers_table = None
 teacher_subjects_table = None
 emails_table = None
 user_medals_table = None
@@ -140,14 +139,13 @@ def setup_tables(engine):
           useexisting=True,
           autoload_with=engine)
 
-    global teachers_table
-    teachers_table = Table("teachers", meta.metadata,
-                        Column('teacher_position', Unicode()),
-                        Column('work_address', Unicode()),
-                        Column('publications', Unicode()),
-                        autoload=True,
-                        useexisting=True,
-                        autoload_with=engine)
+    Table("teachers", meta.metadata,
+          Column('teacher_position', Unicode()),
+          Column('work_address', Unicode()),
+          Column('publications', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
     Table("authors", meta.metadata,
           Column('id', Integer, Sequence('authors_id_seq'), primary_key=True),
