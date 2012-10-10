@@ -117,16 +117,15 @@ class User(Author):
     is_teacher = False
 
     def delete_user(self):
-        from ututi.model import users_table
+        """Low level delete so author record would not get deleted."""
         conn = meta.engine.connect()
-        upd = users_table.delete().where(users_table.c.id==self.id)
+        upd = meta.metadata.tables['users'].delete().where(users_table.c.id==self.id)
         conn.execute(upd)
         meta.Session.expire(self)
 
     def change_type(self, type, **kwargs):
-        from ututi.model import authors_table
         conn = meta.engine.connect()
-        upd = authors_table.update().where(authors_table.c.id==self.id).values(type=type, **kwargs)
+        upd = authors_table.update().where(meta.metadata.tables['authors'].c.id==self.id).values(type=type, **kwargs)
         conn.execute(upd)
 
     @property
@@ -290,10 +289,9 @@ class User(Author):
 
     @property
     def ignored_subjects(self):
-        from ututi.model import user_monitored_subjects_table
         from ututi.model import Subject
         from ututi.model import subjects_table
-        umst = user_monitored_subjects_table
+        umst = meta.metadata.tables['user_monitored_subjects']
         user_ignored_subjects = meta.Session.query(Subject)\
             .join((umst,
                    and_(umst.c.subject_id==subjects_table.c.id,
@@ -304,9 +302,9 @@ class User(Author):
 
     @property
     def watched_subjects(self):
-        from ututi.model import user_monitored_subjects_table, subjects_table
+        from ututi.model import subjects_table
         from ututi.model import Subject
-        umst = user_monitored_subjects_table
+        umst = meta.metadata.tables['user_monitored_subjects']
         directly_watched_subjects = meta.Session.query(Subject)\
             .join((umst,
                    and_(umst.c.subject_id==subjects_table.c.id,
@@ -317,9 +315,9 @@ class User(Author):
 
     @property
     def all_watched_subjects(self):
-        from ututi.model import user_monitored_subjects_table, subjects_table
+        from ututi.model import subjects_table
         from ututi.model import Subject
-        umst = user_monitored_subjects_table
+        umst = meta.metadata.tables['user_monitored_subjects']
         directly_watched_subjects = meta.Session.query(Subject)\
             .join((umst,
                    and_(umst.c.subject_id==subjects_table.c.id,
@@ -663,8 +661,9 @@ class Teacher(User):
                 self.watchSubject(subject)
         meta.Session.commit()
 
-        # a hack: cannot update a polymorphic descriptor column using the orm 
-        from ututi.model import authors_table, teachers_table
+        # a hack: cannot update a polymorphic descriptor column using the orm
+        authors_table = meta.metadata.tables['authors']
+        teachers_table = meta.metadata.tables['teachers']
         conn = meta.engine.connect()
         upd = authors_table.update().where(authors_table.c.id==self.id).values(type='user')
         ins = teachers_table.delete().where(teachers_table.c.id==self.id)

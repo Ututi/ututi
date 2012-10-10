@@ -419,7 +419,8 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
     def teacher_convert(self, id):
         teacher = meta.Session.query(User).filter(User.id == id).one()
 
-        from ututi.model import authors_table, teachers_table
+        authors_table = meta.metadata.tables['authors']
+        teachers_table = meta.metadata.tables['teachers']
         # a hack: cannot update a polymorphic descriptor column using the orm (rejecting a teacher is basically converting him into a user)
         conn = meta.engine.connect()
         upd = authors_table.update().where(authors_table.c.id==id).values(type='teacher')

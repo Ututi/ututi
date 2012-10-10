@@ -125,55 +125,58 @@ class Country(Model):
         return meta.Session.query(cls).order_by(cls.name.asc()).all()
 
 
-def setup_orm(engine):
-    languages_table = Table("languages", meta.metadata,
-        Column('title', Unicode()),
-        autoload=True,
-        useexisting=True,
-        autoload_with=engine)
+def setup_tables(engine):
+    Table("languages", meta.metadata,
+          Column('title', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
-    language_texts_table = Table("language_texts", meta.metadata,
-        Column('text', Unicode()),
-        autoload=True,
-        autoload_with=engine)
+    Table("language_texts", meta.metadata,
+          Column('text', Unicode()),
+          autoload=True,
+          autoload_with=engine)
 
-    i18n_texts_table = Table("i18n_texts", meta.metadata,
-                             autoload=True,
-                             autoload_with=engine)
+    Table("i18n_texts", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
-    i18n_texts_versions_table = Table("i18n_texts_versions", meta.metadata,
-        Column('text', Unicode()),
-        autoload=True,
-        autoload_with=engine)
+    Table("i18n_texts_versions", meta.metadata,
+          Column('text', Unicode()),
+          autoload=True,
+          autoload_with=engine)
 
-    orm.mapper(Language, languages_table)
-    orm.mapper(I18nText, i18n_texts_table,
+    Table("countries", meta.metadata,
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
+
+
+def setup_orm():
+    tables = meta.metadata.tables
+    orm.mapper(Language, tables['languages'])
+    orm.mapper(I18nText, tables['i18n_texts'],
                properties={
                    'versions': relation(I18nTextVersion,
-                                        order_by=i18n_texts_versions_table.c.language_id.asc())
+                                        order_by=tables['i18n_texts_versions'].c.language_id.asc())
                })
 
-    orm.mapper(I18nTextVersion, i18n_texts_versions_table,
+    orm.mapper(I18nTextVersion, tables['i18n_texts_versions'],
                properties={ 'language': relation(Language) })
 
 
     # LanguageText is deprecated until it uses I18nText
     orm.mapper(LanguageText,
-               language_texts_table,
+               tables['language_texts'],
                properties={
                    'language': relation(Language,
                                         backref=backref('texts',
-                                            order_by=language_texts_table.c.id.asc()))})
-
-    countries_table = Table("countries", meta.metadata,
-        autoload=True,
-        useexisting=True,
-        autoload_with=engine)
+                                            order_by=tables['language_texts'].c.id.asc()))})
 
     orm.mapper(Country,
-               countries_table,
+               tables['countries'],
                properties={
                    'language': relation(Language,
                                         backref=backref('countries',
-                                            order_by=countries_table.c.id.asc()))})
+                                            order_by=tables['countries'].c.id.asc()))})
 

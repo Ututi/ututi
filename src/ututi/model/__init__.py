@@ -59,11 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-users_table = None
-authors_table = None
-admin_users_table = None
-user_monitored_subjects_table = None
-email_table = None
 teacher_groups_table = None
 email_domains_table = None
 files_table = None
@@ -155,14 +150,13 @@ def setup_tables(engine):
                               useexisting=True,
                               autoload_with=engine)
 
-    global users_table
-    users_table = Table("users", meta.metadata,
-                        Column('description', Unicode()),
-                        Column('location_city', Unicode()),
-                        Column('site_url', Unicode()),
-                        autoload=True,
-                        useexisting=True,
-                        autoload_with=engine)
+    Table("users", meta.metadata,
+          Column('description', Unicode()),
+          Column('location_city', Unicode()),
+          Column('site_url', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
     global teachers_table
     teachers_table = Table("teachers", meta.metadata,
@@ -173,21 +167,19 @@ def setup_tables(engine):
                         useexisting=True,
                         autoload_with=engine)
 
-    global authors_table
-    authors_table = Table("authors", meta.metadata,
-                          Column('id', Integer, Sequence('authors_id_seq'), primary_key=True),
-                          Column('fullname', Unicode()),
-                          autoload=True,
-                          useexisting=True,
-                          autoload_with=engine)
+    Table("authors", meta.metadata,
+          Column('id', Integer, Sequence('authors_id_seq'), primary_key=True),
+          Column('fullname', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
-    global admin_users_table
-    admin_users_table = Table("admin_users", meta.metadata,
-                              Column('id', Integer, Sequence('admin_users_id_seq'), primary_key=True),
-                              Column('fullname', Unicode()),
-                              autoload=True,
-                              useexisting=True,
-                              autoload_with=engine)
+    Table("admin_users", meta.metadata,
+          Column('id', Integer, Sequence('admin_users_id_seq'), primary_key=True),
+          Column('fullname', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
     global teacher_subjects_table
     teacher_subjects_table = Table("teacher_taught_subjects", meta.metadata,
@@ -343,10 +335,9 @@ def setup_tables(engine):
                                     autoload=True,
                                     autoload_with=engine)
 
-    global user_monitored_subjects_table
-    user_monitored_subjects_table = Table("user_monitored_subjects", meta.metadata,
-                                        autoload=True,
-                                        autoload_with=engine)
+    Table("user_monitored_subjects", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     # ignoring error about unknown column type for now
     warnings.simplefilter("ignore", SAWarning)
@@ -402,11 +393,18 @@ def setup_tables(engine):
                                autoload=True,
                                autoload_with=engine)
 
+    from ututi.model import events
+    events.setup_tables(engine)
+    from ututi.model import i18n
+    i18n.setup_tables(engine)
+    from ututi.model import theming
+    theming.setup_tables(engine)
+    from ututi.model import mailing
+    mailing.setup_tables(engine)
 
-def setup_orm(meta):
-    engine = meta.engine
+
+def setup_orm():
     tables = meta.metadata.tables
-
     tag_mapper = orm.mapper(Tag,
                             tables['tags'],
                             polymorphic_on=tables['tags'].c.tag_type,
@@ -687,18 +685,14 @@ def setup_orm(meta):
                                    backref="seen_notifications"),
                           })
 
-
-    from ututi.model import mailing
-    mailing.setup_orm(engine)
-
     from ututi.model import events
-    events.setup_orm(engine)
-
+    events.setup_orm()
     from ututi.model import i18n
-    i18n.setup_orm(engine)
-
+    i18n.setup_orm()
     from ututi.model import theming
-    theming.setup_orm(engine)
+    theming.setup_orm()
+    from ututi.model import mailing
+    mailing.setup_orm()
 
 
 def reset_db(engine):
@@ -1004,7 +998,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
     def last_seen_members(self):
         gmt = group_members_table
         return meta.Session.query(User).join((gmt,
-                                      gmt.c.user_id == users_table.c.id))\
+                                      gmt.c.user_id == meta.metadata.tables['users'].c.id))\
                                       .filter(gmt.c.group_id == self.id)\
                                       .order_by(User.last_seen.desc()).all()
 
