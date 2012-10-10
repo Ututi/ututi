@@ -60,7 +60,6 @@ def init_model(engine):
 
 
 subjects_table = None
-search_items_table = None
 payments_table = None
 sms_table = None
 received_sms_messages = None
@@ -275,10 +274,9 @@ def setup_tables(engine):
     # ignoring error about unknown column type for now
     warnings.simplefilter("ignore", SAWarning)
 
-    global search_items_table
-    search_items_table = Table("search_items", meta.metadata,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("search_items", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     Table("tag_search_items", meta.metadata,
           autoload=True,
