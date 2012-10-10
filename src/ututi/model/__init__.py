@@ -402,11 +402,18 @@ def setup_tables(engine):
                                autoload=True,
                                autoload_with=engine)
 
+    from ututi.model import events
+    events.setup_tables(engine)
+    from ututi.model import i18n
+    i18n.setup_tables(engine)
+    from ututi.model import theming
+    theming.setup_tables(engine)
+    from ututi.model import mailing
+    mailing.setup_tables(engine)
 
-def setup_orm(meta):
-    engine = meta.engine
+
+def setup_orm():
     tables = meta.metadata.tables
-
     tag_mapper = orm.mapper(Tag,
                             tables['tags'],
                             polymorphic_on=tables['tags'].c.tag_type,
@@ -687,18 +694,14 @@ def setup_orm(meta):
                                    backref="seen_notifications"),
                           })
 
-
-    from ututi.model import mailing
-    mailing.setup_orm(engine)
-
     from ututi.model import events
-    events.setup_orm(engine)
-
+    events.setup_orm()
     from ututi.model import i18n
-    i18n.setup_orm(engine)
-
+    i18n.setup_orm()
     from ututi.model import theming
-    theming.setup_orm(engine)
+    theming.setup_orm()
+    from ututi.model import mailing
+    mailing.setup_orm()
 
 
 def reset_db(engine):

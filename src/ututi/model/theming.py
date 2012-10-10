@@ -51,12 +51,15 @@ class Theme(Model):
         return url(controller=controller, id=self.id, **kwargs)
 
 
-def setup_orm(engine):
-    themes_table = Table("themes", meta.metadata,
-                         Column('header_text', Unicode()),
-                         autoload=True,
-                         useexisting=True,
-                         autoload_with=engine)
+def setup_tables(engine):
+    Table("themes", meta.metadata,
+          Column('header_text', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
-    orm.mapper(Theme, themes_table,
-               properties = {'raw_header_logo': deferred(themes_table.c.header_logo)})
+
+def setup_orm():
+    tables = meta.metadata.tables
+    orm.mapper(Theme, tables['themes'],
+               properties = {'raw_header_logo': deferred(tables['themes'].c.header_logo)})

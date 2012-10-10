@@ -120,28 +120,31 @@ class UtutiEmail(email.message.Message):
             from pylons.i18n import _
             return _('(no subject)')
 
-
-def setup_orm(engine):
-    from ututi.model import groups_table, content_items_table
+def setup_tables(engine):
     global group_mailing_list_messages_table
     group_mailing_list_messages_table = Table(
         "group_mailing_list_messages",
         meta.metadata,
         Column('subject', Unicode()),
         autoload=True,
-        autoload_with=engine)
+        autoload_with=engine,
+        useexisting=True)
     global group_mailing_list_attachments_table
     group_mailing_list_attachments_table = Table(
         "group_mailing_list_attachments",
         meta.metadata,
         autoload=True,
         autoload_with=engine)
-    columns = group_mailing_list_messages_table.c
+
+
+def setup_orm():
+    tables = meta.metadata.tables
+    columns = tables['group_mailing_list_messages'].c
     orm.mapper(GroupMailingListMessage,
-               group_mailing_list_messages_table,
+               tables['group_mailing_list_messages'],
                inherits=ContentItem,
                polymorphic_identity='mailing_list_message',
-               polymorphic_on=content_items_table.c.content_type,
+               polymorphic_on=tables['content_items'].c.content_type,
                properties = {
                              'reply_to': relation(GroupMailingListMessage,
                                                   backref=backref('replies'),
@@ -158,7 +161,7 @@ def setup_orm(engine):
                              'author': relation(User,
                                                 backref=backref('messages')),
                              'group': relation(Group,
-                                               primaryjoin=(columns.group_id == groups_table.c.id)),
+                                               primaryjoin=(columns.group_id == tables['groups'].c.id)),
                              'attachments': synonym("files")
                              })
 
