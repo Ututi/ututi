@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-tags_table = None
 private_messages_table = None
 forum_posts_table = None
 regions_table = None
@@ -204,16 +203,15 @@ def setup_tables(engine):
                                useexisting=True,
                                autoload_with=engine)
 
-    global tags_table
-    tags_table = Table("tags", meta.metadata,
-                               Column('id', Integer, Sequence('tags_id_seq'), primary_key=True),
-                               Column('title_short', Unicode()),
-                               Column('title', Unicode()),
-                               Column('description', Unicode()),
-                               Column('site_url', Unicode()),
-                               useexisting=True,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("tags", meta.metadata,
+          Column('id', Integer, Sequence('tags_id_seq'), primary_key=True),
+          Column('title_short', Unicode()),
+          Column('title', Unicode()),
+          Column('description', Unicode()),
+          Column('site_url', Unicode()),
+          useexisting=True,
+          autoload=True,
+          autoload_with=engine)
 
     global emails_table
     emails_table = Table("emails", meta.metadata,
