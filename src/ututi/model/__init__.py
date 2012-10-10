@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-coupon_usage_table = None
 content_items_table = None
 group_whitelist_table = None
 group_members_table = None
@@ -265,11 +264,10 @@ def setup_tables(engine):
                                   autoload=True,
                                   autoload_with=engine)
 
-    global coupon_usage_table
-    coupon_usage_table = Table("coupon_usage", meta.metadata,
-                               useexisting=True,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("coupon_usage", meta.metadata,
+          useexisting=True,
+          autoload=True,
+          autoload_with=engine)
 
     Table("group_coupons", meta.metadata,
           useexisting=True,
