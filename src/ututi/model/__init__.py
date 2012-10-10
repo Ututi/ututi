@@ -60,7 +60,6 @@ def init_model(engine):
 
 
 subjects_table = None
-pages_table = None
 page_versions_table = None
 seen_threads_table = None
 subscribed_threads_table = None
@@ -212,12 +211,9 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global pages_table
-    pages_table = Table("pages", meta.metadata,
-                        autoload=True,
-                        autoload_with=engine)
-
-
+    Table("pages", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     global page_versions_table
     page_versions_table = Table("page_versions", meta.metadata,
