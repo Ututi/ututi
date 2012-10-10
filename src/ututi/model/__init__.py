@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-file_downloads_table = None
 forum_categories_table = None
 tags_table = None
 private_messages_table = None
@@ -109,11 +108,9 @@ def setup_tables(engine):
           autoload_with=engine)
     warnings.simplefilter('default', SAWarning)
 
-    global file_downloads_table
-    file_downloads_table = Table("file_downloads", meta.metadata,
-                                 autoload=True,
-                                 autoload_with=engine)
-
+    Table("file_downloads", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     global forum_categories_table
     forum_categories_table = Table(
