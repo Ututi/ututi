@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-user_registrations_table = None
 subject_pages_table = None
 group_membership_types_table = None
 group_coupons_table = None
@@ -212,13 +211,12 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global user_registrations_table
-    user_registrations_table = Table("user_registrations", meta.metadata,
-                                    Column('fullname', Unicode()),
-                                    Column('university_title', Unicode()),
-                                    Column('university_site_url', Unicode()),
-                                    autoload=True,
-                                    autoload_with=engine)
+    Table("user_registrations", meta.metadata,
+          Column('fullname', Unicode()),
+          Column('university_title', Unicode()),
+          Column('university_site_url', Unicode()),
+          autoload=True,
+          autoload_with=engine)
 
     global subject_pages_table
     subject_pages_table = Table("subject_pages", meta.metadata,

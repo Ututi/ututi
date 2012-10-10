@@ -829,5 +829,3 @@ class UserRegistration(object):
                    action=action,
                    hash=self.hash,
                    **kwargs)
-
-user_registrations_table = None
