@@ -13,7 +13,8 @@ from pylons import session
 log = logging.getLogger(__name__)
 
 def search_query_count(query):
-    count = meta.Session.execute(select([func.count()], from_obj=query.subquery())).scalar()
+    count = meta.Session.execute(
+        select([func.count()], from_obj=query.with_labels().subquery())).scalar()
     return count
 
 def search_query(**kwargs):
@@ -211,5 +212,7 @@ def tag_search(text, count=5):
 def _exclude_subjects(sids):
     """A modifier for the subjects query, which excludes subjects already being watched."""
     def _filter(query):
+        if not sids:
+            return query
         return query.filter(not_(ContentItem.id.in_(sids)))
     return _filter

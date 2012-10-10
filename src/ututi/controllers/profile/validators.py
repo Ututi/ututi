@@ -52,14 +52,14 @@ class InformationForm(Schema):
     pre_validators = [NestedVariables()]
     allow_extra_fields = True
     language = LanguageValidator()
-    general_info_text = validators.String(strip=True)
+    general_info_text = validators.UnicodeString(strip=True)
 
 
 class PublicationsForm(Schema):
     """A schema for validating user information forms."""
     pre_validators = [NestedVariables()]
     allow_extra_fields = True
-    publications = validators.String(strip=True)
+    publications = validators.UnicodeString(strip=True)
 
 
 class PasswordChangeForm(Schema):
