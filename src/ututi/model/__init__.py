@@ -60,7 +60,6 @@ def init_model(engine):
 
 
 subjects_table = None
-notifications_table = None
 notifications_viewed_table = None
 
 
@@ -303,11 +302,10 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global notifications_table
-    notifications_table = Table("notifications", meta.metadata,
-                               Column('content', Unicode()),
-                               autoload=True,
-                               autoload_with=engine)
+    Table("notifications", meta.metadata,
+          Column('content', Unicode()),
+          autoload=True,
+          autoload_with=engine)
 
     global notifications_viewed_table
     notifications_viewed_table = Table("notifications_viewed", meta.metadata,
