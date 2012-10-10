@@ -117,9 +117,8 @@ class User(Author):
     is_teacher = False
 
     def delete_user(self):
-        from ututi.model import users_table
         conn = meta.engine.connect()
-        upd = users_table.delete().where(users_table.c.id==self.id)
+        upd = meta.metadata.tables['users'].delete().where(users_table.c.id==self.id)
         conn.execute(upd)
         meta.Session.expire(self)
 

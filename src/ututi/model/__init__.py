@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-users_table = None
 authors_table = None
 user_monitored_subjects_table = None
 email_table = None
@@ -154,14 +153,13 @@ def setup_tables(engine):
                               useexisting=True,
                               autoload_with=engine)
 
-    global users_table
-    users_table = Table("users", meta.metadata,
-                        Column('description', Unicode()),
-                        Column('location_city', Unicode()),
-                        Column('site_url', Unicode()),
-                        autoload=True,
-                        useexisting=True,
-                        autoload_with=engine)
+    Table("users", meta.metadata,
+          Column('description', Unicode()),
+          Column('location_city', Unicode()),
+          Column('site_url', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
     global teachers_table
     teachers_table = Table("teachers", meta.metadata,
@@ -1005,7 +1003,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
     def last_seen_members(self):
         gmt = group_members_table
         return meta.Session.query(User).join((gmt,
-                                      gmt.c.user_id == users_table.c.id))\
+                                      gmt.c.user_id == meta.metadata.tables['users'].c.id))\
                                       .filter(gmt.c.group_id == self.id)\
                                       .order_by(User.last_seen.desc()).all()
 
