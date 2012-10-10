@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-forum_categories_table = None
 tags_table = None
 private_messages_table = None
 forum_posts_table = None
@@ -112,15 +111,12 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global forum_categories_table
-    forum_categories_table = Table(
-        "forum_categories", meta.metadata,
-        Column('title', Unicode()),
-        Column('description', Unicode()),
-        autoload=True,
-        autoload_with=engine,
-        useexisting=True)
-
+    Table("forum_categories", meta.metadata,
+          Column('title', Unicode()),
+          Column('description', Unicode()),
+          autoload=True,
+          autoload_with=engine,
+          useexisting=True)
 
     global forum_posts_table
     forum_posts_table = Table("forum_posts", meta.metadata,
