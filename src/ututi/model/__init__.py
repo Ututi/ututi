@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-group_members_table = None
 group_requests_table = None
 group_invitations_table = None
 subjects_table = None
@@ -242,10 +241,9 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global group_members_table
-    group_members_table = Table("group_members", meta.metadata,
-                                autoload=True,
-                                autoload_with=engine)
+    Table("group_members", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     global groups_table
     groups_table = Table("groups", meta.metadata,
@@ -947,7 +945,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
 
     @property
     def last_seen_members(self):
-        gmt = group_members_table
+        gmt = meta.metadata.tables['group_members']
         return meta.Session.query(User).join((gmt,
                                       gmt.c.user_id == meta.metadata.tables['users'].c.id))\
                                       .filter(gmt.c.group_id == self.id)\
