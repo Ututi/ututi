@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-group_invitations_table = None
 subjects_table = None
 pages_table = None
 page_versions_table = None
@@ -272,11 +271,9 @@ def setup_tables(engine):
                                          autoload=True,
                                          autoload_with=engine)
 
-
-    global group_invitations_table
-    group_invitations_table = Table("group_invitations", meta.metadata,
-                                    autoload=True,
-                                    autoload_with=engine)
+    Table("group_invitations", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     Table("group_requests", meta.metadata,
           autoload=True,
