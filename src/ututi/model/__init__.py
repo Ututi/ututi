@@ -60,7 +60,6 @@ def init_model(engine):
 
 
 subjects_table = None
-outgoing_group_sms_messages_table = None
 notifications_table = None
 notifications_viewed_table = None
 
@@ -292,12 +291,11 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global outgoing_group_sms_messages_table
-    outgoing_group_sms_messages_table = Table("outgoing_group_sms_messages", meta.metadata,
-                               Column('message_text', Unicode()),
-                               useexisting=True,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("outgoing_group_sms_messages", meta.metadata,
+          Column('message_text', Unicode()),
+          useexisting=True,
+          autoload=True,
+          autoload_with=engine)
 
     Table("sms_outbox", meta.metadata,
           Column('message_text', Unicode()),
