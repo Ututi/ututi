@@ -167,7 +167,8 @@ CREATE TRIGGER delete_user BEFORE DELETE ON users
 
 
 /* Storing the emails of the users. */
-create table emails (id int8 not null references users(id) on delete cascade,
+create table emails (
+       id int8 not null references users(id) on delete cascade,
        email varchar(320),
        confirmed boolean default FALSE,
        confirmation_key char(32) default '',
@@ -198,7 +199,8 @@ create table user_medals (
 create index user_medals_user_id on user_medals(user_id);
 
 /* A generic table for Ututi objects */
-create table content_items (id bigserial not null,
+create table content_items (
+       id bigserial not null,
        content_type varchar(20) not null default '',
        created_by int8 references authors(id) on delete set null,
        created_on timestamp not null default (now() at time zone 'UTC'),
@@ -225,7 +227,8 @@ CREATE TRIGGER set_deleted_on BEFORE UPDATE ON content_items
     FOR EACH ROW EXECUTE PROCEDURE set_deleted_on();;
 
 /* private messages */
-CREATE TABLE private_messages (id int8 references content_items(id) on delete cascade,
+CREATE TABLE private_messages (
+       id int8 references content_items(id) on delete cascade,
        sender_id int8 not null references users(id) on delete cascade,
        recipient_id int8 not null references users(id) on delete cascade,
        thread_id int8 default null references private_messages(id),
@@ -240,7 +243,8 @@ CREATE INDEX sender_id ON private_messages (sender_id);;
 CREATE INDEX recipient_id ON private_messages (recipient_id);;
 
 /* A table for files */
-create table files (id int8 references content_items(id) on delete cascade,
+create table files (
+       id int8 references content_items(id) on delete cascade,
        md5 char(32),
        folder varchar(255) default '' not null,
        mimetype varchar(255) default 'application/octet-stream',
@@ -267,7 +271,8 @@ create index user_id on file_downloads (user_id);;
 create index file_id on file_downloads (file_id);;
 
 /* A table for regions */
-create table regions (id bigserial not null,
+create table regions (
+       id bigserial not null,
        title varchar(250) not null,
        country varchar(2) not null,
        primary key (id));;
@@ -275,7 +280,8 @@ create table regions (id bigserial not null,
 CREATE TYPE university_member_policy AS ENUM ('RESTRICT_EMAIL', 'ALLOW_INVITES', 'PUBLIC');
 
 /* A table for tags (location and simple tags) */
-create table tags (id bigserial not null,
+create table tags (
+       id bigserial not null,
        title varchar(250) not null,
        title_short varchar(50) default null,
        description text default null,
@@ -389,7 +395,8 @@ insert into group_membership_types (membership_type)
                       values ('member');;
 
 /* A table for subjects */
-create table subjects (id int8 not null references content_items(id) on delete cascade,
+create table subjects (
+       id int8 not null references content_items(id) on delete cascade,
        subject_id varchar(150) default null,
        title varchar(500) not null,
        lecturer varchar(500) default null,
@@ -410,7 +417,8 @@ create table pages (
        id int8 not null references content_items(id) on delete cascade,
        primary key(id));;
 
-create table page_versions(id int8 not null references content_items(id) on delete cascade,
+create table page_versions(
+       id int8 not null references content_items(id) on delete cascade,
        page_id int8 not null references pages(id) on delete cascade,
        title varchar(255) not null default '',
        content text not null default '',
@@ -771,7 +779,8 @@ CREATE TRIGGER update_forum_post_search AFTER INSERT OR UPDATE ON forum_posts
     FOR EACH ROW EXECUTE PROCEDURE update_forum_post_search();;
 
 /* A table for connecting tags and the tagged content */
-create table content_tags (id bigserial not null,
+create table content_tags (
+       id bigserial not null,
        content_item_id int8 not null references content_items(id) on delete cascade,
        tag_id int8 references tags(id) on delete cascade not null,
        primary key (id));;
@@ -957,7 +966,8 @@ $$ LANGUAGE plpgsql;;
 
 
 /* event comments */
-CREATE TABLE event_comments (id int8 references content_items(id) on delete cascade,
+CREATE TABLE event_comments (
+       id int8 references content_items(id) on delete cascade,
        event_id int8 not null references events(id) on delete cascade,
        content text default '',
        primary key (id));;

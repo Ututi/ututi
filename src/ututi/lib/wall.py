@@ -20,6 +20,7 @@ from ututi.model import File
 from ututi.model import meta
 from ututi.lib.base import render_def
 
+
 def generic_events_query():
     t_ci = meta.metadata.tables['content_items']
     t_pages = meta.metadata.tables['page_versions']

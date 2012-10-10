@@ -7,6 +7,7 @@ from martian.scan import module_info_from_dotted_name
 
 MIN_VERSION = 199
 
+
 def sql_migrate(name):
     base_name = name.split('.')[-1]
     upgrade_file = "%s_upgrade.sql" % base_name
