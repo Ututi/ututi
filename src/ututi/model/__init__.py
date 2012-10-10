@@ -61,7 +61,6 @@ def init_model(engine):
 
 users_table = None
 authors_table = None
-admin_users_table = None
 user_monitored_subjects_table = None
 email_table = None
 teacher_groups_table = None
@@ -181,13 +180,12 @@ def setup_tables(engine):
                           useexisting=True,
                           autoload_with=engine)
 
-    global admin_users_table
-    admin_users_table = Table("admin_users", meta.metadata,
-                              Column('id', Integer, Sequence('admin_users_id_seq'), primary_key=True),
-                              Column('fullname', Unicode()),
-                              autoload=True,
-                              useexisting=True,
-                              autoload_with=engine)
+    Table("admin_users", meta.metadata,
+          Column('id', Integer, Sequence('admin_users_id_seq'), primary_key=True),
+          Column('fullname', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
     global teacher_subjects_table
     teacher_subjects_table = Table("teacher_taught_subjects", meta.metadata,
