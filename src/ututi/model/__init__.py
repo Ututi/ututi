@@ -60,7 +60,6 @@ def init_model(engine):
 
 
 subjects_table = None
-subscribed_threads_table = None
 search_items_table = None
 tag_search_items_table = None
 payments_table = None
@@ -108,11 +107,10 @@ def setup_tables(engine):
           useexisting=True,
           autoload_with=engine)
 
-    global subscribed_threads_table
-    subscribed_threads_table = Table("subscribed_threads", meta.metadata,
-                              autoload=True,
-                              useexisting=True,
-                              autoload_with=engine)
+    Table("subscribed_threads", meta.metadata,
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
     Table("users", meta.metadata,
           Column('description', Unicode()),
