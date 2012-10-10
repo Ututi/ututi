@@ -59,9 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-subjects_table = None
-
-
 def setup_tables(engine):
     tables = {}
     #relationships between content items and tags
@@ -208,14 +205,13 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global subjects_table
-    subjects_table = Table("subjects", meta.metadata,
-                           Column('title', Unicode()),
-                           Column('lecturer', Unicode()),
-                           Column('description', Unicode()),
-                           autoload=True,
-                           useexisting=True,
-                           autoload_with=engine)
+    Table("subjects", meta.metadata,
+          Column('title', Unicode()),
+          Column('lecturer', Unicode()),
+          Column('description', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
     Table("group_membership_types", meta.metadata,
           autoload=True,
