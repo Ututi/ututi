@@ -314,7 +314,8 @@ create index user_location_idx on users using btree (location_id);
 
 /* Add location field to the content item table */
 alter table content_items
-	drop constraint content_items_location_id_fkey;;
+      add constraint content_items_location_id_fkey
+      foreign key (location_id) references tags(id) on delete cascade;;
 
 /* A table for group coupons */
 create table group_coupons (
