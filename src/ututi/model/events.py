@@ -500,13 +500,11 @@ def setup_tables(engine):
           autoload_with=engine)
     warnings.simplefilter("default", SAWarning)
 
-    global event_comments_table
-    event_comments_table = Table(
-        "event_comments",
-        meta.metadata,
-        Column('content', Unicode()),
-        autoload=True,
-        autoload_with=engine)
+    Table("event_comments",
+          meta.metadata,
+          Column('content', Unicode()),
+          autoload=True,
+          autoload_with=engine)
 
 
 def setup_orm():
