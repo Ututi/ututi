@@ -5,7 +5,7 @@ import pkg_resources
 
 from martian.scan import module_info_from_dotted_name
 
-MIN_VERSION = 199
+MIN_VERSION = 200
 
 
 def sql_migrate(name):
