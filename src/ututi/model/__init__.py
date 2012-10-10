@@ -60,7 +60,6 @@ def init_model(engine):
 
 
 subjects_table = None
-received_sms_messages = None
 outgoing_group_sms_messages_table = None
 notifications_table = None
 notifications_viewed_table = None
@@ -287,12 +286,11 @@ def setup_tables(engine):
           useexisting=True,
           autoload_with=engine)
 
-    global received_sms_messages
-    received_sms_messages = Table("received_sms_messages", meta.metadata,
-                               Column('message_text', Unicode()),
-                               useexisting=True,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("received_sms_messages", meta.metadata,
+          Column('message_text', Unicode()),
+          useexisting=True,
+          autoload=True,
+          autoload_with=engine)
 
     global outgoing_group_sms_messages_table
     outgoing_group_sms_messages_table = Table("outgoing_group_sms_messages", meta.metadata,
@@ -581,10 +579,10 @@ def setup_orm():
                                                                     order_by=tables['payments'].c.created.desc()))})
 
     orm.mapper(ReceivedSMSMessage,
-               received_sms_messages,
+               tables['received_sms_messages'],
                properties = {
-                    'sender': relation(User, primaryjoin=received_sms_messages.c.sender_id==tables['users'].c.id),
-                    'group': relation(Group, primaryjoin=received_sms_messages.c.group_id==tables['groups'].c.group_id),
+                    'sender': relation(User, primaryjoin=tables['received_sms_messages'].c.sender_id==tables['users'].c.id),
+                    'group': relation(Group, primaryjoin=tables['received_sms_messages'].c.group_id==tables['groups'].c.group_id),
                })
 
     orm.mapper(OutgoingGroupSMSMessage,
