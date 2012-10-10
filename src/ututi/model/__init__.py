@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-teacher_subjects_table = None
 emails_table = None
 user_medals_table = None
 user_registrations_table = None
@@ -161,10 +160,9 @@ def setup_tables(engine):
           useexisting=True,
           autoload_with=engine)
 
-    global teacher_subjects_table
-    teacher_subjects_table = Table("teacher_taught_subjects", meta.metadata,
-                                   autoload=True,
-                                   autoload_with=engine)
+    Table("teacher_taught_subjects", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     Table("teacher_groups", meta.metadata,
           Column('title', Unicode()),
