@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-files_table = None
 file_downloads_table = None
 forum_categories_table = None
 tags_table = None
@@ -99,18 +98,16 @@ notifications_viewed_table = None
 def setup_tables(engine):
     tables = {}
     #relationships between content items and tags
-    global files_table
     warnings.simplefilter('ignore', SAWarning)
-    files_table = Table("files", meta.metadata,
-                        Column('filename', Unicode()),
-                        Column('folder', Unicode()),
-                        Column('title', Unicode()),
-                        Column('description', Unicode()),
-                        autoload=True,
-                        useexisting=True,
-                        autoload_with=engine)
+    Table("files", meta.metadata,
+          Column('filename', Unicode()),
+          Column('folder', Unicode()),
+          Column('title', Unicode()),
+          Column('description', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
     warnings.simplefilter('default', SAWarning)
-
 
     global file_downloads_table
     file_downloads_table = Table("file_downloads", meta.metadata,
