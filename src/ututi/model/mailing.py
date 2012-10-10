@@ -34,9 +34,6 @@ class MessageAlreadyExists(Exception):
     """
 
 
-group_mailing_list_attachments_table = None
-
-
 def decode_and_join_header(header):
     from_parts = email.Header.decode_header(header)
     result = []
@@ -126,12 +123,11 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine,
           useexisting=True)
-    global group_mailing_list_attachments_table
-    group_mailing_list_attachments_table = Table(
-        "group_mailing_list_attachments",
-        meta.metadata,
-        autoload=True,
-        autoload_with=engine)
+
+    Table("group_mailing_list_attachments",
+          meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
 
 def setup_orm():
