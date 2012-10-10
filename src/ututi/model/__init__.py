@@ -60,7 +60,6 @@ def init_model(engine):
 
 
 subjects_table = None
-page_versions_table = None
 seen_threads_table = None
 subscribed_threads_table = None
 search_items_table = None
@@ -215,12 +214,11 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global page_versions_table
-    page_versions_table = Table("page_versions", meta.metadata,
-                                Column('title', Unicode()),
-                                Column('content', Unicode()),
-                                autoload=True,
-                                autoload_with=engine)
+    Table("page_versions", meta.metadata,
+          Column('title', Unicode()),
+          Column('content', Unicode()),
+          autoload=True,
+          autoload_with=engine)
 
     global subjects_table
     subjects_table = Table("subjects", meta.metadata,
