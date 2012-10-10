@@ -119,13 +119,15 @@ class User(Author):
     def delete_user(self):
         """Low level delete so author record would not get deleted."""
         conn = meta.engine.connect()
-        upd = meta.metadata.tables['users'].delete().where(users_table.c.id==self.id)
+        users_table = meta.metadata.tables['users']
+        upd = users_table.delete().where(users_table.c.id==self.id)
         conn.execute(upd)
         meta.Session.expire(self)
 
     def change_type(self, type, **kwargs):
         conn = meta.engine.connect()
-        upd = authors_table.update().where(meta.metadata.tables['authors'].c.id==self.id).values(type=type, **kwargs)
+        authors_table = meta.metadata.tables['authors']
+        upd = authors_table.update().where(authors_table.c.id==self.id).values(type=type, **kwargs)
         conn.execute(upd)
 
     @property
