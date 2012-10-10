@@ -34,10 +34,6 @@ class MessageAlreadyExists(Exception):
     """
 
 
-group_mailing_list_messages_table = None
-group_mailing_list_attachments_table = None
-
-
 def decode_and_join_header(header):
     from_parts = email.Header.decode_header(header)
     result = []
@@ -121,20 +117,17 @@ class UtutiEmail(email.message.Message):
             return _('(no subject)')
 
 def setup_tables(engine):
-    global group_mailing_list_messages_table
-    group_mailing_list_messages_table = Table(
-        "group_mailing_list_messages",
-        meta.metadata,
-        Column('subject', Unicode()),
-        autoload=True,
-        autoload_with=engine,
-        useexisting=True)
-    global group_mailing_list_attachments_table
-    group_mailing_list_attachments_table = Table(
-        "group_mailing_list_attachments",
-        meta.metadata,
-        autoload=True,
-        autoload_with=engine)
+    Table("group_mailing_list_messages",
+          meta.metadata,
+          Column('subject', Unicode()),
+          autoload=True,
+          autoload_with=engine,
+          useexisting=True)
+
+    Table("group_mailing_list_attachments",
+          meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
 
 def setup_orm():

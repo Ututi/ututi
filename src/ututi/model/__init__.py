@@ -59,41 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-forum_categories_table = None
-tags_table = None
-private_messages_table = None
-forum_posts_table = None
-regions_table = None
-teachers_table = None
-teacher_subjects_table = None
-emails_table = None
-user_medals_table = None
-user_registrations_table = None
-subject_pages_table = None
-group_membership_types_table = None
-group_coupons_table = None
-coupon_usage_table = None
-content_items_table = None
-group_whitelist_table = None
-group_members_table = None
-group_requests_table = None
-group_invitations_table = None
-subjects_table = None
-pages_table = None
-page_versions_table = None
-content_tags_table = None
-seen_threads_table = None
-subscribed_threads_table = None
-search_items_table = None
-tag_search_items_table = None
-payments_table = None
-sms_table = None
-received_sms_messages = None
-outgoing_group_sms_messages_table = None
-notifications_table = None
-notifications_viewed_table = None
-
-
 def setup_tables(engine):
     tables = {}
     #relationships between content items and tags
@@ -112,35 +77,29 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global forum_categories_table
-    forum_categories_table = Table(
-        "forum_categories", meta.metadata,
-        Column('title', Unicode()),
-        Column('description', Unicode()),
-        autoload=True,
-        autoload_with=engine,
-        useexisting=True)
+    Table("forum_categories", meta.metadata,
+          Column('title', Unicode()),
+          Column('description', Unicode()),
+          autoload=True,
+          autoload_with=engine,
+          useexisting=True)
 
+    Table("forum_posts", meta.metadata,
+          Column('title', Unicode()),
+          Column('message', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
-    global forum_posts_table
-    forum_posts_table = Table("forum_posts", meta.metadata,
-                              Column('title', Unicode()),
-                              Column('message', Unicode()),
-                              autoload=True,
-                              useexisting=True,
-                              autoload_with=engine)
+    Table("seen_threads", meta.metadata,
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
-    global seen_threads_table
-    seen_threads_table = Table("seen_threads", meta.metadata,
-                              autoload=True,
-                              useexisting=True,
-                              autoload_with=engine)
-
-    global subscribed_threads_table
-    subscribed_threads_table = Table("subscribed_threads", meta.metadata,
-                              autoload=True,
-                              useexisting=True,
-                              autoload_with=engine)
+    Table("subscribed_threads", meta.metadata,
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
     Table("users", meta.metadata,
           Column('description', Unicode()),
@@ -150,14 +109,13 @@ def setup_tables(engine):
           useexisting=True,
           autoload_with=engine)
 
-    global teachers_table
-    teachers_table = Table("teachers", meta.metadata,
-                        Column('teacher_position', Unicode()),
-                        Column('work_address', Unicode()),
-                        Column('publications', Unicode()),
-                        autoload=True,
-                        useexisting=True,
-                        autoload_with=engine)
+    Table("teachers", meta.metadata,
+          Column('teacher_position', Unicode()),
+          Column('work_address', Unicode()),
+          Column('publications', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
     Table("authors", meta.metadata,
           Column('id', Integer, Sequence('authors_id_seq'), primary_key=True),
@@ -173,10 +131,9 @@ def setup_tables(engine):
           useexisting=True,
           autoload_with=engine)
 
-    global teacher_subjects_table
-    teacher_subjects_table = Table("teacher_taught_subjects", meta.metadata,
-                                   autoload=True,
-                                   autoload_with=engine)
+    Table("teacher_taught_subjects", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     Table("teacher_groups", meta.metadata,
           Column('title', Unicode()),
@@ -184,145 +141,119 @@ def setup_tables(engine):
           autoload_with=engine,
           useexisting=True)
 
-    global content_items_table
-    content_items_table = Table("content_items", meta.metadata,
-                                autoload=True,
-                                autoload_with=engine)
+    Table("content_items", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
-    global content_tags_table
-    content_tags_table = Table("content_tags", meta.metadata,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("content_tags", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
-    global private_messages_table
-    private_messages_table = Table(
-        "private_messages", meta.metadata,
-        Column('subject', Unicode()),
-        Column('content', Unicode()),
-        autoload=True,
-        autoload_with=engine,
-        useexisting=True)
+    Table("private_messages", meta.metadata,
+          Column('subject', Unicode()),
+          Column('content', Unicode()),
+          autoload=True,
+          autoload_with=engine,
+          useexisting=True)
 
-    global regions_table
-    regions_table = Table("regions", meta.metadata,
-                               Column('title', Unicode()),
-                               autoload=True,
-                               useexisting=True,
-                               autoload_with=engine)
+    Table("regions", meta.metadata,
+          Column('title', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
-    global tags_table
-    tags_table = Table("tags", meta.metadata,
-                               Column('id', Integer, Sequence('tags_id_seq'), primary_key=True),
-                               Column('title_short', Unicode()),
-                               Column('title', Unicode()),
-                               Column('description', Unicode()),
-                               Column('site_url', Unicode()),
-                               useexisting=True,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("tags", meta.metadata,
+          Column('id', Integer, Sequence('tags_id_seq'), primary_key=True),
+          Column('title_short', Unicode()),
+          Column('title', Unicode()),
+          Column('description', Unicode()),
+          Column('site_url', Unicode()),
+          useexisting=True,
+          autoload=True,
+          autoload_with=engine)
 
-    global emails_table
-    emails_table = Table("emails", meta.metadata,
-                         autoload=True,
-                         autoload_with=engine)
+    Table("emails", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     Table("email_domains", meta.metadata,
           autoload=True,
           autoload_with=engine)
 
-    global user_medals_table
-    user_medals_table = Table("user_medals", meta.metadata,
-                              autoload=True,
-                              autoload_with=engine)
+    Table("user_medals", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
+    Table("user_registrations", meta.metadata,
+          Column('fullname', Unicode()),
+          Column('university_title', Unicode()),
+          Column('university_site_url', Unicode()),
+          autoload=True,
+          autoload_with=engine)
 
-    global user_registrations_table
-    user_registrations_table = Table("user_registrations", meta.metadata,
-                                    Column('fullname', Unicode()),
-                                    Column('university_title', Unicode()),
-                                    Column('university_site_url', Unicode()),
-                                    autoload=True,
-                                    autoload_with=engine)
+    Table("subject_pages", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
-    global subject_pages_table
-    subject_pages_table = Table("subject_pages", meta.metadata,
-                                autoload=True,
-                                autoload_with=engine)
+    Table("pages", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
-    global pages_table
-    pages_table = Table("pages", meta.metadata,
-                        autoload=True,
-                        autoload_with=engine)
+    Table("page_versions", meta.metadata,
+          Column('title', Unicode()),
+          Column('content', Unicode()),
+          autoload=True,
+          autoload_with=engine)
 
+    Table("subjects", meta.metadata,
+          Column('title', Unicode()),
+          Column('lecturer', Unicode()),
+          Column('description', Unicode()),
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
+    Table("group_membership_types", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
-    global page_versions_table
-    page_versions_table = Table("page_versions", meta.metadata,
-                                Column('title', Unicode()),
-                                Column('content', Unicode()),
-                                autoload=True,
-                                autoload_with=engine)
+    Table("group_members", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
-    global subjects_table
-    subjects_table = Table("subjects", meta.metadata,
-                           Column('title', Unicode()),
-                           Column('lecturer', Unicode()),
-                           Column('description', Unicode()),
-                           autoload=True,
-                           useexisting=True,
-                           autoload_with=engine)
+    Table("groups", meta.metadata,
+          Column('title', Unicode()),
+          Column('description', Unicode()),
+          Column('page', Unicode()),
+          useexisting=True,
+          autoload=True,
+          autoload_with=engine)
 
-    global group_membership_types_table
-    group_membership_types_table = Table("group_membership_types", meta.metadata,
-                                         autoload=True,
-                                         autoload_with=engine)
+    Table("group_whitelist", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
-    global group_members_table
-    group_members_table = Table("group_members", meta.metadata,
-                                autoload=True,
-                                autoload_with=engine)
+    Table("coupon_usage", meta.metadata,
+          useexisting=True,
+          autoload=True,
+          autoload_with=engine)
 
-    global groups_table
-    groups_table = Table("groups", meta.metadata,
-                         Column('title', Unicode()),
-                         Column('description', Unicode()),
-                         Column('page', Unicode()),
-                         useexisting=True,
-                         autoload=True,
-                         autoload_with=engine)
+    Table("group_coupons", meta.metadata,
+          useexisting=True,
+          autoload=True,
+          autoload_with=engine)
 
-    global group_whitelist_table
-    group_whitelist_table = Table("group_whitelist", meta.metadata,
-                                  autoload=True,
-                                  autoload_with=engine)
+    Table("group_watched_subjects", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
-    global coupon_usage_table
-    coupon_usage_table = Table("coupon_usage", meta.metadata,
-                               useexisting=True,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("group_invitations", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
-    global group_coupons_table
-    group_coupons_table = Table("group_coupons", meta.metadata,
-                                useexisting=True,
-                                autoload=True,
-                                autoload_with=engine)
-
-    global group_watched_subjects_table
-    group_watched_subjects_table = Table("group_watched_subjects", meta.metadata,
-                                         autoload=True,
-                                         autoload_with=engine)
-
-
-    global group_invitations_table
-    group_invitations_table = Table("group_invitations", meta.metadata,
-                                    autoload=True,
-                                    autoload_with=engine)
-
-    global group_requests_table
-    group_requests_table = Table("group_requests", meta.metadata,
-                                    autoload=True,
-                                    autoload_with=engine)
+    Table("group_requests", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     Table("user_monitored_subjects", meta.metadata,
           autoload=True,
@@ -331,56 +262,47 @@ def setup_tables(engine):
     # ignoring error about unknown column type for now
     warnings.simplefilter("ignore", SAWarning)
 
-    global search_items_table
-    search_items_table = Table("search_items", meta.metadata,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("search_items", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
-    global tag_search_items_table
-    tag_search_items_table = Table("tag_search_items", meta.metadata,
-                                   autoload=True,
-                                   autoload_with=engine)
+    Table("tag_search_items", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     warnings.simplefilter("default", SAWarning)
 
+    Table("payments", meta.metadata,
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
 
-    global payments_table
-    payments_table = Table("payments", meta.metadata,
-                           autoload=True,
-                           useexisting=True,
-                           autoload_with=engine)
+    Table("received_sms_messages", meta.metadata,
+          Column('message_text', Unicode()),
+          useexisting=True,
+          autoload=True,
+          autoload_with=engine)
 
-    global received_sms_messages
-    received_sms_messages = Table("received_sms_messages", meta.metadata,
-                               Column('message_text', Unicode()),
-                               useexisting=True,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("outgoing_group_sms_messages", meta.metadata,
+          Column('message_text', Unicode()),
+          useexisting=True,
+          autoload=True,
+          autoload_with=engine)
 
-    global outgoing_group_sms_messages_table
-    outgoing_group_sms_messages_table = Table("outgoing_group_sms_messages", meta.metadata,
-                               Column('message_text', Unicode()),
-                               useexisting=True,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("sms_outbox", meta.metadata,
+          Column('message_text', Unicode()),
+          useexisting=True,
+          autoload=True,
+          autoload_with=engine)
 
-    global sms_table
-    sms_table = Table("sms_outbox", meta.metadata,
-                               Column('message_text', Unicode()),
-                               useexisting=True,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("notifications", meta.metadata,
+          Column('content', Unicode()),
+          autoload=True,
+          autoload_with=engine)
 
-    global notifications_table
-    notifications_table = Table("notifications", meta.metadata,
-                               Column('content', Unicode()),
-                               autoload=True,
-                               autoload_with=engine)
-
-    global notifications_viewed_table
-    notifications_viewed_table = Table("notifications_viewed", meta.metadata,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("notifications_viewed", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     Table("wall_posts", meta.metadata,
           autoload=True,
@@ -659,10 +581,10 @@ def setup_orm():
                                                                     order_by=tables['payments'].c.created.desc()))})
 
     orm.mapper(ReceivedSMSMessage,
-               received_sms_messages,
+               tables['received_sms_messages'],
                properties = {
-                    'sender': relation(User, primaryjoin=received_sms_messages.c.sender_id==tables['users'].c.id),
-                    'group': relation(Group, primaryjoin=received_sms_messages.c.group_id==tables['groups'].c.group_id),
+                    'sender': relation(User, primaryjoin=tables['received_sms_messages'].c.sender_id==tables['users'].c.id),
+                    'group': relation(Group, primaryjoin=tables['received_sms_messages'].c.group_id==tables['groups'].c.group_id),
                })
 
     orm.mapper(OutgoingGroupSMSMessage,
@@ -879,9 +801,6 @@ class LimitedUploadMixin(object):
         return pts
 
 
-group_watched_subjects_table = None
-groups_table = None
-
 class GroupSubjectMonitoring(object):
 
     def __init__(self, group, subject, ignored=False):
@@ -999,7 +918,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
 
     @property
     def last_seen_members(self):
-        gmt = group_members_table
+        gmt = meta.metadata.tables['group_members']
         return meta.Session.query(User).join((gmt,
                                       gmt.c.user_id == meta.metadata.tables['users'].c.id))\
                                       .filter(gmt.c.group_id == self.id)\
