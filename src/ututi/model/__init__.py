@@ -60,7 +60,6 @@ def init_model(engine):
 
 
 subjects_table = None
-notifications_viewed_table = None
 
 
 def setup_tables(engine):
@@ -307,10 +306,9 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global notifications_viewed_table
-    notifications_viewed_table = Table("notifications_viewed", meta.metadata,
-                               autoload=True,
-                               autoload_with=engine)
+    Table("notifications_viewed", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     from ututi.model import events
     events.setup_tables(engine)
