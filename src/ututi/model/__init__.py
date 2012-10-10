@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-user_medals_table = None
 user_registrations_table = None
 subject_pages_table = None
 group_membership_types_table = None
@@ -209,11 +208,9 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global user_medals_table
-    user_medals_table = Table("user_medals", meta.metadata,
-                              autoload=True,
-                              autoload_with=engine)
-
+    Table("user_medals", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     global user_registrations_table
     user_registrations_table = Table("user_registrations", meta.metadata,
