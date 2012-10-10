@@ -25,8 +25,10 @@ from ututi.model.events import PageCreatedEvent
 from ututi.model.events import MailinglistPostCreatedEvent
 from ututi.model.events import FileUploadedEvent
 from ututi.model.events import ForumPostCreatedEvent
+from ututi.model.events import GroupWallPostEvent
 from ututi.model.events import Event, EventComment
 from ututi.model import ContentItem
+from ututi.model import WallPost
 from ututi.model import ForumCategory
 from ututi.model import ForumPost, Page, Subject, meta, Group
 
@@ -213,19 +215,28 @@ class WallController(BaseController, FileViewMixin):
         meta.Session.commit()
         return page
 
+    def _create_wall_post(self, group_id=None, subject_id=None, location_id=None, content=None):
+        post = WallPost(group_id=group_id, subject_id=subject_id, location_id=location_id, content=content)
+        meta.Session.add(post)
+        meta.Session.commit()
+        return post
+
     @ActionProtector("user")
     @validate(schema=WallPostForm())
-    def add_wall_post(self):
+    def create_group_wall_post(self):
         """This should add a wall post for specified user"""
         # XXX
         return {}
 
     @ActionProtector("user")
     @js_validate(schema=WallPostForm())
-    def add_wall_post_js(self):
-        """This should add a wall post for specified user when invoded through xhr"""
-        # XXX
-        return {}
+    @jsonify
+    def create_group_wall_post_js(self):
+        """This should add a wall post for specified user when invoked through xhr"""
+        post = self._create_wall_post(group_id=self.form_result['group_id'],
+                                      content=self.form_result['post'])
+        evt = meta.Session.query(GroupWallPostEvent).filter_by(object_id=post.id).one().wall_entry()
+        return {'success': True, 'evt': evt}
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())

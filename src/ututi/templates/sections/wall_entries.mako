@@ -649,20 +649,22 @@
   </%self:wall_entry>
 </%def>
 
-<%def name="wall_post(event)">
+<%def name="group_wall_post(event)">
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
-      ${_("%(user_link)s has posted to his wall.") % \
-         dict(user_link=h.user_link(event.author_id)) | n}
+      ${_("%(user_link)s has posted to %(group_link)s group wall.") % \
+         dict(user_link=h.user_link(event.author_id),
+              group_link=h.link_to(event.context.group.title, event.context.group.id)) | n}
     </%def>
     <div class="thread">
       <div class="logo">
         <img src="${url(controller='user', action='logo', id=event.author_id, width=50)}" />
       </div>
       <div class="content">
-        <span class="event-content">${h.wall_fmt(event.data)}</span>
+        <span class="event-content">${h.wall_fmt(event.context.content)}</span>
       </div>
     </div>
+    <%self:event_conversation event="${event}" head_message="${False}" />
   </%self:wall_entry>
 </%def>

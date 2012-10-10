@@ -28,6 +28,7 @@ def generic_events_query():
     t_mlmsg = meta.metadata.tables['group_mailing_list_messages']
     t_fpmsg = meta.metadata.tables['forum_posts']
     t_sms = meta.metadata.tables['outgoing_group_sms_messages']
+    t_groups = meta.metadata.tables['groups']
 
     #generic query for events
     t_context = t_ci.alias('context_ci')
@@ -36,7 +37,8 @@ def generic_events_query():
     #page
     page_ci = t_ci.alias('page_ci')
     latest_page = select([t_pages.c.page_id, t_pages.c.title, page_ci.c.deleted_on],
-                         from_obj=[t_pages.join(page_ci, page_ci.c.id==t_pages.c.id)])\
+                         from_obj=[t_pages.join(page_ci,
+                                                page_ci.c.id == t_pages.c.id)])\
                          .order_by(t_pages.c.id.desc())\
                          .limit(1)\
                          .alias('latest_page')

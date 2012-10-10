@@ -149,8 +149,8 @@
 <%def name="add_wall_post_block(group)">
     <div id="add_wall_post_block" class="action-block">
     <a name="wall-post"></a>
-    <form method="POST" action="${url(controller='wall', action='add_wall_post')}" id="wallpost_form" class="inelement-form">
-        <input id="add-wall-post-url" type="hidden" value="${url(controller='wall', action='add_wall_post_js')}" />
+    <form method="POST" action="${url(controller='wall', action='create_group_wall_post')}" id="wallpost_form" class="inelement-form">
+        <input id="add-wall-post-url" type="hidden" value="${url(controller='wall', action='create_group_wall_post_js')}" />
         <input type="hidden" name="group_id" id="group_id" value="${group.id}"/>
         <div class="action-tease">${_("Write your post")}</div>
         <textarea name="post" class="tease-element"></textarea>

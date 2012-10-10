@@ -382,6 +382,11 @@ def setup_tables(engine):
                                autoload=True,
                                autoload_with=engine)
 
+    Table("wall_posts", meta.metadata,
+          autoload=True,
+          useexisting=True,
+          autoload_with=engine)
+
     from ututi.model import events
     events.setup_tables(engine)
     from ututi.model import i18n
@@ -477,6 +482,15 @@ def setup_orm():
                                                 primaryjoin=tables['forum_posts'].c.parent_id==tables['content_items'].c.id,
                                                 backref="forum_posts")
                             })
+    orm.mapper(WallPost, tables['wall_posts'],
+               inherits=ContentItem,
+               inherit_condition=tables['wall_posts'].c.id==ContentItem.id,
+               polymorphic_identity='wall_post',
+               polymorphic_on=tables['content_items'].c.content_type,
+               properties={'group': relation(Group,
+                                             primaryjoin=tables['groups'].c.id==tables['wall_posts'].c.group_id),
+                           'subject': relation(Subject,
+                                               primaryjoin=tables['subjects'].c.id==tables['wall_posts'].c.subject_id)})
 
     orm.mapper(SeenThread, tables['seen_threads'],
                properties = {'thread': relation(ForumPost),
@@ -2202,7 +2216,16 @@ class ForumPost(ContentItem):
 
     def snippet(self):
         """Render the post's information."""
-        return render_mako_def('/sections/content_snippets.mako','forum_post', object=self)
+        return render_mako_def('/sections/content_snippets.mako', 'forum_post', object=self)
+
+
+class WallPost(ContentItem):
+
+    def __init__(self, group_id=None, subject_id=None, location_id=None, content=None):
+        self.group_id = group_id
+        self.subject_id = subject_id
+        self.location_id = location_id
+        self.content = content
 
 
 class SeenThread(object):

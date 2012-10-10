@@ -13,13 +13,16 @@ from pylons import url
 from pylons.i18n import ungettext, _
 
 from ututi.model.mailing import GroupMailingListMessage
-from ututi.model import Group, Subject, User, File, Page, ContentItem, ForumPost, OutgoingGroupSMSMessage, PrivateMessage
+from ututi.model import Group, Subject, User, File, Page, ContentItem
+from ututi.model import ForumPost, OutgoingGroupSMSMessage, PrivateMessage
+from ututi.model import WallPost
 from ututi.model import meta
 from ututi.lib.helpers import link_to, ellipsis, when
 from ututi.lib.base import render_def
 
 log = logging.getLogger(__name__)
 events_table = None
+
 
 class Event(object):
     """Generic event class."""
@@ -493,6 +496,15 @@ class GroupStoppedWatchingSubjects(Event):
             'link_to_subject': link_to(self.subject.title, self.subject.url())}
 
 
+class GroupWallPostEvent(Event, Commentable):
+
+    """Wall post event"""
+    def render(self):
+        return _("%(link_to_author)s wrote posted on %(link_to_group)s wall." % {
+            'link_to_user': link_to(self.user.fullname, self.user.url()),
+            'link_to_group': link_to(self.group.title, self.group.url())})
+
+
 def setup_tables(engine):
     warnings.simplefilter("ignore", SAWarning)
     global events_table
@@ -515,16 +527,16 @@ def setup_tables(engine):
 def setup_orm():
     tables = meta.metadata.tables
     event_mapper = orm.mapper(Event,
-               tables['events'],
-               polymorphic_on=tables['events'].c.event_type,
-               polymorphic_identity='generic',
-               properties = {'context': relation(ContentItem, backref=backref('events', cascade='save-update, merge, delete')),
-                             'user': relation(User, backref='events',
-                                              primaryjoin=tables['users'].c.id==tables['events'].c.author_id),
-                             'children': relation(Event,
-                                                  order_by=tables['events'].c.id.asc(),
-                                                  backref=backref('parent',
-                                                                  remote_side=tables['events'].c.id))})
+                              tables['events'],
+                              polymorphic_on=tables['events'].c.event_type,
+                              polymorphic_identity='generic',
+                              properties={'context': relation(ContentItem, backref=backref('events', cascade='save-update, merge, delete')),
+                                          'user': relation(User, backref='events',
+                                                           primaryjoin=tables['users'].c.id==tables['events'].c.author_id),
+                                          'children': relation(Event,
+                                                               order_by=tables['events'].c.id.asc(),
+                                                               backref=backref('parent',
+                                                                               remote_side=tables['events'].c.id))})
 
     orm.mapper(EventComment, tables['event_comments'],
                inherits=ContentItem,
@@ -537,6 +549,11 @@ def setup_orm():
                       backref=backref('comments',
                                       order_by=tables['content_items'].c.created_on.asc()))
                })
+
+    orm.mapper(GroupWallPostEvent,
+               inherits=event_mapper,
+               polymorphic_on=events_table.c.event_type,
+               polymorphic_identity='group_wall_post')
 
     orm.mapper(PageCreatedEvent,
                inherits=event_mapper,
