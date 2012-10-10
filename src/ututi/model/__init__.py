@@ -59,7 +59,6 @@ def init_model(engine):
     meta.engine = engine
 
 
-content_items_table = None
 group_whitelist_table = None
 group_members_table = None
 group_requests_table = None
@@ -163,10 +162,9 @@ def setup_tables(engine):
           autoload_with=engine,
           useexisting=True)
 
-    global content_items_table
-    content_items_table = Table("content_items", meta.metadata,
-                                autoload=True,
-                                autoload_with=engine)
+    Table("content_items", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
 
     Table("content_tags", meta.metadata,
           autoload=True,
