@@ -225,14 +225,13 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
-    global groups_table
-    groups_table = Table("groups", meta.metadata,
-                         Column('title', Unicode()),
-                         Column('description', Unicode()),
-                         Column('page', Unicode()),
-                         useexisting=True,
-                         autoload=True,
-                         autoload_with=engine)
+    Table("groups", meta.metadata,
+          Column('title', Unicode()),
+          Column('description', Unicode()),
+          Column('page', Unicode()),
+          useexisting=True,
+          autoload=True,
+          autoload_with=engine)
 
     Table("group_whitelist", meta.metadata,
           autoload=True,
@@ -791,8 +790,6 @@ class LimitedUploadMixin(object):
         pts = min(5, ceil(5 * float(self.size) / self.available_size))
         return pts
 
-
-groups_table = None
 
 class GroupSubjectMonitoring(object):
 
