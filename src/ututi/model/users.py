@@ -117,6 +117,7 @@ class User(Author):
     is_teacher = False
 
     def delete_user(self):
+        """Low level delete so author record would not get deleted."""
         conn = meta.engine.connect()
         upd = meta.metadata.tables['users'].delete().where(users_table.c.id==self.id)
         conn.execute(upd)
