@@ -19,7 +19,6 @@ from ututi.lib.helpers import link_to, ellipsis, when
 from ututi.lib.base import render_def
 
 log = logging.getLogger(__name__)
-events_table = None
 
 class Event(object):
     """Generic event class."""
@@ -66,7 +65,7 @@ class Event(object):
 
     @classmethod
     def event_types(cls):
-        types = meta.Session.query(events_table.c.event_type).distinct().all()
+        types = meta.Session.query(meta.metadata.tables['events'].c.event_type).distinct().all()
         return [evt[0] for evt in types]
 
 
@@ -495,12 +494,10 @@ class GroupStoppedWatchingSubjects(Event):
 
 def setup_tables(engine):
     warnings.simplefilter("ignore", SAWarning)
-    global events_table
-    events_table = Table(
-        "events",
-        meta.metadata,
-        autoload=True,
-        autoload_with=engine)
+    Table("events",
+          meta.metadata,
+          autoload=True,
+          autoload_with=engine)
     warnings.simplefilter("default", SAWarning)
 
     global event_comments_table
