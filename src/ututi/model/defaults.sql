@@ -206,6 +206,7 @@ create table content_items (id bigserial not null,
        modified_on timestamp not null default (now() at time zone 'UTC'),
        deleted_by int8 references authors(id) on delete cascade default null,
        deleted_on timestamp default null,
+       location_id int8 default null,
        primary key (id));;
 
 CREATE FUNCTION set_deleted_on() RETURNS trigger AS $$
@@ -312,7 +313,8 @@ alter table users add constraint user_unique_pair unique (location_id, username)
 create index user_location_idx on users using btree (location_id);
 
 /* Add location field to the content item table */
-alter table content_items add column location_id int8 default null references tags(id) on delete cascade;;
+alter table content_items
+	drop constraint content_items_location_id_fkey;;
 
 /* A table for group coupons */
 create table group_coupons (
