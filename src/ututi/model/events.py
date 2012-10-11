@@ -547,7 +547,7 @@ def setup_orm():
 
     orm.mapper(GroupWallPostEvent,
                inherits=event_mapper,
-               polymorphic_on=events_table.c.event_type,
+               polymorphic_on=tables['events'].c.event_type,
                polymorphic_identity='group_wall_post')
 
     orm.mapper(PageCreatedEvent,

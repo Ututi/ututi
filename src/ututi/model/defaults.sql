@@ -1717,4 +1717,3 @@ $$ language plpgsql;
 
 create trigger group_wall_post_event_trigger after insert or update on wall_posts
     for each row execute procedure wall_post_event_trigger();
-or each row execute procedure wall_post_event_trigger();;
