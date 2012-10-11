@@ -496,7 +496,7 @@ class GroupStoppedWatchingSubjects(Event):
 
 
 class GroupWallPostEvent(Event, Commentable):
-    """Wall post event"""
+    """Group wall post event"""
 
     @property
     def wp_group_id(self):
@@ -514,6 +514,23 @@ class GroupWallPostEvent(Event, Commentable):
         return _("%(link_to_author)s wrote posted on %(link_to_group)s wall." % {
             'link_to_user': link_to(self.user.fullname, self.user.url()),
             'link_to_group': link_to(self.context.group.title, self.context.group.url())})
+
+
+class SubjectWallPostEvent(Event, Commentable):
+    """Subject wall post event"""
+
+    @property
+    def wp_subject_id(self):
+        return self.context.subject.id
+
+    @property
+    def wp_content(self):
+        return self.context.content
+
+    def render(self):
+        return _("%(link_to_author)s wrote posted on %(link_to_subject)s wall." % {
+            'link_to_user': link_to(self.user.fullname, self.user.url()),
+            'link_to_subject': link_to(self.context.subject.title, self.context.subject.url())})
 
 
 def setup_tables(engine):
@@ -561,6 +578,11 @@ def setup_orm():
                inherits=event_mapper,
                polymorphic_on=tables['events'].c.event_type,
                polymorphic_identity='group_wall_post')
+
+    orm.mapper(SubjectWallPostEvent,
+               inherits=event_mapper,
+               polymorphic_on=tables['events'].c.event_type,
+               polymorphic_identity='subject_wall_post')
 
     orm.mapper(PageCreatedEvent,
                inherits=event_mapper,

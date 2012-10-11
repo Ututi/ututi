@@ -21,6 +21,11 @@
         clearBlock($(this).closest('.action-block'));
         return false;
     });
+    $('#add_wall_post_block .cancel-button').click(function() {
+        $('#add_wall_post').click();
+        clearBlock($(this).closest('.action-block'));
+        return false;
+    });
 
     /* File upload actions.
      */
@@ -64,6 +69,31 @@
         });
     $('#folder').change(function(){
         file_upload.setData({folder: $(this).val(), target_id: $('#file_rcpt').val()});
+    });
+
+    /* Add wall post actions
+     */
+    add_wall_post_url = $("#add-wall-post-url").val();
+    $("#submit_wall_post").click(function () {
+        form = $(this).closest('form');
+        post = $("#post", form).val();
+        if (post != '') {
+            $.post(add_wall_post_url,
+                   $(this).closest('form').serialize(),
+                   function (data, status) {
+                        if (data.success != true) {
+                           for (var key in data.errors) {
+                               var error = data.errors[key];
+                               $('#'+key).parent().after($('<div class="error-message">'+error+'</div>'));
+                           }
+                        } else {
+                            $('#add_wall_post_block .cancel-button').click();
+                            reload_wall(data.evt);
+                        }
+                   }
+            );
+        }
+        return false;
     });
 
     /* Create wiki actions.
@@ -136,13 +166,29 @@
   </div>
 </%def>
 
+<%def name="add_wall_post_block(subject)">
+    <div id="add_wall_post_block" class="action-block">
+    <a name="wall-post"></a>
+    <form method="POST" action="${url(controller='wall', action='create_subject_wall_post')}" id="wallpost_form" class="inelement-form">
+        <input id="add-wall-post-url" type="hidden" value="${url(controller='wall', action='create_subject_wall_post_js')}" />
+        <input type="hidden" name="subject_id" id="subject_id" value="${subject.id}"/>
+        <div class="action-tease">${_("Write your post")}</div>
+        <textarea name="post" class="tease-element"></textarea>
+        ${h.input_submit(_('Send'), id="submit_wall_post", class_='dark inline action-button')}
+        <a class="cancel-button" href="#cancel">${_("Cancel")}</a>
+    </form>
+    </div>
+</%def>
+
 <%def name="action_block(subject)">
   <%actions:action_block>
     <%def name="links()">
+      <a class="action active" id="add_wall_post" href="#add-wall-post">${_('Wall post')}</a>
       <a class="action active" id="upload_file" href="#upload-file">${_('File')}</a>
       <a class="action active" id="create_wiki" href="#create-wiki">${_('Wiki note')}</a>
     </%def>
 
+    ${self.add_wall_post_block(subject)}
     ${self.upload_file_block(subject)}
     ${self.create_wiki_block(subject)}
   </%actions:action_block>

@@ -14,6 +14,8 @@ from pylons.controllers.util import redirect, abort
 from pylons.i18n import _
 from pylons.templating import render_mako_def
 
+from sqlalchemy.sql.expression import or_
+
 from ututi.model import SearchItem
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
 from ututi.lib.security import ActionProtector, deny
@@ -186,8 +188,10 @@ class SubjectWallMixin(WallMixin):
         evts_generic = generic_events_query()
 
         t_evt = meta.metadata.tables['events']
+        t_wall_posts = meta.metadata.tables['wall_posts']
         query = evts_generic\
-             .where(t_evt.c.object_id == c.subject.id)
+             .where(or_(t_evt.c.object_id == c.subject.id,
+                        t_wall_posts.c.subject_id == c.subject.id))
 
         return query
 

@@ -26,6 +26,7 @@ from ututi.model.events import MailinglistPostCreatedEvent
 from ututi.model.events import FileUploadedEvent
 from ututi.model.events import ForumPostCreatedEvent
 from ututi.model.events import GroupWallPostEvent
+from ututi.model.events import SubjectWallPostEvent
 from ututi.model.events import Event, EventComment
 from ututi.model import ContentItem
 from ututi.model import WallPost
@@ -236,6 +237,15 @@ class WallController(BaseController, FileViewMixin):
         post = self._create_wall_post(group_id=self.form_result['group_id'],
                                       content=self.form_result['post'])
         evt = meta.Session.query(GroupWallPostEvent).filter_by(object_id=post.id).one().wall_entry()
+        return {'success': True, 'evt': evt}
+
+    @ActionProtector("user")
+    @js_validate(schema=WallPostForm())
+    @jsonify
+    def create_subject_wall_post_js(self):
+        post = self._create_wall_post(subject_id=self.form_result['subject_id'],
+                                      content=self.form_result['post'])
+        evt = meta.Session.query(SubjectWallPostEvent).filter_by(object_id=post.id).one().wall_entry()
         return {'success': True, 'evt': evt}
 
     @ActionProtector("user")
