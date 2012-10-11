@@ -35,3 +35,6 @@ Gmail mail became main mail, but user want have his university mail as main.
     >>> form = browser.getForm('contacts-form')
     >>> form.getControl('Your email address').value = 'second@mif.stud.vu.lt'
     >>> form.getControl('Save').click()
+
+    >>> print mail_queue.pop()
+    <EmailInfo sender='info@ututi.lt' recipients=[u'second@mif.stud.vu.lt']>
