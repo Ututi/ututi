@@ -7,6 +7,7 @@ from ututi.model import meta
 
 from ututi.lib.wall import WallMixin
 
+
 class UserWallMixin(WallMixin):
 
     def _wall_events_query(self):
@@ -27,8 +28,7 @@ class UserWallMixin(WallMixin):
              .where(or_(t_evt.c.object_id.in_(subject_ids) if subject_ids else False,
                         t_evt.c.object_id.in_(group_ids) if group_ids else False))\
              .where(or_(t_evt.c.event_type != 'moderated_post_created',
-                         t_evt.c.object_id.in_(user_is_admin_of_groups) if user_is_admin_of_groups else False))\
+                        t_evt.c.object_id.in_(user_is_admin_of_groups) if user_is_admin_of_groups else False))\
              .where(not_(t_evt.c.event_type.in_(c.user.ignored_events_list) if c.user.ignored_events_list else False))
 
         return query
-
