@@ -6,7 +6,7 @@ from ututi.model import LocationTag, meta, User
 def test_sms():
     """Test sms sending.
 
-        >>> from ututi.lib.sms import send_sms
+        >>> from ututi.lib.sms import send_sms, sms_queue
         >>> from ututi.model import SMS, User, meta
 
         >>> u = User.get('user@uni.ututi.com', LocationTag.get('uni'))
@@ -15,6 +15,9 @@ def test_sms():
 
         >>> [(sms.message_text, sms.sending_status) for sms in meta.Session.query(SMS).all()]
         [(u'Message text', None)]
+
+        >>> sms_queue.pop()
+        ('+37061300034', u'Message text')
 
     """
 

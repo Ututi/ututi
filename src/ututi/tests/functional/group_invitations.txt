@@ -201,3 +201,5 @@ Once registered, user should be able to accept invitation to group:
     >>> new_user.getLink('New Group', url='/group/newgroup').click()
     >>> new_user.url
     'http://localhost/group/newgroup/home'
+
+    >>> mail_queue[:] = []

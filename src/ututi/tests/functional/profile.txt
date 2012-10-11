@@ -145,6 +145,12 @@ User clicks contacts' tab and enters an invalid phone number:
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Phone number too short; use the format +37069912345
 
+No sms get sent:
+
+    >>> from ututi.lib.sms import sms_queue
+    >>> sms_queue
+    []
+
 User enters lithuanian number from english template:
 
     >>> form = browser.getForm('contacts-form')
@@ -153,6 +159,11 @@ User enters lithuanian number from english template:
     >>> browser.printQuery("//p[@class='field-status']/text()")
     Number is not confirmed
     Email is not confirmed
+
+Confirmation sms got sent:
+
+    >>> sms_queue.pop()
+    (u'+37069912345', u'Ututi registration code: ...')
 
 User enters polish number from english template:
 
@@ -163,7 +174,12 @@ User enters polish number from english template:
     Number is not confirmed
     Email is not confirmed
 
-User changes language to lithuanian and tries to enter an invalid 
+And gets another sms:
+
+    >>> sms_queue.pop()
+    (u'+48123456789', u'Ututi registration code: ...')
+
+User changes language to lithuanian and tries to enter an invalid
 phone number again:
 
     >>> form = browser.getForm('language-switch-form')
@@ -197,6 +213,11 @@ This time user enters correct lithuanian number:
     Numeris nepatvirtintas
     El. pa&#353;to adresas nepatvirtintas
 
+And also gets an sms:
+
+    >>> sms_queue.pop()
+    (u'+37069912345', u'Ututi registracijos kodas: ...')
+
     >>> browser.open('http://localhost/profile/edit/contacts')
     >>> form = browser.getForm('contacts-form')
     >>> form.getControl(name='phone_number').value = '869912345'
@@ -206,8 +227,13 @@ This time user enters correct lithuanian number:
     Numeris nepatvirtintas
     El. pa&#353;to adresas nepatvirtintas
 
-User changes language from lithuanian to polish and tries to enter an invalid 
-phone number again:
+The phone is the same, so this time no message is sent:
+
+    >>> sms_queue
+    []
+
+User changes language from lithuanian to polish and tries to enter an
+invalid phone number again:
 
 
     >>> form = browser.getForm('language-switch-form')
@@ -240,3 +266,9 @@ This time user enters correct polish number:
     >>> browser.printQuery("//p[@class='field-status']/text()")
     Numer nie jest potwierdzony.
     Adres e-mail nie jest potwierdzony
+
+And gets an sms in polish:
+
+    >>> sms_queue.pop()
+    (u'+48123456789', u'Kod rejestracji na Ututi: ...')
+

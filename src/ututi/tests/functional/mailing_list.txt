@@ -7,8 +7,7 @@ System has no holding messages:
     >>> len(mail_queue)
     0
 
-User goes to group and clicks on group's email and writes 
-a message:
+User goes to group and clicks on group's email and writes a message:
 
     >>> browser = Browser.logIn()
     >>> browser.getLink('Moderatoriai').click()
@@ -20,10 +19,10 @@ a message:
 
     >>> len(mail_queue)
     1
-    
+
     >>> mail_queue
     [<EmailInfo sender='admin@uni.ututi.com' recipients=['admin@uni.ututi.com']>]
 
-    >>> msg = mail_queue[0]
+    >>> msg = mail_queue.pop()
     >>> msg.payload()
     'My long message goes here...'
