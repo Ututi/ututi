@@ -225,19 +225,25 @@ class WallController(BaseController, FileViewMixin):
     @ActionProtector("user")
     @validate(schema=WallPostForm())
     def create_group_wall_post(self):
-        """This should add a wall post for specified user"""
-        # XXX
-        return {}
+        self._create_wall_post(group_id=self.form_result['group_id'],
+                               content=self.form_result['post'])
+        self._redirect()
 
     @ActionProtector("user")
     @js_validate(schema=WallPostForm())
     @jsonify
     def create_group_wall_post_js(self):
-        """This should add a wall post for specified user when invoked through xhr"""
         post = self._create_wall_post(group_id=self.form_result['group_id'],
                                       content=self.form_result['post'])
         evt = meta.Session.query(GroupWallPostEvent).filter_by(object_id=post.id).one().wall_entry()
         return {'success': True, 'evt': evt}
+
+    @ActionProtector("user")
+    @js_validate(schema=WallPostForm())
+    def create_subject_wall_post(self):
+        self._create_wall_post(subject_id=self.form_result['subject_id'],
+                               content=self.form_result['post'])
+        self._redirect()
 
     @ActionProtector("user")
     @js_validate(schema=WallPostForm())
