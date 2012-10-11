@@ -496,16 +496,20 @@ class GroupStoppedWatchingSubjects(Event):
 
 
 class GroupWallPostEvent(Event, Commentable):
+    """Wall post event"""
 
     @property
     def wp_group_id(self):
+        """Following 2 methods are needed to equalize interface between model objects and
+           objects returned by the wall query. The latter are constructed manually and not
+           converted to SQLAlchemy model objects."""
         return self.context.group.id
 
     @property
     def wp_content(self):
+        """See wp_group_id method"""
         return self.context.content
 
-    """Wall post event"""
     def render(self):
         return _("%(link_to_author)s wrote posted on %(link_to_group)s wall." % {
             'link_to_user': link_to(self.user.fullname, self.user.url()),
