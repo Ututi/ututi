@@ -15,8 +15,8 @@ def test_i18n_text_handling():
         []
 
         >>> text.set_text('lt', u'Lietuvi\u0161ka versija.')
-        >>> text.set_text('en', 'English version.')
-        >>> text.set_text('pl', 'Wersja polska.')
+        >>> text.set_text('en', u'English version.')
+        >>> text.set_text('pl', u'Wersja polska.')
         >>> len(text.versions)
         3
         >>> meta.Session.add(text)
@@ -82,7 +82,7 @@ def test_i18n_text_handling():
         >>> len(I18nTextVersion.all())
         2
         >>> text.set_text('lt', u'Nauja lietuvi\u0161ka versija.')
-        >>> text.set_text('en', 'New english version.')
+        >>> text.set_text('en', u'New english version.')
         >>> meta.Session.commit()
         >>> len(I18nTextVersion.all())
         2

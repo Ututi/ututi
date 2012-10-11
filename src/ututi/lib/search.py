@@ -13,7 +13,8 @@ from pylons import session
 log = logging.getLogger(__name__)
 
 def search_query_count(query):
-    count = meta.Session.execute(select([func.count()], from_obj=query.subquery())).scalar()
+    count = meta.Session.execute(
+        select([func.count()], from_obj=query.with_labels().subquery())).scalar()
     return count
 
 def search_query(**kwargs):
@@ -146,7 +147,7 @@ def _search_query_default_sorting(query, **kwargs):
     elif obj_type == 'group':
         if not kwargs.get('grouped_search_items'):
             query = query.join((Group, Group.id==SearchItem.content_item_id))
-            query = query.order_by([Group.forum_is_public.desc(), ContentItem.modified_on.desc()])
+            query = query.order_by(Group.forum_is_public.desc(), ContentItem.modified_on.desc())
     elif obj_type == 'subject':
         query = query.order_by(SearchItem.rating.desc())
     return query
@@ -211,5 +212,7 @@ def tag_search(text, count=5):
 def _exclude_subjects(sids):
     """A modifier for the subjects query, which excludes subjects already being watched."""
     def _filter(query):
+        if not sids:
+            return query
         return query.filter(not_(ContentItem.id.in_(sids)))
     return _filter
