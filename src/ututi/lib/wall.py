@@ -28,7 +28,7 @@ def generic_events_query():
     t_mlmsg = meta.metadata.tables['group_mailing_list_messages']
     t_fpmsg = meta.metadata.tables['forum_posts']
     t_sms = meta.metadata.tables['outgoing_group_sms_messages']
-    t_groups = meta.metadata.tables['groups']
+    t_wall_posts = meta.metadata.tables['wall_posts']
 
     #generic query for events
     t_context = t_ci.alias('context_ci')
@@ -72,6 +72,11 @@ def generic_events_query():
                            t_fpmsg.c.thread_id.label('fp_thread_id'),
                            #sms
                            t_sms.c.message_text.label('sms_message'),
+                           #wall posts
+                           t_wall_posts.c.content.label('wp_content'),
+                           t_wall_posts.c.group_id.label('wp_group_id'),
+                           t_wall_posts.c.group_id.label('wp_subject_id'),
+                           t_wall_posts.c.group_id.label('wp_location_id'),
                            ],
                           from_obj=[t_evt.outerjoin(latest_page, latest_page.c.page_id==t_evt.c.page_id)\
                                         .outerjoin(t_context, t_context.c.id==t_evt.c.object_id)\
@@ -79,7 +84,8 @@ def generic_events_query():
                                         .outerjoin(t_mlmsg, t_mlmsg.c.id==t_evt.c.message_id)\
                                         .outerjoin(t_fpmsg, t_fpmsg.c.id==t_evt.c.post_id)\
                                         .outerjoin(file_ci, file_ci.c.id==t_files.c.id)\
-                                        .outerjoin(t_sms, t_sms.c.id==t_evt.c.sms_id)
+                                        .outerjoin(t_sms, t_sms.c.id==t_evt.c.sms_id)\
+                                        .outerjoin(t_wall_posts, t_wall_posts.c.id==t_evt.c.object_id)
                                     ])
     return evts_generic
 

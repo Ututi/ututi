@@ -267,13 +267,15 @@ class GroupWallMixin(WallMixin):
         from ututi.lib.wall import generic_events_query
         evts_generic = generic_events_query()
         t_evt = meta.metadata.tables['events']
+        t_wall_posts = meta.metadata.tables['wall_posts']
         watched_subject_ids = [s.id for s in c.group.watched_subjects]
         object_id_in_list = t_evt.c.object_id.in_(watched_subject_ids) if watched_subject_ids else False
         object_id_in_admin_groups = (t_evt.c.object_id.in_(user_is_admin_of_groups)
                                      if user_is_admin_of_groups else False)
         query = evts_generic\
                 .where(or_(object_id_in_list,
-                           t_evt.c.object_id == c.group.id))\
+                           t_evt.c.object_id == c.group.id,
+                           t_wall_posts.c.group_id == c.group.id))\
                 .where(or_(t_evt.c.event_type != 'moderated_post_created',
                            object_id_in_admin_groups))
 

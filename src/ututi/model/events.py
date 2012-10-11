@@ -497,11 +497,19 @@ class GroupStoppedWatchingSubjects(Event):
 
 class GroupWallPostEvent(Event, Commentable):
 
+    @property
+    def wp_group_id(self):
+        return self.context.group.id
+
+    @property
+    def wp_content(self):
+        return self.context.content
+
     """Wall post event"""
     def render(self):
         return _("%(link_to_author)s wrote posted on %(link_to_group)s wall." % {
             'link_to_user': link_to(self.user.fullname, self.user.url()),
-            'link_to_group': link_to(self.group.title, self.group.url())})
+            'link_to_group': link_to(self.context.group.title, self.context.group.url())})
 
 
 def setup_tables(engine):
