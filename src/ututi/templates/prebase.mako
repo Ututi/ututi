@@ -196,7 +196,6 @@ ${_('Private social networks for universities')}
       document.documentElement.firstChild.appendChild(ga);
       })();
     </script>
-
     ${h.stylesheet_link(h.path_with_hash('/reset.css'))}
     ${h.stylesheet_link(h.path_with_hash('/style.css'))}
     ${h.stylesheet_link(h.path_with_hash('/layout.css'))}
@@ -228,6 +227,16 @@ ${_('Private social networks for universities')}
       }
       %endif
     </style>
+<!--[if IE 7]>
+    <script type="text/javascript">
+        $(function () {
+            $('button.submit').click(function () {
+                $(this).closest('form').submit();
+            });
+        });
+    </script>
+<![endif]-->
+
     <title>
       ${self.title()} - ${_('UTUTI')}
     </title>
