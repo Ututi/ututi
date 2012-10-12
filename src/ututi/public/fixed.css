@@ -758,6 +758,10 @@ form.inline-form button {
     padding-left: 10px;
     background: transparent url("/img/icons.com/wiki_small_grey.png") left center no-repeat;
   }
+  #dashboard_action_links a#add_wall_post {
+    padding-left: 15px;
+    background: transparent url("/img/icons.com/feed_small_grey.png") left center no-repeat;
+  }
 
   a.active, a.active:hover,
   #dashboard_action_links a.action.active:hover,
@@ -776,6 +780,10 @@ form.inline-form button {
   #dashboard_action_links a.active#create_wiki:hover,
   #dashboard_action_links a.open#create_wiki {
     background-image: url("/img/icons.com/wiki_small_orange.png");
+  }
+  #dashboard_action_links a.active#add_wall_post:hover,
+  #dashboard_action_links a.open#add_wall_post {
+    background-image: url("/img/icons.com/feed_small_orange.png");
   }
 
   #upload-failed-error-message { display: none; }
