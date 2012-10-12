@@ -22,11 +22,14 @@ class UserWallMixin(WallMixin):
         evts_generic = generic_events_query()
 
         t_evt = meta.metadata.tables['events']
+        t_wall_posts = meta.metadata.tables['wall_posts']
         subject_ids = [s.id for s in subjects]
         group_ids = [m.group.id for m in c.user.memberships]
         query = evts_generic\
-             .where(or_(t_evt.c.object_id.in_(subject_ids) if subject_ids else False,
-                        t_evt.c.object_id.in_(group_ids) if group_ids else False))\
+             .where(or_(or_(t_evt.c.object_id.in_(subject_ids),
+                            t_wall_posts.c.subject_id.in_(subject_ids)) if subject_ids else False,
+                        or_(t_evt.c.object_id.in_(group_ids),
+                            t_wall_posts.c.group_id.in_(group_ids)) if group_ids else False))\
              .where(or_(t_evt.c.event_type != 'moderated_post_created',
                         t_evt.c.object_id.in_(user_is_admin_of_groups) if user_is_admin_of_groups else False))\
              .where(not_(t_evt.c.event_type.in_(c.user.ignored_events_list) if c.user.ignored_events_list else False))
