@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-04-24 13:23+0300\n"
+"POT-Creation-Date: 2012-10-12 15:41+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1166,6 +1166,14 @@ msgstr ""
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr ""
 
+#, python-format
+msgid "%(link_to_author)s wrote posted on %(link_to_group)s wall.link_to_user"
+msgstr ""
+
+#, python-format
+msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
+msgstr ""
+
 msgid "(no subject)"
 msgstr ""
 
@@ -1239,6 +1247,39 @@ msgid ""
 "http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
 msgstr ""
 
+msgid "Add your university"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Short title"
+msgstr ""
+
+msgid "WWW address"
+msgstr ""
+
+msgid "Create university"
+msgstr ""
+
+msgid "Create account"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "University you belong to"
+msgstr ""
+
+msgid "I accept terms and regulations"
+msgstr ""
+
+msgid "Create an account"
+msgstr ""
+
 msgid "Private social network for universities"
 msgstr ""
 
@@ -1249,9 +1290,6 @@ msgid "University news"
 msgstr ""
 
 msgid "Lecture material"
-msgstr ""
-
-msgid "Add your university"
 msgstr ""
 
 msgid "Teachers' academical workspaces"
@@ -1293,46 +1331,16 @@ msgstr ""
 msgid "I am a teacher"
 msgstr ""
 
-msgid "Name"
-msgstr ""
-
-msgid "Email"
-msgstr ""
-
-msgid "University you belong to"
-msgstr ""
-
 msgid "Pick from the list"
 msgstr ""
 
 msgid "Create new university"
 msgstr ""
 
-msgid "I accept terms and regulations"
-msgstr ""
-
-msgid "Create an account"
-msgstr ""
-
 msgid "Universities already are on Ututi"
 msgstr ""
 
 msgid "More universities"
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Short title"
-msgstr ""
-
-msgid "WWW address"
-msgstr ""
-
-msgid "Create university"
-msgstr ""
-
-msgid "Create account"
 msgstr ""
 
 msgid "Required"
@@ -2652,6 +2660,9 @@ msgstr ""
 msgid "Write your topic"
 msgstr ""
 
+msgid "Write your post"
+msgstr ""
+
 msgid "Root"
 msgstr ""
 
@@ -2659,6 +2670,9 @@ msgid "Upload file"
 msgstr ""
 
 msgid "File upload failed."
+msgstr ""
+
+msgid "Wall post"
 msgstr ""
 
 msgid "Group message"
@@ -3374,18 +3388,6 @@ msgid "Lect."
 msgstr ""
 
 msgid "Create your own social network"
-msgstr ""
-
-msgid "University already has"
-msgstr ""
-
-msgid "groups"
-msgstr ""
-
-msgid "teachers"
-msgstr ""
-
-msgid "subjects"
 msgstr ""
 
 msgid "About Ututi:"
@@ -4627,6 +4629,14 @@ msgstr ""
 
 #, python-format
 msgid "%(user_link)s has modified a page %(page_link)s"
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has posted to %(group_link)s wall."
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has posted to %(subject_link)s wall."
 msgstr ""
 
 msgid "Website"

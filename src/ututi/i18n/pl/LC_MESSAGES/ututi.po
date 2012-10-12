@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-04-24 13:32+0300\n"
+"PO-Revision-Date: 2012-10-12 15:41+0300\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -1270,6 +1270,14 @@ msgstr ""
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr "Grupa %(link_to_group)s przestała obserwować przedmiot %(link_to_subject)s"
 
+#, python-format
+msgid "%(link_to_author)s wrote posted on %(link_to_group)s wall.link_to_user"
+msgstr ""
+
+#, python-format
+msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
+msgstr ""
+
 msgid "(no subject)"
 msgstr "(brak tematu)"
 
@@ -1345,6 +1353,39 @@ msgstr ""
 "Obraz z flickr:  "
 "http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
 
+msgid "Add your university"
+msgstr "Dodaj swoją uczelnię"
+
+msgid "Title"
+msgstr "Nazwa"
+
+msgid "Short title"
+msgstr "Krótki tytuł"
+
+msgid "WWW address"
+msgstr "Adres WWW"
+
+msgid "Create university"
+msgstr "Dodaj uczelnię"
+
+msgid "Create account"
+msgstr "Utwórz konto"
+
+msgid "Name"
+msgstr "Nazwa"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "University you belong to"
+msgstr "Twoja uczelnia"
+
+msgid "I accept terms and regulations"
+msgstr "Akceptuję warunki regulaminu"
+
+msgid "Create an account"
+msgstr "Utwórz nowe konto"
+
 msgid "Private social network for universities"
 msgstr "Prywatna sieć społecznościowa dla uczelni"
 
@@ -1356,9 +1397,6 @@ msgstr "Aktualności z uczelni"
 
 msgid "Lecture material"
 msgstr "Materiały dydaktyczne"
-
-msgid "Add your university"
-msgstr "Dodaj swoją uczelnię"
 
 msgid "Teachers' academical workspaces"
 msgstr "Platforma wspierająca pracę wykładowcy"
@@ -1399,47 +1437,17 @@ msgstr "Jestem studentem"
 msgid "I am a teacher"
 msgstr "Jestem wykładowcą"
 
-msgid "Name"
-msgstr "Nazwa"
-
-msgid "Email"
-msgstr "E-mail"
-
-msgid "University you belong to"
-msgstr "Twoja uczelnia"
-
 msgid "Pick from the list"
 msgstr "Wybierz z listy"
 
 msgid "Create new university"
 msgstr "Dodaj nową uczelnię"
 
-msgid "I accept terms and regulations"
-msgstr "Akceptuję warunki regulaminu"
-
-msgid "Create an account"
-msgstr "Utwórz nowe konto"
-
 msgid "Universities already are on Ututi"
 msgstr "Uczelnia znajduje się już w sieci Ututi"
 
 msgid "More universities"
 msgstr "Więcej uczelni"
-
-msgid "Title"
-msgstr "Nazwa"
-
-msgid "Short title"
-msgstr "Krótki tytuł"
-
-msgid "WWW address"
-msgstr "Adres WWW"
-
-msgid "Create university"
-msgstr "Dodaj uczelnię"
-
-msgid "Create account"
-msgstr "Utwórz konto"
 
 msgid "Required"
 msgstr "wymagany"
@@ -2960,6 +2968,9 @@ msgstr "Popularność przedmiotu:"
 msgid "Write your topic"
 msgstr "Podaj swój temat"
 
+msgid "Write your post"
+msgstr ""
+
 msgid "Root"
 msgstr "Źródło"
 
@@ -2968,6 +2979,9 @@ msgstr "Załaduj plik"
 
 msgid "File upload failed."
 msgstr "Plik nie został dodany."
+
+msgid "Wall post"
+msgstr ""
 
 msgid "Group message"
 msgstr "Wiadomość grupowa"
@@ -3753,18 +3767,6 @@ msgstr "Wykł."
 
 msgid "Create your own social network"
 msgstr "Stwórz swoją własną sieć społecznościową"
-
-msgid "University already has"
-msgstr "Uczelnia ma już"
-
-msgid "groups"
-msgstr "grupy"
-
-msgid "teachers"
-msgstr "wykładowcy"
-
-msgid "subjects"
-msgstr "przedmioty"
 
 msgid "About Ututi:"
 msgstr "O Ututi:"
@@ -5118,6 +5120,14 @@ msgstr "%(user_link)s tworzy stronę %(page_link)s"
 #, python-format
 msgid "%(user_link)s has modified a page %(page_link)s"
 msgstr "%(user_link)s wprowadza zmiany na stronie %(page_link)s"
+
+#, python-format
+msgid "%(user_link)s has posted to %(group_link)s wall."
+msgstr ""
+
+#, python-format
+msgid "%(user_link)s has posted to %(subject_link)s wall."
+msgstr ""
 
 msgid "Website"
 msgstr "Strona internetowa"

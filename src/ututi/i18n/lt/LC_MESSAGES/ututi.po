@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-04-24 13:32+0300\n"
+"PO-Revision-Date: 2012-10-12 15:41+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1242,6 +1242,14 @@ msgstr "%(link_to_subject)s pridėtas prie grupės %(link_to_group)s dalykų."
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr " %(link_to_subject)s ištrintas iš grupės %(link_to_group)s dalykų sąrašo."
 
+#, python-format
+msgid "%(link_to_author)s wrote posted on %(link_to_group)s wall."
+msgstr "%(link_to_author)s parašė ant %(link_to_group)s sienos."
+
+#, python-format
+msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall."
+msgstr "%(link_to_author)s parašė ant %(link_to_subject)s sienos."
+
 msgid "(no subject)"
 msgstr "(be temos)"
 
@@ -1317,6 +1325,39 @@ msgstr ""
 "Paveiksliukas iš flickr: "
 "http://www.flickr.com/photos/orinrobertjohn/13069655/sizes/o/in/photostream/"
 
+msgid "Add your university"
+msgstr "Pridėti jūsų universitetą"
+
+msgid "Title"
+msgstr "Pavadinimas"
+
+msgid "Short title"
+msgstr "Trumpinys"
+
+msgid "WWW address"
+msgstr "WWW adresas"
+
+msgid "Create university"
+msgstr "Kurti universitetą"
+
+msgid "Create account"
+msgstr "Kurti paskyrą"
+
+msgid "Name"
+msgstr "Vardas"
+
+msgid "Email"
+msgstr "El. paštas"
+
+msgid "University you belong to"
+msgstr "Pasirinkite savo universitetą"
+
+msgid "I accept terms and regulations"
+msgstr "Sutinku su teisėmis ir sąlygomis"
+
+msgid "Create an account"
+msgstr "Sukurti paskyrą"
+
 msgid "Private social network for universities"
 msgstr "Privatūs socialiniai tinklai universitetams"
 
@@ -1328,9 +1369,6 @@ msgstr "Universiteto naujienos"
 
 msgid "Lecture material"
 msgstr "Paskaitų medžiaga"
-
-msgid "Add your university"
-msgstr "Pridėti jūsų universitetą"
 
 msgid "Teachers' academical workspaces"
 msgstr "Dėstytojų akademinė darbo erdvė"
@@ -1371,47 +1409,17 @@ msgstr "Aš studentas"
 msgid "I am a teacher"
 msgstr "Esu dėstytojas"
 
-msgid "Name"
-msgstr "Vardas"
-
-msgid "Email"
-msgstr "El. paštas"
-
-msgid "University you belong to"
-msgstr "Pasirinkite savo universitetą"
-
 msgid "Pick from the list"
 msgstr "Pasirinkti iš sąrašo"
 
 msgid "Create new university"
 msgstr "Sukurti naują universitetą"
 
-msgid "I accept terms and regulations"
-msgstr "Sutinku su teisėmis ir sąlygomis"
-
-msgid "Create an account"
-msgstr "Sukurti paskyrą"
-
 msgid "Universities already are on Ututi"
 msgstr "Ututi Universitetai"
 
 msgid "More universities"
 msgstr "Daugiau universitetų"
-
-msgid "Title"
-msgstr "Pavadinimas"
-
-msgid "Short title"
-msgstr "Trumpinys"
-
-msgid "WWW address"
-msgstr "WWW adresas"
-
-msgid "Create university"
-msgstr "Kurti universitetą"
-
-msgid "Create account"
-msgstr "Kurti paskyrą"
 
 msgid "Required"
 msgstr "Privalomas"
@@ -2917,6 +2925,9 @@ msgstr "Dalyko reitingas:"
 msgid "Write your topic"
 msgstr "Rašyti temą"
 
+msgid "Write your post"
+msgstr "Rašyti įrašą"
+
 msgid "Root"
 msgstr "Šakninis aplankas"
 
@@ -2925,6 +2936,9 @@ msgstr "Įkelti failą"
 
 msgid "File upload failed."
 msgstr "Failo įkėlimas nepavyko."
+
+msgid "Wall post"
+msgstr "Sienos įrašas"
 
 msgid "Group message"
 msgstr "Žinutė grupei"
@@ -3706,18 +3720,6 @@ msgstr "Dėst."
 
 msgid "Create your own social network"
 msgstr "Sukurkite savo socialinį tinklą"
-
-msgid "University already has"
-msgstr "Universitete jau yra"
-
-msgid "groups"
-msgstr "grupės"
-
-msgid "teachers"
-msgstr "dėstytojai"
-
-msgid "subjects"
-msgstr "dalykai"
 
 msgid "About Ututi:"
 msgstr "Apie Ututi:"
@@ -5075,6 +5077,14 @@ msgstr "%(user_link)s sukūrė puslapį %(page_link)s"
 #, python-format
 msgid "%(user_link)s has modified a page %(page_link)s"
 msgstr "%(user_link)s redagavo puslapį %(page_link)s"
+
+#, python-format
+msgid "%(user_link)s has posted to %(group_link)s wall."
+msgstr "%(user_link)s sukūrė įrašą ant %(group_link)s sienos."
+
+#, python-format
+msgid "%(user_link)s has posted to %(subject_link)s wall."
+msgstr "%(user_link)s sukūrė įrašą ant %(subject_link)s sienos."
 
 msgid "Website"
 msgstr "Internetinis puslapis"
