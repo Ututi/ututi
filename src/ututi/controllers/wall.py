@@ -74,10 +74,18 @@ class WallPostMessageValidator(Schema):
     message = String(not_empty=True)
 
 
-class WallPostForm(Schema):
-    """Validate wall post form"""
+class GroupWallPostForm(Schema):
+    """Validate group wall post form"""
     allow_extra_fields = True
     post = validators.String(not_empty=True)
+    group_id = validators.Int(not_empty=True)
+
+
+class SubjectWallPostForm(Schema):
+    """Validate subject wall post form"""
+    allow_extra_fields = True
+    post = validators.String(not_empty=True)
+    subject_id = validators.Int(not_empty=True)
 
 
 class WallController(BaseController, FileViewMixin):
@@ -87,7 +95,6 @@ class WallController(BaseController, FileViewMixin):
             redirect(request.referrer)
         else:
             redirect(url(controller='profile', action='feed'))
-
 
     @ActionProtector("user")
     def hide_event(self):
@@ -216,21 +223,15 @@ class WallController(BaseController, FileViewMixin):
         meta.Session.commit()
         return page
 
-    def _create_wall_post(self, group_id=None, subject_id=None, location_id=None, content=None):
-        post = WallPost(group_id=group_id, subject_id=subject_id, location_id=location_id, content=content)
-        meta.Session.add(post)
-        meta.Session.commit()
-        return post
-
     @ActionProtector("user")
-    @validate(schema=WallPostForm())
+    @validate(schema=GroupWallPostForm())
     def create_group_wall_post(self):
         self._create_wall_post(group_id=self.form_result['group_id'],
                                content=self.form_result['post'])
         self._redirect()
 
     @ActionProtector("user")
-    @js_validate(schema=WallPostForm())
+    @js_validate(schema=GroupWallPostForm())
     @jsonify
     def create_group_wall_post_js(self):
         post = self._create_wall_post(group_id=self.form_result['group_id'],
@@ -239,20 +240,26 @@ class WallController(BaseController, FileViewMixin):
         return {'success': True, 'evt': evt}
 
     @ActionProtector("user")
-    @js_validate(schema=WallPostForm())
+    @js_validate(schema=SubjectWallPostForm())
     def create_subject_wall_post(self):
         self._create_wall_post(subject_id=self.form_result['subject_id'],
                                content=self.form_result['post'])
         self._redirect()
 
     @ActionProtector("user")
-    @js_validate(schema=WallPostForm())
+    @js_validate(schema=SubjectWallPostForm())
     @jsonify
     def create_subject_wall_post_js(self):
         post = self._create_wall_post(subject_id=self.form_result['subject_id'],
                                       content=self.form_result['post'])
         evt = meta.Session.query(SubjectWallPostEvent).filter_by(object_id=post.id).one().wall_entry()
         return {'success': True, 'evt': evt}
+
+    def _create_wall_post(self, group_id=None, subject_id=None, location_id=None, content=None):
+        post = WallPost(group_id=group_id, subject_id=subject_id, location_id=location_id, content=content)
+        meta.Session.add(post)
+        meta.Session.commit()
+        return post
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
