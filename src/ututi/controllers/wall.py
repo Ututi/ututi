@@ -230,8 +230,8 @@ class WallController(BaseController, FileViewMixin):
         evt = meta.Session.query(SubjectWallPostEvent).filter_by(object_id=post.id).one().wall_entry()
         return {'success': True, 'evt': evt}
 
-    def _create_wall_post(self, group_id=None, subject_id=None, location_id=None, content=None):
-        post = WallPost(group_id=group_id, subject_id=subject_id, location_id=location_id, content=content)
+    def _create_wall_post(self, subject_id=None, location_id=None, content=None):
+        post = WallPost(subject_id=subject_id, location_id=location_id, content=content)
         meta.Session.add(post)
         meta.Session.commit()
         return post
