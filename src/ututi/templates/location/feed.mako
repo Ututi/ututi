@@ -4,24 +4,27 @@
 <%def name="head_tags()">
   ${parent.head_tags()}
   ${wall.head_tags()}
+  ${h.javascript_link('/javascript/dashboard.js')}
 </%def>
 
 <%def name="body_class()">wall location-wall</%def>
 
-## <div id="dashboard_action_links">
-##   <div id="start-discussion">Start discussion</div>
-## </div>
-##
-## <div id="dashboard_action_blocks">
-##   <div class="action-block">
-##     <div class="arrow-up"></div>
-##     <form id="discussion-form" action="${url(controller='wall', action='send_wall_message')}" method="POST">
-##       <input id="message-send-url" type="hidden" value="${url(controller='wall', action='send_wall_message_js')}">
-##       <textarea id="message" name="message"></textarea>
-##       <button id="message_send" class="dark inline action-button submit" value="Send">Send</button>
-##     </form>
-##   </div>
-## </div>
+  <div id="dashboard_action_links" class="action active">
+    <a class="action active" id="add_wall_post_action" href="#add-wall-post">${_('Wall post')}</a>
+  </div>
+
+  <div id="dashboard_action_blocks">
+    <div class="action-block" id="add_wall_post_block">
+      <form method="POST" action="${url(controller='wall', action='create_location_wall_post')}" id="wallpost_form">
+        <input id="add-wall-post-url" type="hidden" value="${url(controller='wall', action='create_location_wall_post_js')}" />
+        <input type="hidden" name="location_id" id="location_id" value="${c.location.id}"/>
+        <div class="action-tease">${_("Write your post")}</div>
+        <textarea name="post" class="tease-element"></textarea>
+        ${h.input_submit(_('Send'), id="submit_wall_post", class_='dark inline action-button')}
+        <a class="cancel-button" href="#cancel">${_("Cancel")}</a>
+      </form>
+    </div>
+  </div>
 
 <div class="tip">
   ${_('This is a list of all the recent events in the subjects and groups of this university.')}
@@ -33,38 +36,47 @@
   ${_('Sorry, nothing new at the moment.')}
 %endif
 
-## <script>
-##     $('#discussion_action_blocks').show();
-##     $('.action-block').show();
-##     $('#message').click(function() {
-##         $(this).css('min-height', '40px');
-##     });
-##
-##     $('#message').focus();
-##
-##     $('#message_send').click(function() {
-##         _gaq.push(['_trackEvent', 'group wall', 'action block submit', 'message send']);
-##         form = $(this).closest('form');
-##         message = $('#message', form).val();
-##         message_send_url = $('#message-send-url', form).val();
-##
-##         if (message != '') {
-##             $.post(message_send_url,
-##                 $(this).closest('form').serialize(),
-##                     function(data, status) {
-##                         if (data.success != true) {
-##                             for (var key in data.errors) {
-##                                 var error = data.errors[key];
-##                                 $('#'+key).parent().after($('<div class="error-message">'+error+'</div>'));
-##                             }
-##                         } else {
-##                             $('#send_message_block .cancel-button').click();
-##                             reload_wall(data.evt);
-##                         }
-##                     },
-##             "json");
-##         }
-##
-##         return false;
-##     });
-## </script>
+  <script type="text/javascript">
+    $(function () {
+        function clearBlock(block) {
+            block.find('input[type="text"], textarea').val('');
+            block.find('.tease-element').hide();
+            block.find('.action-tease').show();
+            block.find('.error-message').hide();
+        }
+        $('#add_wall_post_block .cancel-button').click(function() {
+            $('#add_wall_post').click();
+            clearBlock($(this).closest('.action-block'));
+            return false;
+        });
+        $('#dashboard_action_blocks').show();
+        /* Add wall post actions
+         */
+        add_wall_post_url = $("#add-wall-post-url").val();
+        $("#submit_wall_post").click(function () {
+            form = $(this).closest('form');
+            post = $("#post", form).val();
+            if (post != '') {
+                $.post(add_wall_post_url,
+                       $(this).closest('form').serialize(),
+                       function (data, status) {
+                            if (data.success != true) {
+                               for (var key in data.errors) {
+                                   var error = data.errors[key];
+                                   $('#'+key).parent().after($('<div class="error-message">'+error+'</div>'));
+                               }
+                            } else {
+                                $('#add_wall_post_block .cancel-button').click();
+                                reload_wall(data.evt);
+                            }
+                       }
+                );
+            }
+            return false;
+        });
+
+      $('#add_wall_post_action').click(function () {
+          $('#add_wall_post_block').toggle();
+      });
+    });
+  </script>

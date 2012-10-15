@@ -10,6 +10,8 @@ from pylons import tmpl_context as c, url
 from pylons.i18n import _
 from pylons.templating import render_mako_def
 
+from sqlalchemy.sql.expression import or_
+
 import ututi.lib.helpers as h
 from ututi.lib.emails import teacher_confirmed_email
 from ututi.lib.base import render
@@ -157,6 +159,7 @@ class LocationWallMixin(WallMixin):
         evts_generic = generic_events_query()
 
         t_evt = meta.metadata.tables['events']
+        t_wall_posts = meta.metadata.tables['wall_posts']
 
         locations = [loc.id for loc in c.location.flatten]
         subjects = meta.Session.query(Subject)\
@@ -170,7 +173,7 @@ class LocationWallMixin(WallMixin):
 
         obj_id_in_list = t_evt.c.object_id.in_(ids) if ids else False
         return evts_generic\
-            .where(obj_id_in_list)
+            .where(or_(obj_id_in_list, t_wall_posts.c.location_id==c.location.id))
 
 class TeacherSearchMixin():
 

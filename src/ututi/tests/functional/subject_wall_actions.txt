@@ -27,6 +27,7 @@ Create a wiki page from action block:
     <td> <a>Adminas Adminovix</a> </td>
 
 Create a wall post:
+
     >>> browser.getLink('News feed').click()
     >>> browser.url
     'http://localhost/subject/vu/mat_analize/feed'
@@ -39,4 +40,3 @@ Create a wall post:
 
     >>> browser.printCssQuery('.type_subject_wall_post .event-content')
     <span class="event-content">A wall post</span>
-
