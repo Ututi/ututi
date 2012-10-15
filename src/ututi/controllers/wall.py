@@ -27,6 +27,7 @@ from ututi.model.events import FileUploadedEvent
 from ututi.model.events import ForumPostCreatedEvent
 from ututi.model.events import SubjectWallPostEvent
 from ututi.model.events import Event, EventComment
+from ututi.model.events import LocationWallPostEvent
 from ututi.model import ContentItem
 from ututi.model import WallPost
 from ututi.model import ForumCategory
@@ -78,6 +79,12 @@ class SubjectWallPostForm(Schema):
     allow_extra_fields = True
     post = validators.String(not_empty=True)
     subject_id = validators.Int(not_empty=True)
+
+
+class LocationWallPostForm(Schema):
+    allow_extra_fields = True
+    post = validators.String(not_empty=True)
+    location_id = validators.Int(not_empty=True)
 
 
 class WallController(BaseController, FileViewMixin):
@@ -228,6 +235,22 @@ class WallController(BaseController, FileViewMixin):
         post = self._create_wall_post(subject_id=self.form_result['subject_id'],
                                       content=self.form_result['post'])
         evt = meta.Session.query(SubjectWallPostEvent).filter_by(object_id=post.id).one().wall_entry()
+        return {'success': True, 'evt': evt}
+
+    @ActionProtector("user")
+    @js_validate(schema=LocationWallPostForm())
+    def create_location_wall_post(self):
+        self._create_wall_post(location_id=self.form_result['location_id'],
+                               content=self.form_result['post'])
+        self._redirect()
+
+    @ActionProtector("user")
+    @js_validate(schema=LocationWallPostForm())
+    @jsonify
+    def create_location_wall_post_js(self):
+        post = self._create_wall_post(location_id=self.form_result['location_id'],
+                                      content=self.form_result['post'])
+        evt = meta.Session.query(LocationWallPostEvent).filter_by(object_id=post.id).one().wall_entry()
         return {'success': True, 'evt': evt}
 
     def _create_wall_post(self, subject_id=None, location_id=None, content=None):

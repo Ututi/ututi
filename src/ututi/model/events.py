@@ -512,6 +512,20 @@ class SubjectWallPostEvent(Event, Commentable):
             'link_to_subject': link_to(self.context.subject.title, self.context.subject.url())})
 
 
+class LocationWallPostEvent(Event, Commentable):
+    @property
+    def wp_subject_id(self):
+        return self.context.subject.id
+
+    @property
+    def wp_content(self):
+        return self.context.content
+
+    def render(self):
+        return _("%(link_to_author)s" % {
+            'link_to_user': link_to(self.user.fullname, self.user.url())})
+
+
 def setup_tables(engine):
     warnings.simplefilter("ignore", SAWarning)
     Table("events",
@@ -557,6 +571,11 @@ def setup_orm():
                inherits=event_mapper,
                polymorphic_on=tables['events'].c.event_type,
                polymorphic_identity='subject_wall_post')
+
+    orm.mapper(LocationWallPostEvent,
+               inherits=event_mapper,
+               polymorphic_on=tables['events'].c.event_type,
+               polymorphic_identity='location_wall_post')
 
     orm.mapper(PageCreatedEvent,
                inherits=event_mapper,

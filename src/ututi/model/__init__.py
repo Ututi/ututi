@@ -305,6 +305,7 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("wall_posts", meta.metadata,
+          Column('content', Unicode()),
           autoload=True,
           useexisting=True,
           autoload_with=engine)
