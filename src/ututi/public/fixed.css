@@ -1343,6 +1343,11 @@ ul.location-links {
     cursor: pointer;
 }
 
+.click2show .hide,
+.click2fade .hide {
+    display: block;
+}
+
 /* WIKI PAGE STYLING
  */
 
