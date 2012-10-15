@@ -74,7 +74,6 @@ def generic_events_query():
                            t_sms.c.message_text.label('sms_message'),
                            #wall posts
                            t_wall_posts.c.content.label('wp_content'),
-                           t_wall_posts.c.group_id.label('wp_group_id'),
                            t_wall_posts.c.subject_id.label('wp_subject_id'),
                            t_wall_posts.c.location_id.label('wp_location_id'),
                            ],

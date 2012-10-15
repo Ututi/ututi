@@ -409,9 +409,7 @@ def setup_orm():
                inherit_condition=tables['wall_posts'].c.id==ContentItem.id,
                polymorphic_identity='wall_post',
                polymorphic_on=tables['content_items'].c.content_type,
-               properties={'group': relation(Group,
-                                             primaryjoin=tables['groups'].c.id==tables['wall_posts'].c.group_id),
-                           'subject': relation(Subject,
+               properties={'subject': relation(Subject,
                                                primaryjoin=tables['subjects'].c.id==tables['wall_posts'].c.subject_id)})
 
     orm.mapper(SeenThread, tables['seen_threads'],
@@ -2141,7 +2139,6 @@ class ForumPost(ContentItem):
 class WallPost(ContentItem):
 
     def __init__(self, group_id=None, subject_id=None, location_id=None, content=None):
-        self.group_id = group_id
         self.subject_id = subject_id
         self.location_id = location_id
         self.content = content

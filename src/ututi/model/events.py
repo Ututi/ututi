@@ -495,27 +495,6 @@ class GroupStoppedWatchingSubjects(Event):
             'link_to_subject': link_to(self.subject.title, self.subject.url())}
 
 
-class GroupWallPostEvent(Event, Commentable):
-    """Group wall post event"""
-
-    @property
-    def wp_group_id(self):
-        """Following 2 methods are needed to equalize interface between model objects and
-           objects returned by the wall query. The latter are constructed manually and not
-           converted to SQLAlchemy model objects."""
-        return self.context.group.id
-
-    @property
-    def wp_content(self):
-        """See wp_group_id method"""
-        return self.context.content
-
-    def render(self):
-        return _("%(link_to_author)s wrote posted on %(link_to_group)s wall." % {
-            'link_to_user': link_to(self.user.fullname, self.user.url()),
-            'link_to_group': link_to(self.context.group.title, self.context.group.url())})
-
-
 class SubjectWallPostEvent(Event, Commentable):
     """Subject wall post event"""
 
@@ -573,11 +552,6 @@ def setup_orm():
                       backref=backref('comments',
                                       order_by=tables['content_items'].c.created_on.asc()))
                })
-
-    orm.mapper(GroupWallPostEvent,
-               inherits=event_mapper,
-               polymorphic_on=tables['events'].c.event_type,
-               polymorphic_identity='group_wall_post')
 
     orm.mapper(SubjectWallPostEvent,
                inherits=event_mapper,

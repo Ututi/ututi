@@ -24,11 +24,6 @@
         clearBlock($(this).closest('.action-block'));
         return false;
     });
-    $('#add_wall_post_block .cancel-button').click(function() {
-        $('#add_wall_post').click();
-        clearBlock($(this).closest('.action-block'));
-        return false;
-    });
 
     message_send_url = $("#message-send-url").val();
     $('#message_send').click(function(){
@@ -53,29 +48,6 @@
                        }
                    },
                    "json");
-        }
-        return false;
-    });
-
-    add_wall_post_url = $("#add-wall-post-url").val();
-    $("#submit_wall_post").click(function () {
-        form = $(this).closest('form');
-        post = $("#post", form).val();
-        if (post != '') {
-            $.post(add_wall_post_url,
-                   $(this).closest('form').serialize(),
-                   function (data, status) {
-                        if (data.success != true) {
-                           for (var key in data.errors) {
-                               var error = data.errors[key];
-                               $('#'+key).parent().after($('<div class="error-message">'+error+'</div>'));
-                           }
-                        } else {
-                            $('#add_wall_post_block .cancel-button').click();
-                            reload_wall(data.evt);
-                        }
-                   }
-            );
         }
         return false;
     });
@@ -146,20 +118,6 @@
   </div>
 </%def>
 
-<%def name="add_wall_post_block(group)">
-    <div id="add_wall_post_block" class="action-block">
-    <a name="wall-post"></a>
-    <form method="POST" action="${url(controller='wall', action='create_group_wall_post')}" id="wallpost_form" class="inelement-form">
-        <input id="add-wall-post-url" type="hidden" value="${url(controller='wall', action='create_group_wall_post_js')}" />
-        <input type="hidden" name="group_id" id="group_id" value="${group.id}"/>
-        <div class="action-tease">${_("Write your post")}</div>
-        <textarea name="post" class="tease-element"></textarea>
-        ${h.input_submit(_('Send'), id="submit_wall_post", class_='dark inline action-button')}
-        <a class="cancel-button" href="#cancel">${_("Cancel")}</a>
-    </form>
-    </div>
-</%def>
-
 <%def name="upload_file_block(group)">
   <div id="upload_file_block" class="action-block">
     <a name="upload-file"></a>
@@ -191,7 +149,6 @@
   %>
   <%actions:action_block>
     <%def name="links()">
-      <a class="action active" id="add_wall_post" href="make-wall-post">${_('Wall post')}</a>
       <a class="action ${'active' if show_messages else 'inactive'}" id="send_message" href="#send-message">${_('Group message')}</a>
       %if not show_files:
       ${tooltip(_('This group does not have a file area of has reached its limits.'))}
@@ -199,7 +156,6 @@
       <a class="action ${'active' if show_files else 'inactive'}" id="upload_file" href="#upload-file">${_('File')}</a>
     </%def>
 
-    ${self.add_wall_post_block(group)}
     ${self.send_message_block(group)}
     ${self.upload_file_block(group)}
 

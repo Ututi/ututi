@@ -25,7 +25,6 @@ from ututi.model.events import PageCreatedEvent
 from ututi.model.events import MailinglistPostCreatedEvent
 from ututi.model.events import FileUploadedEvent
 from ututi.model.events import ForumPostCreatedEvent
-from ututi.model.events import GroupWallPostEvent
 from ututi.model.events import SubjectWallPostEvent
 from ututi.model.events import Event, EventComment
 from ututi.model import ContentItem
@@ -72,13 +71,6 @@ class WallReplyValidator(Schema):
 
 class WallPostMessageValidator(Schema):
     message = String(not_empty=True)
-
-
-class GroupWallPostForm(Schema):
-    """Validate group wall post form"""
-    allow_extra_fields = True
-    post = validators.String(not_empty=True)
-    group_id = validators.Int(not_empty=True)
 
 
 class SubjectWallPostForm(Schema):
@@ -195,12 +187,11 @@ class WallController(BaseController, FileViewMixin):
     @jsonify
     def create_wiki_js(self):
         target = Subject.get_by_id(self.form_result['rcpt_wiki'])
-        page = self._create_wiki_page(
-                 target,
-                 self.form_result['page_title'],
-                 self.form_result['page_content'])
+        page = self._create_wiki_page(target,
+                                      self.form_result['page_title'],
+                                      self.form_result['page_content'])
         evt = meta.Session.query(PageCreatedEvent).filter_by(page_id=page.id).one().wall_entry()
-        return {'success':True, 'evt': evt}
+        return {'success': True, 'evt': evt}
 
     @ActionProtector("user")
     @validate(schema=WikiForm())
@@ -222,22 +213,6 @@ class WallController(BaseController, FileViewMixin):
         meta.Session.add(page)
         meta.Session.commit()
         return page
-
-    @ActionProtector("user")
-    @validate(schema=GroupWallPostForm())
-    def create_group_wall_post(self):
-        self._create_wall_post(group_id=self.form_result['group_id'],
-                               content=self.form_result['post'])
-        self._redirect()
-
-    @ActionProtector("user")
-    @js_validate(schema=GroupWallPostForm())
-    @jsonify
-    def create_group_wall_post_js(self):
-        post = self._create_wall_post(group_id=self.form_result['group_id'],
-                                      content=self.form_result['post'])
-        evt = meta.Session.query(GroupWallPostEvent).filter_by(object_id=post.id).one().wall_entry()
-        return {'success': True, 'evt': evt}
 
     @ActionProtector("user")
     @js_validate(schema=SubjectWallPostForm())
