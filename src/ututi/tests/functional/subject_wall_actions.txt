@@ -25,3 +25,18 @@ Create a wiki page from action block:
     >>> browser.printCssQuery(".wiki-notes td.title, .wiki-notes td.author", strip=True)
     <td> <a>A wiki page</a> </td>
     <td> <a>Adminas Adminovix</a> </td>
+
+Create a wall post:
+    >>> browser.getLink('News feed').click()
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize/feed'
+    >>> form = browser.getForm(id='wallpost_form')
+    >>> form.getControl(name='post').value = 'A wall post'
+    >>> form.getControl('Send').click()
+
+    >>> browser.url
+    'http://localhost/subject/vu/mat_analize/feed'
+
+    >>> browser.printCssQuery('.type_subject_wall_post .event-content')
+    <span class="event-content">A wall post</span>
+
