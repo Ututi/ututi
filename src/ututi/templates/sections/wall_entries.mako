@@ -390,7 +390,7 @@
 
 <%def name="mailinglist_post_created(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">minimizable no-icon</%def>
+    <%def name="classes()">no-icon</%def>
     <%self:event_conversation event="${event}">
       <%def name="headline()">
         <%
