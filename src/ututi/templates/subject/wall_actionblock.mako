@@ -183,7 +183,7 @@
 <%def name="action_block(subject)">
   <%actions:action_block>
     <%def name="links()">
-      <a class="action active" id="add_wall_post" href="#add-wall-post">${_('Wall post')}</a>
+      <a class="action active" id="add_wall_post" href="#add-wall-post">${_('Discussion')}</a>
       <a class="action active" id="upload_file" href="#upload-file">${_('File')}</a>
       <a class="action active" id="create_wiki" href="#create-wiki">${_('Wiki note')}</a>
     </%def>

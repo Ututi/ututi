@@ -123,7 +123,7 @@ class WallMixin(object):
             .order_by(t_evt.c.created.desc())\
             .limit(limit)
 
-        return [ObjectWrapper(evt) for evt in  meta.Session.execute(evts)]
+        return [ObjectWrapper(evt) for evt in meta.Session.execute(evts)]
 
     def _get_event_comments(self, event_ids):
         t_comm = meta.metadata.tables['event_comments']

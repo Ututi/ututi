@@ -564,7 +564,8 @@ def setup_orm():
                  'event': relation(Event,
                       primaryjoin=tables['event_comments'].c.event_id==tables['events'].c.id,
                       backref=backref('comments',
-                                      order_by=tables['content_items'].c.created_on.asc()))
+                                      order_by=tables['content_items'].c.created_on.asc(),
+                                      cascade='delete'))
                })
 
     orm.mapper(SubjectWallPostEvent,

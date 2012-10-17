@@ -4993,7 +4993,7 @@ a.disabled, a.disabled:hover {
 }
 /* End teacher's material specific stylings */
 
-#start-discussion {
+#add_wall_post_action {
     background: url("img/icons.com/discussions_medium_orange.png") no-repeat scroll 15px center transparent;
     padding-left: 40px;
     font-size: 11px;
@@ -5015,7 +5015,7 @@ a.disabled, a.disabled:hover {
     position: relative;
     border-bottom: 5px solid #e6e6e6;
     top: -13px;
-    left: 30px;
+    left: 40px;
 }
 
 #add_university {

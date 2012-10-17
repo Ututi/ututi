@@ -145,6 +145,8 @@
                message = original.ml_message
            elif original.event_type == 'forum_post_created':
                message = original.fp_message
+           elif original.event_type == 'subject_wall_post':
+               message = original.wp_content
         %>
         <span class="event-content truncated">${h.wall_fmt(message)}</span>
         %if hasattr(original, 'attachments'):
@@ -159,6 +161,9 @@
           %if c.user is not None:
           <span class="actions">
             <a href="#reply" class="action-block-link">${_('Reply')}</a>
+            %if c.user is not None and c.user.id == event.author_id:
+              <a href="${url(controller='wall', action='remove_wall_post', id=event.object_id)}">${_('Delete')}</a>
+            %endif
           </span>
           %endif
         </div>
@@ -653,19 +658,8 @@
   <%self:wall_entry event="${event}">
     <%def name="classes()">minimizable message-event</%def>
     <%def name="heading()">
-      ${_("%(user_link)s has posted to %(subject_link)s wall.") % \
-         dict(user_link=h.user_link(event.author_id),
-              subject_link=h.content_link(event.wp_subject_id)) | n}
     </%def>
-    <div class="thread">
-      <div class="logo">
-        <img src="${url(controller='user', action='logo', id=event.author_id, width=50)}" />
-      </div>
-      <div class="content">
-        <span class="event-content">${h.wall_fmt(event.wp_content)}</span>
-      </div>
-    </div>
-    <%self:event_conversation event="${event}" head_message="${False}" />
+    <%self:event_conversation event="${event}" head_message="${True}" />
   </%self:wall_entry>
 </%def>
 

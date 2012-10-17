@@ -39,4 +39,4 @@ Create a wall post:
     'http://localhost/subject/vu/mat_analize/feed'
 
     >>> browser.printCssQuery('.type_subject_wall_post .event-content')
-    <span class="event-content">A wall post</span>
+    <span class="event-content...">A wall post</span>

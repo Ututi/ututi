@@ -760,7 +760,7 @@ form.inline-form button {
   }
   #dashboard_action_links a#add_wall_post {
     padding-left: 15px;
-    background: transparent url("/img/icons.com/feed_small_grey.png") left center no-repeat;
+    background: transparent url("/img/icons.com/discussions_small_grey.png") left center no-repeat;
   }
 
   a.active, a.active:hover,
@@ -783,7 +783,7 @@ form.inline-form button {
   }
   #dashboard_action_links a.active#add_wall_post:hover,
   #dashboard_action_links a.open#add_wall_post {
-    background-image: url("/img/icons.com/feed_small_orange.png");
+    background-image: url("/img/icons.com/discussions_small_orange.png");
   }
 
   #upload-failed-error-message { display: none; }

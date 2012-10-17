@@ -87,6 +87,11 @@ class LocationWallPostForm(Schema):
     location_id = validators.Int(not_empty=True)
 
 
+class DeleteWallPostForm(Schema):
+    allow_extra_fields = True
+    wall_post_id = validators.Int(not_empty=True)
+
+
 class WallController(BaseController, FileViewMixin):
 
     def _redirect(self):
@@ -238,7 +243,7 @@ class WallController(BaseController, FileViewMixin):
         return {'success': True, 'evt': evt}
 
     @ActionProtector("user")
-    @js_validate(schema=LocationWallPostForm())
+    @validate(schema=LocationWallPostForm())
     def create_location_wall_post(self):
         self._create_wall_post(location_id=self.form_result['location_id'],
                                content=self.form_result['post'])
@@ -258,6 +263,21 @@ class WallController(BaseController, FileViewMixin):
         meta.Session.add(post)
         meta.Session.commit()
         return post
+
+    @ActionProtector("user")
+    @validate(schema=DeleteWallPostForm())
+    def remove_wall_post(self, id):
+        self._remove_wall_post(id)
+        self._redirect()
+
+    def _remove_wall_post(self, wall_post_id):
+        post = meta.Session.query(WallPost).filter_by(id=wall_post_id).one()
+        if post and post.created_by == c.user.id:
+            meta.Session.delete(post)
+            meta.Session.commit()
+            return True
+        else:
+            return False
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
