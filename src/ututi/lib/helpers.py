@@ -829,6 +829,13 @@ def content_link(content_id):
         return link_to(item.subject, url(controller='content', action='get_content', id=content_id))
 
 @u_cache(expire=3600, invalidate_on_startup=True)
+def location_link(location_id):
+    from ututi.model import LocationTag
+
+    location = LocationTag.get_by_id(location_id)
+    return link_to(location.title, location.url())
+
+@u_cache(expire=3600, invalidate_on_startup=True)
 def user_link(user_id):
     from ututi.model.users import AnonymousUser
     if type(user_id) in (int, long):

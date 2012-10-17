@@ -145,7 +145,7 @@
                message = original.ml_message
            elif original.event_type == 'forum_post_created':
                message = original.fp_message
-           elif original.event_type == 'subject_wall_post':
+           elif original.event_type in ('subject_wall_post', 'location_wall_post'):
                message = original.wp_content
         %>
         <span class="event-content truncated">${h.wall_fmt(message)}</span>
@@ -654,34 +654,31 @@
   </%self:wall_entry>
 </%def>
 
-<%def name="subject_wall_post(event)">
+<%def name="wall_post(event)">
   <%self:wall_entry event="${event}">
     <%def name="classes()">no-icon</%def>
     <%self:event_conversation event="${event}" head_message="${True}">
         <%def name="headline()">
+          <%
+            if getattr(event, 'wp_subject_id', None):
+                recipient_id = event.wp_subject_id
+                target_link = h.content_link(recipient_id)
+            else:
+                recipient_id = event.wp_location_id
+                target_link = h.location_link(recipient_id)
+          %>
           ${_("%(user_link)s") % \
              dict(user_link=h.user_link(event.author_id)) | n}
-          <span class="recipient">${h.content_link(event.wp_subject_id)}</span>
+          <span class="recipient">${target_link}</span>
         </%def>
     </%self:event_conversation>
   </%self:wall_entry>
 </%def>
 
+<%def name="subject_wall_post(event)">
+    <%self:wall_post event="${event}"/>
+</%def>
+
 <%def name="location_wall_post(event)">
-  <%self:wall_entry event="${event}">
-    <%def name="classes()">no-icon</%def>
-    <%def name="heading()">
-      ${_("%(user_link)s") % \
-         dict(user_link=h.user_link(event.author_id)) | n}
-    </%def>
-    <div class="thread">
-      <div class="logo">
-        <img src="${url(controller='user', action='logo', id=event.author_id, width=50)}" />
-      </div>
-      <div class="content">
-        <span class="event-content">${h.wall_fmt(event.wp_content)}</span>
-      </div>
-    </div>
-    <%self:event_conversation event="${event}" head_message="${False}" />
-  </%self:wall_entry>
+    <%self:wall_post event="${event}"/>
 </%def>

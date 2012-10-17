@@ -514,8 +514,8 @@ class SubjectWallPostEvent(Event, Commentable):
 
 class LocationWallPostEvent(Event, Commentable):
     @property
-    def wp_subject_id(self):
-        return self.context.subject.id
+    def wp_location_id(self):
+        return self.context.location_id
 
     @property
     def wp_content(self):
