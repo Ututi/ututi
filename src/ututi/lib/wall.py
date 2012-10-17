@@ -101,7 +101,7 @@ class ObjectWrapper(dict):
         elif hasattr(self.internal, attr):
             return getattr(self.internal, attr)
         else:
-            raise AttributeError()
+            raise AttributeError('Object does not have attribute \'%s\'.' % attr)
 
     def wall_entry(self):
         return render_def('/sections/wall_entries.mako', self.internal.event_type, event=self)
