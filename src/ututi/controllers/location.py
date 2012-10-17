@@ -173,7 +173,9 @@ class LocationWallMixin(WallMixin):
 
         obj_id_in_list = t_evt.c.object_id.in_(ids) if ids else False
         return evts_generic\
-            .where(or_(obj_id_in_list, t_wall_posts.c.location_id==c.location.id))
+            .where(or_(obj_id_in_list, t_wall_posts.c.location_id==c.location.id,
+                       t_wall_posts.c.subject_id.in_(map(lambda o: o.id, subjects))))
+
 
 class TeacherSearchMixin():
 
