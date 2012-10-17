@@ -656,16 +656,20 @@
 
 <%def name="subject_wall_post(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">minimizable message-event</%def>
-    <%def name="heading()">
-    </%def>
-    <%self:event_conversation event="${event}" head_message="${True}" />
+    <%def name="classes()">no-icon</%def>
+    <%self:event_conversation event="${event}" head_message="${True}">
+        <%def name="headline()">
+          ${_("%(user_link)s") % \
+             dict(user_link=h.user_link(event.author_id)) | n}
+          <span class="recipient">${h.content_link(event.wp_subject_id)}</span>
+        </%def>
+    </%self:event_conversation>
   </%self:wall_entry>
 </%def>
 
 <%def name="location_wall_post(event)">
   <%self:wall_entry event="${event}">
-    <%def name="classes()">minimizable message-event</%def>
+    <%def name="classes()">no-icon</%def>
     <%def name="heading()">
       ${_("%(user_link)s") % \
          dict(user_link=h.user_link(event.author_id)) | n}
