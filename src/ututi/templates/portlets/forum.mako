@@ -58,21 +58,3 @@
     </div>
   </%self:uportlet>
 </%def>
-
-<%def name="community_forum_posts_portlet()">
-${forum_posts_portlet(category_id=1,
-                      controller='community',
-                      new_post_subtitle='',
-                      messages=c.community_category.messages(),
-                      portlet_title=_('Messages in community forum'),
-                      new_post_title=_('New topic'))}
-</%def>
-
-<%def name="bugs_forum_posts_portlet()">
-${forum_posts_portlet(category_id=2,
-                      controller='bugs',
-                      new_post_subtitle=_('You found a bug in our system? Something is broken? Report it.'),
-                      messages=c.bugs_category.messages(),
-                      portlet_title=_('Messages in Bugs forum'),
-                      new_post_title=_('Report a bug'))}
-</%def>

@@ -21,25 +21,6 @@ from ututi.model import get_supporters
 from ututi.model import meta
 
 
-def fix_public_forum_metadata(forum):
-    if forum.group is not None:
-        return
-    assert forum.id in [1, 2], forum.id
-    if forum.id == 1:
-        title = _('Community page')
-        description = _('Ututi community forum.')
-    elif forum.id == 2:
-        title = _('Ututi bugs')
-        description = _('Report Ututi bugs here.')
-
-    if forum.title != title:
-        forum.title = title
-        meta.Session.commit()
-    if forum.description != description:
-        forum.description = description
-        meta.Session.commit()
-
-
 class CategoryForm(Schema):
 
     title = validators.UnicodeString(not_empty=True, strip=True)
@@ -135,8 +116,6 @@ class ForumController(BaseController):
         else:
             c.group = None
             c.group_id = None
-            c.community_category = ForumCategory.get(1)
-            c.bugs_category = ForumCategory.get(2)
 
         if category_id is not None:
             try:
@@ -149,9 +128,6 @@ class ForumController(BaseController):
             c.breadcrumbs.append({'title': c.category.title,
                                   'link': url(controller=c.controller,
                               action='index', id=id, category_id=category_id)})
-            # Make sure forum title and description are localized.
-            # This is not the best place to do this, but I know no better way.
-            fix_public_forum_metadata(c.category)
         else:
             c.category = None
 

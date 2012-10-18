@@ -339,44 +339,6 @@ def make_map(config):
     map.connect('/structure/{id}/logo/{width}',
                 controller='structure', action='logo')
 
-    map.connect('/community',
-                controller='community', action='index', id=None, category_id=1)
-    map.connect('/community/{action}',
-                controller='community', id=None, category_id=1)
-    map.connect('/community/thread/{thread_id}',
-                controller='community', action='thread', id=None, category_id=1)
-    map.connect('/community/thread/{thread_id}/reply',
-                controller='community', action='reply', id=None, category_id=1)
-    map.connect('/community/thread/{thread_id}/edit',
-                controller='community', action='edit', id=None, category_id=1)
-    map.connect('/community/thread/{thread_id}/edit_post',
-                controller='community', action='edit_post', id=None, category_id=1)
-    map.connect('/community/thread/{thread_id}/delete_post',
-                controller='community', action='delete_post', id=None, category_id=1)
-    map.connect('/community/thread/{thread_id}/subscribe',
-                controller='community', action='subscribe', id=None, category_id=1)
-    map.connect('/community/thread/{thread_id}/unsubscribe',
-                controller='community', action='unsubscribe', id=None, category_id=1)
-
-    map.connect('/bugs',
-                controller='bugs', action='index', id=None, category_id=2)
-    map.connect('/bugs/{action}',
-                controller='bugs', id=None, category_id=2)
-    map.connect('/bugs/thread/{thread_id}',
-                controller='bugs', action='thread', id=None, category_id=2)
-    map.connect('/bugs/thread/{thread_id}/reply',
-                controller='bugs', action='reply', id=None, category_id=2)
-    map.connect('/bugs/thread/{thread_id}/edit',
-                controller='bugs', action='edit', id=None, category_id=2)
-    map.connect('/bugs/thread/{thread_id}/edit_post',
-                controller='bugs', action='edit_post', id=None, category_id=2)
-    map.connect('/bugs/thread/{thread_id}/delete_post',
-                controller='bugs', action='delete_post', id=None, category_id=2)
-    map.connect('/bugs/thread/{thread_id}/subscribe',
-                controller='bugs', action='subscribe', id=None, category_id=2)
-    map.connect('/bugs/thread/{thread_id}/unsubscribe',
-                controller='bugs', action='unsubscribe', id=None, category_id=2)
-
     map.connect('switch_language', '/switch_language', controller='home', action='switch_language')
 
     # theme actions

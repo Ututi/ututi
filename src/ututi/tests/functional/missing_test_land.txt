@@ -4,7 +4,6 @@ Pages that are not visited even once during a test run
 I am visiting them so they would get translated properly.
 
     >>> browser = Browser.logIn()
-    >>> browser.open('http://localhost/bugs')
     >>> browser.open('http://localhost/group/moderators/files')
     >>> browser.open('http://localhost/group/moderators/edit')
     >>> browser.open('http://localhost/tour')
