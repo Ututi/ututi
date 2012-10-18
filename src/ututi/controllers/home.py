@@ -226,7 +226,7 @@ class HomeController(UniversityListMixin):
             departments = [
                 (department['title'], department['url_path']) for department in departments
             ]
-        
+
             return departments
 
     @info_action
@@ -536,4 +536,3 @@ class HomeController(UniversityListMixin):
         # show confirmation page
         c.email = email
         return render('registration/email_approval.mako')
-
