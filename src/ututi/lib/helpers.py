@@ -822,7 +822,10 @@ def content_link(content_id):
         # we don't want to link to forum posts anymore
         return item.title
     if type(item) in [Subject, Group, Page]:
-        return link_to(item.title, url(controller='content', action='get_content', id=content_id))
+        if item.deleted_on is None:
+            return link_to(item.title, url(controller='content', action='get_content', id=content_id))
+        else:
+            return item.title
     elif type(item) == File:
         return link_to(item.filename, url(controller='content', action='get_content', id=content_id))
     elif type(item) in [PrivateMessage, GroupMailingListMessage]:
