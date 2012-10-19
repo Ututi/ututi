@@ -52,6 +52,7 @@ def generic_events_query():
                            t_evt.c.file_id,
                            t_evt.c.message_id,
                            t_context.c.content_type.label('context_type'),
+                           t_context.c.deleted_on.label('ci_deleted_on'),
                            #wiki page
                            latest_page.c.deleted_on.label('page_deleted_on'),
                            latest_page.c.title.label('page_title'),
@@ -85,8 +86,9 @@ def generic_events_query():
                                         .outerjoin(file_ci, file_ci.c.id==t_files.c.id)\
                                         .outerjoin(t_sms, t_sms.c.id==t_evt.c.sms_id)\
                                         .outerjoin(t_wall_posts, t_wall_posts.c.id==t_evt.c.object_id)
-                                    ])
+                                    ]).where(t_context.c.deleted_on==None)
     return evts_generic
+
 
 class ObjectWrapper(dict):
     """

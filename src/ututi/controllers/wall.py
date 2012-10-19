@@ -15,7 +15,7 @@ from formencode import validators
 
 from ututi.lib.base import BaseController
 from ututi.lib.validators import js_validate, SubjectIdValidator
-from ututi.lib.security import ActionProtector
+from ututi.lib.security import ActionProtector, is_owner, is_moderator, is_admin
 from ututi.lib.mailinglist import post_message
 from ututi.lib.forums import make_forum_post
 from ututi.lib.fileview import FileViewMixin
@@ -272,8 +272,9 @@ class WallController(BaseController, FileViewMixin):
 
     def _remove_wall_post(self, wall_post_id):
         post = meta.Session.query(WallPost).filter_by(id=wall_post_id).one()
-        if post and post.created_by == c.user.id:
-            meta.Session.delete(post)
+        if post and is_owner(c.user, post):
+            post.deleted_by = c.user.id
+            meta.Session.add(post)
             meta.Session.commit()
             return True
         else:
