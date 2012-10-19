@@ -53,6 +53,7 @@ def generic_events_query():
                            t_evt.c.message_id,
                            t_context.c.content_type.label('context_type'),
                            t_context.c.deleted_on.label('ci_deleted_on'),
+                           t_context.c.location_id.label('ci_location_id'),
                            #wiki page
                            latest_page.c.deleted_on.label('page_deleted_on'),
                            latest_page.c.title.label('page_title'),

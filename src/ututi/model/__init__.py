@@ -1,4 +1,4 @@
-"""The application's model objects"""
+"rm""The application's model objects"""
 import urlparse
 import sys
 import os
@@ -411,7 +411,13 @@ def setup_orm():
                polymorphic_identity='wall_post',
                polymorphic_on=tables['content_items'].c.content_type,
                properties={'subject': relation(Subject,
-                                               primaryjoin=tables['subjects'].c.id==tables['wall_posts'].c.subject_id)})
+                                               primaryjoin=tables['subjects'].c.id==tables['wall_posts'].c.subject_id),
+                           'location': relation(LocationTag,
+                                                primaryjoin=tables['tags'].c.id==tables['wall_posts'].c.location_id,
+                                                foreign_keys=tables['wall_posts'].c.location_id),
+                           'parent_location': relation(LocationTag,
+                                                       primaryjoin=tables['tags'].c.id==tables['content_items'].c.location_id,
+                                                       foreign_keys=tables['content_items'].c.location_id)})
 
     orm.mapper(SeenThread, tables['seen_threads'],
                properties = {'thread': relation(ForumPost),
@@ -2139,10 +2145,12 @@ class ForumPost(ContentItem):
 
 class WallPost(ContentItem):
 
-    def __init__(self, group_id=None, subject_id=None, location_id=None, content=None):
-        self.subject_id = subject_id
-        self.location_id = location_id
+    def __init__(self, subject=None, location=None, content=None):
+        self.subject = subject
+        self.location = location
         self.content = content
+        if subject:
+            self.parent_location = subject.location
 
 
 class SeenThread(object):

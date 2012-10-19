@@ -15,7 +15,7 @@ from formencode import validators
 
 from ututi.lib.base import BaseController
 from ututi.lib.validators import js_validate, SubjectIdValidator
-from ututi.lib.security import ActionProtector, is_owner, is_moderator, is_admin
+from ututi.lib.security import ActionProtector, check_crowds
 from ututi.lib.mailinglist import post_message
 from ututi.lib.forums import make_forum_post
 from ututi.lib.fileview import FileViewMixin
@@ -30,7 +30,7 @@ from ututi.model.events import Event, EventComment
 from ututi.model.events import LocationWallPostEvent
 from ututi.model import ContentItem
 from ututi.model import WallPost
-from ututi.model import ForumCategory
+from ututi.model import ForumCategory, LocationTag
 from ututi.model import ForumPost, Page, Subject, meta, Group
 
 
@@ -229,7 +229,8 @@ class WallController(BaseController, FileViewMixin):
     @ActionProtector("user")
     @js_validate(schema=SubjectWallPostForm())
     def create_subject_wall_post(self):
-        self._create_wall_post(subject_id=self.form_result['subject_id'],
+        subject = Subject.get_by_id(self.form_result['subject_id'])
+        self._create_wall_post(subject=subject,
                                content=self.form_result['post'])
         self._redirect()
 
@@ -237,7 +238,8 @@ class WallController(BaseController, FileViewMixin):
     @js_validate(schema=SubjectWallPostForm())
     @jsonify
     def create_subject_wall_post_js(self):
-        post = self._create_wall_post(subject_id=self.form_result['subject_id'],
+        subject = Subject.get_by_id(self.form_result['subject_id'])
+        post = self._create_wall_post(subject=subject,
                                       content=self.form_result['post'])
         evt = meta.Session.query(SubjectWallPostEvent).filter_by(object_id=post.id).one().wall_entry()
         return {'success': True, 'evt': evt}
@@ -245,7 +247,8 @@ class WallController(BaseController, FileViewMixin):
     @ActionProtector("user")
     @validate(schema=LocationWallPostForm())
     def create_location_wall_post(self):
-        self._create_wall_post(location_id=self.form_result['location_id'],
+        location = LocationTag.get(self.form_result['location_id'])
+        self._create_wall_post(location=location,
                                content=self.form_result['post'])
         self._redirect()
 
@@ -253,13 +256,14 @@ class WallController(BaseController, FileViewMixin):
     @js_validate(schema=LocationWallPostForm())
     @jsonify
     def create_location_wall_post_js(self):
-        post = self._create_wall_post(location_id=self.form_result['location_id'],
+        location = LocationTag.get(self.form_result['location_id'])
+        post = self._create_wall_post(location=location,
                                       content=self.form_result['post'])
         evt = meta.Session.query(LocationWallPostEvent).filter_by(object_id=post.id).one().wall_entry()
         return {'success': True, 'evt': evt}
 
-    def _create_wall_post(self, subject_id=None, location_id=None, content=None):
-        post = WallPost(subject_id=subject_id, location_id=location_id, content=content)
+    def _create_wall_post(self, subject=None, location=None, content=None):
+        post = WallPost(subject=subject, location=location, content=content)
         meta.Session.add(post)
         meta.Session.commit()
         return post
@@ -272,7 +276,7 @@ class WallController(BaseController, FileViewMixin):
 
     def _remove_wall_post(self, wall_post_id):
         post = meta.Session.query(WallPost).filter_by(id=wall_post_id).one()
-        if post and is_owner(c.user, post):
+        if post and check_crowds(('owner', 'moderator', 'root'), c.user, post):
             post.deleted_by = c.user.id
             meta.Session.add(post)
             meta.Session.commit()
