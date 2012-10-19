@@ -17,6 +17,7 @@ from ututi.model import meta
 from ututi.lib.helpers import image, user_done_items, teacher_done_items
 from ututi.lib.emails import send_email_confirmation_code
 
+from zope.cachedescriptors.property import CachedProperty
 
 from pylons.i18n import _
 from pylons import config
@@ -514,6 +515,16 @@ class User(Author):
                 self.accepted_terms < datetime.now() - timedelta(weeks=2):
                 self._is_freshman = False
         return self._is_freshman
+
+    @CachedProperty
+    def moderated_tags(self):
+        # XXX Circular imports!
+        from ututi.model import LocationTag, Group, GroupMember
+        return meta.Session.query(LocationTag)\
+            .join(Group).join(GroupMember)\
+            .filter(Group.moderators == True)\
+            .filter(GroupMember.user == self)\
+            .all()
 
 
 class AnonymousUser(object):

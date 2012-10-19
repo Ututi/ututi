@@ -62,45 +62,34 @@ def is_marketingist(user, context=None):
     if user is None:
         return False
 
-    from ututi.model import meta, File, LocationTag, Group, GroupMember
+    from ututi.model import File
 
     if isinstance(context, File):
         context = context.parent
 
-    moderator_tags = meta.Session.query(LocationTag
-            ).join(Group
-            ).join(GroupMember
-            ).filter(Group.moderators == True
-            ).filter(GroupMember.user == user
-            ).all()
+    moderator_tags = user.moderated_tags
 
-    if moderator_tags: 
+    if moderator_tags:
         return True
 
     return False
+
 
 def is_moderator(user, context=None):
     if user is None:
         return False
 
-    from ututi.model import meta, File, LocationTag, Group, GroupMember
+    from ututi.model import File, LocationTag
 
     if isinstance(context, File):
         context = context.parent
-
-    moderator_tags = meta.Session.query(LocationTag
-            ).join(Group
-            ).join(GroupMember
-            ).filter(Group.moderators == True
-            ).filter(GroupMember.user == user
-            ).all()
 
     if isinstance(context, LocationTag):
         location = context
     else:
         location = getattr(context, 'location')
 
-    for tag in moderator_tags:
+    for tag in user.moderated_tags:
         if location in tag.flatten:
             return True
 
