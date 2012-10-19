@@ -161,7 +161,7 @@
           %if c.user is not None:
           <span class="actions">
             <a href="#reply" class="action-block-link">${_('Reply')}</a>
-            %if c.user.id == event.author_id or event.ci_location_id in map(lambda t: t.id, c.user.moderated_tags) or h.check_crowds('root', c.user):
+            %if c.user.id == event.author_id or event.ci_location_id in map(lambda t: t.id, c.user.moderated_tags) or h.check_crowds(['root'], c.user):
               <a href="${url(controller='wall', action='remove_wall_post', id=event.object_id)}">${_('Delete')}</a>
             %endif
           </span>
