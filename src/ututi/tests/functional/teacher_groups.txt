@@ -88,13 +88,14 @@ A message to the ututi mailing list group:
     Hi, guys!
     <br />
         <br />
-        If You reply to this message, the teacher will not get Your replies.
-        <br />
+    If You reply to this message, the teacher will not get Your replies.
+    <br />
       </span>
       <div>
         <span>0 seconds ago</span>
         <span>
           <a>Reply</a>
+          <a>Delete</a>
         </span>
       </div>
       <div></div>

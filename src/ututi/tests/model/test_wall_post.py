@@ -19,7 +19,7 @@ def test_subject_wall_post():
 
     Create a subject wall post now and check associated event creation
 
-    >>> post = WallPost(subject_id=Subject.get(LocationTag.get(u'uni'), 'subject').id, content=u'Subject wall post.')
+    >>> post = WallPost(subject=Subject.get(LocationTag.get(u'uni'), 'subject'), content=u'Subject wall post.')
     >>> meta.Session.add(post)
     >>> meta.Session.commit()
     >>> saved_post = meta.Session.query(WallPost).filter(WallPost.content==u'Subject wall post.').one()
@@ -41,7 +41,7 @@ def test_location_wall_post():
 
     Create a location wall post and ensure associated event is created.
 
-    >>> post = WallPost(location_id=LocationTag.get(u'uni').id, content=u'This is really just locaton wall post.')
+    >>> post = WallPost(location=LocationTag.get(u'uni'), content=u'This is really just locaton wall post.')
     >>> meta.Session.add(post)
     >>> meta.Session.commit()
     >>> saved_post = meta.Session.query(WallPost).filter_by(content=u'This is really just locaton wall post.').one()
@@ -67,7 +67,7 @@ def test_wall_post_event_glue_methods():
     Create several wall post events and ensure they have a proper glue methods that
     tie them to wall machinery properly.
 
-    >>> subject_post = WallPost(subject_id=Subject.get(LocationTag.get(u'uni'), 'subject').id, content=u'Subject wall post.')
+    >>> subject_post = WallPost(subject=Subject.get(LocationTag.get(u'uni'), 'subject'), content=u'Subject wall post.')
     >>> meta.Session.add_all([subject_post])
     >>> meta.Session.commit()
     >>> subject_post_event = meta.Session.query(SubjectWallPostEvent).filter(SubjectWallPostEvent.object_id==subject_post.id).one()
