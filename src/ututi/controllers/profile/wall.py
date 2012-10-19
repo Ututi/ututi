@@ -1,5 +1,5 @@
 from sqlalchemy.sql.expression import not_
-from sqlalchemy.sql.expression import or_
+from sqlalchemy.sql.expression import or_, and_
 
 from pylons import tmpl_context as c
 
@@ -27,7 +27,9 @@ class UserWallMixin(WallMixin):
         group_ids = [m.group.id for m in c.user.memberships]
         query = evts_generic\
              .where(or_(or_(t_evt.c.object_id.in_(subject_ids),
-                            t_wall_posts.c.subject_id.in_(subject_ids)) if subject_ids else False,
+                            t_wall_posts.c.subject_id.in_(subject_ids)) if subject_ids else False,  # subject wall posts
+                        and_(t_evt.c.author_id == c.user.id,  # location wall posts
+                             t_evt.c.event_type.in_(('subject_wall_post', 'location_wall_post'))),
                         or_(t_evt.c.object_id.in_(group_ids),) if group_ids else False))\
              .where(or_(t_evt.c.event_type != 'moderated_post_created',
                         t_evt.c.object_id.in_(user_is_admin_of_groups) if user_is_admin_of_groups else False))\
