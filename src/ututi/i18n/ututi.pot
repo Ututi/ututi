@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-10-12 15:41+0300\n"
+"POT-Creation-Date: 2012-10-22 09:20+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,18 +141,6 @@ msgstr[1] ""
 
 #, python-format
 msgid "SMS message sent to group %s."
-msgstr ""
-
-msgid "Community page"
-msgstr ""
-
-msgid "Ututi community forum."
-msgstr ""
-
-msgid "Ututi bugs"
-msgstr ""
-
-msgid "Report Ututi bugs here."
 msgstr ""
 
 msgid ""
@@ -1167,11 +1155,11 @@ msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr ""
 
 #, python-format
-msgid "%(link_to_author)s wrote posted on %(link_to_group)s wall.link_to_user"
+msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
 msgstr ""
 
 #, python-format
-msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
+msgid "%(link_to_author)slink_to_user"
 msgstr ""
 
 msgid "(no subject)"
@@ -2660,9 +2648,6 @@ msgstr ""
 msgid "Write your topic"
 msgstr ""
 
-msgid "Write your post"
-msgstr ""
-
 msgid "Root"
 msgstr ""
 
@@ -2670,9 +2655,6 @@ msgid "Upload file"
 msgstr ""
 
 msgid "File upload failed."
-msgstr ""
-
-msgid "Wall post"
 msgstr ""
 
 msgid "Group message"
@@ -2865,6 +2847,12 @@ msgid "Disable custom theming"
 msgstr ""
 
 msgid "Are you sure you want to reset your custom theme?"
+msgstr ""
+
+msgid "Start discussion"
+msgstr ""
+
+msgid "What you want to discuss..."
 msgstr ""
 
 msgid ""
@@ -3175,18 +3163,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "There are no messages."
-msgstr ""
-
-msgid "Messages in community forum"
-msgstr ""
-
-msgid "You found a bug in our system? Something is broken? Report it."
-msgstr ""
-
-msgid "Messages in Bugs forum"
-msgstr ""
-
-msgid "Report a bug"
 msgstr ""
 
 msgid "Group information"
@@ -4632,11 +4608,7 @@ msgid "%(user_link)s has modified a page %(page_link)s"
 msgstr ""
 
 #, python-format
-msgid "%(user_link)s has posted to %(group_link)s wall."
-msgstr ""
-
-#, python-format
-msgid "%(user_link)s has posted to %(subject_link)s wall."
+msgid "%(user_link)s"
 msgstr ""
 
 msgid "Website"
@@ -4798,6 +4770,12 @@ msgstr ""
 msgid ""
 "<strong>Take notes during lecture</strong> on your laptop and upload it "
 "directly to Ututi."
+msgstr ""
+
+msgid "Write your post"
+msgstr ""
+
+msgid "Discussion"
 msgstr ""
 
 #, python-format

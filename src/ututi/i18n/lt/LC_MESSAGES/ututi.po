@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-10-12 15:41+0300\n"
+"PO-Revision-Date: 2012-10-22 09:20+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -154,18 +154,6 @@ msgstr[2] "Nepavyko išsiųsti žinutės - daugiau negu %d gavėjų."
 #, python-format
 msgid "SMS message sent to group %s."
 msgstr "SMS žinutė išsiųsta grupei %s."
-
-msgid "Community page"
-msgstr "Bendruomenės puslapis"
-
-msgid "Ututi community forum."
-msgstr "Ututi bendruomenės forumas."
-
-msgid "Ututi bugs"
-msgstr "Ututi klaidos"
-
-msgid "Report Ututi bugs here."
-msgstr "Pranešimai apie klaidas Ututi sistemoje."
 
 msgid ""
 "The web-based forum for this group has been disabled. Please use the "
@@ -1241,14 +1229,6 @@ msgstr "%(link_to_subject)s pridėtas prie grupės %(link_to_group)s dalykų."
 #, python-format
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr " %(link_to_subject)s ištrintas iš grupės %(link_to_group)s dalykų sąrašo."
-
-#, python-format
-msgid "%(link_to_author)s wrote posted on %(link_to_group)s wall."
-msgstr "%(link_to_author)s parašė ant %(link_to_group)s sienos."
-
-#, python-format
-msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall."
-msgstr "%(link_to_author)s parašė ant %(link_to_subject)s sienos."
 
 msgid "(no subject)"
 msgstr "(be temos)"
@@ -2925,9 +2905,6 @@ msgstr "Dalyko reitingas:"
 msgid "Write your topic"
 msgstr "Rašyti temą"
 
-msgid "Write your post"
-msgstr "Rašyti įrašą"
-
 msgid "Root"
 msgstr "Šakninis aplankas"
 
@@ -2936,9 +2913,6 @@ msgstr "Įkelti failą"
 
 msgid "File upload failed."
 msgstr "Failo įkėlimas nepavyko."
-
-msgid "Wall post"
-msgstr "Sienos įrašas"
 
 msgid "Group message"
 msgstr "Žinutė grupei"
@@ -3144,6 +3118,12 @@ msgstr "Išjungti temos nuostatas"
 
 msgid "Are you sure you want to reset your custom theme?"
 msgstr "Ar tikrai norite panaikinti jūsų temos nuostatas?"
+
+msgid "Start discussion"
+msgstr "Pradėti diskusiją"
+
+msgid "What you want to discuss..."
+msgstr "Apie ką nori padiskutuoti..."
 
 msgid ""
 "This is a list of all the recent events in the subjects and groups of "
@@ -3492,18 +3472,6 @@ msgstr[2] "<em>%(count)s</em> pranešimų"
 
 msgid "There are no messages."
 msgstr "Pranešimų nėra."
-
-msgid "Messages in community forum"
-msgstr "Bendruomenės forumo pranešimai"
-
-msgid "You found a bug in our system? Something is broken? Report it."
-msgstr "Radai sistemoje klaidą? Kas nors neveikia? Pranešk apie tai čia."
-
-msgid "Messages in Bugs forum"
-msgstr "<strong>Klaidų</strong> forumo pranešimai"
-
-msgid "Report a bug"
-msgstr "Pranešk apie klaidą"
 
 msgid "Group information"
 msgstr "Informacija apie grupę"
@@ -5079,12 +5047,8 @@ msgid "%(user_link)s has modified a page %(page_link)s"
 msgstr "%(user_link)s redagavo puslapį %(page_link)s"
 
 #, python-format
-msgid "%(user_link)s has posted to %(group_link)s wall."
-msgstr "%(user_link)s sukūrė įrašą ant %(group_link)s sienos."
-
-#, python-format
-msgid "%(user_link)s has posted to %(subject_link)s wall."
-msgstr "%(user_link)s sukūrė įrašą ant %(subject_link)s sienos."
+msgid "%(user_link)s"
+msgstr "%(user_link)s"
 
 msgid "Website"
 msgstr "Internetinis puslapis"
@@ -5252,6 +5216,12 @@ msgid ""
 "<strong>Take notes during lecture</strong> on your laptop and upload it "
 "directly to Ututi."
 msgstr "<strong>Konspektuokite per paskaitas</strong> tiesiai į Ututi."
+
+msgid "Write your post"
+msgstr "Rašyti įrašą"
+
+msgid "Discussion"
+msgstr "Diskusija"
 
 #, python-format
 msgid "Log in as %(user)s"

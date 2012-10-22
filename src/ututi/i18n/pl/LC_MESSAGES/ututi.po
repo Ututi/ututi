@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-10-12 15:41+0300\n"
+"PO-Revision-Date: 2012-10-22 09:20+0300\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -161,18 +161,6 @@ msgstr[2] "Więcej niż %d użytkowników nie może wysyłać wiadomości."
 #, python-format
 msgid "SMS message sent to group %s."
 msgstr "Wiadomość SMS została wysłana do grupy %s."
-
-msgid "Community page"
-msgstr "Strona społeczności"
-
-msgid "Ututi community forum."
-msgstr "Forum wspólnoty Ututi."
-
-msgid "Ututi bugs"
-msgstr "Błędy techniczne na Ututi"
-
-msgid "Report Ututi bugs here."
-msgstr "Przekaż nam swoje spostrzeżenia o Ututi."
 
 msgid ""
 "The web-based forum for this group has been disabled. Please use the "
@@ -1271,11 +1259,11 @@ msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr "Grupa %(link_to_group)s przestała obserwować przedmiot %(link_to_subject)s"
 
 #, python-format
-msgid "%(link_to_author)s wrote posted on %(link_to_group)s wall.link_to_user"
+msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
 msgstr ""
 
 #, python-format
-msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
+msgid "%(link_to_author)slink_to_user"
 msgstr ""
 
 msgid "(no subject)"
@@ -2968,9 +2956,6 @@ msgstr "Popularność przedmiotu:"
 msgid "Write your topic"
 msgstr "Podaj swój temat"
 
-msgid "Write your post"
-msgstr ""
-
 msgid "Root"
 msgstr "Źródło"
 
@@ -2979,9 +2964,6 @@ msgstr "Załaduj plik"
 
 msgid "File upload failed."
 msgstr "Plik nie został dodany."
-
-msgid "Wall post"
-msgstr ""
 
 msgid "Group message"
 msgstr "Wiadomość grupowa"
@@ -3187,6 +3169,12 @@ msgstr "Wyłącz wprowadzanie zmian w motywie"
 
 msgid "Are you sure you want to reset your custom theme?"
 msgstr "Jestes pewny, że chcesz zresetować Twoje ustawienia?"
+
+msgid "Start discussion"
+msgstr ""
+
+msgid "What you want to discuss..."
+msgstr ""
 
 msgid ""
 "This is a list of all the recent events in the subjects and groups of "
@@ -3535,18 +3523,6 @@ msgstr[2] "<em>%(count)s</em> postów"
 
 msgid "There are no messages."
 msgstr "Brak wiadomości."
-
-msgid "Messages in community forum"
-msgstr "Nowa wiadomość na forum wspólnoty"
-
-msgid "You found a bug in our system? Something is broken? Report it."
-msgstr "Natrafiłes na jakis problem techniczny? Zgłoś to."
-
-msgid "Messages in Bugs forum"
-msgstr "Nowa wiadomość na forum bugów."
-
-msgid "Report a bug"
-msgstr "Zgłoś bug"
 
 msgid "Group information"
 msgstr "O grupie"
@@ -5122,11 +5098,7 @@ msgid "%(user_link)s has modified a page %(page_link)s"
 msgstr "%(user_link)s wprowadza zmiany na stronie %(page_link)s"
 
 #, python-format
-msgid "%(user_link)s has posted to %(group_link)s wall."
-msgstr ""
-
-#, python-format
-msgid "%(user_link)s has posted to %(subject_link)s wall."
+msgid "%(user_link)s"
 msgstr ""
 
 msgid "Website"
@@ -5305,6 +5277,12 @@ msgid ""
 msgstr ""
 "<strong>Notuj na wykładzie</strong> na swoim laptopie i wrzucaj notatki "
 "prosto na Ututi."
+
+msgid "Write your post"
+msgstr ""
+
+msgid "Discussion"
+msgstr ""
 
 #, python-format
 msgid "Log in as %(user)s"
