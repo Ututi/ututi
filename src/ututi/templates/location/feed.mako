@@ -10,19 +10,19 @@
 <%def name="body_class()">wall location-wall</%def>
 
   <div id="dashboard_action_links" class="action active">
-    <a class="action active" id="add_wall_post_action" href="#add-wall-post">${_('Start discussion')}</a>
+    <a class="action active location-discussion-action" id="add_wall_post_action" href="#add-wall-post">${_('Start a discussion')}</a>
   </div>
 
   <div id="dashboard_action_blocks">
-    <div class="action-block" id="add_wall_post_block">
+    <div class="action-block" style="display: block;" id="add_wall_post_block">
       <div class="arrow-up"></div>
       <form method="POST" action="${url(controller='wall', action='create_location_wall_post')}" id="wallpost_form">
         <input id="add-wall-post-url" type="hidden" value="${url(controller='wall', action='create_location_wall_post_js')}" />
         <input type="hidden" name="location_id" id="location_id" value="${c.location.id}"/>
-        <div class="action-tease">${_("What you want to discuss...")}</div>
+        <div class="action-tease"></div>
         <textarea name="post" class="tease-element"></textarea>
-        ${h.input_submit(_('Send'), id="submit_wall_post", class_='dark inline action-button')}
-        <a class="cancel-button" href="#cancel">${_("Cancel")}</a>
+        ${h.input_submit(_('Send'), id="submit_wall_post", class_='dark inline action-button tease-element')}
+        <a class="cancel-button tease-element" href="#cancel">${_("Cancel")}</a>
       </form>
     </div>
   </div>
@@ -50,6 +50,13 @@
             clearBlock($(this).closest('.action-block'));
             return false;
         });
+
+        $('#add_wall_post_block .action-tease').click(function() {
+            $(this).closest('.action-tease').hide();
+            $(this).siblings('.tease-element').show();
+            $(this).siblings('text-area.tease-element').focus();
+        });
+
         $('#dashboard_action_blocks').show();
         /* Add wall post actions
          */
@@ -75,9 +82,5 @@
             }
             return false;
         });
-
-      $('#add_wall_post_action').click(function () {
-          $('#add_wall_post_block').toggle();
-      });
     });
   </script>

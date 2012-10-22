@@ -505,6 +505,13 @@ form.inline-form button {
                 background-image: url("/img/icons.com/mobile.png");
             }
 
+            .wall #dashboard_action_links .location-discussion-action {
+                padding-left: 19px;
+                background-position-x:
+                0px; margin-left: 0px;
+                margin-bottom: 0px;
+            }
+
         .wall .wall-entry .event-time {
             color: #666;
             font-size: 11px;
@@ -723,6 +730,10 @@ form.inline-form button {
 
   #dashboard_action_blocks .action-block .action-button {
       display: inline;
+  }
+
+  #dashboard_action_blocks .action-block .action-button.tease-element {
+      display: none;
   }
 
   #dashboard_action_blocks .action-block .cancel-button {
