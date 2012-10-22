@@ -95,7 +95,6 @@ A message to the ututi mailing list group:
         <span>0 seconds ago</span>
         <span>
           <a>Reply</a>
-          <a>Delete</a>
         </span>
       </div>
       <div></div>
