@@ -276,7 +276,7 @@ class WallController(BaseController, FileViewMixin):
 
     def _remove_wall_post(self, wall_post_id):
         post = meta.Session.query(WallPost).filter_by(id=wall_post_id).one()
-        if post and check_crowds(('owner', 'moderator', 'root'), c.user, post):
+        if post and check_crowds(('owner', 'moderator'), c.user, post):
             post.deleted_by = c.user.id
             meta.Session.add(post)
             meta.Session.commit()
@@ -299,10 +299,10 @@ class WallController(BaseController, FileViewMixin):
 
         last_post = thread.posts[-1]
         msg = post_message(group,
-                            c.user,
-                            u"Re: %s" % thread.subject,
-                            self.form_result['message'],
-                            reply_to=last_post.message_id)
+                           c.user,
+                           u"Re: %s" % thread.subject,
+                           self.form_result['message'],
+                           reply_to=last_post.message_id)
 
         if request.params.has_key('js'):
             return render_mako_def('/sections/wall_entries.mako',
