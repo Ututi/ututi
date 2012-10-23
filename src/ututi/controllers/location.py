@@ -33,6 +33,7 @@ from ututi.controllers.search import SearchSubmit, SearchBaseController
 
 log = logging.getLogger(__name__)
 
+
 def location_menu_items():
     return [
         {'title': _("News feed"),
@@ -48,6 +49,7 @@ def location_menu_items():
          'name': 'teacher',
          'link': c.location.url(action='catalog', obj_type='teacher')}]
 
+
 def location_menu_public_items():
     return [
         {'title': _("About"),
@@ -59,6 +61,7 @@ def location_menu_public_items():
         {'title': _("Teachers"),
          'name': 'teacher',
          'link': c.location.url(action='catalog', obj_type='teacher')}]
+
 
 def location_edit_menu_items():
     return [
@@ -76,6 +79,21 @@ def location_edit_menu_items():
          'link': c.location.url(action='unverified_teachers')},
     ]
 
+
+def location_feed_subtabs():
+    return [
+        {'title': _('All news'),
+         'name': 'all',
+         'link': c.location.url(action='feed')},
+        {'title': _('Subject news'),
+         'name': 'subjects',
+         'link': c.location.url(action='feed', filter='subjects')},
+        {'title': _('Discussions'),
+         'name': 'discussions',
+         'link': c.location.url(action='feed', filter='discussions')}
+    ]
+
+
 def location_breadcrumbs(location):
     breadcrumbs = []
     for tag in location.hierarchy(True):
@@ -87,10 +105,10 @@ def location_breadcrumbs(location):
         breadcrumbs.append(bc)
     return breadcrumbs
 
+
 def location_action(method):
     def _location_action(self, path, obj_type=None):
         location = LocationTag.get(path)
-
         if location is None:
             abort(404)
 
@@ -99,6 +117,9 @@ def location_action(method):
         c.location = location
         c.breadcrumbs = location_breadcrumbs(location)
         c.theme = location.get_theme()
+
+        c.notabs = True
+        c.tabs = location_feed_subtabs()
 
         if c.user:
             c.menu_items = location_menu_items()
@@ -147,9 +168,11 @@ class RegistrationForm(Schema):
                           UniqueLocationEmail(),
                           UniversityPolicyEmailValidator())
 
+
 class TeacherRegistrationForm(Schema):
     email = compound.Pipe(TranslatedEmailValidator(not_empty=True, strip=True),
                           UniversityPolicyEmailValidator())
+
 
 class LocationWallMixin(WallMixin):
 
@@ -165,6 +188,7 @@ class LocationWallMixin(WallMixin):
         subjects = meta.Session.query(Subject)\
             .filter(Subject.location_id.in_(locations))\
             .all()
+        subject_ids = [subject.id for subject in subjects]
         public_groups = meta.Session.query(Group)\
             .filter(Group.location_id.in_(locations))\
             .filter(Group.forum_is_public == True)\
@@ -172,9 +196,14 @@ class LocationWallMixin(WallMixin):
         ids = [obj.id for obj in subjects + public_groups]
 
         obj_id_in_list = t_evt.c.object_id.in_(ids) if ids else False
-        return evts_generic\
-            .where(or_(obj_id_in_list, t_wall_posts.c.location_id.in_(locations),
-                       t_wall_posts.c.subject_id.in_(map(lambda o: o.id, subjects))))
+        events_query = evts_generic
+        if c.feed_filter == 'subjects':
+            return events_query.where(or_(obj_id_in_list, t_wall_posts.c.subject_id.in_(subject_ids)))
+        elif c.feed_filter == 'discussions':
+            return events_query.where(t_wall_posts.c.location_id.in_(locations))
+        else:
+            return events_query.where(or_(obj_id_in_list, t_wall_posts.c.location_id.in_(locations),
+                                          t_wall_posts.c.subject_id.in_(subject_ids)))
 
 
 class TeacherSearchMixin():
@@ -197,8 +226,8 @@ class TeacherSearchMixin():
         c.results = paginate.Page(
             query,
             page=c.page,
-            items_per_page = 30,
-            item_count = search_query_count(query),
+            items_per_page=30,
+            item_count=search_query_count(query),
             obj_type='teacher')
         c.searched = True
 
@@ -222,7 +251,16 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
     @location_action
     @ActionProtector("user")
     def feed(self, location):
+        feed_filter = request.params.get('filter', 'all')
+        if feed_filter not in [ff['name'] for ff in c.tabs]:
+            feed_filter = 'all'
         c.current_menu_item = 'feed'
+        c.current_tab = feed_filter
+        c.feed_filter = feed_filter
+        c.notabs = False
+
+        c.show_discussion_form = (feed_filter != 'subjects')
+
         self._set_wall_variables()
         return render('location/feed.mako')
 
@@ -261,7 +299,6 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             self._search_teachers(location, self.form_result.get('text', ''))
         else:
             self._search()
-
 
         if self.form_result.has_key('text'):
             search_query = self.form_result['text']
@@ -539,7 +576,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         c.current_menu_item = 'unverified_teachers'
         c.teachers = meta.Session.query(Teacher)\
             .filter(Teacher.location==location)\
-            .filter(Teacher.teacher_verified == False).all()
+            .filter(Teacher.teacher_verified==False).all()
         c.found_users = []
         return render('location/edit_teachers.mako')
 
@@ -565,7 +602,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
     def teachers_json(self, location):
         teachers = meta.Session.query(Teacher)\
             .filter(Teacher.location==location)\
-            .filter(Teacher.teacher_verified == True).all()
+            .filter(Teacher.teacher_verified==True).all()
         return {'teachers': sorted([{'name': teacher.fullname,
                                      'profile': teacher.url(action='external_teacher_index', qualified=True),
                                      'registered': teacher.accepted_terms.strftime('%Y-%m-%d %H:%M:%S'),

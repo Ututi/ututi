@@ -9,6 +9,7 @@
 
 <%def name="body_class()">wall location-wall</%def>
 
+%if c.show_discussion_form:
   <div id="dashboard_action_links" class="action active">
     <a class="action active location-discussion-action" id="add_wall_post_action" href="#add-wall-post">${_('Start a discussion')}</a>
   </div>
@@ -26,6 +27,7 @@
       </form>
     </div>
   </div>
+%endif
 
 <div class="tip">
   ${_('This is a list of all the recent events in the subjects and groups of this university.')}

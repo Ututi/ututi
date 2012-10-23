@@ -93,5 +93,8 @@
 </%def>
 
 ${self.pageheader()}
+%if not c.notabs:
+${tabs()}
+%endif
 
 ${next.body()}
