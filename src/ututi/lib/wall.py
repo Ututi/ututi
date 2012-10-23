@@ -77,7 +77,7 @@ def generic_events_query():
                            #wall posts
                            t_wall_posts.c.content.label('wp_content'),
                            t_wall_posts.c.subject_id.label('wp_subject_id'),
-                           t_wall_posts.c.location_id.label('wp_location_id'),
+                           t_wall_posts.c.target_location_id.label('wp_location_id'),
                            ],
                           from_obj=[t_evt.outerjoin(latest_page, latest_page.c.page_id==t_evt.c.page_id)\
                                         .outerjoin(t_context, t_context.c.id==t_evt.c.object_id)\

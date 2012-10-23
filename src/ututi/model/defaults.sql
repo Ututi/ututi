@@ -1693,17 +1693,17 @@ create index email_domains_domain_name_idx on email_domains(domain_name);
 create table wall_posts (
        id int8 references content_items(id) on delete cascade,
        subject_id int8 references subjects(id) on delete cascade default null,
-       location_id int8 default null, /* Should this reference a location? */
+       target_location_id int8 default null, /* Should this reference a location? */
        content text not null,
        primary key (id),
-       check(subject_id is not null or location_id is not null));
+       check(subject_id is not null or target_location_id is not null));
 
 create or replace function wall_post_event_trigger() returns trigger as $$
     begin
         if new.subject_id is not null then
             insert into events(object_id, author_id, event_type)
                    values (new.id, cast(current_setting('ututi.active_user') as int8), 'subject_wall_post');
-        elsif new.location_id is not null then
+        elsif new.target_location_id is not null then
             insert into events(object_id, author_id, event_type)
                    values (new.id, cast(current_setting('ututi.active_user') as int8), 'location_wall_post');
         end if;

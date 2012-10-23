@@ -56,7 +56,7 @@ def test_location_wall_post():
 
     See location info
 
-    >>> event.context.location.title_short
+    >>> event.context.target_location.title_short
     u'uni'
 
     """

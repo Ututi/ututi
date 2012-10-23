@@ -412,12 +412,9 @@ def setup_orm():
                polymorphic_on=tables['content_items'].c.content_type,
                properties={'subject': relation(Subject,
                                                primaryjoin=tables['subjects'].c.id==tables['wall_posts'].c.subject_id),
-                           'location': relation(LocationTag,
-                                                primaryjoin=tables['tags'].c.id==tables['wall_posts'].c.location_id,
-                                                foreign_keys=tables['wall_posts'].c.location_id),
-                           'parent_location': relation(LocationTag,
-                                                       primaryjoin=tables['tags'].c.id==tables['content_items'].c.location_id,
-                                                       foreign_keys=tables['content_items'].c.location_id)})
+                           'target_location': relation(LocationTag,
+                                                       primaryjoin=tables['tags'].c.id==tables['wall_posts'].c.target_location_id,
+                                                       foreign_keys=tables['wall_posts'].c.target_location_id)})
 
     orm.mapper(SeenThread, tables['seen_threads'],
                properties = {'thread': relation(ForumPost),
@@ -2147,10 +2144,10 @@ class WallPost(ContentItem):
 
     def __init__(self, subject=None, location=None, content=None):
         self.subject = subject
-        self.location = location
+        self.target_location = location
         self.content = content
         if subject:
-            self.parent_location = subject.location
+            self.location = subject.location
 
 
 class SeenThread(object):

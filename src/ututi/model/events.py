@@ -508,7 +508,7 @@ class SubjectWallPostEvent(Event, Commentable):
 
     @property
     def ci_location_id(self):
-        return self.context.location.id
+        return self.context.target_location.id
 
     def render(self):
         return _("%(link_to_author)s wrote posted on %(link_to_subject)s wall." % {
@@ -519,7 +519,7 @@ class SubjectWallPostEvent(Event, Commentable):
 class LocationWallPostEvent(Event, Commentable):
     @property
     def wp_location_id(self):
-        return self.context.location_id
+        return self.context.target_location_id
 
     @property
     def wp_content(self):
