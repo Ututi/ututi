@@ -1,3 +1,0 @@
-# (pofilter) xmltags: checks that XML/HTML tags have not been translated
-msgid "Messages in Bugs forum"
-msgstr "<strong>Klaidų</strong> forumo pranešimai"
