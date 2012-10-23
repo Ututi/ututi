@@ -197,9 +197,9 @@ class LocationWallMixin(WallMixin):
 
         obj_id_in_list = t_evt.c.object_id.in_(ids) if ids else False
         events_query = evts_generic
-        if c.feed_filter == 'subjects':
+        if self.feed_filter == 'subjects':
             return events_query.where(or_(obj_id_in_list, t_wall_posts.c.subject_id.in_(subject_ids)))
-        elif c.feed_filter == 'discussions':
+        elif self.feed_filter == 'discussions':
             return events_query.where(t_wall_posts.c.location_id.in_(locations))
         else:
             return events_query.where(or_(obj_id_in_list, t_wall_posts.c.location_id.in_(locations),
@@ -256,7 +256,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             feed_filter = 'all'
         c.current_menu_item = 'feed'
         c.current_tab = feed_filter
-        c.feed_filter = feed_filter
+        self.feed_filter = feed_filter
         c.notabs = False
 
         c.show_discussion_form = (feed_filter != 'subjects')
