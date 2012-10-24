@@ -31,7 +31,7 @@ $(document).ready(function(){
 
     /* Show/hide reply forms.
      */
-    $('.wall .wall-entry .action-block-link, ' +
+    $('.wall .wall-entry .action-block-link[href="#reply"], ' +
       '.wall .wall-entry .action-tease').live('click', function() {
         var entry = $(this).closest('.wall-entry, .wall-subentry');
         entry.find('.action-tease').hide();

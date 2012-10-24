@@ -71,7 +71,7 @@
 </div>
 </%def>
 
-<%def name="thread_reply(author_id, message, created_on, attachments=None, event_id=None)">
+<%def name="thread_reply(id, author_id, message, created_on, attachments=None, event_id=None, allow_comment_deletion=False)">
   <div class="reply">
     <div class="logo">
       <img src="${url(controller='user', action='logo', id=author_id, width=30)}" />
@@ -91,6 +91,9 @@
         %if c.user is not None:
         <span class="actions">
           <a href="#reply" class="action-block-link">${_('Reply')}</a>
+          %if allow_comment_deletion and author_id == c.user.id:
+          <a href="${url(controller='wall', action='remove_comment', id=id)}" class="action-block-link">${_('Delete')}</a>
+          %endif
         </span>
         %endif
       </div>
@@ -120,6 +123,8 @@
       messages = event.comments
     else:
       messages = []
+
+    allow_comment_deletion = (original.event_type not in ['mailinglist_post_created', 'forum_post_created'])
   %>
   <div class="thread">
     %if head_message:
@@ -184,13 +189,13 @@
             </div>
             <div class="show">
               %for msg in hidden:
-                ${thread_reply(**h.thread_reply_dict(msg))}
+                ${thread_reply(**dict(h.thread_reply_dict(msg).items() + [('allow_comment_deletion', allow_comment_deletion)]))}
               %endfor
             </div>
           </div>
         %endif
         %for msg in messages:
-          ${thread_reply(**h.thread_reply_dict(msg))}
+          ${thread_reply(**dict(h.thread_reply_dict(msg).items() + [('allow_comment_deletion', allow_comment_deletion)]))}
         %endfor
       </div>
       %if c.user is not None:

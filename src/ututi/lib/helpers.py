@@ -853,12 +853,14 @@ def thread_reply_dict(obj):
     """Create a universal thread reply dict from an event."""
     if type(obj) == dict:
         return dict(
+            id = obj['comment_id'],
             author_id = obj['author_id'],
             message= obj['message'],
             created_on = obj['created_on'])
 
     if obj.event_type == 'mailinglist_post_created':
         return dict(
+            id = obj.id,
             author_id = obj.author_id,
             message = obj.ml_message,
             created_on = obj.created,
@@ -866,6 +868,7 @@ def thread_reply_dict(obj):
             )
     elif obj.event_type == 'forum_post_created':
         return dict(
+            id = obj.id,
             author_id = obj.author_id,
             message = obj.fp_message,
             created_on = obj.created)

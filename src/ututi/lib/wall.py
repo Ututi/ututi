@@ -133,12 +133,14 @@ class WallMixin(object):
         t_ci = meta.metadata.tables['content_items']
 
         event_id_in_list = t_comm.c.event_id.in_(event_ids) if event_ids else False
-        comm = select([t_comm.c.content.label('message'),
+        comm = select([t_comm.c.id.label('comment_id'),
+                       t_comm.c.content.label('message'),
                        t_ci.c.created_by.label('author_id'),
                        t_comm.c.event_id,
                        t_ci.c.created_on],
                        from_obj=[t_comm.join(t_ci, t_comm.c.id==t_ci.c.id)])\
                       .where(event_id_in_list)\
+                      .where(t_ci.c.deleted_by==None)\
                       .order_by(t_ci.c.created_on.asc())
         comments = meta.Session.execute(comm).fetchall()
 

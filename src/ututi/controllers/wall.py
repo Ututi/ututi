@@ -269,7 +269,6 @@ class WallController(BaseController, FileViewMixin):
         return post
 
     @ActionProtector("user")
-    @validate(schema=DeleteWallPostForm())
     def remove_wall_post(self, id):
         self._remove_wall_post(id)
         self._redirect()
@@ -283,6 +282,16 @@ class WallController(BaseController, FileViewMixin):
             return True
         else:
             return False
+
+    @ActionProtector("user")
+    def remove_comment(self, id):
+        comment = EventComment.get(id)
+        if comment:
+            comment.deleted_by = c.user.id
+            meta.Session.add(comment)
+            meta.Session.commit()
+
+        self._redirect()
 
     @ActionProtector("user")
     @validate(schema=WallReplyValidator())
@@ -307,10 +316,12 @@ class WallController(BaseController, FileViewMixin):
         if request.params.has_key('js'):
             return render_mako_def('/sections/wall_entries.mako',
                                    'thread_reply',
+                                   id=msg.id,
                                    author_id=msg.author_id if msg.author_id is not None else msg.author_or_anonymous,
                                    message=msg.body,
                                    created_on=msg.sent,
-                                   attachments=msg.attachments)
+                                   attachments=msg.attachments,
+                                   allow_comment_deletion=False)
         else:
             self._redirect()
 
@@ -342,9 +353,11 @@ class WallController(BaseController, FileViewMixin):
         if request.params.has_key('js'):
             return render_mako_def('/sections/wall_entries.mako',
                                    'thread_reply',
+                                   id=post.id,
                                    author_id=post.created.id,
                                    message=post.message,
-                                   created_on=post.created_on)
+                                   created_on=post.created_on,
+                                   allow_comment_deletion=True)
         else:
             self._redirect()
 
@@ -360,8 +373,10 @@ class WallController(BaseController, FileViewMixin):
         if request.params.has_key('js'):
             return render_mako_def('/sections/wall_entries.mako',
                                    'thread_reply',
+                                   id=comment.id,
                                    author_id=comment.created.id,
                                    message=comment.content,
-                                   created_on=comment.created_on)
+                                   created_on=comment.created_on,
+                                   allow_comment_deletion=True)
         else:
             self._redirect()
