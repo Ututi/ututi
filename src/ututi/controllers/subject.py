@@ -38,7 +38,7 @@ def set_login_url_to_referrer(method):
 
 def subject_menu_items():
     return [
-        {'title': _("Subject information"),
+        {'title': _("Info"),
          'name': 'info',
          'link': c.subject.url(action='info')},
         {'title': _("News feed"),
@@ -49,7 +49,10 @@ def subject_menu_items():
          'link': c.subject.url(action='files')},
         {'title': _("Notes"),
          'name': 'pages',
-         'link': c.subject.url(action='pages')}]
+         'link': c.subject.url(action='pages')},
+        {'title': _("Discussions"),
+         'name': 'discussions',
+         'link': c.subject.url(action='feed', filter='discussions')}]
 
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
@@ -146,6 +149,7 @@ class NewSubjectForm(Schema):
     title = validators.UnicodeString(strip=True)
     lecturer = validators.UnicodeString(strip=True)
 
+
 class SubjectAddMixin(object):
 
     def _create_subject(self):
@@ -193,6 +197,9 @@ class SubjectWallMixin(WallMixin):
              .where(or_(t_evt.c.object_id == c.subject.id,
                              t_wall_posts.c.subject_id == c.subject.id))
 
+        if getattr(self, 'feed_filter', None) == u'discussions':
+            query = query.where(t_evt.c.event_type=='subject_wall_post')
+
         return query
 
 
@@ -229,6 +236,10 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
     @subject_action
     def feed(self, subject):
         c.current_tab = 'feed'
+        feed_filter = request.params.get('filter')
+        if feed_filter in (u'discussions',):
+            c.current_tab = feed_filter
+            self.feed_filter = feed_filter
         self._set_wall_variables()
         return render('subject/feed.mako')
 
