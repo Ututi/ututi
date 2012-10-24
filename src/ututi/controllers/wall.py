@@ -286,7 +286,7 @@ class WallController(BaseController, FileViewMixin):
     @ActionProtector("user")
     def remove_comment(self, id):
         comment = EventComment.get(id)
-        if comment:
+        if comment and (check_crowds(('owner',), c.user, comment) or check_crowds(('moderator',), c.user, comment.event.context)):
             comment.deleted_by = c.user.id
             meta.Session.add(comment)
             meta.Session.commit()
