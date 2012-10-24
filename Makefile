@@ -190,8 +190,8 @@ test_migration_2: ${PG_SOCKET}
 test_translations: bin/pofilter
 	bin/py setup.py update_catalog --ignore-obsolete=yes --no-fuzzy-matching
 	bin/pofilter --progress=none -t xmltags -t printf --nous ${PWD}/src/ututi/i18n/ -o ${PWD}/parts/test_translations/
-	diff -r -u ${PWD}/src/ututi/tests/expected_i18n_errors/lt ${PWD}/parts/test_translations/lt
-	diff -r -u ${PWD}/src/ututi/tests/expected_i18n_errors/pl ${PWD}/parts/test_translations/pl
+	diff -r -x .gitkeep -u ${PWD}/src/ututi/tests/expected_i18n_errors/lt ${PWD}/parts/test_translations/lt
+	diff -r -x .gitkeep -u ${PWD}/src/ututi/tests/expected_i18n_errors/pl ${PWD}/parts/test_translations/pl
 
 .coverage: bin/coverage bin/test
 	bin/coverage run bin/test
