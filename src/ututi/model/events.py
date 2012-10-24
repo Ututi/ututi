@@ -71,6 +71,11 @@ class Event(object):
         types = meta.Session.query(meta.metadata.tables['events'].c.event_type).distinct().all()
         return [evt[0] for evt in types]
 
+    # XXX Methods required to glue wall and ORM objects together
+    @property
+    def ci_location_id(self):
+        return self.context.location.id
+
 
 class EventComment(ContentItem):
     """Event comment ORM class."""

@@ -125,7 +125,7 @@
       messages = []
 
     allow_comment_deletion = (original.event_type not in ['mailinglist_post_created', 'forum_post_created'])
-    is_moderator = event.ci_location_id in map(lambda t: t.id, c.user.moderated_tags)
+    is_moderator = c.user and event.ci_location_id in map(lambda t: t.id, c.user.moderated_tags)
   %>
   <div class="thread">
     %if head_message:
