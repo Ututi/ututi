@@ -69,7 +69,7 @@ def set_login_url(method):
 
 def group_mailinglist_action(method):
     def _group_action(self, id, thread_id):
-        group = Group.get(id)
+        group = Group.get(int(id))
         if group is None:
             abort(404)
 
