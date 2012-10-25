@@ -1275,6 +1275,10 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
     @classmethod
     def get(cls, location, id):
         try:
+            id = int(id)
+        except ValueError:
+            pass
+        try:
             return meta.Session.query(cls).filter_by(subject_id=id, location=location).one()
         except NoResultFound:
             return None
