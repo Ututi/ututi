@@ -123,7 +123,7 @@ class WallMixin(object):
 
         evts = evts\
             .where(t_evt.c.parent_id==None)\
-            .order_by(t_evt.c.created.desc())\
+            .order_by(t_evt.c.last_activity.desc())\
             .limit(limit)
 
         return [ObjectWrapper(evt) for evt in meta.Session.execute(evts)]

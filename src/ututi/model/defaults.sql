@@ -918,6 +918,7 @@ create table events (
        author_id int8 references users(id) on delete cascade,
        recipient_id int8 default null references users(id) on delete cascade,
        created timestamp not null default (now() at time zone 'UTC'),
+       last_activity timestamp not null default (now() at time zone 'UTC'),
        event_type varchar(30),
        file_id int8 references files(id) on delete cascade default null,
        page_id int8 references pages(id) on delete cascade default null,
@@ -973,6 +974,16 @@ CREATE TABLE event_comments (
        primary key (id));;
 
 CREATE INDEX event_comments_event_id_idx ON event_comments (event_id);;
+
+CREATE FUNCTION event_comment_created_trigger() RETURNS trigger AS $$
+    BEGIN
+        UPDATE events SET last_activity  = (now() at time zone 'UTC') WHERE id = NEW.event_id;
+        RETURN NEW;
+    END
+$$ LANGUAGE plpgsql;;
+
+CREATE TRIGGER after_event_comment_created AFTER INSERT ON event_comments
+    FOR EACH ROW EXECUTE PROCEDURE event_comment_created_trigger();;
 
 /* page events */
 CREATE FUNCTION page_modified_trigger() RETURNS trigger AS $$
