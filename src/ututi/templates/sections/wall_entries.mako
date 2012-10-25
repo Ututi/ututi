@@ -22,13 +22,21 @@
   </script>
 </%def>
 
-<%def name="wall_entries(events, per_page=20)">
+<%def name="wall_entries(events, per_page=20, last_seen=None)">
   <%
   this_page, other = events[:per_page], events[per_page:]
   %>
-  %for event in this_page:
+  <div class="new_items">
+  %for event, previous_event in zip(this_page, this_page[1:] + [None]):
+    %if (previous_event is not None) and (last_seen is not None) and (previous_event.created < last_seen < event.created):
+    </div><div>
+    %endif
     ${event.wall_entry()}
+    %if (previous_event is not None) and (last_seen is not None) and (previous_event.created < last_seen < event.created):
+    <hr style="margin-top: 0px;" />
+    %endif
   %endfor
+  </div>
   %if other:
     <div class="more-events click2fade">
       <a class="click hide" href="#older-events">${_("See older events...")}</a>
