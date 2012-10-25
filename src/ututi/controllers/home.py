@@ -213,7 +213,7 @@ class HomeController(UniversityListMixin):
             c.all_universities = self._universities()
 
             if request.params.has_key('js'):
-                return render_mako_def('/search/browse.mako','universities', unis=c.unis, ajax_url=url(controller='home', action='index'))
+                return render_mako_def('/search/browse.mako', 'universities', unis=c.unis, ajax_url=url(controller='home', action='index'))
             c.slideshow = request.params.has_key('slide')
             return htmlfill.render(self._sign_up_form())
 
