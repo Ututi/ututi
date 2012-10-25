@@ -513,7 +513,7 @@ class SubjectWallPostEvent(Event, Commentable):
 
     @property
     def ci_location_id(self):
-        return self.context.target_location.id
+        return self.context.location.id
 
     def render(self):
         return _("%(link_to_author)s wrote posted on %(link_to_subject)s wall." % {
@@ -532,7 +532,7 @@ class LocationWallPostEvent(Event, Commentable):
 
     @property
     def ci_location_id(self):
-        return self.context.location.id
+        return self.context.target_location.id
 
     def render(self):
         return _("%(link_to_author)s" % {
