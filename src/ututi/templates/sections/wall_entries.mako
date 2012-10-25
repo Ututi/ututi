@@ -687,7 +687,7 @@
                 recipient_id = event.wp_location_id
                 target_link = h.location_link(recipient_id)
           %>
-          ${h.litteral(_("%(user_link)s") % \
+          ${h.literal(_("%(user_link)s") % \
                 dict(user_link=h.user_link(event.author_id)))}
           <span class="recipient">${target_link}</span>
         </%def>
