@@ -550,6 +550,7 @@ form.inline-form button {
                     margin-top: -2px; /* Looks more aligned to logo. */
                 }
 
+
                 .wall .wall-entry .thread .reply .logo img {
                     /* Cheap fix: tall images overlap each other.
                      * A better solution would be to have image logo
@@ -595,7 +596,16 @@ form.inline-form button {
                 padding: 8px 14px 8px 8px; /* 14px to compensate textarea padding */
                 margin-bottom: 3px;
                 border-bottom: 1px solid #ccc;
+                position: relative;
             }
+
+                .wall-entry .reply .delete-button-container {
+                    right: -8px;
+                    top: -2px;
+                    float: right;
+                    position: relative;
+                }
+
 
             .wall .wall-entry .action-block {
                 display: none; /* initialy hidden */

@@ -73,6 +73,11 @@
 
 <%def name="thread_reply(id, author_id, message, created_on, attachments=None, event_id=None, is_moderator=False, allow_comment_deletion=False)">
   <div class="reply">
+    %if allow_comment_deletion and (author_id == c.user.id or is_moderator or h.check_crowds(('root',))):
+    <div class="delete-button-container">
+      <a href="${url(controller='wall', action='remove_comment', id=id)}" title="${_('Delete')}"><img src="${url('/img/icons.com/close.png')}"/></a>
+    </div>
+    %endif
     <div class="logo">
       <img src="${url(controller='user', action='logo', id=author_id, width=30)}" />
     </div>
@@ -91,9 +96,6 @@
         %if c.user is not None:
         <span class="actions">
           <a href="#reply" class="action-block-link">${_('Reply')}</a>
-          %if allow_comment_deletion and (author_id == c.user.id or is_moderator or h.check_crowds(('root',))):
-          <a href="${url(controller='wall', action='remove_comment', id=id)}" class="action-block-link">${_('Delete')}</a>
-          %endif
         </span>
         %endif
       </div>
