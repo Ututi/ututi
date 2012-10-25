@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-10-22 09:20+0300\n"
+"PO-Revision-Date: 2012-10-25 18:56+0300\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -461,6 +461,15 @@ msgstr "Edytuj motyw"
 msgid "Unverified teachers"
 msgstr "Wykładowca niezweryfikowany"
 
+msgid "All news"
+msgstr ""
+
+msgid "Subject news"
+msgstr ""
+
+msgid "Discussions"
+msgstr "Dyskusje"
+
 msgid "Information updated."
 msgstr "Informacje zostały zaktualizowane."
 
@@ -633,8 +642,8 @@ msgstr "Wybierz inną nazwę skróconą"
 msgid "The short title must contain no spaces"
 msgstr "Skrócona nazwa nie powinna zawierać spacji"
 
-msgid "Subject information"
-msgstr "Informacje o przedmiocie"
+msgid "Info"
+msgstr "Info "
 
 msgid "Please enter subject title"
 msgstr "Wybierz nazwę przedmiotu"
@@ -2538,9 +2547,6 @@ msgstr "Postanowiłeś nie kupować dodatkowych punktów SMS."
 msgid "About groups"
 msgstr "O grupach"
 
-msgid "Discussions"
-msgstr "Dyskusje"
-
 msgid "a place to discuss study matters and your student life."
 msgstr ""
 "miejsce gdzie możesz przedyskutować sprawy dotyczące studiów jak i "
@@ -3170,10 +3176,7 @@ msgstr "Wyłącz wprowadzanie zmian w motywie"
 msgid "Are you sure you want to reset your custom theme?"
 msgstr "Jestes pewny, że chcesz zresetować Twoje ustawienia?"
 
-msgid "Start discussion"
-msgstr ""
-
-msgid "What you want to discuss..."
+msgid "Start a discussion"
 msgstr ""
 
 msgid ""
@@ -3698,9 +3701,6 @@ msgstr "Członkowie:"
 
 msgid "teachers:"
 msgstr "Wykładowcy:"
-
-msgid "Info"
-msgstr "Info "
 
 msgid "more"
 msgstr "więcej"
@@ -4314,6 +4314,12 @@ msgstr "Zmoderowane posty"
 
 msgid "New groups"
 msgstr "Nowe grupy"
+
+msgid "Subject discussions"
+msgstr ""
+
+msgid "University discussions"
+msgstr ""
 
 msgid "Why we need support?"
 msgstr "Dlaczego potrzebujemy wsparcia"

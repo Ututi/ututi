@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-10-22 09:20+0300\n"
+"PO-Revision-Date: 2012-10-25 18:56+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -449,6 +449,15 @@ msgstr "Temos nuostatos"
 msgid "Unverified teachers"
 msgstr "Nepatvirtinti dėstytojai"
 
+msgid "All news"
+msgstr "Visos naujienos"
+
+msgid "Subject news"
+msgstr "Dalykų naujienos"
+
+msgid "Discussions"
+msgstr "Diskusijos"
+
 msgid "Information updated."
 msgstr "Informacija atnaujinta."
 
@@ -615,8 +624,8 @@ msgstr "Sugalvok kitą trumpinį"
 msgid "The short title must contain no spaces"
 msgstr "Santrumpoje negali būti tarpų"
 
-msgid "Subject information"
-msgstr "Informacija apie dalyką"
+msgid "Info"
+msgstr "Informacija"
 
 msgid "Please enter subject title"
 msgstr "Įveskite dalyko pavadinimą"
@@ -2496,9 +2505,6 @@ msgstr "Nusprendėti nepirkti papildomų SMS kreditų."
 msgid "About groups"
 msgstr "Apie grupes"
 
-msgid "Discussions"
-msgstr "Diskusijos"
-
 msgid "a place to discuss study matters and your student life."
 msgstr "vieta kalbėtis apie studijas ir studentišką gyvenimą."
 
@@ -3119,11 +3125,8 @@ msgstr "Išjungti temos nuostatas"
 msgid "Are you sure you want to reset your custom theme?"
 msgstr "Ar tikrai norite panaikinti jūsų temos nuostatas?"
 
-msgid "Start discussion"
-msgstr "Pradėti diskusiją"
-
-msgid "What you want to discuss..."
-msgstr "Apie ką nori padiskutuoti..."
+msgid "Start a discussion"
+msgstr "Pradėk diskusiją"
 
 msgid ""
 "This is a list of all the recent events in the subjects and groups of "
@@ -3643,9 +3646,6 @@ msgstr "Nariai:"
 
 msgid "teachers:"
 msgstr "dėstytojai:"
-
-msgid "Info"
-msgstr "Informacija"
 
 msgid "more"
 msgstr "daugiau"
@@ -4262,6 +4262,12 @@ msgstr "Moderuojami laiškai"
 
 msgid "New groups"
 msgstr "Naujos grupės"
+
+msgid "Subject discussions"
+msgstr "Dalykų diskusijos"
+
+msgid "University discussions"
+msgstr "Universiteto diskusijos"
 
 msgid "Why we need support?"
 msgstr "Kodėl mums reikia paramos?"

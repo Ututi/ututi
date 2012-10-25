@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-10-22 09:20+0300\n"
+"PO-Revision-Date: 2012-10-25 18:56+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=((n * 1) != 1)\n"
@@ -427,6 +427,15 @@ msgstr ""
 msgid "Unverified teachers"
 msgstr ""
 
+msgid "All news"
+msgstr ""
+
+msgid "Subject news"
+msgstr ""
+
+msgid "Discussions"
+msgstr ""
+
 msgid "Information updated."
 msgstr ""
 
@@ -588,7 +597,7 @@ msgstr ""
 msgid "The short title must contain no spaces"
 msgstr ""
 
-msgid "Subject information"
+msgid "Info"
 msgstr ""
 
 msgid "Please enter subject title"
@@ -2297,9 +2306,6 @@ msgstr ""
 msgid "About groups"
 msgstr ""
 
-msgid "Discussions"
-msgstr ""
-
 msgid "a place to discuss study matters and your student life."
 msgstr ""
 
@@ -2872,10 +2878,7 @@ msgstr ""
 msgid "Are you sure you want to reset your custom theme?"
 msgstr ""
 
-msgid "Start discussion"
-msgstr ""
-
-msgid "What you want to discuss..."
+msgid "Start a discussion"
 msgstr ""
 
 msgid ""
@@ -3344,9 +3347,6 @@ msgid "Members:"
 msgstr ""
 
 msgid "teachers:"
-msgstr ""
-
-msgid "Info"
 msgstr ""
 
 msgid "more"
@@ -3922,6 +3922,12 @@ msgid "Moderated posts"
 msgstr ""
 
 msgid "New groups"
+msgstr ""
+
+msgid "Subject discussions"
+msgstr ""
+
+msgid "University discussions"
 msgstr ""
 
 msgid "Why we need support?"
