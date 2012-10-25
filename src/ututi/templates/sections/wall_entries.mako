@@ -52,7 +52,7 @@
     <form method="POST" action="${url(controller='wall', action='hide_event')}">
       <div>
         <input class="event-type" name="event_type" type="hidden" value="${event.event_type}" />
-        <input class="hide-button" type="image" src="/img/icons.com/close.png" title="${_('Ignore events like this')}" />
+        <input class="hide-button" type="image" src="/img/icons.com/ignore_small_grey.png" title="${_('Ignore events like this')}" />
       </div>
     </form>
   </div>

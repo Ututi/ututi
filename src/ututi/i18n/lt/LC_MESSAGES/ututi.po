@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-10-25 18:56+0300\n"
+"PO-Revision-Date: 2012-10-25 18:58+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1238,6 +1238,14 @@ msgstr "%(link_to_subject)s pridėtas prie grupės %(link_to_group)s dalykų."
 #, python-format
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr " %(link_to_subject)s ištrintas iš grupės %(link_to_group)s dalykų sąrašo."
+
+#, python-format
+msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
+msgstr ""
+
+#, python-format
+msgid "%(link_to_author)slink_to_user"
+msgstr ""
 
 msgid "(no subject)"
 msgstr "(be temos)"
