@@ -133,12 +133,17 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     def feed(self):
         self._set_wall_variables(events_hidable=True)
 
-        c.msg_recipients = [(m.group.id, m.group.title) for m in c.user.memberships]
+        c.msg_recipients = [(m.group.id, m.group.title)
+                            for m in c.user.memberships]
 
-        c.file_recipients = [(m.group.id, m.group.title) for m in c.user.memberships if m.group.has_file_area and m.group.upload_status != m.group.LIMIT_REACHED]
+        c.file_recipients = [(m.group.id, m.group.title)
+                             for m in c.user.memberships
+                             if (m.group.has_file_area and
+                                 m.group.upload_status != m.group.LIMIT_REACHED)]
         c.file_recipients.extend([(s.id, s.title) for s in c.user.all_watched_subjects])
 
-        c.wiki_recipients =  [(subject.id, subject.title) for subject in c.user.all_watched_subjects]
+        c.wiki_recipients =  [(subject.id, subject.title)
+                              for subject in c.user.all_watched_subjects]
 
         result = render('/profile/feed.mako')
 
