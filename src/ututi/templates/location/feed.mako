@@ -29,10 +29,37 @@
   </div>
 %endif
 
+<%def name="empty_discussions_location()">
+  <div class="feature-box one-column icon-message">
+    <div class="title">
+      ${_("About discussions:")}
+    </div>
+    <div class="clearfix">
+      <div class="feature icon-discussions">
+        <strong>${_("Start a discussion")}</strong>
+        - ${_("discuss various topics. Both students and teachers from your university will be able to join the discussion.")}
+      </div>
+<%doc>
+      <div class="feature icon-email">
+        <strong>${_("Power text")}</strong>
+        - ${_("for power rangers!")}
+      </div>
+</%doc>
+    </div>
+    <div class="action-button">
+      <button id="start-discussion-actionbutton">${_('Start a discussion')}</button>
+    </div>
+  </div>
+</%def>
+
 <%
-    tip_dict = {'all': _('This is a list of all recent events in this university.'),
-                'subjects': _('This is a list of all the recent events in the subjects and groups of this university.'),
-                'discussions': _('This is a list of all recent discussions in this university.')}
+  tip_dict = {'all': _('This is a list of all recent events in this university.'),
+              'subjects': _('This is a list of all the recent events in the subjects and groups of this university.'),
+              'discussions': _('This is a list of all recent discussions in this university.')}
+
+  emptytext_dict = {'all': _('Sorry, nothing new at the moment.'),
+                    'subjects': _('Sorry, no subject news the moment.'),
+                    'discussions': "Sorry, no discussions for this university."}
 %>
 <div class="tip">
   ${tip_dict.get(c.current_tab, tip_dict['all'])}
@@ -41,7 +68,10 @@
 %if c.events:
   ${wall.wall_entries(c.events)}
 %else:
-  ${_('Sorry, nothing new at the moment.')}
+  <p>${emptytext_dict.get(c.current_tab, emptytext_dict['all'])}</p>
+  %if c.current_tab == 'discussions':
+    ${empty_discussions_location()}
+  %endif
 %endif
 
   <script type="text/javascript">
@@ -87,6 +117,10 @@
                        }
                 );
             }
+            return false;
+        });
+        $('#start-discussion-actionbutton').click(function () {
+            $('#add_wall_post_block .action-tease').click();
             return false;
         });
     });

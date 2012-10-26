@@ -1663,6 +1663,10 @@ ul.medium-icon-list {
         background-position: 20px 10px;
         background-image: url('img/icons.com/about/wiki.png');
     }
+    .feature-box.icon-message {
+        background-image: url('img/icons.com/about/message.png');
+        background-position: 20px 15px;
+    }
 
     .feature-box.simple {
         background: none;

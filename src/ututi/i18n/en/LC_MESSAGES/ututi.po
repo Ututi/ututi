@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-10-26 14:15+0300\n"
+"PO-Revision-Date: 2012-10-26 17:58+0300\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=((n * 1) != 1)\n"
@@ -2881,6 +2881,14 @@ msgstr ""
 msgid "Start a discussion"
 msgstr ""
 
+msgid "About discussions:"
+msgstr ""
+
+msgid ""
+"discuss various topics. Both students and teachers from your university "
+"will be able to join the discussion."
+msgstr ""
+
 msgid "This is a list of all recent events in this university."
 msgstr ""
 
@@ -2893,6 +2901,9 @@ msgid "This is a list of all recent discussions in this university."
 msgstr ""
 
 msgid "Sorry, nothing new at the moment."
+msgstr ""
+
+msgid "Sorry, no subject news the moment."
 msgstr ""
 
 #, python-format
@@ -4765,6 +4776,11 @@ msgid "University | Department:"
 msgstr ""
 
 msgid "Department:"
+msgstr ""
+
+msgid ""
+"discuss various topics. Students and teachers who follow this subject "
+"will be able to join the discussion."
 msgstr ""
 
 #, python-format

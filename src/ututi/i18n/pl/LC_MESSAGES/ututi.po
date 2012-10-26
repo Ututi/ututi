@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-10-26 14:15+0300\n"
+"PO-Revision-Date: 2012-10-26 17:58+0300\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -3179,6 +3179,14 @@ msgstr "Jestes pewny, że chcesz zresetować Twoje ustawienia?"
 msgid "Start a discussion"
 msgstr ""
 
+msgid "About discussions:"
+msgstr ""
+
+msgid ""
+"discuss various topics. Both students and teachers from your university "
+"will be able to join the discussion."
+msgstr ""
+
 msgid "This is a list of all recent events in this university."
 msgstr ""
 
@@ -3194,6 +3202,9 @@ msgstr ""
 
 msgid "Sorry, nothing new at the moment."
 msgstr "Przepraszamy, na tą chwilę nie ma nic nowego."
+
+msgid "Sorry, no subject news the moment."
+msgstr ""
 
 #, python-format
 msgid "%(result_count)s result for <strong>%(search_query)s</strong>"
@@ -5223,6 +5234,11 @@ msgstr "Uniwersytet | Wydział:"
 
 msgid "Department:"
 msgstr "Wydział:"
+
+msgid ""
+"discuss various topics. Students and teachers who follow this subject "
+"will be able to join the discussion."
+msgstr ""
 
 #, python-format
 msgid "%(subject_link)s has been added to your watched subject list."

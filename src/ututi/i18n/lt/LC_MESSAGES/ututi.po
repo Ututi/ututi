@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-10-26 14:15+0300\n"
+"PO-Revision-Date: 2012-10-26 17:58+0300\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -3136,6 +3136,16 @@ msgstr "Ar tikrai norite panaikinti jūsų temos nuostatas?"
 msgid "Start a discussion"
 msgstr "Pradėk diskusiją"
 
+msgid "About discussions:"
+msgstr "Apie diskusijas:"
+
+msgid ""
+"discuss various topics. Both students and teachers from your university "
+"will be able to join the discussion."
+msgstr ""
+"aptark įvairias temas. Tiek dėstytojai, tiek studentai iš tavo "
+"universiteto galės prisijungti prie diskusijos."
+
 msgid "This is a list of all recent events in this university."
 msgstr "Naujausių universiteto naujienų sąrašas."
 
@@ -3149,6 +3159,9 @@ msgstr "Naujausių universiteto diskusijų sąrašas."
 
 msgid "Sorry, nothing new at the moment."
 msgstr "Deja, šiuo metu nieko naujo"
+
+msgid "Sorry, no subject news the moment."
+msgstr "Deja, šiuo metu nėra dalykų naujienų."
 
 #, python-format
 msgid "%(result_count)s result for <strong>%(search_query)s</strong>"
@@ -5180,6 +5193,13 @@ msgstr "Universitetas  |  Fakultetas:"
 
 msgid "Department:"
 msgstr "Fakultetas:"
+
+msgid ""
+"discuss various topics. Students and teachers who follow this subject "
+"will be able to join the discussion."
+msgstr ""
+"aptark įvairius dalykus. Dėstytojai ir studentai kure seka šį dalyką "
+"galės prisijungti prie diskusijos"
 
 #, python-format
 msgid "%(subject_link)s has been added to your watched subject list."
