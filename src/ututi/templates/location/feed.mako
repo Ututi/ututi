@@ -29,8 +29,13 @@
   </div>
 %endif
 
+<%
+    tip_dict = {'all': _('This is a list of all recent events in this university.'),
+                'subjects': _('This is a list of all the recent events in the subjects and groups of this university.'),
+                'discussions': _('This is a list of all recent discussions in this university.')}
+%>
 <div class="tip">
-  ${_('This is a list of all the recent events in the subjects and groups of this university.')}
+  ${tip_dict.get(c.current_tab, tip_dict['all'])}
 </div>
 
 %if c.events:
