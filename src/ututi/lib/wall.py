@@ -92,9 +92,13 @@ def generic_events_query():
 
 
 class ObjectWrapper(dict):
+    """A generic object wrapper.
+
+    If we have the time this should be turned into a simple dict, that
+    has all the attributes needed to render the wall. Now it delegates
+    all the attributes it is missing to the underlying event.
     """
-    A generic object wrapper. If we have the time this should be turned into a simple dict, that has all the attributes needed to render the wall.
-    """
+
     def __init__(self, internal):
         self.internal = internal
 
