@@ -83,5 +83,5 @@
 %else:
     <a id="settings-link" href="${url(controller='profile', action='wall_settings')}">${_('News feed settings')}</a>
     ${actions.action_block(c.msg_recipients, c.file_recipients, c.wiki_recipients)}
-    ${wall.wall_entries(c.events, last_seen=c.user.last_seen_feed)}
+    ${wall.wall_entries(c.events)}
 %endif

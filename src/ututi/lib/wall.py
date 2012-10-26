@@ -51,6 +51,7 @@ def generic_events_query():
                            t_evt.c.post_id,
                            t_evt.c.file_id,
                            t_evt.c.message_id,
+                           t_evt.c.last_activity,
                            t_context.c.content_type.label('context_type'),
                            t_context.c.deleted_on.label('ci_deleted_on'),
                            t_context.c.location_id.label('ci_location_id'),
@@ -101,6 +102,7 @@ class ObjectWrapper(dict):
 
     def __init__(self, internal):
         self.internal = internal
+        self['event_is_new'] = False
 
     def __getattr__(self, attr):
         if self.has_key(attr):
@@ -108,7 +110,7 @@ class ObjectWrapper(dict):
         elif hasattr(self.internal, attr):
             return getattr(self.internal, attr)
         else:
-            raise AttributeError('Object does not have attribute \'%s\'.' % attr)
+            raise AttributeError('%r does not have attribute \'%s\'.' % (self.internal, attr))
 
     def wall_entry(self):
         return render_def('/sections/wall_entries.mako', self.internal.event_type, event=self)

@@ -145,9 +145,15 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         c.wiki_recipients =  [(subject.id, subject.title)
                               for subject in c.user.all_watched_subjects]
 
+        for event in c.events:
+            event['event_is_new'] = event.last_activity > c.user.last_seen_feed
+
         result = render('/profile/feed.mako')
 
         # Register new news feed visit.
+        meta.Session.commit() # commit before that to avoid possible
+                              # conflicts (on double refresh for
+                              # example)
         c.user.last_seen_feed = datetime.utcnow()
         meta.Session.commit()
 

@@ -26,6 +26,8 @@ log = logging.getLogger(__name__)
 class Event(object):
     """Generic event class."""
 
+    event_is_new = False
+
     @classmethod
     def get(cls, id):
         try:

@@ -22,21 +22,16 @@
   </script>
 </%def>
 
-<%def name="wall_entries(events, per_page=20, last_seen=None)">
+<%def name="wall_entries(events, per_page=20)">
   <%
   this_page, other = events[:per_page], events[per_page:]
   %>
-  <div class="new_items">
   %for event, previous_event in zip(this_page, this_page[1:] + [None]):
-    %if (previous_event is not None) and (last_seen is not None) and (previous_event.created < last_seen < event.created):
-    </div><div>
-    %endif
     ${event.wall_entry()}
-    %if (previous_event is not None) and (last_seen is not None) and (previous_event.created < last_seen < event.created):
+    %if (previous_event is not None) and (previous_event['event_is_new'] != event['event_is_new']):
     <hr style="margin-top: 0px;" />
     %endif
   %endfor
-  </div>
   %if other:
     <div class="more-events click2fade">
       <a class="click hide" href="#older-events">${_("See older events...")}</a>
@@ -59,7 +54,7 @@
 </%def>
 
 <%def name="wall_entry(event)">
-<div class="wall-entry ${caller.classes()} type_${event.event_type}" id="wall-event-${event.id}">
+<div class="wall-entry ${caller.classes()} type_${event.event_type} ${'new' if event.event_is_new else ''}" id="wall-event-${event.id}">
   %if hasattr(caller, 'heading'):
   <div class="event-heading">
     %if hasattr(c, 'events_hidable') and c.events_hidable and c.user is not None:
