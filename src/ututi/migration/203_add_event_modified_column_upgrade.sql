@@ -1,5 +1,7 @@
 alter table events add column last_activity timestamp not null default (now() at time zone 'UTC');
 
+update events set last_activity = created;
+
 CREATE OR REPLACE FUNCTION event_comment_created_trigger() RETURNS trigger AS $$
     BEGIN
         UPDATE events SET last_activity  = (now() at time zone 'UTC') WHERE id = NEW.event_id;
