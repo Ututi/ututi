@@ -78,7 +78,7 @@
 
 <%def name="thread_reply(id, author_id, message, created_on, attachments=None, event_id=None, is_moderator=False, allow_comment_deletion=False)">
   <div class="reply">
-    %if allow_comment_deletion and (author_id == c.user.id or is_moderator or h.check_crowds(('root',))):
+    %if allow_comment_deletion and c.user is not None and (author_id == c.user.id or is_moderator or h.check_crowds(('root',))):
     <div class="delete-button-container">
       <a href="${url(controller='wall', action='remove_comment', id=id)}" title="${_('Delete')}"><img src="${url('/img/icons.com/close.png')}"/></a>
     </div>
