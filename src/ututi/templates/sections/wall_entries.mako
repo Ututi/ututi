@@ -30,7 +30,7 @@
   %for event, previous_event in zip(this_page, this_page[1:] + [None]):
     ${event.wall_entry()}
     %if (previous_event is not None) and (previous_event['event_is_new'] != event['event_is_new']):
-    <hr style="margin-top: 0px;" />
+    <div class="new-post-separator">${_('Older posts below this line')}</div>
     %endif
   %endfor
   %if other:

@@ -456,9 +456,21 @@ form.inline-form button {
 .wall {
 }
 
+    .wall .new-post-separator {
+        background-color: #F5F5F5;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        padding: 6px;
+        font-size: 11px;
+    }
+
+
     .wall .wall-entry {
         border-bottom: 1px solid #ddd;
         font-size: 11px;
+    }
+
+    .wall .wall-entry.new {
     }
 
         .wall .wall-entry .event-heading {
@@ -2171,3 +2183,14 @@ ul.tabs {
             display: inline-block;
         }
 
+
+.group-portlet-setting {
+    padding-top: 2px;
+    padding-left: 26px;
+    height: 22px;
+    background-repeat: no-repeat;
+}
+
+.group-portlet-setting:nth-of-type(1) {
+    margin-top: 4px;
+}

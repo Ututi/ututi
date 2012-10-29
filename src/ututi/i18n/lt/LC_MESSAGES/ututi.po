@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-10-26 17:58+0300\n"
+"PO-Revision-Date: 2012-10-29 14:40+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -3133,11 +3133,11 @@ msgstr "Išjungti temos nuostatas"
 msgid "Are you sure you want to reset your custom theme?"
 msgstr "Ar tikrai norite panaikinti jūsų temos nuostatas?"
 
-msgid "Start a discussion"
-msgstr "Pradėk diskusiją"
-
 msgid "About discussions:"
 msgstr "Apie diskusijas:"
+
+msgid "Start a discussion"
+msgstr "Pradėk diskusiją"
 
 msgid ""
 "discuss various topics. Both students and teachers from your university "
@@ -4950,6 +4950,9 @@ msgstr "Dalintis:"
 
 msgid "less"
 msgstr "mažiau"
+
+msgid "Older posts below this line"
+msgstr "Ankstesni įvykiai žemiau"
 
 msgid "See older events..."
 msgstr "Žiūrėti senesnius įvykius..."

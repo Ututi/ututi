@@ -5035,14 +5035,3 @@ a.disabled, a.disabled:hover {
 .single_button {
     margin-bottom: 15px;
 }
-
-.group-portlet-setting {
-    padding-top: 2px;
-    padding-left: 26px;
-    height: 22px;
-    background-repeat: no-repeat;
-}
-
-.group-portlet-setting:nth-of-type(1) {
-    margin-top: 4px;
-}

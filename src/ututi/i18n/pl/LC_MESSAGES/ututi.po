@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-10-26 17:58+0300\n"
+"PO-Revision-Date: 2012-10-29 14:40+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -3176,10 +3176,10 @@ msgstr "Wyłącz wprowadzanie zmian w motywie"
 msgid "Are you sure you want to reset your custom theme?"
 msgstr "Jestes pewny, że chcesz zresetować Twoje ustawienia?"
 
-msgid "Start a discussion"
+msgid "About discussions:"
 msgstr ""
 
-msgid "About discussions:"
+msgid "Start a discussion"
 msgstr ""
 
 msgid ""
@@ -4991,6 +4991,9 @@ msgstr "Udostępnij:"
 
 msgid "less"
 msgstr "mniej"
+
+msgid "Older posts below this line"
+msgstr ""
 
 msgid "See older events..."
 msgstr "Zobacz więcej..."

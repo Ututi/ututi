@@ -142,8 +142,8 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                                  m.group.upload_status != m.group.LIMIT_REACHED)]
         c.file_recipients.extend([(s.id, s.title) for s in c.user.all_watched_subjects])
 
-        c.wiki_recipients =  [(subject.id, subject.title)
-                              for subject in c.user.all_watched_subjects]
+        c.wiki_recipients = [(subject.id, subject.title)
+                             for subject in c.user.all_watched_subjects]
 
         for event in c.events:
             event['event_is_new'] = event.last_activity > c.user.last_seen_feed

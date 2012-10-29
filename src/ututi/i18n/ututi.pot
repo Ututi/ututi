@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-10-26 17:58+0300\n"
+"POT-Creation-Date: 2012-10-29 14:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2855,10 +2855,10 @@ msgstr ""
 msgid "Are you sure you want to reset your custom theme?"
 msgstr ""
 
-msgid "Start a discussion"
+msgid "About discussions:"
 msgstr ""
 
-msgid "About discussions:"
+msgid "Start a discussion"
 msgstr ""
 
 msgid ""
@@ -4512,6 +4512,9 @@ msgid "Share:"
 msgstr ""
 
 msgid "less"
+msgstr ""
+
+msgid "Older posts below this line"
 msgstr ""
 
 msgid "See older events..."
