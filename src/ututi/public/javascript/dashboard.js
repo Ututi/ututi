@@ -47,6 +47,6 @@ $(document).ready(function() {
 /* Helper reload function.
  */
 function reload_wall(event_snippet) {
-    $('.wall-entry:first').before(event_snippet);
+    $('.wall-entries').prepend(event_snippet);
 };
 

@@ -24,19 +24,22 @@
     </div>
   </div>
 </%def>
+
 <%def name="body_class()">wall subject-wall</%def>
 
 %if c.user:
 ${actions.action_block(c.subject)}
 %endif
 
-%if c.events:
-  ${wall.wall_entries(c.events)}
-%else:
+${wall.wall_entries(c.events)}
+%if not c.events:
+<div id="empty-wall-notice">
   %if c.current_tab == 'discussions':
     ${empty_discussions_subject()}
   %endif
+</div>
 %endif
+
 <script type="text/javascript">
 $(function () {
     $('#start-discussion-actionbutton').click(function () {

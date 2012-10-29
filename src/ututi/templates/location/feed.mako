@@ -39,12 +39,6 @@
         <strong>${_("Start a discussion")}</strong>
         - ${_("discuss various topics. Both students and teachers from your university will be able to join the discussion.")}
       </div>
-<%doc>
-      <div class="feature icon-email">
-        <strong>${_("Power text")}</strong>
-        - ${_("for power rangers!")}
-      </div>
-</%doc>
     </div>
     <div class="action-button">
       <button id="start-discussion-actionbutton">${_('Start a discussion')}</button>
@@ -65,13 +59,14 @@
   ${tip_dict.get(c.current_tab, tip_dict['all'])}
 </div>
 
-%if c.events:
-  ${wall.wall_entries(c.events)}
-%else:
+${wall.wall_entries(c.events)}
+%if not c.events:
+<div id="empty-wall-notice">
   <p>${emptytext_dict.get(c.current_tab, emptytext_dict['all'])}</p>
   %if c.current_tab == 'discussions':
     ${empty_discussions_location()}
   %endif
+</div>
 %endif
 
   <script type="text/javascript">
@@ -113,6 +108,7 @@
                             } else {
                                 $('#add_wall_post_block .cancel-button').click();
                                 reload_wall(data.evt);
+                                $('#empty-wall-notice').hide();
                             }
                        }
                 );

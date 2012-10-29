@@ -89,6 +89,7 @@
                         } else {
                             $('#add_wall_post_block .cancel-button').click();
                             reload_wall(data.evt);
+                            $('#empty-wall-notice').hide();
                         }
                    }
             );

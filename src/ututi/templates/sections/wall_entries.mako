@@ -26,6 +26,7 @@
   <%
   this_page, other = events[:per_page], events[per_page:]
   %>
+  <div class="wall-entries">
   %for event, previous_event in zip(this_page, this_page[1:] + [None]):
     ${event.wall_entry()}
     %if (previous_event is not None) and (previous_event['event_is_new'] != event['event_is_new']):
@@ -40,6 +41,7 @@
       </div>
     </div>
   %endif
+  </div>
 </%def>
 
 <%def name="hide_button(event)">
