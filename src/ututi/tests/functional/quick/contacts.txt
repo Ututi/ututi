@@ -33,6 +33,8 @@ Gmail mail became main mail, but user want have his university mail as main.
 
     >>> browser.open('http://localhost/profile/edit/contacts')
     >>> form = browser.getForm('contacts-form')
+    >>> form.getControl('Your email address').value
+    'second@gmail.com'
     >>> form.getControl('Your email address').value = 'second@mif.stud.vu.lt'
     >>> form.getControl('Save').click()
 
