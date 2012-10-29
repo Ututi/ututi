@@ -86,7 +86,7 @@ ${wall.wall_entries(c.events)}
         $('#add_wall_post_block .action-tease').click(function() {
             $(this).closest('.action-tease').hide();
             $(this).siblings('.tease-element').show();
-            $(this).siblings('text-area.tease-element').focus();
+            $(this).siblings('textarea.tease-element').focus();
         });
 
         $('#dashboard_action_blocks').show();
