@@ -261,22 +261,22 @@
       </%def>
 
       %if group.is_admin(c.user) or c.security_context and h.check_crowds(['admin', 'moderator']):
-      <div style="padding-top: 4px">
+      <div class="group-portlet-setting" style="background-image: url(${url('/img/icons/group_moderation_queue.png')});">
         <a href="${group.url(controller='mailinglist', action='administration')}">${_('Moderation queue')}</a>
       </div>
       %endif
 
       %if group.is_subscribed(c.user):
-      <div style="padding-top: 4px">
+      <div class="group-portlet-setting" style="background-image: url(${url('/img/icons/group_unsubscribe.png')})">
         <a href="${group.url(action='unsubscribe')}">${_("Do not get email")}</a>
       </div>
       %else:
-      <div style="padding-top: 4px">
+      <div class="group-portlet-setting" style="background-image: url(${url('/img/icons/group_subscribe.png')})">
         <a href="${group.url(action='subscribe')}">${_("Get email")}</a>
       </div>
       %endif
 
-      <div style="padding-top: 4px">
+      <div class="group-portlet-setting" style="background-image: url(${url('/img/icons/group_leave.png')})">
         <a href="${group.url(action='leave')}">${_("Leave group")}</a>
       </div>
 
