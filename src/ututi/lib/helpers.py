@@ -889,3 +889,8 @@ def get_university_stats(location):
         return {'total_teachers': location.count(Teacher),
                 'total_subjects': location.count(Subject),
                 'total_groups': location.count(Group)}
+
+
+def get_new_wall_event_count():
+    from pylons import tmpl_context as c
+    return c.user.get_new_wall_events_count()

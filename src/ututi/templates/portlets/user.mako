@@ -11,7 +11,16 @@
     %if c.user.is_teacher:
     <li class="icon-teacher"> <a href="${url(controller='profile', action='dashboard')}">${_("Dashboard")}</a> </li>
     %endif
-    <li class="icon-feed"> <a href="${url(controller='profile', action='feed')}">${_("News feed")}</a> </li>
+    <%
+        new_event_count = (c.new_wall_event_count
+                           if hasattr(c, 'new_wall_event_count')
+                           else h.get_new_wall_event_count())
+    %>
+    %if new_event_count:
+      <li class="icon-feed"> <a href="${url(controller='profile', action='feed')}"><strong>${_("News feed")} (${new_event_count })</strong></a> </li>
+    %else:
+      <li class="icon-feed"> <a href="${url(controller='profile', action='feed')}">${_("News feed")}</a> </li>
+    %endif
     <li class="icon-university"> <a href="${c.user.location.url()}">${_("University feed")}</a> </li>
     <% unread_messages = c.user.unread_messages() %>
     <li class="icon-message ${'active' if unread_messages else ''}">

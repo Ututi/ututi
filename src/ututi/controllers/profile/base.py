@@ -127,7 +127,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     @validate(schema=SearchSubmit, form='index', post_only=False, on_get=True)
     def search_js(self):
         self._search()
-        return render_mako_def('/search/index.mako','search_results', results=c.results, controller='profile', action='search_js')
+        return render_mako_def('/search/index.mako', 'search_results', results=c.results, controller='profile', action='search_js')
 
     @ActionProtector("user")
     def feed(self):
@@ -148,12 +148,14 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         for event in c.events:
             event['event_is_new'] = event.last_activity > c.user.last_seen_feed
 
+        c.new_wall_event_count = 0
+
         result = render('/profile/feed.mako')
 
         # Register new news feed visit.
-        meta.Session.commit() # commit before that to avoid possible
-                              # conflicts (on double refresh for
-                              # example)
+        meta.Session.commit()  # commit before that to avoid possible
+                               # conflicts (on double refresh for
+                               # example)
         c.user.last_seen_feed = datetime.utcnow()
         meta.Session.commit()
 
