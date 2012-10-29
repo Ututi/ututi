@@ -151,6 +151,7 @@ export BUILD_ID ?= `date +%Y-%m-%d_%H-%M-%S`
 
 .PHONY: package_release
 package_release:
+	rm -f ututi*.tar.gz
 	git archive --prefix=ututi${BUILD_ID}/ HEAD | gzip > ututi${BUILD_ID}.tar.gz
 
 .PHONY: download_backup
