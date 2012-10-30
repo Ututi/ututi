@@ -501,6 +501,10 @@ class User(Author):
     def ignored_events_list(self):
         return self.ignored_events.split(',')
 
+    @property
+    def all_subjects(self):
+        return self.watched_subjects
+
     def update_ignored_events(self, events):
         self.ignored_events = ','.join(list(set(events)))
 
@@ -685,6 +689,10 @@ class Teacher(User):
                     caption=caption,
                     link=self.url(qualified=True),
                     description=self.description)
+
+    @property
+    def all_subjects(self):
+        return self.taught_subjects + self.watched_subjects
 
     def snippet(self):
         """Render a short snippet with the basic teacher information.

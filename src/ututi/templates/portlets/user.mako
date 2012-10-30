@@ -43,7 +43,7 @@
       ${_('My subjects:')}
     </%def>
     <ul class="icon-list">
-      %for subject in user.watched_subjects:
+      %for subject in user.all_subjects:
       <li class="icon-subject">
         <a href="${subject.url()}" title="${subject.title}">${h.ellipsis(subject.title, 35)}</a>
       </li>

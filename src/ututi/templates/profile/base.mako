@@ -9,6 +9,7 @@
     ${teacher_information_portlet()}
     ${user_menu_portlet()}
     ${user_groups_portlet()}
+    ${user_subjects_portlet()}
   %else:
     ${profile_portlet()}
     ${user_menu_portlet()}
