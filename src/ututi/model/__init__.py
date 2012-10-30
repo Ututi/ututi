@@ -907,6 +907,10 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
     def get(cls, id):
         query = meta.Session.query(cls)
         try:
+            id = int(id)
+        except ValueError:
+            pass
+        try:
             if isinstance(id, (long, int)):
                 return query.filter_by(id=id).one()
             else:
@@ -1274,10 +1278,6 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
 
     @classmethod
     def get(cls, location, id):
-        try:
-            id = int(id)
-        except ValueError:
-            pass
         try:
             return meta.Session.query(cls).filter_by(subject_id=id, location=location).one()
         except NoResultFound:
