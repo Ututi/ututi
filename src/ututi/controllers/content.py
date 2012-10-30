@@ -22,6 +22,9 @@ class ContentController(BaseController):
         if content_item is None:
             abort(404)
 
+        if content_item.deleted_on is not None:
+            abort(404)
+
         if next_action is None:
             redirect(content_item.url())
         else:
