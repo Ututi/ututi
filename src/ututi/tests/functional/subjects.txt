@@ -75,6 +75,15 @@ The changed information should be visible in the sidebar blocks:
     Lecturer:
     <br />
     Some other guy
+        <div>
+        <form>
+          <fieldset>
+            <button>
+              <span>Manage lecturers</span>
+            </button>
+          </fieldset>
+        </form>
+      </div>
     </li>
 
 The subject's portlet contains a link that can be used to start watching the subject.
