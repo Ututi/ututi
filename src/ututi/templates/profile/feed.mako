@@ -78,7 +78,7 @@
   </div>
 </%def>
 
-%if not c.user.groups and not c.user.watched_subjects:
+%if not c.user.is_teacher and not c.user.groups and not c.user.watched_subjects:
     ${empty_wall_page()}
 %else:
     <a id="settings-link" href="${url(controller='profile', action='wall_settings')}">${_('News feed settings')}</a>
