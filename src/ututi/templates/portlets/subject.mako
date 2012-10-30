@@ -64,6 +64,11 @@
           <br />
           ${subject.lecturer}
         %endif
+        %if h.check_crowds(["moderator"], c.user, subject.location):
+            <div style="margin-top: 8px;">
+            ${h.button_to(_("Manage lecturers"), subject.url(action='teacher_assignment'), class_='dark', method='GET')}
+            </div>
+        %endif
       </li>
       %endif
     </ul>

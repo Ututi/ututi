@@ -18,6 +18,7 @@ from sqlalchemy.sql.expression import or_, and_
 
 from ututi.model import SearchItem
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
+from ututi.model.users import Teacher
 from ututi.lib.security import ActionProtector, deny
 from ututi.lib.search import search, search_query, search_query_count
 from ututi.lib.fileview import FileViewMixin
@@ -405,6 +406,28 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
                     action='home',
                     id=subject.subject_id,
                     tags=subject.location_path))
+
+    @subject_action
+    @ActionProtector("moderator")
+    def teacher_assignment(self, subject):
+        c.notabs = True
+        c.teachers = meta.Session.query(Teacher).filter(Teacher.location==subject.location).all()
+        return render('subject/assign_teacher.mako')
+
+    @subject_action
+    @ActionProtector("moderator")
+    def teacher(self, subject):
+        command = request.params.get('command')
+        teacher_id = int(request.params.get('teacher_id'))
+        teacher = Teacher.get_byid(teacher_id)
+        if command == 'assign':
+            teacher.teach_subject(c.subject)
+        elif command == 'remove':
+            teacher.unteach_subject(c.subject)
+        meta.Session.add(teacher)
+        meta.Session.commit()
+        redirect(c.subject.url(action='teacher_assignment'))
+
 
     @subject_action
     @validate(schema=SubjectForm, form='_edit_form')

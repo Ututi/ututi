@@ -170,7 +170,8 @@ def make_map(config):
     subject_actions = ['feed', 'files', 'edit', 'watch', 'js_watch', 'update',
                        'delete', 'undelete', 'flag', 'create_folder', 'delete_folder',
                        'js_create_folder', 'js_delete_folder', 'upload_file',
-                       'upload_file_short', 'teach', 'unteach', 'info']
+                       'upload_file_short', 'teach', 'unteach', 'info', 'teacher_assignment',
+                       'teacher']
 
     for action in subject_actions:
         map.connect('/subject/*tags/{id}/%s' % action,
