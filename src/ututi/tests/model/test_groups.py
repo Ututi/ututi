@@ -2,8 +2,12 @@ from datetime import date
 import doctest
 
 from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, File, meta
+from ututi.model import ContentItem
+from ututi.model.mailing import GroupMailingListMessage
+from ututi.lib.mailinglist import post_message
 from ututi.model.users import User
 from ututi.model.events import Event
+from ututi.lib.mailer import mail_queue
 
 from ututi.tests import UtutiLayer
 from ututi.tests.model import setUpUser, setUpModeratorGroup
@@ -138,6 +142,30 @@ def test_memberships():
     >>> meta.Session.commit()
     >>> len(g.members)
     1
+    """
+
+def test_message_deletion_cascade():
+    """Test group message deletion after group is deleted
+
+    >>> g = Group.get("moderators")
+    >>> u = User.get("admin@uni.ututi.com", LocationTag.get(u'uni'))
+    >>> g.add_member(u, True)
+    >>> meta.Session.commit()
+    >>> meta.set_active_user(u.id)
+    >>> msg_id = post_message(g, u, 'test', 'test message body').id
+    >>> ci = meta.Session.query(ContentItem).filter_by(id=msg_id).all()
+    >>> len(ci)
+    1
+    >>> meta.Session.delete(g)
+
+    Make sure mailing list message content items are deleted.
+
+    >>> ci = meta.Session.query(ContentItem).filter_by(id=msg_id).all()
+    >>> len(ci)
+    0
+    >>> mail_queue[:] = []
+
+
     """
 
 def test_suite():
