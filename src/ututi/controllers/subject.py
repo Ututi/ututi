@@ -91,7 +91,12 @@ def subject_action(method):
         if subject.visibility != 'everyone':
             crowds = ['university_member'] if subject.visibility == 'university_members' else ['department_member']
             if not c.user or not check_crowds(crowds, c.user, subject):
-                abort(403)  # XXX Reidrect to a page that explains why you can't access the subject
+                location_link = ((location.url(), ' '.join(location.full_title_path))
+                                 if subject.visibility == 'department_members'
+                                 else (location.root.url(), location.root.title))
+                request.environ['ututi.access_denied_reason'] = h.literal(('Only %(location)s members can access see this subject.')
+                        % dict(location=h.link_to(location_link[1], location_link[0])))
+                abort(403)
 
         c.security_context = subject
         c.object_location = subject.location

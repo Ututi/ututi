@@ -1616,6 +1616,15 @@ class LocationTag(Tag):
         return '/'.join(self.path)
 
     @property
+    def full_title_path(self):
+        loc = self
+        path = []
+        while loc:
+            path.append(loc.title)
+            loc = loc.parent
+        return list(reversed(path))
+
+    @property
     def root(self):
         """Return root location of this location tag.
         If tag has no parent, will return this tag itself."""
