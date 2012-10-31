@@ -38,7 +38,7 @@ def set_login_url_to_referrer(method):
 
 
 def subject_menu_items():
-    return [
+    items = [
         {'title': _("Info"),
          'name': 'info',
          'link': c.subject.url(action='info')},
@@ -50,10 +50,12 @@ def subject_menu_items():
          'link': c.subject.url(action='files')},
         {'title': _("Notes"),
          'name': 'pages',
-         'link': c.subject.url(action='pages')},
-        {'title': _("Discussions"),
-         'name': 'discussions',
-         'link': c.subject.url(action='feed', filter='discussions')}]
+         'link': c.subject.url(action='pages')}]
+    if c.user and c.subject.post_discussion_perm == 'everyone' or check_crowds(['teacher', 'moderator'], c.user):
+        items.append({'title': _("Discussions"),
+                      'name': 'discussions',
+                      'link': c.subject.url(action='feed', filter='discussions')})
+    return items
 
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)

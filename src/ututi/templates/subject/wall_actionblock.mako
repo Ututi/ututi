@@ -184,12 +184,16 @@
 <%def name="action_block(subject)">
   <%actions:action_block>
     <%def name="links()">
+      %if c.user_can_post_discussions:
       <a class="action active" id="add_wall_post" href="#add-wall-post">${_('Discussion')}</a>
+      %endif
       <a class="action active" id="upload_file" href="#upload-file">${_('File')}</a>
       <a class="action active" id="create_wiki" href="#create-wiki">${_('Wiki note')}</a>
     </%def>
 
+    %if c.user_can_post_discussions:
     ${self.add_wall_post_block(subject)}
+    %endif
     ${self.upload_file_block(subject)}
     ${self.create_wiki_block(subject)}
   </%actions:action_block>
