@@ -98,6 +98,8 @@ def subject_action(method):
         c.tabs = subject_menu_items()
         c.breadcrumbs = [{'link': subject.url(), 'title': subject.title}]
         c.theme = subject.location.get_theme()
+        c.user_can_edit_settings = c.user and (c.subject.edit_settings_perm == 'everyone' or check_crowds(['teacher', 'moderator'], c.user))
+        c.user_can_post_discussions = c.user and (c.subject.post_discussion_perm == 'everyone' or check_crowds(['teacher', 'moderator'], c.user))
         return method(self, subject)
     return _subject_action
 
@@ -346,6 +348,9 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
     @subject_action
     @ActionProtector("user")
     def edit(self, subject):
+        if subject.edit_settings_perm != 'everyone' and not check_crowds(['teacher', 'moderator'], c.user, subject):
+            abort(403)
+
         defaults = {
             'id': subject.subject_id,
             'old_location': '/'.join(subject.location.path),
@@ -547,7 +552,13 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
             for watcher in subject.watching_users:
                 if not crowd_fn(watcher.user, subject):
                     watcher.user.unwatchSubject(subject)
-            # XXX Todo: remove subject from group watched subject if group can't access subject
+# XXX Todo: find out what subjects are available for groups to watch
+#            for group_w in subject.watching_groups:
+#                group = group_w.group
+#                if (subject.visibility == 'department_members' and not group.location is subject.location)\
+#                        or (subject.visibility == 'university_members' and not group.location.root is subject.location.root):
+#                    group.unwatchSubject(subject)
+
 
         subject.edit_settings_perm = self.form_result['subject_edit']
         subject.post_discussion_perm = self.form_result['subject_post_discussions']

@@ -40,7 +40,7 @@
 %endif
 
 %if not hasattr(c, 'notabs'):
-  %if c.user:
+  %if c.user and c.user_can_edit_settings:
     <div class="above-tabs">
       <a class="settings-link" href="${c.subject.url(action='edit')}">${_("Edit Settings")}</a>
     </div>
