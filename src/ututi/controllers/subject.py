@@ -90,7 +90,7 @@ def subject_action(method):
 
         if subject.visibility != 'everyone':
             crowds = ['university_member'] if subject.visibility == 'university_members' else ['department_member']
-            if not check_crowds(crowds, c.user, subject):
+            if not c.user or not check_crowds(crowds, c.user, subject):
                 abort(403)  # XXX Reidrect to a page that explains why you can't access the subject
 
         c.security_context = subject
