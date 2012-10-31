@@ -19,7 +19,7 @@ from sqlalchemy.sql.expression import or_, and_
 from ututi.model import SearchItem
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
 from ututi.model.users import Teacher
-from ututi.lib.security import ActionProtector, deny, check_crowds
+from ututi.lib.security import ActionProtector, deny, check_crowds, is_university_member, is_department_member
 from ututi.lib.search import search, search_query, search_query_count
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render, u_cache
@@ -541,8 +541,15 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
     @validate(schema=SubjectPermissionsForm)
     @ActionProtector("teacher", "moderator", "root")
     def change_permissions(self, subject):
-        c.subject.visibility = self.form_result['subject_visibility']
-        c.subject.edit_settings_perm = self.form_result['subject_edit']
-        c.subject.post_discussion_perm = self.form_result['subject_post_discussions']
+        subject.visibility = self.form_result['subject_visibility']
+        if subject.visibility != 'everyone':
+            crowd_fn = is_university_member if subject.visibility == 'university_members' else is_department_member
+            for watcher in subject.watching_users:
+                if not crowd_fn(watcher.user, subject):
+                    watcher.user.unwatchSubject(subject)
+            # XXX Todo: remove subject from group watched subject if group can't access subject
+
+        subject.edit_settings_perm = self.form_result['subject_edit']
+        subject.post_discussion_perm = self.form_result['subject_post_discussions']
         meta.Session.commit()
         return redirect(c.subject.url(action='permissions'))
