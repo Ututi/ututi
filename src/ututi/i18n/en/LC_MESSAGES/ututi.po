@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-10-29 14:40+0200\n"
+"PO-Revision-Date: 2012-10-31 12:04+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=((n * 1) != 1)\n"
@@ -3393,6 +3393,9 @@ msgid_plural "Lecturers:"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "Manage lecturers"
+msgstr ""
+
 msgid "Files and wiki notes:"
 msgstr ""
 
@@ -4750,6 +4753,12 @@ msgid "Did you mean:"
 msgstr ""
 
 msgid "No, I want to create a new subject that is not in this list."
+msgstr ""
+
+msgid "Assign teacher"
+msgstr ""
+
+msgid "Assign"
 msgstr ""
 
 msgid "Subject has been deleted, you can restore it if you want to."
