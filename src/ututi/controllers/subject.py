@@ -19,7 +19,7 @@ from sqlalchemy.sql.expression import or_, and_
 from ututi.model import SearchItem
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
 from ututi.model.users import Teacher
-from ututi.lib.security import ActionProtector, deny
+from ututi.lib.security import ActionProtector, deny, check_crowds
 from ututi.lib.search import search, search_query, search_query_count
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render, u_cache
@@ -85,6 +85,11 @@ def subject_action(method):
 
         if subject is None:
             abort(404)
+
+        if subject.visibility != 'everyone':
+            crowds = ['university_member'] if subject.visibility == 'university_members' else ['department_member']
+            if not check_crowds(crowds, c.user, subject):
+                abort(403)  # XXX Reidrect to a page that explains why you can't access the subject
 
         c.security_context = subject
         c.object_location = subject.location

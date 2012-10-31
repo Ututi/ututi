@@ -8,40 +8,40 @@ from ututi.tests.model import setUpUser
 
 import ututi
 
-from ututi.lib.security import is_department_student, is_university_student
+from ututi.lib.security import is_department_member, is_university_member
 
 
-def test_department_student():
+def test_department_member():
     r"""
 
     >>> u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni/dept2'))
-    >>> is_department_student(u, LocationTag.get(u'uni/dept1'))
+    >>> is_department_member(u, LocationTag.get(u'uni/dept1'))
     False
-    >>> is_department_student(u, LocationTag.get(u'uni'))
+    >>> is_department_member(u, LocationTag.get(u'uni'))
     False
-    >>> is_department_student(u, LocationTag.get(u'uni/dept2'))
+    >>> is_department_member(u, LocationTag.get(u'uni/dept2'))
     True
     >>> subject1 = Subject.get(LocationTag.get(u'uni/dept1'), u'subject1')
     >>> subject2 = Subject.get(LocationTag.get(u'uni/dept2'), u'subject2')
-    >>> is_department_student(u, subject1)
+    >>> is_department_member(u, subject1)
     False
-    >>> is_department_student(u, subject2)
+    >>> is_department_member(u, subject2)
     True
 
     """
 
 
-def test_university_student():
+def test_university_member():
     r"""
 
     >>> u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni/dept2'))
-    >>> is_university_student(u, LocationTag.get(u'uni'))
+    >>> is_university_member(u, LocationTag.get(u'uni'))
     True
-    >>> is_university_student(u, LocationTag.get(u'uni/dept1'))
+    >>> is_university_member(u, LocationTag.get(u'uni/dept1'))
     True
-    >>> is_university_student(u, Subject.get(LocationTag.get(u'uni/dept1'), u'subject1'))
+    >>> is_university_member(u, Subject.get(LocationTag.get(u'uni/dept1'), u'subject1'))
     True
-    >>> is_university_student(u, LocationTag.get(u'other_uni'))
+    >>> is_university_member(u, LocationTag.get(u'other_uni'))
     False
 
     """
