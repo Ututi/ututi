@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-10-29 14:40+0200\n"
+"PO-Revision-Date: 2012-10-31 12:04+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -3701,6 +3701,9 @@ msgstr[0] "Dėstytojas:"
 msgstr[1] "Dėstytojai:"
 msgstr[2] "Dėstytojų:"
 
+msgid "Manage lecturers"
+msgstr "Keisti dėstytojus"
+
 msgid "Files and wiki notes:"
 msgstr "Failai ir Wiki užrašai:"
 
@@ -5167,6 +5170,12 @@ msgstr "Turite omeny:"
 
 msgid "No, I want to create a new subject that is not in this list."
 msgstr "Ne, noriu sukurti dalyką, kurio sąraše nėra."
+
+msgid "Assign teacher"
+msgstr "Priskirti dėstytojus"
+
+msgid "Assign"
+msgstr "Priskirti"
 
 msgid "Subject has been deleted, you can restore it if you want to."
 msgstr "Dalykas buvo ištrintas. Jūs galite jį atstatyti."

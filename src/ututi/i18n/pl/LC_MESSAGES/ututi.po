@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-10-29 14:40+0200\n"
+"PO-Revision-Date: 2012-10-31 12:04+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -3746,6 +3746,9 @@ msgstr[0] "Wykładowca:"
 msgstr[1] "Wykładowcy:"
 msgstr[2] "Wykładowców:"
 
+msgid "Manage lecturers"
+msgstr ""
+
 msgid "Files and wiki notes:"
 msgstr "Pliki i notatki wiki:"
 
@@ -5208,6 +5211,12 @@ msgstr "Masz na myśli:"
 
 msgid "No, I want to create a new subject that is not in this list."
 msgstr "Nie, chcę utworzyć nowy przedmiot, którego nie ma na tej liście."
+
+msgid "Assign teacher"
+msgstr ""
+
+msgid "Assign"
+msgstr ""
 
 msgid "Subject has been deleted, you can restore it if you want to."
 msgstr "Przedmiot został usunięty, ale możesz go jeszcze przywrócić."
