@@ -151,11 +151,18 @@ class NewSubjectForm(Schema):
     lecturer = validators.UnicodeString(strip=True)
 
 
+class SubjectPermissionsForm(Schema):
+    allow_extra_fields = True
+    subject_visibility = validators.OneOf(['everyone', 'department_members', 'university_members'])
+    subject_edit = validators.OneOf(['everyone', 'teachers_and_admins'])
+    subject_post_discussions = validators.OneOf(['everyone', 'teachers'])
+
+
 class SubjectAddMixin(object):
 
     def _create_subject(self):
         title = self.form_result['title']
-        id = ''.join(Random().sample(string.ascii_lowercase, 8)) # use random id first
+        id = ''.join(Random().sample(string.ascii_lowercase, 8))  # use random id first
         lecturer = self.form_result['lecturer']
         location = self.form_result['location']
         description = self.form_result['description']
@@ -519,3 +526,19 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         c.subject.deleted = None
         meta.Session.commit()
         redirect(request.referrer)
+
+    @subject_action
+    @ActionProtector("moderator", "root")
+    def permissions(self, subject):
+        c.notabs = True
+        return render('subject/permissions.mako')
+
+    @subject_action
+    @validate(schema=SubjectPermissionsForm)
+    @ActionProtector("moderator", "root")
+    def change_permissions(self, subject):
+        c.subject.visibility = self.form_result['subject_visibility']
+        c.subject.edit_settings_perm = self.form_result['subject_edit']
+        c.subject.post_discussion_perm = self.form_result['subject_post_discussions']
+        meta.Session.commit()
+        return redirect(c.subject.url(action='permissions'))

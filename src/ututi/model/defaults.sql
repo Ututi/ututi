@@ -401,6 +401,9 @@ create table subjects (
        title varchar(500) not null,
        lecturer varchar(500) default null,
        description text default null,
+       visibility varchar(40) not null default 'everyone',
+       edit_settings_perm varchar(40) not null default 'everyone',
+       post_discussion_perm varchar(40) not null default 'everyone',
        primary key (id));;
 
 /* A table that tracks subjects watched and ignored by a user */
