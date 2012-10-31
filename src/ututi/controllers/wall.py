@@ -230,6 +230,8 @@ class WallController(BaseController, FileViewMixin):
     @js_validate(schema=SubjectWallPostForm())
     def create_subject_wall_post(self):
         subject = Subject.get_by_id(self.form_result['subject_id'])
+        if subject.post_discussion_perm != 'everyone' and not check_crowds(['teacher', 'moderator'], c.user, subject):
+            abort(403)
         self._create_wall_post(subject=subject,
                                content=self.form_result['post'])
         self._redirect()
@@ -239,6 +241,8 @@ class WallController(BaseController, FileViewMixin):
     @jsonify
     def create_subject_wall_post_js(self):
         subject = Subject.get_by_id(self.form_result['subject_id'])
+        if subject.post_discussion_perm != 'everyone' and not check_crowds(['teacher', 'moderator'], c.user, subject):
+            abort(403)
         post = self._create_wall_post(subject=subject,
                                       content=self.form_result['post'])
         evt = meta.Session.query(SubjectWallPostEvent).filter_by(object_id=post.id).one().wall_entry()
