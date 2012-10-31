@@ -95,7 +95,15 @@ different error message:
 
     >>> browser.printCssQuery("#permission-denied-message", strip=True)
     <div>You do not have the rights to see this page, or perform this action. Go back or go to the search page please.</div>
-    
+
+But if user is not logged in
+    >>> browser = Browser()
+    >>> browser.open('http://localhost/admin')
+
+They will see a login page:
+    >>> browser.printQuery("id('main-content')//h1", strip=True)
+    <h1>Login</h1>
+
 If anonymous user will get NotFound (404) error, then login form will be showed:
 
     >>> browser = Browser()

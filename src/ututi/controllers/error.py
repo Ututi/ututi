@@ -10,6 +10,8 @@ from pylons import url, config, session
 from pylons.controllers.util import redirect
 
 from ututi.controllers.search import SearchController
+
+
 class ErrorController(SearchController):
     """Generates error documents as and when they are required.
 
@@ -29,21 +31,27 @@ class ErrorController(SearchController):
             return render("/error.mako")
 
         c.reason = req.environ.get('ututi.access_denied_reason', None)
-        if resp.status_int == 403:
-            return render("/access_denied.mako")
-        elif resp.status_int == 404:
-            h.flash(_("Document at %(url)s was not found, but maybe you are interested in something else?") % {
-                    'url': req.url.encode('ascii', 'ignore')})
+        if resp.status_int in [403, 404]:
             self.form_result = {}
             self._search()
             c.came_from = url('/')
+            if resp.status_int == 403:
+                try:
+                    if session['login']:
+                        return render("/access_denied.mako")
+                except KeyError:
+                    return render('/login.mako')
 
-            # if user is logged in, show search form, otherwise - login form
-            try:
-                if session['login']:
-                    return render('/search/index.mako')
-            except KeyError:
-                return render('/login.mako')
+            elif resp.status_int == 404:
+                h.flash(_("Document at %(url)s was not found, but maybe you are interested in something else?") % {
+                        'url': req.url.encode('ascii', 'ignore')})
+
+                # if user is logged in, show search form, otherwise - login form
+                try:
+                    if session['login']:
+                        return render('/search/index.mako')
+                except KeyError:
+                    return render('/login.mako')
 
         return render("/error.mako")
 
