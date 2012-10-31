@@ -1,6 +1,7 @@
 <%inherit file="/base.mako" />
 <%namespace file="/portlets/subject.mako" import="subject_info_portlet,
-    subject_follow_portlet, subject_teachers_portlet, subject_stats_portlet"/>
+    subject_follow_portlet, subject_teachers_portlet, subject_stats_portlet,
+    subject_permission_link_portlet"/>
 <%namespace name="files" file="/sections/files.mako" />
 <%namespace file="/elements.mako" import="tabs"/>
 
@@ -20,6 +21,7 @@
   ${subject_info_portlet()}
   ${subject_follow_portlet()}
   ${subject_teachers_portlet()}
+  ${subject_permission_link_portlet()}
   ${subject_stats_portlet()}
 </%def>
 
