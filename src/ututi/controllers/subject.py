@@ -184,7 +184,6 @@ class SubjectAddMixin(object):
         for tag in tags:
             stags.append(SimpleTag.get(tag))
 
-        
         subj = Subject(id, title, location, lecturer, description, stags)
 
         meta.Session.add(subj)
@@ -533,14 +532,14 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         redirect(request.referrer)
 
     @subject_action
-    @ActionProtector("moderator", "root")
+    @ActionProtector("teacher", "moderator", "root")
     def permissions(self, subject):
         c.notabs = True
         return render('subject/permissions.mako')
 
     @subject_action
     @validate(schema=SubjectPermissionsForm)
-    @ActionProtector("moderator", "root")
+    @ActionProtector("teacher", "moderator", "root")
     def change_permissions(self, subject):
         c.subject.visibility = self.form_result['subject_visibility']
         c.subject.edit_settings_perm = self.form_result['subject_edit']
