@@ -13,6 +13,7 @@ from ututi.lib.security import is_department_student, is_university_student
 
 def test_department_student():
     r"""
+
     >>> u = User.get('admin@uni.ututi.com', LocationTag.get(u'uni/dept2'))
     >>> is_department_student(u, LocationTag.get(u'uni/dept1'))
     False
@@ -72,9 +73,9 @@ def test_setup(test):
                         parent=uni,
                         member_policy='PUBLIC')
     other_uni = LocationTag(title=u'other_uni',
-                        title_short=u'other_uni',
-                        parent=None,
-                        member_policy='PUBLIC')
+                            title_short=u'other_uni',
+                            parent=None,
+                            member_policy='PUBLIC')
     meta.Session.add_all([dept1, dept2, other_uni])
     meta.Session.commit()
 
