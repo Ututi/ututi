@@ -139,6 +139,18 @@ def is_smallfile(user, context=None):
         return context.size < int(config.get('small_file_size', 1024**2))
     return False
 
+def is_department_student(user, context=None):
+    from ututi.model import Subject
+    if isinstance(context, Subject):
+        context = context.location
+    return user.location.id == context.id
+
+def is_university_student(user, context=None):
+    from ututi.model import Subject
+    if isinstance(context, Subject):
+        context = context.location
+    return user.location.root is context.root
+
 
 crowd_checkers = {
     "root": is_root,
@@ -153,6 +165,8 @@ crowd_checkers = {
     "verified_teacher": is_verified_teacher,
     "group_teacher": is_group_teacher,
     "smallfile": is_smallfile,
+    "department_student": is_department_student,
+    "university_student": is_university_student,
     }
 
 
