@@ -1,4 +1,4 @@
-"rm""The application's model objects"""
+"""The application's model objects"""
 import urlparse
 import sys
 import os
