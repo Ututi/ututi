@@ -2225,15 +2225,13 @@ class SubscribedThread(object):
 
 
 class SearchItem(object):
-    """Language mapper.
-    
-    You can find more dictionaries in
-    /usr/share/postgresql/8.4/tsearch_data/ directory.
 
-    Key means information from the user session, value - filename in this
-    directory.
-    """
-    LANGUAGE_MAPPER = {'en': 'public.universal', 'lt': 'lt', 'pl': 'pl'}
+    @classmethod
+    def getDictForLanguage(cls, lang):
+        lang_to_dict = {'en': config['default_search_dict'],
+                        'lt': 'lt',
+                        'pl': 'pl'}
+        return lang_to_dict[lang]
 
 
 class TagSearchItem(object):

@@ -85,7 +85,6 @@ class UtutiQuickLayerBase(LayerBase):
     def setUp(self):
         teardown_db_defaults(meta.engine, quiet=True)
         initialize_db_defaults(meta.engine)
-        initialize_dictionaries(meta.engine)
 
     def tearDown(self):
         try:
@@ -96,6 +95,7 @@ class UtutiQuickLayerBase(LayerBase):
 
     def testSetUp(self):
         config = pylons.test.pylonsapp.config
+        config['default_search_dict'] = 'pg_catalog.english'
         config['tpl_lang'] = 'lt'
         mail_queue[:] = []
         sms_queue[:] = []
