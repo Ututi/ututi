@@ -61,11 +61,10 @@ def make_app(global_conf, full_stack=True, static_files=True, **app_conf):
             app = ErrorHandler(app, global_conf, **config['pylons.errorware'])
             app = StatusCodeRedirect(app)
         else:
-            try:
-                from exceptional import ExceptionalMiddleware
-                app = ExceptionalMiddleware(app, config['exceptional.api_key'])
-            except:
-                print "ERROR: Cannot setup exceptional error reporting", sys.exc_info()
+            from raven.contrib.pylons import Sentry
+            if config.get('sentry.dsn'):
+                app = Sentry(app, config)
+            else:
                 app = ErrorHandler(app, global_conf, **config['pylons.errorware'])
             app = StatusCodeRedirect(app, [400, 401, 403, 404, 500])
 
