@@ -487,7 +487,7 @@ CREATE TRIGGER set_thread_id BEFORE INSERT OR UPDATE ON group_mailing_list_messa
 create function group_message_delete_content_item() returns trigger as $$
     begin
         delete from content_items where content_items.id=OLD.id;
-        return null;
+        RETURN NULL;
     end;
 $$ language plpgsql;;
 
