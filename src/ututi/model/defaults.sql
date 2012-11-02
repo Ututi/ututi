@@ -1706,3 +1706,16 @@ $$ language plpgsql;
 
 create trigger after_wall_post_event_trigger after insert or update on wall_posts
     for each row execute procedure wall_post_event_trigger();
+
+/* A table for sub-departments
+
+Universities and Departments are covered by location tag functionality.
+*/
+create table sub_departments (
+       id bigserial not null,
+       location_id int8 not null references tags(id) on delete cascade,
+       slug varchar(150) default null,
+       title varchar(500) not null,
+       description text default null,
+       unique(location_id, slug),
+       primary key (id));;

@@ -310,6 +310,10 @@ def setup_tables(engine):
           useexisting=True,
           autoload_with=engine)
 
+    Table("sub_departments", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
+
     from ututi.model import events
     events.setup_tables(engine)
     from ututi.model import i18n
@@ -611,6 +615,10 @@ def setup_orm():
                                    secondary=tables['notifications_viewed'],
                                    backref="seen_notifications"),
                           })
+
+
+    orm.mapper(SubDepartment, tables['sub_departments'],
+               properties = {'location': relation(Tag, backref='sub_departments')})
 
     from ututi.model import events
     events.setup_orm()
@@ -2411,3 +2419,11 @@ class EmailDomain(Model):
                 .filter(EmailDomain.location == None)\
                 .order_by(EmailDomain.domain_name)\
                 .all()
+
+
+class SubDepartment(Model):
+
+    def __init__(self, title, location, slug=None):
+        self.title = title
+        self.location = location
+        self.slug = slug
