@@ -3,25 +3,11 @@ create table languages (
        title varchar(100) not null,
        primary key (id));;
 
-insert into languages (title, id) values
-       ('English', 'en'),
-       ('Lithuanian', 'lt'),
-       ('Polish', 'pl');;
-
-
 create table language_texts (
        id varchar(100) not null,
        language_id varchar(100) not null references languages(id) on delete cascade,
        text text not null default '',
        primary key (id, language_id));;
-
-insert into language_texts (id, language_id, text) values
-       ('about_books', 'en', ''),
-       ('about', 'en', ''),
-       ('advertising', 'en', ''),
-       ('group_pay', 'en', ''),
-       ('banners', 'en', '');;
-
 
 create table i18n_texts (
        id bigserial not null,
@@ -50,10 +36,6 @@ create table countries (
        language_id varchar(100) not null references languages(id) on delete cascade,
        primary key (id));;
 
-insert into countries (name, timezone, locale, language_id) values
-       ('Lithuania', 'Europe/Vilnius', 'lt_LT', 'lt'),
-       ('Poland', 'Europe/Warsaw', 'pl_PL', 'pl');;
-
 /* A table for custom Ututi theming data.
  */
 CREATE TABLE themes (
@@ -70,9 +52,6 @@ create table admin_users(
        fullname varchar(100),
        password char(36),
        last_seen timestamp not null default (now() at time zone 'UTC'));;
-
-/* Create first user=admin and password=asdasd */
-insert into admin_users (email, fullname, password) values ('admin@ututi.lt', 'Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7');;
 
 create table authors (
        id bigserial not null,
@@ -389,11 +368,6 @@ create table group_members (
 create index group_members_group_id_idx on group_members(group_id);
 create index group_members_user_id_idx on group_members(user_id);
 
-insert into group_membership_types (membership_type)
-                      values ('administrator');;
-insert into group_membership_types (membership_type)
-                      values ('member');;
-
 /* A table for subjects */
 create table subjects (
        id int8 not null references content_items(id) on delete cascade,
@@ -570,11 +544,6 @@ CREATE TABLE forum_categories (
        primary key (id));
 
 CREATE INDEX forum_categories_group_id_idx ON forum_categories(group_id);
-
-INSERT INTO forum_categories (group_id, title, description)
-    VALUES (NULL, 'Community', 'Ututi community forum');
-INSERT INTO forum_categories (group_id, title, description)
-    VALUES (NULL, 'Report a bug', 'Report bugs here' );
 
 
 CREATE TABLE forum_posts (
@@ -1739,3 +1708,32 @@ $$ language plpgsql;
 
 create trigger after_wall_post_event_trigger after insert or update on wall_posts
     for each row execute procedure wall_post_event_trigger();
+
+insert into languages (title, id) values
+       ('English', 'en'),
+       ('Lithuanian', 'lt'),
+       ('Polish', 'pl');;
+
+insert into language_texts (id, language_id, text) values
+       ('about_books', 'en', ''),
+       ('about', 'en', ''),
+       ('advertising', 'en', ''),
+       ('group_pay', 'en', ''),
+       ('banners', 'en', '');;
+
+insert into countries (name, timezone, locale, language_id) values
+       ('Lithuania', 'Europe/Vilnius', 'lt_LT', 'lt'),
+       ('Poland', 'Europe/Warsaw', 'pl_PL', 'pl');;
+
+/* Create first user=admin and password=asdasd */
+insert into admin_users (email, fullname, password) values ('admin@ututi.lt', 'Adminas Adminovix', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7');;
+
+insert into group_membership_types (membership_type)
+                      values ('administrator');;
+insert into group_membership_types (membership_type)
+                      values ('member');;
+
+INSERT INTO forum_categories (group_id, title, description)
+    VALUES (NULL, 'Community', 'Ututi community forum');
+INSERT INTO forum_categories (group_id, title, description)
+    VALUES (NULL, 'Report a bug', 'Report bugs here' );
