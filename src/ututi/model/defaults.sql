@@ -1732,8 +1732,3 @@ insert into group_membership_types (membership_type)
                       values ('administrator');;
 insert into group_membership_types (membership_type)
                       values ('member');;
-
-INSERT INTO forum_categories (group_id, title, description)
-    VALUES (NULL, 'Community', 'Ututi community forum');
-INSERT INTO forum_categories (group_id, title, description)
-    VALUES (NULL, 'Report a bug', 'Report bugs here' );
