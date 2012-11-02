@@ -44,10 +44,10 @@ class UtutiBaseLayer(LayerBase):
     def testSetUp(self):
         teardown_db_defaults(meta.engine, quiet=True)
         initialize_db_defaults(meta.engine)
-        initialize_dictionaries(meta.engine)
 
         config = pylons.test.pylonsapp.config
         config['tpl_lang'] = 'lt'
+        config['default_search_dict'] = 'pg_catalog.english'
         mail_queue[:] = []
         sms_queue[:] = []
         gg.sent_messages[:] = []

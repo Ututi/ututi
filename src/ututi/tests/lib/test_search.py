@@ -2,6 +2,8 @@ from datetime import date
 import doctest
 
 from pylons import config
+from ututi.model import initialize_dictionaries
+import pylons.test
 
 from ututi.model import LocationTag, GroupMembershipType, GroupMember, Group, User, meta
 from ututi.model import meta, Subject, Page, SimpleTag, File
@@ -112,6 +114,9 @@ def test_suite():
 def test_setup(test):
     """Create some models needed for the tests."""
     ututi.tests.setUp(test)
+    initialize_dictionaries(meta.engine)
+    config = pylons.test.pylonsapp.config
+    config['default_search_dict'] = 'public.universal'
 
     vu = LocationTag(u'Vilniaus universitetas', u'vu', u'', member_policy='PUBLIC')
     ef = LocationTag(u'Ekonomikos fakultetas', u'ef', u'', vu, member_policy='PUBLIC')

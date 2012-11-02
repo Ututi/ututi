@@ -2228,7 +2228,7 @@ class SearchItem(object):
 
     @classmethod
     def getDictForLanguage(cls, lang):
-        lang_to_dict = {'en': config['default_search_dict'],
+        lang_to_dict = {'en': config.get('default_search_dict', 'public.universal'),
                         'lt': 'lt',
                         'pl': 'pl'}
         return lang_to_dict[lang]
