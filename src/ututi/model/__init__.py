@@ -629,12 +629,9 @@ def reset_db(engine):
     connection.close()
 
 
-def initialize_dictionaries(engine):
-    initial_db_data = pkg_resources.resource_string(
-        "ututi",
-        "model/stemming.sql").split(";;")
+def run_statements(statements):
     connection = meta.engine.connect()
-    for statement in initial_db_data:
+    for statement in statements:
         statement = statement.strip()
         if (statement):
             try:
@@ -648,27 +645,26 @@ def initialize_dictionaries(engine):
                 txn.rollback()
                 return
     connection.close()
+
+
+def initialize_dictionaries(engine):
+    stemming = pkg_resources.resource_string(
+        "ututi",
+        "model/stemming.sql").split(";;")
+    run_statements(stemming)
 
 
 def initialize_db_defaults(engine):
-    initial_db_data = pkg_resources.resource_string(
+    schema = pkg_resources.resource_string(
         "ututi",
         "model/defaults.sql").split(";;")
-    connection = meta.engine.connect()
-    for statement in initial_db_data:
-        statement = statement.strip()
-        if (statement):
-            try:
-                txn = connection.begin()
-                connection.execute(statement)
-                txn.commit()
-            except DatabaseError, e:
-                print >> sys.stderr, ""
-                print >> sys.stderr, e.message
-                print >> sys.stderr, e.statement
-                txn.rollback()
-                return
-    connection.close()
+    run_statements(schema)
+
+    initial_data = pkg_resources.resource_string(
+        "ututi",
+        "model/initial_data.sql").split(";;")
+    run_statements(initial_data)
+
     migrator = GreatMigrator(engine)
     migrator.initializeVersionning()
 
