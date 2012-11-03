@@ -64,7 +64,7 @@ def setup_tables(engine):
     warnings.simplefilter('ignore', SAWarning)
     Table("files", meta.metadata,
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
     warnings.simplefilter('default', SAWarning)
 
@@ -75,43 +75,43 @@ def setup_tables(engine):
     Table("forum_categories", meta.metadata,
           autoload=True,
           autoload_with=engine,
-          useexisting=True)
+          extend_existing=True)
 
     Table("forum_posts", meta.metadata,
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
     Table("seen_threads", meta.metadata,
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
     Table("subscribed_threads", meta.metadata,
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
     Table("users", meta.metadata,
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
     Table("teachers", meta.metadata,
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
     Table("authors", meta.metadata,
           Column('id', Integer, Sequence('authors_id_seq'), primary_key=True),
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
     Table("admin_users", meta.metadata,
           Column('id', Integer, Sequence('admin_users_id_seq'), primary_key=True),
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
     Table("teacher_taught_subjects", meta.metadata,
@@ -121,7 +121,7 @@ def setup_tables(engine):
     Table("teacher_groups", meta.metadata,
           autoload=True,
           autoload_with=engine,
-          useexisting=True)
+          extend_existing=True)
 
     Table("content_items", meta.metadata,
           autoload=True,
@@ -134,16 +134,16 @@ def setup_tables(engine):
     Table("private_messages", meta.metadata,
           autoload=True,
           autoload_with=engine,
-          useexisting=True)
+          extend_existing=True)
 
     Table("regions", meta.metadata,
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
     Table("tags", meta.metadata,
           Column('id', Integer, Sequence('tags_id_seq'), primary_key=True),
-          useexisting=True,
+          extend_existing=True,
           autoload=True,
           autoload_with=engine)
 
@@ -177,7 +177,7 @@ def setup_tables(engine):
 
     Table("subjects", meta.metadata,
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
     Table("group_membership_types", meta.metadata,
@@ -189,7 +189,7 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("groups", meta.metadata,
-          useexisting=True,
+          extend_existing=True,
           autoload=True,
           autoload_with=engine)
 
@@ -198,12 +198,12 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("coupon_usage", meta.metadata,
-          useexisting=True,
+          extend_existing=True,
           autoload=True,
           autoload_with=engine)
 
     Table("group_coupons", meta.metadata,
-          useexisting=True,
+          extend_existing=True,
           autoload=True,
           autoload_with=engine)
 
@@ -238,21 +238,21 @@ def setup_tables(engine):
 
     Table("payments", meta.metadata,
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
     Table("received_sms_messages", meta.metadata,
-          useexisting=True,
+          extend_existing=True,
           autoload=True,
           autoload_with=engine)
 
     Table("outgoing_group_sms_messages", meta.metadata,
-          useexisting=True,
+          extend_existing=True,
           autoload=True,
           autoload_with=engine)
 
     Table("sms_outbox", meta.metadata,
-          useexisting=True,
+          extend_existing=True,
           autoload=True,
           autoload_with=engine)
 
@@ -266,7 +266,7 @@ def setup_tables(engine):
 
     Table("wall_posts", meta.metadata,
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
     Table("sub_departments", meta.metadata,

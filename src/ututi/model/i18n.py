@@ -127,7 +127,7 @@ class Country(Model):
 def setup_tables(engine):
     Table("languages", meta.metadata,
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
     Table("language_texts", meta.metadata,
@@ -144,7 +144,7 @@ def setup_tables(engine):
 
     Table("countries", meta.metadata,
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
 
