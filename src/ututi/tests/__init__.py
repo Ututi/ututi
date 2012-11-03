@@ -97,6 +97,7 @@ class UtutiQuickLayerBase(LayerBase):
         config = pylons.test.pylonsapp.config
         config['default_search_dict'] = 'pg_catalog.english'
         config['tpl_lang'] = 'lt'
+        pylons.config._push_object(config)
         mail_queue[:] = []
         sms_queue[:] = []
         gg.sent_messages[:] = []
@@ -126,6 +127,7 @@ class UtutiQuickLayerBase(LayerBase):
 
         meta.Session.rollback()
         meta.Session.remove()
+        pylons.config._pop_object(config)
 
 
 UtutiLayer = CompositeLayer(PylonsTestBrowserLayer('test.ini', conf_dir, meta),
