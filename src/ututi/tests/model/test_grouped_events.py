@@ -36,7 +36,7 @@ def test_grouping_subject_events():
 
         >>> events = meta.Session.query(SubjectModifiedEvent).all()
         >>> [(e.id, e.event_type, [c.id for c in e.children]) for e in events]
-        [(4L, 'subject_modified', [3L])]
+        [(4L, u'subject_modified', [3L])]
 
     Let's update the subject again and see if the newest event is really the parent:
 
@@ -46,7 +46,7 @@ def test_grouping_subject_events():
 
         >>> events = meta.Session.query(SubjectModifiedEvent).all()
         >>> [(e.id, e.event_type, [c.id for c in e.children]) for e in events]
-        [(5L, 'subject_modified', [3L, 4L]), (4L, 'subject_modified', [])]
+        [(5L, u'subject_modified', [3L, 4L]), (4L, u'subject_modified', [])]
 
     Only modifications by the same user are grouped.
         >>> petras = User(u'Petras', 'petras', LocationTag.get(u'uni'), 'qwerty', gen_password=True)
@@ -58,7 +58,7 @@ def test_grouping_subject_events():
         >>> meta.Session.commit()
         >>> events = meta.Session.query(SubjectModifiedEvent).all()
         >>> [(e.id, e.event_type, [c.id for c in e.children]) for e in events]
-        [(5L, 'subject_modified', [3L, 4L]), (4L, 'subject_modified', []), (6L, 'subject_modified', [])]
+        [(5L, u'subject_modified', [3L, 4L]), (4L, u'subject_modified', []), (6L, u'subject_modified', [])]
     """
 
 def test_grouping_page_events():
@@ -80,7 +80,7 @@ def test_grouping_page_events():
 
         >>> events = meta.Session.query(PageModifiedEvent).all()
         >>> [(e.id, e.event_type, [c.id for c in e.children]) for e in events]
-        [(5L, 'page_modified', [4L])]
+        [(5L, u'page_modified', [4L])]
 
     """
 
@@ -102,7 +102,7 @@ def test_grouping_file_events():
 
         >>> events = meta.Session.query(FileUploadedEvent).all()
         >>> [(e.id, e.event_type, [c.id for c in e.children]) for e in events]
-        [(4L, 'file_uploaded', [3L]), (3L, 'file_uploaded', [])]
+        [(4L, u'file_uploaded', [3L]), (3L, u'file_uploaded', [])]
 
      """
 

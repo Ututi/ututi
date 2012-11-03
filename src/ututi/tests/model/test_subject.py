@@ -17,7 +17,7 @@ def test_Subject_get():
 
         >>> subject = Subject.get(LocationTag.get(u'uni'), 'subject')
         >>> subject.subject_id, subject.title
-        ('subject', u'Subject')
+        (u'subject', u'Subject')
 
     Which will open a whole can of AmbiguityError kind of errors,
     because we will have to limit tag names and subject names so they

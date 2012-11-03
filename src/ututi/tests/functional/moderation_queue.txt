@@ -283,7 +283,7 @@ through:
 
     >>> send_test_message('email_from_admin.txt', '78', to='moderators@groups.ututi.lt', subject='New teacher wants to be accepted')
     >>> mail_queue
-    [<EmailInfo sender='Ututi <info@ututi.lt>' recipients=['admin@uni.ututi.com']>]
+    [<EmailInfo sender='Ututi <info@ututi.lt>' recipients=[u'admin@uni.ututi.com']>]
 
 Clear the mail queue:
 

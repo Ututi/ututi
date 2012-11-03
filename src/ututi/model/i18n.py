@@ -1,5 +1,4 @@
 from sqlalchemy import orm, Column
-from sqlalchemy.types import Unicode
 from sqlalchemy.schema import Table
 from sqlalchemy.orm import relation, backref
 from sqlalchemy.orm.exc import NoResultFound
@@ -127,13 +126,11 @@ class Country(Model):
 
 def setup_tables(engine):
     Table("languages", meta.metadata,
-          Column('title', Unicode()),
           autoload=True,
           useexisting=True,
           autoload_with=engine)
 
     Table("language_texts", meta.metadata,
-          Column('text', Unicode()),
           autoload=True,
           autoload_with=engine)
 
@@ -142,7 +139,6 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("i18n_texts_versions", meta.metadata,
-          Column('text', Unicode()),
           autoload=True,
           autoload_with=engine)
 

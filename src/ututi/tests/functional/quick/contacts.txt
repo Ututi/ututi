@@ -22,7 +22,7 @@ Functional tests for contacts form
     >>> form.getControl('Get confirmation email').click()
 
     >>> print mail_queue.pop()
-    <EmailInfo sender='info@ututi.lt' recipients=['odmin@ututi.lt']>
+    <EmailInfo sender='info@ututi.lt' recipients=[u'odmin@ututi.lt']>
 
 
 Adding one more email and check if user is abble change his secondary email to his main.
