@@ -15,7 +15,7 @@ class UtutiSessionExtension(SessionExtension):
 
         session.execute("SET LOCAL ututi.active_user TO 0")
         from pylons import config
-        session.execute("SET default_text_search_config TO '%s'" % config['default_search_dict'])
+        session.execute("SET default_text_search_config TO '%s'" % config.get('default_search_dict', 'public.universal'))
 
         from pylons import request
         try:
