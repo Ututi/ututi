@@ -18,7 +18,7 @@ from pylons import config
 from pylons.decorators.cache import beaker_cache
 from pylons.templating import render_mako_def
 
-from sqlalchemy import orm, Column, Integer, Sequence, Table
+from sqlalchemy import orm, Table
 from sqlalchemy.exc import DatabaseError, SAWarning
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation, backref, deferred
@@ -36,6 +36,7 @@ from ututi.model.i18n import Country, I18nText
 from ututi.model.theming import Theme
 from ututi.model.base import Model
 from ututi.model import meta
+from ututi.model.meta import DeclarativeModel
 from ututi.lib.messaging import SMSMessage
 from ututi.lib.emails import group_space_bought_email
 from ututi.lib.security import check_crowds
@@ -570,10 +571,6 @@ def setup_orm():
                                    secondary=tables['notifications_viewed'],
                                    backref="seen_notifications"),
                           })
-
-
-    orm.mapper(SubDepartment, tables['sub_departments'],
-               properties = {'location': relation(Tag, backref='sub_departments')})
 
     from ututi.model import events
     events.setup_orm()
@@ -2376,7 +2373,10 @@ class EmailDomain(Model):
                 .all()
 
 
-class SubDepartment(Model):
+class SubDepartment(DeclarativeModel):
+    __tablename__ = 'sub_departments'
+
+    location = relation(Tag, backref='sub_departments')
 
     def __init__(self, title, location, slug=None):
         self.title = title
