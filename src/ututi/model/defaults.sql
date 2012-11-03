@@ -51,7 +51,8 @@ create table admin_users(
        email varchar(320),
        fullname varchar(100),
        password char(36),
-       last_seen timestamp not null default (now() at time zone 'UTC'));;
+       last_seen timestamp not null default (now() at time zone 'UTC'),
+       primary key (id));;
 
 create table authors (
        id bigserial not null,

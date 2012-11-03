@@ -103,13 +103,11 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("authors", meta.metadata,
-          Column('id', Integer, Sequence('authors_id_seq'), primary_key=True),
           autoload=True,
           extend_existing=True,
           autoload_with=engine)
 
     Table("admin_users", meta.metadata,
-          Column('id', Integer, Sequence('admin_users_id_seq'), primary_key=True),
           autoload=True,
           extend_existing=True,
           autoload_with=engine)
@@ -142,7 +140,6 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("tags", meta.metadata,
-          Column('id', Integer, Sequence('tags_id_seq'), primary_key=True),
           extend_existing=True,
           autoload=True,
           autoload_with=engine)
@@ -314,12 +311,12 @@ def setup_orm():
                polymorphic_on=tables['content_items'].c.content_type,
                polymorphic_identity='generic',
                properties={'created': relation(Author,
-                                               primaryjoin=tables['content_items'].c.created_by==tables['authors'].c.id,
+                                               foreign_keys=tables['content_items'].c.created_by,
                                                backref="content_items"),
                            'modified': relation(Author,
-                                                primaryjoin=tables['content_items'].c.modified_by==tables['authors'].c.id),
+                                                foreign_keys=tables['content_items'].c.modified_by),
                            'deleted': relation(Author,
-                                               primaryjoin=tables['content_items'].c.deleted_by==tables['authors'].c.id),
+                                               foreign_keys=tables['content_items'].c.deleted_by),
                            'tags': relation(SimpleTag,
                                             secondary=tables['content_tags']),
                            'location': relation(LocationTag)})
@@ -331,7 +328,7 @@ def setup_orm():
                polymorphic_on=tables['content_items'].c.content_type,
                extension=NotifyGG(),
                properties = {'parent': relation(ContentItem,
-                                                primaryjoin=tables['files'].c.parent_id==tables['content_items'].c.id,
+                                                foreign_keys=tables['files'].c.parent_id,
                                                 backref=backref("files", order_by=tables['files'].c.filename.asc()))})
 
     orm.mapper(PrivateMessage, tables['private_messages'],
@@ -341,11 +338,11 @@ def setup_orm():
                polymorphic_on=tables['content_items'].c.content_type,
                properties = {
                  'sender': relation(User,
-                      primaryjoin=tables['private_messages'].c.sender_id==tables['users'].c.id,
+                      foreign_keys=tables['private_messages'].c.sender_id,
                       backref=backref("messages_sent",
                                       order_by=tables['private_messages'].c.id.asc())),
                  'recipient': relation(User,
-                      primaryjoin=tables['private_messages'].c.recipient_id==tables['users'].c.id,
+                      foreign_keys=tables['private_messages'].c.recipient_id,
                       backref=backref("messages_received",
                                       order_by=tables['private_messages'].c.id.asc())),
                })
@@ -365,7 +362,7 @@ def setup_orm():
                properties = {'category': relation(ForumCategory,
                                                   backref="posts"),
                              'parent': relation(ContentItem,
-                                                primaryjoin=tables['forum_posts'].c.parent_id==tables['content_items'].c.id,
+                                                foreign_keys=tables['forum_posts'].c.parent_id,
                                                 backref="forum_posts")
                             })
     orm.mapper(WallPost, tables['wall_posts'],
@@ -373,8 +370,7 @@ def setup_orm():
                inherit_condition=tables['wall_posts'].c.id==ContentItem.id,
                polymorphic_identity='wall_post',
                polymorphic_on=tables['content_items'].c.content_type,
-               properties={'subject': relation(Subject,
-                                               primaryjoin=tables['subjects'].c.id==tables['wall_posts'].c.subject_id),
+               properties={'subject': relation(Subject, foreign_keys=tables['wall_posts'].c.subject_id),
                            'target_location': relation(LocationTag,
                                                        primaryjoin=tables['tags'].c.id==tables['wall_posts'].c.target_location_id,
                                                        foreign_keys=tables['wall_posts'].c.target_location_id)})
@@ -444,9 +440,9 @@ def setup_orm():
                properties = {'location': relation(Tag),
                              'raw_logo': deferred(tables['user_registrations'].c.logo),
                              'inviter': relation(User,
-                                                 primaryjoin=tables['user_registrations'].c.inviter_id==tables['users'].c.id),
+                                                 foreign_keys=tables['user_registrations'].c.inviter_id),
                              'user': relation(User,
-                                              primaryjoin=tables['user_registrations'].c.user_id==tables['users'].c.id),
+                                              foreign_keys=tables['user_registrations'].c.user_id),
                              'university_country': relation(Country),
                              'raw_university_logo': deferred(tables['user_registrations'].c.university_logo)})
 
@@ -548,22 +544,22 @@ def setup_orm():
     orm.mapper(ReceivedSMSMessage,
                tables['received_sms_messages'],
                properties = {
-                    'sender': relation(User, primaryjoin=tables['received_sms_messages'].c.sender_id==tables['users'].c.id),
-                    'group': relation(Group, primaryjoin=tables['received_sms_messages'].c.group_id==tables['groups'].c.id),
+                    'sender': relation(User),
+                    'group': relation(Group),
                })
 
     orm.mapper(OutgoingGroupSMSMessage,
                tables['outgoing_group_sms_messages'],
                properties = {
-                    'sender': relation(User, primaryjoin=tables['outgoing_group_sms_messages'].c.sender_id==tables['users'].c.id),
-                    'group': relation(Group, primaryjoin=tables['outgoing_group_sms_messages'].c.group_id==tables['groups'].c.id),
+                    'sender': relation(User),
+                    'group': relation(Group),
                })
 
     orm.mapper(SMS,
                tables['sms_outbox'],
-               properties={'sender': relation(User, primaryjoin=tables['sms_outbox'].c.sender_uid==tables['users'].c.id),
-                           'recipient': relation(User, primaryjoin=tables['sms_outbox'].c.recipient_uid==tables['users'].c.id),
-                           'outgoing_group_message': relation(OutgoingGroupSMSMessage, primaryjoin=tables['sms_outbox'].c.outgoing_group_message_id==tables['outgoing_group_sms_messages'].c.id,
+               properties={'sender': relation(User, foreign_keys=tables['sms_outbox'].c.sender_uid),
+                           'recipient': relation(User, foreign_keys=tables['sms_outbox'].c.recipient_uid),
+                           'outgoing_group_message': relation(OutgoingGroupSMSMessage,
                                                               backref='individual_messages'),
                            })
 
