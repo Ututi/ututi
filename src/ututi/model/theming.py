@@ -53,7 +53,7 @@ class Theme(Model):
 def setup_tables(engine):
     Table("themes", meta.metadata,
           autoload=True,
-          useexisting=True,
+          extend_existing=True,
           autoload_with=engine)
 
 

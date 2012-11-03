@@ -120,7 +120,7 @@ def setup_tables(engine):
           meta.metadata,
           autoload=True,
           autoload_with=engine,
-          useexisting=True)
+          extend_existing=True)
 
     Table("group_mailing_list_attachments",
           meta.metadata,
