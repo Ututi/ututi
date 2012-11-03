@@ -228,7 +228,7 @@ def test_create_university():
         ['mif.vu.lt', 'stud.mif.vu.lt', 'vu.lt']
 
         >>> university.country.name
-        'Lithuania'
+        u'Lithuania'
 
     """
 

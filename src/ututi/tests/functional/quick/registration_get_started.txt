@@ -101,7 +101,7 @@ Let's check the emails:
     Ututi team
 
     >>> msg1.recipients
-    ['user@example.com']
+    [u'user@example.com']
 
     >>> mail_queue[:] = []
 
@@ -233,7 +233,7 @@ and invitation are sent:
     4
 
     >>> [msg.recipients for msg in mail_queue]
-    [['one@example.com'], ['two@example.com'], ['three@example.com'], ['four@example.com']]
+    [[u'one@example.com'], [u'two@example.com'], [u'three@example.com'], [u'four@example.com']]
 
     >>> mail_queue[:] = []
 

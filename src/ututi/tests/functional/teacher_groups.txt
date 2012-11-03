@@ -128,7 +128,7 @@ A message to the ututi mailing list group:
     'benas@ututi.lt'
 
     >>> print msg.recipients
-    ['admin@uni.ututi.com']
+    [u'admin@uni.ututi.com']
 
 A message to the ututi forum group - members of the group receive email messages:
 
@@ -146,10 +146,10 @@ A message to the ututi forum group - members of the group receive email messages
     If You reply to this message, the teacher will not get Your replies.
 
     >>> print msg.recipients
-    ['user2@ututi.lt']
+    [u'user2@ututi.lt']
 
     >>> mail_queue.pop().recipients
-    ['admin@uni.ututi.com']
+    [u'admin@uni.ututi.com']
 
     >>> browser2.getLink('Home').click()
     >>> browser2.getLink('Testing group', url='/group/test').click()
@@ -170,16 +170,16 @@ Let's try sending an sms:
     >>> len(sms_queue)
     1
     >>> print sms_queue.pop()
-    ('+37067812375', u'Hi, guys! (sms)')
+    (u'+37067812375', u'Hi, guys! (sms)')
 
     >>> browser.getControl(name='sms_message', index=1).value = 'Hi, guys! (sms 2)'
     >>> browser.getControl('Send', index=4).click()
 
     >>> print sms_queue.pop()
-    ('+37067412345', u'Hi, guys! (sms 2)')
+    (u'+37067412345', u'Hi, guys! (sms 2)')
 
     >>> print sms_queue.pop()
-    ('+37067812375', u'Hi, guys! (sms 2)')
+    (u'+37067812375', u'Hi, guys! (sms 2)')
 
 And let's try sending messages with attachments:
 

@@ -551,7 +551,6 @@ def setup_tables(engine):
 
     Table("event_comments",
           meta.metadata,
-          Column('content', Unicode()),
           autoload=True,
           autoload_with=engine)
 

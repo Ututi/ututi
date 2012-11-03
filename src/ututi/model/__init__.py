@@ -19,7 +19,6 @@ from pylons.decorators.cache import beaker_cache
 from pylons.templating import render_mako_def
 
 from sqlalchemy import orm, Column, Integer, Sequence, Table
-from sqlalchemy.types import Unicode
 from sqlalchemy.exc import DatabaseError, SAWarning
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation, backref, deferred
@@ -64,10 +63,6 @@ def setup_tables(engine):
     #relationships between content items and tags
     warnings.simplefilter('ignore', SAWarning)
     Table("files", meta.metadata,
-          Column('filename', Unicode()),
-          Column('folder', Unicode()),
-          Column('title', Unicode()),
-          Column('description', Unicode()),
           autoload=True,
           useexisting=True,
           autoload_with=engine)
@@ -78,15 +73,11 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("forum_categories", meta.metadata,
-          Column('title', Unicode()),
-          Column('description', Unicode()),
           autoload=True,
           autoload_with=engine,
           useexisting=True)
 
     Table("forum_posts", meta.metadata,
-          Column('title', Unicode()),
-          Column('message', Unicode()),
           autoload=True,
           useexisting=True,
           autoload_with=engine)
@@ -102,31 +93,23 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("users", meta.metadata,
-          Column('description', Unicode()),
-          Column('location_city', Unicode()),
-          Column('site_url', Unicode()),
           autoload=True,
           useexisting=True,
           autoload_with=engine)
 
     Table("teachers", meta.metadata,
-          Column('teacher_position', Unicode()),
-          Column('work_address', Unicode()),
-          Column('publications', Unicode()),
           autoload=True,
           useexisting=True,
           autoload_with=engine)
 
     Table("authors", meta.metadata,
           Column('id', Integer, Sequence('authors_id_seq'), primary_key=True),
-          Column('fullname', Unicode()),
           autoload=True,
           useexisting=True,
           autoload_with=engine)
 
     Table("admin_users", meta.metadata,
           Column('id', Integer, Sequence('admin_users_id_seq'), primary_key=True),
-          Column('fullname', Unicode()),
           autoload=True,
           useexisting=True,
           autoload_with=engine)
@@ -136,7 +119,6 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("teacher_groups", meta.metadata,
-          Column('title', Unicode()),
           autoload=True,
           autoload_with=engine,
           useexisting=True)
@@ -150,24 +132,17 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("private_messages", meta.metadata,
-          Column('subject', Unicode()),
-          Column('content', Unicode()),
           autoload=True,
           autoload_with=engine,
           useexisting=True)
 
     Table("regions", meta.metadata,
-          Column('title', Unicode()),
           autoload=True,
           useexisting=True,
           autoload_with=engine)
 
     Table("tags", meta.metadata,
           Column('id', Integer, Sequence('tags_id_seq'), primary_key=True),
-          Column('title_short', Unicode()),
-          Column('title', Unicode()),
-          Column('description', Unicode()),
-          Column('site_url', Unicode()),
           useexisting=True,
           autoload=True,
           autoload_with=engine)
@@ -185,9 +160,6 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("user_registrations", meta.metadata,
-          Column('fullname', Unicode()),
-          Column('university_title', Unicode()),
-          Column('university_site_url', Unicode()),
           autoload=True,
           autoload_with=engine)
 
@@ -200,15 +172,10 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("page_versions", meta.metadata,
-          Column('title', Unicode()),
-          Column('content', Unicode()),
           autoload=True,
           autoload_with=engine)
 
     Table("subjects", meta.metadata,
-          Column('title', Unicode()),
-          Column('lecturer', Unicode()),
-          Column('description', Unicode()),
           autoload=True,
           useexisting=True,
           autoload_with=engine)
@@ -222,9 +189,6 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("groups", meta.metadata,
-          Column('title', Unicode()),
-          Column('description', Unicode()),
-          Column('page', Unicode()),
           useexisting=True,
           autoload=True,
           autoload_with=engine)
@@ -278,25 +242,21 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("received_sms_messages", meta.metadata,
-          Column('message_text', Unicode()),
           useexisting=True,
           autoload=True,
           autoload_with=engine)
 
     Table("outgoing_group_sms_messages", meta.metadata,
-          Column('message_text', Unicode()),
           useexisting=True,
           autoload=True,
           autoload_with=engine)
 
     Table("sms_outbox", meta.metadata,
-          Column('message_text', Unicode()),
           useexisting=True,
           autoload=True,
           autoload_with=engine)
 
     Table("notifications", meta.metadata,
-          Column('content', Unicode()),
           autoload=True,
           autoload_with=engine)
 
@@ -305,7 +265,6 @@ def setup_tables(engine):
           autoload_with=engine)
 
     Table("wall_posts", meta.metadata,
-          Column('content', Unicode()),
           autoload=True,
           useexisting=True,
           autoload_with=engine)

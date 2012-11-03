@@ -152,12 +152,12 @@ def test_smsmessage_user():
 
         >>> sms = meta.Session.query(SMS).first()
         >>> print (sms.recipient_number, sms.message_text)
-        ('+37060000000', u'the message')
+        (u'+37060000000', u'the message')
 
         >>> config._pop_object(pylons.test.pylonsapp.config)
         >>> from ututi.lib.sms import sms_queue
         >>> sms_queue.pop()
-        ('+37060000000', u'the message')
+        (u'+37060000000', u'the message')
 
     """
 

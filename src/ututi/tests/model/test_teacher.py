@@ -23,7 +23,7 @@ def test_create_teacher():
        >>> teacher.teacher_verified
        False
        >>> teacher.type
-       'teacher'
+       u'teacher'
 
 Just checking if he has emails (which come from the user):
        >>> len(teacher.emails)

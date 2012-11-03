@@ -56,7 +56,7 @@ We want check invitations so let's join as the invited user.
 
     >>> msg1, msg2, msg3, msg4 = mail_queue
     >>> msg1.recipients
-    ['user@ututi.lt']
+    [u'user@ututi.lt']
 
     >>> user = Browser.logIn("user@ututi.lt", "password")
 
@@ -146,7 +146,7 @@ Now let's check the invitations:
 
     >>> msg1, msg2 = mail_queue
     >>> msg1.recipients
-    ['user@ututi.lt']
+    [u'user@ututi.lt']
 
 user@ututi.lt is Ututi user. He can accept the invitation by clicking
 link in the email or on-site. Let's do it on-site:

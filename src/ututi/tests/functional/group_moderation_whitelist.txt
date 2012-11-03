@@ -94,11 +94,11 @@ whitelis, it will get approved automatically:
 
     >>> from ututi.tests.functional import printEmails
     >>> printEmails()
-    ['admin@uni.ututi.com']
+    [u'admin@uni.ututi.com']
     Hi, I am just writing to tell you how wonderful this system is.
     User2
     <BLANKLINE>
-    ['admin@uni.ututi.com']
+    [u'admin@uni.ututi.com']
     Confirm your varlius registration!
     Click the link now!
     Sincerely,
@@ -114,7 +114,7 @@ Let's try half a whitelist:
     >>> send_test_message('email_from_non_ututi.txt', '47', to='moderators@groups.ututi.lt', subject='Hello from varlius 3')
 
     >>> printEmails()
-    ['admin@uni.ututi.com']
+    [u'admin@uni.ututi.com']
     Confirm your varlius registration!
     Click the link now!
     Sincerely,

@@ -21,7 +21,7 @@ User goes to group and clicks on group's email and writes a message:
     1
 
     >>> mail_queue
-    [<EmailInfo sender='admin@uni.ututi.com' recipients=['admin@uni.ututi.com']>]
+    [<EmailInfo sender='admin@uni.ututi.com' recipients=[u'admin@uni.ututi.com']>]
 
     >>> msg = mail_queue.pop()
     >>> msg.payload()

@@ -17,7 +17,7 @@ There should be a portlet with a form that let's us enter email addresses the re
    >>> form.getControl('Recipients:').value = 'somenewuser@example.com'
    >>> form.getControl('Send invitation').click()
    >>> printEmails()
-   ['somenewuser@example.com']
+   [u'somenewuser@example.com']
    Hello!
    <BLANKLINE>
    Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.
@@ -54,7 +54,7 @@ User can add personal message to the invitation that is sent:
    >>> form.getControl('Send invitation').click()
 
    >>> printEmails()
-   ['someotheruser@example.com']
+   [u'someotheruser@example.com']
    Hello!
    <BLANKLINE>
    Hey, come and try Ututi. I found it rather nice.
@@ -88,7 +88,7 @@ What if some of the emails were mistyped?
    2
 
    >>> printEmails()
-   ['someneweruser@example.com']
+   [u'someneweruser@example.com']
    Hello!
    <BLANKLINE>
    Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.
@@ -101,7 +101,7 @@ What if some of the emails were mistyped?
    --
    The Ututi team
    <BLANKLINE>
-   ['user@example.com']
+   [u'user@example.com']
    Hello!
    <BLANKLINE>
    Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.

@@ -4,7 +4,6 @@ import time
 from datetime import datetime
 import email
 
-from sqlalchemy.types import Unicode
 from sqlalchemy.sql.expression import asc
 from sqlalchemy.sql.expression import and_
 from sqlalchemy.schema import Column
@@ -119,7 +118,6 @@ class UtutiEmail(email.message.Message):
 def setup_tables(engine):
     Table("group_mailing_list_messages",
           meta.metadata,
-          Column('subject', Unicode()),
           autoload=True,
           autoload_with=engine,
           useexisting=True)

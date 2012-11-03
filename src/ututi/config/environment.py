@@ -56,8 +56,7 @@ def load_environment(global_conf, app_conf):
 
     # Setup the SQLAlchemy database engine
     engine = engine_from_config(config, 'sqlalchemy.',
-                                encoding='utf-8',
-                                use_native_unicode=False)
+                                encoding='utf-8')
     init_model(engine)
 
     # CONFIGURATION OPTIONS HERE (note: all config options will override

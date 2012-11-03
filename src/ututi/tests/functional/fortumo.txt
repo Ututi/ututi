@@ -95,7 +95,7 @@ Some other useful attributes are stored on the message:
     True
     >>> msg.message_text
     >>> msg.sender_phone_number
-    '37067812345'
+    u'37067812345'
     >>> msg.sender.fullname
     u'Alternative user'
 
@@ -132,13 +132,13 @@ This should send an email:
     >>> msg.payload()
     "Space for private files was bought for 'Testing group' group.\n\nUtuti team\n"
     >>> msg.recipients
-    ['user2@ututi.lt']
+    [u'user2@ututi.lt']
 
     >>> msg = mail_queue.pop()
     >>> msg.payload()
     "Space for private files was bought for 'Testing group' group.\n\nUtuti team\n"
     >>> msg.recipients
-    ['admin@uni.ututi.com']
+    [u'admin@uni.ututi.com']
 
 If you specify an invalid group id, you will get an error:
 
@@ -158,7 +158,7 @@ You can send an SMS to the entire group
     'SMS message sent to group testgroup.'
     >>> from ututi.lib.sms import sms_queue
     >>> print sms_queue
-    [('+37067812375', u'Hello!')]
+    [(u'+37067812375', u'Hello!')]
 
 Unregistered users may not send a message to the group:
 
@@ -179,4 +179,4 @@ You need to specify an existing group:
     'Invalid group: foobar'
 
     >>> sms_queue.pop()
-    ('+37067812375', u'Hello!')
+    (u'+37067812375', u'Hello!')
