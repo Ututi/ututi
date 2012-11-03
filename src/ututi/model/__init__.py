@@ -549,7 +549,7 @@ def setup_orm():
                tables['received_sms_messages'],
                properties = {
                     'sender': relation(User, primaryjoin=tables['received_sms_messages'].c.sender_id==tables['users'].c.id),
-                    'group': relation(Group, primaryjoin=tables['received_sms_messages'].c.group_id==tables['groups'].c.group_id),
+                    'group': relation(Group, primaryjoin=tables['received_sms_messages'].c.group_id==tables['groups'].c.id),
                })
 
     orm.mapper(OutgoingGroupSMSMessage,
