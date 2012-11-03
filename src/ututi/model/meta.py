@@ -1,8 +1,7 @@
 """SQLAlchemy Metadata and Session object"""
-from sqlalchemy import MetaData
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-__all__ = ['Session', 'engine', 'metadata']
+__all__ = ['Session', 'engine', 'metadata', 'DeclarativeModel']
 
 # SQLAlchemy database engine. Updated by model.init_model()
 engine = None
@@ -37,6 +36,11 @@ def set_active_user(user_id):
     else:
         Session.execute("SET LOCAL ututi.active_user TO ''")
 
+from sqlalchemy.ext.declarative import declarative_base, DeferredReflection
 # Global metadata. If you have multiple databases with overlapping table
 # names, you'll need a metadata for each database
-metadata = MetaData()
+Base = declarative_base()
+metadata = Base.metadata
+
+class DeclarativeModel(DeferredReflection, Base):
+    __abstract__ = True
