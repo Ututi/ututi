@@ -1,6 +1,5 @@
 from sqlalchemy import orm, Table, Column
 from sqlalchemy.orm import deferred
-from sqlalchemy.types import Unicode
 
 from pylons import url
 
@@ -53,7 +52,6 @@ class Theme(Model):
 
 def setup_tables(engine):
     Table("themes", meta.metadata,
-          Column('header_text', Unicode()),
           autoload=True,
           useexisting=True,
           autoload_with=engine)

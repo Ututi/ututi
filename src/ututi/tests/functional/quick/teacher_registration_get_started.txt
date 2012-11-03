@@ -46,7 +46,7 @@ moderators of the university):
 
     >>> print mail_queue
     [<EmailInfo sender='info@ututi.lt' recipients=['info@ututi.lt']>,
-     <EmailInfo sender='info@ututi.lt' recipients=['moderators@groups.ututi.lt']>]
+     <EmailInfo sender='info@ututi.lt' recipients=[u'moderators@groups.ututi.lt']>]
 
     >>> msg = mail_queue.pop()
     >>> msg = mail_queue.pop()

@@ -15,7 +15,7 @@ User should have location city and country.
     >>> user.location_city
     u'Vilnius'
     >>> user.location_country
-    'LT'
+    u'LT'
 
 Malformed headers don't break the application:
 
@@ -34,7 +34,7 @@ Lets try login from Polish IP with non ASCII symbols in city name.
     >>> user.location_city
     u'Chorz\xf3w'
     >>> user.location_country
-    'PL'
+    u'PL'
 
 None in location_city don't braak the application:
 
