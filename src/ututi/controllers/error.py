@@ -36,11 +36,7 @@ class ErrorController(SearchController):
             self._search()
             c.came_from = url('/')
             if resp.status_int == 403:
-                try:
-                    if session['login']:
-                        return render("/access_denied.mako")
-                except KeyError:
-                    return render('/login.mako')
+                return render("/access_denied.mako")
 
             elif resp.status_int == 404:
                 h.flash(_("Document at %(url)s was not found, but maybe you are interested in something else?") % {
