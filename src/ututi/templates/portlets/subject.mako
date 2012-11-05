@@ -147,12 +147,3 @@
   </%self:portlet>
   %endif
 </%def>
-
-<%def name="subject_permission_link_portlet()">
-  %if h.check_crowds(['teacher', 'moderator']):
-    <%self:portlet id="subject-permission-link-portlet">
-      <%def name="header()"></%def>
-      <a class="settings-link" href="${c.subject.url(action='permissions')}">${_("Edit permissions")}</a>
-    </%self:portlet>
-  %endif
-</%def>

@@ -14,6 +14,9 @@
   ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
 </%def>
 
+<%def name="subject_permissions()">
+</%def>
+
 <a class="back-link" href="${url(controller='subject', action='home', id=c.subject.subject_id, tags=c.subject.location_path)}">${_('Back to subject')}</a>
 
 <h2 style="margin-top: 10px">${_("Edit subject's info")}</h2>
@@ -67,6 +70,22 @@
     </label>
     <textarea class="line ckeditor" name="description" id="description" cols="60" rows="5"></textarea>
   </div>
+
+  %if c.show_permission_settings:
+    ${h.select_line('subject_visibility', _('Who can view the subject'),\
+                    [(u'everyone', _('Everyone')),\
+                     (u'department_members', _('Department members')),\
+                     (u'university_members', _('University members'))],\
+                    selected=c.subject.visibility)}
+    ${h.select_line('subject_edit', _('Who can change subject settings'),
+                    [(u'everyone', _('Everyone')),
+                     (u'teachers_and_admins', _('Teachers and administrators'))],
+                    selected=c.subject.edit_settings_perm )}
+    ${h.select_line('subject_post_discussions', _('Who can post subject discussions'),
+                    [(u'everyone', _('Everyone')),
+                     (u'teachers', _('Teachers'))],
+                    selected=c.subject.post_discussion_perm)}
+  %endif
 
   <div>
     ${h.input_submit(_('Save'))}
