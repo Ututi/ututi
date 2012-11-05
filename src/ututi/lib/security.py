@@ -151,6 +151,14 @@ def is_university_member(user, context=None):
         context = context.location
     return user.location.root is context.root
 
+def is_subject_accessor(user, context=None):
+    from ututi.model import Subject
+    if isinstance(context, Subject):
+        return (context.visibility == 'everyone'
+                or user and ((context.visibility == 'university' and is_university_member(user, context))
+                             or (context.visibility == 'department' and is_department_member(user, context))))
+    return False
+
 
 crowd_checkers = {
     "root": is_root,
@@ -167,6 +175,7 @@ crowd_checkers = {
     "smallfile": is_smallfile,
     "department_member": is_department_member,
     "university_member": is_university_member,
+    "subject_accessor": is_subject_accessor,
     }
 
 

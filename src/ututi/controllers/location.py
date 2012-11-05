@@ -23,7 +23,7 @@ from ututi.lib.validators import LocationIdValidator, InURLValidator, \
 from ututi.lib.wall import WallMixin
 from ututi.lib.search import search_query_count
 from ututi.lib.emails import teacher_request_email
-from ututi.lib.security import ActionProtector
+from ututi.lib.security import ActionProtector, check_crowds
 from ututi.model import Subject, Group, Teacher
 from ututi.model import LocationTag, EmailDomain, meta
 from ututi.model.users import User, UserRegistration
@@ -188,7 +188,8 @@ class LocationWallMixin(WallMixin):
         subjects = meta.Session.query(Subject)\
             .filter(Subject.location_id.in_(locations))\
             .all()
-        subject_ids = [subject.id for subject in subjects]
+        subject_ids = [subject.id for subject in subjects
+                       if check_crowds(["subject_accessor"], c.user, subject)]
         public_groups = meta.Session.query(Group)\
             .filter(Group.location_id.in_(locations))\
             .filter(Group.forum_is_public == True)\
