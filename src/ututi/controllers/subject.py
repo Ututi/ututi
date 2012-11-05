@@ -105,9 +105,8 @@ def subject_privacy(method):
             location_link = ((c.subject.location.url(), ' '.join(c.subject.location.full_title_path))
                              if c.subject.visibility == 'department_members'
                              else (c.subject.location.root.url(), c.subject.location.root.title))
-            request.environ['ututi.access_denied_reason'] = h.literal(_('Only %(location)s members can access see this subject.')
-                                                                      % dict(location=h.link_to(location_link[1], location_link[0])))
-            abort(403)
+            deny(h.literal(_('Only %(location)s members can access see this subject.')
+                           % dict(location=h.link_to(location_link[1], location_link[0]))), 401)
         c.user_can_edit_settings = c.user and (c.subject.edit_settings_perm == 'everyone' or check_crowds(['teacher', 'moderator'], c.user))
         c.user_can_post_discussions = c.user and (c.subject.post_discussion_perm == 'everyone' or check_crowds(['teacher', 'moderator'], c.user))
         return method(self, *args, **kwargs)
