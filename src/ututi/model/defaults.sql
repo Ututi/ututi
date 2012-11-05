@@ -1703,7 +1703,7 @@ create or replace function wall_post_event_trigger() returns trigger as $$
         end if;
         return new;
     end
-$$ language plpgsql;
+$$ language plpgsql;;
 
 create trigger after_wall_post_event_trigger after insert or update on wall_posts
     for each row execute procedure wall_post_event_trigger();
@@ -1720,3 +1720,19 @@ create table sub_departments (
        description text default null,
        unique(location_id, slug),
        primary key (id));;
+
+/* A table for storing teacher blog posts.
+ */
+create table teacher_blog_posts (
+       id int8 references content_items(id) on delete cascade,
+       title varchar(250) not null,
+       description text not null,
+       primary key (id));;
+
+create function teacher_blog_post_event_trigger() returns trigger as $$
+    begin
+        insert into events(object_id, author_id, event_type)
+               values (new.id, cast(current_setting('ututi.active_user') as int8), 'teacher_blog_post');
+        return new;
+    end
+$$ language plpgsql;;
