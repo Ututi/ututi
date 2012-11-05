@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-10-31 12:04+0200\n"
+"PO-Revision-Date: 2012-11-05 10:32+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -626,6 +626,10 @@ msgstr "Santrumpoje negali būti tarpų"
 
 msgid "Info"
 msgstr "Informacija"
+
+#, python-format
+msgid "Only %(location)s members can access see this subject."
+msgstr "Tik %(location)s nariai gali matyti šį dalyką."
 
 msgid "Please enter subject title"
 msgstr "Įveskite dalyko pavadinimą"
@@ -3716,6 +3720,9 @@ msgstr "Susiję dalykai:"
 msgid "Lect."
 msgstr "Dėst."
 
+msgid "Edit permissions"
+msgstr "Keisti teises"
+
 msgid "Create your own social network"
 msgstr "Sukurkite savo socialinį tinklą"
 
@@ -5268,6 +5275,30 @@ msgid ""
 "<strong>Take notes during lecture</strong> on your laptop and upload it "
 "directly to Ututi."
 msgstr "<strong>Konspektuokite per paskaitas</strong> tiesiai į Ututi."
+
+msgid "Subject permissions"
+msgstr "Dalyko prieinamumas"
+
+msgid "Who can view the subject"
+msgstr "Kas gali matyti šį dalyką"
+
+msgid "Everyone"
+msgstr "Visi"
+
+msgid "Department members"
+msgstr "Fakulteto nariai"
+
+msgid "University members"
+msgstr "Universiteto nariai"
+
+msgid "Who can change subject settings"
+msgstr "Kas gali keisti dalyko nustatymus"
+
+msgid "Teachers and administrators"
+msgstr "Dėstytojai ir administratoriai"
+
+msgid "Who can post subject discussions"
+msgstr "Kas gali dalyko rašyti diskusijas"
 
 msgid "Write your post"
 msgstr "Rašyti įrašą"

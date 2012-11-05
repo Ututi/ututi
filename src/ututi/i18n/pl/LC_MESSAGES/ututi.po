@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-10-31 12:04+0200\n"
+"PO-Revision-Date: 2012-11-05 10:32+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -644,6 +644,10 @@ msgstr "Skrócona nazwa nie powinna zawierać spacji"
 
 msgid "Info"
 msgstr "Info "
+
+#, python-format
+msgid "Only %(location)s members can access see this subject."
+msgstr ""
 
 msgid "Please enter subject title"
 msgstr "Wybierz nazwę przedmiotu"
@@ -3761,6 +3765,9 @@ msgstr "Powiązane przedmioty:"
 msgid "Lect."
 msgstr "Wykł."
 
+msgid "Edit permissions"
+msgstr ""
+
 msgid "Create your own social network"
 msgstr "Stwórz swoją własną sieć społecznościową"
 
@@ -5317,6 +5324,30 @@ msgid ""
 msgstr ""
 "<strong>Notuj na wykładzie</strong> na swoim laptopie i wrzucaj notatki "
 "prosto na Ututi."
+
+msgid "Subject permissions"
+msgstr ""
+
+msgid "Who can view the subject"
+msgstr ""
+
+msgid "Everyone"
+msgstr ""
+
+msgid "Department members"
+msgstr ""
+
+msgid "University members"
+msgstr ""
+
+msgid "Who can change subject settings"
+msgstr ""
+
+msgid "Teachers and administrators"
+msgstr ""
+
+msgid "Who can post subject discussions"
+msgstr ""
 
 msgid "Write your post"
 msgstr ""
