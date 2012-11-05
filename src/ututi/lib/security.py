@@ -155,8 +155,8 @@ def is_subject_accessor(user, context=None):
     from ututi.model import Subject
     if isinstance(context, Subject):
         return (context.visibility == 'everyone'
-                or user and ((context.visibility == 'university' and is_university_member(user, context))
-                             or (context.visibility == 'department' and is_department_member(user, context))))
+                or user and ((context.visibility == 'university_members' and is_university_member(user, context))
+                             or (context.visibility == 'department_members' and is_department_member(user, context))))
     return False
 
 
