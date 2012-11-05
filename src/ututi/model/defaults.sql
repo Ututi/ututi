@@ -485,7 +485,7 @@ CREATE TRIGGER set_thread_id BEFORE INSERT OR UPDATE ON group_mailing_list_messa
     FOR EACH ROW EXECUTE PROCEDURE set_thread_id();;
 
 
-create function group_message_delete_content_item() returns trigger as $$
+create function delete_content_item() returns trigger as $$
     begin
         delete from content_items where content_items.id=OLD.id;
         RETURN NULL;
@@ -493,8 +493,10 @@ create function group_message_delete_content_item() returns trigger as $$
 $$ language plpgsql;;
 
 create trigger delete_content_item_after_group_delete after delete on group_mailing_list_messages
-    for each row execute procedure group_message_delete_content_item();;
+    for each row execute procedure delete_content_item();;
 
+create trigger delete_content_item_after_page_version_delete after delete on page_versions
+    for each row execute procedure delete_content_item();;
 
 /* SMS */
 
