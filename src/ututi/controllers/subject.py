@@ -19,7 +19,7 @@ from sqlalchemy.sql.expression import or_, and_
 from ututi.model import SearchItem
 from ututi.model import meta, LocationTag, Subject, File, SimpleTag
 from ututi.model.users import Teacher
-from ututi.lib.security import ActionProtector, deny
+from ututi.lib.security import ActionProtector, deny, check_crowds, is_university_member, is_department_member
 from ututi.lib.search import search, search_query, search_query_count
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render, u_cache
@@ -38,7 +38,7 @@ def set_login_url_to_referrer(method):
 
 
 def subject_menu_items():
-    return [
+    items = [
         {'title': _("Info"),
          'name': 'info',
          'link': c.subject.url(action='info')},
@@ -50,10 +50,12 @@ def subject_menu_items():
          'link': c.subject.url(action='files')},
         {'title': _("Notes"),
          'name': 'pages',
-         'link': c.subject.url(action='pages')},
-        {'title': _("Discussions"),
-         'name': 'discussions',
-         'link': c.subject.url(action='feed', filter='discussions')}]
+         'link': c.subject.url(action='pages')}]
+    if c.user and c.subject.post_discussion_perm == 'everyone' or check_crowds(['teacher', 'moderator'], c.user):
+        items.append({'title': _("Discussions"),
+                      'name': 'discussions',
+                      'link': c.subject.url(action='feed', filter='discussions')})
+    return items
 
 
 @u_cache(expire=3600, query_args=True, invalidate_on_startup=True)
@@ -95,6 +97,21 @@ def subject_action(method):
         c.theme = subject.location.get_theme()
         return method(self, subject)
     return _subject_action
+
+
+def subject_privacy(method):
+    def _protected_action(self, *args, **kwargs):
+        if not check_crowds(['subject_accessor'], c.user, c.subject):
+            location_link = ((c.subject.location.url(), ' '.join(c.subject.location.full_title_path))
+                             if c.subject.visibility == 'department_members'
+                             else (c.subject.location.root.url(), c.subject.location.root.title))
+            request.environ['ututi.access_denied_reason'] = h.literal(_('Only %(location)s members can access see this subject.')
+                                                                      % dict(location=h.link_to(location_link[1], location_link[0])))
+            abort(403)
+        c.user_can_edit_settings = c.user and (c.subject.edit_settings_perm == 'everyone' or check_crowds(['teacher', 'moderator'], c.user))
+        c.user_can_post_discussions = c.user and (c.subject.post_discussion_perm == 'everyone' or check_crowds(['teacher', 'moderator'], c.user))
+        return method(self, *args, **kwargs)
+    return _protected_action
 
 
 class SubjectForm(Schema):
@@ -151,11 +168,18 @@ class NewSubjectForm(Schema):
     lecturer = validators.UnicodeString(strip=True)
 
 
+class SubjectPermissionsForm(Schema):
+    allow_extra_fields = True
+    subject_visibility = validators.OneOf(['everyone', 'department_members', 'university_members'])
+    subject_edit = validators.OneOf(['everyone', 'teachers_and_admins'])
+    subject_post_discussions = validators.OneOf(['everyone', 'teachers'])
+
+
 class SubjectAddMixin(object):
 
     def _create_subject(self):
         title = self.form_result['title']
-        id = ''.join(Random().sample(string.ascii_lowercase, 8)) # use random id first
+        id = ''.join(Random().sample(string.ascii_lowercase, 8))  # use random id first
         lecturer = self.form_result['lecturer']
         location = self.form_result['location']
         description = self.form_result['description']
@@ -172,7 +196,6 @@ class SubjectAddMixin(object):
         for tag in tags:
             stags.append(SimpleTag.get(tag))
 
-        
         subj = Subject(id, title, location, lecturer, description, stags)
 
         meta.Session.add(subj)
@@ -208,6 +231,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
     """A controller for subjects."""
 
     @subject_action
+    @subject_privacy
     def home(self, subject):
         if c.user:
             blank_subject = not subject.pages and not subject.n_files(include_deleted=False)
@@ -217,11 +241,13 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         return render('subject/info.mako')
 
     @subject_action
+    @subject_privacy
     def info(self, subject):
         c.current_tab = 'info'
         return render('subject/info.mako')
 
     @subject_action
+    @subject_privacy
     def files(self, subject):
         c.current_tab = 'files'
         file_id = request.GET.get('serve_file')
@@ -230,11 +256,13 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         return render('subject/home_files.mako')
 
     @subject_action
+    @subject_privacy
     def pages(self, subject):
         c.current_tab = 'pages'
         return render('subject/notes.mako')
 
     @subject_action
+    @subject_privacy
     def feed(self, subject):
         c.current_tab = 'feed'
         feed_filter = request.params.get('filter')
@@ -333,8 +361,12 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         return render('subject/edit.mako')
 
     @subject_action
+    @subject_privacy
     @ActionProtector("user")
     def edit(self, subject):
+        if subject.edit_settings_perm != 'everyone' and not check_crowds(['teacher', 'moderator'], c.user, subject):
+            abort(403)
+
         defaults = {
             'id': subject.subject_id,
             'old_location': '/'.join(subject.location.path),
@@ -355,6 +387,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         return htmlfill.render(self._edit_form(), defaults=defaults)
 
     @subject_action
+    @subject_privacy
     @ActionProtector("user")
     def watch(self, subject):
         if not c.user.watches(subject):
@@ -372,6 +405,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
                     tags=subject.location_path))
 
     @subject_action
+    @subject_privacy
     @ActionProtector("teacher")
     def teach(self, subject):
         if not c.user.teaches(subject):
@@ -390,6 +424,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
                     tags=subject.location_path))
 
     @subject_action
+    @subject_privacy
     @ActionProtector("teacher")
     def unteach(self, subject):
         if c.user.teaches(subject):
@@ -408,6 +443,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
                     tags=subject.location_path))
 
     @subject_action
+    @subject_privacy
     @ActionProtector("moderator")
     def teacher_assignment(self, subject):
         c.notabs = True
@@ -415,6 +451,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         return render('subject/assign_teacher.mako')
 
     @subject_action
+    @subject_privacy
     @ActionProtector("moderator")
     def teacher(self, subject):
         command = request.params.get('command')
@@ -430,6 +467,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
 
 
     @subject_action
+    @subject_privacy
     @validate(schema=SubjectForm, form='_edit_form')
     @ActionProtector("user")
     def update(self, subject):
@@ -465,24 +503,28 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
                     tags=subject.location_path))
 
     @subject_action
+    @subject_privacy
     @set_login_url_to_referrer
     @ActionProtector("user")
     def upload_file(self, subject):
         return self._upload_file(subject)
 
     @subject_action
+    @subject_privacy
     @set_login_url_to_referrer
     @ActionProtector("user")
     def upload_file_short(self, subject):
         return self._upload_file_short(subject)
 
     @subject_action
+    @subject_privacy
     @ActionProtector("user")
     def create_folder(self, subject):
         self._create_folder(subject)
         redirect(subject.url())
 
     @subject_action
+    @subject_privacy
     @ActionProtector("user")
     def delete_folder(self, subject):
         folder_name = request.params['folder']
@@ -493,11 +535,13 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
             redirect(request.referrer)
 
     @subject_action
+    @subject_privacy
     @ActionProtector("user")
     def js_create_folder(self, subject):
         return self._create_folder(subject)
 
     @subject_action
+    @subject_privacy
     @ActionProtector("user")
     def js_delete_folder(self, subject):
         folder_name = request.params['folder']
@@ -507,6 +551,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
             return self._delete_folder(subject)
 
     @subject_action
+    @subject_privacy
     @ActionProtector("moderator", "root")
     def delete(self, subject):
         c.subject.deleted = c.user
@@ -514,8 +559,40 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         redirect(request.referrer)
 
     @subject_action
+    @subject_privacy
     @ActionProtector("moderator", "root")
     def undelete(self, subject):
         c.subject.deleted = None
         meta.Session.commit()
         redirect(request.referrer)
+
+    @subject_action
+    @subject_privacy
+    @ActionProtector("teacher", "moderator", "root")
+    def permissions(self, subject):
+        c.notabs = True
+        return render('subject/permissions.mako')
+
+    @subject_action
+    @subject_privacy
+    @validate(schema=SubjectPermissionsForm)
+    @ActionProtector("teacher", "moderator", "root")
+    def change_permissions(self, subject):
+        subject.visibility = self.form_result['subject_visibility']
+        if subject.visibility != 'everyone':
+            crowd_fn = is_university_member if subject.visibility == 'university_members' else is_department_member
+            for watcher in subject.watching_users:
+                if not crowd_fn(watcher.user, subject):
+                    watcher.user.unwatchSubject(subject)
+# XXX Todo: find out what subjects are available for groups to watch
+#            for group_w in subject.watching_groups:
+#                group = group_w.group
+#                if (subject.visibility == 'department_members' and not group.location is subject.location)\
+#                        or (subject.visibility == 'university_members' and not group.location.root is subject.location.root):
+#                    group.unwatchSubject(subject)
+
+
+        subject.edit_settings_perm = self.form_result['subject_edit']
+        subject.post_discussion_perm = self.form_result['subject_post_discussions']
+        meta.Session.commit()
+        return redirect(c.subject.url(action='permissions'))

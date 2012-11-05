@@ -106,7 +106,7 @@ def _search_query_text(query, **kwargs):
     text = kwargs.get('text')
     if text:
         if language is not None:
-            to_tsquery = func.to_tsquery(SearchItem.LANGUAGE_MAPPER[language], text)
+            to_tsquery = func.to_tsquery(SearchItem.getDictForLanguage(language), text)
         else:
             to_tsquery = func.to_tsquery(text)
         query = query.filter(SearchItem.terms.op('@@')(to_tsquery))
@@ -123,7 +123,7 @@ def _search_query_rank(query, **kwargs):
     rank_cutoff = kwargs.get('rank_cutoff')
 
     if language is not None:
-        rank_func = func.ts_rank_cd(SearchItem.terms, func.to_tsquery(SearchItem.LANGUAGE_MAPPER[language], text))
+        rank_func = func.ts_rank_cd(SearchItem.terms, func.to_tsquery(SearchItem.getDictForLanguage(language), text))
     else:
         rank_func = func.ts_rank_cd(SearchItem.terms, func.to_tsquery(text))
 

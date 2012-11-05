@@ -28,7 +28,7 @@ setup(
         "nous.pylons.testing",
         "nous.pylons.geoip",
         "addhrefs",
-        'pylons-exceptional'
+        'raven'
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),

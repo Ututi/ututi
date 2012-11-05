@@ -21,7 +21,7 @@ div#short-info-block {
     %if c.subject.teacher_repr:
     <li class="icon-teacher">
       ${c.subject.teacher_repr}
-      %if c.user:
+      %if c.user and c.user_can_edit_settings:
         <a href="${c.subject.url(action='edit')}">
           <img src="${url('/img/icons.com/edit.png')}" alt="${_('Edit')}" />
         </a>

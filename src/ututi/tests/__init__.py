@@ -44,10 +44,10 @@ class UtutiBaseLayer(LayerBase):
     def testSetUp(self):
         teardown_db_defaults(meta.engine, quiet=True)
         initialize_db_defaults(meta.engine)
-        initialize_dictionaries(meta.engine)
 
         config = pylons.test.pylonsapp.config
         config['tpl_lang'] = 'lt'
+        config['default_search_dict'] = 'pg_catalog.english'
         mail_queue[:] = []
         sms_queue[:] = []
         gg.sent_messages[:] = []
@@ -85,7 +85,6 @@ class UtutiQuickLayerBase(LayerBase):
     def setUp(self):
         teardown_db_defaults(meta.engine, quiet=True)
         initialize_db_defaults(meta.engine)
-        initialize_dictionaries(meta.engine)
 
     def tearDown(self):
         try:
@@ -96,7 +95,9 @@ class UtutiQuickLayerBase(LayerBase):
 
     def testSetUp(self):
         config = pylons.test.pylonsapp.config
+        config['default_search_dict'] = 'pg_catalog.english'
         config['tpl_lang'] = 'lt'
+        pylons.config._push_object(config)
         mail_queue[:] = []
         sms_queue[:] = []
         gg.sent_messages[:] = []
@@ -126,6 +127,7 @@ class UtutiQuickLayerBase(LayerBase):
 
         meta.Session.rollback()
         meta.Session.remove()
+        pylons.config._pop_object(config)
 
 
 UtutiLayer = CompositeLayer(PylonsTestBrowserLayer('test.ini', conf_dir, meta),

@@ -1,4 +1,4 @@
-"rm""The application's model objects"""
+"""The application's model objects"""
 import urlparse
 import sys
 import os
@@ -310,6 +310,10 @@ def setup_tables(engine):
           useexisting=True,
           autoload_with=engine)
 
+    Table("sub_departments", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
+
     from ututi.model import events
     events.setup_tables(engine)
     from ututi.model import i18n
@@ -612,6 +616,10 @@ def setup_orm():
                                    backref="seen_notifications"),
                           })
 
+
+    orm.mapper(SubDepartment, tables['sub_departments'],
+               properties = {'location': relation(Tag, backref='sub_departments')})
+
     from ututi.model import events
     events.setup_orm()
     from ututi.model import i18n
@@ -629,12 +637,9 @@ def reset_db(engine):
     connection.close()
 
 
-def initialize_dictionaries(engine):
-    initial_db_data = pkg_resources.resource_string(
-        "ututi",
-        "model/stemming.sql").split(";;")
+def run_statements(statements):
     connection = meta.engine.connect()
-    for statement in initial_db_data:
+    for statement in statements:
         statement = statement.strip()
         if (statement):
             try:
@@ -648,27 +653,26 @@ def initialize_dictionaries(engine):
                 txn.rollback()
                 return
     connection.close()
+
+
+def initialize_dictionaries(engine):
+    stemming = pkg_resources.resource_string(
+        "ututi",
+        "model/stemming.sql").split(";;")
+    run_statements(stemming)
 
 
 def initialize_db_defaults(engine):
-    initial_db_data = pkg_resources.resource_string(
+    schema = pkg_resources.resource_string(
         "ututi",
         "model/defaults.sql").split(";;")
-    connection = meta.engine.connect()
-    for statement in initial_db_data:
-        statement = statement.strip()
-        if (statement):
-            try:
-                txn = connection.begin()
-                connection.execute(statement)
-                txn.commit()
-            except DatabaseError, e:
-                print >> sys.stderr, ""
-                print >> sys.stderr, e.message
-                print >> sys.stderr, e.statement
-                txn.rollback()
-                return
-    connection.close()
+    run_statements(schema)
+
+    initial_data = pkg_resources.resource_string(
+        "ututi",
+        "model/initial_data.sql").split(";;")
+    run_statements(initial_data)
+
     migrator = GreatMigrator(engine)
     migrator.initializeVersionning()
 
@@ -1616,6 +1620,15 @@ class LocationTag(Tag):
         return '/'.join(self.path)
 
     @property
+    def full_title_path(self):
+        loc = self
+        path = []
+        while loc:
+            path.append(loc.title)
+            loc = loc.parent
+        return list(reversed(path))
+
+    @property
     def root(self):
         """Return root location of this location tag.
         If tag has no parent, will return this tag itself."""
@@ -2216,15 +2229,13 @@ class SubscribedThread(object):
 
 
 class SearchItem(object):
-    """Language mapper.
-    
-    You can find more dictionaries in
-    /usr/share/postgresql/8.4/tsearch_data/ directory.
 
-    Key means information from the user session, value - filename in this
-    directory.
-    """
-    LANGUAGE_MAPPER = {'en': 'public.universal', 'lt': 'lt', 'pl': 'pl'}
+    @classmethod
+    def getDictForLanguage(cls, lang):
+        lang_to_dict = {'en': config.get('default_search_dict', 'public.universal'),
+                        'lt': 'lt',
+                        'pl': 'pl'}
+        return lang_to_dict[lang]
 
 
 class TagSearchItem(object):
@@ -2408,3 +2419,11 @@ class EmailDomain(Model):
                 .filter(EmailDomain.location == None)\
                 .order_by(EmailDomain.domain_name)\
                 .all()
+
+
+class SubDepartment(Model):
+
+    def __init__(self, title, location, slug=None):
+        self.title = title
+        self.location = location
+        self.slug = slug
