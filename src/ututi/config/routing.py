@@ -171,7 +171,7 @@ def make_map(config):
                        'delete', 'undelete', 'flag', 'create_folder', 'delete_folder',
                        'js_create_folder', 'js_delete_folder', 'upload_file',
                        'upload_file_short', 'teach', 'unteach', 'info', 'teacher_assignment',
-                       'teacher', 'permissions', 'change_permissions']
+                       'teacher']
 
     for action in subject_actions:
         map.connect('/subject/*tags/{id}/%s' % action,

@@ -126,6 +126,9 @@ class SubjectForm(Schema):
 
     title = validators.UnicodeString(not_empty=True, strip=True)
     lecturer = validators.UnicodeString(strip=True)
+    subject_visibility = validators.OneOf(['everyone', 'department_members', 'university_members'], if_missing=None)
+    subject_edit = validators.OneOf(['everyone', 'teachers_and_admins'], if_missing=None)
+    subject_post_discussions = validators.OneOf(['everyone', 'teachers'], if_missing=None)
     chained_validators = [
         TagsValidator()
         ]
@@ -166,13 +169,6 @@ class NewSubjectForm(Schema):
                     LocationTagsValidator())
     title = validators.UnicodeString(strip=True)
     lecturer = validators.UnicodeString(strip=True)
-
-
-class SubjectPermissionsForm(Schema):
-    allow_extra_fields = True
-    subject_visibility = validators.OneOf(['everyone', 'department_members', 'university_members'])
-    subject_edit = validators.OneOf(['everyone', 'teachers_and_admins'])
-    subject_post_discussions = validators.OneOf(['everyone', 'teachers'])
 
 
 class SubjectAddMixin(object):
@@ -358,6 +354,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
 
     def _edit_form(self):
         c.notabs = True
+        c.show_permission_settings = check_crowds(["teacher", "moderator", "root"], c.user, c.subject)
         return render('subject/edit.mako')
 
     @subject_action
@@ -374,6 +371,9 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
             'lecturer': subject.lecturer,
             'tags': ', '.join([tag.title for tag in subject.tags]),
             'description': subject.description,
+            'subject_visibility': subject.visibility,
+            'subject_edit': subject.edit_settings_perm,
+            'subject_post_discussions': subject.post_discussion_perm
             }
         c.hide_location = True
 
@@ -479,7 +479,6 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         if clash is not None and clash is not subject:
             subject.subject_id = subject.generate_new_id()
 
-
         subject.title = self.form_result['title']
         subject.lecturer = self.form_result['lecturer']
         subject.location = self.form_result['location']
@@ -494,6 +493,17 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         for tag in tags:
             subject.tags.append(SimpleTag.get(tag))
 
+        # update subject permissions
+        if check_crowds(["teacher", "moderator", "root"], c.user, subject) and 'subject_visibility' in self.form_result:
+            subject.visibility = self.form_result['subject_visibility']
+            subject.edit_settings_perm = self.form_result['subject_edit']
+            subject.post_discussion_perm = self.form_result['subject_post_discussions']
+            # remove subject from watched list for users who can't view subject anymore
+            if subject.visibility != 'everyone':
+                crowd_fn = is_university_member if subject.visibility == 'university_members' else is_department_member
+                for watcher in subject.watching_users:
+                    if not crowd_fn(watcher.user, subject):
+                        watcher.user.unwatchSubject(subject)
 
         meta.Session.commit()
 
@@ -565,34 +575,3 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         c.subject.deleted = None
         meta.Session.commit()
         redirect(request.referrer)
-
-    @subject_action
-    @subject_privacy
-    @ActionProtector("teacher", "moderator", "root")
-    def permissions(self, subject):
-        c.notabs = True
-        return render('subject/permissions.mako')
-
-    @subject_action
-    @subject_privacy
-    @validate(schema=SubjectPermissionsForm)
-    @ActionProtector("teacher", "moderator", "root")
-    def change_permissions(self, subject):
-        subject.visibility = self.form_result['subject_visibility']
-        if subject.visibility != 'everyone':
-            crowd_fn = is_university_member if subject.visibility == 'university_members' else is_department_member
-            for watcher in subject.watching_users:
-                if not crowd_fn(watcher.user, subject):
-                    watcher.user.unwatchSubject(subject)
-# XXX Todo: find out what subjects are available for groups to watch
-#            for group_w in subject.watching_groups:
-#                group = group_w.group
-#                if (subject.visibility == 'department_members' and not group.location is subject.location)\
-#                        or (subject.visibility == 'university_members' and not group.location.root is subject.location.root):
-#                    group.unwatchSubject(subject)
-
-
-        subject.edit_settings_perm = self.form_result['subject_edit']
-        subject.post_discussion_perm = self.form_result['subject_post_discussions']
-        meta.Session.commit()
-        return redirect(c.subject.url(action='permissions'))
