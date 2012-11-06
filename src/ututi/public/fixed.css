@@ -1888,6 +1888,15 @@ ul.tabs {
         background-position: 5px top;
     }
 
+    .page-section.blog {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+        .page-section.blog .title {
+            margin-bottom: 4px;
+            margin-top: 20px;
+        }
+
     .page-section.feature-box.profile {
         background-image: url("/img/icons.com/about/file_edit.png");
         background-position: 22px 8px;
@@ -1907,6 +1916,11 @@ ul.tabs {
         position: absolute;
         bottom: 2px;
         right: 0px;
+    }
+
+    .page-section .post-date {
+        font-size: 11px;
+        color: #666;
     }
 
 /* SETTINGS PAGES */

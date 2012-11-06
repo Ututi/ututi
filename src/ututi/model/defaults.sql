@@ -1739,5 +1739,13 @@ create function teacher_blog_post_event_trigger() returns trigger as $$
     end
 $$ language plpgsql;;
 
+/* --- Disable teacher blog post event generation until it's needed
 create trigger teacher_blog_post_event_trigger after insert or update on teacher_blog_posts
-    for each row execute procedure teacher_blog_post_event_trigger();
+    for each row execute procedure teacher_blog_post_event_trigger();;
+*/
+
+create table teacher_blog_comments (
+       id int8 references content_items(id) on delete cascade,
+       post_id int8 references teacher_blog_posts(id) on delete cascade not null,
+       content text not null,
+       primary key (id));;

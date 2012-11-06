@@ -227,3 +227,13 @@ class FriendsInvitationJSForm(Schema):
                       SeparatedListValidator(separators=',', whitespace=False),
                       ForEach(validators.Email(not_empty=True)))
 
+
+class BlogPostForm(Schema):
+    allow_extra_fields = True
+    title = validators.UnicodeString(not_empty=True)
+    description = validators.UnicodeString(not_empty=True)
+
+
+class BlogPostCommentForm(Schema):
+    allow_extra_fields = True
+    content = validators.UnicodeString(not_empty=True)

@@ -197,6 +197,9 @@ def make_map(config):
     map.connect('/teacher/{id}/subjects', controller='user', action='teacher_subjects')
     map.connect('/teacher/{id}/publications', controller='user', action='teacher_publications')
     map.connect('/teacher/{id}/activity', controller='user', action='teacher_activity')
+    map.connect('/teacher/{id}/blog', controller='user', action='teacher_blog_index')
+    map.connect('/teacher/{id}/blog/{post_id}', controller='user', action='teacher_blog_post')
+    map.connect('/teacher/{id}/blog/{post_id}/comment', controller='user', action='teacher_blog_comment')
 
     # user profiles
     map.connect('/user/{id}', controller='user', action='index')
@@ -287,6 +290,9 @@ def make_map(config):
     map.connect('/profile/edit/information', controller='profile', action='edit_information')
     map.connect('/profile/edit/information/{lang}', controller='profile', action='edit_information')
     map.connect('/profile/edit/publications', controller='profile', action='edit_publications')
+    map.connect('/profile/edit/posts', controller='profile', action='edit_blog_posts')
+    map.connect('/profile/edit/post/{id}', controller='profile', action='edit_blog_post')
+    map.connect('/profile/edit/post', controller='profile', action='create_blog_post')
     map.connect('/profile/settings', controller='profile', action='settings')
     map.connect('/profile/settings/login', controller='profile', action='login_settings')
     map.connect('/profile/settings/wall', controller='profile', action='wall_settings')

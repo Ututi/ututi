@@ -18,7 +18,7 @@ from pylons import config
 from pylons.decorators.cache import beaker_cache
 from pylons.templating import render_mako_def
 
-from sqlalchemy import orm, Table
+from sqlalchemy import orm, Table, Column
 from sqlalchemy.exc import DatabaseError, SAWarning
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import relation, backref, deferred
@@ -27,6 +27,7 @@ from sqlalchemy.sql.expression import not_
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import and_, or_
 from sqlalchemy.orm.interfaces import MapperExtension
+from sqlalchemy.types import String
 
 from ututi.migration import GreatMigrator
 from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Author
@@ -123,6 +124,8 @@ def setup_tables(engine):
           extend_existing=True)
 
     Table("content_items", meta.metadata,
+          Column('content_type', String()),
+          extend_existing=True,
           autoload=True,
           autoload_with=engine)
 
@@ -275,6 +278,10 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
+    Table("teacher_blog_comments", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
+
     from ututi.model import events
     events.setup_tables(engine)
     from ututi.model import i18n
@@ -384,7 +391,20 @@ def setup_orm():
                inherits=ContentItem,
                inherit_condition=tables['teacher_blog_posts'].c.id==ContentItem.id,
                polymorphic_identity='teacher_blog_post',
-               polymorphic_on=tables['content_items'].c.content_type)
+               polymorphic_on=tables['content_items'].c.content_type,
+               properties={'teacher': relation(Teacher,
+                                               primaryjoin=tables['content_items'].c.created_by==tables['teachers'].c.id,
+                                               foreign_keys=tables['content_items'].c.created_by,
+                                               backref='blog_posts')})
+
+    orm.mapper(TeacherBlogComment, tables['teacher_blog_comments'],
+               inherits=ContentItem,
+               inherit_condition=tables['teacher_blog_comments'].c.id==ContentItem.id,
+               polymorphic_identity='teacher_blog_comment',
+               polymorphic_on=tables['content_items'].c.content_type,
+               properties={'post': relation(TeacherBlogPost,
+                                                 primaryjoin=tables['teacher_blog_posts'].c.id==tables['teacher_blog_comments'].c.post_id,
+                                                 backref='comments')})
 
     orm.mapper(SeenThread, tables['seen_threads'],
                properties = {'thread': relation(ForumPost),
@@ -2134,6 +2154,16 @@ class TeacherBlogPost(ContentItem):
     def __init__(self, title, description):
         self.title = title
         self.description = description
+
+    def url(self, controller='user', action='teacher_blog_post'):
+        return url(controller=controller, action=action, id=self.created.id, post_id=self.id)
+
+
+class TeacherBlogComment(ContentItem):
+
+    def __init__(self, post, content):
+        self.post = post
+        self.content = content
 
 
 class SeenThread(object):

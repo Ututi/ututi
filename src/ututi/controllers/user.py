@@ -8,6 +8,8 @@ from pylons import tmpl_context as c, request, url
 
 from pylons.i18n import _
 
+from ututi.lib.forms import validate
+
 from ututi.controllers.home import sign_in_user
 
 from ututi.lib.security import ActionProtector, deny
@@ -15,7 +17,9 @@ from ututi.lib.image import serve_logo
 from ututi.lib.base import BaseController, render
 from ututi.lib.wall import WallMixin
 
-from ututi.model import meta, User, Medal, LocationTag
+from ututi.model import meta, User, Medal, LocationTag, TeacherBlogPost, TeacherBlogComment
+
+from ututi.controllers.profile.validators import BlogPostCommentForm
 
 log = logging.getLogger(__name__)
 
@@ -63,6 +67,27 @@ def teacher_profile_action(method):
     return _profile_action
 
 
+def teacher_blog_post_action(method):
+    def _blog_post_action(self, id, post_id):
+        user = find_user(id)
+        if user is None or not user.is_teacher:
+            abort(404)
+
+        post = meta.Session.query(TeacherBlogPost).filter_by(id=post_id, created=user).one()
+        if not post:
+            abort(404)
+
+        if not user.profile_is_public and not c.user:
+            deny(_('This user profile is not public'), 401)
+
+        c.teacher = user
+        c.tabs = teacher_tabs(user)
+        c.current_tab = 'blog'
+        c.theme = user.location.get_theme()
+        return method(self, user, post)
+    return _blog_post_action
+
+
 def external_teacher_profile_action(method):
     def _profile_action(self, path, id):
         location = LocationTag.get(path)
@@ -89,6 +114,11 @@ def teacher_tabs(teacher):
          'name': 'information',
          'link': teacher.url(action='teacher_index')},
     ]
+    if teacher.blog_posts:
+        tabs.append({
+            'title': _('Blog'),
+            'name': 'blog',
+            'link': teacher.url(action='teacher_blog_index')})
     if teacher.publications:
         tabs.append({
             'title': _('Publications'),
@@ -185,6 +215,27 @@ class UserController(BaseController, UserInfoWallMixin):
             redirect(user.url(action='external_teacher_publications'))
         c.current_tab = 'publications'
         return render('user/teacher_publications.mako')
+
+    @teacher_profile_action
+    def teacher_blog_index(self, user):
+        c.current_tab = 'blog'
+        c.blog_posts = meta.Session.query(TeacherBlogPost).filter_by(created=user).order_by(TeacherBlogPost.created_on.desc()).all()
+        return render('user/teacher_blog_index.mako')
+
+    @teacher_blog_post_action
+    def teacher_blog_post(self, user, post):
+        c.blog_post = post
+        return render('user/teacher_blog_post.mako')
+
+    @validate(schema=BlogPostCommentForm())
+    @teacher_blog_post_action
+    @ActionProtector("user")
+    def teacher_blog_comment(self, user, post):
+        comment = TeacherBlogComment(post=post,
+                                     content=self.form_result['content'])
+        meta.Session.add(comment)
+        meta.Session.commit()
+        return redirect(post.url())
 
     @teacher_profile_action
     @ActionProtector("user")

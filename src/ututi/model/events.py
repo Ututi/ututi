@@ -541,6 +541,10 @@ class LocationWallPostEvent(Event, Commentable):
             'link_to_user': link_to(self.user.fullname, self.user.url())})
 
 
+class TeacherBlogPostEvent(Event, Commentable):
+    pass
+
+
 def setup_tables(engine):
     warnings.simplefilter("ignore", SAWarning)
     Table("events",
@@ -591,6 +595,11 @@ def setup_orm():
                inherits=event_mapper,
                polymorphic_on=tables['events'].c.event_type,
                polymorphic_identity='location_wall_post')
+
+    orm.mapper(TeacherBlogPostEvent,
+               inherits=event_mapper,
+               polymorphic_on=tables['events'].c.event_type,
+               polymorphic_identity='teacher_blog_post')
 
     orm.mapper(PageCreatedEvent,
                inherits=event_mapper,

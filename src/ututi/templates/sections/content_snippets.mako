@@ -254,3 +254,32 @@ Snippets for rendering various content items, e.g. in search results.
     </div>
   </div>
 </%def>
+
+<%def name="blog_post(post, show_comments=True, title_link=False)">
+    %if title_link:
+      <div class="title"><a href=${post.url()}>${post.title}</a></div>
+    %else:
+      <div class="title">${post.title}</div>
+    %endif
+    <div class="post-date">${h.fmt_normaldate(post.created_on)}</div>
+    <div class="blog-post">
+      ${h.literal(post.description)}
+    </div>
+    %if show_comments:
+      <div class="blog-comments">
+        %for comment in post.comments:
+          <div class="comment">
+            <div class="comment-author">${h.user_link(comment.created_by)}</div>
+            <div class="comment-date">${h.when(comment.created_on)}</div>
+            <div class="comment-content">
+              ${comment.content}
+            </div>
+          </div>
+        %endfor
+        <form action="${url(controller='user', action='teacher_blog_comment', id=post.created.id, post_id=post.id)}" method="POST">
+          ${h.input_area('content', _('Comment'))}
+          ${h.input_submit(_('Send'))}
+        </form>
+      </div>
+    %endif
+</%def>
