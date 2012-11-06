@@ -267,12 +267,13 @@ Snippets for rendering various content items, e.g. in search results.
     </div>
     %if show_comments:
       <div class="blog-comments">
+        <h2>${_('Comments:')}</h2>
         %for comment in post.comments:
           <div class="comment">
             <div class="comment-author">${h.user_link(comment.created_by)}</div>
             <div class="comment-date">${h.when(comment.created_on)}</div>
             <div class="comment-content">
-              ${comment.content}
+              ${h.nl2br(comment.content)}
             </div>
           </div>
         %endfor
