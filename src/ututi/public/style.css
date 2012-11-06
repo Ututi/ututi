@@ -1424,7 +1424,7 @@ p.qu{
 .portletSmall .ctr { background-position: right top; }
 .portletSmall .cbl { background-position: left -5px; }
 .portletSmall .cbr { background-position: right -5px; }
-.portletTitle { font-size: 16px; color:#666; }
+.portletTitle { font-size: 16px; color:#666; padding-bottom: 3px; padding-left: 11px; }
 .portletTitleBold {
     font-size: 16px;
     color:#666;
