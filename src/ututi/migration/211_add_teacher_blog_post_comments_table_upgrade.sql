@@ -12,3 +12,6 @@ ALTER TABLE teacher_blog_comments
 
 ALTER TABLE teacher_blog_comments
 	ADD CONSTRAINT teacher_blog_comments_post_id_fkey FOREIGN KEY (post_id) REFERENCES teacher_blog_posts(id) ON DELETE CASCADE;
+
+/* Drop trigger for now */
+DROP TRIGGER teacher_blog_post_event_trigger ON teacher_blog_posts;

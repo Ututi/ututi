@@ -1739,7 +1739,7 @@ create function teacher_blog_post_event_trigger() returns trigger as $$
     end
 $$ language plpgsql;;
 
-/* --- Disable teacher blog post event generation until it's needed
+/* Disable teacher blog post event generation until it's needed
 create trigger teacher_blog_post_event_trigger after insert or update on teacher_blog_posts
     for each row execute procedure teacher_blog_post_event_trigger();;
 */
