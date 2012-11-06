@@ -485,7 +485,7 @@ CREATE TRIGGER set_thread_id BEFORE INSERT OR UPDATE ON group_mailing_list_messa
     FOR EACH ROW EXECUTE PROCEDURE set_thread_id();;
 
 
-create function group_message_delete_content_item() returns trigger as $$
+create function delete_content_item() returns trigger as $$
     begin
         delete from content_items where content_items.id=OLD.id;
         RETURN NULL;
@@ -493,8 +493,10 @@ create function group_message_delete_content_item() returns trigger as $$
 $$ language plpgsql;;
 
 create trigger delete_content_item_after_group_delete after delete on group_mailing_list_messages
-    for each row execute procedure group_message_delete_content_item();;
+    for each row execute procedure delete_content_item();;
 
+create trigger delete_content_item_after_page_version_delete after delete on page_versions
+    for each row execute procedure delete_content_item();;
 
 /* SMS */
 
@@ -1703,7 +1705,7 @@ create or replace function wall_post_event_trigger() returns trigger as $$
         end if;
         return new;
     end
-$$ language plpgsql;
+$$ language plpgsql;;
 
 create trigger after_wall_post_event_trigger after insert or update on wall_posts
     for each row execute procedure wall_post_event_trigger();
@@ -1720,3 +1722,22 @@ create table sub_departments (
        description text default null,
        unique(location_id, slug),
        primary key (id));;
+
+/* A table for storing teacher blog posts.
+ */
+create table teacher_blog_posts (
+       id int8 references content_items(id) on delete cascade,
+       title varchar(250) not null,
+       description text not null,
+       primary key (id));;
+
+create function teacher_blog_post_event_trigger() returns trigger as $$
+    begin
+        insert into events(object_id, author_id, event_type)
+               values (new.id, cast(current_setting('ututi.active_user') as int8), 'teacher_blog_post');
+        return new;
+    end
+$$ language plpgsql;;
+
+create trigger teacher_blog_post_event_trigger after insert or update on teacher_blog_posts
+    for each row execute procedure teacher_blog_post_event_trigger();

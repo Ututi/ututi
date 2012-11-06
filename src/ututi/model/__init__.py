@@ -271,6 +271,10 @@ def setup_tables(engine):
           autoload=True,
           autoload_with=engine)
 
+    Table("teacher_blog_posts", meta.metadata,
+          autoload=True,
+          autoload_with=engine)
+
     from ututi.model import events
     events.setup_tables(engine)
     from ututi.model import i18n
@@ -375,6 +379,12 @@ def setup_orm():
                            'target_location': relation(LocationTag,
                                                        primaryjoin=tables['tags'].c.id==tables['wall_posts'].c.target_location_id,
                                                        foreign_keys=tables['wall_posts'].c.target_location_id)})
+
+    orm.mapper(TeacherBlogPost, tables['teacher_blog_posts'],
+               inherits=ContentItem,
+               inherit_condition=tables['teacher_blog_posts'].c.id==ContentItem.id,
+               polymorphic_identity='teacher_blog_post',
+               polymorphic_on=tables['content_items'].c.content_type)
 
     orm.mapper(SeenThread, tables['seen_threads'],
                properties = {'thread': relation(ForumPost),
@@ -2117,6 +2127,13 @@ class WallPost(ContentItem):
         self.content = content
         if subject:
             self.location = subject.location
+
+
+class TeacherBlogPost(ContentItem):
+
+    def __init__(self, title, description):
+        self.title = title
+        self.description = description
 
 
 class SeenThread(object):
