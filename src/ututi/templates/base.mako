@@ -48,3 +48,7 @@ else:
   %endif
   %endif
 </div>
+
+<%def name="form(filler)">
+  ${filler(capture(caller.body))}
+</%def>
