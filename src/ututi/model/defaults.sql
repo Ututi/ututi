@@ -1738,3 +1738,6 @@ create function teacher_blog_post_event_trigger() returns trigger as $$
         return new;
     end
 $$ language plpgsql;;
+
+create trigger teacher_blog_post_event_trigger after insert or update on teacher_blog_posts
+    for each row execute procedure teacher_blog_post_event_trigger();
