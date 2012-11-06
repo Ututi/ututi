@@ -273,7 +273,7 @@ def make_map(config):
     map.connect('/school/*path/edit/teacher_status/{command}/{id}', controller='location', action='teacher_status')
 
     map.connect('/school/*path/edit/add_sub_department', controller='location', action='add_sub_department')
-    map.connect('/school/*path/edit/edit_sub_department', controller='location', action='edit_sub_department')
+    map.connect('/school/*path/edit/edit_sub_department/{id}', controller='location', action='edit_sub_department')
     map.connect('/school/*path/edit/sub_departments', controller='location', action='sub_departments')
 
     # external teacher profile pages

@@ -10,7 +10,7 @@
       </%def>
       <%def name="row(item)">
         <td>
-          ${item.title}
+          <a href="${c.location.url(action='edit_sub_department', id=item.id)}">${item.title}</a>
         </td>
         <td class="actions">
           ${h.button_to('Delete', '#')}

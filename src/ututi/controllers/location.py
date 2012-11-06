@@ -364,7 +364,6 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             h.flash(_("Information updated."))
         redirect(location.url(action='edit'))
 
-
     def _add_sub_department(self, location, values):
         return SubDepartment(values['title'], location)
 
@@ -385,6 +384,33 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
         c.form = form
         return render('location/add_sub_department.mako')
+
+
+    def _update_sub_department(self, sub_department, values):
+        sub_department.title = values['title']
+        return sub_department
+
+    @location_action
+    @ActionProtector('moderator')
+    def edit_sub_department(self, location):
+        sub_department_id = request.urlvars['id']
+        sub_department = SubDepartment.get(sub_department_id)
+
+        c.menu_items = location_edit_menu_items()
+        c.current_menu_item = 'sub-departments'
+        form = Form(sub_department, request,
+                    apply=self._update_sub_department,
+                    defaults={'title': sub_department.title},
+                    schema=SubDepartmentAddForm(),
+                    action='UPDATE')
+
+        sub_department = form.work()
+        if sub_department is not None:
+            meta.Session.commit()
+            redirect(location.url(action='sub_departments'))
+
+        c.form = form
+        return render('location/edit_sub_department.mako')
 
     @location_action
     @ActionProtector('moderator')
