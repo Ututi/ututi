@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-07 15:41+0200\n"
+"PO-Revision-Date: 2012-11-07 17:41+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=((n * 1) != 1)\n"
@@ -4077,6 +4077,12 @@ msgstr ""
 msgid "edit my page"
 msgstr ""
 
+msgid "Create a blog post"
+msgstr ""
+
+msgid "View your blog posts"
+msgstr ""
+
 msgid "Delete this group"
 msgstr ""
 
@@ -4158,6 +4164,18 @@ msgid "Are you sure you want to delete this group?"
 msgstr ""
 
 msgid "Create a new post"
+msgstr ""
+
+msgid "Click on a blog post to edit it."
+msgstr ""
+
+#, python-format
+msgid "%(count)s comment"
+msgid_plural "%(count)s comments"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "You haven't created any blog posts yet."
 msgstr ""
 
 msgid "Blog post"
@@ -4423,12 +4441,6 @@ msgstr ""
 
 msgid "Price"
 msgstr ""
-
-#, python-format
-msgid "%(count)s comment"
-msgid_plural "%(count)s comments"
-msgstr[0] ""
-msgstr[1] ""
 
 msgid "Comments:"
 msgstr ""

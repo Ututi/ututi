@@ -130,6 +130,20 @@ button.submit {
   </a>
 </div>
 %endif
+<div>
+  <div class="dashboard-blog-button">
+    <form id="message_button" action="${url(controller='profile', action='create_blog_post')}">
+      <input type="submit" class="black" value="${_('Create a blog post')}" />
+    </form>
+  </div>
+  %if c.has_blog_posts:
+  <div class="dashboard-blog-button">
+    <form id="message_button" action="${url(controller='profile', action='edit_blog_posts')}">
+      <input type="submit" class="black" value="${_('View your blog posts')}" />
+    </form>
+  </div>
+  %endif
+</div>
 </%def>
 
 <%def name="group_entry(group, first)">

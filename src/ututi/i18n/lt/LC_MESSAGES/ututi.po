@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-11-07 15:41+0200\n"
+"PO-Revision-Date: 2012-11-07 17:41+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -4434,6 +4434,12 @@ msgstr "Mano svetainė"
 msgid "edit my page"
 msgstr "redaguoti puslapį"
 
+msgid "Create a blog post"
+msgstr "Sukurti blogo įrašą"
+
+msgid "View your blog posts"
+msgstr "Peržiūrėti blogo įrašus"
+
 msgid "Delete this group"
 msgstr "Trinti šią grupę"
 
@@ -4518,6 +4524,19 @@ msgstr "Ar tikrai norite ištrinti šią grupę?"
 
 msgid "Create a new post"
 msgstr "Sukurti blogo įrašą"
+
+msgid "Click on a blog post to edit it."
+msgstr "Paspauskite ant įrašo norėdami jį redaguoti"
+
+#, python-format
+msgid "%(count)s comment"
+msgid_plural "%(count)s comments"
+msgstr[0] "%(count)s komentaras"
+msgstr[1] "%(count)s komentarai"
+msgstr[2] "%(count)s komentarų"
+
+msgid "You haven't created any blog posts yet."
+msgstr "Jūs dar nesukūrėte blogo įrašų."
 
 msgid "Blog post"
 msgstr "Blogo įrašas"
@@ -4804,13 +4823,6 @@ msgstr "Knyga"
 
 msgid "Price"
 msgstr "Kaina"
-
-#, python-format
-msgid "%(count)s comment"
-msgid_plural "%(count)s comments"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
 
 msgid "Comments:"
 msgstr "Komentarai"

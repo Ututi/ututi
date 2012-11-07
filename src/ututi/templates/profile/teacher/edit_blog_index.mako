@@ -6,16 +6,17 @@
     </form>
 </div>
 <div class="single-messages">
-
+%if bool(c.posts):
+  <div>${_("Click on a blog post to edit it.")}</div>
   % for post in c.posts:
     <div class="message-list-off1">
       <div class="floatleft m-on">
         <div class="orange">
           <a href="${url(controller='profile', action='edit_blog_post', id=post.id)}"
              class="post-title">${post.title}</a>
-          <%doc><span class="reply-count">
-            (${ungettext("%(count)s comment", "%(count)s comments", post.thread_length()) % dict(count=message.thread_length())})
-          </span></%doc>
+          <span class="reply-count">
+            (${ungettext("%(count)s comment", "%(count)s comments", len(post.comments)) % dict(count=len(post.comments))})
+          </span>
           ${h.button_to('Delete', url(controller='profile', action='delete_blog_post', id=post.id), style='display: none')}
           <a href="#" class="delete-post-link"><img src="${url('/img/icons/cross_small.png')}" alt="delete" /></a>
         </div>
@@ -25,7 +26,10 @@
       </div>
       <br style="clear: left;" />
     </div>
-  % endfor
+  %endfor
+%else:
+  <div>${_("You haven't created any blog posts yet.")}</div>
+%endif
 </div>
 
 <script>

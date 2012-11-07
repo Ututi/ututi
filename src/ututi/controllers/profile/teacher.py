@@ -58,6 +58,7 @@ class TeacherProfileController(ProfileControllerBase):
 
     @ActionProtector("teacher")
     def dashboard(self):
+        c.has_blog_posts = bool(meta.Session.query(TeacherBlogPost).filter_by(created=c.user).count())
         return render('/profile/teacher/dashboard.mako')
 
     def _edit_profile_tabs(self):

@@ -2255,3 +2255,8 @@ ul.tabs {
 .group-portlet-setting:nth-of-type(1) {
     margin-top: 4px;
 }
+
+.dashboard-blog-button {
+    margin: 8px;
+    margin-left: 40px;
+}
