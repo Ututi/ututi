@@ -36,7 +36,7 @@ Regression test: non-ascii characters in email are not valid in Ututi:
     >>> form.getControl(name='email').value = u'\u016bser@example.com'.encode('utf-8')
     >>> form.getControl('Sign Up').click()
     >>> browser.printCssQuery('.error-message', strip=True)
-    <span>Email address cannot contain unicode characters</span>
+    <span>The username portion of the email address is invalid (the portion before the @: &#363;ser)</span>
 
 User come back to registration view ant types new email:
 
