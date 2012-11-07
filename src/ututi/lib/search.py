@@ -8,7 +8,6 @@ from sqlalchemy.orm import aliased
 
 from ututi.model import meta, SearchItem, LocationTag, ContentItem, TagSearchItem
 from ututi.model import Group
-from pylons import session
 
 log = logging.getLogger(__name__)
 
