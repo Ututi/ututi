@@ -26,7 +26,7 @@ from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
 from ututi.lib.invitations import make_email_invitations, make_facebook_invitations
 from ututi.lib.messaging import EmailMessage
-from ututi.lib import gg, sms
+from ututi.lib import sms
 from ututi.lib.validators import js_validate, LogoUpload
 
 from ututi.model.events import Event
@@ -212,8 +212,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
     def _edit_form_defaults(self):
         defaults = {
             'email': c.user.emails[0].email,
-            'gadugadu_uin': c.user.gadugadu_uin,
-            'gadugadu_get_news': c.user.gadugadu_get_news,
             'phone_number': c.user.phone_number,
             'fullname': c.user.fullname,
             'site_url': c.user.site_url,
@@ -455,23 +453,6 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                 c.user.emails[0].confirmed = confirmed
                 email_confirmation_request(c.user, email)
                 sign_in_user(c.user)
-
-            # handle GG
-            gadugadu_uin = self.form_result['gadugadu_uin']
-            gadugadu_confirmation_key = self.form_result['gadugadu_confirmation_key']
-
-            if self.form_result['resend_gadugadu_code']:
-                gg.confirmation_request(c.user)
-            elif gadugadu_uin != c.user.gadugadu_uin:
-                c.user.gadugadu_uin = gadugadu_uin
-                c.user.gadugadu_confirmed = False
-                c.user.gadugadu_get_news = False
-                if gadugadu_uin:
-                    gg.confirmation_request(c.user)
-            elif gadugadu_confirmation_key:
-                c.user.gadugadu_confirmed = True
-            else:
-                c.user.gadugadu_get_news = self.form_result['gadugadu_get_news']
 
             # handle phone number
             phone_number = self.form_result['phone_number']

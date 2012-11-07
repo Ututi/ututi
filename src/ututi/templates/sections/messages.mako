@@ -37,18 +37,7 @@
 </div>
 %endif
 
-%if c.user and c.gg_enabled and c.user.gadugadu_uin is not None and not c.user.gadugadu_confirmed:
-<div class="flash-message">
-  <span class="close-link hide-parent">
-    ${h.image('/img/icons.com/close.png', alt=_('Close'))}
-  </span>
-  <span class="flash-message-content">
-    ${_('Your <strong>gadu gadu number</strong> is not confirmed! Please <a href="%s">confirm</a> it by entering the code sent to you.') % url(controller='profile', action='edit_contacts')|n}
-  </span>
-</div>
-%endif
-
-%if c.user and c.gg_enabled and c.user.phone_number is not None and not c.user.phone_confirmed:
+%if c.user and c.user.phone_number is not None and not c.user.phone_confirmed:
 <div class="flash-message" id="confirm-phone-flash-message">
   <span class="close-link hide-parent">
     ${h.image('/img/icons.com/close.png', alt=_('Close'))}

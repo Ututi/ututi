@@ -338,7 +338,6 @@ def setup_orm():
                inherit_condition=tables['files'].c.id==ContentItem.id,
                polymorphic_identity='file',
                polymorphic_on=tables['content_items'].c.content_type,
-               extension=NotifyGG(),
                properties = {'parent': relation(ContentItem,
                                                 foreign_keys=tables['files'].c.parent_id,
                                                 backref=backref("files", order_by=tables['files'].c.filename.asc()))})
@@ -862,13 +861,6 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
             filter_by(group=self, receive_email_each=period).all()
         return [recipient.user for recipient in recipients]
 
-    def recipients_gg(self):
-        recipients = meta.Session.query(GroupMember).\
-            filter_by(group=self).all()
-        return [recipient.user for recipient in recipients
-                if (recipient.user.gadugadu_get_news and
-                    recipient.user.gadugadu_confirmed)]
-
     def recipients_sms(self, sender=None):
         query = meta.Session.query(GroupMember
                         ).join(User
@@ -1244,21 +1236,6 @@ class Subject(ContentItem, FolderMixin, LimitedUploadMixin):
 
         recipients = [usm.user for usm in usms]
 
-        all_recipients.extend(recipients)
-        return list(set(all_recipients))
-
-    def recipients_gg(self):
-        all_recipients = []
-        groups =  meta.Session.query(Group).filter(Group.watched_subjects.contains(self)).all()
-        for group in groups:
-            all_recipients.extend(group.recipients_gg())
-
-        usms = meta.Session.query(UserSubjectMonitoring).\
-            join(User).\
-            filter(UserSubjectMonitoring.subject==self).\
-            filter(User.gadugadu_get_news==True).\
-            filter(User.gadugadu_confirmed==True).all()
-        recipients = [usm.user for usm in usms]
         all_recipients.extend(recipients)
         return list(set(all_recipients))
 
@@ -1807,30 +1784,6 @@ class LocationTag(Tag):
 def cleanupFileName(filename):
     return filename.split('\\')[-1].split('/')[-1]
 
-
-class NotifyGG(MapperExtension):
-
-    def after_insert(self, mapper, connection, instance):
-        if instance.isNullFile():
-            return
-        from pylons import tmpl_context as c
-        from ututi.lib.messaging import GGMessage
-
-        recipients = []
-        if isinstance(instance.parent, (Group, Subject)):
-            for interested_user in instance.parent.recipients_gg():
-                if interested_user is not c.user:
-                    recipients.append(interested_user.gadugadu_uin)
-
-            if recipients == []:
-                return
-
-            msg1 = GGMessage(_("A new file has been uploaded for the %(title)s:") % {
-                    'title': instance.parent.title})
-            msg2 = GGMessage("%s (%s)" % (instance.title, instance.url(qualified=True)))
-
-            msg1.send(recipients)
-            msg2.send(recipients)
 
 
 class FileDownload(object):

@@ -88,27 +88,6 @@ class DeleteMeForm(Schema):
     passwordd = UserPasswordValidator(not_empty=True)
     msg = {'empty': _(u"Please enter your password."),
            'tooShort': _(u"The password must be at least 5 symbols long.")}
-    
-                                                 
-class GaduGaduConfirmationNumber(validators.FormValidator):
-
-    messages = {
-        'invalid': _(u"This is not the confirmation code we sent you."),
-    }
-
-    def validate_python(self, form_dict, state):
-        if not form_dict['gadugadu_confirmation_key']:
-            return
-        if not form_dict['confirm_gadugadu'] and not form_dict['update_contacts']:
-            return
-        if (form_dict['gadugadu_confirmation_key'] and
-            c.user.gadugadu_uin == form_dict['gadugadu_uin'] and
-            c.user.gadugadu_confirmation_key.strip() == form_dict['gadugadu_confirmation_key']):
-            return
-
-        raise Invalid(self.message('invalid', state),
-                      form_dict, state,
-                      error_dict={'gadugadu_confirmation_key': Invalid(self.message('invalid', state), form_dict, state)})
 
 
 class PhoneConfirmationNumber(validators.FormValidator):
@@ -151,25 +130,18 @@ class ContactForm(Schema):
                 UniqueEmail(messages=msg, strip=True))
 
     site_url = validators.URL()
-    gadugadu_uin = validators.Int()
     phone_number = PhoneNumberValidator()
 
-    gadugadu_get_news = validators.StringBool(if_missing=False)
-
-    gadugadu_confirmation_key = validators.String()
     phone_confirmation_key = validators.String()
 
     confirm_email = validators.Bool()
-    confirm_gadugadu = validators.Bool()
     confirm_phone = validators.Bool()
 
     resend_phone_code = validators.Bool()
-    resend_gadugadu_code = validators.Bool()
 
     update_contacts = validators.Bool()
 
-    chained_validators = [GaduGaduConfirmationNumber(),
-                          PhoneConfirmationNumber()]
+    chained_validators = [PhoneConfirmationNumber()]
 
 
 class HideElementForm(Schema):

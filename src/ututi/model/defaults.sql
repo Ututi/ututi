@@ -71,10 +71,6 @@ create table users (
        logo bytea default null,
        accepted_terms timestamp default null,
        receive_email_each varchar(30) default 'day',
-       gadugadu_uin bigint default null,
-       gadugadu_confirmed boolean default false,
-       gadugadu_confirmation_key char(32) default '',
-       gadugadu_get_news boolean default false,
        openid varchar(200) default null unique,
        facebook_id bigint default null unique,
        phone_number varchar(20) default null,
@@ -120,20 +116,6 @@ $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER teacher_delete_trg AFTER DELETE ON teachers FOR EACH ROW
     EXECUTE PROCEDURE teacher_delete_trg();
-
-CREATE FUNCTION check_gadugadu() RETURNS trigger AS $$
-    BEGIN
-        IF NEW.gadugadu_uin is NULL THEN
-          NEW.gadugadu_confirmed := false;
-          NEW.gadugadu_confirmation_key := '';
-          NEW.gadugadu_get_news := false;
-        END IF;
-        RETURN NEW;
-    END
-$$ LANGUAGE plpgsql;;
-
-CREATE TRIGGER check_gadugadu BEFORE INSERT OR UPDATE ON users
-    FOR EACH ROW EXECUTE PROCEDURE check_gadugadu();;
 
 CREATE FUNCTION delete_user() RETURNS trigger AS $$
     BEGIN
