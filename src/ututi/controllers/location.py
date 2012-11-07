@@ -365,7 +365,9 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         redirect(location.url(action='edit'))
 
     def _add_sub_department(self, location, values):
-        return SubDepartment(values['title'], location)
+        sub_department = SubDepartment(values['title'], location)
+        sub_department.description = values['description']
+        return sub_department
 
     @location_action
     @ActionProtector('moderator')
@@ -388,6 +390,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
     def _update_sub_department(self, sub_department, values):
         sub_department.title = values['title']
+        sub_department.description = values['description']
         return sub_department
 
     @location_action
@@ -400,7 +403,8 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         c.current_menu_item = 'sub-departments'
         form = Form(sub_department, request,
                     apply=self._update_sub_department,
-                    defaults={'title': sub_department.title},
+                    defaults={'title': sub_department.title,
+                              'description': sub_department.description},
                     schema=SubDepartmentAddForm(),
                     action='UPDATE')
 
