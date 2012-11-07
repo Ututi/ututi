@@ -61,226 +61,61 @@ def init_model(engine):
 
 def setup_tables(engine):
     tables = {}
+
     #relationships between content items and tags
     warnings.simplefilter('ignore', SAWarning)
-    Table("files", meta.metadata,
-          autoload=True,
-          extend_existing=True,
-          autoload_with=engine)
+    Table("files", meta.metadata, autoload=True, autoload_with=engine)
     warnings.simplefilter('default', SAWarning)
 
-    Table("file_downloads", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("forum_categories", meta.metadata,
-          autoload=True,
-          autoload_with=engine,
-          extend_existing=True)
-
-    Table("forum_posts", meta.metadata,
-          autoload=True,
-          extend_existing=True,
-          autoload_with=engine)
-
-    Table("seen_threads", meta.metadata,
-          autoload=True,
-          extend_existing=True,
-          autoload_with=engine)
-
-    Table("subscribed_threads", meta.metadata,
-          autoload=True,
-          extend_existing=True,
-          autoload_with=engine)
-
-    Table("users", meta.metadata,
-          autoload=True,
-          extend_existing=True,
-          autoload_with=engine)
-
-    Table("teachers", meta.metadata,
-          autoload=True,
-          extend_existing=True,
-          autoload_with=engine)
-
-    Table("authors", meta.metadata,
-          autoload=True,
-          extend_existing=True,
-          autoload_with=engine)
-
-    Table("admin_users", meta.metadata,
-          autoload=True,
-          extend_existing=True,
-          autoload_with=engine)
-
-    Table("teacher_taught_subjects", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("teacher_groups", meta.metadata,
-          autoload=True,
-          autoload_with=engine,
-          extend_existing=True)
-
-    Table("content_items", meta.metadata,
-          Column('content_type', String()),
-          extend_existing=True,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("content_tags", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("private_messages", meta.metadata,
-          autoload=True,
-          autoload_with=engine,
-          extend_existing=True)
-
-    Table("regions", meta.metadata,
-          autoload=True,
-          extend_existing=True,
-          autoload_with=engine)
-
-    Table("tags", meta.metadata,
-          extend_existing=True,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("emails", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("email_domains", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("user_medals", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("user_registrations", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("subject_pages", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("pages", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("page_versions", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("subjects", meta.metadata,
-          autoload=True,
-          extend_existing=True,
-          autoload_with=engine)
-
-    Table("group_membership_types", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("group_members", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("groups", meta.metadata,
-          extend_existing=True,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("group_whitelist", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("coupon_usage", meta.metadata,
-          extend_existing=True,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("group_coupons", meta.metadata,
-          extend_existing=True,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("group_watched_subjects", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("group_invitations", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("group_requests", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("user_monitored_subjects", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
+    Table("file_downloads", meta.metadata, autoload=True, autoload_with=engine)
+    Table("forum_categories", meta.metadata, autoload=True, autoload_with=engine)
+    Table("forum_posts", meta.metadata, autoload=True, autoload_with=engine)
+    Table("seen_threads", meta.metadata, autoload=True, autoload_with=engine)
+    Table("subscribed_threads", meta.metadata, autoload=True, autoload_with=engine)
+    Table("users", meta.metadata, autoload=True, autoload_with=engine)
+    Table("teachers", meta.metadata, autoload=True, autoload_with=engine)
+    Table("authors", meta.metadata, autoload=True, autoload_with=engine)
+    Table("admin_users", meta.metadata, autoload=True, autoload_with=engine)
+    Table("teacher_taught_subjects", meta.metadata, autoload=True, autoload_with=engine)
+    Table("teacher_groups", meta.metadata, autoload=True, autoload_with=engine)
+    Table("content_items", meta.metadata, autoload=True, autoload_with=engine)
+    Table("content_tags", meta.metadata, autoload=True, autoload_with=engine)
+    Table("private_messages", meta.metadata, autoload=True, autoload_with=engine)
+    Table("regions", meta.metadata, autoload=True, autoload_with=engine)
+    Table("tags", meta.metadata, autoload=True, autoload_with=engine)
+    Table("emails", meta.metadata, autoload=True, autoload_with=engine)
+    Table("email_domains", meta.metadata, autoload=True, autoload_with=engine)
+    Table("user_medals", meta.metadata, autoload=True, autoload_with=engine)
+    Table("user_registrations", meta.metadata, autoload=True, autoload_with=engine)
+    Table("subject_pages", meta.metadata, autoload=True, autoload_with=engine)
+    Table("pages", meta.metadata, autoload=True, autoload_with=engine)
+    Table("page_versions", meta.metadata, autoload=True, autoload_with=engine)
+    Table("subjects", meta.metadata, autoload=True, autoload_with=engine)
+    Table("group_membership_types", meta.metadata, autoload=True, autoload_with=engine)
+    Table("group_members", meta.metadata, autoload=True, autoload_with=engine)
+    Table("groups", meta.metadata, autoload=True, autoload_with=engine)
+    Table("group_whitelist", meta.metadata, autoload=True, autoload_with=engine)
+    Table("coupon_usage", meta.metadata, autoload=True, autoload_with=engine)
+    Table("group_coupons", meta.metadata, autoload=True, autoload_with=engine)
+    Table("group_watched_subjects", meta.metadata, autoload=True, autoload_with=engine)
+    Table("group_invitations", meta.metadata, autoload=True, autoload_with=engine)
+    Table("group_requests", meta.metadata, autoload=True, autoload_with=engine)
+    Table("user_monitored_subjects", meta.metadata, autoload=True, autoload_with=engine)
     # ignoring error about unknown column type for now
     warnings.simplefilter("ignore", SAWarning)
-
-    Table("search_items", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("tag_search_items", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
+    Table("search_items", meta.metadata, autoload=True, autoload_with=engine)
+    Table("tag_search_items", meta.metadata, autoload=True, autoload_with=engine)
     warnings.simplefilter("default", SAWarning)
-
-    Table("payments", meta.metadata,
-          autoload=True,
-          extend_existing=True,
-          autoload_with=engine)
-
-    Table("received_sms_messages", meta.metadata,
-          extend_existing=True,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("outgoing_group_sms_messages", meta.metadata,
-          extend_existing=True,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("sms_outbox", meta.metadata,
-          extend_existing=True,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("notifications", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("notifications_viewed", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("wall_posts", meta.metadata,
-          autoload=True,
-          extend_existing=True,
-          autoload_with=engine)
-
-    Table("sub_departments", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("teacher_blog_posts", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
-    Table("teacher_blog_comments", meta.metadata,
-          autoload=True,
-          autoload_with=engine)
-
+    Table("payments", meta.metadata, autoload=True, autoload_with=engine)
+    Table("received_sms_messages", meta.metadata, autoload=True, autoload_with=engine)
+    Table("outgoing_group_sms_messages", meta.metadata, autoload=True, autoload_with=engine)
+    Table("sms_outbox", meta.metadata, autoload=True, autoload_with=engine)
+    Table("notifications", meta.metadata, autoload=True, autoload_with=engine)
+    Table("notifications_viewed", meta.metadata, autoload=True, autoload_with=engine)
+    Table("wall_posts", meta.metadata, autoload=True, autoload_with=engine)
+    Table("sub_departments", meta.metadata, autoload=True, autoload_with=engine)
+    Table("teacher_blog_posts", meta.metadata, autoload=True, autoload_with=engine)
+    Table("teacher_blog_comments", meta.metadata, autoload=True, autoload_with=engine)
     from ututi.model import events
     events.setup_tables(engine)
     from ututi.model import i18n
