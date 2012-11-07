@@ -27,7 +27,7 @@ class SearchSubmit(Schema):
 class SearchBaseController(BaseController):
     """ A base controller for searching."""
 
-    def _search(self):
+    def _make_search_params(self):
         c.text = self.form_result.get('text', '')
         c.tags = self.form_result.get('tagsitem', None)
         if c.tags is None:
@@ -44,19 +44,27 @@ class SearchBaseController(BaseController):
         if c.obj_type != '*':
             search_params['obj_type'] = c.obj_type
 
+        if search_params != {}:
+            search_params['language'] = c.lang
+
+        return search_params
+
+    def _make_search_query(self, search_params):
+        return search_query(**search_params)
+
+    def _search(self):
+
         try:
             page_no = int(request.params.get('page', 1))
         except ValueError:
             abort(404)
-        c.page = page_no
 
-        search_params['language'] = c.lang
-
+        search_params = self._make_search_params()
         if search_params != {}:
-            query = search_query(**search_params)
+            query = self._make_search_query(search_params)
             c.results = paginate.Page(
                 query,
-                page=c.page,
+                page=page_no,
                 items_per_page = 30,
                 item_count = search_query_count(query),
                 **search_params)
