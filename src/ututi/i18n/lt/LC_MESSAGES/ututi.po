@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-11-05 10:32+0200\n"
+"PO-Revision-Date: 2012-11-07 15:41+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -449,6 +449,9 @@ msgstr "Temos nuostatos"
 msgid "Unverified teachers"
 msgstr "Nepatvirtinti dėstytojai"
 
+msgid "Sub-departments"
+msgstr "Katedros"
+
 msgid "All news"
 msgstr "Visos naujienos"
 
@@ -658,6 +661,9 @@ msgstr "Naujas puslapis"
 
 msgid "This user profile is not public"
 msgstr "Šio naudotojo profilis nėra viešai prieinamas"
+
+msgid "Blog"
+msgstr "Blogas"
 
 msgid "Publications"
 msgstr "Publikacijos"
@@ -1242,14 +1248,6 @@ msgstr "%(link_to_subject)s pridėtas prie grupės %(link_to_group)s dalykų."
 #, python-format
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr " %(link_to_subject)s ištrintas iš grupės %(link_to_group)s dalykų sąrašo."
-
-#, python-format
-msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
-msgstr ""
-
-#, python-format
-msgid "%(link_to_author)slink_to_user"
-msgstr ""
 
 msgid "(no subject)"
 msgstr "(be temos)"
@@ -3046,6 +3044,12 @@ msgstr ""
 msgid "Departments:"
 msgstr "Fakultetai:"
 
+msgid "Add sub-department"
+msgstr "Pridėti katedrą"
+
+msgid "Sub department title:"
+msgstr "Katedros pavadinimas"
+
 msgid "Edit general information of your university below."
 msgstr "Žemiau galite redaguoti universiteto informaciją."
 
@@ -3108,6 +3112,9 @@ msgstr "Kol kas nėra jokių el. pašto domenų, priskirtų šiam universitetui.
 
 msgid "New email domain:"
 msgstr "Naujas el. pašto domenas:"
+
+msgid "edit sub-department"
+msgstr "redaguoti katedrą"
 
 msgid ""
 "Ututi let's you theme your network, including custom colors, header logo "
@@ -3287,6 +3294,12 @@ msgid ""
 msgstr ""
 "<strong>Bendraukite su savo studentais</strong> siųsdami grupės arba "
 "privačias žinutes, arba pradėdami diskusiją dalyko puslapyje."
+
+msgid "Sub-department"
+msgstr "Katedra"
+
+msgid "The actions"
+msgstr "Veiksmai"
 
 msgid "Can't find your subject?"
 msgstr "Nerandate savo dalyko?"
@@ -3719,9 +3732,6 @@ msgstr "Susiję dalykai:"
 
 msgid "Lect."
 msgstr "Dėst."
-
-msgid "Edit permissions"
-msgstr "Keisti teises"
 
 msgid "Create your own social network"
 msgstr "Sukurkite savo socialinį tinklą"
@@ -4506,6 +4516,15 @@ msgstr "Pridėti studentų grupės kontaktus"
 msgid "Are you sure you want to delete this group?"
 msgstr "Ar tikrai norite ištrinti šią grupę?"
 
+msgid "Create a new post"
+msgstr "Sukurti blogo įrašą"
+
+msgid "Blog post"
+msgstr "Blogo įrašas"
+
+msgid "Enter a blog post title"
+msgstr "Įrašykite blogo įrašo pavadinimą"
+
 msgid "Write down your information and research interests"
 msgstr "Užrašykite informaciją apie save bei savo mokslinius interesus"
 
@@ -4786,11 +4805,24 @@ msgstr "Knyga"
 msgid "Price"
 msgstr "Kaina"
 
+#, python-format
+msgid "%(count)s comment"
+msgid_plural "%(count)s comments"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Comments:"
+msgstr "Komentarai"
+
+msgid "Comment"
+msgstr "Komentaras"
+
+msgid "Write a comment"
+msgstr "Parašyti komentarą"
+
 msgid "The data"
 msgstr "Duomenys"
-
-msgid "The actions"
-msgstr "Veiksmai"
 
 msgid "Uploading"
 msgstr "Keliamas"
@@ -5213,6 +5245,27 @@ msgstr "Universitetas  |  Fakultetas:"
 msgid "Department:"
 msgstr "Fakultetas:"
 
+msgid "Who can view the subject"
+msgstr "Kas gali matyti šį dalyką"
+
+msgid "Everyone"
+msgstr "Visi"
+
+msgid "Department members"
+msgstr "Fakulteto nariai"
+
+msgid "University members"
+msgstr "Universiteto nariai"
+
+msgid "Who can change subject settings"
+msgstr "Kas gali keisti dalyko nustatymus"
+
+msgid "Teachers and administrators"
+msgstr "Dėstytojai ir administratoriai"
+
+msgid "Who can post subject discussions"
+msgstr "Kas gali dalyko rašyti diskusijas"
+
 msgid ""
 "discuss various topics. Students and teachers who follow this subject "
 "will be able to join the discussion."
@@ -5275,30 +5328,6 @@ msgid ""
 "<strong>Take notes during lecture</strong> on your laptop and upload it "
 "directly to Ututi."
 msgstr "<strong>Konspektuokite per paskaitas</strong> tiesiai į Ututi."
-
-msgid "Subject permissions"
-msgstr "Dalyko prieinamumas"
-
-msgid "Who can view the subject"
-msgstr "Kas gali matyti šį dalyką"
-
-msgid "Everyone"
-msgstr "Visi"
-
-msgid "Department members"
-msgstr "Fakulteto nariai"
-
-msgid "University members"
-msgstr "Universiteto nariai"
-
-msgid "Who can change subject settings"
-msgstr "Kas gali keisti dalyko nustatymus"
-
-msgid "Teachers and administrators"
-msgstr "Dėstytojai ir administratoriai"
-
-msgid "Who can post subject discussions"
-msgstr "Kas gali dalyko rašyti diskusijas"
 
 msgid "Write your post"
 msgstr "Rašyti įrašą"

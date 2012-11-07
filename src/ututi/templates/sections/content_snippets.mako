@@ -261,7 +261,8 @@ Snippets for rendering various content items, e.g. in search results.
     %else:
       <div class="title">${post.title}</div>
     %endif
-    <div class="post-date">${h.fmt_normaldate(post.created_on)}</div>
+    <div class="comment-label">${ungettext("%(count)s comment", "%(count)s comments", len(post.comments)) % dict(count=len(post.comments))}</div>
+    <div class="post-date date-label">${h.fmt_normaldate(post.created_on)}</div>
     <div class="blog-post">
       ${h.literal(post.description)}
     </div>
@@ -270,17 +271,22 @@ Snippets for rendering various content items, e.g. in search results.
         <h2>${_('Comments:')}</h2>
         %for comment in post.comments:
           <div class="comment">
+            <div class="comment-date date-label">${h.when(comment.created_on)}</div>
+            <div class="logo">
+              <img src="${url(controller='user', action='logo', id=comment.created.id, width=50)}" />
+            </div>
             <div class="comment-author">${h.user_link(comment.created_by)}</div>
-            <div class="comment-date">${h.when(comment.created_on)}</div>
             <div class="comment-content">
-              ${h.nl2br(comment.content)}
+              ${h.wall_fmt(comment.content)}
             </div>
           </div>
         %endfor
-        <form action="${url(controller='user', action='teacher_blog_comment', id=post.created.id, post_id=post.id)}" method="POST">
-          ${h.input_area('content', _('Comment'))}
-          ${h.input_submit(_('Send'))}
-        </form>
+        <div clas='comment-form'>
+          <form  action="${url(controller='user', action='teacher_blog_comment', id=post.created.id, post_id=post.id)}" method="POST">
+            ${h.input_area('content', _('Comment'), help_text=_('Write a comment'), cols='160')}
+            ${h.input_submit(_('Send'))}
+          </form>
+        </div>
       </div>
     %endif
 </%def>

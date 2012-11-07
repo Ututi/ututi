@@ -1923,6 +1923,53 @@ ul.tabs {
         color: #666;
     }
 
+    .date-label {
+        color: #666;
+        font-size: 11px;
+        padding-left: 15px;
+        background: url("/img/icons.com/clock.png") no-repeat left center;
+    }
+
+    .comment-label {
+        color: #666;
+        font-size: 11px;
+        padding-left: 15px;
+        background: url("/img/icons.com/discussions_small_grey.png") no-repeat left center;
+        float: right;
+    }
+
+/* Blog comments */
+    .blog-comments {
+        margin-top: 20px;
+    }
+
+    .blog-comments .comment {
+        margin-top: 8px;
+        background-color: #F8F8F8;
+        position: relative;
+        min-height: 60px;
+        padding: 5px;
+    }
+        .blog-comments .comment .logo {
+            float: left;
+            margin-right: 5px;
+        }
+        .blog-comments .comment .comment-date {
+            float: right;
+        }
+        .blog-comments .comment .comment-author {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+    .blog-comments .comment-form {
+        margin-top: 16px;
+    }
+
+    .blog-comments .formField #content {
+        width: 515px;
+    }
+
 /* SETTINGS PAGES */
 
 .explanation-post-header {

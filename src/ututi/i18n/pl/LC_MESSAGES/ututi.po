@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-05 10:32+0200\n"
+"PO-Revision-Date: 2012-11-07 15:41+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -461,6 +461,9 @@ msgstr "Edytuj motyw"
 msgid "Unverified teachers"
 msgstr "Wykładowca niezweryfikowany"
 
+msgid "Sub-departments"
+msgstr ""
+
 msgid "All news"
 msgstr ""
 
@@ -676,6 +679,9 @@ msgstr "Nowa notatka"
 
 msgid "This user profile is not public"
 msgstr "Profil tego użytkownika nie jest publiczny"
+
+msgid "Blog"
+msgstr ""
 
 msgid "Publications"
 msgstr "Publikacje"
@@ -3089,6 +3095,12 @@ msgstr ""
 msgid "Departments:"
 msgstr "Wydziały:"
 
+msgid "Add sub-department"
+msgstr ""
+
+msgid "Sub department title:"
+msgstr ""
+
 msgid "Edit general information of your university below."
 msgstr "Edytuj ogólne informacje o Twoim uniwersytecie poniżej."
 
@@ -3151,6 +3163,9 @@ msgstr "Obecnie żadne domeny nie są przypisane do tego uniwersytetu."
 
 msgid "New email domain:"
 msgstr "Nowa domena emailowa:"
+
+msgid "edit sub-department"
+msgstr ""
 
 msgid ""
 "Ututi let's you theme your network, including custom colors, header logo "
@@ -3332,6 +3347,12 @@ msgstr ""
 "<strong>Skontaktuj się ze swoimi uczniami</strong> poprzez wysłanie "
 "grupowej lub prywatnej wiadomości. W tym celu możesz również rozpocząć "
 "dyskucję na tablicy kursu."
+
+msgid "Sub-department"
+msgstr ""
+
+msgid "The actions"
+msgstr "Działania"
 
 msgid "Can't find your subject?"
 msgstr "Nie możesz znaleźć swojego przedmiotu?"
@@ -3764,9 +3785,6 @@ msgstr "Powiązane przedmioty:"
 
 msgid "Lect."
 msgstr "Wykł."
-
-msgid "Edit permissions"
-msgstr ""
 
 msgid "Create your own social network"
 msgstr "Stwórz swoją własną sieć społecznościową"
@@ -4548,6 +4566,15 @@ msgstr "Dodaj grupę studencką"
 msgid "Are you sure you want to delete this group?"
 msgstr "Czy na pewno chcesz usunąć tę grupę?"
 
+msgid "Create a new post"
+msgstr ""
+
+msgid "Blog post"
+msgstr ""
+
+msgid "Enter a blog post title"
+msgstr ""
+
 msgid "Write down your information and research interests"
 msgstr ""
 "Wpisz informacje o sobie i swoich zainteresowaniach dotyczących badań "
@@ -4830,11 +4857,24 @@ msgstr "Książka"
 msgid "Price"
 msgstr "Cena"
 
+#, python-format
+msgid "%(count)s comment"
+msgid_plural "%(count)s comments"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Comments:"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Write a comment"
+msgstr ""
+
 msgid "The data"
 msgstr "Dane"
-
-msgid "The actions"
-msgstr "Działania"
 
 msgid "Uploading"
 msgstr "Dodaje"
@@ -5254,6 +5294,27 @@ msgstr "Uniwersytet | Wydział:"
 msgid "Department:"
 msgstr "Wydział:"
 
+msgid "Who can view the subject"
+msgstr ""
+
+msgid "Everyone"
+msgstr ""
+
+msgid "Department members"
+msgstr ""
+
+msgid "University members"
+msgstr ""
+
+msgid "Who can change subject settings"
+msgstr ""
+
+msgid "Teachers and administrators"
+msgstr ""
+
+msgid "Who can post subject discussions"
+msgstr ""
+
 msgid ""
 "discuss various topics. Students and teachers who follow this subject "
 "will be able to join the discussion."
@@ -5324,30 +5385,6 @@ msgid ""
 msgstr ""
 "<strong>Notuj na wykładzie</strong> na swoim laptopie i wrzucaj notatki "
 "prosto na Ututi."
-
-msgid "Subject permissions"
-msgstr ""
-
-msgid "Who can view the subject"
-msgstr ""
-
-msgid "Everyone"
-msgstr ""
-
-msgid "Department members"
-msgstr ""
-
-msgid "University members"
-msgstr ""
-
-msgid "Who can change subject settings"
-msgstr ""
-
-msgid "Teachers and administrators"
-msgstr ""
-
-msgid "Who can post subject discussions"
-msgstr ""
 
 msgid "Write your post"
 msgstr ""
