@@ -26,7 +26,6 @@ from sqlalchemy import func
 from sqlalchemy.sql.expression import not_
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import and_, or_
-from sqlalchemy.orm.interfaces import MapperExtension
 from sqlalchemy.types import String
 
 from ututi.migration import GreatMigrator
