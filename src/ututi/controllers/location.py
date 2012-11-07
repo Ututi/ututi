@@ -414,6 +414,15 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
     @location_action
     @ActionProtector('moderator')
+    def delete_sub_department(self, location):
+        sub_department_id = request.urlvars['id']
+        sub_department = SubDepartment.get(sub_department_id)
+        sub_department.delete()
+        meta.Session.commit()
+        redirect(location.url(action='sub_departments'))
+
+    @location_action
+    @ActionProtector('moderator')
     def sub_departments(self, location):
         c.menu_items = location_edit_menu_items()
         c.current_menu_item = 'sub-departments'

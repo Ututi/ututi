@@ -13,7 +13,7 @@
           <a href="${c.location.url(action='edit_sub_department', id=item.id)}">${item.title}</a>
         </td>
         <td class="actions">
-          ${h.button_to('Delete', '#')}
+          ${h.button_to('Delete', c.location.url(action='delete_sub_department', id=item.id))}
         </td>
       </%def>
     </%b:light_table>
