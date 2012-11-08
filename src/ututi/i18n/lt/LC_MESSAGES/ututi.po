@@ -663,7 +663,7 @@ msgid "This user profile is not public"
 msgstr "Šio naudotojo profilis nėra viešai prieinamas"
 
 msgid "Blog"
-msgstr "Blogas"
+msgstr "Dienoraštis"
 
 msgid "Publications"
 msgstr "Publikacijos"
@@ -4397,10 +4397,10 @@ msgid "edit my page"
 msgstr "redaguoti puslapį"
 
 msgid "Create a blog post"
-msgstr "Sukurti blogo įrašą"
+msgstr "Sukurti dienoraščio įrašą"
 
 msgid "View your blog posts"
-msgstr "Peržiūrėti blogo įrašus"
+msgstr "Peržiūrėti dienoraščio įrašus"
 
 msgid "Delete this group"
 msgstr "Trinti šią grupę"
@@ -4485,7 +4485,7 @@ msgid "Are you sure you want to delete this group?"
 msgstr "Ar tikrai norite ištrinti šią grupę?"
 
 msgid "Create a new post"
-msgstr "Sukurti blogo įrašą"
+msgstr "Sukurti dienoraščio įrašą"
 
 msgid "Click on a blog post to edit it."
 msgstr "Paspauskite ant įrašo norėdami jį redaguoti"
@@ -4498,13 +4498,13 @@ msgstr[1] "%(count)s komentarai"
 msgstr[2] "%(count)s komentarų"
 
 msgid "You haven't created any blog posts yet."
-msgstr "Jūs dar nesukūrėte blogo įrašų."
+msgstr "Dar nesukūrėte dienoraščio įrašų."
 
 msgid "Blog post"
-msgstr "Blogo įrašas"
+msgstr "Dienoraščio įrašas"
 
 msgid "Enter a blog post title"
-msgstr "Įrašykite blogo įrašo pavadinimą"
+msgstr "Įrašykite dienoraščio įrašo pavadinimą"
 
 msgid "Write down your information and research interests"
 msgstr "Užrašykite informaciją apie save bei savo mokslinius interesus"
