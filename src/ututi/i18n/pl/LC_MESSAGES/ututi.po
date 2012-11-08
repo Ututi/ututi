@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-08 14:38+0200\n"
+"PO-Revision-Date: 2012-11-08 16:25+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -5432,6 +5432,12 @@ msgstr "Nauczane przedmioty"
 #, python-format
 msgid "%(teacher)s does not teach any course."
 msgstr "%(teacher)s nie załozył jeszcze żadnego przedmiotu."
+
+msgid "edit posts"
+msgstr ""
+
+msgid "edit post"
+msgstr ""
 
 msgid "add course"
 msgstr "Dodaj kurs"
