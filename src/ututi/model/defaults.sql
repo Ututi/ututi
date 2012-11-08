@@ -354,6 +354,7 @@ create index group_members_user_id_idx on group_members(user_id);
 /* A table for subjects */
 create table subjects (
        id int8 not null references content_items(id) on delete cascade,
+       sub_department_id int8 default null,
        subject_id varchar(150) default null,
        title varchar(500) not null,
        lecturer varchar(500) default null,
@@ -1704,6 +1705,10 @@ create table sub_departments (
        description text default null,
        unique(location_id, slug),
        primary key (id));;
+
+alter table subjects add constraint subjects_sub_department_id_fkey
+      foreign key (sub_department_id) references sub_departments(id)
+      on delete set null;
 
 /* A table for storing teacher blog posts.
  */
