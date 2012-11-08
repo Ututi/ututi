@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-07 17:41+0200\n"
+"PO-Revision-Date: 2012-11-08 14:38+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -872,11 +872,6 @@ msgstr "Społeczność Ututi"
 msgid "ututi-bugs"
 msgstr "Ututi blędy"
 
-msgid "To confirm your gadu gadu enter this code in your profile page."
-msgstr ""
-"Potwierdź swój numer gg poprzez wpisanie tego kodu na stronie Twego "
-"profilu."
-
 msgid "Save"
 msgstr "Zachowaj"
 
@@ -1114,10 +1109,6 @@ msgid_plural "unlimited group private files for %(day_count)d days"
 msgstr[0] "nieograniczona liczba prywatnych plików grupy na %(day_count)d dzień"
 msgstr[1] "nieograniczona liczba prywatnych plików grupy na %(day_count)d dni"
 msgstr[2] "nieograniczona liczba prywatnych plików grupy na %(day_count)d dni"
-
-#, python-format
-msgid "A new file has been uploaded for the %(title)s:"
-msgstr "Do %(title)s został dodany nowy plik"
 
 #, python-format
 msgid "Page %(page_title)s (%(page_url)s) was created."
@@ -3983,41 +3974,6 @@ msgstr ""
 msgid "Work address"
 msgstr "Adres miejsca pracy"
 
-msgid "Your GG number"
-msgstr "Twoje GG"
-
-msgid "GG number is not confirmed"
-msgstr "Numer GG nie jest potwierdzony."
-
-msgid "Enter the code that you have received in your GG"
-msgstr "Wpisz kod, który otrzymałeś na GG"
-
-msgid ""
-"\n"
-"\n"
-"                    Should you not have received the code, please press "
-"\"Send code again\".\n"
-"                    Also don't forget to add Ututi (<a "
-"href=\"gg:5437377\">5437377</a>) to your friends!"
-msgstr ""
-"\n"
-"\n"
-"Jeśli kod nie został dostarczony, kliknij \"Wyślij kod ponownie\".Nie "
-"zapomnij dodać Ututi (<a href=\"gg:5437377\">5437377</a>) do swojej "
-"listy."
-
-msgid "Submit code"
-msgstr "Potwierdź kod"
-
-msgid "Send code again"
-msgstr "Wyślij kod ponownie"
-
-msgid "GG number is confirmed"
-msgstr "Numer GG został potwierdzony."
-
-msgid "Receive news into gg"
-msgstr "Otrzymuj powiadomienia na gg"
-
 msgid "Use international format, +XXXXXXXXXXX"
 msgstr "Użyj międzynarodowego formatu +XXXXXXXXXXX"
 
@@ -4034,6 +3990,12 @@ msgid "Should you not have received the code, please press \"Send code again\""
 msgstr ""
 "Jeśli nie otrzymałeś(-aś) jeszcze kodu potwierdzającego, kliknij \"Wyślij"
 " kod ponownie\"."
+
+msgid "Submit code"
+msgstr "Potwierdź kod"
+
+msgid "Send code again"
+msgstr "Wyślij kod ponownie"
 
 msgid "Number is confirmed"
 msgstr "Numer został potwierdzony"
@@ -4999,14 +4961,6 @@ msgstr "Uzyskaj nowy e-mail potwierdzający"
 
 #, python-format
 msgid ""
-"Your <strong>gadu gadu number</strong> is not confirmed! Please <a "
-"href=\"%s\">confirm</a> it by entering the code sent to you."
-msgstr ""
-"Twój <strong>numer gadu gadu</strong> nie został potwierdzony!<a "
-"href=\"%s\">Potwierdź</a> go, proszę, wpisując wysłany do Ciebie kod."
-
-#, python-format
-msgid ""
 "Your phone is not confirmed! Please <a href=\"%s\">confirm</a> it by "
 "entering the code sent to you."
 msgstr ""
@@ -5460,6 +5414,9 @@ msgstr "Telefon"
 
 msgid "Personal webpage"
 msgstr "Osobista strona internetowa"
+
+msgid "Back to post list"
+msgstr ""
 
 #, python-format
 msgid "%(teacher)s has not provided any information."

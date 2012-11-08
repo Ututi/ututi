@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-11-07 17:41+0200\n"
+"PO-Revision-Date: 2012-11-08 14:38+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -854,11 +854,6 @@ msgstr "ututi-community"
 msgid "ututi-bugs"
 msgstr "ututi-bugs"
 
-msgid "To confirm your gadu gadu enter this code in your profile page."
-msgstr ""
-"Norėdami patvirtinti savo gadu gadu numerį, įveskite šį kodą savo "
-"profilio puslapyje."
-
 msgid "Save"
 msgstr "Saugoti"
 
@@ -1096,10 +1091,6 @@ msgid_plural "unlimited group private files for %(day_count)d days"
 msgstr[0] "neribota grupės privačių failų vieta %(day_count)d dienai"
 msgstr[1] "neribota grupės privačių failų vieta %(day_count)d dienoms"
 msgstr[2] "neribota grupės privačių failų vieta %(day_count)d dienų"
-
-#, python-format
-msgid "A new file has been uploaded for the %(title)s:"
-msgstr "%(title)s buvo įkeltas naujas failas:"
 
 #, python-format
 msgid "Page %(page_title)s (%(page_url)s) was created."
@@ -3930,41 +3921,6 @@ msgstr ""
 msgid "Work address"
 msgstr "Darbo adresas"
 
-msgid "Your GG number"
-msgstr "Tavo GG numeris"
-
-msgid "GG number is not confirmed"
-msgstr "GG numeris nepatvirtintas"
-
-msgid "Enter the code that you have received in your GG"
-msgstr "Įveskite kodą, kurį gavote savo GG"
-
-msgid ""
-"\n"
-"\n"
-"                    Should you not have received the code, please press "
-"\"Send code again\".\n"
-"                    Also don't forget to add Ututi (<a "
-"href=\"gg:5437377\">5437377</a>) to your friends!"
-msgstr ""
-"\n"
-"\n"
-"Jei negavote kodo, paspauskite \"Siųsti kodą dar kartą\". Taip pat "
-"nepamirškite įtraukti Ututi (<a href=\"gg:5437377\">5437377</a>) į savo "
-"draugų sąrašą!"
-
-msgid "Submit code"
-msgstr "Patvirtinti"
-
-msgid "Send code again"
-msgstr "Siųsti kodą dar kartą"
-
-msgid "GG number is confirmed"
-msgstr "GG numeris patvirtintas"
-
-msgid "Receive news into gg"
-msgstr "Gauti naujienas į GG"
-
 msgid "Use international format, +XXXXXXXXXXX"
 msgstr "Naudokite tarptautinį formatą, +370XXXXXXXX"
 
@@ -3979,6 +3935,12 @@ msgstr "Įveskite kodą, kurį mes jums atsiuntėme SMS"
 
 msgid "Should you not have received the code, please press \"Send code again\""
 msgstr "Jei negavote kodo, spauskite \"Siųsti kodą dar kartą\""
+
+msgid "Submit code"
+msgstr "Patvirtinti"
+
+msgid "Send code again"
+msgstr "Siųsti kodą dar kartą"
 
 msgid "Number is confirmed"
 msgstr "Numeris patvirtintas"
@@ -4948,14 +4910,6 @@ msgstr "Negavai?"
 
 #, python-format
 msgid ""
-"Your <strong>gadu gadu number</strong> is not confirmed! Please <a "
-"href=\"%s\">confirm</a> it by entering the code sent to you."
-msgstr ""
-"Jūsų <strong>gadu gadu numeris</strong> nepatvirtintas! <a "
-"href=\"%s\">Patvirtinkite</a> jį įvesdami jums išsiųstą kodą."
-
-#, python-format
-msgid ""
 "Your phone is not confirmed! Please <a href=\"%s\">confirm</a> it by "
 "entering the code sent to you."
 msgstr ""
@@ -5403,6 +5357,9 @@ msgstr "Tel. numeris"
 
 msgid "Personal webpage"
 msgstr "Asmeninis puslapis"
+
+msgid "Back to post list"
+msgstr "Atgal į sąrašą"
 
 #, python-format
 msgid "%(teacher)s has not provided any information."

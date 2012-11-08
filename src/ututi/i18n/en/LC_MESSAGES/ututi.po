@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-07 17:41+0200\n"
+"PO-Revision-Date: 2012-11-08 14:38+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=((n * 1) != 1)\n"
@@ -825,9 +825,6 @@ msgstr ""
 msgid "ututi-bugs"
 msgstr ""
 
-msgid "To confirm your gadu gadu enter this code in your profile page."
-msgstr ""
-
 msgid "Save"
 msgstr ""
 
@@ -1050,10 +1047,6 @@ msgid "unlimited group private files for %(day_count)d day"
 msgid_plural "unlimited group private files for %(day_count)d days"
 msgstr[0] ""
 msgstr[1] ""
-
-#, python-format
-msgid "A new file has been uploaded for the %(title)s:"
-msgstr ""
 
 #, python-format
 msgid "Page %(page_title)s (%(page_url)s) was created."
@@ -3618,36 +3611,6 @@ msgstr ""
 msgid "Work address"
 msgstr ""
 
-msgid "Your GG number"
-msgstr ""
-
-msgid "GG number is not confirmed"
-msgstr ""
-
-msgid "Enter the code that you have received in your GG"
-msgstr ""
-
-msgid ""
-"\n"
-"\n"
-"                    Should you not have received the code, please press "
-"\"Send code again\".\n"
-"                    Also don't forget to add Ututi (<a "
-"href=\"gg:5437377\">5437377</a>) to your friends!"
-msgstr ""
-
-msgid "Submit code"
-msgstr ""
-
-msgid "Send code again"
-msgstr ""
-
-msgid "GG number is confirmed"
-msgstr ""
-
-msgid "Receive news into gg"
-msgstr ""
-
 msgid "Use international format, +XXXXXXXXXXX"
 msgstr ""
 
@@ -3661,6 +3624,12 @@ msgid "Enter the code that you have received by SMS"
 msgstr ""
 
 msgid "Should you not have received the code, please press \"Send code again\""
+msgstr ""
+
+msgid "Submit code"
+msgstr ""
+
+msgid "Send code again"
 msgstr ""
 
 msgid "Number is confirmed"
@@ -4557,12 +4526,6 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Your <strong>gadu gadu number</strong> is not confirmed! Please <a "
-"href=\"%s\">confirm</a> it by entering the code sent to you."
-msgstr ""
-
-#, python-format
-msgid ""
 "Your phone is not confirmed! Please <a href=\"%s\">confirm</a> it by "
 "entering the code sent to you."
 msgstr ""
@@ -4987,6 +4950,9 @@ msgid "Phone"
 msgstr ""
 
 msgid "Personal webpage"
+msgstr ""
+
+msgid "Back to post list"
 msgstr ""
 
 #, python-format
