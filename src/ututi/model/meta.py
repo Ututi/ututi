@@ -1,4 +1,5 @@
 """SQLAlchemy Metadata and Session object"""
+from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 __all__ = ['Session', 'engine', 'metadata', 'DeclarativeModel']
@@ -44,3 +45,17 @@ metadata = Base.metadata
 
 class DeclarativeModel(DeferredReflection, Base):
     __abstract__ = True
+
+    @classmethod
+    def get(cls, id):
+        try:
+            return Session.query(cls).filter_by(id=id).one()
+        except NoResultFound:
+            return None
+
+    @classmethod
+    def all(cls):
+        return Session.query(cls).all()
+
+    def delete(self):
+        Session.delete(self)

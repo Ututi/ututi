@@ -24,47 +24,6 @@ Let's invite a couple of users into our group:
     >>> from ututi.lib.mailer import mail_queue
     >>> mail_queue[:] = []
 
-Add their gadugadu numbers:
-
-    >>> browser2 = Browser.logIn('user3@ututi.lt', 'password')
-    >>> browser2.open('http://localhost/profile/edit/contacts')
-    >>> browser2.getControl(name='gadugadu_uin').value = "564321"
-    >>> browser2.getControl('Save').click()
-
-    >>> from ututi.lib import gg
-    >>> gg.sent_messages[:] = []
-
-Pretend we lost it ;)
-
-    >>> browser2.getControl('Send code again').click()
-    >>> msg = gg.sent_messages.pop()
-    >>> gg.sent_messages.pop()
-    (564321L, u'To confirm your gadu gadu enter this code in your profile page.')
-
-    >>> browser2.getControl(name='gadugadu_confirmation_key').value = msg[1]
-    >>> browser2.getControl('Submit code').click()
-
-    >>> browser2.getControl('Receive news into gg').click()
-    >>> browser2.getControl('Save').click()
-
-    >>> browser3 = Browser.logIn('user@ututi.lt', 'password')
-    >>> browser3.open('http://localhost/profile/edit/contacts')
-    >>> browser3.getControl(name='gadugadu_uin').value = "133465"
-    >>> browser3.getControl('Save').click()
-
-    >>> from ututi.lib import gg
-    >>> msg = gg.sent_messages.pop()
-    >>> ignore = gg.sent_messages.pop()
-    >>> browser3.getControl(name='gadugadu_confirmation_key').value = msg[1]
-    >>> browser3.getControl('Submit code').click()
-
-    >>> browser3.getControl('Receive news into gg').click()
-
-    >>> browser3.getControl('Save').click()
-
-    >>> browser3.getControl('Receive news into gg').selected
-    True
-
 Make some noise:
 
     >>> browser.getLink('Subjects').click()
@@ -163,11 +122,6 @@ Now let's upload a couple of files:
     ...                params={'folder': ''},
     ...                upload_files=[("attachment", "f1.txt", "Test")])
 
-Oh and in the mean time - a user sets his GG number to some nonsense:
-
-    >>> browser3.open('http://localhost/profile/edit/contacts')
-    >>> browser3.getControl(name='gadugadu_uin').value = ""
-    >>> browser3.getControl('Save').click()
 
 And we continue uploading files:
 

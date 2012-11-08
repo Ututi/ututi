@@ -143,18 +143,13 @@ class User(Author):
 
     def send(self, msg):
         """Send a message to the user."""
-        from ututi.lib.messaging import EmailMessage, GGMessage, SMSMessage
+        from ututi.lib.messaging import EmailMessage, SMSMessage
         if isinstance(msg, EmailMessage):
             email = self.emails[0]
             if email.confirmed or msg.force:
                 msg.send(email.email)
             else:
                 log.info("Could not send message to unconfirmed email %(email)s" % dict(email=email.email))
-        elif isinstance(msg, GGMessage):
-            if self.gadugadu_confirmed or msg.force:
-                msg.send(self.gadugadu_uin)
-            else:
-                log.info("Could not send message to unconfirmed gadugadu account %(gg)s" % dict(gg=self.gadugadu_uin))
         elif isinstance(msg, SMSMessage):
             if self.phone_number is not None and (self.phone_confirmed or msg.force):
                 msg.recipient=self

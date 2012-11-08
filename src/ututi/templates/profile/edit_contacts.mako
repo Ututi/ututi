@@ -39,46 +39,6 @@
     ${h.input_line('work_address', _('Work address'))}
   %endif
 
-  ## GADU GADU
-
-  %if c.gg_enabled:
-    <div>
-      ${h.input_line('gadugadu_uin', _('Your GG number'))}
-
-        %if c.user.gadugadu_uin:
-            %if not c.user.gadugadu_confirmed:
-              <p class="field-status">${_('GG number is not confirmed')}</p>
-              ${h.input_line('gadugadu_confirmation_key',
-                             _("Enter the code that you have received in your GG"),
-                             help_text=h.literal(_("""
-
-                    Should you not have received the code, please press "Send code again".
-                    Also don't forget to add Ututi (<a href="gg:5437377">5437377</a>) to your friends!""")),
-
-                             right_next=h.input_submit(_('Submit code'), name='confirm_gadugadu', class_='dark inline') + \
-                                        h.input_submit_text_button(_('Send code again'), name='resend_gadugadu_code')
-                             )}
-            %else:
-              <input type="hidden"  name="gadugadu_confirmation_key" />
-              <p class="field-status confirmed">${_('GG number is confirmed')}</p>
-              <div class="formField">
-                <label for="gadugadu_get_news">
-                  <input type="checkbox" name="gadugadu_get_news" class="checkbox"
-                         id="gadugadu_get_news" class="line" />
-
-                  ${_('Receive news into gg')}
-                </label>
-              </div>
-            %endif
-        %else:
-          <input type="hidden" name="gadugadu_confirmation_key" />
-        %endif
-    </div>
-  %else:
-    <input type="hidden" name="gadugadu_uin" />
-    <input type="hidden" name="gadugadu_confirmation_key" />
-  %endif
-
   ## PHONE NUMBER
 
   <%

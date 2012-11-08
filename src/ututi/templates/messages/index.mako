@@ -19,12 +19,15 @@
   <div class="single-messages">
 
     % for message in c.messages:
-      <% is_read = all((m.sender == c.user or m.is_read) for m in message.thread()) %>
+      <%
+        is_read = all((m.sender == c.user or m.is_read) for m in message.thread())
+        msg_subject = message.subject if message.subject else _('(no subject)')
+      %>
       <div class="${'message-list-on1' if not is_read else 'message-list-off1'}">
         <div class="floatleft m-on">
           <div class="orange ${'bold' if not is_read else ''}">
             <a href="${url(controller='messages', action='thread', id=message.id)}"
-               class="post-title">${message.subject}</a>
+               class="post-title">${msg_subject}</a>
             <span class="reply-count">
               (${ungettext("%(count)s message", "%(count)s messages", message.thread_length()) % dict(count=message.thread_length())})
             </span>

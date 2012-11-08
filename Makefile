@@ -71,27 +71,27 @@ buildout:
 test: test1 test2
 
 .PHONY: test1
-test1: bin/test instance/done ${PG_SOCKET}
+test1: bin/test instance/done ${PG_SOCKET} compile-translations
 	bin/test --layer=Ututi
 
 .PHONY: test2
-test2: bin/test instance/done ${PG_SOCKET}
+test2: bin/test instance/done ${PG_SOCKET} compile-translations
 	bin/test --layer=U2ti
 
 .PHONY: utest
-testall: bin/test
+testall: bin/test compile-translations
 	bin/test -u
 
 .PHONY: ftest
-ftest: bin/test instance/done ${PG_SOCKET}
+ftest: bin/test instance/done ${PG_SOCKET} compile-translations
 	bin/test -f --at-level 2
 
 .PHONY: atest
-atest: bin/test instance/done ${PG_SOCKET}
+atest: bin/test instance/done ${PG_SOCKET} compile-translations
 	bin/test --all
 
 .PHONY: run
-run: bin/paster instance/done ${PG_SOCKET}
+run: bin/paster instance/done ${PG_SOCKET} compile-translations
 	bin/paster serve development.ini --reload --monitor-restart
 
 .PHONY: clean
@@ -100,7 +100,7 @@ clean:
 	find src/ -name '*.pyc' -exec rm '{}' ';'
 
 .PHONY: coverage
-coverage: bin/test bin/coverage instance/done ${PG_SOCKET}
+coverage: bin/test bin/coverage instance/done ${PG_SOCKET} compile-translations
 	rm -rf .coverage
 	bin/coverage run bin/test
 
@@ -126,7 +126,15 @@ extract-translations: bin/py
 	done
 
 .PHONY: compile-translations
-compile-translations: bin/py
+compile-translations: bin/py src/ututi/i18n/lt/LC_MESSAGES/ututi.mo src/ututi/i18n/pl/LC_MESSAGES/ututi.mo src/ututi/i18n/en/LC_MESSAGES/ututi.mo
+
+src/ututi/i18n/lt/LC_MESSAGES/ututi.mo: src/ututi/i18n/lt/LC_MESSAGES/ututi.po
+	bin/py setup.py compile_catalog
+
+src/ututi/i18n/pl/LC_MESSAGES/ututi.mo: src/ututi/i18n/pl/LC_MESSAGES/ututi.po
+	bin/py setup.py compile_catalog
+
+src/ututi/i18n/en/LC_MESSAGES/ututi.mo: src/ututi/i18n/en/LC_MESSAGES/ututi.po
 	bin/py setup.py compile_catalog
 
 .PHONY: ubuntu-environment
@@ -218,7 +226,7 @@ update_expected_translations: bin/pofilter
 	mv ${PWD}/parts/test_translations/ ${PWD}/src/ututi/tests/expected_i18n_errors/
 
 .PHONY: test_all
-test_all: bin/test instance/done ${PG_SOCKET}
+test_all: bin/test instance/done ${PG_SOCKET} compile-translations
 	! git --no-pager grep 'console.log' -- *.js *.mako *.html | grep -v '\(jquery\|ckeditor\|uservoice\)'
 	! git --no-pager grep 'pdb.set_trace' -- *.py
 	rm -rf data/templates/

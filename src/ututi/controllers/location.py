@@ -13,6 +13,8 @@ from pylons.templating import render_mako_def
 from sqlalchemy.sql.expression import or_
 
 import ututi.lib.helpers as h
+from ututi.model import SubDepartment
+from ututi.lib.forms import Form
 from ututi.lib.emails import teacher_confirmed_email
 from ututi.lib.base import render
 from ututi.lib.validators import LocationIdValidator, InURLValidator, \
@@ -77,6 +79,9 @@ def location_edit_menu_items():
         {'title': _("Unverified teachers"),
          'name': 'unverified_teachers',
          'link': c.location.url(action='unverified_teachers')},
+        {'title': _("Sub-departments"),
+         'name': 'sub-departments',
+         'link': c.location.url(action='sub_departments')},
     ]
 
 
@@ -156,6 +161,12 @@ class NewDomainForm(Schema):
     domain_name = compound.Pipe(validators.String(not_empty=True, strip=True),
                                 EmailDomainValidator(),
                                 AvailableEmailDomain())
+
+
+class SubDepartmentAddForm(Schema):
+    allow_extra_fields = True
+    title = validators.UnicodeString(not_empty=True, strip=True)
+    description = validators.UnicodeString(strip=True)
 
 
 class RegistrationSettingsForm(Schema):
@@ -352,6 +363,74 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             meta.Session.commit()
             h.flash(_("Information updated."))
         redirect(location.url(action='edit'))
+
+    def _add_sub_department(self, location, values):
+        sub_department = SubDepartment(values['title'], location)
+        sub_department.description = values['description']
+        return sub_department
+
+    @location_action
+    @ActionProtector('moderator')
+    def add_sub_department(self, location):
+        c.menu_items = location_edit_menu_items()
+        c.current_menu_item = 'sub-departments'
+        form = Form(location, request,
+                    apply=self._add_sub_department,
+                    schema=SubDepartmentAddForm(),
+                    action='ADD')
+
+        sub_department = form.work()
+        if sub_department is not None:
+            meta.Session.commit()
+            redirect(location.url(action='sub_departments'))
+
+        c.form = form
+        return render('location/add_sub_department.mako')
+
+
+    def _update_sub_department(self, sub_department, values):
+        sub_department.title = values['title']
+        sub_department.description = values['description']
+        return sub_department
+
+    @location_action
+    @ActionProtector('moderator')
+    def edit_sub_department(self, location):
+        sub_department_id = request.urlvars['id']
+        sub_department = SubDepartment.get(sub_department_id)
+
+        c.menu_items = location_edit_menu_items()
+        c.current_menu_item = 'sub-departments'
+        form = Form(sub_department, request,
+                    apply=self._update_sub_department,
+                    defaults={'title': sub_department.title,
+                              'description': sub_department.description},
+                    schema=SubDepartmentAddForm(),
+                    action='UPDATE')
+
+        sub_department = form.work()
+        if sub_department is not None:
+            meta.Session.commit()
+            redirect(location.url(action='sub_departments'))
+
+        c.form = form
+        return render('location/edit_sub_department.mako')
+
+    @location_action
+    @ActionProtector('moderator')
+    def delete_sub_department(self, location):
+        sub_department_id = request.urlvars['id']
+        sub_department = SubDepartment.get(sub_department_id)
+        sub_department.delete()
+        meta.Session.commit()
+        redirect(location.url(action='sub_departments'))
+
+    @location_action
+    @ActionProtector('moderator')
+    def sub_departments(self, location):
+        c.menu_items = location_edit_menu_items()
+        c.current_menu_item = 'sub-departments'
+        return render('location/sub_departments.mako')
 
     def _edit_registration_form(self):
         c.menu_items = location_edit_menu_items()

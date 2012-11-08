@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-05 10:32+0200\n"
+"PO-Revision-Date: 2012-11-08 14:38+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -461,6 +461,9 @@ msgstr "Edytuj motyw"
 msgid "Unverified teachers"
 msgstr "Wykładowca niezweryfikowany"
 
+msgid "Sub-departments"
+msgstr ""
+
 msgid "All news"
 msgstr ""
 
@@ -677,6 +680,9 @@ msgstr "Nowa notatka"
 msgid "This user profile is not public"
 msgstr "Profil tego użytkownika nie jest publiczny"
 
+msgid "Blog"
+msgstr ""
+
 msgid "Publications"
 msgstr "Publikacje"
 
@@ -865,11 +871,6 @@ msgstr "Społeczność Ututi"
 
 msgid "ututi-bugs"
 msgstr "Ututi blędy"
-
-msgid "To confirm your gadu gadu enter this code in your profile page."
-msgstr ""
-"Potwierdź swój numer gg poprzez wpisanie tego kodu na stronie Twego "
-"profilu."
 
 msgid "Save"
 msgstr "Zachowaj"
@@ -1108,10 +1109,6 @@ msgid_plural "unlimited group private files for %(day_count)d days"
 msgstr[0] "nieograniczona liczba prywatnych plików grupy na %(day_count)d dzień"
 msgstr[1] "nieograniczona liczba prywatnych plików grupy na %(day_count)d dni"
 msgstr[2] "nieograniczona liczba prywatnych plików grupy na %(day_count)d dni"
-
-#, python-format
-msgid "A new file has been uploaded for the %(title)s:"
-msgstr "Do %(title)s został dodany nowy plik"
 
 #, python-format
 msgid "Page %(page_title)s (%(page_url)s) was created."
@@ -3089,6 +3086,12 @@ msgstr ""
 msgid "Departments:"
 msgstr "Wydziały:"
 
+msgid "Add sub-department"
+msgstr ""
+
+msgid "Sub department title:"
+msgstr ""
+
 msgid "Edit general information of your university below."
 msgstr "Edytuj ogólne informacje o Twoim uniwersytecie poniżej."
 
@@ -3151,6 +3154,9 @@ msgstr "Obecnie żadne domeny nie są przypisane do tego uniwersytetu."
 
 msgid "New email domain:"
 msgstr "Nowa domena emailowa:"
+
+msgid "edit sub-department"
+msgstr ""
 
 msgid ""
 "Ututi let's you theme your network, including custom colors, header logo "
@@ -3332,6 +3338,12 @@ msgstr ""
 "<strong>Skontaktuj się ze swoimi uczniami</strong> poprzez wysłanie "
 "grupowej lub prywatnej wiadomości. W tym celu możesz również rozpocząć "
 "dyskucję na tablicy kursu."
+
+msgid "Sub-department"
+msgstr ""
+
+msgid "The actions"
+msgstr "Działania"
 
 msgid "Can't find your subject?"
 msgstr "Nie możesz znaleźć swojego przedmiotu?"
@@ -3765,9 +3777,6 @@ msgstr "Powiązane przedmioty:"
 msgid "Lect."
 msgstr "Wykł."
 
-msgid "Edit permissions"
-msgstr ""
-
 msgid "Create your own social network"
 msgstr "Stwórz swoją własną sieć społecznościową"
 
@@ -3965,41 +3974,6 @@ msgstr ""
 msgid "Work address"
 msgstr "Adres miejsca pracy"
 
-msgid "Your GG number"
-msgstr "Twoje GG"
-
-msgid "GG number is not confirmed"
-msgstr "Numer GG nie jest potwierdzony."
-
-msgid "Enter the code that you have received in your GG"
-msgstr "Wpisz kod, który otrzymałeś na GG"
-
-msgid ""
-"\n"
-"\n"
-"                    Should you not have received the code, please press "
-"\"Send code again\".\n"
-"                    Also don't forget to add Ututi (<a "
-"href=\"gg:5437377\">5437377</a>) to your friends!"
-msgstr ""
-"\n"
-"\n"
-"Jeśli kod nie został dostarczony, kliknij \"Wyślij kod ponownie\".Nie "
-"zapomnij dodać Ututi (<a href=\"gg:5437377\">5437377</a>) do swojej "
-"listy."
-
-msgid "Submit code"
-msgstr "Potwierdź kod"
-
-msgid "Send code again"
-msgstr "Wyślij kod ponownie"
-
-msgid "GG number is confirmed"
-msgstr "Numer GG został potwierdzony."
-
-msgid "Receive news into gg"
-msgstr "Otrzymuj powiadomienia na gg"
-
 msgid "Use international format, +XXXXXXXXXXX"
 msgstr "Użyj międzynarodowego formatu +XXXXXXXXXXX"
 
@@ -4016,6 +3990,12 @@ msgid "Should you not have received the code, please press \"Send code again\""
 msgstr ""
 "Jeśli nie otrzymałeś(-aś) jeszcze kodu potwierdzającego, kliknij \"Wyślij"
 " kod ponownie\"."
+
+msgid "Submit code"
+msgstr "Potwierdź kod"
+
+msgid "Send code again"
+msgstr "Wyślij kod ponownie"
 
 msgid "Number is confirmed"
 msgstr "Numer został potwierdzony"
@@ -4468,6 +4448,12 @@ msgstr "Moja strona profilowa"
 msgid "edit my page"
 msgstr "Edytuj mój profil"
 
+msgid "Create a blog post"
+msgstr ""
+
+msgid "View your blog posts"
+msgstr ""
+
 msgid "Delete this group"
 msgstr "Usuń tę grupę"
 
@@ -4547,6 +4533,28 @@ msgstr "Dodaj grupę studencką"
 
 msgid "Are you sure you want to delete this group?"
 msgstr "Czy na pewno chcesz usunąć tę grupę?"
+
+msgid "Create a new post"
+msgstr ""
+
+msgid "Click on a blog post to edit it."
+msgstr ""
+
+#, python-format
+msgid "%(count)s comment"
+msgid_plural "%(count)s comments"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "You haven't created any blog posts yet."
+msgstr ""
+
+msgid "Blog post"
+msgstr ""
+
+msgid "Enter a blog post title"
+msgstr ""
 
 msgid "Write down your information and research interests"
 msgstr ""
@@ -4830,11 +4838,17 @@ msgstr "Książka"
 msgid "Price"
 msgstr "Cena"
 
+msgid "Comments:"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Write a comment"
+msgstr ""
+
 msgid "The data"
 msgstr "Dane"
-
-msgid "The actions"
-msgstr "Działania"
 
 msgid "Uploading"
 msgstr "Dodaje"
@@ -4944,14 +4958,6 @@ msgstr ""
 
 msgid "get another confirmation email"
 msgstr "Uzyskaj nowy e-mail potwierdzający"
-
-#, python-format
-msgid ""
-"Your <strong>gadu gadu number</strong> is not confirmed! Please <a "
-"href=\"%s\">confirm</a> it by entering the code sent to you."
-msgstr ""
-"Twój <strong>numer gadu gadu</strong> nie został potwierdzony!<a "
-"href=\"%s\">Potwierdź</a> go, proszę, wpisując wysłany do Ciebie kod."
 
 #, python-format
 msgid ""
@@ -5254,6 +5260,27 @@ msgstr "Uniwersytet | Wydział:"
 msgid "Department:"
 msgstr "Wydział:"
 
+msgid "Who can view the subject"
+msgstr ""
+
+msgid "Everyone"
+msgstr ""
+
+msgid "Department members"
+msgstr ""
+
+msgid "University members"
+msgstr ""
+
+msgid "Who can change subject settings"
+msgstr ""
+
+msgid "Teachers and administrators"
+msgstr ""
+
+msgid "Who can post subject discussions"
+msgstr ""
+
 msgid ""
 "discuss various topics. Students and teachers who follow this subject "
 "will be able to join the discussion."
@@ -5325,30 +5352,6 @@ msgstr ""
 "<strong>Notuj na wykładzie</strong> na swoim laptopie i wrzucaj notatki "
 "prosto na Ututi."
 
-msgid "Subject permissions"
-msgstr ""
-
-msgid "Who can view the subject"
-msgstr ""
-
-msgid "Everyone"
-msgstr ""
-
-msgid "Department members"
-msgstr ""
-
-msgid "University members"
-msgstr ""
-
-msgid "Who can change subject settings"
-msgstr ""
-
-msgid "Teachers and administrators"
-msgstr ""
-
-msgid "Who can post subject discussions"
-msgstr ""
-
 msgid "Write your post"
 msgstr ""
 
@@ -5411,6 +5414,9 @@ msgstr "Telefon"
 
 msgid "Personal webpage"
 msgstr "Osobista strona internetowa"
+
+msgid "Back to post list"
+msgstr ""
 
 #, python-format
 msgid "%(teacher)s has not provided any information."

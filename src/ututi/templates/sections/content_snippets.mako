@@ -254,3 +254,42 @@ Snippets for rendering various content items, e.g. in search results.
     </div>
   </div>
 </%def>
+
+<%def name="blog_post(post, show_comments=True, title_link='none', show_comment_form='True')">
+    %if title_link != 'none':
+      <% link = post.url() if title_link == 'internal' else post.url(path=post.created.location.url_path, action='external_teacher_blog_post') %>
+      <div class="title"><a href="${link}">${post.title}</a></div>
+    %else:
+      <div class="title">${post.title}</div>
+    %endif
+    <div class="comment-label">${ungettext("%(count)s comment", "%(count)s comments", len(post.comments)) % dict(count=len(post.comments))}</div>
+    <div class="post-date date-label">${h.fmt_normaldate(post.created_on)}</div>
+    <div class="blog-post">
+      ${h.literal(post.description)}
+    </div>
+    %if show_comments:
+      <div class="blog-comments">
+        <h2>${_('Comments:')}</h2>
+        %for comment in post.comments:
+          <div class="comment">
+            <div class="comment-date date-label">${h.when(comment.created_on)}</div>
+            <div class="logo">
+              <img src="${url(controller='user', action='logo', id=comment.created.id, width=50)}" />
+            </div>
+            <div class="comment-author">${h.user_link(comment.created_by)}</div>
+            <div class="comment-content">
+              ${h.wall_fmt(comment.content)}
+            </div>
+          </div>
+        %endfor
+        %if show_comment_form and c.user:
+        <div clas='comment-form'>
+          <form  action="${url(controller='user', action='teacher_blog_comment', id=post.created.id, post_id=post.id)}" method="POST">
+            ${h.input_area('content', _('Comment'), help_text=_('Write a comment'), cols='160')}
+            ${h.input_submit(_('Send'))}
+          </form>
+        </div>
+        %endif
+      </div>
+    %endif
+</%def>

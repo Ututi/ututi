@@ -197,6 +197,9 @@ def make_map(config):
     map.connect('/teacher/{id}/subjects', controller='user', action='teacher_subjects')
     map.connect('/teacher/{id}/publications', controller='user', action='teacher_publications')
     map.connect('/teacher/{id}/activity', controller='user', action='teacher_activity')
+    map.connect('/teacher/{id}/blog', controller='user', action='teacher_blog_index')
+    map.connect('/teacher/{id}/blog/{post_id}', controller='user', action='teacher_blog_post')
+    map.connect('/teacher/{id}/blog/{post_id}/comment', controller='user', action='teacher_blog_comment')
 
     # user profiles
     map.connect('/user/{id}', controller='user', action='index')
@@ -269,11 +272,18 @@ def make_map(config):
     map.connect('/school/*path/edit/unverified_teachers', controller='location', action='unverified_teachers')
     map.connect('/school/*path/edit/teacher_status/{command}/{id}', controller='location', action='teacher_status')
 
+    map.connect('/school/*path/edit/add_sub_department', controller='location', action='add_sub_department')
+    map.connect('/school/*path/edit/edit_sub_department/{id}', controller='location', action='edit_sub_department')
+    map.connect('/school/*path/edit/delete_sub_department/{id}', controller='location', action='delete_sub_department')
+    map.connect('/school/*path/edit/sub_departments', controller='location', action='sub_departments')
+
     # external teacher profile pages
     map.connect('/school/*path/teacher/{id}', controller='user', action='external_teacher_index')
     map.connect('/school/*path/teacher/{id}/teaching', controller='user', action='external_teacher_subjects')
     map.connect('/school/*path/teacher/{id}/publications', controller='user', action='external_teacher_publications')
     map.connect('/school/*path/teacher/{id}/activity', controller='user', action='external_teacher_activity')
+    map.connect('/school/*path/teacher/{id}/blog', controller='user', action='external_teacher_blog_index')
+    map.connect('/school/*path/teacher/{id}/blog/{post_id}', controller='user', action='external_teacher_blog_post')
 
     # rest
     map.connect('/school/*path', controller='location', action='index')
@@ -287,6 +297,9 @@ def make_map(config):
     map.connect('/profile/edit/information', controller='profile', action='edit_information')
     map.connect('/profile/edit/information/{lang}', controller='profile', action='edit_information')
     map.connect('/profile/edit/publications', controller='profile', action='edit_publications')
+    map.connect('/profile/edit/posts', controller='profile', action='edit_blog_posts')
+    map.connect('/profile/edit/post/{id}', controller='profile', action='edit_blog_post')
+    map.connect('/profile/edit/post', controller='profile', action='create_blog_post')
     map.connect('/profile/settings', controller='profile', action='settings')
     map.connect('/profile/settings/login', controller='profile', action='login_settings')
     map.connect('/profile/settings/wall', controller='profile', action='wall_settings')

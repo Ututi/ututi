@@ -8,11 +8,11 @@ from pylons import config
 import ututi
 
 from ututi.tests import UtutiLayer
-from ututi.lib.messaging import EmailMessage, GGMessage, SMSMessage
+from ututi.lib.messaging import EmailMessage, SMSMessage
 from ututi.model import User, Group, Email, SMS, meta
 from ututi.model import GroupMembershipType, GroupMember, LocationTag
 from ututi.lib.mailer import mail_queue
-from ututi.lib.gg import sent_messages as gg_queue
+
 
 def test_message_user():
     """Tests for messaging.
@@ -101,32 +101,6 @@ def test_message_attachments():
 
     """
 
-
-def test_ggmessage_user():
-    """Tests for gadugadu messaging.
-
-        >>> config._push_object(pylons.test.pylonsapp.config)
-
-        >>> user = User.get("somebloke@somehost.com", LocationTag.get('uni'))
-
-        >>> msg = GGMessage("the message")
-
-    If the user does not have a confirmed email address, the message should not be sent.
-
-        >>> msg.send(user)
-        >>> len(gg_queue)
-        0
-
-    Unless it is forced:
-
-        >>> msg.force = True
-        >>> msg.send(user)
-        >>> print gg_queue.pop()
-        (345665L, 'the message')
-
-        >>> config._pop_object(pylons.test.pylonsapp.config)
-
-    """
 
 def test_smsmessage_user():
     """Tests for sms messaging.
@@ -244,8 +218,6 @@ def test_setup(test):
     user = User(u"a new user", "somebloke@somehost.com", uni, "his password")
     meta.Session.add(user)
     user.emails.append(Email("somebloke@somehost.com"))
-    user.gadugadu_uin = '345665'
-    user.gadugadu_confirmed = False
     user.phone_number = '+37060000000'
     user.phone_confirmed = False
     meta.Session.commit()

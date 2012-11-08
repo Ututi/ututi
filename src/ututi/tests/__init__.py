@@ -25,7 +25,6 @@ from ututi.model import initialize_db_defaults
 from ututi.model import meta
 from ututi.lib.sms import sms_queue
 from ututi.lib.mailer import mail_queue
-from ututi.lib import gg
 from ututi.tests.css_rules import get_all_rules
 
 import os
@@ -50,7 +49,6 @@ class UtutiBaseLayer(LayerBase):
         config['default_search_dict'] = 'pg_catalog.english'
         mail_queue[:] = []
         sms_queue[:] = []
-        gg.sent_messages[:] = []
         try:
             shutil.rmtree(config['files_path'])
         except OSError:
@@ -61,8 +59,6 @@ class UtutiBaseLayer(LayerBase):
 
     def testTearDown(self):
         config = pylons.test.pylonsapp.config
-        if len(gg.sent_messages) > 0:
-            print >> sys.stderr, "\n===\nGG queue is NOT EMPTY!"
 
         if len(mail_queue) > 0:
             print >> sys.stderr, "\n===\nMail queue is NOT EMPTY!"
@@ -100,7 +96,6 @@ class UtutiQuickLayerBase(LayerBase):
         pylons.config._push_object(config)
         mail_queue[:] = []
         sms_queue[:] = []
-        gg.sent_messages[:] = []
         try:
             shutil.rmtree(config['files_path'])
         except OSError:
@@ -111,8 +106,6 @@ class UtutiQuickLayerBase(LayerBase):
 
     def testTearDown(self):
         config = pylons.test.pylonsapp.config
-        if len(gg.sent_messages) > 0:
-            print >> sys.stderr, "\n===\nGG queue is NOT EMPTY!"
 
         if len(mail_queue) > 0:
             print >> sys.stderr, "\n===\nMail queue is NOT EMPTY!"

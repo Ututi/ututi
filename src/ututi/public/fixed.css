@@ -1888,6 +1888,15 @@ ul.tabs {
         background-position: 5px top;
     }
 
+    .page-section.blog {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+        .page-section.blog .title {
+            margin-bottom: 4px;
+            margin-top: 20px;
+        }
+
     .page-section.feature-box.profile {
         background-image: url("/img/icons.com/about/file_edit.png");
         background-position: 22px 8px;
@@ -1907,6 +1916,58 @@ ul.tabs {
         position: absolute;
         bottom: 2px;
         right: 0px;
+    }
+
+    .page-section .post-date {
+        font-size: 11px;
+        color: #666;
+    }
+
+    .date-label {
+        color: #666;
+        font-size: 11px;
+        padding-left: 15px;
+        background: url("/img/icons.com/clock.png") no-repeat left center;
+    }
+
+    .comment-label {
+        color: #666;
+        font-size: 11px;
+        padding-left: 15px;
+        background: url("/img/icons.com/discussions_small_grey.png") no-repeat left center;
+        float: right;
+    }
+
+/* Blog comments */
+    .blog-comments {
+        margin-top: 20px;
+    }
+
+    .blog-comments .comment {
+        margin-top: 8px;
+        background-color: #F8F8F8;
+        position: relative;
+        min-height: 60px;
+        padding: 5px;
+    }
+        .blog-comments .comment .logo {
+            float: left;
+            margin-right: 5px;
+        }
+        .blog-comments .comment .comment-date {
+            float: right;
+        }
+        .blog-comments .comment .comment-author {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+    .blog-comments .comment-form {
+        margin-top: 16px;
+    }
+
+    .blog-comments .formField #content {
+        width: 515px;
     }
 
 /* SETTINGS PAGES */
@@ -2193,4 +2254,9 @@ ul.tabs {
 
 .group-portlet-setting:nth-of-type(1) {
     margin-top: 4px;
+}
+
+.dashboard-blog-button {
+    margin: 8px;
+    margin-left: 40px;
 }

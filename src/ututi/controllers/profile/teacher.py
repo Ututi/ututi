@@ -13,13 +13,13 @@ from ututi.lib.forms import validate
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.mailinglist import post_message
 
-from ututi.model import meta, File, TeacherGroup
+from ututi.model import meta, File, TeacherGroup, TeacherBlogPost
 from ututi.model.events import TeacherMessageEvent
 from ututi.model.i18n import Language
 from ututi.controllers.profile.base import ProfileControllerBase
 from ututi.controllers.profile.validators import InformationForm, \
         StudentGroupForm, StudentGroupDeleteForm, StudentGroupMessageForm, \
-        PublicationsForm
+        PublicationsForm, BlogPostForm
 
 def group_teacher_action(method):
     def _group_teacher_action(self, id=None):
@@ -54,10 +54,12 @@ class TeacherProfileController(ProfileControllerBase):
     @ActionProtector("teacher")
     def register_welcome(self):
         c.welcome = True
+        c.has_blog_posts = bool(meta.Session.query(TeacherBlogPost).filter_by(created=c.user).count())
         return render('/profile/teacher/dashboard.mako')
 
     @ActionProtector("teacher")
     def dashboard(self):
+        c.has_blog_posts = bool(meta.Session.query(TeacherBlogPost).filter_by(created=c.user).count())
         return render('/profile/teacher/dashboard.mako')
 
     def _edit_profile_tabs(self):
@@ -69,6 +71,9 @@ class TeacherProfileController(ProfileControllerBase):
             {'title': _("Publications"),
              'name': 'publications',
              'link': url(controller='profile', action='edit_publications')},
+            {'title': _("Blog"),
+             'name': 'blog',
+             'link': url(controller='profile', action='edit_blog_posts')},
         ])
         return tabs
 
@@ -287,3 +292,56 @@ class TeacherProfileController(ProfileControllerBase):
             h.flash(message)
 
         redirect(url(controller='profile', action='dashboard'))
+
+    def _edit_blog_post_form(self, form_url):
+        c.tabs = self._edit_profile_tabs()
+        c.current_tab = 'blog'
+        c.blog_post_form_url = form_url
+        return render('profile/teacher/edit_blog_post.mako')
+
+    @ActionProtector("teacher")
+    def edit_blog_posts(self):
+        c.tabs = self._edit_profile_tabs()
+        c.current_tab = 'blog'
+        c.posts = meta.Session.query(TeacherBlogPost).filter_by(created=c.user).order_by(TeacherBlogPost.created_on.desc()).all()
+        return render('profile/teacher/edit_blog_index.mako')
+
+    @validate(schema=BlogPostForm(), form='_edit_blog_post_form')
+    @ActionProtector("teacher")
+    def create_blog_post(self):
+        if hasattr(self, 'form_result'):
+            post = TeacherBlogPost(title=self.form_result['title'],
+                                   description=self.form_result['description'])
+            meta.Session.add(post)
+            meta.Session.commit()
+            return redirect(url(controller="profile", action="edit_blog_posts"))
+        else:
+            return self._edit_blog_post_form(url(controller='profile', action='create_blog_post'))
+
+    @validate(schema=BlogPostForm(), form='_edit_blog_post_form')
+    @ActionProtector("teacher")
+    def edit_blog_post(self, id):
+        blog_post = meta.Session.query(TeacherBlogPost).filter_by(id=int(id), created=c.user).one()
+        if not blog_post:
+            abort(404)
+        if hasattr(self, 'form_result'):
+            blog_post.title = self.form_result['title']
+            blog_post.description = self.form_result['description']
+            meta.Session.commit()
+            return redirect(url(controller="profile", action="edit_blog_posts"))
+        else:
+            defaults = {'title': blog_post.title,
+                        'description': blog_post.description}
+
+            return htmlfill.render(self._edit_blog_post_form(url(controller='profile', action='edit_blog_post', id=id)), defaults=defaults)
+
+    @ActionProtector("teacher")
+    def delete_blog_post(self, id):
+        post = meta.Session.query(TeacherBlogPost).filter_by(id=int(id), created=c.user).one()
+        if not post:
+            abort(404)
+
+        meta.Session.delete(post)
+        meta.Session.commit()
+
+        return redirect(url(controller="profile", action="edit_blog_posts"))
