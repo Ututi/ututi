@@ -2209,7 +2209,8 @@ class EmailDomain(Model):
 class SubDepartment(DeclarativeModel):
     __tablename__ = 'sub_departments'
 
-    location = relation(Tag, backref='sub_departments')
+    location = relation(Tag, backref=backref('sub_departments',
+                                             order_by='SubDepartment.title.asc()'))
 
     def __init__(self, title, location, slug=None):
         self.title = title
