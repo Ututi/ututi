@@ -255,9 +255,10 @@ Snippets for rendering various content items, e.g. in search results.
   </div>
 </%def>
 
-<%def name="blog_post(post, show_comments=True, title_link=False)">
-    %if title_link:
-      <div class="title"><a href=${post.url()}>${post.title}</a></div>
+<%def name="blog_post(post, show_comments=True, title_link='none', show_comment_form='True')">
+    %if title_link != 'none':
+      <% link = post.url() if title_link == 'internal' else post.url(path=post.created.location.url_path, action='external_teacher_blog_post') %>
+      <div class="title"><a href="${link}">${post.title}</a></div>
     %else:
       <div class="title">${post.title}</div>
     %endif
@@ -281,7 +282,7 @@ Snippets for rendering various content items, e.g. in search results.
             </div>
           </div>
         %endfor
-        %if c.user:
+        %if show_comment_form and c.user:
         <div clas='comment-form'>
           <form  action="${url(controller='user', action='teacher_blog_comment', id=post.created.id, post_id=post.id)}" method="POST">
             ${h.input_area('content', _('Comment'), help_text=_('Write a comment'), cols='160')}

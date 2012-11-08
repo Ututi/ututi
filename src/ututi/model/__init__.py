@@ -26,7 +26,6 @@ from sqlalchemy import func
 from sqlalchemy.sql.expression import not_
 from sqlalchemy.sql.expression import desc
 from sqlalchemy.sql.expression import and_, or_
-from sqlalchemy.types import String
 
 from ututi.migration import GreatMigrator
 from ututi.model.users import Medal, Email, UserSubjectMonitoring, User, Author
@@ -228,7 +227,7 @@ def setup_orm():
                properties={'teacher': relation(Teacher,
                                                primaryjoin=tables['content_items'].c.created_by==tables['teachers'].c.id,
                                                foreign_keys=tables['content_items'].c.created_by,
-                                               backref='blog_posts')})
+                                               backref=backref('blog_posts', order_by=TeacherBlogPost.created_on.desc()))})
 
     orm.mapper(TeacherBlogComment, tables['teacher_blog_comments'],
                inherits=ContentItem,
@@ -1942,8 +1941,8 @@ class TeacherBlogPost(ContentItem):
         self.title = title
         self.description = description
 
-    def url(self, controller='user', action='teacher_blog_post'):
-        return url(controller=controller, action=action, id=self.created.id, post_id=self.id)
+    def url(self, controller='user', action='teacher_blog_post', **kwargs):
+        return url(controller=controller, action=action, id=self.created.id, post_id=self.id, **kwargs)
 
 
 class TeacherBlogComment(ContentItem):

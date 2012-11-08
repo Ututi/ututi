@@ -108,6 +108,31 @@ def external_teacher_profile_action(method):
     return _profile_action
 
 
+def external_teacher_blog_post_action(method):
+    def _profile_action(self, path, id, post_id):
+        location = LocationTag.get(path)
+        user = find_user(id)
+
+        if user is None or not user.is_teacher or user.location != location:
+            abort(404)
+
+        if not user.profile_is_public and not c.user:
+            deny(_('This user profile is not public'), 401)
+
+        post = meta.Session.query(TeacherBlogPost).filter_by(id=post_id, created=user).one()
+        if not post:
+            abort(404)
+
+        c.teacher = user
+        c.location = user.location
+        c.tabs = external_teacher_tabs(user)
+        c.current_tab = 'blog'
+        c.theme = None
+
+        return method(self, user, post)
+    return _profile_action
+
+
 def teacher_tabs(teacher):
     tabs = [
         {'title': _('General'),
@@ -142,6 +167,11 @@ def external_teacher_tabs(teacher):
          'name': 'information',
          'link': teacher.url(action='external_teacher_index')},
     ]
+    if teacher.blog_posts:
+        tabs.append({
+            'title': _('Blog'),
+            'name': 'blog',
+            'link': teacher.url(action='external_teacher_blog_index')})
     if teacher.publications:
         tabs.append({
             'title': _('Publications'),
@@ -219,8 +249,19 @@ class UserController(BaseController, UserInfoWallMixin):
     @teacher_profile_action
     def teacher_blog_index(self, user):
         c.current_tab = 'blog'
-        c.blog_posts = meta.Session.query(TeacherBlogPost).filter_by(created=user).order_by(TeacherBlogPost.created_on.desc()).all()
+        c.blog_posts = user.blog_posts
         return render('user/teacher_blog_index.mako')
+
+    @external_teacher_profile_action
+    def external_teacher_blog_index(self, user):
+        c.current_tab = 'blog'
+        c.blog_posts = user.blog_posts
+        return render('user/external/teacher_blog_index.mako')
+
+    @external_teacher_blog_post_action
+    def external_teacher_blog_post(self, user, post):
+        c.blog_post = post
+        return render('user/external/teacher_blog_post.mako')
 
     @teacher_blog_post_action
     def teacher_blog_post(self, user, post):

@@ -282,6 +282,8 @@ def make_map(config):
     map.connect('/school/*path/teacher/{id}/teaching', controller='user', action='external_teacher_subjects')
     map.connect('/school/*path/teacher/{id}/publications', controller='user', action='external_teacher_publications')
     map.connect('/school/*path/teacher/{id}/activity', controller='user', action='external_teacher_activity')
+    map.connect('/school/*path/teacher/{id}/blog', controller='user', action='external_teacher_blog_index')
+    map.connect('/school/*path/teacher/{id}/blog/{post_id}', controller='user', action='external_teacher_blog_post')
 
     # rest
     map.connect('/school/*path', controller='location', action='index')
