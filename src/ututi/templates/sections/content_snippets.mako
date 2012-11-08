@@ -281,12 +281,14 @@ Snippets for rendering various content items, e.g. in search results.
             </div>
           </div>
         %endfor
+        %if c.user:
         <div clas='comment-form'>
           <form  action="${url(controller='user', action='teacher_blog_comment', id=post.created.id, post_id=post.id)}" method="POST">
             ${h.input_area('content', _('Comment'), help_text=_('Write a comment'), cols='160')}
             ${h.input_submit(_('Send'))}
           </form>
         </div>
+        %endif
       </div>
     %endif
 </%def>
