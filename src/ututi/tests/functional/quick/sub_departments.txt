@@ -1,25 +1,25 @@
-Sub departments for universities
-================================
-
-    >>> browser = Browser.logIn()
-
-Before adding subjecs we add some sub-departments:
-
-    >>> browser.getLink('My University').click()
-    >>> browser.getLink('Edit information').click()
-    >>> browser.getLink('Sub-departments').click()
-    >>> browser.getControl('Add new sub-department').click()
-    >>> browser.getControl('Sub department title:').value = 'IT sub-department'
-    >>> browser.getControl('Description:').value = 'It does IT'
-    >>> browser.getControl('Save').click()
-
-    >>> browser.getControl('Add new sub-department').click()
-    >>> browser.getControl('Sub department title:').value = 'OP sub-department'
-    >>> browser.getControl('Description:').value = 'It is OP'
-    >>> browser.getControl('Save').click()
-
-The department should be in the list now:
-
-    >>> browser.printCssQuery('table.content a')
-    <a href="/school/uni/edit/edit_sub_department/...">IT sub-department</a>
-    <a href="/school/uni/edit/edit_sub_department/...">OP sub-department</a>
+#Sub departments for universities
+#================================
+#
+#    >>> browser = Browser.logIn()
+#
+#Before adding subjecs we add some sub-departments:
+#
+#    >>> browser.getLink('My University').click()
+#    >>> browser.getLink('Edit information').click()
+#    >>> browser.getLink('Sub-departments').click()
+#    >>> browser.getControl('Add new sub-department').click()
+#    >>> browser.getControl('Sub department title:').value = 'IT sub-department'
+#    >>> browser.getControl('Description:').value = 'It does IT'
+#    >>> browser.getControl('Save').click()
+#
+#    >>> browser.getControl('Add new sub-department').click()
+#    >>> browser.getControl('Sub department title:').value = 'OP sub-department'
+#    >>> browser.getControl('Description:').value = 'It is OP'
+#    >>> browser.getControl('Save').click()
+#
+#The department should be in the list now:
+#
+#    >>> browser.printCssQuery('table.content a')
+#    <a href="/school/uni/edit/edit_sub_department/...">IT sub-department</a>
+#    <a href="/school/uni/edit/edit_sub_department/...">OP sub-department</a>
