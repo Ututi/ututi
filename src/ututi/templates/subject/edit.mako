@@ -51,7 +51,7 @@
     </script>
     %endif
     <div id="location-edit">
-      ${location_widget(2, titles=(_("University:"), _("Department:")), add_new=(c.tpl_lang=='pl'))}
+      ${location_widget(2, titles=(_("University:"), _("Department:")))}
     </div>
   </div>
 

@@ -47,8 +47,6 @@ def test_phonenumbervalidator():
         >>> from ututi.lib.validators import PhoneNumberValidator
         >>> v = PhoneNumberValidator()
 
-        >>> config['tpl_lang'] = 'lt'
-
         >>> print v.to_python('', {})
         None
 
@@ -90,23 +88,6 @@ def test_phonenumbervalidator():
         Traceback (most recent call last):
             ...
         Invalid: Invalid phone number; use the format +37069912345
-
-    If the language is set to Polish, only Polish numbers are accepted:
-
-        >>> config['tpl_lang'] = 'pl'
-
-        >>> v.to_python('+37069912345', {})
-        Traceback (most recent call last):
-            ...
-        Invalid: Invalid phone number; use the format +37069912345
-
-    The format message sample lies, but that should be fixed in the Polish
-    text translation.
-
-        >>> v.to_python('+48069912345', {})
-        '+48069912345'
-
-        >>> config['tpl_lang'] = 'lt'
 
     """
 

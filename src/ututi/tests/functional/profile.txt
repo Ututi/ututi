@@ -130,20 +130,19 @@ The content type should be PNG even though we uploaded a jpeg.
     'image/png'
 
 User clicks contacts' tab and enters an invalid phone number:
-    >>> config['tpl_lang'] = 'en'
 
     >>> browser.open('http://localhost/profile/edit/contacts')
     >>> form = browser.getForm('contacts-form')
     >>> form.getControl(name='phone_number').value = '1234'
     >>> form.getControl(name='update_contacts').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
-    Phone number too short; use the format +37069912345
+    Invalid phone number; use the format +37069912345
 
     >>> form = browser.getForm('contacts-form')
     >>> form.getControl(name='phone_number').value = '37069912345'
     >>> form.getControl(name='update_contacts').click()
     >>> browser.printQuery("//span[@class='error-message']/text()")
-    Phone number too short; use the format +37069912345
+    Invalid phone number; use the format +37069912345
 
 No sms get sent:
 
@@ -151,7 +150,7 @@ No sms get sent:
     >>> sms_queue
     []
 
-User enters lithuanian number from english template:
+User enters lithuanian number:
 
     >>> form = browser.getForm('contacts-form')
     >>> form.getControl(name='phone_number').value = '+37069912345'
@@ -164,111 +163,3 @@ Confirmation sms got sent:
 
     >>> sms_queue.pop()
     (u'+37069912345', u'Ututi registration code: ...')
-
-User enters polish number from english template:
-
-    >>> form = browser.getForm('contacts-form')
-    >>> form.getControl(name='phone_number').value = '+48123456789'
-    >>> form.getControl(name='update_contacts').click()
-    >>> browser.printQuery("//p[@class='field-status']/text()")
-    Number is not confirmed
-    Email is not confirmed
-
-And gets another sms:
-
-    >>> sms_queue.pop()
-    (u'+48123456789', u'Ututi registration code: ...')
-
-User changes language to lithuanian and tries to enter an invalid
-phone number again:
-
-    >>> form = browser.getForm('language-switch-form')
-    >>> form.getControl(name='language').value = ['lt']
-    >>> form.getControl('Select').click()
-    >>> config['tpl_lang'] = 'lt'
-
-    >>> browser.open('http://localhost/profile/edit/contacts')
-    >>> form = browser.getForm('contacts-form')
-    >>> form.getControl(name='phone_number').value = '1234'
-    >>> form.getControl(name='update_contacts').click()
-    >>> browser.printQuery("//span[@class='error-message']/text()")
-    Netaisyklingas telefono numeris (pvz., +37069912345)
-
-
-    >>> browser.open('http://localhost/profile/edit/contacts')
-    >>> form = browser.getForm('contacts-form')
-    >>> form.getControl(name='phone_number').value = '37069912345'
-    >>> form.getControl(name='update_contacts').click()
-    >>> browser.printQuery("//span[@class='error-message']/text()")
-    Netaisyklingas telefono numeris (pvz., +37069912345)
-
-This time user enters correct lithuanian number:
-
-    >>> browser.open('http://localhost/profile/edit/contacts')
-    >>> form = browser.getForm('contacts-form')
-    >>> form.getControl(name='phone_number').value = '+37069912345'
-    >>> form.getControl(name='update_contacts').click()
-    >>> browser.printQuery("//span[@class='error-message']/text()")
-    >>> browser.printQuery("//p[@class='field-status']/text()")
-    Numeris nepatvirtintas
-    El. pa&#353;to adresas nepatvirtintas
-
-And also gets an sms:
-
-    >>> sms_queue.pop()
-    (u'+37069912345', u'Ututi registracijos kodas: ...')
-
-    >>> browser.open('http://localhost/profile/edit/contacts')
-    >>> form = browser.getForm('contacts-form')
-    >>> form.getControl(name='phone_number').value = '869912345'
-    >>> form.getControl(name='update_contacts').click()
-    >>> browser.printQuery("//span[@class='error-message']/text()")
-    >>> browser.printQuery("//p[@class='field-status']/text()")
-    Numeris nepatvirtintas
-    El. pa&#353;to adresas nepatvirtintas
-
-The phone is the same, so this time no message is sent:
-
-    >>> sms_queue
-    []
-
-User changes language from lithuanian to polish and tries to enter an
-invalid phone number again:
-
-
-    >>> form = browser.getForm('language-switch-form')
-    >>> form.getControl(name='language').value = ['pl']
-    >>> form.getControl('Rinktis').click()
-    >>> config['tpl_lang'] = 'pl'
-
-    >>> browser.open('http://localhost/profile/edit/contacts')
-    >>> form = browser.getForm('contacts-form')
-    >>> form.getControl(name='phone_number').value = '1234'
-    >>> form.getControl(name='update_contacts').click()
-    >>> browser.printQuery("//span[@class='error-message']/text()")
-    Niepoprawny numer telefonu; u&#380;yj formatu +48123456789
-
-
-    >>> browser.open('http://localhost/profile/edit/contacts')
-    >>> form = browser.getForm('contacts-form')
-    >>> form.getControl(name='phone_number').value = '48123456789'
-    >>> form.getControl(name='update_contacts').click()
-    >>> browser.printQuery("//span[@class='error-message']/text()")
-    Niepoprawny numer telefonu; u&#380;yj formatu +48123456789
-
-This time user enters correct polish number:
-
-    >>> browser.open('http://localhost/profile/edit/contacts')
-    >>> form = browser.getForm('contacts-form')
-    >>> form.getControl(name='phone_number').value = '+48123456789'
-    >>> form.getControl(name='update_contacts').click()
-    >>> browser.printQuery("//span[@class='error-message']/text()")
-    >>> browser.printQuery("//p[@class='field-status']/text()")
-    Numer nie jest potwierdzony.
-    Adres e-mail nie jest potwierdzony
-
-And gets an sms in polish:
-
-    >>> sms_queue.pop()
-    (u'+48123456789', u'Kod rejestracji na Ututi: ...')
-

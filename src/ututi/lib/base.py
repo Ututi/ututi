@@ -71,7 +71,6 @@ class BaseController(WSGIController):
         c.pylons_config = config
 
         c.testing = asbool(config.get('testing', False))
-        c.tpl_lang = config.get('tpl_lang', 'en')
         c.mailing_list_host = config.get('mailing_list_host', '')
         c.google_tracker = config['google_tracker']
         c.facebook_app_id = config.get('facebook.appid')

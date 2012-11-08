@@ -225,14 +225,10 @@ class PhoneNumberValidator(validators.FancyValidator):
                 return None
 
         s = re.sub(r'[^\d\+]', '', value) # strip away all non-numeric chars.
-        if config.get('tpl_lang') == 'lt':
-            if s.startswith('8'):
-                s = '+370' + s[1:]
-            if not s.startswith('+370'):
-                raise Invalid(self.message('invalid', state), value, state)
-        elif config.get('tpl_lang') == 'pl':
-            if not s.startswith('+48'):
-                raise Invalid(self.message('invalid', state), value, state)
+        if s.startswith('8'):
+            s = '+370' + s[1:]
+        if not s.startswith('+370'):
+            raise Invalid(self.message('invalid', state), value, state)
 
         if len(s) < 12:
             raise Invalid(self.message('tooShort', state), value, state)

@@ -45,7 +45,6 @@ class UtutiBaseLayer(LayerBase):
         initialize_db_defaults(meta.engine)
 
         config = pylons.test.pylonsapp.config
-        config['tpl_lang'] = 'lt'
         config['default_search_dict'] = 'pg_catalog.english'
         mail_queue[:] = []
         sms_queue[:] = []
@@ -92,7 +91,6 @@ class UtutiQuickLayerBase(LayerBase):
     def testSetUp(self):
         config = pylons.test.pylonsapp.config
         config['default_search_dict'] = 'pg_catalog.english'
-        config['tpl_lang'] = 'lt'
         pylons.config._push_object(config)
         mail_queue[:] = []
         sms_queue[:] = []

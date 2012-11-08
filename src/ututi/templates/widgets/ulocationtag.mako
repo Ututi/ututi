@@ -22,16 +22,7 @@
 </script>
 %endif
 <div id="location-edit">
-  ${location_widget(2, titles=(_("University:"), _("Department:")), add_new=(c.tpl_lang=='pl'))}
-</div>
-</%def>
-
-<%def name="location_add_subform(index)">
-<div class="location-add-subform hidden" id="location-add-subform-${index}">
-  <div class="error"></div>
-  ${h.input_line('newlocation-%d.title' % index, _('Title'), help_text=_('Full title'), class_='title')}
-  ${h.input_line('newlocation-%d.title_short' % index, _('Short title'), help_text=_('e.g. LKKA'), class_='title-short')}
-  ${h.input_submit('Save')}
+  ${location_widget(2, titles=(_("University:"), _("Department:")))}
 </div>
 </%def>
 
@@ -41,7 +32,7 @@
 %endfor
 </%def>
 
-<%def name="location_widget(number, values=[], titles=[], add_titles=[], add_new=False, label_class='')">
+<%def name="location_widget(number, values=[], titles=[], add_titles=[], label_class='')">
 <%
    if not hasattr(self, 'newlocationwidget_id'):
        self.newlocationwidget_id = 0
@@ -54,7 +45,7 @@
        add_titles = [_('Add university'), _('Add department'), _('Add section')]
 %>
 
-<div class="location-tag-widget ${'horizontalLocationForm' if c.tpl_lang != 'pl' else ''}"
+<div class="location-tag-widget"
      id="newlocationwidget-${self.newlocationwidget_id}">
   %for i in range(number):
     <div class="location-tag-field form-field formField" id="location-tag-field-${i}">
@@ -71,12 +62,6 @@
               <span class="edge"></span>
             </span>
       </label>
-      %if add_new:
-        <span style="margin-left: 5px;">${_('or')}</span> <a style="margin: 0 0 0 5px;" class="btn add_subform_switch" href="#"><span>${add_titles[i]}</span></a>
-      %endif
-      %if add_new:
-        ${location_add_subform(i)}
-      %endif
     </div>
   %endfor
   <form:error name="location"/>
