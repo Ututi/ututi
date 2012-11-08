@@ -21,13 +21,13 @@ h1.page-title {
     font-size: 22px;
     margin-top: 15px;
     padding-left: 5px;
-    color: #820505;
+    color: #00477F;
 }
 
 .underline,
 h1.underline,
 h1.page-title.underline {
-    border-bottom: 2px solid #820505;
+    border-bottom: 2px solid #00477F;
 }
 
 /* Layout
@@ -64,7 +64,7 @@ h1.page-title.underline {
 
 ul.tabs {
     display: block;
-    background: #820505;
+    background: #00477F;
     border: none;
     padding: 0;
     height: 35px;
@@ -78,7 +78,7 @@ ul.tabs li {
 ul.tabs li:hover,
 ul.tabs li.current {
     border: none;
-    background: #952d2d;
+    background: #205C90;
 }
 
 ul.tabs li a,
@@ -94,7 +94,6 @@ ul.tabs li.current a {
     line-height: 35px;
     text-align: center;
     background: none;
-    border-right: 1px solid #d45500;
 }
 
 /* Header
@@ -110,7 +109,7 @@ ul.tabs li.current a {
     height: 125px;
     background: white;
     padding: 0;
-    border-bottom: 6px solid #820505;
+    border-bottom: 6px solid #00477F;
 }
 
 .anonymous #header #header-inner,
@@ -126,7 +125,7 @@ ul.tabs li.current a {
 
 #footer {
     width: 100%;
-    border-top: 2px solid #820505;
+    border-top: 2px solid #00477F;
 }
 
 #footer #footer-inner {
@@ -157,8 +156,9 @@ ul.tabs li.current a {
     font-size: 16px;
     font-weight: normal;
     text-transform: none;
-    color: #820505;
-    border-bottom: 1px solid #820505;
+    color: #FFFFFF;
+    padding: 4px;
+    background-color: #00477F;
 }
 
 #related-links-portlet .content {
@@ -279,4 +279,23 @@ ul.tabs li.current a {
 
 #taught-courses-list .snippet-subject .item-title {
     font-size: 14px;
+}
+
+/* Random styling overrides
+ */
+.blog .title {
+    border-bottom: 1px solid #253856;
+}
+
+.wiki-page h2 {
+    border-bottom: 1px solid #253856;
+}
+
+#powered-by-ututi-portlet .content {
+    border-top: 1px solid #253856;
+    border-bottom: 1px solid #253856;
+}
+
+a.back-link {
+    background: url("/img/icons.com/back_blue.png") left center no-repeat;
 }
