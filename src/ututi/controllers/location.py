@@ -212,7 +212,7 @@ class LocationWallMixin(WallMixin):
         if self.feed_filter == 'subjects':
             return events_query.where(or_(obj_id_in_list, t_wall_posts.c.subject_id.in_(subject_ids)))
         elif self.feed_filter == 'discussions':
-            return events_query.where(t_wall_posts.c.target_location_id.in_(locations))
+            return events_query.where(or_(t_wall_posts.c.target_location_id.in_(locations), t_wall_posts.c.subject_id.in_(subject_ids)))
         else:
             return events_query.where(or_(obj_id_in_list, t_wall_posts.c.target_location_id.in_(locations),
                                           t_wall_posts.c.subject_id.in_(subject_ids)))
