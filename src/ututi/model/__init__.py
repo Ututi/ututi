@@ -2212,6 +2212,7 @@ class SubDepartment(DeclarativeModel):
     location = relation(Tag, backref=backref('sub_departments',
                                              order_by='SubDepartment.title.asc()'))
     subjects = relation(Subject, backref=backref('sub_department'))
+    teachers = relation(Teacher, backref=backref('sub_department'))
 
     def __init__(self, title, location, slug=None):
         self.title = title

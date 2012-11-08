@@ -90,6 +90,7 @@ create table users (
 create table teachers (
        id int8 references users(id) on delete cascade,
        teacher_verified boolean default null,
+       sub_department_id int8 default null,
        teacher_position varchar(200) default null,
        work_address varchar(200) default null,
        publications text default null,
@@ -1707,6 +1708,10 @@ create table sub_departments (
        primary key (id));;
 
 alter table subjects add constraint subjects_sub_department_id_fkey
+      foreign key (sub_department_id) references sub_departments(id)
+      on delete set null;
+
+alter table teachers add constraint teachers_sub_department_id_fkey
       foreign key (sub_department_id) references sub_departments(id)
       on delete set null;
 
