@@ -821,6 +821,55 @@ form.inline-form button {
 
   #upload-failed-error-message { display: none; }
 
+/*
+ * TEACHER DASHBOARD
+ */
+.subject-description .action-block {
+  background-color: #e6e6e6;
+  padding: 8px 14px 8px 8px; /* 14px to compensate textarea padding */
+  margin-top: 5px;
+  margin-bottom: 3px;
+  display: none; /* Initially hidden */
+}
+
+    .subject-description .action-block .action-tease {
+        height: 12px;
+        line-height: 12px;
+        font-size: 10px;
+        color: #999;
+        border: 1px solid #999;
+        background-color: #fff;
+        width: 100%;
+        padding: 3px;
+    }
+
+.subject-description .action-block .action-tease {
+  margin-bottom: 5px; /* Same as other form elements. */
+}
+
+.subject-description .action-block .tease-element {
+  display: none; /* Initially hidden */
+}
+
+.subject-description .action-block .action-button {
+  display: inline;
+}
+
+.subject-description .action-block .action-button.tease-element {
+  display: none;
+}
+
+.subject-description .action-block .cancel-button {
+  margin-left: 5px;
+}
+
+.subject-description .action-block textarea {
+    margin-bottom: 5px;
+    border: 1px solid #999;
+    background-color: #fff;
+    width: 100%;
+    padding: 3px;
+}
 
 /* SIMPLE LISTS
  * Simple list styles that provide bullet images and spacing.
