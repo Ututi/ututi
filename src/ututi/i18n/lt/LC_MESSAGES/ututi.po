@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-11-08 16:25+0200\n"
+"PO-Revision-Date: 2012-11-13 17:08+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1239,6 +1239,14 @@ msgstr "%(link_to_subject)s pridėtas prie grupės %(link_to_group)s dalykų."
 #, python-format
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr " %(link_to_subject)s ištrintas iš grupės %(link_to_group)s dalykų sąrašo."
+
+#, python-format
+msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
+msgstr ""
+
+#, python-format
+msgid "%(link_to_author)slink_to_user"
+msgstr ""
 
 msgid "(no subject)"
 msgstr "(be temos)"
@@ -4396,12 +4404,6 @@ msgstr "Mano svetainė"
 msgid "edit my page"
 msgstr "redaguoti puslapį"
 
-msgid "Create a blog post"
-msgstr "Sukurti dienoraščio įrašą"
-
-msgid "View your blog posts"
-msgstr "Peržiūrėti dienoraščio įrašus"
-
 msgid "Delete this group"
 msgstr "Trinti šią grupę"
 
@@ -4426,11 +4428,32 @@ msgstr "Žinutė išsiųsta."
 msgid "Your SMS was successfully sent."
 msgstr "SMS išsiųsta."
 
+msgid "Comments"
+msgstr "Komentarai"
+
+msgid "Create a blog post"
+msgstr "Sukurti dienoraščio įrašą"
+
+msgid "Create your first blog post."
+msgstr "Sukurti pirmąjį blogo įrašą."
+
+msgid "My blog posts"
+msgstr "Mano blogo įrašai"
+
+msgid "create a blog post"
+msgstr "Sukurti blogo įrašą"
+
+msgid "Create discussion"
+msgstr "Pradėti diskusiją"
+
 msgid "Settings"
 msgstr "Nustatymai"
 
 msgid "Wiki notes"
 msgstr "Wiki užrašai"
+
+msgid "Write your post"
+msgstr "Rašyti įrašą"
 
 msgid "Create your subjects"
 msgstr "Sukurkite dėstomus dalykus"
@@ -4730,12 +4753,6 @@ msgid_plural "%(count)s files"
 msgstr[0] "%(count)s failas"
 msgstr[1] "%(count)s failai"
 msgstr[2] "%(count)s failų"
-
-msgid "Pick your region"
-msgstr "Pasirinkite regioną"
-
-msgid "Regions of Poland"
-msgstr "Lenkijos regionai"
 
 msgid "Were you looking for a university or department?"
 msgstr "Gal ieškojai universiteto arba fakulteto?"
@@ -5295,9 +5312,6 @@ msgid ""
 "directly to Ututi."
 msgstr "<strong>Konspektuokite per paskaitas</strong> tiesiai į Ututi."
 
-msgid "Write your post"
-msgstr "Rašyti įrašą"
-
 msgid "Discussion"
 msgstr "Diskusija"
 
@@ -5469,12 +5483,6 @@ msgstr "Pirkti SMS kreditų"
 
 msgid "University and department:"
 msgstr "Universitetas ir fakultetas"
-
-msgid "Full title"
-msgstr "Visas pavadinimas"
-
-msgid "e.g. LKKA"
-msgstr "pvz. LKKA"
 
 msgid "Department"
 msgstr "Fakultetas"

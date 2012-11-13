@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-11-08 16:25+0200\n"
+"POT-Creation-Date: 2012-11-13 17:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4021,12 +4021,6 @@ msgstr ""
 msgid "edit my page"
 msgstr ""
 
-msgid "Create a blog post"
-msgstr ""
-
-msgid "View your blog posts"
-msgstr ""
-
 msgid "Delete this group"
 msgstr ""
 
@@ -4051,10 +4045,31 @@ msgstr ""
 msgid "Your SMS was successfully sent."
 msgstr ""
 
+msgid "Comments"
+msgstr ""
+
+msgid "Create a blog post"
+msgstr ""
+
+msgid "Create your first blog post."
+msgstr ""
+
+msgid "My blog posts"
+msgstr ""
+
+msgid "create a blog post"
+msgstr ""
+
+msgid "Create discussion"
+msgstr ""
+
 msgid "Settings"
 msgstr ""
 
 msgid "Wiki notes"
+msgstr ""
+
+msgid "Write your post"
 msgstr ""
 
 msgid "Create your subjects"
@@ -4325,12 +4340,6 @@ msgid "%(count)s file"
 msgid_plural "%(count)s files"
 msgstr[0] ""
 msgstr[1] ""
-
-msgid "Pick your region"
-msgstr ""
-
-msgid "Regions of Poland"
-msgstr ""
 
 msgid "Were you looking for a university or department?"
 msgstr ""
@@ -4854,9 +4863,6 @@ msgid ""
 "directly to Ututi."
 msgstr ""
 
-msgid "Write your post"
-msgstr ""
-
 msgid "Discussion"
 msgstr ""
 
@@ -5012,12 +5018,6 @@ msgid "Purchase SMS credits"
 msgstr ""
 
 msgid "University and department:"
-msgstr ""
-
-msgid "Full title"
-msgstr ""
-
-msgid "e.g. LKKA"
 msgstr ""
 
 msgid "Department"

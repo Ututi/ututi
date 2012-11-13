@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-08 16:25+0200\n"
+"PO-Revision-Date: 2012-11-13 17:08+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -4448,12 +4448,6 @@ msgstr "Moja strona profilowa"
 msgid "edit my page"
 msgstr "Edytuj mój profil"
 
-msgid "Create a blog post"
-msgstr ""
-
-msgid "View your blog posts"
-msgstr ""
-
 msgid "Delete this group"
 msgstr "Usuń tę grupę"
 
@@ -4478,11 +4472,32 @@ msgstr "Twoja wiadomość została wysłana."
 msgid "Your SMS was successfully sent."
 msgstr "Twój SMS został wysłany."
 
+msgid "Comments"
+msgstr ""
+
+msgid "Create a blog post"
+msgstr ""
+
+msgid "Create your first blog post."
+msgstr ""
+
+msgid "My blog posts"
+msgstr ""
+
+msgid "create a blog post"
+msgstr ""
+
+msgid "Create discussion"
+msgstr ""
+
 msgid "Settings"
 msgstr "Ustawienia"
 
 msgid "Wiki notes"
 msgstr "Notatki Wiki"
+
+msgid "Write your post"
+msgstr ""
 
 msgid "Create your subjects"
 msgstr "Utwórz swoje przedmioty"
@@ -4782,12 +4797,6 @@ msgid_plural "%(count)s files"
 msgstr[0] "%(count)s dokument"
 msgstr[1] "%(count)s dokumenty"
 msgstr[2] "%(count)s dokumentów"
-
-msgid "Pick your region"
-msgstr "Wybierz województwo"
-
-msgid "Regions of Poland"
-msgstr "Regiony Polski"
 
 msgid "Were you looking for a university or department?"
 msgstr "Szukałeś uczelni lub wydziału?"
@@ -5352,9 +5361,6 @@ msgstr ""
 "<strong>Notuj na wykładzie</strong> na swoim laptopie i wrzucaj notatki "
 "prosto na Ututi."
 
-msgid "Write your post"
-msgstr ""
-
 msgid "Discussion"
 msgstr ""
 
@@ -5527,12 +5533,6 @@ msgstr "Kup punkty SMS"
 
 msgid "University and department:"
 msgstr "Uczelnia i wydział:"
-
-msgid "Full title"
-msgstr "Pełna nazwa"
-
-msgid "e.g. LKKA"
-msgstr "n.p. UWM"
 
 msgid "Department"
 msgstr "Wydział"

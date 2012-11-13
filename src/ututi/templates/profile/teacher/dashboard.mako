@@ -228,7 +228,7 @@ button.submit {
   </div>
   <div>
     <div class="create-blog-post clearfix">
-      <p>Create your first blog post.</p>
+      <p>${_('Create your first blog post.')}</p>
       ${h.button_to(_('Create a blog post'),
                     url(controller='profile', action='create_blog_post'),
                     class_='dark add',
@@ -236,7 +236,7 @@ button.submit {
     </div>
   </div>
   %else:
-  <div class title>
+  <div class="title">
     ${_("My blog posts")}
     <span class="action-button">
       ${h.button_to(_('create a blog post'),
