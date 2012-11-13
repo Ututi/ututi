@@ -824,6 +824,15 @@ form.inline-form button {
 /*
  * TEACHER DASHBOARD
  */
+
+.all-posts-link a {
+    margin-top: 28px;
+    padding-bottom: 2px;
+    padding-right: 16px;
+    width: default;
+    background: url('/img/icons/arrow_more_right_13.png') no-repeat right center;
+}
+
 .subject-description .action-block {
   background-color: #e6e6e6;
   padding: 8px 14px 8px 8px; /* 14px to compensate textarea padding */
@@ -1038,6 +1047,31 @@ ul.feature-list {
 
     .u-object:hover .close-button {
         display: block;
+    }
+
+/* BLOG POST DESCRIPTION
+ */
+
+.blog-post-description {
+    color: #666666;
+    font-size: 11px;
+    padding: 10px 15px 10px 30px;
+    background: url("img/icons.com/blog_small.png") no-repeat 8px 8px;
+}
+    .blog-post-description dt {
+        font-weight: bold;
+        font-size: 13px;
+        margin-right: 10px;
+    }
+
+    .blog-post-description dd {
+        margin-right: 15px;
+        display: inline-block;
+    }
+
+    .blog-post-description dd.edit {
+        padding-left: 16px;
+        background: url('/img/icons.com/settings.png') no-repeat left center;
     }
 
 
@@ -1915,6 +1949,10 @@ ul.tabs {
     background-repeat: no-repeat;
     min-height: 40px;
 }
+
+    .page-section.blog_posts {
+        background-image: url("/img/icons.com/blog_medium.png");
+    }
 
     .page-section.subjects {
         background-image: url("/img/icons.com/about/subject.png");

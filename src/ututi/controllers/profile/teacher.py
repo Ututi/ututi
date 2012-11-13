@@ -53,13 +53,14 @@ class TeacherProfileController(ProfileControllerBase):
 
     @ActionProtector("teacher")
     def register_welcome(self):
-        c.welcome = True
-        c.has_blog_posts = bool(meta.Session.query(TeacherBlogPost).filter_by(created=c.user).count())
+        c.user_blog_posts = meta.Session.query(TeacherBlogPost).filter_by(created=c.user)
+        c.has_blog_posts = bool(c.user_blog_posts)
         return render('/profile/teacher/dashboard.mako')
 
     @ActionProtector("teacher")
     def dashboard(self):
-        c.has_blog_posts = bool(meta.Session.query(TeacherBlogPost).filter_by(created=c.user).count())
+        c.user_blog_posts = meta.Session.query(TeacherBlogPost).filter_by(created=c.user).all()
+        c.has_blog_posts = bool(c.user_blog_posts)
         return render('/profile/teacher/dashboard.mako')
 
     def _edit_profile_tabs(self):

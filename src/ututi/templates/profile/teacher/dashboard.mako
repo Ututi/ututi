@@ -130,20 +130,6 @@ button.submit {
   </a>
 </div>
 %endif
-<div>
-  <div class="dashboard-blog-button">
-    <form id="message_button" action="${url(controller='profile', action='create_blog_post')}">
-      <input type="submit" class="black" value="${_('Create a blog post')}" />
-    </form>
-  </div>
-  %if c.has_blog_posts:
-  <div class="dashboard-blog-button">
-    <form id="message_button" action="${url(controller='profile', action='edit_blog_posts')}">
-      <input type="submit" class="black" value="${_('View your blog posts')}" />
-    </form>
-  </div>
-  %endif
-</div>
 </%def>
 
 <%def name="group_entry(group, first)">
@@ -213,6 +199,49 @@ button.submit {
     ${_('Your SMS was successfully sent.')}
   </div>
   %endif
+</div>
+</%def>
+
+<%def name="blog_post_entry(post, first=False)">
+<div class="u-object blog-post-description ${'with-top-line' if not first else ''}">
+  <div>
+    <dt>
+      <a class="action" href="${post.url()}">${h.ellipsis(post.title, 60)}</a>
+    </dt>
+  </div>
+  <div style="margin-top: 5px">
+    <dd class="edit">
+      <a href="${url(controller='profile', action='edit_blog_post', id=post.id)}">${_("Edit")}</a>
+    </dd>
+    <dd class="comments">
+      <a href="${post.url()}">${_("Comments")} (${len(post.comments)})</a>
+    </dd>
+  </div>
+</div>
+</%def>
+
+<%def name="blog_section(blog_posts)">
+<div class="page-section blog_posts">
+  <div class="title">
+    %if c.has_blog_posts:
+    ${_("My blog posts")}
+    <span class="action-button">
+      ${h.button_to(_('create a blog post'),
+                    url(controller='profile', action='create_blog_post'),
+                    class_='dark add', method='GET')}
+    </span>
+    %else:
+    ${_("Create a blog post")}
+    %endif
+  </div>
+  <div>
+    %for n, blog_post in enumerate(blog_posts):
+      ${blog_post_entry(blog_post, n==0)}
+    %endfor
+  </div>
+  <div class="all-posts-link">
+    <a href="${url(controller='profile', action='edit_blog_posts')}">All posts</a>
+  </div>
 </div>
 </%def>
 
@@ -363,7 +392,7 @@ button.submit {
   %endif
 </div>
 </%def>
-
 ${profile_section()}
+${blog_section(c.user_blog_posts)}
 ${subject_section(c.user.taught_subjects)}
 ${group_section(c.user.student_groups)}
