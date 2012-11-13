@@ -55,6 +55,7 @@ class TeacherProfileController(ProfileControllerBase):
     def register_welcome(self):
         c.user_blog_posts = meta.Session.query(TeacherBlogPost).filter_by(created=c.user).order_by(TeacherBlogPost.created_on.desc()).all()
         c.has_blog_posts = bool(c.user_blog_posts)
+        c.welcome = True
         return render('/profile/teacher/dashboard.mako')
 
     @ActionProtector("teacher")
