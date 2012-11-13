@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-11-13 17:07+0200\n"
+"POT-Creation-Date: 2012-11-13 17:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4058,6 +4058,9 @@ msgid "My blog posts"
 msgstr ""
 
 msgid "create a blog post"
+msgstr ""
+
+msgid "All posts"
 msgstr ""
 
 msgid "Create discussion"

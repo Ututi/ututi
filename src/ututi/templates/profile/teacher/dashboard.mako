@@ -250,7 +250,7 @@ button.submit {
     %endfor
   </div>
   <div class="all-posts-link">
-    <a href="${url(controller='profile', action='edit_blog_posts')}">All posts</a>
+    <a href="${url(controller='profile', action='edit_blog_posts')}">${_('All posts')}</a>
   </div>
   %endif
 </div>
