@@ -235,8 +235,9 @@ def setup_orm():
                polymorphic_identity='teacher_blog_comment',
                polymorphic_on=tables['content_items'].c.content_type,
                properties={'post': relation(TeacherBlogPost,
-                                                 primaryjoin=tables['teacher_blog_posts'].c.id==tables['teacher_blog_comments'].c.post_id,
-                                                 backref='comments')})
+                                            primaryjoin=tables['teacher_blog_posts'].c.id==tables['teacher_blog_comments'].c.post_id,
+                                            backref=backref('comments',
+                                                            cascade='delete'))})
 
     orm.mapper(SeenThread, tables['seen_threads'],
                properties = {'thread': relation(ForumPost),
