@@ -245,7 +245,7 @@ button.submit {
     </span>
   </div>
   <div>
-    %for n, blog_post in enumerate(blog_posts):
+    %for n, blog_post in enumerate(blog_posts[:3]):
       ${blog_post_entry(blog_post, n==0)}
     %endfor
   </div>
