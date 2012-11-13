@@ -222,17 +222,27 @@ button.submit {
 
 <%def name="blog_section(blog_posts)">
 <div class="page-section blog_posts">
+  %if not c.has_blog_posts:
   <div class="title">
-    %if c.has_blog_posts:
+    ${_("Create a blog post")}
+  </div>
+  <div>
+    <div class="create-blog-post clearfix">
+      <p>Create your first blog post.</p>
+      ${h.button_to(_('Create a blog post'),
+                    url(controller='profile', action='create_blog_post'),
+                    class_='dark add',
+                    method='GET')}
+    </div>
+  </div>
+  %else:
+  <div class title>
     ${_("My blog posts")}
     <span class="action-button">
       ${h.button_to(_('create a blog post'),
                     url(controller='profile', action='create_blog_post'),
                     class_='dark add', method='GET')}
     </span>
-    %else:
-    ${_("Create a blog post")}
-    %endif
   </div>
   <div>
     %for n, blog_post in enumerate(blog_posts):
@@ -242,6 +252,7 @@ button.submit {
   <div class="all-posts-link">
     <a href="${url(controller='profile', action='edit_blog_posts')}">All posts</a>
   </div>
+  %endif
 </div>
 </%def>
 
