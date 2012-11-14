@@ -211,7 +211,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
     def _edit_form_defaults(self):
         defaults = {
-            'email': c.user.emails[0].email,
+            'email': c.user.email.email,
             'phone_number': c.user.phone_number,
             'fullname': c.user.fullname,
             'site_url': c.user.site_url,
@@ -435,13 +435,13 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
             if self.form_result['confirm_email']:
                 h.flash(_('Confirmation message sent. Please check your email.'))
-                email_confirmation_request(c.user, c.user.emails[0].email)
+                email_confirmation_request(c.user, c.user.email.email)
                 redirect(url(controller='profile', action='edit_contacts'))
 
             # handle email
             email = self.form_result['email']
             confirmed = False
-            if email != c.user.emails[0].email:
+            if email != c.user.email.email:
                 # XXX Allow user to set default email if it already added as second.
                 if len(c.user.emails) > 1:
                     if c.user.emails[1].email == email:
@@ -449,8 +449,8 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                         meta.Session.commit()
                         confirmed = True
 
-                c.user.emails[0].email = email
-                c.user.emails[0].confirmed = confirmed
+                c.user.email.email = email
+                c.user.email.confirmed = confirmed
                 email_confirmation_request(c.user, email)
                 sign_in_user(c.user)
 

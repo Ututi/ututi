@@ -145,7 +145,7 @@ class User(Author):
         """Send a message to the user."""
         from ututi.lib.messaging import EmailMessage, SMSMessage
         if isinstance(msg, EmailMessage):
-            email = self.emails[0]
+            email = self.email
             if email.confirmed or msg.force:
                 msg.send(email.email)
             else:
@@ -474,7 +474,7 @@ class User(Author):
 
     @property
     def isConfirmed(self):
-        return self.emails[0].confirmed
+        return self.email.confirmed
 
     logo = logo_property()
 

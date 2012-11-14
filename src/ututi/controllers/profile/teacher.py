@@ -285,7 +285,7 @@ class TeacherProfileController(ProfileControllerBase):
                     attachments = [{'filename': self.form_result['file'].filename,
                                     'file': self.form_result['file'].file}]
 
-                msg = EmailMessage(subject, msg_text, sender=c.user.emails[0].email, force=True, attachments=attachments)
+                msg = EmailMessage(subject, msg_text, sender=c.user.email.email, force=True, attachments=attachments)
                 msg.send(group.email)
 
             message = _(u'Message sent to %(group_title)s (%(group_email)s).') % {

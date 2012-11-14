@@ -12,7 +12,7 @@ def _generateMessageId():
     return "%s@%s" % (choose_boundary(), host)
 
 def post_message(group, user, subject, message, reply_to=None, force=False, attachments=[]):
-    msgstr = compose_email(user.emails[0].email,
+    msgstr = compose_email(user.email.email,
                            group.list_address,
                            subject,
                            message,

@@ -152,7 +152,7 @@
         %if c.user is None:
         ${h.input_line('sender', _("Your email"))}
         %else:
-        <input type="hidden" name="sender" value="${c.user.emails[0].email}" />
+        <input type="hidden" name="sender" value="${c.user.email.email}" />
         %endif
         ${h.input_line('recipients', _("Recipients"),
                        help_text=_("Enter comma separated list of email addresses"))}

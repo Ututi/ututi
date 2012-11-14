@@ -73,7 +73,7 @@ ${group_members_invite_section()}
       <a href="${url(controller='user', action='index', id=request.user.id)}" title="${request.user.fullname}"
          >${request.user.fullname}
       </a>
-      (${request.user.emails[0].email})
+      (${request.user.email.email})
     </td>
     <td class="actions">
       <form style="display: inline;" method="post" action="${url(controller='group', action='request', id=c.group.group_id)}">
@@ -126,7 +126,7 @@ ${group_members_invite_section()}
           ${member['title']}
         </a>
         <div>
-          ${member['user'].emails[0].email}
+          ${member['user'].email.email}
         </div>
       </td>
       <td class="phone">

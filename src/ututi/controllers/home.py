@@ -433,7 +433,7 @@ class HomeController(UniversityListMixin):
                 user.update_password(self.form_result.get('new_password'))
                 user.recovery_key = None
                 #password reset is actually a confirmation of the email
-                user.emails[0].confirmed = True
+                user.email.confirmed = True
                 meta.Session.commit()
                 h.flash(_('Your password has been updated. Welcome back!'))
                 sign_in_user(user)

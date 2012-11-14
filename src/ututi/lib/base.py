@@ -102,7 +102,7 @@ class BaseController(WSGIController):
                 meta.Session.query(User).filter_by(id=c.user.id).with_lockmode('update').one()
                 c.user.last_seen = datetime.utcnow()
                 meta.Session.commit()
-                user_email = c.user.emails[0].email
+                user_email = c.user.email.email
             else:
                 #the user is anonymous - check if he is coming from google search
                 referrer = request.headers.get('referer', '')

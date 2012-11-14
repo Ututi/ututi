@@ -116,7 +116,7 @@ class BasefilesController(BaseController):
         if request.method == 'POST':
             reason = request.POST.get('reason')
             if c.user:
-                email = c.user.emails[0].email
+                email = c.user.email.email
             else:
                 email = request.POST.get('reporter_email')
             extra_vars = dict(f=file, reason=reason, email=email)
