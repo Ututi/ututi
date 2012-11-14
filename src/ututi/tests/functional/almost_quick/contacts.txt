@@ -2,7 +2,7 @@ Functional tests for contacts form
 ==================================
 
     >>> from ututi.tests.data import create_user
-    >>> create_user('Some user', 'second@mif.stud.vu.lt', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7', 'uni', 'second@gmail.com')
+    >>> create_user('Some user', 'first@mif.stud.vu.lt', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7', 'uni', 'second@gmail.com')
     >>> browser = Browser.logIn()
 
     >>> browser.open('http://localhost/profile/edit/contacts')
@@ -31,14 +31,14 @@ Adding one more email and check if user is abble change his secondary email to h
 This situation is possible when user is linking his gmail account, and
 Gmail mail became main mail, but user want have his university mail as main.
 
-    >>> browser = Browser.logIn('second@mif.stud.vu.lt', 'asdasd')
+    >>> browser = Browser.logIn('first@mif.stud.vu.lt', 'asdasd')
 
     >>> browser.open('http://localhost/profile/edit/contacts')
     >>> form = browser.getForm('contacts-form')
     >>> form.getControl('Your email address').value
-    'second@gmail.com'
-    >>> form.getControl('Your email address').value = 'second@mif.stud.vu.lt'
+    'first@mif.stud.vu.lt'
+    >>> form.getControl('Your email address').value = 'second@gmail.com'
     >>> form.getControl('Save').click()
 
     >>> print mail_queue.pop()
-    <EmailInfo sender='info@ututi.lt' recipients=[u'second@mif.stud.vu.lt']>
+    <EmailInfo sender='info@ututi.lt' recipients=[u'second@gmail.com']>

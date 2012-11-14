@@ -454,6 +454,21 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                 email_confirmation_request(c.user, email)
                 sign_in_user(c.user)
 
+            # new way to handle user email
+            email = self.form_result['email']
+            confirmed = False
+            if email != c.user.email.email:
+                email_objs = filter(lambda e: e.email == email, c.user.emails)
+                if email_objs:
+                    new_main_email = email_objs[0]
+                    meta.Session.delete(new_main_email)
+                    meta.Session.commit()
+                    confirmed = True
+                c.user.email.email = email
+                c.user.email.confirmed = confirmed
+                email_confirmation_request(c.user, email)
+                sign_in_user(c.user)
+
             # handle phone number
             phone_number = self.form_result['phone_number']
             phone_confirmation_key = self.form_result['phone_confirmation_key']

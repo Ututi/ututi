@@ -135,6 +135,7 @@ create table emails (
        email varchar(320),
        confirmed boolean default FALSE,
        confirmation_key char(32) default '',
+       main boolean default TRUE,
        primary key (id, email));;
 
 

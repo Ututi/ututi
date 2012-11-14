@@ -134,8 +134,7 @@ class User(Author):
 
     @property
     def email(self):
-        email = self.emails[0]
-        return email
+        return filter(lambda email: email.main, self.emails)[0]
 
     @property
     def hidden_blocks_list(self):
@@ -596,9 +595,10 @@ class AnonymousUser(object):
 class Email(object):
     """Class representing one email address of a user."""
 
-    def __init__(self, email, confirmed=False):
+    def __init__(self, email, confirmed=False, main=True):
         self.email = email.strip().lower()
         self.confirmed = confirmed
+        self.main = main
 
     @classmethod
     def get(cls, email):
@@ -848,9 +848,17 @@ class UserRegistration(object):
 
         user = Teacher(**args) if self.teacher else User(**args)
         from string import lower
-        emails = [self.email, self.openid_email, self.facebook_email]
-        emails = set(map(lower, filter(bool, emails)))
-        user.emails = [Email(email, confirmed=True) for email in emails]
+        emails_src = [self.email, self.openid_email, self.facebook_email]
+        emails_src = map(lower, filter(bool, emails_src))
+        # remove duplicate emails while preserving order
+        emails = []
+        seen = set()
+        for email in emails_src:
+            if email not in seen:
+                emails.append(email)
+                seen.add(email)
+
+        user.emails = [Email(email, confirmed=True, main=(n == 0)) for n, email in enumerate(emails)]
         user.openid = self.openid
         user.facebook_id = self.facebook_id
         user.logo = self.logo
