@@ -22,9 +22,6 @@ def setUp(test):
     if not list(res):
         create_user()
 
-        # User with second email
-        create_user('Some user', 'second@mif.stud.vu.lt', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7', 'uni', 'second@gmail.com')
-
     meta.Session.commit()
 
 

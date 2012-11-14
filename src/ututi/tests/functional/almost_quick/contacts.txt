@@ -1,6 +1,8 @@
 Functional tests for contacts form
 ==================================
 
+    >>> from ututi.tests.data import create_user
+    >>> create_user('Some user', 'second@mif.stud.vu.lt', 'xnIVufqLhFFcgX+XjkkwGbrY6kBBk0vvwjA7', 'uni', 'second@gmail.com')
     >>> browser = Browser.logIn()
 
     >>> browser.open('http://localhost/profile/edit/contacts')
