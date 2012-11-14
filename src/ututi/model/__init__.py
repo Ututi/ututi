@@ -126,6 +126,7 @@ def setup_tables(engine):
 
 
 def setup_orm():
+    DeclarativeModel.prepare(meta.engine)
     tables = meta.metadata.tables
     tag_mapper = orm.mapper(Tag,
                             tables['tags'],

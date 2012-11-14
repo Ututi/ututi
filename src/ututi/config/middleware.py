@@ -9,7 +9,6 @@ from pylons.middleware import ErrorHandler, StatusCodeRedirect
 from pylons.wsgiapp import PylonsApp
 from routes.middleware import RoutesMiddleware
 
-from ututi.model.meta import DeclarativeModel
 from ututi.model import setup_tables
 from ututi.model import meta, setup_orm
 from ututi.config.environment import load_environment
@@ -41,7 +40,6 @@ def make_app(global_conf, full_stack=True, static_files=True, **app_conf):
     # Configure the Pylons environment
     config = load_environment(global_conf, app_conf)
     setup_tables(meta.engine)
-    DeclarativeModel.prepare(meta.engine)
     setup_orm()
 
     # The Pylons WSGI app
