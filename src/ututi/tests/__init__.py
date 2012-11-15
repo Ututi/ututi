@@ -121,6 +121,15 @@ class UtutiQuickLayerBase(LayerBase):
         pylons.config._pop_object(config)
 
 
+# Patch out Pylons layer tear down to stop clearing_mappers
+# as it stops declarative reflection from working
+from nous.pylons.testing import PylonsBaseLayer
+def new_tearDown(self):
+    pylons.test.pylonsapp = None
+
+PylonsBaseLayer.tearDown = new_tearDown
+
+
 UtutiLayer = CompositeLayer(PylonsTestBrowserLayer('test.ini', conf_dir, meta),
                             UtutiBaseLayer(),
                             name='UtutiLayer')

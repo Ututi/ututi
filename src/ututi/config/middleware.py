@@ -39,8 +39,10 @@ def make_app(global_conf, full_stack=True, static_files=True, **app_conf):
     """
     # Configure the Pylons environment
     config = load_environment(global_conf, app_conf)
-    setup_tables(meta.engine)
-    setup_orm()
+    if not getattr(meta.metadata, 'set_up', False):
+        setup_tables(meta.engine)
+        setup_orm()
+        meta.metadata.set_up = True
 
     # The Pylons WSGI app
     app = PylonsApp(config=config)
