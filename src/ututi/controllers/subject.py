@@ -386,6 +386,52 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
 
     @subject_action
     @subject_privacy
+    @validate(schema=SubjectForm, form='_edit_form')
+    @ActionProtector("user")
+    def update(self, subject):
+        if not hasattr(self, 'form_result'):
+            redirect(url(controller='subject', action='add'))
+
+        #check if we need to regenerate the id
+        clash = Subject.get(self.form_result.get('location', None), subject.subject_id)
+        if clash is not None and clash is not subject:
+            subject.subject_id = subject.generate_new_id()
+
+        subject.title = self.form_result['title']
+        subject.lecturer = self.form_result['lecturer']
+        subject.location = self.form_result['location']
+        subject.description = self.form_result.get('description', None)
+
+        #check to see what kind of tags we have got
+        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', []) if len(tag.strip().lower()) < 250 and tag.strip() != '']
+        if tags == []:
+            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',') if len(tag.strip()) < 250 and tag.strip() != '']
+
+        subject.tags = []
+        for tag in tags:
+            subject.tags.append(SimpleTag.get(tag))
+
+        # update subject permissions
+        if check_crowds(["teacher", "moderator", "root"], c.user, subject) and 'subject_visibility' in self.form_result:
+            subject.visibility = self.form_result['subject_visibility']
+            subject.edit_settings_perm = self.form_result['subject_edit']
+            subject.post_discussion_perm = self.form_result['subject_post_discussions']
+            # remove subject from watched list for users who can't view subject anymore
+            if subject.visibility != 'everyone':
+                crowd_fn = is_university_member if subject.visibility == 'university_members' else is_department_member
+                for watcher in subject.watching_users:
+                    if not crowd_fn(watcher.user, subject):
+                        watcher.user.unwatchSubject(subject)
+
+        meta.Session.commit()
+
+        redirect(url(controller='subject',
+                    action='home',
+                    id=subject.subject_id,
+                    tags=subject.location_path))
+
+    @subject_action
+    @subject_privacy
     @ActionProtector("user")
     def watch(self, subject):
         if not c.user.watches(subject):
@@ -462,53 +508,6 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         meta.Session.add(teacher)
         meta.Session.commit()
         redirect(c.subject.url(action='teacher_assignment'))
-
-
-    @subject_action
-    @subject_privacy
-    @validate(schema=SubjectForm, form='_edit_form')
-    @ActionProtector("user")
-    def update(self, subject):
-        if not hasattr(self, 'form_result'):
-            redirect(url(controller='subject', action='add'))
-
-        #check if we need to regenerate the id
-        clash = Subject.get(self.form_result.get('location', None), subject.subject_id)
-        if clash is not None and clash is not subject:
-            subject.subject_id = subject.generate_new_id()
-
-        subject.title = self.form_result['title']
-        subject.lecturer = self.form_result['lecturer']
-        subject.location = self.form_result['location']
-        subject.description = self.form_result.get('description', None)
-
-        #check to see what kind of tags we have got
-        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', []) if len(tag.strip().lower()) < 250 and tag.strip() != '']
-        if tags == []:
-            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',') if len(tag.strip()) < 250 and tag.strip() != '']
-
-        subject.tags = []
-        for tag in tags:
-            subject.tags.append(SimpleTag.get(tag))
-
-        # update subject permissions
-        if check_crowds(["teacher", "moderator", "root"], c.user, subject) and 'subject_visibility' in self.form_result:
-            subject.visibility = self.form_result['subject_visibility']
-            subject.edit_settings_perm = self.form_result['subject_edit']
-            subject.post_discussion_perm = self.form_result['subject_post_discussions']
-            # remove subject from watched list for users who can't view subject anymore
-            if subject.visibility != 'everyone':
-                crowd_fn = is_university_member if subject.visibility == 'university_members' else is_department_member
-                for watcher in subject.watching_users:
-                    if not crowd_fn(watcher.user, subject):
-                        watcher.user.unwatchSubject(subject)
-
-        meta.Session.commit()
-
-        redirect(url(controller='subject',
-                    action='home',
-                    id=subject.subject_id,
-                    tags=subject.location_path))
 
     @subject_action
     @subject_privacy
