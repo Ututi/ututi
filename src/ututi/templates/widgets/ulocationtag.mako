@@ -1,13 +1,15 @@
 <%namespace file="/elements.mako" import="location_links" />
 
-<%def name="standard_location_widget()">
+<%def name="standard_location_widget(read_only=False)">
 %if hasattr(c, 'preset_location'):
 <div id="location-preview" class="formField" style="display: none">
   <label for="tags">
     <span class="labelText">${_('University and department:')}</span>
   </label>
   ${location_links(c.preset_location)}
+  %if not read_only:
   <a id="location-edit-link" href="#">${_("Change")}</a>
+  %endif
 </div>
 <script type="text/javascript">
   $(document).ready(function() {

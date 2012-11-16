@@ -30,28 +30,12 @@
   ${h.input_line('title', _('Subject title:'))}
 
   <div class="formField">
-    %if hasattr(c, 'hide_location'):
-    <div id="location-preview" style="display: none">
+    ${hidden_fields(c.subject.location)}
+    <div id="location-preview">
       <label for="tags">
         <span class="labelText">${_('University | Department:')}</span>
       </label>
       ${item_location_full(c.subject)}
-      <a id="location-edit-link" href="#">${_("Change")}</a>
-    </div>
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $('#location-preview').show();
-        $('#location-edit').hide();
-        $('#location-edit-link').click(function() {
-          $('#location-preview').hide();
-          $('#location-edit').show();
-          return false;
-        });
-      })
-    </script>
-    %endif
-    <div id="location-edit">
-      ${location_widget(2, titles=(_("University:"), _("Department:")))}
     </div>
   </div>
 

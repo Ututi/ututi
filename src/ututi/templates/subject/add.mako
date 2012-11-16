@@ -1,4 +1,5 @@
 <%inherit file="/profile/home_base.mako" />
+<%namespace file="/elements.mako" import="location_links" />
 <%namespace name="b" file="/sections/standard_blocks.mako" import="title_box"/>
 <%namespace name="newlocationtag" file="/widgets/ulocationtag.mako" import="*"/>
 <%namespace file="/widgets/tags.mako" import="*"/>
@@ -35,7 +36,15 @@ ${_('Create new subject')}
 <%def name="form(action)">
 <form method="post" action="${action}" id="subject_add_form" class="narrow">
   <fieldset>
-  ${standard_location_widget()}
+  <div class="formField">
+    ${hidden_fields(c.preset_location)}
+    <div id="location-preview">
+      <label for="tags">
+        <span class="labelText">${_('University | Department:')}</span>
+      </label>
+      ${location_links(c.preset_location)}
+    </div>
+  </div>
   ${h.input_line('title', _('Subject title:'),
     help_text=_("It's best to use exactly the same title that is used in your university for this subject. It does not need to be unique."))}
   ${h.input_line('lecturer', _('Subject lecturer:'))}

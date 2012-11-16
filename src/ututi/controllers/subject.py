@@ -268,13 +268,13 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         return render('subject/feed.mako')
 
     def _add_form(self):
+        c.preset_location = c.user.location
         return render('subject/add.mako')
 
     @ActionProtector("user")
     def add(self):
         defaults = dict([('location-%d' % n, tag)
                          for n, tag in enumerate(c.user.location.hierarchy())])
-        c.preset_location = c.user.location
         return htmlfill.render(self._add_form(), defaults=defaults)
 
     @ActionProtector("user")
@@ -374,7 +374,6 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
             'subject_edit': subject.edit_settings_perm,
             'subject_post_discussions': subject.post_discussion_perm
             }
-        c.hide_location = True
 
         if subject.location is not None:
             location = dict([('location-%d' % n, tag)
