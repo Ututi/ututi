@@ -2372,6 +2372,17 @@ ul.tabs {
     margin-bottom: 8px;
 }
 
+.moderation-list .email-whitelist .text_button {
+    color: #3D617A;
+    font-weight: normal;
+}
+
+.moderation-list .email-whitelist .text_button:hover {
+    color: #6099CC;
+    border: none;
+    padding-bottom: 1px;
+}
+
 table.moderation-table {
     width: 100%;
     text-align: left;
@@ -2415,4 +2426,13 @@ table.moderation-table th.actions {
 
 .moderation-table .actions {
     text-align: center;
+}
+
+.moderation-table .moderation-actions form {
+    display: inline;
+}
+
+
+.moderation-table .moderation-actions fieldset {
+    display: inline;
 }

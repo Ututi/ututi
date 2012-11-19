@@ -19,21 +19,6 @@
   </div>
 </%def>
 
-<%def name="listThreadsActions(message)">
-  <div class="moderation-actions">
-    <div class="loading-message">
-      ${_('Working...')}
-    </div>
-  <div class="error-message">
-    ${_('Error: could not reach server or this message was already moderated. Please try refreshing the page.')}
-  </div>
-    <div class="moderation-action-buttons">
-      ${h.button_to(_('Approve'), url=message.url(action='approve_post_from_list'), class_='btn btn-approve')}
-      ${h.button_to(_('Reject'), url=message.url(action='reject_post_from_list'), class_='btn btn-reject')}
-    </div>
-  </div>
-</%def>
-
 <div class="back-link">
   <a class="back-link" href="${h.url_for(action='index')}">${_('Back to the topic list')}</a>
 </div>
@@ -54,7 +39,7 @@
           <span class="edge"></span>
         </label>
         <div style="float: left; padding-left: 5px;">
-          ${h.input_submit('Add')}
+          ${h.input_submit(_('Add'))}
         </div>
         <div id="whitelist_email_error" style="float: left; padding-left: 5px;">
           <form:error name="email"/>
@@ -68,12 +53,12 @@
     %for item in group.whitelist:
       <tr>
         <td class="email">
-          ${item.email}
+          <a href="mailto:${item.email}">${item.email}</a>
         </td>
         <td style="text-align: right;">
           <form style="display: inline;" method="post" action="${group.url(controller='mailinglist', action='remove_from_whitelist')}">
             <input type="hidden" name="email" value="${item.email}" />
-            <a href="#" class="submit-anchor">${_('Remove')}</a>
+            <input type="submit" name="remove" value="${_('Remove')}" class="text_button"/>
           </form>
         </td>
       </tr>
@@ -89,6 +74,7 @@
   <div class="title">
     ${_('Moderation queue')}:
   </div>
+  %if c.messages:
   <table class="moderation-table">
     <thead>
       <tr>
@@ -101,7 +87,8 @@
       %for message in c.messages:
       <tr>
         <td class="message">
-          <a href="#">${h.ellipsis(message.subject, 36)}</a><br/><span class="excerpt">${h.ellipsis(message.body, 42)}</span>
+          <a href="${url(controller='mailinglist', action='moderate_post', id=c.group.group_id, thread_id=message.id)}">${h.ellipsis(message.subject, 36)}</a><br/><span class="excerpt">${h.ellipsis(message.body, 42)}</span>
+
         </td>
         <td class="author-and-date">
           <a class="author" href="${message.author_or_anonymous.url()}">
@@ -111,23 +98,17 @@
         </td>
         <td class="actions">
           <span class="moderation-actions">
-            <a href="${url(controller='mailinglist', action='approve_post', id=c.group.id, thread_id=message.id)}"
-               class="btn-approve"><img src="${url('/img/icons/tick_10.png')}"/></a>
-            <a href="${url(controller='mailinglist', action='reject_post', id=c.group.id, thread_id=message.id)}"
-               class="btn-reject"><img src="${url('/img/icons/cross_small.png')}"/></a>
+            ${h.button_to(_("Approve"), url=url(controller='mailinglist', action='approve_post_from_list', id=c.group.id, thread_id=message.id),
+                          type='image', src=url('/img/icons/tick_10.png'), name="approve")}
+            ${h.button_to(_("Reject"), url=url(controller='mailinglist', action='reject_post_from_list', id=c.group.id, thread_id=message.id),
+                          type='image', src=url('/img/icons/cross_small.png'), name="reject")}
           </span>
         </td>
       </tr>
       %endfor
     </tbody>
   </table>
+  %else:
+    <p id="empty-queue-notice">${_('No messages to be moderated yet.')}</p>
+  %endif
 </div>
-
-<script type="text/javascript">
-  $(function () {
-    $('.submit-anchor').click(function() {
-      $(this).closest('form').submit();
-      return false;
-    });
-  });
-</script>

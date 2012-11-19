@@ -80,9 +80,12 @@ message:
 This message will appear in the moderation queue:
 
     >>> browser.open('http://localhost/group/moderators/mailinglist/administration')
-    >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()")
-    Hi group!
-    This is my message
+    >>> browser.printCssQuery('tbody .message', strip=True)
+    <td>
+      <a>Hi group!</a>
+      <br />
+      <span>This is my message</span>
+    </td>
 
 If we disable the moderation non-group members can't post messages to
 our mailing list:

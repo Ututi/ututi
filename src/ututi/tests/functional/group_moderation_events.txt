@@ -101,7 +101,7 @@ Administrator can click "Approve" button to approve the message.
 From this view he gets redirected to the moderation queue:
 
     >>> browser.open('http://localhost/group/moderators/mailinglist/administration')
-    >>> browser.getControl('Approve', index=1).click()
+    >>> browser.getControl(name='approve', index=1).click()
     >>> print browser.url
     http://localhost/group/moderators/mailinglist/administration
 
