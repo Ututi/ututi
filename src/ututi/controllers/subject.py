@@ -23,6 +23,7 @@ from ututi.lib.security import ActionProtector, deny, check_crowds, is_universit
 from ututi.lib.search import search, search_query, search_query_count
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render, u_cache
+from ututi.lib.validators import SubDepartmentIdValidator
 from ututi.lib.validators import LocationTagsValidator, TagsValidator, validate
 from ututi.lib.wall import WallMixin
 import ututi.lib.helpers as h
@@ -122,7 +123,8 @@ class SubjectForm(Schema):
 
     location = Pipe(ForEach(validators.UnicodeString(strip=True, max=250)),
                     LocationTagsValidator())
-
+    sub_department_id = Pipe(validators.Int(),
+                             SubDepartmentIdValidator())
     title = validators.UnicodeString(not_empty=True, strip=True)
     lecturer = validators.UnicodeString(strip=True)
     subject_visibility = validators.OneOf(['everyone', 'department_members', 'university_members'], if_missing=None)
@@ -372,7 +374,8 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
             'description': subject.description,
             'subject_visibility': subject.visibility,
             'subject_edit': subject.edit_settings_perm,
-            'subject_post_discussions': subject.post_discussion_perm
+            'subject_post_discussions': subject.post_discussion_perm,
+            'sub_department_id': subject.sub_department_id
             }
 
         if subject.location is not None:
@@ -401,6 +404,7 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         subject.lecturer = self.form_result['lecturer']
         subject.location = self.form_result['location']
         subject.description = self.form_result.get('description', None)
+        subject.sub_department_id = self.form_result.get('sub_department_id', None)
 
         #check to see what kind of tags we have got
         tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', []) if len(tag.strip().lower()) < 250 and tag.strip() != '']

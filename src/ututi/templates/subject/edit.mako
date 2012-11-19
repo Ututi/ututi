@@ -39,6 +39,17 @@
     </div>
   </div>
 
+  %if c.subject.location.sub_departments:
+      ${h.select_line('sub_department_id',
+                      _('Sub-department:'),
+                      [('', '')] + [
+                       (sd.id, sd.title)
+                       for sd in c.subject.location.sub_departments],
+                      selected=[c.subject.sub_department])}
+  %else:
+      <input type="hidden" name="sub_department_id" value=""/>
+  %endif
+
   ${h.input_line('lecturer', _('Lecturer:'))}
 
   <div class="formField">

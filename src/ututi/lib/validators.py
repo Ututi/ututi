@@ -15,6 +15,7 @@ from pylons.decorators import validate as old_validate
 
 from ututi.model import GroupCoupon
 from ututi.model import meta, Email, User
+from ututi.model import SubDepartment
 from ututi.model import Subject, Group, ContentItem, LocationTag, EmailDomain
 from ututi.model.i18n import Language, Country
 
@@ -661,6 +662,17 @@ class SubjectIdValidator(validators.FancyValidator):
         s = Subject.get_by_id(int(value))
         if s is None:
             raise Invalid(self.message('invalid', state), value, state)
+
+
+class SubDepartmentIdValidator(validators.FancyValidator):
+    """A validator for subject ids"""
+    messages = { 'invalid': _("Invalid sub department") }
+
+    def _to_python(self, value, state):
+        s = SubDepartment.get(value)
+        if s is None:
+            raise Invalid(self.message('invalid', state), value, state)
+        return value
 
 
 def js_validate(schema=None, validators=None, form=None, variable_decode=False,
