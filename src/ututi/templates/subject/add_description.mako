@@ -30,6 +30,16 @@ ${_('Enter subject details')}
     ${h.input_line('lecturer', _('Lecturer:'))}
   %endif
 
+  %if c.subject_location.sub_departments:
+      ${h.select_line('sub_department_id',
+                      _('Sub-department:'),
+                      [('', '')] + [
+                       (sd.id, sd.title)
+                       for sd in c.subject_location.sub_departments])}
+  %else:
+      <input type="hidden" name="sub_department_id" value=""/>
+  %endif
+
   <div class="formField">
     <label for="tags">
       <span class="labelText">${_('Tags:')}</span>

@@ -48,6 +48,7 @@ ${_('Create new subject')}
   ${h.input_line('title', _('Subject title:'),
     help_text=_("It's best to use exactly the same title that is used in your university for this subject. It does not need to be unique."))}
   ${h.input_line('lecturer', _('Subject lecturer:'))}
+
   <div class="formField">
     <label for="description">
       <span class="labelText">${_('Subject description:')}</span>

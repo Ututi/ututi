@@ -168,6 +168,8 @@ class NewSubjectForm(Schema):
     pre_validators = [NestedVariables()]
     location = Pipe(ForEach(validators.UnicodeString(strip=True, max=250)),
                     LocationTagsValidator())
+    sub_department_id = Pipe(validators.Int(),
+                             SubDepartmentIdValidator())
     title = validators.UnicodeString(strip=True)
     lecturer = validators.UnicodeString(strip=True)
 
@@ -179,6 +181,7 @@ class SubjectAddMixin(object):
         id = ''.join(Random().sample(string.ascii_lowercase, 8))  # use random id first
         lecturer = self.form_result['lecturer']
         location = self.form_result['location']
+        sub_department_id = self.form_result.get('sub_department_id', None)
         description = self.form_result['description']
 
         if lecturer == '':
@@ -194,6 +197,7 @@ class SubjectAddMixin(object):
             stags.append(SimpleTag.get(tag))
 
         subj = Subject(id, title, location, lecturer, description, stags)
+        subj.sub_department_id = sub_department_id
 
         meta.Session.add(subj)
         meta.Session.flush()
@@ -311,6 +315,8 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
             return redirect(url(controller='subject', action='add_description'))
 
     def _add_full_form(self):
+        location = LocationTag.get(session['subject_location_id'])
+        c.subject_location = location
         return render('subject/add_description.mako')
 
     @ActionProtector("user")
