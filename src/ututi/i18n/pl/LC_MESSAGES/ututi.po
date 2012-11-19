@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-13 17:17+0200\n"
+"PO-Revision-Date: 2012-11-19 16:34+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -1269,11 +1269,15 @@ msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr "Grupa %(link_to_group)s przestała obserwować przedmiot %(link_to_subject)s"
 
 #, python-format
-msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
+msgid "%(link_to_author)s wrote on %(link_to_subject)s wall."
 msgstr ""
 
 #, python-format
-msgid "%(link_to_author)slink_to_user"
+msgid "%(link_to_author)s wrote on %(link_to_location)s wall."
+msgstr ""
+
+#, python-format
+msgid "%(link_to_author)s wrote a blog post %(link_to_post)s."
 msgstr ""
 
 msgid "(no subject)"
@@ -3445,14 +3449,14 @@ msgstr "Odmów"
 msgid "Emails that are allowed to post to the mailing list of this group"
 msgstr "E-maile, które są dopuszczone na listę dyskusyjną tej grupy"
 
-msgid "Invite to group"
-msgstr "Zaproś do grupy"
+msgid "Add email"
+msgstr ""
 
 msgid "Moderation queue"
 msgstr "Kolejka do moderacji"
 
-msgid "No messages to be moderated yet."
-msgstr "Brak wiadomości do moderowania."
+msgid "Author and date"
+msgstr ""
 
 msgid "Back to the moderation queue"
 msgstr "Powrót do kolejki do moderacji"
@@ -5200,6 +5204,9 @@ msgstr "Umieść notatki z wykładu na stronie przedmiotu i edytuj je"
 msgid "Get notifications related to this subject"
 msgstr "Dostawaj powiadomienia dotyczące tego przedmiotu"
 
+msgid "University | Department:"
+msgstr "Uniwersytet | Wydział:"
+
 msgid "Subject title:"
 msgstr "Nazwa przedmiotu:"
 
@@ -5265,12 +5272,6 @@ msgstr "Wróć do przedmiotu"
 
 msgid "Edit subject's info"
 msgstr "Edytuj info o przedmiocie"
-
-msgid "University | Department:"
-msgstr "Uniwersytet | Wydział:"
-
-msgid "Department:"
-msgstr "Wydział:"
 
 msgid "Who can view the subject"
 msgstr ""
@@ -5536,6 +5537,9 @@ msgstr "Kup punkty SMS"
 
 msgid "University and department:"
 msgstr "Uczelnia i wydział:"
+
+msgid "Department:"
+msgstr "Wydział:"
 
 msgid "Department"
 msgstr "Wydział"

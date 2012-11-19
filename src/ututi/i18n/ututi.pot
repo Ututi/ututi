@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-11-13 17:17+0200\n"
+"POT-Creation-Date: 2012-11-19 16:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1167,11 +1167,15 @@ msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr ""
 
 #, python-format
-msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
+msgid "%(link_to_author)s wrote on %(link_to_subject)s wall."
 msgstr ""
 
 #, python-format
-msgid "%(link_to_author)slink_to_user"
+msgid "%(link_to_author)s wrote on %(link_to_location)s wall."
+msgstr ""
+
+#, python-format
+msgid "%(link_to_author)s wrote a blog post %(link_to_post)s."
 msgstr ""
 
 msgid "(no subject)"
@@ -3092,13 +3096,13 @@ msgstr ""
 msgid "Emails that are allowed to post to the mailing list of this group"
 msgstr ""
 
-msgid "Invite to group"
+msgid "Add email"
 msgstr ""
 
 msgid "Moderation queue"
 msgstr ""
 
-msgid "No messages to be moderated yet."
+msgid "Author and date"
 msgstr ""
 
 msgid "Back to the moderation queue"
@@ -4718,6 +4722,9 @@ msgstr ""
 msgid "Get notifications related to this subject"
 msgstr ""
 
+msgid "University | Department:"
+msgstr ""
+
 msgid "Subject title:"
 msgstr ""
 
@@ -4780,12 +4787,6 @@ msgid "Back to subject"
 msgstr ""
 
 msgid "Edit subject's info"
-msgstr ""
-
-msgid "University | Department:"
-msgstr ""
-
-msgid "Department:"
 msgstr ""
 
 msgid "Who can view the subject"
@@ -5021,6 +5022,9 @@ msgid "Purchase SMS credits"
 msgstr ""
 
 msgid "University and department:"
+msgstr ""
+
+msgid "Department:"
 msgstr ""
 
 msgid "Department"

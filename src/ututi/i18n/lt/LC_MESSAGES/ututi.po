@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-11-13 17:17+0200\n"
+"PO-Revision-Date: 2012-11-19 16:35+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1241,12 +1241,16 @@ msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr " %(link_to_subject)s ištrintas iš grupės %(link_to_group)s dalykų sąrašo."
 
 #, python-format
-msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
-msgstr ""
+msgid "%(link_to_author)s wrote on %(link_to_subject)s wall."
+msgstr "(link_to_author)s parašė diskusiją %(link_to_subject)s."
 
 #, python-format
-msgid "%(link_to_author)slink_to_user"
-msgstr ""
+msgid "%(link_to_author)s wrote on %(link_to_location)s wall."
+msgstr "%(link_to_author)s parašė diskusiją %(link_to_location)s."
+
+#, python-format
+msgid "%(link_to_author)s wrote a blog post %(link_to_post)s."
+msgstr "(link_to_author)s parašė naują blogo įrašą %(link_to_post)s."
 
 msgid "(no subject)"
 msgstr "(be temos)"
@@ -3402,14 +3406,14 @@ msgstr ""
 "El. pašto adresai, kuriems leidžiama siųsti žinutes į šios grupės "
 "konferenciją"
 
-msgid "Invite to group"
-msgstr "Pakviesti į grupę"
+msgid "Add email"
+msgstr "Pridėti adresą"
 
 msgid "Moderation queue"
 msgstr "Moderavimo eilė"
 
-msgid "No messages to be moderated yet."
-msgstr "Žinučių nėra."
+msgid "Author and date"
+msgstr "Autorius ir data"
 
 msgid "Back to the moderation queue"
 msgstr "Atgal į moderavimo eilę"
@@ -5159,6 +5163,9 @@ msgstr "Įkelkite paskaitos užrašus į dalyko puslapį ir redaguokite juos kar
 msgid "Get notifications related to this subject"
 msgstr "Gaukite priminimus, susijusius su šiuo dalyku"
 
+msgid "University | Department:"
+msgstr "Universitetas  |  Fakultetas:"
+
 msgid "Subject title:"
 msgstr "Dalyko pavadinimas:"
 
@@ -5224,12 +5231,6 @@ msgstr "Grįžti į dalyką"
 
 msgid "Edit subject's info"
 msgstr "Redaguoti dalyko informaciją"
-
-msgid "University | Department:"
-msgstr "Universitetas  |  Fakultetas:"
-
-msgid "Department:"
-msgstr "Fakultetas:"
 
 msgid "Who can view the subject"
 msgstr "Kas gali matyti šį dalyką"
@@ -5486,6 +5487,9 @@ msgstr "Pirkti SMS kreditų"
 
 msgid "University and department:"
 msgstr "Universitetas ir fakultetas"
+
+msgid "Department:"
+msgstr "Fakultetas:"
 
 msgid "Department"
 msgstr "Fakultetas"
