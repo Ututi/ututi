@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-11-19 16:35+0200\n"
+"PO-Revision-Date: 2012-11-19 22:25+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -1085,6 +1085,9 @@ msgstr "Įveskite bent vieną reikšmę."
 msgid "Invalid subject"
 msgstr "Netinkamas dalykas"
 
+msgid "Invalid sub department"
+msgstr "Netinkama katedra"
+
 #, python-format
 msgid "unlimited group private files for %(day_count)d day"
 msgid_plural "unlimited group private files for %(day_count)d days"
@@ -1242,7 +1245,7 @@ msgstr " %(link_to_subject)s ištrintas iš grupės %(link_to_group)s dalykų s�
 
 #, python-format
 msgid "%(link_to_author)s wrote on %(link_to_subject)s wall."
-msgstr "(link_to_author)s parašė diskusiją %(link_to_subject)s."
+msgstr "%(link_to_author)s parašė diskusiją %(link_to_subject)s."
 
 #, python-format
 msgid "%(link_to_author)s wrote on %(link_to_location)s wall."
@@ -1250,7 +1253,7 @@ msgstr "%(link_to_author)s parašė diskusiją %(link_to_location)s."
 
 #, python-format
 msgid "%(link_to_author)s wrote a blog post %(link_to_post)s."
-msgstr "(link_to_author)s parašė naują blogo įrašą %(link_to_post)s."
+msgstr "%(link_to_author)s parašė naują blogo įrašą %(link_to_post)s."
 
 msgid "(no subject)"
 msgstr "(be temos)"
@@ -3385,22 +3388,6 @@ msgstr "Žinutė atmesta"
 msgid "Message already approved"
 msgstr "Žinutė jau patvirtinta"
 
-msgid "Working..."
-msgstr "Vykdoma..."
-
-msgid ""
-"Error: could not reach server or this message was already moderated. "
-"Please try refreshing the page."
-msgstr ""
-"Klaida: nepavyko susisiekti su serveriu arba žinutė jau moderuota. "
-"Pabandykite užkrauti puslapį iš naujo."
-
-msgid "Approve"
-msgstr "Patvirtinti"
-
-msgid "Reject"
-msgstr "Atmesti"
-
 msgid "Emails that are allowed to post to the mailing list of this group"
 msgstr ""
 "El. pašto adresai, kuriems leidžiama siųsti žinutes į šios grupės "
@@ -3414,6 +3401,15 @@ msgstr "Moderavimo eilė"
 
 msgid "Author and date"
 msgstr "Autorius ir data"
+
+msgid "Approve"
+msgstr "Patvirtinti"
+
+msgid "Reject"
+msgstr "Atmesti"
+
+msgid "No messages to be moderated yet."
+msgstr "Nėra moderuojamų žinučių."
 
 msgid "Back to the moderation queue"
 msgstr "Atgal į moderavimo eilę"
@@ -5053,6 +5049,16 @@ msgstr ""
 "%(user_link)s parašė naują žinutę %(message_link)s į grupės "
 "%(group_link)s moderavimo eilę"
 
+msgid "Working..."
+msgstr "Vykdoma..."
+
+msgid ""
+"Error: could not reach server or this message was already moderated. "
+"Please try refreshing the page."
+msgstr ""
+"Klaida: nepavyko susisiekti su serveriu arba žinutė jau moderuota. "
+"Pabandykite užkrauti puslapį iš naujo."
+
 #, python-format
 msgid ""
 "%(user_link)s has posted a new message %(message_link)s in the forum "
@@ -5231,6 +5237,9 @@ msgstr "Grįžti į dalyką"
 
 msgid "Edit subject's info"
 msgstr "Redaguoti dalyko informaciją"
+
+msgid "Sub-department:"
+msgstr "Katedra:"
 
 msgid "Who can view the subject"
 msgstr "Kas gali matyti šį dalyką"
