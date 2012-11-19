@@ -23,3 +23,25 @@ The department should be in the list now:
     >>> browser.printCssQuery('table.content a')
     <a href="/school/uni/edit/edit_sub_department/...">IT sub-department</a>
     <a href="/school/uni/edit/edit_sub_department/...">OP sub-department</a>
+
+If we try adding a subject we should be able to set it's
+sub-department now:
+
+    >>> browser.open('http://localhost/subjects/add')
+    >>> browser.getControl('Subject title:').value = 'Test subject'
+    >>> browser.getControl('Next').click()
+
+    >>> browser.getControl('Sub-department').displayOptions
+    [None, 'IT sub-department', 'OP sub-department']
+
+    >>> browser.getControl('Sub-department').displayValue = ['IT sub-department']
+    >>> browser.getControl('Create').click()
+
+We can change it later if we want to:
+
+    >>> browser.getLink('Edit Settings').click()
+    >>> browser.getControl('Sub-department').displayValue
+    ['IT sub-department']
+
+    >>> browser.getControl('Sub-department').displayValue = ['OP sub-department']
+    >>> browser.getControl('Save').click()
