@@ -2347,3 +2347,72 @@ ul.tabs {
     margin: 8px;
     margin-left: 40px;
 }
+
+.group-whitelist button {
+    margin-top: 17px;
+}
+
+.group-whitelist .email-whitelist {
+    margin-top: 12px;
+    border-bottom: 1px solid #DED8D8;
+    border-top: 1px solid #DED8D8;
+}
+
+.group-whitelist .email-whitelist tbody {
+}
+
+.group-whitelist .email-whitelist td {
+    border: none;
+}
+
+.moderation-list .title {
+    border-bottom: 1px solid #F90;
+    font-size: 13px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+table.moderation-table {
+    width: 100%;
+    text-align: left;
+}
+
+table.moderation-table th {
+    border-bottom: 1px solid #DED8D8;
+}
+
+table.moderation-table th.message {
+    width: 50%;
+}
+
+table.moderation-table th.author-and-date {
+    width: 40%;
+}
+
+table.moderation-table th.actions {
+    width: 10%;
+}
+
+.moderation-table .author-and-date {
+    font-size: 11px;
+    text-align: center;
+}
+
+.moderation-table td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #DED8D8;
+}
+
+.moderation-table td.message {
+    background: url("/img/icons.com/discussions_medium_orange.png") no-repeat left center;
+    padding-left: 26px;
+}
+
+.moderation-table .date {
+    color: #666;
+}
+
+.moderation-table .actions {
+    text-align: center;
+}
