@@ -37,6 +37,10 @@ def render_def(*args, **kwargs):
     return render_mako_def(*args, **kwargs)
 
 
+def get_mem_usage():
+    return int(open('/proc/self/stat').read().split()[22])
+
+
 class BaseController(WSGIController):
 
     def __call__(self, environ, start_response):
@@ -45,6 +49,7 @@ class BaseController(WSGIController):
         # the request is routed to. This routing information is
         # available in environ['pylons.routes_dict']
 
+        request_start_memory_usage = get_mem_usage()
         if 'HTTP_X_FORWARDED_SCHEME' in environ:
             environ['wsgi.url_scheme'] = environ.pop('HTTP_X_FORWARDED_SCHEME')
 
@@ -141,11 +146,12 @@ class BaseController(WSGIController):
 
             # Performance logging.
             perflog.log(logging.INFO,
-                'request %(controller)s.%(action)s %(duration).4f %(duration_cpu).4f %(user_email)s'
+                'request\t%(controller)s.%(action)s\t%(duration).4f\t%(duration_cpu).4f\t%(memory_usage)d\t%(user_email)s'
                  % dict(controller=environ['pylons.routes_dict'].get('controller'),
                         action=environ['pylons.routes_dict'].get('action'),
                         duration=time.time() - request_start_walltime,
                         duration_cpu=time.clock() - request_start_cputime,
+                        memory_usage=get_mem_usage() - request_start_memory_usage,
                         user_email=user_email))
 
     def _push_custom_urls(self):
