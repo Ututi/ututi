@@ -59,13 +59,13 @@
     font-size: 14px;
   }
 
-  ul#breadcrumbs li {
+  ul#breadcrumbs > li {
     display: inline;
     margin-right: 2px;
     padding-left: 12px;
     background: url("${url('/img/icons.com/arrow_right.png')}") no-repeat left center;
   }
-  ul#breadcrumbs li.first {
+  ul#breadcrumbs > li.first {
     padding-left: 0;
     background: none;
   }
