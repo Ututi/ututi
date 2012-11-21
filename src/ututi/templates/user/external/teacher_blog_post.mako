@@ -14,5 +14,5 @@
     >${_('Back to post list')}</a>
 </div>
 <div class="page-section blog">
-  <%snippets:blog_post post="${c.blog_post}" show_comment_form="${False}" />
+  <%snippets:blog_post post="${c.blog_post}" />
 </div>

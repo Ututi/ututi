@@ -12,17 +12,21 @@
     <div class="message-list-off1">
       <div class="floatleft m-on">
         <div class="orange">
-          <a href="${url(controller='profile', action='edit_blog_post', id=post.id)}"
-             class="post-title">${post.title}</a>
+          <a href="${url(controller='user', action='teacher_blog_post', id=c.user.id, post_id=post.id)}"
+            class="post-title">${post.title}</a>
           <span class="reply-count">
             (${ungettext("%(count)s comment", "%(count)s comments", len(post.comments)) % dict(count=len(post.comments))})
           </span>
-          ${h.button_to('Delete', url(controller='profile', action='delete_blog_post', id=post.id), style='display: none')}
-          <a href="#" class="delete-post-link"><img src="${url('/img/icons/cross_small.png')}" alt="delete" /></a>
         </div>
       </div>
       <div class="floatleft user">
         <div class="grey verysmall">${h.fmt_dt(post.created_on)}</div>
+      </div>
+      <div class="floatleft">
+        ${h.button_to("Edit", url=url(controller='profile', action='edit_blog_post', id=post.id), method="get")}
+      </div>
+      <div class="floatleft">
+        ${h.button_to('Delete', url=url(controller='profile', action='delete_blog_post', id=post.id))}
       </div>
       <br style="clear: left;" />
     </div>
@@ -31,9 +35,3 @@
   <div>${_("You haven't created any blog posts yet.")}</div>
 %endif
 </div>
-
-<script>
-    $('.delete-post-link').click(function() {
-        $(this).siblings('form').submit();
-    });
-</script>

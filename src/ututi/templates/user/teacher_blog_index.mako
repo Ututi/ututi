@@ -4,7 +4,7 @@
 <div class="page-section blog">
   <div class="blog-post-list">
     %for post in c.blog_posts:
-      <%snippets:blog_post post="${post}" show_comments="${False}" title_link="internal" />
+      <%snippets:blog_post post="${post}" show_full="${False}" type="${'internal'}" title_link="${True}" />
     %endfor
   </div>
 </div>

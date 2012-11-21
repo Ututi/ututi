@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-11-19 22:25+0200\n"
+"PO-Revision-Date: 2012-11-21 18:20+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -4815,6 +4815,9 @@ msgstr "Komentaras"
 msgid "Write a comment"
 msgstr "Parašyti komentarą"
 
+msgid "Login to comment"
+msgstr "Jei norite parašyti komentarą, prisijunkite"
+
 msgid "The data"
 msgstr "Duomenys"
 
@@ -5191,6 +5194,9 @@ msgstr "Dalyko aprašymas:"
 msgid "Enter subject details"
 msgstr "Įvesti dalyko detales"
 
+msgid "Sub-department:"
+msgstr "Katedra:"
+
 msgid "Tags:"
 msgstr "Žymės:"
 
@@ -5237,9 +5243,6 @@ msgstr "Grįžti į dalyką"
 
 msgid "Edit subject's info"
 msgstr "Redaguoti dalyko informaciją"
-
-msgid "Sub-department:"
-msgstr "Katedra:"
 
 msgid "Who can view the subject"
 msgstr "Kas gali matyti šį dalyką"

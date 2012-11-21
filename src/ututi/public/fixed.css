@@ -2043,6 +2043,7 @@ ul.tabs {
         }
         .blog-comments .comment .comment-date {
             float: right;
+            margin-right: 16px;
         }
         .blog-comments .comment .comment-author {
             font-size: 14px;

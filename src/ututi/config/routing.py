@@ -200,6 +200,7 @@ def make_map(config):
     map.connect('/teacher/{id}/blog', controller='user', action='teacher_blog_index')
     map.connect('/teacher/{id}/blog/{post_id}', controller='user', action='teacher_blog_post')
     map.connect('/teacher/{id}/blog/{post_id}/comment', controller='user', action='teacher_blog_comment')
+    map.connect('/teacher/{id}/blog/{post_id}/delete_comment', controller='user', action='teacher_delete_blog_comment')
 
     # user profiles
     map.connect('/user/{id}', controller='user', action='index')

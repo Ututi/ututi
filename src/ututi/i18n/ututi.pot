@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-11-19 16:34+0200\n"
+"POT-Creation-Date: 2012-11-21 18:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1030,6 +1030,9 @@ msgid "Please enter at least one value."
 msgstr ""
 
 msgid "Invalid subject"
+msgstr ""
+
+msgid "Invalid sub department"
 msgstr ""
 
 #, python-format
@@ -3079,20 +3082,6 @@ msgstr ""
 msgid "Message already approved"
 msgstr ""
 
-msgid "Working..."
-msgstr ""
-
-msgid ""
-"Error: could not reach server or this message was already moderated. Please "
-"try refreshing the page."
-msgstr ""
-
-msgid "Approve"
-msgstr ""
-
-msgid "Reject"
-msgstr ""
-
 msgid "Emails that are allowed to post to the mailing list of this group"
 msgstr ""
 
@@ -3103,6 +3092,15 @@ msgid "Moderation queue"
 msgstr ""
 
 msgid "Author and date"
+msgstr ""
+
+msgid "Approve"
+msgstr ""
+
+msgid "Reject"
+msgstr ""
+
+msgid "No messages to be moderated yet."
 msgstr ""
 
 msgid "Back to the moderation queue"
@@ -4405,6 +4403,9 @@ msgstr ""
 msgid "Write a comment"
 msgstr ""
 
+msgid "Login to comment"
+msgstr ""
+
 msgid "The data"
 msgstr ""
 
@@ -4620,6 +4621,14 @@ msgid ""
 "%(group_link)s moderation queue"
 msgstr ""
 
+msgid "Working..."
+msgstr ""
+
+msgid ""
+"Error: could not reach server or this message was already moderated. Please "
+"try refreshing the page."
+msgstr ""
+
 #, python-format
 msgid ""
 "%(user_link)s has posted a new message %(message_link)s in the forum "
@@ -4740,6 +4749,9 @@ msgid "Subject description:"
 msgstr ""
 
 msgid "Enter subject details"
+msgstr ""
+
+msgid "Sub-department:"
 msgstr ""
 
 msgid "Tags:"

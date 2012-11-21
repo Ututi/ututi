@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-19 16:34+0200\n"
+"PO-Revision-Date: 2012-11-21 18:20+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -1102,6 +1102,9 @@ msgstr "Proszę wpisać przynajmniej jedną wartość."
 
 msgid "Invalid subject"
 msgstr "Nieprawidłowy temat"
+
+msgid "Invalid sub department"
+msgstr ""
 
 #, python-format
 msgid "unlimited group private files for %(day_count)d day"
@@ -3430,22 +3433,6 @@ msgstr "Wiadomość odrzucono"
 msgid "Message already approved"
 msgstr "Wiadomość już zatwierdzono"
 
-msgid "Working..."
-msgstr "Wczytywanie ... "
-
-msgid ""
-"Error: could not reach server or this message was already moderated. "
-"Please try refreshing the page."
-msgstr ""
-"Błąd: nie można nawiązać połączenia z serwerem lub ta wiadomość była już "
-"moderowana. Spróbuj odświeżyć stronę."
-
-msgid "Approve"
-msgstr "Zatwierdź"
-
-msgid "Reject"
-msgstr "Odmów"
-
 msgid "Emails that are allowed to post to the mailing list of this group"
 msgstr "E-maile, które są dopuszczone na listę dyskusyjną tej grupy"
 
@@ -3456,6 +3443,15 @@ msgid "Moderation queue"
 msgstr "Kolejka do moderacji"
 
 msgid "Author and date"
+msgstr ""
+
+msgid "Approve"
+msgstr "Zatwierdź"
+
+msgid "Reject"
+msgstr "Odmów"
+
+msgid "No messages to be moderated yet."
 msgstr ""
 
 msgid "Back to the moderation queue"
@@ -4863,6 +4859,9 @@ msgstr ""
 msgid "Write a comment"
 msgstr ""
 
+msgid "Login to comment"
+msgstr ""
+
 msgid "The data"
 msgstr "Dane"
 
@@ -5094,6 +5093,16 @@ msgstr ""
 "%(user_link)s dodaje nową wiadomość %(message_link)s do kolejki moderacji"
 " %(group_link)s"
 
+msgid "Working..."
+msgstr "Wczytywanie ... "
+
+msgid ""
+"Error: could not reach server or this message was already moderated. "
+"Please try refreshing the page."
+msgstr ""
+"Błąd: nie można nawiązać połączenia z serwerem lub ta wiadomość była już "
+"moderowana. Spróbuj odświeżyć stronę."
+
 #, python-format
 msgid ""
 "%(user_link)s has posted a new message %(message_link)s in the forum "
@@ -5225,6 +5234,9 @@ msgstr "Opis przedmiotu:"
 
 msgid "Enter subject details"
 msgstr "Podaj szczegóły przedmiotu"
+
+msgid "Sub-department:"
+msgstr ""
 
 msgid "Tags:"
 msgstr "Tagi:"
