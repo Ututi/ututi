@@ -85,3 +85,6 @@ We should see subdepartment page when we navigate to subdepartment:
     >>> browser.open('http://localhost/school/uni/subdepartment/1')
     >>> browser.printCssQuery('.page-title')
     <h1 class="page-title">IT sub-department</h1>
+
+    >>> browser.printCssQuery('.subdepartment-description')
+    <div class="subdepartment-description">It does IT</div>
