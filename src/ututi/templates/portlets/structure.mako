@@ -132,15 +132,11 @@
   %endif
 </%def>
 
-<%def name="location_teacher_list_portlet(location=None)">
-  <%
-  if location is None: location = c.location
-  teachers = h.location_teachers(location.id)
-  %>
+<%def name="teacher_list(teachers, location_name)">
   %if teachers:
   <%self:portlet id="location-teacher-list-portlet">
     <%def name="header()">
-      <span class="university-abbr">${' '.join(location.title_path)}</span> ${_("teachers:")}
+      <span class="university-abbr">${location_name}</span> ${_("teachers:")}
     </%def>
     <ul class="icon-list" id="teacher-list">
     %for teacher in teachers:
@@ -151,5 +147,21 @@
     </ul>
   </%self:portlet>
   %endif
+</%def>
+
+<%def name="location_teacher_list_portlet(location=None)">
+  <%
+  if location is None: location = c.location
+  teachers = h.location_teachers(location.id)
+  %>
+  ${self.teacher_list(teachers, ' '.join(location.title_path))}
+</%def>
+
+<%def name="sub_department_teacher_list_portlet(sub_department)">
+  <%
+    teachers = [{'name': teacher.fullname,
+                 'url': teacher.url()} for teacher in sub_department.teachers]
+  %>
+  ${teacher_list(teachers, sub_department.title)}
 </%def>
 
