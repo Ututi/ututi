@@ -52,7 +52,7 @@
       ${h.input_line('fullname', _('Full name'))}
       %if c.user.is_teacher:
         ${h.input_line('teacher_position', _('Position'), help_text=_("e.g. Associate professor"))}
-        ${h.select_line('teacher_sub_department', _('Sub-department'), [('', 'None')] + [(sd.id, sd.title) for sd in c.sub_departments])}
+        ${h.select_line('teacher_sub_department', _('Sub-department'), [('', _('None'))] + [(sd.id, sd.title) for sd in c.sub_departments])}
       %else:
         ${h.input_area('description', _('About yourself'), rows='5', col='40')}
       %endif
