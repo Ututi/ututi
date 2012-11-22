@@ -27,6 +27,15 @@
   .search-results-header .action-button .notice {
     margin-right: 10px;
   }
+
+  .sub-department-list {
+    display: inline-block;
+    position: relative;
+  }
+
+  .sub-department-list > .show {
+    position: absolute;
+  }
 </%def>
 
 <%def name="breadcrumbs()">
@@ -39,9 +48,9 @@
     </li>
   %endfor
   %if sub_departments:
-  <li class="sub-department-list click2show" style="display: inline-block; position: relative;">
+  <li class="sub-department-list click2show">
     <span class="click">All sub-departments</span>
-    <div class="show" style="position: absolute;">
+    <div class="show">
       <ul>
         %for sub_department in sub_departments:
         <li class="sub-department-item"><a href="${sub_department.url(obj_type=c.current_menu_item)}">${sub_department.title}</a></li>
