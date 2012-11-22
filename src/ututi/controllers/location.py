@@ -13,7 +13,9 @@ from pylons.templating import render_mako_def
 from sqlalchemy.sql.expression import or_
 
 import ututi.lib.helpers as h
+from ututi.model import Subject
 from ututi.model import SubDepartment
+from ututi.lib.search import search_query
 from ututi.lib.forms import Form
 from ututi.lib.emails import teacher_confirmed_email
 from ututi.lib.base import render
@@ -276,6 +278,12 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         self._set_wall_variables()
         return render('location/feed.mako')
 
+    def _make_search_query(self, search_params):
+        query = search_query(**search_params)
+        if hasattr(c, 'selected_sub_department'):
+            query = query.filter(Subject.sub_department_id==c.selected_sub_department)
+        return query
+
     @location_action
     @validate(schema=SearchSubmit, post_only=False, on_get=True)
     def catalog(self, location, obj_type):
@@ -284,6 +292,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         self.form_result['obj_type'] = obj_type
 
         c.text = self.form_result.get('text', '')
+        c.selected_sub_department = self.form_result.get('sub_department_id', None)
 
         if obj_type == 'teacher':
             self._search_teachers(location, c.text)

@@ -5,6 +5,30 @@
   ${c.location.title} &ndash; ${_('Subjects')}
 </%def>
 
+<%def name="breadcrumbs()">
+%if c.location.parent or c.location.sub_departments:
+<ul id="breadcrumbs">
+  %for n, crumb in enumerate(c.breadcrumbs, 1):
+    <li class="${'first' if n == 1 else ''}">
+      <a href="${crumb['link']}">${crumb['full_title']}</a>
+    </li>
+  %endfor
+  %if c.location.sub_departments:
+  <li class="expandable click2show" style="display: inline-block; position: relative;">
+    <span class="click">All sub-departments</span>
+    <div class="show" style="position: absolute;">
+      <ul>
+        %for sub_department in c.location.sub_departments:
+        <li><a href="${sub_department.url(obj_type='subject')}">${sub_department.title}</a></li>
+        %endfor
+      </ul>
+    </div>
+  </li>
+  %endif
+</ul>
+%endif
+</%def>
+
 <%def name="pagetitle()">${_('Subjects')}</%def>
 
 <%def name="search_results(results, search_query=None)">
