@@ -51,10 +51,10 @@ Now if we go to the list of subjects in the university:
     >>> browser.getLink('My University').click()
     >>> browser.getLink('Subjects').click()
 
-We should see a list of all the sub-departments:
+We should see a list of all the sub-departments that have subjects in
+them:
 
     >>> browser.printCssQuery(".sub-department-item a")
-    <a href="/school/uni/subjects?sub_department_id=1">IT sub-department</a>
     <a href="/school/uni/subjects?sub_department_id=2">OP sub-department</a>
 
     >>> browser.getLink('OP sub-department').click()

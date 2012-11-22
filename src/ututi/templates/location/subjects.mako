@@ -6,19 +6,20 @@
 </%def>
 
 <%def name="breadcrumbs()">
-%if c.location.parent or c.location.sub_departments:
+<% sub_departments = getattr(c, 'sub_departments', []) %>
+%if c.location.parent or sub_departments:
 <ul id="breadcrumbs">
   %for n, crumb in enumerate(c.breadcrumbs, 1):
     <li class="${'first' if n == 1 else ''}">
       <a href="${crumb['link']}">${crumb['full_title']}</a>
     </li>
   %endfor
-  %if c.location.sub_departments:
+  %if sub_departments:
   <li class="sub-department-list click2show" style="display: inline-block; position: relative;">
     <span class="click">All sub-departments</span>
     <div class="show" style="position: absolute;">
       <ul>
-        %for sub_department in c.location.sub_departments:
+        %for sub_department in sub_departments:
         <li class="sub-department-item"><a href="${sub_department.url(obj_type='subject')}">${sub_department.title}</a></li>
         %endfor
       </ul>

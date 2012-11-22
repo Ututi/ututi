@@ -299,6 +299,14 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         else:
             self._search()
 
+        c.sub_departments = []
+        if obj_type == 'teacher':
+            c.sub_departments = c.location.sub_departments
+        elif obj_type == 'subject':
+            c.sub_departments = [sub_department
+                                 for sub_department in c.location.sub_departments
+                                 if bool(sub_department.subjects)]
+
         # render template by object type
         template_names = {'group': '/location/groups.mako',
                           'subject': '/location/subjects.mako',
