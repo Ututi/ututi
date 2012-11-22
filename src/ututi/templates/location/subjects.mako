@@ -14,12 +14,12 @@
     </li>
   %endfor
   %if c.location.sub_departments:
-  <li class="expandable click2show" style="display: inline-block; position: relative;">
+  <li class="sub-department-list click2show" style="display: inline-block; position: relative;">
     <span class="click">All sub-departments</span>
     <div class="show" style="position: absolute;">
       <ul>
         %for sub_department in c.location.sub_departments:
-        <li><a href="${sub_department.url(obj_type='subject')}">${sub_department.title}</a></li>
+        <li class="sub-department-item"><a href="${sub_department.url(obj_type='subject')}">${sub_department.title}</a></li>
         %endfor
       </ul>
     </div>
