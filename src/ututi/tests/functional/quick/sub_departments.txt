@@ -58,11 +58,24 @@ them:
     <a href="/school/uni/subjects?sub_department_id=2">OP sub-department</a>
 
     >>> browser.getLink('OP sub-department').click()
-    >>> browser.url
-    'http://localhost/school/uni/subjects?sub_department_id=2'
-
     >>> browser.printCssQuery(".item-title a")
     <a href="/subject/uni/test_subject" title="Test subject">Test subject</a>
 
+There are no results in the sub-department that has no subjects:
+
     >>> browser.open('http://localhost/school/uni/subjects?sub_department_id=1')
+    >>> browser.printCssQuery(".item-title a")
+
+Same works for teachers (WIP, must add sub-dep for at least one teacher):
+
+    >>> browser.getLink('Teachers').click()
+
+    >>> browser.printCssQuery(".sub-department-item a")
+    <a href="/school/uni/teachers?sub_department_id=1">IT sub-department</a>
+    <a href="/school/uni/teachers?sub_department_id=2">OP sub-department</a>
+
+    >>> browser.getLink('OP sub-department').click()
+    >>> browser.printCssQuery(".item-title a")
+
+    >>> browser.open('http://localhost/school/uni/teachers?sub_department_id=2')
     >>> browser.printCssQuery(".item-title a")
