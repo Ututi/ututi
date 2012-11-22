@@ -2221,5 +2221,8 @@ class SubDepartment(DeclarativeModel):
         self.location = location
         self.slug = slug
 
-    def url(self, obj_type='subject'):
+    def url(self):
+        return self.location.url(action='subdepartment', subdept_id=self.id)
+
+    def catalog_url(self, obj_type='subject'):
         return self.location.url(action='catalog', obj_type=obj_type, sub_department_id=self.id)
