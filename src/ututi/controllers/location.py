@@ -514,6 +514,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
     @subdepartment_action
     def subdepartment(self, location, subdepartment):
+        c.current_menu_item = 'about'
         return render('location/subdepartment.mako')
 
     @location_action
