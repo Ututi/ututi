@@ -13,7 +13,7 @@ from ututi.lib.forms import validate
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.mailinglist import post_message
 
-from ututi.model import meta, File, TeacherGroup, TeacherBlogPost
+from ututi.model import meta, File, TeacherGroup, TeacherBlogPost, SubDepartment
 from ututi.model.events import TeacherMessageEvent
 from ututi.model.i18n import Language
 from ututi.controllers.profile.base import ProfileControllerBase
