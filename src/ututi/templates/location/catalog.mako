@@ -53,7 +53,7 @@
     <div class="show">
       <ul>
         %for sub_department in sub_departments:
-        <li class="sub-department-item"><a href="${sub_department.url(obj_type=c.current_menu_item)}">${sub_department.title}</a></li>
+        <li class="sub-department-item"><a href="${sub_department.catalog_url(obj_type=c.current_menu_item)}">${sub_department.title}</a></li>
         %endfor
       </ul>
     </div>

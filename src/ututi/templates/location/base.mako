@@ -72,8 +72,8 @@
 </%def>
 
 <%def name="breadcrumbs()">
-<%doc>Only show breadcrumbs if we're not at root.</%doc>
-%if c.location.parent:
+<%doc>Only show breadcrumbs if we're not at root and not in a sub-department.</%doc>
+%if c.location.parent or hasattr(c, 'subdepartment'):
 <ul id="breadcrumbs">
   %for n, crumb in enumerate(c.breadcrumbs, 1):
     <li class="${'first' if n == 1 else ''}">

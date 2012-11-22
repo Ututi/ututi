@@ -79,3 +79,9 @@ Same works for teachers (WIP, must add sub-dep for at least one teacher):
 
     >>> browser.open('http://localhost/school/uni/teachers?sub_department_id=2')
     >>> browser.printCssQuery(".item-title a")
+
+We should see subdepartment page when we navigate to subdepartment:
+
+    >>> browser.open('http://localhost/school/uni/subdepartment/1')
+    >>> browser.printCssQuery('.page-title')
+    <h1 class="page-title">IT sub-department</h1>

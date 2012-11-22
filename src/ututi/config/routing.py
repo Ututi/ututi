@@ -257,6 +257,7 @@ def make_map(config):
     map.connect('/school/*path/register/teacher', controller='location', action='register_teacher')
     map.connect('/school/*path/register/teacher/existing', controller='location', action='register_teacher_existing')
     map.connect('/school/*path/language', controller='location', action='switch_language')
+    map.connect('/school/*path/subdepartment/{subdept_id}', controller='location', action='subdepartment')
 
     # location setting actions
     map.connect('/school/*path/edit', controller='location', action='edit')

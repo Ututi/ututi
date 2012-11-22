@@ -113,6 +113,28 @@ def location_breadcrumbs(location):
     return breadcrumbs
 
 
+def subdepartment_breadcrumbs(subdepartment):
+    breadcrumbs = location_breadcrumbs(subdepartment.location)
+    bc = {'link': subdepartment.url(),
+          'full_title': subdepartment.title,
+          'title': subdepartment.title}
+    breadcrumbs.append(bc)
+    return breadcrumbs
+
+
+def subdepartment_menu_items(subdepartment):
+    return [
+        {'title': 'About',
+         'name': 'about',
+         'link': subdepartment.url()},
+        {'title': 'Teachers',
+         'name': 'teacher',
+         'link': subdepartment.catalog_url(obj_type='teacher')},
+        {'title': 'Subjects',
+         'name': 'subject',
+         'link': subdepartment.catalog_url(obj_type='subject')}]
+
+
 def location_action(method):
     def _location_action(self, path, obj_type=None):
         location = LocationTag.get(path)
@@ -139,6 +161,35 @@ def location_action(method):
         else:
             return method(self, location, obj_type)
     return _location_action
+
+
+def subdepartment_action(method):
+    def _subdepartmnet_action(self, path, subdept_id, obj_type=None):
+        location = LocationTag.get(path)
+        if location is None:
+            abort(404)
+
+        subdepartment = meta.Session.query(SubDepartment).filter_by(id=subdept_id).one()
+        if subdepartment is None:
+            abort(404)
+
+        c.security_context = location
+        c.object_location = None
+        c.location = location
+        c.breadcrumbs = subdepartment_breadcrumbs(subdepartment)
+        c.subdepartment = subdepartment
+
+        c.theme = location.get_theme()
+        c.notabs = True
+
+        c.menu_items = subdepartment_menu_items(subdepartment)
+
+        c.current_menu_item = None
+        if obj_type is None:
+            return method(self, location, subdepartment)
+        else:
+            return method(self, location, subdepartment, obj_type)
+    return _subdepartmnet_action
 
 
 class LocationEditForm(Schema):
@@ -460,6 +511,10 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         return htmlfill.render(self._edit_registration_form(),
                                defaults=defaults,
                                force_defaults=False)
+
+    @subdepartment_action
+    def subdepartment(self, location, subdepartment):
+        return render('location/subdepartment.mako')
 
     @location_action
     @ActionProtector('moderator')
