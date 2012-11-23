@@ -2216,10 +2216,11 @@ class SubDepartment(DeclarativeModel):
     subjects = relation(Subject, backref=backref('sub_department'))
     teachers = relation(Teacher, backref=backref('sub_department'))
 
-    def __init__(self, title, location, slug=None):
+    def __init__(self, title, location, slug=None, site_url=None):
         self.title = title
         self.location = location
         self.slug = slug
+        self.site_url = site_url
 
     def url(self):
         return self.location.url(action='subdepartment', subdept_id=self.id)
