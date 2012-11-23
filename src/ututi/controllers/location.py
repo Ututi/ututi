@@ -274,11 +274,14 @@ class LocationWallMixin(WallMixin):
 
 class TeacherSearchMixin():
 
-    def _search_teachers(self, location, text):
+    def _search_teachers(self, location, text, sub_department_id=None):
         locations = [loc.id for loc in location.flatten]
 
         query = meta.Session.query(Teacher)\
                 .filter(Teacher.location_id.in_(locations))
+
+        if sub_department_id is not None:
+            query = query.filter_by(sub_department_id=sub_department_id)
 
         if text:
             query = query.filter(Teacher.fullname.contains(text))
@@ -347,13 +350,15 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         c.selected_sub_department = self.form_result.get('sub_department_id', None)
 
         if obj_type == 'teacher':
-            self._search_teachers(location, c.text)
+            self._search_teachers(location, c.text, c.selected_sub_department)
         else:
             self._search()
 
         c.sub_departments = []
         if obj_type == 'teacher':
-            c.sub_departments = c.location.sub_departments
+            c.sub_departments = [sub_department
+                                 for sub_department in c.location.sub_departments
+                                 if bool(sub_department.teachers)]
         elif obj_type == 'subject':
             c.sub_departments = [sub_department
                                  for sub_department in c.location.sub_departments

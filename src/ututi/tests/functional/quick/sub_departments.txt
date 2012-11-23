@@ -68,14 +68,22 @@ There are no results in the sub-department that has no subjects:
 
 Same works for teachers (WIP, must add sub-dep for at least one teacher):
 
+    >>> from ututi.model import LocationTag
+    >>> from ututi.model.users import Teacher
+    >>> from ututi.model import meta
+    >>> teacher = Teacher(fullname=u'Petras', username='petras', location=LocationTag.get('uni'), password='qwerty', gen_password=True)
+    >>> teacher.sub_department_id = 1
+    >>> meta.Session.add(teacher)
+    >>> meta.Session.commit()
+
     >>> browser.getLink('Teachers').click()
 
     >>> browser.printCssQuery(".sub-department-item a")
     <a href="/school/uni/teachers?sub_department_id=1">IT sub-department</a>
-    <a href="/school/uni/teachers?sub_department_id=2">OP sub-department</a>
 
-    >>> browser.getLink('OP sub-department').click()
+    >>> browser.getLink('IT sub-department').click()
     >>> browser.printCssQuery(".item-title a")
+    <a href="/teacher/2" title="Petras">Petras</a>
 
     >>> browser.open('http://localhost/school/uni/teachers?sub_department_id=2')
     >>> browser.printCssQuery(".item-title a")
