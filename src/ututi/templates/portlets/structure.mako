@@ -94,7 +94,7 @@
     </a>
 
     ${new_university_popup()}
-  </%self:portlet> 
+  </%self:portlet>
 </%def>
 
 <%def name="location_groups_portlet(location=None)">
