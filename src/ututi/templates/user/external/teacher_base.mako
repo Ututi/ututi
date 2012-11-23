@@ -59,7 +59,7 @@
     %endif
 
     <div class="teacher-location">
-      ${location_links(c.teacher.location, full_title=True, external=True)}
+      ${location_links(c.teacher.location, full_title=True, external=True, sub_department=c.teacher.sub_department)}
     </div>
 
     <ul class="icon-list" id="teacher-contact-information">
