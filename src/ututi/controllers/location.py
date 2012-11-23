@@ -219,6 +219,7 @@ class NewDomainForm(Schema):
 class SubDepartmentAddForm(Schema):
     allow_extra_fields = True
     title = validators.UnicodeString(not_empty=True, strip=True)
+    site_url = validators.UnicodeString(strip=True)
     description = validators.UnicodeString(strip=True)
 
 
@@ -444,6 +445,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         result = form.work()
         if result is not None:
             sub_department = SubDepartment(result['title'], location)
+            sub_department.site_url = result['site_url']
             sub_department.description = result['description']
             meta.Session.commit()
             redirect(location.url(action='sub_departments'))
@@ -461,6 +463,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         c.current_menu_item = 'sub-departments'
         form = Form(sub_department, request,
                     defaults={'title': sub_department.title,
+                              'site_url': sub_department.site_url,
                               'description': sub_department.description},
                     schema=SubDepartmentAddForm(),
                     action='UPDATE')
@@ -468,6 +471,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         result = form.work()
         if result is not None:
             sub_department.title = result['title']
+            sub_department.site_url = result['site_url']
             sub_department.description = result['description']
             meta.Session.commit()
             redirect(location.url(action='sub_departments'))
