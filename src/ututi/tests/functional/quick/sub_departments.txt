@@ -71,10 +71,13 @@ Same works for teachers (WIP, must add sub-dep for at least one teacher):
     >>> from ututi.model import LocationTag
     >>> from ututi.model.users import Teacher
     >>> from ututi.model import meta
-    >>> teacher = Teacher(fullname=u'Petras', username='petras', location=LocationTag.get('uni'), password='qwerty', gen_password=True)
-    >>> teacher.sub_department_id = 1
-    >>> meta.Session.add(teacher)
-    >>> meta.Session.commit()
+    >>> def addTeacher(name, username, sub_department_id=None):
+    ...     teacher = Teacher(fullname=name, username=username, location=LocationTag.get('uni'), password='qwerty', gen_password=True)
+    ...     teacher.sub_department_id = sub_department_id
+    ...     meta.Session.add(teacher)
+    ...     meta.Session.commit()
+    >>> addTeacher('Petras', 'petras', 1)
+    >>> addTeacher('Jones', 'jonas')
 
     >>> browser.getLink('Teachers').click()
 
@@ -84,6 +87,15 @@ Same works for teachers (WIP, must add sub-dep for at least one teacher):
     >>> browser.getLink('IT sub-department').click()
     >>> browser.printCssQuery(".item-title a")
     <a href="/teacher/2" title="Petras">Petras</a>
+
+Search should not forget the selected sub department:
+
+    >>> form = browser.getForm('search_form')
+    >>> form.getControl('Search').click()
+    >>> browser.printCssQuery(".item-title a")
+    <a href="/teacher/2" title="Petras">Petras</a>
+
+If sub-department is emtpy no teachers should be shown:
 
     >>> browser.open('http://localhost/school/uni/teachers?sub_department_id=2')
     >>> browser.printCssQuery(".item-title a")

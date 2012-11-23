@@ -280,7 +280,7 @@ class TeacherSearchMixin():
         query = meta.Session.query(Teacher)\
                 .filter(Teacher.location_id.in_(locations))
 
-        if sub_department_id is not None:
+        if sub_department_id:
             query = query.filter_by(sub_department_id=sub_department_id)
 
         if text:
@@ -335,7 +335,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
     def _make_search_query(self, search_params):
         query = search_query(**search_params)
-        if hasattr(c, 'selected_sub_department'):
+        if getattr(c, 'selected_sub_department', None):
             query = query.filter(Subject.sub_department_id==c.selected_sub_department)
         return query
 

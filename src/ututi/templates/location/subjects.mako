@@ -34,9 +34,15 @@
 </%def>
 
 <%def name="search_form()">
-  ${search.search_form(c.text, 'subject', c.location.hierarchy,
-      parts=['text'], target=c.location.url(action='catalog', obj_type='subject'), js=True,
-      js_target=c.location.url(action='catalog_js'))}
+  <%search:search_form text="${c.text}"
+                       obj_type="subject"
+                       tags="${c.location.hierarchy}"
+                       parts="${['text']}"
+                       target="${c.location.url(action='catalog', obj_type='subject')}"
+                       js="True",
+                       js_target="${c.location.url(action='catalog_js')}">
+    <input type="hidden" name="sub_department_id" value="${c.selected_sub_department}" />
+  </%search:search_form>
 </%def>
 
 <%def name="empty_box()">
