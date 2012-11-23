@@ -43,6 +43,11 @@
 <%def name="subject_teachers_portlet(subject=None)">
   <% if subject is None: subject = c.subject %>
   <%self:portlet id="subject-teachers-portlet">
+    <%
+      location_links = [h.link_to(subject.location.title, subject.location.url())]
+      if subject.sub_department:
+        location_links.append(h.link_to(subject.sub_department.title, subject.sub_department.url()))
+    %>
     <ul class="icon-list">
       <li class="icon-university align-top subject-location">
         %if subject.location.parent is None:
@@ -51,7 +56,7 @@
           ${_("Faculty / department:")}
         %endif
         <br />
-        ${h.link_to(subject.location.title, subject.location.url())}
+        ${h.literal(', '.join(location_links))}
       </li>
       %if subject.teacher_repr:
       <li class="icon-teacher align-top subject-teacher">
