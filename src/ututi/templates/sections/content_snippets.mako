@@ -49,6 +49,9 @@ Snippets for rendering various content items, e.g. in search results.
   %for tag in object.location.hierarchy(True):
     <a href="${tag.url()}">${tag.title_short}</a> |
   %endfor
+  %if getattr(object, 'sub_department', None):
+    <a class="sub_department_link" href="${object.sub_department.url()}">${object.sub_department.title}</a> |
+  %endif
   </span>
   %endif
 </%def>
