@@ -38,66 +38,66 @@ from ututi.controllers.search import SearchSubmit, SearchBaseController
 log = logging.getLogger(__name__)
 
 
-def location_menu_items():
+def location_menu_items(location):
     return [
         {'title': _("News feed"),
          'name': 'feed',
-         'link': c.location.url(action='feed')},
+         'link': location.url(action='feed')},
         {'title': _("Subjects"),
          'name': 'subject',
-         'link': c.location.url(action='catalog', obj_type='subject')},
+         'link': location.url(action='catalog', obj_type='subject')},
         {'title': _("Groups"),
          'name': 'group',
-         'link': c.location.url(action='catalog', obj_type='group')},
+         'link': location.url(action='catalog', obj_type='group')},
         {'title': _("Teachers"),
          'name': 'teacher',
-         'link': c.location.url(action='catalog', obj_type='teacher')}]
+         'link': location.url(action='catalog', obj_type='teacher')}]
 
 
-def location_menu_public_items():
+def location_menu_public_items(location):
     return [
         {'title': _("About"),
          'name': 'about',
-         'link': c.location.url(action='about')},
+         'link': location.url(action='about')},
         {'title': _("Subjects"),
          'name': 'subject',
-         'link': c.location.url(action='catalog', obj_type='subject')},
+         'link': location.url(action='catalog', obj_type='subject')},
         {'title': _("Teachers"),
          'name': 'teacher',
-         'link': c.location.url(action='catalog', obj_type='teacher')}]
+         'link': location.url(action='catalog', obj_type='teacher')}]
 
 
-def location_edit_menu_items():
+def location_edit_menu_items(location):
     return [
         {'title': _("General information"),
          'name': 'settings',
-         'link': c.location.url(action='edit')},
+         'link': location.url(action='edit')},
         {'title': _("Registration settings"),
          'name': 'registration',
-         'link': c.location.url(action='edit_registration')},
+         'link': location.url(action='edit_registration')},
         {'title': _("Custom theme"),
          'name': 'theming',
-         'link': c.location.url(action='edit_theme')},
+         'link': location.url(action='edit_theme')},
         {'title': _("Unverified teachers"),
          'name': 'unverified_teachers',
-         'link': c.location.url(action='unverified_teachers')},
+         'link': location.url(action='unverified_teachers')},
         {'title': _("Sub-departments"),
          'name': 'sub-departments',
-         'link': c.location.url(action='sub_departments')},
+         'link': location.url(action='sub_departments')},
     ]
 
 
-def location_feed_subtabs():
+def location_feed_subtabs(location):
     return [
         {'title': _('All news'),
          'name': 'all',
-         'link': c.location.url(action='feed')},
+         'link': location.url(action='feed')},
         {'title': _('Subject news'),
          'name': 'subjects',
-         'link': c.location.url(action='feed', filter='subjects')},
+         'link': location.url(action='feed', filter='subjects')},
         {'title': _('Discussions'),
          'name': 'discussions',
-         'link': c.location.url(action='feed', filter='discussions')}
+         'link': location.url(action='feed', filter='discussions')}
     ]
 
 
@@ -148,12 +148,12 @@ def location_action(method):
         c.theme = location.get_theme()
 
         c.notabs = True
-        c.tabs = location_feed_subtabs()
+        c.tabs = location_feed_subtabs(location)
 
         if c.user:
-            c.menu_items = location_menu_items()
+            c.menu_items = location_menu_items(location)
         else:
-            c.menu_items = location_menu_public_items()
+            c.menu_items = location_menu_public_items(location)
 
         c.current_menu_item = None
         if obj_type is None:
@@ -404,7 +404,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
                                    search_query=search_query)
 
     def _edit_form(self):
-        c.menu_items = location_edit_menu_items()
+        c.menu_items = location_edit_menu_items(c.location)
         c.current_menu_item = 'settings'
         return render('location/edit.mako')
 
@@ -441,7 +441,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
     @location_action
     @ActionProtector('moderator')
     def add_sub_department(self, location):
-        c.menu_items = location_edit_menu_items()
+        c.menu_items = location_edit_menu_items(location)
         c.current_menu_item = 'sub-departments'
         form = Form(location, request,
                     schema=SubDepartmentAddForm(),
@@ -464,7 +464,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         sub_department_id = request.urlvars['id']
         sub_department = SubDepartment.get(sub_department_id)
 
-        c.menu_items = location_edit_menu_items()
+        c.menu_items = location_edit_menu_items(location)
         c.current_menu_item = 'sub-departments'
         form = Form(sub_department, request,
                     defaults={'title': sub_department.title,
@@ -496,12 +496,12 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
     @location_action
     @ActionProtector('moderator')
     def sub_departments(self, location):
-        c.menu_items = location_edit_menu_items()
+        c.menu_items = location_edit_menu_items(location)
         c.current_menu_item = 'sub-departments'
         return render('location/sub_departments.mako')
 
     def _edit_registration_form(self):
-        c.menu_items = location_edit_menu_items()
+        c.menu_items = location_edit_menu_items(location)
         c.current_menu_item = 'registration'
         return render('location/edit_registration.mako')
 
@@ -581,7 +581,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
     @location_action
     @ActionProtector('moderator')
     def edit_theme(self, location):
-        c.menu_items = location_edit_menu_items()
+        c.menu_items = location_edit_menu_items(location)
         c.current_menu_item = 'theming'
         if location.theme is None:
             c.example_theme = Theme()
@@ -725,7 +725,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
     @location_action
     @ActionProtector('moderator')
     def unverified_teachers(self, location):
-        c.menu_items = location_edit_menu_items()
+        c.menu_items = location_edit_menu_items(location)
         c.current_menu_item = 'unverified_teachers'
         c.teachers = meta.Session.query(Teacher)\
             .filter(Teacher.location==location)\
