@@ -83,7 +83,7 @@ def location_edit_menu_items(location):
          'link': location.url(action='unverified_teachers')},
         {'title': _("Sub-departments"),
          'name': 'sub-departments',
-         'link': location.url(action='sub_departments')},
+         'link': location.url(action='edit_sub_departments')},
     ]
 
 
@@ -453,7 +453,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             sub_department.site_url = result['site_url']
             sub_department.description = result['description']
             meta.Session.commit()
-            redirect(location.url(action='sub_departments'))
+            redirect(location.url(action='edit_sub_departments'))
 
         c.form = form
         return render('location/add_sub_department.mako')
@@ -479,7 +479,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             sub_department.site_url = result['site_url']
             sub_department.description = result['description']
             meta.Session.commit()
-            redirect(location.url(action='sub_departments'))
+            redirect(location.url(action='edit_sub_departments'))
 
         c.form = form
         return render('location/edit_sub_department.mako')
@@ -491,11 +491,11 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         sub_department = SubDepartment.get(sub_department_id)
         sub_department.delete()
         meta.Session.commit()
-        redirect(location.url(action='sub_departments'))
+        redirect(location.url(action='edit_sub_departments'))
 
     @location_action
     @ActionProtector('moderator')
-    def sub_departments(self, location):
+    def edit_sub_departments(self, location):
         c.menu_items = location_edit_menu_items(location)
         c.current_menu_item = 'sub-departments'
         return render('location/sub_departments.mako')

@@ -21,8 +21,8 @@ Before adding subjecs we add some sub-departments:
 The department should be in the list now:
 
     >>> browser.printCssQuery('table.content a')
-    <a href="/school/uni/edit/edit_sub_department/...">IT sub-department</a>
-    <a href="/school/uni/edit/edit_sub_department/...">OP sub-department</a>
+    <a href="/school/uni/edit/sub_department/...">IT sub-department</a>
+    <a href="/school/uni/edit/sub_department/...">OP sub-department</a>
 
 If we try adding a subject we should be able to set it's
 sub-department now:
