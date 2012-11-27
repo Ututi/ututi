@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-11-23 13:10+0200\n"
+"PO-Revision-Date: 2012-11-27 18:43+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -2969,6 +2969,9 @@ msgstr "Atstatyti slaptažodį"
 msgid "All faculties"
 msgstr "Visi fakultetai"
 
+msgid "All sub-departments"
+msgstr "Visos katedros"
+
 msgid "+ Add teacher"
 msgstr "+ Pridėti dėstytoją"
 
@@ -3047,14 +3050,22 @@ msgstr ""
 "akademinis puslapis su dėstytojų biografija, publikacijomis, dėstomais "
 "dalykais ir contaktinę informacija"
 
-msgid "Departments:"
-msgstr "Fakultetai:"
+#, python-format
+msgid "Faculties of %(university)s:"
+msgstr "%(university)s fakultetai:"
+
+#, python-format
+msgid "Sub-departments of %(department)s:"
+msgstr "%(department)s katedros:"
 
 msgid "Add sub-department"
 msgstr "Pridėti katedrą"
 
 msgid "Sub department title:"
 msgstr "Katedros pavadinimas"
+
+msgid "Website link:"
+msgstr "Nuoroda į puslapį:"
 
 msgid "Edit general information of your university below."
 msgstr "Žemiau galite redaguoti universiteto informaciją."

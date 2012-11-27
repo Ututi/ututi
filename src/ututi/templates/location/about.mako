@@ -155,7 +155,7 @@
 %if unis:
 <div class="university-box">
   <div class="section-header">
-    <h2 class="academy">Faculties of ${c.location.title}</h2>
+    <h2 class="academy">${title}</h2>
 
     <div class="section-header-links">
       <a href="#">${_('All faculties')} >></a>
@@ -169,6 +169,38 @@
   %endfor
 </div>
 %endif
+</%def>
+
+<%def name="sub_department_entry(subdept)">
+<div class="university-entry clearfix">
+  <div class="logo">
+    <img src="${url(controller='structure', action='logo', id=c.location.id, width=40, height=40)}"
+         alt="logo" />
+  </div>
+  <div class="title">
+    <a href="${subdept.url()}" title="${subdept.title}">${h.ellipsis(subdept.title, 36)}</a>
+  </div>
+  <ul class="icon-list statistics">
+    <li class="icon-file"> ${len(subdept.subjects)} </li>
+    <li class="icon-teacher"> ${len(subdept.teachers)} </li>
+  </ul>
+</div>
+</%def>
+
+<%def name="sub_department_box(subdepts, title)">
+<div class="university-box">
+  <div class="section-header">
+    <h2 class="academy">${title}</h2>
+    <div class="section-header-links">
+      <a href="#">${_('All sub-departments')} >></a>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  %for subdept in subdepts:
+    ${sub_department_entry(subdept)}
+  %endfor
+</div>
 </%def>
 
 <%def name="teachers_box()">
@@ -369,10 +401,11 @@
 </div>
 
 <div class="clearfix"></div>
-
 %if c.departments:
-${university_box(c.departments, _("Departments:"))}
+${university_box(c.departments, _("Faculties of %(university)s:") % dict(university=c.location.title))}
 ## ${teachers_box()}
+%elif c.location.sub_departments:
+${sub_department_box(c.location.sub_departments, _("Sub-departments of %(department)s:") % dict(department=c.location.title))}
 %else:
 ${no_faculties_box()}
 %endif

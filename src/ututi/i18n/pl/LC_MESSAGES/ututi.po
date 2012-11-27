@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-23 13:10+0200\n"
+"PO-Revision-Date: 2012-11-27 18:43+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -3012,6 +3012,9 @@ msgstr "Odzyskaj hasło"
 msgid "All faculties"
 msgstr "Dodaj przedmiot"
 
+msgid "All sub-departments"
+msgstr ""
+
 msgid "+ Add teacher"
 msgstr "+ Dodaj wykładowcę"
 
@@ -3090,13 +3093,21 @@ msgstr ""
 "strona uczelniana z biografią, publikacjami, prowadzonymi kursami i "
 "danymi kontaktowymi wykładowców"
 
-msgid "Departments:"
-msgstr "Wydziały:"
+#, python-format
+msgid "Faculties of %(university)s:"
+msgstr ""
+
+#, python-format
+msgid "Sub-departments of %(department)s:"
+msgstr ""
 
 msgid "Add sub-department"
 msgstr ""
 
 msgid "Sub department title:"
+msgstr ""
+
+msgid "Website link:"
 msgstr ""
 
 msgid "Edit general information of your university below."

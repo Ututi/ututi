@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-23 13:10+0200\n"
+"PO-Revision-Date: 2012-11-27 18:43+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=((n * 1) != 1)\n"
@@ -2729,6 +2729,9 @@ msgstr ""
 msgid "All faculties"
 msgstr ""
 
+msgid "All sub-departments"
+msgstr ""
+
 msgid "+ Add teacher"
 msgstr ""
 
@@ -2799,13 +2802,21 @@ msgid ""
 "and contact information"
 msgstr ""
 
-msgid "Departments:"
+#, python-format
+msgid "Faculties of %(university)s:"
+msgstr ""
+
+#, python-format
+msgid "Sub-departments of %(department)s:"
 msgstr ""
 
 msgid "Add sub-department"
 msgstr ""
 
 msgid "Sub department title:"
+msgstr ""
+
+msgid "Website link:"
 msgstr ""
 
 msgid "Edit general information of your university below."
