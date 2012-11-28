@@ -102,7 +102,7 @@ If sub-department is emtpy no teachers should be shown:
 
 We should see subdepartment page when we navigate to subdepartment:
 
-    >>> browser.open('http://localhost/school/uni/subdepartment/1')
+    >>> browser.open('http://localhost/school/uni/sub_department/1')
     >>> browser.printCssQuery('.page-title')
     <h1 class="page-title">IT sub-department</h1>
 

@@ -252,12 +252,16 @@ def make_map(config):
     map.connect('/school/*path/groups', controller='location', action='catalog', obj_type='group')
     map.connect('/school/*path/subjects', controller='location', action='catalog', obj_type='subject')
     map.connect('/school/*path/teachers', controller='location', action='catalog', obj_type='teacher')
+    # XXX edit/sub_departments must be above 'departments' else *path will eat 'edit' part
+    map.connect('/school/*path/edit/sub_departments', controller='location', action='edit_sub_departments')
+    map.connect('/school/*path/departments', controller='location', action='catalog', obj_type='department')
+    map.connect('/school/*path/sub_departments', controller='location', action='catalog', obj_type='sub_department')
     map.connect('/school/*path/teachers.json', controller='location', action='teachers_json')
     map.connect('/school/*path/register', controller='location', action='register')
     map.connect('/school/*path/register/teacher', controller='location', action='register_teacher')
     map.connect('/school/*path/register/teacher/existing', controller='location', action='register_teacher_existing')
     map.connect('/school/*path/language', controller='location', action='switch_language')
-    map.connect('/school/*path/subdepartment/{subdept_id}', controller='location', action='subdepartment')
+    map.connect('/school/*path/sub_department/{subdept_id}', controller='location', action='subdepartment')
 
     # location setting actions
     map.connect('/school/*path/edit', controller='location', action='edit')
@@ -277,7 +281,6 @@ def make_map(config):
     map.connect('/school/*path/edit/add_sub_department', controller='location', action='add_sub_department')
     map.connect('/school/*path/edit/sub_department/{id}', controller='location', action='edit_sub_department')
     map.connect('/school/*path/edit/delete_sub_department/{id}', controller='location', action='delete_sub_department')
-    map.connect('/school/*path/edit/sub_departments', controller='location', action='edit_sub_departments')
 
     # external teacher profile pages
     map.connect('/school/*path/teacher/{id}', controller='user', action='external_teacher_index')

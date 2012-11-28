@@ -1615,6 +1615,9 @@ class LocationTag(Tag):
             if loc.country is not None:
                 return loc.country
 
+    def snippet(self):
+        return render_mako_def('/sections/content_snippets.mako', 'location', object=self)
+
 
 def cleanupFileName(filename):
     return filename.split('\\')[-1].split('/')[-1]
@@ -2227,3 +2230,6 @@ class SubDepartment(DeclarativeModel):
 
     def catalog_url(self, obj_type='subject'):
         return self.location.url(action='catalog', obj_type=obj_type, sub_department_id=self.id)
+
+    def snippet(self):
+        return render_mako_def('/sections/content_snippets.mako', 'sub_department', object=self)

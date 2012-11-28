@@ -39,7 +39,7 @@ log = logging.getLogger(__name__)
 
 
 def location_menu_items(location):
-    return [
+    items = [
         {'title': _("News feed"),
          'name': 'feed',
          'link': location.url(action='feed')},
@@ -52,6 +52,15 @@ def location_menu_items(location):
         {'title': _("Teachers"),
          'name': 'teacher',
          'link': location.url(action='catalog', obj_type='teacher')}]
+    if location.children:
+        items.append({'title': _('Departments'),
+                      'name': 'department',
+                      'link': location.url(action='catalog', obj_type='department')})
+    elif location.sub_departments:
+        items.append({'title': _('Sub-departments'),
+                      'name': 'sub_department',
+                      'link': location.url(action='catalog', obj_type='sub_department')})
+    return items
 
 
 def location_menu_public_items(location):
@@ -302,6 +311,11 @@ class TeacherSearchMixin():
 
 
 class LocationController(SearchBaseController, UniversityListMixin, LocationWallMixin, TeacherSearchMixin):
+    catalog_template_names = {'group': '/location/groups.mako',
+                              'subject': '/location/subjects.mako',
+                              'teacher': '/location/teachers.mako',
+                              'sub_department': '/location/sub_departments.mako',
+                              'department': '/location/departments.mako'}
 
     @location_action
     def index(self, location):
@@ -339,6 +353,24 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             query = query.filter(Subject.sub_department_id==c.selected_sub_department)
         return query
 
+    def _list_departments(self, location, text):
+        c.page = int(request.params.get('page', 1))
+        c.results = paginate.Page(location.children,
+                                  page=c.page,
+                                  items_per_page=30,
+                                  item_count=len(location.children),
+                                  obj_type='department')
+        c.searched = True
+
+    def _list_sub_departments(self, location, text):
+        c.page = int(request.params.get('page', 1))
+        c.results = paginate.Page(location.sub_departments,
+                                  page=c.page,
+                                  items_per_page=30,
+                                  item_count=len(location.sub_departments),
+                                  obj_type='sub_department')
+        c.searched = True
+
     @location_action
     @validate(schema=SearchSubmit, post_only=False, on_get=True)
     def catalog(self, location, obj_type):
@@ -351,6 +383,10 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
         if obj_type == 'teacher':
             self._search_teachers(location, c.text, c.selected_sub_department)
+        elif obj_type == 'department':
+            self._list_departments(location, c.text)
+        elif obj_type == 'sub_department':
+            self._list_sub_departments(location, c.text)
         else:
             self._search()
 
@@ -365,13 +401,10 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
                                  if bool(sub_department.subjects)]
 
         # render template by object type
-        template_names = {'group': '/location/groups.mako',
-                          'subject': '/location/subjects.mako',
-                          'teacher': '/location/teachers.mako'}
 
-        if obj_type in template_names:
+        if obj_type in self.catalog_template_names:
             c.current_menu_item = obj_type
-            return render(template_names[obj_type])
+            return render(self.catalog_template_names[obj_type])
         else:
             abort(404)
 
@@ -383,6 +416,10 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
         if obj_type == 'teacher':
             self._search_teachers(location, self.form_result.get('text', ''))
+        elif obj_type == 'department':
+            self._list_departments(location, c.text)
+        elif obj_type == 'sub_department':
+            self._list_sub_departments(location, c.text)
         else:
             self._search()
 
@@ -393,12 +430,8 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
         # return specific snippet per object type
 
-        template_names = {'group': '/location/groups.mako',
-                          'subject': '/location/subjects.mako',
-                          'teacher': '/location/teachers.mako'}
-
-        if obj_type in template_names:
-            return render_mako_def(template_names[obj_type],
+        if obj_type in self.catalog_template_names:
+            return render_mako_def(self.catalog_template_names[obj_type],
                                    'search_results',
                                    results=c.results,
                                    search_query=search_query)
@@ -498,10 +531,10 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
     def edit_sub_departments(self, location):
         c.menu_items = location_edit_menu_items(location)
         c.current_menu_item = 'sub-departments'
-        return render('location/sub_departments.mako')
+        return render('location/edit_sub_departments.mako')
 
     def _edit_registration_form(self):
-        c.menu_items = location_edit_menu_items(location)
+        c.menu_items = location_edit_menu_items(c.location)
         c.current_menu_item = 'registration'
         return render('location/edit_registration.mako')
 

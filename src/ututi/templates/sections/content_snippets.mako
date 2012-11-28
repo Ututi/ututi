@@ -186,6 +186,35 @@ Snippets for rendering various content items, e.g. in search results.
   </div>
 </%def>
 
+<%def name="location(object)">
+  <div class="search-item snippet-location with-logo clearfix">
+    <div class="logo">
+      <img src="${url(controller='structure', action='logo', id=object.id, width=40)}" alt="object.title" />
+    </div>
+    <div class="heading">
+      <div class="item-title">
+        <a href="${object.url()}" title="${object.title}">${object.title}</a>
+      </div>
+    </div>
+    <% stats = object.stats %>
+    <ul class="statistics icon-list">
+      <li class="icon-subject"> ${stats['subject']} </li>
+      <li class="icon-file"> ${stats['file']} </li>
+      <li class="icon-group"> ${stats['group']} </li>
+    </ul>
+  </div>
+</%def>
+
+<%def name="sub_department(object)">
+  <div class="search-item snippet-sub-department">
+    <a href="${object.url()}" title="${object.title}" class="item-title larger bold">${object.title}</a>
+    <ul class="icon-list statistics">
+      <li class="icon-file"> ${len(object.subjects)} </li>
+      <li class="icon-teacher"> ${len(object.teachers)} </li>
+    </ul>
+  </div>
+</%def>
+
 <%def name="page(object)">
   <div class="search-item snippet-page">
     <a href="${object.url()}" title="${object.title}" class="item-title larger bold">${object.title}</a>

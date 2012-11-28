@@ -1689,6 +1689,10 @@ ul.medium-icon-list {
     background-image: url("/img/icons.com/subject_big_grey.png");
 }
 
+.search-results-container .snippet-sub-department {
+    padding-left: 8px;
+}
+
 .search-results-container .snippet-group {
     background-image: url("/img/icons.com/group_big_grey.png");
 }

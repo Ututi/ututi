@@ -109,6 +109,18 @@
         background-image: url('/img/icons.com/settings.png');
     }
 
+    #navigation-portlet ul li.department a {
+        background-image: url('/img/icons.com/university_small_grey.png');
+        background-position: 15px center;
+        padding-left: 35px;
+    }
+
+    #navigation-portlet ul li.sub_department a {
+        background-image: url('/img/icons.com/university_small_grey.png');
+        background-position: 15px center;
+        padding-left: 35px;
+    }
+
     #navigation-portlet ul li.registration a {
         background-image: url('/img/icons.com/contact_small.png');
         background-position: 13px center;
