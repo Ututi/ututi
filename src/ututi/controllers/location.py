@@ -262,8 +262,12 @@ class LocationWallMixin(WallMixin):
         subjects = meta.Session.query(Subject)\
             .filter(Subject.location_id.in_(locations))\
             .all()
-        subject_ids = [subject.id for subject in subjects
-                       if check_crowds(["subject_accessor"], c.user, subject)]
+        if self.feed_filter == 'sub_department':
+            subject_ids = [subject.id for subject in self.sub_department.subjects
+                           if check_crowds(["subject_accessor"], c.user, subject)]
+        else:
+            subject_ids = [subject.id for subject in subjects
+                           if check_crowds(["subject_accessor"], c.user, subject)]
         public_groups = meta.Session.query(Group)\
             .filter(Group.location_id.in_(locations))\
             .filter(Group.forum_is_public == True)\
@@ -274,6 +278,8 @@ class LocationWallMixin(WallMixin):
         events_query = evts_generic
         if self.feed_filter == 'subjects':
             return events_query.where(or_(obj_id_in_list, t_wall_posts.c.subject_id.in_(subject_ids)))
+        elif self.feed_filter == 'sub_department':
+            return events_query.where(or_(t_evt.c.object_id.in_(subject_ids) if subject_ids else False, t_wall_posts.c.subject_id.in_(subject_ids)))
         elif self.feed_filter == 'discussions':
             return events_query.where(or_(t_wall_posts.c.target_location_id.in_(locations), t_wall_posts.c.subject_id.in_(subject_ids)))
         else:
@@ -556,8 +562,20 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
     @subdepartment_action
     def subdepartment(self, location, subdepartment):
-        c.current_menu_item = 'about'
-        return render('location/subdepartment.mako')
+        if c.user:
+            c.current_menu_item = 'feed'
+            self.feed_filter = 'sub_department'
+            self.sub_department = subdepartment
+            c.notabs = True
+
+            c.show_discussion_form = False
+
+            self._set_wall_variables()
+            return render('location/sub_department_feed.mako')
+        else:
+            c.current_menu_item = 'about'
+            return render('location/subdepartment.mako')
+
 
     @location_action
     @ActionProtector('moderator')
