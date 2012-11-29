@@ -887,7 +887,7 @@ CREATE TRIGGER on_content_update BEFORE UPDATE ON content_items
 create table events (
        id bigserial not null,
        object_id int8 default null references content_items(id) on delete cascade,
-       author_id int8 references users(id) on delete cascade,
+       author_id int8 references authors(id) on delete cascade,
        recipient_id int8 default null references users(id) on delete cascade,
        created timestamp not null default (now() at time zone 'UTC'),
        last_activity timestamp not null default (now() at time zone 'UTC'),
