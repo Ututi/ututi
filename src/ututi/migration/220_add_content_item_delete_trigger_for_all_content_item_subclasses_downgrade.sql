@@ -1,0 +1,19 @@
+DROP TRIGGER delete_content_item_after_forum_post_delete ON forum_posts;
+
+DROP TRIGGER delete_content_item_after_private_message_delete ON private_messages;
+
+DROP TRIGGER delete_content_item_after_file_delete ON files;
+
+DROP TRIGGER delete_content_item_after_group_delete ON groups;
+
+DROP TRIGGER delete_content_item_after_subject_delete ON subjects;
+
+DROP TRIGGER delete_content_item_after_event_comment_delete ON event_comments;
+
+DROP TRIGGER delete_content_item_after_page_delete ON pages;
+
+DROP TRIGGER delete_content_item_after_blog_comment_delete ON teacher_blog_comments;
+
+DROP TRIGGER delete_content_item_after_blog_post_delete ON teacher_blog_posts;
+
+DROP TRIGGER delete_content_item_after_wall_post_delete ON wall_posts;

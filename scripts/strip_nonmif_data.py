@@ -2,19 +2,26 @@ import sys
 import os
 
 
-def delete_locations(conn, keep=[]):
+def delete_groups(conn):
     conn.execute("begin;")
     conn.execute("delete from group_mailing_list_messages;")
     conn.execute("delete from payments;")
     conn.execute("delete from groups;")
+    conn.execute("commit;")
+
+
+def delete_locations(conn, keep=[]):
+    conn.execute("begin;")
     conn.execute("delete from tags where tag_type = 'location' and title_short not in (%s);" % ', '.join(keep))
     conn.execute("commit;")
 
 
 def delete_files(conn, keep=[]):
     conn.execute("begin;")
-    conn.execute("delete from files using content_items, tags where files.id = content_items.id"
-                 " and content_items.location_id = tags.id and tags.title_short not in (%s);" % ', '.join(keep))
+    conn.execute("delete from content_items using files, tags where files.id = content_items.id"
+                 " and content_items.location_id = tags.id and (tags.title_short not in (%s)"
+                 "     or content_items.deleted_on is not null);" % ', '.join(keep))
+    conn.execute("delete from files using content_items where files.id = content_items.id and content_items.location_id is null;")
     conn.execute("commit")
 
 
@@ -32,6 +39,7 @@ def main():
     engine = engine_from_config(dict(clo.parser.items('app:main')))
 
     connection = engine.connect()
+    delete_groups(connection)
     delete_locations(connection, keep=["'vu'", "'mif'"])
     delete_files(connection, keep=["'vu'", "'mif'"])
 

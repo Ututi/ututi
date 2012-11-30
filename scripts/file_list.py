@@ -21,7 +21,8 @@ def get_file_list(connection, prefix):
                       connection.execute("select files.md5 from files, content_items, tags"
                                          " where files.id = content_items.id"
                                          " and content_items.location_id = tags.id"
-                                         " and tags.title_short in ('vu', 'mif');"))
+                                         " and tags.title_short in ('vu', 'mif')"
+                                         " and content_items.deleted_on is null;"))
     return map(partial(build_filename, prefix), filter(bool, file_hashes))
 
 
