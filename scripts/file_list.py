@@ -17,7 +17,11 @@ def build_filename(prefix, digest):
 
 
 def get_file_list(connection, prefix):
-    file_hashes = map(lambda row: row[0], connection.execute("select md5 from files;"))
+    file_hashes = map(lambda row: row[0],
+                      connection.execute("select files.md5 from files, content_items, tags"
+                                         " where files.id = content_items.id"
+                                         " and content_items.location_id = tags.id"
+                                         " and tags.title_short in ('vu', 'mif');"))
     return map(partial(build_filename, prefix), filter(bool, file_hashes))
 
 

@@ -11,6 +11,13 @@ def delete_locations(conn, keep=[]):
     conn.execute("commit;")
 
 
+def delete_files(conn, keep=[]):
+    conn.execute("begin;")
+    conn.execute("delete from files using content_items, tags where files.id = content_items.id"
+                 " and content_items.location_id = tags.id and tags.title_short not in (%s);" % ', '.join(keep))
+    conn.execute("commit")
+
+
 def main():
     config_file = sys.argv[1] if len(sys.argv) > 1 else 'development.ini'
 
@@ -26,6 +33,7 @@ def main():
 
     connection = engine.connect()
     delete_locations(connection, keep=["'vu'", "'mif'"])
+    delete_files(connection, keep=["'vu'", "'mif'"])
 
 if __name__ == '__main__':
     main()
