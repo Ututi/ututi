@@ -132,16 +132,20 @@ def subdepartment_breadcrumbs(subdepartment):
 
 
 def subdepartment_menu_items(subdepartment):
-    return [
-        {'title': 'About',
-         'name': 'about',
-         'link': subdepartment.url()},
+    items = [{'title': 'Feed',
+              'name': 'feed',
+              'link': subdepartment.url()} if c.user
+             else {'title': 'About',
+                   'name': 'about',
+                   'link': subdepartment.url()}]
+    items += [
         {'title': 'Teachers',
          'name': 'teacher',
          'link': subdepartment.catalog_url(obj_type='teacher')},
         {'title': 'Subjects',
          'name': 'subject',
          'link': subdepartment.catalog_url(obj_type='subject')}]
+    return items
 
 
 def location_action(method):
