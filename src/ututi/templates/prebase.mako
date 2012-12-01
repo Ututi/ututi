@@ -184,6 +184,7 @@ ${_('Private social networks for universities')}
       }
     </script>
 
+    %if c.google_tracker:
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', '${c.google_tracker}']);
@@ -196,6 +197,7 @@ ${_('Private social networks for universities')}
       document.documentElement.firstChild.appendChild(ga);
       })();
     </script>
+    %endif
     ${h.stylesheet_link(h.path_with_hash('/reset.css'))}
     ${h.stylesheet_link(h.path_with_hash('/style.css'))}
     ${h.stylesheet_link(h.path_with_hash('/layout.css'))}

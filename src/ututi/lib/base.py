@@ -77,7 +77,7 @@ class BaseController(WSGIController):
 
         c.testing = asbool(config.get('testing', False))
         c.mailing_list_host = config.get('mailing_list_host', '')
-        c.google_tracker = config['google_tracker']
+        c.google_tracker = config.get('google_tracker', '')
         c.facebook_app_id = config.get('facebook.appid')
         config.get('facebook.appid')
         c.redirect_to = request.params.get('redirect_to', '')
