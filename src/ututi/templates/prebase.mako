@@ -13,6 +13,17 @@ ${_('Private social networks for universities')}
 <%def name="body_class()">
 </%def>
 
+<%def name="anonymous_themed_header()">
+  <% nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '') %>
+  <a id="logo" href="${url('/')}"><img src="${c.theme.url(action="header_logo", size=55)}" alt="Ututi" title="Ututi"/></a>
+  <span id="slogan">${c.location.title}</span>
+  <ul id="nav">
+    <li class="header-links"><a href="${url('/features')}">${_('What is Ututi?')}</a></li>
+    <li class="header-links"><a href="${url('/contacts')}">${_('Contact us')}</a></li>
+    <li class="header-links" id="login-link"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Login')}</a></li>
+  </ul>
+</%def>
+
 <%def name="anonymous_header()">
   <% nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '') %>
   <a id="logo" href="${url('/')}"><img src="${url('/img/Ututi_logo.png')}" alt="Ututi" title="Ututi"/></a>
@@ -83,7 +94,9 @@ ${_('Private social networks for universities')}
 </%def>
 
 <%def name="header()">
-  %if c.user is None:
+  %if c.user is None and c.theme:
+    ${self.anonymous_themed_header()}
+  %elif c.user is None:
     ${self.anonymous_header()}
   %else:
     ${self.loggedin_header()}
@@ -227,6 +240,30 @@ ${_('Private social networks for universities')}
       #header {
         background-color: #${c.theme.header_background_color};
       }
+
+      .anonymous #header #slogan {
+        color: #${c.theme.header_color};
+      }
+
+      .anonymous .themed#header,
+      .anonymous .themed#header-inner {
+        height: 90px;
+      }
+
+      .anonymous .themed#header {
+        border-bottom: #bbb solid 1px;
+      }
+
+      .anonymous .themed#header #nav {
+        display: none;
+      }
+
+      .anonymous .themed#header #slogan {
+        position: absolute;
+        left: 100px;
+        bottom: 10px;
+        font-size: 20px;
+      }
       %endif
     </style>
 <!--[if IE 7]>
@@ -253,7 +290,7 @@ ${_('Private social networks for universities')}
     </script>
     %endif
 
-    <div id="header" class="anonymous">
+    <div id="header" class="${'themed' if c.theme else ''}">
       <div id="header-inner">
         ${self.header()}
       </div>

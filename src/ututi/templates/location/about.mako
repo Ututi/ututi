@@ -126,10 +126,31 @@
     line-height: 35px;
   }
 
-
   .icon-academy a {
     margin-right: 100px;
     padding-right: 50px;
+  }
+
+
+  #layout-wrap.themed .content-inner {
+    padding-top: 20px;
+  }
+
+  #layout-wrap.themed .sidebar-inner {
+    padding-top: 15px;
+  }
+
+  #layout-wrap.themed #location-logo-portlet,
+  #layout-wrap.themed .page-title {
+    display: none;
+  }
+
+  #layout-wrap.themed .sub-title {
+    border-top: none;
+  }
+
+  #layout-wrap.themed .login-box {
+    margin-top: 22px;
   }
 
 </%def>

@@ -67,6 +67,7 @@ html, body {
     width: 980px;
     margin: auto;
     padding-top: 10px;
+    position: relative;
 }
 #header #header-inner #logo {
     display: inline;
@@ -258,7 +259,7 @@ li.expanded li a {
     }
 
         .anonymous #header #header-inner #logo img {
-           margin-top: 7px; 
+           margin-top: 7px;
         }
 
     .anonymous #header #slogan {
@@ -271,8 +272,10 @@ li.expanded li a {
     }
 
     .anonymous #header ul#nav {
-        margin-left: 250px;
         display: inline;
+        position: absolute;
+        right: 57px;
+        bottom: 23px;
     }
 
     .anonymous #header ul#nav li {
