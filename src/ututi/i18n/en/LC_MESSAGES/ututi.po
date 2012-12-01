@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-27 18:43+0200\n"
+"PO-Revision-Date: 2012-12-01 21:45+0200\n"
 "Last-Translator: Linas <linas.petrauskas@gmail.com>\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=((n * 1) != 1)\n"
@@ -412,6 +412,12 @@ msgstr ""
 msgid "Teachers"
 msgstr ""
 
+msgid "Departments"
+msgstr ""
+
+msgid "Sub-departments"
+msgstr ""
+
 msgid "About"
 msgstr ""
 
@@ -425,9 +431,6 @@ msgid "Custom theme"
 msgstr ""
 
 msgid "Unverified teachers"
-msgstr ""
-
-msgid "Sub-departments"
 msgstr ""
 
 msgid "All news"
@@ -2882,6 +2885,12 @@ msgstr ""
 msgid "edit sub-department"
 msgstr ""
 
+msgid "Sub-department"
+msgstr ""
+
+msgid "The actions"
+msgstr ""
+
 msgid ""
 "Ututi let's you theme your network, including custom colors, header logo "
 "and text."
@@ -3036,10 +3045,10 @@ msgid ""
 "messages, or firing discussions on the course wall."
 msgstr ""
 
-msgid "Sub-department"
+msgid "This is a list of all recent events in this sub-department."
 msgstr ""
 
-msgid "The actions"
+msgid "or register"
 msgstr ""
 
 msgid "Can't find your subject?"

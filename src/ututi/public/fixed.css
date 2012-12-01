@@ -2441,3 +2441,7 @@ table.moderation-table th.actions {
 .moderation-table .moderation-actions fieldset {
     display: inline;
 }
+
+.subdepartment-description {
+    width: 455px;
+}

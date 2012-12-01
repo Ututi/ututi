@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-27 18:43+0200\n"
+"PO-Revision-Date: 2012-12-01 21:45+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -446,6 +446,12 @@ msgstr "Grupy"
 msgid "Teachers"
 msgstr "Wykładowcy"
 
+msgid "Departments"
+msgstr ""
+
+msgid "Sub-departments"
+msgstr ""
+
 msgid "About"
 msgstr "O Ututi"
 
@@ -460,9 +466,6 @@ msgstr "Edytuj motyw"
 
 msgid "Unverified teachers"
 msgstr "Wykładowca niezweryfikowany"
-
-msgid "Sub-departments"
-msgstr ""
 
 msgid "All news"
 msgstr ""
@@ -3176,6 +3179,12 @@ msgstr "Nowa domena emailowa:"
 msgid "edit sub-department"
 msgstr ""
 
+msgid "Sub-department"
+msgstr ""
+
+msgid "The actions"
+msgstr "Działania"
+
 msgid ""
 "Ututi let's you theme your network, including custom colors, header logo "
 "and text."
@@ -3357,11 +3366,11 @@ msgstr ""
 "grupowej lub prywatnej wiadomości. W tym celu możesz również rozpocząć "
 "dyskucję na tablicy kursu."
 
-msgid "Sub-department"
+msgid "This is a list of all recent events in this sub-department."
 msgstr ""
 
-msgid "The actions"
-msgstr "Działania"
+msgid "or register"
+msgstr ""
 
 msgid "Can't find your subject?"
 msgstr "Nie możesz znaleźć swojego przedmiotu?"

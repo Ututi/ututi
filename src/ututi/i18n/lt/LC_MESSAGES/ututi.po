@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-11-27 18:43+0200\n"
+"PO-Revision-Date: 2012-12-01 21:45+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -434,6 +434,12 @@ msgstr "Grupės"
 msgid "Teachers"
 msgstr "Dėstytojai"
 
+msgid "Departments"
+msgstr "Katedros"
+
+msgid "Sub-departments"
+msgstr "Katedros"
+
 msgid "About"
 msgstr "Apie"
 
@@ -448,9 +454,6 @@ msgstr "Temos nuostatos"
 
 msgid "Unverified teachers"
 msgstr "Nepatvirtinti dėstytojai"
-
-msgid "Sub-departments"
-msgstr "Katedros"
 
 msgid "All news"
 msgstr "Visos naujienos"
@@ -3133,6 +3136,12 @@ msgstr "Naujas el. pašto domenas:"
 msgid "edit sub-department"
 msgstr "redaguoti katedrą"
 
+msgid "Sub-department"
+msgstr "Katedra"
+
+msgid "The actions"
+msgstr "Veiksmai"
+
 msgid ""
 "Ututi let's you theme your network, including custom colors, header logo "
 "and text."
@@ -3312,11 +3321,11 @@ msgstr ""
 "<strong>Bendraukite su savo studentais</strong> siųsdami grupės arba "
 "privačias žinutes, arba pradėdami diskusiją dalyko puslapyje."
 
-msgid "Sub-department"
-msgstr "Katedra"
+msgid "This is a list of all recent events in this sub-department."
+msgstr "Čia yra paskutinių katedros įvykių sąrašas."
 
-msgid "The actions"
-msgstr "Veiksmai"
+msgid "or register"
+msgstr "arba užsiregistruoti"
 
 msgid "Can't find your subject?"
 msgstr "Nerandate savo dalyko?"
