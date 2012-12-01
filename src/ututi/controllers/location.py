@@ -355,8 +355,9 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
     def _make_search_query(self, search_params):
         query = search_query(**search_params)
-        if getattr(c, 'selected_sub_department', None):
-            query = query.filter(Subject.sub_department_id==c.selected_sub_department)
+        if getattr(c, 'selected_sub_department_id', None):
+            query = query.join(Subject)
+            query = query.filter(Subject.sub_department_id==c.selected_sub_department_id)
         return query
 
     def _list_departments(self, location, text):
@@ -385,10 +386,14 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         self.form_result['obj_type'] = obj_type
 
         c.text = self.form_result.get('text', '')
-        c.selected_sub_department = self.form_result.get('sub_department_id', None)
+
+        c.selected_sub_department_id = self.form_result.get('sub_department_id', None)
+        c.selected_sub_department = None
+        if c.selected_sub_department_id:
+            c.selected_sub_department = SubDepartment.get(c.selected_sub_department_id)
 
         if obj_type == 'teacher':
-            self._search_teachers(location, c.text, c.selected_sub_department)
+            self._search_teachers(location, c.text, c.selected_sub_department_id)
         elif obj_type == 'department':
             self._list_departments(location, c.text)
         elif obj_type == 'sub_department':

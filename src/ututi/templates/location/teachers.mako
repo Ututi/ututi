@@ -45,7 +45,7 @@
                        target="${c.location.url(action='catalog', obj_type='teacher')}"
                        js="True",
                        js_target="${c.location.url(action='catalog_js')}">
-    <input type="hidden" name="sub_department_id" value="${c.selected_sub_department}" />
+                       <input type="hidden" name="sub_department_id" value="${c.selected_sub_department_id}" />
   </%search:search_form>
 </%def>
 

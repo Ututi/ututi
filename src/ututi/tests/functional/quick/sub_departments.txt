@@ -61,6 +61,9 @@ them:
     >>> browser.printCssQuery(".item-title a")
     <a href="/subject/uni/test_subject" title="Test subject">Test subject</a>
 
+    >>> browser.printCssQuery(".sub-department-item a")
+    <a href="/school/uni/subjects">All sub-departments</a>
+
 There are no results in the sub-department that has no subjects:
 
     >>> browser.open('http://localhost/school/uni/subjects?sub_department_id=1')

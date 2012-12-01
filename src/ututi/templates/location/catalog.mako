@@ -29,12 +29,29 @@
   }
 
   .sub-department-list {
-    display: inline-block;
+    display: inline-block !important;
     position: relative;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .sub-department-list .click {
+    background: url("/img/icons/header_arrow_active.png") right 8px no-repeat;
+    padding-right: 18px;
   }
 
   .sub-department-list > .show {
     position: absolute;
+  }
+
+  .sub-department-list > .show ul {
+    background: #f2f2f2;
+    padding: 5px 10px;
+    border: #6d6d6d solid 1px;
+  }
+
+  .sub-department-list .sub-department-item a {
+    white-space: nowrap;
   }
 </%def>
 
@@ -49,11 +66,23 @@
   %endfor
   %if sub_departments:
   <li class="sub-department-list click2show">
-    <span class="click">All sub-departments</span>
+    %if not c.selected_sub_department:
+      <span class="click">${_('All sub-departments')}</span>
+    %else:
+      <span class="click">${c.selected_sub_department.title}</span>
+    %endif
+
     <div class="show">
       <ul>
+        %if c.selected_sub_department:
+          <li class="sub-department-item">
+            <a href="${c.location.url(action='catalog', obj_type=c.current_menu_item)}">${_('All sub-departments')}</a>
+          </li>
+        %endif
         %for sub_department in sub_departments:
-        <li class="sub-department-item"><a href="${sub_department.catalog_url(obj_type=c.current_menu_item)}">${sub_department.title}</a></li>
+          %if str(sub_department.id) != c.selected_sub_department_id:
+            <li class="sub-department-item"><a href="${sub_department.catalog_url(obj_type=c.current_menu_item)}">${sub_department.title}</a></li>
+          %endif
         %endfor
       </ul>
     </div>
