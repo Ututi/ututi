@@ -84,10 +84,6 @@ Same works for teachers (WIP, must add sub-dep for at least one teacher):
 
     >>> browser.getLink('Teachers').click()
 
-    >>> browser.printCssQuery(".sub-department-item a")
-    <a href="/school/uni/teachers?sub_department_id=1">IT sub-department</a>
-
-    >>> browser.getLink('IT sub-department').click()
     >>> browser.printCssQuery(".item-title a")
     <a href="/teacher/2" title="Petras">Petras</a>
 
