@@ -1,6 +1,7 @@
 import sys
 import os
 from subprocess import call
+import hashlib
 
 
 def build_path(prefix, digest):
@@ -16,17 +17,39 @@ def build_path(prefix, digest):
     return path
 
 
+def hash_chunked(file):
+    chunk_size = 8 * 1024 ** 2
+    md5 = hashlib.md5()
+    while True:
+        bytes = file.read(chunk_size)
+        if bytes:
+            md5.update(bytes)
+        else:
+            break
+    return md5.hexdigest()
+
+
 def get_hash_list(connection):
     file_hashes = map(lambda row: row[0],
                       connection.execute("select files.md5 from files;"))
     return filter(bool, file_hashes)
 
 
-def download_file(digest, local_prefix, remote_prefix, userhost='ututi@ututi.com'):
-    remote_file = build_path(remote_prefix, digest)
+class ChecksumMismatchException(Exception):
+    pass
+
+
+def ensure_file(digest, local_prefix, remote_prefix, userhost='ututi@ututi.com'):
     local_file = build_path(local_prefix, digest)
-    call(['mkdir', '-p', '%s' % os.path.dirname(local_file)])
-    return call(['scp', '%s:%s' % (userhost, remote_file), local_file])
+
+    try:
+        file = open(local_file, 'rb')
+        if hash_chunked(file) != digest:
+            raise ChecksumMismatchException()
+    except (ChecksumMismatchException, IOError):
+        remote_file = build_path(remote_prefix, digest)
+        call(['mkdir', '-p', '%s' % os.path.dirname(local_file)])
+        call(['scp', '%s:%s' % (userhost, remote_file), local_file])
 
 
 def main():
@@ -51,7 +74,7 @@ def main():
     connection = engine.connect()
     file_hashes = get_hash_list(connection)
     for file_hash in file_hashes:
-        download_file(file_hash, local_prefix, remote_prefix, userhost=userhost)
+        ensure_file(file_hash, local_prefix, remote_prefix, userhost=userhost)
 
 if __name__ == '__main__':
     main()
