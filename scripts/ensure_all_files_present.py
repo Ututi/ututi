@@ -45,11 +45,13 @@ def ensure_file(digest, local_prefix, remote_prefix, userhost='ututi@ututi.com')
     try:
         file = open(local_file, 'rb')
         if hash_chunked(file) != digest:
+            print 'Incorrect hash for %s!' % local_file
             raise ChecksumMismatchException()
     except (ChecksumMismatchException, IOError):
         remote_file = build_path(remote_prefix, digest)
         call(['mkdir', '-p', '%s' % os.path.dirname(local_file)])
-        call(['scp', '%s:%s' % (userhost, remote_file), local_file])
+        print 'Downloading %s' % remote_file
+        call(['scp', '-q', '%s:%s' % (userhost, remote_file), local_file])
 
 
 def main():
