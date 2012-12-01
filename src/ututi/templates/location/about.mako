@@ -400,22 +400,22 @@
   <p>Here you can find:</p>
   <ul class="about-box feature-box">
     <li class="feature icon-subjects-file">
-      <strong>${_('Academic resources')}:</strong> 
-      ${_('teaching subjects with study materials (notes, files, presentations, audio&amp;video)')}.
+      <strong>${_('Academic resources')}:</strong>
+      ${_('teaching subjects with study materials (notes, files, presentations, audio & video)')}.
     </li>
 
     <li class="feature icon-group">
-      <strong>${_('Students groups')}:</strong> 
+      <strong>${_('Student groups')}:</strong>
       ${_('private and public groups with files area, forum and email for communication and collaboration')}.
     </li>
 
     <li class="feature icon-discussions">
-      <strong>${_('Discussions')}:</strong> 
+      <strong>${_('Discussions')}:</strong>
       ${_('knowlenge sharing and discussions on academic subjects with students and teachers')}.
     </li>
 
     <li class="feature icon-teachers-profiles">
-      <strong>${_('Teachers profiles')}:</strong>
+      <strong>${_('Teacher profiles')}:</strong>
       ${_('academic webpage  with teachers biography, publications, touch cources and contact information')}.
     </li>
   </ul>
