@@ -139,12 +139,12 @@ def subdepartment_menu_items(subdepartment):
                    'name': 'about',
                    'link': subdepartment.url()}]
     items += [
-        {'title': 'Teachers',
-         'name': 'teacher',
-         'link': subdepartment.catalog_url(obj_type='teacher')},
         {'title': 'Subjects',
          'name': 'subject',
-         'link': subdepartment.catalog_url(obj_type='subject')}]
+         'link': subdepartment.catalog_url(obj_type='subject')},
+        {'title': 'Teachers',
+         'name': 'teacher',
+         'link': subdepartment.catalog_url(obj_type='teacher')}]
     return items
 
 
