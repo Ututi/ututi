@@ -157,16 +157,26 @@ def location_action(method):
         c.security_context = location
         c.object_location = None
         c.location = location
-        c.breadcrumbs = location_breadcrumbs(location)
-        c.theme = location.get_theme()
 
-        c.notabs = True
-        c.tabs = location_feed_subtabs(location)
+        c.selected_sub_department_id = request.params.get('sub_department_id', None)
+        c.selected_sub_department = None
+        if c.selected_sub_department_id:
+            subdepartment = SubDepartment.get(c.selected_sub_department_id)
+            c.selected_sub_department = subdepartment
+            c.menu_items = subdepartment_menu_items(subdepartment)
 
-        if c.user:
-            c.menu_items = location_menu_items(location)
         else:
-            c.menu_items = location_menu_public_items(location)
+            c.tabs = location_feed_subtabs(location)
+            if c.user:
+                c.menu_items = location_menu_items(location)
+            else:
+                c.menu_items = location_menu_public_items(location)
+
+        c.breadcrumbs = location_breadcrumbs(location)
+
+        c.theme = location.get_theme()
+        c.notabs = True
+
 
         c.current_menu_item = None
         if obj_type is None:
@@ -390,11 +400,6 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         self.form_result['obj_type'] = obj_type
 
         c.text = self.form_result.get('text', '')
-
-        c.selected_sub_department_id = self.form_result.get('sub_department_id', None)
-        c.selected_sub_department = None
-        if c.selected_sub_department_id:
-            c.selected_sub_department = SubDepartment.get(c.selected_sub_department_id)
 
         if obj_type == 'teacher':
             self._search_teachers(location, c.text, c.selected_sub_department_id)
