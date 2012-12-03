@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-12-03 20:30+0200\n"
+"PO-Revision-Date: 2012-12-03 22:28+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -528,7 +528,6 @@ msgid "All fields must be filled!"
 msgstr "Visi laukai privalo būti užpildyti"
 
 #, python-format
-#| msgid "Ututi news: %(changes)s"
 msgid "VUtuti news: %(changes)s"
 msgstr "Ututi naujienos:  %(changes)s"
 
@@ -547,7 +546,6 @@ msgstr[1] "%(page_count)d nauji puslapiai"
 msgstr[2] "%(page_count)d naujų puslapių"
 
 #, python-format
-#| msgid "Ututi news: %(file_changes)s and %(page_changes)s"
 msgid "VUtuti news: %(file_changes)s and %(page_changes)s"
 msgstr "Ututi naujienos: %(file_changes)s ir %(page_changes)s"
 
@@ -563,7 +561,6 @@ msgid "The private space subscription for \"%s\" is about to expire"
 msgstr "Greitai baigsis grupės '%s' privačios vietos galiojimo laikas"
 
 #, python-format
-#| msgid "The Ututi group \"%s\" has run out of private file space"
 msgid "The VUtuti group \"%s\" has run out of private file space"
 msgstr "Grupėje \"%s\" baigėsi privačių failų vieta."
 
@@ -752,7 +749,6 @@ msgid "Invalid email addresses: %(email_list)s"
 msgstr "Neteisingi el. pašto adresai: %(email_list)s"
 
 #, python-format
-#| msgid "These addresses are already registered in Ututi: %(email_list)s"
 msgid "These addresses are already registered in VUtuti: %(email_list)s"
 msgstr "Šie el. pašto adresai jau užregistruoti Ututi: %(email_list)s"
 
@@ -1478,10 +1474,8 @@ msgstr "Prisijunk naudodamas Google"
 msgid "Private social networks for universities"
 msgstr "Privatūs socialiniai tinklai universitetams"
 
-#, python-format
-#| msgid "%(title_abbr)s social network"
 msgid "VU MIF social network"
-msgstr "%(title_abbr)s socialinis tinklas"
+msgstr "VU MIF socialinis tinklas"
 
 msgid "My University"
 msgstr "Mano universitetas"
@@ -1653,8 +1647,8 @@ msgid ""
 " group can see the private files of the group and all the files of the "
 "subjects the group is watching."
 msgstr ""
-"VUtuti duoda galimybę patogiai keistis failais. Grupė skiltyje \"failai\" "
-"mato privačių failų ir stebimų dalykų failų katalogus."
+"VUtuti duoda galimybę patogiai keistis failais. Grupė skiltyje \"failai\""
+" mato privačių failų ir stebimų dalykų failų katalogus."
 
 msgid ""
 "Private files are kept in a separate folder. Their size is limited to 200"
@@ -1786,8 +1780,8 @@ msgid ""
 "VUtuti is a platform for creating academic social networks.It helps "
 "engage your students and teachers and improve the qualityof your studies."
 msgstr ""
-"VUtuti yra platforma, skirta kurti akademiniams socialiniams tinklams. Ji "
-"leidžia studentams ir dėstytojams bendradarbiauti patogiau bei "
+"VUtuti yra platforma, skirta kurti akademiniams socialiniams tinklams. Ji"
+" leidžia studentams ir dėstytojams bendradarbiauti patogiau bei "
 "efektyviau."
 
 msgid ""
@@ -2164,11 +2158,6 @@ msgid "Space for private files was bought for '%(groupname)s' group."
 msgstr "Privačių grupės failų vieta buvo nupirktą '%(groupname)s' grupei."
 
 #, python-format
-#| msgid "" "Hello,\n" "\n" "the private space subscription for the Ututi group
-#| \"%(group_title)s\"\n" "is about to expire.  When it expires, you will not
-#| be able to upload\n" "more files to your file area.  Please extend your
-#| subscription on the\n" "group page at %(group_url)s .\n" "\n" "--\n" "The
-#| Ututi team\n"
 msgid ""
 "Hello,\n"
 "\n"
@@ -2191,11 +2180,6 @@ msgstr ""
 "Ututi komanda\n"
 
 #, python-format
-#| msgid "" "Hello,\n" "\n" "your group \"%(group_title)s\" has just run out of
-#| private group space.\n" "If you want to use private group space further,
-#| please purchase a " "subscription\n" "on the group page at %(group_url)s,
-#| and the group file limit\n" "will be raised to %(size)s.\n" "\n" "--\n" "The
-#| Ututi team\n"
 msgid ""
 "Hello,\n"
 "\n"
@@ -2226,13 +2210,6 @@ msgid "You may join group %(group_title)s by following this link:"
 msgstr "Galite prisijungti prie grupės %(group_title)s naudodami nuorodą:"
 
 #, python-format
-#| msgid "" "Hello,\n" "\n" "Your friend %(author)s is using Ututi.com,
-#| academical social networtk, " "and\n" "wants to invite you to a group
-#| %(group_title)s (%(group_url)s).\n" "In Ututi you can find coursework, share
-#| files with other members of \n" "the group and use the group forums.\n" "\n"
-#| "Since you do not appear to be a Ututi user at the moment, to become a\n"
-#| "member of this group, you need to register first.\n" "\n" "You may register
-#| by following this link: %(link)s\n" "\n" "--\n" "The Ututi team\n"
 msgid ""
 "Hello,\n"
 "\n"
@@ -2264,12 +2241,6 @@ msgstr ""
 "Ututi komanda \n"
 
 #, python-format
-#| msgid "" "Hello,\n" "\n" "Your friend %(author)s wants to invite you to the
-#| group\n" "%(group_title)s (%(group_url)s). After joining you will be able
-#| to\n" "watch subjects your group is studying, share files with other
-#| members\n" "of the group and use the group forum.\n" "\n" "You may accept or
-#| reject the invitation here: %(invitation_url)s\n" "\n" "We hope you will
-#| find Ututi useful!\n" "\n" "--\n" "The Ututi team\n"
 msgid ""
 "Hello,\n"
 "\n"
@@ -2333,8 +2304,6 @@ msgid "Hello!"
 msgstr "Labas!"
 
 #, python-format
-#| msgid "" "%(user_name)s has been using Ututi, a portal for students, for
-#| some time " "now and recommends you to try it."
 msgid ""
 "%(user_name)s has been using VUtuti, a portal for students, for some time"
 " now and recommends you to try it."
@@ -2348,14 +2317,12 @@ msgid ""
 " of study materials. We provide tools that make storing lecture notes, "
 "sharing files and communicating with your classmates much, much easier."
 msgstr ""
-"VUtuti yra sistema studentams, padedanti jiems bendradarbiauti kuriant ir "
-"dalijantis studijų medžiaga. Tai - įrankis, kuris leidžia kurti bei "
+"VUtuti yra sistema studentams, padedanti jiems bendradarbiauti kuriant ir"
+" dalijantis studijų medžiaga. Tai - įrankis, kuris leidžia kurti bei "
 "saugoti paskaitų konspektus, failus, jais dalintis bei bendrauti su "
 "grupės ar kurso draugais daug paprasčiau."
 
 #, python-format
-#| msgid "" "If You would like to join Ututi now, please follow this <a "
-#| "href=\"%(link)s\">link</a>."
 msgid ""
 "If You would like to join VUtuti now, please follow this <a "
 "href=\"%(link)s\">link</a>."
@@ -2371,7 +2338,6 @@ msgid "Your request to join VUtuti as a teacher has been confirmed!"
 msgstr "Jūsų pageidavimas prisijungti prie VUtuti dėstytojų patvirtintas!"
 
 #, python-format
-#| msgid "You may now visit your Ututi dashboard here: %(url)s ."
 msgid "You may now visit your VUtuti dashboard here: %(url)s ."
 msgstr "Galite aplankyti savo Ututi puslapį čia: %(url)s ."
 
@@ -2724,9 +2690,6 @@ msgid "Congratulations, you have created a new group!"
 msgstr "Sveikiname Tave sukūrus grupę!"
 
 #, python-format
-#| msgid "" "\n" "Ututi groups are a communication tool for you and your
-#| friends. Here\n" "your group can use the <a
-#| href=\"%(link_to_forums)s\">forums</a> and " "store\n" "private files.\n"
 msgid ""
 "\n"
 "VUtuti groups are a communication tool for you and your friends. Here\n"
@@ -2740,10 +2703,6 @@ msgstr ""
 "saugoti privačius grupės failus.\n"
 
 #, python-format
-#| msgid "" "\n" "Ututi groups are a communication tool for you and your
-#| friends. Here\n" "your group can use the <a
-#| href=\"%(link_to_forums)s\">forums</a>, keep\n" "private files and <a
-#| href=\"%(link_to_subjects)s\">watch subjects</a>\n" "you are studying.\n"
 msgid ""
 "\n"
 "VUtuti groups are a communication tool for you and your friends. Here\n"
@@ -2765,8 +2724,6 @@ msgid "Invite your friends to VUtuti!"
 msgstr "Pakviesk savo draugus į VUtuti!"
 
 #, python-format
-#| msgid "" "Join our group <a href=\"%s\">%s</a> in Ututi, a system for
-#| exchanging " "study materials and information."
 msgid ""
 "Join our group <a href=\"%s\">%s</a> in VUtuti, a system for exchanging "
 "study materials and information."
@@ -2873,10 +2830,6 @@ msgid "Make your group's file space unlimited"
 msgstr "Gauk neribotai vietos grupės failams!"
 
 #, python-format
-#| msgid "" "The amount of group's private files is limited to %(limit)s. This
-#| is so " "because Ututi encourages users to store their files in publicly "
-#| "accessible subjects where they can be shared with all the users. But if "
-#| "you want to keep more than %(limit)s of files, you can do this."
 msgid ""
 "The amount of group's private files is limited to %(limit)s. This is so "
 "because VUtuti encourages users to store their files in publicly "
@@ -3335,7 +3288,8 @@ msgid ""
 "lectures."
 msgstr ""
 "<strong>Kurk wiki užrašus</strong> ir redaguok juos kartu su kitais "
-"bendruomenės nariais. Tu gali konspektuoti paskaitų metu tiesiai į VUtuti!"
+"bendruomenės nariais. Tu gali konspektuoti paskaitų metu tiesiai į "
+"VUtuti!"
 
 msgid "Join as teacher"
 msgstr "Dėstytojo registracija"
@@ -3599,10 +3553,6 @@ msgid "Get more space"
 msgstr "Gauk daugiau vietos"
 
 #, python-format
-#| msgid "" "The amount of group's private files is limited to %(limit)s. This
-#| is so " "because Ututi encourages users to store their files in publicly "
-#| "accessible subjects where they can be shared with all the users. But if "
-#| "you want to keep more than %(limit)s of files, you can do this."
 msgid ""
 "The amount of group's private files is limited to %(limit)s. This is so "
 "because VUtuti encourages users to store their files in publicly "
@@ -4170,10 +4120,6 @@ msgid "Welcome to VUtuti"
 msgstr "Sveiki atvykę į VUtuti"
 
 #, python-format
-#| msgid "" "Welcome to <strong>%(university)s</strong> private social network
-#| created" " on <a href=\"%(url)s\">Ututi platform</a>. Here students and
-#| teachers " "can create groups online, use the mailinglist for communication
-#| and the " "file storage for sharing information."
 msgid ""
 "Welcome to <strong>%(university)s</strong> private social network created"
 " on <a href=\"%(url)s\">VUtuti platform</a>. Here students and teachers "
@@ -4470,8 +4416,8 @@ msgid ""
 "Enter email address for this group. It can be VUtuti or any other mailing"
 " list, or a private email address."
 msgstr ""
-"Įveskite grupės el. pašto adresą. Tai gali būti VUtuti ar kokia nors kita "
-"pašto konferencija, arba asmeninis el. pašto adresas."
+"Įveskite grupės el. pašto adresą. Tai gali būti VUtuti ar kokia nors kita"
+" pašto konferencija, arba asmeninis el. pašto adresas."
 
 msgid "Fill your page"
 msgstr "Užpildykite savo svetainę"

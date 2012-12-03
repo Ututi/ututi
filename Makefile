@@ -119,8 +119,7 @@ coverage_report_hudson: bin/coverage .coverage
 .PHONY: extract-translations
 extract-translations: bin/py
 	bin/py setup.py extract_messages --no-location -c TRANSLATORS
-	#bin/py setup.py update_catalog --ignore-obsolete=yes --no-fuzzy-matching
-	bin/py setup.py update_catalog --ignore-obsolete=yes
+	bin/py setup.py update_catalog --ignore-obsolete=yes --no-fuzzy-matching
 	for file in $$(find src/ututi/i18n -name "*.po" -type f); do \
 	   sed -e "s/#, fuzzy, python-format/#, python-format/ig" $$file > /tmp/tempfile.tmp; \
 	   mv /tmp/tempfile.tmp $$file; \
