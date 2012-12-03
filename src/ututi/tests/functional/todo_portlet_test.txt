@@ -10,20 +10,9 @@ Let's login as Ututi user:
 Todo portlet lists what user should be able to do:
 
     >>> browser.printQuery('id("todo-portlet")//div[contains(@class, "content")]//text()')
-    1. Invite others to join
-    2. Join / create a group
-    3. Find / create your subjects
-    4. Fill profile information
-
-"Invite others to join" takes user to FB invitation view:
-
-    >>> browser.getLink('Invite others to join').click()
-    >>> browser.url
-    'http://localhost/invite_friends'
-
-However, we will use email invitations to test this todo item:
-
-    >>> browser.goBack()
+    1. Join / create a group
+    2. Find / create your subjects
+    3. Fill profile information
 
 If user sends an invitation to somebody, this item is correctly
 marked as done. We will use friend invitation portlet for that matter:
@@ -35,9 +24,6 @@ marked as done. We will use friend invitation portlet for that matter:
     >>> print len(mail_queue)
     1
     >>> mail_queue[:] = []
-
-    >>> browser.printCssQuery('#todo-portlet p.done', strip=True)
-    <p>1. Invite others to join</p>
 
 The join-create group link points to group's creation page:
 
@@ -54,8 +40,7 @@ Once user creates or becomes member of a group, the todo item is marked as done:
     >>> browser.getControl('Finish').click()
     >>> browser.getLink('Home').click()
     >>> browser.printCssQuery('#todo-portlet p.done', strip=True)
-    <p>1. Invite others to join</p>
-    <p>2. Join / create a group</p>
+    <p>1. Join / create a group</p>
 
 The join-create subject link points to watch subjects page:
 
@@ -69,9 +54,8 @@ Once user starts watching any subject personally, the todo item is marked as don
     >>> browser.getControl('Follow').click()
     >>> browser.getLink('Home').click()
     >>> browser.printCssQuery('#todo-portlet p.done', strip=True)
-    <p>1. Invite others to join</p>
-    <p>2. Join / create a group</p>
-    <p>3. Find / create your subjects</p>
+    <p>1. Join / create a group</p>
+    <p>2. Find / create your subjects</p>
 
 "Fill profile information" links to user's settings page. If user enters his description,
 or website url, or phone number, his profile is considered complete and todo item
