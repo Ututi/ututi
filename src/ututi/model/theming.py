@@ -40,6 +40,10 @@ class Theme(Model):
             'header_text': self.header_text
         }
 
+    @property
+    def location_title_or_slogan(self):
+        return self.location[0].title if self.location else self.header_text
+
     def update(self, values):
         """Update values from dict, e.g. formr result."""
         self.header_text = values['header_text']
