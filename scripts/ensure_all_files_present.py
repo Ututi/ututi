@@ -52,6 +52,9 @@ def ensure_file(digest, local_prefix, remote_prefix, userhost='ututi@ututi.com')
         call(['mkdir', '-p', '%s' % os.path.dirname(local_file)])
         print 'Downloading %s' % remote_file
         call(['scp', '-q', '%s:%s' % (userhost, remote_file), local_file])
+    finally:
+        if file:
+            file.close()
 
 
 def main():
