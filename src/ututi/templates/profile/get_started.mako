@@ -51,12 +51,6 @@ subject-search-form input,
           </span>
           ${h.input_submit(_("Invite"), class_='dark add inline')}
         </form>
-        <div id="invite-friends-facebook" class="right">
-          <p>${_("Or use Facebook to invite your friends.")}</p>
-          <a id="facebook-button" href="${url(controller='profile', action='invite_friends_fb')}">
-            ${h.image('/img/facebook-button.png', alt=_('Facebook'))}
-          </a>
-        </div>
       </div>
     </div>
   </div>

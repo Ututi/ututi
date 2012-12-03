@@ -1,6 +1,5 @@
 <%inherit file="/portlets/base.mako"/>
 <%namespace file="/elements.mako" import="item_box" />
-<%namespace file="/widgets/facebook.mako" import="init_facebook" />
 
 <%def name="create_network_portlet()">
   <%self:portlet id="navigation-portlet">
@@ -138,7 +137,6 @@
       %endif
     </%def>
     <ul class="icon-list">
-      <li class="icon-facebook"><a href="#share-facebook" id="facebook-share-link">${"Facebook"}</a></li>
       <li class="icon-email"><a href="#share-email" id="email-share-link">${"Email"}</a></li>
     </ul>
 
@@ -163,27 +161,9 @@
       <p id="feedback-message">${_("Your email was successfully sent.")}</p>
     </div>
 
-    ${init_facebook()}
     <script type="text/javascript">
       //<![CDATA[
       $(document).ready(function() {
-        $("#facebook-share-link").click(function() {
-          FB.ui(
-            {
-              method: 'feed',
-              name: '${info['title']}',
-              link: '${info['link']}',
-              %if 'caption' in info:
-              caption: '${info['caption']}',
-              %endif
-              message: "${_("Here's what I've found in Ututi")}" + '!',
-              description: '${h.single_line(info['description'])}',
-              picture: '${url("/img/site_logo_collapsed.gif", qualified=True)}'
-            }
-          );
-          return false;
-        });
-
         $('#email-share-dialog').dialog({
             title: '${_("Send email")}',
             width: 350,

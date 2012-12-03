@@ -155,9 +155,6 @@
       ${_("Invite friends:")}
     </%def>
     <ul class="icon-list">
-      <li class="icon-facebook">
-        <a href="${url(controller='profile', action='invite_friends_fb')}" id="invite-fb-link">${"Facebook"}</a>
-      </li>
       <li class="icon-email">
         <a href="#invite-email" id="invite-email-link">${"Email"}</a>
       </li>

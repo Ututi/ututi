@@ -5,15 +5,13 @@
 </%def>
 
 <%def name="css()">
-   .members-invitations,
-   .facebook-invitations {
+   .members-invitations {
        float: left;
        width: 280px;
        margin-top: 20px;
    }
 
-   .members-invitations h2,
-   .facebook-invitations h2 {
+   .members-invitations h2 {
        font-size: 12px;
        font-weight: bold;
    }
@@ -21,7 +19,6 @@
    .members-invitations {
        padding-right: 20px;
        margin-right: 20px;
-       border-right: 1px solid #666;
    }
 
    .members-invitations button.submit {
@@ -30,17 +27,6 @@
 
    #member_invitation_form #emails {
       width: 260px;
-   }
-
-   .facebook-invitations {
-      text-align: center;
-   }
-
-   .facebook-invitations a {
-      /* facebook button */
-      display: block;
-      margin: 20px auto;
-      outline: none;
    }
 
    div.single-title {
@@ -100,13 +86,6 @@
         <h2>${_('Invite your groupmates')}</h2>
         ${h.input_area('emails', '', help_text=_('Enter emails of your classmates, separated with commas.'), cols=30)}
         ${h.input_submit(_('Invite'), class_='dark add inline')}
-      </div>
-
-      <div class="facebook-invitations">
-        <h2>${_('Invite your groupmates using Facebook')}</h2>
-        <a id="facebook-button" href="${c.group.url(action='invite_fb')}">
-          ${h.image('/img/facebook-button.png', alt=_('Facebook'))}
-        </a>
       </div>
     </div>
 

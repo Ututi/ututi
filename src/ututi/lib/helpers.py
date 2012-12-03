@@ -769,10 +769,6 @@ def user_todo_items(user):
     todo_items = []
     done = user_done_items(user)
     todo_items.append({
-        'title': _("Invite others to join"),
-        'link': url(controller='profile', action='invite_friends_fb'),
-        'done': 'invitation' in done })
-    todo_items.append({
         'title': _("Join / create a group"),
         'link': url(controller='group', action='create'),
         'done': 'group' in done })

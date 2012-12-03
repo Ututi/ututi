@@ -24,9 +24,6 @@
     display: block;
     margin: 0;
   }
-  #facebook-invitation {
-    text-align: center;
-  }
 </%def>
 
 <%def name="pagetitle()">${_("Invite friends")}</%def>
@@ -49,14 +46,5 @@
 
     ${h.input_submit(_("Finish"))}
   </form>
-
-  %if c.registration.location is not None:
-  <div class="right" id="facebook-invitation">
-    <h2>${_('Invite friends via facebook')}</h2>
-    <a id="facebook-button" href="${c.registration.url(action='invite_friends_fb', qualified=True)}">
-      ${h.image('/img/facebook-button.png', alt=_('Facebook'))}
-    </a>
-  </div>
-  %endif
 
 </div>
