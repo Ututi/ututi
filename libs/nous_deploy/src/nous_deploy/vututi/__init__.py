@@ -8,7 +8,6 @@ from nous_deploy.services import run_as_sudo
 from fabric.utils import warn
 from fabric.context_managers import settings
 from fabric.context_managers import prefix
-from fabric.context_managers import settings
 from fabric.context_managers import cd
 from fabric.contrib.files import sed
 from fabric.contrib.files import exists
@@ -25,6 +24,11 @@ class VUtuti(Service):
         name='vututi',
 
         srv = '/srv',
+
+        email_to = 'errors@{host_name}',
+        error_email_from = 'release@{host_name}',
+        error_email = 'errors@{host_name}',
+        ututi_email_from = 'info@{host_name}',
 
         # site dirs
         site_dir = '{srv}/{name}',
