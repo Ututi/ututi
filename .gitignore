@@ -26,3 +26,4 @@ performance.log
 var/log/*
 *ututi.mo
 docs/build
+libs/nous_deploy/src/nous_deploy.egg-info/*

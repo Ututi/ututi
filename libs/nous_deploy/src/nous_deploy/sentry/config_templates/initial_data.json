@@ -1,0 +1,62 @@
+[
+    {
+        "pk": 1,
+        "model": "auth.user",
+        "fields": {
+            "username": "{{ service.settings.admin_username }}",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2008-09-04 14:25:29",
+            "groups": [],
+            "user_permissions": [],
+            "password": "sha1${{ service.password_salt }}${{ service.password_hexdigest }}",
+            "email": "{{ service.settings.admin_email }}",
+            "date_joined": "2008-09-04 14:25:29"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "sentry.team",
+        "fields": {
+            "owner": 1,
+            "slug": "{{ service.settings.admin_username }}",
+            "name": "{{ service.settings.admin_username }}"}
+    },
+    {
+        "pk": 1,
+        "model": "sentry.teammember",
+        "fields": {
+            "type": 0,
+            "is_active": true,
+            "user": 1,
+            "date_added": "2012-11-29T13:01:19.177Z",
+            "team": 1
+        }
+    },
+    {
+        "pk": 2,
+        "model": "sentry.project",
+        "fields": {
+            "status": 0,
+            "name": "{{ service.settings.project_name }}",
+            "slug": "{{ service.settings.project_name }}",
+            "team": 1,
+            "owner": 1,
+            "date_added": "2012-11-29T13:01:19.125Z",
+            "public": true
+        }
+    },
+    {
+        "pk": 1,
+        "model": "sentry.projectkey",
+        "fields": {
+            "project": 2,
+            "public_key": "{{ service.settings.dsn_public }}",
+            "secret_key": "{{ service.settings.dsn_secret }}",
+            "user": 1
+        }
+    }
+]
