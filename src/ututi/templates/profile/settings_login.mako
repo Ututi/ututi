@@ -45,54 +45,6 @@
     ${h.button_to(_("Recover password"),
                   url(controller='profile', action='recover_password'),
                   method='GET', class_='dark')}
-
-    <div class="explanation-post-header">
-      <h2>${_('Link with Google and/or Facebook')}</h2>
-      <p class="tip">
-        ${_("You can log in to Ututi using your Google or Facebook account. "
-            "Use buttons below to link or unlink these external accounts.")}
-      </p>
-    </div>
-
-    <div id="google-and-facebook-buttons" class="clearfix">
-      %if not c.user.openid:
-        <a id="google-link-button" href="${url(controller='profile', action='link_google')}">
-          ${h.image('/img/google-button.png', alt=_('Link Google'))}
-        </a>
-      %else:
-        <a id="google-unlink-button" href="${url(controller='profile', action='unlink_google')}">
-          ${h.image('/img/google-button.png', alt=_('Unlink Google'))}
-        </a>
-      %endif
-
-      %if not c.user.facebook_id:
-        <a id="fb-link-button" href="#link-facebook">
-          ${h.image('/img/facebook-button.png', alt=_('Link Facebook'))}
-        </a>
-      %else:
-        <a id="fb-unlink-button" href="${url(controller='profile', action='unlink_facebook')}">
-          ${h.image('/img/facebook-button.png', alt=_('Unlink Facebook'))}
-        </a>
-      %endif
-    </div>
-
-    ${init_facebook()}
-    <script>
-      $(document).ready(function() {
-        $('#fb-link-button').click(function() {
-            // attempt to login FB
-            FB.login(function(response) {
-                if (response.authResponse) {
-                    // user is logged in and granted some permissions.
-                    // scope is a comma separated list of granted permissions
-                    window.location = '${url(controller='profile', action='link_facebook')}';
-                }
-            }, {scope:'email'});
-
-            return false;
-        });
-      });
-    </script>
   </div>
 </div>
 

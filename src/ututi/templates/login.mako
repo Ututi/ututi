@@ -22,7 +22,6 @@
   #login-choice-left {
       width: 50%;
       float: left;
-      border-right: 1px solid #888;
   }
   #login-choice-right {
       width: 45%;
@@ -77,41 +76,4 @@
       </div>
     </form>
   </div>
-
-  <div id="login-choice-right">
-    <strong>
-      ${_('Or log in using Facebook or Google')}
-    </strong>
-    ## We rely here on the fact that Facebook has been configured
-    ## by the login widget in the page header.
-    <div class="button">
-      <a id="facebook-login" href="#">
-        ${h.image('/img/facebook-button.png', alt=_('Log in using Facebook'))}
-      </a>
-      ${init_facebook()}
-      <script type="text/javascript">
-        $(document).ready(function() {
-          $('#facebook-login').click(function() {
-              // attempt to login FB
-              FB.login(function(response) {
-                  if (response.authResponse) {
-                      // user is logged in and granted some permissions.
-                      // scope is a comma separated list of granted permissions
-                      show_loading_message();
-                      window.location = '${url(controller='federation', action='facebook_login', came_from=c.came_from)}';
-                  }
-              }, {scope:'email'});
-
-              return false;
-          });
-        });
-      </script>
-    </div>
-    <div class="button">
-      <a href="${url(controller='federation', action='google_login', came_from=c.came_from, invitation_hash=c.hash)}">
-        ${h.image('/img/google-button.png', alt=_('Log in using Google'))}
-      </a>
-    </div>
-  </div>
-
 </div>
