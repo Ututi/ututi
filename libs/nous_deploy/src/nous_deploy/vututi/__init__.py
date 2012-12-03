@@ -327,7 +327,7 @@ class VUtuti(Service):
     @run_as_sudo
     def update_postfix_transport(self):
         # XXX kill all lines that start with group hostname in /etc/postfix/transport
-        append('/etc/postfix/transport', '{{groups_host_name}}  {{name}}_mailer:'.format(
+        append('/etc/postfix/transport', '{groups_host_name}  {name}_mailer:'.format(
                 groups_host_name=self.settings.groups_host_name,
                 name=self.name))
         run('postmap /etc/postfix/transport')
