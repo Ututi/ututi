@@ -23,6 +23,9 @@ Sistema buvo parašyta naudojant `Pylons`.
 Mako
 ++++
 
+Puslapiams atvaizduoti sistema naudoja `Mako` šablonų biblioteką.
+
+`Mako šablonų bibliotekos dokumentacija <http://docs.makotemplates.org/>`_.
 
 SQLAlchemy
 ++++++++++
@@ -65,3 +68,7 @@ Tokie sprendimai buvo parinkti dėl mažesnės pakeitimų kainos.
 
 Postgresql
 ----------
+
+Sistema naudoja PostgreSQL 8.4 duomenų bazių valdymo sistemą.
+
+`PostgreSQL dokumentacija <http://www.postgresql.org/docs/8.4/static/>`_.
