@@ -126,6 +126,7 @@ def setup_tables(engine):
 
 
 def setup_orm():
+    DeclarativeModel.prepare(meta.engine)
     tables = meta.metadata.tables
     tag_mapper = orm.mapper(Tag,
                             tables['tags'],
@@ -235,8 +236,9 @@ def setup_orm():
                polymorphic_identity='teacher_blog_comment',
                polymorphic_on=tables['content_items'].c.content_type,
                properties={'post': relation(TeacherBlogPost,
-                                                 primaryjoin=tables['teacher_blog_posts'].c.id==tables['teacher_blog_comments'].c.post_id,
-                                                 backref='comments')})
+                                            primaryjoin=tables['teacher_blog_posts'].c.id==tables['teacher_blog_comments'].c.post_id,
+                                            backref=backref('comments',
+                                                            cascade='delete'))})
 
     orm.mapper(SeenThread, tables['seen_threads'],
                properties = {'thread': relation(ForumPost),
@@ -1613,6 +1615,9 @@ class LocationTag(Tag):
             if loc.country is not None:
                 return loc.country
 
+    def snippet(self):
+        return render_mako_def('/sections/content_snippets.mako', 'location', object=self)
+
 
 def cleanupFileName(filename):
     return filename.split('\\')[-1].split('/')[-1]
@@ -2209,9 +2214,22 @@ class EmailDomain(Model):
 class SubDepartment(DeclarativeModel):
     __tablename__ = 'sub_departments'
 
-    location = relation(Tag, backref='sub_departments')
+    location = relation(Tag, backref=backref('sub_departments',
+                                             order_by='SubDepartment.title.asc()'))
+    subjects = relation(Subject, backref=backref('sub_department'))
+    teachers = relation(Teacher, backref=backref('sub_department'))
 
-    def __init__(self, title, location, slug=None):
+    def __init__(self, title, location, slug=None, site_url=None):
         self.title = title
         self.location = location
         self.slug = slug
+        self.site_url = site_url
+
+    def url(self):
+        return self.location.url(action='subdepartment', subdept_id=self.id)
+
+    def catalog_url(self, obj_type='subject'):
+        return self.location.url(action='catalog', obj_type=obj_type, sub_department_id=self.id)
+
+    def snippet(self):
+        return render_mako_def('/sections/content_snippets.mako', 'sub_department', object=self)

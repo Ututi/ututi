@@ -207,6 +207,14 @@ class HomeController(UniversityListMixin):
         if c.user is not None:
             redirect(url(controller='profile', action='home'))
         else:
+            # If default_location is set in configuration.ini, try
+            # redirecting to it.
+            default_location_path = config.get('default_location', None)
+            if default_location_path:
+                default_location = LocationTag.get(default_location_path)
+                if default_location:
+                    return redirect(default_location.url())
+
             self._get_unis()
             (c.subjects, c.groups, c.universities) = (self._subjects(), self._groups(), self._universities(limit=12))
 
@@ -433,7 +441,7 @@ class HomeController(UniversityListMixin):
                 user.update_password(self.form_result.get('new_password'))
                 user.recovery_key = None
                 #password reset is actually a confirmation of the email
-                user.emails[0].confirmed = True
+                user.email.confirmed = True
                 meta.Session.commit()
                 h.flash(_('Your password has been updated. Welcome back!'))
                 sign_in_user(user)

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-11-08 14:38+0200\n"
+"PO-Revision-Date: 2012-12-01 22:42+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -434,6 +434,12 @@ msgstr "Grupės"
 msgid "Teachers"
 msgstr "Dėstytojai"
 
+msgid "Departments"
+msgstr "Fakultetai"
+
+msgid "Sub-departments"
+msgstr "Katedros"
+
 msgid "About"
 msgstr "Apie"
 
@@ -448,9 +454,6 @@ msgstr "Temos nuostatos"
 
 msgid "Unverified teachers"
 msgstr "Nepatvirtinti dėstytojai"
-
-msgid "Sub-departments"
-msgstr "Katedros"
 
 msgid "All news"
 msgstr "Visos naujienos"
@@ -663,7 +666,7 @@ msgid "This user profile is not public"
 msgstr "Šio naudotojo profilis nėra viešai prieinamas"
 
 msgid "Blog"
-msgstr "Blogas"
+msgstr "Dienoraštis"
 
 msgid "Publications"
 msgstr "Publikacijos"
@@ -1085,6 +1088,9 @@ msgstr "Įveskite bent vieną reikšmę."
 msgid "Invalid subject"
 msgstr "Netinkamas dalykas"
 
+msgid "Invalid sub department"
+msgstr "Netinkama katedra"
+
 #, python-format
 msgid "unlimited group private files for %(day_count)d day"
 msgid_plural "unlimited group private files for %(day_count)d days"
@@ -1239,6 +1245,18 @@ msgstr "%(link_to_subject)s pridėtas prie grupės %(link_to_group)s dalykų."
 #, python-format
 msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr " %(link_to_subject)s ištrintas iš grupės %(link_to_group)s dalykų sąrašo."
+
+#, python-format
+msgid "%(link_to_author)s wrote on %(link_to_subject)s wall."
+msgstr "%(link_to_author)s parašė diskusiją %(link_to_subject)s."
+
+#, python-format
+msgid "%(link_to_author)s wrote on %(link_to_location)s wall."
+msgstr "%(link_to_author)s parašė diskusiją %(link_to_location)s."
+
+#, python-format
+msgid "%(link_to_author)s wrote a blog post %(link_to_post)s."
+msgstr "%(link_to_author)s parašė naują blogo įrašą %(link_to_post)s."
 
 msgid "(no subject)"
 msgstr "(be temos)"
@@ -2954,6 +2972,9 @@ msgstr "Atstatyti slaptažodį"
 msgid "All faculties"
 msgstr "Visi fakultetai"
 
+msgid "All sub-departments"
+msgstr "Visos katedros"
+
 msgid "+ Add teacher"
 msgstr "+ Pridėti dėstytoją"
 
@@ -3000,12 +3021,12 @@ msgstr "Akademiniai resursai"
 
 msgid ""
 "teaching subjects with study materials (notes, files, presentations, "
-"audio&amp;video)"
+"audio & video)"
 msgstr ""
 "dėstomi dalykai su paskaitų medžiaga (užrašai, failai, konspektai, "
-"prezentacios, audio&amp;video)"
+"prezentacios, audio & video)"
 
-msgid "Students groups"
+msgid "Student groups"
 msgstr "Studentų grupės"
 
 msgid ""
@@ -3022,7 +3043,7 @@ msgstr ""
 "žinių dalinimąsis ir diskusijos akademinėmis temomis su studentais ir "
 "dėstytojais"
 
-msgid "Teachers profiles"
+msgid "Teacher profiles"
 msgstr "Dėstytojų profiliai"
 
 msgid ""
@@ -3032,14 +3053,22 @@ msgstr ""
 "akademinis puslapis su dėstytojų biografija, publikacijomis, dėstomais "
 "dalykais ir contaktinę informacija"
 
-msgid "Departments:"
-msgstr "Fakultetai:"
+#, python-format
+msgid "Faculties of %(university)s:"
+msgstr "%(university)s fakultetai:"
+
+#, python-format
+msgid "Sub-departments of %(department)s:"
+msgstr "%(department)s katedros:"
 
 msgid "Add sub-department"
 msgstr "Pridėti katedrą"
 
 msgid "Sub department title:"
 msgstr "Katedros pavadinimas"
+
+msgid "Website link:"
+msgstr "Nuoroda į puslapį:"
 
 msgid "Edit general information of your university below."
 msgstr "Žemiau galite redaguoti universiteto informaciją."
@@ -3106,6 +3135,12 @@ msgstr "Naujas el. pašto domenas:"
 
 msgid "edit sub-department"
 msgstr "redaguoti katedrą"
+
+msgid "Sub-department"
+msgstr "Katedra"
+
+msgid "The actions"
+msgstr "Veiksmai"
 
 msgid ""
 "Ututi let's you theme your network, including custom colors, header logo "
@@ -3286,11 +3321,11 @@ msgstr ""
 "<strong>Bendraukite su savo studentais</strong> siųsdami grupės arba "
 "privačias žinutes, arba pradėdami diskusiją dalyko puslapyje."
 
-msgid "Sub-department"
-msgstr "Katedra"
+msgid "This is a list of all recent events in this sub-department."
+msgstr "Čia yra paskutinių katedros įvykių sąrašas."
 
-msgid "The actions"
-msgstr "Veiksmai"
+msgid "or register"
+msgstr "arba užsiregistruoti"
 
 msgid "Can't find your subject?"
 msgstr "Nerandate savo dalyko?"
@@ -3373,15 +3408,19 @@ msgstr "Žinutė atmesta"
 msgid "Message already approved"
 msgstr "Žinutė jau patvirtinta"
 
-msgid "Working..."
-msgstr "Vykdoma..."
-
-msgid ""
-"Error: could not reach server or this message was already moderated. "
-"Please try refreshing the page."
+msgid "Emails that are allowed to post to the mailing list of this group"
 msgstr ""
-"Klaida: nepavyko susisiekti su serveriu arba žinutė jau moderuota. "
-"Pabandykite užkrauti puslapį iš naujo."
+"El. pašto adresai, kuriems leidžiama siųsti žinutes į šios grupės "
+"konferenciją"
+
+msgid "Add email"
+msgstr "Pridėti adresą"
+
+msgid "Moderation queue"
+msgstr "Moderavimo eilė"
+
+msgid "Author and date"
+msgstr "Autorius ir data"
 
 msgid "Approve"
 msgstr "Patvirtinti"
@@ -3389,19 +3428,8 @@ msgstr "Patvirtinti"
 msgid "Reject"
 msgstr "Atmesti"
 
-msgid "Emails that are allowed to post to the mailing list of this group"
-msgstr ""
-"El. pašto adresai, kuriems leidžiama siųsti žinutes į šios grupės "
-"konferenciją"
-
-msgid "Invite to group"
-msgstr "Pakviesti į grupę"
-
-msgid "Moderation queue"
-msgstr "Moderavimo eilė"
-
 msgid "No messages to be moderated yet."
-msgstr "Žinučių nėra."
+msgstr "Nėra moderuojamų žinučių."
 
 msgid "Back to the moderation queue"
 msgstr "Atgal į moderavimo eilę"
@@ -3969,6 +3997,9 @@ msgstr "Vardas, pavardė"
 msgid "e.g. Associate professor"
 msgstr "pvz. Associate professor"
 
+msgid "Not selected"
+msgstr "Nepasirinkta"
+
 msgid "About yourself"
 msgstr "Šiek tiek informacijos apie save"
 
@@ -4396,12 +4427,6 @@ msgstr "Mano svetainė"
 msgid "edit my page"
 msgstr "redaguoti puslapį"
 
-msgid "Create a blog post"
-msgstr "Sukurti blogo įrašą"
-
-msgid "View your blog posts"
-msgstr "Peržiūrėti blogo įrašus"
-
 msgid "Delete this group"
 msgstr "Trinti šią grupę"
 
@@ -4426,11 +4451,35 @@ msgstr "Žinutė išsiųsta."
 msgid "Your SMS was successfully sent."
 msgstr "SMS išsiųsta."
 
+msgid "Comments"
+msgstr "Komentarai"
+
+msgid "Create a blog post"
+msgstr "Sukurti dienoraščio įrašą"
+
+msgid "Create your first blog post."
+msgstr "Sukurti pirmąjį blogo įrašą."
+
+msgid "My blog posts"
+msgstr "Mano blogo įrašai"
+
+msgid "create a blog post"
+msgstr "Sukurti blogo įrašą"
+
+msgid "All posts"
+msgstr "Visi įrašai"
+
+msgid "Create discussion"
+msgstr "Pradėti diskusiją"
+
 msgid "Settings"
 msgstr "Nustatymai"
 
 msgid "Wiki notes"
 msgstr "Wiki užrašai"
+
+msgid "Write your post"
+msgstr "Rašyti įrašą"
 
 msgid "Create your subjects"
 msgstr "Sukurkite dėstomus dalykus"
@@ -4485,7 +4534,7 @@ msgid "Are you sure you want to delete this group?"
 msgstr "Ar tikrai norite ištrinti šią grupę?"
 
 msgid "Create a new post"
-msgstr "Sukurti blogo įrašą"
+msgstr "Sukurti dienoraščio įrašą"
 
 msgid "Click on a blog post to edit it."
 msgstr "Paspauskite ant įrašo norėdami jį redaguoti"
@@ -4498,13 +4547,13 @@ msgstr[1] "%(count)s komentarai"
 msgstr[2] "%(count)s komentarų"
 
 msgid "You haven't created any blog posts yet."
-msgstr "Jūs dar nesukūrėte blogo įrašų."
+msgstr "Dar nesukūrėte dienoraščio įrašų."
 
 msgid "Blog post"
-msgstr "Blogo įrašas"
+msgstr "Dienoraščio įrašas"
 
 msgid "Enter a blog post title"
-msgstr "Įrašykite blogo įrašo pavadinimą"
+msgstr "Įrašykite dienoraščio įrašo pavadinimą"
 
 msgid "Write down your information and research interests"
 msgstr "Užrašykite informaciją apie save bei savo mokslinius interesus"
@@ -4731,12 +4780,6 @@ msgstr[0] "%(count)s failas"
 msgstr[1] "%(count)s failai"
 msgstr[2] "%(count)s failų"
 
-msgid "Pick your region"
-msgstr "Pasirinkite regioną"
-
-msgid "Regions of Poland"
-msgstr "Lenkijos regionai"
-
 msgid "Were you looking for a university or department?"
 msgstr "Gal ieškojai universiteto arba fakulteto?"
 
@@ -4794,6 +4837,9 @@ msgstr "Komentaras"
 
 msgid "Write a comment"
 msgstr "Parašyti komentarą"
+
+msgid "Login to comment"
+msgstr "Jei norite parašyti komentarą, prisijunkite"
 
 msgid "The data"
 msgstr "Duomenys"
@@ -5029,6 +5075,16 @@ msgstr ""
 "%(user_link)s parašė naują žinutę %(message_link)s į grupės "
 "%(group_link)s moderavimo eilę"
 
+msgid "Working..."
+msgstr "Vykdoma..."
+
+msgid ""
+"Error: could not reach server or this message was already moderated. "
+"Please try refreshing the page."
+msgstr ""
+"Klaida: nepavyko susisiekti su serveriu arba žinutė jau moderuota. "
+"Pabandykite užkrauti puslapį iš naujo."
+
 #, python-format
 msgid ""
 "%(user_link)s has posted a new message %(message_link)s in the forum "
@@ -5139,6 +5195,9 @@ msgstr "Įkelkite paskaitos užrašus į dalyko puslapį ir redaguokite juos kar
 msgid "Get notifications related to this subject"
 msgstr "Gaukite priminimus, susijusius su šiuo dalyku"
 
+msgid "University | Department:"
+msgstr "Universitetas  |  Fakultetas:"
+
 msgid "Subject title:"
 msgstr "Dalyko pavadinimas:"
 
@@ -5157,6 +5216,9 @@ msgstr "Dalyko aprašymas:"
 
 msgid "Enter subject details"
 msgstr "Įvesti dalyko detales"
+
+msgid "Sub-department:"
+msgstr "Katedra:"
 
 msgid "Tags:"
 msgstr "Žymės:"
@@ -5204,12 +5266,6 @@ msgstr "Grįžti į dalyką"
 
 msgid "Edit subject's info"
 msgstr "Redaguoti dalyko informaciją"
-
-msgid "University | Department:"
-msgstr "Universitetas  |  Fakultetas:"
-
-msgid "Department:"
-msgstr "Fakultetas:"
 
 msgid "Who can view the subject"
 msgstr "Kas gali matyti šį dalyką"
@@ -5295,9 +5351,6 @@ msgid ""
 "directly to Ututi."
 msgstr "<strong>Konspektuokite per paskaitas</strong> tiesiai į Ututi."
 
-msgid "Write your post"
-msgstr "Rašyti įrašą"
-
 msgid "Discussion"
 msgstr "Diskusija"
 
@@ -5375,6 +5428,12 @@ msgstr "Dėstomi dalykai"
 #, python-format
 msgid "%(teacher)s does not teach any course."
 msgstr "%(teacher)s nedėsto jokio kurso."
+
+msgid "edit posts"
+msgstr "keisti įrašus"
+
+msgid "edit post"
+msgstr "keisti įrašą"
 
 msgid "add course"
 msgstr "pridėti dalyką"
@@ -5464,11 +5523,8 @@ msgstr "Pirkti SMS kreditų"
 msgid "University and department:"
 msgstr "Universitetas ir fakultetas"
 
-msgid "Full title"
-msgstr "Visas pavadinimas"
-
-msgid "e.g. LKKA"
-msgstr "pvz. LKKA"
+msgid "Department:"
+msgstr "Fakultetas:"
 
 msgid "Department"
 msgstr "Fakultetas"

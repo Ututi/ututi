@@ -2,7 +2,7 @@
 Various reusable elements.
 </%doc>
 
-<%def name="location_links(location, full_title=False, external=False)">
+<%def name="location_links(location, full_title=False, external=False, sub_department=None)">
   <%doc>
     Prints hierarchy of location tag with links.
     - full_title -- use full titles instead of short ones,
@@ -26,6 +26,19 @@ Various reusable elements.
     %endif
     </li>
   %endfor
+  %if sub_department is not None:
+    <li>
+    %if external:
+      %if sub_department.site_url:
+        <a href="${sub_department.site_url}" class="external">${sub_department.title}</a>
+      %else:
+        ${sub_department.title}
+      %endif
+    %else:
+      <a href="${sub_department.url()}">${sub_department.title}</a>
+    %endif
+    </li>
+  %endif
   </ul>
 </%def>
 

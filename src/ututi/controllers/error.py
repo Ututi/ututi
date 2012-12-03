@@ -58,7 +58,7 @@ class ErrorController(SearchController):
             user_shout = request.POST.get('error_message')
             message = ""
             if c.user:
-                sender = c.user.emails[0].email
+                sender = c.user.email.email
             if action == "shout":
                 h.flash(_('Monkeys are ashamed of what you said and are now working even harder to fix the problem. Until they do that, try to search for something else.'))
                 message = user_shout

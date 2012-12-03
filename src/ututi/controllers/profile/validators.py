@@ -209,3 +209,8 @@ class BlogPostForm(Schema):
 class BlogPostCommentForm(Schema):
     allow_extra_fields = True
     content = validators.UnicodeString(not_empty=True)
+
+
+class BlogPostCommentDeleteForm(Schema):
+    allow_extra_fields = True
+    comment_id = validators.Int()

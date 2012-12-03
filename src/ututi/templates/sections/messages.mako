@@ -25,12 +25,12 @@
   <span class="flash-message-content">
       ${_('Your email (%(email)s) is not confirmed! '
       'Please confirm your email by clicking on the link sent '
-      'to your address or ') % dict(email=c.user.emails[0].email) |n}
+      'to your address or ') % dict(email=c.user.email.email) |n}
   </span>
   <form method="post" action="${url(controller='profile', action='confirm_emails')}" id="email_confirmation_request" class="inline-form">
     <div>
       <input type="hidden" name="came_from" value="${request.url}" />
-      <input type="hidden" name="email" value="${c.user.emails[0].email}" />
+      <input type="hidden" name="email" value="${c.user.email.email}" />
       <input type="submit" class="text_button" value="${_('get another confirmation email')}" style="font-size: 13px;"/>
     </div>
   </form>

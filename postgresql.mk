@@ -95,3 +95,13 @@ import_backup_schema_into_test: ${PG_SOCKET}
 .PHONY: dbdump
 dbdump: ${PG_SOCKET}
 	${PG_PATH}/bin/pg_dump --format=c -h ${PG_RUN}/ development > dbdump
+
+.PHONY: vututi_initial_db
+vututi_initial_db: ${PG_SOCKET}
+	${PG_PATH}/bin/psql -h ${PG_RUN}/ -d development -c "drop schema public cascade"
+	${PG_PATH}/bin/droplang plpgsql development -h ${PG_RUN}/ || true
+	${PG_PATH}/bin/psql -h ${PG_RUN}/ -d development -c "create schema public"
+	${PG_PATH}/bin/pg_restore -j 2 -d development -h ${PG_RUN} --no-owner backup/dbdump || true
+	${PWD}/bin/migrate development.ini
+	bin/py scripts/strip_nonmif_data.py
+	${PG_PATH}/bin/pg_dump --format=c -h ${PG_RUN}/ development > vututi_dbdump

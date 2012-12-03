@@ -2,7 +2,7 @@
 <%namespace file="/profile/base.mako" name="profile"/>
 <%namespace file="/portlets/user.mako" import="user_statistics_portlet,
         related_users_portlet" />
-<%namespace file="/portlets/structure.mako" import="location_teacher_list_portlet"/>
+<%namespace file="/portlets/structure.mako" import="location_teacher_list_portlet, sub_department_teacher_list_portlet"/>
 <%namespace file="/portlets/universal.mako" import="share_portlet"/>
 <%namespace file="/elements.mako" import="tabs, location_links" />
 <%namespace name="index" file="/user/index.mako" import="css" />
@@ -14,7 +14,11 @@
 <%def name="portlets_secondary()">
   ${share_portlet(c.teacher)}
   ${user_statistics_portlet(c.teacher)}
+  %if c.teacher.sub_department is not None:
+  ${sub_department_teacher_list_portlet(c.teacher.sub_department)}
+  %else:
   ${location_teacher_list_portlet(c.teacher.location)}
+  %endif
 </%def>
 
 <%def name="title()">
@@ -77,7 +81,7 @@
     %endif
 
     <div class="teacher-location">
-      ${location_links(c.teacher.location, full_title=True, external=True)}
+      ${location_links(c.teacher.location, full_title=True, external=False, sub_department=c.teacher.sub_department)}
     </div>
 
     <ul class="icon-list" id="teacher-contact-information">

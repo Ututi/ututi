@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-11-08 14:38+0200\n"
+"PO-Revision-Date: 2012-12-01 22:42+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -446,6 +446,12 @@ msgstr "Grupy"
 msgid "Teachers"
 msgstr "Wykładowcy"
 
+msgid "Departments"
+msgstr ""
+
+msgid "Sub-departments"
+msgstr ""
+
 msgid "About"
 msgstr "O Ututi"
 
@@ -460,9 +466,6 @@ msgstr "Edytuj motyw"
 
 msgid "Unverified teachers"
 msgstr "Wykładowca niezweryfikowany"
-
-msgid "Sub-departments"
-msgstr ""
 
 msgid "All news"
 msgstr ""
@@ -1103,6 +1106,9 @@ msgstr "Proszę wpisać przynajmniej jedną wartość."
 msgid "Invalid subject"
 msgstr "Nieprawidłowy temat"
 
+msgid "Invalid sub department"
+msgstr ""
+
 #, python-format
 msgid "unlimited group private files for %(day_count)d day"
 msgid_plural "unlimited group private files for %(day_count)d days"
@@ -1269,11 +1275,15 @@ msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr "Grupa %(link_to_group)s przestała obserwować przedmiot %(link_to_subject)s"
 
 #, python-format
-msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
+msgid "%(link_to_author)s wrote on %(link_to_subject)s wall."
 msgstr ""
 
 #, python-format
-msgid "%(link_to_author)slink_to_user"
+msgid "%(link_to_author)s wrote on %(link_to_location)s wall."
+msgstr ""
+
+#, python-format
+msgid "%(link_to_author)s wrote a blog post %(link_to_post)s."
 msgstr ""
 
 msgid "(no subject)"
@@ -3005,6 +3015,9 @@ msgstr "Odzyskaj hasło"
 msgid "All faculties"
 msgstr "Dodaj przedmiot"
 
+msgid "All sub-departments"
+msgstr ""
+
 msgid "+ Add teacher"
 msgstr "+ Dodaj wykładowcę"
 
@@ -3051,12 +3064,12 @@ msgstr "Zasoby akademickie"
 
 msgid ""
 "teaching subjects with study materials (notes, files, presentations, "
-"audio&amp;video)"
+"audio & video)"
 msgstr ""
-"przedmioty oraz materiały (notatki, dokumenty, prezentacje, pliki "
-"audio/video)"
+"przedmioty oraz materiały (notatki, dokumenty, prezentacje, "
+"pliki audio/video)"
 
-msgid "Students groups"
+msgid "Student groups"
 msgstr "Grupy studentów"
 
 msgid ""
@@ -3073,7 +3086,7 @@ msgstr ""
 "wymiana wiedzy i doświadczeń oraz dyskusje dotyczące przedmiotów ze "
 "studentami i wykładowcami"
 
-msgid "Teachers profiles"
+msgid "Teacher profiles"
 msgstr "Profile wykładowców"
 
 msgid ""
@@ -3083,13 +3096,21 @@ msgstr ""
 "strona uczelniana z biografią, publikacjami, prowadzonymi kursami i "
 "danymi kontaktowymi wykładowców"
 
-msgid "Departments:"
-msgstr "Wydziały:"
+#, python-format
+msgid "Faculties of %(university)s:"
+msgstr ""
+
+#, python-format
+msgid "Sub-departments of %(department)s:"
+msgstr ""
 
 msgid "Add sub-department"
 msgstr ""
 
 msgid "Sub department title:"
+msgstr ""
+
+msgid "Website link:"
 msgstr ""
 
 msgid "Edit general information of your university below."
@@ -3157,6 +3178,12 @@ msgstr "Nowa domena emailowa:"
 
 msgid "edit sub-department"
 msgstr ""
+
+msgid "Sub-department"
+msgstr ""
+
+msgid "The actions"
+msgstr "Działania"
 
 msgid ""
 "Ututi let's you theme your network, including custom colors, header logo "
@@ -3339,11 +3366,11 @@ msgstr ""
 "grupowej lub prywatnej wiadomości. W tym celu możesz również rozpocząć "
 "dyskucję na tablicy kursu."
 
-msgid "Sub-department"
+msgid "This is a list of all recent events in this sub-department."
 msgstr ""
 
-msgid "The actions"
-msgstr "Działania"
+msgid "or register"
+msgstr ""
 
 msgid "Can't find your subject?"
 msgstr "Nie możesz znaleźć swojego przedmiotu?"
@@ -3426,15 +3453,17 @@ msgstr "Wiadomość odrzucono"
 msgid "Message already approved"
 msgstr "Wiadomość już zatwierdzono"
 
-msgid "Working..."
-msgstr "Wczytywanie ... "
+msgid "Emails that are allowed to post to the mailing list of this group"
+msgstr "E-maile, które są dopuszczone na listę dyskusyjną tej grupy"
 
-msgid ""
-"Error: could not reach server or this message was already moderated. "
-"Please try refreshing the page."
+msgid "Add email"
 msgstr ""
-"Błąd: nie można nawiązać połączenia z serwerem lub ta wiadomość była już "
-"moderowana. Spróbuj odświeżyć stronę."
+
+msgid "Moderation queue"
+msgstr "Kolejka do moderacji"
+
+msgid "Author and date"
+msgstr ""
 
 msgid "Approve"
 msgstr "Zatwierdź"
@@ -3442,17 +3471,8 @@ msgstr "Zatwierdź"
 msgid "Reject"
 msgstr "Odmów"
 
-msgid "Emails that are allowed to post to the mailing list of this group"
-msgstr "E-maile, które są dopuszczone na listę dyskusyjną tej grupy"
-
-msgid "Invite to group"
-msgstr "Zaproś do grupy"
-
-msgid "Moderation queue"
-msgstr "Kolejka do moderacji"
-
 msgid "No messages to be moderated yet."
-msgstr "Brak wiadomości do moderowania."
+msgstr ""
 
 msgid "Back to the moderation queue"
 msgstr "Powrót do kolejki do moderacji"
@@ -4024,6 +4044,9 @@ msgstr "Imię i nazwisko"
 msgid "e.g. Associate professor"
 msgstr "np. profesor nadzwyczajny"
 
+msgid "Not selected"
+msgstr ""
+
 msgid "About yourself"
 msgstr "O Tobie"
 
@@ -4448,12 +4471,6 @@ msgstr "Moja strona profilowa"
 msgid "edit my page"
 msgstr "Edytuj mój profil"
 
-msgid "Create a blog post"
-msgstr ""
-
-msgid "View your blog posts"
-msgstr ""
-
 msgid "Delete this group"
 msgstr "Usuń tę grupę"
 
@@ -4478,11 +4495,35 @@ msgstr "Twoja wiadomość została wysłana."
 msgid "Your SMS was successfully sent."
 msgstr "Twój SMS został wysłany."
 
+msgid "Comments"
+msgstr ""
+
+msgid "Create a blog post"
+msgstr ""
+
+msgid "Create your first blog post."
+msgstr ""
+
+msgid "My blog posts"
+msgstr ""
+
+msgid "create a blog post"
+msgstr ""
+
+msgid "All posts"
+msgstr ""
+
+msgid "Create discussion"
+msgstr ""
+
 msgid "Settings"
 msgstr "Ustawienia"
 
 msgid "Wiki notes"
 msgstr "Notatki Wiki"
+
+msgid "Write your post"
+msgstr ""
 
 msgid "Create your subjects"
 msgstr "Utwórz swoje przedmioty"
@@ -4783,12 +4824,6 @@ msgstr[0] "%(count)s dokument"
 msgstr[1] "%(count)s dokumenty"
 msgstr[2] "%(count)s dokumentów"
 
-msgid "Pick your region"
-msgstr "Wybierz województwo"
-
-msgid "Regions of Poland"
-msgstr "Regiony Polski"
-
 msgid "Were you looking for a university or department?"
 msgstr "Szukałeś uczelni lub wydziału?"
 
@@ -4845,6 +4880,9 @@ msgid "Comment"
 msgstr ""
 
 msgid "Write a comment"
+msgstr ""
+
+msgid "Login to comment"
 msgstr ""
 
 msgid "The data"
@@ -5078,6 +5116,16 @@ msgstr ""
 "%(user_link)s dodaje nową wiadomość %(message_link)s do kolejki moderacji"
 " %(group_link)s"
 
+msgid "Working..."
+msgstr "Wczytywanie ... "
+
+msgid ""
+"Error: could not reach server or this message was already moderated. "
+"Please try refreshing the page."
+msgstr ""
+"Błąd: nie można nawiązać połączenia z serwerem lub ta wiadomość była już "
+"moderowana. Spróbuj odświeżyć stronę."
+
 #, python-format
 msgid ""
 "%(user_link)s has posted a new message %(message_link)s in the forum "
@@ -5188,6 +5236,9 @@ msgstr "Umieść notatki z wykładu na stronie przedmiotu i edytuj je"
 msgid "Get notifications related to this subject"
 msgstr "Dostawaj powiadomienia dotyczące tego przedmiotu"
 
+msgid "University | Department:"
+msgstr "Uniwersytet | Wydział:"
+
 msgid "Subject title:"
 msgstr "Nazwa przedmiotu:"
 
@@ -5206,6 +5257,9 @@ msgstr "Opis przedmiotu:"
 
 msgid "Enter subject details"
 msgstr "Podaj szczegóły przedmiotu"
+
+msgid "Sub-department:"
+msgstr ""
 
 msgid "Tags:"
 msgstr "Tagi:"
@@ -5253,12 +5307,6 @@ msgstr "Wróć do przedmiotu"
 
 msgid "Edit subject's info"
 msgstr "Edytuj info o przedmiocie"
-
-msgid "University | Department:"
-msgstr "Uniwersytet | Wydział:"
-
-msgid "Department:"
-msgstr "Wydział:"
 
 msgid "Who can view the subject"
 msgstr ""
@@ -5352,9 +5400,6 @@ msgstr ""
 "<strong>Notuj na wykładzie</strong> na swoim laptopie i wrzucaj notatki "
 "prosto na Ututi."
 
-msgid "Write your post"
-msgstr ""
-
 msgid "Discussion"
 msgstr ""
 
@@ -5432,6 +5477,12 @@ msgstr "Nauczane przedmioty"
 #, python-format
 msgid "%(teacher)s does not teach any course."
 msgstr "%(teacher)s nie załozył jeszcze żadnego przedmiotu."
+
+msgid "edit posts"
+msgstr ""
+
+msgid "edit post"
+msgstr ""
 
 msgid "add course"
 msgstr "Dodaj kurs"
@@ -5522,11 +5573,8 @@ msgstr "Kup punkty SMS"
 msgid "University and department:"
 msgstr "Uczelnia i wydział:"
 
-msgid "Full title"
-msgstr "Pełna nazwa"
-
-msgid "e.g. LKKA"
-msgstr "n.p. UWM"
+msgid "Department:"
+msgstr "Wydział:"
 
 msgid "Department"
 msgstr "Wydział"

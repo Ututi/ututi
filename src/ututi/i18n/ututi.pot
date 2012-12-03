@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-11-08 14:38+0200\n"
+"POT-Creation-Date: 2012-12-01 22:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -406,6 +406,12 @@ msgstr ""
 msgid "Teachers"
 msgstr ""
 
+msgid "Departments"
+msgstr ""
+
+msgid "Sub-departments"
+msgstr ""
+
 msgid "About"
 msgstr ""
 
@@ -419,9 +425,6 @@ msgid "Custom theme"
 msgstr ""
 
 msgid "Unverified teachers"
-msgstr ""
-
-msgid "Sub-departments"
 msgstr ""
 
 msgid "All news"
@@ -1032,6 +1035,9 @@ msgstr ""
 msgid "Invalid subject"
 msgstr ""
 
+msgid "Invalid sub department"
+msgstr ""
+
 #, python-format
 msgid "unlimited group private files for %(day_count)d day"
 msgid_plural "unlimited group private files for %(day_count)d days"
@@ -1167,11 +1173,15 @@ msgid "Group %(link_to_group)s stopped watching subject %(link_to_subject)s"
 msgstr ""
 
 #, python-format
-msgid "%(link_to_author)s wrote posted on %(link_to_subject)s wall.link_to_user"
+msgid "%(link_to_author)s wrote on %(link_to_subject)s wall."
 msgstr ""
 
 #, python-format
-msgid "%(link_to_author)slink_to_user"
+msgid "%(link_to_author)s wrote on %(link_to_location)s wall."
+msgstr ""
+
+#, python-format
+msgid "%(link_to_author)s wrote a blog post %(link_to_post)s."
 msgstr ""
 
 msgid "(no subject)"
@@ -2699,6 +2709,9 @@ msgstr ""
 msgid "All faculties"
 msgstr ""
 
+msgid "All sub-departments"
+msgstr ""
+
 msgid "+ Add teacher"
 msgstr ""
 
@@ -2744,11 +2757,11 @@ msgid "Academic resources"
 msgstr ""
 
 msgid ""
-"teaching subjects with study materials (notes, files, presentations, "
-"audio&amp;video)"
+"teaching subjects with study materials (notes, files, presentations, audio & "
+"video)"
 msgstr ""
 
-msgid "Students groups"
+msgid "Student groups"
 msgstr ""
 
 msgid ""
@@ -2761,7 +2774,7 @@ msgid ""
 "teachers"
 msgstr ""
 
-msgid "Teachers profiles"
+msgid "Teacher profiles"
 msgstr ""
 
 msgid ""
@@ -2769,13 +2782,21 @@ msgid ""
 "contact information"
 msgstr ""
 
-msgid "Departments:"
+#, python-format
+msgid "Faculties of %(university)s:"
+msgstr ""
+
+#, python-format
+msgid "Sub-departments of %(department)s:"
 msgstr ""
 
 msgid "Add sub-department"
 msgstr ""
 
 msgid "Sub department title:"
+msgstr ""
+
+msgid "Website link:"
 msgstr ""
 
 msgid "Edit general information of your university below."
@@ -2839,6 +2860,12 @@ msgid "New email domain:"
 msgstr ""
 
 msgid "edit sub-department"
+msgstr ""
+
+msgid "Sub-department"
+msgstr ""
+
+msgid "The actions"
 msgstr ""
 
 msgid ""
@@ -2994,10 +3021,10 @@ msgid ""
 " or firing discussions on the course wall."
 msgstr ""
 
-msgid "Sub-department"
+msgid "This is a list of all recent events in this sub-department."
 msgstr ""
 
-msgid "The actions"
+msgid "or register"
 msgstr ""
 
 msgid "Can't find your subject?"
@@ -3075,27 +3102,22 @@ msgstr ""
 msgid "Message already approved"
 msgstr ""
 
-msgid "Working..."
+msgid "Emails that are allowed to post to the mailing list of this group"
 msgstr ""
 
-msgid ""
-"Error: could not reach server or this message was already moderated. Please "
-"try refreshing the page."
+msgid "Add email"
+msgstr ""
+
+msgid "Moderation queue"
+msgstr ""
+
+msgid "Author and date"
 msgstr ""
 
 msgid "Approve"
 msgstr ""
 
 msgid "Reject"
-msgstr ""
-
-msgid "Emails that are allowed to post to the mailing list of this group"
-msgstr ""
-
-msgid "Invite to group"
-msgstr ""
-
-msgid "Moderation queue"
 msgstr ""
 
 msgid "No messages to be moderated yet."
@@ -3634,6 +3656,9 @@ msgstr ""
 msgid "e.g. Associate professor"
 msgstr ""
 
+msgid "Not selected"
+msgstr ""
+
 msgid "About yourself"
 msgstr ""
 
@@ -4021,12 +4046,6 @@ msgstr ""
 msgid "edit my page"
 msgstr ""
 
-msgid "Create a blog post"
-msgstr ""
-
-msgid "View your blog posts"
-msgstr ""
-
 msgid "Delete this group"
 msgstr ""
 
@@ -4051,10 +4070,34 @@ msgstr ""
 msgid "Your SMS was successfully sent."
 msgstr ""
 
+msgid "Comments"
+msgstr ""
+
+msgid "Create a blog post"
+msgstr ""
+
+msgid "Create your first blog post."
+msgstr ""
+
+msgid "My blog posts"
+msgstr ""
+
+msgid "create a blog post"
+msgstr ""
+
+msgid "All posts"
+msgstr ""
+
+msgid "Create discussion"
+msgstr ""
+
 msgid "Settings"
 msgstr ""
 
 msgid "Wiki notes"
+msgstr ""
+
+msgid "Write your post"
 msgstr ""
 
 msgid "Create your subjects"
@@ -4326,12 +4369,6 @@ msgid_plural "%(count)s files"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Pick your region"
-msgstr ""
-
-msgid "Regions of Poland"
-msgstr ""
-
 msgid "Were you looking for a university or department?"
 msgstr ""
 
@@ -4387,6 +4424,9 @@ msgid "Comment"
 msgstr ""
 
 msgid "Write a comment"
+msgstr ""
+
+msgid "Login to comment"
 msgstr ""
 
 msgid "The data"
@@ -4604,6 +4644,14 @@ msgid ""
 "%(group_link)s moderation queue"
 msgstr ""
 
+msgid "Working..."
+msgstr ""
+
+msgid ""
+"Error: could not reach server or this message was already moderated. Please "
+"try refreshing the page."
+msgstr ""
+
 #, python-format
 msgid ""
 "%(user_link)s has posted a new message %(message_link)s in the forum "
@@ -4706,6 +4754,9 @@ msgstr ""
 msgid "Get notifications related to this subject"
 msgstr ""
 
+msgid "University | Department:"
+msgstr ""
+
 msgid "Subject title:"
 msgstr ""
 
@@ -4721,6 +4772,9 @@ msgid "Subject description:"
 msgstr ""
 
 msgid "Enter subject details"
+msgstr ""
+
+msgid "Sub-department:"
 msgstr ""
 
 msgid "Tags:"
@@ -4768,12 +4822,6 @@ msgid "Back to subject"
 msgstr ""
 
 msgid "Edit subject's info"
-msgstr ""
-
-msgid "University | Department:"
-msgstr ""
-
-msgid "Department:"
 msgstr ""
 
 msgid "Who can view the subject"
@@ -4854,9 +4902,6 @@ msgid ""
 "directly to Ututi."
 msgstr ""
 
-msgid "Write your post"
-msgstr ""
-
 msgid "Discussion"
 msgstr ""
 
@@ -4935,6 +4980,12 @@ msgstr ""
 msgid "%(teacher)s does not teach any course."
 msgstr ""
 
+msgid "edit posts"
+msgstr ""
+
+msgid "edit post"
+msgstr ""
+
 msgid "add course"
 msgstr ""
 
@@ -5008,10 +5059,7 @@ msgstr ""
 msgid "University and department:"
 msgstr ""
 
-msgid "Full title"
-msgstr ""
-
-msgid "e.g. LKKA"
+msgid "Department:"
 msgstr ""
 
 msgid "Department"

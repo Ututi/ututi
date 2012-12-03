@@ -17,7 +17,7 @@
   %for teacher in c.found_users:
   <tr>
     <td class="name"><a href="${teacher.url()}" class="author-link">${teacher.fullname}</a></td>
-    <td>${teacher.emails[0].email}</td>
+    <td>${teacher.email.email}</td>
     <td>
       %if teacher.location is not None:
       <a href="${teacher.location.url()}">${', '.join(teacher.location.hierarchy())}</a>
@@ -53,7 +53,7 @@
       %for teacher in c.teachers:
       <tr>
         <td class="name"><a href="${teacher.url()}" class="author-link">${teacher.fullname}</a></td>
-        <td>${teacher.emails[0].email}</td>
+        <td>${teacher.email.email}</td>
         <td>
           %if teacher.location is not None:
           <a href="${teacher.location.url()}">${', '.join(teacher.location.hierarchy())}</a>

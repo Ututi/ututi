@@ -15,6 +15,7 @@ from pylons.decorators import validate as old_validate
 
 from ututi.model import GroupCoupon
 from ututi.model import meta, Email, User
+from ututi.model import SubDepartment
 from ututi.model import Subject, Group, ContentItem, LocationTag, EmailDomain
 from ututi.model.i18n import Language, Country
 
@@ -225,14 +226,10 @@ class PhoneNumberValidator(validators.FancyValidator):
                 return None
 
         s = re.sub(r'[^\d\+]', '', value) # strip away all non-numeric chars.
-        if config.get('tpl_lang') == 'lt':
-            if s.startswith('8'):
-                s = '+370' + s[1:]
-            if not s.startswith('+370'):
-                raise Invalid(self.message('invalid', state), value, state)
-        elif config.get('tpl_lang') == 'pl':
-            if not s.startswith('+48'):
-                raise Invalid(self.message('invalid', state), value, state)
+        if s.startswith('8'):
+            s = '+370' + s[1:]
+        if not s.startswith('+370'):
+            raise Invalid(self.message('invalid', state), value, state)
 
         if len(s) < 12:
             raise Invalid(self.message('tooShort', state), value, state)
@@ -665,6 +662,17 @@ class SubjectIdValidator(validators.FancyValidator):
         s = Subject.get_by_id(int(value))
         if s is None:
             raise Invalid(self.message('invalid', state), value, state)
+
+
+class SubDepartmentIdValidator(validators.FancyValidator):
+    """A validator for subject ids"""
+    messages = { 'invalid': _("Invalid sub department") }
+
+    def _to_python(self, value, state):
+        s = SubDepartment.get(value)
+        if s is None:
+            raise Invalid(self.message('invalid', state), value, state)
+        return value
 
 
 def js_validate(schema=None, validators=None, form=None, variable_decode=False,

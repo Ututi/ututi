@@ -1,6 +1,6 @@
 ${_(u"A user wants to become a teacher:")}
 
-${user.fullname} (${user.emails[0].email})
+${user.fullname} (${user.email.email})
 
 %if user.location is not None:
 ${', '.join(user.location.hierarchy())}

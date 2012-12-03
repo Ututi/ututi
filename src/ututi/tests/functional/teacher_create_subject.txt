@@ -6,19 +6,9 @@ Let's login as a verified teacher:
     >>> browser = Browser.logIn('benas@ututi.lt', 'password')
     >>> browser.open('http://localhost/subjects/add')
 
-The teacher has been assigned to default location (U-niversity),
-so so location fields are prefilled:
-
-    >>> browser.getControl('University:').value
-    'U-niversity'
-
-    >>> browser.getControl('Department:').value
-    ''
 
 Let's enter subject's location and title, and continue the wizard:
 
-    >>> browser.getControl('University:').value = 'Vilniaus universitetas'
-    >>> browser.getControl('Department:').value = 'Ekonomikos fakultetas'
     >>> browser.getControl('Subject title:').value = 'Math'
     >>> browser.getControl('Next').click()
     >>> browser.url
@@ -34,7 +24,7 @@ Let's finish the wizard and create the subject:
 
     >>> browser.getControl('Create').click()
     >>> print browser.url
-    http://localhost/subject/vu/ef/math
+    http://localhost/subject/uni/math
 
 On the subject page Benas is listed as the lecturer:
 

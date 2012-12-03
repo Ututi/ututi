@@ -11,7 +11,12 @@ div#short-info-block {
 <div id="short-info-block">
   <ul class="icon-list">
     <li class="icon-university">
-      ${h.link_to(c.subject.location.title, c.subject.location.url())}
+      <%
+        location_links = [h.link_to(c.subject.location.title, c.subject.location.url())]
+        if c.subject.sub_department:
+          location_links.append(h.link_to(c.subject.sub_department.title, c.subject.sub_department.url()))
+      %>
+      ${h.literal(', '.join(location_links))}
       %if not c.subject.teacher_repr and c.user:
         <a href="${c.subject.url(action='edit')}">
           <img src="${url('/img/icons.com/edit.png')}" alt="${_('Edit')}" />

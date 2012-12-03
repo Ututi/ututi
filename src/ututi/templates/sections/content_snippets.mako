@@ -49,6 +49,9 @@ Snippets for rendering various content items, e.g. in search results.
   %for tag in object.location.hierarchy(True):
     <a href="${tag.url()}">${tag.title_short}</a> |
   %endfor
+  %if getattr(object, 'sub_department', None):
+    <a class="sub_department_link" href="${object.sub_department.url()}">${object.sub_department.title}</a> |
+  %endif
   </span>
   %endif
 </%def>
@@ -183,6 +186,35 @@ Snippets for rendering various content items, e.g. in search results.
   </div>
 </%def>
 
+<%def name="location(object)">
+  <div class="search-item snippet-location with-logo clearfix">
+    <div class="logo">
+      <img src="${url(controller='structure', action='logo', id=object.id, width=40)}" alt="object.title" />
+    </div>
+    <div class="heading">
+      <div class="item-title">
+        <a href="${object.url()}" title="${object.title}">${object.title}</a>
+      </div>
+    </div>
+    <% stats = object.stats %>
+    <ul class="statistics icon-list">
+      <li class="icon-subject"> ${stats['subject']} </li>
+      <li class="icon-file"> ${stats['file']} </li>
+      <li class="icon-group"> ${stats['group']} </li>
+    </ul>
+  </div>
+</%def>
+
+<%def name="sub_department(object)">
+  <div class="search-item snippet-sub-department">
+    <a href="${object.url()}" title="${object.title}" class="item-title larger bold">${object.title}</a>
+    <ul class="icon-list statistics">
+      <li class="icon-file"> ${len(object.subjects)} </li>
+      <li class="icon-teacher"> ${len(object.teachers)} </li>
+    </ul>
+  </div>
+</%def>
+
 <%def name="page(object)">
   <div class="search-item snippet-page">
     <a href="${object.url()}" title="${object.title}" class="item-title larger bold">${object.title}</a>
@@ -255,41 +287,69 @@ Snippets for rendering various content items, e.g. in search results.
   </div>
 </%def>
 
-<%def name="blog_post(post, show_comments=True, title_link='none', show_comment_form='True')">
-    %if title_link != 'none':
-      <% link = post.url() if title_link == 'internal' else post.url(path=post.created.location.url_path, action='external_teacher_blog_post') %>
+<%def name="blog_post(post, show_full=True, type='internal', title_link=False, show_comment_form='True')">
+    <%
+      link = post.url() if type == 'internal' else post.url(path=post.created.location.url_path, action='external_teacher_blog_post')
+      comment_form_link = link + '#comment-form'
+      comment_link = link + '#comment' if post.comments else comment_form_link
+    %>
+    %if title_link:
       <div class="title"><a href="${link}">${post.title}</a></div>
     %else:
       <div class="title">${post.title}</div>
     %endif
-    <div class="comment-label">${ungettext("%(count)s comment", "%(count)s comments", len(post.comments)) % dict(count=len(post.comments))}</div>
+    <div class="comment-label">
+      <a href="${link}#comments">${ungettext("%(count)s comment", "%(count)s comments", len(post.comments)) % dict(count=len(post.comments))}</a>
+    </div>
     <div class="post-date date-label">${h.fmt_normaldate(post.created_on)}</div>
     <div class="blog-post">
       ${h.literal(post.description)}
     </div>
-    %if show_comments:
+    %if show_full:
       <div class="blog-comments">
-        <h2>${_('Comments:')}</h2>
-        %for comment in post.comments:
-          <div class="comment">
-            <div class="comment-date date-label">${h.when(comment.created_on)}</div>
-            <div class="logo">
-              <img src="${url(controller='user', action='logo', id=comment.created.id, width=50)}" />
+        <a name='comments'></a>
+        %if post.comments:
+          <h2>${_('Comments:')}</h2>
+          %for comment in post.comments:
+            <div class="comment">
+              %if c.user and (c.user.id == post.created.id or c.user.id == comment.created.id):
+              <div style="position: absolute; right: 4px; top: 8px;">
+                <form action="${url(controller='user', action='teacher_delete_blog_comment', id=post.created.id, post_id=post.id)}" method="POST">
+                  <input type="hidden" name="comment_id" value="${comment.id}"/>
+                  <input type="image" src="${url('/img/icons.com/close.png')}"/>
+                </form>
+              </div>
+              %endif
+              <div class="comment-date date-label">${h.when(comment.created_on)}</div>
+              <div class="logo">
+                <img src="${url(controller='user', action='logo', id=comment.created.id, width=50)}" />
+              </div>
+              <div class="comment-author">${h.user_link(comment.created_by)}</div>
+              <div class="comment-content">
+                ${h.wall_fmt(comment.content)}
+              </div>
             </div>
-            <div class="comment-author">${h.user_link(comment.created_by)}</div>
-            <div class="comment-content">
-              ${h.wall_fmt(comment.content)}
-            </div>
+          %endfor
+        %endif
+        %if show_comment_form:
+          %if c.user:
+          <a name='comment-form'></a>
+          <div class='comment-form'>
+            <form  action="${url(controller='user', action='teacher_blog_comment', id=post.created.id, post_id=post.id)}" method="POST">
+              ${h.input_area('content', _('Comment'), help_text=_('Write a comment'), cols='160')}
+              ${h.input_submit(_('Send'))}
+            </form>
           </div>
-        %endfor
-        %if show_comment_form and c.user:
-        <div clas='comment-form'>
-          <form  action="${url(controller='user', action='teacher_blog_comment', id=post.created.id, post_id=post.id)}" method="POST">
-            ${h.input_area('content', _('Comment'), help_text=_('Write a comment'), cols='160')}
-            ${h.input_submit(_('Send'))}
-          </form>
-        </div>
+          %else:
+            <a href="${url(controller='home', action='login', came_from=comment_link)}">${_('Login to comment')}</a>
+          %endif
         %endif
       </div>
+    %else:
+      %if c.user:
+      <a href="${link}#comment-form">${_('Write a comment')}</a>
+      %else:
+      <a href="${url(controller='home', action='login', came_from=comment_form_link)}">${_('Login to comment')}</a>
+      %endif
     %endif
 </%def>

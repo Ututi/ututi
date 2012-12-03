@@ -128,19 +128,21 @@ def button_to(title, url='', **html_options):
 
     url, title = url, title or url
 
+    html_options.setdefault('class_', "btn")
+
     submit_type = html_options.get('type')
     img_source = html_options.get('src')
     if submit_type == 'image' and img_source:
         html_options["value"] = title
         html_options.setdefault("alt", title)
+        button_element = HTML.input(**html_options)
     else:
         html_options["type"] = "submit"
         html_options["value"] = title
+        button_element = HTML.button(c=[HTML.span(title)], **html_options)
 
-    html_options.setdefault('class_', "btn")
     return HTML.form(method=form_method, action=url, class_="button-to",
-                     c=[HTML.fieldset(c=[method_tag, HTML.button(c=[HTML.span(title)], **html_options)])])
-
+                     c=[HTML.fieldset(c=[method_tag, button_element])])
 
 def get_urls(text):
     urls = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+~]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", text)

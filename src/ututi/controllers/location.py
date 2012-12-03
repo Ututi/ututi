@@ -13,7 +13,9 @@ from pylons.templating import render_mako_def
 from sqlalchemy.sql.expression import or_
 
 import ututi.lib.helpers as h
+from ututi.model import Subject
 from ututi.model import SubDepartment
+from ututi.lib.search import search_query
 from ututi.lib.forms import Form
 from ututi.lib.emails import teacher_confirmed_email
 from ututi.lib.base import render
@@ -36,66 +38,75 @@ from ututi.controllers.search import SearchSubmit, SearchBaseController
 log = logging.getLogger(__name__)
 
 
-def location_menu_items():
-    return [
+def location_menu_items(location):
+    items = [
         {'title': _("News feed"),
          'name': 'feed',
-         'link': c.location.url(action='feed')},
+         'link': location.url(action='feed')},
         {'title': _("Subjects"),
          'name': 'subject',
-         'link': c.location.url(action='catalog', obj_type='subject')},
+         'link': location.url(action='catalog', obj_type='subject')},
         {'title': _("Groups"),
          'name': 'group',
-         'link': c.location.url(action='catalog', obj_type='group')},
+         'link': location.url(action='catalog', obj_type='group')},
         {'title': _("Teachers"),
          'name': 'teacher',
-         'link': c.location.url(action='catalog', obj_type='teacher')}]
+         'link': location.url(action='catalog', obj_type='teacher')}]
+    if location.children:
+        items.append({'title': _('Departments'),
+                      'name': 'department',
+                      'link': location.url(action='catalog', obj_type='department')})
+    elif location.sub_departments:
+        items.append({'title': _('Sub-departments'),
+                      'name': 'sub_department',
+                      'link': location.url(action='catalog', obj_type='sub_department')})
+    return items
 
 
-def location_menu_public_items():
+def location_menu_public_items(location):
     return [
         {'title': _("About"),
          'name': 'about',
-         'link': c.location.url(action='about')},
+         'link': location.url(action='about')},
         {'title': _("Subjects"),
          'name': 'subject',
-         'link': c.location.url(action='catalog', obj_type='subject')},
+         'link': location.url(action='catalog', obj_type='subject')},
         {'title': _("Teachers"),
          'name': 'teacher',
-         'link': c.location.url(action='catalog', obj_type='teacher')}]
+         'link': location.url(action='catalog', obj_type='teacher')}]
 
 
-def location_edit_menu_items():
+def location_edit_menu_items(location):
     return [
         {'title': _("General information"),
          'name': 'settings',
-         'link': c.location.url(action='edit')},
+         'link': location.url(action='edit')},
         {'title': _("Registration settings"),
          'name': 'registration',
-         'link': c.location.url(action='edit_registration')},
+         'link': location.url(action='edit_registration')},
         {'title': _("Custom theme"),
          'name': 'theming',
-         'link': c.location.url(action='edit_theme')},
+         'link': location.url(action='edit_theme')},
         {'title': _("Unverified teachers"),
          'name': 'unverified_teachers',
-         'link': c.location.url(action='unverified_teachers')},
+         'link': location.url(action='unverified_teachers')},
         {'title': _("Sub-departments"),
          'name': 'sub-departments',
-         'link': c.location.url(action='sub_departments')},
+         'link': location.url(action='edit_sub_departments')},
     ]
 
 
-def location_feed_subtabs():
+def location_feed_subtabs(location):
     return [
         {'title': _('All news'),
          'name': 'all',
-         'link': c.location.url(action='feed')},
+         'link': location.url(action='feed')},
         {'title': _('Subject news'),
          'name': 'subjects',
-         'link': c.location.url(action='feed', filter='subjects')},
+         'link': location.url(action='feed', filter='subjects')},
         {'title': _('Discussions'),
          'name': 'discussions',
-         'link': c.location.url(action='feed', filter='discussions')}
+         'link': location.url(action='feed', filter='discussions')}
     ]
 
 
@@ -111,6 +122,32 @@ def location_breadcrumbs(location):
     return breadcrumbs
 
 
+def subdepartment_breadcrumbs(subdepartment):
+    breadcrumbs = location_breadcrumbs(subdepartment.location)
+    bc = {'link': subdepartment.url(),
+          'full_title': subdepartment.title,
+          'title': subdepartment.title}
+    breadcrumbs.append(bc)
+    return breadcrumbs
+
+
+def subdepartment_menu_items(subdepartment):
+    items = [{'title': 'Feed',
+              'name': 'feed',
+              'link': subdepartment.url()} if c.user
+             else {'title': 'About',
+                   'name': 'about',
+                   'link': subdepartment.url()}]
+    items += [
+        {'title': 'Subjects',
+         'name': 'subject',
+         'link': subdepartment.catalog_url(obj_type='subject')},
+        {'title': 'Teachers',
+         'name': 'teacher',
+         'link': subdepartment.catalog_url(obj_type='teacher')}]
+    return items
+
+
 def location_action(method):
     def _location_action(self, path, obj_type=None):
         location = LocationTag.get(path)
@@ -120,16 +157,26 @@ def location_action(method):
         c.security_context = location
         c.object_location = None
         c.location = location
-        c.breadcrumbs = location_breadcrumbs(location)
-        c.theme = location.get_theme()
 
-        c.notabs = True
-        c.tabs = location_feed_subtabs()
+        c.selected_sub_department_id = request.params.get('sub_department_id', None)
+        c.selected_sub_department = None
+        if c.selected_sub_department_id:
+            subdepartment = SubDepartment.get(c.selected_sub_department_id)
+            c.selected_sub_department = subdepartment
+            c.menu_items = subdepartment_menu_items(subdepartment)
 
-        if c.user:
-            c.menu_items = location_menu_items()
         else:
-            c.menu_items = location_menu_public_items()
+            c.tabs = location_feed_subtabs(location)
+            if c.user:
+                c.menu_items = location_menu_items(location)
+            else:
+                c.menu_items = location_menu_public_items(location)
+
+        c.breadcrumbs = location_breadcrumbs(location)
+
+        c.theme = location.get_theme()
+        c.notabs = True
+
 
         c.current_menu_item = None
         if obj_type is None:
@@ -137,6 +184,35 @@ def location_action(method):
         else:
             return method(self, location, obj_type)
     return _location_action
+
+
+def subdepartment_action(method):
+    def _subdepartmnet_action(self, path, subdept_id, obj_type=None):
+        location = LocationTag.get(path)
+        if location is None:
+            abort(404)
+
+        subdepartment = meta.Session.query(SubDepartment).filter_by(id=subdept_id).one()
+        if subdepartment is None:
+            abort(404)
+
+        c.security_context = location
+        c.object_location = None
+        c.location = location
+        c.breadcrumbs = subdepartment_breadcrumbs(subdepartment)
+        c.subdepartment = subdepartment
+
+        c.theme = location.get_theme()
+        c.notabs = True
+
+        c.menu_items = subdepartment_menu_items(subdepartment)
+
+        c.current_menu_item = None
+        if obj_type is None:
+            return method(self, location, subdepartment)
+        else:
+            return method(self, location, subdepartment, obj_type)
+    return _subdepartmnet_action
 
 
 class LocationEditForm(Schema):
@@ -166,6 +242,7 @@ class NewDomainForm(Schema):
 class SubDepartmentAddForm(Schema):
     allow_extra_fields = True
     title = validators.UnicodeString(not_empty=True, strip=True)
+    site_url = validators.UnicodeString(strip=True)
     description = validators.UnicodeString(strip=True)
 
 
@@ -199,8 +276,12 @@ class LocationWallMixin(WallMixin):
         subjects = meta.Session.query(Subject)\
             .filter(Subject.location_id.in_(locations))\
             .all()
-        subject_ids = [subject.id for subject in subjects
-                       if check_crowds(["subject_accessor"], c.user, subject)]
+        if self.feed_filter == 'sub_department':
+            subject_ids = [subject.id for subject in self.sub_department.subjects
+                           if check_crowds(["subject_accessor"], c.user, subject)]
+        else:
+            subject_ids = [subject.id for subject in subjects
+                           if check_crowds(["subject_accessor"], c.user, subject)]
         public_groups = meta.Session.query(Group)\
             .filter(Group.location_id.in_(locations))\
             .filter(Group.forum_is_public == True)\
@@ -211,8 +292,10 @@ class LocationWallMixin(WallMixin):
         events_query = evts_generic
         if self.feed_filter == 'subjects':
             return events_query.where(or_(obj_id_in_list, t_wall_posts.c.subject_id.in_(subject_ids)))
+        elif self.feed_filter == 'sub_department':
+            return events_query.where(or_(t_evt.c.object_id.in_(subject_ids) if subject_ids else False, t_wall_posts.c.subject_id.in_(subject_ids)))
         elif self.feed_filter == 'discussions':
-            return events_query.where(t_wall_posts.c.target_location_id.in_(locations))
+            return events_query.where(or_(t_wall_posts.c.target_location_id.in_(locations), t_wall_posts.c.subject_id.in_(subject_ids)))
         else:
             return events_query.where(or_(obj_id_in_list, t_wall_posts.c.target_location_id.in_(locations),
                                           t_wall_posts.c.subject_id.in_(subject_ids)))
@@ -220,11 +303,14 @@ class LocationWallMixin(WallMixin):
 
 class TeacherSearchMixin():
 
-    def _search_teachers(self, location, text):
+    def _search_teachers(self, location, text, sub_department_id=None):
         locations = [loc.id for loc in location.flatten]
 
         query = meta.Session.query(Teacher)\
                 .filter(Teacher.location_id.in_(locations))
+
+        if sub_department_id:
+            query = query.filter_by(sub_department_id=sub_department_id)
 
         if text:
             query = query.filter(Teacher.fullname.contains(text))
@@ -245,6 +331,11 @@ class TeacherSearchMixin():
 
 
 class LocationController(SearchBaseController, UniversityListMixin, LocationWallMixin, TeacherSearchMixin):
+    catalog_template_names = {'group': '/location/groups.mako',
+                              'subject': '/location/subjects.mako',
+                              'teacher': '/location/teachers.mako',
+                              'sub_department': '/location/sub_departments.mako',
+                              'department': '/location/departments.mako'}
 
     @location_action
     def index(self, location):
@@ -276,6 +367,31 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         self._set_wall_variables()
         return render('location/feed.mako')
 
+    def _make_search_query(self, search_params):
+        query = search_query(**search_params)
+        if getattr(c, 'selected_sub_department_id', None):
+            query = query.join(Subject)
+            query = query.filter(Subject.sub_department_id==c.selected_sub_department_id)
+        return query
+
+    def _list_departments(self, location, text):
+        c.page = int(request.params.get('page', 1))
+        c.results = paginate.Page(location.children,
+                                  page=c.page,
+                                  items_per_page=30,
+                                  item_count=len(location.children),
+                                  obj_type='department')
+        c.searched = True
+
+    def _list_sub_departments(self, location, text):
+        c.page = int(request.params.get('page', 1))
+        c.results = paginate.Page(location.sub_departments,
+                                  page=c.page,
+                                  items_per_page=30,
+                                  item_count=len(location.sub_departments),
+                                  obj_type='sub_department')
+        c.searched = True
+
     @location_action
     @validate(schema=SearchSubmit, post_only=False, on_get=True)
     def catalog(self, location, obj_type):
@@ -286,18 +402,29 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         c.text = self.form_result.get('text', '')
 
         if obj_type == 'teacher':
-            self._search_teachers(location, c.text)
+            self._search_teachers(location, c.text, c.selected_sub_department_id)
+        elif obj_type == 'department':
+            self._list_departments(location, c.text)
+        elif obj_type == 'sub_department':
+            self._list_sub_departments(location, c.text)
         else:
             self._search()
 
-        # render template by object type
-        template_names = {'group': '/location/groups.mako',
-                          'subject': '/location/subjects.mako',
-                          'teacher': '/location/teachers.mako'}
+        c.sub_departments = []
+        if obj_type == 'teacher':
+            c.sub_departments = [sub_department
+                                 for sub_department in c.location.sub_departments
+                                 if bool(sub_department.teachers)]
+        elif obj_type == 'subject':
+            c.sub_departments = [sub_department
+                                 for sub_department in c.location.sub_departments
+                                 if bool(sub_department.subjects)]
 
-        if obj_type in template_names:
+        # render template by object type
+
+        if obj_type in self.catalog_template_names:
             c.current_menu_item = obj_type
-            return render(template_names[obj_type])
+            return render(self.catalog_template_names[obj_type])
         else:
             abort(404)
 
@@ -309,6 +436,10 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
         if obj_type == 'teacher':
             self._search_teachers(location, self.form_result.get('text', ''))
+        elif obj_type == 'department':
+            self._list_departments(location, c.text)
+        elif obj_type == 'sub_department':
+            self._list_sub_departments(location, c.text)
         else:
             self._search()
 
@@ -319,18 +450,14 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
         # return specific snippet per object type
 
-        template_names = {'group': '/location/groups.mako',
-                          'subject': '/location/subjects.mako',
-                          'teacher': '/location/teachers.mako'}
-
-        if obj_type in template_names:
-            return render_mako_def(template_names[obj_type],
+        if obj_type in self.catalog_template_names:
+            return render_mako_def(self.catalog_template_names[obj_type],
                                    'search_results',
                                    results=c.results,
                                    search_query=search_query)
 
     def _edit_form(self):
-        c.menu_items = location_edit_menu_items()
+        c.menu_items = location_edit_menu_items(c.location)
         c.current_menu_item = 'settings'
         return render('location/edit.mako')
 
@@ -364,34 +491,25 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
             h.flash(_("Information updated."))
         redirect(location.url(action='edit'))
 
-    def _add_sub_department(self, location, values):
-        sub_department = SubDepartment(values['title'], location)
-        sub_department.description = values['description']
-        return sub_department
-
     @location_action
     @ActionProtector('moderator')
     def add_sub_department(self, location):
-        c.menu_items = location_edit_menu_items()
+        c.menu_items = location_edit_menu_items(location)
         c.current_menu_item = 'sub-departments'
         form = Form(location, request,
-                    apply=self._add_sub_department,
                     schema=SubDepartmentAddForm(),
                     action='ADD')
 
-        sub_department = form.work()
-        if sub_department is not None:
+        result = form.work()
+        if result is not None:
+            sub_department = SubDepartment(result['title'], location)
+            sub_department.site_url = result['site_url']
+            sub_department.description = result['description']
             meta.Session.commit()
-            redirect(location.url(action='sub_departments'))
+            redirect(location.url(action='edit_sub_departments'))
 
         c.form = form
         return render('location/add_sub_department.mako')
-
-
-    def _update_sub_department(self, sub_department, values):
-        sub_department.title = values['title']
-        sub_department.description = values['description']
-        return sub_department
 
     @location_action
     @ActionProtector('moderator')
@@ -399,19 +517,22 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         sub_department_id = request.urlvars['id']
         sub_department = SubDepartment.get(sub_department_id)
 
-        c.menu_items = location_edit_menu_items()
+        c.menu_items = location_edit_menu_items(location)
         c.current_menu_item = 'sub-departments'
         form = Form(sub_department, request,
-                    apply=self._update_sub_department,
                     defaults={'title': sub_department.title,
+                              'site_url': sub_department.site_url,
                               'description': sub_department.description},
                     schema=SubDepartmentAddForm(),
                     action='UPDATE')
 
-        sub_department = form.work()
-        if sub_department is not None:
+        result = form.work()
+        if result is not None:
+            sub_department.title = result['title']
+            sub_department.site_url = result['site_url']
+            sub_department.description = result['description']
             meta.Session.commit()
-            redirect(location.url(action='sub_departments'))
+            redirect(location.url(action='edit_sub_departments'))
 
         c.form = form
         return render('location/edit_sub_department.mako')
@@ -423,17 +544,17 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         sub_department = SubDepartment.get(sub_department_id)
         sub_department.delete()
         meta.Session.commit()
-        redirect(location.url(action='sub_departments'))
+        redirect(location.url(action='edit_sub_departments'))
 
     @location_action
     @ActionProtector('moderator')
-    def sub_departments(self, location):
-        c.menu_items = location_edit_menu_items()
+    def edit_sub_departments(self, location):
+        c.menu_items = location_edit_menu_items(location)
         c.current_menu_item = 'sub-departments'
-        return render('location/sub_departments.mako')
+        return render('location/edit_sub_departments.mako')
 
     def _edit_registration_form(self):
-        c.menu_items = location_edit_menu_items()
+        c.menu_items = location_edit_menu_items(c.location)
         c.current_menu_item = 'registration'
         return render('location/edit_registration.mako')
 
@@ -452,6 +573,23 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         return htmlfill.render(self._edit_registration_form(),
                                defaults=defaults,
                                force_defaults=False)
+
+    @subdepartment_action
+    def subdepartment(self, location, subdepartment):
+        if c.user:
+            c.current_menu_item = 'feed'
+            self.feed_filter = 'sub_department'
+            self.sub_department = subdepartment
+            c.notabs = True
+
+            c.show_discussion_form = False
+
+            self._set_wall_variables()
+            return render('location/sub_department_feed.mako')
+        else:
+            c.current_menu_item = 'about'
+            return render('location/subdepartment.mako')
+
 
     @location_action
     @ActionProtector('moderator')
@@ -508,7 +646,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
     @location_action
     @ActionProtector('moderator')
     def edit_theme(self, location):
-        c.menu_items = location_edit_menu_items()
+        c.menu_items = location_edit_menu_items(location)
         c.current_menu_item = 'theming'
         if location.theme is None:
             c.example_theme = Theme()
@@ -652,7 +790,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
     @location_action
     @ActionProtector('moderator')
     def unverified_teachers(self, location):
-        c.menu_items = location_edit_menu_items()
+        c.menu_items = location_edit_menu_items(location)
         c.current_menu_item = 'unverified_teachers'
         c.teachers = meta.Session.query(Teacher)\
             .filter(Teacher.location==location)\

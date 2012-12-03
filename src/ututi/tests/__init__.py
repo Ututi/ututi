@@ -45,7 +45,6 @@ class UtutiBaseLayer(LayerBase):
         initialize_db_defaults(meta.engine)
 
         config = pylons.test.pylonsapp.config
-        config['tpl_lang'] = 'lt'
         config['default_search_dict'] = 'pg_catalog.english'
         mail_queue[:] = []
         sms_queue[:] = []
@@ -92,7 +91,6 @@ class UtutiQuickLayerBase(LayerBase):
     def testSetUp(self):
         config = pylons.test.pylonsapp.config
         config['default_search_dict'] = 'pg_catalog.english'
-        config['tpl_lang'] = 'lt'
         pylons.config._push_object(config)
         mail_queue[:] = []
         sms_queue[:] = []
@@ -121,6 +119,15 @@ class UtutiQuickLayerBase(LayerBase):
         meta.Session.rollback()
         meta.Session.remove()
         pylons.config._pop_object(config)
+
+
+# Patch out Pylons layer tear down to stop clearing_mappers
+# as it stops declarative reflection from working
+from nous.pylons.testing import PylonsBaseLayer
+def new_tearDown(self):
+    pylons.test.pylonsapp = None
+
+PylonsBaseLayer.tearDown = new_tearDown
 
 
 UtutiLayer = CompositeLayer(PylonsTestBrowserLayer('test.ini', conf_dir, meta),

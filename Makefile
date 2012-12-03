@@ -5,7 +5,8 @@
 
 BOOTSTRAP_PYTHON=python2.6
 TIMEOUT=1
-BUILDOUT = bin/buildout -t $(TIMEOUT) && touch bin/*
+BUILDOUT_OPTIONS=
+BUILDOUT = bin/buildout -t $(TIMEOUT) $(BUILDOUT_OPTIONS) && touch bin/*
 
 export LC_ALL := en_US.utf8
 

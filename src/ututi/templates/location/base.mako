@@ -59,21 +59,21 @@
     font-size: 14px;
   }
 
-  ul#breadcrumbs li {
+  ul#breadcrumbs > li {
     display: inline;
     margin-right: 2px;
     padding-left: 12px;
     background: url("${url('/img/icons.com/arrow_right.png')}") no-repeat left center;
   }
-  ul#breadcrumbs li.first {
+  ul#breadcrumbs > li.first {
     padding-left: 0;
     background: none;
   }
 </%def>
 
 <%def name="breadcrumbs()">
-<%doc>Only show breadcrumbs if we're not at root.</%doc>
-%if c.location.parent:
+<%doc>Only show breadcrumbs if we're not at root and not in a sub-department.</%doc>
+%if c.location.parent or hasattr(c, 'subdepartment'):
 <ul id="breadcrumbs">
   %for n, crumb in enumerate(c.breadcrumbs, 1):
     <li class="${'first' if n == 1 else ''}">

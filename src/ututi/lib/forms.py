@@ -243,13 +243,16 @@ class Form(FormBase):
 
     """
 
-    def __init__(self, context, request, apply, schema, action, defaults=None):
+    def apply(self, context, values):
+        return values
+
+    def __init__(self, context, request, schema, action, apply=None, defaults=None):
         self.request = request
         self.context = context
         self.schema = schema
-        self.apply = apply
+        if apply is not None:
+            self.apply = apply
         self.action = action
 
         if defaults is not None:
             self.defaults = defaults
-

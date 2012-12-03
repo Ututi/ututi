@@ -49,7 +49,7 @@ class Export(object):
 class UniversityExportMixin(object):
 
     def _format_file_row(self, file):
-        return [file.created.emails[0].email,
+        return [file.created.email.email,
                 file.created_on.strftime(FMT_TIMESTAMP),
                 file.folder,
                 file.title,
@@ -62,7 +62,7 @@ class UniversityExportMixin(object):
                     .filter(Subject.location_id.in_([loc.id for loc in university.flatten]))\
                     .filter_by(deleted_by=None):
                 subjects.writerow(['/'.join(subject.location.path[1:]),
-                                   subject.created.emails[0].email,
+                                   subject.created.email.email,
                                    subject.subject_id,
                                    subject.title,
                                    subject.lecturer,
@@ -79,7 +79,7 @@ class UniversityExportMixin(object):
                     .filter(Group.location_id.in_([loc.id for loc in university.flatten]))\
                     .filter_by(deleted_by=None):
                 groups.writerow(['/'.join(group.location.path[1:]),
-                                 group.created.emails[0].email,
+                                 group.created.email.email,
                                  group.group_id,
                                  group.year.strftime('%Y'),
                                  group.title,
@@ -92,7 +92,7 @@ class UniversityExportMixin(object):
                 for membership in group.members:
                     group_members.writerow(['/'.join(group.location.path[1:]),
                                             group.group_id,
-                                            membership.user.emails[0].email])
+                                            membership.user.email.email])
                 for file in group.files:
                     if not file.isNullFile() and not file.isDeleted():
                         group_files.writerow(['/'.join(group.location.path[1:]),
@@ -117,8 +117,8 @@ class UniversityExportMixin(object):
         users.update(meta.Session.query(User).filter_by(location=university))
         with Export(zf, 'users.csv') as users_csv:
             for user in users:
-                users_csv.writerow([user.emails[0].email,
-                                    str(user.emails[0].confirmed),
+                users_csv.writerow([user.email.email,
+                                    str(user.email.confirmed),
                                     user.fullname,
                                     user.password,
                                     user.site_url,
@@ -137,7 +137,7 @@ class UniversityExportMixin(object):
                                     str(getattr(user, "teacher_verified", None)),
                                     ])
                 if user.logo:
-                    zf.writestr('user_logos/%s.png' % user.emails[0].email, prepare_image(user.logo))
+                    zf.writestr('user_logos/%s.png' % user.email.email, prepare_image(user.logo))
         #accepted_terms timestamp default null,
         #last_seen_feed timestamp not null default (now() at time zone 'UTC'),
         #location_country varchar(5) default null,

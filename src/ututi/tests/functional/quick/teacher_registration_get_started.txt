@@ -220,6 +220,7 @@ User sees these recommended actions on his dashboard:
 
     >>> user.printCssQuery('.page-section > div.title', strip=True)
     <div>Fill your page</div>
+    <div>Create a blog post</div>
     <div>Create your subjects</div>
     <div>Add your students' contacts</div>
 
@@ -248,6 +249,7 @@ If user add some info, this action will change:
         </form>
       </span>
     </div>
+    <div>Create a blog post</div>
     <div>Create your subjects</div>
     <div>Add your students' contacts</div>
 
@@ -277,6 +279,7 @@ Now this action has also will change:
         </form>
       </span>
     </div>
+    <div>Create a blog post</div>
     <div>
         My courses
         <span>
@@ -309,6 +312,7 @@ behavior by removing profile information:
     >>> user.click('Home')
     >>> user.printCssQuery('.page-section > div.title', strip=True)
     <div>Fill your page</div>
+    <div>Create a blog post</div>
     <div>
         My courses
         <span>

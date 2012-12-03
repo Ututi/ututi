@@ -23,6 +23,7 @@ from ututi.lib.security import ActionProtector, deny, check_crowds, is_universit
 from ututi.lib.search import search, search_query, search_query_count
 from ututi.lib.fileview import FileViewMixin
 from ututi.lib.base import BaseController, render, u_cache
+from ututi.lib.validators import SubDepartmentIdValidator
 from ututi.lib.validators import LocationTagsValidator, TagsValidator, validate
 from ututi.lib.wall import WallMixin
 import ututi.lib.helpers as h
@@ -122,7 +123,8 @@ class SubjectForm(Schema):
 
     location = Pipe(ForEach(validators.UnicodeString(strip=True, max=250)),
                     LocationTagsValidator())
-
+    sub_department_id = Pipe(validators.Int(),
+                             SubDepartmentIdValidator())
     title = validators.UnicodeString(not_empty=True, strip=True)
     lecturer = validators.UnicodeString(strip=True)
     subject_visibility = validators.OneOf(['everyone', 'department_members', 'university_members'], if_missing=None)
@@ -166,6 +168,8 @@ class NewSubjectForm(Schema):
     pre_validators = [NestedVariables()]
     location = Pipe(ForEach(validators.UnicodeString(strip=True, max=250)),
                     LocationTagsValidator())
+    sub_department_id = Pipe(validators.Int(),
+                             SubDepartmentIdValidator())
     title = validators.UnicodeString(strip=True)
     lecturer = validators.UnicodeString(strip=True)
 
@@ -177,6 +181,7 @@ class SubjectAddMixin(object):
         id = ''.join(Random().sample(string.ascii_lowercase, 8))  # use random id first
         lecturer = self.form_result['lecturer']
         location = self.form_result['location']
+        sub_department_id = self.form_result.get('sub_department_id', None)
         description = self.form_result['description']
 
         if lecturer == '':
@@ -192,6 +197,7 @@ class SubjectAddMixin(object):
             stags.append(SimpleTag.get(tag))
 
         subj = Subject(id, title, location, lecturer, description, stags)
+        subj.sub_department_id = sub_department_id
 
         meta.Session.add(subj)
         meta.Session.flush()
@@ -268,13 +274,13 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         return render('subject/feed.mako')
 
     def _add_form(self):
+        c.preset_location = c.user.location
         return render('subject/add.mako')
 
     @ActionProtector("user")
     def add(self):
         defaults = dict([('location-%d' % n, tag)
                          for n, tag in enumerate(c.user.location.hierarchy())])
-        c.preset_location = c.user.location
         return htmlfill.render(self._add_form(), defaults=defaults)
 
     @ActionProtector("user")
@@ -309,6 +315,8 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
             return redirect(url(controller='subject', action='add_description'))
 
     def _add_full_form(self):
+        location = LocationTag.get(session['subject_location_id'])
+        c.subject_location = location
         return render('subject/add_description.mako')
 
     @ActionProtector("user")
@@ -372,9 +380,9 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
             'description': subject.description,
             'subject_visibility': subject.visibility,
             'subject_edit': subject.edit_settings_perm,
-            'subject_post_discussions': subject.post_discussion_perm
+            'subject_post_discussions': subject.post_discussion_perm,
+            'sub_department_id': subject.sub_department_id
             }
-        c.hide_location = True
 
         if subject.location is not None:
             location = dict([('location-%d' % n, tag)
@@ -384,6 +392,53 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
 
         defaults.update(location)
         return htmlfill.render(self._edit_form(), defaults=defaults)
+
+    @subject_action
+    @subject_privacy
+    @validate(schema=SubjectForm, form='_edit_form')
+    @ActionProtector("user")
+    def update(self, subject):
+        if not hasattr(self, 'form_result'):
+            redirect(url(controller='subject', action='add'))
+
+        #check if we need to regenerate the id
+        clash = Subject.get(self.form_result.get('location', None), subject.subject_id)
+        if clash is not None and clash is not subject:
+            subject.subject_id = subject.generate_new_id()
+
+        subject.title = self.form_result['title']
+        subject.lecturer = self.form_result['lecturer']
+        subject.location = self.form_result['location']
+        subject.description = self.form_result.get('description', None)
+        subject.sub_department_id = self.form_result.get('sub_department_id', None)
+
+        #check to see what kind of tags we have got
+        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', []) if len(tag.strip().lower()) < 250 and tag.strip() != '']
+        if tags == []:
+            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',') if len(tag.strip()) < 250 and tag.strip() != '']
+
+        subject.tags = []
+        for tag in tags:
+            subject.tags.append(SimpleTag.get(tag))
+
+        # update subject permissions
+        if check_crowds(["teacher", "moderator", "root"], c.user, subject) and 'subject_visibility' in self.form_result:
+            subject.visibility = self.form_result['subject_visibility']
+            subject.edit_settings_perm = self.form_result['subject_edit']
+            subject.post_discussion_perm = self.form_result['subject_post_discussions']
+            # remove subject from watched list for users who can't view subject anymore
+            if subject.visibility != 'everyone':
+                crowd_fn = is_university_member if subject.visibility == 'university_members' else is_department_member
+                for watcher in subject.watching_users:
+                    if not crowd_fn(watcher.user, subject):
+                        watcher.user.unwatchSubject(subject)
+
+        meta.Session.commit()
+
+        redirect(url(controller='subject',
+                    action='home',
+                    id=subject.subject_id,
+                    tags=subject.location_path))
 
     @subject_action
     @subject_privacy
@@ -463,53 +518,6 @@ class SubjectController(BaseController, FileViewMixin, SubjectAddMixin, SubjectW
         meta.Session.add(teacher)
         meta.Session.commit()
         redirect(c.subject.url(action='teacher_assignment'))
-
-
-    @subject_action
-    @subject_privacy
-    @validate(schema=SubjectForm, form='_edit_form')
-    @ActionProtector("user")
-    def update(self, subject):
-        if not hasattr(self, 'form_result'):
-            redirect(url(controller='subject', action='add'))
-
-        #check if we need to regenerate the id
-        clash = Subject.get(self.form_result.get('location', None), subject.subject_id)
-        if clash is not None and clash is not subject:
-            subject.subject_id = subject.generate_new_id()
-
-        subject.title = self.form_result['title']
-        subject.lecturer = self.form_result['lecturer']
-        subject.location = self.form_result['location']
-        subject.description = self.form_result.get('description', None)
-
-        #check to see what kind of tags we have got
-        tags = [tag.strip().lower() for tag in self.form_result.get('tagsitem', []) if len(tag.strip().lower()) < 250 and tag.strip() != '']
-        if tags == []:
-            tags = [tag.strip().lower() for tag in self.form_result.get('tags', '').split(',') if len(tag.strip()) < 250 and tag.strip() != '']
-
-        subject.tags = []
-        for tag in tags:
-            subject.tags.append(SimpleTag.get(tag))
-
-        # update subject permissions
-        if check_crowds(["teacher", "moderator", "root"], c.user, subject) and 'subject_visibility' in self.form_result:
-            subject.visibility = self.form_result['subject_visibility']
-            subject.edit_settings_perm = self.form_result['subject_edit']
-            subject.post_discussion_perm = self.form_result['subject_post_discussions']
-            # remove subject from watched list for users who can't view subject anymore
-            if subject.visibility != 'everyone':
-                crowd_fn = is_university_member if subject.visibility == 'university_members' else is_department_member
-                for watcher in subject.watching_users:
-                    if not crowd_fn(watcher.user, subject):
-                        watcher.user.unwatchSubject(subject)
-
-        meta.Session.commit()
-
-        redirect(url(controller='subject',
-                    action='home',
-                    id=subject.subject_id,
-                    tags=subject.location_path))
 
     @subject_action
     @subject_privacy

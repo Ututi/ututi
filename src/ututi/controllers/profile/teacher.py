@@ -13,7 +13,7 @@ from ututi.lib.forms import validate
 from ututi.lib.messaging import EmailMessage
 from ututi.lib.mailinglist import post_message
 
-from ututi.model import meta, File, TeacherGroup, TeacherBlogPost
+from ututi.model import meta, File, TeacherGroup, TeacherBlogPost, SubDepartment
 from ututi.model.events import TeacherMessageEvent
 from ututi.model.i18n import Language
 from ututi.controllers.profile.base import ProfileControllerBase
@@ -53,13 +53,15 @@ class TeacherProfileController(ProfileControllerBase):
 
     @ActionProtector("teacher")
     def register_welcome(self):
+        c.user_blog_posts = meta.Session.query(TeacherBlogPost).filter_by(created=c.user).order_by(TeacherBlogPost.created_on.desc()).all()
+        c.has_blog_posts = bool(c.user_blog_posts)
         c.welcome = True
-        c.has_blog_posts = bool(meta.Session.query(TeacherBlogPost).filter_by(created=c.user).count())
         return render('/profile/teacher/dashboard.mako')
 
     @ActionProtector("teacher")
     def dashboard(self):
-        c.has_blog_posts = bool(meta.Session.query(TeacherBlogPost).filter_by(created=c.user).count())
+        c.user_blog_posts = meta.Session.query(TeacherBlogPost).filter_by(created=c.user).order_by(TeacherBlogPost.created_on.desc()).all()
+        c.has_blog_posts = bool(c.user_blog_posts)
         return render('/profile/teacher/dashboard.mako')
 
     def _edit_profile_tabs(self):
@@ -283,7 +285,7 @@ class TeacherProfileController(ProfileControllerBase):
                     attachments = [{'filename': self.form_result['file'].filename,
                                     'file': self.form_result['file'].file}]
 
-                msg = EmailMessage(subject, msg_text, sender=c.user.emails[0].email, force=True, attachments=attachments)
+                msg = EmailMessage(subject, msg_text, sender=c.user.email.email, force=True, attachments=attachments)
                 msg.send(group.email)
 
             message = _(u'Message sent to %(group_title)s (%(group_email)s).') % {

@@ -20,8 +20,8 @@ def create_user(fullname='Administrator of the university',
 
     # Adding second email
     if second_mail:
-        meta.Session.execute("insert into emails (id, email, confirmed)"
-                             " (select users.id, '%(second_mail)s', true from users where username = '%(username)s')" %
+        meta.Session.execute("insert into emails (id, email, main, confirmed)"
+                             " (select users.id, '%(second_mail)s', false, true from users where username = '%(username)s')" %
                              dict(second_mail=second_mail, username=username))
 
     meta.Session.commit()

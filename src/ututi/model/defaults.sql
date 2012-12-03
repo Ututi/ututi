@@ -90,6 +90,7 @@ create table users (
 create table teachers (
        id int8 references users(id) on delete cascade,
        teacher_verified boolean default null,
+       sub_department_id int8 default null,
        teacher_position varchar(200) default null,
        work_address varchar(200) default null,
        publications text default null,
@@ -134,6 +135,7 @@ create table emails (
        email varchar(320),
        confirmed boolean default FALSE,
        confirmation_key char(32) default '',
+       main boolean default TRUE,
        primary key (id, email));;
 
 
@@ -188,6 +190,14 @@ $$ LANGUAGE plpgsql;;
 CREATE TRIGGER set_deleted_on BEFORE UPDATE ON content_items
     FOR EACH ROW EXECUTE PROCEDURE set_deleted_on();;
 
+create function delete_content_item() returns trigger as $$
+    begin
+        delete from content_items where content_items.id=OLD.id;
+        RETURN NULL;
+    end;
+$$ language plpgsql;;
+
+
 /* private messages */
 CREATE TABLE private_messages (
        id int8 references content_items(id) on delete cascade,
@@ -200,6 +210,9 @@ CREATE TABLE private_messages (
        hidden_by_sender boolean default false,
        hidden_by_recipient boolean default false,
        primary key (id));;
+
+create trigger delete_content_item_after_private_message_delete after delete on private_messages
+    for each row execute procedure delete_content_item();;
 
 CREATE INDEX sender_id ON private_messages (sender_id);;
 CREATE INDEX recipient_id ON private_messages (recipient_id);;
@@ -216,6 +229,9 @@ create table files (
        description text default '',
        parent_id int8 default null references content_items(id) on delete set null,
        primary key (id));;
+
+create trigger delete_content_item_after_file_delete after delete on files
+    for each row execute procedure delete_content_item();;
 
 create index files_parent_id_idx on files(parent_id);
 create index md5 on files (md5);;
@@ -318,6 +334,9 @@ create table groups (
        mailinglist_moderated bool not null default true,
        primary key (id));;
 
+create trigger delete_content_item_after_group_delete after delete on groups
+    for each row execute procedure delete_content_item();;
+
 /* group mailinglist whitelist */
 create table group_whitelist (
        id bigserial not null,
@@ -354,6 +373,7 @@ create index group_members_user_id_idx on group_members(user_id);
 /* A table for subjects */
 create table subjects (
        id int8 not null references content_items(id) on delete cascade,
+       sub_department_id int8 default null,
        subject_id varchar(150) default null,
        title varchar(500) not null,
        lecturer varchar(500) default null,
@@ -362,6 +382,9 @@ create table subjects (
        edit_settings_perm varchar(40) not null default 'everyone',
        post_discussion_perm varchar(40) not null default 'everyone',
        primary key (id));;
+
+create trigger delete_content_item_after_subject_delete after delete on subjects
+    for each row execute procedure delete_content_item();;
 
 /* A table that tracks subjects watched and ignored by a user */
 
@@ -377,12 +400,18 @@ create table pages (
        id int8 not null references content_items(id) on delete cascade,
        primary key(id));;
 
+create trigger delete_content_item_after_page_delete after delete on pages
+    for each row execute procedure delete_content_item();;
+
 create table page_versions(
        id int8 not null references content_items(id) on delete cascade,
        page_id int8 not null references pages(id) on delete cascade,
        title varchar(255) not null default '',
        content text not null default '',
        primary key (id));;
+
+create trigger delete_content_item_after_page_version_delete after delete on page_versions
+    for each row execute procedure delete_content_item();;
 
 /* A table linking pages and subjects */
 
@@ -421,6 +450,10 @@ create table group_mailing_list_messages (
 CREATE INDEX group_mailing_list_messages_reply_to_idx ON group_mailing_list_messages USING btree (reply_to_group_id, reply_to_message_id);
 
 CREATE INDEX group_mailing_list_messages_thread_idx ON group_mailing_list_messages USING btree (thread_group_id, thread_message_id);
+
+create trigger delete_content_item_after_group_delete after delete on group_mailing_list_messages
+    for each row execute procedure delete_content_item();;
+
 
 CREATE FUNCTION set_thread_id() RETURNS trigger AS $$
     DECLARE
@@ -466,19 +499,6 @@ $$ LANGUAGE plpgsql;;
 CREATE TRIGGER set_thread_id BEFORE INSERT OR UPDATE ON group_mailing_list_messages
     FOR EACH ROW EXECUTE PROCEDURE set_thread_id();;
 
-
-create function delete_content_item() returns trigger as $$
-    begin
-        delete from content_items where content_items.id=OLD.id;
-        RETURN NULL;
-    end;
-$$ language plpgsql;;
-
-create trigger delete_content_item_after_group_delete after delete on group_mailing_list_messages
-    for each row execute procedure delete_content_item();;
-
-create trigger delete_content_item_after_page_version_delete after delete on page_versions
-    for each row execute procedure delete_content_item();;
 
 /* SMS */
 
@@ -539,6 +559,9 @@ CREATE TABLE forum_posts (
        parent_id int8 default null references content_items(id) on delete cascade,
        category_id int8 not null references forum_categories(id) on delete cascade,
        primary key(id));;
+
+create trigger delete_content_item_after_forum_post_delete after delete on forum_posts
+    for each row execute procedure delete_content_item();;
 
 CREATE INDEX forum_posts_thread_id ON forum_posts(thread_id);
 CREATE INDEX forum_posts_parent_id ON forum_posts(parent_id);
@@ -884,7 +907,7 @@ CREATE TRIGGER on_content_update BEFORE UPDATE ON content_items
 create table events (
        id bigserial not null,
        object_id int8 default null references content_items(id) on delete cascade,
-       author_id int8 references users(id) on delete cascade,
+       author_id int8 references authors(id) on delete cascade,
        recipient_id int8 default null references users(id) on delete cascade,
        created timestamp not null default (now() at time zone 'UTC'),
        last_activity timestamp not null default (now() at time zone 'UTC'),
@@ -953,6 +976,9 @@ $$ LANGUAGE plpgsql;;
 
 CREATE TRIGGER after_event_comment_created AFTER INSERT ON event_comments
     FOR EACH ROW EXECUTE PROCEDURE event_comment_created_trigger();;
+
+create trigger delete_content_item_after_event_comment_delete after delete on event_comments
+    for each row execute procedure delete_content_item();;
 
 /* page events */
 CREATE FUNCTION page_modified_trigger() RETURNS trigger AS $$
@@ -1671,7 +1697,7 @@ create index email_domains_domain_name_idx on email_domains(domain_name);
 create table wall_posts (
        id int8 references content_items(id) on delete cascade,
        subject_id int8 references subjects(id) on delete cascade default null,
-       target_location_id int8 default null, /* Should this reference a location? */
+       target_location_id int8 references tags(id) on delete cascade default null,
        content text not null,
        primary key (id),
        check(subject_id is not null or target_location_id is not null));
@@ -1692,6 +1718,9 @@ $$ language plpgsql;;
 create trigger after_wall_post_event_trigger after insert or update on wall_posts
     for each row execute procedure wall_post_event_trigger();
 
+create trigger delete_content_item_after_wall_post_delete after delete on wall_posts
+    for each row execute procedure delete_content_item();;
+
 /* A table for sub-departments
 
 Universities and Departments are covered by location tag functionality.
@@ -1701,9 +1730,18 @@ create table sub_departments (
        location_id int8 not null references tags(id) on delete cascade,
        slug varchar(150) default null,
        title varchar(500) not null,
+       site_url varchar(200) default null,
        description text default null,
        unique(location_id, slug),
        primary key (id));;
+
+alter table subjects add constraint subjects_sub_department_id_fkey
+      foreign key (sub_department_id) references sub_departments(id)
+      on delete set null;
+
+alter table teachers add constraint teachers_sub_department_id_fkey
+      foreign key (sub_department_id) references sub_departments(id)
+      on delete set null;
 
 /* A table for storing teacher blog posts.
  */
@@ -1712,6 +1750,9 @@ create table teacher_blog_posts (
        title varchar(250) not null,
        description text not null,
        primary key (id));;
+
+create trigger delete_content_item_after_blog_post_delete after delete on teacher_blog_posts
+    for each row execute procedure delete_content_item();;
 
 create function teacher_blog_post_event_trigger() returns trigger as $$
     begin
@@ -1731,3 +1772,6 @@ create table teacher_blog_comments (
        post_id int8 references teacher_blog_posts(id) on delete cascade not null,
        content text not null,
        primary key (id));;
+
+create trigger delete_content_item_after_blog_comment_delete after delete on teacher_blog_comments
+    for each row execute procedure delete_content_item();;

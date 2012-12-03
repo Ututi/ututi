@@ -119,7 +119,7 @@ ${h.javascript_link('/javascript/search.js')|n}
       %else:
         <input type="hidden" name="obj_type" value="${obj_type}" />
       %endif
-
+      ${caller.body() if caller else ''}
     </form>
   %endif
 

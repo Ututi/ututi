@@ -518,9 +518,9 @@ class SubjectWallPostEvent(Event, Commentable):
         return self.context.location.id
 
     def render(self):
-        return _("%(link_to_author)s wrote posted on %(link_to_subject)s wall." % {
-            'link_to_user': link_to(self.user.fullname, self.user.url()),
-            'link_to_subject': link_to(self.context.subject.title, self.context.subject.url())})
+        return _("%(link_to_author)s wrote on %(link_to_subject)s wall.") % {
+            'link_to_author': link_to(self.user.fullname, self.user.url()),
+            'link_to_subject': link_to(self.context.subject.title, self.context.subject.url())}
 
 
 class LocationWallPostEvent(Event, Commentable):
@@ -537,12 +537,16 @@ class LocationWallPostEvent(Event, Commentable):
         return self.context.target_location.id
 
     def render(self):
-        return _("%(link_to_author)s" % {
-            'link_to_user': link_to(self.user.fullname, self.user.url())})
+        return _("%(link_to_author)s wrote on %(link_to_location)s wall.") % {
+            'link_to_author': link_to(self.user.fullname, self.user.url()),
+            'link_to_location': link_to(self.context.target_location.title, self.context.target_location.url())}
 
 
 class TeacherBlogPostEvent(Event, Commentable):
-    pass
+    def render(self):
+        return _('%(link_to_author)s wrote a blog post %(link_to_post)s.') % {
+            'link_to_author': link_to(self.user.fullname, self.user.url()),
+            'link_to_post': link_to(self.context.title, self.context.url())}
 
 
 def setup_tables(engine):
@@ -567,7 +571,8 @@ def setup_orm():
                               polymorphic_identity='generic',
                               properties={'context': relation(ContentItem, backref=backref('events', cascade='save-update, merge, delete')),
                                           'user': relation(User, backref='events',
-                                                           primaryjoin=tables['users'].c.id==tables['events'].c.author_id),
+                                                           primaryjoin=tables['users'].c.id==tables['events'].c.author_id,
+                                                           foreign_keys=tables['events'].c.author_id),
                                           'children': relation(Event,
                                                                order_by=tables['events'].c.id.asc(),
                                                                backref=backref('parent',

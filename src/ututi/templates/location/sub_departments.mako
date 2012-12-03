@@ -1,25 +1,22 @@
-<%inherit file="/location/edit_base.mako" />
-<%namespace name="b" file="/sections/standard_blocks.mako" />
+<%inherit file="/location/catalog.mako" />
+<%namespace file="/search/index.mako" name="search" import="search_form, search_results"/>
 
-<div>
-  <div>
-    <%b:light_table title="Sub-departments" items="${c.location.sub_departments}">
-      <%def name="header(items)">
-        <th>${_('Sub-department')}</th>
-        <th>${_('The actions')}</th>
-      </%def>
-      <%def name="row(item)">
-        <td>
-          <a href="${c.location.url(action='edit_sub_department', id=item.id)}">${item.title}</a>
-        </td>
-        <td class="actions">
-          ${h.button_to('Delete', c.location.url(action='delete_sub_department', id=item.id))}
-        </td>
-      </%def>
-    </%b:light_table>
+<%def name="sub_department_snippet(sub_department)">
+  ${sub_department.snippet()}
+</%def>
 
-    <div>
-      ${h.button_to('Add new sub-department', c.location.url(action='add_sub_department'))}
-    </div>
-  </div>
-</div>
+<%def name="search_results(results, search_query=None)">
+  <%search:search_results results="${results}" controller='location' action='catalog_js' display="${self.sub_department_snippet}">
+    <%def name="header()">
+      ${_('Sub-departments')}
+    </%def>
+  </%search:search_results>
+</%def>
+
+<%def name="search_form()">
+## Can't search here
+</%def>
+
+<%def name="empty_box()">
+## This link is not displayed anywhere if location has no sublocations
+</%def>

@@ -30,30 +30,25 @@
   ${h.input_line('title', _('Subject title:'))}
 
   <div class="formField">
-    %if hasattr(c, 'hide_location'):
-    <div id="location-preview" style="display: none">
+    ${hidden_fields(c.subject.location)}
+    <div id="location-preview">
       <label for="tags">
         <span class="labelText">${_('University | Department:')}</span>
       </label>
       ${item_location_full(c.subject)}
-      <a id="location-edit-link" href="#">${_("Change")}</a>
-    </div>
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $('#location-preview').show();
-        $('#location-edit').hide();
-        $('#location-edit-link').click(function() {
-          $('#location-preview').hide();
-          $('#location-edit').show();
-          return false;
-        });
-      })
-    </script>
-    %endif
-    <div id="location-edit">
-      ${location_widget(2, titles=(_("University:"), _("Department:")), add_new=(c.tpl_lang=='pl'))}
     </div>
   </div>
+
+  %if c.subject.location.sub_departments:
+      ${h.select_line('sub_department_id',
+                      _('Sub-department:'),
+                      [('', '')] + [
+                       (sd.id, sd.title)
+                       for sd in c.subject.location.sub_departments],
+                      selected=[c.subject.sub_department])}
+  %else:
+      <input type="hidden" name="sub_department_id" value=""/>
+  %endif
 
   ${h.input_line('lecturer', _('Lecturer:'))}
 

@@ -1,6 +1,11 @@
 <%inherit file="/base.mako" />
 <%namespace file="/portlets/universal.mako" import="navigation_portlet" />
 
+<%def name="head_tags()">
+  ${parent.head_tags()}
+  ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
+</%def>
+
 <%def name="portlets()">
   ${navigation_portlet(c.menu_items, c.current_menu_item,
     _("Network settings:"))}

@@ -19,7 +19,7 @@ from ututi.lib.wall import WallMixin
 
 from ututi.model import meta, User, Medal, LocationTag, TeacherBlogPost, TeacherBlogComment
 
-from ututi.controllers.profile.validators import BlogPostCommentForm
+from ututi.controllers.profile.validators import BlogPostCommentForm, BlogPostCommentDeleteForm
 
 log = logging.getLogger(__name__)
 
@@ -277,6 +277,17 @@ class UserController(BaseController, UserInfoWallMixin):
         meta.Session.add(comment)
         meta.Session.commit()
         return redirect(post.url())
+
+    @validate(schema=BlogPostCommentDeleteForm())
+    @teacher_blog_post_action
+    @ActionProtector("user")
+    def teacher_delete_blog_comment(self, user, post):
+        if hasattr(self, 'form_result') and self.form_result.get('comment_id'):
+            comment = meta.Session.query(TeacherBlogComment).filter_by(id=self.form_result.get('comment_id'), post_id=post.id).one()
+            if comment and (c.user.id == comment.created.id or c.user.id == post.created.id):
+                meta.Session.delete(comment)
+                meta.Session.commit()
+        return redirect(request.referrer)
 
     @teacher_profile_action
     @ActionProtector("user")

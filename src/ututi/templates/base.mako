@@ -24,7 +24,7 @@ else:
 
 %>
 
-<div id="layout-wrap" class="${layout} clearfix">
+<div id="layout-wrap" class="${layout} ${'themed' if c.theme else ''} clearfix">
   <div id="main-content">
     <div class="content-inner">
       ${self.flash_messages()}

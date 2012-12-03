@@ -43,9 +43,12 @@ No email messages will be sent to group members either:
 But we will see it in the moderation queue.
 
     >>> browser.getLink('Moderation queue').click()
-    >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()")
-    Hello
-    Hi, I am just writing to tell you how wonderful...
+    >>> browser.printCssQuery('tbody .message', strip=True)
+    <td>
+      <a>Hello</a>
+      <br />
+      <span>Hi, I am just writing to tell you how w...</span>
+    </td>
 
 We can see the content of the message by clicking on it's title:
 
@@ -62,18 +65,25 @@ messages don't have an author:
 Now we should see 2 messages in the list:
 
     >>> browser.getLink('Back to the moderation queue').click()
-    >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()")
-    Hello
-    Hi, I am just writing to tell you how wonderful...
+    >>> browser.printCssQuery('tbody .message', strip=True)
+    <td>
+      <a>Hello</a>
+      <br />
+      <span>Hi, I am just writing to tell you how w...</span>
+    </td>
+    <td>
+      <a>Hello from varlius</a>
+      <br />
+      <span>Confirm your varlius registration!
     <BLANKLINE>
-    Hello from varlius
-    Confirm your varlius registration!
-    Click the l...
+    Cli...</span>
+    </td>
+
 
 We click "Reject" button for the second message and get redirected to the same page.
 app.post is used because of the bug in TestBrowser redirection behaviour.
 
-    >>> action_url = browser.getControl('Reject', index=1).mech_form.action
+    >>> action_url = browser.getControl(name='reject', index=1).mech_form.action
     >>> res = app.post("/login",
     ...                params={'username': 'admin@uni.ututi.com', 'password': 'asdasd'})
     >>> res = app.post(action_url,
@@ -85,9 +95,12 @@ The second message was rejected so it is not shown in the moderation queue,
 only the first message is left:
 
     >>> browser.reload()
-    >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()") # doctest: -ELLIPSIS
-    Hello
-    Hi, I am just writing to tell you how wonderful...
+    >>> browser.printCssQuery('tbody .message', strip=True)
+    <td>
+      <a>Hello</a>
+      <br />
+      <span>Hi, I am just writing to tell you how w...</span>
+    </td>
 
 The corresponding event is removed from the wall as well:
 
@@ -109,7 +122,7 @@ The corresponding event is removed from the wall as well:
 In the administration view one message is still left. Let's approve it:
 
     >>> browser.getLink('Moderation queue').click()
-    >>> action_url = browser.getControl('Approve').mech_form.action
+    >>> action_url = browser.getControl(name='approve').mech_form.action
     >>> res = app.post(action_url,
     ...                headers=[('referer', browser.url)])
     >>> print res.status, res.location
@@ -155,19 +168,42 @@ Let us navigate to the navigation queue one more time. We see a message
 saying that the queue is empty:
 
     >>> browser.getLink('Moderation queue').click()
-    >>> browser.printQuery('//div[@class="no-messages"]//text()')
-    No messages to be moderated yet.
+    >>> browser.printCssQuery('#empty-queue-notice', strip=True)
+    <p>No messages to be moderated yet.</p>
 
 Four more emails arrive. We can see them if we reload the page:
 
     >>> for id, subj in [(42, 'one'), (84, 'two'), (168, 'three'), (336, 'four')]:
     ...     send_test_message('email_from_non_ututi.txt', str(id), to='moderators@groups.ututi.lt', subject=subj)
     >>> browser.reload()
-    >>> browser.printQuery("id('single-messages')//div[contains(@class, 'm-on')]//text()") # doctest: -ELLIPSIS
-    one Confirm your varlius registration!  Click the l...
-    two Confirm your varlius registration!  Click the l...
-    three Confirm your varlius registration!  Click the l...
-    four Confirm your varlius registration!  Click the l...
+    >>> browser.printQuery("//tbody//td[contains(@class, 'message')]//text()") # doctest: -ELLIPSIS
+    <BLANKLINE>
+    one
+    Confirm your varlius registration!
+    <BLANKLINE>
+    Cli...
+    <BLANKLINE>
+    <BLANKLINE>
+    two
+    <BLANKLINE>
+    Confirm your varlius registration!
+    <BLANKLINE>
+    Cli...
+    <BLANKLINE>
+    <BLANKLINE>
+    three
+    <BLANKLINE>
+    Confirm your varlius registration!
+    <BLANKLINE>
+    Cli...
+    <BLANKLINE>
+    <BLANKLINE>
+    four
+    <BLANKLINE>
+    Confirm your varlius registration!
+    <BLANKLINE>
+    Cli...
+    <BLANKLINE>
 
 Let us click on the message to view it's text, and approve it from there.
 We are redirected back to the moderation queue:
@@ -235,10 +271,10 @@ Let's go back to the moderation queue, and moderate third and fourth
 messages via ajax calls. Appropriate message snippets are rendered:
 
     >>> browser.open('http://localhost/group/moderators/mailinglist/administration')
-    >>> approve_url_1 = browser.getControl('Approve', index=0).mech_form.action + '?js=1'
-    >>> approve_url_2 = browser.getControl('Approve', index=1).mech_form.action + '?js=1'
-    >>> reject_url_1 = browser.getControl('Reject', index=0).mech_form.action + '?js=1'
-    >>> reject_url_2 = browser.getControl('Reject', index=1).mech_form.action + '?js=1'
+    >>> approve_url_1 = browser.getControl(name='approve', index=0).mech_form.action + '?js=1'
+    >>> approve_url_2 = browser.getControl(name='approve', index=1).mech_form.action + '?js=1'
+    >>> reject_url_1 = browser.getControl(name='reject', index=0).mech_form.action + '?js=1'
+    >>> reject_url_2 = browser.getControl(name='reject', index=1).mech_form.action + '?js=1'
     >>> browser.open(approve_url_1)
     >>> print browser.contents
     <div class="approved-message">

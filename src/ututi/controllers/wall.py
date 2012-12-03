@@ -95,7 +95,9 @@ class DeleteWallPostForm(Schema):
 class WallController(BaseController, FileViewMixin):
 
     def _redirect(self):
-        if request.referrer:
+        if request.params.get('redirect_to'):
+            redirect(request.params['redirect_to'])
+        elif request.referrer:
             redirect(request.referrer)
         else:
             redirect(url(controller='profile', action='feed'))
@@ -227,7 +229,7 @@ class WallController(BaseController, FileViewMixin):
         return page
 
     @ActionProtector("user")
-    @js_validate(schema=SubjectWallPostForm())
+    @validate(schema=SubjectWallPostForm())
     def create_subject_wall_post(self):
         subject = Subject.get_by_id(self.form_result['subject_id'])
         if subject.post_discussion_perm != 'everyone' and not check_crowds(['teacher', 'moderator'], c.user, subject):

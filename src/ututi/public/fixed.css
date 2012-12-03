@@ -821,6 +821,64 @@ form.inline-form button {
 
   #upload-failed-error-message { display: none; }
 
+/*
+ * TEACHER DASHBOARD
+ */
+
+.all-posts-link a {
+    margin-top: 28px;
+    padding-bottom: 2px;
+    padding-right: 16px;
+    width: default;
+    background: url('/img/icons/arrow_more_right_13.png') no-repeat right center;
+}
+
+.subject-description .action-block {
+  background-color: #e6e6e6;
+  padding: 8px 14px 8px 8px; /* 14px to compensate textarea padding */
+  margin-top: 5px;
+  margin-bottom: 3px;
+  display: none; /* Initially hidden */
+}
+
+    .subject-description .action-block .action-tease {
+        height: 12px;
+        line-height: 12px;
+        font-size: 10px;
+        color: #999;
+        border: 1px solid #999;
+        background-color: #fff;
+        width: 100%;
+        padding: 3px;
+    }
+
+.subject-description .action-block .action-tease {
+  margin-bottom: 5px; /* Same as other form elements. */
+}
+
+.subject-description .action-block .tease-element {
+  display: none; /* Initially hidden */
+}
+
+.subject-description .action-block .action-button {
+  display: inline;
+}
+
+.subject-description .action-block .action-button.tease-element {
+  display: none;
+}
+
+.subject-description .action-block .cancel-button {
+  margin-left: 5px;
+}
+
+.subject-description .action-block textarea {
+    margin-bottom: 5px;
+    border: 1px solid #999;
+    background-color: #fff;
+    width: 100%;
+    padding: 3px;
+}
 
 /* SIMPLE LISTS
  * Simple list styles that provide bullet images and spacing.
@@ -989,6 +1047,31 @@ ul.feature-list {
 
     .u-object:hover .close-button {
         display: block;
+    }
+
+/* BLOG POST DESCRIPTION
+ */
+
+.blog-post-description {
+    color: #666666;
+    font-size: 11px;
+    padding: 10px 15px 10px 30px;
+    background: url("img/icons.com/blog_small.png") no-repeat 8px 8px;
+}
+    .blog-post-description dt {
+        font-weight: bold;
+        font-size: 13px;
+        margin-right: 10px;
+    }
+
+    .blog-post-description dd {
+        margin-right: 15px;
+        display: inline-block;
+    }
+
+    .blog-post-description dd.edit {
+        padding-left: 16px;
+        background: url('/img/icons.com/settings.png') no-repeat left center;
     }
 
 
@@ -1606,6 +1689,10 @@ ul.medium-icon-list {
     background-image: url("/img/icons.com/subject_big_grey.png");
 }
 
+.search-results-container .snippet-sub-department {
+    padding-left: 8px;
+}
+
 .search-results-container .snippet-group {
     background-image: url("/img/icons.com/group_big_grey.png");
 }
@@ -1867,6 +1954,10 @@ ul.tabs {
     min-height: 40px;
 }
 
+    .page-section.blog_posts {
+        background-image: url("/img/icons.com/blog_medium.png");
+    }
+
     .page-section.subjects {
         background-image: url("/img/icons.com/about/subject.png");
     }
@@ -1956,6 +2047,7 @@ ul.tabs {
         }
         .blog-comments .comment .comment-date {
             float: right;
+            margin-right: 16px;
         }
         .blog-comments .comment .comment-author {
             font-size: 14px;
@@ -2259,4 +2351,97 @@ ul.tabs {
 .dashboard-blog-button {
     margin: 8px;
     margin-left: 40px;
+}
+
+.group-whitelist button {
+    margin-top: 17px;
+}
+
+.group-whitelist .email-whitelist {
+    margin-top: 12px;
+    border-bottom: 1px solid #DED8D8;
+    border-top: 1px solid #DED8D8;
+}
+
+.group-whitelist .email-whitelist tbody {
+}
+
+.group-whitelist .email-whitelist td {
+    border: none;
+}
+
+.moderation-list .title {
+    border-bottom: 1px solid #F90;
+    font-size: 13px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.moderation-list .email-whitelist .text_button {
+    color: #3D617A;
+    font-weight: normal;
+}
+
+.moderation-list .email-whitelist .text_button:hover {
+    color: #6099CC;
+    border: none;
+    padding-bottom: 1px;
+}
+
+table.moderation-table {
+    width: 100%;
+    text-align: left;
+}
+
+table.moderation-table th {
+    border-bottom: 1px solid #DED8D8;
+}
+
+table.moderation-table th.message {
+    width: 50%;
+}
+
+table.moderation-table th.author-and-date {
+    width: 40%;
+}
+
+table.moderation-table th.actions {
+    width: 10%;
+}
+
+.moderation-table .author-and-date {
+    font-size: 11px;
+    text-align: center;
+}
+
+.moderation-table td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #DED8D8;
+}
+
+.moderation-table td.message {
+    background: url("/img/icons.com/discussions_medium_orange.png") no-repeat left center;
+    padding-left: 26px;
+}
+
+.moderation-table .date {
+    color: #666;
+}
+
+.moderation-table .actions {
+    text-align: center;
+}
+
+.moderation-table .moderation-actions form {
+    display: inline;
+}
+
+
+.moderation-table .moderation-actions fieldset {
+    display: inline;
+}
+
+.subdepartment-description {
+    width: 455px;
 }

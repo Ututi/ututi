@@ -126,10 +126,31 @@
     line-height: 35px;
   }
 
-
   .icon-academy a {
     margin-right: 100px;
     padding-right: 50px;
+  }
+
+
+  #layout-wrap.themed .content-inner {
+    padding-top: 20px;
+  }
+
+  #layout-wrap.themed .sidebar-inner {
+    padding-top: 15px;
+  }
+
+  #layout-wrap.themed #location-logo-portlet,
+  #layout-wrap.themed .page-title {
+    display: none;
+  }
+
+  #layout-wrap.themed .sub-title {
+    border-top: none;
+  }
+
+  #layout-wrap.themed .login-box {
+    margin-top: 22px;
   }
 
 </%def>
@@ -155,7 +176,7 @@
 %if unis:
 <div class="university-box">
   <div class="section-header">
-    <h2 class="academy">Faculties of ${c.location.title}</h2>
+    <h2 class="academy">${title}</h2>
 
     <div class="section-header-links">
       <a href="#">${_('All faculties')} >></a>
@@ -169,6 +190,38 @@
   %endfor
 </div>
 %endif
+</%def>
+
+<%def name="sub_department_entry(subdept)">
+<div class="university-entry clearfix">
+  <div class="logo">
+    <img src="${url(controller='structure', action='logo', id=c.location.id, width=40, height=40)}"
+         alt="logo" />
+  </div>
+  <div class="title">
+    <a href="${subdept.url()}" title="${subdept.title}">${h.ellipsis(subdept.title, 36)}</a>
+  </div>
+  <ul class="icon-list statistics">
+    <li class="icon-file"> ${len(subdept.subjects)} </li>
+    <li class="icon-teacher"> ${len(subdept.teachers)} </li>
+  </ul>
+</div>
+</%def>
+
+<%def name="sub_department_box(subdepts, title)">
+<div class="university-box">
+  <div class="section-header">
+    <h2 class="academy">${title}</h2>
+    <div class="section-header-links">
+      <a href="#">${_('All sub-departments')} >></a>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  %for subdept in subdepts:
+    ${sub_department_entry(subdept)}
+  %endfor
+</div>
 </%def>
 
 <%def name="teachers_box()">
@@ -347,32 +400,33 @@
   <p>Here you can find:</p>
   <ul class="about-box feature-box">
     <li class="feature icon-subjects-file">
-      <strong>${_('Academic resources')}:</strong> 
-      ${_('teaching subjects with study materials (notes, files, presentations, audio&amp;video)')}.
+      <strong>${_('Academic resources')}:</strong>
+      ${_('teaching subjects with study materials (notes, files, presentations, audio & video)')}.
     </li>
 
     <li class="feature icon-group">
-      <strong>${_('Students groups')}:</strong> 
+      <strong>${_('Student groups')}:</strong>
       ${_('private and public groups with files area, forum and email for communication and collaboration')}.
     </li>
 
     <li class="feature icon-discussions">
-      <strong>${_('Discussions')}:</strong> 
+      <strong>${_('Discussions')}:</strong>
       ${_('knowlenge sharing and discussions on academic subjects with students and teachers')}.
     </li>
 
     <li class="feature icon-teachers-profiles">
-      <strong>${_('Teachers profiles')}:</strong>
+      <strong>${_('Teacher profiles')}:</strong>
       ${_('academic webpage  with teachers biography, publications, touch cources and contact information')}.
     </li>
   </ul>
 </div>
 
 <div class="clearfix"></div>
-
 %if c.departments:
-${university_box(c.departments, _("Departments:"))}
+${university_box(c.departments, _("Faculties of %(university)s:") % dict(university=c.location.title))}
 ## ${teachers_box()}
+%elif c.location.sub_departments:
+${sub_department_box(c.location.sub_departments, _("Sub-departments of %(department)s:") % dict(department=c.location.title))}
 %else:
 ${no_faculties_box()}
 %endif

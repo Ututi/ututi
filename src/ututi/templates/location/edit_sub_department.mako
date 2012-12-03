@@ -6,7 +6,8 @@
   <%self:form filler="${c.form}">
   <form method="post" action="" class="edit-form">
     ${h.input_line('title', _("Sub department title:"))}
-    ${h.input_area('description', _("Description:"))}
+    ${h.input_line('site_url', _("Website link:"))}
+    ${h.input_wysiwyg('description', _("Description:"))}
     ${h.input_submit(name='UPDATE')}
   </form>
   </%self:form>

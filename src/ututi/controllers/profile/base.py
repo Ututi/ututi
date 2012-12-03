@@ -30,7 +30,7 @@ from ututi.lib import sms
 from ututi.lib.validators import js_validate, LogoUpload
 
 from ututi.model.events import Event
-from ututi.model import meta, Email, User
+from ututi.model import meta, Email, User, SubDepartment
 
 from ututi.controllers.profile.validators import HideElementForm, \
     MultiRcptEmailForm, FriendsInvitationJSForm, ContactForm, \
@@ -211,7 +211,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
     def _edit_form_defaults(self):
         defaults = {
-            'email': c.user.emails[0].email,
+            'email': c.user.email.email,
             'phone_number': c.user.phone_number,
             'fullname': c.user.fullname,
             'site_url': c.user.site_url,
@@ -228,6 +228,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             additional = {
                 'teacher_position': c.user.teacher_position,
                 'work_address': c.user.work_address,
+                'teacher_sub_department': c.user.sub_department.id if c.user.sub_department else '',
             }
             defaults.update(additional)
 
@@ -237,6 +238,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         c.tabs = self._edit_profile_tabs()
         c.current_tab = 'general'
         c.teachers_url = ''
+        c.sub_departments = meta.Session.query(SubDepartment).filter_by(location_id=c.user.location.id).all()
         if c.user.location.teachers_url:
             c.teachers_url = c.user.location.teachers_url
         return render('profile/edit_profile.mako')
@@ -255,6 +257,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
             'profile_is_public': None,
             'url_name': None,
             'teacher_position': None,
+            'teacher_sub_department': None,
         }
         values.update(self.form_result)
 
@@ -267,8 +270,16 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
         c.user.profile_is_public = bool(values['profile_is_public'])
         c.user.url_name = values['url_name']
         if c.user.is_teacher:
-            c.user.profile_is_public = True # teacher profile always public
-            c.user.teacher_position = values['teacher_position'] # additional teacher fields
+            c.user.profile_is_public = True  # teacher profile always public
+            c.user.teacher_position = values['teacher_position']  # additional teacher fields
+            sd_id = values['teacher_sub_department']
+            if sd_id is not None:
+                if sd_id != '':
+                    sd = meta.Session.query(SubDepartment).filter_by(id=sd_id).one()
+                    if sd is not None:
+                        c.user.sub_department = sd
+                else:
+                    c.user.sub_department = None
         meta.Session.commit()
         h.flash(_('Your profile was updated.'))
         redirect(url(controller='profile', action='edit'))
@@ -435,13 +446,13 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
 
             if self.form_result['confirm_email']:
                 h.flash(_('Confirmation message sent. Please check your email.'))
-                email_confirmation_request(c.user, c.user.emails[0].email)
+                email_confirmation_request(c.user, c.user.email.email)
                 redirect(url(controller='profile', action='edit_contacts'))
 
             # handle email
             email = self.form_result['email']
             confirmed = False
-            if email != c.user.emails[0].email:
+            if email != c.user.email.email:
                 # XXX Allow user to set default email if it already added as second.
                 if len(c.user.emails) > 1:
                     if c.user.emails[1].email == email:
@@ -449,8 +460,23 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                         meta.Session.commit()
                         confirmed = True
 
-                c.user.emails[0].email = email
-                c.user.emails[0].confirmed = confirmed
+                c.user.email.email = email
+                c.user.email.confirmed = confirmed
+                email_confirmation_request(c.user, email)
+                sign_in_user(c.user)
+
+            # new way to handle user email
+            email = self.form_result['email']
+            confirmed = False
+            if email != c.user.email.email:
+                email_objs = filter(lambda e: e.email == email, c.user.emails)
+                if email_objs:
+                    new_main_email = email_objs[0]
+                    meta.Session.delete(new_main_email)
+                    meta.Session.commit()
+                    confirmed = True
+                c.user.email.email = email
+                c.user.email.confirmed = confirmed
                 email_confirmation_request(c.user, email)
                 sign_in_user(c.user)
 

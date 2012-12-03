@@ -1,0 +1,111 @@
+Sub departments for universities
+================================
+
+    >>> browser = Browser.logIn()
+
+Before adding subjecs we add some sub-departments:
+
+    >>> browser.getLink('My University').click()
+    >>> browser.getLink('Edit information').click()
+    >>> browser.getLink('Sub-departments').click()
+    >>> browser.getControl('Add new sub-department').click()
+    >>> browser.getControl('Sub department title:').value = 'IT sub-department'
+    >>> browser.getControl('Description:').value = 'It does IT'
+    >>> browser.getControl('Save').click()
+
+    >>> browser.getControl('Add new sub-department').click()
+    >>> browser.getControl('Sub department title:').value = 'OP sub-department'
+    >>> browser.getControl('Description:').value = 'It is OP'
+    >>> browser.getControl('Save').click()
+
+The department should be in the list now:
+
+    >>> browser.printCssQuery('table.content a')
+    <a href="/school/uni/edit/sub_department/...">IT sub-department</a>
+    <a href="/school/uni/edit/sub_department/...">OP sub-department</a>
+
+If we try adding a subject we should be able to set it's
+sub-department now:
+
+    >>> browser.open('http://localhost/subjects/add')
+    >>> browser.getControl('Subject title:').value = 'Test subject'
+    >>> browser.getControl('Next').click()
+
+    >>> browser.getControl('Sub-department').displayOptions
+    [None, 'IT sub-department', 'OP sub-department']
+
+    >>> browser.getControl('Sub-department').displayValue = ['IT sub-department']
+    >>> browser.getControl('Create').click()
+
+We can change it later if we want to:
+
+    >>> browser.getLink('Edit Settings').click()
+    >>> browser.getControl('Sub-department').displayValue
+    ['IT sub-department']
+
+    >>> browser.getControl('Sub-department').displayValue = ['OP sub-department']
+    >>> browser.getControl('Save').click()
+
+Now if we go to the list of subjects in the university:
+
+    >>> browser.getLink('My University').click()
+    >>> browser.getLink('Subjects').click()
+
+We should see a list of all the sub-departments that have subjects in
+them:
+
+    >>> browser.printCssQuery(".sub-department-item a")
+    <a href="/school/uni/subjects?sub_department_id=2">OP sub-department</a>
+
+    >>> browser.getLink('OP sub-department').click()
+    >>> browser.printCssQuery(".item-title a")
+    <a href="/subject/uni/test_subject" title="Test subject">Test subject</a>
+
+    >>> browser.printCssQuery(".sub-department-item a")
+    <a href="/school/uni/subjects">All sub-departments</a>
+
+There are no results in the sub-department that has no subjects:
+
+    >>> browser.open('http://localhost/school/uni/subjects?sub_department_id=1')
+    >>> browser.printCssQuery(".item-title a")
+
+Same works for teachers (WIP, must add sub-dep for at least one teacher):
+
+    >>> from ututi.model import LocationTag
+    >>> from ututi.model.users import Teacher
+    >>> from ututi.model import meta
+    >>> def addTeacher(name, username, sub_department_id=None):
+    ...     teacher = Teacher(fullname=name, username=username, location=LocationTag.get('uni'), password='qwerty', gen_password=True)
+    ...     teacher.sub_department_id = sub_department_id
+    ...     meta.Session.add(teacher)
+    ...     meta.Session.commit()
+    >>> addTeacher('Petras', 'petras', 1)
+    >>> addTeacher('Jones', 'jonas')
+
+    >>> browser.getLink('Teachers').click()
+
+    >>> browser.printCssQuery(".item-title a")
+    <a href="/teacher/2" title="Petras">Petras</a>
+
+Search should not forget the selected sub department:
+
+    >>> form = browser.getForm('search_form')
+    >>> form.getControl('Search').click()
+    >>> browser.printCssQuery(".item-title a")
+    <a href="/teacher/2" title="Petras">Petras</a>
+
+If sub-department is emtpy no teachers should be shown:
+
+    >>> browser.open('http://localhost/school/uni/teachers?sub_department_id=2')
+    >>> browser.printCssQuery(".item-title a")
+
+We should see subdepartment page when we navigate to subdepartment:
+
+    >>> browser = Browser()
+
+    >>> browser.open('http://localhost/school/uni/sub_department/1')
+    >>> browser.printCssQuery('.page-title')
+    <h1 class="page-title">IT sub-department</h1>
+
+    >>> browser.printCssQuery('.subdepartment-description')
+    <div class="subdepartment-description">It does IT</div>

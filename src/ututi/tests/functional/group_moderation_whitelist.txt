@@ -16,8 +16,8 @@ automatically:
 
     >>> browser.getLink('Moderation queue').click()
     >>> form = browser.getForm(id='whitelist_email_form')
-    >>> form.getControl('Email:').value = 'varlius@example.com'
-    >>> form.getControl('Add').click()
+    >>> form.getControl('Add email:').value = 'varlius@example.com'
+    >>> form.getControl('Add', index=1).click()
 
 The new item should be in the list:
 
@@ -28,8 +28,8 @@ If the new item is not a valid email address we should get an error,
 and the emails list should not get modified:
 
     >>> form = browser.getForm(id='whitelist_email_form')
-    >>> form.getControl('Email:').value = 'varliusexample.com'
-    >>> form.getControl('Add').click()
+    >>> form.getControl('Add email:').value = 'varliusexample.com'
+    >>> form.getControl('Add', index=1).click()
 
     >>> browser.printCssQuery('.group-whitelist .email a')
     <a href="mailto:varlius@example.com">varlius@example.com</a>
@@ -45,15 +45,15 @@ If we try adding an email that is in the list already, nothing
 happens (maybe we should still highligth the item added?):
 
     >>> form = browser.getForm(id='whitelist_email_form')
-    >>> form.getControl('Email:').value = 'varlius@example.com'
-    >>> form.getControl('Add').click()
+    >>> form.getControl('Add email:').value = 'varlius@example.com'
+    >>> form.getControl('Add', index=1).click()
 
     >>> browser.printCssQuery('.group-whitelist .email a')
     <a href="mailto:varlius@example.com">varlius@example.com</a>
 
 Let's remove the email from the list:
 
-    >>> browser.click('Remove')
+    >>> browser.getControl(name="remove").click()
 
 The list should be empty:
 
@@ -61,7 +61,7 @@ The list should be empty:
 
 Approving a message automatically adds the email to the whitelist:
 
-    >>> action_url = browser.getControl('Approve', index=0).mech_form.action
+    >>> action_url = browser.getControl(name='approve', index=0).mech_form.action
     >>> res = browser.app.post(action_url,
     ...                        headers=[('referer', browser.url)])
     >>> print res.status, res.location
@@ -71,7 +71,7 @@ Approving a message automatically adds the email to the whitelist:
     >>> browser.printCssQuery('.group-whitelist .email a')
     <a href="mailto:user2@ututi.lt">user2@ututi.lt</a>
 
-    >>> action_url = browser.getControl('Approve', index=0).mech_form.action
+    >>> action_url = browser.getControl(name='approve', index=0).mech_form.action
     >>> res = browser.app.post(action_url, headers=[('referer', browser.url)])
 
     >>> browser.open(res.location)
@@ -108,7 +108,7 @@ whitelis, it will get approved automatically:
 
 Let's try half a whitelist:
 
-    >>> browser.click('Remove', index=0)
+    >>> browser.getControl(name='remove', index=0).click()
 
     >>> send_test_message('email_from_user2.txt', '36', to='moderators@groups.ututi.lt')
     >>> send_test_message('email_from_non_ututi.txt', '47', to='moderators@groups.ututi.lt', subject='Hello from varlius 3')
@@ -125,11 +125,12 @@ Let's try half a whitelist:
 The other message is in the moderation queue, as expected:
 
     >>> browser.open(res.location)
-    >>> browser.printCssQuery('.m-on div', strip=True)
-    <div>
+    >>> browser.printCssQuery('tbody .message', strip=True)
+    <td>
       <a>Hello</a>
-    </div>
-    <div>Hi, I am just writing to tell you how wonderful...</div>
+      <br />
+      <span>Hi, I am just writing to tell you how w...</span>
+    </td>
 
 If Ajax will refresh the whitelist, it should get the same items as
 that we saw on the page:

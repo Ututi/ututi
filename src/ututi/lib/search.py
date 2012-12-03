@@ -1,4 +1,3 @@
-import logging
 import string
 import re
 
@@ -8,9 +7,7 @@ from sqlalchemy.orm import aliased
 
 from ututi.model import meta, SearchItem, LocationTag, ContentItem, TagSearchItem
 from ututi.model import Group
-from pylons import session
 
-log = logging.getLogger(__name__)
 
 def search_query_count(query):
     count = meta.Session.execute(
@@ -58,15 +55,6 @@ def search_query(**kwargs):
         query = settings['extra'](query)
 
     cnt = search_query_count(query)
-    log_msg = u"%(url)s \t %(text)s \t %(tags)s \t %(type)s \t %(count)i" % {"url": '', # pylons.url.current(),
-                                                                             "text": settings['text_original'] is not None and settings['text_original'] or '',
-                                                                             "tags": settings['tags'] is not None and ', '.join(settings['tags']) or '',
-                                                                             "type": settings['obj_type'] is not None or '*',
-                                                                             "count": cnt }
-    if cnt == 0:
-        log.warn(log_msg)
-    else:
-        log.info(log_msg)
     return query
 
 

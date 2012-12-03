@@ -130,20 +130,6 @@ button.submit {
   </a>
 </div>
 %endif
-<div>
-  <div class="dashboard-blog-button">
-    <form id="message_button" action="${url(controller='profile', action='create_blog_post')}">
-      <input type="submit" class="black" value="${_('Create a blog post')}" />
-    </form>
-  </div>
-  %if c.has_blog_posts:
-  <div class="dashboard-blog-button">
-    <form id="message_button" action="${url(controller='profile', action='edit_blog_posts')}">
-      <input type="submit" class="black" value="${_('View your blog posts')}" />
-    </form>
-  </div>
-  %endif
-</div>
 </%def>
 
 <%def name="group_entry(group, first)">
@@ -216,21 +202,75 @@ button.submit {
 </div>
 </%def>
 
+<%def name="blog_post_entry(post, first=False)">
+<div class="u-object blog-post-description ${'with-top-line' if not first else ''}">
+  <div>
+    <dt>
+      <a class="action" href="${post.url()}">${h.ellipsis(post.title, 60)}</a>
+    </dt>
+  </div>
+  <div style="margin-top: 5px">
+    <dd class="edit">
+      <a href="${url(controller='profile', action='edit_blog_post', id=post.id)}">${_("Edit")}</a>
+    </dd>
+    <dd class="comments">
+      <a href="${post.url()}">${_("Comments")} (${len(post.comments)})</a>
+    </dd>
+  </div>
+</div>
+</%def>
+
+<%def name="blog_section(blog_posts)">
+<div class="page-section blog_posts">
+  %if not c.has_blog_posts:
+  <div class="title">
+    ${_("Create a blog post")}
+  </div>
+  <div>
+    <div class="create-blog-post clearfix">
+      <p>${_('Create your first blog post.')}</p>
+      ${h.button_to(_('Create a blog post'),
+                    url(controller='profile', action='create_blog_post'),
+                    class_='dark add',
+                    method='GET')}
+    </div>
+  </div>
+  %else:
+  <div class="title">
+    ${_("My blog posts")}
+    <span class="action-button">
+      ${h.button_to(_('create a blog post'),
+                    url(controller='profile', action='create_blog_post'),
+                    class_='dark add', method='GET')}
+    </span>
+  </div>
+  <div>
+    %for n, blog_post in enumerate(blog_posts[:3]):
+      ${blog_post_entry(blog_post, n==0)}
+    %endfor
+  </div>
+  <div class="all-posts-link">
+    <a href="${url(controller='profile', action='edit_blog_posts')}">${_('All posts')}</a>
+  </div>
+  %endif
+</div>
+</%def>
+
 <%def name="subject_entry(subject, first=False)">
 <div class="u-object subject-description ${'with-top-line' if not first else ''}">
   ${close_button(url(controller='profile', action='unteach_subject', subject_id=subject.id), class_='unteach-button')}
   <div>
     <dt>
-      <a href="${subject.url()}">${h.ellipsis(subject.title, 60)}</a>
+      <a class="action" href="${subject.url(action='feed')}">${h.ellipsis(subject.title, 60)}</a>
     </dt>
     ${elements.location_links(subject.location)}
   </div>
   <div style="margin-top: 5px">
+    <dd class="feed">
+      <a href="#" class="create-discussion-link">${_("Create discussion")}</a>
+    </dd>
     <dd class="settings">
       <a href="${subject.url(action='edit')}">${_("Settings")}</a>
-    </dd>
-    <dd class="feed">
-      <a href="${subject.url(action='feed')}">${_("Discussions")}</a>
     </dd>
     <dd class="files">
       <a href="${subject.url(action='files')}">${_("Files")}</a>
@@ -240,6 +280,16 @@ button.submit {
       <a href="${subject.url(action='pages')}">${_("Wiki notes")}</a>
       (${h.subject_page_count(subject.id)})
     </dd>
+  </div>
+  <div class="action-block add_wall_post_block">
+    <a name="wall-post"></a>
+    <form method="POST" action="${url(controller='wall', action='create_subject_wall_post', redirect_to=subject.url(action='feed'))}" class="inelement-form wallpost_form">
+        <input type="hidden" name="subject_id" value="${subject.id}"/>
+        <div class="action-tease">${_("Write your post")}</div>
+        <textarea name="post" class="tease-element"></textarea>
+        ${h.input_submit(_('Send'), class_='dark inline action-button')}
+        <a class="cancel-button" href="#cancel">${_("Cancel")}</a>
+    </form>
   </div>
 </div>
 </%def>
@@ -292,6 +342,23 @@ button.submit {
     $('.subject-description-list a.unteach-button').click(function() {
       return confirm('${_("Are you sure you want to delete this subject?")}');
     });
+    function clearBlock(block) {
+        block.find('input[type="text"], textarea').val('');
+        block.find('.tease-element').hide();
+        block.find('.action-tease').show();
+    }
+    $('.subject-description .cancel-button').click(function() {
+        clearBlock($(this).closest('.action-block'));
+        return false;
+    });
+
+    $('.create-discussion-link').click(function () {
+        $(this).closest('.subject-description').find('.action-block').toggle();
+        return false;
+    });
+    $('.subject-description .action-tease').click(function() {
+        $(this).hide().siblings('.tease-element').show().focus();
+    });
   });
   </script>
 </div>
@@ -336,7 +403,7 @@ button.submit {
   %endif
 </div>
 </%def>
-
 ${profile_section()}
+${blog_section(c.user_blog_posts)}
 ${subject_section(c.user.taught_subjects)}
 ${group_section(c.user.student_groups)}
