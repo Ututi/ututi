@@ -4,4 +4,4 @@ Sender: ${name} <${email}>
 Message: ${message}
 
 --
-Sent by Ututi
+Sent by VUtuti

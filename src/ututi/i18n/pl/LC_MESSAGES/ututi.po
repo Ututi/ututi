@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-12-01 22:42+0200\n"
+"PO-Revision-Date: 2012-12-03 20:30+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -345,7 +345,9 @@ msgstr "Odpowiedź SMS"
 msgid "SMS sent! (%d credits used up, %d remaining)"
 msgstr "Wiadomość została wysłana! (%d punkty wykorzystano, %d zostało)"
 
-msgid "What is Ututi?"
+#, fuzzy
+#| msgid "What is Ututi?"
+msgid "What is VUtuti?"
 msgstr "Co to Ututi?"
 
 msgid "Contact us"
@@ -373,7 +375,9 @@ msgstr "Błędny adres email."
 msgid "Field can't be empty."
 msgstr "Pole to nie może zostać puste."
 
-msgid "Message to Ututi.com team"
+#, fuzzy
+#| msgid "Message to Ututi.com team"
+msgid "Message to VUtuti team"
 msgstr "Wiadomość do Zespołu Ututi.com"
 
 msgid "Your message was succesfully sent."
@@ -496,7 +500,10 @@ msgid ""
 "again!"
 msgstr "Login nie pasuje do hasła. Spróbuj jeszcze raz!"
 
-msgid "The email you entered is registered in Ututi. Please login to proceed."
+#, fuzzy
+#| msgid "The email you entered is registered in Ututi. Please login to
+#| proceed."
+msgid "The email you entered is registered in VUtuti. Please login to proceed."
 msgstr ""
 "Ten adres e-mail jest już zarejestrowany w Ututi. Proszę się zalogować "
 "aby kontynuować."
@@ -546,7 +553,8 @@ msgid "All fields must be filled!"
 msgstr "Wszystkie pola muszą być uzupełnione"
 
 #, python-format
-msgid "Ututi news: %(changes)s"
+#| msgid "Ututi news: %(changes)s"
+msgid "VUtuti news: %(changes)s"
 msgstr "Nowe na Ututi: %(changes)s"
 
 #, python-format
@@ -564,7 +572,8 @@ msgstr[1] "%(page_count)d nowe notatki"
 msgstr[2] "%(page_count)d nowych notatek"
 
 #, python-format
-msgid "Ututi news: %(file_changes)s and %(page_changes)s"
+#| msgid "Ututi news: %(file_changes)s and %(page_changes)s"
+msgid "VUtuti news: %(file_changes)s and %(page_changes)s"
 msgstr "Nowe na Ututi: %(file_changes)s i %(page_changes)s"
 
 #, python-format
@@ -579,7 +588,8 @@ msgid "The private space subscription for \"%s\" is about to expire"
 msgstr "Subskrypcja prywatnej przestrzeni grupy na  \"%s\\ niedługo się kończy."
 
 #, python-format
-msgid "The Ututi group \"%s\" has run out of private file space"
+#| msgid "The Ututi group \"%s\" has run out of private file space"
+msgid "The VUtuti group \"%s\" has run out of private file space"
 msgstr "Grupa \"%s\" nie posiada już prywatnej przestrzeni na pliki."
 
 msgid "Please enter your password."
@@ -617,6 +627,11 @@ msgstr "Dodaj swoje zdjęcie"
 
 msgid "Invite friends"
 msgstr "Zaproś przyjaciół"
+
+#, fuzzy
+#| msgid "This Google account is already linked to another Ututi account."
+msgid "This Google account is already linked to another VUtuti account."
+msgstr "Ten profil Google już jest połączony z innym profilem na Ututi."
 
 msgid "Unlinked from Google account."
 msgstr "Rozłączony z kontem Google."
@@ -728,6 +743,13 @@ msgstr "Zdjęcie zostało usunięte."
 msgid "Your Google account has been unlinked."
 msgstr "Twoje konto Google zostało odłączone"
 
+#, fuzzy
+#| msgid "This Facebook account is already linked to another Ututi account."
+msgid "This Facebook account is already linked to another VUtuti account."
+msgstr ""
+"Ten profil  Facebook już jest połączony z profilem innego użytkownika "
+"Ututi."
+
 msgid "Your Facebook account has been unlinked."
 msgstr "Twoje konto Facebook zostało rozłączone"
 
@@ -761,7 +783,8 @@ msgid "Invalid email addresses: %(email_list)s"
 msgstr "Niewłaściwy adres e-mail: %(email_list)s"
 
 #, python-format
-msgid "These addresses are already registered in Ututi: %(email_list)s"
+#| msgid "These addresses are already registered in Ututi: %(email_list)s"
+msgid "These addresses are already registered in VUtuti: %(email_list)s"
 msgstr "Te adresy są już zarejestrowane na Ututi: %(email_list)s"
 
 #, python-format
@@ -830,25 +853,39 @@ msgstr "Wiadomość nie może być pusta."
 msgid "Please enter at least one email address."
 msgstr "Wpisz przynajmniej jeden adres e-mail."
 
-msgid "Invitation to Ututi"
+#, fuzzy
+#| msgid "Invitation to Ututi"
+msgid "Invitation to VUtuti"
 msgstr "Zaproszenie do Ututi"
 
-msgid "Confirm your email for Ututi"
+#, fuzzy
+#| msgid "Confirm your email for Ututi"
+msgid "Confirm your email for VUtuti"
 msgstr "Potwierdź swój e-mail dla Ututi"
 
-msgid "Confirm the email for Ututi"
+#, fuzzy
+#| msgid "Confirm the email for Ututi"
+msgid "Confirm the email for VUtuti"
 msgstr "Zaakceptuj e-mail Ututi"
 
-msgid "Ututi group invitation"
+#, fuzzy
+#| msgid "Ututi group invitation"
+msgid "VUtuti group invitation"
 msgstr "Zaproszenie Ututi grupy"
 
-msgid "Ututi password recovery"
+#, fuzzy
+#| msgid "Ututi password recovery"
+msgid "VUtuti password recovery"
 msgstr "Odzyskiwanie hasła Ututi"
 
-msgid "Ututi group membership request"
+#, fuzzy
+#| msgid "Ututi group membership request"
+msgid "VUtuti group membership request"
 msgstr "Zgłoszenie nowego członka do ututi grupy"
 
-msgid "Ututi group membership confirmation"
+#, fuzzy
+#| msgid "Ututi group membership confirmation"
+msgid "VUtuti group membership confirmation"
 msgstr "Potwierdzenie przyjęcia do ututi grupy "
 
 msgid "Group space bought"
@@ -1451,7 +1488,9 @@ msgstr "Wybierz z listy"
 msgid "Create new university"
 msgstr "Dodaj nową uczelnię"
 
-msgid "Universities already are on Ututi"
+#, fuzzy
+#| msgid "Universities already are on Ututi"
+msgid "Universities already are on VUtuti"
 msgstr "Uczelnia znajduje się już w sieci Ututi"
 
 msgid "More universities"
@@ -1463,7 +1502,9 @@ msgstr "wymagany"
 msgid "You must agree to the terms"
 msgstr "Musisz zaakceptować warunki regulaminu"
 
-msgid "New in Ututi?"
+#, fuzzy
+#| msgid "New in Ututi?"
+msgid "New in VUtuti?"
 msgstr "Jesteś nowy na Ututi?"
 
 msgid "Sign in with your university email"
@@ -1496,14 +1537,13 @@ msgstr "Zaloguj się przez Google"
 msgid "Private social networks for universities"
 msgstr "Prywatne sieci społecznościowe dla uczelni"
 
-msgid "Bringing students and teachers together"
-msgstr "Łączymy studentów i wykładowców"
+#, python-format
+#| msgid "%(title_abbr)s social network"
+msgid "VU MIF social network"
+msgstr "sieć społecznościowa %(title_abbr)s"
 
 msgid "My University"
 msgstr "Moja uczelnia"
-
-msgid "Catalog"
-msgstr "Katalog"
 
 msgid "Search text"
 msgstr "Szukaj "
@@ -1529,8 +1569,10 @@ msgstr "Język:"
 msgid "Select"
 msgstr "Wybierz"
 
-msgid "„UTUTI Ltd.“"
-msgstr "„UTUTI Ltd.“"
+#, fuzzy
+#| msgid "Find your university"
+msgid "Vilnius University"
+msgstr "Znadź swoją uczelnię"
 
 msgid "Terms"
 msgstr "Warunki"
@@ -1591,7 +1633,9 @@ msgstr "Regulamin"
 msgid "Found out enough?"
 msgstr "Czy wiesz już wszystko?"
 
-msgid "Join Ututi!"
+#, fuzzy
+#| msgid "Join Ututi!"
+msgid "Join VUtuti!"
 msgstr "Dołącz do Ututi!"
 
 msgid "Previous"
@@ -1600,7 +1644,9 @@ msgstr "Wróć"
 msgid "Next"
 msgstr "Dalej"
 
-msgid "Ututi - your university on the web"
+#, fuzzy
+#| msgid "Ututi - your university on the web"
+msgid "VUtuti - your university on the web"
 msgstr "Ututi - to Twoja uczelnia w sieci"
 
 msgid ""
@@ -1608,17 +1654,24 @@ msgid ""
 "notes and descriptions. "
 msgstr "Twoje grupy akademickie oraz przedmioty z plikami, notatkami i opisami."
 
-msgid "All these things are combined in the handy Ututi system."
+#, fuzzy
+#| msgid "All these things are combined in the handy Ututi system."
+msgid "All these things are combined in the handy VUtuti system."
 msgstr "Połączenie tych wszystkich rzeczy tworzy system Ututi."
 
 msgid "What groups can do: email"
 msgstr "Co mogą robić grupy: e-mail"
 
+#, fuzzy
+#| msgid "" "It is a communication tool for You and Your classmates. Ututi
+#| groups work" " just like mailing lists: every member can receive these
+#| messages in " "their email account and can reply to them from there (You do
+#| not have to " "log on to Ututi every time). "
 msgid ""
-"It is a communication tool for You and Your classmates. Ututi groups work"
-" just like mailing lists: every member can receive these messages in "
+"It is a communication tool for You and Your classmates. VUtuti groups "
+"work just like mailing lists: every member can receive these messages in "
 "their email account and can reply to them from there (You do not have to "
-"log on to Ututi every time). "
+"log on to VUtuti every time). "
 msgstr ""
 "To jest narzędzie do komunikowania się z kolegami z grupy. Ututi działa "
 "jak lista mailingowa: każdy członek grupy może otrzymywać e-maile, "
@@ -1634,8 +1687,13 @@ msgstr "Możesz zrezygnować z otrzymywania takich e-maili poprzez ustawienia gr
 msgid "What groups can do: subjects"
 msgstr "Co mogą robić grupy: przedmioty"
 
+#, fuzzy
+#| msgid "" "Every group studies subjects. Ututi also has a catalog of academic
+#| " "subjects. Here the subjects are classified by the university and
+#| faculty." " Every group can mark the subjects it is studying in the
+#| \"subjects\" " "area."
 msgid ""
-"Every group studies subjects. Ututi also has a catalog of academic "
+"Every group studies subjects. VUtuti also has a catalog of academic "
 "subjects. Here the subjects are classified by the university and faculty."
 " Every group can mark the subjects it is studying in the \"subjects\" "
 "area."
@@ -1664,9 +1722,13 @@ msgstr ""
 msgid "What groups can do: files"
 msgstr "Co moge robić grupy: pliki"
 
+#, fuzzy
+#| msgid "" "Ututi makes it easy to share files. In the \"files\" area members
+#| of the " "group can see the private files of the group and all the files of
+#| the " "subjects the group is watching."
 msgid ""
-"Ututi makes it easy to share files. In the \"files\" area members of the "
-"group can see the private files of the group and all the files of the "
+"VUtuti makes it easy to share files. In the \"files\" area members of the"
+" group can see the private files of the group and all the files of the "
 "subjects the group is watching."
 msgstr ""
 "Ututi ułatwia dzielenie się plikami.  W zakładce \"pliki\" członkowie "
@@ -1680,12 +1742,18 @@ msgstr ""
 "Prywatne pliki grupy są przechowywane w odrębnym folderze. Pojemność tego"
 " folderu - 200 Mb."
 
+#, fuzzy
+#| msgid "" "Public files are kept in the folders belonging to the subjects.
+#| The " "folders are visible in the group when it is watching these subjects.
+#| The " "size and amount of public files is not limited. What is more, files
+#| can " "be added to subjects not only by your group, but also by other groups
+#| and" " Ututi members. This makes it easy to share information."
 msgid ""
 "Public files are kept in the folders belonging to the subjects. The "
 "folders are visible in the group when it is watching these subjects. The "
 "size and amount of public files is not limited. What is more, files can "
 "be added to subjects not only by your group, but also by other groups and"
-" Ututi members. This makes it easy to share information."
+" VUtuti members. This makes it easy to share information."
 msgstr ""
 "Pliki udostępnione dla wszystkich użytkowników portalu są pogrupowane "
 "wedlug przedmiotów. Foldery przedmiotów są widoczne dla grupy, która "
@@ -1708,8 +1776,12 @@ msgstr ""
 msgid "What members can do: subjects"
 msgstr "Co mogą robić członkowie: przedmioty"
 
+#, fuzzy
+#| msgid "" "Not only groups, but also single Ututi members can watch subjects.
+#| You " "can easily start watching a subject by visiting its page and clicking
+#| on " "the link \"start watching\"."
 msgid ""
-"Not only groups, but also single Ututi members can watch subjects. You "
+"Not only groups, but also single VUtuti members can watch subjects. You "
 "can easily start watching a subject by visiting its page and clicking on "
 "the link \"start watching\"."
 msgstr ""
@@ -1753,9 +1825,12 @@ msgstr ""
 "jakie zmiany zachodzą w obserwowanych przez Ciebie i Twoją grupę "
 "przedmiotach."
 
+#, fuzzy
+#| msgid "" "From here You can also easily create a subject, upload a file,
+#| invite " "people to use Ututi."
 msgid ""
 "From here You can also easily create a subject, upload a file, invite "
-"people to use Ututi."
+"people to use VUtuti."
 msgstr ""
 "Stąd możesz też z łatwością utworzyć przedmiot, dodać plik, zaprosić do "
 "Ututi znajomych."
@@ -1763,7 +1838,9 @@ msgstr ""
 msgid "Overview:"
 msgstr "Przegląd:"
 
-msgid "About Ututi"
+#, fuzzy
+#| msgid "About Ututi"
+msgid "About VUtuti"
 msgstr "O Ututi"
 
 msgid "Contact us using this form"
@@ -1796,9 +1873,13 @@ msgstr ""
 msgid "Private social networks for Universities and Colleges"
 msgstr "Prywatne uczelniane sieci społecznościowe"
 
+#, fuzzy
+#| msgid "" "Ututi is a platform for creating academic social networks.It helps
+#| engage" " your students and teachers and improve the qualityof your
+#| studies."
 msgid ""
-"Ututi is a platform for creating academic social networks.It helps engage"
-" your students and teachers and improve the qualityof your studies."
+"VUtuti is a platform for creating academic social networks.It helps "
+"engage your students and teachers and improve the qualityof your studies."
 msgstr ""
 "Ututi to miejsce, gdzie można stworzyć uniwersytecką sieć "
 "społecznościową. Takie rozwiązanie pomoże zainteresować studentów i "
@@ -1834,7 +1915,9 @@ msgstr "Popraw"
 msgid "Adminstration dashboard"
 msgstr "Panel administracyjny"
 
-msgid "Ututi controls:"
+#, fuzzy
+#| msgid "Ututi controls:"
+msgid "VUtuti controls:"
 msgstr "Ututi controls:"
 
 msgid "University administration:"
@@ -2101,7 +2184,9 @@ msgstr "Nazwa użytkownika lub fragment e-mail "
 msgid "Find"
 msgstr "Znajdź"
 
-msgid "Ututi users:"
+#, fuzzy
+#| msgid "Ututi users:"
+msgid "VUtuti users:"
 msgstr "Użytkownicy Ututi:"
 
 msgid "Downloads"
@@ -2129,15 +2214,21 @@ msgstr[0] "znaleziono  %(count)s użytkownika"
 msgstr[1] "znaleziono  %(count)s użytkowników"
 msgstr[2] "znaleziono  %(count)s użytkowników"
 
+#, fuzzy
+#| msgid "" "We have received a request to confirm the ownership of this email
+#| on the " "Ututi system. If this email belongs to you, confirm it by clicking
+#| on " "this link:"
 msgid ""
 "We have received a request to confirm the ownership of this email on the "
-"Ututi system. If this email belongs to you, confirm it by clicking on "
+"VUtuti system. If this email belongs to you, confirm it by clicking on "
 "this link:"
 msgstr ""
 "Otrzymaliśmy prośbę o weryfikację właściciela tego adresu e-mail. Jeśli "
 "ten e-mail należy do Ciebie, potwierdź to klikając ten link:"
 
-msgid "Ututi team"
+#, fuzzy
+#| msgid "Ututi team"
+msgid "VUtuti team"
 msgstr "Załoga Ututi"
 
 msgid "Hello, this is a message sent from ututi.com contact us form."
@@ -2150,7 +2241,9 @@ msgstr "%(person_title)s zamieścił na forum '%(forum_title)s':"
 msgid "You can find the thread online here:"
 msgstr "Ten wątek znajdziesz na:"
 
-msgid "The Ututi team"
+#, fuzzy
+#| msgid "The Ututi team"
+msgid "The VUtuti team"
 msgstr "Załoga Ututi"
 
 #, python-format
@@ -2178,16 +2271,21 @@ msgid "Space for private files was bought for '%(groupname)s' group."
 msgstr "Grupa '%(groupname)s kupiła przestrzeń na plki prywatne."
 
 #, python-format
+#| msgid "" "Hello,\n" "\n" "the private space subscription for the Ututi group
+#| \"%(group_title)s\"\n" "is about to expire.  When it expires, you will not
+#| be able to upload\n" "more files to your file area.  Please extend your
+#| subscription on the\n" "group page at %(group_url)s .\n" "\n" "--\n" "The
+#| Ututi team\n"
 msgid ""
 "Hello,\n"
 "\n"
-"the private space subscription for the Ututi group \"%(group_title)s\"\n"
+"the private space subscription for the VUtuti group \"%(group_title)s\"\n"
 "is about to expire.  When it expires, you will not be able to upload\n"
 "more files to your file area.  Please extend your subscription on the\n"
 "group page at %(group_url)s .\n"
 "\n"
 "--\n"
-"The Ututi team\n"
+"The VUtuti team\n"
 msgstr ""
 "Witaj,\n"
 "\n"
@@ -2200,6 +2298,11 @@ msgstr ""
 "U-team\n"
 
 #, python-format
+#| msgid "" "Hello,\n" "\n" "your group \"%(group_title)s\" has just run out of
+#| private group space.\n" "If you want to use private group space further,
+#| please purchase a " "subscription\n" "on the group page at %(group_url)s,
+#| and the group file limit\n" "will be raised to %(size)s.\n" "\n" "--\n" "The
+#| Ututi team\n"
 msgid ""
 "Hello,\n"
 "\n"
@@ -2210,7 +2313,7 @@ msgid ""
 "will be raised to %(size)s.\n"
 "\n"
 "--\n"
-"The Ututi team\n"
+"The VUtuti team\n"
 msgstr ""
 "Cześć,\n"
 "\n"
@@ -2232,22 +2335,28 @@ msgid "You may join group %(group_title)s by following this link:"
 msgstr "Możesz dołączyć do grupy %(group_title)s klikając ten link:"
 
 #, python-format
+#| msgid "" "Hello,\n" "\n" "Your friend %(author)s is using Ututi.com,
+#| academical social networtk, " "and\n" "wants to invite you to a group
+#| %(group_title)s (%(group_url)s).\n" "In Ututi you can find coursework, share
+#| files with other members of \n" "the group and use the group forums.\n" "\n"
+#| "Since you do not appear to be a Ututi user at the moment, to become a\n"
+#| "member of this group, you need to register first.\n" "\n" "You may register
+#| by following this link: %(link)s\n" "\n" "--\n" "The Ututi team\n"
 msgid ""
 "Hello,\n"
 "\n"
-"Your friend %(author)s is using Ututi.com, academical social networtk, "
-"and\n"
+"Your friend %(author)s is using VUtuti, academical social networtk, and\n"
 "wants to invite you to a group %(group_title)s (%(group_url)s).\n"
-"In Ututi you can find coursework, share files with other members of \n"
+"In VUtuti you can find coursework, share files with other members of \n"
 "the group and use the group forums.\n"
 "\n"
-"Since you do not appear to be a Ututi user at the moment, to become a\n"
+"Since you do not appear to be a VUtuti user at the moment, to become a\n"
 "member of this group, you need to register first.\n"
 "\n"
 "You may register by following this link: %(link)s\n"
 "\n"
 "--\n"
-"The Ututi team\n"
+"The VUtuti team\n"
 msgstr ""
 "Cześć,\n"
 "\n"
@@ -2267,6 +2376,12 @@ msgstr ""
 "Zespół Ututi\n"
 
 #, python-format
+#| msgid "" "Hello,\n" "\n" "Your friend %(author)s wants to invite you to the
+#| group\n" "%(group_title)s (%(group_url)s). After joining you will be able
+#| to\n" "watch subjects your group is studying, share files with other
+#| members\n" "of the group and use the group forum.\n" "\n" "You may accept or
+#| reject the invitation here: %(invitation_url)s\n" "\n" "We hope you will
+#| find Ututi useful!\n" "\n" "--\n" "The Ututi team\n"
 msgid ""
 "Hello,\n"
 "\n"
@@ -2277,10 +2392,10 @@ msgid ""
 "\n"
 "You may accept or reject the invitation here: %(invitation_url)s\n"
 "\n"
-"We hope you will find Ututi useful!\n"
+"We hope you will find VUtuti useful!\n"
 "\n"
 "--\n"
-"The Ututi team\n"
+"The VUtuti team\n"
 msgstr ""
 "Cześć,\n"
 "\n"
@@ -2315,9 +2430,13 @@ msgstr ""
 "Jeśli nie chcesz otrzymywać tych wiadomości możesz zmienić ustawienia "
 "subskrypcji na stronie Ustawienia powiadomień (%(url)s)."
 
+#, fuzzy
+#| msgid "" "We have received a request to reset Your password on the Ututi
+#| system. If" " You did not request the password to be recovered, please
+#| ignore this " "message."
 msgid ""
-"We have received a request to reset Your password on the Ututi system. If"
-" You did not request the password to be recovered, please ignore this "
+"We have received a request to reset Your password on the VUtuti system. "
+"If You did not request the password to be recovered, please ignore this "
 "message."
 msgstr ""
 "Otrzymaliśmy zgłoszenie utraty hasła w systemie Ututi. Jeżeli nie "
@@ -2330,16 +2449,23 @@ msgid "Hello!"
 msgstr "Witaj!"
 
 #, python-format
+#| msgid "" "%(user_name)s has been using Ututi, a portal for students, for
+#| some time " "now and recommends you to try it."
 msgid ""
-"%(user_name)s has been using Ututi, a portal for students, for some time "
-"now and recommends you to try it."
+"%(user_name)s has been using VUtuti, a portal for students, for some time"
+" now and recommends you to try it."
 msgstr ""
 "%(user_name)s już od jakiegoś czasu korzysta ze studenckiego portalu "
 "Ututi. Teraz poleca go Tobie."
 
+#, fuzzy
+#| msgid "" "Ututi is a system for students that encourages collaboration and
+#| sharing " "of study materials. We provide tools that make storing lecture
+#| notes, " "sharing files and communicating with your classmates much, much
+#| easier."
 msgid ""
-"Ututi is a system for students that encourages collaboration and sharing "
-"of study materials. We provide tools that make storing lecture notes, "
+"VUtuti is a system for students that encourages collaboration and sharing"
+" of study materials. We provide tools that make storing lecture notes, "
 "sharing files and communicating with your classmates much, much easier."
 msgstr ""
 "Ututi - to system dla studentów, który służy do komunikacji i dzielenia "
@@ -2347,25 +2473,36 @@ msgstr ""
 " notatek, łatwego dzielenia się nimi i porozumiewania się z kolegami."
 
 #, python-format
+#| msgid "" "If You would like to join Ututi now, please follow this <a "
+#| "href=\"%(link)s\">link</a>."
 msgid ""
-"If You would like to join Ututi now, please follow this <a "
+"If You would like to join VUtuti now, please follow this <a "
 "href=\"%(link)s\">link</a>."
 msgstr "Jeśli chcesz zdołączyć do Ututi, kliknij  <a href=\"%(link)s\">link</a>."
 
-msgid "Looking forward to meeting you,<br/>The Ututi team"
+#, fuzzy
+#| msgid "Looking forward to meeting you,<br/>The Ututi team"
+msgid "Looking forward to meeting you,<br/>The VUtuti team"
 msgstr "Do zobaczenia, <br/>U-Team"
 
-msgid "If you would like to join Ututi now, please follow this link:"
+#, fuzzy
+#| msgid "If you would like to join Ututi now, please follow this link:"
+msgid "If you would like to join VUtuti now, please follow this link:"
 msgstr "Chcesz dołączyc do Ututi teraz? Kliknij:"
 
-msgid "Your request to join Ututi as a teacher has been confirmed!"
+#, fuzzy
+#| msgid "Your request to join Ututi as a teacher has been confirmed!"
+msgid "Your request to join VUtuti as a teacher has been confirmed!"
 msgstr "Twoja prośba aby dołączyć do Ututi jako wykładowca została potwierdzona!"
 
 #, python-format
-msgid "You may now visit your Ututi dashboard here: %(url)s ."
+#| msgid "You may now visit your Ututi dashboard here: %(url)s ."
+msgid "You may now visit your VUtuti dashboard here: %(url)s ."
 msgstr "Możesz teraz przejść na Twoją tablicę Ututi tutaj: %(url)s "
 
-msgid "At Ututi you will be able to:"
+#, fuzzy
+#| msgid "At Ututi you will be able to:"
+msgid "At VUtuti you will be able to:"
 msgstr "Na Ututi będziesz w stanie:"
 
 msgid "Create your own profile with all Your courses and materials."
@@ -2397,10 +2534,14 @@ msgstr ""
 msgid "A new teacher has registered:"
 msgstr "Nowy wykładowca został zarejestrowany:"
 
-msgid "Ututi"
+#, fuzzy
+#| msgid "Ututi"
+msgid "VUtuti"
 msgstr "Ututi"
 
-msgid "Your request to join Ututi as a teacher has been rejected."
+#, fuzzy
+#| msgid "Your request to join Ututi as a teacher has been rejected."
+msgid "Your request to join VUtuti as a teacher has been rejected."
 msgstr ""
 "Twoje zapytanie o przyłączenie się do Ututi jako wykładowca zostało "
 "odrzucone."
@@ -2540,7 +2681,9 @@ msgstr ""
 "Teraz możesz przechowywać do %(size)s w prywatnej przestrzeni grupy. "
 "Przedłużenie okresu ważności: %(time)s."
 
-msgid "Have fun using Ututi groups!"
+#, fuzzy
+#| msgid "Have fun using Ututi groups!"
+msgid "Have fun using VUtuti groups!"
 msgstr "Miłego korzystania z grup Ututi!"
 
 msgid "You have decided not to increase your group's private file limit."
@@ -2724,9 +2867,12 @@ msgid "Congratulations, you have created a new group!"
 msgstr "Gratulujemy, utworzyłeś nową grupę!"
 
 #, python-format
+#| msgid "" "\n" "Ututi groups are a communication tool for you and your
+#| friends. Here\n" "your group can use the <a
+#| href=\"%(link_to_forums)s\">forums</a> and " "store\n" "private files.\n"
 msgid ""
 "\n"
-"Ututi groups are a communication tool for you and your friends. Here\n"
+"VUtuti groups are a communication tool for you and your friends. Here\n"
 "your group can use the <a href=\"%(link_to_forums)s\">forums</a> and "
 "store\n"
 "private files.\n"
@@ -2738,9 +2884,13 @@ msgstr ""
 "pliki widoczne tylko dla Twojej grupy.\n"
 
 #, python-format
+#| msgid "" "\n" "Ututi groups are a communication tool for you and your
+#| friends. Here\n" "your group can use the <a
+#| href=\"%(link_to_forums)s\">forums</a>, keep\n" "private files and <a
+#| href=\"%(link_to_subjects)s\">watch subjects</a>\n" "you are studying.\n"
 msgid ""
 "\n"
-"Ututi groups are a communication tool for you and your friends. Here\n"
+"VUtuti groups are a communication tool for you and your friends. Here\n"
 "your group can use the <a href=\"%(link_to_forums)s\">forums</a>, keep\n"
 "private files and <a href=\"%(link_to_subjects)s\">watch subjects</a>\n"
 "you are studying.\n"
@@ -2757,12 +2907,16 @@ msgstr ""
 msgid "Invite friends to %s"
 msgstr "Zaproś znajomych do %s"
 
-msgid "Invite your friends to Ututi!"
+#, fuzzy
+#| msgid "Invite your friends to Ututi!"
+msgid "Invite your friends to VUtuti!"
 msgstr "Zaproś znajomych do Ututi!"
 
 #, python-format
+#| msgid "" "Join our group <a href=\"%s\">%s</a> in Ututi, a system for
+#| exchanging " "study materials and information."
 msgid ""
-"Join our group <a href=\"%s\">%s</a> in Ututi, a system for exchanging "
+"Join our group <a href=\"%s\">%s</a> in VUtuti, a system for exchanging "
 "study materials and information."
 msgstr ""
 "Dołącz do naszej grupy <a href=\"%s\">%s</a>  na Ututi, serwisu do "
@@ -2871,17 +3025,21 @@ msgid "Make your group's file space unlimited"
 msgstr "Zwiększ przestrzeń plików swojej grupy"
 
 #, python-format
+#| msgid "" "The amount of group's private files is limited to %(limit)s. This
+#| is so " "because Ututi encourages users to store their files in publicly "
+#| "accessible subjects where they can be shared with all the users. But if "
+#| "you want to keep more than %(limit)s of files, you can do this."
 msgid ""
 "The amount of group's private files is limited to %(limit)s. This is so "
-"because Ututi encourages users to store their files in publicly "
+"because VUtuti encourages users to store their files in publicly "
 "accessible subjects where they can be shared with all the users. But if "
 "You want to keep more than %(limit)s of files, You can do this."
 msgstr ""
-"Ilość prywatnych plików na Ututi jest ograniczona do %(limit)s. W ten "
-"sposób chcemy zachęcić użytkowników do przechowywania notatek w "
-"dostępnych dla wszystkich użytkowników folderach przedmiotów. Jeśli "
-"jednak bardzo zależy Ci na przechowywaniu więcej niż %(limit)s plików, "
-"możesz to zrobić."
+"Objętość plików grupy jest ograniczona do %(limit)s. Dzieje się tak "
+"dlatego, że Ututi zachęca do przechowywania plików w folderach "
+"publicznych, tak aby każdy poszukujący materiałów na określony temat z "
+"łatwością mógł je odnaleźć. Jeśli jednak chcesz gromadzić więcej niż "
+"%(limit)s plików - możesz to zrobić."
 
 msgid "There are no ways to pay for additional group space at the moment."
 msgstr "W tej chwili nie ma możliwości zapłaty za dodatkowe miejsce w grupie."
@@ -3066,8 +3224,8 @@ msgid ""
 "teaching subjects with study materials (notes, files, presentations, "
 "audio & video)"
 msgstr ""
-"przedmioty oraz materiały (notatki, dokumenty, prezentacje, "
-"pliki audio/video)"
+"przedmioty oraz materiały (notatki, dokumenty, prezentacje, pliki "
+"audio/video)"
 
 msgid "Student groups"
 msgstr "Grupy studentów"
@@ -3185,15 +3343,21 @@ msgstr ""
 msgid "The actions"
 msgstr "Działania"
 
+#, fuzzy
+#| msgid "" "Ututi let's you theme your network, including custom colors,
+#| header logo " "and text."
 msgid ""
-"Ututi let's you theme your network, including custom colors, header logo "
-"and text."
+"VUtuti let's you theme your network, including custom colors, header logo"
+" and text."
 msgstr ""
 "Na Ututi możesz stworzyć własny motyw dla swojej sieci, wybrać kolory, "
 "logo w nagłówku i tekst."
 
 msgid "Enable custom theming"
 msgstr "Włącz wprowadzanie zmian w motywie"
+
+msgid "Catalog"
+msgstr "Katalog"
 
 msgid "Choose other logo"
 msgstr "Wybierz inne logo"
@@ -3296,7 +3460,9 @@ msgstr ""
 "Do Twojego portalu mogą dołączyć tylko osoby ze zweryfikowanym "
 "uniwersyteckim adresem e-mail."
 
-msgid "Ututi student accounts:"
+#, fuzzy
+#| msgid "Ututi student accounts:"
+msgid "VUtuti student accounts:"
 msgstr "Konta studentów na Ututi:"
 
 msgid ""
@@ -3323,9 +3489,13 @@ msgstr ""
 "grupy. Pliki dodane do katalogu danych zajęć będą dostępne dla wszystkich"
 " zainteresowanych."
 
+#, fuzzy
+#| msgid "" "<strong>Create wiki notes</strong> and edit them together with
+#| other " "people on the network. You can even take notes to Ututi during your
+#| " "lectures."
 msgid ""
 "<strong>Create wiki notes</strong> and edit them together with other "
-"people on the network. You can even take notes to Ututi during your "
+"people on the network. You can even take notes to VUtuti during your "
 "lectures."
 msgstr ""
 "<strong>Utwórz notatki wiki</strong> i edytuj je z innymi ludźmi z twojej"
@@ -3334,7 +3504,9 @@ msgstr ""
 msgid "Join as teacher"
 msgstr "Dołącz jako wykładowca"
 
-msgid "Ututi teacher accounts:"
+#, fuzzy
+#| msgid "Ututi teacher accounts:"
+msgid "VUtuti teacher accounts:"
 msgstr "Konta wykładowców na Ututi:"
 
 msgid ""
@@ -3351,9 +3523,12 @@ msgstr ""
 "<strong>Dodaj materiał z zajęć.</strong> Natychmiast stanie się on "
 "dostępny dla wszystkich osób, które śledzą dane zajęcia."
 
+#, fuzzy
+#| msgid "" "<strong>Select and organize your publications</strong> that will
+#| be " "displayed on your Ututi profile page."
 msgid ""
 "<strong>Select and organize your publications</strong> that will be "
-"displayed on your Ututi profile page."
+"displayed on your VUtuti profile page."
 msgstr ""
 "<strong>Wybierz i zorganizuj swoje publikacje</strong>, które będą "
 "dostępne na Twojej stronie profilowej Ututi."
@@ -3590,9 +3765,13 @@ msgid "Get more space"
 msgstr "Zwiększ przestrzeń"
 
 #, python-format
+#| msgid "" "The amount of group's private files is limited to %(limit)s. This
+#| is so " "because Ututi encourages users to store their files in publicly "
+#| "accessible subjects where they can be shared with all the users. But if "
+#| "you want to keep more than %(limit)s of files, you can do this."
 msgid ""
 "The amount of group's private files is limited to %(limit)s. This is so "
-"because Ututi encourages users to store their files in publicly "
+"because VUtuti encourages users to store their files in publicly "
 "accessible subjects where they can be shared with all the users. But if "
 "you want to keep more than %(limit)s of files, you can do this."
 msgstr ""
@@ -3800,13 +3979,19 @@ msgstr "Wykł."
 msgid "Create your own social network"
 msgstr "Stwórz swoją własną sieć społecznościową"
 
-msgid "About Ututi:"
+#, fuzzy
+#| msgid "About Ututi:"
+msgid "About VUtuti:"
 msgstr "O Ututi:"
 
+#, fuzzy
+#| msgid "" "Ututi lets you create a social network for your university. Here
+#| you will" " find online groups, teacher profiles and course pages. Ututi is
+#| a tool " "to share information and build your online academic community."
 msgid ""
-"Ututi lets you create a social network for your university. Here you will"
-" find online groups, teacher profiles and course pages. Ututi is a tool "
-"to share information and build your online academic community."
+"VUtuti lets you create a social network for your university. Here you "
+"will find online groups, teacher profiles and course pages. VUtuti is a "
+"tool to share information and build your online academic community."
 msgstr ""
 "Ututi pozwala Ci na utworzenie sieci społecznościowej dla Twojego "
 "uniwersytetu. Znajdziesz tu grupy online, profile wykładowców i strony "
@@ -3828,7 +4013,9 @@ msgstr "Szybkie dodawanie plików"
 msgid "Tell a friend:"
 msgstr "Powiedz znajomemu:"
 
-msgid "Here's what I've found in Ututi"
+#, fuzzy
+#| msgid "Here's what I've found in Ututi"
+msgid "Here's what I've found in VUtuti"
 msgstr "Zobacz co znalazłem na Ututi"
 
 msgid "Your email"
@@ -3854,7 +4041,9 @@ msgstr ""
 "To jest zweryfikowana sieć do <strong>%s</strong>.  Tylko %s studenci i "
 "wykładowcy mogą dołączyć do tej sieci."
 
-msgid "Powered by Ututi"
+#, fuzzy
+#| msgid "Powered by Ututi"
+msgid "Powered by VUtuti"
 msgstr "Stworzone przez Ututi"
 
 msgid "Login:"
@@ -4056,7 +4245,9 @@ msgstr "Twój nowy URL to:"
 msgid "Page address"
 msgstr "Adres profilu"
 
-msgid "Ututi username"
+#, fuzzy
+#| msgid "Ututi username"
+msgid "VUtuti username"
 msgstr "Nazwa użytkownika Ututi"
 
 msgid "Show my profile to unregistered users and search engines"
@@ -4093,9 +4284,12 @@ msgstr "Miejsce rozmów studentów z wykładowcami na tematy związane z przedmi
 msgid "Shared notes"
 msgstr "Wspólne notatki"
 
+#, fuzzy
+#| msgid "" "create wiki notes collaboratively with your class-mates or take
+#| notes " "during the lecture and upload it directly to Ututi."
 msgid ""
 "create wiki notes collaboratively with your class-mates or take notes "
-"during the lecture and upload it directly to Ututi."
+"during the lecture and upload it directly to VUtuti."
 msgstr ""
 "stwórz notatki wiki wspólnie ze znajomymi z uczelni lub notuj podczas "
 "wykładu i dodaj swoje notatki bezpośrednio na Ututi."
@@ -4155,13 +4349,19 @@ msgstr "Powiedz coś o sobie poprzez edycję swojego profilu."
 msgid "Tell some basic information about yourself by editing your profile."
 msgstr "Opowiedz coś o sobie poprzez edycję swojego profilu."
 
-msgid "Welcome to Ututi"
+#, fuzzy
+#| msgid "Welcome to Ututi"
+msgid "Welcome to VUtuti"
 msgstr "Witaj na Ututi"
 
 #, python-format
+#| msgid "" "Welcome to <strong>%(university)s</strong> private social network
+#| created" " on <a href=\"%(url)s\">Ututi platform</a>. Here students and
+#| teachers " "can create groups online, use the mailinglist for communication
+#| and the " "file storage for sharing information."
 msgid ""
 "Welcome to <strong>%(university)s</strong> private social network created"
-" on <a href=\"%(url)s\">Ututi platform</a>. Here students and teachers "
+" on <a href=\"%(url)s\">VUtuti platform</a>. Here students and teachers "
 "can create groups online, use the mailinglist for communication and the "
 "file storage for sharing information."
 msgstr ""
@@ -4197,8 +4397,11 @@ msgstr "Pokaż przedmioty moich grup"
 msgid "Very sad..."
 msgstr "Szkoda..."
 
+#, fuzzy
+#| msgid "" "We are very disappointed that you have decided not to support
+#| Ututi. We " "hope you will support us next time. Good luck!"
 msgid ""
-"We are very disappointed that you have decided not to support Ututi. We "
+"We are very disappointed that you have decided not to support VUtuti. We "
 "hope you will support us next time. Good luck!"
 msgstr ""
 "Szkoda, że nie zdecydowałeś się wesprzeć Ututi. Miejmy nadzieję, że "
@@ -4442,7 +4645,9 @@ msgstr "Wyślij e-mail do studentów z Pulpitu"
 msgid "Attach files to your messages"
 msgstr "Dołącz pliki to swoich wiadomości"
 
-msgid "Send SMS messages from your dashboard to Ututi groups"
+#, fuzzy
+#| msgid "Send SMS messages from your dashboard to Ututi groups"
+msgid "Send SMS messages from your dashboard to VUtuti groups"
 msgstr "Wyślij wiadomości SMS do grup Ututi z Kokpitu"
 
 msgid ""
@@ -4452,9 +4657,12 @@ msgstr ""
 "Wpisz tytuł, aby zidentyfikować grupę, np. Technologia Informacyjna "
 "pierwszoroczni lub Informatyka pierwszy rok."
 
+#, fuzzy
+#| msgid "" "Enter email address for this group. It can be Ututi or any other
+#| mailing " "list, or a private email address."
 msgid ""
-"Enter email address for this group. It can be Ututi or any other mailing "
-"list, or a private email address."
+"Enter email address for this group. It can be VUtuti or any other mailing"
+" list, or a private email address."
 msgstr ""
 "Wpisz adres e-mail dla tej grupy. Może to być Ututi, prywatny adres "
 "e-mail lub każda inna lista mailingowa."
@@ -4564,8 +4772,11 @@ msgstr "Kontakty do moich studentów"
 msgid "add a contact"
 msgstr "Dodaj kontakt"
 
+#, fuzzy
+#| msgid "" "Ututi will keep track of your student groups and make it easy to
+#| reach " "them."
 msgid ""
-"Ututi will keep track of your student groups and make it easy to reach "
+"VUtuti will keep track of your student groups and make it easy to reach "
 "them."
 msgstr "Ututi będzie śledziło Twoje grupy studenckie i ułatwi Ci kontakt z nimi."
 
@@ -4729,7 +4940,9 @@ msgstr "Rejestracja"
 msgid "Step %(step_num)s"
 msgstr "Krok %(step_num)s"
 
-msgid "Registration to Ututi"
+#, fuzzy
+#| msgid "Registration to Ututi"
+msgid "Registration to VUtuti"
 msgstr "Rejestracja do Ututi"
 
 msgid "Email approval"
@@ -4745,8 +4958,11 @@ msgstr "Kod potwierdzający został wysłany na %(email_address)s."
 msgid "Did not get the confirmation code? Press \"Send again\" button."
 msgstr "Kod potwierdzający nie doszedł? Kliknij \"Wyślij ponownie\"."
 
+#, fuzzy
+#| msgid "" "Ututi is most valuable when used together with your classmates and
+#| " "friends. Take a minute to invite them now."
 msgid ""
-"Ututi is most valuable when used together with your classmates and "
+"VUtuti is most valuable when used together with your classmates and "
 "friends. Take a minute to invite them now."
 msgstr ""
 "Ututi jest najbardziej efektywne gdy używasz go wspólnie ze swoimi "
@@ -5393,9 +5609,12 @@ msgstr ""
 "Notatki wiki są dostępne dla całej grupy. Każdy kto obserwuje ten "
 "przedmiot może edytować wszystkie notatki wiki."
 
+#, fuzzy
+#| msgid "" "<strong>Take notes during lecture</strong> on your laptop and
+#| upload it " "directly to Ututi."
 msgid ""
 "<strong>Take notes during lecture</strong> on your laptop and upload it "
-"directly to Ututi."
+"directly to VUtuti."
 msgstr ""
 "<strong>Notuj na wykładzie</strong> na swoim laptopie i wrzucaj notatki "
 "prosto na Ututi."

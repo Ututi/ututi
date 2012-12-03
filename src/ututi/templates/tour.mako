@@ -12,7 +12,7 @@
   <br />
   <a class="btn-large" href="${url(controller='home', action='register')}">
     <span>
-      ${_('Join Ututi!')}
+      ${_('Join VUtuti!')}
     </span>
   </a>
 </div>
@@ -31,13 +31,13 @@
       ${h.image('/images/tour/%s/1.png' % c.lang, alt='logo')|n}
     </div>
     <div class="text">
-      <h2>${_('Ututi - your university on the web')}</h2>
+      <h2>${_('VUtuti - your university on the web')}</h2>
       <p>
         ${_('Your academic groups and subjects containing '
         'related materials: files, notes and descriptions. ')}
       </p>
       <p>
-        ${_('All these things are combined in the handy Ututi system.')}
+        ${_('All these things are combined in the handy VUtuti system.')}
       </p>
       ${joinlink()}
     </div>
@@ -52,9 +52,9 @@
       <h2>${_('What groups can do: email')}</h2>
       <p>
         ${_('It is a communication tool for You and Your classmates. '
-        'Ututi groups work just like mailing lists: every member can '
+        'VUtuti groups work just like mailing lists: every member can '
         'receive these messages in their email account and can reply to '
-        'them from there (You do not have to log on to Ututi every time). ')}
+        'them from there (You do not have to log on to VUtuti every time). ')}
       </p>
       <p>
         ${_('You can always choose not to receive these email messages in the group settings.')}
@@ -71,7 +71,7 @@
     <div class="text">
       <h2>${_('What groups can do: subjects')}</h2>
       <p>
-        ${_('Every group studies subjects. Ututi also has a catalog '
+        ${_('Every group studies subjects. VUtuti also has a catalog '
         'of academic subjects. Here the subjects are classified by the '
         'university and faculty. Every group can mark the subjects it is '
         'studying in the "subjects" area.')}
@@ -98,7 +98,7 @@
     <div class="text">
       <h2>${_('What groups can do: files')}</h2>
       <p>
-        ${_('Ututi makes it easy to share files. In the "files" area '
+        ${_('VUtuti makes it easy to share files. In the "files" area '
         'members of the group can see the private files of the group '
         'and all the files of the subjects the group is watching.')}
       </p>
@@ -113,7 +113,7 @@
         'The folders are visible in the group when it is watching these subjects. '
         'The size and amount of public files is not limited. What is more, '
         'files can be added to subjects not only by your group, but also by other '
-        'groups and Ututi members. This makes it easy to share information.')}
+        'groups and VUtuti members. This makes it easy to share information.')}
       </p>
       ${joinlink()}
     </div>
@@ -139,7 +139,7 @@
     <div class="text">
       <h2>${_('What members can do: subjects')}</h2>
       <p>
-        ${_('Not only groups, but also single Ututi members can watch subjects. '
+        ${_('Not only groups, but also single VUtuti members can watch subjects. '
         'You can easily start watching a subject by visiting its page and clicking on '
         'the link "start watching".')}
       </p>
@@ -185,7 +185,7 @@
       <br />
       <p>
         ${_('From here You can also easily create a subject, upload a file, '
-        'invite people to use Ututi.')}
+        'invite people to use VUtuti.')}
       </p>
       ${joinlink()}
     </div>

@@ -69,7 +69,7 @@ class NewsController(BaseController):
                 elif event['type'] == 'file':
                     files += 1
 
-        subject = _('Ututi news: %(changes)s')
+        subject = _('VUtuti news: %(changes)s')
         file_changes = ungettext('%(file_count)d new file',
                                  '%(file_count)d new files', files) % {
             'file_count': files}
@@ -78,7 +78,7 @@ class NewsController(BaseController):
             'page_count': pages}
 
         if pages and files:
-            subject = _('Ututi news: %(file_changes)s and %(page_changes)s')
+            subject = _('VUtuti news: %(file_changes)s and %(page_changes)s')
             subject = subject % {'file_changes': file_changes,
                                  'page_changes': page_changes}
         elif files:
@@ -158,7 +158,7 @@ class NewsController(BaseController):
 
     def _send_out_of_space_notification(self, group):
         """Send a notification to a group that it has run out of private space."""
-        subject = _('The Ututi group "%s" has run out of private file space') % group.title
+        subject = _('The VUtuti group "%s" has run out of private file space') % group.title
         extra_vars = dict(group=group, size_limit=int(config.get('paid_group_file_limit')))
         text = render('/emails/group_space_full.mako', extra_vars=extra_vars)
         msg = EmailMessage(subject, text)

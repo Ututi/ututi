@@ -1,10 +1,10 @@
 <%inherit file="/about/base.mako" />
 
-<%def name="pagetitle()">${_('What is Ututi?')}</%def>
+<%def name="pagetitle()">${_('What is VUtuti?')}</%def>
 
 <div class="static-content">
   <h2>${_('Private social networks for Universities and Colleges')}</h2>
-  <p>${_('Ututi is a platform for creating academic social networks.'
+  <p>${_('VUtuti is a platform for creating academic social networks.'
     'It helps engage your students and teachers and improve the quality'
     'of your studies.')}</p>
 
@@ -40,7 +40,7 @@
       <strong>File sharing</strong> &ndash; Share files or research materials with colleagues or others.<br />&nbsp;
     </div>
     <div class="feature icon-branding">
-      <strong>Custom branding</strong> &ndash; Customize the look and feel of Ututi with Your university's style: logo, color scheme and basic information in the header and footer.
+      <strong>Custom branding</strong> &ndash; Customize the look and feel of VUtuti with Your university's style: logo, color scheme and basic information in the header and footer.
     </div>
   </div>
 </div>

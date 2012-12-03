@@ -88,7 +88,7 @@ Invitee has to go through registration first:
     >>> new_user.click('Skip')
     >>> new_user.click('Finish')
     >>> new_user.printCssQuery('h1.page-title', strip=True)
-    <h1>Welcome to Ututi</h1>
+    <h1>Welcome to VUtuti</h1>
 
 Once registered, user should be able to accept invitation to group:
 
@@ -185,7 +185,7 @@ Invitee has to go through registration first:
     >>> new_user.click('Skip')
     >>> new_user.click('Finish')
     >>> new_user.printCssQuery('h1.page-title', strip=True)
-    <h1>Welcome to Ututi</h1>
+    <h1>Welcome to VUtuti</h1>
 
 Once registered, user should be able to accept invitation to group:
 

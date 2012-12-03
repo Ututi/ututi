@@ -25,7 +25,7 @@
 
 <div class="feature-box simple">
   <div class="title">
-    ${_("Ututi student accounts:")}
+    ${_("VUtuti student accounts:")}
   </div>
   <div class="clearfix">
     <div class="feature icon-group">
@@ -40,7 +40,7 @@
       ${h.literal(_("<strong>Upload files</strong> to share them with your classmates. Files uploaded to course catalog will be available to everyone who is interested in the subject."))}
     </div>
     <div class="feature icon-wiki">
-      ${h.literal(_("<strong>Create wiki notes</strong> and edit them together with other people on the network. You can even take notes to Ututi during your lectures."))}
+      ${h.literal(_("<strong>Create wiki notes</strong> and edit them together with other people on the network. You can even take notes to VUtuti during your lectures."))}
     </div>
   </div>
 </div>

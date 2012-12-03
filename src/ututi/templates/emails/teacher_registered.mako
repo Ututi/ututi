@@ -8,4 +8,4 @@ ${', '.join(teacher.location.hierarchy())}
 
 ${teacher.teacher_position}
 
-${_(u"Ututi")}
+${_(u"VUtuti")}

@@ -21,7 +21,7 @@
 
 <div class="feature-box simple">
   <div class="title">
-    ${_("Ututi teacher accounts:")}
+    ${_("VUtuti teacher accounts:")}
   </div>
   <div class="clearfix">
     <div class="feature icon-cv">
@@ -33,7 +33,7 @@
   </div>
   <div class="clearfix">
     <div class="feature icon-publications">
-      ${h.literal(_("<strong>Select and organize your publications</strong> that will be displayed on your Ututi profile page."))}
+      ${h.literal(_("<strong>Select and organize your publications</strong> that will be displayed on your VUtuti profile page."))}
     </div>
     <div class="feature icon-email">
       ${h.literal(_("<strong>Contact your followers</strong> by sending group or private messages, or firing discussions on the course wall."))}

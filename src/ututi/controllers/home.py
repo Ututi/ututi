@@ -44,7 +44,7 @@ def switch_language(language):
 
 def info_menu_items():
     return [
-        {'title': _("What is Ututi?"),
+        {'title': _("What is VUtuti?"),
          'name': 'about',
          'link': url(controller='home', action='features')},
         {'title': _("Contact us"),
@@ -254,8 +254,8 @@ class HomeController(UniversityListMixin):
                           extra_vars={'name': name,
                                       'email': email,
                                       'message': message})
-            msg = EmailMessage(_('Message to Ututi.com team'), text, force=True)
-            msg.send('info@ututi.com')
+            msg = EmailMessage(_('Message to VUtuti team'), text, force=True)
+            msg.send(config.get('ututi_info_email', 'info@ututi.com'))
             h.flash(_('Your message was succesfully sent.'))
 
         return self._contacts_form()

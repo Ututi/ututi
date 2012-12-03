@@ -144,7 +144,7 @@ ${group_right_sidebar()}
         <div style="padding-top: 1em; padding-bottom: 1em">
           ${_("You can now store up to %(size)s in your group's private area. Time period extension: %(time)s.") % \
               dict(time=request.GET.get('paid_space'), size=h.file_size(int(c.pylons_config.get('paid_group_file_limit')))) |n}
-          ${_('Have fun using Ututi groups!')}
+          ${_('Have fun using VUtuti groups!')}
         </div>
 
         <div style="padding-left: 120px">
@@ -171,7 +171,7 @@ ${group_right_sidebar()}
 
         <div style="padding-top: 1em; padding-bottom: 1em">
           ${_('Perhaps you will change your mind later?')}
-          ${_('Have fun using Ututi groups!')}
+          ${_('Have fun using VUtuti groups!')}
         </div>
 
         <div style="padding-left: 120px">
@@ -198,7 +198,7 @@ ${group_right_sidebar()}
 
         <div style="padding-top: 1em; padding-bottom: 1em">
           ${_('Perhaps you will change your mind later?')}
-          ${_('Have fun using Ututi groups!')}
+          ${_('Have fun using VUtuti groups!')}
         </div>
 
         <div style="padding-left: 120px">

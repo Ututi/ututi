@@ -11,7 +11,7 @@
   }
 </style>
 
-<h1>${_('Ututi users:')}</h1>
+<h1>${_('VUtuti users:')}</h1>
 
 <div>
   <span>Sort by:</span>

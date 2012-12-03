@@ -22,13 +22,13 @@ He should receive and email:
     >>> from ututi.lib.mailer import mail_queue
     >>> print mail_queue.pop().payload()
     Alternative user,
-    Your request to join Ututi as a teacher has been confirmed!
-    You may now visit your Ututi dashboard here: http://localhost/ .
-    At Ututi you will be able to::
+    Your request to join VUtuti as a teacher has been confirmed!
+    You may now visit your VUtuti dashboard here: http://localhost/ .
+    At VUtuti you will be able to::
     - Create your own profile with all Your courses and materials.
     - Easily publish Your lecture notes so that Your students can find and access them.
     - Easily communicate with Your students.
-    The Ututi team
+    The VUtuti team
 
 Oh, we can also lookup users by their names:
     >>> form = browser.getForm(id='user_search')

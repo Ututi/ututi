@@ -190,7 +190,7 @@ class FederationMixin(object):
         if info.status == consumer.SUCCESS:
             identity_url = info.identity_url
             if User.get_byopenid(identity_url, registration.location):
-                message = _('This Google account is already linked to another Ututi account.')
+                message = _('This Google account is already linked to another VUtuti account.')
             else:
                 registration.openid = identity_url
                 if not registration.fullname:

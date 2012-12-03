@@ -35,12 +35,12 @@
 <%def name="about_ututi_portlet()">
   <%self:portlet id="about-ututi-portlet">
     <%def name="header()">
-      ${_("About Ututi:")}
+      ${_("About VUtuti:")}
     </%def>
     <p>
-    ${_("Ututi lets you create a social network for your university. "
+    ${_("VUtuti lets you create a social network for your university. "
         "Here you will find online groups, teacher profiles and course pages. "
-        "Ututi is a tool to share information and build your online academic community.")}
+        "VUtuti is a tool to share information and build your online academic community.")}
     </p>
     <a href="${url(controller='home', action='features')}">${_("Learn more...")}</a>
   </%self:portlet>
@@ -143,7 +143,7 @@
     <div id="email-share-dialog">
       <form action="${url(controller='profile', action='send_email_message_js')}" method="POST" class="new-style-form">
         <%
-        subject = _("Here's what I've found in Ututi") + ': ' + info['title']
+        subject = _("Here's what I've found in VUtuti") + ': ' + info['title']
         message = "%(title)s\n\n%(description)s\n\n%(link)s" % \
           dict(title=info['title'], description=info['description'], link=info['link'])
         %>
@@ -225,7 +225,7 @@
 <%def name="powered_by_ututi()">
   <%self:portlet id="powered-by-ututi-portlet">
     <a href="${url('frontpage')}">
-      <img src="${url('/img/powered-by-ututi.png')}" alt="${_("Powered by Ututi")}" />
+      <img src="${url('/img/powered-by-ututi.png')}" alt="${_("Powered by VUtuti")}" />
     </a>
   </%self:portlet>
 </%def>

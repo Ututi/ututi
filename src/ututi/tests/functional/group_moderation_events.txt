@@ -152,7 +152,7 @@ All the emails for approved messages have been sent:
     >>> from ututi.tests.functional import printEmails
     >>> printEmails()
     [u'admin@uni.ututi.com']
-    Ututi news: 1 new message awaiting moderation
+    VUtuti news: 1 new message awaiting moderation
     Moderatoriai (http://localhost/group/moderators)
     - There is 1 message in the moderation queue (http://localhost/group/moderators/mailinglist/administration)
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/settings/notifications).
@@ -172,7 +172,7 @@ Let's try it with more messages in the queue:
     >>> browser.open('http://localhost/news/hourly?date=2009-10-08&hour=11')
     >>> printEmails()
     [u'admin@uni.ututi.com']
-    Ututi news: 3 new messages awaiting moderation
+    VUtuti news: 3 new messages awaiting moderation
     <BLANKLINE>
     Moderatoriai (http://localhost/group/moderators)
     <BLANKLINE>

@@ -69,7 +69,7 @@
           <div id="get-space-dialog" class="payment-dialog" style="display: none">
               <div class="description">
 
-  ${_("The amount of group's private files is limited to %(limit)s. This is so because Ututi "
+  ${_("The amount of group's private files is limited to %(limit)s. This is so because VUtuti "
   "encourages users to store their files in publicly accessible subjects where they can "
   "be shared with all the users. But if you want to keep more than %(limit)s of files, "
   "you can do this.") % dict(limit=h.file_size(c.group.group_file_limit()))}

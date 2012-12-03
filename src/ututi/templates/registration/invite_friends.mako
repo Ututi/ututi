@@ -28,7 +28,7 @@
 
 <%def name="pagetitle()">${_("Invite friends")}</%def>
 
-<p>${_("Ututi is most valuable when used together with your classmates and friends. Take a minute to invite them now.")}</p>
+<p>${_("VUtuti is most valuable when used together with your classmates and friends. Take a minute to invite them now.")}</p>
 
 <div class="left-right" id="invitation-choice">
 

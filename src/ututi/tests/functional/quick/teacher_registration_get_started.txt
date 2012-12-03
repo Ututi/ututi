@@ -36,7 +36,7 @@ will be registered as teacher:
 Here. Let's look at what teacher sees:
 
     >>> user.printCssQuery('h1.page-title', strip=True)
-    <h1>Welcome to Ututi</h1>
+    <h1>Welcome to VUtuti</h1>
 
     >>> user.printCssQuery(".flash-message-content", strip=True)
     <span>At the moment you are not confirmed as teacher. Our administrators have been notified and will verify you shortly.</span>
@@ -54,7 +54,7 @@ moderators of the university):
     A new teacher has registered:
     User (user@example.com)
     U-niversity
-    Ututi
+    VUtuti
 
 Let's register one more teacher that later will be denied:
 
@@ -77,7 +77,7 @@ Let's register one more teacher that later will be denied:
     A new teacher has registered:
     Not a teacher (notteacher@example.com)
     U-niversity
-    Ututi
+    VUtuti
 
 The administrator should now see requests to confirm a teacher:
 
@@ -93,13 +93,13 @@ Let's confirm User:
     >>> admin.getControl('Confirm', index=0).click()
     >>> print mail_queue.pop().payload()
     User,
-    Your request to join Ututi as a teacher has been confirmed!
-    You may now visit your Ututi dashboard here: http://localhost/ .
-    At Ututi you will be able to::
+    Your request to join VUtuti as a teacher has been confirmed!
+    You may now visit your VUtuti dashboard here: http://localhost/ .
+    At VUtuti you will be able to::
     - Create your own profile with all Your courses and materials.
     - Easily publish Your lecture notes so that Your students can find and access them.
     - Easily communicate with Your students.
-    The Ututi team
+    The VUtuti team
 
     >>> admin.printQuery("id('teacher_list')//td[@class='name']//text()")
     Not a teacher
@@ -114,9 +114,9 @@ Let's deny the other one:
     >>> admin.getControl('Deny', index=0).click()
     >>> print mail_queue.pop().payload()
     Not a teacher,
-    Your request to join Ututi as a teacher has been rejected.
+    Your request to join VUtuti as a teacher has been rejected.
     If this was a misunderstanding, please contact us directly at: info@ututi.lt.
-    The Ututi team
+    The VUtuti team
 
 2. Existing user wants to become a teacher
 ==========================================
@@ -140,7 +140,7 @@ Let's login as admin@uni.ututi.com (default user) to test that.
     Administrator of the university (admin@uni.ututi.com)
     U-niversity
     http://localhost/admin/teachers?user_id=1
-    Ututi
+    VUtuti
 
 Admin can click the link from email above and confirm the teacher.
 However, let's save it for later.
@@ -176,7 +176,7 @@ way as any existing Ututi user (case above).
     Administrator of the university (admin@uni.ututi.com)
     U-niversity
     http://localhost/admin/teachers?user_id=1
-    Ututi
+    VUtuti
 
 Let's verify him this time:
 
@@ -187,13 +187,13 @@ Let's verify him this time:
 
     >>> print mail_queue.pop().payload()
     Administrator of the university,
-    Your request to join Ututi as a teacher has been confirmed!
-    You may now visit your Ututi dashboard here: http://localhost/ .
-    At Ututi you will be able to::
+    Your request to join VUtuti as a teacher has been confirmed!
+    You may now visit your VUtuti dashboard here: http://localhost/ .
+    At VUtuti you will be able to::
     - Create your own profile with all Your courses and materials.
     - Easily publish Your lecture notes so that Your students can find and access them.
     - Easily communicate with Your students.
-    The Ututi team
+    The VUtuti team
 
     >>> user.click('Home')
 

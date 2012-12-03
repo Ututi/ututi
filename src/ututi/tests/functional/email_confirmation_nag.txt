@@ -15,11 +15,11 @@ Test nagging users to confirm their emails
 
    >>> msg = mail_queue.pop()
    >>> print msg.payload()
-   We have received a request to confirm the ownership of this email on the Ututi system. If this email belongs to you, confirm it by clicking on this link:
+   We have received a request to confirm the ownership of this email on the VUtuti system. If this email belongs to you, confirm it by clicking on this link:
    <BLANKLINE>
    http://localhost/confirm_user_email/...
    <BLANKLINE>
-   Ututi team
+   VUtuti team
 
    >>> msg.recipients
    [u'user3@ututi.lt']

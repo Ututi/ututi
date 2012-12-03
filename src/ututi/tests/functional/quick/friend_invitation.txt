@@ -20,15 +20,15 @@ There should be a portlet with a form that let's us enter email addresses the re
    [u'somenewuser@example.com']
    Hello!
    <BLANKLINE>
-   Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.
+   Administrator of the university has been using VUtuti, a portal for students, for some time now and recommends you to try it.
    <BLANKLINE>
-   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
+   VUtuti is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
    <BLANKLINE>
-   If you would like to join Ututi now, please follow this link:
+   If you would like to join VUtuti now, please follow this link:
    http://localhost/registration/.../confirm
    <BLANKLINE>
    --
-   The Ututi team
+   The VUtuti team
    <BLANKLINE>
 
    >>> mail_queue[:] = []
@@ -59,7 +59,7 @@ User can add personal message to the invitation that is sent:
    <BLANKLINE>
    Hey, come and try Ututi. I found it rather nice.
    <BLANKLINE>
-   If you would like to join Ututi now, please follow this link:
+   If you would like to join VUtuti now, please follow this link:
    http://localhost/registration/.../confirm
    <BLANKLINE>
    --
@@ -91,28 +91,28 @@ What if some of the emails were mistyped?
    [u'someneweruser@example.com']
    Hello!
    <BLANKLINE>
-   Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.
+   Administrator of the university has been using VUtuti, a portal for students, for some time now and recommends you to try it.
    <BLANKLINE>
-   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
+   VUtuti is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
    <BLANKLINE>
-   If you would like to join Ututi now, please follow this link:
+   If you would like to join VUtuti now, please follow this link:
    http://localhost/registration/.../confirm
    <BLANKLINE>
    --
-   The Ututi team
+   The VUtuti team
    <BLANKLINE>
    [u'user@example.com']
    Hello!
    <BLANKLINE>
-   Administrator of the university has been using Ututi, a portal for students, for some time now and recommends you to try it.
+   Administrator of the university has been using VUtuti, a portal for students, for some time now and recommends you to try it.
    <BLANKLINE>
-   Ututi is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
+   VUtuti is a system for students that encourages collaboration and sharing of study materials. We provide tools that make storing lecture notes, sharing files and communicating with your classmates much, much easier.
    <BLANKLINE>
-   If you would like to join Ututi now, please follow this link:
+   If you would like to join VUtuti now, please follow this link:
    http://localhost/registration/.../confirm
    <BLANKLINE>
    --
-   The Ututi team
+   The VUtuti team
    <BLANKLINE>
 
    >>> browser.printQuery("//div[@class='flash-message']/span/text()")

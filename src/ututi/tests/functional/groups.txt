@@ -30,8 +30,8 @@ We can edit the group's information.
    >>> browser.getControl('Title:').value
    'Moderatoriai'
 
-   >>> browser.getControl('Title:').value = 'Ututi moderatoriai'
-   >>> browser.getControl('Description').value = 'Ututi moderatorių grupė'
+   >>> browser.getControl('Title:').value = 'VUtuti moderatoriai'
+   >>> browser.getControl('Description').value = 'VUtuti moderatorių grupė'
    >>> browser.getControl('Picture').add_file(*make_file('test_logo.png'))
    >>> browser.getControl('Save').click()
    >>> browser.printQuery('//li[@class="current"]//a/text()')
@@ -41,7 +41,7 @@ We can edit the group's information.
    <img id="group-logo" src="/group/moderators/logo/70/70" alt="logo" />
 
    >>> browser.printCssQuery(".page-title", strip=True)
-   <h1>Ututi moderatoriai</h1>
+   <h1>VUtuti moderatoriai</h1>
 
 We can add a group:
 

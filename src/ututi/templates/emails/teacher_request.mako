@@ -8,4 +8,4 @@ ${', '.join(user.location.hierarchy())}
 
 ${url(controller='admin', action='teachers', user_id=user.id, qualified=True)}
 
-${_(u"Ututi")}
+${_(u"VUtuti")}

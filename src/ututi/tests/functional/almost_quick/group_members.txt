@@ -178,9 +178,9 @@ If a user, who has been invited to join a group requests to join it, we consider
     <BLANKLINE>
     You may accept or reject the invitation here: http://localhost/group/moderators/invitation?accept=True
     <BLANKLINE>
-    We hope you will find Ututi useful!
+    We hope you will find VUtuti useful!
     <BLANKLINE>
     --
-    The Ututi team
+    The VUtuti team
     <BLANKLINE>
     <BLANKLINE>

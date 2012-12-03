@@ -85,7 +85,7 @@ else:
         - ${_("Create wiki notes collaborating with your groupmates. Everyone who follows the subject can edit it's wiki notes.")}
       </div>
       <div class="feature icon-class-note">
-        ${h.literal(_("<strong>Take notes during lecture</strong> on your laptop and upload it directly to Ututi."))}
+        ${h.literal(_("<strong>Take notes during lecture</strong> on your laptop and upload it directly to VUtuti."))}
       </div>
     </div>
     <div class="action-button">

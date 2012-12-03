@@ -93,10 +93,10 @@ Let's check the emails:
     True
 
     >>> print msg1.payload()
-    We have received a request to confirm the ownership of this email on the Ututi system.
+    We have received a request to confirm the ownership of this email on the VUtuti system.
     If this email belongs to you, confirm it by clicking on this link:
     http://localhost/registration/.../confirm
-    Ututi team
+    VUtuti team
 
     >>> msg1.recipients
     [u'user@example.com']
@@ -240,7 +240,7 @@ and invitation are sent:
     >>> browser.getControl('Finish').click()
 
     >>> browser.printCssQuery('h1.page-title', strip=True)
-    <h1>Welcome to Ututi</h1>
+    <h1>Welcome to VUtuti</h1>
 
     >>> len(mail_queue)
     4
@@ -282,10 +282,10 @@ Let's check the emails:
     >>> msg1 = mail_queue.pop()
 
     >>> print msg1.payload()
-    We have received a request to confirm the ownership of this email on the Ututi system.
+    We have received a request to confirm the ownership of this email on the VUtuti system.
     If this email belongs to you, confirm it by clicking on this link:
     http://localhost/registration/.../confirm
-    Ututi team
+    VUtuti team
 
     >>> msg1.recipients
     [u'user@u2ti.com']
@@ -350,7 +350,7 @@ We don't want to invite any users:
 
     >>> browser.getControl('Finish').click()
     >>> browser.printCssQuery('h1.page-title', strip=True)
-    <h1>Welcome to Ututi</h1>
+    <h1>Welcome to VUtuti</h1>
 
 Let's look to universities list. We must see only one 'Example University':
 

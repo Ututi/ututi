@@ -41,7 +41,7 @@
 </%def>
 
 <div id="sign-up-link">
-  ${_("New in Ututi?")}
+  ${_("New in VUtuti?")}
   <a href="${url('frontpage')}">
     ${_("Sign in with your university email")}
   </a>

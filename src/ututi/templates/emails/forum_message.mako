@@ -6,4 +6,4 @@ ${message}
 ${_("You can find the thread online here:")}
 ${thread_url}
 
-${_(u"The Ututi team")}
+${_(u"The VUtuti team")}

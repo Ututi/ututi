@@ -12,19 +12,19 @@ User can now set his "username", so that the url would not have numerical
 id in it. He does this via his settings:
 
     >>> user.getLink('Edit profile').click()
-    >>> user.getControl('Ututi username').value = 'admin'
+    >>> user.getControl('VUtuti username').value = 'admin'
     >>> user.click('Save', index=0)
     >>> user.click('Public profile')
     >>> user.url
     'http://localhost/user/admin'
 
     >>> user.getLink('Edit profile').click()
-    >>> user.getControl('Ututi username').value
+    >>> user.getControl('VUtuti username').value
     'admin'
 
 This field is validated properly:
 
-    >>> user.getControl('Ututi username').value = 'a d m i n'
+    >>> user.getControl('VUtuti username').value = 'a d m i n'
     >>> user.click('Save', index=0)
     >>> user.printCssQuery('.error-message',strip=True)
     <span>The field may only contain lowercase letters, numbers and the characters + - _ and . (dot)</span>
@@ -33,7 +33,7 @@ Two users cannot have same username:
 
     >>> another = Browser.logIn('user@ututi.lt', 'password')
     >>> another.getLink('Edit profile').click()
-    >>> another.getControl('Ututi username').value = 'admin'
+    >>> another.getControl('VUtuti username').value = 'admin'
     >>> another.click('Save', index=0)
     >>> another.printCssQuery('.error-message',strip=True)
     <span>This username is used by another user.</span>
@@ -55,7 +55,7 @@ Teachers have separate URLs from users:
 User can reset his username to empty if he wants to:
 
     >>> user.getLink('Edit profile').click()
-    >>> user.getControl('Ututi username').value = ''
+    >>> user.getControl('VUtuti username').value = ''
     >>> user.click('Save', index=0)
     >>> user.click('Public profile')
     >>> user.url

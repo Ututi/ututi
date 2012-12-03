@@ -24,14 +24,14 @@ Let's register a new teacher:
     A new teacher has registered:
     Mr. Jones (mrjones@vu.lt)
     Vilniaus universitetas
-    Ututi
+    VUtuti
 
 Teacher can see that his account is not confirmed yet:
 
     >>> teacher.printCssQuery('.flash-message-content', strip=True)
     <span>At the moment you are not confirmed as teacher. Our administrators have been notified and will verify you shortly.</span>
 
-However, teacher can start using Ututi. He can say, he teaches
+However, teacher can start using VUtuti. He can say, he teaches
 a subject:
 
     >>> teacher.open('http://localhost/subject/vu/mat_analize')
@@ -79,9 +79,9 @@ Now let's have admin deny this teacher:
     >>> admin.getControl('Deny', index=0).click()
     >>> print mail_queue.pop().payload()
     Mr. Jones,
-    Your request to join Ututi as a teacher has been rejected.
+    Your request to join VUtuti as a teacher has been rejected.
     If this was a misunderstanding, please contact us directly at: info@ututi.lt.
-    The Ututi team
+    The VUtuti team
 
 Let's assert teacher account has been reverted to user account:
 

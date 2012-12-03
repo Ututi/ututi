@@ -7,10 +7,10 @@ of the group and use the group forum.
 
 You may accept or reject the invitation here: %(invitation_url)s
 
-We hope you will find Ututi useful!
+We hope you will find VUtuti useful!
 
 --
-The Ututi team
+The VUtuti team
 """) % dict(author=invitation.author.fullname,
             group_title=invitation.group.title,
             group_url=invitation.group.url(qualified=True),

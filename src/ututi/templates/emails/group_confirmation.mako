@@ -4,4 +4,4 @@ ${_("Your request to join the group %(groupname)s has been confirmed.") % dict(g
 
 ${_(u"You may visit the group's page here: %(url)s .") % dict(url=url(group.url(), qualified=True))}
 
-${_(u"The Ututi team")}
+${_(u"The VUtuti team")}

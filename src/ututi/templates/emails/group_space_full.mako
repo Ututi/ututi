@@ -6,6 +6,6 @@ on the group page at %(group_url)s, and the group file limit
 will be raised to %(size)s.
 
 --
-The Ututi team
+The VUtuti team
 """) % dict(group_title=group.title, group_url=group.url(qualified=True), size=h.file_size(size_limit))
 )}

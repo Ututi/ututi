@@ -14,14 +14,14 @@ def send_registration_invitation(registration, inviter=None, message=None):
                   extra_vars={'registration': registration,
                               'inviter': inviter,
                               'message': message})
-    msg = EmailMessage(_('Invitation to Ututi'), text)
+    msg = EmailMessage(_('Invitation to VUtuti'), text)
     msg.send(registration.email)
 
 def send_email_confirmation_code(email, url):
     text = render('/emails/confirm_email.mako',
                   extra_vars={'link': url})
 
-    msg = EmailMessage(_('Confirm your email for Ututi'), text, force=True)
+    msg = EmailMessage(_('Confirm your email for VUtuti'), text, force=True)
     msg.send(email)
 
 def email_confirmation_request(user, email):
@@ -37,7 +37,7 @@ def email_confirmation_request(user, email):
                                       'link': link,
                                       'html': False})
 
-            msg = EmailMessage(_('Confirm the email for Ututi'), text, force=True)
+            msg = EmailMessage(_('Confirm the email for VUtuti'), text, force=True)
             msg.send(email)
 
 def send_group_invitation_for_user(invitation, email, message=None):
@@ -50,7 +50,7 @@ def send_group_invitation_for_user(invitation, email, message=None):
             text = render('/emails/invitation_user.mako',
                           extra_vars={'invitation': invitation,
                                       'message': message})
-            msg = EmailMessage(_('Ututi group invitation'), text)
+            msg = EmailMessage(_('VUtuti group invitation'), text)
             msg.send(email_instance.user)
         #if the email is not confirmed, nothing will be sent for now
         #XXX: if the user has several emails, send the invitation to one that is confirmed
@@ -61,21 +61,21 @@ def send_group_invitation_for_non_user(invitation, registration, message=None):
                   extra_vars={'invitation': invitation,
                               'registration': registration,
                               'message': message})
-    msg = EmailMessage(_('Ututi group invitation'), text)
+    msg = EmailMessage(_('VUtuti group invitation'), text)
     msg.send(registration.email)
 
 def email_password_reset(user):
     """Send an email to the user with a link to reset his password."""
     text = render('/emails/password_recovery.mako',
                   extra_vars={'user' : user})
-    msg = EmailMessage(_('Ututi password recovery'), text, force=True)
+    msg = EmailMessage(_('VUtuti password recovery'), text, force=True)
     user.send(msg)
 
 
 def group_request_email(group, user):
     """Send an email to administrators of a group, informing of a membership request."""
     text = render('/emails/group_request.mako', extra_vars={'group': group, 'user': user})
-    msg = EmailMessage(_('Ututi group membership request'), text)
+    msg = EmailMessage(_('VUtuti group membership request'), text)
     msg.send(group.administrators)
 
 def group_confirmation_email(group, user, status):
@@ -86,7 +86,7 @@ def group_confirmation_email(group, user, status):
     else:
         text = render('/emails/group_confirmation_deny.mako', extra_vars={'group': group, 'user': user})
 
-    msg = EmailMessage(_('Ututi group membership confirmation'), text, force=True)
+    msg = EmailMessage(_('VUtuti group membership confirmation'), text, force=True)
     msg.send(user)
 
 

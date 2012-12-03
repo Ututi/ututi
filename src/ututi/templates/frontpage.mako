@@ -187,7 +187,7 @@
 
       <div class="clear university-box">
         <div class="section-header">
-            <h2 class="academy">${_('Universities already are on Ututi')}</h2>
+            <h2 class="academy">${_('Universities already are on VUtuti')}</h2>
             <div class="section-header-links">
                 <a href="${url(controller='search', action='browse')}">${_('More universities')} >></a>
             </div>

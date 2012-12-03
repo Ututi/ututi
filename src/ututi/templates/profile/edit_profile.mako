@@ -78,7 +78,7 @@
         </label>
       </div>
       %else:
-      ${h.input_line('url_name', _('Ututi username'), help_text=help_text)}
+      ${h.input_line('url_name', _('VUtuti username'), help_text=help_text)}
       %endif
       <script type="text/javascript">
         function update_url_preview() {

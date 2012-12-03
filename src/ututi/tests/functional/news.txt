@@ -79,7 +79,7 @@ And look at the emails:
 
     >>> printEmails()
     ['admin@uni.ututi.com']
-    Ututi news: 2 new pages
+    VUtuti news: 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -89,7 +89,7 @@ And look at the emails:
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user2@ututi.lt']
-    Ututi news: 3 new pages
+    VUtuti news: 3 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -100,7 +100,7 @@ And look at the emails:
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
-    Ututi news: 2 new pages
+    VUtuti news: 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -138,7 +138,7 @@ And we continue uploading files:
 
     >>> printEmails()
     ['admin@uni.ututi.com']
-    Ututi news: 2 new pages
+    VUtuti news: 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -148,7 +148,7 @@ And we continue uploading files:
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user2@ututi.lt']
-    Ututi news: 2 new files and 3 new pages
+    VUtuti news: 2 new files and 3 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -161,7 +161,7 @@ And we continue uploading files:
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
-    Ututi news: 2 new files and 2 new pages
+    VUtuti news: 2 new files and 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -214,7 +214,7 @@ after commit 5d21e3cdb91863d7843dfc80cd6dd72284dd931d.
 
     ##>>> printEmails()
     ['admin@uni.ututi.com']
-    Ututi news: 2 new pages
+    VUtuti news: 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -240,7 +240,7 @@ Admin should stop getting events in his daily news:
 
     ##>>> printEmails()
     ['user3@ututi.lt']
-    Ututi news: 2 new files and 2 new pages
+    VUtuti news: 2 new files and 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -252,7 +252,7 @@ Admin should stop getting events in his daily news:
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
-    Ututi news: 2 new files and 2 new pages
+    VUtuti news: 2 new files and 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -278,7 +278,7 @@ welcome portlet is taking me to the notification view...
 
     >>> printEmails()
     ['admin@uni.ututi.com']
-    Ututi news: 2 new pages
+    VUtuti news: 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -288,7 +288,7 @@ welcome portlet is taking me to the notification view...
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user2@ututi.lt']
-    Ututi news: 2 new files and 3 new pages
+    VUtuti news: 2 new files and 3 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -301,7 +301,7 @@ welcome portlet is taking me to the notification view...
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
-    Ututi news: 2 new files and 2 new pages
+    VUtuti news: 2 new files and 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -351,7 +351,7 @@ Hmm, now what happens if user3 starts ignoring the subject:
     >>> browser.open('http://localhost/news/daily?date=2009-10-09')
     >>> printEmails()
     ['admin@uni.ututi.com']
-    Ututi news: 2 new pages
+    VUtuti news: 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -361,7 +361,7 @@ Hmm, now what happens if user3 starts ignoring the subject:
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user2@ututi.lt']
-    Ututi news: 2 new files and 3 new pages
+    VUtuti news: 2 new files and 3 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -374,7 +374,7 @@ Hmm, now what happens if user3 starts ignoring the subject:
     If you want to stop getting these emails - you can change your subscription settings in your notification settings page (http://localhost/profile/edit/notifications).
     <BLANKLINE>
     ['user@ututi.lt']
-    Ututi news: 2 new files and 2 new pages
+    VUtuti news: 2 new files and 2 new pages
     <BLANKLINE>
     Matematinė analizė (http://localhost/subject/vu/mat_analize)
     <BLANKLINE>
@@ -437,23 +437,23 @@ Three days is right:
     ['admin@uni.ututi.com']
     Hello,
     <BLANKLINE>
-    the private space subscription for the Ututi group "Testing group"
+    the private space subscription for the VUtuti group "Testing group"
     is about to expire.  When it expires, you will not be able to upload
     more files to your file area.  Please extend your subscription on the
     group page at http://localhost/group/testgroup .
     <BLANKLINE>
     --
-    The Ututi team
+    The VUtuti team
     ['user2@ututi.lt']
     Hello,
     <BLANKLINE>
-    the private space subscription for the Ututi group "Testing group"
+    the private space subscription for the VUtuti group "Testing group"
     is about to expire.  When it expires, you will not be able to upload
     more files to your file area.  Please extend your subscription on the
     group page at http://localhost/group/testgroup .
     <BLANKLINE>
     --
-    The Ututi team
+    The VUtuti team
     <BLANKLINE>
     <BLANKLINE>
 
@@ -494,7 +494,7 @@ And, here are the notifications:
     will be raised to 5 GB.
     <BLANKLINE>
     --
-    The Ututi team
+    The VUtuti team
     ['user2@ututi.lt']
     Hello,
     <BLANKLINE>
@@ -504,7 +504,7 @@ And, here are the notifications:
     will be raised to 5 GB.
     <BLANKLINE>
     --
-    The Ututi team
+    The VUtuti team
 
     >>> mail_queue[:] = []
 

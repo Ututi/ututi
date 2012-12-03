@@ -96,7 +96,7 @@ button.submit {
 
 <%def name="pagetitle()">
   %if hasattr(c, 'welcome'):
-    ${_("Welcome to Ututi")}
+    ${_("Welcome to VUtuti")}
   %else:
     ${_("Dashboard")}
   %endif
@@ -381,7 +381,7 @@ button.submit {
   </div>
   %if not 'group' in done:
   <div class="content">
-    <p>${_("Ututi will keep track of your student groups and make it easy to reach them.")}</p>
+    <p>${_("VUtuti will keep track of your student groups and make it easy to reach them.")}</p>
     ${h.button_to(_('Add student group'), url(controller='profile', action='add_student_group'),
        class_='dark add inline', method='GET', id='add-student-group')}
   </div>

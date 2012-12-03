@@ -5,7 +5,7 @@
   ${navigation_portlet(c.menu_items, c.current_menu_item, _('Overview:'))}
 </%def>
 
-<%def name="pagetitle()">${_('About Ututi')}</%def>
+<%def name="pagetitle()">${_('About VUtuti')}</%def>
 
 <h1 class="page-title underline">${self.pagetitle()}</h1>
 

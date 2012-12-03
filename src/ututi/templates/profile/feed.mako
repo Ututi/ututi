@@ -69,7 +69,7 @@
     <div class="clearfix">
       <div class="feature icon-wiki">
         <strong>${_("Shared notes")}</strong>
-        - ${_("create wiki notes collaboratively with your class-mates or take notes during the lecture and upload it directly to Ututi.")}
+        - ${_("create wiki notes collaboratively with your class-mates or take notes during the lecture and upload it directly to VUtuti.")}
       </div>
     </div>
     <div class="action-button">

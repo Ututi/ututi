@@ -342,7 +342,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                 meta.Session.commit()
                 h.flash(_("Linked to Facebook account."))
             else:
-                h.flash(_('This Facebook account is already linked to another Ututi account.'))
+                h.flash(_('This Facebook account is already linked to another VUtuti account.'))
         redirect(url(controller='profile', action='login_settings'))
 
     @ActionProtector("user")
@@ -563,7 +563,7 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                 h.flash(_("Invalid email addresses: %(email_list)s") % \
                         dict(email_list=', '.join(invalid)))
             if already:
-                h.flash(_("These addresses are already registered in Ututi: %(email_list)s") % \
+                h.flash(_("These addresses are already registered in VUtuti: %(email_list)s") % \
                         dict(email_list=', '.join(already)))
             if invites:
                 h.flash(_("Invitations sent to %(email_list)s") % \

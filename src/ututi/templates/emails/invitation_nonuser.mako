@@ -11,18 +11,18 @@ ${invitation.author.fullname}
 %else:
 ${h.literal(_(u"""Hello,
 
-Your friend %(author)s is using Ututi.com, academical social networtk, and
+Your friend %(author)s is using VUtuti, academical social networtk, and
 wants to invite you to a group %(group_title)s (%(group_url)s).
-In Ututi you can find coursework, share files with other members of 
+In VUtuti you can find coursework, share files with other members of 
 the group and use the group forums.
 
-Since you do not appear to be a Ututi user at the moment, to become a
+Since you do not appear to be a VUtuti user at the moment, to become a
 member of this group, you need to register first.
 
 You may register by following this link: %(link)s
 
 --
-The Ututi team
+The VUtuti team
 """) % dict(author=invitation.author.fullname,
             group_title=invitation.group.title,
             group_url=invitation.group.url(qualified=True),

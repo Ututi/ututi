@@ -15,10 +15,10 @@ ${_('Private social networks for universities')}
 
 <%def name="anonymous_themed_header(theme)">
   <% nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '') %>
-  <a id="logo" href="${url('/')}"><img src="${theme.url(action="header_logo", size=55)}" alt="Ututi" title="Ututi"/></a>
+  <a id="logo" href="${url('/')}"><img src="${theme.url(action="header_logo", size=55)}" alt="VUtuti" title="VUtuti"/></a>
   <span id="slogan">${theme.location_title_or_slogan}</span>
   <ul id="nav">
-    <li class="header-links"><a href="${url('/features')}">${_('What is Ututi?')}</a></li>
+    <li class="header-links"><a href="${url('/features')}">${_('What is VUtuti?')}</a></li>
     <li class="header-links"><a href="${url('/contacts')}">${_('Contact us')}</a></li>
     <li class="header-links" id="login-link"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Login')}</a></li>
   </ul>
@@ -26,10 +26,10 @@ ${_('Private social networks for universities')}
 
 <%def name="anonymous_header()">
   <% nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '') %>
-  <a id="logo" href="${url('/')}"><img src="${url('/img/Ututi_logo.png')}" alt="Ututi" title="Ututi"/></a>
-  <span id="slogan">${_("Bringing students and teachers together")}</span>
+  <a id="logo" href="${url('/')}"><img src="${url('/img/mif_27.png')}" alt="VUtuti" title="VUtuti"/></a>
+  <span id="slogan">${_("VU MIF social network")}</span>
   <ul id="nav">
-    <li class="header-links"><a href="${url('/features')}">${_('What is Ututi?')}</a></li>
+    <li class="header-links"><a href="${url('/features')}">${_('What is VUtuti?')}</a></li>
     <li class="header-links"><a href="${url('/contacts')}">${_('Contact us')}</a></li>
     <li class="header-links" id="login-link"><a ${nofollow} href="${url(controller='home', action='login')}">${_('Login')}</a></li>
   </ul>
@@ -42,14 +42,13 @@ ${_('Private social networks for universities')}
         ${c.theme.header_text}
       </div>
     %else:
-      <a href="${url('/')}"><img src="${url('/img/Ututi_logo.png')}" alt="Ututi" title="Ututi" /></a>
+      <a href="${url('/')}"><img src="${url('/img/mif_25.png.png')}" alt="VUtuti" title="VUtuti" /></a>
     %endif
   </div>
   <div id="top-panel">
     <ul id="head-nav">
       <li id="nav-home"><a href="${url(controller='profile', action='home')}">${_('Home')}</a></li>
       <li id="nav-university"><a href="${c.user.location.url()}">${_('My University')}</a></li>
-      <li id="nav-catalog"><a href="${url(controller='profile', action='browse')}">${_('Catalog')}</a></li>
     </ul>
     <form id="search-form" action="${url(controller='profile', action='search')}">
       <label>
@@ -127,7 +126,7 @@ ${_('Private social networks for universities')}
       </script>
     </form>
   </div>
-  <div class="column middle">Copyright © <a href="${url('frontpage')}">${_(u'„UTUTI Ltd.“')}</a></div>
+  <div class="column middle">Copyright © <a href="${url('frontpage')}">${_('Vilnius University')}</a></div>
   <div class="column right link-color">
     <a ${nofollow} href="${url(controller='home', action='about')}">${_('About')}</a>
     |
@@ -303,40 +302,6 @@ ${_('Private social networks for universities')}
         ${self.footer()}
       </div>
     </div>
-
-    %if c.lang in ['lt', 'en', 'pl']:
-    ${h.javascript_link('/javascript/uservoice.js')|n}
-    <script type="text/javascript">
-      %if c.lang in ['lt', 'en']:
-      var uservoiceOptions = {
-        key: 'ututi',
-        host: 'ututi.uservoice.com',
-        forum: '26068',
-        lang: 'en',
-        showTab: false
-      };
-      %else:
-      var uservoiceOptions = {
-        key: 'ututipl',
-        host: 'ututipl.uservoice.com',
-        forum: '69159',
-        lang: 'pl',
-        showTab: false
-      };
-      %endif
-      function _loadUserVoice() {
-        var s = document.createElement('script');
-        s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js";
-        document.getElementsByTagName('head')[0].appendChild(s);
-      }
-      _loadSuper = window.onload;
-      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
-      $('#feedback-link').click(function() {
-        UserVoice.Popin.show(uservoiceOptions); return false;
-      });
-    </script>
-    %endif
-
     <div id="loading" style="display: none">
         ${_('Loading...')}
     </div>

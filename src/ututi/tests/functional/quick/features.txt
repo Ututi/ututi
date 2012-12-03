@@ -6,6 +6,6 @@ accesible from frontpage.
 
     >>> user = Browser()
     >>> user.open('http://localhost/')
-    >>> user.click('What is Ututi?')
+    >>> user.click('What is VUtuti?')
     >>> user.printCssQuery('.page-title', strip=True)
-    <h1>What is Ututi?</h1>
+    <h1>What is VUtuti?</h1>

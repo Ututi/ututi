@@ -11,7 +11,7 @@
 <div class="explanation-post-header" style="margin-top:0">
   <h2>${_('Custom theme')}</h2>
   <p class="tip">
-    ${_("Ututi let's you theme your network, "
+    ${_("VUtuti let's you theme your network, "
         "including custom colors, header logo and text.")}
   </p>
 </div>

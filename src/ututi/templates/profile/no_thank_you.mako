@@ -11,7 +11,7 @@ ${_('Very sad...')}
 
 <div class="no_thank_you">
 <p>
-${_('We are very disappointed that you have decided not to support Ututi. We hope you will support us next time. Good luck!')}
+${_('We are very disappointed that you have decided not to support VUtuti. We hope you will support us next time. Good luck!')}
 </p>
 
 <p style="padding-top: 3px; text-align: right;">

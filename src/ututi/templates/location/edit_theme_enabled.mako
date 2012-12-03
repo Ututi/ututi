@@ -60,7 +60,7 @@
     text-align: left;
     font-size: 22px;
     font-weight: bold;
-    background: url("/img/Ututi_logo_small.png") no-repeat 5px center;
+    background: url("/img/VUtuti_logo_small.png") no-repeat 5px center;
     color: white;
     %if theme is not None:
     background-image: url('${theme.url(action="header_logo", size=25)}');
@@ -101,7 +101,7 @@
 <div class="explanation-post-header" style="margin-top:0">
   <h2>${_('Custom theme')}</h2>
   <p class="tip">
-    ${_("Ututi let's you theme your network, "
+    ${_("VUtuti let's you theme your network, "
         "including custom colors, header logo and text.")}
   </p>
 </div>

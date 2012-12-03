@@ -722,7 +722,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
         # redirect to login if user is registered in this university
         if User.get(email, location.root):
-            h.flash(_('The email you entered is registered in Ututi. '
+            h.flash(_('The email you entered is registered in VUtuti. '
                       'Please login to proceed.'))
             redirect(url(controller='home', action='login', email=email))
 
@@ -751,7 +751,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         email = self.form_result['email']
 
         if User.get(email, location):
-            h.flash(_('The email you entered is registered in Ututi. '
+            h.flash(_('The email you entered is registered in VUtuti. '
                       'Please login to proceed.'))
             destination = location.url(action='register_teacher_existing')
             redirect(url(controller='home', action='login', email=email,

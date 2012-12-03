@@ -21,7 +21,7 @@ ${_('Add a student group')}
       <li class="group">${_("Keep track of your student groups")}</li>
       <li class="email">${_("Email your students from your dashboard")}</li>
       <li class="files">${_("Attach files to your messages")}</li>
-      <li class="sms">${_("Send SMS messages from your dashboard to Ututi groups")}</li>
+      <li class="sms">${_("Send SMS messages from your dashboard to VUtuti groups")}</li>
     </ul>
   </%b:title_box>
   <form method="post" action="${self.group_action_url()}" id="student_group_form" class="narrow">
@@ -29,7 +29,7 @@ ${_('Add a student group')}
     ${h.input_line('title', _('Title'),
       help_text=_("Enter a title to identify this group, e. g. Computer Science freshmen or CS 1st year."))}
     ${h.input_line('email', _('Email address'),
-      help_text=_("Enter email address for this group. It can be Ututi or any other mailing list, or a private email address."))}
+      help_text=_("Enter email address for this group. It can be VUtuti or any other mailing list, or a private email address."))}
     ${h.input_submit(_('Save'), class_='btnMedium')}
     </fieldset>
   </form>

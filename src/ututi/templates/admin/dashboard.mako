@@ -27,7 +27,7 @@
 
 <div id="admin-dashboard">
 
-<h2>${_('Ututi controls:')}</h2>
+<h2>${_('VUtuti controls:')}</h2>
 <ul class="clearfix">
   <li>${h.link_to('Events', url(controller='admin', action='events'))}</li>
   <li>${h.link_to('Universities', url(controller='structure', action='index'))}</li>

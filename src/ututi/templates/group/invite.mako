@@ -6,9 +6,9 @@
 </%def>
 
 %if c.has_facebook:
-  ${fb.invitation_box(_('Invite your friends to Ututi!'),
+  ${fb.invitation_box(_('Invite your friends to VUtuti!'),
                       c.group.url(action='invite_fb'),
-                      _('Join our group <a href="%s">%s</a> in Ututi, '
+                      _('Join our group <a href="%s">%s</a> in VUtuti, '
                         'a system for exchanging study materials and information.') % \
                         (c.group.url(), c.group.title),
                       _('Join group'),
