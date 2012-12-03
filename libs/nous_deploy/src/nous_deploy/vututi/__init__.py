@@ -29,6 +29,7 @@ class VUtuti(Service):
         error_email_from = 'release@{host_name}',
         error_email = 'errors@{host_name}',
         ututi_email_from = 'info@{host_name}',
+        ututi_info_email = 'info@{host_name}',
 
         # site dirs
         site_dir = '{srv}/{name}',
