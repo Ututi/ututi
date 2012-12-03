@@ -13,10 +13,10 @@ ${_('Private social networks for universities')}
 <%def name="body_class()">
 </%def>
 
-<%def name="anonymous_themed_header()">
+<%def name="anonymous_themed_header(theme)">
   <% nofollow = h.literal(request.path != '/' and  'rel="nofollow"' or '') %>
-  <a id="logo" href="${url('/')}"><img src="${c.theme.url(action="header_logo", size=55)}" alt="Ututi" title="Ututi"/></a>
-  <span id="slogan">${c.location.title}</span>
+  <a id="logo" href="${url('/')}"><img src="${theme.url(action="header_logo", size=55)}" alt="Ututi" title="Ututi"/></a>
+  <span id="slogan">${theme.location_title_or_slogan}</span>
   <ul id="nav">
     <li class="header-links"><a href="${url('/features')}">${_('What is Ututi?')}</a></li>
     <li class="header-links"><a href="${url('/contacts')}">${_('Contact us')}</a></li>
@@ -95,7 +95,7 @@ ${_('Private social networks for universities')}
 
 <%def name="header()">
   %if c.user is None and c.theme:
-    ${self.anonymous_themed_header()}
+    ${self.anonymous_themed_header(c.theme)}
   %elif c.user is None:
     ${self.anonymous_header()}
   %else:
