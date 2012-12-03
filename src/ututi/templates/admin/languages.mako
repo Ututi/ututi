@@ -12,7 +12,10 @@
     <tr>
       <td>${language.id}</td>
       <td>${language.title}</td>
-      <td>${h.link_to(_('Edit'), url(controller="admin", action="edit_language", id=language.id)) }</td>
+      <td>
+        ${h.link_to(_('Edit'), url(controller="admin", action="edit_language", id=language.id)) } |
+        ${h.link_to(_('Delete'), url(controller="admin", action="delete_language", id=language.id)) }
+      </td>
     </tr>
     %endfor
   </table>
