@@ -145,7 +145,7 @@ def setup_orm():
                                                                 remote_side=tables['tags'].c.id)),
                            'region': relation(Region, backref='tags'),
                            'country': relation(Country, backref='locations'),
-                           'theme': relation(Theme)})
+                           'theme': relation(Theme, backref='location')})
 
     orm.mapper(SimpleTag,
                inherits=tag_mapper,

@@ -167,12 +167,14 @@ def setup_orm():
                properties={
                    'language': relation(Language,
                                         backref=backref('texts',
-                                            order_by=tables['language_texts'].c.id.asc()))})
+                                                        order_by=tables['language_texts'].c.id.asc(),
+                                                        cascade='all, delete-orphan'))})
 
     orm.mapper(Country,
                tables['countries'],
                properties={
                    'language': relation(Language,
                                         backref=backref('countries',
-                                            order_by=tables['countries'].c.id.asc()))})
+                                                        cascade='all, delete-orphan',
+                                                        order_by=tables['countries'].c.id.asc()))})
 

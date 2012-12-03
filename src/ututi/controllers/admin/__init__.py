@@ -485,6 +485,13 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
         return htmlfill.render(self._edit_language_form(), defaults)
 
     @ActionProtector("root")
+    def delete_language(self, id):
+        c.language  = Language.get(id)
+        meta.Session.delete(c.language)
+        meta.Session.commit()
+        redirect(url(controller='admin', action='languages'))
+
+    @ActionProtector("root")
     @validate(schema=LanguageEditForm, form='_edit_language_form')
     def update_language(self):
         if hasattr(self, 'form_result'):

@@ -11,9 +11,15 @@ The link is available in the dashboard:
 The table lists languages already available:
 
     >>> browser.printQuery('id("languages_list")//td/text()')
-    en English
-    lt Lithuanian
-    pl Polish
+    en
+    English
+    ...
+    lt
+    Lithuanian
+    ...
+    pl
+    Polish
+    ...
 
 Let's add one more:
 
@@ -22,10 +28,18 @@ Let's add one more:
     >>> form.getControl('Language title').value = 'Korean'
     >>> form.getControl('Save').click()
     >>> browser.printQuery('id("languages_list")//td/text()')
-    en English
-    kr Korean
-    lt Lithuanian
-    pl Polish
+    en
+    English
+    ...
+    kr
+    Korean
+    ...
+    lt
+    Lithuanian
+    ...
+    pl
+    Polish
+    ...
 
 The language add form does not allow adding duplicates:
 
@@ -34,10 +48,18 @@ The language add form does not allow adding duplicates:
     >>> form.getControl('Language title').value = 'Pirate english'
     >>> form.getControl('Save').click()
     >>> browser.printQuery('id("languages_list")//td/text()')
-    en English
-    kr Korean
-    lt Lithuanian
-    pl Polish
+    en
+    English
+    ...
+    kr
+    Korean
+    ...
+    lt
+    Lithuanian
+    ...
+    pl
+    Polish
+    ...
 
     >>> browser.printCssQuery('.error-message', strip=True)
     <span>Language with this id already exists.</span>
@@ -55,10 +77,18 @@ Let's edit english:
     'http://localhost/admin/languages'
 
     >>> browser.printQuery('id("languages_list")//td/text()')
-    kr Korean
-    lt Lithuanian
-    en Pirate english
-    pl Polish
+    kr
+    Korean
+    ...
+    lt
+    Lithuanian
+    ...
+    en
+    Pirate english
+    ...
+    pl
+    Polish
+    ...
 
 Now let's visit i18n texts view:
 
