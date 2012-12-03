@@ -69,6 +69,7 @@ class VUtuti(Service):
 
     @run_as_sudo
     def prepare(self):
+        run('apt-get remove sendmail -y')
         self.server.apt_get_install(' '.join([
                 "build-essential",
                 "enscript",
@@ -91,7 +92,8 @@ class VUtuti(Service):
                 "python-setuptools",
                 "uuid-dev",
                 "zlib1g-dev",
-                "supervisor"
+                "supervisor",
+                "postfix"
                 ]))
         package = "ututi-pg-dictionaries_1.0_all.deb"
         target_filename = os.path.join(self.server.getHomeDir('root'), package)
@@ -219,13 +221,15 @@ class VUtuti(Service):
         # rsync -rt $1/files_dump/uploads/ uploads/
 
     @run_as_user
-    def import_inital_backup(self):
+    def import_inital_backup(self, local_backup):
+        run('mkdir -p %s' % '{backup_dir}/initial'.format(backup_dir=self.settings.backups_dir))
+        put(local_backup, '{backup_dir}/initial/dbdump'.format(backup_dir=self.settings.backups_dir))
         self.stop()
         with settings(warn_only=True):
             self.clear_database()
             self.server.getService(self.database).import_dump('{backup_dir}/initial/dbdump'.format(backup_dir=self.settings.backups_dir))
-            self.ensure_all_files_present()
         self.start()
+        self.ensure_all_files_present()
 
     @run_as_user
     def migrate(self):
