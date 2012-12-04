@@ -346,6 +346,7 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
 
     @location_action
     def about(self, location):
+        c.hide_header_nav = True
         if c.user:
             redirect(location.url(action='feed'))
         self._get_departments(location)

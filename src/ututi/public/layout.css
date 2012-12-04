@@ -275,7 +275,7 @@ li.expanded li a {
         display: inline;
         position: absolute;
         right: 57px;
-        bottom: 23px;
+        bottom: -6px;
     }
 
     .anonymous #header ul#nav li {

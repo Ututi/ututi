@@ -102,6 +102,7 @@ class BaseController(WSGIController):
         # XXX get these from db
         c.timezone = 'UTC'
         c.locale = 'en'
+        c.hide_header_nav = False
 
         succeeded = False
         try:

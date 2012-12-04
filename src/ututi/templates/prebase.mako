@@ -252,10 +252,11 @@ ${_('Private social networks for universities')}
       .anonymous .themed#header {
         border-bottom: #bbb solid 1px;
       }
-
+      %if c.hide_header_nav:
       .anonymous .themed#header #nav {
         display: none;
       }
+      %endif
 
       .anonymous .themed#header #slogan {
         position: absolute;
