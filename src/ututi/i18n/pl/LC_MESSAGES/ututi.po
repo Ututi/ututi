@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-03-25 13:52+0200\n"
-"PO-Revision-Date: 2012-12-03 22:28+0200\n"
+"PO-Revision-Date: 2012-12-04 14:05+0200\n"
 "Last-Translator: Monika Piasecka\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11 ? 0 : n%10>=2 "
@@ -941,9 +941,6 @@ msgstr[0] "%(num)s dzień temu"
 msgstr[1] "%(num)s dni temu"
 msgstr[2] "%(num)s dni temu"
 
-msgid "Invite others to join"
-msgstr "Zaproś innych"
-
 msgid "Join / create a group"
 msgstr "Dołącz / utwórz grupę"
 
@@ -1506,15 +1503,6 @@ msgstr "Nie wylogowuj mnie na tym komputerze"
 msgid "Forgot password?"
 msgstr "Zapomniałeś hasła?"
 
-msgid "Or log in using Facebook or Google"
-msgstr "Lub zaloguj się za pomocą Facebooka lub Google"
-
-msgid "Log in using Facebook"
-msgstr "Zaloguj się używając Facebooka"
-
-msgid "Log in using Google"
-msgstr "Zaloguj się przez Google"
-
 msgid "Private social networks for universities"
 msgstr "Prywatne sieci społecznościowe dla uczelni"
 
@@ -1810,18 +1798,6 @@ msgstr "Wiadomość:"
 
 msgid "Send"
 msgstr "Wysłane"
-
-msgid "Contact information:"
-msgstr "Informacje kontaktowe:"
-
-msgid "Mobile phone"
-msgstr ""
-
-msgid "Company number"
-msgstr ""
-
-msgid "VAT number"
-msgstr ""
 
 msgid "Private social networks for Universities and Colleges"
 msgstr "Prywatne uczelniane sieci społecznościowe"
@@ -2828,12 +2804,6 @@ msgstr "Wpisz adresy e-mail osób z Twojej grupy i oddziel je przecinkami."
 msgid "Invite"
 msgstr "Zaproś"
 
-msgid "Invite your groupmates using Facebook"
-msgstr "Zaproś znajomych z grupy za pomocą Facebook"
-
-msgid "Facebook"
-msgstr "Facebook"
-
 msgid "Finish"
 msgstr "Zakończ"
 
@@ -3103,6 +3073,9 @@ msgstr "Zarejestruj się jako student"
 
 msgid "Keep me logged in"
 msgstr "Nie wylogowuj mnie"
+
+msgid "Here you can find:"
+msgstr ""
 
 msgid "Academic resources"
 msgstr "Zasoby akademickie"
@@ -4171,9 +4144,6 @@ msgstr "Zaproś znajomych"
 msgid "Enter comma separated list of email addresses."
 msgstr "Utwórz listę adresów e-mail oddzielonych przecinkami."
 
-msgid "Or use Facebook to invite your friends."
-msgstr "Lub użyj Facebooka aby zaprosić swoich przyjaciół."
-
 msgid "Join the group"
 msgstr "Dołącz do grupy"
 
@@ -4295,28 +4265,6 @@ msgstr "Usuń konto"
 
 msgid "In case you forgot your password, use the button below to recover it."
 msgstr "Jeśli nie pamietasz swojego hasła, użyj przycisku poniżej aby je odzyskać."
-
-msgid "Link with Google and/or Facebook"
-msgstr "Połącz z Google i/albo Facebook"
-
-msgid ""
-"You can log in to Ututi using your Google or Facebook account. Use "
-"buttons below to link or unlink these external accounts."
-msgstr ""
-"Możesz zalogować się na Ututi za pomocą konta na Google lub Facebooku. "
-"Użyj przycisków poniżej, aby połączyć lub odłączyć te konta."
-
-msgid "Link Google"
-msgstr "Połącz z Google"
-
-msgid "Unlink Google"
-msgstr "Zerwij połączenie z Google"
-
-msgid "Link Facebook"
-msgstr "Połącz z Facebookiem"
-
-msgid "Unlink Facebook"
-msgstr "Zerwij połączenie z Facebookiem"
 
 msgid "Email me when"
 msgstr "Wyślij mi wiadomość e-mail gdy:"
@@ -4823,24 +4771,11 @@ msgstr ""
 "Wpisz adresy e-mail swoich znajomych z grupy. Oddziel je przecinkami "
 "i/lub spacjami."
 
-msgid "Invite friends via facebook"
-msgstr "Zaproś swoich znajomych przez Facebook."
-
 msgid "Full name:"
 msgstr "Imię:"
 
 msgid "Password must contain at least 5 characters"
 msgstr "Hasło musi zawierać co najmniej 5 znaków."
-
-msgid "Link Google or Facebook"
-msgstr "Połącz z Google lub Facebook."
-
-msgid ""
-"Click the buttons to link or unlink your profile with Google and/or "
-"Facebook"
-msgstr ""
-"Kliknij przyciski, aby połączyć się lub zerwać połączenie z Google i/lub "
-"Facebookiem"
 
 msgid "University logo:"
 msgstr "Logo uczelni:"

@@ -397,7 +397,7 @@
 </%def>
 
 <div class="features">
-  <p>Here you can find:</p>
+  <p>${_('Here you can find:')}</p>
   <ul class="about-box feature-box">
     <li class="feature icon-subjects-file">
       <strong>${_('Academic resources')}:</strong>

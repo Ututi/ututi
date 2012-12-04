@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2009-05-28 16:25+0300\n"
-"PO-Revision-Date: 2012-12-03 22:28+0200\n"
+"PO-Revision-Date: 2012-12-04 14:05+0200\n"
 "Last-Translator: Jaro <jaro@ututi.com>\n"
 "Language-Team: lt <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -907,9 +907,6 @@ msgstr[0] "prieš %(num)s dieną"
 msgstr[1] "prieš %(num)s dienas"
 msgstr[2] "prieš %(num)s dienų"
 
-msgid "Invite others to join"
-msgstr "Pakviesti prisijungti kitus"
-
 msgid "Join / create a group"
 msgstr "Jungtis / įkurti grupę"
 
@@ -1462,15 +1459,6 @@ msgstr "Prisiminti mane šiame kompiuteryje"
 msgid "Forgot password?"
 msgstr "Pamiršote slaptažodį?"
 
-msgid "Or log in using Facebook or Google"
-msgstr "Arba prisijungti naudojant Facebook ar Google"
-
-msgid "Log in using Facebook"
-msgstr "Prisijungti per Facebook"
-
-msgid "Log in using Google"
-msgstr "Prisijunk naudodamas Google"
-
 msgid "Private social networks for universities"
 msgstr "Privatūs socialiniai tinklai universitetams"
 
@@ -1760,18 +1748,6 @@ msgstr "Žinutė:"
 
 msgid "Send"
 msgstr "Siųsti"
-
-msgid "Contact information:"
-msgstr "Kontaktinė informacija:"
-
-msgid "Mobile phone"
-msgstr "Mobilusis telefonas"
-
-msgid "Company number"
-msgstr "Įmonės kodas"
-
-msgid "VAT number"
-msgstr "PVM mok. kodas"
 
 msgid "Private social networks for Universities and Colleges"
 msgstr "Privatūs socialiniai tinklai universitetams ir kolegijoms"
@@ -2746,12 +2722,6 @@ msgstr "Įveskite el. pašto adresus, atskirtus kabeliais."
 msgid "Invite"
 msgstr "Pakviesti"
 
-msgid "Invite your groupmates using Facebook"
-msgstr "Pakviesti grupės draugus per Facebook"
-
-msgid "Facebook"
-msgstr "Facebook"
-
 msgid "Finish"
 msgstr "Baigti"
 
@@ -3015,6 +2985,9 @@ msgstr "Studento registracija"
 
 msgid "Keep me logged in"
 msgstr "Prisiminti mane"
+
+msgid "Here you can find:"
+msgstr "Čia galite rasti:"
 
 msgid "Academic resources"
 msgstr "Akademiniai resursai"
@@ -4069,9 +4042,6 @@ msgstr "Pakviesk draugų"
 msgid "Enter comma separated list of email addresses."
 msgstr "Įveskit el.pašto adresus atskiriant juos kableliais."
 
-msgid "Or use Facebook to invite your friends."
-msgstr "Arba pakviesk naudojant Facebook."
-
 msgid "Join the group"
 msgstr "Prisijungti prie grupės"
 
@@ -4196,28 +4166,6 @@ msgstr "Noriu ištrinti savo paskyrą"
 
 msgid "In case you forgot your password, use the button below to recover it."
 msgstr "Jei pamiršote savo slaptažodį, galite jį atkurti paspausdami šį mygtuką."
-
-msgid "Link with Google and/or Facebook"
-msgstr "Susieti su Google arba/ir Facebook"
-
-msgid ""
-"You can log in to Ututi using your Google or Facebook account. Use "
-"buttons below to link or unlink these external accounts."
-msgstr ""
-"Jūs galite jungtis prie Ututi naudodami savo Google ar Facebook paskyrą. "
-"Susiekite savo paskyras naudodami šiuos mygtukus."
-
-msgid "Link Google"
-msgstr "Susieti su Google"
-
-msgid "Unlink Google"
-msgstr "Atsieti nuo Google"
-
-msgid "Link Facebook"
-msgstr "Susieti su Facebook"
-
-msgid "Unlink Facebook"
-msgstr "Atsieti nuo Facebook"
 
 msgid "Email me when"
 msgstr "Praneškite man, kai"
@@ -4715,24 +4663,11 @@ msgstr ""
 "Įveskite savo grupiokų el. pašto adresus, atskirdami juos kableliais "
 "ir/arba tarpais."
 
-msgid "Invite friends via facebook"
-msgstr "Pakviesti draugus per Facebook"
-
 msgid "Full name:"
 msgstr "Vardas ir pavardė:"
 
 msgid "Password must contain at least 5 characters"
 msgstr "Slaptažodis turi būti ne trumpesnis nei 5 simboliai.."
-
-msgid "Link Google or Facebook"
-msgstr "Susieti su Google arba Facebook"
-
-msgid ""
-"Click the buttons to link or unlink your profile with Google and/or "
-"Facebook"
-msgstr ""
-"Paspauskite mygtukus norėdami susieti arba atsieti savo paskyrą su Google"
-" ir/ar Facebook"
 
 msgid "University logo:"
 msgstr "Universiteto logotipas:"

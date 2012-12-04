@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ututi 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-12-03 20:30+0200\n"
+"POT-Creation-Date: 2012-12-04 14:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -862,9 +862,6 @@ msgid_plural "%(num)s days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Invite others to join"
-msgstr ""
-
 msgid "Join / create a group"
 msgstr ""
 
@@ -1386,15 +1383,6 @@ msgstr ""
 msgid "Forgot password?"
 msgstr ""
 
-msgid "Or log in using Facebook or Google"
-msgstr ""
-
-msgid "Log in using Facebook"
-msgstr ""
-
-msgid "Log in using Google"
-msgstr ""
-
 msgid "Private social networks for universities"
 msgstr ""
 
@@ -1626,18 +1614,6 @@ msgid "Message:"
 msgstr ""
 
 msgid "Send"
-msgstr ""
-
-msgid "Contact information:"
-msgstr ""
-
-msgid "Mobile phone"
-msgstr ""
-
-msgid "Company number"
-msgstr ""
-
-msgid "VAT number"
 msgstr ""
 
 msgid "Private social networks for Universities and Colleges"
@@ -2503,12 +2479,6 @@ msgstr ""
 msgid "Invite"
 msgstr ""
 
-msgid "Invite your groupmates using Facebook"
-msgstr ""
-
-msgid "Facebook"
-msgstr ""
-
 msgid "Finish"
 msgstr ""
 
@@ -2754,6 +2724,9 @@ msgid "Register as a student"
 msgstr ""
 
 msgid "Keep me logged in"
+msgstr ""
+
+msgid "Here you can find:"
 msgstr ""
 
 msgid "Academic resources"
@@ -3726,9 +3699,6 @@ msgstr ""
 msgid "Enter comma separated list of email addresses."
 msgstr ""
 
-msgid "Or use Facebook to invite your friends."
-msgstr ""
-
 msgid "Join the group"
 msgstr ""
 
@@ -3834,26 +3804,6 @@ msgid "Delete my account"
 msgstr ""
 
 msgid "In case you forgot your password, use the button below to recover it."
-msgstr ""
-
-msgid "Link with Google and/or Facebook"
-msgstr ""
-
-msgid ""
-"You can log in to Ututi using your Google or Facebook account. Use buttons "
-"below to link or unlink these external accounts."
-msgstr ""
-
-msgid "Link Google"
-msgstr ""
-
-msgid "Unlink Google"
-msgstr ""
-
-msgid "Link Facebook"
-msgstr ""
-
-msgid "Unlink Facebook"
 msgstr ""
 
 msgid "Email me when"
@@ -4316,19 +4266,10 @@ msgstr ""
 msgid "Enter emails of your classmates, separated with commas and/or whitespace."
 msgstr ""
 
-msgid "Invite friends via facebook"
-msgstr ""
-
 msgid "Full name:"
 msgstr ""
 
 msgid "Password must contain at least 5 characters"
-msgstr ""
-
-msgid "Link Google or Facebook"
-msgstr ""
-
-msgid "Click the buttons to link or unlink your profile with Google and/or Facebook"
 msgstr ""
 
 msgid "University logo:"
