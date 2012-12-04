@@ -1,8 +1,6 @@
 Welcome to Ututi documentation!
 ===============================
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
 

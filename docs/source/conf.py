@@ -216,6 +216,8 @@ man_pages = [
 ]
 
 latex_elements = {
+    'classoptions': ',openany,oneside',
+    'babel': '\\usepackage[english]{babel}',
     'inputenc': r'''
         \usepackage[postscript]{ucs}
         \usepackage[utf8x]{inputenc}
