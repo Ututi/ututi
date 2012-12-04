@@ -163,7 +163,8 @@ def raw_send_email(sender, recipients, message):
     if not hold_emails:
         # send the email if we are not told to hold it
         server = config.get('smtp_host', 'localhost')
-        smtp = SMTP(server)
+        port = config.get('smtp_port', 25)
+        smtp = SMTP(server, port)
         try:
             smtp.sendmail(config['ututi_email_from'], recipients, message)
         except SMTPRecipientsRefused:

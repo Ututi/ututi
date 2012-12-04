@@ -54,6 +54,12 @@ class VUtuti(Service):
         buildout_extends = '{buildout_dir}/buildout/extends',
         buildout_eggs = '{buildout_dir}/buildout/eggs',
 
+        #smtp configuration
+        smtp_host = '127.0.0.1',
+        smtp_port = '25',  # not implemented yet
+        smtp_user = '',  # not implemented yet
+        smtp_password = '',  # not implemented yet
+
         log_prefix = '')
 
     @property
