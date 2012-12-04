@@ -423,10 +423,10 @@
 
 <div class="clearfix"></div>
 %if c.departments:
-${university_box(c.departments, _("Faculties of %(university)s:") % dict(university=c.location.title))}
+${university_box(c.departments, _("Faculties of %(university)s:") % dict(university=h.simple_declension(c.location.title, lang=c.lang)))}
 ## ${teachers_box()}
-##%elif c.location.sub_departments:
-##${sub_department_box(c.location.sub_departments, _("Sub-departments of %(department)s:") % dict(department=c.location.title))}
-##%else:
-##${no_faculties_box()}
+%elif c.location.sub_departments:
+${sub_department_box(c.location.sub_departments, _("Sub-departments of %(department)s:") % dict(department=h.simple_declension(c.location.title, lang=c.lang)))}
+%else:
+${no_faculties_box()}
 %endif
