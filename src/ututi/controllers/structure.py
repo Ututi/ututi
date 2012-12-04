@@ -163,6 +163,7 @@ class StructureController(BaseController):
             'description': c.item.description,
             'parent': c.item.parent,
             'region': c.item.region_id or 0,
+            'allow_login': 'true' if c.item.allow_login else '',
             }
         defaults['old_path'] = '/'.join(item.path)
         c.structure = meta.Session.query(LocationTag).filter_by(parent=None).filter(LocationTag.id != item.id).all()
@@ -182,6 +183,7 @@ class StructureController(BaseController):
             c.item.description = values['description']
             c.item.site_url = values['site_url']
             c.item.region_id = int(values['region']) or None
+            c.item.allow_login = bool(values['logo_delete'])
 
             if values['logo_delete']:
                 c.item.logo = None

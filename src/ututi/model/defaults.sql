@@ -273,6 +273,7 @@ create table tags (
        country_id int8 default null references countries(id) on delete cascade,
        theme_id int8 default null references themes(id) on delete set null,
        teachers_url varchar default '' not null,
+       allow_login bool default true,
        primary key (id),
        unique(parent_id, title));;
 

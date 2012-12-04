@@ -16,9 +16,9 @@
   ${location_register_teacher_portlet()}
   ${location_info_portlet()}
 %else:
-  ${location_logo_portlet()}
+  ##${location_logo_portlet()}
   ${navigation_portlet(c.menu_items, c.current_menu_item)}
-  ${location_dont_study_here_portlet()}
+  ##${location_dont_study_here_portlet()}
   ##${location_register_portlet()}
   ##${location_register_teacher_portlet()}
   ##${about_ututi_portlet()}

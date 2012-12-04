@@ -425,8 +425,8 @@
 %if c.departments:
 ${university_box(c.departments, _("Faculties of %(university)s:") % dict(university=c.location.title))}
 ## ${teachers_box()}
-%elif c.location.sub_departments:
-${sub_department_box(c.location.sub_departments, _("Sub-departments of %(department)s:") % dict(department=c.location.title))}
-%else:
-${no_faculties_box()}
+##%elif c.location.sub_departments:
+##${sub_department_box(c.location.sub_departments, _("Sub-departments of %(department)s:") % dict(department=c.location.title))}
+##%else:
+##${no_faculties_box()}
 %endif

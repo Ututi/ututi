@@ -45,6 +45,13 @@
 
    <br />
    <label>
+     <input type="checkbox" name="allow_login" id="allow_login"
+            value="true"/>
+     ${_('Allow login')}
+   </label>
+
+   <br />
+   <label>
      <input type="checkbox" name="logo_delete" id="logo_delete" value="true"/>
      ${_('Delete current logo')}
    </label>

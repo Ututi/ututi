@@ -119,7 +119,7 @@
 </%def>
 
 <%def name="location_field()">
-  ${standard_location_widget()}
+  ${standard_location_widget(True)}
 </%def>
 
 <%def name="logo_field()">
