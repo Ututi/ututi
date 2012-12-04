@@ -56,10 +56,28 @@ Tuomet reikia įvykdyti komandą (po dvitaškio - ankstesnės komandos sugeneruo
 
   bin/fab vututi_vututi_setup:ututi<timestamp>.tar
 
+Pirminių duomenų įkėlimas į sistemą::
+
+  bin/fab vututi_vututi_import_inital_backup:vututi_dbdump
+
+Serverio paleidimas::
+
+  bin/fab vututi_vututi_start
 
 Atnaujintos versijos diegimas
 -----------------------------
 
+Kodo kataloge(lokaliai)::
+
+  make package_release
+
+Ši komanda sugeneruos failą::
+
+  ututi<timestamp>.tar.gz
+
+  bin/fab vututi_vututi_upload_release:ututi<timestamp>.tar.gz
+  bin/fab vututi_vututi_build
+  bin/fab vututi_vututi_release
 
 Įprastos operacijos
 -------------------
