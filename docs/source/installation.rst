@@ -17,7 +17,7 @@ Git kliento diegimas ir serverio konfigūravimas
 Versijavimui naudojame Git_. Darbiniame kataloge įvykdykite::
 
   sudo apt-get install git-core
-  git clone ssh://git@vututi:/git/vututi vututi
+  git clone ssh://git@vututi:/git/ututi vututi
   cd vututi
 
 **Svarbu prieš tai darant Vutui serveryje sukonfigūruoti git acccess**

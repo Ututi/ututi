@@ -72,3 +72,13 @@ Postgresql
 Sistema naudoja PostgreSQL 8.4 duomenų bazių valdymo sistemą.
 
 `PostgreSQL dokumentacija <http://www.postgresql.org/docs/8.4/static/>`_.
+
+Git ir Gitolite
+---------------
+
+Kodo versijavimui naudojama Git versijų kontrolės sistema. Ji prieinama per Gitolite
+įrankį.
+
+`Oficiali Git svetainė <http://git-scm.com/>`_.
+
+`Gitolite dokumentacija <http://sitaramc.github.com/gitolite/master-toc.html>`_.
