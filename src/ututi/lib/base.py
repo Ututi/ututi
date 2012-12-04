@@ -41,6 +41,12 @@ def get_mem_usage():
     return int(open('/proc/self/stat').read().split()[22])
 
 
+def get_default_theme():
+    from ututi.model import LocationTag
+    default_location = LocationTag.get(config.get('default_location', ''))
+    return default_location.get_theme() if default_location else None
+
+
 class BaseController(WSGIController):
 
     def __call__(self, environ, start_response):
@@ -72,7 +78,7 @@ class BaseController(WSGIController):
         c.message_class = None
         c.text = None
         c.tags = None
-        c.theme = None
+        c.theme = get_default_theme()
         c.pylons_config = config
 
         c.testing = asbool(config.get('testing', False))
