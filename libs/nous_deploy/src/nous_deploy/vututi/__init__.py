@@ -37,7 +37,7 @@ class VUtuti(Service):
         package_tmp_dir = '{package_dir}/tmp',
         build_dir = '{site_dir}/builds',
         backups_dir = '{site_dir}/backups',
-        scripts_dir = '{site_dir}/bin/',
+        scripts_dir = '{site_dir}/bin',
 
         # instance dirs
         instance_dir = '{site_dir}/instance',
@@ -116,14 +116,18 @@ class VUtuti(Service):
         run('add-apt-repository ppa:fkrull/deadsnakes -y')
         run('apt-get update')
         self.server.apt_get_install('python2.6 python2.6-dev')
-        # run("apt-get build-dep python-psycopg2 python-imaging")
-        # apt-get remove python-egenix-mx-base-dev
 
     @run_as_user
     def update_release_ini(self):
         self.upload_config_template('release.ini',
                                     os.path.join(self.settings.instance_dir, 'release.ini'),
                                     {'service': self})
+
+    @run_as_user
+    def update_backup_script(self):
+        self.upload_config_template('backup.sh',
+                                    '%s/backup.sh' % self.settings.scripts_dir,
+                                    {'service': self}, mode=0o700)
 
     @run_as_sudo
     def configure(self):
@@ -231,6 +235,10 @@ class VUtuti(Service):
         # $PG_PATH/bin/pg_restore -d release -h $PWD/var/run < $1/dbdump || true
         # rsync -rt $1/files_dump/uploads/ uploads/
 
+    @property
+    def pg_dump_command(self):
+        return self.server.getService(self.database).dump_cmd
+
     @run_as_user
     def import_inital_backup(self, local_backup):
         run('mkdir -p %s' % '{backup_dir}/initial'.format(backup_dir=self.settings.backups_dir))
@@ -273,6 +281,7 @@ class VUtuti(Service):
         self.reset_database()
 
         self.configure()
+        self.configure_postfix()
         # self.server.cron_setup(self.crontab) # XXX not implemented
 
     @run_as_sudo

@@ -68,11 +68,19 @@ class Postgresql(Service):
         return os.path.join(self.BIDNIR, 'droplang') + ' %s -U %s -d %s -h %s -p %s' % (
             lang, self.user, self.name, self.socket_dir, self.db_port)
 
+    @property
+    def restore_cmd(self):
+        return os.path.join(self.BIDNIR, 'pg_restore') + ' -U %s -d %s -h %s -p %s --no-owner' % (
+            self.user, self.name, self.socket_dir, self.db_port)
+
+    @property
+    def dump_cmd(self):
+        return os.path.join(self.BIDNIR, 'pg_dump') + ' {database} -U {user} -h {host} -p {port} -Fc'.format(
+            user=self.user, database=self.name, host=self.socket_dir, port=self.db_port)
+
     @run_as_user
     def import_dump(self, path_to_dump):
-        restore_cmd = os.path.join(self.BIDNIR, 'pg_restore') + ' -U %s -d %s -h %s -p %s --no-owner' % (
-            self.user, self.name, self.socket_dir, self.db_port)
-        run(restore_cmd + ' < ' + path_to_dump)
+        run(self.restore_cmd + ' < ' + path_to_dump)
 
     @run_as_sudo
     def create_cluster(self):
