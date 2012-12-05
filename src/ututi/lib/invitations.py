@@ -26,7 +26,7 @@ def make_email_invitations(emails, inviter, location):
     invited = []
     for email in filter(bool, map(strip, emails)):
         try:
-            TranslatedEmailValidator.to_python(email)
+            email = TranslatedEmailValidator.to_python(email)
         except Invalid:
             invalid.append(email)
         else:

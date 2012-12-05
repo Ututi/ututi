@@ -1,5 +1,10 @@
 <%inherit file="/base.mako" />
 
+<%def name="head_tags()">
+  ${parent.head_tags()}
+  ${h.javascript_link('/javascript/ckeditor/ckeditor.js')|n}
+</%def>
+
 %if c.texts:
   <table id="texts_list" style="width: 100%;">
     <tr>
@@ -25,7 +30,7 @@
       name="text_form" id="text_form" class="fullForm">
   ${h.input_line('id', _('Text id'))}
   ${h.input_line('language', _('Text language'))}
-  ${h.input_area('text', _('Text'))}
+  ${h.input_wysiwyg('i18n_text', _('Text'))}
   <br />
   ${h.input_submit(_('Save'))}
 </form>
