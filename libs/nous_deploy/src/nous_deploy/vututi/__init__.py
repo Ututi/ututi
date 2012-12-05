@@ -124,10 +124,20 @@ class VUtuti(Service):
                                     {'service': self})
 
     @run_as_user
-    def update_backup_script(self):
+    def update_scripts(self):
         self.upload_config_template('backup.sh',
                                     '%s/backup.sh' % self.settings.scripts_dir,
                                     {'service': self}, mode=0o700)
+        self.upload_config_template('start_db.sh',
+                                    '%s/start_db.sh' % self.settings.scripts_dir,
+                                    {'service': self}, mode=0o700)
+
+    @run_as_sudo
+    def update_crontab(self):
+        self.upload_config_template('crontab',
+                                    '/etc/cron.d/%s' % self.name,
+                                    {'service': self})
+        run("service cron restart")
 
     @run_as_sudo
     def configure(self):
@@ -136,6 +146,8 @@ class VUtuti(Service):
                                     '/etc/supervisor/conf.d/%s.conf' % self.name,
                                     {'service': self})
         self.update_release_ini()
+        self.update_scripts()
+        self.update_crontab()
         run('supervisorctl reload')
 
     @property
@@ -225,15 +237,15 @@ class VUtuti(Service):
             run("mkdir uploads")
             run("code/bin/paster setup-app release.ini")
 
-    def crontab(self):
-        return ["curl -s http://ututi.com/news/daily?date=`date -u +%Y-%m-%d` > /dev/null",
-                "curl -s http://ututi.com/news/hourly -F date=`date -u +%Y-%m-%d` -F hour=`date -u +%H` > /dev/null"]
-
     @run_as_user
     def import_backup(self):
         self.clear_database()
         # $PG_PATH/bin/pg_restore -d release -h $PWD/var/run < $1/dbdump || true
         # rsync -rt $1/files_dump/uploads/ uploads/
+
+    @property
+    def db_start_command(self):
+        return self.server.getService(self.database).pg_start_command
 
     @property
     def pg_dump_command(self):
@@ -282,7 +294,6 @@ class VUtuti(Service):
 
         self.configure()
         self.configure_postfix()
-        # self.server.cron_setup(self.crontab) # XXX not implemented
 
     @run_as_sudo
     def release(self):

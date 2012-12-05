@@ -1,0 +1,5 @@
+15 3 * * * {{ service.settings.user }} curl -s http://{{ service.settings.host_name }}/news/daily?date=`date -u +%Y-%m-%d` > /dev/null
+15 * * * * {{ service.settings.user }} curl -s http://{{ service.settings.host_name }}/news/hourly -F date=`date -u +%Y-%m-%d` -F hour=`date -u +%H` > /dev/null
+15 2 * * * {{ service.settings.user }} {{ service.settings.scripts_dir }}/backup.sh
+@reboot {{ service.settings.user }} {{ service.settings.scripts_dir }}/db_start.sh
+

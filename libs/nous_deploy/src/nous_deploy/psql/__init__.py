@@ -154,19 +154,30 @@ class Postgresql(Service):
         self.stop()
         run("rm -rf " + self.service_path)
 
+    def pg_ctl_command(self, command):
+        log_file = os.path.join(self.service_path, 'var', 'log', 'pg.log')
+        extra_options = '-o "%s"' % ' -c '.join(
+            ['',
+             'unix_socket_directory={socket_dir}'.format(socket_dir=self.socket_dir)] +
+            self.settings.get('extra_options', []))
+        params = " -D {cluster_path} {extra_options} -l {log_file} {command}".format(
+            cluster_path=self.cluster_path,
+            extra_options=extra_options,
+            log_file=log_file,
+            command=command)
+        return os.path.join(self.BIDNIR, 'pg_ctl') + ' ' + params
+
+    @property
+    def pg_start_command(self):
+        if self.version == '9.1':
+            return self.pg_ctl_command("start -w")
+        else:
+            return self.pg_ctl_command("start; sleep 5")
+
     @run_as_user
     def pg_ctl(self, command):
-        log_file = os.path.join(self.service_path, 'var', 'log', 'pg.log')
         with self.dir():
-            extra_options = "-o '%s'" % ' -c '.join(
-                ['',
-                 'unix_socket_directory={socket_dir}'.format(socket_dir=self.socket_dir)] +
-                self.settings.get('extra_options', []))
-            self.pg_run('pg_ctl', " -D {cluster_path} {extra_options} -l {log_file} {command}".format(
-                    cluster_path=self.cluster_path,
-                    extra_options=extra_options,
-                    log_file=log_file,
-                    command=command))
+            run(self.pg_ctl_command(command))
 
     @run_as_user
     def psql(self):
@@ -175,11 +186,7 @@ class Postgresql(Service):
 
     @run_as_user
     def start(self, force=False):
-        if self.version == '9.1':
-            self.pg_ctl("start -w")
-        else:
-            self.pg_ctl("start; sleep 5")
-            self.status()
+        run(self.pg_start_command)
 
     @run_as_user
     def status(self, force=False):
