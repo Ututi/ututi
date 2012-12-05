@@ -3,7 +3,7 @@
 
 <div>
   <div>
-    <%b:light_table title="Sub-departments" items="${c.location.sub_departments}">
+    <%b:light_table title="${_('Sub-departments')}" items="${c.location.sub_departments}">
       <%def name="header(items)">
         <th>${_('Sub-department')}</th>
         <th>${_('The actions')}</th>
@@ -13,13 +13,13 @@
           <a href="${c.location.url(action='edit_sub_department', id=item.id)}">${item.title}</a>
         </td>
         <td class="actions">
-          ${h.button_to('Delete', c.location.url(action='delete_sub_department', id=item.id))}
+          ${h.button_to(_('Delete'), c.location.url(action='delete_sub_department', id=item.id))}
         </td>
       </%def>
     </%b:light_table>
 
     <div>
-      ${h.button_to('Add new sub-department', c.location.url(action='add_sub_department'))}
+      ${h.button_to(_('Add new sub-department'), c.location.url(action='add_sub_department'))}
     </div>
   </div>
 </div>
