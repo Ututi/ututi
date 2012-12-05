@@ -292,7 +292,7 @@
       ${h.literal(_('Welcome to the social network of %s!') % ('<a href="#" target="_self" onclick="window.open(document.URL, this.target)">%s</a>' % h.simple_declension(c.location.title, lang=c.lang)))}
     </div>
   </div>
-
+  %if c.location.allow_login:
   <div class="login-box">
     <div class="login-box-title">
       <div class="login-box-title-text">${_('Register or login')}</div>
@@ -394,6 +394,7 @@
             });
         });
     </script>
+    %endif
 </%def>
 
 <div class="features">

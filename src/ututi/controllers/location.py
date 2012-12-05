@@ -719,6 +719,9 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         if not hasattr(self, 'form_result'):
             return htmlfill.render(self._register_form())
 
+        if not location.allow_login:
+            return redirect(location.url())
+
         email = self.form_result['email']
 
         # redirect to login if user is registered in this university
@@ -745,6 +748,9 @@ class LocationController(SearchBaseController, UniversityListMixin, LocationWall
         # bounce existing users to different action
         if c.user is not None:
             redirect(location.url(action='register_teacher_existing'))
+
+        if not location.allow_login:
+            return redirect(location.url())
 
         if not hasattr(self, 'form_result'):
             return htmlfill.render(self._register_teacher_form())
