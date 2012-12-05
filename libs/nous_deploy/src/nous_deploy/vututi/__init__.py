@@ -85,7 +85,7 @@ class VUtuti(Service):
                 "build-essential",
                 "enscript",
                 "libfreetype6-dev",
-                # "libjpeg62-dev",
+                "libjpeg-dev",
                 "liblcms1-dev",
                 "libpq-dev",
                 "libsane-dev",

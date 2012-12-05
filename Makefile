@@ -4,7 +4,7 @@
 #
 
 BOOTSTRAP_PYTHON=python2.6
-TIMEOUT=1
+TIMEOUT=3
 BUILDOUT_OPTIONS=
 BUILDOUT = bin/buildout -t $(TIMEOUT) $(BUILDOUT_OPTIONS) && touch bin/*
 
@@ -145,10 +145,9 @@ ubuntu-environment:
 	 echo "I am running as $(shell whoami)"; \
 	 exit 3; \
 	} else { \
-	 apt-get build-dep python-psycopg2 python-imaging ; \
-	 apt-get install build-essential python-all python-all-dev postgresql enscript myspell-lt myspell-en-gb myspell-pl libxslt1-dev libpq-dev python-pyrex python-setuptools python-geoip; \
-	 apt-get remove python-egenix-mx-base-dev; \
-	 dpkg -i libs/ututi-pg-dictionaries_1.0_all.deb; \
+	 add-apt-repository ppa:fkrull/deadsnakes -y; \
+	 apt-get update; \
+	 apt-get install build-essential enscript libfreetype6-dev libjpeg-dev liblcms1-dev libpq-dev libsane-dev libxml2-dev libxslt1-dev myspell-en-gb myspell-lt myspell-pl postgresql python-all python-all-dbg python-all-dev python-geoip python-pyrex python-setuptools uuid-dev zlib1g-dev python-software-properties python2.6 python2.6-dev; \
 	 echo "Installation Complete: Next... Run 'make'."; \
 	} fi
 
