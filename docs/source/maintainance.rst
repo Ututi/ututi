@@ -84,3 +84,17 @@ Kodo kataloge(lokaliai)::
 
 Makefile guli dažniausiai atliekamos operacijos, tokios kaip paleisti
 testus ar paleisti serverį.
+
+Serverio paleidmas/sustabdymas/perkrovimas
+``````````````````````````````````````````
+
+Komandos::
+
+  bin/fab vututi_vututi_start
+  bin/fab vututi_vututi_stop
+  bin/fab vututi_vututi_restart
+
+
+Atsarginių kopijų atstatymas
+````````````````````````````
+Write me

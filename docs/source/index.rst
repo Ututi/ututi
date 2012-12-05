@@ -6,5 +6,6 @@ Welcome to Ututi documentation!
 
    installation
    maintainance
+   development
    technology
 
