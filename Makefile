@@ -166,16 +166,12 @@ package_release:
 .PHONY: download_backup
 download_backup:
 	mkdir -p backup
-	scp ututi.lt:/srv/ututi.com/backup/dbdump ./backup/dbdump
+	bin/fab vututi_vututi_download_backup
 
-.PHONY: download_pl_backup
-download_pl_backup:
-	mkdir -p backup
-	scp ututi.lt:/srv/ututi.pl/backup/dbdump ./backup/dbdump
-
-.PHONY: download_backup_files
-download_backup_files:
-	rsync -rtv ututi.lt:/srv/u2ti.com/backup/files_dump/ ./backup/files_dump/
+# XXX There is no such possibility at the moment
+#.PHONY: download_backup_files
+#download_backup_files:
+# 	rsync -rtv ututi.lt:/srv/u2ti.com/backup/files_dump/ ./backup/files_dump/
 
 .PHONY: test_migration
 test_migration: ${PG_SOCKET}

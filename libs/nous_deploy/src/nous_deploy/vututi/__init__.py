@@ -243,6 +243,11 @@ class VUtuti(Service):
         # $PG_PATH/bin/pg_restore -d release -h $PWD/var/run < $1/dbdump || true
         # rsync -rt $1/files_dump/uploads/ uploads/
 
+    @run_as_user
+    def download_backup(self):
+        get('{backup_dir}/backup/dbdump'.format(backup_dir=self.settings.backups_dir),
+            'backup/dbdump')
+
     @property
     def db_start_command(self):
         return self.server.getService(self.database).pg_start_command
