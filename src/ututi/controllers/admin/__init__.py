@@ -88,7 +88,7 @@ class LanguageEditForm(Schema):
 class LanguageTextForm(Schema):
     id = String(min=1, max=100, not_empty=True)
     language = LanguageValidator()
-    text = String(not_empty=True)
+    i18n_text = String(not_empty=True)
 
 
 class EmailDomainsForm(Schema):
@@ -513,7 +513,7 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
         if hasattr(self, 'form_result'):
             text = LanguageText(self.form_result['id'],
                                 self.form_result['language'],
-                                self.form_result['text'])
+                                self.form_result['i18n_text'])
             meta.Session.add(text)
             meta.Session.commit()
         redirect(url(controller='admin', action='i18n_texts'))
@@ -528,7 +528,7 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
         defaults = {
             'id': c.text.id,
             'language': c.text.language_id,
-            'text': c.text.text
+            'i18n_text': c.text.text
         }
         return htmlfill.render(self._edit_i18n_text_form(), defaults)
 
@@ -539,7 +539,7 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
             id = self.form_result['id']
             lang = self.form_result['language']
             text = LanguageText.get(id, lang)
-            text.text = self.form_result['text']
+            text.text = self.form_result['i18n_text']
             meta.Session.commit()
         redirect(url(controller='admin', action='i18n_texts'))
 
