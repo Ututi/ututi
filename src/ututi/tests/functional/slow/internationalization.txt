@@ -131,13 +131,13 @@ Let's add "Terms of use" texts in two different languages:
     >>> form = browser.getForm('text_form')
     >>> form.getControl('Text id').value = 'terms'
     >>> form.getControl('Text language').value = 'lt'
-    >>> form.getControl(name='text').value = 'Terms of use <b>LT</b> content'
+    >>> form.getControl(name='i18n_text').value = 'Terms of use <b>LT</b> content'
     >>> form.getControl('Save').click()
 
     >>> form = browser.getForm('text_form')
     >>> form.getControl('Text id').value = 'terms'
     >>> form.getControl('Text language').value = 'pl'
-    >>> form.getControl(name='text').value = 'Terms of use <b>PL</b> content'
+    >>> form.getControl(name='i18n_text').value = 'Terms of use <b>PL</b> content'
     >>> form.getControl('Save').click()
 
     >>> browser.printCssQuery('#texts_list td', strip=True)
