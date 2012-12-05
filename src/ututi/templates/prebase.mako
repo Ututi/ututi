@@ -42,7 +42,7 @@ ${_('Private social networks for universities')}
         ${c.theme.header_text}
       </div>
     %else:
-      <a href="${url('/')}"><img src="${url('/img/mif_25.png.png')}" alt="VUtuti" title="VUtuti" /></a>
+      <a href="${url('/')}"><img src="${url('/img/mif_25.png')}" alt="VUtuti" title="VUtuti" /></a>
     %endif
   </div>
   <div id="top-panel">
