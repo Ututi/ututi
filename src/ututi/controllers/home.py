@@ -371,7 +371,6 @@ class HomeController(UniversityListMixin):
                 return {'success': True}
         return {'success': False, 'errors': errors}
 
-
     def login(self):
         # Here below email get parameter may be used for convenience
         # i.e. when redirecting from sign-up form.
@@ -533,7 +532,9 @@ class HomeController(UniversityListMixin):
             location = None
 
         # lookup/create registration entry and send confirmation code to user
-        registration = UserRegistration.create_or_update(location, email, name=name)
+        registration = UserRegistration.create_or_update(location,
+                                                         self.form_result['email'],
+                                                         name=self.form_result['name'])
 
         if person == 'teacher':
             registration.teacher = True
@@ -542,5 +543,5 @@ class HomeController(UniversityListMixin):
         registration.send_confirmation_email()
 
         # show confirmation page
-        c.email = email
+        c.email = self.form_result['email']
         return render('registration/email_approval.mako')
