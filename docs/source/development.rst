@@ -38,7 +38,20 @@ galite paleisdami komandą::
 Vertimai
 --------
 
-XXX
+Vertimai saugomi src/ututi/i18n/ kataloge PO formatu.
+
+Surinkti visus vertimus iš kodo į šiuos failus leidžia komanda::
+
+  make extract-translations
+
+Sistema tiesiogiai nenaudoja PO failuose esančių vertimų, o kompiliuoja
+juos į .mo failus. Šis žingsnis vykdomas automatiškai paleidžiant
+development serverį. Rankiniu būdu .mo failus sukompiliuoja komanda::
+
+  make compile-translations
+
+Pastaba: development serveris automatiškai neužkrauna naujai sukompiliuotų
+vertimų - jiems pasikeitus reikia rankomis perkrauti serverį.
 
 Duomenų modelio migracija
 -------------------------
