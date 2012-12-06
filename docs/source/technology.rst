@@ -82,3 +82,9 @@ Kodo versijavimui naudojama Git versijų kontrolės sistema. Ji prieinama per Gi
 `Oficiali Git svetainė <http://git-scm.com/>`_.
 
 `Gitolite dokumentacija <http://sitaramc.github.com/gitolite/master-toc.html>`_.
+
+Fabric
+------
+
+XXX
+

@@ -1,6 +1,45 @@
 Sistemos vystymas
 =================
 
+Įprastos operacijos
+-------------------
+
+Makefile guli dažniausiai atliekamos operacijos, tokios kaip paleisti
+testus ar paleisti development serverį.
+
+Development serverio paleidimas
+-------------------------------
+
+Development serveris paleidžiamas komanda::
+
+  make run
+
+Tai automatiškai paleis duomenų bazę, jei ji dar nepaleista.
+
+Atsarginės duomenų kopijos naudojimas vystant sistemą
+-----------------------------------------------------
+
+Jei parsisiuntėte atsarginę duomenų bazės kopiją komanda::
+
+  make download_backup
+
+Galite ją importuoti į development duomenų bazę paleisdami::
+
+  make import_backup
+
+Atsarginė duomenų bazės kopija siunčiama be failų kurie įkelti į
+dalykus, tam, kad taupyti disko ir tinklo resursus.
+
+Išvalyti duomenų bazę ir atstatyti ją į tuščią ututi duomenų bazę
+galite paleisdami komandą::
+
+  make reset_devdb
+
+Vertimai
+--------
+
+XXX
+
 Duomenų modelio migracija
 -------------------------
 

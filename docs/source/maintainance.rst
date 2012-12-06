@@ -1,6 +1,40 @@
 Sistemos Priežiūra
 ==================
 
+Čia apžvelgiamos pagrindinės serverio administravimo komandos ir
+operacijos.
+
+Fabric
+------
+
+Serverio konfigūracija generuojama iš duomenų esančių ``fabfile.py``,
+administravimui naudojamas įrankis `Fabric`. Visų komandų sąrašą
+galite pamatyti paleisdamin komandą::
+
+  bin/fab --list
+
+Ututi serverio ir duomenų bazės valdymo kodas laikomas
+`libs/nous_deploy/`, konfigūracijos failų šablonai laikomi
+kataloguose::
+
+  libs/nous_deploy/src/nous_deploy/ubuntu/config_templates
+  libs/nous_deploy/src/nous_deploy/ututi/config_templates
+  libs/nous_deploy/src/nous_deploy/psql/config_templates
+
+Pakeitus konfigūracijos parametrus galima atnaujinti konfigūraciją
+paleidžiant pvz.::
+
+   bin/fab vututi_vututi_configure
+
+Atspausdinti visus ututi serverio nustatymus galite paleisdami
+komandą::
+
+   bin/fab vututi_vututi_settings # XXX implement me
+
+Tai reikalinga jei norite sužinoti kokie šio serverio parametrai (pvz.
+kur saugomos atsarginės duomenų kopijos, kur saugomi skriptai ir t.t.)
+
+
 Naujo Vututi serverio konfigūracija ir paleidimas
 -------------------------------------------------
 
@@ -79,22 +113,41 @@ Kodo kataloge(lokaliai)::
   bin/fab vututi_vututi_build
   bin/fab vututi_vututi_release
 
-Įprastos operacijos
--------------------
-
-Makefile guli dažniausiai atliekamos operacijos, tokios kaip paleisti
-testus ar paleisti serverį.
 
 Serverio paleidmas/sustabdymas/perkrovimas
-``````````````````````````````````````````
+------------------------------------------
 
-Komandos::
+Ututi serveriui::
 
   bin/fab vututi_vututi_start
   bin/fab vututi_vututi_stop
   bin/fab vututi_vututi_restart
 
+Ututi serverio duomenų bazei::
 
-Atsarginių kopijų atstatymas
-````````````````````````````
-Write me
+  bin/fab vututi_ututi_db_start
+  bin/fab vututi_ututi_db_stop
+
+
+Atsarginės kopijos
+------------------
+
+Padaryti naują atsarginę kopiją galite paleisdami komandą::
+
+   bin/fab vututi_vututi_backup # XXX implement me
+
+Atsarginės kopijos daromos automatiškai kiekvieną naktį. Laikomos
+paskutinės 5 atsarginės duomenų kopijos. Galite parsisiųsti paskutinę
+duomenų bazės kopiją į savo kompiuterį paleisdami komandą::
+
+   bin/fab vututi_vututi_download_backup
+
+Įkelti paskutinę atsarginę kopiją galite paleisdami komandą::
+
+   bin/fab vututi_vututi_import_backup # XXX implement me
+
+Jei norite įkelti ne paskutinę, o kurią nors kitą duomenų bazės kopiją
+nurodykite ją kaip `import_backup` komandos parametrą, pvz.::
+
+   bin/fab vututi_vututi_import_backup:daily/2012-12-05_16-17-37
+
