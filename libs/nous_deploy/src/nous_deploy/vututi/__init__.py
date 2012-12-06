@@ -104,7 +104,8 @@ class VUtuti(Service):
                 "uuid-dev",
                 "zlib1g-dev",
                 "supervisor",
-                "postfix"
+                "postfix",
+                "curl"
                 ]))
         package = "ututi-pg-dictionaries_1.0_all.deb"
         target_filename = os.path.join(self.server.getHomeDir('root'), package)
