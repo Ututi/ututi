@@ -342,13 +342,6 @@ create table group_whitelist (
        email varchar(320) not null,
        primary key (id));;
 
-/* track coupon usage */
-create table coupon_usage (
-       coupon_id varchar(20) not null references group_coupons(id),
-       group_id int8 default null references groups(id) on delete cascade,
-       user_id int8 not null references users(id) on delete cascade,
-       primary key (coupon_id, user_id));;
-
 /* An enumerator for membership types in groups */
 create table group_membership_types (
        membership_type varchar(20) not null,
@@ -497,45 +490,6 @@ $$ LANGUAGE plpgsql;;
 CREATE TRIGGER set_thread_id BEFORE INSERT OR UPDATE ON group_mailing_list_messages
     FOR EACH ROW EXECUTE PROCEDURE set_thread_id();;
 
-
-/* SMS */
-
-CREATE TABLE outgoing_group_sms_messages (
-       id bigserial not null,
-       created timestamp not null default (now() at time zone 'UTC'),
-       sender_id int8 not null references users(id) on delete cascade,
-       group_id int8 not null references groups(id) on delete cascade,
-       message_text text not null,
-       primary key (id));
-
-
-CREATE TABLE received_sms_messages (
-       id bigserial not null,
-       sender_id int8 references users(id) on delete cascade,
-       group_id int8 references groups(id) on delete cascade,
-       sender_phone_number varchar(20) default null,
-       message_type varchar(30),
-       message_text text,
-       received timestamp not null default (now() at time zone 'UTC'),
-       success boolean default null,
-       result text,
-       request_url text,
-       test boolean default false,
-       primary key (id));
-
-CREATE TABLE sms_outbox (
-       id bigserial not null,
-       sender_uid int8 references users(id) on delete cascade not null,
-       recipient_uid int8 references users(id) on delete cascade default null,
-       recipient_number varchar(20),
-       message_text text not null,
-       created timestamp not null default (now() at time zone 'UTC'),
-       processed timestamp default null,
-       outgoing_group_message_id int8 references outgoing_group_sms_messages(id) on delete cascade,
-       delivered timestamp default null,
-       sending_status int default null,
-       delivery_status int default null,
-       primary key (id));
 
 /* Forums */
 
@@ -915,7 +869,6 @@ create table events (
        subject_id int8 references subjects(id) on delete cascade default null,
        message_id int8 references group_mailing_list_messages(id) on delete cascade default null,
        post_id int8 references forum_posts(id) on delete cascade default null,
-       sms_id int8 references outgoing_group_sms_messages(id) on delete cascade default null,
        private_message_id int8 references private_messages(id) on delete cascade default null,
        data text default null,
        parent_id int8 default null references events(id) on delete cascade,
@@ -1270,17 +1223,6 @@ $$ LANGUAGE plpgsql;;
 CREATE TRIGGER group_subject_event_trigger AFTER INSERT OR DELETE ON group_watched_subjects
     FOR EACH ROW EXECUTE PROCEDURE group_subject_event_trigger();;
 
-
-CREATE FUNCTION outgoing_group_sms_event_trigger() RETURNS trigger AS $$
-    BEGIN
-      INSERT INTO events (object_id, author_id, event_type, sms_id)
-             VALUES (NEW.group_id, NEW.sender_id, 'sms_message_sent', NEW.id);
-      RETURN NEW;
-    END
-$$ LANGUAGE plpgsql;;
-
-CREATE TRIGGER outgoing_group_sms_event_trigger AFTER INSERT ON outgoing_group_sms_messages
-    FOR EACH ROW EXECUTE PROCEDURE outgoing_group_sms_event_trigger();;
 
 CREATE FUNCTION get_private_message_event_parent(private_messages) RETURNS int8 AS $$
     DECLARE

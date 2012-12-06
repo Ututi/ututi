@@ -27,7 +27,6 @@ def generic_events_query():
     t_files = meta.metadata.tables['files']
     t_mlmsg = meta.metadata.tables['group_mailing_list_messages']
     t_fpmsg = meta.metadata.tables['forum_posts']
-    t_sms = meta.metadata.tables['outgoing_group_sms_messages']
     t_wall_posts = meta.metadata.tables['wall_posts']
 
     #generic query for events
@@ -73,8 +72,6 @@ def generic_events_query():
                            t_fpmsg.c.title.label('fp_subject'),
                            t_fpmsg.c.category_id.label('fp_category_id'),
                            t_fpmsg.c.thread_id.label('fp_thread_id'),
-                           #sms
-                           t_sms.c.message_text.label('sms_message'),
                            #wall posts
                            t_wall_posts.c.content.label('wp_content'),
                            t_wall_posts.c.subject_id.label('wp_subject_id'),
@@ -86,7 +83,6 @@ def generic_events_query():
                                         .outerjoin(t_mlmsg, t_mlmsg.c.id==t_evt.c.message_id)\
                                         .outerjoin(t_fpmsg, t_fpmsg.c.id==t_evt.c.post_id)\
                                         .outerjoin(file_ci, file_ci.c.id==t_files.c.id)\
-                                        .outerjoin(t_sms, t_sms.c.id==t_evt.c.sms_id)\
                                         .outerjoin(t_wall_posts, t_wall_posts.c.id==t_evt.c.object_id)
                                     ]).where(t_context.c.deleted_on==None)
     return evts_generic
@@ -173,17 +169,6 @@ class WallMixin(object):
             children_collection[child.parent_id].append(child)
         return children_collection
 
-    def _get_sms_event_groups(self, events):
-        groups = []
-        ids = [e.object_id for e in events if e.event_type == 'sms_message_sent']
-        if ids:
-            groups = meta.Session.query(Group).filter(Group.id.in_(ids)).all()
-
-        groups_collection = dict()
-        for group in groups:
-            groups_collection[group.id] = group
-        return groups_collection
-
     def _get_ml_attachments(self, event_ids):
         t_evt = meta.metadata.tables['events']
         att = []
@@ -210,7 +195,6 @@ class WallMixin(object):
         ids.extend(children_ids)
 
         comments_collection = self._get_event_comments(ids)
-        groups_collection = self._get_sms_event_groups(events)
         attachment_collection = self._get_ml_attachments(ids)
         c.events = [ObjectWrapper(evt) for evt in events]
 
@@ -230,8 +214,6 @@ class WallMixin(object):
                 evt['children'] = children_collection[evt.id]
             if comments_collection.has_key(evt.id):
                 evt['conversation'] = comments_collection[evt.id]
-            if evt.event_type == 'sms_message_sent':
-                evt['sms_group'] = groups_collection[evt.object_id]
             if attachment_collection.has_key(evt.message_id):
                 evt['attachments'] = attachment_collection[evt.message_id]
 

@@ -17,7 +17,6 @@ from ututi.lib.security import deny
 from ututi.lib.validators import validate
 from ututi.controllers.group import group_menu_items
 from ututi.model import Group, ForumCategory, ForumPost, SubscribedThread
-from ututi.model import get_supporters
 from ututi.model import meta
 
 

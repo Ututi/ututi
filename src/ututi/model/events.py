@@ -14,7 +14,7 @@ from pylons.i18n import ungettext, _
 
 from ututi.model.mailing import GroupMailingListMessage
 from ututi.model import Group, Subject, User, File, Page, ContentItem
-from ututi.model import ForumPost, OutgoingGroupSMSMessage, PrivateMessage
+from ututi.model import ForumPost, PrivateMessage
 from ututi.model import WallPost
 from ututi.model import meta
 from ututi.lib.helpers import link_to, ellipsis, when
@@ -437,21 +437,6 @@ class ForumPostCreatedEvent(Event, MessagingEventMixin):
         return self.post.thread_id
 
 
-class SMSMessageSentEvent(Event):
-    """Event fired when someone sends an SMS message to the group."""
-
-    def render(self):
-        return _("%(link_to_author)s sent an SMS: <em>%(text)s</em>") % {
-            'link_to_author': link_to(self.outgoing_sms.sender.fullname, self.outgoing_sms.sender.url()),
-            'text': self.sms_text()}
-
-    def sms_text(self):
-        return cgi.escape(self.outgoing_sms.message_text)
-
-    def sms_created(self):
-        return self.outgoing_sms.created
-
-
 class PrivateMessageSentEvent(Event):
     """Event fired when someone sends a private message to the user."""
 
@@ -668,13 +653,6 @@ def setup_orm():
                polymorphic_identity='forum_post_created',
                properties = {'post': relation(ForumPost,
                                  primaryjoin=tables['forum_posts'].c.id==tables['events'].c.post_id)})
-
-    orm.mapper(SMSMessageSentEvent,
-               inherits=event_mapper,
-               polymorphic_on=tables['events'].c.event_type,
-               polymorphic_identity='sms_message_sent',
-               properties={'outgoing_sms': relation(OutgoingGroupSMSMessage,
-                    primaryjoin=tables['outgoing_group_sms_messages'].c.id==tables['events'].c.sms_id)})
 
     orm.mapper(PrivateMessageSentEvent,
                inherits=event_mapper,

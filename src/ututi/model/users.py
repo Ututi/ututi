@@ -381,7 +381,7 @@ class User(Author):
 
     def all_medals(self):
         """Return a list of medals for this user, including implicit medals."""
-        from ututi.model import GroupMember, Payment
+        from ututi.model import GroupMember
         from ututi.model import GroupMembershipType
         is_moderator = bool(meta.Session.query(GroupMember
             ).filter_by(user=self, role=GroupMembershipType.get('moderator')
@@ -389,9 +389,7 @@ class User(Author):
         is_admin = bool(meta.Session.query(GroupMember
             ).filter_by(user=self, role=GroupMembershipType.get('administrator')
             ).count())
-        is_supporter = bool(meta.Session.query(Payment
-            ).filter_by(user=self, payment_type='support'
-            ).filter_by(raw_error='').count())
+        is_supporter = False  # XXX Remove me (and deal with implications)
 
         implicit_medals = {'support': is_moderator,
                            'admin': is_admin,

@@ -42,7 +42,6 @@
   <li>${h.link_to('Languages', url(controller='admin', action='languages'))}</li>
   <li>${h.link_to('Messages', url(controller='admin', action='messages'))}</li>
   <li>${h.link_to('Notifications', url(controller='admin', action='notifications'))}</li>
-  <li>${h.link_to('SMSs', url(controller='admin', action='sms'))}</li>
 </ul>
 
 <h2>${_('University administration:')}</h2>

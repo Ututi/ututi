@@ -29,8 +29,7 @@ from ututi.lib.security import ActionProtector, sign_in_user, bot_protect
 from ututi.lib.validators import (validate, u_error_formatters,
                                   TranslatedEmailValidator, ForbidPublicEmail)
 from ututi.lib.decorators import jsonpify
-from ututi.model import (meta, User, Region, LocationTag, Payment,
-                         UserRegistration)
+from ututi.model import meta, User, Region, LocationTag, UserRegistration
 from ututi.model import Subject, Group, SearchItem
 from ututi.model.events import Event
 
@@ -450,45 +449,6 @@ class HomeController(UniversityListMixin):
             return htmlfill.render(self._pswreset_form(), defaults=defaults)
         except NoResultFound:
             abort(404)
-
-    @bot_protect
-    def process_transaction(self):
-        prefix = 'wp_'
-        args = ['projectid',
-                'orderid',
-                'lang',
-                'amount',
-                'currency',
-                'paytext',
-                '_ss2',
-                '_ss1',
-                'name',
-                'surename',
-                'status',
-                'error',
-                'test',
-                'p_email',
-                'payamount',
-                'paycurrency',
-                'version']
-
-        kwargs = {}
-        for arg in args:
-            value = request.params.get(prefix + arg, '')
-            kwargs[arg] = value
-
-        payment = Payment(**kwargs)
-        payment.referrer = request.referrer
-        payment.query_string = request.query_string
-        meta.Session.add(payment)
-        meta.Session.commit()
-        payment.process()
-        meta.Session.commit()
-
-        if payment.valid:
-            return 'OK'
-        else:
-            return 'Error accepting payment'
 
     def tour(self):
         return render('tour.mako')

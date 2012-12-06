@@ -663,13 +663,6 @@ def path_with_hash(fn):
     digest = md5(file(file_path).read()).hexdigest()
     return '%s?hash=%s' % (fn, digest)
 
-def coupons_available(user):
-    from ututi.model import meta, GroupCoupon
-    return meta.Session\
-        .query(GroupCoupon)\
-        .filter(~GroupCoupon.id.in_([coup.id for coup in user.coupons]))\
-        .all()
-
 def object_link(object):
     """Render a complete link to an object, dispatching on object type."""
     from ututi.model import Subject, Group, User, File, ForumPost, Page, PrivateMessage
@@ -713,10 +706,6 @@ def when(time):
                          num) % {'num': num}
     else:
         return time.strftime("%Y-%m-%d")
-
-def get_supporters():
-    from ututi.model import get_supporters
-    return get_supporters()
 
 def get_i18n_text(text_id):
     from pylons import tmpl_context as c

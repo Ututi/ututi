@@ -21,7 +21,6 @@ ${_('Add a student group')}
       <li class="group">${_("Keep track of your student groups")}</li>
       <li class="email">${_("Email your students from your dashboard")}</li>
       <li class="files">${_("Attach files to your messages")}</li>
-      <li class="sms">${_("Send SMS messages from your dashboard to VUtuti groups")}</li>
     </ul>
   </%b:title_box>
   <form method="post" action="${self.group_action_url()}" id="student_group_form" class="narrow">

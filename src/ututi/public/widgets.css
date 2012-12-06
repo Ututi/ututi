@@ -1,29 +1,4 @@
 
-/* SMS widget (in-wall variant) */
-.sms-box-compact {}
-
-    .sms-box-compact .credits-left {
-        float: left;
-    }
-    .sms-box-compact .purchase-credits {
-        float: right;
-    }
-    .sms-box-compact .cost {
-        float: right;
-    }
-    .sms-box-compact .character-counter {
-        float: left;
-    }
-
-    .sms-box-compact .character-counter,
-    .sms-box-compact .cost {
-        padding-top: 10px;
-    }
-    .sms-box-compact #sms_message {
-        width: 500px;
-        border: 1px solid #f6f6f6;
-    }
-
 /* Fancy dropdown */
 .dropdown {
   padding-right: 1px;

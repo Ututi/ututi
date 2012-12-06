@@ -93,8 +93,6 @@ def setup_tables(engine):
     Table("group_members", meta.metadata, autoload=True, autoload_with=engine)
     Table("groups", meta.metadata, autoload=True, autoload_with=engine)
     Table("group_whitelist", meta.metadata, autoload=True, autoload_with=engine)
-    Table("coupon_usage", meta.metadata, autoload=True, autoload_with=engine)
-    Table("group_coupons", meta.metadata, autoload=True, autoload_with=engine)
     Table("group_watched_subjects", meta.metadata, autoload=True, autoload_with=engine)
     Table("group_invitations", meta.metadata, autoload=True, autoload_with=engine)
     Table("group_requests", meta.metadata, autoload=True, autoload_with=engine)
@@ -104,10 +102,6 @@ def setup_tables(engine):
     Table("search_items", meta.metadata, autoload=True, autoload_with=engine)
     Table("tag_search_items", meta.metadata, autoload=True, autoload_with=engine)
     warnings.simplefilter("default", SAWarning)
-    Table("payments", meta.metadata, autoload=True, autoload_with=engine)
-    Table("received_sms_messages", meta.metadata, autoload=True, autoload_with=engine)
-    Table("outgoing_group_sms_messages", meta.metadata, autoload=True, autoload_with=engine)
-    Table("sms_outbox", meta.metadata, autoload=True, autoload_with=engine)
     Table("notifications", meta.metadata, autoload=True, autoload_with=engine)
     Table("notifications_viewed", meta.metadata, autoload=True, autoload_with=engine)
     Table("wall_posts", meta.metadata, autoload=True, autoload_with=engine)
@@ -365,15 +359,6 @@ def setup_orm():
                             'group': relation(Group)
                             })
 
-    orm.mapper(GroupCoupon, tables['group_coupons'],
-               properties ={'groups': relation(Group, secondary=tables['coupon_usage'], backref="coupons", lazy=True),
-                            'users': relation(User, secondary=tables['coupon_usage'], backref="coupons", lazy=True)})
-
-    orm.mapper(CouponUsage, tables['coupon_usage'],
-               properties ={'group': relation(Group, lazy=True),
-                            'user': relation(User, lazy=True),
-                            'coupon': relation(GroupCoupon, lazy=True)})
-
     orm.mapper(PendingRequest, tables['group_requests'],
                properties = {'group': relation(Group, backref=backref('requests', cascade='save-update, merge, delete')),
                              'user': relation(User,
@@ -399,33 +384,6 @@ def setup_orm():
 
     orm.mapper(TagSearchItem, tables['tag_search_items'],
                properties={'tag' : relation(LocationTag)})
-
-    orm.mapper(Payment, tables['payments'],
-               properties={'user': relation(User),
-                           'group': relation(Group, backref=backref('payments',
-                                                                    order_by=tables['payments'].c.created.desc()))})
-
-    orm.mapper(ReceivedSMSMessage,
-               tables['received_sms_messages'],
-               properties = {
-                    'sender': relation(User),
-                    'group': relation(Group),
-               })
-
-    orm.mapper(OutgoingGroupSMSMessage,
-               tables['outgoing_group_sms_messages'],
-               properties = {
-                    'sender': relation(User),
-                    'group': relation(Group),
-               })
-
-    orm.mapper(SMS,
-               tables['sms_outbox'],
-               properties={'sender': relation(User, foreign_keys=tables['sms_outbox'].c.sender_uid),
-                           'recipient': relation(User, foreign_keys=tables['sms_outbox'].c.recipient_uid),
-                           'outgoing_group_message': relation(OutgoingGroupSMSMessage,
-                                                              backref='individual_messages'),
-                           })
 
     orm.mapper(Notification,
                tables['notifications'],
@@ -626,61 +584,6 @@ class GroupSubjectMonitoring(object):
 
     def __init__(self, group, subject, ignored=False):
         self.group, self.subject, self.ignored = group, subject, ignored
-
-
-class CouponUsage(object):
-    """Coupon usage record."""
-    def __init__(self, coupon, user, group):
-        self.coupon = coupon
-        self.user = user
-        self.group = group
-
-class GroupCoupon(object):
-    """GroupCoupon object - give groups special gifts on creation."""
-    def __init__(self, code, valid_until, action, **kwargs):
-        """ Actions used at the moment are: smscredits, unlimitedspace. """
-        self.id = code.upper()
-        self.valid_until = valid_until
-        self.action = action
-        for (key, value) in kwargs.items():
-            setattr(self, key, value)
-
-    @classmethod
-    def get(cls, code):
-        try:
-            return meta.Session.query(cls).filter_by(id=code.upper()).one()
-        except NoResultFound:
-            return None
-
-    def active(self, user=None, group=None):
-        """ Ensure that a coupon is used only once per user or per group and has not expired yet. """
-        valid = self.valid_until >= datetime.utcnow()
-        if valid and user is not None:
-            valid = valid and user not in self.users
-        if valid and group is not None:
-            valid = valid and group not in self.groups
-        return valid
-
-    def description(self):
-        strings = {
-            'unlimitedspace': ungettext("unlimited group private files for %(day_count)d day",
-                                        "unlimited group private files for %(day_count)d days",
-                                        self.day_count) % dict(day_count = self.day_count)}
-        return strings[self.action]
-
-    def apply(self, group, user):
-        if self.action == 'unlimitedspace':
-            if self.active(user, group) and group.has_file_area:
-                end_date = group.private_files_lock_date or datetime.utcnow()
-                end_date += timedelta(days=self.day_count)
-                group.private_files_lock_date = end_date
-
-                c_u = CouponUsage(coupon=self, group=group, user=user)
-                meta.Session.add(c_u)
-                return True
-        else:
-            raise AttributeError("Cannot apply unknown GroupCoupon action %s !" % self.action)
-        return False
 
 
 class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
@@ -2030,47 +1933,6 @@ class TagSearchItem(object):
     pass
 
 
-class Payment(object):
-
-    def __init__(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, 'raw_' + key, value)
-
-    def process(self):
-        payment_type, payment_info = self.raw_orderid.split('_', 1)
-        self.payment_type = payment_type
-        self.amount = int(self.raw_amount)
-
-        if payment_type == 'support':
-            user_id = payment_info
-            self.user = User.get_byid(int(user_id))
-        elif payment_type.startswith('grouplimits'):
-            user_id, group_id = payment_info.split('_', 1)
-            self.user = User.get_byid(int(user_id))
-            self.group = Group.get(int(group_id))
-
-            if self.raw_error == '':
-                period = {'1': 31, '2': 100, '3': 200}[payment_type[-1]]
-                self.group.purchase_days(period)
-        elif payment_type.startswith('smspayment'):
-            user_id = int(payment_info)
-            self.user = User.get_byid(int(user_id))
-            if self.raw_error == '':
-                plan = payment_type[-1]
-                credits = int(config['sms_payment%s_credits' % plan])
-                self.user.purchase_sms_credits(credits)
-
-        self.valid = True
-        self.processed = True
-
-
-def get_supporters():
-    return sorted(list(set([payment.user for payment in
-                            meta.Session.query(Payment)\
-                                .filter_by(payment_type='support')\
-                                .filter_by(raw_error='')])),
-                  key=lambda u:u.id)
-
 # Reimports for convenience
 from ututi.model.mailing import GroupMailingListMessage
 
@@ -2087,66 +1949,6 @@ from ututi.model.mailing import GroupMailingListMessage
 # group -> subjects (pages, files) + group + pages + files + members
 
 #   conversation, comment (feedback)
-
-class SMS(object):
-    """ Object for SMS messages stored in the database. """
-
-    def __init__(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-
-    @classmethod
-    def get(cls, id):
-        try:
-            return meta.Session.query(cls).filter_by(id=id).one()
-        except NoResultFound:
-            return None
-
-
-class ReceivedSMSMessage(object):
-    """An incoming SMS message."""
-
-    def __init__(self, message_type, request_url):
-        self.message_type = message_type
-        self.request_url = request_url
-
-    def request_params(self):
-        query_string = urlparse.urlparse(self.request_url).query
-        return dict(urlparse.parse_qsl(query_string, keep_blank_values=True))
-
-    def _get_secret(self):
-        secret = config.get('fortumo.%s.secret' % self.message_type)
-        if not secret:
-            raise ValueError('Secret not configured for %r' % self.message_type)
-        return secret
-
-    def calculate_fortumo_sig(self):
-        s = ''
-        for k, v in sorted(self.request_params().items()):
-            if k != 'sig':
-                s += '%s=%s' % (k, v)
-        s += self._get_secret()
-        return hashlib.md5(s).hexdigest()
-
-    def check_fortumo_sig(self):
-        return self.request_params()['sig'] == self.calculate_fortumo_sig()
-
-
-class OutgoingGroupSMSMessage(object):
-    """An SMS message that has been sent to a group.
-
-    A single such message maps to multiple peer-to-peer SMS messages.
-    """
-
-    def __init__(self, sender, group, message_text):
-        self.sender = sender
-        self.group = group
-        self.message_text = message_text
-
-    def send(self):
-        """Queue peer-to-peer messages for each recipient."""
-        pass
-
 
 class Notification(object):
     """Class for users notifications """
