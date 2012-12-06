@@ -10,7 +10,7 @@ from ututi.lib.forms import validate
 
 from ututi.model import meta
 from ututi.controllers.profile.base import ProfileControllerBase
-from ututi.controllers.profile.validators import  PhoneConfirmationForm, PhoneForm
+from ututi.controllers.profile.validators import PhoneForm
 
 class UserProfileController(ProfileControllerBase):
     """A controller for the user's personal information and actions."""
@@ -64,12 +64,4 @@ class UserProfileController(ProfileControllerBase):
         c.user.location = self.form_result.get('phone_number', None)
         meta.Session.commit()
         h.flash(_('Your phone number has been updated.'))
-        redirect(url(controller='profile', action='home'))
-
-    @ActionProtector("user")
-    @validate(schema=PhoneConfirmationForm, form='home')
-    def confirm_phone(self):
-        c.user.location = self.form_result.get('phone_confirmation_key', None)
-        meta.Session.commit()
-        h.flash(_('Your phone number has been confirmed.'))
         redirect(url(controller='profile', action='home'))

@@ -1,5 +1,4 @@
 <%namespace name="moderation" file="/mailinglist/administration.mako" />
-<%namespace name="sms" file="/widgets/sms.mako" />
 
 <%def name="head_tags()">
   ${h.javascript_link('/javascript/wall.js')}
@@ -515,45 +514,6 @@
               message_link=h.content_link(event.post_id)) | n}
     </%def>
     <%self:event_conversation event="${event}"/>
-  </%self:wall_entry>
-</%def>
-
-<%def name="sms_message_sent(event)">
-  <%self:wall_entry event="${event}">
-    <%def name="classes()">minimizable sms-event</%def>
-    <%def name="heading()">
-      %if c.user is not None and c.user.id == event.author_id:
-        ${_("You have sent an sms to the group %(group_link)s") % \
-           dict(group_link=h.content_link(event.object_id)) | n}
-      %else:
-        ${_("%(user_link)s has sent an sms to the group %(group_link)s") % \
-           dict(user_link=h.user_link(event.author_id),
-                group_link=h.content_link(event.object_id)) | n}
-      %endif
-    </%def>
-    <div class="thread">
-      <div class="logo">
-        <img src="${url(controller='users', action='logo', id=event.author_id, width=50)}" />
-      </div>
-      <div class="content">
-        <span class="event-content truncated">${h.wall_fmt(event.sms_message)}</span>
-        <div class="closing">
-          <span class="event-time">${h.when(event.created)}</span>
-          %if c.user is not None:
-          <span class="actions">
-            <a href="#moderate" class="action-block-link">${_('Reply')}</a>
-          </span>
-          %endif
-        </div>
-        %if c.user is not None:
-        <div class="action-block">
-          <div class="content">
-            ${sms.sms_widget_tiny(c.user, event.sms_group)}
-          </div>
-        </div>
-        %endif
-      </div>
-    </div>
   </%self:wall_entry>
 </%def>
 

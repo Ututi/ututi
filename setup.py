@@ -46,7 +46,6 @@ setup(
 
     [console_scripts]
     migrate = ututi.migration:main
-    sms_daemon = ututi.lib.sms_daemon:main
     profile = cProfile:main
 
     [paste.app_install]

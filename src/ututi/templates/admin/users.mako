@@ -64,7 +64,7 @@
        </td>
 
        <td style="font-weight: bold; white-space: nowrap; padding-right: 10px">
-         % if user.phone_confirmed:
+         % if user.phone_number:
            <span style="color: #a00">
              P
            </span>

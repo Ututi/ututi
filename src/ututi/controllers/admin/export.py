@@ -125,8 +125,6 @@ class UniversityExportMixin(object):
                                     user.description,
                                     user.receive_email_each,
                                     user.phone_number if user.phone_number else '',
-                                    str(user.phone_confirmed),
-                                    str(user.sms_messages_remaining),
                                     user.openid if user.openid else '',
                                     str(user.facebook_id) if user.facebook_id else '',
                                     str(user.profile_is_public),

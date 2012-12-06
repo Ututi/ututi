@@ -74,7 +74,7 @@
 
       %if c.user is not None:
         ## don't show private details to anonymous
-        %if c.user_info.phone_number and c.user_info.phone_confirmed:
+        %if c.user_info.phone_number:
         <li class="icon-mobile link-color">
           ${c.user_info.phone_number}
         </li>

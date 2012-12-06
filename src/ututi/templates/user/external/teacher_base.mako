@@ -70,7 +70,7 @@
       </li>
       %endif
 
-      %if c.teacher.phone_number and c.teacher.phone_confirmed:
+      %if c.teacher.phone_number:
       <li class="phone icon-mobile">
         <span class="label">${_('Phone')}:</span> ${c.teacher.phone_number}
       </li>

@@ -30,14 +30,13 @@ from ututi.lib.image import serve_logo
 from ututi.lib.invitations import make_email_invitations, make_facebook_invitations,\
         extract_emails
 from ututi.lib.search import _exclude_subjects
-from ututi.lib.sms import sms_cost
 from ututi.lib.base import BaseController, render
 from ututi.lib.validators import js_validate
 from ututi.lib.validators import HtmlSanitizeValidator, LocationTagsValidator, TagsValidator, FileUploadTypeValidator, validate
 from ututi.lib.wall import WallMixin
 
 from ututi.model import ForumCategory
-from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File, OutgoingGroupSMSMessage
+from ututi.model import LocationTag, User, GroupMember, GroupMembershipType, File
 from ututi.model import meta, Group, SimpleTag, Subject, PendingInvitation, PendingRequest
 
 from ututi.controllers.profile.validators import FriendsInvitationJSForm
@@ -1075,32 +1074,6 @@ class GroupController(BaseController, SubjectAddMixin, FileViewMixin, GroupWallM
         if request.params.has_key('js'):
             return 'ok'
         redirect(request.referrer)
-
-    @group_action
-    def send_sms(self, group):
-        text = request.params.get('sms_message')
-        if not text.strip():
-            h.flash(_('Why would you want to send an empty SMS message?'))
-            redirect(request.params.get('current_url'))
-        cost = sms_cost(text, n_recipients=len(c.group.recipients_sms(sender=c.user)))
-        if cost == 0:
-            h.flash(_('Nobody received your message... No other group members have confirmed their phone numbers yet. Please encourage them to do so!'))
-            redirect(request.params.get('current_url'))
-        if c.user.sms_messages_remaining < cost:
-            h.flash(_('Not enough SMS credits: you need %d, but you have only %d.')
-                    % (cost, c.user.sms_messages_remaining))
-            redirect(request.params.get('current_url'))
-
-        c.user.sms_messages_remaining -= cost
-        msg = OutgoingGroupSMSMessage(sender=c.user, group=group,
-                                      message_text=text)
-        meta.Session.add(msg)
-        msg.send()
-        meta.Session.commit()
-        if request.params.has_key('js'):
-            return _('SMS reply sent')
-        h.flash(_('SMS sent! (%d credits used up, %d remaining)') % (cost, c.user.sms_messages_remaining))
-        redirect(request.params.get('current_url'))
 
     @group_action
     @ActionProtector("member", "admin")

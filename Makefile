@@ -242,12 +242,6 @@ migrate: ${PG_SOCKET}
 downgrade: ${PG_SOCKET}
 	${PWD}/bin/migrate development.ini downgrade
 
-start_sms: ${PG_SOCKET}
-	${PWD}/bin/sms_daemon start
-
-stop_sms:
-	${PWD}/bin/sms_daemon stop
-
 ssh:
 	ssh -nNT -R 7137:localhost:5000 u2ti.com
 

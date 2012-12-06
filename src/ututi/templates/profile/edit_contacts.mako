@@ -42,30 +42,13 @@
   ## PHONE NUMBER
 
   <%
-  if c.user.phone_number and c.user.phone_confirmed:
+  if c.user.phone_number:
       phone_help = None
   else:
       phone_help = _('Use international format, +XXXXXXXXXXX')
   %>
 
   ${h.input_line('phone_number', _('Mobile phone number'), help_text=phone_help)}
-
-  %if c.user.phone_number:
-    %if not c.user.phone_confirmed:
-      <p class="field-status">${_('Number is not confirmed')}</p>
-      ${h.input_line('phone_confirmation_key',
-                     _("Enter the code that you have received by SMS"),
-                     help_text=_('Should you not have received the code, please press "Send code again"'),
-                     right_next=h.input_submit(_('Submit code'), name='confirm_phone', class_='dark inline') + \
-                                h.input_submit_text_button(_('Send code again'), name='resend_phone_code')
-                     )}
-    %else:
-      <p class="field-status confirmed">${_('Number is confirmed')}</p>
-      <input type="hidden"  name="phone_confirmation_key" />
-    %endif
-  %else:
-    <input type="hidden" name="phone_confirmation_key" />
-  %endif
 
   ## E-MAIL
 

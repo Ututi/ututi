@@ -134,7 +134,7 @@ A message to the ututi forum group - members of the group receive email messages
 
     >>> browser.getControl(name='subject', index=2).value = 'a message to the group'
     >>> browser.getControl(name='message', index=2).value = 'Hi, guys!'
-    >>> browser.getControl('Send', index=3).click()
+    >>> browser.getControl('Send', index=2).click()
 
     >>> len(mail_queue)
     2
@@ -161,25 +161,6 @@ A message to the ututi forum group - members of the group receive email messages
       <a>Adminas Adminovix</a> has created the group <a>Testing group</a>
     </span>
     ...
-
-Let's try sending an sms:
-    >>> browser.getControl(name='sms_message', index=0).value = 'Hi, guys! (sms)'
-    >>> browser.getControl('Send', index=2).click()
-
-    >>> from ututi.lib.sms import sms_queue
-    >>> len(sms_queue)
-    1
-    >>> print sms_queue.pop()
-    (u'+37067812375', u'Hi, guys! (sms)')
-
-    >>> browser.getControl(name='sms_message', index=1).value = 'Hi, guys! (sms 2)'
-    >>> browser.getControl('Send', index=4).click()
-
-    >>> print sms_queue.pop()
-    (u'+37067412345', u'Hi, guys! (sms 2)')
-
-    >>> print sms_queue.pop()
-    (u'+37067812375', u'Hi, guys! (sms 2)')
 
 And let's try sending messages with attachments:
 

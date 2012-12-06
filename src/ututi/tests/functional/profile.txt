@@ -144,22 +144,10 @@ User clicks contacts' tab and enters an invalid phone number:
     >>> browser.printQuery("//span[@class='error-message']/text()")
     Invalid phone number; use the format +37069912345
 
-No sms get sent:
-
-    >>> from ututi.lib.sms import sms_queue
-    >>> sms_queue
-    []
-
 User enters lithuanian number:
 
     >>> form = browser.getForm('contacts-form')
     >>> form.getControl(name='phone_number').value = '+37069912345'
     >>> form.getControl(name='update_contacts').click()
     >>> browser.printQuery("//p[@class='field-status']/text()")
-    Number is not confirmed
     Email is not confirmed
-
-Confirmation sms got sent:
-
-    >>> sms_queue.pop()
-    (u'+37069912345', u'Ututi registration code: ...')

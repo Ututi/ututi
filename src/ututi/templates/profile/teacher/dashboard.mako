@@ -2,7 +2,6 @@
 <%namespace file="/sections/standard_buttons.mako" import="close_button" />
 <%namespace name="b" file="/sections/standard_blocks.mako" import="title_box"/>
 <%namespace name="location" file="/widgets/ulocationtag.mako" />
-<%namespace file="/widgets/sms.mako" import="sms_widget" />
 <%namespace name="elements" file="/elements.mako" />
 <%namespace file="/portlets/user.mako" import="invite_friends_portlet"/>
 <%namespace file="/portlets/universal.mako" import="users_online_portlet,
@@ -161,13 +160,6 @@ button.submit {
           ${_('Send message')}
         </a>
       </dd>
-      %if group.group is not None:
-      <dd class="sms">
-        <a href="#" title="${_('Send SMS')}" class="sms action-link">
-          ${_('Send SMS')}
-        </a>
-      </dd>
-      %endif
   </div>
 
   <div class="email action-block">
@@ -191,14 +183,6 @@ button.submit {
   <div class="message-sent action-reply">
     ${_('Your message was successfully sent.')}
   </div>
-  %if group.group is not None:
-  <div class="sms action-block">
-    ${sms_widget(user=c.user, group=group.group, text='', parts=[])}
-  </div>
-  <div class="sms-sent action-reply">
-    ${_('Your SMS was successfully sent.')}
-  </div>
-  %endif
 </div>
 </%def>
 

@@ -26,7 +26,6 @@ from ututi.lib.image import serve_logo
 from ututi.lib.forms import validate
 from ututi.lib.invitations import make_email_invitations, make_facebook_invitations
 from ututi.lib.messaging import EmailMessage
-from ututi.lib import sms
 from ututi.lib.validators import js_validate, LogoUpload
 
 from ututi.model.events import Event
@@ -481,23 +480,9 @@ class ProfileControllerBase(SearchBaseController, UniversityListMixin, FileViewM
                 sign_in_user(c.user)
 
             # handle phone number
+            # VUtuti: number confirmation is removed
             phone_number = self.form_result['phone_number']
-            phone_confirmation_key = self.form_result['phone_confirmation_key']
-
-            if self.form_result['resend_phone_code']:
-                sms.confirmation_request(c.user)
-            elif phone_number != c.user.phone_number:
-                c.user.phone_number = phone_number
-                c.user.phone_confirmed = False
-                if phone_number:
-                    # new number
-                    if c.user.is_teacher:
-                        # don't asks confirmations from teachers
-                        c.user.phone_confirmed = True
-                    else:
-                        sms.confirmation_request(c.user)
-            elif phone_confirmation_key:
-                c.user.confirm_phone_number()
+            c.user.phone_number = phone_number
 
         meta.Session.commit()
         h.flash(_('Your contact information was updated.'))

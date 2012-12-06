@@ -37,17 +37,6 @@
 </div>
 %endif
 
-%if c.user and c.user.phone_number is not None and not c.user.phone_confirmed:
-<div class="flash-message" id="confirm-phone-flash-message">
-  <span class="close-link hide-parent">
-    ${h.image('/img/icons.com/close.png', alt=_('Close'))}
-  </span>
-  <span class="flash-message-content">
-    ${_('Your phone is not confirmed! Please <a href="%s">confirm</a> it by entering the code sent to you.') % url(controller='profile', action='edit_contacts')|n}
-  </span>
-</div>
-%endif
-
 </%def>
 
 <%def name="invitation_messages(user=None)">

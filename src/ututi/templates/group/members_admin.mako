@@ -131,7 +131,7 @@ ${group_members_invite_section()}
       </td>
       <td class="phone">
         % if member['user'].phone_number:
-          ${member['user'].phone_number if member['user'].phone_confirmed else _('unconfirmed')}
+          ${member['user'].phone_number}
         % else:
           -
         % endif

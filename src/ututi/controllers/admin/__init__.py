@@ -29,13 +29,12 @@ from ututi.lib.wall import WallMixin
 
 from ututi.lib.security import ActionProtector
 from ututi.lib.base import BaseController, render
-from ututi.lib.validators import PhoneNumberValidator, GroupCouponValidator, validate, \
+from ututi.lib.validators import PhoneNumberValidator, validate, \
     LanguageIdValidator, LanguageValidator, SeparatedListValidator
 from ututi.lib.emails import teacher_confirmed_email
 from ututi.model.users import AdminUser
 from ututi.model.events import Event
 from ututi.model import FileDownload
-from ututi.model import SMS, GroupCoupon
 from ututi.model import (meta, User, Email, Group, Subject,
                          File, PrivateMessage, Teacher, LocationTag)
 from ututi.model import Notification
@@ -47,20 +46,6 @@ from ututi.lib import helpers as h
 
 
 log = logging.getLogger(__name__)
-
-
-class SMSForm(Schema):
-    allow_extra_fields = False
-    number = PhoneNumberValidator()
-    message = String(min=1, max=130)
-
-
-class GroupCouponForm(Schema):
-    allow_extra_fields = False
-    code = GroupCouponValidator(check_collision=True)
-    action = OneOf(['smscredits', 'unlimitedspace'])
-    day_count = Any(Constant(''), Int(min=0))
-    valid_until = DateConverter()
 
 
 class NotificationForm(Schema):
@@ -223,26 +208,6 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
         return render('admin/files.mako')
 
     @ActionProtector('root')
-    def sms(self):
-        messages = meta.Session.query(SMS)\
-            .order_by(SMS.created.desc())
-
-        c.messages = self._make_pages(messages)
-        return render('admin/sms.mako')
-
-    @ActionProtector('root')
-    @validate(schema=SMSForm, form='sms')
-    def send_sms(self):
-        if hasattr(self, 'form_result'):
-            msg = SMS(sender=c.user,
-                      recipient_number=self.form_result.get('number'),
-                      message_text=self.form_result.get('message'))
-            meta.Session.add(msg)
-            meta.Session.commit()
-            h.flash('Message sent to number %s' % self.form_result.get('number'))
-        redirect(url(controller='admin', action='sms'))
-
-    @ActionProtector('root')
     def deleted_files(self):
         files = meta.Session.query(File)\
             .order_by(desc(File.deleted_on))\
@@ -317,28 +282,6 @@ class AdminController(BaseController, UniversityExportMixin, WallMixin):
             h.flash('Message sent to %d users.' % len(users))
         return render('admin/messages.mako')
 
-
-    @ActionProtector("root")
-    @validate(schema=GroupCouponForm, form='group_coupons')
-    def group_coupons(self):
-        groupcoupons = meta.Session.query(GroupCoupon).order_by(GroupCoupon.valid_until.desc()).order_by(GroupCoupon.created.desc())
-        c.groupcoupons = self._make_pages(groupcoupons)
-        return render('admin/groupcoupons.mako')
-
-    @ActionProtector("root")
-    @validate(schema=GroupCouponForm, form='group_coupons')
-    def add_coupon(self):
-        if hasattr(self, 'form_result'):
-            coupon = GroupCoupon(code=self.form_result['code'],
-                                 valid_until=self.form_result['valid_until'],
-                                 action=self.form_result['action'])
-            if coupon.action == 'smscredits':
-                coupon.credit_count = self.form_result['credit_count']
-            elif coupon.action == 'unlimitedspace':
-                coupon.day_count = self.form_result['day_count']
-            meta.Session.add(coupon)
-            meta.Session.commit()
-        redirect(url(controller='admin', action='group_coupons'))
 
     @ActionProtector("root")
     def notifications(self):

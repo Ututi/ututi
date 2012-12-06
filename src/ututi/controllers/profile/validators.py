@@ -90,35 +90,9 @@ class DeleteMeForm(Schema):
            'tooShort': _(u"The password must be at least 5 symbols long.")}
 
 
-class PhoneConfirmationNumber(validators.FormValidator):
-
-    messages = {
-        'invalid': _(u"This is not the confirmation code we sent you."),
-    }
-
-    def validate_python(self, form_dict, state):
-        if not form_dict['phone_confirmation_key']:
-            return
-        if not form_dict['confirm_phone'] and not form_dict['update_contacts']:
-            return
-        if (form_dict['phone_confirmation_key'] and
-            c.user.phone_number == form_dict['phone_number'] and
-            c.user.phone_confirmation_key.strip() == form_dict['phone_confirmation_key']):
-            return
-
-        raise Invalid(self.message('invalid', state),
-                      form_dict, state,
-                      error_dict={'phone_confirmation_key': Invalid(self.message('invalid', state), form_dict, state)})
-
-
 class PhoneForm(Schema):
     allow_extra_fields = True
     phone_number = PhoneNumberValidator()
-
-
-class PhoneConfirmationForm(Schema):
-    allow_extra_fields = True
-    phone_confirmation_key = validators.String()
 
 
 class ContactForm(Schema):
@@ -132,22 +106,17 @@ class ContactForm(Schema):
     site_url = validators.URL()
     phone_number = PhoneNumberValidator()
 
-    phone_confirmation_key = validators.String()
-
     confirm_email = validators.Bool()
-    confirm_phone = validators.Bool()
 
     resend_phone_code = validators.Bool()
 
     update_contacts = validators.Bool()
 
-    chained_validators = [PhoneConfirmationNumber()]
-
 
 class HideElementForm(Schema):
-     """Ajax submit validator to hide welcome screen widgets."""
-     allow_extra_fields = False
-     type = validators.OneOf(['suggest_create_group', 'suggest_watch_subject', 'suggest_enter_phone'])
+    """Ajax submit validator to hide welcome screen widgets."""
+    allow_extra_fields = False
+    type = validators.OneOf(['suggest_create_group', 'suggest_watch_subject', 'suggest_enter_phone'])
 
 
 class StudentGroupForm(Schema):

@@ -1,5 +1,4 @@
 <%namespace file="/sections/standard_buttons.mako" import="close_button, watch_button, teach_button" />
-<%namespace file="/widgets/sms.mako" import="sms_widget" />
 
 <%def name="subject_listitem_button(subject)">
 ## Renders appropriate action button.

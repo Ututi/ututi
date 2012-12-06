@@ -6,8 +6,6 @@ from formencode.api import Invalid
 from pylons import config
 
 from ututi.lib.mailer import send_email
-from ututi.lib.sms import send_sms
-
 
 log = logging.getLogger(__name__)
 
@@ -63,26 +61,3 @@ class EmailMessage(Message):
                 Message.send(self, recipient=recipient)
         else:
             raise RuntimeError("The message must have a subject and a text to be sent.")
-
-
-class SMSMessage(Message):
-    """An SMS message."""
-
-    def __init__(self, text, force=False, sender=None, parent=None, ignored_recipients=[]):
-        self.text = text
-        self.sender = sender
-        self.recipient = None
-        super(SMSMessage, self).__init__(sender=sender, parent=parent, force=force, ignored_recipients=ignored_recipients)
-
-    def send(self, recipient):
-        if recipient in self.ignored_recipients:
-            return
-
-        if isinstance(recipient, basestring):
-            try:
-                send_sms(recipient, self.text, self.sender, self.recipient,
-                         parent=self.parent)
-            except Invalid:
-                log.debug("Invalid phone number %(num)s" % dict(num=recipient))
-        else:
-            Message.send(self, recipient=recipient)

@@ -36,7 +36,6 @@ from ututi.model.theming import Theme
 from ututi.model.base import Model
 from ututi.model import meta
 from ututi.model.meta import DeclarativeModel
-from ututi.lib.messaging import SMSMessage
 from ututi.lib.emails import group_space_bought_email
 from ututi.lib.security import check_crowds
 from ututi.lib.group_payment_info import GroupPaymentInfo
@@ -699,8 +698,7 @@ class Group(ContentItem, FolderMixin, LimitedUploadMixin, GroupPaymentInfo):
     def recipients_sms(self, sender=None):
         query = meta.Session.query(GroupMember
                         ).join(User
-                        ).filter(GroupMember.group == self
-                        ).filter(User.phone_confirmed == True)
+                        ).filter(GroupMember.group == self)
         if sender is not None:
             query = query.filter(User.id != sender.id)
         return query.all()
@@ -2147,8 +2145,7 @@ class OutgoingGroupSMSMessage(object):
 
     def send(self):
         """Queue peer-to-peer messages for each recipient."""
-        self.group.send(SMSMessage(self.message_text, sender=self.sender,
-                                   parent=self, ignored_recipients=[self.sender]))
+        pass
 
 
 class Notification(object):

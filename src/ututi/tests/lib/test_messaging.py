@@ -8,8 +8,8 @@ from pylons import config
 import ututi
 
 from ututi.tests import UtutiLayer
-from ututi.lib.messaging import EmailMessage, SMSMessage
-from ututi.model import User, Group, Email, SMS, meta
+from ututi.lib.messaging import EmailMessage
+from ututi.model import User, Group, Email, meta
 from ututi.model import GroupMembershipType, GroupMember, LocationTag
 from ututi.lib.mailer import mail_queue
 
@@ -102,40 +102,6 @@ def test_message_attachments():
     """
 
 
-def test_smsmessage_user():
-    """Tests for sms messaging.
-
-        >>> config._push_object(pylons.test.pylonsapp.config)
-
-        >>> user = User.get("somebloke@somehost.com", LocationTag.get('uni'))
-
-        >>> msg = SMSMessage(u"the message", sender=user)
-
-    If the user does not have a confirmed phone number, the message should not be sent.
-
-        >>> msg.send(user)
-        >>> meta.Session.commit()
-        >>> len(meta.Session.query(SMS).all())
-        0
-
-    Unless it is forced:
-
-        >>> msg.force = True
-        >>> msg.send(user)
-        >>> meta.Session.commit()
-
-        >>> sms = meta.Session.query(SMS).first()
-        >>> print (sms.recipient_number, sms.message_text)
-        (u'+37060000000', u'the message')
-
-        >>> config._pop_object(pylons.test.pylonsapp.config)
-        >>> from ututi.lib.sms import sms_queue
-        >>> sms_queue.pop()
-        (u'+37060000000', u'the message')
-
-    """
-
-
 def test_message_list():
     """Sending messages to lists of recipients.
 
@@ -219,7 +185,6 @@ def test_setup(test):
     meta.Session.add(user)
     user.emails.append(Email("somebloke@somehost.com"))
     user.phone_number = '+37060000000'
-    user.phone_confirmed = False
     meta.Session.commit()
 
     meta.Session.execute("SET LOCAL ututi.active_user TO %d" % u.id)

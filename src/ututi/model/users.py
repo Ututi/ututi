@@ -142,19 +142,13 @@ class User(Author):
 
     def send(self, msg):
         """Send a message to the user."""
-        from ututi.lib.messaging import EmailMessage, SMSMessage
+        from ututi.lib.messaging import EmailMessage
         if isinstance(msg, EmailMessage):
             email = self.email
             if email.confirmed or msg.force:
                 msg.send(email.email)
             else:
                 log.info("Could not send message to unconfirmed email %(email)s" % dict(email=email.email))
-        elif isinstance(msg, SMSMessage):
-            if self.phone_number is not None and (self.phone_confirmed or msg.force):
-                msg.recipient=self
-                msg.send(self.phone_number)
-            else:
-                log.info("Could not send message to uncofirmed phone number %(num)s" % dict(num=self.phone_number))
 
     def checkPassword(self, password):
         """Check the user's password."""
@@ -272,18 +266,9 @@ class User(Author):
     def get_byphone(cls, phone_number):
         try:
             return meta.Session.query(cls).filter_by(
-                    phone_number=phone_number, phone_confirmed=True).one()
+                    phone_number=phone_number).one()
         except NoResultFound:
             return None
-
-    def confirm_phone_number(self):
-        # If there is another user with the same number, mark his phone
-        # as unconfirmed.  This way there is only one person with a specific
-        # confirmed phone number at any time.
-        other = User.get_byphone(self.phone_number)
-        if other is not None:
-            other.phone_confirmed = False
-        self.phone_confirmed = True
 
     @property
     def ignored_subjects(self):
@@ -487,9 +472,6 @@ class User(Author):
     def purchase_sms_credits(self, credits):
         self.sms_messages_remaining += credits
         log.info("user %(id)d (%(fullname)s) purchased %(credits)s credits; current balance: %(current)d credits." % dict(id=self.id, fullname=self.fullname, credits=credits, current=self.sms_messages_remaining))
-
-    def can_send_sms(self, group):
-        return self.sms_messages_remaining > len(group.recipients_sms(sender=self))
 
     @property
     def ignored_events_list(self):

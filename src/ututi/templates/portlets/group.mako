@@ -1,5 +1,4 @@
 <%inherit file="/portlets/base.mako"/>
-<%namespace file="/widgets/sms.mako" import="sms_widget"/>
 <%namespace file="/elements.mako" import="item_box, tooltip" />
 
 <%def name="portlet_file(file)">
@@ -281,20 +280,4 @@
       </div>
 
     </%self:portlet>
-</%def>
-
-<%def name="group_sms_portlet(group=None)">
-  <%
-     if group is None:
-         group = c.group
-  %>
-  <%self:uportlet id="group_sms_portlet" portlet_class="MyProfile">
-    <%def name="header()">
-      ${_('Send SMS message to group')}
-    </%def>
-
-    ${sms_widget(c.user, group)}
-    <div class="clear-left"></div>
-
-  </%self:uportlet>
 </%def>

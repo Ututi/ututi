@@ -64,11 +64,9 @@ def ftest_setUp(test):
     email.confirmed = True
     second.emails.append(email)
     second.phone_number = '+37067412345'
-    second.phone_confirmed = True
 
     admin = User.get('admin@uni.ututi.com', uni)
     admin.phone_number = '+37067812375'
-    admin.phone_confirmed = True
 
     # Third user has hist email uncofirmed
     third = User(u'Third user', 'user3@ututi.lt', uni, 'password', True)
