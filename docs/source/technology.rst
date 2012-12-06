@@ -86,5 +86,6 @@ Kodo versijavimui naudojama Git versijų kontrolės sistema. Ji prieinama per Gi
 Fabric
 ------
 
-XXX
+Serverių paleidimui ir valdymui naudojamas Fabric.
 
+`Oficiali Fabric svetainė <http://fabfile.org/>`_.
