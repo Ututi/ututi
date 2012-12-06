@@ -239,10 +239,16 @@ class VUtuti(Service):
             run("code/bin/paster setup-app release.ini")
 
     @run_as_user
-    def import_backup(self):
-        self.clear_database()
-        # $PG_PATH/bin/pg_restore -d release -h $PWD/var/run < $1/dbdump || true
-        # rsync -rt $1/files_dump/uploads/ uploads/
+    def backup(self):
+        run(os.path.join(self.settings.scripts_dir, "backup.sh"))
+
+    @run_as_user
+    def import_backup(self, backup='backup'):
+        with settings(warn_only=True):
+            self.clear_database()
+            self.server.getService(self.database).import_dump('{backup_dir}/{backup}/dbdump'.format(
+                    backup_dir=self.settings.backups_dir,
+                    backup=backup))
 
     @run_as_user
     def download_backup(self):

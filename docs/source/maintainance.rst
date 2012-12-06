@@ -134,7 +134,7 @@ Atsarginės kopijos
 
 Padaryti naują atsarginę kopiją galite paleisdami komandą::
 
-   bin/fab vututi_vututi_backup # XXX implement me
+   bin/fab vututi_vututi_backup
 
 Atsarginės kopijos daromos automatiškai kiekvieną naktį. Laikomos
 paskutinės 5 atsarginės duomenų kopijos. Galite parsisiųsti paskutinę
@@ -144,7 +144,7 @@ duomenų bazės kopiją į savo kompiuterį paleisdami komandą::
 
 Įkelti paskutinę atsarginę kopiją galite paleisdami komandą::
 
-   bin/fab vututi_vututi_import_backup # XXX implement me
+   bin/fab vututi_vututi_import_backup
 
 Jei norite įkelti ne paskutinę, o kurią nors kitą duomenų bazės kopiją
 nurodykite ją kaip `import_backup` komandos parametrą, pvz.::
