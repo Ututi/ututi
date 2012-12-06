@@ -29,7 +29,7 @@ paleidžiant pvz.::
 Atspausdinti visus ututi serverio nustatymus galite paleisdami
 komandą::
 
-   bin/fab vututi_vututi_settings # XXX implement me
+   bin/fab vututi_vututi_current_settings
 
 Tai reikalinga jei norite sužinoti kokie šio serverio parametrai (pvz.
 kur saugomos atsarginės duomenų kopijos, kur saugomi skriptai ir t.t.)

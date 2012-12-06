@@ -1,4 +1,5 @@
 import sys
+import pprint
 import pkg_resources
 
 from contextlib import contextmanager
@@ -110,6 +111,10 @@ class Service(object):
         template_dir = pkg_resources.resource_filename(self.__class__.__module__, 'config_templates')
         self.server.upload_config_template(name, to, context, template_dir=template_dir,
                                            **kwargs)
+
+    @run_as_user
+    def current_settings(self):
+        pprint.pprint(self.settings)
 
     # API
 
