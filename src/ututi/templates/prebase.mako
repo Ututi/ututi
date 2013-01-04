@@ -212,16 +212,18 @@ ${_('Private social networks for universities')}
     </script>
     %endif
 
+    %if c.user:
     <script id="IntercomSettingsScriptTag">
       var intercomSettings = {
       // TODO: The current logged in user's email address.
-      email: "${user.email}",
+      email: "${c.user.email}",
       // TODO: The current logged in user's sign-up date as a Unix timestamp.
-      created_at: ${int(user.created_at)},
+      created_at: ${int(c.user.created)},
       app_id: "43cikuho"
       };
     </script>
     <script>(function(){var w=window;var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://api.intercom.io/api/js/library.js';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}})();</script>
+    %endif
 
     ${h.stylesheet_link(h.path_with_hash('/reset.css'))}
     ${h.stylesheet_link(h.path_with_hash('/style.css'))}

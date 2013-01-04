@@ -12,6 +12,7 @@ import binascii
 import hashlib
 from urlparse import urlparse
 from datetime import datetime, timedelta
+from time import mktime
 
 from ututi.model.util import logo_property, read_facebook_logo
 from ututi.model import meta
@@ -131,6 +132,11 @@ class User(Author):
         authors_table = meta.metadata.tables['authors']
         upd = authors_table.update().where(authors_table.c.id==self.id).values(type=type, **kwargs)
         conn.execute(upd)
+
+    @property
+    def created(self):
+        """Return user creation time in Unix time format"""
+        return mktime(self.accepted_terms.timetuple())
 
     @property
     def email(self):
